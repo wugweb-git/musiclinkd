@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "maintenance_mode": {
+      "defaultValue": { "value": "false" },
+      "description": "When true, app/admin surfaces show a maintenance banner or lock out non-admin traffic.",
+      "valueType": "BOOLEAN"
+    },
+    "minimum_app_version": {
+      "defaultValue": { "value": "1.0.0" },
+      "description": "Android clients below this version are prompted to update.",
+      "valueType": "STRING"
+    },
+    "support_contact_email": {
+      "defaultValue": { "value": "hello@musiclinkd.com" },
+      "description": "Support/tickets routing address surfaced in-app and in admin.",
+      "valueType": "STRING"
+    }
+  },
+  "parameterGroups": {},
+  "conditions": []
+}

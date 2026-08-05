@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Stylized background circular halo or audio wave rings in the safe zone -->
+    <path
+        android:strokeColor="#EA4C89"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.3"
+        android:pathData="M54,54m-28,0a28,28 0,1 1,56 0a28,28 0,1 1,-56 0" />
+    <path
+        android:strokeColor="#EA4C89"
+        android:strokeWidth="1.0"
+        android:strokeAlpha="0.15"
+        android:pathData="M54,54m-38,0a38,38 0,1 1,76 0a38,38 0,1 1,-76 0" />
+
+    <!-- A beautiful, bold Music Note + Link stylized icon at the center -->
+    <!-- Left note head at (40, 68) -->
+    <path
+        android:pathData="M40,68m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0"
+        android:fillColor="#EA4C89" />
+    <!-- Right note head at (68, 60) -->
+    <path
+        android:pathData="M68,60m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0"
+        android:fillColor="#EA4C89" />
+    
+    <!-- Left Stem: rectangle from (44, 38) to (48, 68) -->
+    <path
+        android:pathData="M44,38 L48,38 L48,68 L44,68 Z"
+        android:fillColor="#EA4C89" />
+    <!-- Right Stem: rectangle from (72, 30) to (76, 60) -->
+    <path
+        android:pathData="M72,30 L76,30 L76,60 L72,60 Z"
+        android:fillColor="#EA4C89" />
+        
+    <!-- Thick beam connecting the two notes -->
+    <path
+        android:pathData="M44,30 L76,22 L76,30 L44,38 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="44"
+                android:startY="22"
+                android:endX="76"
+                android:endY="38"
+                android:type="linear">
+                <item android:offset="0" android:color="#EA4C89" />
+                <item android:offset="1" android:color="#D93C77" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    
+    <!-- Stylized connection node lines representing MusicLinkd's network matching -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:pathData="M40,68 L54,54" />
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:pathData="M68,60 L54,54" />
+        
+    <!-- Center white connection node -->
+    <path
+        android:pathData="M54,54m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"
+        android:fillColor="#FFFFFF" />
+</vector>

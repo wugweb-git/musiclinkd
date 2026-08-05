@@ -1,0 +1,150 @@
+rules_version = '2';
+
+// Canonical source: app/docs/firestore/Firestore_Schema_Index_Rules.md
+// Keep that doc and this file in sync by hand when the schema changes.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function adminRole() {
+      return signedIn()
+        ? get(/databases/$(database)/documents/admin_roles/$(request.auth.uid)).data.role
+        : null;
+    }
+
+    function isAdmin() {
+      return adminRole() == 'ROLE_ADMIN';
+    }
+
+    function isModerator() {
+      return isAdmin() || adminRole() == 'ROLE_MODERATOR';
+    }
+
+    function isSupport() {
+      return isAdmin() || adminRole() == 'ROLE_SUPPORT';
+    }
+
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    match /users/{userId} {
+      allow read: if true;
+      allow create: if isOwner(userId)
+        && request.resource.data.role in ['ARTIST', 'PRODUCER', 'VOCALIST', 'STUDIO', 'LABEL']
+        && request.resource.data.isVerified == false
+        && request.resource.data.isBanned == false;
+      allow update: if isModerator()
+        || (isOwner(userId)
+            && !request.resource.data.diff(resource.data)
+                 .affectedKeys()
+                 .hasAny(['isVerified', 'isBanned', 'role']));
+    }
+
+    match /admin_roles/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /connections/{connectionId} {
+      allow read, write: if signedIn()
+        && (request.auth.uid == resource.data.senderUid
+            || request.auth.uid == resource.data.targetUserId);
+    }
+
+    match /feed_posts/{postId} {
+      allow read: if true;
+      allow create, update: if signedIn()
+        && (request.auth.uid == request.resource.data.authorUid || isModerator());
+      allow delete: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.authorUid);
+    }
+
+    match /studio_bookings/{bookingId} {
+      allow create: if signedIn() && request.auth.uid == request.resource.data.userId;
+      allow read, update: if signedIn()
+        && (request.auth.uid == resource.data.userId
+            || request.auth.uid == get(/databases/$(database)/documents/studios/$(resource.data.studioId)).data.ownerUid
+            || isModerator());
+    }
+
+    match /chat_threads/{threadId} {
+      allow read, update: if signedIn() && request.auth.uid in resource.data.memberUids;
+      allow create: if signedIn() && request.auth.uid in request.resource.data.memberUids;
+
+      match /messages/{messageId} {
+        allow read, create: if signedIn()
+          && request.auth.uid in get(/databases/$(database)/documents/chat_threads/$(threadId)).data.memberUids;
+      }
+    }
+
+    match /studios/{studioId} {
+      allow read: if true;
+      allow create: if signedIn() && request.auth.uid == request.resource.data.ownerUid;
+      allow update, delete: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.ownerUid);
+    }
+
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create: if signedIn() && request.auth.uid == request.resource.data.creatorUid;
+      allow update, delete: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.creatorUid);
+    }
+
+    match /marketplace_items/{itemId} {
+      allow read: if true;
+      allow create: if signedIn() && request.auth.uid == request.resource.data.sellerUid;
+      allow update, delete: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.sellerUid);
+    }
+
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create, update: if signedIn()
+        && request.auth.uid == request.resource.data.authorUid
+        && reviewId == request.auth.uid + '_' + request.resource.data.targetId;
+      allow delete: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.authorUid);
+    }
+
+    match /verification_requests/{requestId} {
+      allow create: if signedIn() && request.auth.uid == request.resource.data.submittedBy;
+      allow read: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.submittedBy);
+      allow update: if isModerator();
+    }
+
+    match /moderation_flags/{flagId} {
+      allow create: if signedIn() && request.auth.uid == request.resource.data.reportedBy;
+      allow read: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.reportedBy);
+      allow update: if isModerator();
+    }
+
+    match /support_tickets/{ticketId} {
+      allow create: if signedIn() && request.auth.uid == request.resource.data.requesterUid;
+      allow read, update: if isSupport()
+        || (signedIn() && request.auth.uid == resource.data.requesterUid);
+    }
+
+    match /broadcast_messages/{broadcastId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin();
+    }
+
+    match /audit_logs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isModerator();
+    }
+
+    match /page_content/{pageId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}

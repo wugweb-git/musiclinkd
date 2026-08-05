@@ -1,0 +1,5 @@
+# Global Code Owners for MusicLinkd Repository
+* @vedanshu-srivastava
+/app/ @wugweb-git/android-leads
+/docs/ @wugweb-git/tech-writers
+/styleguide/ @wugweb-git/design-system-leads

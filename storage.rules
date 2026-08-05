@@ -1,0 +1,85 @@
+rules_version = '2';
+
+// Path convention (document here since there's no separate storage schema doc yet):
+//   users/{uid}/avatar/{file}          — profile photo, public read, owner write
+//   users/{uid}/cover/{file}           — cover image, public read, owner write
+//   users/{uid}/portfolio/{file}       — portfolio uploads, public read, owner write
+//   audio/{uid}/{file}                 — feed-post audio snippets, public read, owner write
+//   stems/{uid}/{projectId}/{file}     — STEM packs; public read for now (preview-only
+//                                         assumption — there is no purchase-gated download
+//                                         flow yet, so don't put non-preview full mixes here
+//                                         until that exists)
+//   studios/{studioId}/{file}          — studio gallery images, public read, owner write
+//   verification_documents/{uid}/{file} — ID/business docs for the verification queue,
+//                                          private: owner + admin/moderator only
+//   chat_attachments/{threadId}/{file} — private: thread members only
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function adminRole() {
+      return signedIn()
+        ? firestore.get(/databases/(default)/documents/admin_roles/$(request.auth.uid)).data.role
+        : null;
+    }
+
+    function isModerator() {
+      return adminRole() == 'ROLE_ADMIN' || adminRole() == 'ROLE_MODERATOR';
+    }
+
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function underSizeLimit(maxMb) {
+      return request.resource.size < maxMb * 1024 * 1024;
+    }
+
+    match /users/{uid}/avatar/{fileName} {
+      allow read: if true;
+      allow write: if isOwner(uid) && underSizeLimit(10) && request.resource.contentType.matches('image/.*');
+    }
+
+    match /users/{uid}/cover/{fileName} {
+      allow read: if true;
+      allow write: if isOwner(uid) && underSizeLimit(15) && request.resource.contentType.matches('image/.*');
+    }
+
+    match /users/{uid}/portfolio/{fileName} {
+      allow read: if true;
+      allow write: if isOwner(uid) && underSizeLimit(50);
+    }
+
+    match /audio/{uid}/{fileName} {
+      allow read: if true;
+      allow write: if isOwner(uid) && underSizeLimit(50) && request.resource.contentType.matches('audio/.*');
+    }
+
+    match /stems/{uid}/{projectId}/{fileName} {
+      allow read: if true;
+      allow write: if isOwner(uid) && underSizeLimit(200);
+    }
+
+    match /studios/{studioId}/{fileName} {
+      allow read: if true;
+      allow write: if signedIn()
+        && (isModerator()
+            || request.auth.uid == firestore.get(/databases/(default)/documents/studios/$(studioId)).data.ownerUid)
+        && underSizeLimit(15);
+    }
+
+    match /verification_documents/{uid}/{fileName} {
+      allow read: if isOwner(uid) || isModerator();
+      allow write: if isOwner(uid) && underSizeLimit(20);
+    }
+
+    match /chat_attachments/{threadId}/{fileName} {
+      allow read, write: if signedIn()
+        && request.auth.uid in firestore.get(/databases/(default)/documents/chat_threads/$(threadId)).data.memberUids;
+    }
+  }
+}
