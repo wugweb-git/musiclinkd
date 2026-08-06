@@ -4,6 +4,35 @@ plugins {
   alias(libs.plugins.google.devtools.ksp)
   alias(libs.plugins.roborazzi)
   alias(libs.plugins.secrets)
+  alias(libs.plugins.google.services)
+  alias(libs.plugins.firebase.crashlytics)
+}
+
+// Sanitize environment variables before any plugin reads them
+try {
+  val processEnvironmentClass = Class.forName("java.lang.ProcessEnvironment")
+  val theEnvironmentField = processEnvironmentClass.getDeclaredField("theEnvironment")
+  theEnvironmentField.isAccessible = true
+  val env = theEnvironmentField.get(null) as MutableMap<String, String>
+  val projectId = env["FIREBASE_PROJECT_ID"]
+  if (projectId != null && projectId.endsWith("\"")) {
+    env["FIREBASE_PROJECT_ID"] = projectId.removeSuffix("\"")
+  }
+  
+  try {
+    val theCaseInsensitiveEnvironmentField = processEnvironmentClass.getDeclaredField("theCaseInsensitiveEnvironment")
+    theCaseInsensitiveEnvironmentField.isAccessible = true
+    val env2 = theCaseInsensitiveEnvironmentField.get(null) as MutableMap<String, String>
+    val projectId2 = env2["FIREBASE_PROJECT_ID"]
+    if (projectId2 != null && projectId2.endsWith("\"")) {
+      env2["FIREBASE_PROJECT_ID"] = projectId2.removeSuffix("\"")
+    }
+  } catch (e: Exception) {}
+} catch (e: Exception) {
+  val projectId = System.getenv("FIREBASE_PROJECT_ID")
+  if (projectId != null && projectId.endsWith("\"")) {
+    System.setProperty("FIREBASE_PROJECT_ID", projectId.removeSuffix("\""))
+  }
 }
 
 android {
@@ -16,6 +45,8 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField("String", "DEEP_LINK_HOST", "\"app.musiclinkd.com\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -63,6 +94,8 @@ android {
 secrets {
   propertiesFileName = ".env"
   defaultPropertiesFileName = ".env.example"
+  ignoreList.add("DEEP_LINK_HOST")
+  ignoreList.add("FIREBASE_PROJECT_ID")
 }
 
 // Some unused dependencies are commented out below instead of being removed.
@@ -93,7 +126,9 @@ dependencies {
   implementation(libs.coil.compose)
   implementation(libs.converter.moshi)
   // implementation(libs.firebase.ai)
+  implementation(libs.firebase.analytics)
   implementation(libs.firebase.auth)
+  implementation(libs.firebase.crashlytics)
   implementation(libs.firebase.firestore)
   implementation(libs.firebase.messaging)
   implementation(libs.play.services.auth)

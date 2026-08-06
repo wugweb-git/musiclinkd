@@ -11,8 +11,10 @@ MusicLinkd is operated across three isolated target environments and one primary
 1. **Public Website (`musiclinkd.com`):** Editorial marketing landing pages, SEO catalog, pricing tiers, and public artist/studio discovery previews.
 2. **Application Target (`app.musiclinkd.com`):** High-contrast light Jetpack Compose Android app for musicians, vocalists, producers, audio engineers, and studio bookings.
 3. **Admin Portal (`admin.musiclinkd.com`):** Enterprise control center for moderation, verification queue, flagged content, user management, and system analytics.
-4. **Official Contact Email:** `hello@musiclinkd.com`
-5. **GitHub Repository:** `https://github.com/wugweb-git/musiclinkd`
+4. **Primary Backend & Firebase Project:** `musiclinkd-7ae30` (Single authoritative Firebase project for MVP powering Auth, Firestore, Storage, Cloud Messaging, Analytics, Crashlytics, Remote Config, and Hosting across all 3 hosts).
+5. **Official Contact Email:** `hello@musiclinkd.com`
+6. **GitHub Repository:** `https://github.com/wugweb-git/musiclinkd`
+
 
 ---
 

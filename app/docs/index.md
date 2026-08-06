@@ -2,7 +2,7 @@
 
 > **Repository Status:** `Release Candidate (v1.5.0-RC)` — Frozen production baseline. All ongoing changes across `musiclinkd.com`, `app.musiclinkd.com`, and `admin.musiclinkd.com` must strictly maintain this governance framework.
 
-Welcome to the master index of the **MusicLinkd** repository. This document provides direct links and structural navigation across all product targets, engineering modules, design system tokens, and architecture specifications.
+Welcome to the master index of the **MusicLinkd** repository. To prevent documentation decay, fragmentation, and duplication, all technical, design, and product specifications are consolidated into three single-source-of-truth master guides:
 
 ---
 
@@ -17,46 +17,20 @@ Welcome to the master index of the **MusicLinkd** repository. This document prov
 
 ---
 
-## 📁 Repository Documentation Index
+## 📁 Ecosystem Single-Source-of-Truth Specifications
 
-### 1. Architecture & System Design
-- [Application Architecture](docs/Architecture.md)
-- [Visual Application Architecture Diagram](docs/architecture/Visual_Application_Architecture.md)
-- [Module Architecture Overview](docs/modules/architecture_overview.md)
-- [Visual Module Dependencies Diagram](docs/modules/Visual_Module_Dependencies.md)
-- [Repository Architecture Diagram](docs/repositories/Visual_Repository_Dependencies.md)
-- [Database Schema & Firestore Collections](docs/database/schema_definition.md)
-- [Visual Firestore ERD Diagram](docs/database/Visual_Firestore_ERD.md)
-- [Architecture Decision Records (ADRs)](docs/adr/)
+### 🏛️ 1. Master System & Product Specifications
+* 🛠️ **[Master System Architecture & Product Specifications (Architecture.md)](Architecture.md)** - Authoritative guide containing:
+  - **Product Roadmap & PRD:** Supported roles, user personas, and core functional modules.
+  - **Clean Architecture & MVVM:** Package layout, sealed navigation routing states, and system specifications.
+  - **Data Schemas & Firebase:** Room SQLite tables, remote Firestore NoSQL collections, and GMS integration parameters.
+  - **Peer Handshake Sync:** Double-opt-in connection request states and resilient message synchronization queues.
+  - **Notifications & Motion:** FCM JSON payloads, horizontal page transitions, and frequency waveform visualization physics.
+  - **Security, Native UI, & Release:** Alphanumeric form sanitization, edge-to-edge layouts, minimum touch targets, dynamic analytics taxonomy, local JVM test verification commands, and release build guidelines.
 
-### 2. User Flows & Visual Diagrams
-- [User Journeys Catalog](docs/journeys/)
-- [Navigation Graph & Route Registry](docs/navigation/navigation_graph.md)
-- [Visual Navigation Graph](docs/navigation/Visual_Navigation_Graph.md)
-- [Core User Flow Sequence Diagrams](docs/flows/Core_Flow_Diagrams.md)
-
-### 3. Product Features & Governance Matrices
-- [Platform Roles Matrix](docs/roles/platform_roles.md)
-- [Feature Access Matrix](docs/features/feature_matrix.md)
-- [Cross-Channel Notification Matrix](docs/notifications/Notification_Matrix.md)
-- [Analytics Event Taxonomy](docs/analytics/Analytics_Event_Taxonomy.md)
-- [Error Catalogue](docs/errors/Error_Catalogue.md)
-
-### 4. Products & Future Integrations
-- [Website Architecture & SEO (`musiclinkd.com`)](docs/website/Website_Architecture_And_SEO.md)
-- [Admin Portal Readiness (`admin.musiclinkd.com`)](docs/admin/Admin_Readiness_Architecture.md)
-- [API Endpoint Specifications](docs/api/API_Endpoint_Specifications.md)
-
-### 5. Design System & UI Catalogues
-- [Design System Showcase](styleguide/Showcase.md)
-- [Icon Library Catalog](docs/branding/icon_library.md)
-- [GSAP Web & Compose Animations Specification](docs/animations/gsap_and_compose_animations.md)
-- [Native Android Capabilities Specification](docs/android/Native_Android_Features.md)
-- [Component Catalogue](docs/components/Component_Catalogue.md)
-- [Widget Catalogue](docs/widgets/Widget_Catalogue.md)
-- [Block Catalogue](docs/blocks/Block_Catalogue.md)
-- [Accessibility Implementation Checklist](styleguide/Accessibility.md)
-- [Motion & Gestures Guide](styleguide/motion.md)
+### 🎨 2. Unified Brand & Design Specifications
+* 🎨 **[Design System Foundations (../styleguide/Foundations.md)](../styleguide/Foundations.md)** - Visual philosophy, color palette, typography hierarchy, spacing grids, icons, and native accessibility.
+* 🧩 **[Design System Components (../styleguide/Components.md)](../styleguide/Components.md)** - Unified components, interactive screens, layout templates, specialized widgets, and micro-animations.
 
 ---
 

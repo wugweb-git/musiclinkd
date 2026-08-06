@@ -1,6 +1,7 @@
 package com.example.onboarding.util
 
 import android.util.Log
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import java.io.PrintWriter
 import java.io.StringWriter
 
@@ -23,12 +24,13 @@ data class LoggedErrorEvent(
 
 /**
  * Centralized Error Reporting Service for MusicLinkd Application.
- * Logs exceptions to Firebase Crashlytics when available at runtime,
+ * Logs exceptions and breadcrumbs directly to Firebase Crashlytics for project musiclinkd-7ae30,
  * while maintaining a structured in-memory diagnostic buffer and local logcat reports.
  */
 object ErrorReportingService {
 
     private const val TAG = "MusicLinkd_ErrorReporting"
+    private const val PRIMARY_PROJECT_ID = "musiclinkd-7ae30"
     
     private val _recentErrorEvents = mutableListOf<LoggedErrorEvent>()
     val recentErrorEvents: List<LoggedErrorEvent> get() = _recentErrorEvents.toList()
@@ -42,16 +44,14 @@ object ErrorReportingService {
     fun setUserContext(userId: String, email: String? = null, role: String? = null) {
         logBreadcrumb("User Context Set: ID=$userId, Email=$email, Role=$role")
         try {
-            val crashlyticsClass = Class.forName("com.google.firebase.crashlytics.FirebaseCrashlytics")
-            val getInstanceMethod = crashlyticsClass.getMethod("getInstance")
-            val instance = getInstanceMethod.invoke(null)
-            
-            val setUserIdMethod = crashlyticsClass.getMethod("setUserId", String::class.java)
-            setUserIdMethod.invoke(instance, userId)
-            
-            val setCustomKeyMethod = crashlyticsClass.getMethod("setCustomKey", String::class.java, String::class.java)
-            email?.let { setCustomKeyMethod.invoke(instance, "user_email", it) }
-            role?.let { setCustomKeyMethod.invoke(instance, "user_role", it) }
+            val isFirebaseReady = try { com.google.firebase.FirebaseApp.getInstance() != null } catch (e: Throwable) { false }
+            if (isFirebaseReady) {
+                val crashlytics = FirebaseCrashlytics.getInstance()
+                crashlytics.setUserId(userId)
+                crashlytics.setCustomKey("musiclinkd_project_id", PRIMARY_PROJECT_ID)
+                email?.let { crashlytics.setCustomKey("user_email", it) }
+                role?.let { crashlytics.setCustomKey("user_role", it) }
+            }
         } catch (e: Throwable) {
             Log.d(TAG, "Crashlytics not available for setUserContext: ${e.message}")
         }
@@ -67,11 +67,10 @@ object ErrorReportingService {
             _breadcrumbs.add(entry)
         }
         try {
-            val crashlyticsClass = Class.forName("com.google.firebase.crashlytics.FirebaseCrashlytics")
-            val getInstanceMethod = crashlyticsClass.getMethod("getInstance")
-            val instance = getInstanceMethod.invoke(null)
-            val logMethod = crashlyticsClass.getMethod("log", String::class.java)
-            logMethod.invoke(instance, message)
+            val isFirebaseReady = try { com.google.firebase.FirebaseApp.getInstance() != null } catch (e: Throwable) { false }
+            if (isFirebaseReady) {
+                FirebaseCrashlytics.getInstance().log(message)
+            }
         } catch (e: Throwable) {
             Log.d(TAG, "Breadcrumb recorded locally: $message")
         }
@@ -79,7 +78,7 @@ object ErrorReportingService {
 
     /**
      * Primary exception reporting method.
-     * Captures stacktrace, routes to Firebase Crashlytics if available, and records in local diagnostic memory.
+     * Captures stacktrace, routes to Firebase Crashlytics, and records in local diagnostic memory.
      */
     fun logException(
         throwable: Throwable,
@@ -109,19 +108,17 @@ object ErrorReportingService {
         Log.e(TAG, "[$severity] [$tag] $message\n$stackSnippet")
 
         try {
-            val crashlyticsClass = Class.forName("com.google.firebase.crashlytics.FirebaseCrashlytics")
-            val getInstanceMethod = crashlyticsClass.getMethod("getInstance")
-            val instance = getInstanceMethod.invoke(null)
-            
-            val setCustomKeyMethod = crashlyticsClass.getMethod("setCustomKey", String::class.java, String::class.java)
-            customKeys.forEach { (k, v) ->
-                setCustomKeyMethod.invoke(instance, k, v.toString())
+            val isFirebaseReady = try { com.google.firebase.FirebaseApp.getInstance() != null } catch (e: Throwable) { false }
+            if (isFirebaseReady) {
+                val crashlytics = FirebaseCrashlytics.getInstance()
+                crashlytics.setCustomKey("firebase_project_id", PRIMARY_PROJECT_ID)
+                customKeys.forEach { (k, v) ->
+                    crashlytics.setCustomKey(k, v.toString())
+                }
+                crashlytics.setCustomKey("error_severity", severity.name)
+                crashlytics.setCustomKey("error_tag", tag)
+                crashlytics.recordException(throwable)
             }
-            setCustomKeyMethod.invoke(instance, "error_severity", severity.name)
-            setCustomKeyMethod.invoke(instance, "error_tag", tag)
-            
-            val recordExceptionMethod = crashlyticsClass.getMethod("recordException", Throwable::class.java)
-            recordExceptionMethod.invoke(instance, throwable)
         } catch (e: Throwable) {
             Log.d(TAG, "Firebase Crashlytics not active during logException: ${e.message}")
         }

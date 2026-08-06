@@ -27,12 +27,15 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <div className="flex items-center gap-2 px-2 py-1.5">
+        <Link
+          href="/"
+          className="flex items-center gap-2 rounded-md px-2 py-1.5 hover:bg-sidebar-accent"
+        >
           <Music2 className="size-5 text-primary" />
           <span className="font-heading text-sm font-bold tracking-tight group-data-[collapsible=icon]:hidden">
             MusicLinkd Ops
           </span>
-        </div>
+        </Link>
       </SidebarHeader>
       <SidebarContent>
         {NAV_GROUPS.map((group) => (

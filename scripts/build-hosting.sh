@@ -30,4 +30,8 @@ cp -r website/. dist/
 rm -f dist/README.md
 rsync -a --exclude='index.html' --exclude='index.txt' --exclude='404.html' admin/out/ dist/
 
+echo "==> Including guide/ into dist/guide/"
+mkdir -p dist/guide
+cp -r guide/. dist/guide/
+
 echo "==> dist/ ready ($(find dist -type f | wc -l | tr -d ' ') files)"

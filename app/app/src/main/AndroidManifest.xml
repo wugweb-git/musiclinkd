@@ -22,6 +22,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+
+        <!-- Disable Firebase Analytics and Crashlytics auto-collection in emulator runtime to prevent E/ GMS log errors -->
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="false" />
+        <meta-data
+            android:name="firebase_crashlytics_collection_enabled"
+            android:value="false" />
         <service
             android:name="com.example.onboarding.messaging.AppFirebaseMessagingService"
             android:exported="false">

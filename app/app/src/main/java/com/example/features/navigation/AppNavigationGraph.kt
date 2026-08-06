@@ -3,15 +3,19 @@ package com.example.features.navigation
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.onboarding.models.OnboardingScreen
 import com.example.onboarding.models.OnboardingState
 import com.example.onboarding.models.PortfolioState
 import com.example.onboarding.ui.screens.*
+import com.example.onboarding.util.AnalyticsHelper
 import com.example.onboarding.viewmodel.OnboardingViewModel
 
 object MusicLinkdRoutes {
@@ -61,6 +65,23 @@ fun AppNavigationGraph(
         OnboardingScreen.PROFILE_CREATION -> MusicLinkdRoutes.PROFILE_CREATION
         OnboardingScreen.SUCCESS -> MusicLinkdRoutes.SUCCESS
         OnboardingScreen.DASHBOARD -> MusicLinkdRoutes.DASHBOARD
+    }
+
+    val currentNavBackStackEntry by navController.currentBackStackEntryAsState()
+    LaunchedEffect(currentNavBackStackEntry) {
+        currentNavBackStackEntry?.destination?.route?.let { route ->
+            AnalyticsHelper.trackScreenView(screenName = route, screenClass = "MusicLinkdScreen_$route")
+        }
+    }
+
+    LaunchedEffect(state.currentScreen) {
+        AnalyticsHelper.trackUserInteraction(
+            eventName = "onboarding_screen_changed",
+            params = mapOf(
+                "screen" to state.currentScreen.name,
+                "project_id" to AnalyticsHelper.PRIMARY_PROJECT_ID
+            )
+        )
     }
 
     NavHost(

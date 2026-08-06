@@ -1,9 +1,1 @@
 /build
-
-# Secrets Gradle Plugin reads .env for real values; .env.example is the
-# committed template (placeholders only). Never commit real secrets here.
-.env
-.env.development
-.env.staging
-.env.production
-!.env.example

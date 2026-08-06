@@ -12,10 +12,12 @@ This file contains key directives, architectural patterns, and guidelines for Ge
    - 1.dp border stroke (`BorderStroke(1.dp, Color(0xFFECECF1))`).
    - Clean light canvas (`Color(0xFFFCFCFD)`).
    - Pill primary action buttons (`RoundedCornerShape(999.dp)`).
-3. **Product Topology:**
+3. **Product Topology & Authoritative Firebase Project:**
    - Website: `musiclinkd.com`
    - App: `app.musiclinkd.com`
    - Admin: `admin.musiclinkd.com`
+   - Single Active Firebase Project: `musiclinkd-7ae30` (Auth, Firestore, Storage, FCM, Analytics, Crashlytics, Remote Config, Hosting)
    - Email: `hello@musiclinkd.com`
+
 4. **Documentation Sync:**
    - Update `update.md`, `CHANGELOG.md`, and relevant files in `docs/` or `styleguide/` whenever making changes.

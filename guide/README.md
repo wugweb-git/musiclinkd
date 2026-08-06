@@ -2,7 +2,7 @@
 
 This directory is the single source of truth for MusicLinkd's UI and brand decisions.
 
-**Interactive reference:** Open `guide/index.html` in any browser — no build step, no dependencies beyond Google Fonts.
+**Interactive reference:** Open `guide/styleguide.html` in any browser — no build step, no dependencies beyond Google Fonts.
 
 ## Product expression
 
@@ -37,7 +37,7 @@ Do not introduce Material-design layouts, purple brand tokens, glassmorphism, ne
 
 | Path | Purpose |
 |---|---|
-| `index.html` | Interactive living design system (sidebar nav, live previews, AI prompt library) |
+| `styleguide.html` | Canonical living Enterprise Design System & Styleguide reference (296 consolidated sections & screens) |
 | `tokens/tokens.json` | Machine-readable design tokens (colors, spacing, radius, typography, motion, stroke) |
 | `components/` | Controls and composite UI primitives |
 | `cards/` | Reusable discovery and transaction cards |
