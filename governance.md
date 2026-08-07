@@ -21,7 +21,11 @@
 ## 3. 🖼️ Icon Language Standard
 
 - **Icon Family**: Use **Lucide Outlined Icons** exclusively (outlined at `1.75px` stroke in monochrome `#0D0B26` / `#7D7D8E` or brand pink `#EA4C89`).
-- **Prohibition**: Never use emoji as icons, colorful junkie icons, or mixed icon sets across any component or screen.
+- **No Multi-Colored Default Icons**: Every icon in its default/resting state MUST be a single solid color. No gradients, no duo-tone, no multi-color fills. The ONLY permitted icon colors are:
+  - `var(--black)` / `#0D0D0D` — default, inactive
+  - `var(--muted)` / `#7D7D8E` — secondary, disabled
+  - `var(--pink)` / `#EA4C89` — active, selected, brand accent
+- **Prohibition**: Never use emoji as icons, colorful junkie icons, FontAwesome multi-color icons, or mixed icon sets across any component or screen. Lucide only. One color per icon. Period.
 
 ---
 
@@ -67,7 +71,36 @@ Every component must define 6 explicit interaction states:
 
 ---
 
-## 7. ♿ ARIA, WCAG 2.1 AA & Accessibility Standards
+## 7. 📐 Card & Block Height Constraints (Breakpoint-Mapped)
+
+Every card, block, and container MUST respect min/max height boundaries mapped to the 4-breakpoint grid. This prevents content overflow, maintains visual rhythm, and ensures consistent scrolling behavior across all viewport sizes.
+
+| Component | Min Height | Max Height (Mobile 0-767px) | Max Height (Tablet 768-1023px) | Max Height (Desktop 1024-1439px) | Max Height (Wide 1440px+) | Overflow |
+|-----------|-----------|---------------------------|-------------------------------|--------------------------------|--------------------------|----------|
+| Card (.card-s) | 120dp | 480dp | 520dp | 600dp | 680dp | hidden |
+| Masonry Item | auto | 420dp | 460dp | 520dp | 580dp | hidden |
+| Spec Card | 100dp | 360dp | 400dp | 480dp | 560dp | scroll |
+| Visual Demo | 80dp | 600dp | none | none | none | auto |
+| Phone Frame Screen | 500dp | 700dp | 700dp | 700dp | 700dp | scroll |
+
+**Breakpoint Reference:**
+- **Mobile:** 0–767px (360dp viewport, 2-col grid)
+- **Tablet:** 768–1023px (iPad, foldables, 4-col grid)
+- **Desktop:** 1024–1439px (Laptops, 8-col grid)
+- **Wide:** 1440px+ (Large monitors, 12-col grid)
+
+**CSS Enforcement:**
+```css
+.card-s { min-height: 120px; overflow: hidden; }
+@media (max-width: 767px)  { .card-s { max-height: 480px; } }
+@media (min-width: 768px) and (max-width: 1023px) { .card-s { max-height: 520px; } }
+@media (min-width: 1024px) and (max-width: 1439px) { .card-s { max-height: 600px; } }
+@media (min-width: 1440px) { .card-s { max-height: 680px; } }
+```
+
+---
+
+## 8. ♿ ARIA, WCAG 2.1 AA & Accessibility Standards
 
 1. **Color Contrast**: Text must achieve a contrast ratio of at least **4.5:1** against its background (`#0D0B26` on `#FFFFFF` / `#FCFCFD` = `16.8:1`).
 2. **Screen Reader Labels**: Every interactive icon button must include `aria-label` or `contentDescription`.
