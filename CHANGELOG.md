@@ -7,6 +7,8 @@ All notable repository-level changes are recorded here.
 ### Added
 
 - Governance rule §8 "Changelog Discipline" — every commit must include a `CHANGELOG.md` entry following Keep a Changelog format. Applies to all repos: app, admin, website, guide.
+- Phone-frame visual mockups for all 11 screen sections in `guide/merge3.html` (Authentication, Onboarding, Discovery, Artist, Business, Studio, Marketplace, Messaging, Projects, Reputation, Settings).
+- Color swatches (`<span class="ts">`) added to all bare hex codes in documentation tables across `guide/merge3.html` — Semantic Colors, Iconography Extended, Border Tokens, Accessibility, Design Philosophy sections. Complies with Governance §2 Color Swatch Rule.
 
 ### Changed
 
