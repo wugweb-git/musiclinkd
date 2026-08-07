@@ -71,9 +71,9 @@ All layouts across the application must draw components directly from the unifie
 
 ### Functional Widgets Specification
 
-1. **`AudioWaveformPlayerWidget`:** Animated audio stem preview player displaying custom real-time audio visualization bars driven by `rememberInfiniteTransition()`. Integrates play/pause triggers, track timeline sliders, and duration.
+1. **`AudioWaveformPlayerWidget`:** Animated audio stem preview player displaying custom real-time audio visualisation bars driven by `rememberInfiniteTransition()`. Integrates play/pause triggers, track timeline sliders, and duration.
 2. **`StudioSlotPickerWidget`:** Hourly schedule matrix helping users review, select, and book Recording Studio blocks with touch selections.
-3. **`ArtistSynergyScoreWidget`:** Circular progress arc depicting the Gemini AI Matchmaking score badge and summarized matching metrics.
+3. **`ArtistSynergyScoreWidget`:** Circular progress arc depicting the Gemini AI Matchmaking score badge and summarised matching metrics.
 4. **`VerifiedBadgeWidget`:** Verified Industry Passport checkmark emblem to display on authenticated creative accounts.
 5. **`SearchAndFilterHeaderWidget`:** Full-width filled search bar with clear buttons and a horizontally scrollable row of genre category chips.
 

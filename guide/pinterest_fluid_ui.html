@@ -1,0 +1,2296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicLinkd — Discovery Portal (Fluid UI Theme)</title>
+    
+    <!-- Fonts matching MusicLinkd styleguide -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter+Tight:ital,wght@0,600;0,700;0,800;1,800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ===== DESIGN SYSTEM TOKENS (MUSICLINKD + GESTALT) ===== */
+        :root {
+            /* Colors */
+            --pink: #EA4C89;
+            --pink-hover: #D93C77;
+            --navy: #0D0B26;
+            --black: #0D0D0D;
+            --paper: #FCFCFD;
+            --line: #ECECF1;
+            --muted: #7D7D8E;
+            --white: #FFFFFF;
+            --success: #22C55E;
+            --warn: #F59E0B;
+            --err: #DC2626;
+            --purple: #8B5CF6;
+            
+            /* Gestalt Color Tokens */
+            --color-brand-red: #E60023;
+            --color-bg-wash-light: #F1F1F1;
+            --color-bg-wash-dark: #111111;
+            --color-gray-200: #E9E9E9;
+            --color-gray-50: #F9F9F9;
+            
+            /* Spacing */
+            --space-100: 4px;
+            --space-200: 8px;
+            --space-300: 12px;
+            --space-400: 16px;
+            --space-600: 24px;
+            --space-800: 32px;
+            --space-1200: 48px;
+            
+            /* Border Radii */
+            --rounding-pill: 999px;
+            --rounding-circle: 50%;
+            --rounding-800: 32px;
+            --rounding-600: 24px;
+            --rounding-400: 16px;
+            --rounding-200: 8px;
+            
+            /* Typography */
+            --font-display: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display-pinterest: 'Poppins', sans-serif;
+            
+            /* Transition */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(13,11,38,0.06);
+            --shadow-lg: 0 8px 24px rgba(13,11,38,0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--paper);
+            color: var(--navy);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ===== NAVIGATION SYSTEM ===== */
+        
+        /* Floating Left Sidebar (Desktop) */
+        .desktop-sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            background-color: var(--white);
+            border-right: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: var(--space-400) 0;
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--rounding-circle);
+            background-color: var(--pink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: var(--space-800);
+            box-shadow: 0 4px 10px rgba(234, 76, 137, 0.3);
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.08);
+            background-color: var(--pink-hover);
+        }
+
+        .nav-item {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--rounding-circle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            font-size: 18px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: var(--space-300);
+            position: relative;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--pink);
+            background-color: #FCE7F3;
+        }
+
+        .nav-item .badge-count {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: var(--err);
+            color: var(--white);
+            font-size: 9px;
+            font-weight: 700;
+            border-radius: var(--rounding-pill);
+            padding: 2px 5px;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+        }
+
+        /* Bottom Nav Bar (Mobile) */
+        .mobile-bottom-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 32px);
+            max-width: 420px;
+            height: 64px;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--line);
+            border-radius: var(--rounding-pill);
+            display: none;
+            align-items: center;
+            justify-content: space-around;
+            box-shadow: var(--shadow-lg);
+            z-index: 100;
+        }
+
+        .mobile-bottom-nav .nav-item {
+            margin-bottom: 0;
+        }
+
+        /* ===== MAIN FRAME LAYOUT ===== */
+        .main-frame {
+            margin-left: 80px;
+            min-height: 100vh;
+            padding: var(--space-600) var(--space-800);
+            transition: var(--transition);
+        }
+
+        /* ===== VIEW CONTAINERS ===== */
+        .view-pane {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .view-pane.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== PROFILE VIEW ("Your Saved Ideas") ===== */
+        .profile-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: var(--space-400);
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: var(--rounding-circle);
+            background: linear-gradient(135deg, #FCE7F3, #F3E8FF);
+            color: var(--pink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-family: var(--font-display);
+            font-weight: 800;
+            margin: 0 auto var(--space-400);
+            border: 4px solid var(--white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .profile-name {
+            font-family: var(--font-display-pinterest);
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--navy);
+            margin-bottom: var(--space-400);
+        }
+
+        .btn-profile-share {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-200);
+            background-color: var(--color-bg-wash-light);
+            color: var(--navy);
+            border: none;
+            border-radius: var(--rounding-pill);
+            padding: var(--space-300) var(--space-600);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-profile-share:hover {
+            background-color: var(--color-gray-200);
+        }
+
+        /* Tabs bar */
+        .profile-tabs {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-600);
+            margin: var(--space-800) 0 var(--space-600);
+            border-bottom: 1px solid var(--line);
+            padding-bottom: var(--space-300);
+        }
+
+        .profile-tab {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--muted);
+            cursor: pointer;
+            padding-bottom: var(--space-300);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .profile-tab:hover, .profile-tab.active {
+            color: var(--navy);
+        }
+
+        .profile-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--navy);
+            border-radius: var(--rounding-pill);
+        }
+
+        /* Grid Controls Row */
+        .grid-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-400);
+        }
+
+        .btn-create-round {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--rounding-circle);
+            background-color: var(--pink);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(234, 76, 137, 0.3);
+            transition: var(--transition);
+        }
+
+        .btn-create-round:hover {
+            background-color: var(--pink-hover);
+            transform: scale(1.05);
+        }
+
+        /* Masonry Grid Layout */
+        .masonry-grid {
+            column-count: 4;
+            column-gap: var(--space-400);
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .masonry-item {
+            background-color: var(--white);
+            border-radius: var(--rounding-600);
+            overflow: hidden;
+            margin-bottom: var(--space-400);
+            break-inside: avoid;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--line);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .masonry-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .masonry-media-container {
+            position: relative;
+            overflow: hidden;
+            background-color: var(--color-bg-wash-light);
+        }
+
+        .masonry-media-container img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .masonry-item:hover .masonry-media-container img {
+            transform: scale(1.06);
+        }
+
+        /* Overlay washes & save button */
+        .item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(13,11,38,0.6) 0%, rgba(13,11,38,0.2) 60%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: var(--space-300);
+            z-index: 5;
+        }
+
+        .masonry-item:hover .item-overlay {
+            opacity: 1;
+        }
+
+        .overlay-save-btn {
+            align-self: flex-end;
+            background-color: var(--pink);
+            color: var(--white);
+            border: none;
+            border-radius: var(--rounding-pill);
+            padding: var(--space-200) var(--space-400);
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .overlay-save-btn:hover {
+            background-color: var(--pink-hover);
+        }
+
+        .overlay-save-btn.saved {
+            background-color: var(--navy);
+            color: var(--white);
+        }
+
+        .overlay-action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--white);
+        }
+
+        .overlay-action-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: var(--rounding-circle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .overlay-action-btn:hover {
+            background: var(--white);
+            color: var(--navy);
+        }
+
+        .masonry-details {
+            padding: var(--space-300);
+            text-align: left;
+        }
+
+        .masonry-title {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: var(--space-100);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .masonry-meta {
+            font-size: 11px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Empty Board Placeholders */
+        .empty-grid-card {
+            background-color: var(--white);
+            border: 2px dashed var(--line);
+            border-radius: var(--rounding-600);
+            padding: var(--space-800) var(--space-400);
+            text-align: center;
+            break-inside: avoid;
+            margin-bottom: var(--space-400);
+        }
+
+        .empty-illustration {
+            font-size: 48px;
+            margin-bottom: var(--space-300);
+            color: var(--line);
+        }
+
+        .empty-grid-card h4 {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: var(--space-200);
+        }
+
+        .empty-grid-card p {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: var(--space-400);
+        }
+
+        /* ===== TRENDS VIEW (`trends.pinterest.com`) ===== */
+        .trends-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-top: var(--space-300);
+        }
+
+        .trends-header {
+            margin-bottom: var(--space-600);
+        }
+
+        .trends-header h2 {
+            font-family: var(--font-display-pinterest);
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-100);
+        }
+
+        .trends-header p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-200);
+            margin-bottom: var(--space-600);
+        }
+
+        .filter-chip {
+            background-color: var(--color-bg-wash-light);
+            border: 1px solid transparent;
+            border-radius: var(--rounding-pill);
+            padding: var(--space-200) var(--space-400);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--navy);
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-200);
+        }
+
+        .filter-chip:hover {
+            background-color: var(--color-gray-200);
+        }
+
+        .filter-chip.selected {
+            background-color: var(--navy);
+            color: var(--white);
+        }
+
+        .trends-tabs {
+            display: flex;
+            gap: var(--space-400);
+            margin-bottom: var(--space-400);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .trends-tab {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--muted);
+            padding-bottom: var(--space-300);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .trends-tab.active {
+            color: var(--navy);
+        }
+
+        .trends-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--navy);
+        }
+
+        /* Trends Table */
+        .trends-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--white);
+            border-radius: var(--rounding-400);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--line);
+        }
+
+        .trends-table th, .trends-table td {
+            padding: var(--space-400) var(--space-600);
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .trends-table th {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+            background-color: var(--color-gray-50);
+        }
+
+        .trends-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .trends-table tbody tr:hover {
+            background-color: var(--color-gray-50);
+        }
+
+        .trend-keyword-cell {
+            display: flex;
+            align-items: center;
+            gap: var(--space-300);
+        }
+
+        .trend-img {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--rounding-200);
+            object-fit: cover;
+        }
+
+        .trend-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .sparkline-svg {
+            width: 100px;
+            height: 32px;
+            stroke: var(--pink);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .growth-pct {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--success);
+        }
+
+        .volume-bar-container {
+            width: 80px;
+            height: 6px;
+            background-color: var(--line);
+            border-radius: var(--rounding-pill);
+            overflow: hidden;
+        }
+
+        .volume-bar-fill {
+            height: 100%;
+            background-color: var(--pink);
+            border-radius: var(--rounding-pill);
+        }
+
+        /* ===== CREATE BLOG VIEW (`create.pinterest.com`) ===== */
+        .blog-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-bottom: 100px;
+        }
+
+        .blog-hero {
+            background-color: #E0F2FE; /* Light Pastel Blue */
+            border-radius: var(--rounding-800);
+            padding: var(--space-1200) var(--space-800);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            min-height: 280px;
+            margin-bottom: var(--space-800);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .blog-hero-content {
+            z-index: 10;
+            max-width: 480px;
+        }
+
+        .blog-hero-tag {
+            background-color: var(--navy);
+            color: var(--white);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: var(--space-100) var(--space-300);
+            border-radius: var(--rounding-pill);
+            display: inline-block;
+            margin-bottom: var(--space-300);
+        }
+
+        .blog-hero-title {
+            font-family: var(--font-display-pinterest);
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--navy);
+        }
+
+        .blog-hero-title span {
+            color: var(--pink);
+        }
+
+        /* Hero graphics/overlays mock */
+        .hero-graphic {
+            position: absolute;
+            transition: transform 0.5s ease;
+        }
+
+        .graphic-headphones {
+            width: 140px;
+            right: 40px;
+            top: 20px;
+            transform: rotate(-15deg);
+        }
+
+        .graphic-discoball {
+            width: 110px;
+            right: 200px;
+            bottom: -20px;
+            opacity: 0.85;
+        }
+
+        .graphic-watch {
+            width: 90px;
+            right: 120px;
+            top: 140px;
+            transform: rotate(20deg);
+        }
+
+        .blog-hero:hover .graphic-headphones {
+            transform: rotate(-5deg) scale(1.05);
+        }
+
+        .blog-hero:hover .graphic-watch {
+            transform: rotate(30deg) scale(1.05);
+        }
+
+        /* Blog posts layout */
+        .blog-posts-row {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: var(--space-600);
+            margin-top: var(--space-600);
+        }
+
+        @media (max-width: 860px) {
+            .blog-posts-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .collage-card {
+            background-color: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--rounding-600);
+            padding: var(--space-600);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .collage-images-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: var(--space-300);
+            margin-bottom: var(--space-600);
+            position: relative;
+            height: 220px;
+        }
+
+        .collage-img-main {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--rounding-400);
+        }
+
+        .collage-sub-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-300);
+            height: 100%;
+        }
+
+        .collage-img-sub {
+            width: 100%;
+            height: calc(50% - 6px);
+            object-fit: cover;
+            border-radius: var(--rounding-200);
+        }
+
+        /* Floating stickers / card highlights */
+        .collage-sticker {
+            position: absolute;
+            background-color: var(--pink);
+            color: var(--white);
+            font-family: var(--font-display-pinterest);
+            font-weight: 800;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: var(--rounding-pill);
+            box-shadow: var(--shadow-md);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-4deg);
+            z-index: 10;
+        }
+
+        .collage-details h3 {
+            font-family: var(--font-display-pinterest);
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-200);
+            line-height: 1.2;
+        }
+
+        .collage-details p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: var(--space-400);
+        }
+
+        /* Floating Sticky Chat Button */
+        .btn-sticky-chat {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--err); /* Pinterest red-circle sticky chat bubble */
+            color: var(--white);
+            border: none;
+            border-radius: var(--rounding-pill);
+            padding: var(--space-300) var(--space-500);
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: var(--space-200);
+            transition: var(--transition);
+        }
+
+        .btn-sticky-chat:hover {
+            transform: scale(1.05);
+            background-color: #C32F00;
+        }
+
+        /* ===== ABOUT LANDING VIEW (`about.pinterest.com`) ===== */
+        .about-hero-section {
+            max-width: 900px;
+            margin: var(--space-800) auto;
+            text-align: center;
+            padding: 0 var(--space-400);
+        }
+
+        /* Huge bold heading with inline badges */
+        .about-heading {
+            font-family: var(--font-display-pinterest);
+            font-size: 56px;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            color: var(--navy);
+            text-align: center;
+            margin-bottom: var(--space-800);
+        }
+
+        .heading-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            vertical-align: middle;
+            background-color: var(--color-bg-wash-light);
+            border: 1px solid var(--line);
+            border-radius: var(--rounding-pill);
+            padding: 2px 14px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            color: var(--navy);
+            margin: 0 4px;
+            transform: translateY(-2px);
+        }
+
+        .heading-badge img {
+            width: 24px;
+            height: 24px;
+            border-radius: var(--rounding-circle);
+            object-fit: cover;
+        }
+
+        .heading-badge.badge-icon {
+            padding: 2px 8px;
+            background-color: #FCE7F3;
+            border-color: #FCE7F3;
+            color: var(--pink);
+        }
+
+        .about-cta-row {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-300);
+        }
+
+        /* ===== MEGA MENU OVERLAY ===== */
+        .mega-menu-overlay {
+            position: fixed;
+            top: -100%;
+            left: 0;
+            right: 0;
+            background-color: var(--white);
+            box-shadow: var(--shadow-lg);
+            z-index: 1010;
+            transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .mega-menu-overlay.open {
+            top: 0;
+        }
+
+        .mega-menu-overlay.open ~ .desktop-sidebar {
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .mega-menu-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: var(--space-800) var(--space-600);
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: var(--space-800);
+        }
+
+        .menu-left-col {
+            border-right: 1px solid var(--line);
+            padding-right: var(--space-600);
+        }
+
+        .menu-logo-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-600);
+        }
+
+        .btn-menu-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--muted);
+            transition: var(--transition);
+        }
+
+        .btn-menu-close:hover {
+            color: var(--navy);
+        }
+
+        .menu-quick-links {
+            list-style: none;
+        }
+
+        .menu-quick-links li {
+            margin-bottom: var(--space-300);
+        }
+
+        .menu-quick-links a {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--navy);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .menu-quick-links a:hover {
+            color: var(--pink);
+        }
+
+        .menu-right-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-600);
+        }
+
+        .menu-col-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+            margin-bottom: var(--space-300);
+        }
+
+        .menu-links-list {
+            list-style: none;
+        }
+
+        .menu-links-list li {
+            margin-bottom: var(--space-200);
+        }
+
+        .menu-links-list a {
+            font-size: 13px;
+            color: var(--navy);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .menu-links-list a:hover {
+            color: var(--pink);
+        }
+
+        .menu-auth-row {
+            margin-top: var(--space-600);
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-200);
+        }
+
+        /* ===== MOCK INTERACTIVE MODALS ===== */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(13, 11, 38, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-400);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-card {
+            background-color: var(--white);
+            border-radius: var(--rounding-800);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 480px;
+            overflow: hidden;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            padding: var(--space-600);
+        }
+
+        .modal-backdrop.open .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--muted);
+            transition: var(--transition);
+        }
+
+        .modal-close-btn:hover {
+            color: var(--navy);
+        }
+
+        /* 1. Create a Board Modal */
+        .create-board-modal h3 {
+            font-family: var(--font-display-pinterest);
+            font-size: 24px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: var(--space-600);
+        }
+
+        .board-preview-grid {
+            width: 120px;
+            height: 80px;
+            border-radius: var(--rounding-400);
+            background-color: var(--color-bg-wash-light);
+            border: 1px solid var(--line);
+            margin: 0 auto var(--space-600);
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2px;
+            overflow: hidden;
+        }
+
+        .board-preview-main {
+            background-color: var(--line);
+            height: 100%;
+        }
+
+        .board-preview-side {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            height: 100%;
+        }
+
+        .board-preview-sub {
+            background-color: var(--color-gray-200);
+            height: calc(50% - 1px);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-400);
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: var(--space-100);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-300) var(--space-400);
+            border: 1.5px solid var(--line);
+            border-radius: var(--rounding-400);
+            font-family: var(--font-body);
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            border-color: var(--pink);
+        }
+
+        /* Toggles */
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-400);
+        }
+
+        .toggle-details {
+            max-width: 320px;
+        }
+
+        .toggle-title {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .toggle-desc {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background-color: var(--color-gray-200);
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--navy);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        .invite-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-300) 0;
+            border-top: 1px solid var(--line);
+            margin-bottom: var(--space-400);
+        }
+
+        .invite-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--rounding-circle);
+            background-color: var(--color-bg-wash-light);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .invite-btn:hover {
+            background-color: var(--color-gray-200);
+        }
+
+        /* 2. Welcome Login Modal */
+        .login-modal {
+            text-align: center;
+        }
+
+        .login-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--rounding-circle);
+            background-color: var(--pink);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 18px;
+            margin-bottom: var(--space-400);
+            box-shadow: 0 4px 8px rgba(234, 76, 137, 0.2);
+        }
+
+        .login-logo i {
+            color: white;
+        }
+
+        .login-modal h3 {
+            font-family: var(--font-display-pinterest);
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-100);
+        }
+
+        .login-modal p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: var(--space-600);
+        }
+
+        .login-qr-section {
+            background-color: var(--color-gray-50);
+            border: 1px solid var(--line);
+            border-radius: var(--rounding-400);
+            padding: var(--space-400);
+            margin-top: var(--space-600);
+            display: flex;
+            align-items: center;
+            gap: var(--space-400);
+            text-align: left;
+        }
+
+        .login-qr-desc h4 {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: var(--space-100);
+        }
+
+        .login-qr-desc p {
+            font-size: 11px;
+            color: var(--muted);
+            margin-bottom: 0;
+        }
+
+        /* 3. Business Settings Promo Modal */
+        .business-modal-card {
+            max-width: 680px;
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            padding: 0;
+        }
+
+        @media (max-width: 600px) {
+            .business-modal-card {
+                grid-template-columns: 1fr;
+            }
+            .biz-modal-left {
+                display: none;
+            }
+        }
+
+        .biz-modal-left {
+            background-color: var(--navy);
+            background-image: linear-gradient(135deg, var(--navy) 40%, #1e1b4b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-800);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .biz-illustration-img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--rounding-400);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transform: rotate(-3deg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .biz-modal-right {
+            padding: var(--space-600);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .biz-modal-right h3 {
+            font-family: var(--font-display-pinterest);
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: var(--space-300);
+            line-height: 1.25;
+        }
+
+        .biz-features-list {
+            list-style: none;
+            margin-bottom: var(--space-600);
+        }
+
+        .biz-features-list li {
+            position: relative;
+            padding-left: 24px;
+            font-size: 13px;
+            margin-bottom: var(--space-300);
+            color: var(--navy);
+            font-weight: 500;
+        }
+
+        .biz-features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* ===== SLIDING "CREATE" DRAWER / BOTTOM SHEET ===== */
+        .create-drawer {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: -320px;
+            width: 280px;
+            background-color: var(--white);
+            border-right: 1px solid var(--line);
+            box-shadow: var(--shadow-lg);
+            z-index: 95;
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: var(--space-800) var(--space-400) var(--space-400);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-400);
+        }
+
+        .create-drawer.open {
+            left: 80px;
+        }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: var(--space-300);
+            margin-bottom: var(--space-200);
+        }
+
+        .drawer-header h3 {
+            font-family: var(--font-display-pinterest);
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .create-option-card {
+            display: flex;
+            align-items: center;
+            gap: var(--space-300);
+            padding: var(--space-300);
+            background-color: var(--color-gray-50);
+            border: 1px solid var(--line);
+            border-radius: var(--rounding-400);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .create-option-card:hover {
+            border-color: var(--pink);
+            background-color: #FCE7F3;
+        }
+
+        .create-option-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--rounding-circle);
+            background-color: var(--color-bg-wash-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .create-option-card:hover .create-option-icon {
+            background-color: var(--pink);
+            color: var(--white);
+        }
+
+        .create-option-desc h4 {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .create-option-desc p {
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        /* ===== COMMON UTILITY STYLES ===== */
+        .btn-primary-ds {
+            background-color: var(--pink);
+            color: var(--white);
+            border: none;
+            border-radius: var(--rounding-pill);
+            padding: var(--space-300) var(--space-600);
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(234, 76, 137, 0.25);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+        }
+
+        .btn-primary-ds:hover {
+            background-color: var(--pink-hover);
+        }
+
+        .btn-secondary-ds {
+            background-color: var(--color-bg-wash-light);
+            color: var(--navy);
+            border: 1px solid var(--line);
+            border-radius: var(--rounding-pill);
+            padding: var(--space-300) var(--space-600);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-secondary-ds:hover {
+            background-color: var(--color-gray-200);
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* Toast notifications */
+        .toast-popup {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 2050;
+            background-color: var(--black);
+            color: var(--white);
+            padding: var(--space-300) var(--space-500);
+            border-radius: var(--rounding-400);
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-200);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+        }
+
+        .toast-popup.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: var(--rounding-circle);
+            background-color: var(--pink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        /* ===== RESPONISIVE RETUNING ===== */
+        @media (max-width: 1023px) {
+            .desktop-sidebar {
+                display: none;
+            }
+            .mobile-bottom-nav {
+                display: flex;
+            }
+            .main-frame {
+                margin-left: 0;
+                padding-bottom: 100px;
+            }
+            .masonry-grid {
+                column-count: 3;
+            }
+            .create-drawer {
+                bottom: 84px;
+                top: auto;
+                left: 0;
+                right: 0;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-top: 1px solid var(--line);
+                border-radius: var(--rounding-600) var(--rounding-600) 0 0;
+                transform: translateY(100%);
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                padding: var(--space-400);
+            }
+            .create-drawer.open {
+                left: 0;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+            .about-heading {
+                font-size: 38px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== MEGA MENU OVERLAY ===== -->
+    <div class="mega-menu-overlay" id="megaMenu">
+        <div class="mega-menu-content">
+            <div class="menu-left-col">
+                <div class="menu-logo-row">
+                    <div style="display:flex;align-items:center;gap:8px">
+                        <div class="login-logo" style="margin-bottom:0;width:32px;height:32px;font-size:14px">M</div>
+                        <span style="font-family:var(--font-display);font-weight:800;font-size:15px">MusicLinkd</span>
+                    </div>
+                    <button class="btn-menu-close" onclick="toggleMegaMenu()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <ul class="menu-quick-links">
+                    <li><a href="#" onclick="showSection('saved')">Saved Ideas</a></li>
+                    <li><a href="#" onclick="showSection('trends')">Search Trends</a></li>
+                    <li><a href="#" onclick="showSection('blog')">Creator News</a></li>
+                    <li><a href="#" onclick="showSection('about')">Brand About</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="menu-right-grid">
+                    <div>
+                        <h4 class="menu-col-title">Company</h4>
+                        <ul class="menu-links-list">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Newsroom</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Investors</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="menu-col-title">Safety & Support</h4>
+                        <ul class="menu-links-list">
+                            <li><a href="#">Help Centre</a></li>
+                            <li><a href="#">Community Policies</a></li>
+                            <li><a href="#">Teen Safety</a></li>
+                            <li><a href="#">Brand Safety</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="menu-col-title">For Businesses</h4>
+                        <ul class="menu-links-list">
+                            <li><a href="#" onclick="triggerModal('modalBiz')">Business Account</a></li>
+                            <li><a href="#">Advertise on MusicLinkd</a></li>
+                            <li><a href="#">Creator Academy</a></li>
+                            <li><a href="#">Trends Tool</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="menu-auth-row">
+                    <button class="btn-secondary-ds" onclick="triggerModal('modalLogin')">Log in</button>
+                    <button class="btn-primary-ds" onclick="triggerModal('modalLogin')">Sign up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== DESKTOP LEFT SIDEBAR ===== -->
+    <aside class="desktop-sidebar">
+        <div class="brand-logo" onclick="toggleMegaMenu()">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px" aria-hidden="true">
+                <rect width="64" height="64" rx="16" fill="#0D0D0D"/>
+                <rect x="16" y="26" width="5" height="20" rx="2.5" fill="#FFFFFF"/>
+                <rect x="25.5" y="16" width="5" height="32" rx="2.5" fill="#EA4C89"/>
+                <rect x="35" y="22" width="5" height="24" rx="2.5" fill="#FFFFFF"/>
+                <rect x="44.5" y="30" width="5" height="16" rx="2.5" fill="#EA4C89"/>
+            </svg>
+        </div>
+        
+        <div class="nav-item active" onclick="showSection('saved', this)" title="Home / Saved Ideas">
+            <i class="fa-solid fa-house"></i>
+        </div>
+        <div class="nav-item" onclick="showSection('trends', this)" title="Search Trends">
+            <i class="fa-solid fa-compass"></i>
+        </div>
+        <div class="nav-item" onclick="toggleCreateDrawer(this)" id="createNavBtn" title="Create Pin or Board">
+            <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="nav-item" onclick="showSection('blog', this)" title="News & Blog">
+            <i class="fa-solid fa-newspaper"></i>
+            <span class="badge-count">1</span>
+        </div>
+        <div class="nav-item" onclick="showSection('about', this)" title="About MusicLinkd">
+            <i class="fa-solid fa-circle-info"></i>
+        </div>
+        
+        <div class="sidebar-bottom">
+            <div class="nav-item" onclick="triggerModal('modalLogin')" title="Settings">
+                <i class="fa-solid fa-gear"></i>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ===== MOBILE BOTTOM NAVIGATION ===== -->
+    <nav class="mobile-bottom-nav">
+        <div class="nav-item active" onclick="showSection('saved', this)">
+            <i class="fa-solid fa-house"></i>
+        </div>
+        <div class="nav-item" onclick="showSection('trends', this)">
+            <i class="fa-solid fa-compass"></i>
+        </div>
+        <div class="nav-item" onclick="toggleCreateDrawer(this)" id="mobileCreateNavBtn">
+            <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="nav-item" onclick="showSection('blog', this)">
+            <i class="fa-solid fa-newspaper"></i>
+        </div>
+        <div class="nav-item" onclick="showSection('about', this)">
+            <i class="fa-solid fa-circle-info"></i>
+        </div>
+    </nav>
+
+    <!-- ===== CREATE MENU DRAWER ===== -->
+    <div class="create-drawer" id="createDrawer">
+        <div class="drawer-header">
+            <h3>Create</h3>
+            <button class="btn-menu-close" onclick="toggleCreateDrawer()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <div class="create-option-card" onclick="showToast('Pin tool opened'); toggleCreateDrawer();">
+            <div class="create-option-icon"><i class="fa-solid fa-thumbtack"></i></div>
+            <div class="create-option-desc">
+                <h4>Pin</h4>
+                <p>Post audio portfolios or media</p>
+            </div>
+        </div>
+        
+        <div class="create-option-card" onclick="triggerModal('modalCreateBoard'); toggleCreateDrawer();">
+            <div class="create-option-icon"><i class="fa-solid fa-folder-plus"></i></div>
+            <div class="create-option-desc">
+                <h4>Board</h4>
+                <p>Organize collections of ideas</p>
+            </div>
+        </div>
+        
+        <div class="create-option-card" onclick="showToast('Collage workspace loading'); toggleCreateDrawer();">
+            <div class="create-option-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <div class="create-option-desc">
+                <h4>Collage</h4>
+                <p>Mix & match studio assets</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT CONTAINER ===== -->
+    <main class="main-frame">
+        
+        <!-- View 1: Saved Ideas (Default View) -->
+        <div class="view-pane active" id="view-saved">
+            <div class="profile-container">
+                <div class="profile-avatar">V</div>
+                <h1 class="profile-name">Your saved ideas</h1>
+                <button class="btn-profile-share" onclick="showToast('Profile link copied to clipboard')">
+                    <i class="fa-solid fa-share-nodes"></i> Share profile
+                </button>
+                
+                <div class="profile-tabs">
+                    <div class="profile-tab active" onclick="switchProfileTab('pins', this)">Pins</div>
+                    <div class="profile-tab" onclick="switchProfileTab('boards', this)">Boards</div>
+                    <div class="profile-tab" onclick="switchProfileTab('collages', this)">Collages</div>
+                </div>
+                
+                <div class="grid-controls">
+                    <button class="filter-chip"><i class="fa-solid fa-sliders"></i> Filter</button>
+                    <button class="btn-create-round" onclick="triggerModal('modalCreateBoard')">+</button>
+                </div>
+                
+                <!-- Pins Masonry (Active Tab by default) -->
+                <div class="tab-content" id="profile-tab-pins">
+                    <div class="masonry-grid">
+                        
+                        <!-- Item 1: Studio Pin -->
+                        <div class="masonry-item">
+                            <div class="masonry-media-container" style="height: 240px;">
+                                <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=400&q=80" alt="Yash Raj Studios">
+                                <div class="item-overlay">
+                                    <button class="overlay-save-btn" onclick="toggleSavePin(this, event)">Save</button>
+                                    <div class="overlay-action-row">
+                                        <span style="font-size: 11px; font-weight: 600;"><i class="fa-solid fa-headphones"></i> Play Preview</span>
+                                        <button class="overlay-action-btn" onclick="showToast('Link copied')"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="masonry-details">
+                                <h4 class="masonry-title">Yash Raj Studios</h4>
+                                <div class="masonry-meta">
+                                    <span>Mumbai Room A</span>
+                                    <span>₹5,000/hr</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: Vocalist Pin -->
+                        <div class="masonry-item">
+                            <div class="masonry-media-container" style="height: 320px;">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Ananya Sharma Vocalist">
+                                <div class="item-overlay">
+                                    <button class="overlay-save-btn" onclick="toggleSavePin(this, event)">Save</button>
+                                    <div class="overlay-action-row">
+                                        <span style="font-size: 11px; font-weight: 600;"><i class="fa-solid fa-microphone-lines"></i> 4.9 ★</span>
+                                        <button class="overlay-action-btn" onclick="showToast('Link copied')"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="masonry-details">
+                                <h4 class="masonry-title">Ananya Sharma (Soprano)</h4>
+                                <div class="masonry-meta">
+                                    <span>Vocal Portfolios</span>
+                                    <span>Verified</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: Equipment Pin -->
+                        <div class="masonry-item">
+                            <div class="masonry-media-container" style="height: 200px;">
+                                <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=400&q=80" alt="Studio Gear Microphone">
+                                <div class="item-overlay">
+                                    <button class="overlay-save-btn" onclick="toggleSavePin(this, event)">Save</button>
+                                    <div class="overlay-action-row">
+                                        <span style="font-size: 11px; font-weight: 600;">Gear Rental</span>
+                                        <button class="overlay-action-btn" onclick="showToast('Link copied')"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="masonry-details">
+                                <h4 class="masonry-title">Neumann U87 Condenser</h4>
+                                <div class="masonry-meta">
+                                    <span>₹2,500/day</span>
+                                    <span>Delhi Rental</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 4: Producer Pin -->
+                        <div class="masonry-item">
+                            <div class="masonry-media-container" style="height: 280px;">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Arjun Beats Mix Engineer">
+                                <div class="item-overlay">
+                                    <button class="overlay-save-btn" onclick="toggleSavePin(this, event)">Save</button>
+                                    <div class="overlay-action-row">
+                                        <span style="font-size: 11px; font-weight: 600;"><i class="fa-solid fa-music"></i> Mix & Master</span>
+                                        <button class="overlay-action-btn" onclick="showToast('Link copied')"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="masonry-details">
+                                <h4 class="masonry-title">Arjun Beats (Producer)</h4>
+                                <div class="masonry-meta">
+                                    <span>Mumbai Sessions</span>
+                                    <span>Pro Synced</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Empty state for Boards Tab -->
+                <div class="tab-content" id="profile-tab-boards" style="display:none;">
+                    <div class="masonry-grid" style="column-count: 2; max-width: 600px;">
+                        <div class="empty-grid-card">
+                            <div class="empty-illustration"><i class="fa-solid fa-folder-open"></i></div>
+                            <h4>Organise your ideas</h4>
+                            <p>Boards are where they live. Create boards to organise your audio portfolios your way.</p>
+                            <button class="btn-primary-ds btn-sm" onclick="triggerModal('modalCreateBoard')">Create a board</button>
+                        </div>
+                        <div class="empty-grid-card">
+                            <div class="empty-illustration"><i class="fa-solid fa-user-group"></i></div>
+                            <h4>Collaborate with others</h4>
+                            <p>Invite teammates and vocalists to add tracks and pins to your shared boards.</p>
+                            <button class="btn-secondary-ds btn-sm" onclick="triggerModal('modalCreateBoard')">Create group board</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty state for Collages Tab -->
+                <div class="tab-content" id="profile-tab-collages" style="display:none;">
+                    <div class="masonry-grid" style="column-count: 1; max-width: 420px;">
+                        <div class="empty-grid-card" style="padding: var(--space-800) var(--space-600);">
+                            <div class="empty-illustration" style="color: var(--pink); opacity: 0.8;"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                            <h4>Welcome to Collages</h4>
+                            <p>Create visual Moodboards using overlapping studio photos, waveforms, and gear templates to define your production aesthetic.</p>
+                            <button class="btn-primary-ds btn-block" onclick="showToast('Collage tool workspace launching...')">Start a Collage</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- View 2: Search Trends (compass link) -->
+        <div class="view-pane" id="view-trends">
+            <div class="trends-container">
+                <div class="trends-header">
+                    <h2>Discover trending search keywords</h2>
+                    <p>Explore keyword search volume and growth trends on MusicLinkd.</p>
+                </div>
+                
+                <div class="trends-tabs">
+                    <div class="trends-tab active" onclick="switchTrendsTab(this)">Growing trends</div>
+                    <div class="trends-tab" onclick="switchTrendsTab(this)">Seasonal trends</div>
+                    <div class="trends-tab" onclick="switchTrendsTab(this)">Top monthly trends</div>
+                    <div class="trends-tab" onclick="switchTrendsTab(this)">Top yearly trends</div>
+                </div>
+                
+                <div class="filter-row">
+                    <button class="filter-chip selected" onclick="toggleChip(this)">Interest: All</button>
+                    <button class="filter-chip" onclick="toggleChip(this)">Moments: Recording</button>
+                    <button class="filter-chip" onclick="toggleChip(this)">Age: All</button>
+                    <button class="filter-chip" onclick="toggleChip(this)">Gender: All</button>
+                </div>
+                
+                <table class="trends-table">
+                    <thead>
+                        <tr>
+                            <th>Keywords</th>
+                            <th>Trend (90 Days)</th>
+                            <th>Search Volume</th>
+                            <th>Weekly Change</th>
+                            <th>Monthly Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="trend-keyword-cell">
+                                    <img class="trend-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80" alt="Vocalist">
+                                    <span class="trend-title">Sufi Vocalist Priya</span>
+                                </div>
+                            </td>
+                            <td>
+                                <svg class="sparkline-svg" viewBox="0 0 100 32">
+                                    <path d="M 0 30 L 20 28 L 40 25 L 60 18 L 80 5 L 100 2" />
+                                </svg>
+                            </td>
+                            <td>
+                                <div class="volume-bar-container"><div class="volume-bar-fill" style="width: 85%;"></div></div>
+                            </td>
+                            <td class="growth-pct">6,000%</td>
+                            <td class="growth-pct">10,000%+</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="trend-keyword-cell">
+                                    <img class="trend-img" src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=80&q=80" alt="Studio">
+                                    <span class="trend-title">Dolby Atmos Room Mumbai</span>
+                                </div>
+                            </td>
+                            <td>
+                                <svg class="sparkline-svg" viewBox="0 0 100 32">
+                                    <path d="M 0 28 L 20 29 L 40 20 L 60 22 L 80 10 L 100 0" />
+                                </svg>
+                            </td>
+                            <td>
+                                <div class="volume-bar-container"><div class="volume-bar-fill" style="width: 65%;"></div></div>
+                            </td>
+                            <td class="growth-pct" style="color: var(--navy);">-7%</td>
+                            <td class="growth-pct">10,000%+</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="trend-keyword-cell">
+                                    <img class="trend-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80" alt="Mixing">
+                                    <span class="trend-title">Warm Analog Tube Synths</span>
+                                </div>
+                            </td>
+                            <td>
+                                <svg class="sparkline-svg" viewBox="0 0 100 32">
+                                    <path d="M 0 30 L 25 24 L 50 15 L 75 18 L 100 5" />
+                                </svg>
+                            </td>
+                            <td>
+                                <div class="volume-bar-container"><div class="volume-bar-fill" style="width: 40%;"></div></div>
+                            </td>
+                            <td class="growth-pct">1,000%</td>
+                            <td class="growth-pct">10,000%+</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- View 3: Blog/News Section (newspaper link) -->
+        <div class="view-pane" id="view-blog">
+            <div class="blog-container">
+                
+                <div class="blog-hero">
+                    <div class="blog-hero-content">
+                        <span class="blog-hero-tag">News</span>
+                        <h2 class="blog-hero-title">What's new in <span>MusicLinkd</span></h2>
+                    </div>
+                    <!-- Mock images of Watch, Headphones, Disco ball overlays -->
+                    <img class="hero-graphic graphic-headphones" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=200&q=80" alt="Headphones">
+                    <img class="hero-graphic graphic-watch" src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=200&q=80" alt="Instrument">
+                </div>
+                
+                <div class="profile-tabs" style="justify-content: flex-start;">
+                    <div class="profile-tab active" onclick="switchTrendsTab(this)">All</div>
+                    <div class="profile-tab" onclick="switchTrendsTab(this)">News</div>
+                    <div class="profile-tab" onclick="switchTrendsTab(this)">Best practices</div>
+                    <div class="profile-tab" onclick="switchTrendsTab(this)">Success stories</div>
+                </div>
+                
+                <div class="blog-posts-row">
+                    <!-- Inclusion Fund Collage Card -->
+                    <div class="collage-card">
+                        <div class="collage-images-grid">
+                            <img class="collage-img-main" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Creator Main">
+                            <div class="collage-sub-grid">
+                                <img class="collage-img-sub" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Creator Sub 1">
+                                <img class="collage-img-sub" src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=200&q=80" alt="Creator Sub 2">
+                            </div>
+                            <div class="collage-sticker">MusicLinkd Inclusion Fund</div>
+                        </div>
+                        <div class="collage-details">
+                            <h3>The MusicLinkd Inclusion Fund returns, expanding support for creators</h3>
+                            <p>We are opening submissions for Indian independent vocalists and bedroom producers to obtain direct grants and zero-commission booking boosts.</p>
+                            <span style="font-size: 11px; color: var(--muted)">24 July 2026</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Standard card -->
+                    <div class="collage-card" style="justify-content: flex-start; gap: var(--space-400);">
+                        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=400&h=200&q=80" style="border-radius: var(--rounding-400); width:100%; object-fit:cover;" alt="Sessions">
+                        <div class="collage-details">
+                            <h3 style="font-size:18px;">How to price your studio rental space dynamically</h3>
+                            <p>Best practices for studio owners to increase occupancy by adjusting pricing based on weekly search trends.</p>
+                            <span style="font-size: 11px; color: var(--muted)">19 July 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sticky chat bubble matching Pinterest Inclusion page -->
+            <button class="btn-sticky-chat" onclick="showToast('Opening support live chat...');"><i class="fa-solid fa-comment"></i> Chat</button>
+        </div>
+
+        <!-- View 4: About Landing (info link) -->
+        <div class="view-pane" id="view-about">
+            <div class="about-hero-section">
+                <!-- Massive header with inline badges -->
+                <h1 class="about-heading">
+                    MusicLinkd is your space to <span class="heading-badge badge-icon"><i class="fa-solid fa-magnifying-glass"></i></span> find and explore what you actually <span class="heading-badge">like</span>, not just what gets <span style="color: var(--pink);">likes</span>. Save <span class="heading-badge badge-icon"><i class="fa-solid fa-thumbtack"></i></span> Pins, hire what you love and follow.
+                </h1>
+                
+                <div class="about-cta-row">
+                    <button class="btn-primary-ds" onclick="toggleMegaMenu()"><i class="fa-solid fa-compass"></i> Explore menu</button>
+                    <button class="btn-secondary-ds" onclick="triggerModal('modalLogin')">Join MusicLinkd</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ===== TOAST ALERTS ===== -->
+    <div class="toast-popup" id="globalToast">
+        <div class="toast-icon">✓</div>
+        <span id="toastMessage">Saved changes</span>
+    </div>
+
+    <!-- ===== MODALS OVERLAYS ===== -->
+    
+    <!-- 1. Create Board Modal -->
+    <div class="modal-backdrop" id="modalCreateBoard" onclick="closeModalOnBackdrop(this, event)">
+        <div class="modal-card create-board-modal">
+            <button class="modal-close-btn" onclick="closeModal('modalCreateBoard')"><i class="fa-solid fa-xmark"></i></button>
+            <h3>Create a board</h3>
+            
+            <div class="board-preview-grid">
+                <div class="board-preview-main"></div>
+                <div class="board-preview-side">
+                    <div class="board-preview-sub"></div>
+                    <div class="board-preview-sub"></div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="boardName">Board name</label>
+                <input type="text" class="form-input" id="boardName" placeholder='e.g. "Studio Room Sessions"'>
+            </div>
+            
+            <div class="toggle-row">
+                <div class="toggle-details">
+                    <div class="toggle-title">Keep this board secret</div>
+                    <div class="toggle-desc">Secret boards are only visible to you and invitees. Only collaborators can see private boards.</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="invite-row">
+                <div style="display:flex; flex-direction:column; text-align:left;">
+                    <div style="font-size:13px; font-weight:600">Collaborators</div>
+                    <div style="font-size:11px; color:var(--muted)">Invite vocalists or managers to join this board</div>
+                </div>
+                <button class="invite-btn" onclick="showToast('Collaborator search opened')"><i class="fa-solid fa-user-plus"></i></button>
+            </div>
+            
+            <button class="btn-primary-ds btn-block" onclick="createBoardAction()">Create</button>
+        </div>
+    </div>
+
+    <!-- 2. Login Modal -->
+    <div class="modal-backdrop" id="modalLogin" onclick="closeModalOnBackdrop(this, event)">
+        <div class="modal-card login-modal">
+            <button class="modal-close-btn" onclick="closeModal('modalLogin')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="login-logo"><i class="fa-solid fa-rocket"></i></div>
+            <h3>Welcome to MusicLinkd</h3>
+            <p>Log in to discover more talent and production options</p>
+            
+            <div class="form-group" style="text-align:left;">
+                <label>Email</label>
+                <input type="email" class="form-input" placeholder="Enter email">
+            </div>
+            <div class="form-group" style="text-align:left; position:relative;">
+                <label>Password</label>
+                <input type="password" class="form-input" placeholder="Password">
+                <span style="position:absolute; right:12px; top:36px; cursor:pointer; color:var(--muted)"><i class="fa-solid fa-eye-slash"></i></span>
+            </div>
+            
+            <button class="btn-primary-ds btn-block" style="margin-bottom:var(--space-300)" onclick="showToast('Authenticating session...'); closeModal('modalLogin')">Log in</button>
+            
+            <button class="btn-secondary-ds btn-block" style="margin-bottom:var(--space-300)" onclick="showToast('Connecting Google account...')"><i class="fa-brands fa-google" style="margin-right:8px"></i> Continue with Google</button>
+            
+            <div class="login-qr-section">
+                <!-- Mock QR representation -->
+                <div style="width:50px; height:50px; background-color:var(--black); padding:4px; border-radius:4px; display:grid; grid-template-columns: repeat(4, 1fr); gap:2px;">
+                    <div style="background:#fff"></div><div style="background:#fff"></div><div style="background:#000"></div><div style="background:#fff"></div>
+                    <div style="background:#000"></div><div style="background:#fff"></div><div style="background:#fff"></div><div style="background:#000"></div>
+                    <div style="background:#fff"></div><div style="background:#000"></div><div style="background:#fff"></div><div style="background:#fff"></div>
+                    <div style="background:#fff"></div><div style="background:#fff"></div><div style="background:#000"></div><div style="background:#fff"></div>
+                </div>
+                <div class="login-qr-desc">
+                    <h4>Log in instantly</h4>
+                    <p>Scan this QR code with your mobile phone to log in on the app</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Business Settings Promo Modal -->
+    <div class="modal-backdrop" id="modalBiz" onclick="closeModalOnBackdrop(this, event)">
+        <div class="modal-card business-modal-card">
+            <button class="modal-close-btn" onclick="closeModal('modalBiz')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="biz-modal-left">
+                <!-- Mock Collage graphic -->
+                <img class="biz-illustration-img" src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=300&q=80" alt="Collage graphic">
+            </div>
+            <div class="biz-modal-right">
+                <h3>View Business settings to update profile, add security features</h3>
+                <ul class="biz-features-list">
+                    <li>Edit and update your business profile</li>
+                    <li>Manage verification and billing hierarchies</li>
+                    <li>Secure permissions with 2FA</li>
+                </ul>
+                <button class="btn-primary-ds" onclick="showToast('Redirecting to settings...'); closeModal('modalBiz');">Visit Business settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== JAVASCRIPT CONTROLLERS ===== -->
+    <script>
+        // Switch viewport tabs / navigation
+        function showSection(sectionId, element = null) {
+            // Remove active view pane
+            document.querySelectorAll('.view-pane').forEach(v => v.classList.remove('active'));
+            // Activate target pane
+            const pane = document.getElementById('view-saved');
+            const targetPane = document.getElementById('view-' + sectionId);
+            if (targetPane) {
+                targetPane.classList.add('active');
+            }
+            
+            // Sync navigation active state
+            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+            if (element) {
+                element.classList.add('active');
+            } else {
+                // Find matching desktop/mobile items
+                const iconMap = {
+                    saved: 'house',
+                    trends: 'compass',
+                    blog: 'newspaper',
+                    about: 'circle-info'
+                };
+                const classToFind = iconMap[sectionId];
+                if (classToFind) {
+                    document.querySelectorAll('.nav-item i.fa-' + classToFind).forEach(i => {
+                        i.closest('.nav-item').classList.add('active');
+                    });
+                }
+            }
+            
+            // Close drawers
+            document.getElementById('createDrawer').classList.remove('open');
+            document.getElementById('megaMenu').classList.remove('open');
+        }
+
+        // Switch Saved profile tab filter (Pins, Boards, Collages)
+        function switchProfileTab(tabName, el) {
+            document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            
+            document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+            document.getElementById('profile-tab-' + tabName).style.display = 'block';
+        }
+
+        // Switch search trends tab filter
+        function switchTrendsTab(el) {
+            el.parentElement.querySelectorAll('.profile-tab, .trends-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            showToast('Trend data updated');
+        }
+
+        // Toggle filter chip selection state
+        function toggleChip(el) {
+            el.classList.toggle('selected');
+        }
+
+        // Toggle drawer sheet
+        function toggleCreateDrawer(element = null) {
+            const drawer = document.getElementById('createDrawer');
+            drawer.classList.toggle('open');
+        }
+
+        // Toggle mega menu overlay
+        function toggleMegaMenu() {
+            const menu = document.getElementById('megaMenu');
+            menu.classList.toggle('open');
+        }
+
+        // Modal triggers
+        function triggerModal(modalId) {
+            const backdrop = document.getElementById(modalId);
+            if (backdrop) {
+                backdrop.classList.add('open');
+            }
+            // Close mega menu / drawer
+            document.getElementById('megaMenu').classList.remove('open');
+            document.getElementById('createDrawer').classList.remove('open');
+        }
+
+        function closeModal(modalId) {
+            const backdrop = document.getElementById(modalId);
+            if (backdrop) {
+                backdrop.classList.remove('open');
+            }
+        }
+
+        function closeModalOnBackdrop(backdropEl, event) {
+            if (event.target === backdropEl) {
+                backdropEl.classList.remove('open');
+            }
+        }
+
+        // Save Pin click handler
+        function toggleSavePin(btn, event) {
+            event.stopPropagation();
+            btn.classList.toggle('saved');
+            if (btn.classList.contains('saved')) {
+                btn.textContent = 'Saved';
+                showToast('Pin saved to board');
+            } else {
+                btn.textContent = 'Save';
+                showToast('Pin removed from board');
+            }
+        }
+
+        // Toast controller
+        function showToast(message) {
+            const toast = document.getElementById('globalToast');
+            const msg = document.getElementById('toastMessage');
+            if (!toast || !msg) return;
+            msg.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // Action mock for create board
+        function createBoardAction() {
+            const input = document.getElementById('boardName');
+            const boardName = input.value.trim();
+            if (!boardName) {
+                showToast('Please enter a board name');
+                return;
+            }
+            showToast('Board "' + boardName + '" created successfully!');
+            input.value = '';
+            closeModal('modalCreateBoard');
+        }
+    </script>
+</body>
+</html>

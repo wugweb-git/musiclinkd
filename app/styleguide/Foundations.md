@@ -14,7 +14,7 @@ MusicLinkd is designed around an editorial, high-contrast light aesthetic. It le
 2. **Application Target (`app.musiclinkd.com`):** M3 Jetpack Compose Android app for musicians, vocalists, producers, and recording studio bookings.
 3. **Admin Portal (`admin.musiclinkd.com`):** Enterprise Control Center for moderation, user verification queues, flagged content review, and system analytics. Built with React.
 
----
+
 
 ## 📐 2. Color Palette & Primitive Tokens (`com.example.ui.theme`)
 
@@ -41,7 +41,7 @@ Enforced strictly on an 8.dp baseline grid to establish a consistent vertical an
 - **`24.dp`:** Large section separators, outer card margins, and primary container padding.
 - **`32.dp`:** Large hero workspace margins and upper display banners.
 
----
+
 
 ## ✍️ 3. Typography Hierarchy Scale
 
@@ -73,7 +73,7 @@ MusicLinkd declares clean Material Symbols to maintain layout parity across tabs
 | `mic` | Vocal Micro | Genres | `Icons.Default.Mic` | Vocalist role badge & audio recording |
 | `verified` | Verified | Badges | `Icons.Default.Verified` | Certified profile checkmark emblem |
 
----
+
 
 ## ♿ 5. Accessibility & Android UI Standards
 
