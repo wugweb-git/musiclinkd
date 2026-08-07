@@ -332,7 +332,10 @@
 
 /* Mobile Breakpoint (0–767px): 1-Column Spec Cards */
 @media (max-width: 767px) {
-    .top-nav .nav-controls {
+    .top-nav .nav-controls,
+    .top-nav .breadcrumb,
+    .top-nav .search-area,
+    .top-nav .nav-links {
         display: none !important;
     }
     .spec-grid {
@@ -450,30 +453,6 @@ h1, h2, h3 {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
-}
-
-.mtBtn {
-    position: fixed;
-    top: 8px;
-    left: 8px;
-    z-index: 110;
-    background: var(--black);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 12px;
-    font-size: var(--type-1);
-    font-weight: 600;
-    cursor: pointer;
-    display: none;
-}
-
-.ov {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.3);
-    z-index: 94;
 }
 
 .sgt {
