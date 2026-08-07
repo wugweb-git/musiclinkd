@@ -2276,19 +2276,19 @@ fun FeaturedStudioCard(
 ) {
     Card(
         modifier = Modifier
-            .width(280.dp)
+            .width(220.dp)
             .clickable { onClick() },
         colors = CardDefaults.cardColors(containerColor = Color.White),
         border = BorderStroke(1.dp, BrandBorder),
-        shape = RoundedCornerShape(Dimens.r3)
+        shape = RoundedCornerShape(12.dp)
     ) {
-        Column {
+        Column(modifier = Modifier.padding(10.dp)) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(130.dp)
-                    .background(Brush.verticalGradient(colors = listOf(BrandDark, Color(0xFF2E2A4E)))),
-                contentAlignment = Alignment.Center
+                    .height(100.dp)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Color.Gray)
             ) {
                 if (studio.imageUrl != null) {
                     AsyncImage(
@@ -2298,66 +2298,41 @@ fun FeaturedStudioCard(
                         modifier = Modifier.fillMaxSize()
                     )
                 } else {
-                    Text(studio.coverEmoji, fontSize = 54.sp)
-                }
-                
-                // Overlay price chip
-                Box(
-                    modifier = Modifier
-                        .align(Alignment.BottomStart)
-                        .padding(12.dp)
-                        .clip(RoundedCornerShape(Dimens.r1))
-                        .background(Color.Black.copy(alpha = 0.7f))
-                        .padding(horizontal = 8.dp, vertical = 4.dp)
-                ) {
-                    Text("₹${studio.pricePerHour}/hr", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                    Text(studio.coverEmoji, fontSize = 40.sp, modifier = Modifier.align(Alignment.Center))
                 }
             }
-
-            Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+            
+            Spacer(modifier = Modifier.height(6.dp))
+            
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = studio.name,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 13.sp,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
+                        fontSize = 12.sp,
                         color = BrandDark,
-                        modifier = Modifier.weight(1f)
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.Star, null, tint = Color(0xFFFFB300), modifier = Modifier.size(12.dp))
-                        Spacer(modifier = Modifier.width(2.dp))
-                        Text(studio.rating.toString(), fontWeight = FontWeight.Bold, fontSize = 11.sp)
-                    }
+                    Text(
+                        text = studio.location.split(",")[0],
+                        fontSize = 9.sp,
+                        color = BrandTextSecondary,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
                 }
-
-                Text(
-                    text = studio.location,
-                    fontSize = 11.sp,
-                    color = BrandTextSecondary,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    studio.amenities.take(2).forEach { amen ->
-                        Box(
-                            modifier = Modifier
-                                .background(BrandPrimary.copy(alpha = 0.08f), RoundedCornerShape(Dimens.r1))
-                                .padding(horizontal = 6.dp, vertical = 2.dp)
-                        ) {
-                            Text(amen, fontSize = 8.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)
-                        }
+                
+                Column(horizontalAlignment = Alignment.End, modifier = Modifier.padding(start = 4.dp)) {
+                    Row(verticalAlignment = Alignment.Bottom) {
+                        Text("₹${if (studio.pricePerHour >= 1000) "${studio.pricePerHour/1000}k" else studio.pricePerHour.toString()}", fontWeight = FontWeight.Bold, fontSize = 10.sp, color = BrandDark)
+                        Text("/hr", fontSize = 8.sp, color = BrandTextSecondary)
                     }
+                    Text("${studio.rating} ★", fontSize = 8.sp, color = Color(0xFFF59E0B))
                 }
             }
         }

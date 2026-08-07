@@ -3222,6 +3222,126 @@ fun ErrorBoundary(
     }
 }
 
+// ============================================================================
+// 41. MOCKUP PHONE FRAME & NAVBAR (For matching HTML design system)
+// ============================================================================
+
+@Composable
+fun StatusAndNotchBar(
+    modifier: Modifier = Modifier,
+    timeText: String = "9:41",
+    statusIcons: String = "📶 🔋"
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(44.dp)
+            .padding(horizontal = 24.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = timeText,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Bold,
+            color = BrandTextPrimary
+        )
+        
+        // Notch simulation
+        Box(
+            modifier = Modifier
+                .width(140.dp)
+                .height(30.dp)
+                .align(Alignment.Top)
+                .clip(RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp))
+                .background(Color.Black),
+            contentAlignment = Alignment.CenterEnd
+        ) {
+            // Camera dot
+            Box(
+                modifier = Modifier
+                    .padding(end = 12.dp)
+                    .size(10.dp)
+                    .clip(CircleShape)
+                    .background(Color(0xFF1F2937)) // Dark gray lens
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(4.dp)
+                        .clip(CircleShape)
+                        .background(Color(0xFF4B5563))
+                        .align(Alignment.Center)
+                )
+            }
+        }
+        
+        Text(
+            text = statusIcons,
+            fontSize = 13.sp,
+            color = BrandTextPrimary
+        )
+    }
+}
+
+@Composable
+fun PhoneNavbar(
+    modifier: Modifier = Modifier,
+    selectedIndex: Int = 0,
+    onTabSelected: (Int) -> Unit = {}
+) {
+    Surface(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(80.dp),
+        color = Color.White,
+        shadowElevation = 24.dp,
+        border = BorderStroke(1.dp, BrandBorder),
+        shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 24.dp, vertical = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            val icons = listOf(
+                Icons.Outlined.Home,
+                Icons.Outlined.Search,
+                Icons.Outlined.AddCircleOutline,
+                Icons.Outlined.ChatBubbleOutline,
+                Icons.Outlined.AccountCircle
+            )
+            
+            val activeIcons = listOf(
+                Icons.Filled.Home,
+                Icons.Filled.Search,
+                Icons.Filled.AddCircle,
+                Icons.Filled.ChatBubble,
+                Icons.Filled.AccountCircle
+            )
+
+            icons.forEachIndexed { index, icon ->
+                val isActive = index == selectedIndex
+                IconButton(
+                    onClick = { onTabSelected(index) },
+                    modifier = Modifier.size(48.dp)
+                ) {
+                    Icon(
+                        imageVector = if (isActive) activeIcons[index] else icon,
+                        contentDescription = "Nav Tab $index",
+                        tint = if (isActive) BrandPrimary else BrandTextSecondary,
+                        modifier = Modifier
+                            .size(26.dp)
+                            .scale(if (isActive) 1.1f else 1.0f)
+                    )
+                }
+            }
+        }
+    }
+}
+
+
 
 
 

@@ -1006,267 +1006,176 @@ fun FullTalentProfileScreen(
                 .padding(bottom = 76.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-        // TOP HEADER - EDITORIAL IMAGELESS COVER
+        // TOP HEADER - HERO MOCKUP (Stage 2)
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(180.dp) // Simulating the hero banner height
                 .background(
-                    Brush.verticalGradient(
-                        colors = listOf(
-                            baseAccentColor.copy(alpha = 0.12f),
-                            Color.White
-                        )
+                    Brush.linearGradient(
+                        colors = listOf(Color(0xFF181A22), Color(0xFF4A4D5C))
                     )
                 )
-                .padding(bottom = 24.dp)
         ) {
-            Column(
+            // Action Bar overlay
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 24.dp)
+                    .padding(horizontal = 16.dp, vertical = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Spacer(modifier = Modifier.height(Dimens.sp2))
-
-                // Action Bar
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                IconButton(
+                    onClick = onBack,
+                    modifier = Modifier
+                        .background(Color.White.copy(alpha = 0.2f), CircleShape)
+                        .size(36.dp)
                 ) {
-                    IconButton(
-                        onClick = onBack,
-                        modifier = Modifier
-                            .background(Color.White, CircleShape)
-                            .border(1.dp, Color.Black.copy(alpha = 0.06f), CircleShape)
-                            .size(44.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
-                            tint = BrandText,
-                            modifier = Modifier.size(20.dp)
-                        )
-                    }
-
-                    Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
-                        IconButton(
-                            onClick = onShareClick,
-                            modifier = Modifier
-                                .background(Color.White, CircleShape)
-                                .border(1.dp, Color.Black.copy(alpha = 0.06f), CircleShape)
-                                .size(44.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Share,
-                                contentDescription = "Share Profile",
-                                tint = BrandText,
-                                modifier = Modifier.size(20.dp)
-                            )
-                        }
-
-                        IconButton(
-                            onClick = onToggleSave,
-                            modifier = Modifier
-                                .background(Color.White, CircleShape)
-                                .border(1.dp, Color.Black.copy(alpha = 0.06f), CircleShape)
-                                .size(44.dp)
-                        ) {
-                            Icon(
-                                imageVector = if (isSaved) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
-                                contentDescription = "Save Profile",
-                                tint = if (isSaved) BrandPrimary else BrandText,
-                                modifier = Modifier.size(20.dp)
-                            )
-                        }
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(28.dp))
-
-                // IDENTITY SECTION
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    // Large Premium Avatar with Border following 32px shape
-                    Box(
-                        modifier = Modifier
-                            .size(100.dp)
-                            .clip(RoundedCornerShape(32.dp))
-                            .background(
-                                Brush.linearGradient(
-                                    colors = listOf(baseAccentColor.copy(alpha = 0.2f), baseAccentColor.copy(alpha = 0.05f))
-                                )
-                            )
-                            .border(1.5.dp, baseAccentColor.copy(alpha = 0.3f), RoundedCornerShape(32.dp)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        AsyncImage(
-                            model = profile.imageUrl ?: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80",
-                            contentDescription = profile.name,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize()
-                        )
-                    }
-
-                    // Availability Badge
-                    val isAvailable = profile.availabilityStatus.contains("Avail", ignoreCase = true) || profile.availabilityStatus.contains("Open", ignoreCase = true)
-                    val badgeColor = if (isAvailable) Color(0xFF10B981) else Color(0xFFF59E0B)
-                    Row(
-                        modifier = Modifier
-                            .border(1.dp, badgeColor.copy(alpha = 0.25f), RoundedCornerShape(99.dp))
-                            .background(badgeColor.copy(alpha = 0.06f), RoundedCornerShape(99.dp))
-                            .padding(horizontal = 14.dp, vertical = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(8.dp)
-                                .background(badgeColor, CircleShape)
-                        )
-                        Text(
-                            text = profile.availabilityStatus,
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = badgeColor
-                        )
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                // Name & Verified Badge
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = profile.name,
-                        fontSize = 32.sp,
-                        fontWeight = FontWeight.ExtraBold,
-                        color = BrandText,
-                        lineHeight = 38.sp
-                    )
-                    if (profile.isVerified) {
-                        Spacer(modifier = Modifier.width(Dimens.sp1))
-                        Icon(
-                            imageVector = Icons.Default.Verified,
-                            contentDescription = "Verified Artist",
-                            tint = BrandPrimary,
-                            modifier = Modifier.size(22.dp)
-                        )
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(Dimens.sp1))
-
-                // Specialty and Location
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    val instEmoji = getInstrumentEmoji(profile.subRole, profile.category)
-                    Text(instEmoji, style = Typography.bodyLarge)
-                    Text(
-                        text = profile.subRole,
-                        style = Typography.bodyLarge,
-                        color = BrandPrimary,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text("•", color = BrandMuted, style = Typography.labelLarge)
                     Icon(
-                        imageVector = Icons.Default.LocationOn,
-                        contentDescription = "Location",
-                        tint = BrandMuted,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back",
+                        tint = Color.White,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    IconButton(
+                        onClick = onShareClick,
+                        modifier = Modifier
+                            .background(Color.White.copy(alpha = 0.2f), CircleShape)
+                            .size(36.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Share,
+                            contentDescription = "Share Profile",
+                            tint = Color.White,
+                            modifier = Modifier.size(18.dp)
+                        )
+                    }
+
+                    IconButton(
+                        onClick = onToggleSave,
+                        modifier = Modifier
+                            .background(Color.White.copy(alpha = 0.2f), CircleShape)
+                            .size(36.dp)
+                    ) {
+                        Icon(
+                            imageVector = if (isSaved) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
+                            contentDescription = "Save Profile",
+                            tint = Color.White,
+                            modifier = Modifier.size(18.dp)
+                        )
+                    }
+                }
+            }
+
+            // Avatar at bottom-left corner of the banner
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .padding(start = 24.dp, bottom = 16.dp)
+                    .size(70.dp)
+                    .clip(CircleShape)
+                    .border(3.dp, Color.White, CircleShape)
+            ) {
+                AsyncImage(
+                    model = profile.imageUrl ?: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80",
+                    contentDescription = profile.name,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+        }
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 24.dp, vertical = 16.dp)
+        ) {
+            // Profile Info
+            Text(
+                text = profile.name,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.ExtraBold,
+                color = BrandTextPrimary
+            )
+            Text(
+                text = "${profile.subRole} • ${profile.area}, ${profile.location}",
+                fontSize = 13.sp,
+                color = BrandTextSecondary
+            )
+            
+            // Star rating
+            Row(modifier = Modifier.padding(top = 4.dp)) {
+                repeat(5) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Star",
+                        tint = Color(0xFFF59E0B),
                         modifier = Modifier.size(14.dp)
                     )
-                    Text(
-                        text = "${profile.area}, ${profile.location}",
-                        style = Typography.labelLarge,
-                        color = BrandMuted,
-                        fontWeight = FontWeight.Medium
-                    )
                 }
+            }
 
-                Spacer(modifier = Modifier.height(Dimens.sp2))
-
-                // Bio Summary
-                Text(
-                    text = profile.bio.ifEmpty { "A talented professional music creator specializing in creating world-class, premium acoustic experiences, live stage performances, and studio records." },
-                    style = Typography.labelLarge,
-                    color = Color(0xFF4B5563),
-                    lineHeight = 22.sp
-                )
-
-                Spacer(modifier = Modifier.height(Dimens.sp3))
-
-                // Stats Dashboard Row
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
-                ) {
-                    listOf(
-                        Triple("★ " + profile.rating.toString(), "Rating", Color(0xFFF59E0B)),
-                        Triple(profile.experienceLevel.split(" ").firstOrNull() ?: "Pro", "Experience", BrandPrimary),
-                        Triple(profile.pricing.ifEmpty { "₹2,500/hr" }, "Est. Rate", BrandSuccess),
-                        Triple(if (profile.followers > 1000) "${(profile.followers / 1000.0).toString().take(4)}K" else profile.followers.toString(), "Followers", Color(0xFFEA4C89))
-                    ).forEach { (value, label, color) ->
-                        Card(
-                            modifier = Modifier.weight(1f),
-                            shape = RoundedCornerShape(Dimens.r2),
-                            colors = CardDefaults.cardColors(containerColor = Color.White),
-                            border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f))
-                        ) {
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 12.dp, horizontal = 8.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Text(
-                                    text = value,
-                                    style = Typography.bodyLarge,
-                                    color = color
-                                )
-                                Spacer(modifier = Modifier.height(2.dp))
-                                Text(
-                                    text = label,
-                                    fontSize = 10.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = BrandMuted
-                                )
-                            }
-                        }
+            // Genre Chips
+            Row(
+                modifier = Modifier.padding(vertical = 12.dp),
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                profile.genres.take(3).forEach { genre ->
+                    Box(
+                        modifier = Modifier
+                            .background(BrandPrimary.copy(alpha = 0.1f), RoundedCornerShape(8.dp))
+                            .padding(horizontal = 10.dp, vertical = 4.dp)
+                    ) {
+                        Text(genre, fontSize = 11.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)
                     }
                 }
+            }
 
-                Spacer(modifier = Modifier.height(Dimens.sp3))
-
-                // Primary Collaborate Button
-                Button(
-                    onClick = onHireClick,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp),
-                    shape = RoundedCornerShape(Dimens.r3),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF111827))
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Send,
-                        contentDescription = "Engage",
-                        modifier = Modifier.size(16.dp),
-                        tint = Color.White
-                    )
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
-                    Text(
-                        text = "Collaborate / Hire ${profile.name.split(" ").first()}",
-                        style = Typography.bodyLarge,
-                        color = Color.White
-                    )
+            // Stats row matching HTML
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
+                    .border(BorderStroke(1.dp, BrandBorder), RoundedCornerShape(8.dp))
+                    .padding(12.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(if (profile.followers > 1000) "${(profile.followers / 1000.0).toString().take(4)}k" else profile.followers.toString(), fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, color = BrandTextPrimary)
+                    Text("Followers", fontSize = 11.sp, color = BrandTextSecondary)
                 }
+                Box(modifier = Modifier.height(30.dp).width(1.dp).background(BrandBorder))
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(profile.credits.size.toString(), fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, color = BrandTextPrimary)
+                    Text("Credits", fontSize = 11.sp, color = BrandTextSecondary)
+                }
+                Box(modifier = Modifier.height(30.dp).width(1.dp).background(BrandBorder))
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text("${profile.rating} ★", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, color = BrandTextPrimary)
+                    Text("Rating", fontSize = 11.sp, color = BrandTextSecondary)
+                }
+            }
+
+            // Hire Artist Button
+            Button(
+                onClick = onHireClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp)
+                    .height(44.dp),
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary)
+            ) {
+                Text(
+                    text = "Hire Artist",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
+                    color = Color.White
+                )
             }
         }
 

@@ -26,7 +26,7 @@
   --purple: #8B5CF6;
 
   /* Typography Scale */
-  --fs-display: clamp(48px, 6vw, 72px); /* Oversized */
+  --fs-display: clamp(48px, 6vw, 72px); /* Oversized */ /* Oversized */
   --fs-h1: clamp(22px, 3vw, 28px);
   --fs-h2: clamp(16px, 2vw, 20px);
   --fs-h3: 16px;
@@ -63,8 +63,8 @@
 
   /* Elevation */
   --el-0: none;
-  --el-1: none; /* Border-first */
-  --el-2: 0 4px 12px rgba(0,0,0,0.03); /* Extremely subtle */
+  --el-1: none; /* Border-first */ /* Border-first */
+  --el-2: 0 4px 12px rgba(0,0,0,0.03); /* Extremely subtle */ /* Extremely subtle */
   --el-3: 0 12px 32px rgba(0,0,0,0.06);
 
   /* Border Tokens */
@@ -1227,6 +1227,232 @@ img { max-width: 100%; height: auto; display: block; }
   .cta-pills { align-items: flex-start; }
   .p-card.pro { transform: none; }
 }
+
+/* ===== 17. ADVANCED MARKETING BLOCKS (PINTEREST & SUPERCHARGE) ===== */
+/* Supercharge Bento Feature Grid */
+.sc-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-lg);
+    margin: var(--sp-2xl) 0;
+}
+.sc-bento-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    padding: var(--sp-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-md);
+    transition: transform 0.3s var(--ease);
+}
+.sc-bento-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--pink);
+}
+.sc-bento-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: var(--r-md);
+    background: var(--paper);
+}
+.sc-bento-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+}
+.sc-bento-desc {
+    font-size: var(--fs-body);
+    color: var(--muted);
+}
+
+/* Supercharge Dark Bento Layout */
+.sc-dark-section {
+    background: var(--navy);
+    color: var(--white);
+    padding: var(--sp-2xl);
+    border-radius: var(--r-card);
+    margin: var(--sp-2xl) 0;
+}
+.sc-dark-bento {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-lg);
+    margin-top: var(--sp-xl);
+}
+.sc-dark-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--r-card);
+    padding: var(--sp-lg);
+}
+.sc-dark-card.hero-span {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+.sc-dark-label {
+    display: inline-block;
+    background: var(--white);
+    color: var(--navy);
+    padding: 4px 12px;
+    border-radius: var(--r-pill);
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: var(--sp-md);
+}
+
+/* Supercharge Split Editorial */
+.sc-split-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-2xl);
+    align-items: center;
+    padding: var(--sp-2xl) 0;
+    border-bottom: 1px solid var(--line);
+}
+.sc-editorial-quote {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #E2E8F0; /* Light gray text for contrast */
+}
+.sc-editorial-quote span {
+    color: var(--navy);
+}
+.sc-alert-pill {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-sm);
+    background: var(--white);
+    border: 1px solid var(--line);
+    padding: var(--sp-sm) var(--sp-md);
+    border-radius: var(--r-pill);
+    margin-bottom: var(--sp-md);
+    font-size: var(--fs-body);
+    font-weight: 500;
+    box-shadow: var(--el-2);
+}
+.sc-alert-pill i {
+    color: var(--err);
+}
+
+/* Pinterest Floating Left Sidebar & Bottom Nav */
+.pin-floating-sidebar {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: var(--sp-md);
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r-pill);
+    padding: var(--sp-md) var(--sp-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-md);
+    z-index: 100;
+    box-shadow: var(--el-2);
+}
+.pin-nav-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-avatar);
+    color: var(--muted);
+    cursor: pointer;
+    transition: var(--ease) 0.2s;
+}
+.pin-nav-icon:hover, .pin-nav-icon.active {
+    background: var(--paper);
+    color: var(--navy);
+}
+.pin-bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-top: 1px solid var(--line);
+    padding: var(--sp-sm) var(--sp-md);
+    justify-content: space-between;
+    z-index: 100;
+    padding-bottom: env(safe-area-inset-bottom, var(--sp-md));
+}
+
+/* Pinterest Profile Masonry Grid & Trends Table */
+.pin-masonry {
+    column-count: 3;
+    column-gap: var(--sp-lg);
+    margin-top: var(--sp-xl);
+}
+.pin-masonry-item {
+    break-inside: avoid;
+    margin-bottom: var(--sp-lg);
+    position: relative;
+    border-radius: var(--r-media);
+    overflow: hidden;
+}
+.pin-masonry-item img {
+    width: 100%;
+    border-radius: var(--r-media);
+    display: block;
+}
+.pin-trends-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--sp-lg);
+}
+.pin-trends-table th, .pin-trends-table td {
+    padding: var(--sp-md);
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+}
+.pin-trends-table th {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+}
+.pin-trend-title {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-sm);
+    font-weight: 600;
+}
+.pin-trend-title img {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--r-sm);
+    object-fit: cover;
+}
+
+@media (max-width: 1023px) {
+    .sc-bento-grid, .sc-dark-bento, .sc-split-section {
+        grid-template-columns: 1fr;
+    }
+    .sc-dark-card.hero-span {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    .pin-floating-sidebar {
+        display: none;
+    }
+    .pin-bottom-nav {
+        display: flex;
+    }
+    .pin-masonry {
+        column-count: 2;
+    }
+}
+@media (max-width: 600px) {
+    .pin-masonry {
+        column-count: 1;
+    }
+}
+
 </style>
 
 </head>
@@ -5213,7 +5439,163 @@ img { max-width: 100%; height: auto; display: block; }
       By continuing, you agree to Terms & Privacy
     </div>
   </div>
-\n\n</main>
+\n\n
+    <!-- ===== 17. PINTEREST & SUPERCHARGE BLOCKS ===== -->
+    <section class="sec" id="adv-supercharge-bento">
+        <div class="eyebrow">Marketing Block</div>
+        <h2>Supercharge Bento Grid</h2>
+        <p class="desc">A conversion-optimized 3-column grid for featuring platform benefits with top-aligned imagery and border-first styling.</p>
+        
+        <div class="sc-bento-grid">
+            <div class="sc-bento-card">
+                <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=400&q=80" alt="Studio" class="sc-bento-img">
+                <h3 class="sc-bento-title">Ever-growing library</h3>
+                <p class="sc-bento-desc">Continuously updated premium studios and session files.</p>
+            </div>
+            <div class="sc-bento-card">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Vocalist" class="sc-bento-img">
+                <h3 class="sc-bento-title">Pro vocal sessions</h3>
+                <p class="sc-bento-desc">Expert-led high quality recordings and performances.</p>
+            </div>
+            <div class="sc-bento-card">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Mixing" class="sc-bento-img">
+                <h3 class="sc-bento-title">Exclusive stems</h3>
+                <p class="sc-bento-desc">Premium mixing templates, stems, and mastering guides.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec" id="adv-supercharge-dark">
+        <div class="eyebrow">Marketing Block</div>
+        <h2>Supercharge Dark Bento</h2>
+        <p class="desc">Premium dark-mode staggered grid to highlight top-tier masterclasses or features.</p>
+        
+        <div class="sc-dark-section">
+            <h2 style="color:white;">What you'll master with All-Access</h2>
+            <div class="sc-dark-bento">
+                <div class="sc-dark-card hero-span" style="background-image: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center; position:relative;">
+                    <div style="position:absolute; inset:0; background:rgba(13,11,38,0.7); border-radius:inherit;"></div>
+                    <div style="position:relative; z-index:1;">
+                        <span class="sc-dark-label">Pro-only</span>
+                        <h3 style="font-size:28px; margin-bottom:8px;">Studio Mastering</h3>
+                        <p style="color:#CBD5E1;">Master acoustics from foundations to advanced analog routing.</p>
+                    </div>
+                </div>
+                <div class="sc-dark-card">
+                    <span class="sc-dark-label">Pro-only</span>
+                    <h4>Vocal comping</h4>
+                    <p style="font-size:12px; color:#CBD5E1; margin-top:8px;">Unlock the power of clean takes.</p>
+                </div>
+                <div class="sc-dark-card">
+                    <h4>Mic placement</h4>
+                    <p style="font-size:12px; color:#CBD5E1; margin-top:8px;">Learn to use polar patterns.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec" id="adv-supercharge-split">
+        <div class="eyebrow">Marketing Block</div>
+        <h2>Supercharge Split Editorial</h2>
+        <p class="desc">Massive typography addressing user pain points with floating alert pills.</p>
+        
+        <div class="sc-split-section">
+            <div>
+                <p style="color:var(--pink); font-weight:700; margin-bottom:8px;">Does this sound familiar?</p>
+                <div class="sc-editorial-quote">
+                    "I recognize beautiful <span>studios</span> quickly—but I can't <span>book them easily</span>."
+                </div>
+                <p class="desc" style="margin-top:24px;">It's not about lacking budget. It's about lacking structured access. MusicLinkd gives you actionable bookings instantly.</p>
+            </div>
+            <div>
+                <div class="sc-alert-pill"><i class="fa-solid fa-thumbs-down"></i> Booking process feels overwhelming.</div>
+                <div class="sc-alert-pill"><i class="fa-solid fa-thumbs-down"></i> Rates are scattered or impractical.</div>
+                <div class="sc-alert-pill"><i class="fa-solid fa-thumbs-down"></i> Gear lists don't reflect reality.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec" id="adv-pinterest-masonry">
+        <div class="eyebrow">Marketing Block</div>
+        <h2>Pinterest Profile & Trends</h2>
+        <p class="desc">The iconic Pinterest masonry grid and search trends table, optimized for fluid UI.</p>
+        
+        <h3>Your Saved Ideas</h3>
+        <div class="pin-masonry">
+            <div class="pin-masonry-item">
+                <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=400&q=80" alt="Pin">
+                <div style="padding:12px 0;">
+                    <h4 style="font-size:14px;">Yash Raj Studios</h4>
+                    <p style="font-size:12px; color:var(--muted);">Mumbai Room A</p>
+                </div>
+            </div>
+            <div class="pin-masonry-item">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Pin" style="height:240px; object-fit:cover;">
+                <div style="padding:12px 0;">
+                    <h4 style="font-size:14px;">Ananya Sharma</h4>
+                    <p style="font-size:12px; color:var(--muted);">Soprano Vocals</p>
+                </div>
+            </div>
+            <div class="pin-masonry-item">
+                <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=400&q=80" alt="Pin" style="height:180px; object-fit:cover;">
+                <div style="padding:12px 0;">
+                    <h4 style="font-size:14px;">Neumann U87</h4>
+                    <p style="font-size:12px; color:var(--muted);">Gear Rental</p>
+                </div>
+            </div>
+        </div>
+        
+        <h3 style="margin-top:48px;">Search Trends</h3>
+        <table class="pin-trends-table">
+            <thead>
+                <tr>
+                    <th>Keywords</th>
+                    <th>Search Volume</th>
+                    <th>Growth</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="pin-trend-title">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80" alt="Vocalist">
+                            Sufi Vocalist Priya
+                        </div>
+                    </td>
+                    <td>High</td>
+                    <td style="color:var(--success); font-weight:700;">+6,000%</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="pin-trend-title">
+                            <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=80&q=80" alt="Studio">
+                            Dolby Atmos Mumbai
+                        </div>
+                    </td>
+                    <td>Medium</td>
+                    <td style="color:var(--success); font-weight:700;">+1,000%</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Floating Nav Elements -->
+    <div class="pin-floating-sidebar">
+        <div class="pin-nav-icon active"><i class="fa-solid fa-house"></i></div>
+        <div class="pin-nav-icon"><i class="fa-solid fa-compass"></i></div>
+        <div class="pin-nav-icon"><i class="fa-solid fa-plus"></i></div>
+        <div class="pin-nav-icon"><i class="fa-solid fa-newspaper"></i></div>
+        <div class="pin-nav-icon"><i class="fa-solid fa-user"></i></div>
+    </div>
+    <div class="pin-bottom-nav">
+        <div class="pin-nav-icon active"><i class="fa-solid fa-house"></i></div>
+        <div class="pin-nav-icon"><i class="fa-solid fa-compass"></i></div>
+        <div class="pin-nav-icon"><i class="fa-solid fa-plus"></i></div>
+        <div class="pin-nav-icon"><i class="fa-solid fa-newspaper"></i></div>
+        <div class="pin-nav-icon"><i class="fa-solid fa-user"></i></div>
+    </div>
+
+</main>
 </div><!-- /.layout-wrapper -->
 
 <script>

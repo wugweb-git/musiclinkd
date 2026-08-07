@@ -1743,6 +1743,129 @@ fun DashboardPreviewScreen(
                 }
             }
 
+            // ============================================================================
+            // NEW: BUSINESS DASHBOARD KPI GRID (From HTML Mockup)
+            // ============================================================================
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp, vertical = 16.dp)
+            ) {
+                Text(
+                    text = "Business Dashboard",
+                    style = Typography.bodyLarge.copy(
+                        fontWeight = FontWeight.ExtraBold,
+                        color = BrandTextPrimary,
+                        fontSize = 18.sp
+                    ),
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+
+                // 2x2 Scorecard Grid
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Card(
+                            shape = RoundedCornerShape(12.dp),
+                            colors = CardDefaults.cardColors(containerColor = Color.White),
+                            border = BorderStroke(1.dp, BrandBorder),
+                            modifier = Modifier.fillMaxWidth().height(80.dp)
+                        ) {
+                            Column(
+                                modifier = Modifier.fillMaxSize().padding(12.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Text("₹84.5k", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp, color = BrandTextPrimary)
+                                Text("Revenue", fontSize = 11.sp, color = BrandTextSecondary)
+                            }
+                        }
+                        Card(
+                            shape = RoundedCornerShape(12.dp),
+                            colors = CardDefaults.cardColors(containerColor = Color.White),
+                            border = BorderStroke(1.dp, BrandBorder),
+                            modifier = Modifier.fillMaxWidth().height(80.dp)
+                        ) {
+                            Column(
+                                modifier = Modifier.fillMaxSize().padding(12.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Text("42", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp, color = BrandTextPrimary)
+                                Text("Bookings", fontSize = 11.sp, color = BrandTextSecondary)
+                            }
+                        }
+                    }
+
+                    Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Card(
+                            shape = RoundedCornerShape(12.dp),
+                            colors = CardDefaults.cardColors(containerColor = Color.White),
+                            border = BorderStroke(1.dp, BrandBorder),
+                            modifier = Modifier.fillMaxWidth().height(80.dp)
+                        ) {
+                            Column(
+                                modifier = Modifier.fillMaxSize().padding(12.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Text("1,240", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp, color = BrandTextPrimary)
+                                Text("Views", fontSize = 11.sp, color = BrandTextSecondary)
+                            }
+                        }
+                        Card(
+                            shape = RoundedCornerShape(12.dp),
+                            colors = CardDefaults.cardColors(containerColor = Color.White),
+                            border = BorderStroke(1.dp, BrandBorder),
+                            modifier = Modifier.fillMaxWidth().height(80.dp)
+                        ) {
+                            Column(
+                                modifier = Modifier.fillMaxSize().padding(12.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Text("98%", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp, color = BrandTextPrimary)
+                                Text("Response", fontSize = 11.sp, color = BrandTextSecondary)
+                            }
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                // Recent Activity Feed Card
+                Card(
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    border = BorderStroke(1.dp, BrandBorder),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = "Recent Activity",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+                            color = BrandTextPrimary,
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
+                        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(bottom = 6.dp)) {
+                            Box(modifier = Modifier.size(6.dp).background(BrandPrimary, CircleShape))
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text("New booking: North Room", fontSize = 12.sp, color = BrandTextSecondary, modifier = Modifier.weight(1f))
+                            Text("2h ago", fontSize = 10.sp, color = BrandTextSecondary)
+                        }
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Box(modifier = Modifier.size(6.dp).background(BrandSuccess, CircleShape))
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text("Review received: 4.9 ★", fontSize = 12.sp, color = BrandTextSecondary, modifier = Modifier.weight(1f))
+                            Text("5h ago", fontSize = 10.sp, color = BrandTextSecondary)
+                        }
+                    }
+                }
+            }
+
             // 1. Profile Completion Banner
             Card(
                 modifier = Modifier

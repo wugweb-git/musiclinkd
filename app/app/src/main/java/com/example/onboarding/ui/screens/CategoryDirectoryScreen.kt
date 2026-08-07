@@ -71,8 +71,16 @@ fun CategoryDirectoryScreen(
             Text("Browse Categories", style = Typography.bodyLarge, color = BrandText)
         }
 
+        Text(
+            text = "Marketplace",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.ExtraBold,
+            color = BrandTextPrimary,
+            modifier = Modifier.padding(start = 16.dp, bottom = 8.dp)
+        )
+
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(150.dp),
+            columns = GridCells.Fixed(2),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 12.dp),
@@ -81,36 +89,25 @@ fun CategoryDirectoryScreen(
             items(defaultCategories) { cat ->
                 Card(
                     modifier = Modifier
-                        .padding(6.dp)
-                        .height(130.dp)
+                        .padding(4.dp)
                         .clickable { onSelectCategory(cat.name) },
-                    shape = RoundedCornerShape(Dimens.r2),
+                    shape = RoundedCornerShape(12.dp),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
                     border = BorderStroke(1.dp, BrandBorder)
                 ) {
                     Column(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(16.dp),
-                        verticalArrangement = Arrangement.SpaceBetween
+                            .fillMaxWidth()
+                            .padding(12.dp),
+                        verticalArrangement = Arrangement.Center
                     ) {
-                        Box(
-                            modifier = Modifier
-                                .size(40.dp)
-                                .background(BrandPrimary.copy(alpha = 0.08f), CircleShape),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(cat.icon, style = Typography.headlineLarge)
-                        }
-
-                        Column {
-                            Text(cat.name, style = Typography.bodyLarge, color = BrandText)
-                            Text(
-                                text = cat.profileCount.toString() + " Listings",
-                                fontSize = 11.sp,
-                                color = BrandMuted
-                            )
-                        }
+                        Text(cat.icon, fontSize = 24.sp, modifier = Modifier.padding(bottom = 6.dp))
+                        Text(cat.name, fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = BrandTextPrimary)
+                        Text(
+                            text = "${cat.profileCount} available",
+                            fontSize = 11.sp,
+                            color = BrandTextSecondary
+                        )
                     }
                 }
             }
