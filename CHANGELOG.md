@@ -4,6 +4,10 @@ All notable repository-level changes are recorded here.
 
 ## Unreleased
 
+### Added
+
+- Governance rule §8 "Changelog Discipline" — every commit must include a `CHANGELOG.md` entry following Keep a Changelog format. Applies to all repos: app, admin, website, guide.
+
 ### Changed
 
 - Hosting collapsed from two Firebase Hosting sites to one — `musiclinkd.com` and

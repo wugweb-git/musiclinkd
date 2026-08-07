@@ -100,7 +100,21 @@ Every card, block, and container MUST respect min/max height boundaries mapped t
 
 ---
 
-## 8. ♿ ARIA, WCAG 2.1 AA & Accessibility Standards
+## 8. 📝 Changelog Discipline
+
+- **Mandatory Rule**: Every commit MUST include a corresponding entry in `CHANGELOG.md` before `git commit`.
+- **Format**: Each entry must follow [Keep a Changelog](https://keepachangelog.com/) conventions:
+  ```
+  ## [Unreleased]
+  ### Added / Changed / Fixed / Removed
+  - <concise description of what changed and why>
+  ```
+- **Enforcement**: A commit without a `CHANGELOG.md` update is considered incomplete. CI should fail the build if `CHANGELOG.md` is not modified in the same commit as code changes.
+- **Scope**: This applies to all repos: `app/` (Android), `admin/` (Next.js), `website/` (static), `guide/` (design system).
+
+---
+
+## 9. ♿ ARIA, WCAG 2.1 AA & Accessibility Standards
 
 1. **Color Contrast**: Text must achieve a contrast ratio of at least **4.5:1** against its background (`#0D0B26` on `#FFFFFF` / `#FCFCFD` = `16.8:1`).
 2. **Screen Reader Labels**: Every interactive icon button must include `aria-label` or `contentDescription`.
