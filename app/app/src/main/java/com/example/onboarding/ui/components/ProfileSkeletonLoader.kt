@@ -82,10 +82,10 @@ fun ProfileSkeletonLoader(
             Spacer(modifier = Modifier.height((-30).dp))
 
             SkeletonItem(width = 160.dp, height = 20.dp, cornerRadius = 4.dp)
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
             SkeletonItem(width = 110.dp, height = 12.dp, cornerRadius = 4.dp)
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             // Stat Chips Row
             Row(
@@ -95,11 +95,11 @@ fun ProfileSkeletonLoader(
                 repeat(3) {
                     Card(
                         colors = CardDefaults.cardColors(containerColor = Color.White),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(Dimens.r2),
                         modifier = Modifier.width(105.dp)
                     ) {
                         Column(
-                            modifier = Modifier.padding(12.dp),
+                            modifier = Modifier.padding(Dimens.sp2),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             SkeletonItem(width = 40.dp, height = 16.dp, cornerRadius = 4.dp)
@@ -115,12 +115,12 @@ fun ProfileSkeletonLoader(
             // Content Bio Skeleton Lines
             Card(
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(Dimens.r2),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Column(modifier = Modifier.padding(16.dp)) {
+                Column(modifier = Modifier.padding(Dimens.sp2)) {
                     SkeletonItem(width = 100.dp, height = 14.dp, cornerRadius = 4.dp)
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
                     SkeletonItem(width = 280.dp, height = 12.dp, cornerRadius = 4.dp)
                     Spacer(modifier = Modifier.height(6.dp))
                     SkeletonItem(width = 220.dp, height = 12.dp, cornerRadius = 4.dp)

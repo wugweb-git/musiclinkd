@@ -61,7 +61,7 @@ fun UnifiedNotificationCard(
             .fillMaxWidth()
             .clickable { onClick() },
         colors = CardDefaults.cardColors(containerColor = if (isUnread) BrandPrimary.copy(alpha = 0.04f) else Color.White),
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         border = BorderStroke(1.dp, if (isUnread) BrandPrimary.copy(alpha = 0.3f) else BrandBorder)
     ) {
         Row(
@@ -86,8 +86,8 @@ fun UnifiedNotificationCard(
                     Text(title, fontWeight = FontWeight.Bold, fontSize = 13.5.sp, color = BrandDark)
                     Text(timeAgo, fontSize = 11.sp, color = BrandTextSecondary)
                 }
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(description, fontSize = 12.sp, color = BrandTextSecondary, lineHeight = 16.sp)
+                Spacer(modifier = Modifier.height(Dimens.sp1))
+                Text(description, style = Typography.labelLarge, color = BrandTextSecondary, lineHeight = 16.sp)
             }
         }
     }

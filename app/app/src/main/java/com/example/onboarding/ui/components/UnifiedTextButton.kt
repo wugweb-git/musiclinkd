@@ -62,8 +62,7 @@ fun UnifiedTextButton(
     ) {
         Text(
             text = text,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Bold,
+            style = Typography.bodyLarge,
             color = BrandPrimary
         )
     }

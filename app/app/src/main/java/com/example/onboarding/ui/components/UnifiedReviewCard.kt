@@ -61,11 +61,11 @@ fun UnifiedReviewCard(
     modifier: Modifier = Modifier
 ) {
     Card(
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         modifier = modifier
             .fillMaxWidth()
-            .border(1.dp, BrandBorder, RoundedCornerShape(24.dp))
+            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3))
     ) {
         Column(modifier = Modifier.padding(18.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -82,15 +82,15 @@ fun UnifiedReviewCard(
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Spacer(modifier = Modifier.width(12.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp2))
                 Column(modifier = Modifier.weight(1f)) {
-                    Text(reviewerName, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandTextPrimary)
-                    Text(reviewerRole, fontSize = 12.sp, color = BrandTextSecondary)
+                    Text(reviewerName, style = Typography.bodyLarge, color = BrandTextPrimary)
+                    Text(reviewerRole, style = Typography.labelLarge, color = BrandTextSecondary)
                 }
-                Text(date, fontSize = 12.sp, color = BrandTextSecondary)
+                Text(date, style = Typography.labelLarge, color = BrandTextSecondary)
             }
             
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
             
             // Stars Rating Row
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -103,11 +103,10 @@ fun UnifiedReviewCard(
                         modifier = Modifier.size(16.dp)
                     )
                 }
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp1))
                 Text(
                     text = "${rating.toInt()}.0 / 5.0",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 12.sp,
+                    style = Typography.bodyLarge,
                     color = BrandTextPrimary
                 )
             }
@@ -116,7 +115,7 @@ fun UnifiedReviewCard(
             
             Text(
                 text = reviewText,
-                fontSize = 14.sp,
+                style = Typography.labelLarge,
                 color = BrandTextPrimary,
                 lineHeight = 20.sp
             )
@@ -131,7 +130,7 @@ fun UnifiedReviewCard(
             ) {
                 Row(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(12.dp))
+                        .clip(RoundedCornerShape(Dimens.r2))
                         .background(if (hasClickedHelpful) BrandPrimary.copy(alpha = 0.08f) else Color(0xFFF3F4F6))
                         .clickable { onHelpfulClick() }
                         .padding(horizontal = 12.dp, vertical = 6.dp),

@@ -79,8 +79,7 @@ fun WhatsAppShareSheet(
             ) {
                 Text(
                     text = "Share Portfolio Profile",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
+                    style = Typography.bodyLarge,
                     color = BrandText
                 )
                 IconButton(onClick = onDismiss) {
@@ -91,11 +90,11 @@ fun WhatsAppShareSheet(
         text = {
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
             ) {
                 Text(
                     text = "Promote this certified profile to external clients and partners via WhatsApp. Landing page previews are automatically generated.",
-                    fontSize = 12.sp,
+                    style = Typography.labelLarge,
                     color = BrandMuted
                 )
                 
@@ -110,8 +109,8 @@ fun WhatsAppShareSheet(
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(1.dp, Color(0xFFE2E8F0), RoundedCornerShape(16.dp)),
-                    shape = RoundedCornerShape(16.dp),
+                        .border(1.dp, Color(0xFFE2E8F0), RoundedCornerShape(Dimens.r2)),
+                    shape = RoundedCornerShape(Dimens.r2),
                     colors = CardDefaults.cardColors(containerColor = Color(0xFFF1F5F9))
                 ) {
                     Column {
@@ -166,12 +165,11 @@ fun WhatsAppShareSheet(
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text(
                                     text = profile.name,
-                                    fontSize = 14.sp,
-                                    fontWeight = FontWeight.ExtraBold,
+                                    style = Typography.bodyLarge,
                                     color = BrandText
                                 )
                                 if (profile.isVerified) {
-                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Spacer(modifier = Modifier.width(Dimens.sp1))
                                     Icon(
                                         imageVector = Icons.Default.Verified,
                                         contentDescription = "Verified Artist",
@@ -196,7 +194,7 @@ fun WhatsAppShareSheet(
                                 overflow = TextOverflow.Ellipsis
                             )
                             
-                            Spacer(modifier = Modifier.height(4.dp))
+                            Spacer(modifier = Modifier.height(Dimens.sp1))
                             
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
@@ -219,11 +217,11 @@ fun WhatsAppShareSheet(
                     }
                 }
                 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp1))
                 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                 ) {
                     Button(
                         onClick = {
@@ -233,9 +231,9 @@ fun WhatsAppShareSheet(
                             .weight(1.3f)
                             .height(44.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF25D366)),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(Dimens.r2)
                     ) {
-                        Text("Send to WhatsApp", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                        Text("Send to WhatsApp", style = Typography.bodyLarge, color = Color.White)
                     }
                     
                     OutlinedButton(
@@ -245,7 +243,7 @@ fun WhatsAppShareSheet(
                         modifier = Modifier
                             .weight(1f)
                             .height(44.dp),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(Dimens.r2),
                         border = BorderStroke(1.dp, BrandBorder)
                     ) {
                         Row(

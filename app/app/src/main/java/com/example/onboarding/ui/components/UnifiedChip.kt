@@ -68,14 +68,14 @@ fun UnifiedChip(
                 scaleX = scale
                 scaleY = scale
             }
-            .clip(RoundedCornerShape(999.dp))
+            .clip(RoundedCornerShape(Dimens.rFull))
             .background(
                 color = if (selected) BrandPrimary.copy(alpha = 0.08f) else Color.White
             )
             .border(
                 width = if (selected) 2.dp else 1.dp,
                 color = if (selected) BrandPrimary else BrandBorder,
-                shape = RoundedCornerShape(999.dp)
+                shape = RoundedCornerShape(Dimens.rFull)
             )
             .clickable(
                 onClick = onClick,
@@ -99,7 +99,7 @@ fun UnifiedChip(
             }
             Text(
                 text = text,
-                fontSize = 14.sp,
+                style = Typography.labelLarge,
                 fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
                 color = if (selected) BrandPrimary else BrandTextPrimary
             )

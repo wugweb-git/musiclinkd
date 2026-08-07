@@ -64,13 +64,13 @@ fun UnifiedMarketplaceCard(
 ) {
     Card(
         onClick = onClick,
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         modifier = modifier
             .fillMaxWidth()
-            .border(1.dp, BrandBorder, RoundedCornerShape(20.dp))
+            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3))
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(Dimens.sp2)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier = Modifier
@@ -87,23 +87,22 @@ fun UnifiedMarketplaceCard(
                     )
                 }
 
-                Spacer(modifier = Modifier.width(16.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp2))
 
                 Column(modifier = Modifier.weight(1f)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = name,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 16.sp,
+                            style = Typography.bodyLarge,
                             color = BrandTextPrimary,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
                         if (audioDemo) {
-                            Spacer(modifier = Modifier.width(4.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
                             Box(
                                 modifier = Modifier
-                                    .background(Color(0xFFECFDF5), RoundedCornerShape(4.dp))
+                                    .background(Color(0xFFECFDF5), RoundedCornerShape(Dimens.r1))
                                     .padding(horizontal = 4.dp, vertical = 2.dp)
                             ) {
                                 Text("AUDIO", color = Color(0xFF059669), fontSize = 8.sp, fontWeight = FontWeight.Bold)
@@ -118,17 +117,17 @@ fun UnifiedMarketplaceCard(
                             text = if (category.lowercase() == "sale") "Sale" else "Rental",
                             fontWeight = FontWeight.Bold,
                             color = BrandPrimary,
-                            fontSize = 12.sp
+                            style = Typography.labelLarge
                         )
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
                         Text("•", color = BrandTextSecondary)
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(location, fontSize = 12.sp, color = BrandTextSecondary)
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
+                        Text(location, style = Typography.labelLarge, color = BrandTextSecondary)
                     }
                 }
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -138,8 +137,7 @@ fun UnifiedMarketplaceCard(
                 Column {
                     Text(
                         text = price,
-                        fontWeight = FontWeight.ExtraBold,
-                        fontSize = 18.sp,
+                        style = Typography.bodyLarge,
                         color = BrandTextPrimary
                     )
                     if (condition != null) {
@@ -152,11 +150,11 @@ fun UnifiedMarketplaceCard(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         text = "By $owner",
-                        fontSize = 12.sp,
+                        style = Typography.labelLarge,
                         color = BrandTextSecondary,
                         fontWeight = FontWeight.Medium
                     )
-                    Spacer(modifier = Modifier.width(4.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     Icon(
                         imageVector = Icons.Default.Verified,
                         contentDescription = "Verified Owner",

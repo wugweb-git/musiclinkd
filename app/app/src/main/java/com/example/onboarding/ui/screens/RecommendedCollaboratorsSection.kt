@@ -94,7 +94,7 @@ fun RecommendedCollaboratorsSection(
                     Spacer(modifier = Modifier.width(6.dp))
                     Box(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(8.dp))
+                            .clip(RoundedCornerShape(Dimens.r1))
                             .background(BrandPrimary.copy(alpha = 0.12f))
                             .padding(horizontal = 6.dp, vertical = 2.dp)
                     ) {
@@ -118,7 +118,7 @@ fun RecommendedCollaboratorsSection(
                         val isSel = selectedRole.equals(role, ignoreCase = true)
                         Box(
                             modifier = Modifier
-                                .clip(RoundedCornerShape(16.dp))
+                                .clip(RoundedCornerShape(Dimens.r2))
                                 .background(if (isSel) BrandPrimary else Color(0xFFF3F4F6))
                                 .clickable { selectedRole = role }
                                 .padding(horizontal = 10.dp, vertical = 5.dp)
@@ -150,7 +150,7 @@ fun RecommendedCollaboratorsSection(
                         val isSel = selectedGenres.contains(genre)
                         Box(
                             modifier = Modifier
-                                .clip(RoundedCornerShape(16.dp))
+                                .clip(RoundedCornerShape(Dimens.r2))
                                 .background(if (isSel) BrandSecondary else Color(0xFFF3F4F6))
                                 .clickable {
                                     selectedGenres = if (isSel) selectedGenres - genre else selectedGenres + genre
@@ -169,7 +169,7 @@ fun RecommendedCollaboratorsSection(
             }
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp2))
 
         val context = androidx.compose.ui.platform.LocalContext.current
         var dismissedProfileIds by remember { mutableStateOf(setOf<String>()) }
@@ -180,7 +180,7 @@ fun RecommendedCollaboratorsSection(
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
         ) {
             items(visibleMatches.take(8), key = { it.profile.id }) { matchResult ->
                 val dismissState = rememberSwipeToDismissBoxState(
@@ -199,7 +199,7 @@ fun RecommendedCollaboratorsSection(
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .clip(RoundedCornerShape(20.dp))
+                                .clip(RoundedCornerShape(Dimens.r3))
                                 .background(Color(0xFFEF4444))
                                 .padding(16.dp),
                             contentAlignment = Alignment.Center
@@ -207,7 +207,7 @@ fun RecommendedCollaboratorsSection(
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Icon(Icons.Default.Delete, contentDescription = "Dismiss profile", tint = Color.White)
                                 Spacer(modifier = Modifier.width(6.dp))
-                                Text("Dismissed", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                                Text("Dismissed", color = Color.White, style = Typography.bodyLarge)
                             }
                         }
                     }

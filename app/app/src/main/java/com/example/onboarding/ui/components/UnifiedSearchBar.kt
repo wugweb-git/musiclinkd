@@ -58,7 +58,7 @@ fun UnifiedSearchBar(
     OutlinedTextField(
         value = query,
         onValueChange = onQueryChange,
-        placeholder = { Text(placeholder, fontSize = 14.sp, color = BrandTextSecondary) },
+        placeholder = { Text(placeholder, style = Typography.labelLarge, color = BrandTextSecondary) },
         leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search", tint = BrandTextSecondary) },
         trailingIcon = {
             if (query.isNotEmpty()) {
@@ -67,7 +67,7 @@ fun UnifiedSearchBar(
                 }
             }
         },
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(Dimens.r2),
         colors = OutlinedTextFieldDefaults.colors(
             focusedContainerColor = Color.White,
             unfocusedContainerColor = Color.White,

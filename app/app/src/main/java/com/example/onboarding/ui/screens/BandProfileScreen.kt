@@ -94,7 +94,7 @@ fun BandProfileScreen(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(
@@ -126,7 +126,7 @@ fun BandProfileScreen(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(12.dp)
-                    .background(BrandPrimary, RoundedCornerShape(8.dp))
+                    .background(BrandPrimary, RoundedCornerShape(Dimens.r1))
                     .padding(horizontal = 8.dp, vertical = 2.dp)
             ) {
                 Text(
@@ -138,7 +138,7 @@ fun BandProfileScreen(
             }
         }
 
-        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(modifier = Modifier.padding(Dimens.sp2), verticalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(band.name, fontSize = 22.sp, fontWeight = FontWeight.Bold, color = BrandText)
                 if (band.isVerified) {
@@ -151,14 +151,14 @@ fun BandProfileScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("5-Piece Live Ensemble • Koramangala", fontSize = 12.sp, color = BrandSecondary, fontWeight = FontWeight.Bold)
+                Text("5-Piece Live Ensemble • Koramangala", style = Typography.labelLarge, color = BrandSecondary, fontWeight = FontWeight.Bold)
                 PersonaTypeBadge(band.type)
             }
 
-            Text(band.bio, fontSize = 12.sp, color = BrandText, lineHeight = 18.sp)
+            Text(band.bio, style = Typography.labelLarge, color = BrandText, lineHeight = 18.sp)
 
-            Text("Band Members Lineup", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
-            LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("Band Members Lineup", style = Typography.bodyLarge, color = BrandText)
+            LazyRow(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                 items(band.members) { mb ->
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -186,7 +186,7 @@ fun BandProfileScreen(
                         ) {
                             Text(mb.name.take(1), color = Color.White, fontWeight = FontWeight.Bold)
                         }
-                        Spacer(modifier = Modifier.height(4.dp))
+                        Spacer(modifier = Modifier.height(Dimens.sp1))
                         Text(mb.name.split(" ")[0], fontSize = 10.sp, fontWeight = FontWeight.Bold, color = BrandText, maxLines = 1, overflow = TextOverflow.Ellipsis)
                         Text(mb.instrument, fontSize = 8.sp, color = BrandMuted, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     }
@@ -195,8 +195,8 @@ fun BandProfileScreen(
 
             HorizontalDivider()
 
-            Text("Upcoming Concerts & Tour Dates", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("Upcoming Concerts & Tour Dates", style = Typography.bodyLarge, color = BrandText)
+            Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                 listOf(
                     Triple("28 Jun 2026", "Indie Rock Fiesta @ Phoenix MarketCity", "Mumbai, MH"),
                     Triple("12 Jul 2026", "Swar Fest Showcase @ Swabhumi", "Kolkata, WB"),
@@ -204,7 +204,7 @@ fun BandProfileScreen(
                 ).forEach { (date, eventName, venueLoc) ->
                     Card(
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(Dimens.r2),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
                         border = BorderStroke(1.dp, BrandBorder)
                     ) {
@@ -214,13 +214,13 @@ fun BandProfileScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Column(modifier = Modifier.weight(1f)) {
-                                Text(eventName, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandText)
+                                Text(eventName, style = Typography.bodyLarge, color = BrandText)
                                 Spacer(modifier = Modifier.height(2.dp))
                                 Text("📍 $venueLoc", fontSize = 10.sp, color = BrandMuted, fontWeight = FontWeight.Bold)
                             }
                             Box(
                                 modifier = Modifier
-                                    .background(BrandPrimary.copy(alpha = 0.1f), RoundedCornerShape(8.dp))
+                                    .background(BrandPrimary.copy(alpha = 0.1f), RoundedCornerShape(Dimens.r1))
                                     .padding(horizontal = 8.dp, vertical = 4.dp)
                             ) {
                                 Text(date, fontSize = 9.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)
@@ -232,14 +232,14 @@ fun BandProfileScreen(
 
             HorizontalDivider()
 
-            Text("Technical Rider (Backline Requirements)", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+            Text("Technical Rider (Backline Requirements)", style = Typography.bodyLarge, color = BrandText)
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(Dimens.r2),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFF9FAFB)),
                 border = BorderStroke(1.dp, BrandBorder)
             ) {
-                Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                     listOf(
                         "Drums: 5-piece kit (Mapex/Pearl preferred) with active gates.",
                         "Bass: Ampeg SVT-CL or Gallien-Krueger bass head with 4x10 cabinet.",
@@ -249,7 +249,7 @@ fun BandProfileScreen(
                     ).forEach { req ->
                         Row(verticalAlignment = Alignment.Top) {
                             Icon(Icons.Default.CheckCircle, "Rider Spec", tint = BrandPrimary, modifier = Modifier.size(16.dp).padding(top = 2.dp))
-                            Spacer(modifier = Modifier.width(8.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
                             Text(req, fontSize = 11.sp, color = Color(0xFF4B5563))
                         }
                     }
@@ -258,14 +258,14 @@ fun BandProfileScreen(
 
             HorizontalDivider()
 
-            Text("Interactive Stage Plot & Rig Positions", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+            Text("Interactive Stage Plot & Rig Positions", style = Typography.bodyLarge, color = BrandText)
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(Dimens.r2),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFF0F172A)),
                 border = BorderStroke(1.dp, Color.White.copy(alpha = 0.1f))
             ) {
-                Column(modifier = Modifier.padding(16.dp)) {
+                Column(modifier = Modifier.padding(Dimens.sp2)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -275,12 +275,12 @@ fun BandProfileScreen(
                         Text("BACKSTAGE / UPSTAGE", color = Color.White.copy(alpha = 0.4f), fontSize = 9.sp, fontWeight = FontWeight.Bold)
                     }
                     
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
                     
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(Color(0xFF1E293B), RoundedCornerShape(12.dp))
+                            .background(Color(0xFF1E293B), RoundedCornerShape(Dimens.r2))
                             .padding(12.dp),
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
@@ -290,16 +290,16 @@ fun BandProfileScreen(
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .background(Color(0xFF334155), RoundedCornerShape(8.dp))
-                                    .border(1.dp, Color.White.copy(alpha = 0.2f), RoundedCornerShape(8.dp))
+                                    .background(Color(0xFF334155), RoundedCornerShape(Dimens.r1))
+                                    .border(1.dp, Color.White.copy(alpha = 0.2f), RoundedCornerShape(Dimens.r1))
                                     .padding(horizontal = 10.dp, vertical = 6.dp)
                             ) {
                                 Text("🎹 Keyboard Rig (Line L/R)", fontSize = 9.sp, color = Color.White, fontWeight = FontWeight.Bold)
                             }
                             Box(
                                 modifier = Modifier
-                                    .background(Color(0xFF475569), RoundedCornerShape(8.dp))
-                                    .border(1.dp, Color.White.copy(alpha = 0.2f), RoundedCornerShape(8.dp))
+                                    .background(Color(0xFF475569), RoundedCornerShape(Dimens.r1))
+                                    .border(1.dp, Color.White.copy(alpha = 0.2f), RoundedCornerShape(Dimens.r1))
                                     .padding(horizontal = 10.dp, vertical = 6.dp)
                             ) {
                                 Text("🥁 Drums (Cage + 4 Gates)", fontSize = 9.sp, color = Color.White, fontWeight = FontWeight.Bold)
@@ -312,16 +312,16 @@ fun BandProfileScreen(
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .background(Color(0xFF334155), RoundedCornerShape(8.dp))
-                                    .border(1.dp, Color.White.copy(alpha = 0.2f), RoundedCornerShape(8.dp))
+                                    .background(Color(0xFF334155), RoundedCornerShape(Dimens.r1))
+                                    .border(1.dp, Color.White.copy(alpha = 0.2f), RoundedCornerShape(Dimens.r1))
                                     .padding(horizontal = 10.dp, vertical = 6.dp)
                             ) {
                                 Text("🎸 Bass Cab (XLR Out)", fontSize = 9.sp, color = Color.White, fontWeight = FontWeight.Bold)
                             }
                             Box(
                                 modifier = Modifier
-                                    .background(Color(0xFF334155), RoundedCornerShape(8.dp))
-                                    .border(1.dp, Color.White.copy(alpha = 0.2f), RoundedCornerShape(8.dp))
+                                    .background(Color(0xFF334155), RoundedCornerShape(Dimens.r1))
+                                    .border(1.dp, Color.White.copy(alpha = 0.2f), RoundedCornerShape(Dimens.r1))
                                     .padding(horizontal = 10.dp, vertical = 6.dp)
                             ) {
                                 Text("🎸 Lead Amp (SM57 Mic)", fontSize = 9.sp, color = Color.White, fontWeight = FontWeight.Bold)
@@ -334,7 +334,7 @@ fun BandProfileScreen(
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .background(BrandPrimary, RoundedCornerShape(8.dp))
+                                    .background(BrandPrimary, RoundedCornerShape(Dimens.r1))
                                     .padding(horizontal = 16.dp, vertical = 8.dp)
                             ) {
                                 Text("🎤 Lead Vocals (Shure Beta 58A)", fontSize = 10.sp, color = Color.White, fontWeight = FontWeight.Bold)
@@ -342,7 +342,7 @@ fun BandProfileScreen(
                         }
                     }
                     
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
                     
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -355,7 +355,7 @@ fun BandProfileScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
 
             Button(
                 onClick = onBookClick,
@@ -364,7 +364,7 @@ fun BandProfileScreen(
                     .height(50.dp)
                     .testTag("book_band_cta"),
                 colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(Dimens.r2)
             ) {
                 Text("Lock Booking Dates ($750/night)", fontWeight = FontWeight.Bold)
             }
@@ -389,21 +389,21 @@ fun BandProfileScreen(
             ) {
                 Column {
                     Text("Live Performance", fontSize = 11.sp, color = BrandMuted, fontWeight = FontWeight.Medium)
-                    Text("$750 / night", fontSize = 20.sp, fontWeight = FontWeight.Black, color = BrandText)
+                    Text("$750 / night", style = Typography.bodyLarge, color = BrandText)
                 }
 
                 Button(
                     onClick = onBookClick,
                     colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                    shape = RoundedCornerShape(16.dp),
+                    shape = RoundedCornerShape(Dimens.r2),
                     contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp)
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
                         Icon(Icons.Default.FlashOn, contentDescription = null, modifier = Modifier.size(18.dp))
-                        Text("Book Band Now", fontSize = 15.sp, fontWeight = FontWeight.Bold)
+                        Text("Book Band Now", style = Typography.bodyLarge)
                     }
                 }
             }

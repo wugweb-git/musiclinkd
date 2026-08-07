@@ -63,7 +63,7 @@ fun FallbackErrorScreen(
     ) {
         Card(
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(20.dp),
+            shape = RoundedCornerShape(Dimens.r3),
             elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
             modifier = Modifier.fillMaxWidth(0.92f)
         ) {
@@ -90,16 +90,15 @@ fun FallbackErrorScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 Text(
                     text = "Temporary Connection Issue",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
+                    style = Typography.bodyLarge,
                     color = BrandTextPrimary
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp1))
 
                 Text(
                     text = "We couldn't load content for $screenName. Please check your internet connection and try again.",
@@ -112,12 +111,12 @@ fun FallbackErrorScreen(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp2),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     OutlinedButton(
                         onClick = onRetry,
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(Dimens.r2),
                         border = BorderStroke(1.dp, BrandPrimary),
                         colors = ButtonDefaults.outlinedButtonColors(contentColor = BrandPrimary)
                     ) {
@@ -132,7 +131,7 @@ fun FallbackErrorScreen(
 
                     Button(
                         onClick = onRetry,
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(Dimens.r2),
                         colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary)
                     ) {
                         Text("Reload Page", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Color.White)

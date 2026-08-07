@@ -68,7 +68,7 @@ fun CategoryDirectoryScreen(
             IconButton(onClick = onBack) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
             }
-            Text("Browse Categories", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = BrandText)
+            Text("Browse Categories", style = Typography.bodyLarge, color = BrandText)
         }
 
         LazyVerticalGrid(
@@ -84,7 +84,7 @@ fun CategoryDirectoryScreen(
                         .padding(6.dp)
                         .height(130.dp)
                         .clickable { onSelectCategory(cat.name) },
-                    shape = RoundedCornerShape(16.dp),
+                    shape = RoundedCornerShape(Dimens.r2),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
                     border = BorderStroke(1.dp, BrandBorder)
                 ) {
@@ -100,11 +100,11 @@ fun CategoryDirectoryScreen(
                                 .background(BrandPrimary.copy(alpha = 0.08f), CircleShape),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text(cat.icon, fontSize = 20.sp)
+                            Text(cat.icon, style = Typography.headlineLarge)
                         }
 
                         Column {
-                            Text(cat.name, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+                            Text(cat.name, style = Typography.bodyLarge, color = BrandText)
                             Text(
                                 text = cat.profileCount.toString() + " Listings",
                                 fontSize = 11.sp,

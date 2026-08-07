@@ -82,13 +82,13 @@ fun PersonaTypeBadge(type: ProfileType, modifier: Modifier = Modifier) {
     
     Row(
         modifier = modifier
-            .background(bgColor, RoundedCornerShape(999.dp))
-            .border(1.dp, textColor.copy(alpha = 0.2f), RoundedCornerShape(999.dp))
+            .background(bgColor, RoundedCornerShape(Dimens.rFull))
+            .border(1.dp, textColor.copy(alpha = 0.2f), RoundedCornerShape(Dimens.rFull))
             .padding(horizontal = 10.dp, vertical = 4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(vectorIcon, contentDescription = null, tint = textColor, modifier = Modifier.size(12.dp))
-        Spacer(modifier = Modifier.width(4.dp))
+        Spacer(modifier = Modifier.width(Dimens.sp1))
         Text(label, color = textColor, fontSize = 10.sp, fontWeight = FontWeight.Bold)
     }
 }

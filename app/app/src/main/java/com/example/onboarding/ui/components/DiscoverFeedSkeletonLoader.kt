@@ -56,12 +56,12 @@ fun DiscoverFeedSkeletonLoader(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
     ) {
         repeat(count) {
             Card(
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                shape = RoundedCornerShape(20.dp),
+                shape = RoundedCornerShape(Dimens.r3),
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -74,7 +74,7 @@ fun DiscoverFeedSkeletonLoader(
                             .shimmer()
                     )
                     
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.padding(Dimens.sp2)) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.SpaceBetween,
@@ -82,7 +82,7 @@ fun DiscoverFeedSkeletonLoader(
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 SkeletonCircle(size = 44.dp)
-                                Spacer(modifier = Modifier.width(12.dp))
+                                Spacer(modifier = Modifier.width(Dimens.sp2))
                                 Column {
                                     SkeletonItem(width = 120.dp, height = 14.dp, cornerRadius = 4.dp)
                                     Spacer(modifier = Modifier.height(6.dp))
@@ -92,13 +92,13 @@ fun DiscoverFeedSkeletonLoader(
                             SkeletonItem(width = 60.dp, height = 24.dp, cornerRadius = 12.dp)
                         }
 
-                        Spacer(modifier = Modifier.height(12.dp))
+                        Spacer(modifier = Modifier.height(Dimens.sp2))
                         SkeletonItem(width = 240.dp, height = 12.dp, cornerRadius = 4.dp)
                         Spacer(modifier = Modifier.height(6.dp))
                         SkeletonItem(width = 180.dp, height = 12.dp, cornerRadius = 4.dp)
 
                         Spacer(modifier = Modifier.height(14.dp))
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                             repeat(3) {
                                 SkeletonItem(width = 70.dp, height = 22.dp, cornerRadius = 11.dp)
                             }

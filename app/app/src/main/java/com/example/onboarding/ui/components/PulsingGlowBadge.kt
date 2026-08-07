@@ -87,14 +87,14 @@ fun PulsingGlowBadge(
                     alpha = auraAlpha
                 }
                 .matchParentSize()
-                .clip(RoundedCornerShape(12.dp))
+                .clip(RoundedCornerShape(Dimens.r2))
                 .background(badgeColor)
         )
 
         // Core badge
         Box(
             modifier = Modifier
-                .clip(RoundedCornerShape(12.dp))
+                .clip(RoundedCornerShape(Dimens.r2))
                 .background(badgeColor)
                 .padding(horizontal = 8.dp, vertical = 4.dp)
         ) {

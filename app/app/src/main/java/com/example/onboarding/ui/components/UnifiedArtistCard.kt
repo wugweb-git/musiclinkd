@@ -62,13 +62,13 @@ fun UnifiedArtistCard(
     modifier: Modifier = Modifier
 ) {
     Card(
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         modifier = modifier
             .fillMaxWidth()
-            .border(1.dp, BrandBorder, RoundedCornerShape(24.dp))
+            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3))
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(Dimens.sp2)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier = Modifier
@@ -83,24 +83,23 @@ fun UnifiedArtistCard(
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Spacer(modifier = Modifier.width(16.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp2))
                 Column(modifier = Modifier.weight(1f)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = name,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 18.sp,
+                            style = Typography.bodyLarge,
                             color = BrandTextPrimary
                         )
-                        Spacer(modifier = Modifier.width(4.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
                         Icon(Icons.Filled.Verified, contentDescription = "Verified", tint = BrandPrimary, modifier = Modifier.size(16.dp))
                     }
                     Text(
                         text = role,
-                        fontSize = 14.sp,
+                        style = Typography.labelLarge,
                         color = BrandTextSecondary
                     )
-                    Spacer(modifier = Modifier.height(4.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp1))
                     
                     // Availability Pill
                     val dotColor = when (availability.lowercase()) {
@@ -112,7 +111,7 @@ fun UnifiedArtistCard(
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier
-                            .background(dotColor.copy(alpha = 0.1f), RoundedCornerShape(12.dp))
+                            .background(dotColor.copy(alpha = 0.1f), RoundedCornerShape(Dimens.r2))
                             .padding(horizontal = 8.dp, vertical = 4.dp)
                     ) {
                         Box(modifier = Modifier.size(6.dp).background(dotColor, CircleShape))
@@ -121,7 +120,7 @@ fun UnifiedArtistCard(
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -139,14 +138,14 @@ fun UnifiedArtistCard(
                     Text(followersCount, fontSize = 13.sp, fontWeight = FontWeight.Bold, color = BrandTextPrimary)
                 }
             }
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
             Row(modifier = Modifier.fillMaxWidth()) {
                 UnifiedSecondaryButton(
                     text = "Message",
                     onClick = onMessage,
                     modifier = Modifier.weight(1f)
                 )
-                Spacer(modifier = Modifier.width(12.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp2))
                 UnifiedPrimaryButton(
                     text = "View Profile",
                     onClick = onViewProfile,

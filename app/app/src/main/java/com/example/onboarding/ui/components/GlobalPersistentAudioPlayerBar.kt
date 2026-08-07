@@ -60,7 +60,7 @@ fun GlobalPersistentAudioPlayerBar(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(horizontal = 12.dp, vertical = 6.dp),
-            shape = RoundedCornerShape(16.dp),
+            shape = RoundedCornerShape(Dimens.r2),
             color = Color(0xFF1F2937), // Dark slate
             tonalElevation = 8.dp,
             shadowElevation = 10.dp
@@ -91,7 +91,7 @@ fun GlobalPersistentAudioPlayerBar(
                         )
                     }
 
-                    Spacer(modifier = Modifier.width(12.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp2))
 
                     Column {
                         Text(
@@ -112,7 +112,7 @@ fun GlobalPersistentAudioPlayerBar(
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                 ) {
                     IconButton(
                         onClick = {

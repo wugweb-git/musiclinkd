@@ -66,8 +66,7 @@ fun UnifiedInputField(
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
             text = label,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Bold,
+            style = Typography.bodyLarge,
             color = BrandTextPrimary,
             modifier = Modifier.padding(bottom = 6.dp)
         )
@@ -79,14 +78,14 @@ fun UnifiedInputField(
                 Text(
                     text = placeholder,
                     color = BrandTextSecondary,
-                    fontSize = 15.sp
+                    style = Typography.bodyLarge
                 ) 
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .testTag(testTag)
                 .height(56.dp),
-            shape = RoundedCornerShape(999.dp),
+            shape = RoundedCornerShape(Dimens.rFull),
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon,
             singleLine = true,
@@ -114,7 +113,7 @@ fun UnifiedInputField(
             Text(
                 text = error,
                 color = Color.Red,
-                fontSize = 12.sp,
+                style = Typography.labelLarge,
                 modifier = Modifier.padding(top = 4.dp, start = 4.dp)
             )
         }

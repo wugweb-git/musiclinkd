@@ -186,7 +186,7 @@ fun ReputationAndReviewsScreenContainer(
                         ) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back", tint = BrandDark)
                         }
-                        Spacer(modifier = Modifier.width(12.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp2))
                         Column {
                             Text(
                                 text = "REPUTATION HUB",
@@ -209,8 +209,7 @@ fun ReputationAndReviewsScreenContainer(
                                     ReputationSubScreen.REPORT_REVIEW -> "Dispute / Report Review"
                                     ReputationSubScreen.PUBLIC_REPUTATION -> "Public Profile Preview widget"
                                 },
-                                fontSize = 15.sp,
-                                fontWeight = FontWeight.ExtraBold,
+                                style = Typography.bodyLarge,
                                 color = BrandDark
                             )
                         }
@@ -240,7 +239,7 @@ fun ReputationAndReviewsScreenContainer(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 10.dp, start = 16.dp, end = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     listOf(
@@ -290,15 +289,15 @@ fun ReputationAndReviewsScreenContainer(
                         .fillMaxWidth()
                         .padding(16.dp),
                     colors = CardDefaults.cardColors(containerColor = BrandDark),
-                    shape = RoundedCornerShape(12.dp)
+                    shape = RoundedCornerShape(Dimens.r2)
                 ) {
                     Row(
-                        modifier = Modifier.padding(16.dp),
+                        modifier = Modifier.padding(Dimens.sp2),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(showSnackbarMessage ?: "", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                        Text("✕", color = BrandAccent, fontSize = 14.sp, fontWeight = FontWeight.Bold, modifier = Modifier.clickable { showSnackbarMessage = null })
+                        Text(showSnackbarMessage ?: "", color = Color.White, style = Typography.bodyLarge)
+                        Text("✕", color = BrandAccent, style = Typography.bodyLarge, modifier = Modifier.clickable { showSnackbarMessage = null })
                     }
                 }
             }
@@ -418,16 +417,16 @@ fun ReputationDashboardScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
     ) {
         // Core Scorecard Card
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = BrandDark),
-            shape = RoundedCornerShape(24.dp)
+            shape = RoundedCornerShape(Dimens.r3)
         ) {
             Column(
-                modifier = Modifier.padding(24.dp),
+                modifier = Modifier.padding(Dimens.sp3),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box(
@@ -443,27 +442,27 @@ fun ReputationDashboardScreen(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Text("4.9", color = Color.White, fontSize = 64.sp, fontWeight = FontWeight.ExtraBold)
-                    Spacer(modifier = Modifier.width(12.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp2))
                     Column {
                         Row {
                             repeat(5) {
                                 Icon(Icons.Default.Star, null, tint = BrandAccent, modifier = Modifier.size(22.dp))
                             }
                         }
-                        Text("out of 5 stars · $reviewsCount reviews", color = Color.White.copy(alpha = 0.7f), fontSize = 12.sp)
+                        Text("out of 5 stars · $reviewsCount reviews", color = Color.White.copy(alpha = 0.7f), style = Typography.labelLarge)
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
                 Divider(color = Color.White.copy(alpha = 0.15f))
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 // Score metrics Row
                 Row(
@@ -471,15 +470,15 @@ fun ReputationDashboardScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text("99.2%", color = Color.White, fontWeight = FontWeight.ExtraBold, fontSize = 16.sp)
+                        Text("99.2%", color = Color.White, style = Typography.bodyLarge)
                         Text("Reliability", color = Color.White.copy(alpha = 0.5f), fontSize = 10.sp)
                     }
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text("98.7%", color = Color.White, fontWeight = FontWeight.ExtraBold, fontSize = 16.sp)
+                        Text("98.7%", color = Color.White, style = Typography.bodyLarge)
                         Text("Recommends", color = Color.White.copy(alpha = 0.5f), fontSize = 10.sp)
                     }
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text("100%", color = BrandAccent, fontWeight = FontWeight.ExtraBold, fontSize = 16.sp)
+                        Text("100%", color = BrandAccent, style = Typography.bodyLarge)
                         Text("Deals Completed", color = Color.White.copy(alpha = 0.5f), fontSize = 10.sp)
                     }
                 }
@@ -501,14 +500,14 @@ fun ReputationDashboardScreen(
                 Card(
                     modifier = Modifier
                         .weight(1f)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
+                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(16.dp)
+                    shape = RoundedCornerShape(Dimens.r2)
                 ) {
                     Column(modifier = Modifier.padding(14.dp)) {
                         Text(title, fontSize = 11.sp, color = BrandSecondaryText, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(count, fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
+                        Spacer(modifier = Modifier.height(Dimens.sp1))
+                        Text(count, style = Typography.bodyLarge, color = BrandDark)
                     }
                 }
             }
@@ -518,9 +517,9 @@ fun ReputationDashboardScreen(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .border(1.dp, BrandPrimary.copy(alpha = 0.2f), RoundedCornerShape(16.dp)),
+                .border(1.dp, BrandPrimary.copy(alpha = 0.2f), RoundedCornerShape(Dimens.r2)),
             colors = CardDefaults.cardColors(containerColor = BrandPrimary.copy(alpha = 0.05f)),
-            shape = RoundedCornerShape(16.dp)
+            shape = RoundedCornerShape(Dimens.r2)
         ) {
             Column(modifier = Modifier.padding(18.dp)) {
                 Text("Need to draft verified client feedback?", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandPrimary)
@@ -540,7 +539,7 @@ fun ReputationDashboardScreen(
         // List of other evaluators
         Text("Evaluate Industry Deliverables", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = BrandDark)
 
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
             listOf(
                 "Completed Project" to "Rate studio collaborators, session musicians and bandmates directly." to ReputationSubScreen.COMPLETED_PROJECT_REVIEW,
                 "Marketplace Gear Transaction" to "Rate equipment packaging, value accuracy, and synth/pedal conditions." to ReputationSubScreen.MARKETPLACE_REVIEW,
@@ -550,9 +549,9 @@ fun ReputationDashboardScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(16.dp))
+                        .clip(RoundedCornerShape(Dimens.r2))
                         .background(Color.White)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(16.dp))
+                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
                         .clickable { onNavigateTo(actionScr) }
                         .padding(14.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -564,9 +563,9 @@ fun ReputationDashboardScreen(
                             .background(BrandAccent.copy(alpha = 0.1f)),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text("⭐", fontSize = 16.sp)
+                        Text("⭐", style = Typography.bodyLarge)
                     }
-                    Spacer(modifier = Modifier.width(12.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp2))
                     Column(modifier = Modifier.weight(1f)) {
                         Text(title, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
                         Text(subtitle, fontSize = 10.5.sp, color = BrandSecondaryText)
@@ -583,7 +582,7 @@ fun ReputationDashboardScreen(
             shape = RoundedCornerShape(99.dp),
             modifier = Modifier.fillMaxWidth().height(48.dp)
         ) {
-            Text("Open Verified Reviews Feed", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Text("Open Verified Reviews Feed", style = Typography.bodyLarge)
         }
 
         OutlinedButton(
@@ -593,7 +592,7 @@ fun ReputationDashboardScreen(
             colors = ButtonDefaults.outlinedButtonColors(contentColor = BrandDark),
             modifier = Modifier.fillMaxWidth().height(48.dp)
         ) {
-            Text("View Rating Trends & Analytics", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Text("View Rating Trends & Analytics", style = Typography.bodyLarge)
         }
     }
 }
@@ -616,7 +615,7 @@ fun ReviewListScreen(
                 .background(Color.White)
                 .border(1.dp, BrandBorder)
                 .padding(vertical = 12.dp, horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
         ) {
             listOf("All", "Projects", "Marketplace", "Studios", "Rentals", "Services").forEach { filter ->
                 val isSelected = activeFilter == filter
@@ -644,7 +643,7 @@ fun ReviewListScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
         ) {
             val filteredReviews = if (activeFilter == "All") {
                 reviews
@@ -663,8 +662,8 @@ fun ReviewListScreen(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text("📂", fontSize = 48.sp)
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Text("No verified reviews under this category yet.", fontSize = 12.sp, color = BrandSecondaryText, textAlign = TextAlign.Center)
+                        Spacer(modifier = Modifier.height(Dimens.sp2))
+                        Text("No verified reviews under this category yet.", style = Typography.labelLarge, color = BrandSecondaryText, textAlign = TextAlign.Center)
                     }
                 }
             } else {
@@ -723,7 +722,7 @@ fun ReviewDetailScreen(
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(24.dp),
+            shape = RoundedCornerShape(Dimens.r3),
             border = BorderStroke(1.dp, BrandBorder)
         ) {
             Column(modifier = Modifier.padding(20.dp)) {
@@ -735,12 +734,12 @@ fun ReviewDetailScreen(
                             .background(BrandDark),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(review.reviewerName.take(1), color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                        Text(review.reviewerName.take(1), color = Color.White, style = Typography.bodyLarge)
                     }
-                    Spacer(modifier = Modifier.width(12.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp2))
                     Column {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(review.reviewerName, fontWeight = FontWeight.ExtraBold, fontSize = 15.sp, color = BrandDark)
+                            Text(review.reviewerName, style = Typography.bodyLarge, color = BrandDark)
                             Spacer(modifier = Modifier.width(6.dp))
                             Icon(Icons.Default.Verified, "Verified", tint = BrandAccent, modifier = Modifier.size(16.dp))
                         }
@@ -758,7 +757,7 @@ fun ReviewDetailScreen(
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(review.reviewText, fontSize = 13.sp, color = BrandDark, lineHeight = 18.sp)
                 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
                 Text(review.projectContext, fontSize = 11.sp, color = BrandPrimary, fontWeight = FontWeight.ExtraBold)
                 Text("Verified Secure Transaction · Approved: ${review.date}", fontSize = 10.sp, color = BrandSecondaryText, modifier = Modifier.padding(top = 4.dp))
             }
@@ -770,10 +769,10 @@ fun ReviewDetailScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = BrandDark),
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(Dimens.r2)
             ) {
                 Row(
-                    modifier = Modifier.padding(16.dp),
+                    modifier = Modifier.padding(Dimens.sp2),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(
@@ -800,9 +799,9 @@ fun ReviewDetailScreen(
                             tint = Color.White
                         )
                     }
-                    Spacer(modifier = Modifier.width(12.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp2))
                     Column {
-                        Text(review.audioTitle, color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Text(review.audioTitle, color = Color.White, style = Typography.bodyLarge)
                         Text("Project milestone audio release", color = Color.White.copy(alpha = 0.5f), fontSize = 10.sp)
                     }
                 }
@@ -815,12 +814,12 @@ fun ReviewDetailScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(Dimens.r2),
                 border = BorderStroke(1.dp, BrandBorder)
             ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text("Your Business Reply:", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandPrimary)
-                    Text("\"${review.businessReplyText}\"", fontSize = 12.sp, color = BrandDark, modifier = Modifier.padding(top = 6.dp))
+                Column(modifier = Modifier.padding(Dimens.sp2)) {
+                    Text("Your Business Reply:", style = Typography.bodyLarge, color = BrandPrimary)
+                    Text("\"${review.businessReplyText}\"", style = Typography.labelLarge, color = BrandDark, modifier = Modifier.padding(top = 6.dp))
                 }
             }
         }
@@ -871,15 +870,15 @@ fun WriteReviewScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
     ) {
-        Text("Verified Transaction Scorecard", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
+        Text("Verified Transaction Scorecard", style = Typography.bodyLarge, color = BrandDark)
         
         // Large Overall Star selector
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(20.dp),
+            shape = RoundedCornerShape(Dimens.r3),
             border = BorderStroke(1.dp, BrandBorder)
         ) {
             Column(
@@ -887,7 +886,7 @@ fun WriteReviewScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text("Overall Rating Score", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp1))
                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     for (i in 1..5) {
                         Icon(
@@ -917,7 +916,7 @@ fun WriteReviewScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(Dimens.r2),
                 border = BorderStroke(1.dp, BrandBorder)
             ) {
                 Row(
@@ -927,7 +926,7 @@ fun WriteReviewScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(label, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandDark)
+                    Text(label, style = Typography.bodyLarge, color = BrandDark)
                     Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                         for (i in 1..5) {
                             Icon(
@@ -948,9 +947,9 @@ fun WriteReviewScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(16.dp))
+                .clip(RoundedCornerShape(Dimens.r2))
                 .background(Color.White)
-                .border(1.dp, BrandBorder, RoundedCornerShape(16.dp))
+                .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
                 .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -975,7 +974,7 @@ fun WriteReviewScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(110.dp),
-            shape = RoundedCornerShape(16.dp),
+            shape = RoundedCornerShape(Dimens.r2),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = BrandPrimary,
                 unfocusedBorderColor = BrandBorder
@@ -1003,20 +1002,20 @@ fun RatingBreakdownScreen() {
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
     ) {
-        Text("Acoustic Rating Analytics", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
+        Text("Acoustic Rating Analytics", style = Typography.bodyLarge, color = BrandDark)
 
         // Custom drawn Rating Distribution bars
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(20.dp),
+            shape = RoundedCornerShape(Dimens.r3),
             border = BorderStroke(1.dp, BrandBorder)
         ) {
             Column(modifier = Modifier.padding(18.dp)) {
                 Text("Star Spread Statistics", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 listOf(
                     "5 ★" to 0.88f to "88%",
@@ -1054,7 +1053,7 @@ fun RatingBreakdownScreen() {
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = BrandDark),
-            shape = RoundedCornerShape(20.dp)
+            shape = RoundedCornerShape(Dimens.r3)
         ) {
             Column(modifier = Modifier.padding(18.dp)) {
                 Row(
@@ -1078,7 +1077,7 @@ fun RatingBreakdownScreen() {
                             modifier = Modifier.fillMaxHeight()
                         ) {
                             Text("$count", color = BrandAccent, fontSize = 9.sp, fontWeight = FontWeight.Bold)
-                            Spacer(modifier = Modifier.height(4.dp))
+                            Spacer(modifier = Modifier.height(Dimens.sp1))
                             Box(
                                 modifier = Modifier
                                     .width(16.dp)
@@ -1112,18 +1111,18 @@ fun CompletedProjectReviewScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
     ) {
-        Text("Milestone Evaluation Screen", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
+        Text("Milestone Evaluation Screen", style = Typography.bodyLarge, color = BrandDark)
 
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(20.dp),
+            shape = RoundedCornerShape(Dimens.r3),
             border = BorderStroke(1.dp, BrandBorder)
         ) {
             Column(modifier = Modifier.padding(18.dp)) {
-                Text("Project: Neon Dreamscape Single", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
+                Text("Project: Neon Dreamscape Single", style = Typography.bodyLarge, color = BrandDark)
                 Text("Collaborators: Rhea Kapoor (Producer)", fontSize = 11.sp, color = BrandSecondaryText, modifier = Modifier.padding(top = 4.dp))
                 Text("Approved Deliverables: 5 HQ WAV Stems, Direct Mix", fontSize = 11.sp, color = BrandSecondaryText)
             }
@@ -1151,7 +1150,7 @@ fun CompletedProjectReviewScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp),
-            shape = RoundedCornerShape(16.dp)
+            shape = RoundedCornerShape(Dimens.r2)
         )
 
         Button(
@@ -1181,19 +1180,19 @@ fun MarketplaceReviewScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
     ) {
-        Text("Marketplace Gear Review", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
+        Text("Marketplace Gear Review", style = Typography.bodyLarge, color = BrandDark)
 
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(16.dp),
+            shape = RoundedCornerShape(Dimens.r2),
             border = BorderStroke(1.dp, BrandBorder)
         ) {
             Row(modifier = Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text("🎹", fontSize = 28.sp)
-                Spacer(modifier = Modifier.width(12.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp2))
                 Column {
                     Text("Vintage Roland Juno-106 Synthesizer", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
                     Text("Seller: Siddharth Sen (Verified Gearhead)", fontSize = 10.5.sp, color = BrandSecondaryText)
@@ -1202,7 +1201,7 @@ fun MarketplaceReviewScreen(
         }
 
         // Ratings Sliders
-        Text("Condition Accuracy", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandDark)
+        Text("Condition Accuracy", style = Typography.bodyLarge, color = BrandDark)
         Row {
             for (i in 1..5) {
                 Icon(
@@ -1214,7 +1213,7 @@ fun MarketplaceReviewScreen(
             }
         }
 
-        Text("Packaging Quality", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandDark)
+        Text("Packaging Quality", style = Typography.bodyLarge, color = BrandDark)
         Row {
             for (i in 1..5) {
                 Icon(
@@ -1234,7 +1233,7 @@ fun MarketplaceReviewScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp),
-            shape = RoundedCornerShape(16.dp)
+            shape = RoundedCornerShape(Dimens.r2)
         )
 
         Button(
@@ -1264,19 +1263,19 @@ fun StudioReviewScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
     ) {
-        Text("Studio Facility Review", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
+        Text("Studio Facility Review", style = Typography.bodyLarge, color = BrandDark)
 
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(16.dp),
+            shape = RoundedCornerShape(Dimens.r2),
             border = BorderStroke(1.dp, BrandBorder)
         ) {
             Row(modifier = Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text("🏢", fontSize = 28.sp)
-                Spacer(modifier = Modifier.width(12.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp2))
                 Column {
                     Text("Abbey Road Dolby Atmos Room", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
                     Text("London, UK · Verified Commercial Studio", fontSize = 10.5.sp, color = BrandSecondaryText)
@@ -1284,7 +1283,7 @@ fun StudioReviewScreen(
             }
         }
 
-        Text("Acoustics & Isolation Suite", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandDark)
+        Text("Acoustics & Isolation Suite", style = Typography.bodyLarge, color = BrandDark)
         Row {
             for (i in 1..5) {
                 Icon(
@@ -1296,7 +1295,7 @@ fun StudioReviewScreen(
             }
         }
 
-        Text("Facility Cleanliness & Amenities", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandDark)
+        Text("Facility Cleanliness & Amenities", style = Typography.bodyLarge, color = BrandDark)
         Row {
             for (i in 1..5) {
                 Icon(
@@ -1316,7 +1315,7 @@ fun StudioReviewScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp),
-            shape = RoundedCornerShape(16.dp)
+            shape = RoundedCornerShape(Dimens.r2)
         )
 
         Button(
@@ -1345,18 +1344,18 @@ fun BusinessResponseScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
     ) {
-        Text("Draft Owner Response", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
+        Text("Draft Owner Response", style = Typography.bodyLarge, color = BrandDark)
 
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(16.dp),
+            shape = RoundedCornerShape(Dimens.r2),
             border = BorderStroke(1.dp, BrandBorder)
         ) {
             Column(modifier = Modifier.padding(14.dp)) {
-                Text(review.reviewerName, fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 12.sp)
+                Text(review.reviewerName, fontWeight = FontWeight.Bold, color = BrandDark, style = Typography.labelLarge)
                 Text("\"${review.reviewText}\"", fontSize = 11.5.sp, color = BrandSecondaryText, modifier = Modifier.padding(top = 4.dp))
             }
         }
@@ -1369,7 +1368,7 @@ fun BusinessResponseScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(120.dp),
-            shape = RoundedCornerShape(16.dp)
+            shape = RoundedCornerShape(Dimens.r2)
         )
 
         Button(
@@ -1398,19 +1397,19 @@ fun ReportReviewScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
     ) {
-        Text("Dispute Verification System", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
-        Text("We investigate disputed reviews through contract milestone verification. Please specify your claim reason:", fontSize = 12.sp, color = BrandSecondaryText)
+        Text("Dispute Verification System", style = Typography.bodyLarge, color = BrandDark)
+        Text("We investigate disputed reviews through contract milestone verification. Please specify your claim reason:", style = Typography.labelLarge, color = BrandSecondaryText)
 
         reasons.forEach { reason ->
             val isSelected = selectedReason == reason
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(RoundedCornerShape(Dimens.r2))
                     .background(if (isSelected) BrandPrimary.copy(alpha = 0.08f) else Color.White)
-                    .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(12.dp))
+                    .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(Dimens.r2))
                     .clickable { selectedReason = reason }
                     .padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically,
@@ -1449,15 +1448,15 @@ fun PublicReputationWidget(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
     ) {
-        Text("Profile Reputation Display", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
+        Text("Profile Reputation Display", style = Typography.bodyLarge, color = BrandDark)
         Text("This component renders directly on public portfolios and shared business profiles.", fontSize = 11.sp, color = BrandSecondaryText)
 
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(24.dp),
+            shape = RoundedCornerShape(Dimens.r3),
             border = BorderStroke(1.dp, BrandBorder)
         ) {
             Column(modifier = Modifier.padding(20.dp)) {
@@ -1470,7 +1469,7 @@ fun PublicReputationWidget(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text("4.9", fontWeight = FontWeight.ExtraBold, fontSize = 28.sp, color = BrandDark)
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("★", color = BrandAccent, fontSize = 24.sp)
+                            Text("★", color = BrandAccent, style = Typography.headlineLarge)
                         }
                         Text("Based on ${reviews.size} verified projects", fontSize = 11.sp, color = BrandSecondaryText)
                     }
@@ -1500,7 +1499,7 @@ fun PublicReputationWidget(
                         color = BrandPrimary,
                         strokeWidth = 2.dp
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     Text(
                         text = "Calculating network response metrics...",
                         fontSize = 11.sp,
@@ -1516,9 +1515,9 @@ fun PublicReputationWidget(
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = BrandDark),
-            shape = RoundedCornerShape(16.dp)
+            shape = RoundedCornerShape(Dimens.r2)
         ) {
-            Column(modifier = Modifier.padding(16.dp)) {
+            Column(modifier = Modifier.padding(Dimens.sp2)) {
                 Text(
                     "\"The raw vocals Vedanshu recorded are exceptionally clean. The Kemper profile work was masterfully done.\"",
                     color = Color.White,

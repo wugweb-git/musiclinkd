@@ -93,7 +93,7 @@ fun VenueProfileScreen(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(
@@ -125,7 +125,7 @@ fun VenueProfileScreen(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(12.dp)
-                    .background(BrandSuccess, RoundedCornerShape(8.dp))
+                    .background(BrandSuccess, RoundedCornerShape(Dimens.r1))
                     .padding(horizontal = 8.dp, vertical = 2.dp)
             ) {
                 Text(
@@ -137,7 +137,7 @@ fun VenueProfileScreen(
             }
         }
 
-        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(modifier = Modifier.padding(Dimens.sp2), verticalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(venue.name, fontSize = 22.sp, fontWeight = FontWeight.Bold, color = BrandText)
                 if (venue.isVerified) {
@@ -151,33 +151,33 @@ fun VenueProfileScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("Concert Hall & Soundstage • ${venue.location}", fontSize = 12.sp, color = BrandSecondary, fontWeight = FontWeight.Bold)
+                Text("Concert Hall & Soundstage • ${venue.location}", style = Typography.labelLarge, color = BrandSecondary, fontWeight = FontWeight.Bold)
                 PersonaTypeBadge(venue.type)
             }
 
-            Text(venue.bio.ifEmpty { "Premise acoustic hall engineered for premium audio clarity, containing a full line-array PA system, soundstage, backstage greenroom, and dedicated sound desk." }, fontSize = 12.sp, color = BrandText, lineHeight = 18.sp)
+            Text(venue.bio.ifEmpty { "Premise acoustic hall engineered for premium audio clarity, containing a full line-array PA system, soundstage, backstage greenroom, and dedicated sound desk." }, style = Typography.labelLarge, color = BrandText, lineHeight = 18.sp)
 
-            Text("Venue Specifications & Capability", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+            Text("Venue Specifications & Capability", style = Typography.bodyLarge, color = BrandText)
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(Dimens.r2),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFF9FAFB)),
                 border = BorderStroke(1.dp, BrandBorder)
             ) {
-                Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Default.People, "Capacity", tint = BrandPrimary, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
                         Text("Capacity: 400-500 standing (Indoor & Amphitheater)", fontSize = 11.sp, color = BrandText, fontWeight = FontWeight.Bold)
                     }
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Default.LocationOn, "Location", tint = BrandPrimary, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
                         Text("HQ Address: ${venue.area}, ${venue.location}", fontSize = 11.sp, color = BrandText)
                     }
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Default.ListAlt, "Inclusions", tint = BrandPrimary, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
                         Text("Inclusions: Backline included, Greenroom, FOH Sound Desk", fontSize = 11.sp, color = BrandText)
                     }
                 }
@@ -185,29 +185,29 @@ fun VenueProfileScreen(
 
             HorizontalDivider()
 
-            Text("Upcoming Concerts & Festival Calendar", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+            Text("Upcoming Concerts & Festival Calendar", style = Typography.bodyLarge, color = BrandText)
             listOf(
                 Triple("Indie Wave Festival", "28 June 2026", "Featuring SwarSymphony"),
                 Triple("Acoustic Sunset Series", "14 July 2026", "Featuring Neha Deshmukh")
             ).forEach { (eventTitle, date, artistInfo) ->
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(Dimens.r2),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
                     border = BorderStroke(1.dp, BrandBorder)
                 ) {
                     Row(
-                        modifier = Modifier.padding(12.dp),
+                        modifier = Modifier.padding(Dimens.sp2),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Column {
-                            Text(eventTitle, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandText)
+                            Text(eventTitle, style = Typography.bodyLarge, color = BrandText)
                             Text(artistInfo, fontSize = 10.sp, color = BrandMuted)
                         }
                         Box(
                             modifier = Modifier
-                                .background(BrandPrimary.copy(alpha = 0.1f), RoundedCornerShape(8.dp))
+                                .background(BrandPrimary.copy(alpha = 0.1f), RoundedCornerShape(Dimens.r1))
                                 .padding(horizontal = 8.dp, vertical = 4.dp)
                         ) {
                             Text(date, fontSize = 9.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)
@@ -218,14 +218,14 @@ fun VenueProfileScreen(
 
             HorizontalDivider()
 
-            Text("Availability Calendar Preview", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+            Text("Availability Calendar Preview", style = Typography.bodyLarge, color = BrandText)
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(Dimens.r2),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 border = BorderStroke(1.dp, BrandBorder)
             ) {
-                Column(modifier = Modifier.padding(12.dp)) {
+                Column(modifier = Modifier.padding(Dimens.sp2)) {
                     Text("June 2026", fontWeight = FontWeight.Bold, fontSize = 11.sp)
                     Spacer(modifier = Modifier.height(6.dp))
                     Row(
@@ -239,11 +239,11 @@ fun VenueProfileScreen(
                                 modifier = Modifier
                                     .background(
                                         if (isFree) BrandSuccess.copy(alpha = 0.1f) else Color.Red.copy(alpha = 0.1f),
-                                        RoundedCornerShape(8.dp)
+                                        RoundedCornerShape(Dimens.r1)
                                     )
                                     .padding(8.dp)
                             ) {
-                                Text(day.split(" ")[0], fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandText)
+                                Text(day.split(" ")[0], style = Typography.bodyLarge, color = BrandText)
                                 Text(day.split(" ")[1], fontSize = 9.sp, color = BrandMuted)
                                 Text(if (isFree) "Free" else "Booked", fontSize = 8.sp, color = if (isFree) BrandSuccess else Color.Red, fontWeight = FontWeight.Bold)
                             }
@@ -259,7 +259,7 @@ fun VenueProfileScreen(
                     .height(50.dp)
                     .testTag("book_venue_cta"),
                 colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(Dimens.r2)
             ) {
                 Text("Reserve Venue (₹75,000/day)", fontWeight = FontWeight.Bold)
             }
@@ -284,21 +284,21 @@ fun VenueProfileScreen(
             ) {
                 Column {
                     Text("Venue Day Rate", fontSize = 11.sp, color = BrandMuted, fontWeight = FontWeight.Medium)
-                    Text(venue.pricing.ifEmpty { "₹75,000 / day" }, fontSize = 18.sp, fontWeight = FontWeight.Black, color = BrandText)
+                    Text(venue.pricing.ifEmpty { "₹75,000 / day" }, style = Typography.bodyLarge, color = BrandText)
                 }
 
                 Button(
                     onClick = onBookClick,
                     colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                    shape = RoundedCornerShape(16.dp),
+                    shape = RoundedCornerShape(Dimens.r2),
                     contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp)
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
                         Icon(Icons.Default.FlashOn, contentDescription = null, modifier = Modifier.size(18.dp))
-                        Text("Book Venue Space", fontSize = 15.sp, fontWeight = FontWeight.Bold)
+                        Text("Book Venue Space", style = Typography.bodyLarge)
                     }
                 }
             }

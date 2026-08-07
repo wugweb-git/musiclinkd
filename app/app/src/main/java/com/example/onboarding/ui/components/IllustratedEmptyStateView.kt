@@ -62,7 +62,7 @@ fun IllustratedEmptyStateView(
 ) {
     Card(
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         border = BorderStroke(1.dp, BrandBorder),
         modifier = modifier
             .fillMaxWidth()
@@ -109,7 +109,7 @@ fun IllustratedEmptyStateView(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             // Badge Pill
             Surface(
@@ -126,18 +126,17 @@ fun IllustratedEmptyStateView(
                 )
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             // Title
             Text(
                 text = title,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
+                style = Typography.bodyLarge,
                 color = BrandTextPrimary,
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
 
             // Description
             Text(
@@ -167,12 +166,11 @@ fun IllustratedEmptyStateView(
             }
 
             if (secondaryActionLabel != null && onSecondaryAction != null) {
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp1))
                 TextButton(onClick = onSecondaryAction) {
                     Text(
                         text = secondaryActionLabel,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Medium,
+                        style = Typography.bodyLarge,
                         color = BrandTextSecondary
                     )
                 }

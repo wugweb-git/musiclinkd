@@ -114,7 +114,7 @@ fun RecommendedMatchesScreen(
             
             Text(
                 text = "Discover Matcher",
-                style = MaterialTheme.typography.titleMedium.copy(
+                style = Typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold,
                     color = Color.White,
                     letterSpacing = (-0.5).sp
@@ -230,7 +230,7 @@ fun RecommendedMatchesScreen(
                                 )
                             }
                             
-                            Spacer(modifier = Modifier.height(16.dp))
+                            Spacer(modifier = Modifier.height(Dimens.sp2))
                             
                             // Live Interactive Audio Waveform overlay right in the center
                             Box(
@@ -238,15 +238,15 @@ fun RecommendedMatchesScreen(
                                     .fillMaxWidth()
                                     .padding(horizontal = 40.dp)
                                     .height(60.dp)
-                                    .background(Color.Black.copy(alpha = 0.3f), RoundedCornerShape(20.dp))
-                                    .border(1.dp, Color.White.copy(alpha = 0.08f), RoundedCornerShape(20.dp))
+                                    .background(Color.Black.copy(alpha = 0.3f), RoundedCornerShape(Dimens.r3))
+                                    .border(1.dp, Color.White.copy(alpha = 0.08f), RoundedCornerShape(Dimens.r3))
                                     .clickable { audioState = if (audioState == 2) 0 else 1 }
                                     .padding(horizontal = 16.dp),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
                                 ) {
                                     if (audioState == 1) {
                                         CircularProgressIndicator(
@@ -268,7 +268,7 @@ fun RecommendedMatchesScreen(
                                     } else if (audioState == 1) {
                                         Text(
                                             text = "Buffering Preview...",
-                                            style = MaterialTheme.typography.bodySmall.copy(
+                                            style = Typography.bodyLarge.copy(
                                                 color = Color.White.copy(alpha = 0.8f),
                                                 fontWeight = FontWeight.Bold
                                             )
@@ -276,7 +276,7 @@ fun RecommendedMatchesScreen(
                                     } else {
                                         Text(
                                             text = "Tap to Stream Preview track",
-                                            style = MaterialTheme.typography.bodySmall.copy(
+                                            style = Typography.bodyLarge.copy(
                                                 color = Color.White.copy(alpha = 0.6f),
                                                 fontWeight = FontWeight.Medium
                                             )
@@ -294,15 +294,14 @@ fun RecommendedMatchesScreen(
                                 .align(Alignment.TopStart)
                                 .padding(24.dp)
                                 .graphicsLayer { rotationZ = -12f }
-                                .background(Color(0xFFEA4C89), RoundedCornerShape(12.dp))
-                                .border(2.dp, Color.White, RoundedCornerShape(12.dp))
+                                .background(Color(0xFFEA4C89), RoundedCornerShape(Dimens.r2))
+                                .border(2.dp, Color.White, RoundedCornerShape(Dimens.r2))
                                 .padding(horizontal = 16.dp, vertical = 8.dp)
                         ) {
                             Text(
                                 text = "INTERESTED",
                                 color = Color.White,
-                                fontWeight = FontWeight.Black,
-                                fontSize = 16.sp,
+                                style = Typography.bodyLarge,
                                 letterSpacing = 1.sp
                             )
                         }
@@ -312,15 +311,14 @@ fun RecommendedMatchesScreen(
                                 .align(Alignment.TopEnd)
                                 .padding(24.dp)
                                 .graphicsLayer { rotationZ = 12f }
-                                .background(Color(0xFF676B7B), RoundedCornerShape(12.dp))
-                                .border(2.dp, Color.White, RoundedCornerShape(12.dp))
+                                .background(Color(0xFF676B7B), RoundedCornerShape(Dimens.r2))
+                                .border(2.dp, Color.White, RoundedCornerShape(Dimens.r2))
                                 .padding(horizontal = 16.dp, vertical = 8.dp)
                         ) {
                             Text(
                                 text = "PASS",
                                 color = Color.White,
-                                fontWeight = FontWeight.Black,
-                                fontSize = 16.sp,
+                                style = Typography.bodyLarge,
                                 letterSpacing = 1.sp
                             )
                         }
@@ -332,7 +330,7 @@ fun RecommendedMatchesScreen(
                             .align(Alignment.BottomCenter)
                             .fillMaxWidth()
                             .padding(24.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                     ) {
                         // Match Badge Pill
                         Row(
@@ -362,7 +360,7 @@ fun RecommendedMatchesScreen(
                         // Complementary role reason badge
                         Box(
                             modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
+                                .clip(RoundedCornerShape(Dimens.r1))
                                 .background(Color.White.copy(alpha = 0.1f))
                                 .padding(horizontal = 10.dp, vertical = 4.dp)
                         ) {
@@ -381,7 +379,7 @@ fun RecommendedMatchesScreen(
                         ) {
                             Text(
                                 text = item.name,
-                                style = MaterialTheme.typography.headlineSmall.copy(
+                                style = Typography.bodyLarge.copy(
                                     fontWeight = FontWeight.ExtraBold,
                                     color = Color.White,
                                     letterSpacing = (-0.5).sp
@@ -404,7 +402,7 @@ fun RecommendedMatchesScreen(
                         // SubRole and local area tags
                         Text(
                             text = "${item.subRole} • ${item.location}",
-                            style = MaterialTheme.typography.bodyMedium.copy(
+                            style = Typography.bodyLarge.copy(
                                 color = Color(0xFFB8BAC7),
                                 fontWeight = FontWeight.SemiBold
                             )
@@ -413,7 +411,7 @@ fun RecommendedMatchesScreen(
                         // 2-Line Strict Bio Text limitation
                         Text(
                             text = item.bio,
-                            style = MaterialTheme.typography.bodySmall.copy(
+                            style = Typography.bodyLarge.copy(
                                 color = Color(0xFF8E91A1),
                                 lineHeight = 18.sp
                             ),
@@ -424,7 +422,7 @@ fun RecommendedMatchesScreen(
                         // Match Badges chip row
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                         ) {
                             item.genres.take(3).forEach { genre ->
                                 Box(
@@ -435,7 +433,7 @@ fun RecommendedMatchesScreen(
                                 ) {
                                     Text(
                                         text = genre,
-                                        style = MaterialTheme.typography.labelSmall.copy(
+                                        style = Typography.bodyLarge.copy(
                                             color = Color.White,
                                             fontWeight = FontWeight.Bold,
                                             fontSize = 10.sp
@@ -445,7 +443,7 @@ fun RecommendedMatchesScreen(
                             }
                         }
 
-                        Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(Dimens.sp1))
 
                         // Interaction Buttons Row
                         Row(
@@ -511,6 +509,6 @@ fun RecommendedMatchesScreen(
             }
         }
         
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp2))
     }
 }

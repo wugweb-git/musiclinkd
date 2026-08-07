@@ -58,7 +58,7 @@ fun StagePositionPill(label: String, value: String) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .background(Color.White.copy(alpha = 0.05f), RoundedCornerShape(8.dp))
+            .background(Color.White.copy(alpha = 0.05f), RoundedCornerShape(Dimens.r1))
             .padding(8.dp)
     ) {
         Text(label, color = Color.White, fontSize = 9.sp, fontWeight = FontWeight.Bold)

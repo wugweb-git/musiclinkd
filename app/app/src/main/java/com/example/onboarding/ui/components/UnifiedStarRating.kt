@@ -66,8 +66,7 @@ fun UnifiedStarRating(
         Spacer(modifier = Modifier.width(3.dp))
         Text(
             text = String.format("%.1f", rating),
-            fontSize = 12.sp,
-            fontWeight = FontWeight.Bold,
+            style = Typography.bodyLarge,
             color = BrandTextPrimary
         )
         if (reviewCount != null) {

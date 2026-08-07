@@ -102,7 +102,7 @@ fun ArtistCard(
                 indication = androidx.compose.foundation.LocalIndication.current,
                 onClick = onProfileClick
             ),
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         colors = CardDefaults.cardColors(
             containerColor = if (isHovered) Color.White.copy(alpha = 0.96f) else Color.White
         ),
@@ -164,7 +164,7 @@ fun ArtistCard(
 
                 Row(
                     modifier = Modifier
-                        .background(tagBgColor, RoundedCornerShape(999.dp))
+                        .background(tagBgColor, RoundedCornerShape(Dimens.rFull))
                         .padding(horizontal = 10.dp, vertical = 5.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(5.dp)
@@ -202,15 +202,14 @@ fun ArtistCard(
             ) {
                 Text(
                     text = profile.name,
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 18.sp,
+                    style = Typography.bodyLarge,
                     color = BrandText,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f, fill = false)
                 )
                 if (profile.isVerified) {
-                    Spacer(modifier = Modifier.width(4.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     Icon(
                         imageVector = Icons.Default.Verified,
                         contentDescription = "Verified",
@@ -220,14 +219,14 @@ fun ArtistCard(
                 }
             }
 
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 val instEmoji = getInstrumentEmoji(profile.subRole, profile.category)
-                Text(instEmoji, fontSize = 14.sp)
+                Text(instEmoji, style = Typography.labelLarge)
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
                     text = profile.subRole,
@@ -237,7 +236,7 @@ fun ArtistCard(
                 )
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -249,16 +248,16 @@ fun ArtistCard(
                     tint = BrandMuted,
                     modifier = Modifier.size(14.dp)
                 )
-                Spacer(modifier = Modifier.width(4.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp1))
                 Text(
                     text = "${profile.area} • ${profile.location}",
-                    fontSize = 12.sp,
+                    style = Typography.labelLarge,
                     color = BrandMuted,
                     fontWeight = FontWeight.Medium
                 )
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -267,8 +266,8 @@ fun ArtistCard(
                 profile.genres.take(2).forEach { genre ->
                     Box(
                         modifier = Modifier
-                            .background(Color(0xFFF3F3F6), RoundedCornerShape(999.dp))
-                            .border(1.dp, Color(0xFFECECF1), RoundedCornerShape(999.dp))
+                            .background(Color(0xFFF3F3F6), RoundedCornerShape(Dimens.rFull))
+                            .border(1.dp, Color(0xFFECECF1), RoundedCornerShape(Dimens.rFull))
                             .padding(horizontal = 10.dp, vertical = 4.dp)
                     ) {
                         Text(
@@ -281,7 +280,7 @@ fun ArtistCard(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             HorizontalDivider(color = Color(0xFFECECF1))
 
@@ -307,12 +306,12 @@ fun ArtistCard(
                         }
                         .background(
                             if (isAudioPlaying) Color(0xFFEA4C89).copy(alpha = 0.1f) else Color(0xFFF3F3F6),
-                            RoundedCornerShape(999.dp)
+                            RoundedCornerShape(Dimens.rFull)
                         )
                         .border(
                             1.dp,
                             if (isAudioPlaying) Color(0xFFEA4C89).copy(alpha = 0.3f) else Color(0xFFECECF1),
-                            RoundedCornerShape(999.dp)
+                            RoundedCornerShape(Dimens.rFull)
                         )
                         .clickable(
                             interactionSource = audioInteractionSource,
@@ -379,7 +378,7 @@ fun ArtistCard(
                         containerColor = Color(0xFF0D0B26),
                         contentColor = Color.White
                     ),
-                    shape = RoundedCornerShape(999.dp),
+                    shape = RoundedCornerShape(Dimens.rFull),
                     contentPadding = PaddingValues(horizontal = 16.dp)
                 ) {
                     Text(

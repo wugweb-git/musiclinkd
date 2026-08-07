@@ -57,8 +57,7 @@ import com.example.onboarding.ui.components.*
 fun FilterSectionHeader(title: String) {
     Text(
         text = title,
-        fontWeight = FontWeight.Bold,
-        fontSize = 12.sp,
+        style = Typography.bodyLarge,
         color = BrandSecondary,
         modifier = Modifier.padding(vertical = 4.dp)
     )

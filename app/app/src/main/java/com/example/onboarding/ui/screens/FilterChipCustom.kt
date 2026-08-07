@@ -57,7 +57,7 @@ import com.example.onboarding.ui.components.*
 fun FilterChipCustom(label: String, isSelected: Boolean, onClick: () -> Unit) {
     Box(
         modifier = Modifier
-            .clip(RoundedCornerShape(8.dp))
+            .clip(RoundedCornerShape(Dimens.r1))
             .background(if (isSelected) BrandPrimary else BrandBorder.copy(alpha = 0.5f))
             .clickable { onClick() }
             .padding(horizontal = 12.dp, vertical = 6.dp)

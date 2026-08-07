@@ -59,7 +59,7 @@ fun HomeFeatureCard(profile: DiscoverProfile, onClick: () -> Unit) {
         modifier = Modifier
             .width(220.dp)
             .clickable { onClick() },
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(Dimens.r2),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         border = BorderStroke(1.dp, BrandBorder)
     ) {
@@ -101,7 +101,7 @@ fun HomeFeatureCard(profile: DiscoverProfile, onClick: () -> Unit) {
                     modifier = Modifier
                         .align(Alignment.BottomStart)
                         .padding(8.dp)
-                        .background(Color.Black.copy(alpha = 0.6f), RoundedCornerShape(12.dp))
+                        .background(Color.Black.copy(alpha = 0.6f), RoundedCornerShape(Dimens.r2))
                         .padding(horizontal = 6.dp, vertical = 2.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -111,11 +111,10 @@ fun HomeFeatureCard(profile: DiscoverProfile, onClick: () -> Unit) {
                 }
             }
 
-            Column(modifier = Modifier.padding(12.dp)) {
+            Column(modifier = Modifier.padding(Dimens.sp2)) {
                 Text(
                     text = profile.name,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 14.sp,
+                    style = Typography.bodyLarge,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     color = BrandText
@@ -125,8 +124,8 @@ fun HomeFeatureCard(profile: DiscoverProfile, onClick: () -> Unit) {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     val inst = getInstrumentEmoji(profile.subRole, profile.category)
-                    Text(inst, fontSize = 12.sp)
-                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(inst, style = Typography.labelLarge)
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     Text(
                         text = profile.subRole,
                         fontSize = 11.sp,
@@ -137,14 +136,14 @@ fun HomeFeatureCard(profile: DiscoverProfile, onClick: () -> Unit) {
                     )
                 }
                 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp1))
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Default.LocationOn, "Location", tint = BrandMuted, modifier = Modifier.size(11.dp))
                     Spacer(modifier = Modifier.width(2.dp))
                     Text(profile.location, fontSize = 10.sp, color = BrandMuted)
                 }
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp1))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
@@ -152,7 +151,7 @@ fun HomeFeatureCard(profile: DiscoverProfile, onClick: () -> Unit) {
                     profile.genres.take(2).forEach { genre ->
                         Box(
                             modifier = Modifier
-                                .background(BrandPrimary.copy(alpha = 0.08f), RoundedCornerShape(4.dp))
+                                .background(BrandPrimary.copy(alpha = 0.08f), RoundedCornerShape(Dimens.r1))
                                 .padding(horizontal = 6.dp, vertical = 2.dp)
                         ) {
                             Text(genre, fontSize = 8.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)

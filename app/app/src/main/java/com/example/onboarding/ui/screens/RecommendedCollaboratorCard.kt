@@ -68,7 +68,7 @@ fun RecommendedCollaboratorCard(
             .width(280.dp)
             .clickable { onProfileClick(profile) }
             .testTag("recommended_collaborator_card_${profile.id}"),
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         border = BorderStroke(1.dp, BrandBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
@@ -96,7 +96,7 @@ fun RecommendedCollaboratorCard(
                 )
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
@@ -120,19 +120,18 @@ fun RecommendedCollaboratorCard(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = profile.name,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp,
+                            style = Typography.bodyLarge,
                             color = BrandText,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
                         if (profile.isVerified) {
-                            Spacer(modifier = Modifier.width(4.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
                             Icon(Icons.Default.Verified, "Verified", tint = BrandPrimary, modifier = Modifier.size(14.dp))
                         }
                     }
 
-                    Text(profile.subRole, fontSize = 12.sp, color = BrandSecondary, fontWeight = FontWeight.SemiBold)
+                    Text(profile.subRole, style = Typography.labelLarge, color = BrandSecondary, fontWeight = FontWeight.SemiBold)
 
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Default.Star, "Rating", tint = Color(0xFFFFB800), modifier = Modifier.size(12.dp))
@@ -150,7 +149,7 @@ fun RecommendedCollaboratorCard(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(8.dp))
+                    .clip(RoundedCornerShape(Dimens.r1))
                     .background(BrandPrimary.copy(alpha = 0.08f))
                     .padding(horizontal = 8.dp, vertical = 6.dp)
             ) {
@@ -191,11 +190,11 @@ fun RecommendedCollaboratorCard(
                 )
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
             ) {
                 Button(
                     onClick = { onHireClick(profile) },
@@ -207,7 +206,7 @@ fun RecommendedCollaboratorCard(
                     contentPadding = PaddingValues(horizontal = 8.dp)
                 ) {
                     Icon(Icons.Default.Send, null, modifier = Modifier.size(12.dp))
-                    Spacer(modifier = Modifier.width(4.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     Text("Connect", fontSize = 11.sp, fontWeight = FontWeight.Bold)
                 }
 

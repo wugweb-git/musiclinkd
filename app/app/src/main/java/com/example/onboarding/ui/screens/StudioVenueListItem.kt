@@ -59,12 +59,12 @@ fun StudioVenueListItem(studio: DiscoverProfile, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() },
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(Dimens.r2),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         border = BorderStroke(1.dp, BrandBorder)
     ) {
         Row(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(Dimens.sp2),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
@@ -82,19 +82,19 @@ fun StudioVenueListItem(studio: DiscoverProfile, onClick: () -> Unit) {
                 )
             }
             
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(Dimens.sp2))
             Column(modifier = Modifier.weight(1f)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(studio.name, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+                    Text(studio.name, style = Typography.bodyLarge, color = BrandText)
                     if (studio.isVerified) {
-                        Spacer(modifier = Modifier.width(4.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
                         Icon(Icons.Default.Verified, "Verified", tint = BrandPrimary, modifier = Modifier.size(14.dp))
                     }
                     if (studio.hasAtmos) {
-                        Spacer(modifier = Modifier.width(4.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
                         Box(
                             modifier = Modifier
-                                .background(BrandSecondary.copy(alpha = 0.1f), RoundedCornerShape(4.dp))
+                                .background(BrandSecondary.copy(alpha = 0.1f), RoundedCornerShape(Dimens.r1))
                                 .padding(horizontal = 4.dp, vertical = 1.dp)
                         ) {
                             Text("ATMOS", fontSize = 8.sp, color = BrandSecondary, fontWeight = FontWeight.Bold)

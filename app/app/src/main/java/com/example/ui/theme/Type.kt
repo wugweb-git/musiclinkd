@@ -7,124 +7,119 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 
-// --- MUSICLINKD TYPOGRAPHY SCALE ---
+// --- MUSICLINKD TYPOGRAPHY SCALE (4-TIER STRICT) ---
+// Based on Inter/Roboto style, prioritizing massive oversized headers
+
 val Typography = Typography(
-    // Display XL
+    // fs-4: Massive display headers
     displayLarge = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.ExtraBold,
         fontSize = 72.sp,
-        lineHeight = 80.sp,
-        letterSpacing = (-0.02).em
-    ),
-    // Display LG
-    displayMedium = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
-        fontSize = 60.sp,
         lineHeight = 72.sp,
-        letterSpacing = (-0.02).em
+        letterSpacing = (-0.04).em
     ),
-    // Display MD
-    displaySmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
-        fontSize = 48.sp,
-        lineHeight = 56.sp,
-        letterSpacing = (-0.01).em
-    ),
-    // Heading 1
+    // fs-3: Section headers
     headlineLarge = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Bold,
         fontSize = 40.sp,
-        lineHeight = 48.sp,
-        letterSpacing = (-0.01).em
+        lineHeight = 44.sp,
+        letterSpacing = (-0.03).em
     ),
-    // Heading 2
-    headlineMedium = TextStyle(
+    // fs-2: Body / UI Elements (Oversized)
+    bodyLarge = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
-        fontSize = 32.sp,
-        lineHeight = 40.sp,
-        letterSpacing = (-0.01).em
-    ),
-    // Heading 3
-    headlineSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
-        fontSize = 24.sp,
+        fontWeight = FontWeight.Normal,
+        fontSize = 20.sp,
         lineHeight = 32.sp,
         letterSpacing = (-0.01).em
     ),
-    // Heading 4
+    // fs-1: Caption / Metadata
+    labelLarge = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 0.em
+    ),
+    
+    // Fallbacks mapped to nearest tier to prevent generic Material sizes
+    displayMedium = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 72.sp,
+        lineHeight = 72.sp,
+        letterSpacing = (-0.04).em
+    ),
+    displaySmall = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 72.sp,
+        lineHeight = 72.sp,
+        letterSpacing = (-0.04).em
+    ),
+    headlineMedium = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Bold,
+        fontSize = 40.sp,
+        lineHeight = 44.sp,
+        letterSpacing = (-0.03).em
+    ),
+    headlineSmall = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Bold,
+        fontSize = 40.sp,
+        lineHeight = 44.sp,
+        letterSpacing = (-0.03).em
+    ),
     titleLarge = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.SemiBold,
         fontSize = 20.sp,
-        lineHeight = 28.sp,
+        lineHeight = 32.sp,
         letterSpacing = (-0.01).em
     ),
-    // Body XL
     titleMedium = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 20.sp,
         lineHeight = 32.sp,
-        letterSpacing = 0.em
+        letterSpacing = (-0.01).em
     ),
-    // Body LG
     titleSmall = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
-        fontSize = 18.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.em
+        fontSize = 20.sp,
+        lineHeight = 32.sp,
+        letterSpacing = (-0.01).em
     ),
-    // Body MD
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.em
-    ),
-    // Body SM
     bodyMedium = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
-        lineHeight = 20.sp,
-        letterSpacing = 0.em
+        fontSize = 20.sp,
+        lineHeight = 32.sp,
+        letterSpacing = (-0.01).em
     ),
-    // Caption
     bodySmall = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 12.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.01.em
-    ),
-    // Fallbacks
-    labelLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 14.sp,
-        lineHeight = 20.sp,
-        letterSpacing = 0.em
+        fontWeight = FontWeight.Normal,
+        fontSize = 20.sp,
+        lineHeight = 32.sp,
+        letterSpacing = (-0.01).em
     ),
     labelMedium = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Medium,
-        fontSize = 12.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.01.em
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 0.em
     ),
     labelSmall = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.01.em
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 0.em
     )
 )

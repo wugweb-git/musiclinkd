@@ -67,7 +67,7 @@ fun UnifiedBusinessHeader(
                 Box(
                     modifier = Modifier
                         .size(64.dp)
-                        .clip(RoundedCornerShape(16.dp))
+                        .clip(RoundedCornerShape(Dimens.r2))
                         .background(Color.White.copy(alpha = 0.15f))
                 ) {
                     if (imageUrl != null) {
@@ -78,26 +78,26 @@ fun UnifiedBusinessHeader(
                             modifier = Modifier.fillMaxSize()
                         )
                     } else {
-                        Icon(Icons.Default.Business, contentDescription = null, tint = Color.White, modifier = Modifier.padding(12.dp))
+                        Icon(Icons.Default.Business, contentDescription = null, tint = Color.White, modifier = Modifier.padding(Dimens.sp2))
                     }
                 }
 
-                Spacer(modifier = Modifier.width(16.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp2))
 
                 Column {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(title, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = Color.White)
+                        Text(title, style = Typography.bodyLarge, color = Color.White)
                         Spacer(modifier = Modifier.width(6.dp))
                         UnifiedVerificationBadge(label = "Verified Studio")
                     }
-                    Spacer(modifier = Modifier.height(4.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp1))
                     Text(subtitle, fontSize = 12.5.sp, color = Color.White.copy(alpha = 0.8f))
-                    Spacer(modifier = Modifier.height(4.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp1))
                     Text(location, fontSize = 11.sp, color = Color.White.copy(alpha = 0.6f))
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),

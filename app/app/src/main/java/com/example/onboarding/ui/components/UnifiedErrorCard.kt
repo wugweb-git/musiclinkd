@@ -59,7 +59,7 @@ fun UnifiedErrorCard(
         modifier = modifier
             .fillMaxWidth()
             .testTag(testTag),
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         border = BorderStroke(1.dp, Color(0xFFEF4444).copy(alpha = 0.3f))
     ) {
@@ -68,7 +68,7 @@ fun UnifiedErrorCard(
                 .fillMaxWidth()
                 .padding(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
         ) {
             Box(
                 modifier = Modifier
@@ -87,8 +87,7 @@ fun UnifiedErrorCard(
 
             Text(
                 text = title,
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
+                style = Typography.bodyLarge,
                 color = BrandDark,
                 textAlign = TextAlign.Center
             )
@@ -102,7 +101,7 @@ fun UnifiedErrorCard(
             )
 
             if (onRetry != null) {
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp1))
                 Button(
                     onClick = onRetry,
                     shape = RoundedCornerShape(14.dp),

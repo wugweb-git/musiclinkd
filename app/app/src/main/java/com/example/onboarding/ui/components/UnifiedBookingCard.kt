@@ -62,20 +62,20 @@ fun UnifiedBookingCard(
             .fillMaxWidth()
             .clickable { onClick() },
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         border = BorderStroke(1.dp, BrandBorder)
     ) {
-        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Column(modifier = Modifier.padding(Dimens.sp2), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(title, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
+                Text(title, style = Typography.bodyLarge, color = BrandDark)
                 UnifiedStatusBadge(status = statusText)
             }
 
-            Text(subtitle, fontSize = 12.sp, color = BrandTextSecondary)
+            Text(subtitle, style = Typography.labelLarge, color = BrandTextSecondary)
 
             HorizontalDivider(color = BrandBorder)
 
@@ -84,8 +84,8 @@ fun UnifiedBookingCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(dateText, fontSize = 12.sp, fontWeight = FontWeight.SemiBold, color = BrandDark)
-                Text(priceText, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = BrandPrimary)
+                Text(dateText, style = Typography.bodyLarge, color = BrandDark)
+                Text(priceText, style = Typography.bodyLarge, color = BrandPrimary)
             }
         }
     }

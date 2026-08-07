@@ -51,812 +51,413 @@
 <!-- ============================================================
      NAVIGATION
      ============================================================ -->
-<header class="nav" id="nav" role="banner">
-  <div class="container nav__inner">
-    <a href="/" class="nav__logo" aria-label="MusicLinkd home">
-      <svg class="nav__logo-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0D0B26"/><rect x="16" y="26" width="5" height="20" rx="2.5" fill="#FFFFFF"/><rect x="25.5" y="16" width="5" height="32" rx="2.5" fill="#EA4C89"/><rect x="35" y="22" width="5" height="24" rx="2.5" fill="#FFFFFF"/><rect x="44.5" y="30" width="5" height="16" rx="2.5" fill="#EA4C89"/></svg>
-      MusicLink<em>d</em>
-    </a>
 
-    <nav id="navLinks" class="nav__links" aria-label="Primary">
-      <a href="#problem">Problem</a>
-      <a href="#platform">Platform</a>
-      <a href="#modules">Modules</a>
-      <a href="#journeys">How It Works</a>
-      <a href="#gallery">Screens</a>
-      <a href="#trust">Trust</a>
-      <a href="#ai">AI</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-
-    <div class="nav__actions">
-      <a href="#cta" class="btn btn--primary btn--sm nav__cta-desktop">Join Early Access</a>
-      <button id="navToggle" class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+<header class="top-nav" style="position: sticky; top: 0; z-index: 100; background: rgba(252, 252, 253, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--sp-3); height: var(--nav-h);">
+  <a href="/" style="display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 20px; letter-spacing: -0.02em;">
+    <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" rx="16" fill="#0D0B26"/><rect x="16" y="26" width="5" height="20" rx="2.5" fill="#FFFFFF"/><rect x="25.5" y="16" width="5" height="32" rx="2.5" fill="#EA4C89"/><rect x="35" y="22" width="5" height="24" rx="2.5" fill="#FFFFFF"/><rect x="44.5" y="30" width="5" height="16" rx="2.5" fill="#EA4C89"/></svg>
+    MusicLink<span style="color: var(--pink);">d</span>
+  </a>
+  <div style="display: none; @media(min-width: 768px) { display: flex; gap: var(--sp-2); font-weight: 600; font-size: var(--fs-2); }">
+    <a href="#discover" style="color: var(--ink);">Discover</a>
+    <a href="#studios" style="color: var(--muted);">Studios</a>
+    <a href="#pro" style="color: var(--muted);">Pro</a>
+  </div>
+  <div style="display: flex; gap: var(--sp-1);">
+    <button class="btn" style="padding: 8px 16px; font-weight: 600;">Sign In</button>
+    <button class="btn btn-p" style="padding: 8px 16px; border-radius: var(--r-4);">Join Early Access</button>
   </div>
 </header>
 
-<main id="main">
 
-  <!-- ============================================================
-       1. HERO
-       ============================================================ -->
-  <section class="hero section" data-section="hero" aria-labelledby="hero-h">
-    <div class="blob blob--hero-left" aria-hidden="true"></div>
-    <div class="container hero__grid">
+<main id="main">\n
+  <div class="sec sec-xl" style="padding-top: 120px; padding-bottom: 80px; text-align: center;">
+    <div style="display: inline-block; padding: 8px 16px; background: var(--pink-container); color: var(--pink); border-radius: var(--r-4); font-weight: 700; font-size: var(--fs-2); margin-bottom: 24px;">v4.0 Early Access Live</div>
+    <h1 style="font-size: var(--fs-4); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; max-width: 900px; margin: 0 auto 24px;">The professional network for<br>India's music creators</h1>
+    <p class="desc" style="font-size: var(--fs-2); color: var(--muted); max-width: 600px; margin: 0 auto 48px; line-height: 1.6;">Connect with world-class studios, session musicians, and industry professionals. Elevate your sound, build your reputation, and scale your career.</p>
+    <div style="display: flex; justify-content: center; gap: 16px;">
+      <button class="btn btn-p" style="padding: 16px 32px; border-radius: var(--r-4); font-size: var(--fs-2);">Join the Network</button>
+      <button class="btn btn-s" style="padding: 16px 32px; border-radius: var(--r-4); font-size: var(--fs-2);">Explore Talent</button>
+    </div>
+  </div>
+
+  <!-- MASSIVE OVERHAUL SUPERCHARGE BLOCKS -->
+  
+  <div class="sec sec-xl" style="padding-top: 40px; border-bottom: none;">
+    <div class="trusted-bar">
+      <div class="t-stat"><div class="t-stat-num">5k+</div><div class="t-stat-lbl">Verified Studios</div></div>
+      <div class="t-stat"><div class="t-stat-num">100k+</div><div class="t-stat-lbl">Professional Artists</div></div>
+      <div class="t-stat"><div class="t-stat-num">4.9 ★</div><div class="t-stat-lbl">Average Booking Rating</div></div>
+      <div class="t-stat"><div class="t-stat-num">100k+</div><div class="t-stat-lbl">Successful Sessions</div></div>
+    </div>
+  </div>
+
+  <div class="sec sec-xl">
+    <div class="eyebrow">Does this sound familiar?</div>
+    <div class="split-xl">
+      <div class="split-quote">
+        "I know exactly what sound I want—but I cannot <span>find the right talent to create it.</span>"
+      </div>
       <div>
-        <div class="hero__pill">
-          <span class="hero__pill-dot" aria-hidden="true"></span>
-          <span>Now in <b>Early Access</b> · India</span>
+        <p class="desc" style="margin-bottom: 32px;">It is not about lacking creativity or budget. It is about lacking structured access to verified professionals, transparent pricing, and reliable booking. Your struggle ends here.</p>
+        
+        <div class="pain-card">
+          <div class="pain-icon bad">👎</div>
+          <div class="pain-text">Finding the right studio feels <strong>overwhelming</strong>, unclear, and scattered.</div>
         </div>
-        <h1 id="hero-h" class="display">
-          The network<br>
-          behind the <span class="accent">sound</span>.
-        </h1>
-        <p class="lead">MusicLinkd brings artists, studios, teams and opportunities into one trusted place to discover, collaborate, book and build a music career.</p>
-        <div class="hero__ctas">
-          <a href="https://play.google.com/store/apps/details?id=com.musiclinkd.app" target="_blank" rel="noopener" class="play-badge" aria-label="Get it on Google Play">
-            <svg class="play-badge__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 0 1-.61-.928V2.742a1 1 0 0 1 .61-.928zM14.5 10.722l2.823-1.333 1.415 1.415-2.823 1.333L14.5 10.722zm2.823 5.333L16.915 14.5l2.823-1.333 1.415 1.415-2.408 1.133zM5.5 8.5l7 3.333v-6.666L5.5 8.5z"/></svg>
-            <span class="play-badge__text"><small>Get it on</small><strong>Google Play</strong></span>
-          </a>
-          <a href="#cta" class="btn btn--primary btn--lg">Join the Waitlist</a>
+        <div class="pain-card">
+          <div class="pain-icon bad">👎</div>
+          <div class="pain-text">It is <strong>frustrating</strong> to coordinate sessions with unreliable talent.</div>
         </div>
-        <div class="hero__note">
-          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Free to join</span>
-          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> No spam</span>
-          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Early access perks</span>
+        <div class="pain-card">
+          <div class="pain-icon bad">👎</div>
+          <div class="pain-text">Gear lists and availability are scattered, outdated, or <strong>completely inaccurate</strong>.</div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="hero__visual" aria-hidden="true">
-        <div class="hero__phones">
-          <!-- Phone A — animated discovery feed -->
-          <div class="hero__phone-a">
-            <div class="phone">
-              <div class="phone__screen">
-                <div class="phone__status"><span>9:41</span><span class="phone__status-icons"><i style="width:14px;height:10px"></i><i style="width:10px;height:10px;border-radius:50%"></i></span></div>
-                <div class="phone__body">
-                  <div class="feed">
-                    <div class="feed__track">
-                      <!-- duplicated for infinite loop -->
-                      <div class="m-card"><div class="m-row m-row--between"><div class="m-row"><div class="m-avatar" style="width:36px;height:36px;background:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=72&q=80') center/cover"></div><div><div class="m-name">Ananya Sharma</div><div class="m-sub">Playback Vocalist · Mumbai</div></div></div><span class="m-badge m-badge--av">● Available</span></div><div class="m-chip m-chip--on" style="margin-top:6px">Hindi Folk</div><div class="m-stars" style="margin-top:6px">★★★★★</div><div style="display:flex;gap:6px;margin-top:6px"><button class="m-btn m-btn--s" style="flex:1">Message</button><button class="m-btn m-btn--p" style="flex:1">Hire</button></div></div>
-                      <div class="m-card"><div class="m-row m-row--between"><div class="m-row"><div class="m-avatar" style="width:36px;height:36px;background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=72&q=80') center/cover"></div><div><div class="m-name">Rahul Varma</div><div class="m-sub">Mix Engineer · Delhi</div></div></div><span class="m-badge m-badge--vf">✓ Verified</span></div><div class="m-chip m-chip--on" style="margin-top:6px">Mixing</div><div class="m-stars" style="margin-top:6px">★★★★★</div><div style="display:flex;gap:6px;margin-top:6px"><button class="m-btn m-btn--s" style="flex:1">Message</button><button class="m-btn m-btn--p" style="flex:1">Hire</button></div></div>
-                      <div class="m-card"><div class="m-row m-row--between"><div class="m-row"><div class="m-avatar" style="width:36px;height:36px;background:url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=72&q=80') center/cover"></div><div><div class="m-name">Yash Raj Studios</div><div class="m-sub">Andheri West · Mumbai</div></div></div><span class="m-badge m-badge--biz">Business</span></div><div class="m-chip m-chip--on" style="margin-top:6px">Dolby Atmos</div><div style="display:flex;gap:6px;margin-top:6px"><button class="m-btn m-btn--s" style="flex:1">Details</button><button class="m-btn m-btn--p" style="flex:1">Book</button></div></div>
-                      <div class="m-card"><div class="m-row m-row--between"><div class="m-row"><div class="m-avatar" style="width:36px;height:36px;background:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=72&q=80') center/cover"></div><div><div class="m-name">Priya Sharma</div><div class="m-sub">Music Director · Pune</div></div></div><span class="m-badge m-badge--av">● Available</span></div><div class="m-chip m-chip--on" style="margin-top:6px">Bollywood</div><div class="m-stars" style="margin-top:6px">★★★★☆</div><div style="display:flex;gap:6px;margin-top:6px"><button class="m-btn m-btn--s" style="flex:1">Message</button><button class="m-btn m-btn--p" style="flex:1">Hire</button></div></div>
-                      <!-- duplicate set for seamless loop -->
-                      <div class="m-card"><div class="m-row m-row--between"><div class="m-row"><div class="m-avatar" style="width:36px;height:36px;background:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=72&q=80') center/cover"></div><div><div class="m-name">Ananya Sharma</div><div class="m-sub">Playback Vocalist · Mumbai</div></div></div><span class="m-badge m-badge--av">● Available</span></div><div class="m-chip m-chip--on" style="margin-top:6px">Hindi Folk</div><div class="m-stars" style="margin-top:6px">★★★★★</div><div style="display:flex;gap:6px;margin-top:6px"><button class="m-btn m-btn--s" style="flex:1">Message</button><button class="m-btn m-btn--p" style="flex:1">Hire</button></div></div>
-                      <div class="m-card"><div class="m-row m-row--between"><div class="m-row"><div class="m-avatar" style="width:36px;height:36px;background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=72&q=80') center/cover"></div><div><div class="m-name">Rahul Varma</div><div class="m-sub">Mix Engineer · Delhi</div></div></div><span class="m-badge m-badge--vf">✓ Verified</span></div><div class="m-chip m-chip--on" style="margin-top:6px">Mixing</div><div class="m-stars" style="margin-top:6px">★★★★★</div><div style="display:flex;gap:6px;margin-top:6px"><button class="m-btn m-btn--s" style="flex:1">Message</button><button class="m-btn m-btn--p" style="flex:1">Hire</button></div></div>
-                      <div class="m-card"><div class="m-row m-row--between"><div class="m-row"><div class="m-avatar" style="width:36px;height:36px;background:url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=72&q=80') center/cover"></div><div><div class="m-name">Yash Raj Studios</div><div class="m-sub">Andheri West · Mumbai</div></div></div><span class="m-badge m-badge--biz">Business</span></div><div class="m-chip m-chip--on" style="margin-top:6px">Dolby Atmos</div><div style="display:flex;gap:6px;margin-top:6px"><button class="m-btn m-btn--s" style="flex:1">Details</button><button class="m-btn m-btn--p" style="flex:1">Book</button></div></div>
-                      <div class="m-card"><div class="m-row m-row--between"><div class="m-row"><div class="m-avatar" style="width:36px;height:36px;background:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=72&q=80') center/cover"></div><div><div class="m-name">Priya Sharma</div><div class="m-sub">Music Director · Pune</div></div></div><span class="m-badge m-badge--av">● Available</span></div><div class="m-chip m-chip--on" style="margin-top:6px">Bollywood</div><div class="m-stars" style="margin-top:6px">★★★★☆</div><div style="display:flex;gap:6px;margin-top:6px"><button class="m-btn m-btn--s" style="flex:1">Message</button><button class="m-btn m-btn--p" style="flex:1">Hire</button></div></div>
-                    </div>
-                  </div>
-                  <div class="phone__navbar" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
-                </div>
-              </div>
+  <div class="sec sec-xl">
+    <div style="text-align: center; margin-bottom: 64px;">
+      <h2 style="font-size: clamp(32px, 5vw, 48px);">Access world-class studios<br>and top-tier talent</h2>
+      <p class="desc" style="margin: 0 auto;">Are you tired of unreliable bookings and scattered communication? Become a high-earning professional in the most efficient ecosystem possible.</p>
+    </div>
+    <div class="feat-grid-t">
+      <div class="f-item">
+        <div class="f-icon">⏱</div>
+        <div class="f-content">
+          <h4>Instant Booking</h4>
+          <p>Book studios and talent instantly with transparent pricing and real-time availability.</p>
+        </div>
+      </div>
+      <div class="f-item">
+        <div class="f-icon">🏆</div>
+        <div class="f-content">
+          <h4>Verified Credits</h4>
+          <p>Every profile features verified Discogs and Spotify credits, so you know exactly who you are working with.</p>
+        </div>
+      </div>
+      <div class="f-item">
+        <div class="f-icon">🔄</div>
+        <div class="f-content">
+          <h4>Secure Escrow</h4>
+          <p>Payments are held securely in escrow until the session is completed and both parties are satisfied.</p>
+        </div>
+      </div>
+      <div class="f-item">
+        <div class="f-icon">💬</div>
+        <div class="f-content">
+          <h4>Direct Messaging</h4>
+          <p>Communicate directly with studio managers and artists right within the platform.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sec-xl" style="border-bottom: none;">
+    <div class="purple-cta">
+      <div>
+        <h2>Level-up your production quality continuously</h2>
+        <p>A platform designed by musicians for musicians—made to fit your workflow and help you achieve real career results with premium studios, verified talent, seamless booking, and transparent reviews.</p>
+      </div>
+      <div class="cta-pills">
+        <div class="cta-pill">Session Musicians</div>
+        <div class="cta-pill" style="transform: translateX(10px);">Producers</div>
+        <div class="cta-pill" style="transform: translateX(30px);">Record Labels</div>
+        <div class="cta-pill" style="transform: translateX(0px);">Vocalists</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sec-xl">
+    <div style="text-align: center; margin-bottom: 64px;">
+      <h2 style="font-size: clamp(32px, 5vw, 48px);">Hear from the awesome<br>artists we helped</h2>
+    </div>
+    <div class="test-masonry">
+      <div class="t-card">
+        <div class="t-user">
+          <div class="t-av" style="background: url('https://i.pravatar.cc/100?img=1') center/cover;"></div>
+          <div>
+            <div class="t-name">Estefania</div>
+            <div class="t-role">@estefania</div>
+          </div>
+          <div style="margin-left: auto; color: var(--pink); font-size: 10px;">★★★★★</div>
+        </div>
+        <div class="t-quote">I love how Andrija explained everything very efficiently and how he shared real-life tips. You feel this course is like a conversation with a friend.</div>
+      </div>
+      <div class="t-card video">
+        <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=600&q=80" alt="Video Review">
+        <div class="t-content">
+          <div class="t-user">
+            <div class="t-av" style="background: url('https://i.pravatar.cc/100?img=2') center/cover;"></div>
+            <div>
+              <div class="t-name">Alex Benton</div>
+              <div class="t-role">LinkedIn</div>
             </div>
+            <div style="margin-left: auto; color: var(--pink); font-size: 10px;">★★★★★</div>
           </div>
-
-          <!-- Phone B — chat / booking -->
-          <div class="hero__phone-b">
-            <div class="phone">
-              <div class="phone__screen">
-                <div class="phone__status"><span>9:41</span><span class="phone__status-icons"><i style="width:14px;height:10px"></i><i style="width:10px;height:10px;border-radius:50%"></i></span></div>
-                <div class="phone__body" style="padding:12px;display:flex;flex-direction:column;gap:10px">
-                  <div class="m-row" style="align-items:center;gap:10px"><div class="m-avatar" style="width:36px;height:36px;background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=72&q=80') center/cover"></div><div><div class="m-name">Rahul Varma</div><div class="m-sub">Mix Engineer · Delhi</div></div><span class="m-badge m-badge--av" style="margin-left:auto">Online</span></div>
-                  <div style="display:flex;flex-direction:column;gap:8px">
-                    <div class="m-bubble m-bubble--in">Hey, I reviewed the stems. Great work.</div>
-                    <div class="m-bubble m-bubble--out">Thanks! Can we schedule a mix session?</div>
-                    <div class="m-bubble m-bubble--in">Sure. I have slots open on Thursday.</div>
-                  </div>
-                  <div class="m-search" style="margin-top:auto"><span>💬</span><span>Type a message...</span></div>
-                </div>
-                <div class="phone__navbar" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i></div>
-              </div>
-            </div>
+          <div class="t-quote">Andrija's charisma and detailed explanations made following along so easy!</div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="t-user">
+          <div class="t-av" style="background: url('https://i.pravatar.cc/100?img=3') center/cover;"></div>
+          <div>
+            <div class="t-name">Johnson</div>
+            <div class="t-role">@thejohnson</div>
           </div>
+          <div style="margin-left: auto; color: var(--pink); font-size: 10px;">★★★★★</div>
         </div>
+        <div class="t-quote">I must say that Supercharge really did a good job on this one. They never disappoint.</div>
       </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       2. INDUSTRY PROBLEM
-       ============================================================ -->
-  <section class="section section--alt" id="problem" data-section="problem" aria-labelledby="problem-h">
-    <div class="container">
-      <div class="sec-head">
-        <div class="eyebrow">The Problem</div>
-        <h2 id="problem-h" class="h2">The music industry still runs on word-of-mouth and WhatsApp groups.</h2>
-        <p class="lead">Fragmented tools, scattered identities and manual processes leave professionals wasting time on logistics instead of music.</p>
-      </div>
-
-      <div class="problem__grid">
-        <div class="pain-list">
-          <div class="pain">
-            <div class="pain__num">01</div>
-            <div><h3>Collaborators are impossible to find</h3><p>Musicians still rely on random Instagram comments, Facebook groups and WhatsApp to find the right singer, producer or session player — with no way to verify credentials.</p></div>
+       <div class="t-card">
+        <div class="t-user">
+          <div class="t-av" style="background: url('https://i.pravatar.cc/100?img=4') center/cover;"></div>
+          <div>
+            <div class="t-name">Dustin Turner</div>
+            <div class="t-role">@dustin</div>
           </div>
-          <div class="pain">
-            <div class="pain__num">02</div>
-            <div><h3>Studios live on word-of-mouth</h3><p>There is no trusted directory of studios with verified equipment, real pricing and honest reviews. Booking happens over fragmented calls and texts.</p></div>
-          </div>
-          <div class="pain">
-            <div class="pain__num">03</div>
-            <div><h3>Portfolios are scattered</h3><p>An artist's real work lives across YouTube, Google Drive, Instagram, SoundCloud and private links. There is no single place that proves what you've actually done.</p></div>
-          </div>
-          <div class="pain">
-            <div class="pain__num">04</div>
-            <div><h3>Professional credibility is unverified</h3><p>Without a trusted identity layer, anyone can claim anything. Labels, studios and collaborators have no fast way to confirm who someone really is.</p></div>
-          </div>
+          <div style="margin-left: auto; color: var(--pink); font-size: 10px;">★★★★★</div>
         </div>
+        <div class="t-quote">It's the first course that I've seen that actually takes these things a step further and shows you not only what they are but how to actually implement them.</div>
+      </div>
+    </div>
+  </div>
 
-        <div class="scatter" aria-hidden="true">
-          <div class="scatter__card scatter__card--1"><span class="scatter__tag" style="background:#FEF3C7;color:#92400E">Fragmented</span><b>Instagram DMs</b><small>Random outreach, no verification, no tracking</small></div>
-          <div class="scatter__card scatter__card--2"><span class="scatter__tag" style="background:#FCE7F3;color:var(--brand-pink)">Unstructured</span><b>WhatsApp bookings</b><small>Chaotic threads, missed slots, unclear pricing</small></div>
-          <div class="scatter__card scatter__card--3"><span class="scatter__tag" style="background:#DCFCE7;color:#15803D">Scattered</span><b>Drive folders</b><small>Links expire. Stems get lost. Versions multiply.</small></div>
-          <div class="scatter__card scatter__card--4"><span class="scatter__tag" style="background:#DBEAFE;color:#1E40AF">Siloed</span><b>YouTube / SoundCloud</b><small>Great for streaming, terrible for proving your role.</small></div>
-          <div class="scatter__strike"><span>One ecosystem. One identity.</span></div>
+  <div class="sec sec-xl" style="background: #FAFAFA; margin: 0 -clamp(16px, 4vw, 56px); padding-left: clamp(16px, 4vw, 56px); padding-right: clamp(16px, 4vw, 56px);">
+    <div style="text-align: center; margin-bottom: 64px;">
+      <h2 style="font-size: clamp(32px, 5vw, 48px);">Unlimited platform access for<br>less than the cost of a cable</h2>
+      <p class="desc" style="margin: 0 auto;">Find the perfect plan for you and your team—cancel anytime.</p>
+    </div>
+    <div class="price-grid">
+      <div class="p-card">
+        <div class="p-tier">Basic</div>
+        <div class="p-price">$497 <span>/year</span></div>
+        <div class="p-desc">Billed yearly and inclusive of VAT.</div>
+        <button class="btn btn-s" style="width: 100%; border-radius: 8px;">Subscribe</button>
+        <div class="p-features">
+          <div class="p-feat">Basic profile creation and portfolio</div>
+          <div class="p-feat">Up to 5 inquiries per month</div>
+          <div class="p-feat">Standard search filters</div>
+        </div>
+      </div>
+      <div class="p-card pro">
+        <div class="p-badge">Most Popular</div>
+        <div class="p-tier">Pro</div>
+        <div class="p-price">$597 <span>/year</span></div>
+        <div class="p-desc">Billed yearly and inclusive of VAT.</div>
+        <button class="btn btn-p" style="width: 100%; border-radius: 8px; background: var(--purple);">Subscribe</button>
+        <div class="p-features">
+          <div class="p-feat">Verified Pro Profile badge</div>
+          <div class="p-feat">Unlimited inquiries and bookings</div>
+          <div class="p-feat">Advanced escrow and payment protection</div>
+          <div class="p-feat">Priority search placement</div>
+          <div class="p-feat">Dedicated support manager</div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-tier">Lifetime</div>
+        <div class="p-price">$2,174</div>
+        <div class="p-desc">One-time payment inclusive of VAT.</div>
+        <button class="btn btn-n" style="width: 100%; border-radius: 8px;">Get Lifetime Access</button>
+        <div class="p-features">
+          <div class="p-feat">Everything in the PRO plan</div>
+          <div class="p-feat">One-time payment, yours forever</div>
+          <div class="p-feat">Lifetime access</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ============================================================
-       3. INTRODUCING MUSICLINKD
-       ============================================================ -->
-  <section class="section" id="platform" data-section="introducing" aria-labelledby="intro-h">
-    <div class="container">
-      <div class="sec-head sec-head--center">
-        <div class="eyebrow">Introducing MusicLinkd</div>
-        <h2 id="intro-h" class="h2">One ecosystem.<br>One professional identity.<br>One network.</h2>
-        <p class="lead">Discover, connect, hire, book, showcase and grow — all in one place built specifically for the music industry.</p>
+  <div class="sec sec-xl">
+    <div style="text-align: center; margin-bottom: 64px;">
+      <h2 style="font-size: clamp(32px, 5vw, 48px);">You asked, we answered</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">What is Supercharge Design?</div>
       </div>
-
-      <div class="stats-row">
-        <div class="stat reveal">
-          <div class="stat__num" data-count="12" data-suffix="+">0</div>
-          <div class="stat__label">Professional roles supported</div>
-        </div>
-        <div class="stat reveal">
-          <div class="stat__num" data-count="10" data-suffix="+">0</div>
-          <div class="stat__label">Platform modules</div>
-        </div>
-        <div class="stat reveal">
-          <div class="stat__num" data-count="100" data-suffix="%">0</div>
-          <div class="stat__label">Industry-focused, zero bloat</div>
-        </div>
+      <div class="faq-item">
+        <div class="faq-q">There's a ton of information about UX and UI design online, why should I join?</div>
       </div>
-
-      <div class="orbit-wrap reveal" aria-hidden="true">
-        <div class="orbit">
-          <div class="orbit__core">
-            <div class="logo">MusicLink<em style="color:var(--brand-pink);font-style:normal">d</em></div>
-            <small>India's professional music ecosystem</small>
-          </div>
-          <div class="orbit__chip" style="--a:0deg;--r:38%"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Artists</div>
-          <div class="orbit__chip" style="--a:45deg;--r:38%"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Studios</div>
-          <div class="orbit__chip" style="--a:90deg;--r:38%"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Producers</div>
-          <div class="orbit__chip" style="--a:135deg;--r:38%"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Labels</div>
-          <div class="orbit__chip" style="--a:180deg;--r:38%"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Venues</div>
-          <div class="orbit__chip" style="--a:225deg;--r:38%"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Educators</div>
-          <div class="orbit__chip" style="--a:270deg;--r:38%"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Engineers</div>
-          <div class="orbit__chip" style="--a:315deg;--r:38%"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> Rental</div>
-        </div>
+      <div class="faq-item">
+        <div class="faq-q">What's the refund policy? Is there a money-back guarantee?</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do I have access to the materials once my subscription expires?</div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ============================================================
-       4. WHO IT'S BUILT FOR
-       ============================================================ -->
-  <section class="section section--alt" id="personas" data-section="personas" aria-labelledby="personas-h">
-    <div class="container">
-      <div class="sec-head">
-        <div class="eyebrow">Who It's Built For</div>
-        <h2 id="personas-h" class="h2">Built for every music professional.</h2>
-        <p class="lead">From solo artists to large studios, MusicLinkd is designed around the real workflows of real music people.</p>
+\n
+  
+  <!-- ==========================================
+       USER JOURNEYS (HOW IT WORKS)
+       ========================================== -->
+  <div id="journeys" class="sec sec-xl" style="background: var(--pink-container); margin: 0 -clamp(16px, 4vw, 56px); padding-left: clamp(16px, 4vw, 56px); padding-right: clamp(16px, 4vw, 56px);">
+    <div class="eyebrow" style="color: var(--pink);">How it Works</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); align-items: start; max-width: 1400px; margin: 0 auto; @media(max-width: 900px) { grid-template-columns: 1fr; }">
+      
+      <!-- Sticky Left Side -->
+      <div style="position: sticky; top: 120px; padding-bottom: var(--sp-4);">
+        <h2 style="font-size: var(--fs-4); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 24px;">From session to<br>certified credit.</h2>
+        <p class="desc" style="font-size: var(--fs-2); color: var(--muted); max-width: 500px;">The complete lifecycle of your music production, handled seamlessly in one unified platform.</p>
+        
+        <!-- Mockup Placeholder -->
+        <div style="margin-top: var(--sp-3); width: 100%; max-width: 320px; aspect-ratio: 9/19; background: var(--bg); border-radius: 40px; border: 8px solid var(--ink); box-shadow: 0 32px 64px rgba(0,0,0,0.1); position: relative; overflow: hidden;">
+           <div style="position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 40%; height: 24px; background: var(--ink); border-radius: 20px;"></div>
+           <div style="padding: var(--sp-3) var(--sp-2); display: flex; flex-direction: column; gap: var(--sp-2); height: 100%;">
+             <div style="height: 120px; background: var(--surface-subtle); border-radius: var(--r-2);"></div>
+             <div style="height: 60px; background: var(--surface-subtle); border-radius: var(--r-2);"></div>
+             <div style="height: 60px; background: var(--surface-subtle); border-radius: var(--r-2);"></div>
+             <div style="height: 100%; background: var(--pink-container); border-radius: var(--r-2); margin-top: auto;"></div>
+           </div>
+        </div>
       </div>
 
-      <div class="personas-grid">
-        <div class="persona reveal"><div class="persona__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Artists</h3><p>Build a verified portfolio, get discovered by studios and collaborators, and manage your bookings.</p></div>
-        <div class="persona reveal"><div class="persona__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><h3>Musicians</h3><p>Showcase your skills, connect with bands and projects, and grow your professional reputation.</p></div>
-        <div class="persona reveal"><div class="persona__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h3>Producers</h3><p>Show your discography, manage credits, and get matched with artists who need your sound.</p></div>
-        <div class="persona reveal"><div class="persona__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><h3>Sound Engineers</h3><p>Showcase your mixing and mastering credits, receive reviews, and get hired for sessions.</p></div>
-        <div class="persona reveal"><div class="persona__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><h3>Recording Studios</h3><p>List rooms, equipment, and pricing. Accept bookings and build a verified reputation.</p></div>
-        <div class="persona reveal"><div class="persona__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><h3>Music Directors</h3><p>Find singers, players, and studios fast. Brief projects and hire verified talent.</p></div>
-        <div class="persona reveal"><div class="persona__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h3>Session Players</h3><p>Get discovered for gigs, show your versatility, and build a credit history.</p></div>
-        <div class="persona reveal"><div class="persona__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><h3>Labels</h3><p>Discover artists, manage rosters, and coordinate releases from a single dashboard.</p></div>
-        <div class="persona reveal"><div class="persona__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Managers</h3><p>Oversee bookings, track availability, and grow your artists' careers with verified data.</p></div>
-        <div class="persona reveal"><div class="persona__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h3>Music Schools</h3><p>Showcase courses, manage admissions, and connect students to the industry.</p></div>
-        <div class="persona reveal"><div class="persona__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div><h3>Rental Providers</h3><p>List gear, manage availability, and rent to verified music professionals.</p></div>
-        <div class="persona reveal"><div class="persona__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div><h3>Venues</h3><p>Publish calendars, accept bookings, and promote events to a targeted music audience.</p></div>
-        <div class="persona reveal"><div class="persona__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><h3>Businesses</h3><p>Access a verified network of music professionals and streamline procurement.</p></div>
+      <!-- Scrolling Steps Right Side -->
+      <div style="display: flex; flex-direction: column; gap: var(--sp-4); padding-top: var(--sp-4); padding-bottom: var(--sp-4);">
+        
+        <!-- Step 1 -->
+        <div style="background: var(--bg); padding: var(--sp-3); border-radius: var(--r-3); border: 1px solid var(--line); box-shadow: 0 4px 24px rgba(0,0,0,0.02);">
+          <div style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: var(--pink-container); color: var(--pink); font-size: var(--fs-2); font-weight: 800; border-radius: var(--r-full); margin-bottom: var(--sp-2);">1</div>
+          <h3 style="font-size: var(--fs-3); font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em;">Discover & Filter</h3>
+          <p style="font-size: var(--fs-1); color: var(--muted); line-height: 1.6;">Search thousands of verified studios and session musicians. Filter by gear, rates, genres, and exact availability.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div style="background: var(--bg); padding: var(--sp-3); border-radius: var(--r-3); border: 1px solid var(--line); box-shadow: 0 4px 24px rgba(0,0,0,0.02);">
+          <div style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: var(--pink-container); color: var(--pink); font-size: var(--fs-2); font-weight: 800; border-radius: var(--r-full); margin-bottom: var(--sp-2);">2</div>
+          <h3 style="font-size: var(--fs-3); font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em;">Instant Booking</h3>
+          <p style="font-size: var(--fs-1); color: var(--muted); line-height: 1.6;">Select your time slots, submit your session brief, and book instantly. No more back-and-forth emails.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div style="background: var(--bg); padding: var(--sp-3); border-radius: var(--r-3); border: 1px solid var(--line); box-shadow: 0 4px 24px rgba(0,0,0,0.02);">
+          <div style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: var(--pink-container); color: var(--pink); font-size: var(--fs-2); font-weight: 800; border-radius: var(--r-full); margin-bottom: var(--sp-2);">3</div>
+          <h3 style="font-size: var(--fs-3); font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em;">Secure Escrow</h3>
+          <p style="font-size: var(--fs-1); color: var(--muted); line-height: 1.6;">Your payment is held securely in escrow until the session is completed successfully. Total peace of mind for both sides.</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div style="background: var(--bg); padding: var(--sp-3); border-radius: var(--r-3); border: 1px solid var(--line); box-shadow: 0 4px 24px rgba(0,0,0,0.02);">
+          <div style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: var(--pink-container); color: var(--pink); font-size: var(--fs-2); font-weight: 800; border-radius: var(--r-full); margin-bottom: var(--sp-2);">4</div>
+          <h3 style="font-size: var(--fs-3); font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em;">Credits & Reputation</h3>
+          <p style="font-size: var(--fs-1); color: var(--muted); line-height: 1.6;">After approval, verified credits are automatically added to your profile, boosting your ranking for future gigs.</p>
+        </div>
+
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ============================================================
-       5. EVERYTHING YOU NEED — MODULES
-       ============================================================ -->
-  <section class="section" id="modules" data-section="modules" aria-labelledby="modules-h">
-    <div class="container">
-      <div class="sec-head">
-        <div class="eyebrow">Platform Modules</div>
-        <h2 id="modules-h" class="h2">Everything you need.<br>Nothing you don't.</h2>
-        <p class="lead">Ten interconnected modules designed to replace the patchwork of tools most music professionals currently use.</p>
-      </div>
-
-      <div class="module">
-        <div class="module__text reveal">
-          <span class="module__num">01</span>
-          <h3>Professional Profiles</h3>
-          <p>Build a single, verified identity that represents your full professional journey — roles, genres, credits, equipment, and availability.</p>
-          <div class="module__tags"><span class="module__tag">Verified badges</span><span class="module__tag">Audio preview</span><span class="module__tag">Rate cards</span></div>
-        </div>
-        <div class="mock reveal" aria-hidden="true">
-          <span class="mock__label">Profile</span>
-          <div class="m-row" style="gap:12px"><div class="m-avatar" style="width:48px;height:48px;background:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=96&q=80') center/cover"></div><div><div class="m-name">Ananya Sharma</div><div class="m-sub">Playback Vocalist · Mumbai</div></div><span class="m-badge m-badge--vf" style="margin-left:auto">✓ Verified</span></div>
-          <div class="m-chip m-chip--on" style="margin-top:4px">Hindi Folk</div><div class="m-chip m-chip--on">Pop Vocals</div>
-          <div class="m-stars" style="margin-top:6px">★★★★★ <span style="font-size:10px;color:var(--text-secondary);font-weight:600">4.9 · 42 credits</span></div>
-          <div class="m-divider"></div>
-          <div class="m-search"><span>🎧</span><span>Audio portfolio preview</span></div>
-        </div>
-      </div>
-
-      <div class="module module--flip">
-        <div class="module__text reveal">
-          <span class="module__num">02</span>
-          <h3>Discovery</h3>
-          <p>Find the right person, studio, or piece of gear — filtered by role, genre, location, budget and availability.</p>
-          <div class="module__tags"><span class="module__tag">Smart filters</span><span class="module__tag">AI matchmaking</span><span class="module__tag">Verified results</span></div>
-        </div>
-        <div class="mock reveal" aria-hidden="true">
-          <span class="mock__label">Discover</span>
-          <div class="m-search"><span>🔍</span><span>Search singers, studios, gear...</span></div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="m-chip m-chip--on">All</span><span class="m-chip">Vocalists</span><span class="m-chip">Studios</span></div>
-          <div class="m-card" style="margin-top:4px"><div class="m-row"><div class="m-avatar" style="width:32px;height:32px;background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=64&q=80') center/cover"></div><div><div class="m-name">Rahul Varma</div><div class="m-sub">Mix Engineer · Delhi</div></div></div></div>
-        </div>
-      </div>
-
-      <div class="module">
-        <div class="module__text reveal">
-          <span class="module__num">03</span>
-          <h3>Studio Booking</h3>
-          <p>Book studios in seconds. See real-time availability, pricing, equipment, and reviews — then confirm instantly.</p>
-          <div class="module__tags"><span class="module__tag">Live calendar</span><span class="module__tag">Instant confirm</span><span class="module__tag">Escrow payments</span></div>
-        </div>
-        <div class="mock reveal" aria-hidden="true">
-          <span class="mock__label">Booking</span>
-          <div class="m-row m-row--between"><div><div class="m-name">North Room · Andheri</div><div class="m-sub">Mon, 20 Aug · 2:00–6:00 PM</div></div><span class="m-badge m-badge--av">Confirmed</span></div>
-          <div class="m-sub">4 hours · SSL Console Room A</div>
-          <div style="font-weight:700;font-size:16px;font-family:var(--font-display)">₹7,200 total</div>
-          <div style="display:flex;gap:6px"><button class="m-btn m-btn--s" style="flex:1">Reschedule</button><button class="m-btn m-btn--s" style="flex:1;color:var(--error)">Cancel</button></div>
-        </div>
-      </div>
-
-      <div class="module module--flip">
-        <div class="module__text reveal">
-          <span class="module__num">04</span>
-          <h3>Marketplace</h3>
-          <p>Buy, sell and rent instruments, gear and services. Every transaction is between verified professionals.</p>
-          <div class="module__tags"><span class="module__tag">Buy & sell</span><span class="module__tag">Rentals</span><span class="module__tag">Secure payments</span></div>
-        </div>
-        <div class="mock reveal" aria-hidden="true">
-          <span class="mock__label">Marketplace</span>
-          <div class="m-card"><div style="height:100px;background:var(--surface-alt);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:32px">🎸</div><div class="m-name" style="margin-top:6px">Yamaha HS8 Monitors</div><div class="m-sub">Mumbai · Excellent</div><div style="display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid var(--border)"><span class="m-sub">Price</span><b style="font-family:var(--font-display)">₹45,000</b></div><button class="m-btn m-btn--p" style="width:100%;margin-top:4px">Message Seller</button></div>
-        </div>
-      </div>
-
-      <div class="module">
-        <div class="module__text reveal">
-          <span class="module__num">05</span>
-          <h3>Credits & Reviews</h3>
-          <p>Verified release credits replace unverified bio claims. Real reviews from real collaborators build reputations that matter.</p>
-          <div class="module__tags"><span class="module__tag">Multi-party verify</span><span class="module__tag">Public ledger</span><span class="module__tag">Anti-fake</span></div>
-        </div>
-        <div class="mock reveal" aria-hidden="true">
-          <span class="mock__label">Credits</span>
-          <div class="m-card"><div class="m-row"><div style="width:32px;height:32px;background:var(--brand-navy);border-radius:8px;display:grid;place-items:center;color:#fff;font-size:10px;font-weight:700">🎵</div><div><div class="m-name">Tu Hi Bata (OST)</div><div class="m-sub">Lead Vocals · 2025</div></div><span class="m-badge m-badge--av" style="margin-left:auto">✓ Verified</span></div></div>
-          <div class="m-card" style="margin-top:6px"><div class="m-row"><div style="width:32px;height:32px;background:var(--brand-pink);border-radius:8px;display:grid;place-items:center;color:#fff;font-size:10px;font-weight:700">🎧</div><div><div class="m-name">Safar Motion Picture</div><div class="m-sub">Mix & Mastering</div></div></div></div>
-        </div>
-      </div>
-
-      <div class="module module--flip">
-        <div class="module__text reveal">
-          <span class="module__num">06</span>
-          <h3>AI That Works For Musicians</h3>
-          <p>Practical AI that suggests collaborators, recommends studios, finds opportunities and improves profiles — without the hype.</p>
-          <div class="module__tags"><span class="module__tag">Matchmaking</span><span class="module__tag">Recommendations</span><span class="module__tag">Profile optimizer</span></div>
-        </div>
-        <div class="mock mock--dark reveal" aria-hidden="true">
-          <span class="mock__label">AI Match</span>
-          <div class="m-row" style="align-items:center;gap:10px"><div style="width:32px;height:32px;background:rgba(234,76,137,0.2);border-radius:8px;display:grid;place-items:center;color:var(--brand-pink);font-size:14px">✦</div><div><div class="m-name" style="color:#fff">Suggested collaborator</div><div class="m-sub">94% match · Same genre · Available</div></div></div>
-          <div class="m-row" style="align-items:center;gap:10px"><div style="width:32px;height:32px;background:rgba(139,92,246,0.2);border-radius:8px;display:grid;place-items:center;color:var(--accent-purple);font-size:14px">◎</div><div><div class="m-name" style="color:#fff">Studio recommendation</div><div class="m-sub">Near you · Dolby Atmos · ₹1,800/hr</div></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       6. SEE THE PRODUCT — HORIZONTAL GALLERY
-       ============================================================ -->
-  <section class="section section--alt gallery" id="gallery" data-section="gallery" aria-labelledby="gallery-h">
-    <div class="container">
-      <div class="sec-head">
-        <div class="eyebrow">Product Screens</div>
-        <h2 id="gallery-h" class="h2">See the product.</h2>
-        <p class="lead">Every screen is designed for clarity, speed and trust.</p>
-      </div>
+  <!-- ==========================================
+       SCREENS GALLERY (BENTO BOX)
+       ========================================== -->
+  <div id="gallery" class="sec sec-xl">
+    <div class="eyebrow">The App</div>
+    <div style="text-align: center; margin-bottom: var(--sp-4);">
+      <h2 style="font-size: clamp(32px, 5vw, 64px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1;">Designed for speed.<br>Built for pros.</h2>
     </div>
 
-    <div class="gallery__viewport">
-      <div class="gallery__track">
-        <!-- Shot 1: Splash -->
-        <div class="shot"><div class="phone"><div class="phone__screen" style="background:var(--brand-navy);align-items:center;justify-content:center"><div style="text-align:center"><div style="font-family:var(--font-display);font-weight:800;font-size:28px;color:#fff;letter-spacing:-0.04em">MusicLink<em style="color:var(--brand-pink);font-style:normal">d</em></div><div style="color:var(--text-on-dark-muted);font-size:10px;margin-top:6px">Your professional music network</div></div></div></div><div class="shot__caption"><span class="n">01</span><h3>Splash</h3><p>Instant brand recognition. Clean, confident, premium.</p></div></div>
-        <!-- Shot 2: Onboarding -->
-        <div class="shot"><div class="phone"><div class="phone__screen"><div style="padding:12px"><div class="m-name" style="font-size:18px;margin-bottom:4px">Create your profile</div><div class="m-sub" style="margin-bottom:12px">Choose your primary role</div><div style="display:flex;flex-direction:column;gap:6px"><div class="m-card" style="padding:10px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:var(--pink-container);display:grid;place-items:center;color:var(--brand-pink);font-size:12px">🎤</div><span style="font-size:12px;font-weight:600">Artist</span></div><div class="m-card" style="padding:10px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:var(--pink-container);display:grid;place-items:center;color:var(--brand-pink);font-size:12px">🎛️</div><span style="font-size:12px;font-weight:600">Producer / Engineer</span></div><div class="m-card" style="padding:10px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:var(--pink-container);display:grid;place-items:center;color:var(--brand-pink);font-size:12px">🏢</div><span style="font-size:12px;font-weight:600">Studio</span></div></div></div></div></div><div class="shot__caption"><span class="n">02</span><h3>Onboarding</h3><p>Pick your role in seconds. Personalised from the first tap.</p></div></div>
-        <!-- Shot 3: Discover -->
-        <div class="shot"><div class="phone"><div class="phone__screen"><div style="padding:12px"><div class="m-search" style="margin-bottom:8px"><span>🔍</span><span>Search talent, studios...</span></div><div style="display:flex;gap:4px;flex-wrap:wrap"><span class="m-chip m-chip--on">All</span><span class="m-chip">Vocalists</span><span class="m-chip">Studios</span></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><div class="m-card" style="text-align:center;padding:10px"><div style="font-size:20px">🎤</div><div style="font-size:10px;font-weight:600;margin-top:4px">Ananya</div><div style="font-size:9px;color:var(--text-secondary)">94% match</div></div><div class="m-card" style="text-align:center;padding:10px"><div style="font-size:20px">🎛️</div><div style="font-size:10px;font-weight:600;margin-top:4px">Rahul</div><div style="font-size:9px;color:var(--text-secondary)">82% match</div></div></div></div></div></div><div class="shot__caption"><span class="n">03</span><h3>Discover</h3><p>Filtered, fast, and built around real professional intent.</p></div></div>
-        <!-- Shot 4: Profile -->
-        <div class="shot"><div class="phone"><div class="phone__screen"><div style="height:90px;background:linear-gradient(135deg,#181A22,#4A4D5C);border-radius:0 0 14px 14px;margin:-12px -12px 0;padding:12px;display:flex;align-items:flex-end"><div style="width:44px;height:44px;border-radius:50%;border:2px solid #fff;background:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=88&q=80') center/cover"></div></div><div style="padding:12px"><div class="m-name">Ananya Sharma</div><div class="m-sub">Playback Vocalist · Mumbai</div><div class="m-stars" style="margin-top:4px">★★★★★</div><div class="m-chip m-chip--on" style="margin-top:6px">Hindi Folk</div><div class="m-chip m-chip--on">Pop Vocals</div><div class="m-divider" style="margin:10px 0"></div><div style="display:flex;justify-content:space-between;text-align:center"><div><b style="font-family:var(--font-display);font-size:14px">12.4k</b><div class="m-sub">Followers</div></div><div><b style="font-family:var(--font-display);font-size:14px">42</b><div class="m-sub">Credits</div></div><div><b style="font-family:var(--font-display);font-size:14px">4.9 ★</b><div class="m-sub">Rating</div></div></div><button class="m-btn m-btn--p" style="width:100%;margin-top:10px">Hire Artist</button></div></div></div><div class="shot__caption"><span class="n">04</span><h3>Profile</h3><p>Your complete professional identity — verified, rich, and always yours.</p></div></div>
-        <!-- Shot 5: Messaging -->
-        <div class="shot"><div class="phone"><div class="phone__screen"><div style="padding:12px;display:flex;flex-direction:column;gap:10px"><div class="m-row" style="align-items:center"><div class="m-avatar" style="width:32px;height:32px;background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=64&q=80') center/cover"></div><div><div class="m-name">Rahul Varma</div><div class="m-sub">Mix Engineer</div></div></div><div style="display:flex;flex-direction:column;gap:8px"><div class="m-bubble m-bubble--in">Hey, I reviewed the stems.</div><div class="m-bubble m-bubble--out">Amazing! When can we mix?</div></div><div class="m-search" style="margin-top:auto"><span>💬</span><span>Type a message...</span></div></div></div></div><div class="shot__caption"><span class="n">05</span><h3>Messaging</h3><p>Threaded conversations tied to real projects and bookings.</p></div></div>
-        <!-- Shot 6: Marketplace -->
-        <div class="shot"><div class="phone"><div class="phone__screen"><div style="padding:12px"><div class="m-name">Marketplace</div><div style="display:flex;gap:4px;margin:6px 0"><span class="m-chip m-chip--on">All</span><span class="m-chip">Gear</span><span class="m-chip">Rentals</span></div><div class="m-card" style="margin-top:4px"><div style="height:80px;background:var(--surface-alt);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:24px">🎸</div><div class="m-name" style="margin-top:4px">Yamaha HS8</div><div class="m-sub">₹45,000</div><button class="m-btn m-btn--p" style="width:100%;margin-top:4px">Inquire</button></div></div></div></div><div class="shot__caption"><span class="n">06</span><h3>Marketplace</h3><p>Buy, sell and rent gear with verified sellers and secure payments.</p></div></div>
-        <!-- Shot 7: Booking -->
-        <div class="shot"><div class="phone"><div class="phone__screen"><div style="padding:12px"><div class="m-name">Book Studio</div><div class="m-card" style="margin-top:6px"><div class="m-name">North Room · Andheri</div><div class="m-sub">Mon, 20 Aug · 2:00–6:00 PM</div><div style="font-weight:700;margin-top:4px">₹7,200</div><div style="display:flex;gap:6px;margin-top:6px"><button class="m-btn m-btn--n" style="flex:1">Confirm</button><button class="m-btn m-btn--s" style="flex:1">Cancel</button></div></div></div></div></div><div class="shot__caption"><span class="n">07</span><h3>Booking</h3><p>Real-time calendars, instant confirmation, and escrow protection.</p></div></div>
-        <!-- Shot 8: Reviews -->
-        <div class="shot"><div class="phone"><div class="phone__screen"><div style="padding:12px"><div class="m-name">Reviews</div><div class="m-card" style="margin-top:6px"><div class="m-row"><div class="m-avatar" style="width:28px;height:28px;background:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=56&q=80') center/cover"></div><div><div class="m-name">Priya Sharma</div><div class="m-sub">Music Director · Mumbai</div></div></div><div class="m-stars">★★★★★</div><div class="m-sub" style="margin-top:4px">Exceptional session work. Professional and punctual.</div></div></div></div></div><div class="shot__caption"><span class="n">08</span><h3>Reviews</h3><p>Verified, role-specific reviews that build real reputation.</p></div></div>
-        <!-- Shot 9: Portfolio -->
-        <div class="shot"><div class="phone"><div class="phone__screen"><div style="padding:12px"><div class="m-name">Portfolio</div><div class="m-card" style="margin-top:6px"><div style="height:100px;background:linear-gradient(135deg,var(--brand-pink),var(--brand-navy));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--font-display);font-weight:800;font-size:20px;letter-spacing:0.1em">RAAH</div><div class="m-name" style="margin-top:6px">Dil Ki Raah (Single)</div><div class="m-sub">Vocal Production · 2026</div></div><div style="display:flex;gap:6px;margin-top:6px"><span class="m-chip m-chip--on">Public</span><span class="m-chip">Share</span></div></div></div></div><div class="shot__caption"><span class="n">09</span><h3>Portfolio</h3><p>Showcase your best work in a beautiful, shareable public profile.</p></div></div>
-        <!-- Shot 10: Connections -->
-        <div class="shot"><div class="phone"><div class="phone__screen"><div style="padding:12px"><div class="m-name">Connections</div><div class="m-card" style="margin-top:6px;display:flex;align-items:center;gap:8px"><div class="m-avatar" style="width:36px;height:36px;background:url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=72&q=80') center/cover"></div><div><div class="m-name">Yash Raj Sound</div><div class="m-sub">Studio · Mumbai</div></div><span class="m-badge m-badge--vf" style="margin-left:auto">Connected</span></div></div></div></div><div class="shot__caption"><span class="n">10</span><h3>Connections</h3><p>Build a trusted network of collaborators, studios, and clients.</p></div></div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--sp-2); max-width: 1400px; margin: 0 auto;">
+      
+      <!-- Screen 1: Dashboard -->
+      <div style="background: var(--surface-subtle); border-radius: var(--r-4); padding: var(--sp-3) var(--sp-3) 0 var(--sp-3); border: 1px solid var(--line); display: flex; flex-direction: column; gap: var(--sp-2); overflow: hidden; min-height: 400px;">
+        <h3 style="font-size: var(--fs-2); font-weight: 800;">Command Center</h3>
+        <p style="color: var(--muted);">Manage inquiries, active bookings, and payouts from one unified dashboard.</p>
+        <div style="flex-grow: 1; background: var(--bg); border-radius: var(--r-3) var(--r-3) 0 0; border: 1px solid var(--line); border-bottom: none; box-shadow: 0 -12px 32px rgba(0,0,0,0.05); margin-top: auto; padding: var(--sp-2);">
+           <!-- Abstract UI -->
+           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-2);">
+             <div style="width: 40px; height: 40px; border-radius: var(--r-full); background: var(--pink-container);"></div>
+             <div style="width: 100px; height: 16px; border-radius: 8px; background: var(--line);"></div>
+           </div>
+           <div style="height: 120px; border-radius: var(--r-2); background: var(--surface-subtle); margin-bottom: var(--sp-2);"></div>
+           <div style="display: flex; gap: var(--sp-1);">
+             <div style="flex: 1; height: 80px; border-radius: var(--r-2); background: var(--surface-subtle);"></div>
+             <div style="flex: 1; height: 80px; border-radius: var(--r-2); background: var(--pink-container);"></div>
+           </div>
+        </div>
+      </div>
+
+      <!-- Screen 2: Discovery Grid -->
+      <div style="background: var(--ink); color: var(--bg); border-radius: var(--r-4); padding: var(--sp-3) var(--sp-3) 0 var(--sp-3); display: flex; flex-direction: column; gap: var(--sp-2); overflow: hidden; min-height: 400px;">
+        <h3 style="font-size: var(--fs-2); font-weight: 800;">Visual Discovery</h3>
+        <p style="color: rgba(255,255,255,0.7);">Browse studio photos, gear lists, and past credits in a fluid, immersive grid.</p>
+        <div style="flex-grow: 1; background: #1a1b23; border-radius: var(--r-3) var(--r-3) 0 0; border: 1px solid rgba(255,255,255,0.1); border-bottom: none; box-shadow: 0 -12px 32px rgba(0,0,0,0.2); margin-top: auto; padding: var(--sp-2); display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-1);">
+           <!-- Abstract UI -->
+           <div style="height: 160px; border-radius: var(--r-2); background: rgba(255,255,255,0.05);"></div>
+           <div style="height: 120px; border-radius: var(--r-2); background: rgba(255,255,255,0.05);"></div>
+           <div style="height: 140px; border-radius: var(--r-2); background: rgba(255,255,255,0.05); margin-top: -40px;"></div>
+           <div style="height: 180px; border-radius: var(--r-2); background: rgba(255,255,255,0.05);"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================
+       BRAND IDENTITY
+       ========================================== -->
+  <div id="brand" class="sec sec-xl" style="background: var(--bg); border-top: 1px solid var(--line);">
+    <div class="eyebrow">Our Identity</div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); align-items: center; max-width: 1400px; margin: 0 auto; @media(max-width: 900px) { grid-template-columns: 1fr; }">
+      
+      <!-- Typography Specimen -->
+      <div>
+        <h2 style="font-size: clamp(48px, 8vw, 120px); font-weight: 900; line-height: 0.9; letter-spacing: -0.05em; margin-bottom: var(--sp-2);">Aa</h2>
+        <h3 style="font-size: var(--fs-3); font-weight: 800; margin-bottom: var(--sp-1);">Inter / Roboto</h3>
+        <p style="font-size: var(--fs-2); color: var(--muted);">Oversized type. Massive whitespace. No compromises. Our typography forces a strict 4-tier exponential hierarchy to ensure maximum clarity and impact.</p>
+      </div>
+
+      <!-- Color Swatches -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2);">
+        
+        <div style="background: var(--pink); color: white; padding: var(--sp-3); border-radius: var(--r-3); display: flex; flex-direction: column; justify-content: flex-end; aspect-ratio: 1; box-shadow: 0 12px 24px rgba(234,76,137,0.3);">
+          <div style="font-weight: 800; font-size: var(--fs-2);">Accent</div>
+          <div style="font-family: monospace; opacity: 0.8;">#EA4C89</div>
+        </div>
+
+        <div style="background: var(--ink); color: white; padding: var(--sp-3); border-radius: var(--r-3); display: flex; flex-direction: column; justify-content: flex-end; aspect-ratio: 1; box-shadow: 0 12px 24px rgba(13,11,38,0.3);">
+          <div style="font-weight: 800; font-size: var(--fs-2);">Navy Dark</div>
+          <div style="font-family: monospace; opacity: 0.8;">#0D0B26</div>
+        </div>
+
+        <div style="background: var(--surface-subtle); color: var(--ink); border: 1px solid var(--line); padding: var(--sp-3); border-radius: var(--r-3); display: flex; flex-direction: column; justify-content: flex-end; aspect-ratio: 1;">
+          <div style="font-weight: 800; font-size: var(--fs-2);">Surface</div>
+          <div style="font-family: monospace; opacity: 0.6;">#F8F8FB</div>
+        </div>
+
+        <div style="background: var(--bg); color: var(--ink); border: 1px solid var(--line); padding: var(--sp-3); border-radius: var(--r-3); display: flex; flex-direction: column; justify-content: flex-end; aspect-ratio: 1;">
+          <div style="font-weight: 800; font-size: var(--fs-2);">Background</div>
+          <div style="font-family: monospace; opacity: 0.6;">#FFFFFF</div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+\n\n<!-- SHAZAM ASSETS / DOWNLOAD SECTION -->
+  <div class="sec sec-xl" style="background: var(--surface-subtle); border-radius: var(--r-4); padding: var(--sp-4); text-align: center; margin: var(--sp-4) auto; max-width: 1400px; display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);">
+    <h2 style="font-size: var(--fs-4); font-weight: 800; letter-spacing: -0.04em; max-width: 800px; line-height: 1.1;">Download MusicLinkd.<br>Available anywhere.</h2>
+    <p class="desc" style="font-size: var(--fs-2); color: var(--muted); max-width: 600px; margin-bottom: 24px;">Manage your studios, approve bookings, and discover top-tier talent right from your phone, browser, or control center.</p>
+    
+    <div style="display: flex; gap: var(--sp-2); justify-content: center; flex-wrap: wrap; margin-bottom: var(--sp-3);">
+      <img src="./assets/img/shazam/appstore_chrome_dark.webp" alt="App Store" style="height: 60px; object-fit: contain; border-radius: var(--r-2);">
+      <img src="./assets/img/shazam/galaxystore.webp" alt="Galaxy Store" style="height: 60px; object-fit: contain; border-radius: var(--r-2);">
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--sp-2); width: 100%; max-width: 1200px;">
+      <div style="background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-3); padding: var(--sp-2); overflow: hidden; display: flex; flex-direction: column; align-items: center;">
+        <h3 style="font-size: var(--fs-2); font-weight: 700; margin-bottom: var(--sp-1);">Browser Extension</h3>
+        <img src="./assets/img/shazam/browser.webp" style="width: 100%; border-radius: var(--r-2); object-fit: cover; margin-top: auto;" alt="Browser Extension">
+      </div>
+      <div style="background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-3); padding: var(--sp-2); overflow: hidden; display: flex; flex-direction: column; align-items: center;">
+        <h3 style="font-size: var(--fs-2); font-weight: 700; margin-bottom: var(--sp-1);">Control Center Integration</h3>
+        <img src="./assets/img/shazam/control-center-2026.webp" style="width: 100%; border-radius: var(--r-2); object-fit: cover; margin-top: auto;" alt="Control Center">
       </div>
     </div>
-    <div class="container">
-      <div class="gallery__hint" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Scroll to explore the product</div>
-      <div class="gallery__progress" aria-hidden="true"><i></i></div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       7. HOW IT WORKS — JOURNEYS
-       ============================================================ -->
-  <section class="section" id="journeys" data-section="journeys" aria-labelledby="journeys-h">
-    <div class="container">
-      <div class="sec-head sec-head--center">
-        <div class="eyebrow">How It Works</div>
-        <h2 id="journeys-h" class="h2">Complete journeys, not feature lists.</h2>
-        <p class="lead">Every role has a clear path from sign-up to success.</p>
-      </div>
-
-      <div class="journey-tabs" role="tablist" aria-label="User journeys">
-        <button class="journey-tab" role="tab" aria-selected="true" data-tab="j-artist">🎤 Artist</button>
-        <button class="journey-tab" role="tab" aria-selected="false" data-tab="j-studio">🏢 Studio</button>
-        <button class="journey-tab" role="tab" aria-selected="false" data-tab="j-business">💼 Business</button>
-        <button class="journey-tab" role="tab" aria-selected="false" data-tab="j-mkt">🛒 Marketplace</button>
-      </div>
-
-      <!-- Artist Journey -->
-      <div class="journey-panel" id="j-artist">
-        <div class="journey__layout">
-          <div class="journey__intro reveal">
-            <h3>From unknown to in-demand.</h3>
-            <p>Create a profile, upload your best work, get discovered, connect, collaborate, book studios, receive reviews, and grow your career.</p>
-            <a href="#cta" class="btn btn--primary">Start your journey</a>
-          </div>
-          <ol class="steps reveal">
-            <li class="step"><div class="step__num">1</div><div class="step__body"><h4>Create your profile</h4><p>Set your role, upload a photo, add genres and availability.</p></div></li>
-            <li class="step"><div class="step__num">2</div><div class="step__body"><h4>Upload your music</h4><p>Add audio previews, videos and projects to your portfolio.</p></div></li>
-            <li class="step"><div class="step__num">3</div><div class="step__body"><h4>Get discovered</h4><p>Appear in search results, AI recommendations and opportunity feeds.</p></div></li>
-            <li class="step"><div class="step__num">4</div><div class="step__body"><h4>Connect</h4><p>Send connection requests, build your network and join projects.</p></div></li>
-            <li class="step"><div class="step__num">5</div><div class="step__body"><h4>Collaborate</h4><p>Work with verified professionals on real projects.</p></div></li>
-            <li class="step"><div class="step__num">6</div><div class="step__body"><h4>Book a studio</h4><p>Find and book the right space at the right price.</p></div></li>
-            <li class="step"><div class="step__num">7</div><div class="step__body"><h4>Receive reviews</h4><p>Earn verified reviews that build lasting reputation.</p></div></li>
-            <li class="step"><div class="step__num">8</div><div class="step__body"><h4>Grow your career</h4><p>Use your verified profile to access better opportunities.</p></div></li>
-          </ol>
-        </div>
-      </div>
-
-      <!-- Studio Journey -->
-      <div class="journey-panel" id="j-studio" hidden>
-        <div class="journey__layout">
-          <div class="journey__intro reveal"><h3>From empty rooms to full calendar.</h3><p>List your studio, showcase equipment, accept bookings and build a reputation that fills your slots.</p><a href="#cta" class="btn btn--primary">Register your studio</a></div>
-          <ol class="steps reveal">
-            <li class="step"><div class="step__num">1</div><div class="step__body"><h4>Register studio</h4><p>Add rooms, equipment list, pricing and photos.</p></div></li>
-            <li class="step"><div class="step__num">2</div><div class="step__body"><h4>Get verified</h4><p>Complete business verification to earn the Business badge.</p></div></li>
-            <li class="step"><div class="step__num">3</div><div class="step__body"><h4>Sync calendar</h4><p>Connect your availability so clients see real-time slots.</p></div></li>
-            <li class="step"><div class="step__num">4</div><div class="step__body"><h4>Receive bookings</h4><p>Get notified when artists book your studio.</p></div></li>
-            <li class="step"><div class="step__num">5</div><div class="step__body"><h4>Collect reviews</h4><p>Earn reviews from artists and build trust.</p></div></li>
-            <li class="step"><div class="step__num">6</div><div class="step__body"><h4>Grow visibility</h4><p>Appear in search results and AI recommendations.</p></div></li>
-          </ol>
-        </div>
-      </div>
-
-      <!-- Business Journey -->
-      <div class="journey-panel" id="j-business" hidden>
-        <div class="journey__layout">
-          <div class="journey__intro reveal"><h3>Hire music professionals with confidence.</h3><p>Post briefs, review proposals, manage contracts and payments — all in one platform.</p><a href="#cta" class="btn btn--primary">Request a demo</a></div>
-          <ol class="steps reveal">
-            <li class="step"><div class="step__num">1</div><div class="step__body"><h4>Create business account</h4><p>Verify your label, venue or organisation.</p></div></li>
-            <li class="step"><div class="step__num">2</div><div class="step__body"><h4>Post a brief</h4><p>Describe the project, budget and timeline.</p></div></li>
-            <li class="step"><div class="step__num">3</div><div class="step__body"><h4>Review proposals</h4><p>Compare verified professionals side by side.</p></div></li>
-            <li class="step"><div class="step__num">4</div><div class="step__body"><h4>Hire and pay securely</h4><p>Use escrow payments and milestone tracking.</p></div></li>
-          </ol>
-        </div>
-      </div>
-
-      <!-- Marketplace Journey -->
-      <div class="journey-panel" id="j-mkt" hidden>
-        <div class="journey__layout">
-          <div class="journey__intro reveal"><h3>Buy, sell and rent with trust.</h3><p>Every transaction is between verified professionals with transparent history.</p><a href="#cta" class="btn btn--primary">Explore marketplace</a></div>
-          <ol class="steps reveal">
-            <li class="step"><div class="step__num">1</div><div class="step__body"><h4>Browse listings</h4><p>Filter by category, price, condition and location.</p></div></li>
-            <li class="step"><div class="step__num">2</div><div class="step__body"><h4>Contact seller</h4><p>Message directly through the platform.</p></div></li>
-            <li class="step"><div class="step__num">3</div><div class="step__body"><h4>Inspect and negotiate</h4><p>Use built-in tools to verify and agree terms.</p></div></li>
-            <li class="step"><div class="step__num">4</div><div class="step__body"><h4>Complete transaction</h4><p>Pay securely and leave a review.</p></div></li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       8. BUILT AROUND TRUST
-       ============================================================ -->
-  <section class="section section--dark" id="trust" data-section="trust" aria-labelledby="trust-h">
-    <div class="container">
-      <div class="sec-head">
-        <div class="eyebrow" style="color:var(--brand-pink)">Trust Engine</div>
-        <h2 id="trust-h" class="h2">Built around trust.<br>Not algorithms.</h2>
-        <p class="lead" style="color:var(--text-on-dark-muted)">Every profile, studio, review and credit is verifiable. Because in music, reputation is everything.</p>
-      </div>
-
-      <div class="trust-grid">
-        <div class="trust-card reveal"><div class="trust-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Verified Professionals</h3><p>Credits verified by multiple parties. No more unverified bio claims.</p></div>
-        <div class="trust-card reveal"><div class="trust-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><h3>Verified Studios</h3><p>Equipment, pricing and availability are verified and kept current.</p></div>
-        <div class="trust-card reveal"><div class="trust-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><h3>Verified Reviews</h3><p>Only real collaborators can review. No anonymous ratings.</p></div>
-        <div class="trust-card reveal"><div class="trust-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h3>Credits Ledger</h3><p>A permanent, multi-party verified record of every release credit.</p></div>
-      </div>
-
-      <div class="credit-loop reveal" style="margin-top:24px">
-        <div>
-          <h3>How the <em>Credits Trust Engine</em> works</h3>
-          <p>When someone claims a credit on a release, all other credited parties are invited to verify. Once verified, the credit becomes a permanent, trusted part of that professional's identity.</p>
-        </div>
-        <div class="credit-card">
-          <div class="credit-card__head"><b>"Tu Hi Bata (OST)"</b><span class="m-badge m-badge--av">✓ Verified</span></div>
-          <div class="credit-person"><div><div class="m-name">Ananya Sharma</div><div class="m-sub">Lead Vocals · 2025</div></div><span class="m-badge m-badge--vf">Pro Verified</span></div>
-          <div class="credit-person"><div><div class="m-name">Rahul Varma</div><div class="m-sub">Mix & Mastering</div></div><span class="m-badge m-badge--vf">Pro Verified</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       8b. DESIGN PHILOSOPHY (new)
-       ============================================================ -->
-  <section class="section color-field--soft-pink section--gradient-edge" id="philosophy" data-section="philosophy" aria-labelledby="philosophy-h">
-    <div class="container">
-      <div class="sec-head sec-head--center">
-        <div class="eyebrow">Design Philosophy</div>
-        <h2 id="philosophy-h" class="h2">Designed for <span class="accent-serif">people</span>, not dashboards.</h2>
-        <p class="lead">Every pixel is built around the real ways music professionals work, connect and create.</p>
-      </div>
-
-      <div class="split-layout">
-        <div class="split-layout__text reveal">
-          <h3 class="h2--alt" style="margin-bottom:16px">Clarity over complexity</h3>
-          <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:20px">MusicLinkd strips away the noise. We use large typography, generous whitespace, and deliberate hierarchy so what matters — people, projects, and opportunities — stays front and center.</p>
-          <p style="color:var(--text-secondary);line-height:1.7">No crowded dashboards. No blinking metrics. Just a clean, editorial experience that puts music professionals first.</p>
-        </div>
-        <div class="split-layout__visual reveal">
-          <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=700&q=85" alt="Music studio recording session" class="img-frame img-frame--tilt" style="width:100%;height:420px;object-fit:cover" loading="lazy">
-        </div>
-      </div>
-
-      <div class="tilt-grid" style="margin-top:64px" data-stagger>
-        <div class="tilt-card"><div class="tilt-card__num">01</div><h4>Typography-first</h4><p>Inter Tight for display creates a modern, editorial feel. Bold sizes and tight letter-spacing establish clear information hierarchy without decoration.</p></div>
-        <div class="tilt-card"><div class="tilt-card__num">02</div><h4>Device-native</h4><p>Every interface component is designed at 360dp and scales up. The mobile experience drives every design decision.</p></div>
-        <div class="tilt-card"><div class="tilt-card__num">03</div><h4>Trust as UI</h4><p>Verification badges, credit ledgers and review systems are surfaced directly in the interface — not hidden in settings.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       9. AI FEATURES
-       ============================================================ -->
-  <section class="section" id="ai" data-section="ai" aria-labelledby="ai-h">
-    <div class="container">
-      <div class="sec-head sec-head--center">
-        <div class="eyebrow">Intelligence</div>
-        <h2 id="ai-h" class="h2">AI that works for musicians.</h2>
-        <p class="lead">Practical tools — not hype. Built specifically for music workflows.</p>
-      </div>
-
-      <div class="ai-grid">
-        <div class="ai-card reveal"><div class="ai-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h3>Smart Matchmaking</h3><p>Suggest collaborators based on genre, skill, availability and past project history.</p></div>
-        <div class="ai-card reveal"><div class="ai-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><h3>Studio Recommendations</h3><p>Find the right studio based on your project needs, budget and location.</p></div>
-        <div class="ai-card reveal"><div class="ai-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h3>Opportunity Matching</h3><p>Surface relevant gigs, briefs and collaborations before they go public.</p></div>
-        <div class="ai-card reveal"><div class="ai-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h3>Profile Optimizer</h3><p>Get suggestions to improve discoverability, completeness and conversion.</p></div>
-        <div class="ai-card reveal"><div class="ai-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Connection Suggestions</h3><p>Discover professionals you should know but haven't met yet.</p></div>
-        <div class="ai-card reveal"><div class="ai-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h3>Workflow Insights</h3><p>Understand your peak hours, best channels, and conversion patterns.</p></div>
-      </div>
-
-      <p class="ai-note reveal">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        Powered by Gemini AI. Built for privacy. Designed for musicians.
-      </p>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       10. BUILT FOR EVERY PROFESSIONAL
-       ============================================================ -->
-  <section class="section section--alt" id="roles" data-section="roles" aria-labelledby="roles-h">
-    <div class="container">
-      <div class="sec-head sec-head--center">
-        <div class="eyebrow">Community</div>
-        <h2 id="roles-h" class="h2">Built for every music professional.</h2>
-        <p class="lead">If you make music, produce music, support music or book music — this is your platform.</p>
-      </div>
-
-      <div class="roles-grid">
-        <div class="role reveal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Vocalists</div>
-        <div class="role reveal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Instrumentalists</div>
-        <div class="role reveal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Beatmakers</div>
-        <div class="role reveal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Composers</div>
-        <div class="role reveal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Mix Engineers</div>
-        <div class="role reveal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 9 2 15 6 15 11 19 11 5"/></svg> Mastering Engineers</div>
-        <div class="role reveal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Podcasters</div>
-        <div class="role reveal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Voice Artists</div>
-        <div class="role reveal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Bands</div>
-        <div class="role reveal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg> Teachers</div>
-        <div class="role reveal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg> Rental Companies</div>
-        <div class="role reveal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> Labels</div>
-        <div class="role reveal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Managers</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       10b. TECHNOLOGY (new)
-       ============================================================ -->
-  <section class="section section--dark" id="technology" data-section="technology" aria-labelledby="tech-h">
-    <div class="container">
-      <div class="sec-head">
-        <div class="eyebrow" style="color:var(--brand-pink)">Technology</div>
-        <h2 id="tech-h" class="h2">Built on modern infrastructure.</h2>
-        <p class="lead" style="color:var(--text-on-dark-muted)">Native Android, cloud-synced, AI-powered, and designed for India's music industry.</p>
-      </div>
-
-      <div class="tech-grid" data-stagger>
-        <div class="tech-pill" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12);color:#fff"><div class="tech-pill__icon" style="background:#3DDC84">A</div> Native Android</div>
-        <div class="tech-pill" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12);color:#fff"><div class="tech-pill__icon" style="background:#FFCA28">F</div> Firebase</div>
-        <div class="tech-pill" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12);color:#fff"><div class="tech-pill__icon" style="background:#4285F4">FS</div> Firestore</div>
-        <div class="tech-pill" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12);color:#fff"><div class="tech-pill__icon" style="background:#4285F4">G</div> Gemini AI</div>
-        <div class="tech-pill" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12);color:#fff"><div class="tech-pill__icon" style="background:#34A853">O</div> Offline-first</div>
-        <div class="tech-pill" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12);color:#fff"><div class="tech-pill__icon" style="background:#EA4C89">S</div> Secure Cloud Sync</div>
-      </div>
-
-      <div class="story-block story-block--alt" style="margin-top:48px">
-        <div class="story-block__text">
-          <span class="tag">Why Native Android</span>
-          <h3 style="color:#fff;font-size:clamp(26px,3.2vw,36px);line-height:1.08">India runs on Android.<br>MusicLinkd runs on Android.</h3>
-          <p style="color:var(--text-on-dark-muted)">Built with Jetpack Compose for a smooth, native experience that respects device resources and works reliably even in low-connectivity environments.</p>
-        </div>
-        <div class="story-block__visual">
-          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=85" alt="Person using phone" style="width:100%;height:100%;object-fit:cover" loading="lazy" data-parallax="0.12">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       11. WHY MUSICLINKD IS DIFFERENT
-       ============================================================ -->
-  <section class="section" id="compare" data-section="compare" aria-labelledby="compare-h">
-    <div class="container">
-      <div class="sec-head sec-head--center">
-        <div class="eyebrow">Why MusicLinkd</div>
-        <h2 id="compare-h" class="h2">Not another generic tool.<br>Industry infrastructure.</h2>
-      </div>
-
-      <div class="compare reveal">
-        <div class="compare__col compare__col--without">
-          <div class="compare__label">Without MusicLinkd</div>
-          <h3>Scattered workflows</h3>
-          <ul class="compare__list">
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Scattered tools</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> WhatsApp bookings</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Instagram portfolios</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Google Drive links</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> No reputation system</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> No discovery</li>
-          </ul>
-        </div>
-        <div class="compare__col compare__col--with">
-          <div class="compare__label">With MusicLinkd</div>
-          <h3>One ecosystem</h3>
-          <ul class="compare__list">
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> One professional identity</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> One verified profile</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> One ecosystem</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> One professional network</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> One discovery platform</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> One booking experience</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       12. TESTIMONIALS
-       ============================================================ -->
-  <section class="section section--alt" id="testimonials" data-section="testimonials" aria-labelledby="testimonials-h">
-    <div class="container">
-      <div class="sec-head sec-head--center">
-        <div class="eyebrow">Testimonials</div>
-        <h2 id="testimonials-h" class="h2">Loved by music professionals.</h2>
-      </div>
-
-      <div class="quotes">
-        <div class="quote quote--feature reveal">
-          <div class="quote__text">"MusicLinkd replaced five different tools for me. My profile, bookings, credits and collaborations all live in one place now."</div>
-          <div class="quote__person"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=88&q=80" alt=""><div><b>Arjun Mehta</b><small>Independent Producer · Mumbai</small></div></div>
-        </div>
-        <div class="quote reveal">
-          <div class="quote__stars">★★★★★</div>
-          <div class="quote__text">"Finally, a platform that understands how studios work. Booking, equipment lists, reviews — everything is right there."</div>
-          <div class="quote__person"><img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=88&q=80" alt=""><div><b>Neha Kapoor</b><small>Owner · Bluearp Studio, Bengaluru</small></div></div>
-        </div>
-        <div class="quote reveal">
-          <div class="quote__stars">★★★★★</div>
-          <div class="quote__text">"The credits verification feature is a game-changer. My verified discography now opens real doors."</div>
-          <div class="quote__person"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=88&q=80" alt=""><div><b>Riya Singh</b><small>Mixing Engineer · Delhi</small></div></div>
-        </div>
-        <div class="quote reveal">
-          <div class="quote__stars">★★★★★</div>
-          <div class="quote__text">"We hired three session musicians through MusicLinkd in one week. The quality of profiles is unmatched."</div>
-          <div class="quote__person"><img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=88&q=80" alt=""><div><b>Rahul Verma</b><small>Label Head · Echo Records</small></div></div>
-        </div>
-        <div class="quote reveal">
-          <div class="quote__stars">★★★★★</div>
-          <div class="quote__text">"As an educator, I can now connect students directly to studios and gigs. It closes the loop."</div>
-          <div class="quote__person"><img src="https://images.unsplash.com/photo-1573496359142-b0d38d31b7ae?auto=format&fit=crop&w=88&q=80" alt=""><div><b>Anita Desai</b><small>Faculty · KM Music Conservatory</small></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       13. ROADMAP
-       ============================================================ -->
-  <section class="section" id="roadmap" data-section="roadmap" aria-labelledby="roadmap-h">
-    <div class="container">
-      <div class="sec-head sec-head--center">
-        <div class="eyebrow">Roadmap</div>
-        <h2 id="roadmap-h" class="h2">Built in public.</h2>
-        <p class="lead">Transparent progress from the team that's building it.</p>
-      </div>
-
-      <div class="roadmap">
-        <div class="phase phase--now reveal">
-          <div class="phase__head"><h3>Current</h3><span class="phase__pill phase__pill--now">Now</span></div>
-          <p class="phase__desc">Live in Early Access for Android in India.</p>
-          <ul class="phase__list">
-            <li>Android app (Early Access)</li>
-            <li>Professional profiles</li>
-            <li>Discovery & AI matchmaking</li>
-            <li>Studio booking</li>
-            <li>Marketplace (beta)</li>
-            <li>Credits verification</li>
-          </ul>
-        </div>
-        <div class="phase phase--next reveal">
-          <div class="phase__head"><h3>Upcoming</h3><span class="phase__pill phase__pill--next">Next</span></div>
-          <p class="phase__desc">Expanding platform capabilities and coverage.</p>
-          <ul class="phase__list">
-            <li>Admin platform for businesses</li>
-            <li>Business accounts & escrow</li>
-            <li>Advanced AI matching</li>
-            <li>Marketplace expansion</li>
-            <li>Rental module</li>
-            <li>More cities across India</li>
-          </ul>
-        </div>
-        <div class="phase reveal">
-          <div class="phase__head"><h3>Future</h3><span class="phase__pill phase__pill--future">Later</span></div>
-          <p class="phase__desc">Scaling to new platforms and markets.</p>
-          <ul class="phase__list">
-            <li>iOS app</li>
-            <li>International expansion</li>
-            <li>API for third-party integrations</li>
-            <li>Revenue share for creators</li>
-            <li>Advanced analytics</li>
-            <li>Community features</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       14. FAQ
-       ============================================================ -->
-  <section class="section section--alt" id="faq" data-section="faq" aria-labelledby="faq-h">
-    <div class="container">
-      <div class="sec-head sec-head--center">
-        <div class="eyebrow">FAQ</div>
-        <h2 id="faq-h" class="h2">Frequently asked questions.</h2>
-      </div>
-
-      <div class="faq reveal">
-        <div class="faq__item"><button class="faq__q" aria-expanded="false"><span>Is MusicLinkd free to use?</span><span class="faq__icon" aria-hidden="true">+</span></button><div class="faq__a"><div class="faq__a-inner"><p>Yes. Creating a profile, discovering other professionals and using core features is completely free. Premium features and transaction fees are clearly disclosed before you use them.</p></div></div></div>
-        <div class="faq__item"><button class="faq__q" aria-expanded="false"><span>Who can join MusicLinkd?</span><span class="faq__icon" aria-hidden="true">+</span></button><div class="faq__a"><div class="faq__a-inner"><p>Any music professional — artists, musicians, producers, engineers, studios, labels, managers, educators, rental providers and venues. If you work in music, this is your platform.</p></div></div></div>
-        <div class="faq__item"><button class="faq__q" aria-expanded="false"><span>Can studios and businesses register?</span><span class="faq__icon" aria-hidden="true">+</span></button><div class="faq__a"><div class="faq__a-inner"><p>Absolutely. Studios, labels, venues, rental companies and music schools can create verified business profiles, list services and hire through the platform.</p></div></div></div>
-        <div class="faq__item"><button class="faq__q" aria-expanded="false"><span>Is this available outside India?</span><span class="faq__icon" aria-hidden="true">+</span></button><div class="faq__a"><div class="faq__a-inner"><p>We are launching in India first. International expansion is on our roadmap. Join the waitlist and we'll notify you when we launch in your region.</p></div></div></div>
-        <div class="faq__item"><button class="faq__q" aria-expanded="false"><span>How do I get verified?</span><span class="faq__icon" aria-hidden="true">+</span></button><div class="faq__a"><div class="faq__a-inner"><p>Verification happens through our Credits Trust Engine — your claimed credits are verified by other credited parties on the same release. The more verified credits you have, the stronger your reputation.</p></div></div></div>
-        <div class="faq__item"><button class="faq__q" aria-expanded="false"><span>When is iOS launching?</span><span class="faq__icon" aria-hidden="true">+</span></button><div class="faq__a"><div class="faq__a-inner"><p>iOS is on our future roadmap. We are focusing on delivering the best possible Android experience first. Join the waitlist to be the first to know when iOS early access opens.</p></div></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       15. FINAL CTA
-       ============================================================ -->
-  <section class="section section--dark cta-final" id="cta" data-section="cta" aria-labelledby="cta-h">
-    <div class="cta-final__glow" aria-hidden="true"></div>
-    <div class="container">
-      <h2 id="cta-h" class="h2">Join the future of<br>professional music networking.</h2>
-      <p class="lead" style="color:var(--text-on-dark-muted)">Download the app, join early access, or partner with us. The ecosystem is waiting.</p>
-
-      <div class="cta-final__ctas">
-        <a href="https://play.google.com/store/apps/details?id=com.musiclinkd.app" target="_blank" rel="noopener" class="play-badge play-badge--light">
-          <svg class="play-badge__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 0 1-.61-.928V2.742a1 1 0 0 1 .61-.928zM14.5 10.722l2.823-1.333 1.415 1.415-2.823 1.333L14.5 10.722zm2.823 5.333L16.915 14.5l2.823-1.333 1.415 1.415-2.408 1.133zM5.5 8.5l7 3.333v-6.666L5.5 8.5z"/></svg>
-          <span class="play-badge__text"><small>Get it on</small><strong>Google Play</strong></span>
-        </a>
-        <a href="#cta" class="btn btn--primary btn--lg">Join Early Access</a>
-      </div>
-
-      <form class="waitlist" data-endpoint="/api/waitlist" aria-label="Join the waitlist">
-        <div class="waitlist__row">
-          <input type="email" placeholder="Enter your email" aria-label="Email address" required>
-          <button type="submit" class="btn btn--primary">Join Waitlist</button>
-        </div>
-        <div class="waitlist__success" aria-live="polite">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          You're on the list. We'll be in touch.
-        </div>
-      </form>
-
-      <p class="cta-final__partner">Want to partner with MusicLinkd? <a href="mailto:partner@musiclinkd.com">partner@musiclinkd.com</a></p>
-
-      <!-- Business Demo form (hidden in CTA section) -->
-      <div style="margin-top:24px;text-align:center">
-        <details style="max-width:480px;margin:24px auto 0">
-          <summary style="cursor:pointer;color:var(--text-on-dark-muted);font-size:14px;font-weight:500;padding:12px">Request a Business Demo →</summary>
-          <form class="partner-form" data-endpoint="/api/demo" aria-label="Request a business demo" style="margin-top:16px;text-align:left;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:28px">
-            <div style="display:flex;flex-direction:column;gap:12px">
-              <div><label style="font-size:11px;color:var(--text-on-dark-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;display:block">Full name</label><input type="text" name="name" placeholder="Your name" style="width:100%;padding:10px 14px;border:1px solid rgba(255,255,255,0.15);border-radius:12px;background:rgba(255,255,255,0.05);color:#fff;font-size:14px;outline:none" required></div>
-              <div><label style="font-size:11px;color:var(--text-on-dark-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;display:block">Company / Organisation</label><input type="text" name="company" placeholder="Label, studio, venue..." style="width:100%;padding:10px 14px;border:1px solid rgba(255,255,255,0.15);border-radius:12px;background:rgba(255,255,255,0.05);color:#fff;font-size:14px;outline:none" required></div>
-              <div><label style="font-size:11px;color:var(--text-on-dark-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;display:block">Work email</label><input type="email" name="email" placeholder="you@company.com" style="width:100%;padding:10px 14px;border:1px solid rgba(255,255,255,0.15);border-radius:12px;background:rgba(255,255,255,0.05);color:#fff;font-size:14px;outline:none" required></div>
-            </div>
-            <button type="submit" class="btn btn--light" style="margin-top:16px;width:100%">Request Demo</button>
-            <div class="partner-form--done" style="text-align:center;padding:16px;color:#fff">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin:0 auto 8px"><polyline points="20 6 9 17 4 12"/></svg>
-              Thanks! We'll follow up within 24 hours.
-            </div>
-          </form>
-        </details>
-      </div>
-    </div>
-  </section>
-
-</main>
+  </div>
+\n\n</main>
 
 <!-- ============================================================
      FOOTER

@@ -57,8 +57,7 @@ import com.example.onboarding.ui.components.*
 fun HomeSectionHeader(title: String) {
     Text(
         text = title,
-        fontWeight = FontWeight.Bold,
-        fontSize = 16.sp,
+        style = Typography.bodyLarge,
         color = BrandText,
         modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 20.dp, bottom = 10.dp)
     )

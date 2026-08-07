@@ -77,16 +77,15 @@ fun FullTalentProfileScreen(
         Column(modifier = Modifier.fillMaxWidth()) {
             Text(
                 text = "Featured Audio Showcase",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.ExtraBold,
+                style = Typography.bodyLarge,
                 color = BrandText
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             // Premium Custom Audio Player
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(24.dp),
+                shape = RoundedCornerShape(Dimens.r3),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFF9FAFB)),
                 border = BorderStroke(1.dp, BrandBorder)
             ) {
@@ -103,23 +102,22 @@ fun FullTalentProfileScreen(
                         Box(
                             modifier = Modifier
                                 .size(64.dp)
-                                .clip(RoundedCornerShape(16.dp))
+                                .clip(RoundedCornerShape(Dimens.r2))
                                 .background(baseAccentColor.copy(alpha = 0.2f)),
                             contentAlignment = Alignment.Center
                         ) {
                             Text("🎵", fontSize = 28.sp)
                         }
-                        Spacer(modifier = Modifier.width(16.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp2))
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
                                 text = profile.projects.firstOrNull()?.title ?: "Unreleased Studio Session",
-                                fontWeight = FontWeight.ExtraBold,
-                                fontSize = 15.sp,
+                                style = Typography.bodyLarge,
                                 color = BrandText
                             )
                             Text(
                                 text = "${profile.name} • Master Demo Showcase",
-                                fontSize = 12.sp,
+                                style = Typography.labelLarge,
                                 color = BrandMuted,
                                 fontWeight = FontWeight.Medium
                             )
@@ -198,7 +196,7 @@ fun FullTalentProfileScreen(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
 
                     // Playback duration metrics
                     Row(
@@ -232,11 +230,10 @@ fun FullTalentProfileScreen(
             // OTHER PORTFOLIO TRACKS
             Text(
                 text = "Portfolio Tracks & Uploads",
-                fontSize = 15.sp,
-                fontWeight = FontWeight.ExtraBold,
+                style = Typography.bodyLarge,
                 color = BrandText
             )
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             if (profile.projects.isEmpty()) {
                 EmptyState(
@@ -250,12 +247,12 @@ fun FullTalentProfileScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 6.dp),
-                        shape = RoundedCornerShape(16.dp),
+                        shape = RoundedCornerShape(Dimens.r2),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
                         border = BorderStroke(1.dp, BrandBorder)
                     ) {
                         Row(
-                            modifier = Modifier.padding(16.dp),
+                            modifier = Modifier.padding(Dimens.sp2),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             val platformColor = when (pr.platform.trim().lowercase()) {
@@ -277,11 +274,11 @@ fun FullTalentProfileScreen(
                                     .border(1.dp, platformColor.copy(alpha = 0.2f), CircleShape),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Text(iconSym, fontSize = 18.sp)
+                                Text(iconSym, style = Typography.bodyLarge)
                             }
                             Spacer(modifier = Modifier.width(14.dp))
                             Column(modifier = Modifier.weight(1f)) {
-                                Text(pr.title, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+                                Text(pr.title, style = Typography.bodyLarge, color = BrandText)
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.spacedBy(6.dp)
@@ -293,7 +290,7 @@ fun FullTalentProfileScreen(
                             }
                             Box(
                                 modifier = Modifier
-                                    .background(BrandPrimary.copy(alpha = 0.08f), RoundedCornerShape(12.dp))
+                                    .background(BrandPrimary.copy(alpha = 0.08f), RoundedCornerShape(Dimens.r2))
                                     .padding(horizontal = 10.dp, vertical = 4.dp)
                             ) {
                                 Text(pr.playsCount, fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, color = BrandPrimary)
@@ -310,14 +307,13 @@ fun FullTalentProfileScreen(
         Column(modifier = Modifier.fillMaxWidth()) {
             Text(
                 text = "Professional Collaboration Services",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.ExtraBold,
+                style = Typography.bodyLarge,
                 color = BrandText
             )
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
             Text(
                 text = "Book custom work from ${profile.name} with secure payments & guaranteed delivery timelines.",
-                fontSize = 12.sp,
+                style = Typography.labelLarge,
                 color = BrandMuted,
                 lineHeight = 18.sp
             )
@@ -350,7 +346,7 @@ fun FullTalentProfileScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 8.dp),
-                    shape = RoundedCornerShape(20.dp),
+                    shape = RoundedCornerShape(Dimens.r3),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
                     border = BorderStroke(1.dp, BrandBorder)
                 ) {
@@ -367,11 +363,10 @@ fun FullTalentProfileScreen(
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(
                                     text = name,
-                                    fontSize = 16.sp,
-                                    fontWeight = FontWeight.ExtraBold,
+                                    style = Typography.bodyLarge,
                                     color = BrandText
                                 )
-                                Spacer(modifier = Modifier.height(4.dp))
+                                Spacer(modifier = Modifier.height(Dimens.sp1))
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.spacedBy(4.dp)
@@ -394,13 +389,12 @@ fun FullTalentProfileScreen(
 
                             Text(
                                 text = price,
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Black,
+                                style = Typography.bodyLarge,
                                 color = BrandSuccess
                             )
                         }
 
-                        Spacer(modifier = Modifier.height(12.dp))
+                        Spacer(modifier = Modifier.height(Dimens.sp2))
 
                         Text(
                             text = desc,
@@ -409,7 +403,7 @@ fun FullTalentProfileScreen(
                             lineHeight = 20.sp
                         )
 
-                        Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(Dimens.sp2))
 
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -436,7 +430,7 @@ fun FullTalentProfileScreen(
 
                             Button(
                                 onClick = onHireClick,
-                                shape = RoundedCornerShape(12.dp),
+                                shape = RoundedCornerShape(Dimens.r2),
                                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF111827)),
                                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 6.dp),
                                 modifier = Modifier.height(36.dp)
@@ -461,19 +455,18 @@ fun FullTalentProfileScreen(
                 Column {
                     Text(
                         text = "Verified Testimonials",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.ExtraBold,
+                        style = Typography.bodyLarge,
                         color = BrandText
                     )
                     Text(
                         text = "100% genuine reviews from collaborators.",
-                        fontSize = 12.sp,
+                        style = Typography.labelLarge,
                         color = BrandMuted
                     )
                 }
 
                 Card(
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(Dimens.r2),
                     colors = CardDefaults.cardColors(containerColor = Color(0xFFFFFBEB)),
                     border = BorderStroke(1.dp, Color(0xFFFEF3C7))
                 ) {
@@ -482,12 +475,12 @@ fun FullTalentProfileScreen(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
-                        Text("⭐", fontSize = 12.sp)
+                        Text("⭐", style = Typography.labelLarge)
                         Text(
                             text = "${profile.rating} / 5.0",
                             fontWeight = FontWeight.Bold,
                             color = Color(0xFFD97706),
-                            fontSize = 12.sp
+                            style = Typography.labelLarge
                         )
                     }
                 }
@@ -507,7 +500,7 @@ fun FullTalentProfileScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 8.dp),
-                        shape = RoundedCornerShape(20.dp),
+                        shape = RoundedCornerShape(Dimens.r3),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
                         border = BorderStroke(1.dp, BrandBorder)
                     ) {
@@ -532,8 +525,7 @@ fun FullTalentProfileScreen(
                                         Text(
                                             text = rv.author.take(1).uppercase(),
                                             color = Color.White,
-                                            fontWeight = FontWeight.Bold,
-                                            fontSize = 14.sp
+                                            style = Typography.bodyLarge
                                         )
                                     }
                                     Spacer(modifier = Modifier.width(10.dp))
@@ -600,25 +592,24 @@ fun FullTalentProfileScreen(
         Column(modifier = Modifier.fillMaxWidth()) {
             Text(
                 text = "Verified Collaborator Credits",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.ExtraBold,
+                style = Typography.bodyLarge,
                 color = BrandText
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
 
             // IMDb of Music Trust Score indicator
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 16.dp),
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(Dimens.r2),
                 colors = CardDefaults.cardColors(containerColor = BrandPrimary.copy(alpha = 0.04f)),
                 border = BorderStroke(1.dp, BrandPrimary.copy(alpha = 0.15f))
             ) {
                 Row(
                     modifier = Modifier.padding(14.dp),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     Box(
                         modifier = Modifier
@@ -626,15 +617,15 @@ fun FullTalentProfileScreen(
                             .background(BrandPrimary.copy(alpha = 0.1f), CircleShape),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text("🛡️", fontSize = 20.sp)
+                        Text("🛡️", style = Typography.headlineLarge)
                     }
                     Column(modifier = Modifier.weight(1f)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text("Verified Profile Score: 100%", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandText)
+                            Text("Verified Profile Score: 100%", style = Typography.bodyLarge, color = BrandText)
                             Spacer(modifier = Modifier.width(6.dp))
                             Box(
                                 modifier = Modifier
-                                    .background(BrandSuccess.copy(alpha = 0.15f), RoundedCornerShape(4.dp))
+                                    .background(BrandSuccess.copy(alpha = 0.15f), RoundedCornerShape(Dimens.r1))
                                     .padding(horizontal = 6.dp, vertical = 2.dp)
                             ) {
                                 Text("VERIFIED", fontSize = 7.sp, color = BrandSuccess, fontWeight = FontWeight.Bold)
@@ -665,7 +656,7 @@ fun FullTalentProfileScreen(
                             .clickable {
                                 selectedCreditDetail = cr
                             },
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(Dimens.r2),
                         colors = CardDefaults.cardColors(containerColor = Color(0xFFF9FAFB)),
                         border = BorderStroke(1.dp, BrandBorder)
                     ) {
@@ -680,7 +671,7 @@ fun FullTalentProfileScreen(
                                         .size(6.dp)
                                         .background(baseAccentColor, CircleShape)
                                 )
-                                Spacer(modifier = Modifier.width(12.dp))
+                                Spacer(modifier = Modifier.width(Dimens.sp2))
                                 Column {
                                     Text(
                                         text = cr.title,
@@ -721,96 +712,95 @@ fun FullTalentProfileScreen(
                     categoryLower.contains("lyric") -> "Lyricist Writing Ledger"
                     else -> "Professional Specifications"
                 },
-                fontSize = 16.sp,
-                fontWeight = FontWeight.ExtraBold,
+                style = Typography.bodyLarge,
                 color = BrandText
             )
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             when {
                 categoryLower.contains("singer") -> {
                     Column(
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(Dimens.sp1),
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Row {
-                            Text("Vocal Register: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text(profile.vocalRange, fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Vocal Register: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text(profile.vocalRange, style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                         Row {
-                            Text("Preferred Genres: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text(profile.genres.joinToString(", "), fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Preferred Genres: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text(profile.genres.joinToString(", "), style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                         Row {
-                            Text("Languages Spoken: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text(profile.languages.joinToString(", "), fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Languages Spoken: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text(profile.languages.joinToString(", "), style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                         Row {
-                            Text("Microphone Spec: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text("Neumann U87 Ai / Shure SM7B", fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Microphone Spec: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text("Neumann U87 Ai / Shure SM7B", style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                         Row {
-                            Text("Session Booking: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text("🟢 Remote stems & Live Session", fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Session Booking: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text("🟢 Remote stems & Live Session", style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                     }
                 }
 
                 categoryLower.contains("music") || categoryLower.contains("composer") || categoryLower.contains("producer") -> {
                     Column(
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(Dimens.sp1),
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Row {
-                            Text("Core Instrument: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text(profile.subRole.split(" ").lastOrNull() ?: "Guitar/Keys", fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Core Instrument: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text(profile.subRole.split(" ").lastOrNull() ?: "Guitar/Keys", style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                         Row {
-                            Text("Setup & Backline: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text("Kemper Profiler, Fender Twin Reverb, Vintage Analog Pedalboard", fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Setup & Backline: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text("Kemper Profiler, Fender Twin Reverb, Vintage Analog Pedalboard", style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                         Row {
-                            Text("Session Availability: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text("Touring, Studio Sessions, Remote stems", fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Session Availability: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text("Touring, Studio Sessions, Remote stems", style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                         Row {
-                            Text("Preferred Genres: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text(profile.genres.joinToString(", "), fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Preferred Genres: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text(profile.genres.joinToString(", "), style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                     }
                 }
 
                 categoryLower.contains("engineer") || categoryLower.contains("editor") -> {
                     Column(
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalArrangement = Arrangement.spacedBy(Dimens.sp2),
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Row {
-                            Text("DAW Stack: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text("Pro Tools Ultimate, Logic Pro X, Universal Audio LUNA", fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("DAW Stack: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text("Pro Tools Ultimate, Logic Pro X, Universal Audio LUNA", style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                         Row {
-                            Text("Outboard Gear: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text("SSL G-Comp Bus Compressor, Neve 1073 Preamp, Tube-Tech CL1B", fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Outboard Gear: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text("SSL G-Comp Bus Compressor, Neve 1073 Preamp, Tube-Tech CL1B", style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                         
                         Card(
                             modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(Dimens.r2),
                             colors = CardDefaults.cardColors(containerColor = Color(0xFFF3F4F6)),
                             border = BorderStroke(1.dp, BrandBorder)
                         ) {
-                            Column(modifier = Modifier.padding(16.dp)) {
+                            Column(modifier = Modifier.padding(Dimens.sp2)) {
                                 Text("🎛️ Interactive A/B Mastering Compare", fontSize = 13.sp, fontWeight = FontWeight.ExtraBold, color = BrandText)
-                                Spacer(modifier = Modifier.height(4.dp))
+                                Spacer(modifier = Modifier.height(Dimens.sp1))
                                 Text("Toggle between raw unmixed stem vs. high-definition analog master.", fontSize = 11.sp, color = BrandMuted)
-                                Spacer(modifier = Modifier.height(16.dp))
+                                Spacer(modifier = Modifier.height(Dimens.sp2))
                                 
                                 var currentChannel by remember { mutableStateOf("B") }
                                 
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                                 ) {
                                     Button(
                                         onClick = { currentChannel = "A" },
@@ -836,11 +826,11 @@ fun FullTalentProfileScreen(
                                     }
                                 }
                                 
-                                Spacer(modifier = Modifier.height(12.dp))
+                                Spacer(modifier = Modifier.height(Dimens.sp2))
                                 
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
                                     modifier = Modifier.fillMaxWidth()
                                 ) {
                                     Icon(
@@ -871,23 +861,23 @@ fun FullTalentProfileScreen(
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Row {
-                            Text("Live Setup Deck: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text("Pioneer CDJ-3000 (x4) + DJM-V10 Mixer", fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Live Setup Deck: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text("Pioneer CDJ-3000 (x4) + DJM-V10 Mixer", style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                         Row {
-                            Text("Mixcloud Embed: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text("mixcloud.com/live-sunset-deep-house-remix", fontSize = 12.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)
+                            Text("Mixcloud Embed: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text("mixcloud.com/live-sunset-deep-house-remix", style = Typography.labelLarge, color = BrandPrimary, fontWeight = FontWeight.Bold)
                         }
                         
                         Card(
                             modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(Dimens.r2),
                             colors = CardDefaults.cardColors(containerColor = Color.White),
                             border = BorderStroke(1.dp, BrandBorder)
                         ) {
                             Column(modifier = Modifier.padding(14.dp)) {
                                 Text("🎪 Club Residency & Performance Log", fontSize = 13.sp, fontWeight = FontWeight.ExtraBold, color = BrandText)
-                                Spacer(modifier = Modifier.height(8.dp))
+                                Spacer(modifier = Modifier.height(Dimens.sp1))
                                 listOf(
                                     "Hilltop Festival Goa (Supporting Live Act) - 2026",
                                     "Kitsune Tour (Bengaluru Chapter Residency) - 2025",
@@ -909,28 +899,28 @@ fun FullTalentProfileScreen(
 
                 categoryLower.contains("lyric") -> {
                     Column(
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalArrangement = Arrangement.spacedBy(Dimens.sp2),
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Row {
-                            Text("Writing Languages: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text(profile.languages.joinToString(", "), fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Writing Languages: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text(profile.languages.joinToString(", "), style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                         Row {
-                            Text("IPR / IPRS Registered: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text("🟢 Yes (Registered Lyricist)", fontSize = 12.sp, color = BrandSuccess, fontWeight = FontWeight.Bold)
+                            Text("IPR / IPRS Registered: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text("🟢 Yes (Registered Lyricist)", style = Typography.labelLarge, color = BrandSuccess, fontWeight = FontWeight.Bold)
                         }
                         
-                        Spacer(modifier = Modifier.height(4.dp))
+                        Spacer(modifier = Modifier.height(Dimens.sp1))
                         Text("📜 Signature Writing Samples Showcase", fontSize = 13.sp, fontWeight = FontWeight.ExtraBold, color = BrandText)
                         
                         Card(
                             modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(Dimens.r2),
                             colors = CardDefaults.cardColors(containerColor = Color(0xFFFCFCFD)),
                             border = BorderStroke(1.dp, BrandBorder)
                         ) {
-                            Column(modifier = Modifier.padding(16.dp)) {
+                            Column(modifier = Modifier.padding(Dimens.sp2)) {
                                 Text(
                                     text = "“Kuch adhoore se alfaaz mere,\nKora kaagaz aur jazbaat mere...\nBehti nadi sa thahar gaya thha main,\nChhu ke guzre jab khayaal tere.”",
                                     fontSize = 13.sp,
@@ -947,7 +937,7 @@ fun FullTalentProfileScreen(
                                 ) {
                                     Text("Category: Bollywood Romantic / Sufi Pop", fontSize = 10.sp, color = BrandMuted, fontWeight = FontWeight.Bold)
                                     Box(
-                                        modifier = Modifier.background(BrandPrimary.copy(alpha = 0.1f), RoundedCornerShape(4.dp)).padding(horizontal = 6.dp, vertical = 2.dp)
+                                        modifier = Modifier.background(BrandPrimary.copy(alpha = 0.1f), RoundedCornerShape(Dimens.r1)).padding(horizontal = 6.dp, vertical = 2.dp)
                                     ) {
                                         Text("Sample #1", fontSize = 8.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)
                                     }
@@ -959,38 +949,37 @@ fun FullTalentProfileScreen(
 
                 else -> {
                     Column(
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(Dimens.sp1),
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Row {
-                            Text("Specialty Role: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text(profile.subRole, fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Specialty Role: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text(profile.subRole, style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                         Row {
-                            Text("Preferred Genres: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text(profile.genres.joinToString(", "), fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Preferred Genres: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text(profile.genres.joinToString(", "), style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                         Row {
-                            Text("Languages: ", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandMuted, modifier = Modifier.width(140.dp))
-                            Text(profile.languages.joinToString(", "), fontSize = 12.sp, color = BrandText, fontWeight = FontWeight.SemiBold)
+                            Text("Languages: ", style = Typography.bodyLarge, color = BrandMuted, modifier = Modifier.width(140.dp))
+                            Text(profile.languages.joinToString(", "), style = Typography.labelLarge, color = BrandText, fontWeight = FontWeight.SemiBold)
                         }
                     }
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp3))
 
             if (profile.equipment.isNotEmpty()) {
                 Text(
                     text = "Primary Setup & Gear",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.ExtraBold,
+                    style = Typography.bodyLarge,
                     color = BrandText
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                 ) {
                     profile.equipment.take(4).forEach { gear ->
                         Box(
@@ -1036,7 +1025,7 @@ fun FullTalentProfileScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 24.dp)
             ) {
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 // Action Bar
                 Row(
@@ -1059,7 +1048,7 @@ fun FullTalentProfileScreen(
                         )
                     }
 
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                         IconButton(
                             onClick = onShareClick,
                             modifier = Modifier
@@ -1161,7 +1150,7 @@ fun FullTalentProfileScreen(
                         lineHeight = 38.sp
                     )
                     if (profile.isVerified) {
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
                         Icon(
                             imageVector = Icons.Default.Verified,
                             contentDescription = "Verified Artist",
@@ -1171,7 +1160,7 @@ fun FullTalentProfileScreen(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp1))
 
                 // Specialty and Location
                 Row(
@@ -1180,14 +1169,14 @@ fun FullTalentProfileScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     val instEmoji = getInstrumentEmoji(profile.subRole, profile.category)
-                    Text(instEmoji, fontSize = 15.sp)
+                    Text(instEmoji, style = Typography.bodyLarge)
                     Text(
                         text = profile.subRole,
-                        fontSize = 15.sp,
+                        style = Typography.bodyLarge,
                         color = BrandPrimary,
                         fontWeight = FontWeight.Bold
                     )
-                    Text("•", color = BrandMuted, fontSize = 14.sp)
+                    Text("•", color = BrandMuted, style = Typography.labelLarge)
                     Icon(
                         imageVector = Icons.Default.LocationOn,
                         contentDescription = "Location",
@@ -1196,23 +1185,23 @@ fun FullTalentProfileScreen(
                     )
                     Text(
                         text = "${profile.area}, ${profile.location}",
-                        fontSize = 14.sp,
+                        style = Typography.labelLarge,
                         color = BrandMuted,
                         fontWeight = FontWeight.Medium
                     )
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 // Bio Summary
                 Text(
                     text = profile.bio.ifEmpty { "A talented professional music creator specializing in creating world-class, premium acoustic experiences, live stage performances, and studio records." },
-                    fontSize = 14.sp,
+                    style = Typography.labelLarge,
                     color = Color(0xFF4B5563),
                     lineHeight = 22.sp
                 )
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp3))
 
                 // Stats Dashboard Row
                 Row(
@@ -1227,7 +1216,7 @@ fun FullTalentProfileScreen(
                     ).forEach { (value, label, color) ->
                         Card(
                             modifier = Modifier.weight(1f),
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(Dimens.r2),
                             colors = CardDefaults.cardColors(containerColor = Color.White),
                             border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.05f))
                         ) {
@@ -1239,8 +1228,7 @@ fun FullTalentProfileScreen(
                             ) {
                                 Text(
                                     text = value,
-                                    fontSize = 14.sp,
-                                    fontWeight = FontWeight.ExtraBold,
+                                    style = Typography.bodyLarge,
                                     color = color
                                 )
                                 Spacer(modifier = Modifier.height(2.dp))
@@ -1255,7 +1243,7 @@ fun FullTalentProfileScreen(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp3))
 
                 // Primary Collaborate Button
                 Button(
@@ -1263,7 +1251,7 @@ fun FullTalentProfileScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp),
-                    shape = RoundedCornerShape(20.dp),
+                    shape = RoundedCornerShape(Dimens.r3),
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF111827))
                 ) {
                     Icon(
@@ -1272,11 +1260,10 @@ fun FullTalentProfileScreen(
                         modifier = Modifier.size(16.dp),
                         tint = Color.White
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     Text(
                         text = "Collaborate / Hire ${profile.name.split(" ").first()}",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.ExtraBold,
+                        style = Typography.bodyLarge,
                         color = Color.White
                     )
                 }
@@ -1289,7 +1276,7 @@ fun FullTalentProfileScreen(
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp)
                 .background(Color.White),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
         ) {
             listOf("All", "Showcase", "Services", "Reviews", "Bio & Info").forEach { tab ->
                 val isSelected = activeSubTab == tab
@@ -1305,7 +1292,7 @@ fun FullTalentProfileScreen(
                         fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
                         color = if (isSelected) Color(0xFF111827) else BrandMuted
                     )
-                    Spacer(modifier = Modifier.height(4.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp1))
                     Box(
                         modifier = Modifier
                             .height(2.dp)
@@ -1344,7 +1331,7 @@ fun FullTalentProfileScreen(
                 "Reviews" -> ProfileReviewsSection()
                 "Bio & Info" -> ProfileBioInfoSection()
             }
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp3))
         }
 
         // Verified Seal Dialog (Credits Trust Engine Section 23)
@@ -1357,23 +1344,23 @@ fun FullTalentProfileScreen(
                         Text("Dismiss", color = BrandPrimary, fontWeight = FontWeight.Bold)
                     }
                 },
-                shape = RoundedCornerShape(24.dp),
+                shape = RoundedCornerShape(Dimens.r3),
                 containerColor = Color.White,
                 title = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
-                        Text("🛡️ Verified Collaborator Credit", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = BrandText)
+                        Text("🛡️ Verified Collaborator Credit", style = Typography.bodyLarge, color = BrandText)
                     }
                 },
                 text = {
                     Column(
                         modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalArrangement = Arrangement.spacedBy(Dimens.sp2),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Spacer(modifier = Modifier.height(4.dp))
+                        Spacer(modifier = Modifier.height(Dimens.sp1))
                         
                         // Custom micro animation success checkmark
                         MicroCheckmarkSuccessAnimation(modifier = Modifier.size(48.dp))
@@ -1389,10 +1376,10 @@ fun FullTalentProfileScreen(
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(Color(0xFFF8FAFC), RoundedCornerShape(12.dp))
-                                .border(1.dp, Color(0xFFE2E8F0), RoundedCornerShape(12.dp))
+                                .background(Color(0xFFF8FAFC), RoundedCornerShape(Dimens.r2))
+                                .border(1.dp, Color(0xFFE2E8F0), RoundedCornerShape(Dimens.r2))
                                 .padding(14.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                            verticalArrangement = Arrangement.spacedBy(Dimens.sp1)
                         ) {
                             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                                 Text("Track / Work:", fontSize = 11.sp, color = BrandMuted, fontWeight = FontWeight.Bold)
@@ -1454,8 +1441,7 @@ fun FullTalentProfileScreen(
                     )
                     Text(
                         text = profile.pricing.ifEmpty { "₹8,000 / session" },
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Black,
+                        style = Typography.bodyLarge,
                         color = BrandText
                     )
                 }
@@ -1464,12 +1450,12 @@ fun FullTalentProfileScreen(
                     onClick = onHireClick,
                     modifier = Modifier.testTag("full_profile_hire_cta"),
                     colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                    shape = RoundedCornerShape(16.dp),
+                    shape = RoundedCornerShape(Dimens.r2),
                     contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp)
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
                         Icon(
                             imageVector = Icons.Default.FlashOn,
@@ -1478,8 +1464,7 @@ fun FullTalentProfileScreen(
                         )
                         Text(
                             text = "Book / Hire Talent",
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold
+                            style = Typography.bodyLarge
                         )
                     }
                 }

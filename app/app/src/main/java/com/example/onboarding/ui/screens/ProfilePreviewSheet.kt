@@ -110,7 +110,7 @@ fun ProfilePreviewSheet(
                         modifier = Modifier
                             .align(Alignment.BottomEnd)
                             .padding(12.dp)
-                            .background(Color.Black.copy(alpha = 0.6f), RoundedCornerShape(12.dp))
+                            .background(Color.Black.copy(alpha = 0.6f), RoundedCornerShape(Dimens.r2))
                             .padding(horizontal = 8.dp, vertical = 2.dp)
                     ) {
                         Text(
@@ -127,7 +127,7 @@ fun ProfilePreviewSheet(
                         .weight(1f)
                         .verticalScroll(rememberScrollState())
                         .padding(20.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -136,17 +136,17 @@ fun ProfilePreviewSheet(
                     ) {
                         Column {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(profile.name, fontSize = 20.sp, fontWeight = FontWeight.Bold, color = BrandText)
+                                Text(profile.name, style = Typography.bodyLarge, color = BrandText)
                                 if (profile.isVerified) {
-                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Spacer(modifier = Modifier.width(Dimens.sp1))
                                     Icon(Icons.Default.Verified, "Verified", tint = BrandPrimary, modifier = Modifier.size(16.dp))
                                 }
                             }
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 val inst = getInstrumentEmoji(profile.subRole, profile.category)
                                 Text(inst, fontSize = 13.sp)
-                                Spacer(modifier = Modifier.width(4.dp))
-                                Text(profile.subRole, fontSize = 12.sp, color = BrandSecondary, fontWeight = FontWeight.SemiBold)
+                                Spacer(modifier = Modifier.width(Dimens.sp1))
+                                Text(profile.subRole, style = Typography.labelLarge, color = BrandSecondary, fontWeight = FontWeight.SemiBold)
                             }
                         }
 
@@ -163,22 +163,22 @@ fun ProfilePreviewSheet(
                     }
 
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp2),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.LocationOn, "Location", tint = BrandMuted, modifier = Modifier.size(14.dp))
-                            Text(profile.location, fontSize = 12.sp, color = BrandText)
+                            Text(profile.location, style = Typography.labelLarge, color = BrandText)
                         }
                         
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.Star, "Rating", tint = Color(0xFFFFB74D), modifier = Modifier.size(14.dp))
-                            Text(profile.rating.toString(), fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandText)
+                            Text(profile.rating.toString(), style = Typography.bodyLarge, color = BrandText)
                         }
 
                         Box(
                             modifier = Modifier
-                                .background(BrandSuccess.copy(alpha = 0.1f), RoundedCornerShape(12.dp))
+                                .background(BrandSuccess.copy(alpha = 0.1f), RoundedCornerShape(Dimens.r2))
                                 .padding(horizontal = 8.dp, vertical = 2.dp)
                         ) {
                             Text(profile.availabilityStatus, fontSize = 10.sp, color = BrandSuccess, fontWeight = FontWeight.Bold)
@@ -201,13 +201,13 @@ fun ProfilePreviewSheet(
                         )
                     }
 
-                    Text(profile.bio, fontSize = 12.sp, color = BrandText, lineHeight = 18.sp)
+                    Text(profile.bio, style = Typography.labelLarge, color = BrandText, lineHeight = 18.sp)
 
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text("Languages spoken:", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = BrandMuted)
                         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                             profile.languages.forEach { l ->
-                                Box(modifier = Modifier.background(Color(0xFFEEEEEE), RoundedCornerShape(4.dp)).padding(horizontal = 6.dp, vertical = 2.dp)) {
+                                Box(modifier = Modifier.background(Color(0xFFEEEEEE), RoundedCornerShape(Dimens.r1)).padding(horizontal = 6.dp, vertical = 2.dp)) {
                                     Text(l, fontSize = 9.sp, color = BrandText)
                                 }
                             }
@@ -238,7 +238,7 @@ fun ProfilePreviewSheet(
                             border = BorderStroke(1.dp, brandColor.copy(alpha = 0.15f))
                         ) {
                             Row(
-                                modifier = Modifier.padding(12.dp),
+                                modifier = Modifier.padding(Dimens.sp2),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
@@ -249,11 +249,11 @@ fun ProfilePreviewSheet(
                                             .background(brandColor.copy(alpha = 0.12f), CircleShape),
                                         contentAlignment = Alignment.Center
                                     ) {
-                                        Text(iconSymbol, fontSize = 14.sp)
+                                        Text(iconSymbol, style = Typography.labelLarge)
                                     }
                                     Spacer(modifier = Modifier.width(10.dp))
                                     Column {
-                                        Text(top.title, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandText)
+                                        Text(top.title, style = Typography.bodyLarge, color = BrandText)
                                         Text("Top Streamed - " + top.platform, fontSize = 10.sp, color = brandColor, fontWeight = FontWeight.Bold)
                                     }
                                 }
@@ -274,7 +274,7 @@ fun ProfilePreviewSheet(
                     OutlinedButton(
                         onClick = onViewFullProfile,
                         modifier = Modifier.weight(1f),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(Dimens.r2),
                         colors = ButtonDefaults.outlinedButtonColors(contentColor = BrandPrimary),
                         border = BorderStroke(1.dp, BrandBorder)
                     ) {
@@ -284,7 +284,7 @@ fun ProfilePreviewSheet(
                     Button(
                         onClick = onHireClick,
                         modifier = Modifier.weight(1f),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(Dimens.r2),
                         colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary)
                     ) {
                         Text("Contact & Book", fontWeight = FontWeight.Bold)

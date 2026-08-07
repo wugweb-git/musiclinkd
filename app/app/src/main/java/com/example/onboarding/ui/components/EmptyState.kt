@@ -54,7 +54,7 @@ fun EmptyState(
                 Box(
                     modifier = Modifier
                         .size(80.dp)
-                        .clip(RoundedCornerShape(24.dp))
+                        .clip(RoundedCornerShape(Dimens.r3))
                         .background(
                             Brush.linearGradient(
                                 colors = listOf(
@@ -63,7 +63,7 @@ fun EmptyState(
                                 )
                             )
                         )
-                        .border(1.dp, BrandPrimary.copy(alpha = 0.15f), RoundedCornerShape(24.dp)),
+                        .border(1.dp, BrandPrimary.copy(alpha = 0.15f), RoundedCornerShape(Dimens.r3)),
                     contentAlignment = Alignment.Center
                 ) {
                     if (emoji != null) {
@@ -86,20 +86,18 @@ fun EmptyState(
             // Title with elegant typography scale
             Text(
                 text = title,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.ExtraBold,
+                style = Typography.bodyLarge,
                 color = BrandTextPrimary,
                 textAlign = TextAlign.Center,
                 lineHeight = 26.sp
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             // Description with massive whitespace and editorial style
             Text(
                 text = description,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Medium,
+                style = Typography.bodyLarge,
                 color = BrandTextSecondary,
                 textAlign = TextAlign.Center,
                 lineHeight = 22.sp,
@@ -107,15 +105,15 @@ fun EmptyState(
             )
 
             if (actionLabel != null && onActionClick != null) {
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp3))
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     Button(
                         onClick = onActionClick,
-                        shape = RoundedCornerShape(20.dp),
+                        shape = RoundedCornerShape(Dimens.r3),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = BrandTextPrimary,
                             contentColor = Color.White

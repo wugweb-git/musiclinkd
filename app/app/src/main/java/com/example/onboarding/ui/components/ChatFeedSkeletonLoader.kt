@@ -73,7 +73,7 @@ fun ChatFeedSkeletonLoader(
                         SkeletonItem(width = 130.dp, height = 14.dp, cornerRadius = 4.dp)
                         SkeletonItem(width = 40.dp, height = 10.dp, cornerRadius = 4.dp)
                     }
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp1))
                     SkeletonItem(width = 200.dp, height = 12.dp, cornerRadius = 4.dp)
                 }
             }

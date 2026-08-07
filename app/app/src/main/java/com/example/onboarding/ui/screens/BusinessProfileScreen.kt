@@ -93,7 +93,7 @@ fun BusinessProfileScreen(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(
@@ -126,7 +126,7 @@ fun BusinessProfileScreen(
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
                         .padding(12.dp)
-                        .background(Color.Black, RoundedCornerShape(12.dp))
+                        .background(Color.Black, RoundedCornerShape(Dimens.r2))
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 ) {
                     Text("DOLBY ATMOS PREFERENCE CELL 🔈", color = Color.White, fontSize = 10.sp, fontWeight = FontWeight.Bold)
@@ -134,11 +134,11 @@ fun BusinessProfileScreen(
             }
         }
 
-        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(modifier = Modifier.padding(Dimens.sp2), verticalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(studio.name, fontSize = 20.sp, fontWeight = FontWeight.Bold, color = BrandText)
+                Text(studio.name, style = Typography.bodyLarge, color = BrandText)
                 if (studio.isVerified) {
-                    Spacer(modifier = Modifier.width(4.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     Icon(Icons.Default.Verified, "Verified", tint = BrandPrimary, modifier = Modifier.size(16.dp))
                 }
             }
@@ -147,28 +147,28 @@ fun BusinessProfileScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("State-of-The-Art Sound Lab • " + studio.location, fontSize = 12.sp, color = BrandSecondary, fontWeight = FontWeight.Bold)
+                Text("State-of-The-Art Sound Lab • " + studio.location, style = Typography.labelLarge, color = BrandSecondary, fontWeight = FontWeight.Bold)
                 PersonaTypeBadge(studio.type)
             }
 
-            Text(studio.bio, fontSize = 12.sp, color = BrandText, lineHeight = 18.sp)
+            Text(studio.bio, style = Typography.labelLarge, color = BrandText, lineHeight = 18.sp)
 
             val businessCategoryLower = studio.category.lowercase()
             
             when {
                 businessCategoryLower.contains("studio") || businessCategoryLower.contains("lab") -> {
-                    Text("Certified Studio Gear Checklist", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+                    Text("Certified Studio Gear Checklist", style = Typography.bodyLarge, color = BrandText)
                     studio.equipment.forEach { gear ->
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.CheckCircle, "Checked Item", tint = BrandSuccess, modifier = Modifier.size(16.dp))
-                            Spacer(modifier = Modifier.width(8.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
                             Text(gear, fontSize = 11.sp, color = BrandText)
                         }
                     }
                 }
                 
                 businessCategoryLower.contains("label") || businessCategoryLower.contains("production") -> {
-                    Text("Artist Roster & Signed Talents", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+                    Text("Artist Roster & Signed Talents", style = Typography.bodyLarge, color = BrandText)
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -180,7 +180,7 @@ fun BusinessProfileScreen(
                         ).forEach { (name, subRole, colorHex) ->
                             Card(
                                 modifier = Modifier.weight(1f),
-                                shape = RoundedCornerShape(12.dp),
+                                shape = RoundedCornerShape(Dimens.r2),
                                 colors = CardDefaults.cardColors(containerColor = Color(0xFFF9FAFB)),
                                 border = BorderStroke(1.dp, BrandBorder)
                             ) {
@@ -197,10 +197,10 @@ fun BusinessProfileScreen(
                                     Spacer(modifier = Modifier.height(6.dp))
                                     Text(name, fontSize = 11.sp, fontWeight = FontWeight.Bold, color = BrandText, maxLines = 1, overflow = TextOverflow.Ellipsis)
                                     Text(subRole, fontSize = 8.sp, color = BrandMuted, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                                    Spacer(modifier = Modifier.height(4.dp))
+                                    Spacer(modifier = Modifier.height(Dimens.sp1))
                                     Box(
                                         modifier = Modifier
-                                            .background(BrandPrimary.copy(alpha = 0.1f), RoundedCornerShape(4.dp))
+                                            .background(BrandPrimary.copy(alpha = 0.1f), RoundedCornerShape(Dimens.r1))
                                             .padding(horizontal = 6.dp, vertical = 2.dp)
                                     ) {
                                         Text("Signed", fontSize = 8.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)
@@ -212,7 +212,7 @@ fun BusinessProfileScreen(
                 }
 
                 businessCategoryLower.contains("school") || businessCategoryLower.contains("academy") || businessCategoryLower.contains("class") || businessCategoryLower.contains("edu") -> {
-                    Text("Offered Courses & Syllabus", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+                    Text("Offered Courses & Syllabus", style = Typography.bodyLarge, color = BrandText)
                     listOf(
                         "Hindustani Classical Vocals (6 Months Certification) - ₹12,000/mo",
                         "Digital Music Production & DAW Mixology (3 Months Boot) - ₹18,000/mo",
@@ -220,11 +220,11 @@ fun BusinessProfileScreen(
                     ).forEach { course ->
                         Card(
                             modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(12.dp),
+                            shape = RoundedCornerShape(Dimens.r2),
                             colors = CardDefaults.cardColors(containerColor = Color.White),
                             border = BorderStroke(1.dp, BrandBorder)
                         ) {
-                            Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Row(modifier = Modifier.padding(Dimens.sp2), verticalAlignment = Alignment.CenterVertically) {
                                 Icon(Icons.Default.School, "Course Icon", tint = BrandPrimary, modifier = Modifier.size(18.dp))
                                 Spacer(modifier = Modifier.width(10.dp))
                                 Text(course, fontSize = 11.sp, color = BrandText, fontWeight = FontWeight.Bold)
@@ -234,7 +234,7 @@ fun BusinessProfileScreen(
                 }
 
                 businessCategoryLower.contains("dealer") || businessCategoryLower.contains("equipment") || businessCategoryLower.contains("rental") || businessCategoryLower.contains("store") -> {
-                    Text("Premium Gear Inventory (Sale & Hire)", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+                    Text("Premium Gear Inventory (Sale & Hire)", style = Typography.bodyLarge, color = BrandText)
                     listOf(
                         "Neumann U87 Ai Large-diaphragm Microphone - In Stock",
                         "Shure SM7B Vocal Dynamic Microphone - 4 Left",
@@ -242,28 +242,28 @@ fun BusinessProfileScreen(
                     ).forEach { gear ->
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.CheckCircle, "In Stock", tint = BrandSuccess, modifier = Modifier.size(16.dp))
-                            Spacer(modifier = Modifier.width(8.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
                             Text(gear, fontSize = 11.sp, color = BrandText)
                         }
                     }
                 }
 
                 else -> {
-                    Text("Services & Roster Overview", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+                    Text("Services & Roster Overview", style = Typography.bodyLarge, color = BrandText)
                     Text(studio.bio, fontSize = 11.sp, color = BrandText, lineHeight = 16.sp)
                 }
             }
 
             HorizontalDivider()
 
-            Text("Availability Calendar Preview", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+            Text("Availability Calendar Preview", style = Typography.bodyLarge, color = BrandText)
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(Dimens.r2),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 border = BorderStroke(1.dp, BrandBorder)
             ) {
-                Column(modifier = Modifier.padding(12.dp)) {
+                Column(modifier = Modifier.padding(Dimens.sp2)) {
                     Text("June 2026", fontWeight = FontWeight.Bold, fontSize = 11.sp)
                     Spacer(modifier = Modifier.height(6.dp))
                     Row(
@@ -277,11 +277,11 @@ fun BusinessProfileScreen(
                                 modifier = Modifier
                                     .background(
                                         if (isFree) BrandSuccess.copy(alpha = 0.1f) else Color.Red.copy(alpha = 0.1f),
-                                        RoundedCornerShape(8.dp)
+                                        RoundedCornerShape(Dimens.r1)
                                     )
                                     .padding(8.dp)
                             ) {
-                                Text(day.split(" ")[0], fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandText)
+                                Text(day.split(" ")[0], style = Typography.bodyLarge, color = BrandText)
                                 Text(day.split(" ")[1], fontSize = 9.sp, color = BrandMuted)
                                 Text(if (isFree) "Free" else "Booked", fontSize = 8.sp, color = if (isFree) BrandSuccess else Color.Red, fontWeight = FontWeight.Bold)
                             }
@@ -298,7 +298,7 @@ fun BusinessProfileScreen(
                     .height(50.dp)
                     .testTag("book_studio_cta"),
                 colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(Dimens.r2)
             ) {
                 Text("Reserve Studio Slot (" + studio.pricing + ")", fontWeight = FontWeight.Bold)
             }
@@ -323,21 +323,21 @@ fun BusinessProfileScreen(
             ) {
                 Column {
                     Text("Studio Hourly Rate", fontSize = 11.sp, color = BrandMuted, fontWeight = FontWeight.Medium)
-                    Text(studio.pricing.ifEmpty { "₹2,500 / hr" }, fontSize = 18.sp, fontWeight = FontWeight.Black, color = BrandText)
+                    Text(studio.pricing.ifEmpty { "₹2,500 / hr" }, style = Typography.bodyLarge, color = BrandText)
                 }
 
                 Button(
                     onClick = onBookClick,
                     colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                    shape = RoundedCornerShape(16.dp),
+                    shape = RoundedCornerShape(Dimens.r2),
                     contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp)
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
                         Icon(Icons.Default.FlashOn, contentDescription = null, modifier = Modifier.size(18.dp))
-                        Text("Reserve Studio", fontSize = 15.sp, fontWeight = FontWeight.Bold)
+                        Text("Reserve Studio", style = Typography.bodyLarge)
                     }
                 }
             }

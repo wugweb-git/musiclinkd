@@ -58,7 +58,7 @@ fun WaveformAudioPlayer(
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         border = BorderStroke(1.dp, BrandBorder)
     ) {
         Row(
@@ -80,7 +80,7 @@ fun WaveformAudioPlayer(
                 )
             }
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(Dimens.sp2))
 
             Column(modifier = Modifier.weight(1f)) {
                 Text(title, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
@@ -103,7 +103,7 @@ fun WaveformAudioPlayer(
                 }
             }
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(Dimens.sp2))
 
             Text(durationText, fontSize = 11.sp, color = BrandTextSecondary, fontWeight = FontWeight.Bold)
         }

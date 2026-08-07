@@ -133,20 +133,19 @@ fun NetworkingFeed(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
     ) {
         // Create Post Base Card (24.dp radius)
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(24.dp),
+            shape = RoundedCornerShape(Dimens.r3),
             border = BorderStroke(1.dp, BrandBorder)
         ) {
-            Column(modifier = Modifier.padding(16.dp)) {
+            Column(modifier = Modifier.padding(Dimens.sp2)) {
                 Text(
                     text = "Share Professional Update",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 15.sp,
+                    style = Typography.bodyLarge,
                     color = BrandDark
                 )
                 Spacer(modifier = Modifier.height(10.dp))
@@ -155,20 +154,20 @@ fun NetworkingFeed(
                     onValueChange = { newPostText = it },
                     placeholder = { Text("Seeking collaborators, sharing new STEMs, or studio availability...", fontSize = 12.5.sp) },
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
+                    shape = RoundedCornerShape(Dimens.r2),
                     maxLines = 3,
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = BrandPrimary,
                         unfocusedBorderColor = BrandBorder
                     )
                 )
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                         UnifiedChip(text = "🎵 STEMs", selected = false, onClick = {})
                         UnifiedChip(text = "🎙️ Studio", selected = false, onClick = {})
                     }
@@ -219,7 +218,7 @@ fun NetworkingFeed(
         // Filter Bar Chips
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
         ) {
             val filters = listOf("ALL" to "All Feed", "COLLAB_CALL" to "Calls", "RELEASE" to "Releases", "STUDIO_UPDATE" to "Studios")
             filters.forEach { (type, label) ->
@@ -238,7 +237,7 @@ fun NetworkingFeed(
                     .fillMaxWidth()
                     .clickable { onOpenProfile(post.authorName) },
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                shape = RoundedCornerShape(24.dp),
+                shape = RoundedCornerShape(Dimens.r3),
                 border = BorderStroke(1.dp, BrandBorder)
             ) {
                 Column(modifier = Modifier.padding(18.dp)) {
@@ -274,18 +273,17 @@ fun NetworkingFeed(
                                 }
                             }
 
-                            Spacer(modifier = Modifier.width(12.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp2))
 
                             Column {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Text(
                                         text = post.authorName,
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 15.sp,
+                                        style = Typography.bodyLarge,
                                         color = BrandDark
                                     )
                                     if (post.isVerified) {
-                                        Spacer(modifier = Modifier.width(4.dp))
+                                        Spacer(modifier = Modifier.width(Dimens.sp1))
                                         Icon(
                                             imageVector = Icons.Default.CheckCircle,
                                             contentDescription = "Verified",
@@ -309,7 +307,7 @@ fun NetworkingFeed(
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
 
                     Text(
                         text = post.content,
@@ -319,7 +317,7 @@ fun NetworkingFeed(
                     )
 
                     if (post.audioTitle != null && post.audioDuration != null) {
-                        Spacer(modifier = Modifier.height(12.dp))
+                        Spacer(modifier = Modifier.height(Dimens.sp2))
                         WaveformAudioPlayer(
                             title = post.audioTitle,
                             durationText = post.audioDuration,
@@ -339,10 +337,10 @@ fun NetworkingFeed(
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.FavoriteBorder, contentDescription = "Like", tint = BrandTextSecondary, modifier = Modifier.size(18.dp))
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text("${post.likesCount}", fontSize = 12.sp, color = BrandTextSecondary)
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
+                            Text("${post.likesCount}", style = Typography.labelLarge, color = BrandTextSecondary)
                         }
-                        Text("Reply in Session →", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandPrimary)
+                        Text("Reply in Session →", style = Typography.bodyLarge, color = BrandPrimary)
                     }
                 }
             }

@@ -62,7 +62,7 @@ fun UnifiedPrimaryButton(
         modifier = modifier
             .height(50.dp)
             .testTag(testTag),
-        shape = RoundedCornerShape(999.dp),
+        shape = RoundedCornerShape(Dimens.rFull),
         colors = ButtonDefaults.buttonColors(
             containerColor = BrandPrimary,
             contentColor = Color.White,
@@ -76,12 +76,11 @@ fun UnifiedPrimaryButton(
         ) {
             if (icon != null) {
                 Icon(icon, contentDescription = null, modifier = Modifier.size(18.dp))
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp1))
             }
             Text(
                 text = text,
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Bold
+                style = Typography.bodyLarge
             )
         }
     }

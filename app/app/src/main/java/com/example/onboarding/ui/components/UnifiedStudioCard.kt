@@ -58,18 +58,18 @@ fun UnifiedStudioCard(
     modifier: Modifier = Modifier
 ) {
     Card(
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         modifier = modifier
             .fillMaxWidth()
-            .border(1.dp, BrandBorder, RoundedCornerShape(20.dp))
+            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3))
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(Dimens.sp2)) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(140.dp)
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(RoundedCornerShape(Dimens.r2))
                     .background(Color(0xFFF3F4F6))
             ) {
                 AsyncImage(
@@ -79,25 +79,25 @@ fun UnifiedStudioCard(
                     modifier = Modifier.fillMaxSize()
                 )
             }
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
             Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
                 Column {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(name, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = BrandTextPrimary)
-                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(name, style = Typography.bodyLarge, color = BrandTextPrimary)
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
                         Icon(Icons.Filled.Verified, contentDescription = "Verified Business", tint = Color(0xFFF59E0B), modifier = Modifier.size(16.dp))
                     }
-                    Text(location, fontSize = 14.sp, color = BrandTextSecondary)
+                    Text(location, style = Typography.labelLarge, color = BrandTextSecondary)
                 }
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Filled.Star, contentDescription = "Rating", tint = Color(0xFFF59E0B), modifier = Modifier.size(16.dp))
                     Spacer(modifier = Modifier.width(2.dp))
-                    Text(rating, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandTextPrimary)
+                    Text(rating, style = Typography.bodyLarge, color = BrandTextPrimary)
                 }
             }
-            Spacer(modifier = Modifier.height(8.dp))
-            Text("From $price", fontWeight = FontWeight.ExtraBold, color = BrandPrimary, fontSize = 16.sp)
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Text("From $price", fontWeight = FontWeight.ExtraBold, color = BrandPrimary, style = Typography.bodyLarge)
+            Spacer(modifier = Modifier.height(Dimens.sp2))
             UnifiedPrimaryButton(
                 text = "Book Studio",
                 onClick = onBook,

@@ -270,7 +270,7 @@ fun StudioBookingMainFlowContainer(
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.CheckCircle, null, tint = Color.White, modifier = Modifier.size(20.dp))
-                            Spacer(modifier = Modifier.width(8.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
                             Text(
                                 text = showSuccessBanner ?: "",
                                 color = Color.White,
@@ -473,7 +473,7 @@ fun StudioBookingMainFlowContainer(
                     ) {
                         Text(
                             text = "Filter Spaces",
-                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold, color = BrandDark)
+                            style = Typography.bodyLarge.copy(fontWeight = FontWeight.Bold, color = BrandDark)
                         )
                         Text(
                             text = "Clear All",
@@ -491,10 +491,10 @@ fun StudioBookingMainFlowContainer(
 
                     HorizontalDivider(color = BrandBorder)
 
-                    Text("Capabilities & Amenities", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    Text("Capabilities & Amenities", style = Typography.bodyLarge)
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
                         FilterPillToggle(
                             text = "Dolby Atmos",
@@ -515,7 +515,7 @@ fun StudioBookingMainFlowContainer(
 
                     Spacer(modifier = Modifier.height(6.dp))
 
-                    Text("Max Price Per Hour: ₹$priceMaxSelected", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    Text("Max Price Per Hour: ₹$priceMaxSelected", style = Typography.bodyLarge)
                     Slider(
                         value = priceMaxSelected.toFloat(),
                         onValueChange = { priceMaxSelected = it.toInt() },
@@ -528,7 +528,7 @@ fun StudioBookingMainFlowContainer(
                         )
                     )
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
 
                     Button(
                         onClick = { showFiltersSheet = false },
@@ -542,7 +542,7 @@ fun StudioBookingMainFlowContainer(
                         Text("Show Matching Studios (${filteredStudios.size})", fontWeight = FontWeight.Bold)
                     }
                     
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp3))
                 }
             }
         }
@@ -621,14 +621,14 @@ fun StudioDiscoveryScreen(
                         Text(
                             text = "MusicLinkd Spaces",
                             color = Color.White,
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                            style = Typography.bodyLarge.copy(fontWeight = FontWeight.Bold)
                         )
                     }
 
                     // Floating Profile Button
                     Box(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(12.dp))
+                            .clip(RoundedCornerShape(Dimens.r2))
                             .background(BrandPrimary)
                             .clickable { onNavigateMyBookings() }
                             .padding(horizontal = 12.dp, vertical = 6.dp)
@@ -642,7 +642,7 @@ fun StudioDiscoveryScreen(
                 Text(
                     text = "Find, compare and book India's elite creative spaces.",
                     color = Color.White,
-                    style = MaterialTheme.typography.headlineMedium.copy(
+                    style = Typography.bodyLarge.copy(
                         fontWeight = FontWeight.ExtraBold,
                         lineHeight = 32.sp,
                         letterSpacing = (-0.5).sp
@@ -653,7 +653,7 @@ fun StudioDiscoveryScreen(
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                 ) {
                     Box(
                         modifier = Modifier
@@ -665,7 +665,7 @@ fun StudioDiscoveryScreen(
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.Search, null, tint = BrandPrimary, modifier = Modifier.size(18.dp))
-                            Spacer(modifier = Modifier.width(8.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
                             BasicInputPlaceholder(
                                 text = inputQuery,
                                 onValueChange = { inputQuery = it },
@@ -690,9 +690,9 @@ fun StudioDiscoveryScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
-                .clip(RoundedCornerShape(16.dp))
+                .clip(RoundedCornerShape(Dimens.r2))
                 .background(BrandAccent.copy(alpha = 0.08f))
-                .border(1.dp, BrandAccent.copy(alpha = 0.2f), RoundedCornerShape(16.dp))
+                .border(1.dp, BrandAccent.copy(alpha = 0.2f), RoundedCornerShape(Dimens.r2))
                 .clickable { onNavigateOwnerDashboard() }
                 .padding(16.dp)
         ) {
@@ -702,8 +702,8 @@ fun StudioDiscoveryScreen(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
-                    Text("🏢", fontSize = 24.sp)
-                    Spacer(modifier = Modifier.width(12.dp))
+                    Text("🏢", style = Typography.headlineLarge)
+                    Spacer(modifier = Modifier.width(Dimens.sp2))
                     Column {
                         Text("List your rehearsal space or studio?", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
                         Text("Manage bookings, invoicing & residents.", fontSize = 11.sp, color = BrandTextSecondary)
@@ -722,13 +722,13 @@ fun StudioDiscoveryScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("Featured Sound Labs", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandDark)
-                Text("See All", color = BrandPrimary, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                Text("Featured Sound Labs", style = Typography.bodyLarge, color = BrandDark)
+                Text("See All", color = BrandPrimary, style = Typography.bodyLarge)
             }
 
             LazyRow(
                 contentPadding = PaddingValues(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
             ) {
                 items(studios) { studio ->
                     FeaturedStudioCard(studio = studio, onClick = { onSelectStudio(studio) })
@@ -742,15 +742,14 @@ fun StudioDiscoveryScreen(
         Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
             Text(
                 text = "Nearby Rehearsal & Live Rooms",
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
+                style = Typography.bodyLarge,
                 color = BrandDark,
                 modifier = Modifier.padding(vertical = 12.dp)
             )
 
             studios.forEach { studio ->
                 StudioListItemCard(studio = studio, onClick = { onSelectStudio(studio) })
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
             }
         }
     }
@@ -764,12 +763,12 @@ fun BasicInputPlaceholder(
 ) {
     Box(modifier = Modifier.fillMaxWidth()) {
         if (text.isEmpty()) {
-            Text(placeholder, color = BrandTextSecondary, fontSize = 12.sp)
+            Text(placeholder, color = BrandTextSecondary, style = Typography.labelLarge)
         }
         androidx.compose.foundation.text.BasicTextField(
             value = text,
             onValueChange = onValueChange,
-            textStyle = MaterialTheme.typography.bodyMedium.copy(color = BrandTextPrimary, fontSize = 12.sp),
+            textStyle = Typography.bodyLarge.copy(color = BrandTextPrimary, style = Typography.labelLarge),
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )
@@ -812,7 +811,7 @@ fun StudioSearchResultsScreen(
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Default.Search, null, tint = BrandPrimary, modifier = Modifier.size(16.dp))
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     BasicInputPlaceholder(
                         text = query,
                         onValueChange = onQueryChange,
@@ -820,7 +819,7 @@ fun StudioSearchResultsScreen(
                     )
                 }
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(Dimens.sp1))
             IconButton(
                 onClick = onOpenFilters,
                 modifier = Modifier
@@ -841,9 +840,9 @@ fun StudioSearchResultsScreen(
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text("🏢", fontSize = 48.sp)
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
                     Text("No Studios Found Matching Selection", fontWeight = FontWeight.Bold, color = BrandDark)
-                    Text("Try widening your price range or turning off amenities filters.", color = BrandTextSecondary, fontSize = 12.sp, textAlign = TextAlign.Center)
+                    Text("Try widening your price range or turning off amenities filters.", color = BrandTextSecondary, style = Typography.labelLarge, textAlign = TextAlign.Center)
                 }
             }
         } else {
@@ -857,8 +856,7 @@ fun StudioSearchResultsScreen(
                 item {
                     Text(
                         text = "Matching Studios (${studios.size})",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        style = Typography.bodyLarge,
                         color = BrandDark
                     )
                 }
@@ -927,7 +925,7 @@ fun StudioProfileScreen(
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back", tint = Color.White)
                 }
 
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                     IconButton(
                         onClick = onShare,
                         modifier = Modifier
@@ -951,7 +949,7 @@ fun StudioProfileScreen(
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
                         .padding(12.dp)
-                        .clip(RoundedCornerShape(8.dp))
+                        .clip(RoundedCornerShape(Dimens.r1))
                         .background(BrandPrimary)
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 ) {
@@ -965,7 +963,7 @@ fun StudioProfileScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -974,17 +972,17 @@ fun StudioProfileScreen(
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(studio.name, fontSize = 20.sp, fontWeight = FontWeight.Bold, color = BrandDark)
+                        Text(studio.name, style = Typography.bodyLarge, color = BrandDark)
                         if (studio.isVerified) {
-                            Spacer(modifier = Modifier.width(4.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
                             Icon(Icons.Default.Verified, "Verified", tint = BrandPrimary, modifier = Modifier.size(16.dp))
                         }
                     }
-                    Text(studio.location, fontSize = 12.sp, color = BrandTextSecondary)
+                    Text(studio.location, style = Typography.labelLarge, color = BrandTextSecondary)
                 }
                 
                 Column(horizontalAlignment = Alignment.End) {
-                    Text("₹${studio.pricePerHour}/hr", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, color = BrandPrimary)
+                    Text("₹${studio.pricePerHour}/hr", style = Typography.bodyLarge, color = BrandPrimary)
                     Text("Base Booking Rate", fontSize = 10.sp, color = BrandTextSecondary)
                 }
             }
@@ -996,14 +994,14 @@ fun StudioProfileScreen(
             ) {
                 Icon(Icons.Default.Star, null, tint = Color(0xFFFFB300), modifier = Modifier.size(16.dp))
                 Text(studio.rating.toString(), fontWeight = FontWeight.Bold, fontSize = 13.sp)
-                Text("(${studio.reviewCount} Reviews)", color = BrandTextSecondary, fontSize = 12.sp)
+                Text("(${studio.reviewCount} Reviews)", color = BrandTextSecondary, style = Typography.labelLarge)
             }
 
             // MAIN SECTIONS TABS
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(1.dp, BrandBorder, RoundedCornerShape(12.dp))
+                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
                     .background(Color.White)
             ) {
                 listOf("About", "Equipment & Gear", "Policies").forEach { tab ->
@@ -1027,11 +1025,11 @@ fun StudioProfileScreen(
 
             when (activeTab) {
                 "About" -> {
-                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Text("About The Facility", fontWeight = FontWeight.Bold, fontSize = 14.sp)
-                        Text(studio.description, fontSize = 12.sp, color = BrandTextSecondary, lineHeight = 18.sp)
+                    Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
+                        Text("About The Facility", style = Typography.bodyLarge)
+                        Text(studio.description, style = Typography.labelLarge, color = BrandTextSecondary, lineHeight = 18.sp)
                         
-                        Text("Elite Amenities Offered", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                        Text("Elite Amenities Offered", style = Typography.bodyLarge)
                         FlowRowCustom(
                             items = studio.amenities,
                             color = BrandPrimary
@@ -1040,18 +1038,17 @@ fun StudioProfileScreen(
                 }
 
                 "Equipment & Gear" -> {
-                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text("Resident Gear Showcase", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                            Text("Resident Gear Showcase", style = Typography.bodyLarge)
                             Text(
                                 text = "View Specifications",
                                 color = BrandPrimary,
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 12.sp,
+                                style = Typography.bodyLarge,
                                 modifier = Modifier.clickable { onViewEquipment() }
                             )
                         }
@@ -1067,7 +1064,7 @@ fun StudioProfileScreen(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Text(gear.emoji, fontSize = 20.sp)
+                                    Text(gear.emoji, style = Typography.headlineLarge)
                                     Spacer(modifier = Modifier.width(10.dp))
                                     Column {
                                         Text(gear.name, fontWeight = FontWeight.Bold, fontSize = 11.5.sp)
@@ -1076,7 +1073,7 @@ fun StudioProfileScreen(
                                 }
                                 Box(
                                     modifier = Modifier
-                                        .background(BrandSuccess.copy(alpha = 0.1f), RoundedCornerShape(4.dp))
+                                        .background(BrandSuccess.copy(alpha = 0.1f), RoundedCornerShape(Dimens.r1))
                                         .padding(horizontal = 6.dp, vertical = 2.dp)
                                 ) {
                                     Text("INCLUDED", fontSize = 8.sp, color = BrandSuccess, fontWeight = FontWeight.Bold)
@@ -1088,7 +1085,7 @@ fun StudioProfileScreen(
 
                 "Policies" -> {
                     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Text("Studio Code & Guidelines", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                        Text("Studio Code & Guidelines", style = Typography.bodyLarge)
                         listOf(
                             "❌ No smoking or alcoholic beverages allowed inside the live room or console bays.",
                             "🕒 Rescheduling must be initialized at least 24 hours in advance.",
@@ -1100,7 +1097,7 @@ fun StudioProfileScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             // PRIMARY RESERVE CTA
             Button(
@@ -1112,7 +1109,7 @@ fun StudioProfileScreen(
                 shape = RoundedCornerShape(99.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary)
             ) {
-                Text("Reserve Recording Session", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                Text("Reserve Recording Session", style = Typography.bodyLarge)
             }
         }
     }
@@ -1140,7 +1137,7 @@ fun StudioEquipmentDetailsScreen(
             }
             Spacer(modifier = Modifier.width(10.dp))
             Column {
-                Text("Resident Equipment Room", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
+                Text("Resident Equipment Room", style = Typography.bodyLarge, color = BrandDark)
                 Text(studio.name, fontSize = 11.sp, color = BrandTextSecondary)
             }
         }
@@ -1148,7 +1145,7 @@ fun StudioEquipmentDetailsScreen(
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
         ) {
             items(studio.equipmentList) { gear ->
                 Card(
@@ -1158,7 +1155,7 @@ fun StudioEquipmentDetailsScreen(
                     shape = RoundedCornerShape(14.dp)
                 ) {
                     Row(
-                        modifier = Modifier.padding(16.dp),
+                        modifier = Modifier.padding(Dimens.sp2),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -1170,7 +1167,7 @@ fun StudioEquipmentDetailsScreen(
                                     .background(BrandPrimary.copy(alpha = 0.08f)),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Text(gear.emoji, fontSize = 24.sp)
+                                Text(gear.emoji, style = Typography.headlineLarge)
                             }
                             Spacer(modifier = Modifier.width(14.dp))
                             Column {
@@ -1182,12 +1179,12 @@ fun StudioEquipmentDetailsScreen(
                         Column(horizontalAlignment = Alignment.End) {
                             Box(
                                 modifier = Modifier
-                                    .background(BrandSuccess.copy(alpha = 0.12f), RoundedCornerShape(4.dp))
+                                    .background(BrandSuccess.copy(alpha = 0.12f), RoundedCornerShape(Dimens.r1))
                                     .padding(horizontal = 8.dp, vertical = 4.dp)
                             ) {
                                 Text("Included", color = BrandSuccess, fontSize = 9.sp, fontWeight = FontWeight.Bold)
                             }
-                            Spacer(modifier = Modifier.height(4.dp))
+                            Spacer(modifier = Modifier.height(Dimens.sp1))
                             Text("Qty: ${gear.quantity}", fontSize = 11.sp, fontWeight = FontWeight.Bold)
                         }
                     }
@@ -1228,16 +1225,16 @@ fun StudioAvailabilityCalendarScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
             }
             Spacer(modifier = Modifier.width(10.dp))
-            Text("Select Date & Time Slot", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+            Text("Select Date & Time Slot", style = Typography.bodyLarge)
         }
 
         Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
-            Text("Choose Reservation Date", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("Choose Reservation Date", style = Typography.bodyLarge)
             
             // Standard weekly calendar representation
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
             ) {
                 listOf(
                     Triple("Sat", "27", "2026-06-27"),
@@ -1249,23 +1246,23 @@ fun StudioAvailabilityCalendarScreen(
                     Box(
                         modifier = Modifier
                             .weight(1f)
-                            .clip(RoundedCornerShape(12.dp))
+                            .clip(RoundedCornerShape(Dimens.r2))
                             .background(if (isSelected) BrandPrimary else Color.White)
-                            .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(12.dp))
+                            .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(Dimens.r2))
                             .clickable { onDateSelect(rawDate) }
                             .padding(vertical = 12.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(day, fontSize = 11.sp, color = if (isSelected) Color.White else BrandTextSecondary)
-                            Spacer(modifier = Modifier.height(4.dp))
-                            Text(num, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = if (isSelected) Color.White else BrandDark)
+                            Spacer(modifier = Modifier.height(Dimens.sp1))
+                            Text(num, style = Typography.bodyLarge, color = if (isSelected) Color.White else BrandDark)
                         }
                     }
                 }
             }
 
-            Text("Select Time Block", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("Select Time Block", style = Typography.bodyLarge)
 
             studio.availableSlots.forEach { slot ->
                 val isSelected = selectedSlot == slot
@@ -1292,7 +1289,7 @@ fun StudioAvailabilityCalendarScreen(
                             contentDescription = null,
                             tint = if (isSelected) BrandPrimary else BrandTextSecondary
                         )
-                        Spacer(modifier = Modifier.width(12.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp2))
                         Text(
                             text = slot,
                             fontWeight = FontWeight.Bold,
@@ -1305,7 +1302,7 @@ fun StudioAvailabilityCalendarScreen(
                         modifier = Modifier
                             .background(
                                 if (isBooked) Color.Red.copy(alpha = 0.1f) else if (isSelected) BrandPrimary.copy(alpha = 0.12f) else BrandSuccess.copy(alpha = 0.1f),
-                                RoundedCornerShape(4.dp)
+                                RoundedCornerShape(Dimens.r1)
                             )
                             .padding(horizontal = 8.dp, vertical = 4.dp)
                     ) {
@@ -1319,7 +1316,7 @@ fun StudioAvailabilityCalendarScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp3))
 
             Button(
                 onClick = onNext,
@@ -1369,14 +1366,14 @@ fun StudioConfigureSessionScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
             }
             Spacer(modifier = Modifier.width(10.dp))
-            Text("Configure Your Booking", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+            Text("Configure Your Booking", style = Typography.bodyLarge)
         }
 
         Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
-            Text("Choose Session Mode", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("Choose Session Mode", style = Typography.bodyLarge)
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
             ) {
                 listOf("Recording & Overdubs", "Mixing & Mastering", "Podcast & Foley").forEach { type ->
                     val isSelected = sessionType == type
@@ -1401,7 +1398,7 @@ fun StudioConfigureSessionScreen(
                 }
             }
 
-            Text("Session Duration Selection", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("Session Duration Selection", style = Typography.bodyLarge)
             listOf(
                 Triple("Hourly Session", "₹ Base hourly rate applies.", 1),
                 Triple("Half Day (4 Hours)", "₹ Save 10% off hourly fee.", 4),
@@ -1411,9 +1408,9 @@ fun StudioConfigureSessionScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(12.dp))
+                        .clip(RoundedCornerShape(Dimens.r2))
                         .background(if (isSelected) BrandPrimary.copy(alpha = 0.05f) else Color.White)
-                        .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(12.dp))
+                        .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(Dimens.r2))
                         .clickable { onDurationChange(label, hrs) }
                         .padding(14.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -1431,13 +1428,13 @@ fun StudioConfigureSessionScreen(
                 }
             }
 
-            Text("Add Elite Resident Engineer?", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("Add Elite Resident Engineer?", style = Typography.bodyLarge)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(RoundedCornerShape(Dimens.r2))
                     .background(Color.White)
-                    .border(1.dp, BrandBorder, RoundedCornerShape(12.dp))
+                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
                     .padding(14.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
@@ -1453,7 +1450,7 @@ fun StudioConfigureSessionScreen(
                 )
             }
 
-            Text("Exclusive Add-ons (Optional)", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("Exclusive Add-ons (Optional)", style = Typography.bodyLarge)
             listOf(
                 Triple("Valet Parking Space", "+₹400 per slot", "🚗"),
                 Triple("Artisan Coffee & Catering", "+₹800 complete service", "☕"),
@@ -1463,9 +1460,9 @@ fun StudioConfigureSessionScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(12.dp))
+                        .clip(RoundedCornerShape(Dimens.r2))
                         .background(Color.White)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(12.dp))
+                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
                         .clickable {
                             if (isChecked) selectedAddons.remove(name) else selectedAddons.add(name)
                         }
@@ -1474,10 +1471,10 @@ fun StudioConfigureSessionScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(emoji, fontSize = 18.sp)
-                        Spacer(modifier = Modifier.width(12.dp))
+                        Text(emoji, style = Typography.bodyLarge)
+                        Spacer(modifier = Modifier.width(Dimens.sp2))
                         Column {
-                            Text(name, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                            Text(name, style = Typography.bodyLarge)
                             Text(fee, fontSize = 10.5.sp, color = BrandTextSecondary)
                         }
                     }
@@ -1491,7 +1488,7 @@ fun StudioConfigureSessionScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             Button(
                 onClick = onNext,
@@ -1546,7 +1543,7 @@ fun StudioBookingSummaryScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
             }
             Spacer(modifier = Modifier.width(10.dp))
-            Text("Review Studio Session", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+            Text("Review Studio Session", style = Typography.bodyLarge)
         }
 
         Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(18.dp)) {
@@ -1555,26 +1552,26 @@ fun StudioBookingSummaryScreen(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 border = BorderStroke(1.dp, BrandBorder),
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(Dimens.r2)
             ) {
-                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Column(modifier = Modifier.padding(Dimens.sp2), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Text("Studio Reservation", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = BrandPrimary)
-                    Text(studio.name, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
-                    Text("Location: ${studio.location}", fontSize = 12.sp, color = BrandTextSecondary)
+                    Text(studio.name, style = Typography.bodyLarge, color = BrandDark)
+                    Text("Location: ${studio.location}", style = Typography.labelLarge, color = BrandTextSecondary)
                     
                     HorizontalDivider(color = BrandBorder)
 
-                    Text("Date: $date", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
-                    Text("Selected slot: $timeSlot", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
-                    Text("Mode: $sessionType", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
-                    Text("Block Type: $duration", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                    Text("Date: $date", style = Typography.bodyLarge)
+                    Text("Selected slot: $timeSlot", style = Typography.bodyLarge)
+                    Text("Mode: $sessionType", style = Typography.bodyLarge)
+                    Text("Block Type: $duration", style = Typography.bodyLarge)
                 }
             }
 
-            Text("Apply Promo Code", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("Apply Promo Code", style = Typography.bodyLarge)
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
@@ -1604,7 +1601,7 @@ fun StudioBookingSummaryScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(BrandSuccess.copy(alpha = 0.1f), RoundedCornerShape(8.dp))
+                        .background(BrandSuccess.copy(alpha = 0.1f), RoundedCornerShape(Dimens.r1))
                         .padding(10.dp)
                 ) {
                     Text(
@@ -1616,7 +1613,7 @@ fun StudioBookingSummaryScreen(
                 }
             }
 
-            Text("Session Fee Breakdown", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("Session Fee Breakdown", style = Typography.bodyLarge)
             
             // Detailed breakdown
             val baseCost = studio.pricePerHour * durationMultiplier
@@ -1636,25 +1633,25 @@ fun StudioBookingSummaryScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(16.dp))
+                    .clip(RoundedCornerShape(Dimens.r2))
                     .background(Color.White)
-                    .border(1.dp, BrandBorder, RoundedCornerShape(16.dp))
+                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                    Text("Studio Hire Rate (₹${studio.pricePerHour} × $durationMultiplier hrs)", fontSize = 12.sp, color = BrandTextSecondary)
-                    Text("₹$baseCost", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    Text("Studio Hire Rate (₹${studio.pricePerHour} × $durationMultiplier hrs)", style = Typography.labelLarge, color = BrandTextSecondary)
+                    Text("₹$baseCost", style = Typography.bodyLarge)
                 }
                 if (hasEngineer) {
                     Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                        Text("Senior Resident Engineer (₹1,500 × $durationMultiplier hrs)", fontSize = 12.sp, color = BrandTextSecondary)
-                        Text("₹$engineerCost", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Text("Senior Resident Engineer (₹1,500 × $durationMultiplier hrs)", style = Typography.labelLarge, color = BrandTextSecondary)
+                        Text("₹$engineerCost", style = Typography.bodyLarge)
                     }
                 }
                 selectedAddons.forEach { addon ->
                     Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                        Text(addon, fontSize = 12.sp, color = BrandTextSecondary)
+                        Text(addon, style = Typography.labelLarge, color = BrandTextSecondary)
                         Text(
                             text = when (addon) {
                                 "Valet Parking Space" -> "₹400"
@@ -1662,28 +1659,27 @@ fun StudioBookingSummaryScreen(
                                 "Live-stream Rig Multi-cam Setup" -> "₹2500"
                                 else -> "₹0"
                             },
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold
+                            style = Typography.bodyLarge
                         )
                     }
                 }
 
                 if (discount > 0) {
                     Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                        Text("Promo Discount applied ($promoCode)", fontSize = 12.sp, color = BrandSuccess, fontWeight = FontWeight.Bold)
-                        Text("-₹$discount", fontSize = 12.sp, color = BrandSuccess, fontWeight = FontWeight.Bold)
+                        Text("Promo Discount applied ($promoCode)", style = Typography.labelLarge, color = BrandSuccess, fontWeight = FontWeight.Bold)
+                        Text("-₹$discount", style = Typography.labelLarge, color = BrandSuccess, fontWeight = FontWeight.Bold)
                     }
                 }
 
                 HorizontalDivider(color = BrandBorder)
 
                 Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                    Text("Total Session Quote", fontWeight = FontWeight.ExtraBold, fontSize = 14.sp)
-                    Text("₹$totalPaid", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandPrimary)
+                    Text("Total Session Quote", style = Typography.bodyLarge)
+                    Text("₹$totalPaid", style = Typography.bodyLarge, color = BrandPrimary)
                 }
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             Button(
                 onClick = onNext,
@@ -1733,9 +1729,9 @@ fun StudioPaymentScreen(
             Spacer(modifier = Modifier.width(10.dp))
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
             ) {
-                Text("Secure Checkout Gateway", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                Text("Secure Checkout Gateway", style = Typography.bodyLarge)
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(6.dp))
@@ -1758,21 +1754,21 @@ fun StudioPaymentScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = BrandDark),
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(Dimens.r2)
             ) {
                 Column(
-                    modifier = Modifier.padding(24.dp),
+                    modifier = Modifier.padding(Dimens.sp3),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text("Securing Studio Slot at", color = Color.White.copy(alpha = 0.7f), fontSize = 11.sp)
-                    Text(studioName, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 14.sp, textAlign = TextAlign.Center)
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(studioName, color = Color.White, style = Typography.bodyLarge, textAlign = TextAlign.Center)
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
                     Text("₹$amount", color = BrandAccent, fontWeight = FontWeight.Black, fontSize = 32.sp)
                     Text("Guaranteed 100% Booking Refund Policy", color = Color.White.copy(alpha = 0.6f), fontSize = 10.sp)
                 }
             }
 
-            Text("Choose Payment Method", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("Choose Payment Method", style = Typography.bodyLarge)
 
             listOf(
                 Triple("UPI (Google Pay / PhonePe)", "Instant routing secure session lock.", "UPI"),
@@ -1783,9 +1779,9 @@ fun StudioPaymentScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(12.dp))
+                        .clip(RoundedCornerShape(Dimens.r2))
                         .background(if (isSelected) BrandPrimary.copy(alpha = 0.05f) else Color.White)
-                        .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(12.dp))
+                        .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(Dimens.r2))
                         .clickable { selectedMethod = code }
                         .padding(14.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -1803,7 +1799,7 @@ fun StudioPaymentScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             Button(
                 onClick = onPaymentSuccess,
@@ -1814,7 +1810,7 @@ fun StudioPaymentScreen(
                 shape = RoundedCornerShape(99.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary)
             ) {
-                Text("Authorize & Secure Payment", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                Text("Authorize & Secure Payment", style = Typography.bodyLarge)
             }
 
             TextButton(
@@ -1843,7 +1839,7 @@ fun StudioBookingSuccessScreen(
             .padding(bottom = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(48.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp4))
 
         // Large high-fidelity illustration checkmark
         Box(
@@ -1861,17 +1857,17 @@ fun StudioBookingSuccessScreen(
 
         Text(
             text = "Booking Secured!",
-            style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.ExtraBold, color = BrandDark)
+            style = Typography.bodyLarge.copy(fontWeight = FontWeight.ExtraBold, color = BrandDark)
         )
         Text(
             text = "Session confirmation sent to your email & registered SMS.",
-            fontSize = 12.sp,
+            style = Typography.labelLarge,
             color = BrandTextSecondary,
             modifier = Modifier.padding(horizontal = 24.dp),
             textAlign = TextAlign.Center
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp3))
 
         // Visual Receipt Card
         Card(
@@ -1880,11 +1876,11 @@ fun StudioBookingSuccessScreen(
                 .padding(horizontal = 24.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White),
             border = BorderStroke(1.dp, BrandBorder),
-            shape = RoundedCornerShape(16.dp)
+            shape = RoundedCornerShape(Dimens.r2)
         ) {
             Column(
                 modifier = Modifier.padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -1897,7 +1893,7 @@ fun StudioBookingSuccessScreen(
 
                 HorizontalDivider(color = BrandBorder)
 
-                Text(booking.studio.name, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                Text(booking.studio.name, style = Typography.bodyLarge)
                 Text("Location: ${booking.studio.location}", fontSize = 11.5.sp, color = BrandTextSecondary)
 
                 Row(
@@ -1906,11 +1902,11 @@ fun StudioBookingSuccessScreen(
                 ) {
                     Column {
                         Text("RESERVATION DATE", fontSize = 9.sp, color = BrandTextSecondary)
-                        Text(booking.date, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                        Text(booking.date, style = Typography.bodyLarge)
                     }
                     Column(horizontalAlignment = Alignment.End) {
                         Text("TIME SLOT BLOCK", fontSize = 9.sp, color = BrandTextSecondary)
-                        Text(booking.timeSlot, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                        Text(booking.timeSlot, style = Typography.bodyLarge)
                     }
                 }
 
@@ -1920,23 +1916,23 @@ fun StudioBookingSuccessScreen(
                 ) {
                     Column {
                         Text("ENGINEER SUPPORT", fontSize = 9.sp, color = BrandTextSecondary)
-                        Text(if (booking.hasEngineer) "Yes, Resident" else "No (Self Tracked)", fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                        Text(if (booking.hasEngineer) "Yes, Resident" else "No (Self Tracked)", style = Typography.bodyLarge)
                     }
                     Column(horizontalAlignment = Alignment.End) {
                         Text("TOTAL PAID SECURE", fontSize = 9.sp, color = BrandTextSecondary)
-                        Text("₹${booking.totalPaid}", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandSuccess)
+                        Text("₹${booking.totalPaid}", style = Typography.bodyLarge, color = BrandSuccess)
                     }
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp3))
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
         ) {
             OutlinedButton(
                 onClick = onViewMyBookings,
@@ -1988,7 +1984,7 @@ fun StudioMyBookingsScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
             }
             Spacer(modifier = Modifier.width(10.dp))
-            Text("My Bookings Feed", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+            Text("My Bookings Feed", style = Typography.bodyLarge)
         }
 
         // TABS
@@ -2014,7 +2010,7 @@ fun StudioMyBookingsScreen(
                             color = if (isSelected) BrandPrimary else BrandTextSecondary,
                             fontSize = 12.5.sp
                         )
-                        Spacer(modifier = Modifier.height(4.dp))
+                        Spacer(modifier = Modifier.height(Dimens.sp1))
                         Box(
                             modifier = Modifier
                                 .height(2.dp)
@@ -2042,7 +2038,7 @@ fun StudioMyBookingsScreen(
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(Icons.Default.ConfirmationNumber, contentDescription = null, tint = BrandTextSecondary, modifier = Modifier.size(48.dp))
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
                     Text("No bookings matching selection.", fontWeight = FontWeight.Bold, color = BrandDark)
                 }
             }
@@ -2057,11 +2053,11 @@ fun StudioMyBookingsScreen(
                         modifier = Modifier.fillMaxWidth(),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
                         border = BorderStroke(1.dp, BrandBorder),
-                        shape = RoundedCornerShape(16.dp)
+                        shape = RoundedCornerShape(Dimens.r2)
                     ) {
                         Column(
-                            modifier = Modifier.padding(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                            modifier = Modifier.padding(Dimens.sp2),
+                            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                         ) {
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
@@ -2072,7 +2068,7 @@ fun StudioMyBookingsScreen(
                                     Box(
                                         modifier = Modifier
                                             .size(24.dp)
-                                            .clip(RoundedCornerShape(4.dp)),
+                                            .clip(RoundedCornerShape(Dimens.r1)),
                                         contentAlignment = Alignment.Center
                                     ) {
                                         if (booking.studio.imageUrl != null) {
@@ -2083,17 +2079,17 @@ fun StudioMyBookingsScreen(
                                                 modifier = Modifier.fillMaxSize()
                                             )
                                         } else {
-                                            Text(booking.studio.coverEmoji, fontSize = 20.sp)
+                                            Text(booking.studio.coverEmoji, style = Typography.headlineLarge)
                                         }
                                     }
-                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Spacer(modifier = Modifier.width(Dimens.sp1))
                                     Text(booking.studio.name, fontWeight = FontWeight.Bold, fontSize = 13.sp)
                                 }
                                 Box(
                                     modifier = Modifier
                                         .background(
                                             if (booking.status == "Confirmed") BrandSuccess.copy(alpha = 0.1f) else if (booking.status == "Completed") BrandPrimary.copy(alpha = 0.1f) else Color.Red.copy(alpha = 0.1f),
-                                            RoundedCornerShape(4.dp)
+                                            RoundedCornerShape(Dimens.r1)
                                         )
                                         .padding(horizontal = 6.dp, vertical = 2.dp)
                                 ) {
@@ -2125,12 +2121,12 @@ fun StudioMyBookingsScreen(
                             if (booking.status == "Confirmed") {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                                 ) {
                                     OutlinedButton(
                                         onClick = { onCancelBooking(booking.id) },
                                         modifier = Modifier.weight(1f),
-                                        shape = RoundedCornerShape(8.dp),
+                                        shape = RoundedCornerShape(Dimens.r1),
                                         colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Red),
                                         border = BorderStroke(1.dp, Color.Red.copy(alpha = 0.5f))
                                     ) {
@@ -2140,7 +2136,7 @@ fun StudioMyBookingsScreen(
                                     Button(
                                         onClick = { },
                                         modifier = Modifier.weight(1f),
-                                        shape = RoundedCornerShape(8.dp),
+                                        shape = RoundedCornerShape(Dimens.r1),
                                         colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary)
                                     ) {
                                         Text("Directions", fontSize = 11.sp, fontWeight = FontWeight.Bold)
@@ -2181,37 +2177,37 @@ fun StudioOwnerDashboard(
             }
             Spacer(modifier = Modifier.width(10.dp))
             Column {
-                Text("Studio Owner Workspace", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
+                Text("Studio Owner Workspace", style = Typography.bodyLarge, color = BrandDark)
                 Text("Managing Yash Raj Film Studios (YRF)", fontSize = 11.sp, color = BrandTextSecondary)
             }
         }
 
-        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(modifier = Modifier.padding(Dimens.sp2), verticalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
             // REVENUE METRIC HERO
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = BrandDark),
-                shape = RoundedCornerShape(20.dp)
+                shape = RoundedCornerShape(Dimens.r3)
             ) {
-                Column(modifier = Modifier.padding(24.dp)) {
+                Column(modifier = Modifier.padding(Dimens.sp3)) {
                     Text("TODAY'S ACCUMULATED REVENUE", color = Color.White.copy(alpha = 0.7f), fontSize = 10.sp, fontWeight = FontWeight.Bold)
                     Spacer(modifier = Modifier.height(6.dp))
                     Text("₹42,000", color = Color.White, fontSize = 32.sp, fontWeight = FontWeight.Black)
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Row(horizontalArrangement = Arrangement.spacedBy(24.dp)) {
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp3)) {
                         Column {
                             Text("HOURS BOOKED", color = Color.White.copy(alpha = 0.6f), fontSize = 9.sp)
-                            Text("18 Hrs Today", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            Text("18 Hrs Today", color = Color.White, style = Typography.bodyLarge)
                         }
                         Column {
                             Text("ACTIVE ENGINES", color = Color.White.copy(alpha = 0.6f), fontSize = 9.sp)
-                            Text("2 Rooms Live", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            Text("2 Rooms Live", color = Color.White, style = Typography.bodyLarge)
                         }
                     }
                 }
             }
 
-            Text("Current Live Sessions (Today)", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("Current Live Sessions (Today)", style = Typography.bodyLarge)
             
             // List of today's live sessions
             listOf(
@@ -2222,22 +2218,22 @@ fun StudioOwnerDashboard(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(12.dp))
+                        .clip(RoundedCornerShape(Dimens.r2))
                         .background(Color.White)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(12.dp))
+                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
                         .padding(14.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Column {
-                        Text(title, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandDark)
+                        Text(title, style = Typography.bodyLarge, color = BrandDark)
                         Text(subtitle, fontSize = 10.5.sp, color = BrandTextSecondary)
                     }
                     Box(
                         modifier = Modifier
                             .background(
                                 if (status == "LIVE") BrandAccent.copy(alpha = 0.12f) else if (status == "CONFIRMED") BrandSuccess.copy(alpha = 0.1f) else Color.Red.copy(alpha = 0.1f),
-                                RoundedCornerShape(4.dp)
+                                RoundedCornerShape(Dimens.r1)
                             )
                             .padding(horizontal = 6.dp, vertical = 2.dp)
                     ) {
@@ -2251,7 +2247,7 @@ fun StudioOwnerDashboard(
                 }
             }
 
-            Text("Equipment Status Monitor", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text("Equipment Status Monitor", style = Typography.bodyLarge)
             
             // Equipment health checks
             listOf(
@@ -2284,7 +2280,7 @@ fun FeaturedStudioCard(
             .clickable { onClick() },
         colors = CardDefaults.cardColors(containerColor = Color.White),
         border = BorderStroke(1.dp, BrandBorder),
-        shape = RoundedCornerShape(20.dp)
+        shape = RoundedCornerShape(Dimens.r3)
     ) {
         Column {
             Box(
@@ -2310,7 +2306,7 @@ fun FeaturedStudioCard(
                     modifier = Modifier
                         .align(Alignment.BottomStart)
                         .padding(12.dp)
-                        .clip(RoundedCornerShape(8.dp))
+                        .clip(RoundedCornerShape(Dimens.r1))
                         .background(Color.Black.copy(alpha = 0.7f))
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 ) {
@@ -2333,7 +2329,7 @@ fun FeaturedStudioCard(
                         color = BrandDark,
                         modifier = Modifier.weight(1f)
                     )
-                    Spacer(modifier = Modifier.width(4.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Default.Star, null, tint = Color(0xFFFFB300), modifier = Modifier.size(12.dp))
                         Spacer(modifier = Modifier.width(2.dp))
@@ -2356,7 +2352,7 @@ fun FeaturedStudioCard(
                     studio.amenities.take(2).forEach { amen ->
                         Box(
                             modifier = Modifier
-                                .background(BrandPrimary.copy(alpha = 0.08f), RoundedCornerShape(4.dp))
+                                .background(BrandPrimary.copy(alpha = 0.08f), RoundedCornerShape(Dimens.r1))
                                 .padding(horizontal = 6.dp, vertical = 2.dp)
                         ) {
                             Text(amen, fontSize = 8.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)
@@ -2379,16 +2375,16 @@ fun StudioListItemCard(
             .clickable { onClick() },
         colors = CardDefaults.cardColors(containerColor = Color.White),
         border = BorderStroke(1.dp, BrandBorder),
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(Dimens.r2)
     ) {
         Row(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(Dimens.sp2),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
                 modifier = Modifier
                     .size(72.dp)
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(RoundedCornerShape(Dimens.r2))
                     .background(BrandPrimary.copy(alpha = 0.08f)),
                 contentAlignment = Alignment.Center
             ) {
@@ -2432,10 +2428,10 @@ fun StudioListItemCard(
                 }
             }
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(Dimens.sp1))
 
             Column(horizontalAlignment = Alignment.End) {
-                Text("₹${studio.pricePerHour}", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandPrimary)
+                Text("₹${studio.pricePerHour}", style = Typography.bodyLarge, color = BrandPrimary)
                 Text("per hour", fontSize = 9.sp, color = BrandTextSecondary)
             }
         }

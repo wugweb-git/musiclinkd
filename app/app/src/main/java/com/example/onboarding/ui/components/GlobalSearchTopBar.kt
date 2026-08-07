@@ -60,7 +60,7 @@ fun GlobalSearchTopBar(
             .fillMaxWidth()
             .background(Color.White)
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
     ) {
         UnifiedSearchBar(
             query = query,
@@ -71,7 +71,7 @@ fun GlobalSearchTopBar(
 
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
         ) {
             val categories = listOf("All" to "All Network", "Artists" to "👨‍🎤 Artists", "Tracks" to "🎵 Tracks", "Studios" to "🎙️ Studios")
             categories.forEach { (key, label) ->

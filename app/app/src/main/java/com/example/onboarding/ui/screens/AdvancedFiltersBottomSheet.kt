@@ -95,7 +95,7 @@ fun AdvancedFiltersBottomSheet(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text("Refine Search", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = BrandText)
+                    Text("Refine Search", style = Typography.bodyLarge, color = BrandText)
                     Row {
                         TextButton(onClick = {
                             onReset()
@@ -118,10 +118,10 @@ fun AdvancedFiltersBottomSheet(
                         .weight(1f)
                         .verticalScroll(rememberScrollState())
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     FilterSectionHeader("Sort Results By")
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                         listOf("Most Relevant", "Most Followed", "Highest Rated").forEach { match ->
                             val isSel = sortBy == match
                             FilterChipCustom(
@@ -142,7 +142,7 @@ fun AdvancedFiltersBottomSheet(
                     )
 
                     FilterSectionHeader("Location Scope")
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                         OutlinedTextField(
                             value = city,
                             onValueChange = { city = it },
@@ -162,7 +162,7 @@ fun AdvancedFiltersBottomSheet(
                     FilterSectionHeader("Language Spoken")
                     Row(
                         modifier = Modifier.horizontalScroll(rememberScrollState()),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
                         listOf("Hindi", "English", "Punjabi", "Tamil", "Bengali").forEach { lang ->
                             val isSel = language.equals(lang, ignoreCase = true)
@@ -177,7 +177,7 @@ fun AdvancedFiltersBottomSheet(
                     FilterSectionHeader("Genre Focus")
                     Row(
                         modifier = Modifier.horizontalScroll(rememberScrollState()),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
                         listOf("Bollywood", "Indie", "Classical", "Folk", "Rock", "Pop").forEach { g ->
                             val isSel = genre.equals(g, ignoreCase = true)
@@ -192,7 +192,7 @@ fun AdvancedFiltersBottomSheet(
                     FilterSectionHeader("Experience Seniority")
                     Row(
                         modifier = Modifier.horizontalScroll(rememberScrollState()),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
                         listOf("Rising Star (1-2 yrs)", "Established (3-5 yrs)", "Pro (5+ years)", "Legend (10+ yrs)").forEach { xp ->
                             val isSel = experience == xp
@@ -205,7 +205,7 @@ fun AdvancedFiltersBottomSheet(
                     }
 
                     FilterSectionHeader("Preferences")
-                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Checkbox(checked = verifiedOnly, onCheckedChange = { verifiedOnly = it })
                             Text("Verified Professionals Only", fontSize = 13.sp)
@@ -223,7 +223,7 @@ fun AdvancedFiltersBottomSheet(
 
                 HorizontalDivider()
 
-                Box(modifier = Modifier.padding(16.dp)) {
+                Box(modifier = Modifier.padding(Dimens.sp2)) {
                     Button(
                         onClick = {
                             onApply(role, language, genre, city, area, availability, verifiedOnly, experience, remoteAvailable, sessionAvailable, sortBy)
@@ -233,9 +233,9 @@ fun AdvancedFiltersBottomSheet(
                             .height(50.dp)
                             .testTag("apply_filters_cta"),
                         colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(Dimens.r2)
                     ) {
-                        Text("Apply Selected Filters", fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                        Text("Apply Selected Filters", style = Typography.bodyLarge)
                     }
                 }
             }

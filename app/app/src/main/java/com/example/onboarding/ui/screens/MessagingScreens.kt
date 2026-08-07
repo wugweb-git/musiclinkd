@@ -299,7 +299,7 @@ fun MessagesHomeScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = BrandHeadline)
                     }
 
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                         IconButton(
                             onClick = onViewCalls,
                             modifier = Modifier.size(40.dp).background(BrandBorder.copy(alpha = 0.5f), CircleShape)
@@ -328,7 +328,7 @@ fun MessagesHomeScreen(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 // LARGE EDITORIAL DISPLAY HEADER
                 Text(
@@ -341,7 +341,7 @@ fun MessagesHomeScreen(
                 )
                 Text(
                     text = "Your conversations, bookings and collaborations.",
-                    fontSize = 14.sp,
+                    style = Typography.labelLarge,
                     color = BrandSecondary,
                     modifier = Modifier.padding(top = 4.dp, bottom = 16.dp)
                 )
@@ -350,7 +350,7 @@ fun MessagesHomeScreen(
                 OutlinedTextField(
                     value = searchText,
                     onValueChange = onSearchTextChange,
-                    placeholder = { Text("Search people, studios, projects...", color = BrandSecondary, fontSize = 14.sp) },
+                    placeholder = { Text("Search people, studios, projects...", color = BrandSecondary, style = Typography.labelLarge) },
                     leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, tint = BrandSecondary) },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -367,12 +367,12 @@ fun MessagesHomeScreen(
                     singleLine = true
                 )
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 // FILTER CHIPS (SLIDABLE ROW)
                 LazyRow(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
                     contentPadding = PaddingValues(vertical = 4.dp)
                 ) {
                     val filters = listOf("All", "Unread", "Bookings", "Marketplace", "Projects", "Opportunities", "Pinned")
@@ -426,7 +426,7 @@ fun MessagesHomeScreen(
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(top = 8.dp, bottom = 48.dp, start = 20.dp, end = 20.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     items(convos) { item ->
                         val isPinned = isPinnedMap[item.id] == true
@@ -435,11 +435,11 @@ fun MessagesHomeScreen(
                         Card(
                             onClick = { onConvoSelect(item.id) },
                             colors = CardDefaults.cardColors(containerColor = BrandCardBackground),
-                            shape = RoundedCornerShape(24.dp),
+                            shape = RoundedCornerShape(Dimens.r3),
                             border = BorderStroke(1.dp, if (item.unreadCount > 0) BrandPrimary.copy(alpha = 0.4f) else BrandBorder),
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .shadow(if (item.unreadCount > 0) 4.dp else 0.dp, RoundedCornerShape(24.dp))
+                                .shadow(if (item.unreadCount > 0) 4.dp else 0.dp, RoundedCornerShape(Dimens.r3))
                                 .testTag("convo_card_${item.id}")
                         ) {
                             Row(
@@ -466,8 +466,7 @@ fun MessagesHomeScreen(
                                     ) {
                                         Text(
                                             text = item.name.take(2).uppercase(),
-                                            fontWeight = FontWeight.Bold,
-                                            fontSize = 16.sp,
+                                            style = Typography.bodyLarge,
                                             color = when (item.context) {
                                                 ChatContext.STUDIO -> BrandPrimary
                                                 ChatContext.MARKETPLACE -> BrandAccent
@@ -493,7 +492,7 @@ fun MessagesHomeScreen(
                                     }
                                 }
 
-                                Spacer(modifier = Modifier.width(16.dp))
+                                Spacer(modifier = Modifier.width(Dimens.sp2))
 
                                 // CONVERSATION INFO
                                 Column(modifier = Modifier.weight(1f)) {
@@ -505,12 +504,11 @@ fun MessagesHomeScreen(
                                         Row(verticalAlignment = Alignment.CenterVertically) {
                                             Text(
                                                 text = item.name,
-                                                fontWeight = FontWeight.Bold,
-                                                fontSize = 15.sp,
+                                                style = Typography.bodyLarge,
                                                 color = BrandHeadline
                                             )
                                             if (item.isVerified) {
-                                                Spacer(modifier = Modifier.width(4.dp))
+                                                Spacer(modifier = Modifier.width(Dimens.sp1))
                                                 Icon(
                                                     imageVector = Icons.Default.Verified,
                                                     contentDescription = "Verified Profile",
@@ -550,16 +548,16 @@ fun MessagesHomeScreen(
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Text(
                                             text = item.role,
-                                            fontSize = 12.sp,
+                                            style = Typography.labelLarge,
                                             color = BrandPrimary,
                                             fontWeight = FontWeight.SemiBold
                                         )
-                                        Spacer(modifier = Modifier.width(8.dp))
+                                        Spacer(modifier = Modifier.width(Dimens.sp1))
                                         
                                         // CONTEXT TAG LABEL (E.g. Studio, Marketplace)
                                         Box(
                                             modifier = Modifier
-                                                .clip(RoundedCornerShape(4.dp))
+                                                .clip(RoundedCornerShape(Dimens.r1))
                                                 .background(
                                                     when (item.context) {
                                                         ChatContext.STUDIO -> Color(0xFFEFF6FF)
@@ -597,7 +595,7 @@ fun MessagesHomeScreen(
                                 }
 
                                 if (item.unreadCount > 0) {
-                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Spacer(modifier = Modifier.width(Dimens.sp1))
                                     Box(
                                         modifier = Modifier
                                             .size(20.dp)
@@ -666,7 +664,7 @@ fun ChatScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = BrandHeadline)
                     }
 
-                    Spacer(modifier = Modifier.width(4.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
 
                     // AVATAR
                     Box(modifier = Modifier.size(44.dp)) {
@@ -690,12 +688,12 @@ fun ChatScreen(
                         }
                     }
 
-                    Spacer(modifier = Modifier.width(12.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp2))
 
                     Column(modifier = Modifier.weight(1f)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(convo.name, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandHeadline)
-                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(convo.name, style = Typography.bodyLarge, color = BrandHeadline)
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
                             Icon(Icons.Default.Verified, "Verified", tint = BrandPrimary, modifier = Modifier.size(15.dp))
                         }
                         Text(convo.role, fontSize = 11.5.sp, color = BrandSecondary)
@@ -750,7 +748,7 @@ fun ChatScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(Icons.Default.PushPin, contentDescription = "Pinned Message", tint = BrandAccent, modifier = Modifier.size(14.dp))
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     Text(
                         text = "Pinned: Dynamic Booking agreement finalized on June 26, 2026. Review workspace parameters.",
                         fontSize = 11.5.sp,
@@ -778,7 +776,7 @@ fun ChatScreen(
                         .weight(1f)
                         .fillMaxWidth(),
                     contentPadding = PaddingValues(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     // Date Separator
                     item {
@@ -817,21 +815,21 @@ fun ChatScreen(
                                     .clip(CircleShape)
                                     .background(BrandPrimary)
                             )
-                            Spacer(modifier = Modifier.width(4.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
                             Box(
                                 modifier = Modifier
                                     .size(8.dp)
                                     .clip(CircleShape)
                                     .background(BrandPrimary.copy(alpha = 0.6f))
                             )
-                            Spacer(modifier = Modifier.width(4.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
                             Box(
                                 modifier = Modifier
                                     .size(8.dp)
                                     .clip(CircleShape)
                                     .background(BrandPrimary.copy(alpha = 0.3f))
                             )
-                            Spacer(modifier = Modifier.width(8.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
                             Text("Typing...", fontSize = 11.sp, color = BrandSecondary)
                         }
                     }
@@ -908,7 +906,7 @@ fun ChatScreen(
                         Icon(Icons.Default.Add, contentDescription = "Share Portfolio / Assets", tint = BrandPrimary)
                     }
 
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
 
                     IconButton(
                         onClick = { onViewFilesScreen() },
@@ -917,7 +915,7 @@ fun ChatScreen(
                         Icon(Icons.Default.PhotoLibrary, contentDescription = "Gallery", tint = BrandSecondary)
                     }
 
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
 
                     // TEXT COMPOSER INPUT
                     OutlinedTextField(
@@ -927,7 +925,7 @@ fun ChatScreen(
                         modifier = Modifier
                             .weight(1f)
                             .heightIn(max = 120.dp),
-                        shape = RoundedCornerShape(24.dp),
+                        shape = RoundedCornerShape(Dimens.r3),
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedContainerColor = Color.White,
                             unfocusedContainerColor = BrandBorder.copy(alpha = 0.3f),
@@ -939,7 +937,7 @@ fun ChatScreen(
                         maxLines = 4
                     )
 
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
 
                     // SEND BUTTON
                     IconButton(
@@ -1043,9 +1041,9 @@ fun AdaptiveContextBanner(
         modifier = Modifier
             .fillMaxWidth()
             .padding(12.dp)
-            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
+            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
         colors = CardDefaults.cardColors(containerColor = Color(0xFFFCFCFD)),
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(Dimens.r2)
     ) {
         Row(
             modifier = Modifier.padding(14.dp),
@@ -1081,7 +1079,7 @@ fun AdaptiveContextBanner(
                 Icon(accentIcon, contentDescription = null, tint = accentColor, modifier = Modifier.size(20.dp))
             }
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(Dimens.sp2))
 
             Column(modifier = Modifier.weight(1f)) {
                 val bannerTitle = when (context) {
@@ -1098,10 +1096,10 @@ fun AdaptiveContextBanner(
                 }
 
                 Text(bannerTitle, fontSize = 9.sp, fontWeight = FontWeight.ExtraBold, color = accentColor, letterSpacing = 1.sp)
-                Text(bannerDetail, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandHeadline)
+                Text(bannerDetail, style = Typography.bodyLarge, color = BrandHeadline)
             }
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(Dimens.sp1))
 
             // Action CTAs based on context
             when (context) {
@@ -1209,8 +1207,7 @@ fun SmartQuickActionsRow(
                 Text(
                     text = action,
                     color = BrandHeadline,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold
+                    style = Typography.bodyLarge
                 )
             }
         }
@@ -1260,7 +1257,7 @@ fun AIAssistTray(
                 Text("AI ASSIST FEATURE", fontSize = 9.sp, fontWeight = FontWeight.ExtraBold, color = BrandPrimary, letterSpacing = 1.sp)
             }
 
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                 Text(
                     text = "Summarize Chat",
                     fontSize = 11.sp,
@@ -1282,7 +1279,7 @@ fun AIAssistTray(
             }
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp1))
 
         // Suggested Replies
         Row(
@@ -1290,7 +1287,7 @@ fun AIAssistTray(
                 .fillMaxWidth()
                 .horizontalScroll(rememberScrollState())
                 .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
         ) {
             suggestions.forEach { suggestion ->
                 Box(
@@ -1333,9 +1330,9 @@ fun MessageBubble(
             Card(
                 modifier = Modifier
                     .fillMaxWidth(0.95f)
-                    .border(1.dp, BrandBorder, RoundedCornerShape(24.dp)),
+                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3)),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                shape = RoundedCornerShape(24.dp)
+                shape = RoundedCornerShape(Dimens.r3)
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
                     Row(
@@ -1373,19 +1370,19 @@ fun MessageBubble(
                             )
                         }
 
-                        Text(msg.metaPrice, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandHeadline)
+                        Text(msg.metaPrice, style = Typography.bodyLarge, color = BrandHeadline)
                     }
 
                     Spacer(modifier = Modifier.height(10.dp))
 
-                    Text(msg.metaTitle, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = BrandHeadline)
+                    Text(msg.metaTitle, style = Typography.bodyLarge, color = BrandHeadline)
                     Text(msg.metaDesc, fontSize = 12.5.sp, color = BrandSecondary, modifier = Modifier.padding(top = 2.dp))
 
                     Spacer(modifier = Modifier.height(14.dp))
 
                     Divider(color = BrandBorder)
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -1447,7 +1444,7 @@ fun MessageBubble(
                                 ) {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Icon(Icons.Default.PlayArrow, contentDescription = null, tint = Color.White, modifier = Modifier.size(14.dp))
-                                        Spacer(modifier = Modifier.width(4.dp))
+                                        Spacer(modifier = Modifier.width(Dimens.sp1))
                                         Text("Play", fontSize = 11.sp, fontWeight = FontWeight.Bold)
                                     }
                                 }
@@ -1495,13 +1492,13 @@ fun MessageBubble(
                     border = if (alignMe) null else BorderStroke(1.dp, BrandBorder),
                     modifier = Modifier
                         .widthIn(max = 290.dp)
-                        .shadow(if (alignMe) 3.dp else 0.dp, RoundedCornerShape(24.dp))
+                        .shadow(if (alignMe) 3.dp else 0.dp, RoundedCornerShape(Dimens.r3))
                 ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.padding(Dimens.sp2)) {
                         Text(
                             text = msg.text,
                             color = if (alignMe) Color.White else BrandHeadline,
-                            fontSize = 14.sp,
+                            style = Typography.labelLarge,
                             lineHeight = 20.sp
                         )
                         
@@ -1517,7 +1514,7 @@ fun MessageBubble(
                                 fontSize = 10.sp
                             )
                             if (alignMe) {
-                                Spacer(modifier = Modifier.width(4.dp))
+                                Spacer(modifier = Modifier.width(Dimens.sp1))
                                 Icon(
                                     imageVector = Icons.Default.CheckCircle,
                                     contentDescription = "Read Status",
@@ -1575,8 +1572,7 @@ fun SharePortfolioBottomSheet(
 
                 Text(
                     text = "Share Professional Assets",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.ExtraBold,
+                    style = Typography.bodyLarge,
                     color = BrandHeadline
                 )
                 Text(
@@ -1599,14 +1595,14 @@ fun SharePortfolioBottomSheet(
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(3),
                     modifier = Modifier.fillMaxWidth().height(220.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp2),
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     items(options) { (title, icon, action) ->
                         Card(
                             onClick = { onShareAction(action) },
                             colors = CardDefaults.cardColors(containerColor = BrandBorder.copy(alpha = 0.3f)),
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(Dimens.r2),
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Column(
@@ -1623,7 +1619,7 @@ fun SharePortfolioBottomSheet(
                                 ) {
                                     Icon(icon, contentDescription = title, tint = BrandPrimary, modifier = Modifier.size(20.dp))
                                 }
-                                Spacer(modifier = Modifier.height(8.dp))
+                                Spacer(modifier = Modifier.height(Dimens.sp1))
                                 Text(
                                     text = title,
                                     fontSize = 11.5.sp,
@@ -1636,30 +1632,30 @@ fun SharePortfolioBottomSheet(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 // Preview Before Sending Pane
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
+                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
                     colors = CardDefaults.cardColors(containerColor = BrandBorder.copy(alpha = 0.15f)),
-                    shape = RoundedCornerShape(16.dp)
+                    shape = RoundedCornerShape(Dimens.r2)
                 ) {
                     Row(
-                        modifier = Modifier.padding(12.dp),
+                        modifier = Modifier.padding(Dimens.sp2),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text("💡", fontSize = 24.sp)
+                        Text("💡", style = Typography.headlineLarge)
                         Spacer(modifier = Modifier.width(10.dp))
                         Column {
-                            Text("Asset Sandbox Preview", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandHeadline)
+                            Text("Asset Sandbox Preview", style = Typography.bodyLarge, color = BrandHeadline)
                             Text("Selecting an asset builds a secure deep-linked contract card in the conversation stream.", fontSize = 11.sp, color = BrandSecondary)
                         }
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 OutlinedButton(
                     onClick = onDismiss,
@@ -1692,7 +1688,7 @@ fun QuoteCreatorDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Text("Create Professional Quote Proposal", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, color = BrandHeadline)
+            Text("Create Professional Quote Proposal", style = Typography.bodyLarge, color = BrandHeadline)
         },
         text = {
             Column(
@@ -1752,7 +1748,7 @@ fun QuoteCreatorDialog(
                 Text("Cancel", color = BrandSecondary)
             }
         },
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         containerColor = Color.White
     )
 }
@@ -1785,7 +1781,7 @@ fun CallHistoryScreen(
                 IconButton(onClick = onBackClick) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = BrandHeadline)
                 }
-                Text("Collaboration Calls", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, color = BrandHeadline)
+                Text("Collaboration Calls", style = Typography.bodyLarge, color = BrandHeadline)
                 IconButton(
                     onClick = { showScheduleDialog = true },
                     modifier = Modifier.size(40.dp).background(BrandPrimary.copy(alpha = 0.12f), CircleShape)
@@ -1807,13 +1803,13 @@ fun CallHistoryScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 12.dp)
-                    .border(1.dp, BrandBorder, RoundedCornerShape(24.dp)),
+                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3)),
                 colors = CardDefaults.cardColors(containerColor = BrandBorder.copy(alpha = 0.2f)),
-                shape = RoundedCornerShape(24.dp)
+                shape = RoundedCornerShape(Dimens.r3)
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
-                    Text("⚡ Active Meeting Studio", fontWeight = FontWeight.ExtraBold, fontSize = 15.sp, color = BrandHeadline)
-                    Text("Secure audio & screen-share rooms utilizing lossless Dolby codec engine.", fontSize = 12.sp, color = BrandSecondary)
+                    Text("⚡ Active Meeting Studio", style = Typography.bodyLarge, color = BrandHeadline)
+                    Text("Secure audio & screen-share rooms utilizing lossless Dolby codec engine.", style = Typography.labelLarge, color = BrandSecondary)
                     
                     Spacer(modifier = Modifier.height(14.dp))
                     
@@ -1824,7 +1820,7 @@ fun CallHistoryScreen(
                             modifier = Modifier.weight(1f),
                             shape = RoundedCornerShape(99.dp)
                         ) {
-                            Text("Join Room", fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                            Text("Join Room", style = Typography.bodyLarge)
                         }
                         OutlinedButton(
                             onClick = { showScheduleDialog = true },
@@ -1832,16 +1828,16 @@ fun CallHistoryScreen(
                             modifier = Modifier.weight(1f),
                             shape = RoundedCornerShape(99.dp)
                         ) {
-                            Text("Schedule Sync", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandHeadline)
+                            Text("Schedule Sync", style = Typography.bodyLarge, color = BrandHeadline)
                         }
                     }
                 }
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
-            Text("Call History Logs", fontWeight = FontWeight.ExtraBold, fontSize = 15.sp, color = BrandHeadline)
-            Spacer(modifier = Modifier.height(8.dp))
+            Text("Call History Logs", style = Typography.bodyLarge, color = BrandHeadline)
+            Spacer(modifier = Modifier.height(Dimens.sp1))
 
             LazyColumn(
                 modifier = Modifier.fillMaxWidth(),
@@ -1851,9 +1847,9 @@ fun CallHistoryScreen(
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
+                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
-                        shape = RoundedCornerShape(16.dp)
+                        shape = RoundedCornerShape(Dimens.r2)
                     ) {
                         Row(
                             modifier = Modifier.padding(14.dp),
@@ -1878,7 +1874,7 @@ fun CallHistoryScreen(
                                     )
                                 }
 
-                                Spacer(modifier = Modifier.width(12.dp))
+                                Spacer(modifier = Modifier.width(Dimens.sp2))
 
                                 Column {
                                     Text(log.callerName, fontWeight = FontWeight.Bold, fontSize = 13.5.sp, color = BrandHeadline)
@@ -1919,9 +1915,9 @@ fun CallHistoryScreen(
     if (showScheduleDialog) {
         AlertDialog(
             onDismissRequest = { showScheduleDialog = false },
-            title = { Text("Schedule Collaboration Call", fontWeight = FontWeight.Bold, fontSize = 16.sp) },
+            title = { Text("Schedule Collaboration Call", style = Typography.bodyLarge) },
             text = {
-                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                     Text("Invitee / Team Name", fontSize = 11.sp, color = BrandSecondary)
                     OutlinedTextField(value = scheduleName, onValueChange = { scheduleName = it }, modifier = Modifier.fillMaxWidth())
                     
@@ -1939,7 +1935,7 @@ fun CallHistoryScreen(
                                     .clickable { scheduleType = item }
                                     .padding(horizontal = 16.dp, vertical = 8.dp)
                             ) {
-                                Text(item, color = if (active) Color.White else BrandHeadline, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                Text(item, color = if (active) Color.White else BrandHeadline, style = Typography.bodyLarge)
                             }
                         }
                     }
@@ -1959,7 +1955,7 @@ fun CallHistoryScreen(
             dismissButton = {
                 TextButton(onClick = { showScheduleDialog = false }) { Text("Cancel") }
             },
-            shape = RoundedCornerShape(24.dp),
+            shape = RoundedCornerShape(Dimens.r3),
             containerColor = Color.White
         )
     }
@@ -1993,11 +1989,11 @@ fun FilesAndMediaScreen(
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = BrandHeadline)
                     }
-                    Text("Files & Shared Media", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, color = BrandHeadline)
+                    Text("Files & Shared Media", style = Typography.bodyLarge, color = BrandHeadline)
                     Box(modifier = Modifier.size(40.dp)) // spacing
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 OutlinedTextField(
                     value = queryText,
@@ -2026,7 +2022,7 @@ fun FilesAndMediaScreen(
                 .padding(paddingValues)
                 .padding(horizontal = 24.dp)
         ) {
-            Text("Contracts, Invoices & Audio STEMs", fontWeight = FontWeight.ExtraBold, fontSize = 14.sp, color = BrandHeadline)
+            Text("Contracts, Invoices & Audio STEMs", style = Typography.bodyLarge, color = BrandHeadline)
             Spacer(modifier = Modifier.height(10.dp))
 
             LazyColumn(
@@ -2037,9 +2033,9 @@ fun FilesAndMediaScreen(
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
+                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
-                        shape = RoundedCornerShape(16.dp)
+                        shape = RoundedCornerShape(Dimens.r2)
                     ) {
                         Row(
                             modifier = Modifier.padding(14.dp),
@@ -2050,7 +2046,7 @@ fun FilesAndMediaScreen(
                                 Box(
                                     modifier = Modifier
                                         .size(44.dp)
-                                        .clip(RoundedCornerShape(8.dp))
+                                        .clip(RoundedCornerShape(Dimens.r1))
                                         .background(
                                             if (item.type == "PDF") Color(0xFFFEF2F2) else Color(0xFFEFF6FF)
                                         ),
@@ -2058,11 +2054,11 @@ fun FilesAndMediaScreen(
                                 ) {
                                     Text(
                                         text = if (item.type == "PDF") "📄" else "🎵",
-                                        fontSize = 18.sp
+                                        style = Typography.bodyLarge
                                     )
                                 }
 
-                                Spacer(modifier = Modifier.width(12.dp))
+                                Spacer(modifier = Modifier.width(Dimens.sp2))
 
                                 Column {
                                     Text(item.name, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandHeadline)
@@ -2097,7 +2093,7 @@ fun ChatSettingsDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Text("$convoName Parameters", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandHeadline)
+            Text("$convoName Parameters", style = Typography.bodyLarge, color = BrandHeadline)
         },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
@@ -2177,7 +2173,7 @@ fun ChatSettingsDialog(
                 Text("Close Parameters", fontWeight = FontWeight.Bold, color = BrandPrimary)
             }
         },
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         containerColor = Color.White
     )
 }

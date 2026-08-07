@@ -995,6 +995,84 @@ input:checked+.slider:before{transform:translateX(20px)}
 .state-demo-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding:8px 0}
 .state-demo-item{display:flex;flex-direction:column;align-items:center;gap:4px}
 .state-demo-label{font-size:8px;color:var(--muted);text-transform:uppercase;font-weight:600;text-align:center}
+
+/* ===== SUPERCHARGE MASSIVE OVERHAUL STYLES ===== */
+.sec-xl { padding: clamp(80px, 10vw, 160px) 0; }
+.hero-text { font-size: var(--fs-display); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 24px; }
+.hero-sub { font-size: var(--fs-body-lg); color: var(--muted); max-width: 600px; line-height: 1.6; margin-bottom: 40px; }
+
+/* Trusted By Bar */
+.trusted-bar { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 48px 0; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 32px; text-align: center; }
+.t-stat { display: flex; flex-direction: column; gap: 8px; }
+.t-stat-num { font-size: clamp(32px, 4vw, 48px); font-family: 'Inter Tight', sans-serif; font-weight: 700; }
+.t-stat-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 600; }
+
+/* Does this sound familiar Split */
+.split-xl { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
+.split-quote { font-size: clamp(32px, 5vw, 64px); font-family: 'Inter Tight', sans-serif; font-weight: 800; color: #D1D5DB; line-height: 1.1; letter-spacing: -0.03em; }
+.split-quote span { color: var(--pink); }
+.pain-card { background: #fff; border: 1px solid var(--line); padding: 24px; border-radius: var(--r-card); display: flex; gap: 16px; margin-bottom: 16px; transition: transform 200ms; }
+.pain-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+.pain-icon { width: 32px; height: 32px; flex-shrink: 0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.pain-icon.bad { background: #FEE2E2; color: #DC2626; }
+.pain-icon.good { background: #DCFCE7; color: #16A34A; }
+.pain-text { font-size: 15px; line-height: 1.5; color: var(--black); }
+.pain-text strong { color: var(--pink); }
+
+/* Feature Grid Text */
+.feat-grid-t { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+.f-item { display: flex; gap: 16px; }
+.f-icon { width: 48px; height: 48px; background: #F3E8FF; color: var(--purple); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+.f-content h4 { font-size: 18px; margin-bottom: 8px; }
+.f-content p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+
+/* Purple CTA Block */
+.purple-cta { background: var(--black); border-radius: 32px; padding: clamp(40px, 6vw, 80px); color: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; overflow: hidden; position: relative; }
+.purple-cta h2 { font-size: clamp(32px, 5vw, 56px); color: #fff; margin-bottom: 16px; }
+.purple-cta p { font-size: 18px; opacity: 0.9; line-height: 1.6; }
+.cta-pills { display: flex; flex-direction: column; gap: 16px; align-items: flex-end; }
+.cta-pill { background: rgba(0,0,0,0.2); backdrop-filter: blur(8px); padding: 12px 24px; border-radius: 99px; font-weight: 600; font-size: 14px; border: 1px solid rgba(255,255,255,0.1); transform: translateX(20px); transition: transform 300ms; cursor: pointer; display: flex; align-items: center; gap: 12px; }
+.cta-pill:hover { background: rgba(0,0,0,0.4); transform: translateX(0); }
+.cta-pill::before { content: '◀'; font-size: 10px; opacity: 0.5; }
+
+/* Masonry Testimonials */
+.test-masonry { columns: 3 320px; column-gap: 24px; }
+.t-card { break-inside: avoid; background: #fff; border: 1px solid var(--line); border-radius: var(--r-card); padding: 24px; margin-bottom: 24px; }
+.t-card.video { padding: 0; overflow: hidden; }
+.t-card.video img { width: 100%; display: block; }
+.t-card.video .t-content { padding: 24px; }
+.t-user { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.t-av { width: 40px; height: 40px; border-radius: 50%; background: #eee; }
+.t-name { font-weight: 700; font-size: 14px; }
+.t-role { font-size: 11px; color: var(--muted); }
+.t-quote { font-size: 15px; line-height: 1.6; }
+
+/* Pricing Tables */
+.price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; align-items: center; }
+.p-card { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 40px; text-align: center; }
+.p-card.pro { border: 2px solid var(--black); box-shadow: 0 24px 48px rgba(0,0,0,0.08); transform: scale(1.05); }
+.p-card.pro .p-badge { background: var(--black); color: #fff; padding: 4px 12px; border-radius: 99px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; display: inline-block; margin-bottom: 16px; }
+.p-tier { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 16px; }
+.p-price { font-size: 48px; font-family: 'Inter Tight', sans-serif; font-weight: 800; margin-bottom: 8px; }
+.p-price span { font-size: 16px; color: var(--muted); font-weight: 500; }
+.p-desc { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
+.p-features { text-align: left; margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+.p-feat { display: flex; gap: 12px; font-size: 14px; align-items: flex-start; }
+.p-feat::before { content: '✓'; color: var(--pink); font-weight: bold; }
+
+/* FAQ Accordion */
+.faq-list { max-width: 800px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--line); padding: 24px 0; cursor: pointer; }
+.faq-q { font-size: 18px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+.faq-q::after { content: '+'; font-size: 24px; font-weight: 300; color: var(--muted); }
+
+@media(max-width: 767px) {
+  .split-xl { grid-template-columns: 1fr; }
+  .purple-cta { grid-template-columns: 1fr; padding: 32px; }
+  .cta-pills { align-items: flex-start; }
+  .p-card.pro { transform: none; }
+}
+
 </style>
 <script>
 /* Utility JS helpers */
@@ -1335,47 +1413,109 @@ input:checked+.slider:before{transform:translateX(20px)}
 <section class="sec" id="p-journeys">
 <button class="copy-link-btn" onclick="copyLink('p-journeys')" aria-label="Copy link to section p-journeys">🔗</button>
 <div class="eyebrow">00 Product</div>
-<h2>User Journeys & Flows <span class="badge badge-av" style="margin-left:8px">4 Core Journeys</span></h2>
-<p class="desc">End-to-end user journeys sourced from <code>musiclinkd.com</code> and mapped to Jetpack Compose navigation routes in <code>AppNavigationGraph.kt</code>. Each step number maps to a screen in the <strong>10 Screens</strong> section.</p>
+<h2>User Journeys & Flows <span class="badge badge-av" style="margin-left:8px">7 Core Journeys</span> <span class="badge badge-biz">v5.0</span></h2>
+<p class="desc">End-to-end user journeys mapped to all 13 persona types across 10 platform modules. Each step maps to a Jetpack Compose screen in <code>AppNavigationGraph.kt</code>. Reference: <code>app/README.md</code>, <code>governance.md</code>, <code>docs/03-User-Flows/</code>.</p>
+
 <div class="spec-grid">
+  <!-- Journey 1: Artist / Vocalist -->
   <div class="card-s card-lift">
-    <div class="spec-label" style="color:var(--pink)">Artist — From Unknown to In-Demand</div>
+    <div class="spec-label" style="color:var(--pink)">1. Artist / Vocalist — Unknown → In-Demand</div>
     <div style="display:flex;flex-direction:column;margin-top:12px">
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--pink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">1</span><div style="font-size:12px"><strong>Create verified profile</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Role, photo, genres, availability, city → <code>scr-onboard</code></div></div></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--pink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">2</span><div style="font-size:12px"><strong>Upload portfolio</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Audio previews, videos, projects → <code>scr-artist</code></div></div></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--pink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">3</span><div style="font-size:12px"><strong>Get discovered</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Search results, AI feed, opportunity listings → <code>scr-discovery</code></div></div></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--pink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">4</span><div style="font-size:12px"><strong>Connect & collaborate</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Verified connections, project rooms → <code>scr-messaging</code></div></div></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0"><span style="width:22px;height:22px;background:var(--success,#22c55e);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">✓</span><div style="font-size:12px"><strong>Grow career & earn credits</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Verified credits, reputation score → <code>scr-reputation</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--pink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">1</span><div style="font-size:12px"><strong>Create verified profile</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Role, photo, genres, languages, availability, city → <code>scr-onboard</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--pink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">2</span><div style="font-size:12px"><strong>Upload audio portfolio</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">WAV/FLAC stems, waveform previews, project history → <code>scr-artist</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--pink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">3</span><div style="font-size:12px"><strong>Get discovered</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">AI-ranked discovery feed, search results, opportunity listings → <code>scr-discovery</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--pink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">4</span><div style="font-size:12px"><strong>Connect & collaborate</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Verified connections, project rooms, real-time chat → <code>scr-messaging</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--pink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">5</span><div style="font-size:12px"><strong>Book sessions & earn</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Escrow payments, milestone tracking, wallet → <code>scr-checkout</code> + <code>scr-wallet</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0"><span style="width:22px;height:22px;background:var(--success,#22c55e);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">✓</span><div style="font-size:12px"><strong>Build reputation</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Verified credits, reviews, reputation score → <code>scr-reputation</code></div></div></div>
     </div>
   </div>
+
+  <!-- Journey 2: Producer / Beatmaker -->
   <div class="card-s card-lift">
-    <div class="spec-label" style="color:var(--black)">Studio — Empty Rooms to Full Calendar</div>
+    <div class="spec-label" style="color:var(--purple)">2. Producer / Beatmaker — Bedroom → Pro</div>
     <div style="display:flex;flex-direction:column;margin-top:12px">
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--black);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">1</span><div style="font-size:12px"><strong>Register studio</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Rooms, equipment list, pricing, photos</div></div></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--black);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">2</span><div style="font-size:12px"><strong>Get verified</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Business badge, equipment verification</div></div></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--black);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">3</span><div style="font-size:12px"><strong>Sync live calendar</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Real-time availability slots → <code>scr-studio</code></div></div></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--black);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">4</span><div style="font-size:12px"><strong>Receive bookings & payments</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Escrow protection, instant confirmation → <code>scr-checkout</code></div></div></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0"><span style="width:22px;height:22px;background:var(--success,#22c55e);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">✓</span><div style="font-size:12px"><strong>Collect verified reviews</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Build trust, grow visibility in AI ranking</div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--purple);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">1</span><div style="font-size:12px"><strong>Create producer profile</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Role, DAW, genre tags, rate card → <code>scr-onboard</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--purple);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">2</span><div style="font-size:12px"><strong>Upload beat catalog</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Stem marketplace listings, license tiers → <code>scr-marketplace</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--purple);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">3</span><div style="font-size:12px"><strong>Get matched via AI</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Gemini synergy engine matches by genre, BPM, key → <code>GeminiRecommendationEngine.kt</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--purple);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">4</span><div style="font-size:12px"><strong>Sell beats & stems</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Escrow-protected sales, license management → <code>scr-checkout</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0"><span style="width:22px;height:22px;background:var(--success,#22c55e);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">✓</span><div style="font-size:12px"><strong>Earn verified credits</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Permanent credit ledger, reputation growth → <code>scr-reputation</code></div></div></div>
     </div>
   </div>
+
+  <!-- Journey 3: Studio Owner -->
   <div class="card-s card-lift">
-    <div class="spec-label">Business — Hire with Confidence</div>
+    <div class="spec-label" style="color:var(--black)">3. Studio — Empty Rooms → Full Calendar</div>
     <div style="display:flex;flex-direction:column;margin-top:12px">
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--muted);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">1</span><div style="font-size:12px"><strong>Verify business account</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Label, venue, or organisation verification</div></div></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--muted);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">2</span><div style="font-size:12px"><strong>Post a brief</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Project description, budget, timeline</div></div></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--muted);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">3</span><div style="font-size:12px"><strong>Review AI-matched proposals</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Compare verified professionals side by side</div></div></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0"><span style="width:22px;height:22px;background:var(--success,#22c55e);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">✓</span><div style="font-size:12px"><strong>Hire & pay securely via escrow</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Milestone tracking, receipts, reviews → <code>scr-checkout</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--black);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">1</span><div style="font-size:12px"><strong>Register studio</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Rooms, equipment list, photos, pricing → <code>scr-studio</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--black);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">2</span><div style="font-size:12px"><strong>Get business verified</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Business badge, equipment verification, trust score</div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--black);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">3</span><div style="font-size:12px"><strong>Sync live calendar</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Real-time slot availability, date picker → <code>vd-datepicker</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--black);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">4</span><div style="font-size:12px"><strong>Receive bookings</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Escrow protection, instant confirmation → <code>scr-checkout</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0"><span style="width:22px;height:22px;background:var(--success,#22c55e);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">✓</span><div style="font-size:12px"><strong>Collect reviews & grow</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Verified reviews boost AI ranking → <code>scr-reputation</code></div></div></div>
     </div>
   </div>
+
+  <!-- Journey 4: Label / Business -->
   <div class="card-s card-lift">
-    <div class="spec-label">Marketplace — Buy, Sell & Rent Gear</div>
+    <div class="spec-label">4. Label / Business — Hire with Confidence</div>
     <div style="display:flex;flex-direction:column;margin-top:12px">
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--muted);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">1</span><div style="font-size:12px"><strong>Browse listings</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Filter by category, price, condition, city</div></div></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--muted);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">2</span><div style="font-size:12px"><strong>Contact verified seller</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">In-platform messaging — no WhatsApp needed</div></div></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--muted);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">3</span><div style="font-size:12px"><strong>Inspect & negotiate</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Built-in verification tools, terms agreement</div></div></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0"><span style="width:22px;height:22px;background:var(--success,#22c55e);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">✓</span><div style="font-size:12px"><strong>Complete & leave a review</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Secure payment, verified transaction record</div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--muted);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">1</span><div style="font-size:12px"><strong>Verify business account</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Label, venue, or organisation verification → <code>scr-business</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--muted);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">2</span><div style="font-size:12px"><strong>Post a project brief</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Description, budget, timeline, required skills → <code>scr-projects</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--muted);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">3</span><div style="font-size:12px"><strong>Review AI-matched talent</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Compare verified professionals, listen to samples</div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--muted);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">4</span><div style="font-size:12px"><strong>Hire & manage roster</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Escrow payments, milestone tracking → <code>scr-checkout</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0"><span style="width:22px;height:22px;background:var(--success,#22c55e);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">✓</span><div style="font-size:12px"><strong>Track analytics & royalties</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Dashboard KPIs, insights → <code>scr-business</code></div></div></div>
     </div>
   </div>
+
+  <!-- Journey 5: Gear Buyer / Renter -->
+  <div class="card-s card-lift">
+    <div class="spec-label">5. Marketplace — Buy, Sell & Rent Gear</div>
+    <div style="display:flex;flex-direction:column;margin-top:12px">
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--muted);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">1</span><div style="font-size:12px"><strong>Browse listings</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Filter by category, price, condition, city → <code>scr-marketplace</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--muted);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">2</span><div style="font-size:12px"><strong>Contact verified seller</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">In-platform messaging, no WhatsApp → <code>scr-messaging</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--muted);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">3</span><div style="font-size:12px"><strong>Inspect & negotiate</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Verification tools, terms agreement, price negotiation</div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--muted);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">4</span><div style="font-size:12px"><strong>Pay via escrow</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Secure payment held until delivery → <code>scr-checkout</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0"><span style="width:22px;height:22px;background:var(--success,#22c55e);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">✓</span><div style="font-size:12px"><strong>Leave verified review</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Transaction record, gear review → <code>scr-reputation</code></div></div></div>
+    </div>
+  </div>
+
+  <!-- Journey 6: Mix / Mastering Engineer -->
+  <div class="card-s card-lift">
+    <div class="spec-label" style="color:var(--success)">6. Mix Engineer — Freelance → Verified Pro</div>
+    <div style="display:flex;flex-direction:column;margin-top:12px">
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--success);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">1</span><div style="font-size:12px"><strong>Create engineer profile</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Specialization, credits, work samples → <code>scr-onboard</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--success);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">2</span><div style="font-size:12px"><strong>Verify past credits</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Multi-party credit verification → <code>mp-credits</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--success);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">3</span><div style="font-size:12px"><strong>Get discovered by labels</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">AI matchmaking, opportunity feed → <code>scr-discovery</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:var(--success);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">4</span><div style="font-size:12px"><strong>Deliver stems & earn</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Stem ingestion dropzone, escrow release → <code>cr-drop</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0"><span style="width:22px;height:22px;background:var(--success,#22c55e);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">✓</span><div style="font-size:12px"><strong>Build permanent reputation</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Verified credit ledger, reviews → <code>scr-reputation</code></div></div></div>
+    </div>
+  </div>
+
+  <!-- Journey 7: Music School / Educator -->
+  <div class="card-s card-lift">
+    <div class="spec-label" style="color:#2563EB">7. Educator — Classroom → Global Reach</div>
+    <div style="display:flex;flex-direction:column;margin-top:12px">
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:#2563EB;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">1</span><div style="font-size:12px"><strong>Register as educator</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">School profile, courses, faculty → <code>scr-business</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:#2563EB;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">2</span><div style="font-size:12px"><strong>List courses & faculty</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Course catalog, instructor profiles, pricing</div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:#2563EB;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">3</span><div style="font-size:12px"><strong>Get discovered by students</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Search, discovery feed, category filters → <code>scr-discovery</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)"><span style="width:22px;height:22px;background:#2563EB;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">4</span><div style="font-size:12px"><strong>Manage admissions</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Student network, messaging, bookings → <code>scr-messaging</code></div></div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0"><span style="width:22px;height:22px;background:var(--success,#22c55e);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">✓</span><div style="font-size:12px"><strong>Track growth & analytics</strong><div style="color:var(--muted);font-size:10px;margin-top:1px">Dashboard, insights, revenue → <code>scr-business</code></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Journey Summary Table -->
+<div class="card-s hl" style="margin-top:16px">
+  <div class="spec-label">Journey → Persona → Module Mapping</div>
+  <table class="token-table">
+    <tr><th>#</th><th>Journey</th><th>Primary Persona</th><th>Key Modules</th><th>Entry Screen</th><th>Exit Screen</th></tr>
+    <tr><td>1</td><td>Artist Discovery</td><td>Vocalist, Instrumentalist, Voice Artist</td><td>Discovery, Profiles, Messaging, Credits</td><td><code>scr-onboard</code></td><td><code>scr-reputation</code></td></tr>
+    <tr><td>2</td><td>Producer Growth</td><td>Beatmaker, Composer</td><td>Marketplace, AI Matchmaking, Credits</td><td><code>scr-onboard</code></td><td><code>scr-reputation</code></td></tr>
+    <tr><td>3</td><td>Studio Booking</td><td>Recording Studio, Venue</td><td>Studio Booking, Calendar, Reviews</td><td><code>scr-studio</code></td><td><code>scr-reputation</code></td></tr>
+    <tr><td>4</td><td>Business Hiring</td><td>Label, Manager, Business</td><td>Opportunities, Messaging, Analytics</td><td><code>scr-business</code></td><td><code>scr-checkout</code></td></tr>
+    <tr><td>5</td><td>Marketplace Trade</td><td>Rental Co, Gear Buyer/Seller</td><td>Marketplace, Messaging, Reviews</td><td><code>scr-marketplace</code></td><td><code>scr-reputation</code></td></tr>
+    <tr><td>6</td><td>Engineer Career</td><td>Mix Engineer, Mastering Pro</td><td>Credits, Discovery, Stem Ingestion</td><td><code>scr-onboard</code></td><td><code>scr-reputation</code></td></tr>
+    <tr><td>7</td><td>Educator Growth</td><td>Teacher, Music School</td><td>Profiles, Discovery, Analytics</td><td><code>scr-business</code></td><td><code>scr-business</code></td></tr>
+  </table>
 </div>
 </section>
 
@@ -4887,7 +5027,16 @@ Include: Track cover art, genre chip, multi-track stem breakdown (Vocals, Bass, 
 </div>
 </section>
 
-</main>
+
+<!-- ============================================================================== -->
+<!-- CATEGORY: 03 COMPONENTS - MARKETING / SUPERCHARGE BLOCKS -->
+<!-- ============================================================================== -->
+<section class="sec" id="c-marketing">
+<button class="copy-link-btn" onclick="copyLink('c-marketing')">🔗</button>
+<div class="eyebrow">03 Components</div>
+<h2>Marketing Blocks (Supercharge) <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">High-converting landing page blocks built with the strict 4-tier exponential token system.</p>
+</section>\n\n</main>
 </div><!-- /.layout-wrapper -->
 
 <script>

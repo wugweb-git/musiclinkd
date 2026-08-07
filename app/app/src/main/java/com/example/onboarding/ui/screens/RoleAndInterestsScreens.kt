@@ -60,24 +60,24 @@ fun PrimaryRoleScreen(
             .background(BrandBackground)
             .padding(horizontal = 24.dp)
     ) {
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp2))
         
         Text(
             text = "What best describes you?",
-            style = MaterialTheme.typography.headlineMedium.copy(
+            style = Typography.bodyLarge.copy(
                 fontWeight = FontWeight.Bold,
                 color = BrandTextPrimary,
                 letterSpacing = (-0.5).sp
             )
         )
         
-        Spacer(modifier = Modifier.height(4.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp1))
         
         Text(
             text = "Select your primary identity in the music industry",
-            style = MaterialTheme.typography.bodyMedium.copy(
+            style = Typography.bodyLarge.copy(
                 color = BrandTextSecondary,
-                fontSize = 14.sp
+                style = Typography.labelLarge
             )
         )
         
@@ -87,11 +87,11 @@ fun PrimaryRoleScreen(
         OutlinedTextField(
             value = searchQuery,
             onValueChange = { searchQuery = it },
-            placeholder = { Text("Search roles (e.g. Producer, Label)", color = BrandTextSecondary, fontSize = 14.sp) },
+            placeholder = { Text("Search roles (e.g. Producer, Label)", color = BrandTextSecondary, style = Typography.labelLarge) },
             modifier = Modifier
                 .fillMaxWidth()
                 .testTag("role_search_bar"),
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(Dimens.r2),
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, tint = BrandTextSecondary) },
             singleLine = true,
             colors = OutlinedTextFieldDefaults.colors(
@@ -102,7 +102,7 @@ fun PrimaryRoleScreen(
             )
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp2))
 
         // Grid Scrollable Area grouped by industry sections (Section 10)
         Box(modifier = Modifier.weight(1f)) {
@@ -125,12 +125,11 @@ fun PrimaryRoleScreen(
                             Column(modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)) {
                                 Text(
                                     text = section,
-                                    fontWeight = FontWeight.ExtraBold,
-                                    fontSize = 14.sp,
+                                    style = Typography.bodyLarge,
                                     color = BrandPrimary,
                                     letterSpacing = 0.5.sp
                                 )
-                                Spacer(modifier = Modifier.height(4.dp))
+                                Spacer(modifier = Modifier.height(Dimens.sp1))
                                 HorizontalDivider(color = BrandBorder.copy(alpha = 0.5f))
                             }
                         }
@@ -145,7 +144,7 @@ fun PrimaryRoleScreen(
                                     .testTag("role_card_${role.id}")
                                     .scale(if (isSelected) 1.02f else 1f)
                                     .clickable { onRoleSelected(role.name) },
-                                shape = RoundedCornerShape(16.dp),
+                                shape = RoundedCornerShape(Dimens.r2),
                                 colors = CardDefaults.cardColors(
                                     containerColor = if (isSelected) BrandPrimary.copy(alpha = 0.04f) else Color.White
                                 ),
@@ -171,7 +170,7 @@ fun PrimaryRoleScreen(
                                         Box(
                                             modifier = Modifier
                                                 .size(32.dp)
-                                                .clip(RoundedCornerShape(8.dp))
+                                                .clip(RoundedCornerShape(Dimens.r1))
                                                 .background(if (isSelected) BrandPrimary else BrandBackground),
                                             contentAlignment = Alignment.Center
                                         ) {
@@ -253,8 +252,7 @@ fun PrimaryRoleScreen(
                 ) {
                     Text(
                         text = "Continue",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 15.sp
+                        style = Typography.bodyLarge
                     )
                 }
             }
@@ -298,7 +296,7 @@ fun SecondaryRoleScreen(
             .background(BrandBackground)
             .padding(horizontal = 24.dp)
     ) {
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp2))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -308,18 +306,18 @@ fun SecondaryRoleScreen(
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = "Do you have another role?",
-                    style = MaterialTheme.typography.headlineMedium.copy(
+                    style = Typography.bodyLarge.copy(
                         fontWeight = FontWeight.Bold,
                         color = BrandTextPrimary,
                         letterSpacing = (-0.5).sp
                     )
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp1))
                 Text(
                     text = "Optional second area of expertise (Highly recommended for networking)",
-                    style = MaterialTheme.typography.bodyMedium.copy(
+                    style = Typography.bodyLarge.copy(
                         color = BrandTextSecondary,
-                        fontSize = 14.sp
+                        style = Typography.labelLarge
                     )
                 )
             }
@@ -330,11 +328,11 @@ fun SecondaryRoleScreen(
         OutlinedTextField(
             value = searchQuery,
             onValueChange = { searchQuery = it },
-            placeholder = { Text("Search secondary role", color = BrandTextSecondary, fontSize = 14.sp) },
+            placeholder = { Text("Search secondary role", color = BrandTextSecondary, style = Typography.labelLarge) },
             modifier = Modifier
                 .fillMaxWidth()
                 .testTag("role_secondary_search_bar"),
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(Dimens.r2),
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, tint = BrandTextSecondary) },
             singleLine = true,
             colors = OutlinedTextFieldDefaults.colors(
@@ -345,7 +343,7 @@ fun SecondaryRoleScreen(
             )
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp2))
 
         Box(modifier = Modifier.weight(1f)) {
             if (filteredRoles.isEmpty()) {
@@ -374,7 +372,7 @@ fun SecondaryRoleScreen(
                                         color = BrandSuccess,
                                         letterSpacing = 0.5.sp
                                     )
-                                    Spacer(modifier = Modifier.height(4.dp))
+                                    Spacer(modifier = Modifier.height(Dimens.sp1))
                                     HorizontalDivider(color = BrandSuccess.copy(alpha = 0.25f))
                                 }
                             }
@@ -395,7 +393,7 @@ fun SecondaryRoleScreen(
                                 color = BrandTextPrimary,
                                 letterSpacing = 0.5.sp
                             )
-                            Spacer(modifier = Modifier.height(4.dp))
+                            Spacer(modifier = Modifier.height(Dimens.sp1))
                             HorizontalDivider(color = BrandBorder.copy(alpha = 0.5f))
                         }
                     }
@@ -427,7 +425,7 @@ fun SecondaryRoleScreen(
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     OutlinedButton(
                         onClick = onSkip,
@@ -439,7 +437,7 @@ fun SecondaryRoleScreen(
                         border = BorderStroke(1.dp, BrandBorder),
                         colors = ButtonDefaults.outlinedButtonColors(contentColor = BrandTextPrimary)
                     ) {
-                        Text("Skip", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                        Text("Skip", style = Typography.bodyLarge)
                     }
 
                     Button(
@@ -456,7 +454,7 @@ fun SecondaryRoleScreen(
                             disabledContentColor = BrandTextSecondary
                         )
                     ) {
-                        Text("Continue", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                        Text("Continue", style = Typography.bodyLarge)
                     }
                 }
             }
@@ -473,7 +471,7 @@ fun SecondaryRoleCard(role: RoleItem, isSelected: Boolean, onClick: () -> Unit) 
             .testTag("role_sec_card_${role.id}")
             .scale(if (isSelected) 1.02f else 1f)
             .clickable { onClick() },
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(Dimens.r2),
         colors = CardDefaults.cardColors(
             containerColor = if (isSelected) BrandPrimary.copy(alpha = 0.04f) else Color.White
         ),
@@ -499,7 +497,7 @@ fun SecondaryRoleCard(role: RoleItem, isSelected: Boolean, onClick: () -> Unit) 
                 Box(
                     modifier = Modifier
                         .size(32.dp)
-                        .clip(RoundedCornerShape(8.dp))
+                        .clip(RoundedCornerShape(Dimens.r1))
                         .background(if (isSelected) BrandPrimary else BrandBackground),
                     contentAlignment = Alignment.Center
                 ) {
@@ -568,11 +566,11 @@ fun LanguagesScreen(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Column {
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             Text(
                 text = "Languages You Work In",
-                style = MaterialTheme.typography.headlineMedium.copy(
+                style = Typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold,
                     color = BrandTextPrimary,
                     letterSpacing = (-0.5).sp
@@ -583,19 +581,19 @@ fun LanguagesScreen(
 
             Text(
                 text = "Select up to 3 regional or international languages in which you vocalize, write, or direct projects. Written in native form. (Selected: ${selectedLanguages.size}/3)",
-                style = MaterialTheme.typography.bodyLarge.copy(
+                style = Typography.bodyLarge.copy(
                     color = if (selectedLanguages.size == 3) BrandPrimary else BrandTextSecondary,
-                    fontSize = 14.sp
+                    style = Typography.labelLarge
                 )
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp3))
 
             // Multi-select Flow chips
             FlowRow(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
             ) {
                 availableLanguages.forEach { lang ->
                     val isSelected = selectedLanguages.contains(lang)
@@ -637,9 +635,8 @@ fun LanguagesScreen(
             ) {
                 Text(
                     text = "Continue",
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 15.sp
+                    style = Typography.bodyLarge.copy(
+                        style = Typography.bodyLarge
                     )
                 )
             }
@@ -665,11 +662,11 @@ fun GenresScreen(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Column {
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             Text(
                 text = "Genres & Styles",
-                style = MaterialTheme.typography.headlineMedium.copy(
+                style = Typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold,
                     color = BrandTextPrimary,
                     letterSpacing = (-0.5).sp
@@ -680,19 +677,19 @@ fun GenresScreen(
 
             Text(
                 text = "Choose up to 3 sonic styles. This determines opportunity recommendations in your feed. (Selected: ${selectedGenres.size}/3)",
-                style = MaterialTheme.typography.bodyLarge.copy(
+                style = Typography.bodyLarge.copy(
                     color = if (selectedGenres.size == 3) BrandPrimary else BrandTextSecondary,
-                    fontSize = 14.sp
+                    style = Typography.labelLarge
                 )
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp3))
 
             // Flow Row of multi-select filter chips
             FlowRow(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
             ) {
                 availableGenres.forEach { genre ->
                     val isSelected = selectedGenres.contains(genre)
@@ -734,9 +731,8 @@ fun GenresScreen(
             ) {
                 Text(
                     text = "Continue",
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 15.sp
+                    style = Typography.bodyLarge.copy(
+                        style = Typography.bodyLarge
                     )
                 )
             }
@@ -768,11 +764,11 @@ fun InstrumentsScreen(
                 .weight(1f)
                 .verticalScroll(scrollState)
         ) {
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             Text(
                 text = "Instruments & Gear",
-                style = MaterialTheme.typography.headlineMedium.copy(
+                style = Typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold,
                     color = BrandTextPrimary,
                     letterSpacing = (-0.5).sp
@@ -783,9 +779,9 @@ fun InstrumentsScreen(
 
             Text(
                 text = "Select up to 2 instruments you perform with, and specify your experience or provide links to verify your credentials. (Selected: ${selectedInstruments.size}/2)",
-                style = MaterialTheme.typography.bodyLarge.copy(
+                style = Typography.bodyLarge.copy(
                     color = if (selectedInstruments.size == 2) BrandPrimary else BrandTextSecondary,
-                    fontSize = 14.sp
+                    style = Typography.labelLarge
                 )
             )
 
@@ -794,7 +790,7 @@ fun InstrumentsScreen(
             // Instruments multi-select flow row
             FlowRow(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 availableInstruments.forEach { item ->
@@ -829,23 +825,23 @@ fun InstrumentsScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp3))
 
             // Proficiency Mapping for each selected instrument
             if (selectedInstruments.isNotEmpty()) {
                 Text(
                     text = "Map Experience & Proof",
-                    style = MaterialTheme.typography.titleMedium.copy(
+                    style = Typography.bodyLarge.copy(
                         fontWeight = FontWeight.Bold,
                         color = BrandTextPrimary
                     )
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp1))
                 Text(
                     text = "Providing links builds instant trust with prospective hirers.",
-                    style = MaterialTheme.typography.bodySmall.copy(color = BrandTextSecondary)
+                    style = Typography.bodyLarge.copy(color = BrandTextSecondary)
                 )
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 selectedInstruments.forEach { instrumentName ->
                     val prof = instrumentProficiency[instrumentName] ?: SkillProficiency()
@@ -854,36 +850,34 @@ fun InstrumentsScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 8.dp),
-                        shape = RoundedCornerShape(16.dp),
+                        shape = RoundedCornerShape(Dimens.r2),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
                         border = BorderStroke(1.dp, BrandBorder)
                     ) {
-                        Column(modifier = Modifier.padding(16.dp)) {
+                        Column(modifier = Modifier.padding(Dimens.sp2)) {
                             // Title with instrument emoji if matched
                             val emoji = availableInstruments.find { it.name == instrumentName }?.emoji ?: "🎸"
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(emoji, fontSize = 20.sp, modifier = Modifier.padding(end = 8.dp))
+                                Text(emoji, style = Typography.headlineLarge, modifier = Modifier.padding(end = 8.dp))
                                 Text(
                                     text = instrumentName,
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 16.sp,
+                                    style = Typography.bodyLarge,
                                     color = BrandTextPrimary
                                 )
                             }
 
-                            Spacer(modifier = Modifier.height(16.dp))
+                            Spacer(modifier = Modifier.height(Dimens.sp2))
 
                             // Experience Years Selection Row
                             Text(
                                 text = "Years of Experience",
-                                fontWeight = FontWeight.SemiBold,
-                                fontSize = 12.sp,
+                                style = Typography.bodyLarge,
                                 color = BrandTextPrimary
                             )
                             Spacer(modifier = Modifier.height(6.dp))
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                             ) {
                                 val expOptions = listOf("1-2 Years", "3-5 Years", "5-10 Years", "10+ Years")
                                 expOptions.forEach { opt ->
@@ -891,7 +885,7 @@ fun InstrumentsScreen(
                                     Box(
                                         modifier = Modifier
                                             .weight(1f)
-                                            .clip(RoundedCornerShape(8.dp))
+                                            .clip(RoundedCornerShape(Dimens.r1))
                                             .background(if (isSel) BrandPrimary else BrandBackground)
                                             .clickable {
                                                 onUpdateProficiency(
@@ -914,19 +908,18 @@ fun InstrumentsScreen(
                                 }
                             }
 
-                            Spacer(modifier = Modifier.height(16.dp))
+                            Spacer(modifier = Modifier.height(Dimens.sp2))
 
                             // Proficiency Level Selection Row
                             Text(
                                 text = "Proficiency Level",
-                                fontWeight = FontWeight.SemiBold,
-                                fontSize = 12.sp,
+                                style = Typography.bodyLarge,
                                 color = BrandTextPrimary
                             )
                             Spacer(modifier = Modifier.height(6.dp))
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                             ) {
                                 val levelOptions = listOf("Beginner", "Intermediate", "Advanced", "Expert")
                                 levelOptions.forEach { opt ->
@@ -934,7 +927,7 @@ fun InstrumentsScreen(
                                     Box(
                                         modifier = Modifier
                                             .weight(1f)
-                                            .clip(RoundedCornerShape(8.dp))
+                                            .clip(RoundedCornerShape(Dimens.r1))
                                             .background(if (isSel) BrandPrimary else BrandBackground)
                                             .clickable {
                                                 onUpdateProficiency(
@@ -957,7 +950,7 @@ fun InstrumentsScreen(
                                 }
                             }
 
-                            Spacer(modifier = Modifier.height(16.dp))
+                            Spacer(modifier = Modifier.height(Dimens.sp2))
 
                             // Verification / Portfoilio link input field
                             OutlinedTextField(
@@ -971,7 +964,7 @@ fun InstrumentsScreen(
                                     )
                                 },
                                 label = { Text("Proof / Portfolio URL (Optional)", fontSize = 11.sp) },
-                                placeholder = { Text("e.g. Spotify, YouTube, SoundCloud link", fontSize = 12.sp) },
+                                placeholder = { Text("e.g. Spotify, YouTube, SoundCloud link", style = Typography.labelLarge) },
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .testTag("instrument_proof_${instrumentName.replace(" ", "_")}"),
@@ -1010,7 +1003,7 @@ fun InstrumentsScreen(
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
             ) {
                 // If they don't play instruments, they can skip this step entirely!
                 OutlinedButton(
@@ -1025,8 +1018,7 @@ fun InstrumentsScreen(
                 ) {
                     Text(
                         text = if (selectedInstruments.isEmpty()) "Skip" else "Skip Experience",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp
+                        style = Typography.bodyLarge
                     )
                 }
 
@@ -1047,8 +1039,7 @@ fun InstrumentsScreen(
                 ) {
                     Text(
                         text = "Confirm Instruments",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp
+                        style = Typography.bodyLarge
                     )
                 }
             }

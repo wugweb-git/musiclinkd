@@ -63,10 +63,10 @@ fun UnifiedProjectCard(
             .fillMaxWidth()
             .clickable { onClick() },
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         border = BorderStroke(1.dp, BrandBorder)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(Dimens.sp2)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -87,13 +87,13 @@ fun UnifiedProjectCard(
                                 modifier = Modifier.fillMaxSize()
                             )
                         } else {
-                            Icon(Icons.Default.Person, contentDescription = null, tint = Color.White, modifier = Modifier.padding(8.dp))
+                            Icon(Icons.Default.Person, contentDescription = null, tint = Color.White, modifier = Modifier.padding(Dimens.sp1))
                         }
                     }
                     Spacer(modifier = Modifier.width(10.dp))
                     Column {
-                        Text(title, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
-                        Text("By $creatorName • $genre", fontSize = 12.sp, color = BrandTextSecondary)
+                        Text(title, style = Typography.bodyLarge, color = BrandDark)
+                        Text("By $creatorName • $genre", style = Typography.labelLarge, color = BrandTextSecondary)
                     }
                 }
                 UnifiedStatusBadge(status = "Open Session")
@@ -110,7 +110,7 @@ fun UnifiedProjectCard(
                 lineHeight = 17.sp
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -124,8 +124,7 @@ fun UnifiedProjectCard(
                 )
                 Text(
                     text = "Apply Now →",
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
+                    style = Typography.bodyLarge,
                     color = BrandPrimary
                 )
             }

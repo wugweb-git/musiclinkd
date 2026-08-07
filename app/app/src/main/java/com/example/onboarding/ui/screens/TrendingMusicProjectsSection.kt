@@ -91,8 +91,7 @@ fun TrendingMusicProjectsSection(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         text = "🔥 Trending Music Projects",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp,
+                        style = Typography.bodyLarge,
                         color = BrandText
                     )
                     Spacer(modifier = Modifier.width(6.dp))
@@ -107,13 +106,13 @@ fun TrendingMusicProjectsSection(
                 }
                 Text(
                     text = "Matched to your genres: ${if (userGenres.isNotEmpty()) userGenres.take(2).joinToString(", ") else "Indie & Electronic"}",
-                    fontSize = 12.sp,
+                    style = Typography.labelLarge,
                     color = BrandMuted
                 )
             }
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp2))
 
         if (isLoading) {
             Row(
@@ -149,7 +148,7 @@ fun TrendingMusicProjectsSection(
                             Box(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .clip(RoundedCornerShape(16.dp))
+                                    .clip(RoundedCornerShape(Dimens.r2))
                                     .background(Color(0xFFEF4444))
                                     .padding(16.dp),
                                 contentAlignment = Alignment.Center
@@ -157,7 +156,7 @@ fun TrendingMusicProjectsSection(
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Icon(Icons.Default.Delete, contentDescription = "Dismiss", tint = Color.White)
                                     Spacer(modifier = Modifier.width(6.dp))
-                                    Text("Dismissed", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                                    Text("Dismissed", color = Color.White, style = Typography.bodyLarge)
                                 }
                             }
                         }
@@ -166,7 +165,7 @@ fun TrendingMusicProjectsSection(
                             modifier = Modifier
                                 .width(280.dp)
                                 .testTag("trending_project_${project.id}"),
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(Dimens.r2),
                             colors = CardDefaults.cardColors(containerColor = Color.White),
                             elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
                             border = BorderStroke(1.dp, BrandBorder)
@@ -198,7 +197,7 @@ fun TrendingMusicProjectsSection(
                                     modifier = Modifier
                                         .align(Alignment.TopEnd)
                                         .padding(8.dp)
-                                        .clip(RoundedCornerShape(8.dp))
+                                        .clip(RoundedCornerShape(Dimens.r1))
                                         .background(BrandPrimary)
                                         .padding(horizontal = 8.dp, vertical = 4.dp)
                                 ) {
@@ -219,8 +218,7 @@ fun TrendingMusicProjectsSection(
                                     Text(
                                         text = project.title,
                                         color = Color.White,
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 14.sp,
+                                        style = Typography.bodyLarge,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis
                                     )
@@ -228,17 +226,16 @@ fun TrendingMusicProjectsSection(
                             }
 
                             // Project Details Body
-                            Column(modifier = Modifier.padding(12.dp)) {
+                            Column(modifier = Modifier.padding(Dimens.sp2)) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Icon(Icons.Default.Person, contentDescription = null, modifier = Modifier.size(14.dp), tint = BrandMuted)
-                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Spacer(modifier = Modifier.width(Dimens.sp1))
                                     Text(
                                         text = project.creatorName,
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Bold,
+                                        style = Typography.bodyLarge,
                                         color = BrandText
                                     )
-                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Spacer(modifier = Modifier.width(Dimens.sp1))
                                     Icon(
                                         imageVector = Icons.Default.CheckCircle,
                                         contentDescription = "Verified",

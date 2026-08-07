@@ -77,7 +77,7 @@ fun SingerDirectoryScreen(
                 IconButton(onClick = onBack) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
                 }
-                Text("Singers Directory", fontWeight = FontWeight.Bold, fontSize = 18.sp, color = BrandText)
+                Text("Singers Directory", style = Typography.bodyLarge, color = BrandText)
             }
             
             IconButton(onClick = { onToggleView(!state.isSingerGrid) }) {
@@ -93,7 +93,7 @@ fun SingerDirectoryScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 2.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(Dimens.sp1)
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text("Vocal Range:", fontSize = 10.sp, fontWeight = FontWeight.Bold, modifier = Modifier.width(70.dp))
@@ -126,7 +126,7 @@ fun SingerDirectoryScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp2))
 
         val filtered = profiles.filter { it.category == "Singers" }
         if (state.isSingerGrid) {

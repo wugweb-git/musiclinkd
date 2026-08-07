@@ -76,7 +76,7 @@ fun UnifiedTabRow(
                         color = if (isSelected) BrandPrimary else BrandTextSecondary,
                         fontSize = 13.sp
                     )
-                    Spacer(modifier = Modifier.height(4.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp1))
                     Box(
                         modifier = Modifier
                             .height(2.5.dp)

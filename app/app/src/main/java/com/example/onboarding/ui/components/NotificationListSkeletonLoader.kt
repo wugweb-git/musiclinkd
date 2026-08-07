@@ -56,12 +56,12 @@ fun NotificationListSkeletonLoader(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
     ) {
         repeat(count) {
             Card(
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(Dimens.r2),
                 border = BorderStroke(1.dp, BrandBorder),
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -73,7 +73,7 @@ fun NotificationListSkeletonLoader(
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             SkeletonCircle(size = 38.dp)
-                            Spacer(modifier = Modifier.width(12.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp2))
                             Column {
                                 SkeletonItem(width = 160.dp, height = 14.dp, cornerRadius = 4.dp)
                                 Spacer(modifier = Modifier.height(6.dp))
@@ -82,7 +82,7 @@ fun NotificationListSkeletonLoader(
                         }
                         SkeletonCircle(size = 12.dp)
                     }
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
                     SkeletonItem(width = 280.dp, height = 12.dp, cornerRadius = 4.dp)
                     Spacer(modifier = Modifier.height(6.dp))
                     SkeletonItem(width = 200.dp, height = 12.dp, cornerRadius = 4.dp)

@@ -89,8 +89,7 @@ fun UnifiedProfileHeader(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         text = name,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp,
+                        style = Typography.bodyLarge,
                         color = BrandTextPrimary
                     )
                     if (isVerified) {
@@ -106,7 +105,7 @@ fun UnifiedProfileHeader(
                 
                 Text(
                     text = "@$displayName",
-                    fontSize = 14.sp,
+                    style = Typography.labelLarge,
                     color = BrandTextSecondary
                 )
                 
@@ -128,11 +127,10 @@ fun UnifiedProfileHeader(
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
                         text = availabilityStatus,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold,
+                        style = Typography.bodyLarge,
                         color = dotColor
                     )
-                    Spacer(modifier = Modifier.width(12.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp2))
                     Icon(
                         imageVector = Icons.Default.LocationOn,
                         contentDescription = "Location",
@@ -142,7 +140,7 @@ fun UnifiedProfileHeader(
                     Spacer(modifier = Modifier.width(2.dp))
                     Text(
                         text = location,
-                        fontSize = 12.sp,
+                        style = Typography.labelLarge,
                         color = BrandTextSecondary
                     )
                 }
@@ -159,7 +157,7 @@ fun UnifiedProfileHeader(
         
         Text(
             text = bio,
-            fontSize = 14.sp,
+            style = Typography.labelLarge,
             color = BrandTextPrimary,
             lineHeight = 20.sp
         )

@@ -133,18 +133,17 @@ fun SupportingScreensHub(
                                 modifier = Modifier.size(18.dp)
                             )
                         }
-                        Spacer(modifier = Modifier.width(12.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp2))
                         Text(
                             text = "MusicLinkd Hub",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
+                            style = Typography.bodyLarge,
                             color = BrandDark
                         )
                     }
 
                     Box(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(8.dp))
+                            .clip(RoundedCornerShape(Dimens.r1))
                             .background(BrandAccent.copy(alpha = 0.1f))
                             .padding(horizontal = 8.dp, vertical = 4.dp)
                     ) {
@@ -188,7 +187,7 @@ fun SupportingScreensHub(
                                         SupportingModule.SETTINGS -> "⚙️ Settings"
                                         SupportingModule.HELP_SUPPORT -> "🙋 Help & Support"
                                     },
-                                    fontSize = 12.sp,
+                                    style = Typography.labelLarge,
                                     fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
                                     color = if (selected) BrandPrimary else BrandSecondaryText
                                 )
@@ -337,11 +336,11 @@ fun UniversalSearchFlow(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(Icons.Default.Search, contentDescription = "Search", tint = BrandPrimary)
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp1))
                 TextField(
                     value = searchQuery,
                     onValueChange = { searchQuery = it },
-                    placeholder = { Text("Search artists, studios, instruments...", fontSize = 14.sp, color = BrandSecondaryText) },
+                    placeholder = { Text("Search artists, studios, instruments...", style = Typography.labelLarge, color = BrandSecondaryText) },
                     modifier = Modifier
                         .weight(1f)
                         .testTag("universal_search_field"),
@@ -380,9 +379,9 @@ fun UniversalSearchFlow(
                     ) {
                         // Suggested Categories Horizontal
                         item {
-                            Text("Suggested Categories", fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 14.sp)
+                            Text("Suggested Categories", fontWeight = FontWeight.Bold, color = BrandDark, style = Typography.labelLarge)
                             Spacer(modifier = Modifier.height(10.dp))
-                            LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            LazyRow(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                                 val categories = listOf(
                                     CategoryChip("Artists", "👨‍🎤"),
                                     CategoryChip("Studios", "🎙️"),
@@ -395,16 +394,16 @@ fun UniversalSearchFlow(
                                     Card(
                                         modifier = Modifier
                                             .clickable { searchQuery = cat.title }
-                                            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
-                                        shape = RoundedCornerShape(16.dp),
+                                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                                        shape = RoundedCornerShape(Dimens.r2),
                                         colors = CardDefaults.cardColors(containerColor = BrandCardBg)
                                     ) {
                                         Row(
                                             modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
                                             verticalAlignment = Alignment.CenterVertically
                                         ) {
-                                            Text(cat.emoji, fontSize = 16.sp)
-                                            Spacer(modifier = Modifier.width(8.dp))
+                                            Text(cat.emoji, style = Typography.bodyLarge)
+                                            Spacer(modifier = Modifier.width(Dimens.sp1))
                                             Text(cat.title, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
                                         }
                                     }
@@ -420,7 +419,7 @@ fun UniversalSearchFlow(
                                     horizontalArrangement = Arrangement.SpaceBetween,
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    Text("Recent Searches", fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 14.sp)
+                                    Text("Recent Searches", fontWeight = FontWeight.Bold, color = BrandDark, style = Typography.labelLarge)
                                     Text(
                                         "Clear All",
                                         color = BrandAccent,
@@ -432,19 +431,19 @@ fun UniversalSearchFlow(
                                 Spacer(modifier = Modifier.height(10.dp))
                                 FlowRow(
                                     modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
+                                    verticalArrangement = Arrangement.spacedBy(Dimens.sp1)
                                 ) {
                                     recentSearches.forEach { search ->
                                         Row(
                                             modifier = Modifier
-                                                .background(BrandBorder.copy(alpha = 0.5f), RoundedCornerShape(20.dp))
+                                                .background(BrandBorder.copy(alpha = 0.5f), RoundedCornerShape(Dimens.r3))
                                                 .clickable { searchQuery = search }
                                                 .padding(horizontal = 12.dp, vertical = 6.dp),
                                             verticalAlignment = Alignment.CenterVertically
                                         ) {
-                                            Text(search, fontSize = 12.sp, color = BrandDark)
-                                            Spacer(modifier = Modifier.width(4.dp))
+                                            Text(search, style = Typography.labelLarge, color = BrandDark)
+                                            Spacer(modifier = Modifier.width(Dimens.sp1))
                                             Icon(
                                                 Icons.Default.Close,
                                                 contentDescription = "Remove",
@@ -461,13 +460,13 @@ fun UniversalSearchFlow(
 
                         // Trending Searches
                         item {
-                            Text("Trending Searches", fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 14.sp)
+                            Text("Trending Searches", fontWeight = FontWeight.Bold, color = BrandDark, style = Typography.labelLarge)
                             Spacer(modifier = Modifier.height(10.dp))
                             Card(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
-                                shape = RoundedCornerShape(16.dp),
+                                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                                shape = RoundedCornerShape(Dimens.r2),
                                 colors = CardDefaults.cardColors(containerColor = BrandCardBg)
                             ) {
                                 Column(modifier = Modifier.padding(14.dp)) {
@@ -482,8 +481,7 @@ fun UniversalSearchFlow(
                                             Text(
                                                 "#${idx + 1}",
                                                 color = BrandPrimary,
-                                                fontWeight = FontWeight.Bold,
-                                                fontSize = 12.sp,
+                                                style = Typography.bodyLarge,
                                                 modifier = Modifier.width(30.dp)
                                             )
                                             Text(trend, fontSize = 13.sp, color = BrandDark, fontWeight = FontWeight.Medium)
@@ -505,7 +503,7 @@ fun UniversalSearchFlow(
                         // Quick filter pills row
                         LazyRow(
                             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                         ) {
                             val filters = listOf("All", "Musicians", "Bands", "Projects", "Studios")
                             items(filters) { filter ->
@@ -513,7 +511,7 @@ fun UniversalSearchFlow(
                                 FilterChip(
                                     selected = isSelected,
                                     onClick = { selectedFilter = filter },
-                                    label = { Text(filter, fontSize = 12.sp) },
+                                    label = { Text(filter, style = Typography.labelLarge) },
                                     colors = FilterChipDefaults.filterChipColors(
                                         selectedContainerColor = BrandPrimary,
                                         selectedLabelColor = Color.White
@@ -530,7 +528,7 @@ fun UniversalSearchFlow(
                                 .weight(1f)
                                 .fillMaxWidth(),
                             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                         ) {
                             item {
                                 Text("Global Search Results (${filteredResults.size})", fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 13.sp)
@@ -546,8 +544,8 @@ fun UniversalSearchFlow(
                                                 recentSearches.add(0, item.name)
                                             }
                                         }
-                                        .border(1.dp, BrandBorder, RoundedCornerShape(24.dp)),
-                                    shape = RoundedCornerShape(24.dp),
+                                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3)),
+                                    shape = RoundedCornerShape(Dimens.r3),
                                     colors = CardDefaults.cardColors(containerColor = BrandCardBg)
                                 ) {
                                     Column(modifier = Modifier.padding(14.dp)) {
@@ -568,7 +566,7 @@ fun UniversalSearchFlow(
                                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                                     Text(item.name, fontWeight = FontWeight.Bold, fontSize = 14.5.sp, color = BrandDark)
                                                     if (item.verified) {
-                                                        Spacer(modifier = Modifier.width(4.dp))
+                                                        Spacer(modifier = Modifier.width(Dimens.sp1))
                                                         Icon(Icons.Default.CheckCircle, "Verified", tint = BrandPrimary, modifier = Modifier.size(14.dp))
                                                     }
                                                 }
@@ -594,7 +592,7 @@ fun UniversalSearchFlow(
                                                 item.tags.forEach { tag ->
                                                     Surface(
                                                         color = BrandBorder.copy(alpha = 0.3f),
-                                                        shape = RoundedCornerShape(8.dp)
+                                                        shape = RoundedCornerShape(Dimens.r1)
                                                     ) {
                                                         Text(
                                                             text = "#$tag",
@@ -684,13 +682,13 @@ fun QrAndShareFlow(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(1.dp, BrandBorder, RoundedCornerShape(24.dp))
-                    .shadow(4.rbShadow(), RoundedCornerShape(24.dp)),
-                shape = RoundedCornerShape(24.dp),
+                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3))
+                    .shadow(4.rbShadow(), RoundedCornerShape(Dimens.r3)),
+                shape = RoundedCornerShape(Dimens.r3),
                 colors = CardDefaults.cardColors(containerColor = BrandCardBg)
             ) {
                 Column(
-                    modifier = Modifier.padding(24.dp),
+                    modifier = Modifier.padding(Dimens.sp3),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     // Avatar and profile mini preview
@@ -701,22 +699,22 @@ fun QrAndShareFlow(
                             .background(Brush.linearGradient(colors = listOf(BrandPrimary, BrandAccent))),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text("VS", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                        Text("VS", color = Color.White, style = Typography.bodyLarge)
                     }
                     
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Text("Vedanshu Srivastava", fontWeight = FontWeight.Bold, fontSize = 18.sp, color = BrandDark)
-                    Text("Chief Music Director • Bandra West", fontSize = 12.sp, color = BrandSecondaryText)
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Text("Vedanshu Srivastava", style = Typography.bodyLarge, color = BrandDark)
+                    Text("Chief Music Director • Bandra West", style = Typography.labelLarge, color = BrandSecondaryText)
                     
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp3))
 
                     // QR Code visual block (interactive click to expand preview)
                     Box(
                         modifier = Modifier
                             .size(180.dp)
-                            .clip(RoundedCornerShape(16.dp))
+                            .clip(RoundedCornerShape(Dimens.r2))
                             .background(Color.White)
-                            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp))
+                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
                             .clickable { shareScreenState = "Preview" }
                             .padding(12.dp),
                         contentAlignment = Alignment.Center
@@ -750,7 +748,7 @@ fun QrAndShareFlow(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
                     Text("Click QR to preview full-screen", fontSize = 11.sp, color = BrandSecondaryText)
 
                     Spacer(modifier = Modifier.height(20.dp))
@@ -775,7 +773,7 @@ fun QrAndShareFlow(
                         Button(
                             onClick = { showSnackbar("Link copied to clipboard!") },
                             colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(Dimens.r2),
                             contentPadding = PaddingValues(horizontal = 12.dp, vertical = 0.dp),
                             modifier = Modifier.height(28.dp)
                         ) {
@@ -790,7 +788,7 @@ fun QrAndShareFlow(
             // Action row buttons
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
             ) {
                 Button(
                     onClick = {
@@ -802,19 +800,19 @@ fun QrAndShareFlow(
                         )
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                    shape = RoundedCornerShape(24.dp),
+                    shape = RoundedCornerShape(Dimens.r3),
                     modifier = Modifier
                         .weight(1f)
                         .height(48.dp)
                 ) {
                     Icon(Icons.Default.Share, "Share", modifier = Modifier.size(16.dp))
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     Text("Share Profile Link", fontWeight = FontWeight.Bold)
                 }
 
                 OutlinedButton(
                     onClick = { showSnackbar("QR Image saved to your device album!") },
-                    shape = RoundedCornerShape(24.dp),
+                    shape = RoundedCornerShape(Dimens.r3),
                     border = BorderStroke(1.dp, BrandBorder),
                     colors = ButtonDefaults.outlinedButtonColors(contentColor = BrandDark),
                     modifier = Modifier
@@ -822,12 +820,12 @@ fun QrAndShareFlow(
                         .height(48.dp)
                 ) {
                     Icon(Icons.Default.Download, "Download", modifier = Modifier.size(16.dp))
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     Text("Save QR Code", fontWeight = FontWeight.Bold)
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center,
@@ -849,7 +847,7 @@ fun QrAndShareFlow(
                 ) {
                     TextButton(onClick = { shareScreenState = "Home" }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, null, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(4.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
                         Text("Back to preview")
                     }
                 }
@@ -859,25 +857,25 @@ fun QrAndShareFlow(
                 Card(
                     modifier = Modifier
                         .fillMaxWidth(0.9f)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(24.dp)),
-                    shape = RoundedCornerShape(24.dp),
+                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3)),
+                    shape = RoundedCornerShape(Dimens.r3),
                     colors = CardDefaults.cardColors(containerColor = BrandDark)
                 ) {
                     Column(
-                        modifier = Modifier.padding(24.dp),
+                        modifier = Modifier.padding(Dimens.sp3),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text("MUSICLINKD PRO", color = BrandAccent, fontSize = 10.sp, fontWeight = FontWeight.ExtraBold)
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text("Scan to Audition", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                        Spacer(modifier = Modifier.height(Dimens.sp1))
+                        Text("Scan to Audition", color = Color.White, style = Typography.bodyLarge)
                         
-                        Spacer(modifier = Modifier.height(24.dp))
+                        Spacer(modifier = Modifier.height(Dimens.sp3))
                         
                         // Full size QR simulation
                         Box(
                             modifier = Modifier
                                 .size(220.dp)
-                                .clip(RoundedCornerShape(16.dp))
+                                .clip(RoundedCornerShape(Dimens.r2))
                                 .background(Color.White)
                                 .padding(16.dp)
                         ) {
@@ -889,7 +887,7 @@ fun QrAndShareFlow(
                                             Box(
                                                 modifier = Modifier
                                                     .size(24.dp)
-                                                    .clip(RoundedCornerShape(4.dp))
+                                                    .clip(RoundedCornerShape(Dimens.r1))
                                                     .background(if (isActive) BrandDark else Color.White)
                                             )
                                         }
@@ -898,9 +896,9 @@ fun QrAndShareFlow(
                             }
                         }
 
-                        Spacer(modifier = Modifier.height(24.dp))
-                        Text("Vedanshu Srivastava", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                        Text("Synthesizers & Orchestration", color = Color.White.copy(alpha = 0.7f), fontSize = 12.sp)
+                        Spacer(modifier = Modifier.height(Dimens.sp3))
+                        Text("Vedanshu Srivastava", color = Color.White, style = Typography.bodyLarge)
+                        Text("Synthesizers & Orchestration", color = Color.White.copy(alpha = 0.7f), style = Typography.labelLarge)
                     }
                 }
             }
@@ -916,13 +914,13 @@ fun QrAndShareFlow(
                 ) {
                     TextButton(onClick = { shareScreenState = "Home" }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, null, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(4.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
                         Text("Back")
                     }
                 }
 
-                Text("Share Options", fontWeight = FontWeight.Bold, fontSize = 18.sp, color = BrandDark)
-                Spacer(modifier = Modifier.height(16.dp))
+                Text("Share Options", style = Typography.bodyLarge, color = BrandDark)
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 val socialChannels = listOf(
                     Triple("WhatsApp", Icons.Default.ChatBubble, Color(0xFF25D366)),
@@ -935,11 +933,11 @@ fun QrAndShareFlow(
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
-                    shape = RoundedCornerShape(16.dp),
+                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                    shape = RoundedCornerShape(Dimens.r2),
                     colors = CardDefaults.cardColors(containerColor = BrandCardBg)
                 ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.padding(Dimens.sp2)) {
                         socialChannels.forEachIndexed { index, channel ->
                             Row(
                                 modifier = Modifier
@@ -957,8 +955,8 @@ fun QrAndShareFlow(
                                 ) {
                                     Icon(channel.second, null, tint = channel.third, modifier = Modifier.size(16.dp))
                                 }
-                                Spacer(modifier = Modifier.width(16.dp))
-                                Text(channel.first, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = BrandDark)
+                                Spacer(modifier = Modifier.width(Dimens.sp2))
+                                Text(channel.first, style = Typography.bodyLarge, color = BrandDark)
                                 Spacer(modifier = Modifier.weight(1f))
                                 Icon(Icons.Default.ChevronRight, null, tint = BrandSecondaryText, modifier = Modifier.size(16.dp))
                             }
@@ -969,21 +967,21 @@ fun QrAndShareFlow(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp3))
 
                 // Premium Comp Card PDF Download option
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(1.dp, BrandPrimary.copy(alpha = 0.2f), RoundedCornerShape(16.dp)),
-                    shape = RoundedCornerShape(16.dp),
+                        .border(1.dp, BrandPrimary.copy(alpha = 0.2f), RoundedCornerShape(Dimens.r2)),
+                    shape = RoundedCornerShape(Dimens.r2),
                     colors = CardDefaults.cardColors(containerColor = LocalLightPurpleBg)
                 ) {
                     Column(modifier = Modifier.padding(18.dp)) {
-                        Text("Download PDF Comp Card", fontWeight = FontWeight.Bold, color = BrandPrimary, fontSize = 14.sp)
+                        Text("Download PDF Comp Card", fontWeight = FontWeight.Bold, color = BrandPrimary, style = Typography.labelLarge)
                         Text("Generate a stunning 1-page professional resume & portfolio pitch doc for agency bookings.", fontSize = 11.sp, color = BrandSecondaryText)
                         
-                        Spacer(modifier = Modifier.height(12.dp))
+                        Spacer(modifier = Modifier.height(Dimens.sp2))
 
                         if (downloadingPdf) {
                             Column {
@@ -1000,10 +998,10 @@ fun QrAndShareFlow(
                             Button(
                                 onClick = { downloadingPdf = true },
                                 colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                                shape = RoundedCornerShape(20.dp),
+                                shape = RoundedCornerShape(Dimens.r3),
                                 modifier = Modifier.fillMaxWidth().height(36.dp)
                             ) {
-                                Text("Compile & Download PDF", fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                                Text("Compile & Download PDF", style = Typography.bodyLarge)
                             }
                         }
                     }
@@ -1064,8 +1062,7 @@ fun SavedAndFavoritesFlow(
         ) {
             Text(
                 "My Bookmarks & Collections",
-                fontWeight = FontWeight.ExtraBold,
-                fontSize = 16.sp,
+                style = Typography.bodyLarge,
                 color = BrandDark
             )
             IconButton(onClick = { isGridView = !isGridView }) {
@@ -1094,12 +1091,12 @@ fun SavedAndFavoritesFlow(
                 Tab(
                     selected = selected,
                     onClick = { activeSavedTab = tabType },
-                    text = { Text(tabTitle, fontSize = 12.sp, fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal) }
+                    text = { Text(tabTitle, style = Typography.labelLarge, fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal) }
                 )
             }
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp2))
 
         if (isEmpty) {
             // Empty State
@@ -1113,22 +1110,21 @@ fun SavedAndFavoritesFlow(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text("🔖", fontSize = 64.sp)
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
                 Text(
                     "Your favorites folder is silent.",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
+                    style = Typography.bodyLarge,
                     color = BrandDark
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp1))
                 Text(
                     "Browse listings, discover talents, or book premium spaces to start building your professional collection.",
-                    fontSize = 12.sp,
+                    style = Typography.labelLarge,
                     color = BrandSecondaryText,
                     textAlign = TextAlign.Center,
                     lineHeight = 16.sp
                 )
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp3))
                 Button(
                     onClick = {
                         // Reset items to showcase flow again
@@ -1145,9 +1141,9 @@ fun SavedAndFavoritesFlow(
                         showSnackbar("Restored mock favorites list!")
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                    shape = RoundedCornerShape(20.dp)
+                    shape = RoundedCornerShape(Dimens.r3)
                 ) {
-                    Text("Browse Discover Feed / Restore Items", fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                    Text("Browse Discover Feed / Restore Items", style = Typography.bodyLarge)
                 }
             }
         } else {
@@ -1157,8 +1153,8 @@ fun SavedAndFavoritesFlow(
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(2),
                         contentPadding = PaddingValues(16.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp2),
+                        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                     ) {
                         when (activeSavedTab) {
                             SavedTab.ARTISTS -> {
@@ -1182,7 +1178,7 @@ fun SavedAndFavoritesFlow(
                 } else {
                     LazyColumn(
                         contentPadding = PaddingValues(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                     ) {
                         when (activeSavedTab) {
                             SavedTab.ARTISTS -> {
@@ -1241,8 +1237,8 @@ fun ArtistRowCard(item: SavedArtistItem, onRemove: () -> Unit, onHire: () -> Uni
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
-        shape = RoundedCornerShape(16.dp),
+            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+        shape = RoundedCornerShape(Dimens.r2),
         colors = CardDefaults.cardColors(containerColor = BrandCardBg)
     ) {
         Row(
@@ -1256,11 +1252,11 @@ fun ArtistRowCard(item: SavedArtistItem, onRemove: () -> Unit, onHire: () -> Uni
                     .background(BrandPrimary.copy(alpha = 0.08f)),
                 contentAlignment = Alignment.Center
             ) {
-                Text(item.initials, fontWeight = FontWeight.Bold, color = BrandPrimary, fontSize = 14.sp)
+                Text(item.initials, fontWeight = FontWeight.Bold, color = BrandPrimary, style = Typography.labelLarge)
             }
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(Dimens.sp2))
             Column(modifier = Modifier.weight(1f)) {
-                Text(item.name, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
+                Text(item.name, style = Typography.bodyLarge, color = BrandDark)
                 Text("${item.role} • 📍 ${item.location}", fontSize = 11.sp, color = BrandSecondaryText)
                 Text("★ ${item.rating}", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = BrandAccent)
             }
@@ -1269,13 +1265,13 @@ fun ArtistRowCard(item: SavedArtistItem, onRemove: () -> Unit, onHire: () -> Uni
                 IconButton(onClick = onRemove, modifier = Modifier.size(24.dp)) {
                     Icon(Icons.Default.Delete, "Remove", tint = BrandAccent, modifier = Modifier.size(16.dp))
                 }
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp1))
                 Button(
                     onClick = onHire,
                     colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
                     contentPadding = PaddingValues(horizontal = 10.dp, vertical = 0.dp),
                     modifier = Modifier.height(28.dp),
-                    shape = RoundedCornerShape(12.dp)
+                    shape = RoundedCornerShape(Dimens.r2)
                 ) {
                     Text("Hire", fontSize = 10.sp, fontWeight = FontWeight.Bold)
                 }
@@ -1289,12 +1285,12 @@ fun ArtistGridCard(item: SavedArtistItem, onRemove: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
-        shape = RoundedCornerShape(16.dp),
+            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+        shape = RoundedCornerShape(Dimens.r2),
         colors = CardDefaults.cardColors(containerColor = BrandCardBg)
     ) {
         Column(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(Dimens.sp2),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
@@ -1309,10 +1305,10 @@ fun ArtistGridCard(item: SavedArtistItem, onRemove: () -> Unit) {
                     .background(BrandPrimary.copy(alpha = 0.08f)),
                 contentAlignment = Alignment.Center
             ) {
-                Text(item.initials, fontWeight = FontWeight.Bold, color = BrandPrimary, fontSize = 14.sp)
+                Text(item.initials, fontWeight = FontWeight.Bold, color = BrandPrimary, style = Typography.labelLarge)
             }
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(item.name, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandDark, maxLines = 1, textAlign = TextAlign.Center)
+            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Text(item.name, style = Typography.bodyLarge, color = BrandDark, maxLines = 1, textAlign = TextAlign.Center)
             Text(item.role, fontSize = 10.sp, color = BrandSecondaryText, maxLines = 1)
             Text("★ ${item.rating}", fontSize = 10.sp, color = BrandAccent, fontWeight = FontWeight.Bold)
         }
@@ -1324,8 +1320,8 @@ fun StudioRowCard(item: SavedStudioItem, onRemove: () -> Unit, onBook: () -> Uni
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
-        shape = RoundedCornerShape(16.dp),
+            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+        shape = RoundedCornerShape(Dimens.r2),
         colors = CardDefaults.cardColors(containerColor = BrandCardBg)
     ) {
         Column(modifier = Modifier.padding(14.dp)) {
@@ -1335,20 +1331,20 @@ fun StudioRowCard(item: SavedStudioItem, onRemove: () -> Unit, onBook: () -> Uni
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column {
-                    Text(item.name, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
+                    Text(item.name, style = Typography.bodyLarge, color = BrandDark)
                     Text("📍 ${item.location} • ★ ${item.rating}", fontSize = 11.sp, color = BrandSecondaryText)
                 }
                 IconButton(onClick = onRemove, modifier = Modifier.size(28.dp)) {
                     Icon(Icons.Default.Delete, "Remove", tint = BrandAccent, modifier = Modifier.size(16.dp))
                 }
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
             Text("Featured Equipment: ${item.equipment}", fontSize = 11.sp, color = BrandSecondaryText, maxLines = 2)
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
             Button(
                 onClick = onBook,
                 colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(Dimens.r2),
                 modifier = Modifier.fillMaxWidth().height(34.dp)
             ) {
                 Text("Book Studio Space Again", fontSize = 11.sp, fontWeight = FontWeight.Bold)
@@ -1362,19 +1358,19 @@ fun StudioGridCard(item: SavedStudioItem, onRemove: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
-        shape = RoundedCornerShape(16.dp),
+            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+        shape = RoundedCornerShape(Dimens.r2),
         colors = CardDefaults.cardColors(containerColor = BrandCardBg)
     ) {
-        Column(modifier = Modifier.padding(12.dp)) {
+        Column(modifier = Modifier.padding(Dimens.sp2)) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text("★ ${item.rating}", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = BrandAccent)
                 IconButton(onClick = onRemove, modifier = Modifier.size(18.dp)) {
                     Icon(Icons.Default.Close, null, tint = BrandSecondaryText, modifier = Modifier.size(12.dp))
                 }
             }
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(item.name, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandDark, maxLines = 1)
+            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Text(item.name, style = Typography.bodyLarge, color = BrandDark, maxLines = 1)
             Text(item.location, fontSize = 10.sp, color = BrandSecondaryText)
         }
     }
@@ -1385,8 +1381,8 @@ fun MarketRowCard(item: SavedMarketItem, onRemove: () -> Unit, onView: () -> Uni
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
-        shape = RoundedCornerShape(16.dp),
+            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+        shape = RoundedCornerShape(Dimens.r2),
         colors = CardDefaults.cardColors(containerColor = BrandCardBg)
     ) {
         Row(
@@ -1396,7 +1392,7 @@ fun MarketRowCard(item: SavedMarketItem, onRemove: () -> Unit, onView: () -> Uni
             Box(
                 modifier = Modifier
                     .size(46.dp)
-                    .clip(RoundedCornerShape(8.dp))
+                    .clip(RoundedCornerShape(Dimens.r1))
                     .background(BrandBackground),
                 contentAlignment = Alignment.Center
             ) {
@@ -1411,7 +1407,7 @@ fun MarketRowCard(item: SavedMarketItem, onRemove: () -> Unit, onView: () -> Uni
                     Text(item.emoji, fontSize = 22.sp)
                 }
             }
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(Dimens.sp2))
             Column(modifier = Modifier.weight(1f)) {
                 Text(item.title, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark, maxLines = 1)
                 Text("Seller: ${item.seller}", fontSize = 11.sp, color = BrandSecondaryText)
@@ -1421,11 +1417,11 @@ fun MarketRowCard(item: SavedMarketItem, onRemove: () -> Unit, onView: () -> Uni
                 IconButton(onClick = onRemove, modifier = Modifier.size(24.dp)) {
                     Icon(Icons.Default.Delete, null, tint = BrandAccent, modifier = Modifier.size(16.dp))
                 }
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp1))
                 Button(
                     onClick = onView,
                     colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(Dimens.r2),
                     contentPadding = PaddingValues(horizontal = 10.dp, vertical = 0.dp),
                     modifier = Modifier.height(28.dp)
                 ) {
@@ -1441,11 +1437,11 @@ fun MarketGridCard(item: SavedMarketItem, onRemove: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
-        shape = RoundedCornerShape(16.dp),
+            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+        shape = RoundedCornerShape(Dimens.r2),
         colors = CardDefaults.cardColors(containerColor = BrandCardBg)
     ) {
-        Column(modifier = Modifier.padding(12.dp)) {
+        Column(modifier = Modifier.padding(Dimens.sp2)) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                 if (item.imageUrl != null) {
                     AsyncImage(
@@ -1457,13 +1453,13 @@ fun MarketGridCard(item: SavedMarketItem, onRemove: () -> Unit) {
                             .clip(RoundedCornerShape(6.dp))
                     )
                 } else {
-                    Text(item.emoji, fontSize = 18.sp)
+                    Text(item.emoji, style = Typography.bodyLarge)
                 }
                 IconButton(onClick = onRemove, modifier = Modifier.size(18.dp)) {
                     Icon(Icons.Default.Close, null, tint = BrandSecondaryText, modifier = Modifier.size(12.dp))
                 }
             }
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
             Text(item.title, fontWeight = FontWeight.Bold, fontSize = 11.sp, color = BrandDark, maxLines = 1)
             Text(item.price, color = BrandSuccess, fontWeight = FontWeight.Bold, fontSize = 11.sp)
         }
@@ -1521,7 +1517,7 @@ fun SettingsFlow(
             title = {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Default.ExitToApp, contentDescription = null, tint = Color(0xFFEF4444))
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     Text("Confirm Log Out", fontWeight = FontWeight.Bold)
                 }
             },
@@ -1536,7 +1532,7 @@ fun SettingsFlow(
                         onLogout()
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFEF4444)),
-                    shape = RoundedCornerShape(12.dp)
+                    shape = RoundedCornerShape(Dimens.r2)
                 ) {
                     Text("Log Out", color = Color.White, fontWeight = FontWeight.Bold)
                 }
@@ -1544,7 +1540,7 @@ fun SettingsFlow(
             dismissButton = {
                 OutlinedButton(
                     onClick = { showLogoutConfirmDialog = false },
-                    shape = RoundedCornerShape(12.dp)
+                    shape = RoundedCornerShape(Dimens.r2)
                 ) {
                     Text("Cancel")
                 }
@@ -1575,7 +1571,7 @@ fun SettingsFlow(
                         .padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
-                    Text("Account Preferences", fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 14.sp)
+                    Text("Account Preferences", fontWeight = FontWeight.Bold, color = BrandDark, style = Typography.labelLarge)
                     
                     // Category Items
                     val categories = listOf(
@@ -1591,12 +1587,12 @@ fun SettingsFlow(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clickable { subPage = pageTarget }
-                                .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
-                            shape = RoundedCornerShape(16.dp),
+                                .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                            shape = RoundedCornerShape(Dimens.r2),
                             colors = CardDefaults.cardColors(containerColor = BrandCardBg)
                         ) {
                             Row(
-                                modifier = Modifier.padding(16.dp),
+                                modifier = Modifier.padding(Dimens.sp2),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Box(
@@ -1619,9 +1615,9 @@ fun SettingsFlow(
                                         modifier = Modifier.size(18.dp)
                                     )
                                 }
-                                Spacer(modifier = Modifier.width(16.dp))
+                                Spacer(modifier = Modifier.width(Dimens.sp2))
                                 Column(modifier = Modifier.weight(1f)) {
-                                    Text(title, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
+                                    Text(title, style = Typography.bodyLarge, color = BrandDark)
                                     Text(subtitle, fontSize = 11.sp, color = BrandSecondaryText)
                                 }
                                 Icon(Icons.Default.ChevronRight, null, tint = BrandSecondaryText, modifier = Modifier.size(16.dp))
@@ -1636,14 +1632,14 @@ fun SettingsFlow(
                             showLogoutConfirmDialog = true 
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFEF4444).copy(alpha = 0.08f), contentColor = Color(0xFFEF4444)),
-                        shape = RoundedCornerShape(20.dp),
+                        shape = RoundedCornerShape(Dimens.r3),
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(44.dp)
                             .testTag("settings_logout_button")
                     ) {
                         Icon(Icons.Default.ExitToApp, null, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
                         Text("Log Out Account", fontWeight = FontWeight.Bold, fontSize = 13.sp)
                     }
                 }
@@ -1655,23 +1651,23 @@ fun SettingsFlow(
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                         IconButton(onClick = { subPage = SettingsSubPage.MAIN }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                         }
-                        Text("Personal Account & Musical Roles", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandDark)
+                        Text("Personal Account & Musical Roles", style = Typography.bodyLarge, color = BrandDark)
                     }
 
-                    Text("Contact Details", fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 14.sp)
+                    Text("Contact Details", fontWeight = FontWeight.Bold, color = BrandDark, style = Typography.labelLarge)
 
                     OutlinedTextField(
                         value = editName,
                         onValueChange = { editName = it },
                         label = { Text("Full Name") },
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(Dimens.r2)
                     )
 
                     OutlinedTextField(
@@ -1679,7 +1675,7 @@ fun SettingsFlow(
                         onValueChange = { editEmail = it },
                         label = { Text("Primary Email Address") },
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(Dimens.r2)
                     )
 
                     OutlinedTextField(
@@ -1687,7 +1683,7 @@ fun SettingsFlow(
                         onValueChange = { editPhone = it },
                         label = { Text("Phone / WhatsApp Contact") },
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(Dimens.r2)
                     )
 
                     OutlinedTextField(
@@ -1695,19 +1691,19 @@ fun SettingsFlow(
                         onValueChange = { editUsername = it },
                         label = { Text("Public Username Vanity URL") },
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(Dimens.r2)
                     )
 
                     HorizontalDivider(color = BrandBorder, modifier = Modifier.padding(vertical = 4.dp))
 
                     // Musical Roles & Expertise Section
-                    Text("Primary Musical Role", fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 14.sp)
-                    Text("Select your primary professional role on MusicLinkd", fontSize = 12.sp, color = BrandSecondaryText)
+                    Text("Primary Musical Role", fontWeight = FontWeight.Bold, color = BrandDark, style = Typography.labelLarge)
+                    Text("Select your primary professional role on MusicLinkd", style = Typography.labelLarge, color = BrandSecondaryText)
 
                     val availableRoles = listOf("Music Producer", "Lead Vocalist", "Session Guitarist", "Mixing Engineer", "Songwriter", "Studio Owner")
                     FlowRow(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
+                        verticalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
                         availableRoles.forEach { role ->
                             val isSelected = userPrimaryRole == role
@@ -1718,7 +1714,7 @@ fun SettingsFlow(
                                 leadingIcon = if (isSelected) {
                                     { Icon(Icons.Default.Check, null, modifier = Modifier.size(14.dp)) }
                                 } else null,
-                                shape = RoundedCornerShape(20.dp),
+                                shape = RoundedCornerShape(Dimens.r3),
                                 colors = FilterChipDefaults.filterChipColors(
                                     selectedContainerColor = BrandPrimary,
                                     selectedLabelColor = Color.White,
@@ -1728,15 +1724,15 @@ fun SettingsFlow(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(4.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp1))
 
-                    Text("Genres & Styles", fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 14.sp)
-                    Text("Select genres that best match your musical production & performance style", fontSize = 12.sp, color = BrandSecondaryText)
+                    Text("Genres & Styles", fontWeight = FontWeight.Bold, color = BrandDark, style = Typography.labelLarge)
+                    Text("Select genres that best match your musical production & performance style", style = Typography.labelLarge, color = BrandSecondaryText)
 
                     val availableGenres = listOf("Bollywood", "Indie", "Pop", "Rock", "Classical", "Electronic", "Sufi", "Hip-Hop", "Lo-Fi", "Jazz", "R&B")
                     FlowRow(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
+                        verticalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
                         availableGenres.forEach { genre ->
                             val isSelected = selectedGenresSet.contains(genre)
@@ -1749,7 +1745,7 @@ fun SettingsFlow(
                                 leadingIcon = if (isSelected) {
                                     { Icon(Icons.Default.Check, null, modifier = Modifier.size(14.dp)) }
                                 } else null,
-                                shape = RoundedCornerShape(20.dp),
+                                shape = RoundedCornerShape(Dimens.r3),
                                 colors = FilterChipDefaults.filterChipColors(
                                     selectedContainerColor = Color(0xFF6366F1),
                                     selectedLabelColor = Color.White,
@@ -1767,7 +1763,7 @@ fun SettingsFlow(
                             subPage = SettingsSubPage.MAIN
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                        shape = RoundedCornerShape(24.dp),
+                        shape = RoundedCornerShape(Dimens.r3),
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(48.dp)
@@ -1783,14 +1779,14 @@ fun SettingsFlow(
                         },
                         colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFFEF4444)),
                         border = BorderStroke(1.dp, Color(0xFFEF4444).copy(alpha = 0.5f)),
-                        shape = RoundedCornerShape(24.dp),
+                        shape = RoundedCornerShape(Dimens.r3),
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(44.dp)
                             .testTag("account_subpage_logout_button")
                     ) {
                         Icon(Icons.Default.ExitToApp, null, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
                         Text("Log Out Account", fontWeight = FontWeight.Bold, fontSize = 13.sp)
                     }
 
@@ -1798,7 +1794,7 @@ fun SettingsFlow(
                         onClick = { showSnackbar("Initiating full delete procedures...") },
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text("Delete Professional Account Permanently", color = Color(0xFFEF4444), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Text("Delete Professional Account Permanently", color = Color(0xFFEF4444), style = Typography.bodyLarge)
                     }
                 }
             }
@@ -1809,13 +1805,13 @@ fun SettingsFlow(
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                         IconButton(onClick = { subPage = SettingsSubPage.MAIN }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                         }
-                        Text("Privacy & Limits Config", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandDark)
+                        Text("Privacy & Limits Config", style = Typography.bodyLarge, color = BrandDark)
                     }
 
                     // Toggles
@@ -1840,22 +1836,22 @@ fun SettingsFlow(
                         onCheckedChange = { hideFollowersList = it }
                     )
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
 
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
-                        shape = RoundedCornerShape(16.dp),
+                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                        shape = RoundedCornerShape(Dimens.r2),
                         colors = CardDefaults.cardColors(containerColor = BrandCardBg)
                     ) {
-                        Column(modifier = Modifier.padding(16.dp)) {
+                        Column(modifier = Modifier.padding(Dimens.sp2)) {
                             Text("Your Indexed Data", fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 13.sp)
                             Text("MusicLinkd is a sovereign, secure marketplace. Download a JSON package of your complete history anytime.", fontSize = 11.sp, color = BrandSecondaryText)
-                            Spacer(modifier = Modifier.height(12.dp))
+                            Spacer(modifier = Modifier.height(Dimens.sp2))
                             OutlinedButton(
                                 onClick = { showSnackbar("Generating JSON database package download link...") },
-                                shape = RoundedCornerShape(16.dp),
+                                shape = RoundedCornerShape(Dimens.r2),
                                 border = BorderStroke(1.dp, BrandBorder),
                                 colors = ButtonDefaults.outlinedButtonColors(contentColor = BrandDark),
                                 modifier = Modifier.fillMaxWidth().height(36.dp)
@@ -1873,13 +1869,13 @@ fun SettingsFlow(
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                         IconButton(onClick = { subPage = SettingsSubPage.MAIN }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                         }
-                        Text("Notification Feeds", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandDark)
+                        Text("Notification Feeds", style = Typography.bodyLarge, color = BrandDark)
                     }
 
                     SupportPrivacyToggleRow("Push Alerts Feed", "Receive immediate native app notifications for chat message receipts.", pushNotify) { pushNotify = it }
@@ -1896,7 +1892,7 @@ fun SettingsFlow(
                             subPage = SettingsSubPage.MAIN
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                        shape = RoundedCornerShape(24.dp),
+                        shape = RoundedCornerShape(Dimens.r3),
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(48.dp)
@@ -1913,32 +1909,32 @@ fun SettingsFlow(
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                         IconButton(onClick = { subPage = SettingsSubPage.MAIN }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                         }
-                        Text("Account Security", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandDark)
+                        Text("Account Security", style = Typography.bodyLarge, color = BrandDark)
                     }
 
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
-                        shape = RoundedCornerShape(16.dp),
+                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                        shape = RoundedCornerShape(Dimens.r2),
                         colors = CardDefaults.cardColors(containerColor = BrandCardBg)
                     ) {
-                        Column(modifier = Modifier.padding(16.dp)) {
+                        Column(modifier = Modifier.padding(Dimens.sp2)) {
                             Text("Reset Access Password", fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 13.sp)
                             Spacer(modifier = Modifier.height(10.dp))
                             Button(
                                 onClick = { showSnackbar("Sent instructions to password reset link email!") },
                                 colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                                shape = RoundedCornerShape(20.dp),
+                                shape = RoundedCornerShape(Dimens.r3),
                                 modifier = Modifier.fillMaxWidth().height(36.dp)
                             ) {
-                                Text("Email Reset Password Link", fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                                Text("Email Reset Password Link", style = Typography.bodyLarge)
                             }
                         }
                     }
@@ -1962,11 +1958,11 @@ fun SettingsFlow(
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
-                        shape = RoundedCornerShape(16.dp),
+                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                        shape = RoundedCornerShape(Dimens.r2),
                         colors = CardDefaults.cardColors(containerColor = BrandCardBg)
                     ) {
-                        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Column(modifier = Modifier.padding(Dimens.sp2), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                             DeviceSessionRow("OnePlus 12 • Active Now", "Bandra West, Mumbai • App Client Version 2.26")
                             HorizontalDivider(color = BrandBorder)
                             DeviceSessionRow("MacBook Pro • 2 Hours Ago", "Safari Browser • Session IP: 192.168.1.150")
@@ -1980,13 +1976,13 @@ fun SettingsFlow(
                             text = {
                                 Column {
                                     Text("Enter the 6-digit verification code sent to your active verified phone number.")
-                                    Spacer(modifier = Modifier.height(12.dp))
+                                    Spacer(modifier = Modifier.height(Dimens.sp2))
                                     OutlinedTextField(
                                         value = twoFactorCode,
                                         onValueChange = { if (it.length <= 6) twoFactorCode = it },
                                         placeholder = { Text("e.g. 520418") },
                                         singleLine = true,
-                                        shape = RoundedCornerShape(12.dp)
+                                        shape = RoundedCornerShape(Dimens.r2)
                                     )
                                 }
                             },
@@ -2018,13 +2014,13 @@ fun SettingsFlow(
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                         IconButton(onClick = { subPage = SettingsSubPage.MAIN }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                         }
-                        Text("Appearance & Styling", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandDark)
+                        Text("Appearance & Styling", style = Typography.bodyLarge, color = BrandDark)
                     }
 
                     Text("Active Theme Selection", fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 13.sp)
@@ -2039,8 +2035,8 @@ fun SettingsFlow(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             RadioButton(selected = selected, onClick = { themeSelection = theme; showSnackbar("Switched visual theme to $theme!") })
-                            Spacer(modifier = Modifier.width(12.dp))
-                            Text(theme, fontSize = 14.sp, color = BrandDark, fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal)
+                            Spacer(modifier = Modifier.width(Dimens.sp2))
+                            Text(theme, style = Typography.labelLarge, color = BrandDark, fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal)
                         }
                     }
 
@@ -2069,8 +2065,8 @@ fun SettingsFlow(
                                         }
                                     )
                             )
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Text(acc, fontSize = 14.sp, color = BrandDark, fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal)
+                            Spacer(modifier = Modifier.width(Dimens.sp2))
+                            Text(acc, style = Typography.labelLarge, color = BrandDark, fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal)
                             Spacer(modifier = Modifier.weight(1f))
                             if (selected) {
                                 Icon(Icons.Default.Check, null, tint = BrandPrimary, modifier = Modifier.size(16.dp))
@@ -2093,10 +2089,10 @@ fun SupportPrivacyToggleRow(title: String, description: String, checked: Boolean
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(modifier = Modifier.weight(1f)) {
-            Text(title, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
+            Text(title, style = Typography.bodyLarge, color = BrandDark)
             Text(description, fontSize = 11.sp, color = BrandSecondaryText, lineHeight = 15.sp)
         }
-        Spacer(modifier = Modifier.width(12.dp))
+        Spacer(modifier = Modifier.width(Dimens.sp2))
         Switch(
             checked = checked,
             onCheckedChange = onCheckedChange,
@@ -2193,22 +2189,22 @@ fun HelpAndSupportFlow(
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
-                    Text("Help & Support Center", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, color = BrandDark)
+                    Text("Help & Support Center", style = Typography.bodyLarge, color = BrandDark)
                     Text("Find answers to frequent queries or lodge direct support tickets with our Bandra West admin team.", fontSize = 11.sp, color = BrandSecondaryText)
 
                     // Search help topic bar
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .border(1.dp, BrandBorder, RoundedCornerShape(24.dp)),
-                        shape = RoundedCornerShape(24.dp),
+                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3)),
+                        shape = RoundedCornerShape(Dimens.r3),
                         colors = CardDefaults.cardColors(containerColor = BrandCardBg)
                     ) {
                         Row(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.Search, null, tint = BrandPrimary)
-                            Spacer(modifier = Modifier.width(8.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
                             TextField(
                                 value = searchQuery,
                                 onValueChange = { searchQuery = it },
@@ -2225,40 +2221,40 @@ fun HelpAndSupportFlow(
                     }
 
                     if (searchQuery.isNotEmpty()) {
-                        Text("Search Results for help:", fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 12.sp)
+                        Text("Search Results for help:", fontWeight = FontWeight.Bold, color = BrandDark, style = Typography.labelLarge)
                         filteredFaq.forEach { faq ->
                             Card(
-                                modifier = Modifier.fillMaxWidth().border(1.dp, BrandBorder, RoundedCornerShape(12.dp)),
+                                modifier = Modifier.fillMaxWidth().border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
                                 colors = CardDefaults.cardColors(containerColor = BrandCardBg)
                             ) {
                                 Column(modifier = Modifier.padding(14.dp)) {
                                     Text(faq.question, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandPrimary)
-                                    Spacer(modifier = Modifier.height(4.dp))
+                                    Spacer(modifier = Modifier.height(Dimens.sp1))
                                     Text(faq.answer, fontSize = 11.sp, color = BrandSecondaryText, lineHeight = 15.sp)
                                 }
                             }
                         }
                         if (filteredFaq.isEmpty()) {
-                            Text("No match found. Use contact support below.", fontSize = 12.sp, color = BrandSecondaryText)
+                            Text("No match found. Use contact support below.", style = Typography.labelLarge, color = BrandSecondaryText)
                         }
                     }
 
                     // Popular Topics Quick Buttons
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
                         Button(
                             onClick = { helpPage = HelpSubPage.FAQ },
                             colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(Dimens.r2),
                             modifier = Modifier.weight(1f)
                         ) {
                             Text("Browse FAQ Accordion", fontSize = 11.sp, fontWeight = FontWeight.Bold)
                         }
                         OutlinedButton(
                             onClick = { helpPage = HelpSubPage.CONTACT },
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(Dimens.r2),
                             border = BorderStroke(1.dp, BrandBorder),
                             colors = ButtonDefaults.outlinedButtonColors(contentColor = BrandDark),
                             modifier = Modifier.weight(1f)
@@ -2267,17 +2263,17 @@ fun HelpAndSupportFlow(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(4.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp1))
 
                     // Moderation reports, reviews
                     Text("Report & Submit Incidents", fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 13.sp)
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
                         OutlinedButton(
                             onClick = { helpPage = HelpSubPage.REPORT_USER },
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(Dimens.r2),
                             border = BorderStroke(1.dp, BrandBorder),
                             colors = ButtonDefaults.outlinedButtonColors(contentColor = BrandDark),
                             modifier = Modifier.weight(1f)
@@ -2286,7 +2282,7 @@ fun HelpAndSupportFlow(
                         }
                         OutlinedButton(
                             onClick = { helpPage = HelpSubPage.REPORT_LISTING },
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(Dimens.r2),
                             border = BorderStroke(1.dp, BrandBorder),
                             colors = ButtonDefaults.outlinedButtonColors(contentColor = BrandDark),
                             modifier = Modifier.weight(1f)
@@ -2297,12 +2293,12 @@ fun HelpAndSupportFlow(
 
                     OutlinedButton(
                         onClick = { helpPage = HelpSubPage.FEEDBACK },
-                        shape = RoundedCornerShape(20.dp),
+                        shape = RoundedCornerShape(Dimens.r3),
                         border = BorderStroke(1.dp, BrandBorder),
                         colors = ButtonDefaults.outlinedButtonColors(contentColor = BrandAccent),
                         modifier = Modifier.fillMaxWidth().height(40.dp)
                     ) {
-                        Text("Provide Platform Feedback", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Text("Provide Platform Feedback", style = Typography.bodyLarge)
                     }
                 }
             }
@@ -2313,13 +2309,13 @@ fun HelpAndSupportFlow(
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                         IconButton(onClick = { helpPage = HelpSubPage.CENTER }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                         }
-                        Text("Accordion FAQ Cards", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandDark)
+                        Text("Accordion FAQ Cards", style = Typography.bodyLarge, color = BrandDark)
                     }
 
                     faqList.forEachIndexed { index, item ->
@@ -2327,7 +2323,7 @@ fun HelpAndSupportFlow(
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .border(1.dp, BrandBorder, RoundedCornerShape(16.dp))
+                                .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
                                 .clickable {
                                     if (isExpanded) {
                                         expandedFaqIndices.remove(index)
@@ -2335,10 +2331,10 @@ fun HelpAndSupportFlow(
                                         expandedFaqIndices.add(index)
                                     }
                                 },
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(Dimens.r2),
                             colors = CardDefaults.cardColors(containerColor = BrandCardBg)
                         ) {
-                            Column(modifier = Modifier.padding(16.dp)) {
+                            Column(modifier = Modifier.padding(Dimens.sp2)) {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -2357,7 +2353,7 @@ fun HelpAndSupportFlow(
                                         Spacer(modifier = Modifier.height(10.dp))
                                         HorizontalDivider(color = BrandBorder)
                                         Spacer(modifier = Modifier.height(10.dp))
-                                        Text(item.answer, fontSize = 12.sp, color = BrandSecondaryText, lineHeight = 16.sp)
+                                        Text(item.answer, style = Typography.labelLarge, color = BrandSecondaryText, lineHeight = 16.sp)
                                     }
                                 }
                             }
@@ -2372,13 +2368,13 @@ fun HelpAndSupportFlow(
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                         IconButton(onClick = { helpPage = HelpSubPage.CENTER }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                         }
-                        Text("Contact Support Ticket", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandDark)
+                        Text("Contact Support Ticket", style = Typography.bodyLarge, color = BrandDark)
                     }
 
                     OutlinedTextField(
@@ -2386,12 +2382,12 @@ fun HelpAndSupportFlow(
                         onValueChange = { ticketSubject = it },
                         label = { Text("Ticket Subject") },
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(Dimens.r2)
                     )
 
                     // Simple select category
-                    Text("Category", fontWeight = FontWeight.Bold, color = BrandDark, fontSize = 12.sp)
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text("Category", fontWeight = FontWeight.Bold, color = BrandDark, style = Typography.labelLarge)
+                    Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                         listOf("Billing", "App Bug", "Feature Suggestion").forEach { cat ->
                             val isSelected = ticketCategory == cat
                             FilterChip(
@@ -2407,7 +2403,7 @@ fun HelpAndSupportFlow(
                         onValueChange = { ticketDesc = it },
                         label = { Text("Details & Description") },
                         modifier = Modifier.fillMaxWidth().height(120.dp),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(Dimens.r2),
                         maxLines = 5
                     )
 
@@ -2415,19 +2411,19 @@ fun HelpAndSupportFlow(
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp))
+                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
                             .clickable {
                                 ticketFileUploaded = true
                                 showSnackbar("Screenshot successfully attached!")
                             },
-                        shape = RoundedCornerShape(16.dp),
+                        shape = RoundedCornerShape(Dimens.r2),
                         colors = CardDefaults.cardColors(containerColor = BrandCardBg)
                     ) {
                         Column(
-                            modifier = Modifier.padding(16.dp),
+                            modifier = Modifier.padding(Dimens.sp2),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text(if (ticketFileUploaded) "📎 screenshot_evidence.png" else "📁 Click to upload screenshot/log attachments", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandPrimary)
+                            Text(if (ticketFileUploaded) "📎 screenshot_evidence.png" else "📁 Click to upload screenshot/log attachments", style = Typography.bodyLarge, color = BrandPrimary)
                         }
                     }
 
@@ -2441,7 +2437,7 @@ fun HelpAndSupportFlow(
                             }
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                        shape = RoundedCornerShape(24.dp),
+                        shape = RoundedCornerShape(Dimens.r3),
                         modifier = Modifier.fillMaxWidth().height(48.dp)
                     ) {
                         Text("Submit Support Ticket", fontWeight = FontWeight.Bold)
@@ -2455,13 +2451,13 @@ fun HelpAndSupportFlow(
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                         IconButton(onClick = { helpPage = HelpSubPage.CENTER }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                         }
-                        Text("Report Bad Actor / Scam User", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandDark)
+                        Text("Report Bad Actor / Scam User", style = Typography.bodyLarge, color = BrandDark)
                     }
 
                     Text("Reason for report", fontWeight = FontWeight.Bold, fontSize = 13.sp)
@@ -2476,7 +2472,7 @@ fun HelpAndSupportFlow(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             RadioButton(selected = selected, onClick = { reportUserReason = reason })
-                            Spacer(modifier = Modifier.width(12.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp2))
                             Text(reason, fontSize = 13.sp)
                         }
                     }
@@ -2486,7 +2482,7 @@ fun HelpAndSupportFlow(
                         onValueChange = { reportUserDesc = it },
                         label = { Text("Elaborate on details") },
                         modifier = Modifier.fillMaxWidth().height(100.dp),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(Dimens.r2)
                     )
 
                     Button(
@@ -2495,7 +2491,7 @@ fun HelpAndSupportFlow(
                             helpPage = HelpSubPage.CENTER
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFEF4444)),
-                        shape = RoundedCornerShape(24.dp),
+                        shape = RoundedCornerShape(Dimens.r3),
                         modifier = Modifier.fillMaxWidth().height(48.dp)
                     ) {
                         Text("File Security Incident Report", fontWeight = FontWeight.Bold, color = Color.White)
@@ -2509,13 +2505,13 @@ fun HelpAndSupportFlow(
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                         IconButton(onClick = { helpPage = HelpSubPage.CENTER }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                         }
-                        Text("Report Fake Listing / Copyright", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandDark)
+                        Text("Report Fake Listing / Copyright", style = Typography.bodyLarge, color = BrandDark)
                     }
 
                     Text("Select Violation Type", fontWeight = FontWeight.Bold, fontSize = 13.sp)
@@ -2530,7 +2526,7 @@ fun HelpAndSupportFlow(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             RadioButton(selected = selected, onClick = { reportListReason = reason })
-                            Spacer(modifier = Modifier.width(12.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp2))
                             Text(reason, fontSize = 13.sp)
                         }
                     }
@@ -2540,7 +2536,7 @@ fun HelpAndSupportFlow(
                         onValueChange = { reportListDesc = it },
                         label = { Text("Details & Evidence link") },
                         modifier = Modifier.fillMaxWidth().height(100.dp),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(Dimens.r2)
                     )
 
                     Button(
@@ -2549,7 +2545,7 @@ fun HelpAndSupportFlow(
                             helpPage = HelpSubPage.CENTER
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFEF4444)),
-                        shape = RoundedCornerShape(24.dp),
+                        shape = RoundedCornerShape(Dimens.r3),
                         modifier = Modifier.fillMaxWidth().height(48.dp)
                     ) {
                         Text("File Listing Infringement Report", fontWeight = FontWeight.Bold, color = Color.White)
@@ -2564,16 +2560,16 @@ fun HelpAndSupportFlow(
                         .verticalScroll(rememberScrollState())
                         .padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                         IconButton(onClick = { helpPage = HelpSubPage.CENTER }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                         }
-                        Text("Provide Platform Feedback", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandDark)
+                        Text("Provide Platform Feedback", style = Typography.bodyLarge, color = BrandDark)
                     }
 
-                    Text("Audition Experience Rating", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    Text("Audition Experience Rating", style = Typography.bodyLarge)
                     
                     // Star rating row
                     Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -2595,7 +2591,7 @@ fun HelpAndSupportFlow(
                         onValueChange = { feedbackComments = it },
                         label = { Text("Comments / Ideas to improve?") },
                         modifier = Modifier.fillMaxWidth().height(120.dp),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(Dimens.r2)
                     )
 
                     Button(
@@ -2608,7 +2604,7 @@ fun HelpAndSupportFlow(
                             }
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = BrandAccent),
-                        shape = RoundedCornerShape(24.dp),
+                        shape = RoundedCornerShape(Dimens.r3),
                         modifier = Modifier.fillMaxWidth().height(48.dp)
                     ) {
                         Text("Submit Platform Review", fontWeight = FontWeight.Bold)

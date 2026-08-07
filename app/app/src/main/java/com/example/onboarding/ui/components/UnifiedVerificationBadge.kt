@@ -55,8 +55,8 @@ fun UnifiedVerificationBadge(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
-            .background(BrandPrimary.copy(alpha = 0.08f), RoundedCornerShape(999.dp))
-            .border(1.dp, BrandPrimary.copy(alpha = 0.2f), RoundedCornerShape(999.dp))
+            .background(BrandPrimary.copy(alpha = 0.08f), RoundedCornerShape(Dimens.rFull))
+            .border(1.dp, BrandPrimary.copy(alpha = 0.2f), RoundedCornerShape(Dimens.rFull))
             .padding(horizontal = 8.dp, vertical = 3.dp)
     ) {
         Icon(
@@ -65,7 +65,7 @@ fun UnifiedVerificationBadge(
             tint = BrandPrimary,
             modifier = Modifier.size(12.dp)
         )
-        Spacer(modifier = Modifier.width(4.dp))
+        Spacer(modifier = Modifier.width(Dimens.sp1))
         Text(
             text = label,
             fontSize = 10.sp,

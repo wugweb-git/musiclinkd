@@ -124,7 +124,7 @@ fun SearchResultsScreen(
                         .weight(1f)
                         .padding(vertical = 4.dp)
                         .testTag("network_search_input"),
-                    shape = RoundedCornerShape(24.dp),
+                    shape = RoundedCornerShape(Dimens.r3),
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = BrandPrimary,
                         focusedContainerColor = Color.White,
@@ -214,7 +214,7 @@ fun SearchResultsScreen(
                         item {
                             Box(
                                 modifier = Modifier
-                                    .clip(RoundedCornerShape(16.dp))
+                                    .clip(RoundedCornerShape(Dimens.r2))
                                     .background(Color(0xFFFFEBEE))
                                     .clickable {
                                         searchInput = ""
@@ -224,7 +224,7 @@ fun SearchResultsScreen(
                             ) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Icon(Icons.Default.Close, null, tint = Color(0xFFD32F2F), modifier = Modifier.size(12.dp))
-                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Spacer(modifier = Modifier.width(Dimens.sp1))
                                     Text("Reset ($activeFilterCount)", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color(0xFFD32F2F))
                                 }
                             }
@@ -233,7 +233,7 @@ fun SearchResultsScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
 
             Row(
                 modifier = Modifier
@@ -244,15 +244,14 @@ fun SearchResultsScreen(
             ) {
                 Text(
                     text = "${profiles.size} Professional Profiles Matched",
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
+                    style = Typography.bodyLarge,
                     color = BrandText
                 )
                 
                 state.selectedCategory?.let {
                     Box(
                         modifier = Modifier
-                            .background(BrandPrimary.copy(alpha = 0.1f), RoundedCornerShape(12.dp))
+                            .background(BrandPrimary.copy(alpha = 0.1f), RoundedCornerShape(Dimens.r2))
                             .padding(horizontal = 8.dp, vertical = 2.dp)
                     ) {
                         Text(it, fontSize = 10.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)
@@ -282,7 +281,7 @@ fun SearchResultsScreen(
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(bottom = 80.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
                 ) {
                     items(profiles) { profile ->
                         Box(modifier = Modifier.padding(horizontal = 16.dp)) {

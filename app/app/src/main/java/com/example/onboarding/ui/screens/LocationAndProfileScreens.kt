@@ -87,11 +87,11 @@ fun LocationScreen(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Column {
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             Text(
                 text = "Where are you based?",
-                style = MaterialTheme.typography.headlineMedium.copy(
+                style = Typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold,
                     color = BrandTextPrimary,
                     letterSpacing = (-0.5).sp
@@ -102,9 +102,9 @@ fun LocationScreen(
 
             Text(
                 text = "Connect with local session artists, studios, and hiring opportunities near you.",
-                style = MaterialTheme.typography.bodyLarge.copy(
+                style = Typography.bodyLarge.copy(
                     color = BrandTextSecondary,
-                    fontSize = 14.sp
+                    style = Typography.labelLarge
                 )
             )
 
@@ -113,7 +113,7 @@ fun LocationScreen(
             // 1. Country (Pre-filled Locked)
             Text(
                 text = "Country",
-                style = MaterialTheme.typography.bodyMedium.copy(
+                style = Typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold,
                     color = BrandTextPrimary
                 ),
@@ -123,21 +123,20 @@ fun LocationScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(RoundedCornerShape(Dimens.r2))
                     .background(Color.White)
-                    .border(1.dp, BrandBorder, RoundedCornerShape(12.dp))
+                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
                     .padding(horizontal = 16.dp),
                 contentAlignment = Alignment.CenterStart
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text("🇮🇳", fontSize = 20.sp)
-                    Spacer(modifier = Modifier.width(12.dp))
+                    Text("🇮🇳", style = Typography.headlineLarge)
+                    Spacer(modifier = Modifier.width(Dimens.sp2))
                     Text(
                         text = "India",
-                        style = MaterialTheme.typography.bodyLarge.copy(
+                        style = Typography.bodyLarge.copy(
                             color = BrandTextPrimary,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 15.sp
+                            style = Typography.bodyLarge
                         )
                     )
                 }
@@ -158,7 +157,7 @@ fun LocationScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
-                shape = RoundedCornerShape(24.dp),
+                shape = RoundedCornerShape(Dimens.r3),
                 colors = ButtonDefaults.outlinedButtonColors(
                     contentColor = BrandPrimary
                 ),
@@ -166,11 +165,11 @@ fun LocationScreen(
             ) {
                 if (isLocating) {
                     CircularProgressIndicator(modifier = Modifier.size(20.dp), color = BrandPrimary, strokeWidth = 2.dp)
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     Text("Auto-detecting GPS...", fontSize = 13.sp, fontWeight = FontWeight.Bold)
                 } else {
                     Icon(Icons.Default.MyLocation, contentDescription = null, modifier = Modifier.size(18.dp))
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Dimens.sp1))
                     Text("Auto-detect My Location", fontSize = 13.sp, fontWeight = FontWeight.Bold)
                 }
             }
@@ -214,7 +213,7 @@ fun LocationScreen(
                 testTag = "location_area_input"
             )
             
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
             Text(
                 text = "* Leaving fields blank will auto-populate with Mumbai, MH for test review.",
                 fontSize = 11.sp,
@@ -222,7 +221,7 @@ fun LocationScreen(
             )
         }
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp3))
 
         // Continue CTA
         Button(
@@ -240,9 +239,8 @@ fun LocationScreen(
         ) {
             Text(
                 text = "Continue",
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 15.sp
+                style = Typography.bodyLarge.copy(
+                    style = Typography.bodyLarge
                 )
             )
         }
@@ -358,11 +356,11 @@ fun ProfileCreationScreen(
             verticalArrangement = Arrangement.SpaceBetween
         ) {
         Column {
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             Text(
                 text = "Describe Yourself",
-                style = MaterialTheme.typography.headlineMedium.copy(
+                style = Typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold,
                     color = BrandTextPrimary,
                     letterSpacing = (-0.5).sp
@@ -373,9 +371,9 @@ fun ProfileCreationScreen(
 
             Text(
                 text = "Introduce yourself to studios, directors, and bands.",
-                style = MaterialTheme.typography.bodyLarge.copy(
+                style = Typography.bodyLarge.copy(
                     color = BrandTextSecondary,
-                    fontSize = 14.sp
+                    style = Typography.labelLarge
                 )
             )
 
@@ -384,7 +382,7 @@ fun ProfileCreationScreen(
             // 1. Sleek Avatar Selector Ring
             Text(
                 text = "Choose Your Persona Badge",
-                style = MaterialTheme.typography.bodyMedium.copy(
+                style = Typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold,
                     color = BrandTextPrimary
                 ),
@@ -395,7 +393,7 @@ fun ProfileCreationScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 24.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
             ) {
                 itemsIndexed(availableAvatars) { index, avatar ->
                     val isSelected = selectedAvatarIndex == index
@@ -441,10 +439,10 @@ fun ProfileCreationScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
             Text(
                 text = "Or Upload Custom Media",
-                style = MaterialTheme.typography.bodyMedium.copy(
+                style = Typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold,
                     color = BrandTextPrimary
                 ),
@@ -455,16 +453,16 @@ fun ProfileCreationScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 24.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
             ) {
                 // Profile Photo
                 Box(
                     modifier = Modifier
                         .weight(1f)
                         .height(110.dp)
-                        .clip(RoundedCornerShape(16.dp))
+                        .clip(RoundedCornerShape(Dimens.r2))
                         .background(Color.White)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(16.dp))
+                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
                         .clickable {
                             showHeadshotOptions = true
                         },
@@ -474,7 +472,7 @@ fun ProfileCreationScreen(
                         AsyncImage(
                             model = File(profilePicturePath),
                             contentDescription = "Profile Photo",
-                            modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)),
+                            modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(Dimens.r2)),
                             contentScale = androidx.compose.ui.layout.ContentScale.Crop
                         )
                     } else {
@@ -531,9 +529,9 @@ fun ProfileCreationScreen(
                     modifier = Modifier
                         .weight(1.5f)
                         .height(110.dp)
-                        .clip(RoundedCornerShape(16.dp))
+                        .clip(RoundedCornerShape(Dimens.r2))
                         .background(Color.White)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(16.dp))
+                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
                         .clickable {
                             pendingPickerType = "cover"
                             val perm = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
@@ -549,7 +547,7 @@ fun ProfileCreationScreen(
                         AsyncImage(
                             model = File(coverPicturePath),
                             contentDescription = "Cover Banner",
-                            modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)),
+                            modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(Dimens.r2)),
                             contentScale = androidx.compose.ui.layout.ContentScale.Crop
                         )
                     } else {
@@ -589,7 +587,7 @@ fun ProfileCreationScreen(
             // Dynamic URL Handle Preview
             Text(
                 text = "Your public web card: musiclinkd.com/${if (displayName.isEmpty()) "username" else displayName}",
-                fontSize = 12.sp,
+                style = Typography.labelLarge,
                 color = BrandPrimary,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 4.dp, bottom = 18.dp, start = 4.dp)
@@ -598,7 +596,7 @@ fun ProfileCreationScreen(
             // 4. Short Bio with live counter
             Text(
                 text = "Short Bio",
-                style = MaterialTheme.typography.bodyMedium.copy(
+                style = Typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold,
                     color = BrandTextPrimary
                 ),
@@ -617,14 +615,14 @@ fun ProfileCreationScreen(
                     Text(
                         text = "Briefly share your musical background, instruments, or past records...",
                         color = BrandTextSecondary,
-                        fontSize = 14.sp
+                        style = Typography.labelLarge
                     ) 
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(100.dp)
                     .testTag("profile_bio_input"),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(Dimens.r2),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Done
@@ -650,7 +648,7 @@ fun ProfileCreationScreen(
                     Text(
                         text = bioError,
                         color = Color.Red,
-                        fontSize = 12.sp,
+                        style = Typography.labelLarge,
                         modifier = Modifier.padding(start = 4.dp)
                     )
                 } else {
@@ -664,42 +662,40 @@ fun ProfileCreationScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp3))
 
             // 5. Professional Experience & Proof Mapping (Section 10)
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 12.dp),
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(Dimens.r2),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 border = BorderStroke(1.dp, BrandBorder)
             ) {
-                Column(modifier = Modifier.padding(16.dp)) {
+                Column(modifier = Modifier.padding(Dimens.sp2)) {
                     Text(
                         text = "💼 Experience & Verification",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp,
+                        style = Typography.bodyLarge,
                         color = BrandTextPrimary
                     )
-                    Spacer(modifier = Modifier.height(4.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp1))
                     Text(
                         text = "Map your proficiency for your primary role to unlock premium listings.",
-                        style = MaterialTheme.typography.bodySmall.copy(color = BrandTextSecondary)
+                        style = Typography.bodyLarge.copy(color = BrandTextSecondary)
                     )
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
 
                     Text(
                         text = "Years of Experience",
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 12.sp,
+                        style = Typography.bodyLarge,
                         color = BrandTextPrimary
                     )
                     Spacer(modifier = Modifier.height(6.dp))
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
                         val expOptions = listOf("1-2 Years", "3-5 Years", "5-10 Years", "10+ Years")
                         expOptions.forEach { opt ->
@@ -707,7 +703,7 @@ fun ProfileCreationScreen(
                             Box(
                                 modifier = Modifier
                                     .weight(1f)
-                                    .clip(RoundedCornerShape(8.dp))
+                                    .clip(RoundedCornerShape(Dimens.r1))
                                     .background(if (isSel) BrandPrimary else BrandBackground)
                                     .clickable {
                                         onUpdateRoleExperience(
@@ -729,18 +725,17 @@ fun ProfileCreationScreen(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
 
                     Text(
                         text = "Proficiency Level",
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 12.sp,
+                        style = Typography.bodyLarge,
                         color = BrandTextPrimary
                     )
                     Spacer(modifier = Modifier.height(6.dp))
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
                     ) {
                         val levelOptions = listOf("Beginner", "Intermediate", "Advanced", "Expert")
                         levelOptions.forEach { opt ->
@@ -748,7 +743,7 @@ fun ProfileCreationScreen(
                             Box(
                                 modifier = Modifier
                                     .weight(1f)
-                                    .clip(RoundedCornerShape(8.dp))
+                                    .clip(RoundedCornerShape(Dimens.r1))
                                     .background(if (isSel) BrandPrimary else BrandBackground)
                                     .clickable {
                                         onUpdateRoleExperience(
@@ -770,7 +765,7 @@ fun ProfileCreationScreen(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
 
                     OutlinedTextField(
                         value = roleExperience.portfolioProofUrl,
@@ -783,7 +778,7 @@ fun ProfileCreationScreen(
                         },
                         isError = proofError != null,
                         label = { Text("Primary Role Proof URL (Optional)", fontSize = 11.sp) },
-                        placeholder = { Text("e.g. Spotify, YouTube, SoundCloud, LinkedIn", fontSize = 12.sp) },
+                        placeholder = { Text("e.g. Spotify, YouTube, SoundCloud, LinkedIn", style = Typography.labelLarge) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .testTag("role_proof_input"),
@@ -808,19 +803,18 @@ fun ProfileCreationScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
 
             // 6. Networking & Social Links (Section 10)
             Text(
                 text = "🌐 Networking & Social Links",
-                fontWeight = FontWeight.Bold,
-                fontSize = 15.sp,
+                style = Typography.bodyLarge,
                 color = BrandTextPrimary,
                 modifier = Modifier.padding(bottom = 4.dp, start = 4.dp)
             )
             Text(
                 text = "Add links to external platforms to showcase your portfolio, music releases, and socials.",
-                style = MaterialTheme.typography.bodySmall.copy(color = BrandTextSecondary),
+                style = Typography.bodyLarge.copy(color = BrandTextSecondary),
                 modifier = Modifier.padding(bottom = 12.dp, start = 4.dp)
             )
 
@@ -835,7 +829,7 @@ fun ProfileCreationScreen(
                     },
                     isError = platErr != null,
                     label = { Text("$platform Profile URL", fontSize = 11.sp) },
-                    placeholder = { Text("e.g. https://${platform.lowercase()}.com/your-username", fontSize = 12.sp) },
+                    placeholder = { Text("e.g. https://${platform.lowercase()}.com/your-username", style = Typography.labelLarge) },
                     leadingIcon = {
                         BrandIcon(
                             platform = platform,
@@ -869,7 +863,7 @@ fun ProfileCreationScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(Dimens.sp3))
 
         // Continue CTA
         Button(
@@ -891,9 +885,8 @@ fun ProfileCreationScreen(
             } else {
                 Text(
                     text = "Create Profile",
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 15.sp
+                    style = Typography.bodyLarge.copy(
+                        style = Typography.bodyLarge
                     )
                 )
             }
@@ -910,7 +903,7 @@ fun ProfileCreationScreen(
             contentAlignment = Alignment.Center
         ) {
             Card(
-                shape = RoundedCornerShape(24.dp),
+                shape = RoundedCornerShape(Dimens.r3),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
                 modifier = Modifier
@@ -930,7 +923,7 @@ fun ProfileCreationScreen(
                     Spacer(modifier = Modifier.height(20.dp))
                     Text(
                         text = "Publishing Identity...",
-                        style = MaterialTheme.typography.titleMedium.copy(
+                        style = Typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold,
                             color = Color(0xFF1E293B) // Slate Dark
                         ),
@@ -939,7 +932,7 @@ fun ProfileCreationScreen(
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
                         text = "Syncing your secure professional profile, assets, and portfolio links.",
-                        style = MaterialTheme.typography.bodySmall.copy(
+                        style = Typography.bodyLarge.copy(
                             color = Color(0xFF64748B) // Slate Light
                         ),
                         textAlign = TextAlign.Center

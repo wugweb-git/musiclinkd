@@ -64,7 +64,7 @@ fun UnifiedTrackCard(
             .fillMaxWidth()
             .testTag(testTag),
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         border = BorderStroke(1.dp, BrandBorder)
     ) {
         Row(
@@ -79,7 +79,7 @@ fun UnifiedTrackCard(
                 Box(
                     modifier = Modifier
                         .size(48.dp)
-                        .clip(RoundedCornerShape(12.dp))
+                        .clip(RoundedCornerShape(Dimens.r2))
                         .background(BrandDark)
                 ) {
                     if (coverUrl != null) {
@@ -99,20 +99,19 @@ fun UnifiedTrackCard(
                     }
                 }
 
-                Spacer(modifier = Modifier.width(12.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp2))
 
                 Column {
                     Text(
                         text = title,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        style = Typography.bodyLarge,
                         color = BrandDark,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                     Text(
                         text = "$artistName • $genre",
-                        fontSize = 12.sp,
+                        style = Typography.labelLarge,
                         color = BrandTextSecondary,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
@@ -123,11 +122,11 @@ fun UnifiedTrackCard(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = duration,
-                    fontSize = 12.sp,
+                    style = Typography.labelLarge,
                     color = BrandTextSecondary,
                     fontWeight = FontWeight.Medium
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp1))
                 IconButton(
                     onClick = onPlayToggle,
                     modifier = Modifier

@@ -77,7 +77,7 @@ fun HireContactModal(
             modifier = Modifier
                 .fillMaxWidth(0.92f)
                 .clickable(enabled = false) {},
-            shape = RoundedCornerShape(16.dp),
+            shape = RoundedCornerShape(Dimens.r2),
             colors = CardDefaults.cardColors(containerColor = Color.White)
         ) {
             Column(
@@ -90,14 +90,14 @@ fun HireContactModal(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text("Contact " + profile.name, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandText)
+                    Text("Contact " + profile.name, style = Typography.bodyLarge, color = BrandText)
                     IconButton(onClick = onDismiss) {
                         Icon(Icons.Default.Close, "Close")
                     }
                 }
 
                 HorizontalDivider()
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 if (successMessage != null) {
                     Column(
@@ -112,12 +112,12 @@ fun HireContactModal(
                         ) {
                             Icon(Icons.Default.Check, "Success Check", tint = BrandSuccess, modifier = Modifier.size(36.dp))
                         }
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text("Inquiry Request Submitted!", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandText)
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(successMessage, color = BrandMuted, fontSize = 12.sp, textAlign = TextAlign.Center)
+                        Spacer(modifier = Modifier.height(Dimens.sp2))
+                        Text("Inquiry Request Submitted!", style = Typography.bodyLarge, color = BrandText)
+                        Spacer(modifier = Modifier.height(Dimens.sp1))
+                        Text(successMessage, color = BrandMuted, style = Typography.labelLarge, textAlign = TextAlign.Center)
                         
-                        Spacer(modifier = Modifier.height(24.dp))
+                        Spacer(modifier = Modifier.height(Dimens.sp3))
                         Button(
                             onClick = onDismiss,
                             colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
@@ -142,7 +142,7 @@ fun HireContactModal(
                             val isSel = specPurpose == spec
                             Box(
                                 modifier = Modifier
-                                    .clip(RoundedCornerShape(8.dp))
+                                    .clip(RoundedCornerShape(Dimens.r1))
                                     .background(if (isSel) BrandPrimary else Color(0xFFEEEEEE))
                                     .clickable { specPurpose = spec }
                                     .padding(horizontal = 10.dp, vertical = 6.dp)
@@ -152,7 +152,7 @@ fun HireContactModal(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
                     Text("Project Details", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = BrandSecondary)
                     
                     Spacer(modifier = Modifier.height(6.dp))
@@ -166,7 +166,7 @@ fun HireContactModal(
                     )
 
                     Spacer(modifier = Modifier.height(10.dp))
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
                         OutlinedTextField(
                             value = budget,
                             onValueChange = { budget = it },
@@ -197,7 +197,7 @@ fun HireContactModal(
                         shape = RoundedCornerShape(10.dp)
                     )
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp2))
                     Button(
                         onClick = {
                             if (projectName.isNotEmpty() && budget.isNotEmpty()) {

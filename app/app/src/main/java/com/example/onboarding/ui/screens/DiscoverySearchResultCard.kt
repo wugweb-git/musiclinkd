@@ -65,11 +65,11 @@ fun DiscoverySearchResultCard(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() },
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(Dimens.r2),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         border = BorderStroke(1.dp, BrandBorder)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(Dimens.sp2)) {
             Row(verticalAlignment = Alignment.Top) {
                 Box(
                     modifier = Modifier
@@ -86,19 +86,19 @@ fun DiscoverySearchResultCard(
                     )
                 }
                 
-                Spacer(modifier = Modifier.width(12.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp2))
                 Column(modifier = Modifier.weight(1f)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(profile.name, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandText)
+                        Text(profile.name, style = Typography.bodyLarge, color = BrandText)
                         if (profile.isVerified) {
-                            Spacer(modifier = Modifier.width(4.dp))
+                            Spacer(modifier = Modifier.width(Dimens.sp1))
                             Icon(Icons.Default.Verified, "Verified", tint = BrandPrimary, modifier = Modifier.size(14.dp))
                         }
                     }
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         val inst = getInstrumentEmoji(profile.subRole, profile.category)
-                        Text(inst, fontSize = 12.sp)
-                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(inst, style = Typography.labelLarge)
+                        Spacer(modifier = Modifier.width(Dimens.sp1))
                         Text(profile.subRole, fontSize = 11.sp, color = BrandSecondary, fontWeight = FontWeight.Bold)
                     }
                     
@@ -118,7 +118,7 @@ fun DiscoverySearchResultCard(
                 }
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
             Text(
                 text = profile.bio,
                 color = BrandMuted,
@@ -137,7 +137,7 @@ fun DiscoverySearchResultCard(
                     profile.genres.take(2).forEach { genre ->
                         Box(
                             modifier = Modifier
-                                .background(Color(0xFFEEEEEE), RoundedCornerShape(4.dp))
+                                .background(Color(0xFFEEEEEE), RoundedCornerShape(Dimens.r1))
                                 .padding(horizontal = 6.dp, vertical = 2.dp)
                         ) {
                             Text(genre, fontSize = 9.sp, color = BrandText)
@@ -147,7 +147,7 @@ fun DiscoverySearchResultCard(
 
                 Box(
                     modifier = Modifier
-                        .background(BrandSuccess.copy(alpha = 0.12f), RoundedCornerShape(12.dp))
+                        .background(BrandSuccess.copy(alpha = 0.12f), RoundedCornerShape(Dimens.r2))
                         .padding(horizontal = 8.dp, vertical = 2.dp)
                 ) {
                     Text(
@@ -159,13 +159,13 @@ fun DiscoverySearchResultCard(
                 }
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
             HorizontalDivider()
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
             ) {
                 OutlinedButton(
                     onClick = onClick,
@@ -174,7 +174,7 @@ fun DiscoverySearchResultCard(
                     colors = ButtonDefaults.outlinedButtonColors(contentColor = BrandPrimary),
                     border = BorderStroke(1.dp, BrandBorder)
                 ) {
-                    Text("View Profile", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    Text("View Profile", style = Typography.bodyLarge)
                 }
 
                 Button(
@@ -183,7 +183,7 @@ fun DiscoverySearchResultCard(
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary)
                 ) {
-                    Text("Hire Now", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    Text("Hire Now", style = Typography.bodyLarge)
                 }
             }
         }

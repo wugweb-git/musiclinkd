@@ -105,7 +105,7 @@ fun UnifiedConnectButton(
                 strokeWidth = 2.dp
             )
             Spacer(modifier = Modifier.width(6.dp))
-            Text("Sending...", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Text("Sending...", style = Typography.bodyLarge)
         } else {
             Icon(
                 imageVector = icon,
@@ -116,8 +116,7 @@ fun UnifiedConnectButton(
             Spacer(modifier = Modifier.width(6.dp))
             Text(
                 text = text,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Bold,
+                style = Typography.bodyLarge,
                 color = contentColor
             )
         }

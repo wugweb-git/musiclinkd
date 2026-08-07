@@ -63,13 +63,13 @@ fun ArtistProfileScreen(
             .fillMaxSize()
             .background(BrandBackground)
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
     ) {
         // Hero Header Base Container (24.dp radius)
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = BrandDark),
-            shape = RoundedCornerShape(24.dp)
+            shape = RoundedCornerShape(Dimens.r3)
         ) {
             Column(modifier = Modifier.padding(20.dp)) {
                 Row(
@@ -96,7 +96,7 @@ fun ArtistProfileScreen(
 
                         Column {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(artistName, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = Color.White)
+                                Text(artistName, style = Typography.bodyLarge, color = Color.White)
                                 Spacer(modifier = Modifier.width(6.dp))
                                 UnifiedVerificationBadge(label = "Verified Artist")
                             }
@@ -111,7 +111,7 @@ fun ArtistProfileScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Dimens.sp2))
 
                 Text(
                     text = bioText,
@@ -137,12 +137,12 @@ fun ArtistProfileScreen(
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(24.dp),
+            shape = RoundedCornerShape(Dimens.r3),
             border = BorderStroke(1.dp, BrandBorder)
         ) {
             Column(modifier = Modifier.padding(18.dp)) {
-                Text("Featured Portfolio Tracks", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
-                Spacer(modifier = Modifier.height(12.dp))
+                Text("Featured Portfolio Tracks", style = Typography.bodyLarge, color = BrandDark)
+                Spacer(modifier = Modifier.height(Dimens.sp2))
                 WaveformAudioPlayer(
                     title = "Tum Se Hi (Acoustic Reimagined)",
                     durationText = "3:42",
@@ -163,15 +163,15 @@ fun ArtistProfileScreen(
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(24.dp),
+            shape = RoundedCornerShape(Dimens.r3),
             border = BorderStroke(1.dp, BrandBorder)
         ) {
             Column(modifier = Modifier.padding(18.dp)) {
-                Text("Specializations & Studio Gear", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
+                Text("Specializations & Studio Gear", style = Typography.bodyLarge, color = BrandDark)
                 Spacer(modifier = Modifier.height(10.dp))
                 FlowRow(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
+                    verticalArrangement = Arrangement.spacedBy(Dimens.sp1)
                 ) {
                     val tags = listOf("Neo-Soul", "Vocal Tuning", "ProTools 2024", "Neumann TLM 103", "Apollo Twin X")
                     tags.forEach { tag ->
@@ -190,7 +190,7 @@ fun ArtistProfileScreen(
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(24.dp),
+            shape = RoundedCornerShape(Dimens.r3),
             border = BorderStroke(1.dp, BrandBorder)
         ) {
             Column(modifier = Modifier.padding(18.dp)) {
@@ -200,7 +200,7 @@ fun ArtistProfileScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Column {
-                        Text("Media Attachments & STEMs", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
+                        Text("Media Attachments & STEMs", style = Typography.bodyLarge, color = BrandDark)
                         Text("Cloud Storage via Firebase", fontSize = 11.5.sp, color = BrandTextSecondary)
                     }
                     Button(
@@ -226,7 +226,7 @@ fun ArtistProfileScreen(
                                 )
                             }
                         },
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(Dimens.r2),
                         colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary.copy(alpha = 0.12f)),
                         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
                     ) {
@@ -257,7 +257,7 @@ fun ArtistProfileScreen(
                 val images = mediaAttachments.filter { it.type == "IMAGE" }
                 if (images.isNotEmpty()) {
                     Text("Behind-the-scenes Gallery", fontWeight = FontWeight.SemiBold, fontSize = 13.sp, color = BrandDark)
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(Dimens.sp1))
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -267,7 +267,7 @@ fun ArtistProfileScreen(
                                 modifier = Modifier
                                     .weight(1f)
                                     .height(90.dp)
-                                    .clip(RoundedCornerShape(16.dp))
+                                    .clip(RoundedCornerShape(Dimens.r2))
                                     .background(BrandBorder)
                             ) {
                                 AsyncImage(

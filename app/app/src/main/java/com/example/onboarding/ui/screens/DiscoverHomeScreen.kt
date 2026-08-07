@@ -106,14 +106,13 @@ fun DiscoverHomeScreen(
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
                             text = "Discover",
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold,
+                            style = Typography.bodyLarge,
                             color = BrandText
                         )
                     }
                     Text(
                         text = "Connect with India's Music Grid",
-                        fontSize = 12.sp,
+                        style = Typography.labelLarge,
                         color = BrandMuted
                     )
                 }
@@ -123,7 +122,7 @@ fun DiscoverHomeScreen(
                 IconButton(onClick = { onNavigateTo(DiscoverScreen.RECOMMENDED_MATCHES) }) {
                     Icon(Icons.Default.Whatshot, "Recommendations", tint = Color(0xFFFF5A5F))
                 }
-                Spacer(modifier = Modifier.width(4.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp1))
                 IconButton(onClick = { onNavigateTo(DiscoverScreen.SAVED_PROFILES) }) {
                     BadgedBox(badge = {
                         if (state.savedProfileIds.isNotEmpty()) {
@@ -135,7 +134,7 @@ fun DiscoverHomeScreen(
                         Icon(Icons.Default.Bookmark, "Saved Profiles", tint = BrandPrimary)
                     }
                 }
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp1))
                 
                 // User Avatar Circle
                 Box(
@@ -193,7 +192,7 @@ fun DiscoverHomeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .testTag("discover_search_input"),
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(Dimens.r2),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = BrandPrimary,
                     unfocusedBorderColor = BrandBorder,
@@ -218,7 +217,7 @@ fun DiscoverHomeScreen(
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .clickable { onNavigateTo(DiscoverScreen.RECOMMENDED_MATCHES) },
-            shape = RoundedCornerShape(16.dp),
+            shape = RoundedCornerShape(Dimens.r2),
             colors = CardDefaults.cardColors(containerColor = Color.Transparent)
         ) {
             Box(
@@ -239,22 +238,21 @@ fun DiscoverHomeScreen(
                         Text(
                             text = "Swipe n' Match",
                             color = Color.White,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 18.sp
+                            style = Typography.bodyLarge
                         )
                         Text(
                             text = "Discover collaborators game-show style!",
                             color = Color.White.copy(alpha = 0.85f),
-                            fontSize = 12.sp
+                            style = Typography.labelLarge
                         )
                     }
                     Button(
                         onClick = { onNavigateTo(DiscoverScreen.RECOMMENDED_MATCHES) },
                         colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                        shape = RoundedCornerShape(24.dp),
+                        shape = RoundedCornerShape(Dimens.r3),
                         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
                     ) {
-                        Text("Hot-Match", color = BrandText, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                        Text("Hot-Match", color = BrandText, style = Typography.bodyLarge)
                     }
                 }
             }
@@ -283,12 +281,11 @@ fun DiscoverHomeScreen(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("Quick Categories", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandText)
+            Text("Quick Categories", style = Typography.bodyLarge, color = BrandText)
             Text(
                 text = "See All (${defaultCategories.size})",
                 color = BrandPrimary,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 12.sp,
+                style = Typography.bodyLarge,
                 modifier = Modifier.clickable { onNavigateTo(DiscoverScreen.CATEGORY_DIRECTORY) }
             )
         }
@@ -303,7 +300,7 @@ fun DiscoverHomeScreen(
                     modifier = Modifier
                         .padding(end = 10.dp)
                         .clickable { onSelectCategory(cat.name) },
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(Dimens.r2),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
                     border = BorderStroke(1.dp, BrandBorder)
                 ) {
@@ -311,9 +308,9 @@ fun DiscoverHomeScreen(
                         modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(cat.icon, fontSize = 16.sp)
+                        Text(cat.icon, style = Typography.bodyLarge)
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text(cat.name, fontSize = 12.sp, fontWeight = FontWeight.SemiBold, color = BrandText)
+                        Text(cat.name, style = Typography.bodyLarge, color = BrandText)
                     }
                 }
             }
@@ -323,7 +320,7 @@ fun DiscoverHomeScreen(
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
         ) {
             items(featuredTalent) { talent ->
                 ArtistCard(
@@ -339,7 +336,7 @@ fun DiscoverHomeScreen(
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
         ) {
             items(trendingBands) { band ->
                 ArtistCard(

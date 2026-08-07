@@ -67,14 +67,14 @@ fun SocialIntegrationBadge(platform: String, modifier: Modifier = Modifier) {
     
     Row(
         modifier = modifier
-            .background(iconColor.copy(alpha = 0.08f), RoundedCornerShape(999.dp))
-            .border(1.dp, iconColor.copy(alpha = 0.25f), RoundedCornerShape(999.dp))
+            .background(iconColor.copy(alpha = 0.08f), RoundedCornerShape(Dimens.rFull))
+            .border(1.dp, iconColor.copy(alpha = 0.25f), RoundedCornerShape(Dimens.rFull))
             .padding(horizontal = 8.dp, vertical = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
         Icon(iconVector, contentDescription = null, tint = iconColor, modifier = Modifier.size(12.dp))
-        Spacer(modifier = Modifier.width(4.dp))
+        Spacer(modifier = Modifier.width(Dimens.sp1))
         Text(platform, fontSize = 9.sp, fontWeight = FontWeight.Bold, color = iconColor)
     }
 }

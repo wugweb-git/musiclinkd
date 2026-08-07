@@ -77,14 +77,14 @@ fun SavedProfilesScreen(
             IconButton(onClick = onBack) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
             }
-            Text("Saved Profiles & Bookmarks", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = BrandText)
+            Text("Saved Profiles & Bookmarks", style = Typography.bodyLarge, color = BrandText)
         }
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
         ) {
             listOf("Talent", "Bands", "Studios").forEach { tab ->
                 val isSel = state.activeSavedTab == tab
@@ -142,14 +142,14 @@ fun SavedProfilesScreen(
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(bottom = 24.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
             ) {
                 items(finalRenderList) { item ->
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp),
-                        shape = RoundedCornerShape(16.dp),
+                        shape = RoundedCornerShape(Dimens.r2),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
                         border = BorderStroke(1.dp, BrandBorder)
                     ) {
@@ -158,7 +158,7 @@ fun SavedProfilesScreen(
                                 Box(
                                     modifier = Modifier
                                         .size(44.dp)
-                                        .clip(RoundedCornerShape(8.dp))
+                                        .clip(RoundedCornerShape(Dimens.r1))
                                         .background(Color(item.avatarColorHex).copy(alpha = 0.15f)),
                                     contentAlignment = Alignment.Center
                                 ) {
@@ -171,7 +171,7 @@ fun SavedProfilesScreen(
                                 }
                                 Spacer(modifier = Modifier.width(10.dp))
                                 Column(modifier = Modifier.weight(1f)) {
-                                    Text(item.name, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandText)
+                                    Text(item.name, style = Typography.bodyLarge, color = BrandText)
                                     Text(item.subRole, fontSize = 11.sp, color = BrandSecondary)
                                 }
                                 IconButton(onClick = { onRemove(item.id) }) {
@@ -179,7 +179,7 @@ fun SavedProfilesScreen(
                                 }
                             }
 
-                            Spacer(modifier = Modifier.height(8.dp))
+                            Spacer(modifier = Modifier.height(Dimens.sp1))
                             val customNote = state.savedNotes[item.id] ?: ""
                             var noteInput by remember { mutableStateOf(customNote) }
                             
@@ -199,10 +199,10 @@ fun SavedProfilesScreen(
                                     focusedContainerColor = Color(0xFFF9FAFB),
                                     unfocusedContainerColor = Color(0xFFF9FAFB)
                                 ),
-                                shape = RoundedCornerShape(8.dp)
+                                shape = RoundedCornerShape(Dimens.r1)
                             )
 
-                            Spacer(modifier = Modifier.height(8.dp))
+                            Spacer(modifier = Modifier.height(Dimens.sp1))
                             val tagsList = state.savedTags[item.id] ?: emptyList()
                             var tagInputText by remember { mutableStateOf("") }
 

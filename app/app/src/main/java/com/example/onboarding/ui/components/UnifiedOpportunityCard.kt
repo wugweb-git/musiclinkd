@@ -59,25 +59,25 @@ fun UnifiedOpportunityCard(
     modifier: Modifier = Modifier
 ) {
     Card(
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(Dimens.r3),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         modifier = modifier
             .fillMaxWidth()
-            .border(1.dp, BrandBorder, RoundedCornerShape(20.dp))
+            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3))
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(Dimens.sp2)) {
             Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                Text(title, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = BrandTextPrimary)
-                Text(budget, fontWeight = FontWeight.ExtraBold, color = Color(0xFF10B981), fontSize = 16.sp)
+                Text(title, style = Typography.bodyLarge, color = BrandTextPrimary)
+                Text(budget, fontWeight = FontWeight.ExtraBold, color = Color(0xFF10B981), style = Typography.bodyLarge)
             }
-            Spacer(modifier = Modifier.height(4.dp))
-            Text("Looking for: $role", fontSize = 14.sp, color = BrandTextSecondary)
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Text("Looking for: $role", style = Typography.labelLarge, color = BrandTextSecondary)
+            Spacer(modifier = Modifier.height(Dimens.sp2))
             Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
                 Text(location, fontSize = 13.sp, color = BrandTextSecondary)
                 Text("Due: $deadline", fontSize = 13.sp, color = BrandTextSecondary)
             }
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.sp2))
             UnifiedPrimaryButton(
                 text = "Apply Now ($applicantCount Applied)",
                 onClick = onApply,

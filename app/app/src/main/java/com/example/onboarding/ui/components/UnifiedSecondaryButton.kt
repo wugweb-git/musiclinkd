@@ -62,7 +62,7 @@ fun UnifiedSecondaryButton(
         modifier = modifier
             .height(50.dp)
             .testTag(testTag),
-        shape = RoundedCornerShape(999.dp),
+        shape = RoundedCornerShape(Dimens.rFull),
         border = BorderStroke(1.dp, BrandBorder),
         colors = ButtonDefaults.outlinedButtonColors(
             contentColor = BrandTextPrimary,
@@ -75,12 +75,11 @@ fun UnifiedSecondaryButton(
         ) {
             if (icon != null) {
                 Icon(icon, contentDescription = null, modifier = Modifier.size(18.dp), tint = BrandTextPrimary)
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(Dimens.sp1))
             }
             Text(
                 text = text,
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Bold
+                style = Typography.bodyLarge
             )
         }
     }
