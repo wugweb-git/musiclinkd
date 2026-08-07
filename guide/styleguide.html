@@ -534,7 +534,7 @@ h1, h2, h3 {
 }
 
 .search-box {
-    padding: 6px 12px;
+    padding: var(--space-2) var(--space-3);
     border: 1px solid var(--line);
     border-radius: var(--r-pill);
     font: var(--type-1) 'Inter', sans-serif;
@@ -543,7 +543,7 @@ h1, h2, h3 {
 }
 
 .nav-btn {
-    padding: 6px 12px;
+    padding: var(--space-2) var(--space-3);
     border: 1px solid var(--line);
     border-radius: var(--r-pill);
     background: #fff;
@@ -809,7 +809,7 @@ button, input, select, textarea, .chip, .btn, .sgt, .platform-tab {
 .modal-card h3{font-family:var(--font-display);font-size:var(--type-3);font-weight:800;text-align:center;margin-bottom:var(--sp-lg)}
 .form-group{margin-bottom:var(--sp-md)}
 .form-group label{display:block;font-size:var(--type-1);font-weight:700;color:var(--black);margin-bottom:4px}
-.form-input{width:100%;padding:10px 14px;border:1.5px solid var(--line);border-radius:16px;font:var(--type-1) 'Inter',sans-serif;outline:none;transition:border-color var(--duration-1)}
+.form-input{width:100%;padding:var(--space-2) var(--space-3);border:1.5px solid var(--line);border-radius:var(--radius-2);font:var(--type-1) 'Inter',sans-serif;outline:none;transition:border-color var(--duration-1)}
 .form-input:focus{border-color:var(--pink)}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-md)}
 .toggle-details{max-width:280px}
@@ -944,9 +944,9 @@ input:checked+.slider:before{transform:translateX(20px)}
 
 /* ===== TOOLTIP ===== */
 .tooltip-demo{position:relative;display:inline-flex}
-.tooltip-bubble{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--black);color:#fff;padding:6px 12px;border-radius:8px;font-size:var(--type-1);font-weight:500;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity var(--duration-1)}
+.tooltip-bubble{position:absolute;bottom:calc(100% + var(--space-2));left:50%;transform:translateX(-50%);background:var(--black);color:#fff;padding:var(--space-2) var(--space-3);border-radius:var(--radius-1);font-size:var(--type-1);font-weight:500;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity var(--duration-1)}
 .tooltip-demo:hover .tooltip-bubble{opacity:1}
-.tooltip-bubble.rich{padding:10px 14px;max-width:200px;white-space:normal;text-align:left}
+.tooltip-bubble.rich{padding:var(--space-2) var(--space-3);max-width:200px;white-space:normal;text-align:left}
 .tooltip-bubble.rich .tooltip-title{font-weight:700;font-size:var(--type-1);margin-bottom:2px}
 .tooltip-bubble.rich .tooltip-body{font-size:var(--type-1);color:rgba(255,255,255,0.7)}
 
@@ -958,9 +958,9 @@ input:checked+.slider:before{transform:translateX(20px)}
 
 /* ===== DROPDOWN MENU ===== */
 .dropdown-menu{position:relative;display:inline-block}
-.dropdown-list{position:absolute;top:calc(100% + 4px);left:0;min-width:180px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-3);padding:4px;z-index:100;opacity:0;pointer-events:none;transform:translateY(-4px);transition:all var(--duration-1)}
+.dropdown-list{position:absolute;top:calc(100% + var(--space-1));left:0;min-width:180px;background:#fff;border:1px solid var(--line);border-radius:var(--radius-2);box-shadow:var(--shadow-3);padding:var(--space-1);z-index:100;opacity:0;pointer-events:none;transform:translateY(-4px);transition:all var(--duration-1)}
 .dropdown-menu.open .dropdown-list{opacity:1;pointer-events:auto;transform:translateY(0)}
-.dropdown-item{padding:8px 12px;border-radius:8px;font-size:var(--type-1);cursor:pointer;display:flex;align-items:center;gap:8px;transition:background var(--duration-1)}
+.dropdown-item{padding:var(--space-2) var(--space-3);border-radius:var(--radius-1);font-size:var(--type-1);cursor:pointer;display:flex;align-items:center;gap:var(--space-2);transition:background var(--duration-1)}
 .dropdown-item:hover{background:var(--surface-alt)}
 .dropdown-item .check{width:16px;height:16px;margin-left:auto;color:var(--pink);font-weight:700}
 
@@ -986,6 +986,10 @@ input:checked+.slider:before{transform:translateX(20px)}
 /* ===== LOADING SPINNER ===== */
 .spinner-circular{width:32px;height:32px;border:3px solid var(--line);border-top-color:var(--pink);border-radius:50%;animation:spin 800ms linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes wfb{0%{transform:scaleY(0.3)}100%{transform:scaleY(1)}}
+[style*="animation:wfb"]{transform-origin:bottom}
+@keyframes ping{0%{transform:scale(1);opacity:1}75%,100%{transform:scale(2);opacity:0}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .spinner-determinate{width:32px;height:32px;border-radius:50%;position:relative}
 .spinner-determinate svg{transform:rotate(-90deg)}
 .spinner-determinate circle{fill:none;stroke-width:3}
@@ -2616,7 +2620,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 
 <div style="display:flex;flex-direction:column;gap:12px;width:100%;max-width:480px;">
 <div><div style="height:4px;background:#E2E8F0;border-radius:2px;overflow:hidden"><div style="height:100%;width:65%;background:var(--pink);border-radius:2px"></div></div><p style="font-size:var(--type-1);color:var(--muted);margin-top:4px">Linear 65%</p></div>
-<div style="display:flex;align-items:center;gap:8px"><div style="width:24px;height:24px;border:3px solid #E2E8F0;border-top-color:var(--pink);border-radius:50%;animation:wfb 800ms linear infinite"></div><span style="font-size:var(--type-1);color:var(--muted)">Circular indeterminate</span></div>
+<div style="display:flex;align-items:center;gap:8px"><div style="width:24px;height:24px;border:3px solid #E2E8F0;border-top-color:var(--pink);border-radius:50%;animation:spin 800ms linear infinite"></div><span style="font-size:var(--type-1);color:var(--muted)">Circular indeterminate</span></div>
 </div>
 </section>
 <section class="sec" id="na-slider">
