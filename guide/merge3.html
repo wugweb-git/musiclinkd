@@ -5105,7 +5105,25 @@ img { max-width: 100%; height: auto; display: block; }
   <h2 id="scr-auth-mockup">Authentication UI Mockup <span class="badge badge-av" style="margin-left:8px">Stable</span></h2>
   <p class="desc">Reference implementation of the Mobile Auth screen using the 4-tier token system and Button families.</p>
   
-  <div style="max-width: 400px; margin: 0 auto; background: var(--surface-subtle); border: 8px solid var(--ink); border-radius: var(--r-4); padding: var(--sp-3); position: relative; overflow: hidden; box-shadow: 0 32px 64px rgba(0,0,0,0.1);">
+  <div style="
+    width: 360px;
+    height: 800px;
+    margin: 0 auto;
+    background: var(--surface-subtle);
+    border: 14px solid var(--ink);
+    border-radius: 36px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 32px 64px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+">\n
+    <!-- Android Status Bar / Cutout -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; height: 28px; display: flex; justify-content: center; align-items: center; z-index: 100;">
+        <div style="width: 60px; height: 20px; background: var(--ink); border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; position: absolute; top: -2px;"></div>
+    </div>
+    <div style="height: 28px; width: 100%;"></div> <!-- Spacer -->
+\n<div style="padding: var(--sp-3); flex: 1; display: flex; flex-direction: column;">
     
     <div style="text-align: right; margin-bottom: var(--sp-2);">
       <span style="color: var(--pink); font-weight: 800; font-size: var(--fs-1);">Skip</span>
