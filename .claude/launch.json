@@ -10,7 +10,7 @@
     {
       "name": "website",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "5500", "--directory", "/Users/abcom/Documents/GitHub/musiclinkd"],
+      "runtimeArgs": ["scripts/dev-static-server.py"],
       "port": 5500
     }
   ]
