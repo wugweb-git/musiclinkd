@@ -30,6 +30,13 @@
     --type-2: clamp(14px, calc(14px + 4  * (100vw - 360px) / 1080), 18px);
     --type-3: clamp(20px, calc(20px + 8  * (100vw - 360px) / 1080), 28px);
     --type-4: clamp(28px, calc(28px + 16 * (100vw - 360px) / 1080), 44px);
+    /* 4 z-index tiers, exponential x2. Elements that must stay in strict
+       order within one tier (e.g. a drawer above its own scrim) use a small
+       calc() offset off that tier's base rather than inventing a 5th token. */
+    --z-1: 100;  /* persistent chrome: top nav */
+    --z-2: 200;  /* drawer system: scrim, sidebar, its toggle button */
+    --z-3: 400;  /* transient overlays: side sheet + modal, and their scrims */
+    --z-4: 800;  /* system feedback: toast */
 
     /* Legacy aliases (kept so the rest of the file doesn't need a mass rewrite) */
     --sp-xs: var(--space-1);
@@ -50,9 +57,9 @@
     --r-card: var(--radius-3);
     --r-media: var(--radius-2);
     --el-0: none;
-    --el-1: 0 1px 3px rgba(0,0,0,0.08);
-    --el-2: 0 4px 12px rgba(0,0,0,0.05);
-    --el-3: 0 8px 24px rgba(0,0,0,0.08);
+    --el-1: var(--shadow-1);
+    --el-2: var(--shadow-2);
+    --el-3: var(--shadow-3);
     --bd-none: none;
     --bd-subtle: 1px solid var(--line);
     --bd-focus: 2px solid var(--pink);
@@ -100,7 +107,7 @@
     position: fixed;
     top: 10px;
     left: 12px;
-    z-index: 1050;
+    z-index: calc(var(--z-2) + 2);
     background: var(--black);
     color: #ffffff;
     border: 1px solid rgba(255,255,255,0.2);
@@ -122,7 +129,7 @@
     inset: 0;
     background: rgba(13,11,38,0.4);
     backdrop-filter: blur(3px);
-    z-index: 1030;
+    z-index: var(--z-2);
     transition: opacity var(--duration-2) ease;
 }
 .ov.show, .ov.open {
@@ -136,7 +143,7 @@
     left: 0;
     right: 0;
     height: 72px;
-    z-index: 1000;
+    z-index: var(--z-1);
     background: #ffffff;
     border-bottom: 1px solid var(--line);
     padding: 0 24px;
@@ -240,7 +247,7 @@
     background: #ffffff;
     border-right: 1px solid var(--line);
     padding: 16px 0;
-    z-index: 1040;
+    z-index: calc(var(--z-2) + 1);
     display: flex;
     flex-direction: column;
     transition: transform var(--duration-2) cubic-bezier(0.4, 0, 0.2, 1), left var(--duration-2) cubic-bezier(0.4, 0, 0.2, 1);
@@ -800,7 +807,7 @@ button, input, select, textarea, .chip, .btn, .sgt, .platform-tab {
 @media(max-width:768px){.masonry-grid{column-count:2}}
 
 /* ===== MODAL SYSTEM (from pinterest_fluid_ui) ===== */
-.modal-backdrop{position:fixed;inset:0;background:rgba(13,11,38,0.5);backdrop-filter:blur(4px);z-index:2000;display:none;align-items:center;justify-content:center;padding:var(--sp-md);opacity:0;transition:opacity var(--duration-3) ease}
+.modal-backdrop{position:fixed;inset:0;background:rgba(13,11,38,0.5);backdrop-filter:blur(4px);z-index:calc(var(--z-3) + 1);display:none;align-items:center;justify-content:center;padding:var(--sp-md);opacity:0;transition:opacity var(--duration-3) ease}
 .modal-backdrop.open{display:flex;opacity:1}
 .modal-card{background:#fff;border-radius:32px;box-shadow:var(--shadow-3);width:100%;max-width:480px;overflow:hidden;position:relative;transform:scale(0.9);transition:transform var(--duration-3) cubic-bezier(0.34,1.56,0.64,1);padding:var(--sp-lg)}
 .modal-backdrop.open .modal-card{transform:scale(1)}
@@ -836,7 +843,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 @media(max-width:600px){.business-modal-card{grid-template-columns:1fr}.biz-modal-left{display:none}}
 
 /* ===== TOAST POPUP (spring animated, from pinterest_fluid_ui) ===== */
-.toast-popup{position:fixed;bottom:30px;left:30px;z-index:2050;background:var(--black);color:#fff;padding:var(--space-2) var(--space-3);border-radius:var(--radius-2);font:600 var(--type-1) 'Inter',sans-serif;box-shadow:var(--shadow-3);display:flex;align-items:center;gap:var(--space-2);transform:translateY(100px);opacity:0;transition:all var(--duration-3) cubic-bezier(0.175,0.885,0.32,1.275);pointer-events:none}
+.toast-popup{position:fixed;bottom:30px;left:30px;z-index:var(--z-4);background:var(--black);color:#fff;padding:var(--space-2) var(--space-3);border-radius:var(--radius-2);font:600 var(--type-1) 'Inter',sans-serif;box-shadow:var(--shadow-3);display:flex;align-items:center;gap:var(--space-2);transform:translateY(100px);opacity:0;transition:all var(--duration-3) cubic-bezier(0.175,0.885,0.32,1.275);pointer-events:none}
 .toast-popup.show{transform:translateY(0);opacity:1}
 .toast-icon-dot{width:16px;height:16px;border-radius:50%;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:var(--type-1);font-weight:800}
 
@@ -951,9 +958,9 @@ input:checked+.slider:before{transform:translateX(20px)}
 .tooltip-bubble.rich .tooltip-body{font-size:var(--type-1);color:rgba(255,255,255,0.7)}
 
 /* ===== SIDE SHEET ===== */
-.side-sheet{position:fixed;top:0;bottom:0;right:-400px;width:360px;max-width:90vw;background:#fff;box-shadow:-8px 0 24px rgba(0,0,0,0.12);z-index:2000;transition:right var(--duration-3) cubic-bezier(0.4,0,0.2,1);padding:24px;overflow-y:auto}
+.side-sheet{position:fixed;top:0;bottom:0;right:-400px;width:360px;max-width:90vw;background:#fff;box-shadow:-8px 0 24px rgba(0,0,0,0.12);z-index:calc(var(--z-3) + 1);transition:right var(--duration-3) cubic-bezier(0.4,0,0.2,1);padding:24px;overflow-y:auto}
 .side-sheet.open{right:0}
-.side-sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.32);z-index:1999;opacity:0;pointer-events:none;transition:opacity var(--duration-3)}
+.side-sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.32);z-index:var(--z-3);opacity:0;pointer-events:none;transition:opacity var(--duration-3)}
 .side-sheet-backdrop.open{opacity:1;pointer-events:auto}
 
 /* ===== DROPDOWN MENU ===== */
@@ -1781,14 +1788,12 @@ input:checked+.slider:before{transform:translateX(20px)}
 <div class="eyebrow">02 Foundations</div>
 <h2>Elevation Levels <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--type-1);color:var(--muted);font-weight:400">v4.0</span></h2>
 
-<table class="token-table"><tr><th>Level</th><th>Shadow</th><th>Usage</th></tr>
-<tr><td>Level 0</td><td>None</td><td>Flat content, body text</td></tr>
-<tr><td>Level 1</td><td>0 1px 3px rgba(0,0,0,0.08)</td><td>Cards, chips</td></tr>
-<tr><td>Level 2</td><td>0 4px 12px rgba(0,0,0,0.05)</td><td>Hover cards</td></tr>
-<tr><td>Level 3</td><td>0 8px 24px rgba(0,0,0,0.08)</td><td>Modals, dialogs</td></tr>
-<tr><td>Modal</td><td>0 12px 32px rgba(0,0,0,0.12)</td><td>Full-screen overlay</td></tr>
-<tr><td>Bottom Sheet</td><td>0 -4px 16px rgba(0,0,0,0.08)</td><td>Sheet overlay</td></tr>
-<tr><td>FAB</td><td>0 6px 16px rgba(0,0,0,0.12)</td><td>Floating action</td></tr></table>
+<table class="token-table"><tr><th>Token</th><th>Shadow</th><th>Usage</th></tr>
+<tr><td>shadow-1</td><td>0 1px 3px rgba(13,11,38,.08)</td><td>Cards, chips, resting surfaces</td></tr>
+<tr><td>shadow-2</td><td>0 4px 12px rgba(13,11,38,.05)</td><td>Hover cards, dropdowns</td></tr>
+<tr><td>shadow-3</td><td>0 8px 24px rgba(13,11,38,.08)</td><td>FAB, side sheet, bottom sheet</td></tr>
+<tr><td>shadow-4</td><td>0 12px 32px rgba(13,11,38,.12)</td><td>Modals, dialogs, full-screen overlays</td></tr></table>
+<p style="font-size:var(--fs-caption);color:var(--muted)">4 tokens (a duplicate <code>--el-*</code> scale with mismatched rgba base color has been aliased onto these). Bottom Sheet reuses shadow-3 with a flipped Y-offset (<code>0 -8px 24px</code>) for its upward-facing shadow — a directional variant, not a 5th magnitude.</p>
 </section>
 <section class="sec" id="f-border-tk">
 <button class="copy-link-btn" onclick="copyLink('f-border-tk')">🔗</button>
@@ -1820,13 +1825,11 @@ input:checked+.slider:before{transform:translateX(20px)}
 <h2>Z-Index <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--type-1);color:var(--muted);font-weight:400">v4.0</span></h2>
 
 <table class="token-table"><tr><th>Token</th><th>Value</th><th>Usage</th></tr>
-<tr><td>Content</td><td>1</td><td>Default content layer</td></tr>
-<tr><td>FAB</td><td>6</td><td>Floating action button</td></tr>
-<tr><td>Bottom Sheet</td><td>8</td><td>Modal bottom sheet</td></tr>
-<tr><td>Drawer</td><td>10</td><td>Navigation drawer</td></tr>
-<tr><td>Modal</td><td>12</td><td>Dialog/Alert</td></tr>
-<tr><td>Snackbar</td><td>14</td><td>Snackbar/toast</td></tr>
-<tr><td>Tooltip</td><td>16</td><td>Tooltip overlay</td></tr></table>
+<tr><td>z-1</td><td>100</td><td>Persistent chrome — top nav</td></tr>
+<tr><td>z-2</td><td>200 (+0/+1/+2)</td><td>Drawer system — scrim, sidebar, hamburger toggle</td></tr>
+<tr><td>z-3</td><td>400 (+0/+1)</td><td>Transient overlays — side sheet + modal, and their scrims</td></tr>
+<tr><td>z-4</td><td>800</td><td>System feedback — toast</td></tr></table>
+<p style="font-size:var(--fs-caption);color:var(--muted)">4 tokens, exponential ×2 (100 → 200 → 400 → 800). Where two elements in the same tier must stay in strict relative order (e.g. a drawer above its own scrim), they use a small <code>calc(var(--z-N) + 1)</code> offset off that tier rather than a 5th token. Small in-component stacking (a card above its own background, an icon above a fill) uses ordinary low integers and isn't part of this global scale.</p>
 </section>
 <section class="sec" id="f-semcolor">
 <button class="copy-link-btn" onclick="copyLink('f-semcolor')">🔗</button>
