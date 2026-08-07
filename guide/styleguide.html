@@ -390,9 +390,9 @@ h1, h2, h3 {
     background: #ffffff;
     border: 1px solid var(--line);
     border-radius: var(--r-card);
-    padding: 24px;
+    padding: var(--space-4);
     box-shadow: 0 1px 3px rgba(13,11,38,0.03);
-    margin-bottom: 24px;
+    margin-bottom: var(--space-4);
 }
 
 .spec-grid {
@@ -421,8 +421,8 @@ h1, h2, h3 {
 .chip {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 6px 12px;
+    gap: var(--space-1);
+    padding: var(--space-2) var(--space-3);
     border-radius: var(--r-pill);
     font-size: var(--type-1);
     font-weight: 500;
@@ -470,7 +470,7 @@ h1, h2, h3 {
     background: none;
     border: none;
     padding: 8px 12px;
-    font: 600 12px/1.2 'Inter', sans-serif;
+    font: 600 var(--type-1)/1.2 'Inter', sans-serif;
     color: var(--black);
     cursor: pointer;
     display: flex;
@@ -537,7 +537,7 @@ h1, h2, h3 {
     padding: 6px 12px;
     border: 1px solid var(--line);
     border-radius: var(--r-pill);
-    font: 12px 'Inter', sans-serif;
+    font: var(--type-1) 'Inter', sans-serif;
     outline: none;
     width: 200px;
 }
@@ -547,7 +547,7 @@ h1, h2, h3 {
     border: 1px solid var(--line);
     border-radius: var(--r-pill);
     background: #fff;
-    font: 600 11px 'Inter', sans-serif;
+    font: 600 var(--type-1) 'Inter', sans-serif;
     cursor: pointer;
 }
 
@@ -601,14 +601,14 @@ button, input, select, textarea, .chip, .btn, .sgt, .platform-tab {
     align-items: center;
     justify-content: center;
     border-radius: var(--r-pill);
-    padding: 10px 20px;
-    font: 600 13px/1 'Inter', sans-serif;
+    padding: var(--space-2) var(--space-3);
+    font: 600 var(--type-1)/1 'Inter', sans-serif;
     cursor: pointer;
     transition: all var(--duration-1) ease;
     border: 1px solid transparent;
 }
 
-.btn-p { background: var(--black);
+.btn-p {
     background: var(--black);
     color: #ffffff;
 }
@@ -622,8 +622,8 @@ button, input, select, textarea, .chip, .btn, .sgt, .platform-tab {
 .badge {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 4px 10px;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
     border-radius: var(--r-pill);
     font-size: var(--type-1);
     font-weight: 600;
@@ -809,7 +809,7 @@ button, input, select, textarea, .chip, .btn, .sgt, .platform-tab {
 .modal-card h3{font-family:var(--font-display);font-size:var(--type-3);font-weight:800;text-align:center;margin-bottom:var(--sp-lg)}
 .form-group{margin-bottom:var(--sp-md)}
 .form-group label{display:block;font-size:var(--type-1);font-weight:700;color:var(--black);margin-bottom:4px}
-.form-input{width:100%;padding:10px 14px;border:1.5px solid var(--line);border-radius:16px;font:13px 'Inter',sans-serif;outline:none;transition:border-color var(--duration-1)}
+.form-input{width:100%;padding:10px 14px;border:1.5px solid var(--line);border-radius:16px;font:var(--type-1) 'Inter',sans-serif;outline:none;transition:border-color var(--duration-1)}
 .form-input:focus{border-color:var(--pink)}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-md)}
 .toggle-details{max-width:280px}
@@ -836,7 +836,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 @media(max-width:600px){.business-modal-card{grid-template-columns:1fr}.biz-modal-left{display:none}}
 
 /* ===== TOAST POPUP (spring animated, from pinterest_fluid_ui) ===== */
-.toast-popup{position:fixed;bottom:30px;left:30px;z-index:2050;background:var(--black);color:#fff;padding:10px 16px;border-radius:16px;font:600 12px 'Inter',sans-serif;box-shadow:var(--shadow-3);display:flex;align-items:center;gap:8px;transform:translateY(100px);opacity:0;transition:all var(--duration-3) cubic-bezier(0.175,0.885,0.32,1.275);pointer-events:none}
+.toast-popup{position:fixed;bottom:30px;left:30px;z-index:2050;background:var(--black);color:#fff;padding:var(--space-2) var(--space-3);border-radius:var(--radius-2);font:600 var(--type-1) 'Inter',sans-serif;box-shadow:var(--shadow-3);display:flex;align-items:center;gap:var(--space-2);transform:translateY(100px);opacity:0;transition:all var(--duration-3) cubic-bezier(0.175,0.885,0.32,1.275);pointer-events:none}
 .toast-popup.show{transform:translateY(0);opacity:1}
 .toast-icon-dot{width:16px;height:16px;border-radius:50%;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:var(--type-1);font-weight:800}
 
@@ -895,7 +895,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 .about-cta-row{display:flex;justify-content:center;gap:var(--sp-sm)}
 
 /* ===== STICKY CHAT BUTTON (from pinterest_fluid_ui) ===== */
-.btn-sticky-chat{position:fixed;bottom:30px;right:30px;background:var(--err);color:#fff;border:none;border-radius:var(--r-pill);padding:10px 18px;font:700 13px 'Inter',sans-serif;cursor:pointer;box-shadow:var(--shadow-3);z-index:1000;display:flex;align-items:center;gap:8px;transition:all var(--duration-1)}
+.btn-sticky-chat{position:fixed;bottom:30px;right:30px;background:var(--err);color:#fff;border:none;border-radius:var(--r-pill);padding:10px 18px;font:700 var(--type-1) 'Inter',sans-serif;cursor:pointer;box-shadow:var(--shadow-3);z-index:1000;display:flex;align-items:center;gap:8px;transition:all var(--duration-1)}
 .btn-sticky-chat:hover{transform:scale(1.05);background:#C32F00}
 
 /* ===== EMPTY GRID CARDS (from pinterest_fluid_ui) ===== */
@@ -910,9 +910,9 @@ input:checked+.slider:before{transform:translateX(20px)}
 .filter-chip.selected{background:var(--black);color:#fff}
 
 /* ===== BTN PRIMARY/SECONDARY DS (from pinterest_fluid_ui) ===== */
-.btn-primary-ds{background:var(--pink);color:#fff;border:none;border-radius:var(--r-pill);padding:10px 20px;font:700 13px 'Inter',sans-serif;cursor:pointer;transition:all var(--duration-1);box-shadow:0 4px 10px rgba(234,76,137,0.25);display:inline-flex;align-items:center;justify-content:center;min-height:40px}
+.btn-primary-ds{background:var(--pink);color:#fff;border:none;border-radius:var(--r-pill);padding:10px 20px;font:700 var(--type-1) 'Inter',sans-serif;cursor:pointer;transition:all var(--duration-1);box-shadow:0 4px 10px rgba(234,76,137,0.25);display:inline-flex;align-items:center;justify-content:center;min-height:40px}
 .btn-primary-ds:hover{background:var(--pink-hover,#D93C77)}
-.btn-secondary-ds{background:var(--surface-2);color:var(--black);border:1px solid var(--line);border-radius:var(--r-pill);padding:10px 20px;font:600 13px 'Inter',sans-serif;cursor:pointer;transition:all var(--duration-1);min-height:40px;display:inline-flex;align-items:center;justify-content:center}
+.btn-secondary-ds{background:var(--surface-2);color:var(--black);border:1px solid var(--line);border-radius:var(--r-pill);padding:10px 20px;font:600 var(--type-1) 'Inter',sans-serif;cursor:pointer;transition:all var(--duration-1);min-height:40px;display:inline-flex;align-items:center;justify-content:center}
 .btn-secondary-ds:hover{background:#E9E9E9}
 .btn-block{width:100%}
 
@@ -970,7 +970,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 .time-picker-hand::after{content:'';position:absolute;top:0;left:50%;transform:translate(-50%,-50%);width:28px;height:28px;background:var(--pink);border-radius:50%}
 .time-picker-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:8px;height:8px;background:var(--black);border-radius:50%}
 .time-picker-input{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:12px}
-.time-picker-input input{width:56px;padding:8px;text-align:center;border:1px solid var(--line);border-radius:12px;font:16px 'Inter',sans-serif;outline:none}
+.time-picker-input input{width:56px;padding:8px;text-align:center;border:1px solid var(--line);border-radius:12px;font:var(--type-2) 'Inter',sans-serif;outline:none}
 .time-picker-input input:focus{border-color:var(--pink)}
 .time-picker-input span{font-size:var(--type-2);font-weight:700;color:var(--muted)}
 
@@ -1032,7 +1032,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 <nav class="top-nav" role="banner" aria-label="Design System Navigation">
     <div class="logo-area">
         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px;flex-shrink:0" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0D0D0D"/><rect x="16" y="26" width="5" height="20" rx="2.5" fill="#FFFFFF"/><rect x="25.5" y="16" width="5" height="32" rx="2.5" fill="#EA4C89"/><rect x="35" y="22" width="5" height="24" rx="2.5" fill="#FFFFFF"/><rect x="44.5" y="30" width="5" height="16" rx="2.5" fill="#EA4C89"/></svg>
-        <span style="font:800 16px/1 'Inter Tight',sans-serif;letter-spacing:-0.04em;color:var(--black)">MusicLink<em style="color:var(--pink);font-style:normal">d</em></span>
+        <span style="font:800 var(--type-2)/1 'Inter Tight',sans-serif;letter-spacing:-0.04em;color:var(--black)">MusicLink<em style="color:var(--pink);font-style:normal">d</em></span>
     </div>
     <div class="breadcrumb">
         <span>Design System</span>
@@ -2273,15 +2273,15 @@ input:checked+.slider:before{transform:translateX(20px)}
 <div style="max-width:360px;display:flex;flex-direction:column;gap:12px">
 <div>
 <label style="font-size:var(--type-1);font-weight:600;display:block;margin-bottom:3px">Full name</label>
-<input style="width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:16px;font:13px 'Inter';outline:none" placeholder="Arijit Sen" onfocus="this.style.borderColor='var(--pink)'" onblur="this.style.borderColor='var(--line)'">
+<input style="width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:16px;font:var(--type-1) 'Inter';outline:none" placeholder="Arijit Sen" onfocus="this.style.borderColor='var(--pink)'" onblur="this.style.borderColor='var(--line)'">
 </div>
 <div>
 <label style="font-size:var(--type-1);font-weight:600;display:block;margin-bottom:3px">Email</label>
-<input style="width:100%;padding:10px 14px;border:2px solid var(--pink);border-radius:16px;font:13px 'Inter';outline:none" value="arijit@example.com" placeholder="email">
+<input style="width:100%;padding:10px 14px;border:2px solid var(--pink);border-radius:16px;font:var(--type-1) 'Inter';outline:none" value="arijit@example.com" placeholder="email">
 </div>
 <div>
 <label style="font-size:var(--type-1);font-weight:600;display:block;margin-bottom:3px;color:var(--err)">Phone (error)</label>
-<input style="width:100%;padding:10px 14px;border:2px solid var(--err);border-radius:16px;font:13px 'Inter';outline:none" value="123" placeholder="phone">
+<input style="width:100%;padding:10px 14px;border:2px solid var(--err);border-radius:16px;font:var(--type-1) 'Inter';outline:none" value="123" placeholder="phone">
 <span style="font-size:var(--type-1);color:var(--err);margin-top:2px;display:block">Enter a valid 10-digit number</span>
 </div>
 </div>
@@ -2292,7 +2292,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 <div class="demo-grid">
 <div>
 <label style="font-size:var(--type-1);font-weight:600;display:block;margin-bottom:3px">Category</label>
-<select style="width:100%;padding:8px 12px;border:1px solid var(--line);border-radius:9999px;font:12px 'Inter';background:#F8F8FB;outline:none"><option>Playback Vocalist</option><option>Mix & Mastering</option><option>Studio Booking</option></select>
+<select style="width:100%;padding:8px 12px;border:1px solid var(--line);border-radius:9999px;font:var(--type-1) 'Inter';background:#F8F8FB;outline:none"><option>Playback Vocalist</option><option>Mix & Mastering</option><option>Studio Booking</option></select>
 </div>
 <div>
 <label style="font-size:var(--type-1);font-weight:600;display:block;margin-bottom:3px">Toggle</label>
@@ -2319,7 +2319,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 <div class="demo-label">Global Search — Live</div>
 <div style="max-width:400px;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:9999px;padding:10px 16px">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-<input style="flex:1;border:none;outline:none;font:12px 'Inter'" placeholder="Search artists, studios, gear...">
+<input style="flex:1;border:none;outline:none;font:var(--type-1) 'Inter'" placeholder="Search artists, studios, gear...">
 </div>
 <div class="demo-row" style="margin-top:8px">
 <span class="chip" style="background:var(--black);color:#fff">All</span>
@@ -2943,7 +2943,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 <div class="visual-demo">
 <div class="demo-label">Search + Category Filters</div>
 <div style="max-width:480px">
-<div style="display:flex;align-items:center;gap:8px;background:#F8F8FB;border:1px solid var(--line);border-radius:9999px;padding:10px 14px;margin-bottom:8px"><span>🔍</span><input style="flex:1;background:none;border:none;outline:none;font:12px 'Inter'" placeholder="Search singers, studios, gear..."></div>
+<div style="display:flex;align-items:center;gap:8px;background:#F8F8FB;border:1px solid var(--line);border-radius:9999px;padding:10px 14px;margin-bottom:8px"><span>🔍</span><input style="flex:1;background:none;border:none;outline:none;font:var(--type-1) 'Inter'" placeholder="Search singers, studios, gear..."></div>
 <div style="display:flex;gap:4px;flex-wrap:wrap"><span class="chip" style="background:var(--black);color:#fff">All</span><span class="chip">Vocalists</span><span class="chip">Studios</span><span class="chip">Gear</span></div>
 </div>
 </div>
@@ -3038,7 +3038,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 <div style="font-family:'Inter Tight',sans-serif;font-weight:800;font-size:var(--type-3);color:var(--black);letter-spacing:-0.04em">MusicLink<em style="color:var(--pink);font-style:normal">d</em></div>
 <button class="btn btn-s btn-sm" style="width:100%;max-width:280px">Continue with Google</button>
 <div style="font-size:var(--type-1);color:var(--muted)">or</div>
-<input style="width:100%;max-width:280px;padding:10px 14px;border:1px solid var(--line);border-radius:9999px;font:12px 'Inter';outline:none" placeholder="Email">
+<input style="width:100%;max-width:280px;padding:10px 14px;border:1px solid var(--line);border-radius:9999px;font:var(--type-1) 'Inter';outline:none" placeholder="Email">
 <button class="btn btn-p btn-sm" style="width:100%;max-width:280px">Sign In</button>
 <p style="font-size:var(--type-1);color:var(--muted)">Don't have an account? <a href="#" style="color:var(--pink);font-weight:600">Sign up</a></p>
 </div>
@@ -4616,15 +4616,15 @@ Include: Track cover art, genre chip, multi-track stem breakdown (Vocals, Bass, 
 <div class="demo-label">Supporting Text Patterns</div>
 <div style="max-width:360px;display:flex;flex-direction:column;gap:12px">
 <div>
-<input style="width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:16px;font:13px 'Inter';outline:none" placeholder="Studio name">
+<input style="width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:16px;font:var(--type-1) 'Inter';outline:none" placeholder="Studio name">
 <span class="supporting-text helper">Enter your registered studio name</span>
 </div>
 <div>
-<input style="width:100%;padding:10px 14px;border:2px solid var(--err);border-radius:16px;font:13px 'Inter';outline:none" value="ab" placeholder="Email">
+<input style="width:100%;padding:10px 14px;border:2px solid var(--err);border-radius:16px;font:var(--type-1) 'Inter';outline:none" value="ab" placeholder="Email">
 <span class="supporting-text error">Enter a valid email address</span>
 </div>
 <div>
-<input style="width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:16px;font:13px 'Inter';outline:none" placeholder="Bio" value="A professional vocalist with 12 years">
+<input style="width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:16px;font:var(--type-1) 'Inter';outline:none" placeholder="Bio" value="A professional vocalist with 12 years">
 <span class="supporting-text helper"><span class="char-count">42/160</span></span>
 </div>
 </div>
