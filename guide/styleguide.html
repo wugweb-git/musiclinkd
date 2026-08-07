@@ -737,6 +737,171 @@ button, input, select, textarea, .chip, .btn, .sgt, .platform-tab {
 @keyframes pulse-ring{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.15)}}
 .shimmer-text{background:linear-gradient(90deg,var(--black) 0%,var(--pink) 50%,var(--black) 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer-text 3s linear infinite}
 @keyframes shimmer-text{to{background-position:200% center}}
+
+/* ===== CARD & BLOCK HEIGHT CONSTRAINTS (Breakpoint-Mapped) ===== */
+.card-s{min-height:120px;overflow:hidden}
+.visual-demo{min-height:80px}
+.spec-card{min-height:100px}
+.phone-screen{min-height:500px;max-height:700px}
+@media(max-width:767px){
+.card-s{max-height:480px}
+.masonry-item{max-height:420px}
+.spec-card{max-height:360px}
+.visual-demo{max-height:600px}
+}
+@media(min-width:768px) and (max-width:1023px){
+.card-s{max-height:520px}
+.masonry-item{max-height:460px}
+.spec-card{max-height:400px}
+}
+@media(min-width:1024px) and (max-width:1439px){
+.card-s{max-height:600px}
+.masonry-item{max-height:520px}
+.spec-card{max-height:480px}
+}
+@media(min-width:1440px){
+.card-s{max-height:680px}
+.masonry-item{max-height:580px}
+.spec-card{max-height:560px}
+}
+
+/* ===== MASONRY DISCOVERY GRID (from pinterest_fluid_ui) ===== */
+.masonry-grid{column-count:4;column-gap:var(--sp-md);width:100%;max-width:1200px;margin:0 auto}
+.masonry-item{background:var(--white,#fff);border-radius:var(--r-card);overflow:hidden;margin-bottom:var(--sp-md);break-inside:avoid;position:relative;box-shadow:var(--shadow-1);border:1px solid var(--line);transition:transform 200ms var(--ease, cubic-bezier(0.4,0,0.2,1)),box-shadow 200ms;cursor:pointer}
+.masonry-item:hover{transform:translateY(-4px);box-shadow:var(--shadow-2)}
+.masonry-media-container{position:relative;overflow:hidden;background:var(--surface-2,#F1F5F9)}
+.masonry-media-container img{width:100%;display:block;object-fit:cover;transition:transform 0.6s cubic-bezier(0.4,0,0.2,1)}
+.masonry-item:hover .masonry-media-container img{transform:scale(1.06)}
+.item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,11,38,0.6) 0%,rgba(13,11,38,0.2) 60%,transparent 100%);opacity:0;transition:opacity 0.3s ease;display:flex;flex-direction:column;justify-content:space-between;padding:var(--sp-sm);z-index:5}
+.masonry-item:hover .item-overlay{opacity:1}
+.overlay-save-btn{align-self:flex-end;background:var(--pink);color:#fff;border:none;border-radius:var(--r-pill);padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;transition:all 150ms;box-shadow:var(--shadow-1)}
+.overlay-save-btn:hover{background:var(--pink-hover,#D93C77)}
+.overlay-save-btn.saved{background:var(--black);color:#fff}
+.overlay-action-row{display:flex;justify-content:space-between;align-items:center;color:#fff}
+.overlay-action-btn{background:rgba(255,255,255,0.2);color:#fff;border:none;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;transition:all 150ms}
+.overlay-action-btn:hover{background:#fff;color:var(--black)}
+.masonry-details{padding:var(--sp-sm);text-align:left}
+.masonry-title{font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--black);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.masonry-meta{font-size:10px;color:var(--muted);display:flex;align-items:center;justify-content:space-between}
+@media(max-width:1023px){.masonry-grid{column-count:3}}
+@media(max-width:768px){.masonry-grid{column-count:2}}
+
+/* ===== MODAL SYSTEM (from pinterest_fluid_ui) ===== */
+.modal-backdrop{position:fixed;inset:0;background:rgba(13,11,38,0.5);backdrop-filter:blur(4px);z-index:2000;display:none;align-items:center;justify-content:center;padding:var(--sp-md);opacity:0;transition:opacity 0.3s ease}
+.modal-backdrop.open{display:flex;opacity:1}
+.modal-card{background:#fff;border-radius:32px;box-shadow:var(--shadow-3);width:100%;max-width:480px;overflow:hidden;position:relative;transform:scale(0.9);transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);padding:var(--sp-lg)}
+.modal-backdrop.open .modal-card{transform:scale(1)}
+.modal-close-btn{position:absolute;top:16px;right:16px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--muted);transition:color 150ms}
+.modal-close-btn:hover{color:var(--black)}
+.modal-card h3{font-family:var(--font-display);font-size:22px;font-weight:800;text-align:center;margin-bottom:var(--sp-lg)}
+.form-group{margin-bottom:var(--sp-md)}
+.form-group label{display:block;font-size:10px;font-weight:700;color:var(--black);margin-bottom:4px}
+.form-input{width:100%;padding:10px 14px;border:1.5px solid var(--line);border-radius:16px;font:13px 'Inter',sans-serif;outline:none;transition:border-color 150ms}
+.form-input:focus{border-color:var(--pink)}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-md)}
+.toggle-details{max-width:280px}
+.toggle-title{font-size:12px;font-weight:600}
+.toggle-desc{font-size:10px;color:var(--muted);margin-top:2px}
+.switch{position:relative;display:inline-block;width:44px;height:24px}
+.switch input{opacity:0;width:0;height:0}
+.slider{position:absolute;cursor:pointer;inset:0;background:#E9E9E9;transition:.4s;border-radius:24px}
+.slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background:#fff;transition:.4s;border-radius:50%}
+input:checked+.slider{background:var(--black)}
+input:checked+.slider:before{transform:translateX(20px)}
+.invite-row{display:flex;align-items:center;justify-content:space-between;padding:var(--sp-sm) 0;border-top:1px solid var(--line);margin-bottom:var(--sp-md)}
+.invite-btn{width:36px;height:36px;border-radius:50%;background:var(--surface-2);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 150ms}
+.invite-btn:hover{background:#E9E9E9}
+.business-modal-card{max-width:680px;display:grid;grid-template-columns:1.1fr 1fr;padding:0}
+.biz-modal-left{background:var(--black);background-image:linear-gradient(135deg,var(--black) 40%,#1e1b4b 100%);display:flex;align-items:center;justify-content:center;padding:var(--sp-xl);position:relative;overflow:hidden}
+.biz-illustration-img{width:100%;height:auto;border-radius:16px;border:2px solid rgba(255,255,255,0.1);transform:rotate(-3deg);box-shadow:var(--shadow-3)}
+.biz-modal-right{padding:var(--sp-lg);display:flex;flex-direction:column;justify-content:center}
+.biz-modal-right h3{font-family:var(--font-display);font-size:20px;font-weight:800;margin-bottom:var(--sp-sm);line-height:1.25;text-align:left}
+.biz-features-list{list-style:none;margin-bottom:var(--sp-lg)}
+.biz-features-list li{position:relative;padding-left:20px;font-size:12px;margin-bottom:var(--sp-sm);color:var(--black);font-weight:500}
+.biz-features-list li::before{content:'✓';position:absolute;left:0;color:var(--success);font-weight:700}
+.login-qr-section{background:var(--surface-alt);border:1px solid var(--line);border-radius:16px;padding:var(--sp-md);margin-top:var(--sp-lg);display:flex;align-items:center;gap:var(--sp-md);text-align:left}
+@media(max-width:600px){.business-modal-card{grid-template-columns:1fr}.biz-modal-left{display:none}}
+
+/* ===== TOAST POPUP (spring animated, from pinterest_fluid_ui) ===== */
+.toast-popup{position:fixed;bottom:30px;left:30px;z-index:2050;background:var(--black);color:#fff;padding:10px 16px;border-radius:16px;font:600 12px 'Inter',sans-serif;box-shadow:var(--shadow-3);display:flex;align-items:center;gap:8px;transform:translateY(100px);opacity:0;transition:all 0.3s cubic-bezier(0.175,0.885,0.32,1.275);pointer-events:none}
+.toast-popup.show{transform:translateY(0);opacity:1}
+.toast-icon-dot{width:16px;height:16px;border-radius:50%;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800}
+
+/* ===== TRENDS TABLE (from pinterest_fluid_ui) ===== */
+.trends-container{max-width:1000px;margin:0 auto;padding-top:var(--sp-sm)}
+.trends-header{margin-bottom:var(--sp-lg)}
+.trends-header h2{font-family:var(--font-display);font-size:26px;font-weight:800;letter-spacing:-0.02em;margin-bottom:4px}
+.trends-header p{color:var(--muted);font-size:13px}
+.trends-tabs{display:flex;gap:var(--sp-md);margin-bottom:var(--sp-md);border-bottom:1px solid var(--line)}
+.trends-tab{font-size:13px;font-weight:600;color:var(--muted);padding-bottom:var(--sp-sm);cursor:pointer;position:relative}
+.trends-tab.active{color:var(--black)}
+.trends-tab.active::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--black)}
+.trends-table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-1);border:1px solid var(--line)}
+.trends-table th,.trends-table td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line)}
+.trends-table th{font-family:var(--font-display);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);background:var(--surface-alt)}
+.trends-table tr:last-child td{border-bottom:none}
+.trends-table tbody tr:hover{background:var(--surface-alt)}
+.trend-keyword-cell{display:flex;align-items:center;gap:var(--sp-sm)}
+.trend-img{width:44px;height:44px;border-radius:8px;object-fit:cover}
+.trend-title{font-family:var(--font-display);font-weight:700;font-size:13px}
+.sparkline-svg{width:100px;height:32px;stroke:var(--pink);stroke-width:2;fill:none}
+.growth-pct{font-family:var(--font-display);font-weight:700;font-size:12px;color:var(--success)}
+.volume-bar-container{width:80px;height:6px;background:var(--line);border-radius:var(--r-pill);overflow:hidden}
+.volume-bar-fill{height:100%;background:var(--pink);border-radius:var(--r-pill)}
+
+/* ===== BLOG HERO (from pinterest_fluid_ui) ===== */
+.blog-hero{background:#E0F2FE;border-radius:32px;padding:48px 32px;position:relative;overflow:hidden;display:flex;align-items:center;min-height:280px;margin-bottom:32px;box-shadow:var(--shadow-1)}
+.blog-hero-content{z-index:10;max-width:480px}
+.blog-hero-tag{background:var(--black);color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;padding:4px 12px;border-radius:var(--r-pill);display:inline-block;margin-bottom:12px}
+.blog-hero-title{font-family:var(--font-display);font-size:44px;font-weight:900;line-height:1.05;letter-spacing:-0.03em;color:var(--black)}
+.blog-hero-title span{color:var(--pink)}
+.hero-graphic{position:absolute;transition:transform 0.5s ease}
+.graphic-headphones{width:140px;right:40px;top:20px;transform:rotate(-15deg)}
+.graphic-watch{width:90px;right:120px;top:140px;transform:rotate(20deg)}
+.blog-hero:hover .graphic-headphones{transform:rotate(-5deg) scale(1.05)}
+.blog-hero:hover .graphic-watch{transform:rotate(30deg) scale(1.05)}
+.blog-posts-row{display:grid;grid-template-columns:1.4fr 1fr;gap:var(--sp-lg);margin-top:var(--sp-lg)}
+@media(max-width:860px){.blog-posts-row{grid-template-columns:1fr}}
+
+/* ===== COLLAGE CARD (from pinterest_fluid_ui) ===== */
+.collage-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-card);padding:var(--sp-lg);box-shadow:var(--shadow-1);display:flex;flex-direction:column;justify-content:space-between}
+.collage-images-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:var(--sp-sm);margin-bottom:var(--sp-lg);position:relative;height:220px}
+.collage-img-main{width:100%;height:100%;object-fit:cover;border-radius:16px}
+.collage-sub-grid{display:flex;flex-direction:column;gap:var(--sp-sm);height:100%}
+.collage-img-sub{width:100%;height:calc(50% - 6px);object-fit:cover;border-radius:8px}
+.collage-sticker{position:absolute;background:var(--pink);color:#fff;font-family:var(--font-display);font-weight:800;font-size:13px;padding:8px 16px;border-radius:var(--r-pill);box-shadow:var(--shadow-2);top:50%;left:50%;transform:translate(-50%,-50%) rotate(-4deg);z-index:10}
+.collage-details h3{font-family:var(--font-display);font-size:20px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px;line-height:1.2}
+.collage-details p{color:var(--muted);font-size:12px;margin-bottom:var(--sp-md)}
+
+/* ===== ABOUT LANDING HERO (from pinterest_fluid_ui) ===== */
+.about-hero-section{max-width:900px;margin:32px auto;text-align:center;padding:0 var(--sp-md)}
+.about-heading{font-family:var(--font-display);font-size:clamp(32px,5vw,52px);font-weight:900;letter-spacing:-0.04em;line-height:1.1;color:var(--black);text-align:center;margin-bottom:32px}
+.heading-badge{display:inline-flex;align-items:center;gap:6px;vertical-align:middle;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-pill);padding:2px 14px;font-size:15px;font-weight:600;font-family:var(--font-body);color:var(--black);margin:0 4px;transform:translateY(-2px)}
+.heading-badge img{width:22px;height:22px;border-radius:50%;object-fit:cover}
+.heading-badge.badge-icon{padding:2px 8px;background:var(--pink-container);border-color:var(--pink-container);color:var(--pink)}
+.about-cta-row{display:flex;justify-content:center;gap:var(--sp-sm)}
+
+/* ===== STICKY CHAT BUTTON (from pinterest_fluid_ui) ===== */
+.btn-sticky-chat{position:fixed;bottom:30px;right:30px;background:var(--err);color:#fff;border:none;border-radius:var(--r-pill);padding:10px 18px;font:700 13px 'Inter',sans-serif;cursor:pointer;box-shadow:var(--shadow-3);z-index:1000;display:flex;align-items:center;gap:8px;transition:all 150ms}
+.btn-sticky-chat:hover{transform:scale(1.05);background:#C32F00}
+
+/* ===== EMPTY GRID CARDS (from pinterest_fluid_ui) ===== */
+.empty-grid-card{background:#fff;border:2px dashed var(--line);border-radius:var(--r-card);padding:32px 16px;text-align:center;break-inside:avoid;margin-bottom:var(--sp-md)}
+.empty-illustration{font-size:44px;margin-bottom:12px;color:var(--line)}
+.empty-grid-card h4{font-family:var(--font-display);font-size:15px;font-weight:700;margin-bottom:8px}
+.empty-grid-card p{font-size:11px;color:var(--muted);margin-bottom:16px}
+
+/* ===== FILTER CHIP (enhanced, from pinterest_fluid_ui) ===== */
+.filter-chip{background:var(--surface-2);border:1px solid transparent;border-radius:var(--r-pill);padding:6px 14px;font-size:12px;font-weight:500;color:var(--black);cursor:pointer;transition:all 150ms;display:inline-flex;align-items:center;gap:6px}
+.filter-chip:hover{background:#E9E9E9}
+.filter-chip.selected{background:var(--black);color:#fff}
+
+/* ===== BTN PRIMARY/SECONDARY DS (from pinterest_fluid_ui) ===== */
+.btn-primary-ds{background:var(--pink);color:#fff;border:none;border-radius:var(--r-pill);padding:10px 20px;font:700 13px 'Inter',sans-serif;cursor:pointer;transition:all 150ms;box-shadow:0 4px 10px rgba(234,76,137,0.25);display:inline-flex;align-items:center;justify-content:center;min-height:40px}
+.btn-primary-ds:hover{background:var(--pink-hover,#D93C77)}
+.btn-secondary-ds{background:var(--surface-2);color:var(--black);border:1px solid var(--line);border-radius:var(--r-pill);padding:10px 20px;font:600 13px 'Inter',sans-serif;cursor:pointer;transition:all 150ms;min-height:40px;display:inline-flex;align-items:center;justify-content:center}
+.btn-secondary-ds:hover{background:#E9E9E9}
+.btn-block{width:100%}
 </style>
 <script>
 /* Utility JS helpers */
@@ -2959,8 +3124,8 @@ button, input, select, textarea, .chip, .btn, .sgt, .platform-tab {
 <!-- CATEGORY: ICONS — VISUAL GRID -->
 <!-- imported from merge.html §Icons -->
 <!-- ============================================================================== -->
-<section class="sec" id="icons">
-<button class="copy-link-btn" onclick="copyLink('icons')">🔗</button>
+<section class="sec" id="icons-visual">
+<button class="copy-link-btn" onclick="copyLink('icons-visual')">🔗</button>
 <div class="eyebrow">01 Brand</div>
 <h2>Lucide Icon Library <span class="badge badge-av" style="margin-left:8px">12 Icons</span></h2>
 <p class="desc">One icon family: Lucide, 1.75dp stroke, 24dp default. Pink for active.</p>
@@ -3215,10 +3380,10 @@ button, input, select, textarea, .chip, .btn, .sgt, .platform-tab {
 </section>
 
 <!-- ============================================================================== -->
-<!-- CATEGORY: 11 MOTION -->
+<!-- CATEGORY: 11 MOTION — SPEC TABLE -->
 <!-- ============================================================================== -->
-<section class="sec" id="motion">
-<button class="copy-link-btn" onclick="copyLink('motion')">🔗</button>
+<section class="sec" id="motion-spec">
+<button class="copy-link-btn" onclick="copyLink('motion-spec')">🔗</button>
 <div class="eyebrow">11 Motion</div>
 <h2>Timing & Easing <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:9px;color:var(--muted);font-weight:400">v4.0</span></h2>
 
@@ -3530,8 +3695,8 @@ Include: Track cover art, genre chip, multi-track stem breakdown (Vocals, Bass, 
 <h2>Animated Success <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:9px;color:var(--muted);font-weight:400">v4.0</span></h2>
 <p class="desc">Lottie-style checkmark animation. Pink circle + white check. 500ms entrance, spring physics.</p>
 </section>
-<section class="sec" id="nav-bar">
-<button class="copy-link-btn" onclick="copyLink('nav-bar')">🔗</button>
+<section class="sec" id="nav-bar-alt">
+<button class="copy-link-btn" onclick="copyLink('nav-bar-alt')">🔗</button>
 <div class="eyebrow">More</div>
 <h2>Navbar <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:9px;color:var(--muted);font-weight:400">v4.0</span></h2>
 
