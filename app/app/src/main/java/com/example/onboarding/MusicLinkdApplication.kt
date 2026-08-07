@@ -25,8 +25,8 @@ class MusicLinkdApplication : Application(), ImageLoaderFactory, Application.Act
 
         // Ensure Firebase core is initialized with musiclinkd-7ae30 primary configuration
         try {
-            val defaultApiKey = "AIzaSyMusicLinkd7ae30DefaultApiKey"
-            val defaultAppId = "1:846160129456:android:b204e38af5c6891a"
+            val defaultApiKey = ""
+            val defaultAppId = ""
 
             val apiKey = try { com.example.BuildConfig.FIREBASE_API_KEY.ifEmpty { defaultApiKey } } catch (e: Throwable) { defaultApiKey }
             val appId = try { com.example.BuildConfig.FIREBASE_APP_ID.ifEmpty { defaultAppId } } catch (e: Throwable) { defaultAppId }
