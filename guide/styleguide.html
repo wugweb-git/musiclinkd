@@ -902,6 +902,99 @@ input:checked+.slider:before{transform:translateX(20px)}
 .btn-secondary-ds{background:var(--surface-2);color:var(--black);border:1px solid var(--line);border-radius:var(--r-pill);padding:10px 20px;font:600 13px 'Inter',sans-serif;cursor:pointer;transition:all 150ms;min-height:40px;display:inline-flex;align-items:center;justify-content:center}
 .btn-secondary-ds:hover{background:#E9E9E9}
 .btn-block{width:100%}
+
+/* ===== ANDROID DEVICE MOCKUP (Pixel-style) ===== */
+.android-device{width:360px;background:#1a1a1a;border-radius:36px;padding:10px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,0.4);position:relative}
+.android-device::before{content:'';position:absolute;top:10px;left:50%;transform:translateX(-50%);width:80px;height:6px;background:#333;border-radius:3px;z-index:10}
+.android-screen{background:#FCFCFD;border-radius:26px;overflow:hidden;min-height:640px;position:relative}
+.android-status-bar{height:28px;background:transparent;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:10px;font-weight:600;color:var(--black);position:relative;z-index:5}
+.android-status-bar .time{font-weight:700}
+.android-status-bar .icons{display:flex;align-items:center;gap:4px;font-size:9px}
+.android-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:20px;background:#0D0D0D;border-radius:0 0 14px 14px;z-index:6}
+.android-nav-bar{height:48px;background:transparent;display:flex;align-items:center;justify-content:center;padding:0 16px;position:relative;z-index:5}
+.android-nav-bar .gesture-pill{width:120px;height:5px;background:var(--black);border-radius:3px;opacity:0.6}
+.android-nav-bar .three-btn{display:flex;align-items:center;justify-content:space-between;width:100%}
+.android-nav-bar .nav-btn-icon{width:24px;height:24px;border:1.5px solid var(--black);border-radius:4px;opacity:0.5}
+.android-edge-to-edge .android-status-bar{background:linear-gradient(to bottom,rgba(0,0,0,0.15),transparent);color:#fff}
+.android-edge-to-edge .android-nav-bar{background:linear-gradient(to top,rgba(0,0,0,0.15),transparent)}
+.android-edge-to-edge .android-nav-bar .gesture-pill{background:#fff}
+.android-cutout{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:24px;height:24px;background:#0D0D0D;border-radius:50%;border:2px solid #333;z-index:7}
+
+/* ===== ICON STATES DEMO ===== */
+.icon-state-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:8px 0}
+.icon-state-item{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.icon-state-item svg{width:24px;height:24px}
+.icon-state-label{font-size:8px;color:var(--muted);text-transform:uppercase;font-weight:600}
+.icon-size-row{display:flex;gap:20px;align-items:flex-end;flex-wrap:wrap;padding:8px 0}
+.icon-size-item{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.icon-size-label{font-size:8px;color:var(--muted);text-transform:uppercase;font-weight:600}
+
+/* ===== TOOLTIP ===== */
+.tooltip-demo{position:relative;display:inline-flex}
+.tooltip-bubble{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--black);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:500;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 150ms}
+.tooltip-demo:hover .tooltip-bubble{opacity:1}
+.tooltip-bubble.rich{padding:10px 14px;max-width:200px;white-space:normal;text-align:left}
+.tooltip-bubble.rich .tooltip-title{font-weight:700;font-size:11px;margin-bottom:2px}
+.tooltip-bubble.rich .tooltip-body{font-size:10px;color:rgba(255,255,255,0.7)}
+
+/* ===== SIDE SHEET ===== */
+.side-sheet{position:fixed;top:0;bottom:0;right:-400px;width:360px;max-width:90vw;background:#fff;box-shadow:-8px 0 24px rgba(0,0,0,0.12);z-index:2000;transition:right 300ms cubic-bezier(0.4,0,0.2,1);padding:24px;overflow-y:auto}
+.side-sheet.open{right:0}
+.side-sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.32);z-index:1999;opacity:0;pointer-events:none;transition:opacity 300ms}
+.side-sheet-backdrop.open{opacity:1;pointer-events:auto}
+
+/* ===== DROPDOWN MENU ===== */
+.dropdown-menu{position:relative;display:inline-block}
+.dropdown-list{position:absolute;top:calc(100% + 4px);left:0;min-width:180px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-3);padding:4px;z-index:100;opacity:0;pointer-events:none;transform:translateY(-4px);transition:all 150ms}
+.dropdown-menu.open .dropdown-list{opacity:1;pointer-events:auto;transform:translateY(0)}
+.dropdown-item{padding:8px 12px;border-radius:8px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background 100ms}
+.dropdown-item:hover{background:var(--surface-alt)}
+.dropdown-item .check{width:16px;height:16px;margin-left:auto;color:var(--pink);font-weight:700}
+
+/* ===== TIME PICKER ===== */
+.time-picker-dial{width:200px;height:200px;border-radius:50%;background:var(--surface-alt);border:1px solid var(--line);position:relative;margin:0 auto}
+.time-picker-hand{position:absolute;top:50%;left:50%;width:2px;height:60px;background:var(--pink);transform-origin:bottom center;transform:translate(-50%,-100%) rotate(45deg);border-radius:1px}
+.time-picker-hand::after{content:'';position:absolute;top:0;left:50%;transform:translate(-50%,-50%);width:28px;height:28px;background:var(--pink);border-radius:50%}
+.time-picker-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:8px;height:8px;background:var(--black);border-radius:50%}
+.time-picker-input{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:12px}
+.time-picker-input input{width:56px;padding:8px;text-align:center;border:1px solid var(--line);border-radius:12px;font:16px 'Inter',sans-serif;outline:none}
+.time-picker-input input:focus{border-color:var(--pink)}
+.time-picker-input span{font-size:18px;font-weight:700;color:var(--muted)}
+
+/* ===== M3 NAVIGATION BAR ===== */
+.m3-nav-bar{display:flex;justify-content:space-around;align-items:flex-start;padding:8px 12px 12px;background:#fff;border-top:1px solid var(--line);max-width:400px;border-radius:20px 20px 0 0}
+.m3-nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 12px;border-radius:16px;cursor:pointer;transition:all 150ms;min-width:56px}
+.m3-nav-item.active{background:var(--pink-container)}
+.m3-nav-item .nav-icon{width:24px;height:24px;display:flex;align-items:center;justify-content:center}
+.m3-nav-item .nav-label{font-size:10px;font-weight:600;color:var(--muted)}
+.m3-nav-item.active .nav-label{color:var(--pink)}
+.m3-nav-item .nav-badge{width:16px;height:16px;background:var(--err);color:#fff;border-radius:50%;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;position:absolute;top:0;right:8px}
+
+/* ===== LOADING SPINNER ===== */
+.spinner-circular{width:32px;height:32px;border:3px solid var(--line);border-top-color:var(--pink);border-radius:50%;animation:spin 800ms linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner-determinate{width:32px;height:32px;border-radius:50%;position:relative}
+.spinner-determinate svg{transform:rotate(-90deg)}
+.spinner-determinate circle{fill:none;stroke-width:3}
+.spinner-determinate .track{stroke:var(--line)}
+.spinner-determinate .fill{stroke:var(--pink);stroke-linecap:round;transition:stroke-dashoffset 300ms}
+
+/* ===== MULTI-SELECT CHIPS WITH REMOVE ===== */
+.chip-removable{display:inline-flex;align-items:center;gap:4px;padding:4px 8px 4px 12px;border-radius:var(--r-pill);font-size:11px;font-weight:500;background:var(--pink-container);color:var(--pink);border:1px solid var(--pink)}
+.chip-removable .chip-x{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:10px;font-weight:700;transition:all 100ms}
+.chip-removable .chip-x:hover{background:var(--pink);color:#fff}
+.chip-input{border:1px dashed var(--line);background:transparent;color:var(--muted);cursor:text}
+
+/* ===== SUPPORTING TEXT ===== */
+.supporting-text{font-size:10px;margin-top:2px;display:block}
+.supporting-text.helper{color:var(--muted)}
+.supporting-text.error{color:var(--err)}
+.supporting-text .char-count{float:right;color:var(--muted)}
+
+/* ===== COMPONENT STATE DEMO ROW ===== */
+.state-demo-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding:8px 0}
+.state-demo-item{display:flex;flex-direction:column;align-items:center;gap:4px}
+.state-demo-label{font-size:8px;color:var(--muted);text-transform:uppercase;font-weight:600;text-align:center}
 </style>
 <script>
 /* Utility JS helpers */
@@ -4236,6 +4329,366 @@ Include: Track cover art, genre chip, multi-track stem breakdown (Vocals, Bass, 
 </div>
 </div>
 </section>
+
+<!-- ============================================================================== -->
+<!-- CATEGORY: 16 — ANDROID PLATFORM (System Bars, Insets, Cutouts, IME) -->
+<!-- ============================================================================== -->
+<section class="sec" id="android-platform">
+<button class="copy-link-btn" onclick="copyLink('android-platform')">🔗</button>
+<div class="eyebrow">16 Android Platform</div>
+<h2>System Bars, Insets & Edge-to-Edge <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">Android platform conventions for Jetpack Compose. Status bar (24dp), Navigation bar (48dp), edge-to-edge rendering, window insets, display cutouts, predictive back, and IME handling.</p>
+
+<div class="visual-demo">
+<div class="demo-label">Android Device Mockup — Pixel Style (360×780dp)</div>
+<div class="android-device">
+<div class="android-screen">
+<div class="android-notch"></div>
+<div class="android-cutout"></div>
+<div class="android-status-bar">
+<span class="time">9:41</span>
+<div class="icons">
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="13" x2="23" y2="11"/><polyline points="8 12 12 16 16 12"/></svg>
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="14" rx="2"/><line x1="23" y1="7" x2="17" y2="7"/></svg>
+</div>
+</div>
+<div style="padding:12px;min-height:400px;display:flex;flex-direction:column;gap:8px">
+<div class="card-s hl" style="padding:12px;font-size:11px;text-align:center">Content draws behind system bars<br><code style="font-size:9px">enableEdgeToEdge()</code></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+<div class="card-s hl" style="padding:10px;text-align:center;font-size:10px">Artist Card</div>
+<div class="card-s hl" style="padding:10px;text-align:center;font-size:10px">Studio Card</div>
+</div>
+</div>
+<div class="android-nav-bar">
+<div class="gesture-pill"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="spec-grid">
+<div class="spec-card">
+<div class="spec-label">System Bars</div>
+<table class="token-table"><tr><th>Bar</th><th>Height</th><th>Color</th></tr>
+<tr><td>Status Bar</td><td>24dp</td><td>Transparent / Scrim</td></tr>
+<tr><td>Navigation Bar</td><td>48dp</td><td>Transparent / Scrim</td></tr>
+<tr><td>Caption Bar</td><td>32dp</td><td>Transparent</td></tr></table>
+</div>
+<div class="spec-card">
+<div class="spec-label">Window Insets</div>
+<table class="token-table"><tr><th>Inset</th><th>Compose API</th></tr>
+<tr><td>Status Bars</td><td><code>WindowInsets.statusBars</code></td></tr>
+<tr><td>Navigation Bars</td><td><code>WindowInsets.navigationBars</code></td></tr>
+<tr><td>IME</td><td><code>WindowInsets.ime</code></td></tr>
+<tr><td>System Gestures</td><td><code>WindowInsets.systemGestures</code></td></tr>
+<tr><td>Display Cutout</td><td><code>WindowInsets.displayCutout</code></td></tr></table>
+</div>
+<div class="spec-card">
+<div class="spec-label">Cutout Modes</div>
+<table class="token-table"><tr><th>Mode</th><th>Behavior</th></tr>
+<tr><td>ALWAYS</td><td>Content extends into cutout</td></tr>
+<tr><td>SHORT_EDGES</td><td>Only on short edge cutouts</td></tr>
+<tr><td>NEVER</td><td>Content avoids cutout area</td></tr></table>
+</div>
+<div class="spec-card">
+<div class="spec-label">IME / Keyboard</div>
+<table class="token-table"><tr><th>Flag</th><th>Behavior</th></tr>
+<tr><td>adjustResize</td><td>Content resizes above IME</td></tr>
+<tr><td>adjustPan</td><td>Content pans to keep focus visible</td></tr>
+<tr><td>adjustNothing</td><td>No adjustment</td></tr>
+<tr><td>imePadding()</td><td>Compose modifier for IME</td></tr></table>
+</div>
+</div>
+</section>
+
+<!-- ============================================================================== -->
+<!-- CATEGORY: 04 PRIMITIVES — NEW M3 COMPONENTS -->
+<!-- ============================================================================== -->
+
+<!-- ===== TOOLTIP ===== -->
+<section class="sec" id="c2-tooltip">
+<button class="copy-link-btn" onclick="copyLink('c2-tooltip')">🔗</button>
+<div class="eyebrow">04 Primitives</div>
+<h2>Tooltip <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">Plain and rich tooltips. Hover to reveal. Black background, white text, 8dp radius.</p>
+
+<div class="visual-demo">
+<div class="demo-label">Tooltip Variants — Hover to Show</div>
+<div class="state-demo-row" style="gap:24px">
+<div class="tooltip-demo">
+<button class="btn btn-s btn-sm">Hover me</button>
+<span class="tooltip-bubble">Plain tooltip</span>
+</div>
+<div class="tooltip-demo">
+<button class="btn btn-p btn-sm">Rich tip</button>
+<span class="tooltip-bubble rich"><div class="tooltip-title">Rich Tooltip</div><div class="tooltip-body">With a title and supporting body text for more context.</div></span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== SIDE SHEET ===== -->
+<section class="sec" id="c2-sidesheet">
+<button class="copy-link-btn" onclick="copyLink('c2-sidesheet')">🔗</button>
+<div class="eyebrow">04 Primitives</div>
+<h2>Side Sheet <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">Modal side sheet sliding from right. 360dp width, backdrop scrim, 300ms transition.</p>
+
+<div class="visual-demo">
+<div class="demo-label">Side Sheet — Tap to Open</div>
+<button class="btn btn-p btn-sm" onclick="document.getElementById('sideSheetDemo').classList.add('open');document.getElementById('sideSheetBackdrop').classList.add('open')">Open Side Sheet</button>
+<div class="side-sheet-backdrop" id="sideSheetBackdrop" onclick="document.getElementById('sideSheetDemo').classList.remove('open');this.classList.remove('open')"></div>
+<div class="side-sheet" id="sideSheetDemo" style="position:relative;right:auto;top:auto;bottom:auto;box-shadow:none;border:1px solid var(--line);border-radius:24px;max-width:360px;margin-top:12px">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h4 style="font-size:14px">Filter Options</h4><button class="btn btn-g btn-sm" onclick="this.closest('.side-sheet').classList.remove('open')">✕</button></div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<div class="card-s" style="padding:10px"><span style="font-size:11px;font-weight:600">Genre</span><div style="display:flex;gap:4px;margin-top:4px"><span class="chip">Pop</span><span class="chip sel">Rock</span><span class="chip">Jazz</span></div></div>
+<div class="card-s" style="padding:10px"><span style="font-size:11px;font-weight:600">Price Range</span><div style="height:4px;background:var(--line);border-radius:2px;margin-top:8px"><div style="height:100%;width:60%;background:var(--pink);border-radius:2px"></div></div></div>
+<button class="btn btn-p btn-sm" style="width:100%">Apply Filters</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== DROPDOWN MENU ===== -->
+<section class="sec" id="c2-dropdown">
+<button class="copy-link-btn" onclick="copyLink('c2-dropdown')">🔗</button>
+<div class="eyebrow">04 Primitives</div>
+<h2>Dropdown Menu <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">Exposed dropdown menu. Tap to open. 12dp radius, shadow-3, 150ms transition.</p>
+
+<div class="visual-demo">
+<div class="demo-label">Dropdown — Tap to Toggle</div>
+<div class="dropdown-menu" id="dropdownDemo" style="z-index:10">
+<button class="btn btn-s btn-sm" onclick="this.parentElement.classList.toggle('open')">Select Role ▾</button>
+<div class="dropdown-list">
+<div class="dropdown-item" onclick="this.closest('.dropdown-menu').querySelector('button').textContent='Vocalist ▾';this.closest('.dropdown-menu').classList.remove('open')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--black)" stroke-width="1.75"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>Vocalist<span class="check">✓</span></div>
+<div class="dropdown-item" onclick="this.closest('.dropdown-menu').querySelector('button').textContent='Producer ▾';this.closest('.dropdown-menu').classList.remove('open')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--black)" stroke-width="1.75"><circle cx="12" cy="12" r="3"/></svg>Producer</div>
+<div class="dropdown-item" onclick="this.closest('.dropdown-menu').querySelector('button').textContent='Engineer ▾';this.closest('.dropdown-menu').classList.remove('open')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--black)" stroke-width="1.75"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77"/></svg>Engineer</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== TIME PICKER ===== -->
+<section class="sec" id="c2-timepicker">
+<button class="copy-link-btn" onclick="copyLink('c2-timepicker')">🔗</button>
+<div class="eyebrow">04 Primitives</div>
+<h2>Time Picker <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">Dial + input time picker. Pink hand, 200dp dial, 12dp input radius.</p>
+
+<div class="visual-demo">
+<div class="demo-label">Time Picker — Dial + Input</div>
+<div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;justify-content:center">
+<div class="time-picker-dial">
+<div class="time-picker-hand"></div>
+<div class="time-picker-center"></div>
+</div>
+<div class="time-picker-input">
+<input value="10" placeholder="HH">
+<span>:</span>
+<input value="30" placeholder="MM">
+<span style="font-size:11px;color:var(--muted)">AM</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== M3 NAVIGATION BAR ===== -->
+<section class="sec" id="c2-m3navbar">
+<button class="copy-link-btn" onclick="copyLink('c2-m3navbar')">🔗</button>
+<div class="eyebrow">04 Primitives</div>
+<h2>M3 Navigation Bar <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">Material 3 pill-shaped navigation bar. Active item has pink container background.</p>
+
+<div class="visual-demo">
+<div class="demo-label">M3 Navigation Bar — 5 Destinations</div>
+<div class="m3-nav-bar" style="position:relative">
+<div class="m3-nav-item active">
+<div class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.75"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+<span class="nav-label" style="color:var(--pink)">Home</span>
+</div>
+<div class="m3-nav-item">
+<div class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+<span class="nav-label">Discover</span>
+</div>
+<div class="m3-nav-item">
+<div class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+<span class="nav-label">Bookings</span>
+</div>
+<div class="m3-nav-item">
+<div class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.75"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+<span class="nav-label">Messages</span>
+</div>
+<div class="m3-nav-item">
+<div class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.75"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+<span class="nav-label">Profile</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== LOADING SPINNER ===== -->
+<section class="sec" id="c2-spinner">
+<button class="copy-link-btn" onclick="copyLink('c2-spinner')">🔗</button>
+<div class="eyebrow">04 Primitives</div>
+<h2>Loading Spinner <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">Circular indeterminate + determinate spinners. Pink track, 800ms rotation.</p>
+
+<div class="visual-demo">
+<div class="demo-label">Spinner Variants</div>
+<div class="state-demo-row" style="gap:24px">
+<div class="state-demo-item">
+<div class="spinner-circular"></div>
+<span class="state-demo-label">Indeterminate</span>
+</div>
+<div class="state-demo-item">
+<div class="spinner-determinate">
+<svg width="32" height="32" viewBox="0 0 32 32"><circle class="track" cx="16" cy="16" r="13"/><circle class="fill" cx="16" cy="16" r="13" stroke-dasharray="81.68" stroke-dashoffset="24.5"/></svg>
+</div>
+<span class="state-demo-label">Determinate 70%</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== MULTI-SELECT CHIPS ===== -->
+<section class="sec" id="c2-multichip">
+<button class="copy-link-btn" onclick="copyLink('c2-multichip')">🔗</button>
+<div class="eyebrow">04 Primitives</div>
+<h2>Multi-Select Chips with Remove <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">Removable chips with X button. Pink container background. Input chip for adding new.</p>
+
+<div class="visual-demo">
+<div class="demo-label">Removable Chips + Input Chip</div>
+<div class="demo-row">
+<span class="chip-removable">Bollywood <span class="chip-x" onclick="this.parentElement.remove()">✕</span></span>
+<span class="chip-removable">Classical <span class="chip-x" onclick="this.parentElement.remove()">✕</span></span>
+<span class="chip-removable">Jazz <span class="chip-x" onclick="this.parentElement.remove()">✕</span></span>
+<span class="chip chip-input" contenteditable="true" style="min-width:80px">+ Add genre</span>
+</div>
+</div>
+</section>
+
+<!-- ===== SUPPORTING TEXT ===== -->
+<section class="sec" id="c2-supporting">
+<button class="copy-link-btn" onclick="copyLink('c2-supporting')">🔗</button>
+<div class="eyebrow">04 Primitives</div>
+<h2>Supporting Text <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">Helper text, error text, and character counter below input fields.</p>
+
+<div class="visual-demo">
+<div class="demo-label">Supporting Text Patterns</div>
+<div style="max-width:360px;display:flex;flex-direction:column;gap:12px">
+<div>
+<input style="width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:16px;font:13px 'Inter';outline:none" placeholder="Studio name">
+<span class="supporting-text helper">Enter your registered studio name</span>
+</div>
+<div>
+<input style="width:100%;padding:10px 14px;border:2px solid var(--err);border-radius:16px;font:13px 'Inter';outline:none" value="ab" placeholder="Email">
+<span class="supporting-text error">Enter a valid email address</span>
+</div>
+<div>
+<input style="width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:16px;font:13px 'Inter';outline:none" placeholder="Bio" value="A professional vocalist with 12 years">
+<span class="supporting-text helper"><span class="char-count">42/160</span></span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================================== -->
+<!-- CATEGORY: ICON STATES & SIZES -->
+<!-- ============================================================================== -->
+<section class="sec" id="icon-states">
+<button class="copy-link-btn" onclick="copyLink('icon-states')">🔗</button>
+<div class="eyebrow">01 Brand</div>
+<h2>Icon States & Sizes <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">Lucide icons only. Single solid color per icon. No multi-color, no gradients, no emoji. 1.75px stroke.</p>
+
+<div class="visual-demo">
+<div class="demo-label">Icon States (6-State Matrix)</div>
+<div class="icon-state-row">
+<div class="icon-state-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--black)" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="icon-state-label">Default</span></div>
+<div class="icon-state-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="icon-state-label">Active</span></div>
+<div class="icon-state-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="icon-state-label">Inactive</span></div>
+<div class="icon-state-item" style="background:#FCE7F3;padding:4px;border-radius:8px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--black)" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="icon-state-label">Hover</span></div>
+<div class="icon-state-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.75" style="transform:scale(0.92)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="icon-state-label">Pressed</span></div>
+<div class="icon-state-item" style="opacity:0.38"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--black)" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="icon-state-label">Disabled</span></div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Icon Sizes (5 Sizes)</div>
+<div class="icon-size-row">
+<div class="icon-size-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--black)" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="icon-size-label">16dp · Micro</span></div>
+<div class="icon-size-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--black)" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="icon-size-label">20dp · Small</span></div>
+<div class="icon-size-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--black)" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="icon-size-label">24dp · Standard</span></div>
+<div class="icon-size-item"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--black)" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="icon-size-label">32dp · Large</span></div>
+<div class="icon-size-item"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--black)" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="icon-size-label">40dp · Display</span></div>
+</div>
+</div>
+
+<table class="token-table"><tr><th>State</th><th>Color</th><th>Stroke</th><th>Scale</th><th>Background</th></tr>
+<tr><td>Default</td><td><span class="ts" style="background:var(--black)"></span> var(--black)</td><td>1.75px</td><td>1.0</td><td>none</td></tr>
+<tr><td>Active/Selected</td><td><span class="ts" style="background:var(--pink)"></span> var(--pink)</td><td>1.75px</td><td>1.0</td><td>none</td></tr>
+<tr><td>Inactive</td><td><span class="ts" style="background:var(--muted)"></span> var(--muted)</td><td>1.75px</td><td>1.0</td><td>none</td></tr>
+<tr><td>Hover</td><td><span class="ts" style="background:var(--black)"></span> var(--black)</td><td>1.75px</td><td>1.0</td><td>#FCE7F3</td></tr>
+<tr><td>Pressed</td><td><span class="ts" style="background:var(--pink)"></span> var(--pink)</td><td>1.75px</td><td>0.92</td><td>none</td></tr>
+<tr><td>Disabled</td><td><span class="ts" style="background:var(--black)"></span> var(--black)</td><td>1.75px</td><td>1.0</td><td>opacity 0.38</td></tr></table>
+</section>
+
+<!-- ============================================================================== -->
+<!-- CATEGORY: COMPONENT STATE DEMOS -->
+<!-- ============================================================================== -->
+<section class="sec" id="state-demos">
+<button class="copy-link-btn" onclick="copyLink('state-demos')">🔗</button>
+<div class="eyebrow">04 Primitives</div>
+<h2>Component State Demos <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">Every interactive component showing the 6-state matrix: Default, Hover, Pressed, Focused, Disabled, Error/Loading.</p>
+
+<div class="visual-demo">
+<div class="demo-label">Button States</div>
+<div class="state-demo-row">
+<div class="state-demo-item"><button class="btn btn-p btn-sm">Default</button><span class="state-demo-label">Default</span></div>
+<div class="state-demo-item"><button class="btn btn-p btn-sm" style="background:var(--pink-hover,#D93C77);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.1)">Hover</button><span class="state-demo-label">Hover</span></div>
+<div class="state-demo-item"><button class="btn btn-p btn-sm" style="transform:scale(0.97)">Pressed</button><span class="state-demo-label">Pressed</span></div>
+<div class="state-demo-item"><button class="btn btn-p btn-sm" style="outline:2px solid var(--pink);outline-offset:2px">Focused</button><span class="state-demo-label">Focused</span></div>
+<div class="state-demo-item"><button class="btn btn-p btn-sm" style="opacity:0.38;pointer-events:none">Disabled</button><span class="state-demo-label">Disabled</span></div>
+<div class="state-demo-item"><button class="btn btn-p btn-sm" style="opacity:0.7"><span class="spinner-circular" style="width:14px;height:14px;border-width:2px;margin-right:6px"></span>Loading</button><span class="state-demo-label">Loading</span></div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Chip States</div>
+<div class="state-demo-row">
+<div class="state-demo-item"><span class="chip">Default</span><span class="state-demo-label">Default</span></div>
+<div class="state-demo-item"><span class="chip sel">Selected</span><span class="state-demo-label">Selected</span></div>
+<div class="state-demo-item"><span class="chip" style="opacity:0.38">Disabled</span><span class="state-demo-label">Disabled</span></div>
+<div class="state-demo-item"><span class="chip" style="outline:2px solid var(--pink);outline-offset:1px">Focused</span><span class="state-demo-label">Focused</span></div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Toggle / Switch States</div>
+<div class="state-demo-row" style="gap:20px">
+<div class="state-demo-item"><div style="width:44px;height:24px;background:var(--pink);border-radius:9999px;position:relative"><div style="width:20px;height:20px;background:#fff;border-radius:50%;position:absolute;top:2px;right:2px"></div></div><span class="state-demo-label">On</span></div>
+<div class="state-demo-item"><div style="width:44px;height:24px;background:#E2E8F0;border-radius:9999px;position:relative"><div style="width:20px;height:20px;background:#fff;border-radius:50%;position:absolute;top:2px;left:2px"></div></div><span class="state-demo-label">Off</span></div>
+<div class="state-demo-item"><div style="width:44px;height:24px;background:#E2E8F0;border-radius:9999px;position:relative;opacity:0.38"><div style="width:20px;height:20px;background:#fff;border-radius:50%;position:absolute;top:2px;left:2px"></div></div><span class="state-demo-label">Disabled</span></div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Checkbox & Radio States</div>
+<div class="state-demo-row" style="gap:20px">
+<div class="state-demo-item"><input type="checkbox" style="accent-color:var(--pink);width:18px;height:18px"><span class="state-demo-label">Unchecked</span></div>
+<div class="state-demo-item"><input type="checkbox" checked style="accent-color:var(--pink);width:18px;height:18px"><span class="state-demo-label">Checked</span></div>
+<div class="state-demo-item"><input type="checkbox" style="accent-color:var(--pink);width:18px;height:18px;opacity:0.38" disabled><span class="state-demo-label">Disabled</span></div>
+<div class="state-demo-item"><input type="radio" name="state" style="accent-color:var(--pink);width:18px;height:18px"><span class="state-demo-label">Unselected</span></div>
+<div class="state-demo-item"><input type="radio" name="state" checked style="accent-color:var(--pink);width:18px;height:18px"><span class="state-demo-label">Selected</span></div>
+</div>
+</div>
+</section>
+
 </main>
 </div><!-- /.layout-wrapper -->
 
