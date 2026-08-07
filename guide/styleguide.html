@@ -409,6 +409,15 @@ h1, h2, h3 {
     padding: 20px;
 }
 
+.swc {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-3);
+    overflow: hidden;
+    transition: transform var(--duration-3) cubic-bezier(0.25,1,0.5,1), opacity var(--duration-2);
+    box-shadow: var(--shadow-3);
+}
+
 .chip {
     display: inline-flex;
     align-items: center;
@@ -3848,14 +3857,40 @@ Include: Track cover art, genre chip, multi-track stem breakdown (Vocals, Bass, 
 <div class="card-s" style="padding:10px"><div class="spec-label">Strategy Cards</div><p style="font-size:var(--fs-10);color:var(--muted)">Hire Talent / Get Hired / Pro Upgrade</p></div>
 <div class="card-s" style="padding:10px"><div class="spec-label">Trust Engine</div><p style="font-size:var(--fs-10);color:var(--muted)">Multi-party credit verification</p></div>
 <div class="card-s" style="padding:10px"><div class="spec-label">Audio Mixer</div><p style="font-size:var(--fs-10);color:var(--muted)">Multi-track stem mixer</p></div>
-<div class="card-s" style="padding:10px"><div class="spec-label">Swipe Deck</div><p style="font-size:var(--fs-10);color:var(--muted)">Tinder-style discovery</p></div>
-<div class="card-s" style="padding:10px"><div class="spec-label">Brief Wizard</div><p style="font-size:var(--fs-10);color:var(--muted)">8-step project brief</p></div>
+<div class="card-s" style="padding:10px"><div class="spec-label">Swipe Deck</div><p style="font-size:var(--fs-10);color:var(--muted)">Tinder-style discovery — live demo below</p></div>
+<div class="card-s" style="padding:10px"><div class="spec-label">Brief Wizard</div><p style="font-size:var(--fs-10);color:var(--muted)">8-step project brief — live demo below</p></div>
 <div class="card-s" style="padding:10px"><div class="spec-label">Stem Ingestion</div><p style="font-size:var(--fs-10);color:var(--muted)">Dropzone + upload</p></div>
 <div class="card-s" style="padding:10px"><div class="spec-label">Profile Editor</div><p style="font-size:var(--fs-10);color:var(--muted)">Inline editing</p></div>
 <div class="card-s" style="padding:10px"><div class="spec-label">Settings Matrix</div><p style="font-size:var(--fs-10);color:var(--muted)">Escrow + Notifications + Audio</p></div>
 <div class="card-s" style="padding:10px"><div class="spec-label">Android Grids</div><p style="font-size:var(--fs-10);color:var(--muted)">Phone frame mockups</p></div>
 </div>
 <p style="font-size:var(--fs-10);color:var(--muted);margin-top:12px">These items will be properly categorized in a future audit pass.</p>
+</section>
+<section class="sec" id="pattern-swipe-deck">
+<button class="copy-link-btn" onclick="copyLink('pattern-swipe-deck')" aria-label="Copy link to section pattern-swipe-deck">🔗</button>
+<div class="eyebrow">Patterns</div>
+<h2>Swipe Deck <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--type-1);color:var(--muted);font-weight:400">v4.0</span></h2>
+<p class="desc">Tinder-style discovery deck. Swipe or use the buttons to shortlist/pass; the JS driving this (<code>swipeRender</code>) already existed in the file but had no container to render into.</p>
+<div id="deckW" style="position:relative;width:100%;max-width:320px;height:420px;margin:0 auto"></div>
+<div style="display:flex;gap:var(--space-2);justify-content:center;margin-top:var(--space-3)">
+<button class="btn btn-g btn-sm" onclick="swipeDo('left')">✕ Pass</button>
+<button class="btn btn-p btn-sm" onclick="swipeDo('right')">♥ Shortlist</button>
+<button class="btn btn-g btn-sm" onclick="swipeReset()">Reset</button>
+</div>
+</section>
+<section class="sec" id="pattern-brief-wizard">
+<button class="copy-link-btn" onclick="copyLink('pattern-brief-wizard')" aria-label="Copy link to section pattern-brief-wizard">🔗</button>
+<div class="eyebrow">Patterns</div>
+<h2>Brief Wizard <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--type-1);color:var(--muted);font-weight:400">v4.0</span></h2>
+<p class="desc">8-step casting brief flow. The step logic (<code>bfRender</code>/<code>bfSel</code>/<code>bfNext</code>/<code>bfPrev</code>) already existed in the file but had no container to render into.</p>
+<div class="card-s hl" style="max-width:360px;margin:0 auto;padding:20px">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+<button class="btn btn-g btn-sm" onclick="bfPrev()" aria-label="Previous step">← Back</button>
+<span id="bfStep" style="font-size:var(--type-1);color:var(--muted);font-weight:600"></span>
+</div>
+<div style="height:4px;background:var(--line);border-radius:var(--radius-1);overflow:hidden;margin-bottom:16px"><div id="bfBar" style="height:100%;background:var(--pink);width:0%;transition:width var(--duration-2)"></div></div>
+<div id="bfBody"></div>
+</div>
 </section>
 <!-- ============================================================================== -->
 <!-- CATEGORY: 24 — INSPIRED COMPONENTS (Dribbble · Supercharge · Apple Music · Pinterest · Snapchat) -->
