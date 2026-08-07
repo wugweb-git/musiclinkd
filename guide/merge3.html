@@ -1803,7 +1803,7 @@ img { max-width: 100%; height: auto; display: block; }
 <button class="copy-link-btn" onclick="copyLink('brand-colors')">🔗</button>
 <div class="eyebrow">01 Brand</div>
 <h2>Brand Colors <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:9px;color:var(--muted);font-weight:400">v4.0</span></h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:var(--sp-2);margin-bottom:20px" id="palette"></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:var(--sp-2);margin-bottom:20px" id="palette-brand"></div>
 <p style="font-size:var(--fs-caption);color:var(--muted)">Pink=Primary CTA. Navy=Dark. Purple=Badges only.</p>
 </section>
 <section class="sec" id="brand-voice">
@@ -4589,16 +4589,16 @@ img { max-width: 100%; height: auto; display: block; }
 <h2>Prompt Library <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:9px;color:var(--muted);font-weight:400">v4.0</span></h2>
 <p class="desc">One click copies a prompt for Google AI Studio.</p>
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--sp-2)">
-<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('splash')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Splash Screen</h4><textarea id="p-splash" class="hide">Generate a MusicLinkd Android splash screen. Read guide/README.md. Dark navy var(--black) bg. Logo Inter Tight 800, "d" in var(--pink). 500ms fade-in. No gradients.</textarea></div>
-<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('onboard')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Onboarding</h4><textarea id="p-onboard" class="hide">Generate MusicLinkd onboarding. Read guide/README.md. Progress bar, UnifiedChip, UnifiedPrimaryButton. 24dp cards. Real Unsplash photos.</textarea></div>
-<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('discover')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Discover Feed</h4><textarea id="p-discover" class="hide">Generate MusicLinkd Discover feed. Read guide/README.md. UnifiedSearchBar (999dp pill). Filter chips. 2-col Grid. Cards: 24dp radius, 1dp border. Real Unsplash photos.</textarea></div>
-<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('artist')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Artist Profile</h4><textarea id="p-artist" class="hide">Generate MusicLinkd Artist Profile. Read guide/README.md. Hero (avatar, verified badge). Tabs: About/Projects/Credits/Reviews. Sticky: UnifiedPrimaryButton "Hire". 24dp cards.</textarea></div>
-<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('studio')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Studio Booking</h4><textarea id="p-studio" class="hide">Generate MusicLinkd Studio Booking. Read guide/README.md. Header (cover, verified, rating). Equipment checklist. Calendar grid. Bottom sheet confirmation. 24dp cards.</textarea></div>
-<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('mkt')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Marketplace</h4><textarea id="p-mkt" class="hide">Generate MusicLinkd Marketplace. Read guide/README.md. Category tabs. Search bar. 2-col grid. Price filter. Tap→detail.</textarea></div>
-<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('msg')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Messaging</h4><textarea id="p-msg" class="hide">Generate MusicLinkd Messaging. Read guide/README.md. Sent: pink var(--pink), right. Received: white+1dp border, left, 16dp radius. Real avatars.</textarea></div>
-<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('public')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Public Portfolio</h4><textarea id="p-public" class="hide">Generate MusicLinkd Public Portfolio. Read guide/README.md. No login required. Hero→About→Audio→Projects→Gallery. "Join MusicLinkd" + Sign Up.</textarea></div>
-<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('review')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Reviews</h4><textarea id="p-review" class="hide">Generate MusicLinkd Reviews. Read guide/README.md. Summary (avg rating). UnifiedReviewCard (24dp, real photo, gold stars). Sort. Bottom sheet "Write Review".</textarea></div>
-<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('set')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Settings</h4><textarea id="p-set" class="hide">Generate MusicLinkd Settings. Read guide/README.md. Sections: Profile, Account, Notifications, Privacy, Payments, Help. Lucide icons. 24dp cards.</textarea></div>
+<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('splash')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Splash Screen</h4><textarea id="p2-splash" class="hide">Generate a MusicLinkd Android splash screen. Read guide/README.md. Dark navy var(--black) bg. Logo Inter Tight 800, "d" in var(--pink). 500ms fade-in. No gradients.</textarea></div>
+<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('onboard')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Onboarding</h4><textarea id="p2-onboard" class="hide">Generate MusicLinkd onboarding. Read guide/README.md. Progress bar, UnifiedChip, UnifiedPrimaryButton. 24dp cards. Real Unsplash photos.</textarea></div>
+<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('discover')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Discover Feed</h4><textarea id="p2-discover" class="hide">Generate MusicLinkd Discover feed. Read guide/README.md. UnifiedSearchBar (999dp pill). Filter chips. 2-col Grid. Cards: 24dp radius, 1dp border. Real Unsplash photos.</textarea></div>
+<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('artist')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Artist Profile</h4><textarea id="p2-artist" class="hide">Generate MusicLinkd Artist Profile. Read guide/README.md. Hero (avatar, verified badge). Tabs: About/Projects/Credits/Reviews. Sticky: UnifiedPrimaryButton "Hire". 24dp cards.</textarea></div>
+<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('studio')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Studio Booking</h4><textarea id="p2-studio" class="hide">Generate MusicLinkd Studio Booking. Read guide/README.md. Header (cover, verified, rating). Equipment checklist. Calendar grid. Bottom sheet confirmation. 24dp cards.</textarea></div>
+<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('mkt')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Marketplace</h4><textarea id="p2-mkt" class="hide">Generate MusicLinkd Marketplace. Read guide/README.md. Category tabs. Search bar. 2-col grid. Price filter. Tap→detail.</textarea></div>
+<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('msg')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Messaging</h4><textarea id="p2-msg" class="hide">Generate MusicLinkd Messaging. Read guide/README.md. Sent: pink var(--pink), right. Received: white+1dp border, left, 16dp radius. Real avatars.</textarea></div>
+<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('public')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Public Portfolio</h4><textarea id="p2-public" class="hide">Generate MusicLinkd Public Portfolio. Read guide/README.md. No login required. Hero→About→Audio→Projects→Gallery. "Join MusicLinkd" + Sign Up.</textarea></div>
+<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('review')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Reviews</h4><textarea id="p2-review" class="hide">Generate MusicLinkd Reviews. Read guide/README.md. Summary (avg rating). UnifiedReviewCard (24dp, real photo, gold stars). Sort. Bottom sheet "Write Review".</textarea></div>
+<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('set')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Settings</h4><textarea id="p2-set" class="hide">Generate MusicLinkd Settings. Read guide/README.md. Sections: Profile, Account, Notifications, Privacy, Payments, Help. Lucide icons. 24dp cards.</textarea></div>
 </div>
 </section>
 
@@ -4777,7 +4777,7 @@ img { max-width: 100%; height: auto; display: block; }
 </div>
 <p style="font-size:var(--fs-10);color:var(--muted);margin-top:12px">These items will be properly categorized in a future audit pass.</p>
 </section>
-<section class="section" id="adv-masonry">
+<section class="sec" id="adv-masonry">
     <div class="section-header">
         <h2 class="section-title">Masonry Sign-up Modal</h2>
         <p class="section-desc">A full-width background consisting of a cascading masonry grid of images with a dark overlay and a prominent sign-up card.</p>
@@ -4831,7 +4831,7 @@ img { max-width: 100%; height: auto; display: block; }
     </div>
 </section>
 
-<section class="section" id="adv-dualhero">
+<section class="sec" id="adv-dualhero">
     <div class="section-header">
         <h2 class="section-title">Dual-Sided Floating Hero</h2>
         <p class="section-desc">A center-aligned typography hero flanked by staggered, floating images on both sides.</p>
@@ -4849,7 +4849,7 @@ img { max-width: 100%; height: auto; display: block; }
     </div>
 </section>
 
-<section class="section" id="adv-features">
+<section class="sec" id="adv-features">
     <div class="section-header">
         <h2 class="section-title">Three-Column Feature Grid</h2>
         <p class="section-desc">A grid of columns featuring a floating graphic avatar over a colored shape.</p>
@@ -4896,7 +4896,7 @@ img { max-width: 100%; height: auto; display: block; }
     </div>
 </section>
 
-<section class="section" id="adv-blog">
+<section class="sec" id="adv-blog">
     <div class="section-header">
         <h2 class="section-title">Graphic Banner Hero & Article Grid</h2>
         <p class="section-desc">A full-width rounded banner with a light background and cut-out graphics, followed by an article grid.</p>
@@ -5439,161 +5439,6 @@ img { max-width: 100%; height: auto; display: block; }
       By continuing, you agree to Terms & Privacy
     </div>
   </div>
-
-    <!-- ===== 17. PINTEREST & SUPERCHARGE BLOCKS ===== -->
-    <section class="sec" id="adv-supercharge-bento">
-        <div class="eyebrow">Marketing Block</div>
-        <h2>Supercharge Bento Grid</h2>
-        <p class="desc">A conversion-optimized 3-column grid for featuring platform benefits with top-aligned imagery and border-first styling.</p>
-        
-        <div class="sc-bento-grid">
-            <div class="sc-bento-card">
-                <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=400&q=80" alt="Studio" class="sc-bento-img">
-                <h3 class="sc-bento-title">Ever-growing library</h3>
-                <p class="sc-bento-desc">Continuously updated premium studios and session files.</p>
-            </div>
-            <div class="sc-bento-card">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Vocalist" class="sc-bento-img">
-                <h3 class="sc-bento-title">Pro vocal sessions</h3>
-                <p class="sc-bento-desc">Expert-led high quality recordings and performances.</p>
-            </div>
-            <div class="sc-bento-card">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Mixing" class="sc-bento-img">
-                <h3 class="sc-bento-title">Exclusive stems</h3>
-                <p class="sc-bento-desc">Premium mixing templates, stems, and mastering guides.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="sec" id="adv-supercharge-dark">
-        <div class="eyebrow">Marketing Block</div>
-        <h2>Supercharge Dark Bento</h2>
-        <p class="desc">Premium dark-mode staggered grid to highlight top-tier masterclasses or features.</p>
-        
-        <div class="sc-dark-section">
-            <h2 style="color:white;">What you'll master with All-Access</h2>
-            <div class="sc-dark-bento">
-                <div class="sc-dark-card hero-span" style="background-image: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center; position:relative;">
-                    <div style="position:absolute; inset:0; background:rgba(13,11,38,0.7); border-radius:inherit;"></div>
-                    <div style="position:relative; z-index:1;">
-                        <span class="sc-dark-label">Pro-only</span>
-                        <h3 style="font-size:28px; margin-bottom:8px;">Studio Mastering</h3>
-                        <p style="color:#CBD5E1;">Master acoustics from foundations to advanced analog routing.</p>
-                    </div>
-                </div>
-                <div class="sc-dark-card">
-                    <span class="sc-dark-label">Pro-only</span>
-                    <h4>Vocal comping</h4>
-                    <p style="font-size:12px; color:#CBD5E1; margin-top:8px;">Unlock the power of clean takes.</p>
-                </div>
-                <div class="sc-dark-card">
-                    <h4>Mic placement</h4>
-                    <p style="font-size:12px; color:#CBD5E1; margin-top:8px;">Learn to use polar patterns.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="sec" id="adv-supercharge-split">
-        <div class="eyebrow">Marketing Block</div>
-        <h2>Supercharge Split Editorial</h2>
-        <p class="desc">Massive typography addressing user pain points with floating alert pills.</p>
-        
-        <div class="sc-split-section">
-            <div>
-                <p style="color:var(--pink); font-weight:700; margin-bottom:8px;">Does this sound familiar?</p>
-                <div class="sc-editorial-quote">
-                    "I recognize beautiful <span>studios</span> quickly—but I can't <span>book them easily</span>."
-                </div>
-                <p class="desc" style="margin-top:24px;">It's not about lacking budget. It's about lacking structured access. MusicLinkd gives you actionable bookings instantly.</p>
-            </div>
-            <div>
-                <div class="sc-alert-pill"><i class="fa-solid fa-thumbs-down"></i> Booking process feels overwhelming.</div>
-                <div class="sc-alert-pill"><i class="fa-solid fa-thumbs-down"></i> Rates are scattered or impractical.</div>
-                <div class="sc-alert-pill"><i class="fa-solid fa-thumbs-down"></i> Gear lists don't reflect reality.</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="sec" id="adv-pinterest-masonry">
-        <div class="eyebrow">Marketing Block</div>
-        <h2>Pinterest Profile & Trends</h2>
-        <p class="desc">The iconic Pinterest masonry grid and search trends table, optimized for fluid UI.</p>
-        
-        <h3>Your Saved Ideas</h3>
-        <div class="pin-masonry">
-            <div class="pin-masonry-item">
-                <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=400&q=80" alt="Pin">
-                <div style="padding:12px 0;">
-                    <h4 style="font-size:14px;">Yash Raj Studios</h4>
-                    <p style="font-size:12px; color:var(--muted);">Mumbai Room A</p>
-                </div>
-            </div>
-            <div class="pin-masonry-item">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Pin" style="height:240px; object-fit:cover;">
-                <div style="padding:12px 0;">
-                    <h4 style="font-size:14px;">Ananya Sharma</h4>
-                    <p style="font-size:12px; color:var(--muted);">Soprano Vocals</p>
-                </div>
-            </div>
-            <div class="pin-masonry-item">
-                <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=400&q=80" alt="Pin" style="height:180px; object-fit:cover;">
-                <div style="padding:12px 0;">
-                    <h4 style="font-size:14px;">Neumann U87</h4>
-                    <p style="font-size:12px; color:var(--muted);">Gear Rental</p>
-                </div>
-            </div>
-        </div>
-        
-        <h3 style="margin-top:48px;">Search Trends</h3>
-        <table class="pin-trends-table">
-            <thead>
-                <tr>
-                    <th>Keywords</th>
-                    <th>Search Volume</th>
-                    <th>Growth</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="pin-trend-title">
-                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80" alt="Vocalist">
-                            Sufi Vocalist Priya
-                        </div>
-                    </td>
-                    <td>High</td>
-                    <td style="color:var(--success); font-weight:700;">+6,000%</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="pin-trend-title">
-                            <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=80&q=80" alt="Studio">
-                            Dolby Atmos Mumbai
-                        </div>
-                    </td>
-                    <td>Medium</td>
-                    <td style="color:var(--success); font-weight:700;">+1,000%</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-    <!-- Floating Nav Elements -->
-    <div class="pin-floating-sidebar">
-        <div class="pin-nav-icon active"><i class="fa-solid fa-house"></i></div>
-        <div class="pin-nav-icon"><i class="fa-solid fa-compass"></i></div>
-        <div class="pin-nav-icon"><i class="fa-solid fa-plus"></i></div>
-        <div class="pin-nav-icon"><i class="fa-solid fa-newspaper"></i></div>
-        <div class="pin-nav-icon"><i class="fa-solid fa-user"></i></div>
-    </div>
-    <div class="pin-bottom-nav">
-        <div class="pin-nav-icon active"><i class="fa-solid fa-house"></i></div>
-        <div class="pin-nav-icon"><i class="fa-solid fa-compass"></i></div>
-        <div class="pin-nav-icon"><i class="fa-solid fa-plus"></i></div>
-        <div class="pin-nav-icon"><i class="fa-solid fa-newspaper"></i></div>
-        <div class="pin-nav-icon"><i class="fa-solid fa-user"></i></div>
-    </div>
 
 </main>
 </div><!-- /.layout-wrapper -->
