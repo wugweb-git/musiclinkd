@@ -4,20 +4,43 @@
 <style>
 /* ===== MASTER UNIFIED DESIGN SYSTEM CSS (SINGLE SOURCE OF TRUTH) ===== */
 :root {
-    --sp-xs: 4px;
-    --sp-sm: 8px;
-    --sp-md: 16px;
-    --sp-lg: 24px;
+    /* 4-token exponential scale (r=2) — every numeric category, no exceptions.
+       Legacy names below are aliases so existing usages keep working. */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 16px;
+    --space-4: 32px;
+    --radius-1: 8px;
+    --radius-2: 16px;
+    --radius-3: 32px;
+    --radius-4: 9999px; /* pill / full round */
+    --opacity-1: 0.08;
+    --opacity-2: 0.16;
+    --opacity-3: 0.32;
+    --opacity-4: 0.64;
+    --duration-1: 125ms;
+    --duration-2: var(--duration-2);
+    --duration-3: 320ms;
+    --duration-4: var(--duration-4);
+
+    /* Legacy aliases (kept so the rest of the file doesn't need a mass rewrite) */
+    --sp-xs: var(--space-1);
+    --sp-sm: var(--space-2);
+    --sp-md: var(--space-3);
+    --sp-lg: var(--space-4);
+    --sp-1: var(--space-1);
+    --sp-2: var(--space-2);
+    --sp-3: var(--space-3);
     --sz-sm: 32px;
     --sz-md: 40px;
     --sz-lg: 48px;
     --sz-xl: 56px;
-    --r-sm: 8px;
-    --r-md: 16px;
-    --r-lg: 24px;
-    --r-pill: 9999px;
-    --r-card: 24px;
-    --r-media: 16px;
+    --r-sm: var(--radius-1);
+    --r-md: var(--radius-2);
+    --r-lg: var(--radius-3);
+    --r-pill: var(--radius-4);
+    --r-card: var(--radius-3);
+    --r-media: var(--radius-2);
     --el-0: none;
     --el-1: 0 1px 3px rgba(0,0,0,0.08);
     --el-2: 0 4px 12px rgba(0,0,0,0.05);
@@ -26,10 +49,15 @@
     --bd-subtle: 1px solid var(--line);
     --bd-focus: 2px solid var(--pink);
     --bd-sel: 2px solid var(--black);
-    --op-disabled: 0.38;
-    --op-hover: 0.08;
-    --op-pressed: 0.12;
-    --op-overlay: 0.50;
+    --op-disabled: var(--opacity-3);
+    --op-hover: var(--opacity-1);
+    --op-pressed: var(--opacity-2);
+    --op-overlay: var(--opacity-4);
+    --dur-fast: var(--duration-1);
+    --dur-default: var(--duration-1);
+    --dur-medium: var(--duration-2);
+    --dur-slow: var(--duration-3);
+    --dur-entrance: var(--duration-4);
     --pink: #EA4C89;
     --black: #0D0D0D;
     --paper: #FCFCFD;
@@ -56,9 +84,6 @@
     --fs-10: 10px;
     --fs-caption: 11px;
     --fs-h3: 14px;
-    --sp-1: 4px;
-    --sp-2: 8px;
-    --sp-3: 12px;
 }
 
 /* Floating Hamburger Button (Active on Mobile & Tablet < 1024px) */
@@ -90,7 +115,7 @@
     background: rgba(13,11,38,0.4);
     backdrop-filter: blur(3px);
     z-index: 1030;
-    transition: opacity 0.25s ease;
+    transition: opacity var(--duration-2) ease;
 }
 .ov.show, .ov.open {
     display: block !important;
@@ -111,7 +136,7 @@
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    transition: left 0.25s ease, padding 0.25s ease;
+    transition: left var(--duration-2) ease, padding var(--duration-2) ease;
 }
 
 .top-nav .logo-area {
@@ -159,7 +184,7 @@
     color: var(--muted);
     text-decoration: none;
     font-weight: 500;
-    transition: color 150ms;
+    transition: color var(--duration-1);
 }
 
 .top-nav .nav-links a:hover {
@@ -179,7 +204,7 @@
     border-radius: 4px;
     background: #fff;
     cursor: pointer;
-    transition: all 150ms;
+    transition: all var(--duration-1);
 }
 
 .top-nav .nav-btn:hover {
@@ -210,7 +235,7 @@
     z-index: 1040;
     display: flex;
     flex-direction: column;
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform var(--duration-2) cubic-bezier(0.4, 0, 0.2, 1), left var(--duration-2) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Sidebar Accordion Group & Items */
@@ -228,7 +253,7 @@
     color: var(--muted);
     text-decoration: none;
     border-left: 2px solid transparent;
-    transition: all 0.15s ease;
+    transition: all var(--duration-1) ease;
 }
 .sgi a:hover, .sgi a.on {
     color: var(--pink);
@@ -244,7 +269,7 @@
     min-width: 0;
     padding: 40px 48px 120px;
     background: var(--paper);
-    transition: margin-left 0.25s ease, width 0.25s ease;
+    transition: margin-left var(--duration-2) ease, width var(--duration-2) ease;
 }
 
 /* --- RESPONSIVE BREAKPOINT ADAPTATION --- */
@@ -272,15 +297,7 @@
 
 /* Mobile & Tablet Drawer Layout (< 1024px) */
 @media (max-width: 1023px) {
-    :root {--sp-xs:4px;--sp-sm:8px;--sp-md:16px;--sp-lg:24px;
---sz-sm:32px;--sz-md:40px;--sz-lg:48px;--sz-xl:56px;
---r-sm:8px;--r-md:16px;--r-lg:24px;--r-pill:9999px;
---el-0:none;--el-1:0 1px 3px rgba(0,0,0,0.08);--el-2:0 4px 12px rgba(0,0,0,0.05);--el-3:0 8px 24px rgba(0,0,0,0.08);
---bd-none:none;--bd-subtle:1px solid var(--line);--bd-focus:2px solid var(--pink);--bd-sel:2px solid var(--black);
---op-disabled:0.38;--op-hover:0.08;--op-pressed:0.12;--op-overlay:0.50;
---pink:#EA4C89;--black:#0D0D0D;--paper:#FCFCFD;--line:#ECECF1;--muted:#7D7D8E;
---success:#22C55E;--warn:#F59E0B;--err:#DC2626;--purple:#8B5CF6;
---sw:240px;
+    :root {
         --sw: 0px;
     }
     .mtBtn {
@@ -481,7 +498,7 @@ h1, h2, h3 {
 
 .ch {
     font-size: 9px;
-    transition: transform 150ms;
+    transition: transform var(--duration-1);
 }
 
 .sg.open .ch {
@@ -547,7 +564,7 @@ h1, h2, h3 {
     cursor: pointer;
     font-size: 14px;
     opacity: 0.4;
-    transition: opacity 150ms;
+    transition: opacity var(--duration-1);
 }
 
 .copy-link-btn:hover {
@@ -591,7 +608,7 @@ button, input, select, textarea, .chip, .btn, .sgt, .platform-tab {
     padding: 10px 20px;
     font: 600 13px/1 'Inter', sans-serif;
     cursor: pointer;
-    transition: all 150ms ease;
+    transition: all var(--duration-1) ease;
     border: 1px solid transparent;
 }
 
@@ -659,11 +676,11 @@ button, input, select, textarea, .chip, .btn, .sgt, .platform-tab {
     animation: eqWave 1.2s infinite ease-in-out;
 }
 .eq-bar:nth-child(2) { animation-delay: 0.2s; }
-.eq-bar:nth-child(3) { animation-delay: 0.4s; }
-.eq-bar:nth-child(4) { animation-delay: 0.6s; }
+.eq-bar:nth-child(3) { animation-delay: var(--duration-3); }
+.eq-bar:nth-child(4) { animation-delay: var(--duration-4); }
 
 .card-lift {
-    transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform var(--duration-2) cubic-bezier(0.4, 0, 0.2, 1), box-shadow var(--duration-2) cubic-bezier(0.4, 0, 0.2, 1);
 }
 .card-lift:hover {
     transform: translateY(-4px);
@@ -767,18 +784,18 @@ button, input, select, textarea, .chip, .btn, .sgt, .platform-tab {
 
 /* ===== MASONRY DISCOVERY GRID (from pinterest_fluid_ui) ===== */
 .masonry-grid{column-count:4;column-gap:var(--sp-md);width:100%;max-width:1200px;margin:0 auto}
-.masonry-item{background:var(--white,#fff);border-radius:var(--r-card);overflow:hidden;margin-bottom:var(--sp-md);break-inside:avoid;position:relative;box-shadow:var(--shadow-1);border:1px solid var(--line);transition:transform 200ms var(--ease, cubic-bezier(0.4,0,0.2,1)),box-shadow 200ms;cursor:pointer}
+.masonry-item{background:var(--white,#fff);border-radius:var(--r-card);overflow:hidden;margin-bottom:var(--sp-md);break-inside:avoid;position:relative;box-shadow:var(--shadow-1);border:1px solid var(--line);transition:transform var(--duration-2) var(--ease, cubic-bezier(0.4,0,0.2,1)),box-shadow var(--duration-2);cursor:pointer}
 .masonry-item:hover{transform:translateY(-4px);box-shadow:var(--shadow-2)}
 .masonry-media-container{position:relative;overflow:hidden;background:var(--surface-2,#F1F5F9)}
-.masonry-media-container img{width:100%;display:block;object-fit:cover;transition:transform 0.6s cubic-bezier(0.4,0,0.2,1)}
+.masonry-media-container img{width:100%;display:block;object-fit:cover;transition:transform var(--duration-4) cubic-bezier(0.4,0,0.2,1)}
 .masonry-item:hover .masonry-media-container img{transform:scale(1.06)}
-.item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,11,38,0.6) 0%,rgba(13,11,38,0.2) 60%,transparent 100%);opacity:0;transition:opacity 0.3s ease;display:flex;flex-direction:column;justify-content:space-between;padding:var(--sp-sm);z-index:5}
+.item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,11,38,0.6) 0%,rgba(13,11,38,0.2) 60%,transparent 100%);opacity:0;transition:opacity var(--duration-3) ease;display:flex;flex-direction:column;justify-content:space-between;padding:var(--sp-sm);z-index:5}
 .masonry-item:hover .item-overlay{opacity:1}
-.overlay-save-btn{align-self:flex-end;background:var(--pink);color:#fff;border:none;border-radius:var(--r-pill);padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;transition:all 150ms;box-shadow:var(--shadow-1)}
+.overlay-save-btn{align-self:flex-end;background:var(--pink);color:#fff;border:none;border-radius:var(--r-pill);padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;transition:all var(--duration-1);box-shadow:var(--shadow-1)}
 .overlay-save-btn:hover{background:var(--pink-hover,#D93C77)}
 .overlay-save-btn.saved{background:var(--black);color:#fff}
 .overlay-action-row{display:flex;justify-content:space-between;align-items:center;color:#fff}
-.overlay-action-btn{background:rgba(255,255,255,0.2);color:#fff;border:none;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;transition:all 150ms}
+.overlay-action-btn{background:rgba(255,255,255,0.2);color:#fff;border:none;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;transition:all var(--duration-1)}
 .overlay-action-btn:hover{background:#fff;color:var(--black)}
 .masonry-details{padding:var(--sp-sm);text-align:left}
 .masonry-title{font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--black);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -787,16 +804,16 @@ button, input, select, textarea, .chip, .btn, .sgt, .platform-tab {
 @media(max-width:768px){.masonry-grid{column-count:2}}
 
 /* ===== MODAL SYSTEM (from pinterest_fluid_ui) ===== */
-.modal-backdrop{position:fixed;inset:0;background:rgba(13,11,38,0.5);backdrop-filter:blur(4px);z-index:2000;display:none;align-items:center;justify-content:center;padding:var(--sp-md);opacity:0;transition:opacity 0.3s ease}
+.modal-backdrop{position:fixed;inset:0;background:rgba(13,11,38,0.5);backdrop-filter:blur(4px);z-index:2000;display:none;align-items:center;justify-content:center;padding:var(--sp-md);opacity:0;transition:opacity var(--duration-3) ease}
 .modal-backdrop.open{display:flex;opacity:1}
-.modal-card{background:#fff;border-radius:32px;box-shadow:var(--shadow-3);width:100%;max-width:480px;overflow:hidden;position:relative;transform:scale(0.9);transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);padding:var(--sp-lg)}
+.modal-card{background:#fff;border-radius:32px;box-shadow:var(--shadow-3);width:100%;max-width:480px;overflow:hidden;position:relative;transform:scale(0.9);transition:transform var(--duration-3) cubic-bezier(0.34,1.56,0.64,1);padding:var(--sp-lg)}
 .modal-backdrop.open .modal-card{transform:scale(1)}
-.modal-close-btn{position:absolute;top:16px;right:16px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--muted);transition:color 150ms}
+.modal-close-btn{position:absolute;top:16px;right:16px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--muted);transition:color var(--duration-1)}
 .modal-close-btn:hover{color:var(--black)}
 .modal-card h3{font-family:var(--font-display);font-size:22px;font-weight:800;text-align:center;margin-bottom:var(--sp-lg)}
 .form-group{margin-bottom:var(--sp-md)}
 .form-group label{display:block;font-size:10px;font-weight:700;color:var(--black);margin-bottom:4px}
-.form-input{width:100%;padding:10px 14px;border:1.5px solid var(--line);border-radius:16px;font:13px 'Inter',sans-serif;outline:none;transition:border-color 150ms}
+.form-input{width:100%;padding:10px 14px;border:1.5px solid var(--line);border-radius:16px;font:13px 'Inter',sans-serif;outline:none;transition:border-color var(--duration-1)}
 .form-input:focus{border-color:var(--pink)}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-md)}
 .toggle-details{max-width:280px}
@@ -804,12 +821,12 @@ button, input, select, textarea, .chip, .btn, .sgt, .platform-tab {
 .toggle-desc{font-size:10px;color:var(--muted);margin-top:2px}
 .switch{position:relative;display:inline-block;width:44px;height:24px}
 .switch input{opacity:0;width:0;height:0}
-.slider{position:absolute;cursor:pointer;inset:0;background:#E9E9E9;transition:.4s;border-radius:24px}
-.slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background:#fff;transition:.4s;border-radius:50%}
+.slider{position:absolute;cursor:pointer;inset:0;background:#E9E9E9;transition:var(--duration-3);border-radius:24px}
+.slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background:#fff;transition:var(--duration-3);border-radius:50%}
 input:checked+.slider{background:var(--black)}
 input:checked+.slider:before{transform:translateX(20px)}
 .invite-row{display:flex;align-items:center;justify-content:space-between;padding:var(--sp-sm) 0;border-top:1px solid var(--line);margin-bottom:var(--sp-md)}
-.invite-btn{width:36px;height:36px;border-radius:50%;background:var(--surface-2);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 150ms}
+.invite-btn{width:36px;height:36px;border-radius:50%;background:var(--surface-2);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all var(--duration-1)}
 .invite-btn:hover{background:#E9E9E9}
 .business-modal-card{max-width:680px;display:grid;grid-template-columns:1.1fr 1fr;padding:0}
 .biz-modal-left{background:var(--black);background-image:linear-gradient(135deg,var(--black) 40%,#1e1b4b 100%);display:flex;align-items:center;justify-content:center;padding:var(--sp-xl);position:relative;overflow:hidden}
@@ -823,7 +840,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 @media(max-width:600px){.business-modal-card{grid-template-columns:1fr}.biz-modal-left{display:none}}
 
 /* ===== TOAST POPUP (spring animated, from pinterest_fluid_ui) ===== */
-.toast-popup{position:fixed;bottom:30px;left:30px;z-index:2050;background:var(--black);color:#fff;padding:10px 16px;border-radius:16px;font:600 12px 'Inter',sans-serif;box-shadow:var(--shadow-3);display:flex;align-items:center;gap:8px;transform:translateY(100px);opacity:0;transition:all 0.3s cubic-bezier(0.175,0.885,0.32,1.275);pointer-events:none}
+.toast-popup{position:fixed;bottom:30px;left:30px;z-index:2050;background:var(--black);color:#fff;padding:10px 16px;border-radius:16px;font:600 12px 'Inter',sans-serif;box-shadow:var(--shadow-3);display:flex;align-items:center;gap:8px;transform:translateY(100px);opacity:0;transition:all var(--duration-3) cubic-bezier(0.175,0.885,0.32,1.275);pointer-events:none}
 .toast-popup.show{transform:translateY(0);opacity:1}
 .toast-icon-dot{width:16px;height:16px;border-radius:50%;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800}
 
@@ -855,7 +872,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 .blog-hero-tag{background:var(--black);color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;padding:4px 12px;border-radius:var(--r-pill);display:inline-block;margin-bottom:12px}
 .blog-hero-title{font-family:var(--font-display);font-size:44px;font-weight:900;line-height:1.05;letter-spacing:-0.03em;color:var(--black)}
 .blog-hero-title span{color:var(--pink)}
-.hero-graphic{position:absolute;transition:transform 0.5s ease}
+.hero-graphic{position:absolute;transition:transform var(--duration-4) ease}
 .graphic-headphones{width:140px;right:40px;top:20px;transform:rotate(-15deg)}
 .graphic-watch{width:90px;right:120px;top:140px;transform:rotate(20deg)}
 .blog-hero:hover .graphic-headphones{transform:rotate(-5deg) scale(1.05)}
@@ -882,7 +899,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 .about-cta-row{display:flex;justify-content:center;gap:var(--sp-sm)}
 
 /* ===== STICKY CHAT BUTTON (from pinterest_fluid_ui) ===== */
-.btn-sticky-chat{position:fixed;bottom:30px;right:30px;background:var(--err);color:#fff;border:none;border-radius:var(--r-pill);padding:10px 18px;font:700 13px 'Inter',sans-serif;cursor:pointer;box-shadow:var(--shadow-3);z-index:1000;display:flex;align-items:center;gap:8px;transition:all 150ms}
+.btn-sticky-chat{position:fixed;bottom:30px;right:30px;background:var(--err);color:#fff;border:none;border-radius:var(--r-pill);padding:10px 18px;font:700 13px 'Inter',sans-serif;cursor:pointer;box-shadow:var(--shadow-3);z-index:1000;display:flex;align-items:center;gap:8px;transition:all var(--duration-1)}
 .btn-sticky-chat:hover{transform:scale(1.05);background:#C32F00}
 
 /* ===== EMPTY GRID CARDS (from pinterest_fluid_ui) ===== */
@@ -892,14 +909,14 @@ input:checked+.slider:before{transform:translateX(20px)}
 .empty-grid-card p{font-size:11px;color:var(--muted);margin-bottom:16px}
 
 /* ===== FILTER CHIP (enhanced, from pinterest_fluid_ui) ===== */
-.filter-chip{background:var(--surface-2);border:1px solid transparent;border-radius:var(--r-pill);padding:6px 14px;font-size:12px;font-weight:500;color:var(--black);cursor:pointer;transition:all 150ms;display:inline-flex;align-items:center;gap:6px}
+.filter-chip{background:var(--surface-2);border:1px solid transparent;border-radius:var(--r-pill);padding:6px 14px;font-size:12px;font-weight:500;color:var(--black);cursor:pointer;transition:all var(--duration-1);display:inline-flex;align-items:center;gap:6px}
 .filter-chip:hover{background:#E9E9E9}
 .filter-chip.selected{background:var(--black);color:#fff}
 
 /* ===== BTN PRIMARY/SECONDARY DS (from pinterest_fluid_ui) ===== */
-.btn-primary-ds{background:var(--pink);color:#fff;border:none;border-radius:var(--r-pill);padding:10px 20px;font:700 13px 'Inter',sans-serif;cursor:pointer;transition:all 150ms;box-shadow:0 4px 10px rgba(234,76,137,0.25);display:inline-flex;align-items:center;justify-content:center;min-height:40px}
+.btn-primary-ds{background:var(--pink);color:#fff;border:none;border-radius:var(--r-pill);padding:10px 20px;font:700 13px 'Inter',sans-serif;cursor:pointer;transition:all var(--duration-1);box-shadow:0 4px 10px rgba(234,76,137,0.25);display:inline-flex;align-items:center;justify-content:center;min-height:40px}
 .btn-primary-ds:hover{background:var(--pink-hover,#D93C77)}
-.btn-secondary-ds{background:var(--surface-2);color:var(--black);border:1px solid var(--line);border-radius:var(--r-pill);padding:10px 20px;font:600 13px 'Inter',sans-serif;cursor:pointer;transition:all 150ms;min-height:40px;display:inline-flex;align-items:center;justify-content:center}
+.btn-secondary-ds{background:var(--surface-2);color:var(--black);border:1px solid var(--line);border-radius:var(--r-pill);padding:10px 20px;font:600 13px 'Inter',sans-serif;cursor:pointer;transition:all var(--duration-1);min-height:40px;display:inline-flex;align-items:center;justify-content:center}
 .btn-secondary-ds:hover{background:#E9E9E9}
 .btn-block{width:100%}
 
@@ -931,23 +948,23 @@ input:checked+.slider:before{transform:translateX(20px)}
 
 /* ===== TOOLTIP ===== */
 .tooltip-demo{position:relative;display:inline-flex}
-.tooltip-bubble{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--black);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:500;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 150ms}
+.tooltip-bubble{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--black);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:500;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity var(--duration-1)}
 .tooltip-demo:hover .tooltip-bubble{opacity:1}
 .tooltip-bubble.rich{padding:10px 14px;max-width:200px;white-space:normal;text-align:left}
 .tooltip-bubble.rich .tooltip-title{font-weight:700;font-size:11px;margin-bottom:2px}
 .tooltip-bubble.rich .tooltip-body{font-size:10px;color:rgba(255,255,255,0.7)}
 
 /* ===== SIDE SHEET ===== */
-.side-sheet{position:fixed;top:0;bottom:0;right:-400px;width:360px;max-width:90vw;background:#fff;box-shadow:-8px 0 24px rgba(0,0,0,0.12);z-index:2000;transition:right 300ms cubic-bezier(0.4,0,0.2,1);padding:24px;overflow-y:auto}
+.side-sheet{position:fixed;top:0;bottom:0;right:-400px;width:360px;max-width:90vw;background:#fff;box-shadow:-8px 0 24px rgba(0,0,0,0.12);z-index:2000;transition:right var(--duration-3) cubic-bezier(0.4,0,0.2,1);padding:24px;overflow-y:auto}
 .side-sheet.open{right:0}
-.side-sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.32);z-index:1999;opacity:0;pointer-events:none;transition:opacity 300ms}
+.side-sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.32);z-index:1999;opacity:0;pointer-events:none;transition:opacity var(--duration-3)}
 .side-sheet-backdrop.open{opacity:1;pointer-events:auto}
 
 /* ===== DROPDOWN MENU ===== */
 .dropdown-menu{position:relative;display:inline-block}
-.dropdown-list{position:absolute;top:calc(100% + 4px);left:0;min-width:180px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-3);padding:4px;z-index:100;opacity:0;pointer-events:none;transform:translateY(-4px);transition:all 150ms}
+.dropdown-list{position:absolute;top:calc(100% + 4px);left:0;min-width:180px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-3);padding:4px;z-index:100;opacity:0;pointer-events:none;transform:translateY(-4px);transition:all var(--duration-1)}
 .dropdown-menu.open .dropdown-list{opacity:1;pointer-events:auto;transform:translateY(0)}
-.dropdown-item{padding:8px 12px;border-radius:8px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background 100ms}
+.dropdown-item{padding:8px 12px;border-radius:8px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background var(--duration-1)}
 .dropdown-item:hover{background:var(--surface-alt)}
 .dropdown-item .check{width:16px;height:16px;margin-left:auto;color:var(--pink);font-weight:700}
 
@@ -963,7 +980,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 
 /* ===== M3 NAVIGATION BAR ===== */
 .m3-nav-bar{display:flex;justify-content:space-around;align-items:flex-start;padding:8px 12px 12px;background:#fff;border-top:1px solid var(--line);max-width:400px;border-radius:20px 20px 0 0}
-.m3-nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 12px;border-radius:16px;cursor:pointer;transition:all 150ms;min-width:56px}
+.m3-nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 12px;border-radius:16px;cursor:pointer;transition:all var(--duration-1);min-width:56px}
 .m3-nav-item.active{background:var(--pink-container)}
 .m3-nav-item .nav-icon{width:24px;height:24px;display:flex;align-items:center;justify-content:center}
 .m3-nav-item .nav-label{font-size:10px;font-weight:600;color:var(--muted)}
@@ -977,11 +994,11 @@ input:checked+.slider:before{transform:translateX(20px)}
 .spinner-determinate svg{transform:rotate(-90deg)}
 .spinner-determinate circle{fill:none;stroke-width:3}
 .spinner-determinate .track{stroke:var(--line)}
-.spinner-determinate .fill{stroke:var(--pink);stroke-linecap:round;transition:stroke-dashoffset 300ms}
+.spinner-determinate .fill{stroke:var(--pink);stroke-linecap:round;transition:stroke-dashoffset var(--duration-3)}
 
 /* ===== MULTI-SELECT CHIPS WITH REMOVE ===== */
 .chip-removable{display:inline-flex;align-items:center;gap:4px;padding:4px 8px 4px 12px;border-radius:var(--r-pill);font-size:11px;font-weight:500;background:var(--pink-container);color:var(--pink);border:1px solid var(--pink)}
-.chip-removable .chip-x{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:10px;font-weight:700;transition:all 100ms}
+.chip-removable .chip-x{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:10px;font-weight:700;transition:all var(--duration-1)}
 .chip-removable .chip-x:hover{background:var(--pink);color:#fff}
 .chip-input{border:1px dashed var(--line);background:transparent;color:var(--muted);cursor:text}
 
@@ -996,18 +1013,6 @@ input:checked+.slider:before{transform:translateX(20px)}
 .state-demo-item{display:flex;flex-direction:column;align-items:center;gap:4px}
 .state-demo-label{font-size:8px;color:var(--muted);text-transform:uppercase;font-weight:600;text-align:center}
 </style>
-<script>
-/* Utility JS helpers */
-    const sections = Array.from(document.querySelectorAll('.sec'));
-    const scrollPos = window.scrollY + 80;
-    let current = 0;
-    sections.forEach((s, i) => {
-        if (s.offsetTop <= scrollPos) current = i;
-    });
-    const next = Math.max(0, Math.min(sections.length - 1, current + dir));
-    sections[next].scrollIntoView({ behavior: 'smooth' });
-}
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MusicLinkd Design System — Consolidated Master Reference</title>
@@ -1731,8 +1736,8 @@ input:checked+.slider:before{transform:translateX(20px)}
 <div class="eyebrow">02 Foundations</div>
 <h2>Spacing <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:9px;color:var(--muted);font-weight:400">v4.0</span></h2>
 
-<table class="token-table"><tr><th>Token</th><th>Mobile</th><th>Tablet</th><th>Desktop</th><th>Usage</th></tr><tr><td>xs</td><td>4</td><td>4</td><td>4</td><td>Badge internal</td></tr><tr><td>sm</td><td>8</td><td>8</td><td>8</td><td>Icon gaps</td></tr><tr><td>md</td><td>16</td><td>16</td><td>16</td><td>Card padding</td></tr><tr><td>lg</td><td>24</td><td>24</td><td>32</td><td>Section spacing</td></tr><tr><td>xl</td><td>32</td><td>40</td><td>48</td><td>Page margins</td></tr><tr><td>xxl</td><td>48</td><td>64</td><td>80</td><td>Hero padding</td></tr></table>
-<p style="font-size:var(--fs-caption);color:var(--muted)">8dp system. Spacing scales more than typography across breakpoints.</p>
+<table class="token-table"><tr><th>Token</th><th>Value</th><th>Usage</th></tr><tr><td>space-1</td><td>4dp</td><td>Badge internal, icon gaps</td></tr><tr><td>space-2</td><td>8dp</td><td>Compact gaps, chip padding</td></tr><tr><td>space-3</td><td>16dp</td><td>Card padding, default gaps</td></tr><tr><td>space-4</td><td>32dp</td><td>Section spacing, page margins, hero padding</td></tr></table>
+<p style="font-size:var(--fs-caption);color:var(--muted)">4 tokens, exponential ×2 (4 → 8 → 16 → 32dp). Applies at every breakpoint — no per-breakpoint variants. Legacy names <code>--sp-xs/sm/md/lg</code> alias onto this scale.</p>
 </section>
 <section class="sec" id="f-sizing">
 <button class="copy-link-btn" onclick="copyLink('f-sizing')">🔗</button>
@@ -1754,7 +1759,8 @@ input:checked+.slider:before{transform:translateX(20px)}
 <div class="eyebrow">02 Foundations</div>
 <h2>Radius <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:9px;color:var(--muted);font-weight:400">v4.0</span></h2>
 
-<table class="token-table"><tr><th>Token</th><th>Value</th><th>Usage</th></tr><tr><td>Card</td><td>24dp</td><td>Containers</td></tr><tr><td>Media</td><td>16dp</td><td>Images</td></tr><tr><td>Pill</td><td>9999dp</td><td>Buttons, chips</td></tr><tr><td>Avatar</td><td>50%</td><td>Photos</td></tr><tr><td>Toast</td><td>16dp</td><td>Notifications</td></tr></table>
+<table class="token-table"><tr><th>Token</th><th>Value</th><th>Usage</th></tr><tr><td>radius-1</td><td>8dp</td><td>Chips, small controls</td></tr><tr><td>radius-2</td><td>16dp</td><td>Media, toasts, inputs</td></tr><tr><td>radius-3</td><td>32dp</td><td>Cards, containers</td></tr><tr><td>radius-4</td><td>9999dp (pill)</td><td>Buttons, chips, avatars (round shape, not a step on the numeric scale)</td></tr></table>
+<p style="font-size:var(--fs-caption);color:var(--muted)">4 tokens, exponential ×2 (8 → 16 → 32dp) plus pill as a functional full-round token. Legacy names <code>--r-sm/md/lg/card/media/pill</code> alias onto this scale.</p>
 </section>
 <section class="sec" id="f-elevation">
 <button class="copy-link-btn" onclick="copyLink('f-elevation')">🔗</button>
@@ -1795,11 +1801,11 @@ input:checked+.slider:before{transform:translateX(20px)}
 <h2>Opacity Tokens <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:9px;color:var(--muted);font-weight:400">v4.0</span></h2>
 
 <table class="token-table"><tr><th>Token</th><th>Value</th><th>Usage</th></tr>
-<tr><td>Disabled</td><td>0.38</td><td>Inactive buttons, text</td></tr>
-<tr><td>Hover</td><td>0.08</td><td>Hover overlay</td></tr>
-<tr><td>Pressed</td><td>0.12</td><td>Ripple/press feedback</td></tr>
-<tr><td>Overlay</td><td>0.50</td><td>Modal backdrop</td></tr>
-<tr><td>Scrim</td><td>0.32</td><td>Drawer/menu backdrop</td></tr></table>
+<tr><td>opacity-1</td><td>0.08</td><td>Hover overlay</td></tr>
+<tr><td>opacity-2</td><td>0.16</td><td>Pressed / ripple feedback</td></tr>
+<tr><td>opacity-3</td><td>0.32</td><td>Disabled state, drawer/menu scrim</td></tr>
+<tr><td>opacity-4</td><td>0.64</td><td>Modal backdrop overlay</td></tr></table>
+<p style="font-size:var(--fs-caption);color:var(--muted)">4 tokens, exponential ×2 (0.08 → 0.16 → 0.32 → 0.64). Disabled and scrim previously had distinct values (0.38 / 0.32) — merged onto opacity-3. Legacy names <code>--op-disabled/hover/pressed/overlay</code> alias onto this scale.</p>
 </section>
 <section class="sec" id="f-zindex">
 <button class="copy-link-btn" onclick="copyLink('f-zindex')">🔗</button>
@@ -2162,17 +2168,17 @@ input:checked+.slider:before{transform:translateX(20px)}
 <h2>Motion Tokens <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:9px;color:var(--muted);font-weight:400">v4.0</span></h2>
 
 <table class="token-table"><tr><th>Token</th><th>Value</th><th>Usage</th></tr>
-<tr><td>Duration Fast</td><td>100ms</td><td>Ripple, micro-interactions</td></tr>
-<tr><td>Duration Default</td><td>150ms</td><td>Button press, chip toggle</td></tr>
-<tr><td>Duration Medium</td><td>200ms</td><td>Hover lift, icon change</td></tr>
-<tr><td>Duration Slow</td><td>300ms</td><td>Card lift, sheet reveal</td></tr>
-<tr><td>Duration Entrance</td><td>500ms</td><td>Modal, splash</td></tr></table>
+<tr><td>duration-1</td><td>125ms</td><td>Ripple, button press, chip toggle</td></tr>
+<tr><td>duration-2</td><td>200ms</td><td>Hover lift, icon change</td></tr>
+<tr><td>duration-3</td><td>320ms</td><td>Card lift, sheet reveal</td></tr>
+<tr><td>duration-4</td><td>500ms</td><td>Modal, splash, entrance</td></tr></table>
+<p style="font-size:var(--fs-caption);color:var(--muted)">4 tokens, exponential ×~1.6 (125 → 200 → 320 → var(--duration-4)). Legacy names <code>--dur-fast/default/medium/slow/entrance</code> alias onto this scale.</p>
 <table class="token-table"><tr><th>Curve</th><th>Value</th></tr>
 <tr><td>Standard</td><td>cubic-bezier(0.4, 0, 0.2, 1)</td></tr>
 <tr><td>Decelerate</td><td>cubic-bezier(0.0, 0, 0.2, 1)</td></tr>
 <tr><td>Accelerate</td><td>cubic-bezier(0.4, 0, 1, 1)</td></tr>
-<tr><td>Emphasized</td><td>cubic-bezier(0.4, 0, 0.2, 1)</td></tr>
 <tr><td>Spring</td><td>Damping 0.8 · Stiffness 300</td></tr></table>
+<p style="font-size:var(--fs-caption);color:var(--muted)">"Emphasized" removed — it was byte-for-byte identical to Standard, not a distinct curve.</p>
 <table class="token-table"><tr><th>Scale</th><th>Value</th></tr>
 <tr><td>Hover</td><td>scale(1.01) · translateY(-2px)</td></tr>
 <tr><td>Press</td><td>scale(0.97)</td></tr>
@@ -2362,7 +2368,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 <button class="btn btn-s btn-sm" onclick="toastMsg('Could not connect. Retry.')">Show Error</button>
 <button class="btn btn-n btn-sm" onclick="toastMsg('3 new messages')">Show Info</button>
 </div>
-<p style="font-size:10px;color:var(--muted);margin-top:8px">Entrance: translateY + opacity · 300ms · 16dp radius · Dark black bg</p>
+<p style="font-size:10px;color:var(--muted);margin-top:8px">Entrance: translateY + opacity · var(--duration-3) · 16dp radius · Dark black bg</p>
 </div>
 </section>
 
@@ -2691,7 +2697,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 <table class="token-table"><tr><th>Type</th><th>Usage</th></tr>
 <tr><td>Recent Searches</td><td>Last 5 queries, clearable</td></tr>
 <tr><td>Trending</td><td>Top 10 searches this week</td></tr>
-<tr><td>Autocomplete</td><td>Debounced 300ms, dropdown overlay</td></tr></table>
+<tr><td>Autocomplete</td><td>Debounced var(--duration-3), dropdown overlay</td></tr></table>
 </section>
 <section class="sec" id="vd-search-suggest">
 <button class="copy-link-btn" onclick="copyLink('vd-search-suggest')">🔗</button>
@@ -2912,11 +2918,11 @@ input:checked+.slider:before{transform:translateX(20px)}
 <div style="display:flex;gap:3px;align-items:flex-end;height:40px">
 <div style="width:6px;height:20px;background:var(--pink);border-radius:2px;animation:wfb 600ms ease-in-out infinite alternate"></div>
 <div style="width:6px;height:35px;background:var(--pink);border-radius:2px;animation:wfb 600ms ease-in-out infinite alternate;animation-delay:50ms"></div>
-<div style="width:6px;height:15px;background:var(--pink);border-radius:2px;animation:wfb 600ms ease-in-out infinite alternate;animation-delay:100ms"></div>
-<div style="width:6px;height:40px;background:var(--pink);border-radius:2px;animation:wfb 600ms ease-in-out infinite alternate;animation-delay:150ms"></div>
-<div style="width:6px;height:25px;background:var(--pink);border-radius:2px;animation:wfb 600ms ease-in-out infinite alternate;animation-delay:200ms"></div>
+<div style="width:6px;height:15px;background:var(--pink);border-radius:2px;animation:wfb 600ms ease-in-out infinite alternate;animation-delay:var(--duration-1)"></div>
+<div style="width:6px;height:40px;background:var(--pink);border-radius:2px;animation:wfb 600ms ease-in-out infinite alternate;animation-delay:var(--duration-1)"></div>
+<div style="width:6px;height:25px;background:var(--pink);border-radius:2px;animation:wfb 600ms ease-in-out infinite alternate;animation-delay:var(--duration-2)"></div>
 <div style="width:6px;height:30px;background:var(--pink);border-radius:2px;animation:wfb 600ms ease-in-out infinite alternate;animation-delay:250ms"></div>
-<div style="width:6px;height:10px;background:var(--pink);border-radius:2px;animation:wfb 600ms ease-in-out infinite alternate;animation-delay:300ms"></div>
+<div style="width:6px;height:10px;background:var(--pink);border-radius:2px;animation:wfb 600ms ease-in-out infinite alternate;animation-delay:var(--duration-3)"></div>
 </div>
 </div>
 </section>
@@ -3287,7 +3293,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 <h2>Authentication Screens <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:9px;color:var(--muted);font-weight:400">v4.0</span></h2>
 
 <table class="token-table"><tr><th>Screen</th><th>Layout</th></tr>
-<tr><td>Splash</td><td>Dark black, logo, 500ms fade</td></tr>
+<tr><td>Splash</td><td>Dark black, logo, var(--duration-4) fade</td></tr>
 <tr><td>Welcome</td><td>Logo + Get Started + Sign In</td></tr>
 <tr><td>Email</td><td>Input + Google SSO</td></tr>
 <tr><td>Mobile</td><td>Phone input + country code</td></tr>
@@ -3569,7 +3575,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 <div class="eyebrow">14 AI</div>
 <h2>Prompt Library <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:9px;color:var(--muted);font-weight:400">v4.0</span></h2>
 <p class="desc">One click copies a prompt for Google AI Studio.</p><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px">
-<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:#F8F8FB;border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:9px;font-weight:600;cursor:pointer" onclick="cpP('splash')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Splash Screen</h4><textarea id="p-splash" class="hide">Generate a MusicLinkd Android splash screen. Read guide/README.md. Dark black #0D0D0D bg. Logo Inter Tight 800, "d" in #EA4C89. 500ms fade-in. No gradients.</textarea></div>
+<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:#F8F8FB;border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:9px;font-weight:600;cursor:pointer" onclick="cpP('splash')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Splash Screen</h4><textarea id="p-splash" class="hide">Generate a MusicLinkd Android splash screen. Read guide/README.md. Dark black #0D0D0D bg. Logo Inter Tight 800, "d" in #EA4C89. var(--duration-4) fade-in. No gradients.</textarea></div>
 <div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:#F8F8FB;border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:9px;font-weight:600;cursor:pointer" onclick="cpP('onboard')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Onboarding</h4><textarea id="p-onboard" class="hide">Generate MusicLinkd onboarding. Read guide/README.md. Progress bar, UnifiedChip, UnifiedPrimaryButton. 24dp cards. Real Unsplash photos.</textarea></div>
 <div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:#F8F8FB;border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:9px;font-weight:600;cursor:pointer" onclick="cpP('discover')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Discover Feed</h4><textarea id="p-discover" class="hide">Generate MusicLinkd Discover feed. Read guide/README.md. UnifiedSearchBar (999dp pill). Filter chips. 2-col Grid. Cards: 24dp radius, 1dp border. Real Unsplash photos.</textarea></div>
 <div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:#F8F8FB;border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:9px;font-weight:600;cursor:pointer" onclick="cpP('artist')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Artist Profile</h4><textarea id="p-artist" class="hide">Generate MusicLinkd Artist Profile. Read guide/README.md. Hero (avatar, verified badge). Tabs: About/Projects/Credits/Reviews. Sticky: UnifiedPrimaryButton "Hire". 24dp cards.</textarea></div>
@@ -3593,7 +3599,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 <h2>Prompt Library <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:9px;color:var(--muted);font-weight:400">v4.0</span></h2>
 <p class="desc">One click copies a prompt for Google AI Studio.</p>
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--sp-2)">
-<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('splash')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Splash Screen</h4><textarea id="p-splash-2" class="hide">Generate a MusicLinkd Android splash screen. Read guide/README.md. Dark black var(--black) bg. Logo Inter Tight 800, "d" in var(--pink). 500ms fade-in. No gradients.</textarea></div>
+<div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('splash')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Splash Screen</h4><textarea id="p-splash-2" class="hide">Generate a MusicLinkd Android splash screen. Read guide/README.md. Dark black var(--black) bg. Logo Inter Tight 800, "d" in var(--pink). var(--duration-4) fade-in. No gradients.</textarea></div>
 <div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('onboard')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Onboarding</h4><textarea id="p-onboard-2" class="hide">Generate MusicLinkd onboarding. Read guide/README.md. Progress bar, UnifiedChip, UnifiedPrimaryButton. 24dp cards. Real Unsplash photos.</textarea></div>
 <div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('discover')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Discover Feed</h4><textarea id="p-discover-2" class="hide">Generate MusicLinkd Discover feed. Read guide/README.md. UnifiedSearchBar (999dp pill). Filter chips. 2-col Grid. Cards: 24dp radius, 1dp border. Real Unsplash photos.</textarea></div>
 <div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('artist')">Copy</button><h4 style="font-size:12px;margin-bottom:2px">Artist Profile</h4><textarea id="p-artist-2" class="hide">Generate MusicLinkd Artist Profile. Read guide/README.md. Hero (avatar, verified badge). Tabs: About/Projects/Credits/Reviews. Sticky: UnifiedPrimaryButton "Hire". 24dp cards.</textarea></div>
@@ -3786,7 +3792,7 @@ Include: Track cover art, genre chip, multi-track stem breakdown (Vocals, Bass, 
 <button class="copy-link-btn" onclick="copyLink('util-success')">🔗</button>
 <div class="eyebrow">More</div>
 <h2>Animated Success <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:9px;color:var(--muted);font-weight:400">v4.0</span></h2>
-<p class="desc">Lottie-style checkmark animation. Pink circle + white check. 500ms entrance, spring physics.</p>
+<p class="desc">Lottie-style checkmark animation. Pink circle + white check. var(--duration-4) entrance, spring physics.</p>
 </section>
 <section class="sec" id="nav-bar-alt">
 <button class="copy-link-btn" onclick="copyLink('nav-bar-alt')">🔗</button>
@@ -4238,7 +4244,7 @@ Include: Track cover art, genre chip, multi-track stem breakdown (Vocals, Bass, 
 <div class="demo-label">Float Animation</div>
 <div class="demo-row" style="gap:24px;justify-content:center">
 <div class="float" style="text-align:center"><div style="font-size:32px">🎵</div><div style="font-size:9px;color:var(--muted);margin-top:4px">3s infinite</div></div>
-<div class="float" style="text-align:center;animation-delay:0.5s"><div style="font-size:32px">🎸</div><div style="font-size:9px;color:var(--muted);margin-top:4px">+0.5s</div></div>
+<div class="float" style="text-align:center;animation-delay:var(--duration-4)"><div style="font-size:32px">🎸</div><div style="font-size:9px;color:var(--muted);margin-top:4px">+0.5s</div></div>
 <div class="float" style="text-align:center;animation-delay:1s"><div style="font-size:32px">🎤</div><div style="font-size:9px;color:var(--muted);margin-top:4px">+1s</div></div>
 <div class="float" style="text-align:center;animation-delay:1.5s"><div style="font-size:32px">🥁</div><div style="font-size:9px;color:var(--muted);margin-top:4px">+1.5s</div></div>
 </div>
@@ -4302,8 +4308,8 @@ Include: Track cover art, genre chip, multi-track stem breakdown (Vocals, Bass, 
 <div class="demo-label">Notification Stack (animated)</div>
 <div style="display:flex;flex-direction:column;gap:6px;max-width:380px">
 <div class="card-s hl" style="display:flex;gap:10px;align-items:center;padding:12px;animation:float 3s ease-in-out infinite"><div style="width:36px;height:36px;border-radius:10px;background:#FCE7F3;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🤝</div><div style="flex:1"><div style="font-size:11px;font-weight:600">New connection</div><div style="font-size:9px;color:var(--muted)">BeatRoot Collective · 2m ago</div></div><div style="width:6px;height:6px;background:var(--pink);border-radius:50%"></div></div>
-<div class="card-s hl" style="display:flex;gap:10px;align-items:center;padding:12px;animation:float 3s ease-in-out infinite;animation-delay:0.3s"><div style="width:36px;height:36px;border-radius:10px;background:#DCFCE7;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">✓</div><div style="flex:1"><div style="font-size:11px;font-weight:600">Booking confirmed</div><div style="font-size:9px;color:var(--muted)">North Room · 1h ago</div></div></div>
-<div class="card-s hl" style="display:flex;gap:10px;align-items:center;padding:12px;animation:float 3s ease-in-out infinite;animation-delay:0.6s"><div style="width:36px;height:36px;border-radius:10px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">⭐</div><div style="flex:1"><div style="font-size:11px;font-weight:600">New review</div><div style="font-size:9px;color:var(--muted)">Priya Sharma · 3h ago</div></div></div>
+<div class="card-s hl" style="display:flex;gap:10px;align-items:center;padding:12px;animation:float 3s ease-in-out infinite;animation-delay:var(--duration-3)"><div style="width:36px;height:36px;border-radius:10px;background:#DCFCE7;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">✓</div><div style="flex:1"><div style="font-size:11px;font-weight:600">Booking confirmed</div><div style="font-size:9px;color:var(--muted)">North Room · 1h ago</div></div></div>
+<div class="card-s hl" style="display:flex;gap:10px;align-items:center;padding:12px;animation:float 3s ease-in-out infinite;animation-delay:var(--duration-4)"><div style="width:36px;height:36px;border-radius:10px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">⭐</div><div style="flex:1"><div style="font-size:11px;font-weight:600">New review</div><div style="font-size:9px;color:var(--muted)">Priya Sharma · 3h ago</div></div></div>
 </div>
 </div>
 
@@ -4433,7 +4439,7 @@ Include: Track cover art, genre chip, multi-track stem breakdown (Vocals, Bass, 
 <button class="copy-link-btn" onclick="copyLink('c2-sidesheet')">🔗</button>
 <div class="eyebrow">04 Primitives</div>
 <h2>Side Sheet <span class="badge badge-av" style="margin-left:8px">New</span></h2>
-<p class="desc">Modal side sheet sliding from right. 360dp width, backdrop scrim, 300ms transition.</p>
+<p class="desc">Modal side sheet sliding from right. 360dp width, backdrop scrim, var(--duration-3) transition.</p>
 
 <div class="visual-demo">
 <div class="demo-label">Side Sheet — Tap to Open</div>
@@ -4455,7 +4461,7 @@ Include: Track cover art, genre chip, multi-track stem breakdown (Vocals, Bass, 
 <button class="copy-link-btn" onclick="copyLink('c2-dropdown')">🔗</button>
 <div class="eyebrow">04 Primitives</div>
 <h2>Dropdown Menu <span class="badge badge-av" style="margin-left:8px">New</span></h2>
-<p class="desc">Exposed dropdown menu. Tap to open. 12dp radius, shadow-3, 150ms transition.</p>
+<p class="desc">Exposed dropdown menu. Tap to open. 12dp radius, shadow-3, var(--duration-1) transition.</p>
 
 <div class="visual-demo">
 <div class="demo-label">Dropdown — Tap to Toggle</div>
@@ -4934,7 +4940,7 @@ function updateBreadcrumbs(section) {
         <span>${heading}</span>
     `;
     
-    const sectionNumber = document.getElementById('current-section');
+    const sectionNumber = document.getElementById('current-section-name');
     if (sectionNumber) {
         sectionNumber.textContent = eyebrow || 'Design System';
     }
@@ -5055,24 +5061,24 @@ document.addEventListener('DOMContentLoaded', () => {
 // Palette
 const pal=[{n:'White',h:'#FFFFFF'},{n:'Bg',h:'#FCFCFD'},{n:'Surface-50',h:'#F8F8FB'},{n:'Surface-100',h:'#F3F3F6'},{n:'Border',h:'#ECECF1'},{n:'Muted',h:'#8E91A1'},{n:'Text-2',h:'#676B7B'},{n:'Text',h:'#181A22'},{n:'Black',h:'#0D0D0D'},{n:'Pink',h:'#EA4C89'},{n:'Green',h:'#16A34A'},{n:'Error',h:'#DC2626'}];
 const pg=document.getElementById('palette');
-pal.forEach(c=>{const l=['#FFFFFF','#FCFCFD','#F8F8FB','#F3F3F6','#ECECF1'].includes(c.h);pg.insertAdjacentHTML('beforeend','<div style="background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer" onclick="navigator.clipboard.writeText(''+c.h+'');toastMsg('Copied '+c.h+'')"><div style="height:40px;background:'+c.h+(l?';border-bottom:1px solid var(--line)':'')+'"></div><div style="padding:6px 8px"><div style="font-weight:600;font-size:10px">'+c.n+'</div><div style="font-size:9px;color:var(--muted)">'+c.h+'</div></div></div>')});
+pal.forEach(c=>{const l=['#FFFFFF','#FCFCFD','#F8F8FB','#F3F3F6','#ECECF1'].includes(c.h);pg.insertAdjacentHTML('beforeend','<div style="background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer" onclick="navigator.clipboard.writeText(&#39;'+c.h+'&#39;);toastMsg(&#39;Copied '+c.h+'&#39;)"><div style="height:40px;background:'+c.h+(l?';border-bottom:1px solid var(--line)':'')+'"></div><div style="padding:6px 8px"><div style="font-weight:600;font-size:10px">'+c.n+'</div><div style="font-size:9px;color:var(--muted)">'+c.h+'</div></div></div>')});
 
 let wfOn=false,wfT=null;
 function togWf(){wfOn=!wfOn;const b=document.getElementById('wfBtn'),bars=document.querySelectorAll('#wfBox span');if(b)b.textContent=wfOn?'⏸':'▶';if(wfOn){wfT=setInterval(()=>{bars.forEach(x=>x.style.height=(Math.random()*20+4)+'px')},100)}else{clearInterval(wfT)}}
 
-function credDo(){document.getElementById('credAct').innerHTML='<span style="font-size:9px;font-weight:700;color:var(--success)">✓ Verified</span>';toastMsg('Credit authorized')}
+function credDo(){const el=document.getElementById('credAct');if(!el)return;el.innerHTML='<span style="font-size:9px;font-weight:700;color:var(--success)">✓ Verified</span>';toastMsg('Credit authorized')}
 function credRej(){document.getElementById('credAct').innerHTML='<span style="font-size:9px;font-weight:700;color:var(--err)">✕ Rejected</span>';toastMsg('Credit rejected')}
 function trDo(id,ok){const t=document.getElementById('tr'+id);t.innerHTML=ok?'<span style="font-size:9px;font-weight:700;color:var(--success)">✓ Verified</span>':'<span style="font-size:9px;font-weight:700;color:var(--err)">✕ Rejected</span>';toastMsg(ok?'Credit authorized':'Credit rejected')}
 
 const sc=[{name:'Priya Raj',title:'Female Punjabi Folk Singer',bg:'linear-gradient(135deg,#EA4C89,#0D0D0D)',tag:'Match 98%'},{name:'Arjun Beats',title:'Mixing & Mastering Engineer',bg:'linear-gradient(135deg,#2563EB,#181A22)',tag:'Match 85%'},{name:'SoundSpace',title:'Dolby Atmos Room',bg:'linear-gradient(135deg,#7C3AED,#0D0D0D)',tag:'Available'}];
 let sIdx=0;
-function swipeRender(){const w=document.getElementById('deckW');w.innerHTML='';if(sIdx>=sc.length){w.innerHTML='<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;background:#fff;border:1px solid var(--line);border-radius:24px;padding:16px"><div style="font-size:28px;margin-bottom:8px">✨</div><h4 style="font-size:14px">Deck Empty</h4><button class="btn btn-p btn-sm" onclick="swipeReset()" style="margin-top:8px">Reload</button></div>';return}sc.forEach((c,i)=>{if(i<sIdx)return;const o=i-sIdx;w.insertAdjacentHTML('beforeend','<div class="swc" style="z-index:'+(100-i)+';transform:scale('+(1-o*0.05)+') translateY('+(o*12)+'px);opacity:'+(o>2?0:1)+'"><div style="width:100%;height:100%;background:'+c.bg+';color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:16px"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85),rgba(0,0,0,0.1))"></div><div style="position:relative;z-index:1"><span style="padding:2px 8px;background:rgba(255,255,255,0.2);border-radius:9999px;font-size:8px;font-weight:700;text-transform:uppercase;margin-bottom:6px;display:inline-block">'+c.tag+'</span><h4 style="font-size:18px;font-weight:700;margin-bottom:2px">'+c.name+'</h4><p style="font-size:9px;opacity:0.8">'+c.title+'</p></div></div></div>')})}
-function swipeDo(dir){if(sIdx>=sc.length)return;const card=document.querySelector('#deckW .swc');if(!card)return;card.style.transition='transform 300ms cubic-bezier(0.25,1,0.5,1),opacity 200ms';card.style.transform='translateX('+(dir==='right'?280:-280)+'px) translateY(40px) rotate('+(dir==='right'?15:-15)+'deg) scale(0.9)';card.style.opacity='0';toastMsg(dir==='right'?'Shortlisted!':'Passed');setTimeout(()=>{sIdx++;swipeRender()},300)}
+function swipeRender(){const w=document.getElementById('deckW');if(!w)return;w.innerHTML='';if(sIdx>=sc.length){w.innerHTML='<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;background:#fff;border:1px solid var(--line);border-radius:24px;padding:16px"><div style="font-size:28px;margin-bottom:8px">✨</div><h4 style="font-size:14px">Deck Empty</h4><button class="btn btn-p btn-sm" onclick="swipeReset()" style="margin-top:8px">Reload</button></div>';return}sc.forEach((c,i)=>{if(i<sIdx)return;const o=i-sIdx;w.insertAdjacentHTML('beforeend','<div class="swc" style="z-index:'+(100-i)+';transform:scale('+(1-o*0.05)+') translateY('+(o*12)+'px);opacity:'+(o>2?0:1)+'"><div style="width:100%;height:100%;background:'+c.bg+';color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:16px"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85),rgba(0,0,0,0.1))"></div><div style="position:relative;z-index:1"><span style="padding:2px 8px;background:rgba(255,255,255,0.2);border-radius:9999px;font-size:8px;font-weight:700;text-transform:uppercase;margin-bottom:6px;display:inline-block">'+c.tag+'</span><h4 style="font-size:18px;font-weight:700;margin-bottom:2px">'+c.name+'</h4><p style="font-size:9px;opacity:0.8">'+c.title+'</p></div></div></div>')})}
+function swipeDo(dir){if(sIdx>=sc.length)return;const card=document.querySelector('#deckW .swc');if(!card)return;card.style.transition='transform var(--duration-3) cubic-bezier(0.25,1,0.5,1),opacity var(--duration-2)';card.style.transform='translateX('+(dir==='right'?280:-280)+'px) translateY(40px) rotate('+(dir==='right'?15:-15)+'deg) scale(0.9)';card.style.opacity='0';toastMsg(dir==='right'?'Shortlisted!':'Passed');setTimeout(()=>{sIdx++;swipeRender()},300)}
 function swipeReset(){sIdx=0;swipeRender();toastMsg('Deck reset')}
 
-const bs=[{q:'What service do you need?',h:'<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">'+['Male Vocalist','Female Singer','Music Producer','Mixing & Mastering'].map(r=>'<div onclick="bfSel('role',''+r+'')" class="chip" style="text-align:center;padding:10px;cursor:pointer">'+r+'</div>').join('')+'</div>'},{q:'Project budget?',h:'<div style="display:flex;flex-direction:column;gap:6px;max-width:260px;margin:0 auto">'+['Under ₹15,000','₹15,000 – ₹50,000','Over ₹50,000'].map(b=>'<button onclick="bfSel('budget',''+b+'')" class="btn btn-s btn-sm" style="width:100%">'+b+'</button>').join('')+'</div>'},{q:'Timeline?',h:'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">'+[{i:'⚡',t:'Immediate'},{i:'📅',t:'2 Weeks'},{i:'🌱',t:'Flexible'}].map(x=>'<div onclick="bfSel('timeline',''+x.t+'')" class="card-s" style="text-align:center;cursor:pointer;padding:12px"><span style="font-size:20px">'+x.i+'</span><div style="font-size:11px;font-weight:600">'+x.t+'</div></div>').join('')+'</div>'},{q:'Select genres',h:'<div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center">'+['Punjabi Folk','Indie Rock','Bollywood Pop','Sufi'].map(g=>'<span class="chip" style="cursor:pointer" onclick="this.classList.toggle('sel')">'+g+'</span>').join('')+'</div><div style="text-align:center;margin-top:10px"><button class="btn btn-p btn-sm" onclick="bfNext()">Continue</button></div>'},{q:'Location?',h:'<div style="display:flex;flex-direction:column;gap:6px;max-width:260px;margin:0 auto">'+['Remote','Mumbai In-Studio'].map(l=>'<button onclick="bfNext()" class="btn btn-s btn-sm" style="width:100%">'+l+'</button>').join('')+'</div>'},{q:'Pro verification?',h:'<div style="display:flex;flex-direction:column;gap:6px;max-width:260px;margin:0 auto">'+['Pro Creators Only','Open to All'].map(p=>'<button onclick="bfNext()" class="btn btn-s btn-sm" style="width:100%">'+p+'</button>').join('')+'</div>'},{q:'Review your brief',h:'<div id="bfRev" class="card-s" style="font-size:11px;max-width:260px;margin:0 auto"></div>'},{q:'Published! 🎉',h:'<div style="text-align:center;padding:10px"><span style="font-size:36px">🎉</span><h4 style="color:var(--success);font-size:14px">Casting Live</h4></div>'}];
+const bs=[{q:'What service do you need?',h:'<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">'+['Male Vocalist','Female Singer','Music Producer','Mixing & Mastering'].map(r=>'<div onclick="bfSel(&#39;role&#39;,&#39;'+r+'&#39;)" class="chip" style="text-align:center;padding:10px;cursor:pointer">'+r+'</div>').join('')+'</div>'},{q:'Project budget?',h:'<div style="display:flex;flex-direction:column;gap:6px;max-width:260px;margin:0 auto">'+['Under ₹15,000','₹15,000 – ₹50,000','Over ₹50,000'].map(b=>'<button onclick="bfSel(&#39;budget&#39;,&#39;'+b+'&#39;)" class="btn btn-s btn-sm" style="width:100%">'+b+'</button>').join('')+'</div>'},{q:'Timeline?',h:'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">'+[{i:'⚡',t:'Immediate'},{i:'📅',t:'2 Weeks'},{i:'🌱',t:'Flexible'}].map(x=>'<div onclick="bfSel(&#39;timeline&#39;,&#39;'+x.t+'&#39;)" class="card-s" style="text-align:center;cursor:pointer;padding:12px"><span style="font-size:20px">'+x.i+'</span><div style="font-size:11px;font-weight:600">'+x.t+'</div></div>').join('')+'</div>'},{q:'Select genres',h:'<div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center">'+['Punjabi Folk','Indie Rock','Bollywood Pop','Sufi'].map(g=>'<span class="chip" style="cursor:pointer" onclick="this.classList.toggle(&#39;sel&#39;)">'+g+'</span>').join('')+'</div><div style="text-align:center;margin-top:10px"><button class="btn btn-p btn-sm" onclick="bfNext()">Continue</button></div>'},{q:'Location?',h:'<div style="display:flex;flex-direction:column;gap:6px;max-width:260px;margin:0 auto">'+['Remote','Mumbai In-Studio'].map(l=>'<button onclick="bfNext()" class="btn btn-s btn-sm" style="width:100%">'+l+'</button>').join('')+'</div>'},{q:'Pro verification?',h:'<div style="display:flex;flex-direction:column;gap:6px;max-width:260px;margin:0 auto">'+['Pro Creators Only','Open to All'].map(p=>'<button onclick="bfNext()" class="btn btn-s btn-sm" style="width:100%">'+p+'</button>').join('')+'</div>'},{q:'Review your brief',h:'<div id="bfRev" class="card-s" style="font-size:11px;max-width:260px;margin:0 auto"></div>'},{q:'Published! 🎉',h:'<div style="text-align:center;padding:10px"><span style="font-size:36px">🎉</span><h4 style="color:var(--success);font-size:14px">Casting Live</h4></div>'}];
 let bfIdx=0,bfData={role:'',budget:'',timeline:''};
-function bfRender(){document.getElementById('bfStep').textContent='Step '+(bfIdx+1)+'/8';document.getElementById('bfBar').style.width=((bfIdx+1)/8*100)+'%';document.getElementById('bfBody').innerHTML='<div style="text-align:center;margin-bottom:8px"><h4 style="font-size:14px;font-weight:700;margin-bottom:4px">'+bs[bfIdx].q+'</h4></div>'+bs[bfIdx].h;if(bfIdx===6){const r=document.getElementById('bfRev');if(r)r.innerHTML='<div style="padding:3px 0">Role: <b>'+bfData.role+'</b></div><div style="padding:3px 0">Budget: <b>'+bfData.budget+'</b></div><div style="padding:3px 0">Timeline: <b>'+bfData.timeline+'</b></div>'}}
+function bfRender(){const stepEl=document.getElementById('bfStep'),barEl=document.getElementById('bfBar'),bodyEl=document.getElementById('bfBody');if(!stepEl||!barEl||!bodyEl)return;stepEl.textContent='Step '+(bfIdx+1)+'/8';barEl.style.width=((bfIdx+1)/8*100)+'%';bodyEl.innerHTML='<div style="text-align:center;margin-bottom:8px"><h4 style="font-size:14px;font-weight:700;margin-bottom:4px">'+bs[bfIdx].q+'</h4></div>'+bs[bfIdx].h;if(bfIdx===6){const r=document.getElementById('bfRev');if(r)r.innerHTML='<div style="padding:3px 0">Role: <b>'+bfData.role+'</b></div><div style="padding:3px 0">Budget: <b>'+bfData.budget+'</b></div><div style="padding:3px 0">Timeline: <b>'+bfData.timeline+'</b></div>'}}
 function bfSel(k,v){bfData[k]=v;toastMsg('Set');bfNext()}
 function bfNext(){if(bfIdx<7){bfIdx++;bfRender()}else toastMsg('Brief published!')}
 function bfPrev(){if(bfIdx>0){bfIdx--;bfRender()}}
