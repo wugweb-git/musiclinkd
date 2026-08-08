@@ -50,45 +50,45 @@
 /*
  * Brand tokens — must stay in sync with the marketing site's inline styles
  * (website/index.html) and app/brand.md's Color Psychology section.
- * Pink #EA4C89, Ink #0D0B26, Paper #FCFCFD, Line #ECECF1, Muted #7D7D8E.
+ * Pink #EA4C89, Ink #141414, Paper #FCFCFD, Line #ECECF1, Muted #7D7D8E.
  */
 :root {
   --background: #FCFCFD;
-  --foreground: #0D0B26;
+  --foreground: #141414;
   --card: #FFFFFF;
-  --card-foreground: #0D0B26;
+  --card-foreground: #141414;
   --popover: #FFFFFF;
-  --popover-foreground: #0D0B26;
+  --popover-foreground: #141414;
   --primary: #EA4C89;
   --primary-foreground: #FFFFFF;
   --secondary: #F5F5F8;
-  --secondary-foreground: #0D0B26;
+  --secondary-foreground: #141414;
   --muted: #F5F5F8;
   --muted-foreground: #7D7D8E;
   --accent: #FDECF2;
-  --accent-foreground: #0D0B26;
+  --accent-foreground: #141414;
   --destructive: #DC2626;
   --border: #ECECF1;
   --input: #ECECF1;
   --ring: #EA4C89;
   --chart-1: #EA4C89;
-  --chart-2: #0D0B26;
+  --chart-2: #141414;
   --chart-3: #7D7D8E;
   --chart-4: #F9A8C9;
   --chart-5: #ECECF1;
   --radius: 0.75rem;
   --sidebar: #FFFFFF;
-  --sidebar-foreground: #0D0B26;
+  --sidebar-foreground: #141414;
   --sidebar-primary: #EA4C89;
   --sidebar-primary-foreground: #FFFFFF;
   --sidebar-accent: #FDECF2;
-  --sidebar-accent-foreground: #0D0B26;
+  --sidebar-accent-foreground: #141414;
   --sidebar-border: #ECECF1;
   --sidebar-ring: #EA4C89;
 }
 
 .dark {
-  --background: #0D0B26;
+  --background: #141414;
   --foreground: #FCFCFD;
   --card: #16143A;
   --card-foreground: #FCFCFD;

@@ -1,15 +1,20 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import { Ban, BadgeCheck } from "lucide-react";
+import { Ban, BadgeCheck, Plus } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
-import { CollectionListPage } from "@/components/shared/collection-list-page";
+import { DataTable } from "@/components/shared/data-table";
+import { PageShell } from "@/components/layout/page-shell";
+import { useCollection } from "@/hooks/use-collection";
+import { useRequireModule } from "@/hooks/use-require-module";
 import { usersRepo } from "@/services/repositories";
 import type { UserDoc, WithId } from "@/types/firestore";
+import { UserEditorSheet } from "./user-editor-sheet";
 
 type Row = WithId<UserDoc>;
 
@@ -96,17 +101,48 @@ const columns: ColumnDef<Row>[] = [
 ];
 
 export default function UsersPage() {
+  const { hasAccess } = useRequireModule("users");
+  const { data, loading, error, refetch } = useCollection(usersRepo, {
+    orderByField: "createdAt",
+    orderDirection: "desc",
+  });
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [selected, setSelected] = useState<Row | null>(null);
+
+  if (!hasAccess) return null;
+
   return (
-    <CollectionListPage
-      moduleKey="users"
+    <PageShell
       title="Users"
       description="Artists, producers, vocalists, studios, and labels registered on MusicLinkd."
-      repo={usersRepo}
-      columns={columns}
-      listOptions={{ orderByField: "createdAt", orderDirection: "desc" }}
-      searchPlaceholder="Search users..."
-      emptyTitle="No users yet"
-      emptyDescription="Registered users will show up here."
-    />
+      actions={
+        <Button
+          size="sm"
+          onClick={() => {
+            setSelected(null);
+            setEditorOpen(true);
+          }}
+        >
+          <Plus className="size-4" /> New user
+        </Button>
+      }
+    >
+      <DataTable
+        columns={columns}
+        data={data}
+        loading={loading}
+        error={error}
+        searchPlaceholder="Search users..."
+        emptyTitle="No users yet"
+        emptyDescription="Registered users will show up here."
+        onRowClick={(row) => {
+          setSelected(row);
+          setEditorOpen(true);
+        }}
+        meta={{ refetch }}
+      />
+
+      <UserEditorSheet user={selected} open={editorOpen} onOpenChange={setEditorOpen} onSaved={refetch} />
+    </PageShell>
   );
 }

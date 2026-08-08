@@ -42,9 +42,12 @@ rsync -a --exclude='index.html' --exclude='index.txt' --exclude='404.html' admin
 echo "==> Including guide/ into dist/guide/ + root copies"
 mkdir -p dist/guide
 cp -r guide/. dist/guide/
-# Root-level copies for direct access
+# Root-level copies for direct, unlisted access — not linked from any nav/footer.
+# NOT copying guide/styleguide.html to dist/styleguide.html: that would silently
+# overwrite frontend/website/styleguide.html (the one the footer actually links
+# to, from the main merge above). The guide/ copy stays reachable at
+# /guide/styleguide.html via the full dist/guide/ copy instead.
 cp guide/merge3.html dist/merge3.html
 cp guide/merge2.html dist/merge2.html
 cp guide/merge.html dist/merge1.html
-cp guide/styleguide.html dist/styleguide.html
 echo "==> dist/ ready ($(find dist -type f | wc -l | tr -d ' ') files)"

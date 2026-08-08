@@ -14,7 +14,7 @@ import { ANALYTICS_EVENTS } from "@/config/constants";
 function BrandMark({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect width="64" height="64" rx="16" fill="#0D0B26" />
+      <rect width="64" height="64" rx="16" fill="#141414" />
       <rect x="16" y="26" width="5" height="20" rx="2.5" fill="#FFFFFF" />
       <rect x="25.5" y="16" width="5" height="32" rx="2.5" fill="#EA4C89" />
       <rect x="35" y="22" width="5" height="24" rx="2.5" fill="#FFFFFF" />
@@ -89,7 +89,7 @@ function LoginForm() {
 
   return (
     <div className="grid min-h-svh grid-cols-1 md:grid-cols-2">
-      <div className="relative hidden flex-col justify-between overflow-hidden bg-[#0D0B26] p-12 text-white md:flex">
+      <div className="relative hidden flex-col justify-between overflow-hidden bg-[#141414] p-12 text-white md:flex">
         <div
           className="pointer-events-none absolute -right-24 -top-24 size-96 rounded-full opacity-20 blur-3xl"
           style={{ background: "radial-gradient(circle, #EA4C89, transparent 70%)" }}
