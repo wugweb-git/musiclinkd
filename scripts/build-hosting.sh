@@ -30,8 +30,12 @@ cp -r website/. dist/
 rm -f dist/README.md
 rsync -a --exclude='index.html' --exclude='index.txt' --exclude='404.html' admin/out/ dist/
 
-echo "==> Including guide/ into dist/guide/"
+echo "==> Including guide/ into dist/guide/ + root copies"
 mkdir -p dist/guide
 cp -r guide/. dist/guide/
-
+# Root-level copies for direct access
+cp guide/merge3.html dist/merge3.html
+cp guide/merge2.html dist/merge2.html
+cp guide/merge.html dist/merge1.html
+cp guide/styleguide.html dist/styleguide.html
 echo "==> dist/ ready ($(find dist -type f | wc -l | tr -d ' ') files)"
