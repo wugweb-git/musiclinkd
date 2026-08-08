@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
-# Builds admin/ (Next.js static export) and merges it with website/ into
-# dist/ — the single directory Firebase Hosting actually deploys. One
+# Builds admin/ (Next.js static export) and merges it with frontend/website/
+# into dist/ — the single directory Firebase Hosting actually deploys. One
 # Hosting site, two custom domains (musiclinkd.com, admin.musiclinkd.com)
 # both attached to it, both serving this same merged tree.
+#
+# Source moved from root website/ to frontend/website/ (the new canonical
+# location) — root website/ and guide/ are kept around only as a fallback
+# until frontend/ is fully confirmed, then get deleted. guide/ deliberately
+# still builds from the root location, not frontend/guide/, until that's
+# confirmed separately.
 #
 # Why a merge instead of two Hosting sites: Firebase Hosting rewrites only
 # match on URL path, not hostname — there's no way to serve different
@@ -23,10 +29,10 @@ cd "$(dirname "$0")/.."
 echo "==> Building admin/"
 (cd admin && npm run build)
 
-echo "==> Merging website/ + admin/out/ into dist/"
+echo "==> Merging frontend/website/ + admin/out/ into dist/"
 rm -rf dist
 mkdir -p dist
-cp -r website/. dist/
+cp -r frontend/website/. dist/
 rm -f dist/README.md
 rsync -a --exclude='index.html' --exclude='index.txt' --exclude='404.html' admin/out/ dist/
 
