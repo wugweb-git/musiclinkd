@@ -1,0 +1,81 @@
+/* ============================================================
+   MusicLinkd Design Tokens — Web
+   Source of truth: guide/tokens/tokens.json (v2026.1)
+   Single token layer for musiclinkd.com — do not duplicate.
+   ============================================================ */
+:root {
+  /* Color — Brand */
+  --brand-pink: #EA4C89;
+  --brand-pink-hover: #D93C77;
+  --brand-navy: #141414;
+  --accent-purple: #8B5CF6; /* badges only — never on buttons */
+
+  /* Color — Surface */
+  --surface: #FFFFFF;
+  --surface-alt: #F8F8FB;
+  --background: #FCFCFD;
+
+  /* Color — Text */
+  --text-primary: #141414;
+  --text-secondary: #7D7D8E;
+  --text-on-dark: #FFFFFF;
+  --text-on-dark-muted: #B8BAC7;
+
+  /* Color — Border */
+  --border: #ECECF1;
+  --border-focus: #EA4C89;
+
+  /* Color — Status */
+  --success: #22C55E;
+  --success-dark: #15803D;
+  --success-container: #DCFCE7;
+  --warning: #F59E0B;
+  --warning-container: #FEF3C7;
+  --error: #DC2626;
+  --info: #2563EB;
+
+  /* Color — Brand containers */
+  --pink-container: #FCE7F3;
+  --purple-container: #F3E8FF;
+
+  /* Typography */
+  --font-display: 'Inter Tight', 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing (8px system) */
+  --sp-xs: 4px;
+  --sp-sm: 8px;
+  --sp-md: 16px;
+  --sp-lg: 24px;
+  --sp-xl: 32px;
+  --sp-2xl: 48px;
+  --sp-3xl: 64px;
+  --sp-4xl: 96px;
+  --sp-5xl: 128px;
+
+  /* Radius */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 9999px;
+
+  /* Elevation */
+  --shadow-1: 0 1px 3px rgba(13, 11, 38, 0.08);
+  --shadow-2: 0 4px 12px rgba(13, 11, 38, 0.05);
+  --shadow-3: 0 8px 24px rgba(13, 11, 38, 0.08);
+  --shadow-4: 0 12px 32px rgba(13, 11, 38, 0.12);
+  --shadow-5: 0 24px 64px rgba(13, 11, 38, 0.16);
+
+  /* Motion */
+  --dur-fast: 150ms;
+  --dur-medium: 200ms;
+  --dur-slow: 300ms;
+  --dur-entrance: 500ms;
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout */
+  --container: 1200px;
+  --nav-h: 72px;
+}

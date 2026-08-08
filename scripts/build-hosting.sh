@@ -29,6 +29,9 @@ cd "$(dirname "$0")/.."
 echo "==> Building admin/"
 (cd admin && npm run build)
 
+echo "==> Generating changelog page from CHANGELOG.md"
+node scripts/generate-changelog.mjs
+
 echo "==> Merging frontend/website/ + admin/out/ into dist/"
 rm -rf dist
 mkdir -p dist

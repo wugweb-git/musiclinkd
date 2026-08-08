@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Changelog — MusicLinkd</title>
+  <meta name="description" content="What's new and what's changed across MusicLinkd — generated from the repository's own CHANGELOG.md.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+</head>
+<body>
+  <main class="legal-body" role="main">
+    <div class="container">
+      <div class="legal-hero">
+        <a href="/" style="font-family:var(--font-display);font-weight:800;font-size:22px;letter-spacing:-0.05em;text-decoration:none;color:var(--text-primary);display:inline-flex;align-items:center;gap:10px;margin-bottom:24px">MusicLink<em style="color:var(--brand-pink);font-style:normal">d</em></a>
+        <h1 class="h2">Changelog</h1>
+        <p class="muted">Generated from CHANGELOG.md — always in sync with the repository.</p>
+      </div>
+
+      <p>All notable repository-level changes are recorded here.</p>
+      <h2>Unreleased</h2>
+      <h3>Added</h3>
+      <ul>
+      <li>Governance rule §8 "Changelog Discipline" — every commit must include a <code>CHANGELOG.md</code> entry following Keep a Changelog format. Applies to all repos: app, admin, website, guide.</li>
+      <li>Phone-frame visual mockups for all 11 screen sections in <code>guide/merge3.html</code> (Authentication, Onboarding, Discovery, Artist, Business, Studio, Marketplace, Messaging, Projects, Reputation, Settings).</li>
+      <li>Color swatches (<code>&lt;span class="ts"&gt;</code>) added to all bare hex codes in documentation tables across <code>guide/merge3.html</code> — Semantic Colors, Iconography Extended, Border Tokens, Accessibility, Design Philosophy sections. Complies with Governance §2 Color Swatch Rule.</li>
+      </ul>
+      <h3>Changed</h3>
+      <ul>
+      <li>Hosting collapsed from two Firebase Hosting sites to one — <code>musiclinkd.com</code> and</li>
+      </ul>
+      <p>  <code>admin.musiclinkd.com</code> are now two custom domains on the same site, serving a   merged build (<code>website/</code> + <code>admin/</code>'s Next.js export) produced by   <code>scripts/build-hosting.sh</code>. Both domains serve identical content; visit   <code>admin.musiclinkd.com/login</code> or <code>/dashboard</code> directly rather than its root.</p>
+      <h3>Added</h3>
+      <ul>
+      <li>Simple product-area structure for app, website, admin, documentation, brand, styleguide, backend, infrastructure, and archive.</li>
+      <li>Central styleguide guidance, base design tokens, and a rendered styleguide reference page.</li>
+      <li>Static launch page for the marketing website (<code>website/</code>).</li>
+      <li>Domain ownership map for the planned MusicLinkd URLs.</li>
+      <li>Firebase Hosting configured for <code>musiclinkd.com</code> and <code>admin.musiclinkd.com</code> (<code>firebase.json</code>, <code>.firebaserc</code>).</li>
+      <li>Single-project Firebase decision (<code>musiclinkd-7ae30</code> for Android, website, and admin) replacing the previously-documented, never-built dev/stage/prod split.</li>
+      <li>Canonical Firestore schema (<code>app/docs/firestore/Firestore_Schema_Index_Rules.md</code>) consolidating three previously-contradictory schema docs, plus 7 new collections needed for admin (<code>admin_roles</code>, <code>reviews</code>, <code>verification_requests</code>, <code>moderation_flags</code>, <code>support_tickets</code>, <code>broadcast_messages</code>, <code>audit_logs</code>) and one for website content (<code>page_content</code>).</li>
+      <li>Deployable Firebase config at the repo root: <code>firestore.rules</code>, <code>firestore.indexes.json</code>, <code>storage.rules</code>, <code>remoteconfig.template.json</code>.</li>
+      <li><code>admin/</code> is now a real Next.js 15 admin application (static export), replacing the static placeholder — 17 modules (Dashboard, Users, Studios, Marketplace, Bookings, Projects, Reviews, Verification, Moderation, Audit Logs, Settings, Reports &amp; Exports, Notifications, Page Management, Messages, Analytics, Tracks), Google Sign-In auth, role-gated routing (<code>ROLE_ADMIN</code>/<code>ROLE_MODERATOR</code>/<code>ROLE_SUPPORT</code>), and a Tailwind theme matching the marketing site's brand tokens. See <code>admin/README.md</code> for module-by-module status (which are wired to real data vs. mock, and why).</li>
+      </ul>
+      <h3>Changed</h3>
+      <ul>
+      <li>The top-level styleguide is the canonical location for UI rules and reusable web-facing design references.</li>
+      <li>The old static <code>admin/index.html</code> and <code>admin/404.html</code> placeholders moved to <code>archive/admin-placeholder/</code>.</li>
+      </ul>
+      <h3>Fixed</h3>
+      <ul>
+      <li>The previous Firestore rules draft let any signed-in user self-write their own <code>isVerified</code>/<code>role</code> fields on <code>/users</code> — closed before anything depended on it; those fields are now update-locked to admins/moderators.</li>
+      </ul>
+
+      <p style="margin-top:32px"><a href="/" class="btn btn--ghost">← Back to MusicLinkd</a></p>
+    </div>
+  </main>
+</body>
+</html>
