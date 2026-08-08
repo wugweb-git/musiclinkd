@@ -24,13 +24,10 @@ This directory is the single source of truth for MusicLinkd's UI and brand decis
 - Warning: `#F59E0B`
 - Error: `#DC2626`
 - Typography: Inter Tight for display/headings; Inter for body; JetBrains Mono for metadata.
-- Every numeric token category is exactly 4 values on an exponential scale — no exceptions, no per-breakpoint variants:
-  - Spacing: 4, 8, 16, 32px (×2)
-  - Radius: 8, 16, 32px (×2) + pill (9999px, functional full-round, not a scale step)
-  - Opacity: 0.08, 0.16, 0.32, 0.64 (×2)
-  - Motion duration: 125, 200, 320, 500ms (×~1.6) using `cubic-bezier(0.4, 0, 0.2, 1)`
-  - Type scale: 4 fluid tokens, each a CSS `clamp()` scaling continuously between 360px and 1440px viewports — 10–12px, 14–18px, 20–28px, 28–44px
+- Spacing scale: 4, 8, 16, 24, 32, 48, 64, 96, 128 px (8px-based rhythm).
+- Radius: 12, 16, 24, 32 px; pill (9999px) for buttons, chips, and compact controls.
 - Stroke: 1px solid `#ECECF1` for containers; 2px `#EA4C89` for active focus.
+- Motion: 150ms, 200ms, 300ms, and 500ms using `cubic-bezier(0.4, 0, 0.2, 1)`.
 
 ## Boundaries
 

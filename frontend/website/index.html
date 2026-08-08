@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MusicLinkd — India's Professional Music Ecosystem</title>
+  <meta name="description" content="MusicLinkd connects artists, producers, studios, engineers, labels, venues, educators and music businesses through one unified professional platform. Discover, collaborate, book and grow.">
+  <meta name="theme-color" content="#0D0B26">
+  <link rel="canonical" href="https://musiclinkd.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MusicLinkd — India's Professional Music Ecosystem">
+  <meta property="og:description" content="The infrastructure layer for the music industry. One identity, one ecosystem, one professional network.">
+  <meta property="og:url" content="https://musiclinkd.com/">
+  <meta property="og:site_name" content="MusicLinkd">
+  <!-- og:image intentionally omitted — assets/img/og.jpg doesn't exist yet.
+       Add a real 1200x630 image and restore this tag; a broken image URL
+       is worse for link previews than no image (most platforms fall back
+       to a text-only card without one). -->
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MusicLinkd — India's Professional Music Ecosystem">
+  <meta name="twitter:description" content="Connecting artists, studios, engineers, labels and music businesses through one unified platform.">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"MusicLinkd","url":"https://musiclinkd.com","description":"India's professional music ecosystem connecting artists, studios, engineers, labels and music businesses.","sameAs":[]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"MusicLinkd","applicationCategory":"BusinessApplication","operatingSystem":"Android","description":"Professional music ecosystem for discovery, collaboration, booking and portfolio management.","author":{"@type":"Organization","name":"MusicLinkd"}}
+  </script>
+  <script type="application/ld+json" id="faq-schema">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is MusicLinkd free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Creating a profile, discovering professionals and core features are free."}},{"@type":"Question","name":"Who can join MusicLinkd?","acceptedAnswer":{"@type":"Answer","text":"Any music professional — artists, musicians, producers, engineers, studios, labels, managers, educators, rental providers and venues."}},{"@type":"Question","name":"When is iOS launching?","acceptedAnswer":{"@type":"Answer","text":"iOS is on our roadmap. Android Early Access is available now in India."}}]}
+  </script>
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles — Single source of truth (tokens + design system + website) -->
+  <link rel="stylesheet" href="/assets/css/musiclinkd.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+
+  <!-- Lucide Icons (unpkg as fallback single-file sprite) -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body>
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+
+<header class="top-nav" style="position: sticky; top: 0; z-index: 100; background: rgba(252, 252, 253, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--sp-3); height: var(--nav-h);">
+  <a href="/" style="display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 20px; letter-spacing: -0.02em;">
+    <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" rx="16" fill="#0D0B26"/><rect x="16" y="26" width="5" height="20" rx="2.5" fill="#FFFFFF"/><rect x="25.5" y="16" width="5" height="32" rx="2.5" fill="#EA4C89"/><rect x="35" y="22" width="5" height="24" rx="2.5" fill="#FFFFFF"/><rect x="44.5" y="30" width="5" height="16" rx="2.5" fill="#EA4C89"/></svg>
+    MusicLink<span style="color: var(--pink);">d</span>
+  </a>
+  <div style="display: none; @media(min-width: 768px) { display: flex; gap: var(--sp-2); font-weight: 600; font-size: var(--fs-2); }">
+    <a href="#discover" style="color: var(--ink);">Discover</a>
+    <a href="#studios" style="color: var(--muted);">Studios</a>
+    <a href="#pro" style="color: var(--muted);">Pro</a>
+  </div>
+  <div style="display: flex; gap: var(--sp-1);">
+    <button class="btn" style="padding: 8px 16px; font-weight: 600;">Sign In</button>
+    <button class="btn btn-p" style="padding: 8px 16px; border-radius: var(--r-4);">Join Early Access</button>
+  </div>
+</header>
+
+
+<main id="main">
+
+  <div class="sec sec-xl" style="padding-top: 120px; padding-bottom: 80px; text-align: center;">
+    <div style="display: inline-block; padding: 8px 16px; background: var(--pink-container); color: var(--pink); border-radius: var(--r-4); font-weight: 700; font-size: var(--fs-2); margin-bottom: 24px;">v4.0 Early Access Live</div>
+    <h1 style="font-size: var(--fs-4); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; max-width: 900px; margin: 0 auto 24px;">The professional network for<br>India's music creators</h1>
+    <p class="desc" style="font-size: var(--fs-2); color: var(--muted); max-width: 600px; margin: 0 auto 48px; line-height: 1.6;">Connect with world-class studios, session musicians, and industry professionals. Elevate your sound, build your reputation, and scale your career.</p>
+    <div style="display: flex; justify-content: center; gap: 16px;">
+      <button class="btn btn-p" style="padding: 16px 32px; border-radius: var(--r-4); font-size: var(--fs-2);">Join the Network</button>
+      <button class="btn btn-s" style="padding: 16px 32px; border-radius: var(--r-4); font-size: var(--fs-2);">Explore Talent</button>
+    </div>
+  </div>
+
+  <!-- MASSIVE OVERHAUL SUPERCHARGE BLOCKS -->
+  
+  <div class="sec sec-xl" style="padding-top: 40px; border-bottom: none;">
+    <div class="trusted-bar">
+      <div class="t-stat"><div class="t-stat-num">5k+</div><div class="t-stat-lbl">Verified Studios</div></div>
+      <div class="t-stat"><div class="t-stat-num">100k+</div><div class="t-stat-lbl">Professional Artists</div></div>
+      <div class="t-stat"><div class="t-stat-num">4.9 ★</div><div class="t-stat-lbl">Average Booking Rating</div></div>
+      <div class="t-stat"><div class="t-stat-num">100k+</div><div class="t-stat-lbl">Successful Sessions</div></div>
+    </div>
+  </div>
+
+  <div class="sec sec-xl">
+    <div class="eyebrow">Does this sound familiar?</div>
+    <div class="split-xl">
+      <div class="split-quote">
+        "I know exactly what sound I want—but I cannot <span>find the right talent to create it.</span>"
+      </div>
+      <div>
+        <p class="desc" style="margin-bottom: 32px;">It is not about lacking creativity or budget. It is about lacking structured access to verified professionals, transparent pricing, and reliable booking. Your struggle ends here.</p>
+        
+        <div class="pain-card">
+          <div class="pain-icon bad">👎</div>
+          <div class="pain-text">Finding the right studio feels <strong>overwhelming</strong>, unclear, and scattered.</div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon bad">👎</div>
+          <div class="pain-text">It is <strong>frustrating</strong> to coordinate sessions with unreliable talent.</div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon bad">👎</div>
+          <div class="pain-text">Gear lists and availability are scattered, outdated, or <strong>completely inaccurate</strong>.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sec-xl">
+    <div style="text-align: center; margin-bottom: 64px;">
+      <h2 style="font-size: clamp(32px, 5vw, 48px);">Access world-class studios<br>and top-tier talent</h2>
+      <p class="desc" style="margin: 0 auto;">Are you tired of unreliable bookings and scattered communication? Become a high-earning professional in the most efficient ecosystem possible.</p>
+    </div>
+    <div class="feat-grid-t">
+      <div class="f-item">
+        <div class="f-icon">⏱</div>
+        <div class="f-content">
+          <h4>Instant Booking</h4>
+          <p>Book studios and talent instantly with transparent pricing and real-time availability.</p>
+        </div>
+      </div>
+      <div class="f-item">
+        <div class="f-icon">🏆</div>
+        <div class="f-content">
+          <h4>Verified Credits</h4>
+          <p>Every profile features verified Discogs and Spotify credits, so you know exactly who you are working with.</p>
+        </div>
+      </div>
+      <div class="f-item">
+        <div class="f-icon">🔄</div>
+        <div class="f-content">
+          <h4>Secure Escrow</h4>
+          <p>Payments are held securely in escrow until the session is completed and both parties are satisfied.</p>
+        </div>
+      </div>
+      <div class="f-item">
+        <div class="f-icon">💬</div>
+        <div class="f-content">
+          <h4>Direct Messaging</h4>
+          <p>Communicate directly with studio managers and artists right within the platform.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sec-xl" style="border-bottom: none;">
+    <div class="purple-cta">
+      <div>
+        <h2>Level-up your production quality continuously</h2>
+        <p>A platform designed by musicians for musicians—made to fit your workflow and help you achieve real career results with premium studios, verified talent, seamless booking, and transparent reviews.</p>
+      </div>
+      <div class="cta-pills">
+        <div class="cta-pill">Session Musicians</div>
+        <div class="cta-pill" style="transform: translateX(10px);">Producers</div>
+        <div class="cta-pill" style="transform: translateX(30px);">Record Labels</div>
+        <div class="cta-pill" style="transform: translateX(0px);">Vocalists</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       TESTIMONIALS — using local speaker images
+       ========================================== -->
+  <div class="sec sec-xl">
+    <div style="text-align: center; margin-bottom: 64px;">
+      <h2 style="font-size: clamp(32px, 5vw, 48px);">Hear from the awesome<br>artists we helped</h2>
+    </div>
+    <div class="test-masonry">
+      <div class="t-card">
+        <div class="t-user">
+          <div class="t-av" style="background: url('assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg') center/cover;"></div>
+          <div>
+            <div class="t-name">Estefania</div>
+            <div class="t-role">@estefania</div>
+          </div>
+          <div style="margin-left: auto; color: var(--pink); font-size: 10px;">★★★★★</div>
+        </div>
+        <div class="t-quote">I love how Andrija explained everything very efficiently and how he shared real-life tips. You feel this course is like a conversation with a friend.</div>
+      </div>
+      <div class="t-card video">
+        <img src="assets/img/speakers/02e0f0a15edc103c549c136fb31c42a6.jpg" alt="Video Review">
+        <div class="t-content">
+          <div class="t-user">
+            <div class="t-av" style="background: url('assets/img/speakers/39fdf43f680420b44f547c6cb535900b.jpg') center/cover;"></div>
+            <div>
+              <div class="t-name">Alex Benton</div>
+              <div class="t-role">LinkedIn</div>
+            </div>
+            <div style="margin-left: auto; color: var(--pink); font-size: 10px;">★★★★★</div>
+          </div>
+          <div class="t-quote">Andrija's charisma and detailed explanations made following along so easy!</div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="t-user">
+          <div class="t-av" style="background: url('assets/img/speakers/859c9049534b1e091726374ed9e3a8a6.jpg') center/cover;"></div>
+          <div>
+            <div class="t-name">Johnson</div>
+            <div class="t-role">@thejohnson</div>
+          </div>
+          <div style="margin-left: auto; color: var(--pink); font-size: 10px;">★★★★★</div>
+        </div>
+        <div class="t-quote">I must say that Supercharge really did a good job on this one. They never disappoint.</div>
+      </div>
+       <div class="t-card">
+        <div class="t-user">
+          <div class="t-av" style="background: url('assets/img/speakers/dd3ba4f39e3feceef481eef5b75fc179.jpg') center/cover;"></div>
+          <div>
+            <div class="t-name">Dustin Turner</div>
+            <div class="t-role">@dustin</div>
+          </div>
+          <div style="margin-left: auto; color: var(--pink); font-size: 10px;">★★★★★</div>
+        </div>
+        <div class="t-quote">It's the first course that I've seen that actually takes these things a step further and shows you not only what they are but how to actually implement them.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sec-xl" style="background: #FAFAFA; margin: 0 -clamp(16px, 4vw, 56px); padding-left: clamp(16px, 4vw, 56px); padding-right: clamp(16px, 4vw, 56px);">
+    <div style="text-align: center; margin-bottom: 64px;">
+      <h2 style="font-size: clamp(32px, 5vw, 48px);">Unlimited platform access for<br>less than the cost of a cable</h2>
+      <p class="desc" style="margin: 0 auto;">Find the perfect plan for you and your team—cancel anytime.</p>
+    </div>
+    <div class="price-grid">
+      <div class="p-card">
+        <div class="p-tier">Basic</div>
+        <div class="p-price">$497 <span>/year</span></div>
+        <div class="p-desc">Billed yearly and inclusive of VAT.</div>
+        <button class="btn btn-s" style="width: 100%; border-radius: 8px;">Subscribe</button>
+        <div class="p-features">
+          <div class="p-feat">Basic profile creation and portfolio</div>
+          <div class="p-feat">Up to 5 inquiries per month</div>
+          <div class="p-feat">Standard search filters</div>
+        </div>
+      </div>
+      <div class="p-card pro">
+        <div class="p-badge">Most Popular</div>
+        <div class="p-tier">Pro</div>
+        <div class="p-price">$597 <span>/year</span></div>
+        <div class="p-desc">Billed yearly and inclusive of VAT.</div>
+        <button class="btn btn-p" style="width: 100%; border-radius: 8px; background: var(--purple);">Subscribe</button>
+        <div class="p-features">
+          <div class="p-feat">Verified Pro Profile badge</div>
+          <div class="p-feat">Unlimited inquiries and bookings</div>
+          <div class="p-feat">Advanced escrow and payment protection</div>
+          <div class="p-feat">Priority search placement</div>
+          <div class="p-feat">Dedicated support manager</div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-tier">Lifetime</div>
+        <div class="p-price">$2,174</div>
+        <div class="p-desc">One-time payment inclusive of VAT.</div>
+        <button class="btn btn-n" style="width: 100%; border-radius: 8px;">Get Lifetime Access</button>
+        <div class="p-features">
+          <div class="p-feat">Everything in the PRO plan</div>
+          <div class="p-feat">One-time payment, yours forever</div>
+          <div class="p-feat">Lifetime access</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sec-xl">
+    <div style="text-align: center; margin-bottom: 64px;">
+      <h2 style="font-size: clamp(32px, 5vw, 48px);">You asked, we answered</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">What is Supercharge Design?</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">There's a ton of information about UX and UI design online, why should I join?</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What's the refund policy? Is there a money-back guarantee?</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do I have access to the materials once my subscription expires?</div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- ==========================================
+       USER JOURNEYS (HOW IT WORKS)
+       ========================================== -->
+  <div id="journeys" class="sec sec-xl" style="background: var(--pink-container); margin: 0 -clamp(16px, 4vw, 56px); padding-left: clamp(16px, 4vw, 56px); padding-right: clamp(16px, 4vw, 56px);">
+    <div class="eyebrow" style="color: var(--pink);">How it Works</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); align-items: start; max-width: 1400px; margin: 0 auto; @media(max-width: 900px) { grid-template-columns: 1fr; }">
+      
+      <!-- Sticky Left Side -->
+      <div style="position: sticky; top: 120px; padding-bottom: var(--sp-4);">
+        <h2 style="font-size: var(--fs-4); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 24px;">From session to<br>certified credit.</h2>
+        <p class="desc" style="font-size: var(--fs-2); color: var(--muted); max-width: 500px;">The complete lifecycle of your music production, handled seamlessly in one unified platform.</p>
+        
+        <!-- Mockup Placeholder -->
+        <div style="margin-top: var(--sp-3); width: 100%; max-width: 320px; aspect-ratio: 9/19; background: var(--bg); border-radius: 40px; border: 8px solid var(--ink); box-shadow: 0 32px 64px rgba(0,0,0,0.1); position: relative; overflow: hidden;">
+           <div style="position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 40%; height: 24px; background: var(--ink); border-radius: 20px;"></div>
+           <div style="padding: var(--sp-3) var(--sp-2); display: flex; flex-direction: column; gap: var(--sp-2); height: 100%;">
+             <div style="height: 120px; background: var(--surface-subtle); border-radius: var(--r-2);"></div>
+             <div style="height: 60px; background: var(--surface-subtle); border-radius: var(--r-2);"></div>
+             <div style="height: 60px; background: var(--surface-subtle); border-radius: var(--r-2);"></div>
+             <div style="height: 100%; background: var(--pink-container); border-radius: var(--r-2); margin-top: auto;"></div>
+           </div>
+        </div>
+      </div>
+
+      <!-- Scrolling Steps Right Side -->
+      <div style="display: flex; flex-direction: column; gap: var(--sp-4); padding-top: var(--sp-4); padding-bottom: var(--sp-4);">
+        
+        <!-- Step 1 -->
+        <div style="background: var(--bg); padding: var(--sp-3); border-radius: var(--r-3); border: 1px solid var(--line); box-shadow: 0 4px 24px rgba(0,0,0,0.02);">
+          <div style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: var(--pink-container); color: var(--pink); font-size: var(--fs-2); font-weight: 800; border-radius: var(--r-full); margin-bottom: var(--sp-2);">1</div>
+          <h3 style="font-size: var(--fs-3); font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em;">Discover & Filter</h3>
+          <p style="font-size: var(--fs-1); color: var(--muted); line-height: 1.6;">Search thousands of verified studios and session musicians. Filter by gear, rates, genres, and exact availability.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div style="background: var(--bg); padding: var(--sp-3); border-radius: var(--r-3); border: 1px solid var(--line); box-shadow: 0 4px 24px rgba(0,0,0,0.02);">
+          <div style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: var(--pink-container); color: var(--pink); font-size: var(--fs-2); font-weight: 800; border-radius: var(--r-full); margin-bottom: var(--sp-2);">2</div>
+          <h3 style="font-size: var(--fs-3); font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em;">Instant Booking</h3>
+          <p style="font-size: var(--fs-1); color: var(--muted); line-height: 1.6;">Select your time slots, submit your session brief, and book instantly. No more back-and-forth emails.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div style="background: var(--bg); padding: var(--sp-3); border-radius: var(--r-3); border: 1px solid var(--line); box-shadow: 0 4px 24px rgba(0,0,0,0.02);">
+          <div style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: var(--pink-container); color: var(--pink); font-size: var(--fs-2); font-weight: 800; border-radius: var(--r-full); margin-bottom: var(--sp-2);">3</div>
+          <h3 style="font-size: var(--fs-3); font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em;">Secure Escrow</h3>
+          <p style="font-size: var(--fs-1); color: var(--muted); line-height: 1.6;">Your payment is held securely in escrow until the session is completed successfully. Total peace of mind for both sides.</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div style="background: var(--bg); padding: var(--sp-3); border-radius: var(--r-3); border: 1px solid var(--line); box-shadow: 0 4px 24px rgba(0,0,0,0.02);">
+          <div style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: var(--pink-container); color: var(--pink); font-size: var(--fs-2); font-weight: 800; border-radius: var(--r-full); margin-bottom: var(--sp-2);">4</div>
+          <h3 style="font-size: var(--fs-3); font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em;">Credits & Reputation</h3>
+          <p style="font-size: var(--fs-1); color: var(--muted); line-height: 1.6;">After approval, verified credits are automatically added to your profile, boosting your ranking for future gigs.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SCREENS GALLERY (BENTO BOX)
+       ========================================== -->
+  <div id="gallery" class="sec sec-xl">
+    <div class="eyebrow">The App</div>
+    <div style="text-align: center; margin-bottom: var(--sp-4);">
+      <h2 style="font-size: clamp(32px, 5vw, 64px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1;">Designed for speed.<br>Built for pros.</h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--sp-2); max-width: 1400px; margin: 0 auto;">
+      
+      <!-- Screen 1: Dashboard -->
+      <div style="background: var(--surface-subtle); border-radius: var(--r-4); padding: var(--sp-3) var(--sp-3) 0 var(--sp-3); border: 1px solid var(--line); display: flex; flex-direction: column; gap: var(--sp-2); overflow: hidden; min-height: 400px;">
+        <h3 style="font-size: var(--fs-2); font-weight: 800;">Command Center</h3>
+        <p style="color: var(--muted);">Manage inquiries, active bookings, and payouts from one unified dashboard.</p>
+        <div style="flex-grow: 1; background: var(--bg); border-radius: var(--r-3) var(--r-3) 0 0; border: 1px solid var(--line); border-bottom: none; box-shadow: 0 -12px 32px rgba(0,0,0,0.05); margin-top: auto; padding: var(--sp-2);">
+           <!-- Abstract UI -->
+           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-2);">
+             <div style="width: 40px; height: 40px; border-radius: var(--r-full); background: var(--pink-container);"></div>
+             <div style="width: 100px; height: 16px; border-radius: 8px; background: var(--line);"></div>
+           </div>
+           <div style="height: 120px; border-radius: var(--r-2); background: var(--surface-subtle); margin-bottom: var(--sp-2);"></div>
+           <div style="display: flex; gap: var(--sp-1);">
+             <div style="flex: 1; height: 80px; border-radius: var(--r-2); background: var(--surface-subtle);"></div>
+             <div style="flex: 1; height: 80px; border-radius: var(--r-2); background: var(--pink-container);"></div>
+           </div>
+        </div>
+      </div>
+
+      <!-- Screen 2: Discovery Grid -->
+      <div style="background: var(--ink); color: var(--bg); border-radius: var(--r-4); padding: var(--sp-3) var(--sp-3) 0 var(--sp-3); display: flex; flex-direction: column; gap: var(--sp-2); overflow: hidden; min-height: 400px;">
+        <h3 style="font-size: var(--fs-2); font-weight: 800;">Visual Discovery</h3>
+        <p style="color: rgba(255,255,255,0.7);">Browse studio photos, gear lists, and past credits in a fluid, immersive grid.</p>
+        <div style="flex-grow: 1; background: #1a1b23; border-radius: var(--r-3) var(--r-3) 0 0; border: 1px solid rgba(255,255,255,0.1); border-bottom: none; box-shadow: 0 -12px 32px rgba(0,0,0,0.2); margin-top: auto; padding: var(--sp-2); display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-1);">
+           <!-- Abstract UI -->
+           <div style="height: 160px; border-radius: var(--r-2); background: rgba(255,255,255,0.05);"></div>
+           <div style="height: 120px; border-radius: var(--r-2); background: rgba(255,255,255,0.05);"></div>
+           <div style="height: 140px; border-radius: var(--r-2); background: rgba(255,255,255,0.05); margin-top: -40px;"></div>
+           <div style="height: 180px; border-radius: var(--r-2); background: rgba(255,255,255,0.05);"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================
+       BRAND IDENTITY
+       ========================================== -->
+  <div id="brand" class="sec sec-xl" style="background: var(--bg); border-top: 1px solid var(--line);">
+    <div class="eyebrow">Our Identity</div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); align-items: center; max-width: 1400px; margin: 0 auto; @media(max-width: 900px) { grid-template-columns: 1fr; }">
+      
+      <!-- Typography Specimen -->
+      <div>
+        <h2 style="font-size: clamp(48px, 8vw, 120px); font-weight: 900; line-height: 0.9; letter-spacing: -0.05em; margin-bottom: var(--sp-2);">Aa</h2>
+        <h3 style="font-size: var(--fs-3); font-weight: 800; margin-bottom: var(--sp-1);">Inter / Roboto</h3>
+        <p style="font-size: var(--fs-2); color: var(--muted);">Oversized type. Massive whitespace. No compromises. Our typography forces a strict 4-tier exponential hierarchy to ensure maximum clarity and impact.</p>
+      </div>
+
+      <!-- Color Swatches -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2);">
+        
+        <div style="background: var(--pink); color: white; padding: var(--sp-3); border-radius: var(--r-3); display: flex; flex-direction: column; justify-content: flex-end; aspect-ratio: 1; box-shadow: 0 12px 24px rgba(234,76,137,0.3);">
+          <div style="font-weight: 800; font-size: var(--fs-2);">Accent</div>
+          <div style="font-family: monospace; opacity: 0.8;">#EA4C89</div>
+        </div>
+
+        <div style="background: var(--ink); color: white; padding: var(--sp-3); border-radius: var(--r-3); display: flex; flex-direction: column; justify-content: flex-end; aspect-ratio: 1; box-shadow: 0 12px 24px rgba(13,11,38,0.3);">
+          <div style="font-weight: 800; font-size: var(--fs-2);">Navy Dark</div>
+          <div style="font-family: monospace; opacity: 0.8;">#0D0B26</div>
+        </div>
+
+        <div style="background: var(--surface-subtle); color: var(--ink); border: 1px solid var(--line); padding: var(--sp-3); border-radius: var(--r-3); display: flex; flex-direction: column; justify-content: flex-end; aspect-ratio: 1;">
+          <div style="font-weight: 800; font-size: var(--fs-2);">Surface</div>
+          <div style="font-family: monospace; opacity: 0.6;">#F8F8FB</div>
+        </div>
+
+        <div style="background: var(--bg); color: var(--ink); border: 1px solid var(--line); padding: var(--sp-3); border-radius: var(--r-3); display: flex; flex-direction: column; justify-content: flex-end; aspect-ratio: 1;">
+          <div style="font-weight: 800; font-size: var(--fs-2);">Background</div>
+          <div style="font-family: monospace; opacity: 0.6;">#FFFFFF</div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+<!-- SHAZAM ASSETS / DOWNLOAD SECTION -->
+  <div class="sec sec-xl" style="background: var(--surface-subtle); border-radius: var(--r-4); padding: var(--sp-4); text-align: center; margin: var(--sp-4) auto; max-width: 1400px; display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);">
+    <h2 style="font-size: var(--fs-4); font-weight: 800; letter-spacing: -0.04em; max-width: 800px; line-height: 1.1;">Download MusicLinkd.<br>Available anywhere.</h2>
+    <p class="desc" style="font-size: var(--fs-2); color: var(--muted); max-width: 600px; margin-bottom: 24px;">Manage your studios, approve bookings, and discover top-tier talent right from your phone, browser, or control center.</p>
+    
+    <div style="display: flex; gap: var(--sp-2); justify-content: center; flex-wrap: wrap; margin-bottom: var(--sp-3);">
+      <img src="./assets/img/shazam/appstore_chrome_dark.webp" alt="App Store" style="height: 60px; object-fit: contain; border-radius: var(--r-2);">
+      <img src="./assets/img/shazam/galaxystore.webp" alt="Galaxy Store" style="height: 60px; object-fit: contain; border-radius: var(--r-2);">
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--sp-2); width: 100%; max-width: 1200px;">
+      <div style="background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-3); padding: var(--sp-2); overflow: hidden; display: flex; flex-direction: column; align-items: center;">
+        <h3 style="font-size: var(--fs-2); font-weight: 700; margin-bottom: var(--sp-1);">Browser Extension</h3>
+        <img src="./assets/img/shazam/browser.webp" style="width: 100%; border-radius: var(--r-2); object-fit: cover; margin-top: auto;" alt="Browser Extension">
+      </div>
+      <div style="background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-3); padding: var(--sp-2); overflow: hidden; display: flex; flex-direction: column; align-items: center;">
+        <h3 style="font-size: var(--fs-2); font-weight: 700; margin-bottom: var(--sp-1);">Control Center Integration</h3>
+        <img src="./assets/img/shazam/control-center-2026.webp" style="width: 100%; border-radius: var(--r-2); object-fit: cover; margin-top: auto;" alt="Control Center">
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="/" style="font-family:var(--font-display);font-weight:800;font-size:22px;letter-spacing:-0.05em;text-decoration:none;color:var(--text-primary);display:inline-flex;align-items:center;gap:10px">MusicLink<em style="color:var(--brand-pink);font-style:normal">d</em></a>
+        <p>India's professional music ecosystem. Connecting artists, studios, engineers, labels, venues and music businesses through one unified platform.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#problem">Problem</a></li>
+          <li><a href="#modules">Modules</a></li>
+          <li><a href="#journeys">How It Works</a></li>
+          <li><a href="#gallery">Screens</a></li>
+          <li><a href="#trust">Trust</a></li>
+          <li><a href="#ai">AI Features</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#roadmap">Roadmap</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="mailto:partner@musiclinkd.com">Partner With Us</a></li>
+          <li><a href="#cta">Early Access</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/legal/privacy/">Privacy Policy</a></li>
+          <li><a href="/legal/terms/">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© MusicLinkd. All rights reserved. · Powered by <a href="https://wugweb.com" target="_blank" rel="noopener" style="color:inherit;font-weight:600;text-decoration:none">Wugweb</a></span>
+      <div class="footer__social">
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" aria-label="X (Twitter)"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- GSAP — editorial animations -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>
