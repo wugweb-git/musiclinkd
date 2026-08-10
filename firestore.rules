@@ -34,16 +34,19 @@ service cloud.firestore {
 
     match /users/{userId} {
       allow read: if true;
+      // primaryRole/secondaryRole values come from the "person_types"
+      // master-data category (admin-managed, dynamic) — not a fixed enum
+      // here anymore, so this only checks the field is present/typed.
       allow create: if isModerator()
         || (isOwner(userId)
-            && request.resource.data.role in ['ARTIST', 'PRODUCER', 'VOCALIST', 'STUDIO', 'LABEL']
+            && request.resource.data.primaryRole is string
             && request.resource.data.isVerified == false
             && request.resource.data.isBanned == false);
       allow update: if isModerator()
         || (isOwner(userId)
             && !request.resource.data.diff(resource.data)
                  .affectedKeys()
-                 .hasAny(['isVerified', 'isBanned', 'role']));
+                 .hasAny(['isVerified', 'isBanned', 'primaryRole', 'secondaryRole']));
     }
 
     match /admin_roles/{userId} {

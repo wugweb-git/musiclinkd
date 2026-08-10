@@ -22,9 +22,10 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Textarea } from "@/components/ui/textarea";
-import { taxonomyCategoriesRepo, usersRepo } from "@/services/repositories";
-import { taxonomyOptionsRepo } from "@/services/repositories/taxonomy-options-repository";
-import type { TaxonomyOptionDoc, UserDoc, UserRole, WithId } from "@/types/firestore";
+import { CappedCheckboxList } from "@/components/shared/capped-checkbox-list";
+import { useTaxonomyOptions } from "@/hooks/use-taxonomy-options";
+import { usersRepo } from "@/services/repositories";
+import type { UserDoc, WithId } from "@/types/firestore";
 
 interface UserEditorSheetProps {
   /** Existing user to edit, or null to create a new one. */
@@ -34,14 +35,16 @@ interface UserEditorSheetProps {
   onSaved: () => void;
 }
 
-const ROLES: UserRole[] = ["ARTIST", "PRODUCER", "VOCALIST", "STUDIO", "LABEL"];
 const MAX_GENRES = 3;
+
+type ArrayField = "genres" | "languages" | "instruments" | "personaBadges";
 
 function emptyForm(): UserDoc {
   return {
     displayName: "",
     email: "",
-    role: "ARTIST",
+    primaryRole: "",
+    secondaryRole: "",
     isVerified: false,
     isBanned: false,
     isAvailable: true,
@@ -49,78 +52,77 @@ function emptyForm(): UserDoc {
     location: "",
     bio: "",
     genres: [],
+    languages: [],
+    instruments: [],
+    personaBadges: [],
     avatarUrl: "",
     createdAt: usersRepo.serverTimestamp() as never,
   };
 }
 
+/** Freeform fallback text for each array field, used only until its master-data category is seeded. */
+function emptyFallbackText(): Record<ArrayField, string> {
+  return { genres: "", languages: "", instruments: "", personaBadges: "" };
+}
+
 export function UserEditorSheet({ user, open, onOpenChange, onSaved }: UserEditorSheetProps) {
   const [uid, setUid] = useState("");
   const [form, setForm] = useState<UserDoc>(emptyForm());
-  const [genresText, setGenresText] = useState("");
-  const [genreOptions, setGenreOptions] = useState<WithId<TaxonomyOptionDoc>[] | null>(null);
+  const [fallbackText, setFallbackText] = useState<Record<ArrayField, string>>(emptyFallbackText());
   const [saving, setSaving] = useState(false);
+
+  const roleOptions = useTaxonomyOptions("person_types");
+  const genreOptions = useTaxonomyOptions("genres");
+  const languageOptions = useTaxonomyOptions("languages");
+  const instrumentOptions = useTaxonomyOptions("instruments");
+  const personaBadgeOptions = useTaxonomyOptions("persona_badges");
 
   useEffect(() => {
     if (user) {
       setUid(user.id);
       setForm(user.data);
-      setGenresText(user.data.genres?.join(", ") ?? "");
+      setFallbackText({
+        genres: user.data.genres?.join(", ") ?? "",
+        languages: user.data.languages?.join(", ") ?? "",
+        instruments: user.data.instruments?.join(", ") ?? "",
+        personaBadges: user.data.personaBadges?.join(", ") ?? "",
+      });
     } else {
       setUid(crypto.randomUUID());
       setForm(emptyForm());
-      setGenresText("");
+      setFallbackText(emptyFallbackText());
     }
   }, [user, open]);
 
-  // Controlled multi-select once master data has a "genres" category; falls
-  // back to the freeform input above if it hasn't been seeded yet, so this
-  // page never hard-breaks on missing master data.
-  useEffect(() => {
-    if (!open) return;
-    let cancelled = false;
-    taxonomyCategoriesRepo
-      .get("genres")
-      .then((category) => {
-        if (cancelled) return;
-        if (!category) {
-          setGenreOptions(null);
-          return;
-        }
-        return taxonomyOptionsRepo("genres")
-          .list({ orderByField: "sortOrder", orderDirection: "asc" })
-          .then((options) => {
-            if (!cancelled) setGenreOptions(options.filter((o) => o.data.isActive));
-          });
-      })
-      .catch(() => {
-        if (!cancelled) setGenreOptions(null);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [open]);
-
-  function toggleGenre(value: string) {
+  function toggleArrayValue(field: ArrayField, value: string, max?: number) {
     setForm((f) => {
-      const has = f.genres.includes(value);
-      if (has) return { ...f, genres: f.genres.filter((g) => g !== value) };
-      if (f.genres.length >= MAX_GENRES) return f;
-      return { ...f, genres: [...f.genres, value] };
+      const arr = f[field];
+      const has = arr.includes(value);
+      if (has) return { ...f, [field]: arr.filter((v) => v !== value) };
+      if (max && arr.length >= max) return f;
+      return { ...f, [field]: [...arr, value] };
     });
   }
 
+  function fallbackToArray(text: string) {
+    return text
+      .split(",")
+      .map((v) => v.trim())
+      .filter(Boolean);
+  }
+
   async function handleSave() {
-    if (!form.displayName || !form.email) return;
+    if (!form.displayName || !form.email || !form.primaryRole) return;
     setSaving(true);
     try {
-      const genres = genreOptions
-        ? form.genres
-        : genresText
-            .split(",")
-            .map((g) => g.trim())
-            .filter(Boolean);
-      await usersRepo.create(uid, { ...form, genres });
+      const resolved: UserDoc = {
+        ...form,
+        genres: genreOptions ? form.genres : fallbackToArray(fallbackText.genres),
+        languages: languageOptions ? form.languages : fallbackToArray(fallbackText.languages),
+        instruments: instrumentOptions ? form.instruments : fallbackToArray(fallbackText.instruments),
+        personaBadges: personaBadgeOptions ? form.personaBadges : fallbackToArray(fallbackText.personaBadges),
+      };
+      await usersRepo.create(uid, resolved);
       toast.success(user ? "User updated" : "User created");
       onSaved();
       onOpenChange(false);
@@ -129,6 +131,34 @@ export function UserEditorSheet({ user, open, onOpenChange, onSaved }: UserEdito
     } finally {
       setSaving(false);
     }
+  }
+
+  function arrayField(key: ArrayField, label: string, options: ReturnType<typeof useTaxonomyOptions>, max?: number) {
+    if (options) {
+      return (
+        <CappedCheckboxList
+          label={label}
+          options={options}
+          selected={form[key]}
+          onToggle={(value) => toggleArrayValue(key, value, max)}
+          max={max}
+        />
+      );
+    }
+    return (
+      <div className="space-y-1.5">
+        <Label htmlFor={`user-${key}`}>{label} (comma-separated)</Label>
+        <Input
+          id={`user-${key}`}
+          value={fallbackText[key]}
+          onChange={(e) => setFallbackText((t) => ({ ...t, [key]: e.target.value }))}
+        />
+        <p className="text-xs text-muted-foreground">
+          No matching master-data category yet — using freeform text. Create one under Master Data to
+          switch to a controlled list here.
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -163,30 +193,82 @@ export function UserEditorSheet({ user, open, onOpenChange, onSaved }: UserEdito
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
-            <div className="space-y-1.5">
-              <Label htmlFor="user-role">Role</Label>
-              <Select value={form.role} onValueChange={(v) => setForm((f) => ({ ...f, role: v as UserRole }))}>
-                <SelectTrigger id="user-role" className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {ROLES.map((r) => (
-                    <SelectItem key={r} value={r}>
-                      {r}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+          {roleOptions ? (
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1.5">
+                <Label htmlFor="user-primary-role">Primary role</Label>
+                <Select
+                  value={form.primaryRole}
+                  onValueChange={(v) => setForm((f) => ({ ...f, primaryRole: v ?? "" }))}
+                >
+                  <SelectTrigger id="user-primary-role" className="w-full">
+                    <SelectValue placeholder="Select a role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {roleOptions.map((r) => (
+                      <SelectItem key={r.id} value={r.data.value}>
+                        {r.data.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="user-secondary-role">Secondary role (optional)</Label>
+                <Select
+                  value={form.secondaryRole || "__none__"}
+                  onValueChange={(v) => setForm((f) => ({ ...f, secondaryRole: !v || v === "__none__" ? "" : v }))}
+                >
+                  <SelectTrigger id="user-secondary-role" className="w-full">
+                    <SelectValue placeholder="None" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="__none__">None</SelectItem>
+                    {roleOptions
+                      .filter((r) => r.data.value !== form.primaryRole)
+                      .map((r) => (
+                        <SelectItem key={r.id} value={r.data.value}>
+                          {r.data.label}
+                        </SelectItem>
+                      ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="user-location">Location</Label>
-              <Input
-                id="user-location"
-                value={form.location}
-                onChange={(e) => setForm((f) => ({ ...f, location: e.target.value }))}
-              />
+          ) : (
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1.5">
+                <Label htmlFor="user-primary-role">Primary role</Label>
+                <Input
+                  id="user-primary-role"
+                  value={form.primaryRole}
+                  onChange={(e) => setForm((f) => ({ ...f, primaryRole: e.target.value }))}
+                  placeholder="Singer / Vocalist"
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="user-secondary-role">Secondary role (optional)</Label>
+                <Input
+                  id="user-secondary-role"
+                  value={form.secondaryRole}
+                  onChange={(e) => setForm((f) => ({ ...f, secondaryRole: e.target.value }))}
+                />
+              </div>
             </div>
+          )}
+          {!roleOptions ? (
+            <p className="-mt-2 text-xs text-muted-foreground">
+              No &quot;person_types&quot; master-data category yet — using freeform text.
+            </p>
+          ) : null}
+
+          <div className="space-y-1.5">
+            <Label htmlFor="user-location">Location</Label>
+            <Input
+              id="user-location"
+              value={form.location}
+              onChange={(e) => setForm((f) => ({ ...f, location: e.target.value }))}
+            />
           </div>
 
           <div className="space-y-1.5">
@@ -199,72 +281,10 @@ export function UserEditorSheet({ user, open, onOpenChange, onSaved }: UserEdito
             />
           </div>
 
-          {genreOptions ? (
-            <div className="space-y-1.5">
-              <Label>
-                Genres (up to {MAX_GENRES} — {form.genres.length}/{MAX_GENRES} selected)
-              </Label>
-              <div className="flex flex-wrap gap-x-4 gap-y-2 rounded-md border p-3">
-                {genreOptions.map((opt) => {
-                  const checked = form.genres.includes(opt.data.value);
-                  const disabled = !checked && form.genres.length >= MAX_GENRES;
-                  return (
-                    <label
-                      key={opt.id}
-                      className={`flex items-center gap-2 text-sm ${disabled ? "opacity-40" : ""}`}
-                    >
-                      <Checkbox
-                        checked={checked}
-                        disabled={disabled}
-                        onCheckedChange={() => toggleGenre(opt.data.value)}
-                      />
-                      {opt.data.label}
-                    </label>
-                  );
-                })}
-              </div>
-              {(() => {
-                const knownValues = new Set(genreOptions.map((o) => o.data.value));
-                const legacy = form.genres.filter((g) => !knownValues.has(g));
-                if (!legacy.length) return null;
-                return (
-                  <div className="rounded-md border border-dashed border-amber-500/50 bg-amber-500/10 p-2 text-xs text-amber-700 dark:text-amber-400">
-                    <p className="mb-1 font-medium">
-                      {legacy.length} stored genre{legacy.length > 1 ? "s" : ""} not in the current
-                      list (still counts toward the {MAX_GENRES}-max above):
-                    </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {legacy.map((g) => (
-                        <button
-                          key={g}
-                          type="button"
-                          className="rounded border border-amber-500/50 bg-background px-1.5 py-0.5 hover:bg-amber-500/20"
-                          onClick={() => setForm((f) => ({ ...f, genres: f.genres.filter((x) => x !== g) }))}
-                          title="Remove"
-                        >
-                          {g} ×
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })()}
-            </div>
-          ) : (
-            <div className="space-y-1.5">
-              <Label htmlFor="user-genres">Genres (comma-separated)</Label>
-              <Input
-                id="user-genres"
-                value={genresText}
-                onChange={(e) => setGenresText(e.target.value)}
-                placeholder="Hindi Folk, Pop Vocals"
-              />
-              <p className="text-xs text-muted-foreground">
-                No &quot;genres&quot; master-data category yet — using freeform text. Create one under
-                Master Data to switch to a controlled list here.
-              </p>
-            </div>
-          )}
+          {arrayField("genres", "Genres", genreOptions, MAX_GENRES)}
+          {arrayField("languages", "Languages", languageOptions)}
+          {arrayField("instruments", "Instruments", instrumentOptions)}
+          {arrayField("personaBadges", "Persona badges", personaBadgeOptions)}
 
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
@@ -310,7 +330,7 @@ export function UserEditorSheet({ user, open, onOpenChange, onSaved }: UserEdito
           </div>
         </div>
         <SheetFooter>
-          <Button onClick={handleSave} disabled={saving || !form.displayName || !form.email}>
+          <Button onClick={handleSave} disabled={saving || !form.displayName || !form.email || !form.primaryRole}>
             {saving ? "Saving…" : user ? "Save changes" : "Create user"}
           </Button>
         </SheetFooter>

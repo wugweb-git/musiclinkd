@@ -36,9 +36,18 @@ const columns: ColumnDef<Row>[] = [
     ),
   },
   {
-    accessorKey: "data.role",
+    accessorKey: "data.primaryRole",
     header: "Role",
-    cell: ({ row }) => <Badge variant="outline">{row.original.data.role}</Badge>,
+    cell: ({ row }) => (
+      <div className="flex flex-wrap gap-1">
+        <Badge variant="outline">{row.original.data.primaryRole}</Badge>
+        {row.original.data.secondaryRole ? (
+          <Badge variant="outline" className="text-muted-foreground">
+            {row.original.data.secondaryRole}
+          </Badge>
+        ) : null}
+      </div>
+    ),
   },
   { accessorKey: "data.location", header: "Location" },
   {

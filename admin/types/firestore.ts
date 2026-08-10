@@ -6,12 +6,20 @@ import type { Timestamp } from "firebase/firestore";
 
 export type AdminRole = "ROLE_ADMIN" | "ROLE_MODERATOR" | "ROLE_SUPPORT";
 
-export type UserRole = "ARTIST" | "PRODUCER" | "VOCALIST" | "STUDIO" | "LABEL";
-
+/**
+ * Replaced the old hardcoded 5-value UserRole enum (ARTIST/PRODUCER/
+ * VOCALIST/STUDIO/LABEL) — the app's real onboarding collects one of 17
+ * granular roles (see the "person_types" master-data category), as
+ * primaryRole (required) + optional secondaryRole, matching what
+ * OnboardingViewModel.kt actually writes today. Values are dynamic
+ * (admin-managed master data), not a fixed union — see Users_And_Masters
+ * notes in admin/docs/architecture/ for the seed list.
+ */
 export interface UserDoc {
   displayName: string;
   email: string;
-  role: UserRole;
+  primaryRole: string;
+  secondaryRole: string;
   isVerified: boolean;
   isBanned: boolean;
   isAvailable: boolean;
@@ -19,6 +27,9 @@ export interface UserDoc {
   location: string;
   bio: string;
   genres: string[];
+  languages: string[];
+  instruments: string[];
+  personaBadges: string[];
   avatarUrl: string;
   createdAt: Timestamp;
 }
