@@ -55,6 +55,14 @@ export function CategoryEditorSheet({ open, onOpenChange, onSaved }: CategoryEdi
     if (!key || !user) return;
     setSaving(true);
     try {
+      // create() uses setDoc, which overwrites rather than erroring on a
+      // duplicate ID — check first so a repeated label can't silently wipe
+      // an existing category's data.
+      const existing = await taxonomyCategoriesRepo.get(key);
+      if (existing) {
+        toast.error(`A category with key "${key}" already exists.`);
+        return;
+      }
       const now = taxonomyCategoriesRepo.serverTimestamp();
       const doc: TaxonomyCategoryDoc = {
         key,

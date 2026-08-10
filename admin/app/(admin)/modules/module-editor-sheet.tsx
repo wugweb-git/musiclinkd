@@ -66,9 +66,9 @@ export function ModuleEditorSheet({ module, open, onOpenChange, onSaved }: Modul
     try {
       const now = modulesRepo.serverTimestamp();
       if (module) {
-        // Metadata only — `enabled` is intentionally omitted here; rules
-        // block clients from changing it outside the toggleModule Cloud
-        // Function, and this update wouldn't include it even if allowed.
+        // Metadata only — `enabled` is deliberately kept out of this form;
+        // the toggle button on the list is the one path for changing it, to
+        // keep "edit metadata" and "flip live state" as distinct actions.
         await modulesRepo.update(module.id, {
           label,
           description,
@@ -79,6 +79,14 @@ export function ModuleEditorSheet({ module, open, onOpenChange, onSaved }: Modul
         });
         toast.success("Module updated");
       } else {
+        // create() uses setDoc, which overwrites rather than erroring on a
+        // duplicate ID — check first so a repeated label can't silently
+        // wipe an existing module's registered state.
+        const existing = await modulesRepo.get(id);
+        if (existing) {
+          toast.error(`A module with key "${id}" already exists.`);
+          return;
+        }
         const doc: ModuleRegistryDoc = {
           label,
           description,

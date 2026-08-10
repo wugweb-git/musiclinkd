@@ -223,6 +223,32 @@ export function UserEditorSheet({ user, open, onOpenChange, onSaved }: UserEdito
                   );
                 })}
               </div>
+              {(() => {
+                const knownValues = new Set(genreOptions.map((o) => o.data.value));
+                const legacy = form.genres.filter((g) => !knownValues.has(g));
+                if (!legacy.length) return null;
+                return (
+                  <div className="rounded-md border border-dashed border-amber-500/50 bg-amber-500/10 p-2 text-xs text-amber-700 dark:text-amber-400">
+                    <p className="mb-1 font-medium">
+                      {legacy.length} stored genre{legacy.length > 1 ? "s" : ""} not in the current
+                      list (still counts toward the {MAX_GENRES}-max above):
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {legacy.map((g) => (
+                        <button
+                          key={g}
+                          type="button"
+                          className="rounded border border-amber-500/50 bg-background px-1.5 py-0.5 hover:bg-amber-500/20"
+                          onClick={() => setForm((f) => ({ ...f, genres: f.genres.filter((x) => x !== g) }))}
+                          title="Remove"
+                        >
+                          {g} ×
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           ) : (
             <div className="space-y-1.5">
