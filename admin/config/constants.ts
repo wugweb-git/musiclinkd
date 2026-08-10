@@ -22,6 +22,8 @@ export const COLLECTIONS = {
   broadcastMessages: "broadcast_messages",
   auditLogs: "audit_logs",
   pageContent: "page_content",
+  taxonomyCategories: "taxonomy_categories",
+  modules: "modules",
 } as const;
 
 export const STORAGE_PATHS = {
@@ -60,9 +62,18 @@ export const MODULE_PERMISSIONS = {
   tracks: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
   "audit-logs": perm("ROLE_ADMIN"),
   settings: perm("ROLE_ADMIN"),
+  masterData: perm("ROLE_ADMIN"),
+  modules: perm("ROLE_ADMIN"),
 } satisfies Record<string, AdminRole[]>;
 
 export type ModuleKey = keyof typeof MODULE_PERMISSIONS;
+
+/**
+ * Modules the registry (see the `modules` collection / admin Modules page)
+ * is never allowed to disable, regardless of what an admin sets — core
+ * admin infrastructure can't be allowed to lock itself out.
+ */
+export const NON_TOGGLEABLE_MODULES: ModuleKey[] = ["dashboard", "settings", "masterData", "modules"];
 
 /** Remote Config parameter keys — must match remoteconfig.template.json at repo root. */
 export const FEATURE_FLAGS = {

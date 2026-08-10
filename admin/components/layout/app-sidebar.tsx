@@ -18,11 +18,13 @@ import {
 } from "@/components/ui/sidebar";
 import { NAV_GROUPS } from "@/config/navigation";
 import { useAuth } from "@/hooks/use-auth";
+import { useModuleRegistry } from "@/hooks/use-module-registry";
 import { signOut } from "@/services/auth";
 
 export function AppSidebar() {
   const pathname = usePathname();
   const { user, role } = useAuth();
+  const { isNavModuleDisabled } = useModuleRegistry();
 
   return (
     <Sidebar collapsible="icon">
@@ -54,6 +56,9 @@ export function AppSidebar() {
                       <span>{navItem.label}</span>
                     </SidebarMenuButton>
                     {navItem.mock ? <SidebarMenuBadge>mock</SidebarMenuBadge> : null}
+                    {isNavModuleDisabled(navItem.key) ? (
+                      <SidebarMenuBadge className="text-destructive">disabled</SidebarMenuBadge>
+                    ) : null}
                   </SidebarMenuItem>
                 ))}
               </SidebarMenu>

@@ -43,7 +43,7 @@ export default function PagesPage() {
   return (
     <PageShell
       title="Page Management"
-      description={`Homepage, CMS pages, and footer pages editable here. website/ is still static HTML and doesn't read this collection yet — see the schema doc's limitation note. Suggested slugs to seed first: ${SUGGESTED_SLUGS.join(", ")}.`}
+      description={`Homepage, CMS pages, and footer pages editable here. Suggested slugs to seed first: ${SUGGESTED_SLUGS.join(", ")}.`}
       actions={
         <Button
           size="sm"
@@ -56,6 +56,13 @@ export default function PagesPage() {
         </Button>
       }
     >
+      <div className="rounded-lg border border-dashed border-amber-500/50 bg-amber-500/10 px-4 py-2 text-sm text-amber-700 dark:text-amber-400">
+        <span className="font-medium">Not yet live:</span> pages edited here are stored in Firestore
+        only. <code className="text-xs">frontend/website/</code> is 100% static HTML and doesn&apos;t
+        read this collection — a save here doesn&apos;t change what&apos;s live at musiclinkd.com until a
+        build-time content pipeline is added (see{" "}
+        <code className="text-xs">admin/docs/architecture/CMS_Content_Mapping.md</code>).
+      </div>
       <DataTable
         columns={columns}
         data={data}

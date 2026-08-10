@@ -14,6 +14,36 @@
       "defaultValue": { "value": "hello@musiclinkd.com" },
       "description": "Support/tickets routing address surfaced in-app and in admin.",
       "valueType": "STRING"
+    },
+    "module_marketplace_enabled": {
+      "defaultValue": { "value": "false" },
+      "description": "Mirrors modules/marketplace.enabled — written by the toggleModule Cloud Function. Do not deploy this file's default over a live admin toggle without reconciling first (see Deployment_Plan.md).",
+      "valueType": "BOOLEAN"
+    },
+    "module_bookings_enabled": {
+      "defaultValue": { "value": "false" },
+      "description": "Mirrors modules/bookings.enabled — written by the toggleModule Cloud Function.",
+      "valueType": "BOOLEAN"
+    },
+    "module_analytics_enabled": {
+      "defaultValue": { "value": "false" },
+      "description": "Mirrors modules/analytics.enabled — written by the toggleModule Cloud Function.",
+      "valueType": "BOOLEAN"
+    },
+    "module_tracks_enabled": {
+      "defaultValue": { "value": "false" },
+      "description": "Mirrors modules/tracks.enabled — written by the toggleModule Cloud Function.",
+      "valueType": "BOOLEAN"
+    },
+    "module_ai_enabled": {
+      "defaultValue": { "value": "false" },
+      "description": "Mirrors modules/ai.enabled — written by the toggleModule Cloud Function.",
+      "valueType": "BOOLEAN"
+    },
+    "module_business_enabled": {
+      "defaultValue": { "value": "false" },
+      "description": "Mirrors modules/business.enabled — written by the toggleModule Cloud Function.",
+      "valueType": "BOOLEAN"
     }
   },
   "parameterGroups": {},

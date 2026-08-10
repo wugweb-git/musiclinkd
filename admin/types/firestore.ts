@@ -171,6 +171,13 @@ export interface AuditLogDoc {
 
 export type PageStatus = "DRAFT" | "PUBLISHED";
 
+/**
+ * Known gap, not silently dropped: frontend/website/ is static HTML and
+ * never reads this collection at runtime, so a save here doesn't change
+ * what's live. The real fix is a build-time SSG pull of PUBLISHED docs into
+ * scripts/build-hosting.sh's frontend/website/ step — a separate, larger
+ * workstream, not attempted yet. See admin/docs/architecture/CMS_Content_Mapping.md.
+ */
 export interface PageContentDoc {
   /** URL path on musiclinkd.com, e.g. "/", "/about", "/legal/privacy". */
   route: string;
@@ -181,6 +188,38 @@ export interface PageContentDoc {
   seoDescription: string;
   updatedBy: string;
   updatedAt: Timestamp;
+}
+
+export interface TaxonomyCategoryDoc {
+  key: string;
+  label: string;
+  description: string;
+  isActive: boolean;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+  updatedBy: string;
+}
+
+export interface TaxonomyOptionDoc {
+  label: string;
+  value: string;
+  sortOrder: number;
+  isActive: boolean;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
+
+export interface ModuleRegistryDoc {
+  label: string;
+  description: string;
+  enabled: boolean;
+  /** Links to a real admin nav item/route (see config/constants.ts ModuleKey), or null if this module has no admin-panel page. */
+  navModuleKey: string | null;
+  /** Remote Config parameter this toggle mirrors, or null if it's admin-only. */
+  remoteConfigKey: string | null;
+  updatedBy: string;
+  updatedAt: Timestamp;
+  createdAt: Timestamp;
 }
 
 export interface WithId<T> {

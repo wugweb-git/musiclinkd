@@ -7,12 +7,14 @@ import type {
   FeedPostDoc,
   MarketplaceItemDoc,
   ModerationFlagDoc,
+  ModuleRegistryDoc,
   PageContentDoc,
   ProjectDoc,
   ReviewDoc,
   StudioBookingDoc,
   StudioDoc,
   SupportTicketDoc,
+  TaxonomyCategoryDoc,
   UserDoc,
   VerificationRequestDoc,
 } from "@/types/firestore";
@@ -33,3 +35,5 @@ export const supportTicketsRepo = createRepository<SupportTicketDoc>(COLLECTIONS
 export const broadcastMessagesRepo = createRepository<BroadcastMessageDoc>(COLLECTIONS.broadcastMessages);
 export const auditLogsRepo = createRepository<AuditLogDoc>(COLLECTIONS.auditLogs);
 export const pageContentRepo = createRepository<PageContentDoc>(COLLECTIONS.pageContent);
+export const taxonomyCategoriesRepo = createRepository<TaxonomyCategoryDoc>(COLLECTIONS.taxonomyCategories);
+export const modulesRepo = createRepository<ModuleRegistryDoc>(COLLECTIONS.modules);

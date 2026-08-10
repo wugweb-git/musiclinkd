@@ -1,6 +1,7 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { PageShell } from "@/components/layout/page-shell";
@@ -86,10 +87,27 @@ export default function SettingsPage() {
     <PageShell title="Settings" description="Feature flags and admin role management.">
       <Card>
         <CardHeader>
+          <CardTitle>Modules</CardTitle>
+          <CardDescription>
+            Enable/disable admin modules, backed by a real Cloud Function
+            (toggleModule) that also mirrors to Remote Config where a module
+            has a linked key — for the app to consume later.
+          </CardDescription>
+        </CardHeader>
+        <CardFooter>
+          <Button variant="outline" render={<Link href="/modules" />}>
+            Open Modules
+          </Button>
+        </CardFooter>
+      </Card>
+
+      <Card>
+        <CardHeader>
           <CardTitle>Feature flags</CardTitle>
           <CardDescription>
             Read from Remote Config (remoteconfig.template.json). Edit values in the Firebase console —
-            this panel doesn&apos;t write flags yet.
+            module-linked flags now write via the Modules page above; other flags (maintenance mode,
+            etc.) still don&apos;t write from this panel.
           </CardDescription>
         </CardHeader>
         <CardContent className="grid grid-cols-1 gap-3 sm:grid-cols-3">

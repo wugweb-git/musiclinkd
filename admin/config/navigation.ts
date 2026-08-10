@@ -11,10 +11,12 @@ import {
   LayoutDashboard,
   MessageSquare,
   Newspaper,
+  Power,
   ScrollText,
   Settings,
   ShoppingBag,
   Star,
+  Tags,
   Users,
 } from "lucide-react";
 import { MOCK_ONLY_MODULES, type ModuleKey } from "./constants";
@@ -76,6 +78,8 @@ export const NAV_GROUPS: NavGroup[] = [
     items: [
       item("pages", "Pages", Newspaper),
       item("analytics", "Analytics", BarChart3),
+      item("masterData", "Master Data", Tags),
+      item("modules", "Modules", Power),
       item("settings", "Settings", Settings),
     ],
   },

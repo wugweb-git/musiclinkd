@@ -147,5 +147,28 @@ service cloud.firestore {
       allow read: if true;
       allow write: if isAdmin();
     }
+
+    match /taxonomy_categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+
+      match /options/{optionId} {
+        allow read: if true;
+        allow write: if isAdmin();
+      }
+    }
+
+    match /modules/{moduleKey} {
+      allow read: if true;
+      // v1: isAdmin() may write `enabled` directly from the client — no
+      // Cloud Function required (Firebase Functions need the Blaze plan;
+      // this project stays on Spark). The Remote Config mirror described in
+      // backend/functions/src/index.ts (toggleModule) is a documented,
+      // deferred follow-up — not called by the admin UI right now. See
+      // admin/docs/architecture/Edge_Functions_And_Errors.md.
+      allow create: if isAdmin() && request.resource.data.enabled == false;
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
   }
 }
