@@ -577,3 +577,253 @@ these:
 Please confirm each of these 10 sections back to me one at a time, same as
 last round — don't batch-confirm.
 ```
+
+---
+
+## Prompt F — Round 3: still-open corrections, profile-type design, and a verification note
+
+**Before sending, read this:** a verification pass (2026-08-11) checked
+every claim in your `v1.9.1` changelog entry against the live source, item
+by item. All 11 substantive claims — including several that overlap with
+Prompts D/E below — were false when checked against the actual code, not
+partially confirmed. The strongest signal: `FirebaseManager.kt`, central to
+4 of those claims, has had **zero changes — committed or uncommitted —
+since the initial commit**, despite three separate changelog entries across
+different dates claiming functions were added to it. Please paste the
+actual diff of the changed file for every section below, not just an
+updated schema doc or changelog entry — that's the only way we can confirm
+a fix landed instead of just being described.
+
+```
+This is a third correction pass. Two things up front, because the same
+pattern has happened twice now: both times I sent field-name corrections
+for studio_bookings and connections, you updated BackendSchemas.kt /
+BACKEND_SCHEMA_SPEC.md to show the corrected names, but StudioBookingScreens.kt
+and ConnectionsScreen.kt were never actually changed — the real write code
+still uses the old field names today. For every section below, please paste
+back the actual diff of the screen/viewmodel file you changed, not just the
+updated schema doc — a schema-doc-only change will not be treated as done.
+
+=== 1. Studio Bookings — this is still broken, please fix the actual write code this time ===
+
+StudioBookingScreens.kt's booking-confirmation write (around where
+db.collection("studio_bookings").document(...).set(...) is called) still
+writes:
+  "artistUserId" (should be "userId")
+  "totalCostAmount" (should be "totalAmount")
+  "statusKey" (should be "bookingStatus")
+and never writes "slotText" or "paymentStatus" at all, despite both being
+in the schema you already wrote. Please fix the actual hashMapOf(...) /
+data-class construction in the write function, the .whereEqualTo(...) query
+that reads these fields back, and the cancellation-update call — all three
+places currently use the old names. Paste the diff of the actual changed
+lines in StudioBookingScreens.kt when done.
+
+=== 2. Connections — two different writers disagree with each other, not just with the schema ===
+
+There are two separate places that write to the "connections" collection:
+FirebaseManager.kt's sendConnectionRequest (this one is already correct —
+senderUid/targetUserId/status, correct doc ID) and a second function in
+ConnectionsScreen.kt (used for accept/reject/request-sent) that writes
+connectionId/targetName instead, with a plain local ID as the doc ID
+instead of "${senderUid}_${targetUserId}". Please point the second writer
+at the same document shape and ID scheme as the first, so both paths agree.
+Paste the diff of the changed function in ConnectionsScreen.kt.
+
+=== 3. Profile-type schema — new work, please confirm the design before building ===
+
+The app has three separate, disconnected ways of guessing whether a
+profile is Talent/Band/Business/Venue (a dashboard-badge substring match
+on primaryRole, a headline substring match in PublicProfilePreviewScreen,
+and DiscoverData.kt's ProfileType enum used only by mock data) — none of
+them write or read a real field. Please add:
+
+  users/{uid}.profileType: string   — REQUIRED, set once at profile
+                                       creation, values from a new
+                                       taxonomy_categories/profile_types
+                                       category: "talent", "band",
+                                       "business", "venue_event"
+                                       (matching your existing ProfileType
+                                       enum's casing).
+
+For the Business family (Studio/Label/School/Dealer), extend the EXISTING
+"studios" collection rather than creating a new one — add:
+  businessType: string   — from a new "business_types" taxonomy category:
+                            "studio", "label", "school", "dealer"
+  businessName: string
+  tagline: string
+  operatingHours: string
+  gstin: string
+  services: string[]
+
+For Band, a NEW top-level "band_profiles" collection, doc ID = the owning
+user's Firebase Auth UID:
+  ownerUid: string
+  members: array of { name: string, instrument: string, role: string }
+  technicalRider: string
+  stagePlotUrl: string
+
+For Venue, a NEW top-level "venue_profiles" collection, same doc-ID scheme:
+  ownerUid: string
+  capacity: number
+  features: string[]
+
+Before writing any of this, confirm back: (a) does StudioDoc.amenities
+already cover what Label/School/Dealer would use for "equipment", or do
+they need a separate field? (b) should the existing BandProfileLayout /
+VenueProfileLayout hardcoded UI (in ProfileManagementScreens.kt) be wired
+to read/write these new fields as part of this change, or is that a
+separate follow-up? Don't build the UI wiring until this is confirmed.
+
+=== 4. Portfolio projects — still schema-only, please confirm your Prompt D/E work actually shipped ===
+
+Per the standing instruction at the top of this prompt: please paste the
+actual diff showing portfolio_projects being written to Firestore from
+PortfolioViewModel.kt's publishProject() function, with the corrected field
+names from the previous prompt (ownerUid, artworkTheme, projectViews,
+likes, shares, ownerRoles, etc.) — if this hasn't been done yet, please do
+it now rather than reporting it as already complete.
+
+=== 5. feed_posts — field names need reconciling WITH a migration plan, this collection has live data ===
+
+Unlike the other items in this prompt, feed_posts already has real posts
+being written today, so this isn't a simple rename. Current write code
+(FirebaseManager.kt's createFeedPost) writes "content" (should read as
+"text" to match the admin schema), and adds "authorName"/"authorRole"
+fields directly onto each post (denormalized, not in the documented
+schema) plus a "mediaUrl" field whose meaning your own read code
+(NetworkingFeed's post-mapping function) doesn't agree with (it currently
+reads mediaUrl back as an avatar image, not media content — please check
+whether this is intentional or a bug on your end first).
+
+Please: (a) confirm whether "authorName"/"authorRole" denormalization is
+intentional (avoids a join against "users" when rendering the feed) — if
+so, that's fine, just confirm it so the admin schema doc can be updated to
+match reality instead of the other way around. (b) either rename "content"
+to "text" with a one-time migration/backfill for existing documents, or
+tell me how many real feed_posts documents currently exist so we can decide
+whether a backfill is worth writing. (c) fix the mediaUrl read/write
+mismatch — decide whether it's for audio (as documented) or avatar images
+(as currently read), and align both sides.
+
+=== 6. Small bug, unrelated to schema, found in the same audit ===
+
+NativeQRCodeCanvas (in your Compose UI components file) takes a
+"contentUrl" parameter but never actually reads it inside the Canvas
+drawing code — it always renders the same fixed pattern no matter what URL
+is passed in. This means the QR code shown to users doesn't actually encode
+their profile link. Please fix this so the canvas actually encodes
+contentUrl (a real QR encoding library, or at minimum a URL-dependent
+pattern) rather than a static decorative grid.
+
+=== 7. Vocabularies to confirm before I create taxonomy categories for them ===
+
+I found these controlled-vocabulary-shaped fields in your app but don't
+have your source's exact literal option lists — please send me the full
+value lists (in the same style as your earlier Genres/Instruments lists)
+for: vocal range, gender, session/booking duration tiers, session mode,
+studio add-ons (confirm: is this the same list as your existing
+"studio_amenities", or genuinely different?), the 5-state availability
+status (I only have partial values from a UI screenshot), verification ID
+type, subscription plan tier, and service rate type. I'll create matching
+taxonomy_categories entries once I have the real lists — please don't
+invent new ones on your end in the meantime.
+
+=== 8. Experience-seniority reconciliation — please don't add a 4th vocabulary ===
+
+Your app currently has THREE separate "how experienced is this person"
+vocabularies with no shared mapping: SkillProficiency.yearsOfExperience
+("1-2 Years"/"3-5 Years"/"5-10 Years"/"10+ Years"), .proficiencyLevel
+("Beginner"/"Intermediate"/"Advanced"/"Expert"), and Discover's
+experienceLevel field ("Rising Star (1-2 yrs)"/"Established (3-5
+yrs)"/"Pro (5+ years)"/"Legend (10+ yrs)"). Before any more schema work
+touches "experience," please tell me: is Discover's version meant to be a
+computed/derived display label from the other two, or is it a genuinely
+separate user-facing "seniority tier" concept? I don't want to add a 4th
+vocabulary on top of three that already don't agree with each other.
+Separately: experience should be tracked at TWO levels, both need to
+persist — a per-instrument map (instrumentProficiency) AND a single
+per-primary-role value (roleExperience). Confirm your persistence fix
+keeps both, not collapsed into one field.
+
+=== 9. Unpersisted onboarding data ===
+
+instrumentProficiency, roleExperience, and networkingLinks are all
+collected during onboarding but never make it into your Firestore write
+call (OnboardingViewModel's confirmProfile() / saveUserProfileToFirestore)
+or into Room. Same for profilePicturePath and coverPicturePath — collected
+via updateProfile() but absent from the final write payload. Please add
+all five to the write payload — instrumentProficiency and roleExperience
+as nested maps/fields on users/{uid}, networkingLinks as part of the
+social_links collection from Prompt D section 1 (one document per
+platform, not a map field) — and confirm which approach you used.
+
+=== 10. Settings and moderation — please wire these to real writes ===
+
+Two flows currently show a success snackbar and discard the input instead
+of writing anything: (a) SettingsFlow's Account/Privacy/Notifications/
+Security/Appearance screens — please write these to a new "user_settings"
+collection (doc ID = user's UID) once I confirm its field shape with you
+next round; hold off on this one specifically until I send the shape. (b)
+HelpAndSupportFlow's Report User, Report Listing, and Feedback actions —
+please wire these NOW to write real documents to the already-deployed
+"moderation_flags" collection (targetType, targetId, reportedBy, reason,
+status — same shape the admin panel already has full CRUD for) and
+"support_tickets" collection, instead of just showing a snackbar.
+
+=== 11. Category/instrument selection must respect a single profileType — please confirm this design before building ===
+
+A user has exactly one profileType (never two profile views at once), so
+primaryRole, supportingRoles, and instrument selections all need to stay
+consistent with whichever one is chosen. Proposed approach — please confirm
+or counter-propose before implementing:
+
+  - Change UserDoc.secondaryRole (single string) to
+    UserDoc.supportingRoles: string[] (max 2 entries) — primaryRole plus up
+    to 2 supportingRoles, all validated against the same profileType.
+  - Tag each option in the "person_types" taxonomy category with a new
+    metadata field: applicableProfileTypes: string[] (using the
+    TaxonomyOptionDoc.metadata field the admin panel already supports) —
+    e.g. "Vocalist" -> ["talent"], "Recording Studio" -> ["business"],
+    "Concert Hall" -> ["venue_event"], "Ensemble/Band Manager" -> ["band"].
+    Once profileType is set during onboarding, filter the role-picker UI to
+    only show person_types options whose applicableProfileTypes includes
+    it — this prevents the impossible combination from being selectable at
+    all, rather than validating it after the fact.
+  - Only show the instrument-proficiency onboarding step when profileType
+    is "talent" or "band" — Business/Venue profiles use equipmentList /
+    venueFeatures instead, which don't need a per-instrument mapping table.
+
+Please confirm this approach (or propose an alternative) before building
+it — this changes an existing field's type (secondaryRole ->
+supportingRoles), so I want to agree on the shape first.
+
+=== 12. Auth — this is a product decision, not a code request. Please answer these questions, don't fix anything yet ===
+
+A deeper audit found the registration flow itself has real problems, not
+just field-name mismatches:
+  - verifyOtp()'s check is effectively "any 6-digit string passes" (the
+    `|| enteredOtp.length == 6` makes the intended "123456" check dead) —
+    no real SMS/OTP verification exists.
+  - Google Sign-In's native flow reliably fails (fabricated OAuth client
+    ID) and falls back to a fully hardcoded fake profile with zero network
+    calls.
+  - The registration write's UID fallback
+    (`?: "local_uid_${email.hashCode()}"`) means most real signups today
+    write to Firestore under a hash-of-email document ID with no
+    corresponding Firebase Auth account at all.
+
+Before we prompt any code change here: (a) should OTP become real (needs a
+real SMS gateway or Firebase Phone Auth — a cost/infra decision on our
+side, not something to build speculatively), (b) should Google Sign-In get
+a real OAuth client (blocked on us registering a real applicationId +
+google-services.json first), (c) is the local_uid_${email.hashCode()}
+fallback acceptable as a permanent pseudo-identity, or should registration
+hard-block without a real Firebase Auth UID? Please just answer these
+three, don't change any auth code until we've decided.
+
+Please confirm each of these 12 sections back to me one at a time, WITH the
+actual code diff for any section that touches existing write code
+(sections 1, 2, 4, 5, 6, 9, 10b) — not just a schema doc update. Section 12
+specifically needs answers, not code.
+```

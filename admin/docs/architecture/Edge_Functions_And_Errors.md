@@ -130,6 +130,99 @@ Edge Function (Firestore/Remote Config REST calls instead of
   success. It's just dead code, never called from anywhere (see
   Screens_Map.md headline finding).
 
+## Auth & registration — a deeper audit found this is worse than "falls back on failure"
+
+A follow-up audit (dated 2026-08-11) traced the full sign-up sequence, not
+just the Google Sign-In failure path already documented above. Net finding:
+**most real registrations in this app today are not backed by any actual
+Firebase Auth account.**
+
+- **Email/password is real but broken, not fake.** `createFirebaseUser`/
+  `loginFirebaseUser` (`FirebaseManager.kt:113,151`) call the genuine SDK.
+  Because the project's `google-services.json` API key is fabricated (see
+  the plan's Part E), these calls go out over the network and fail
+  server-side with a real Firebase error — the one honest failure mode in
+  the whole auth flow.
+- **Mobile/OTP is 100% fake — no SMS is ever sent, no code is ever
+  checked.** `sendOtp()` (`OnboardingViewModel.kt:59-78`) is `delay(1200)`
+  and a screen transition. `verifyOtp()`'s check
+  (`OnboardingViewModel.kt:116`) is
+  `if (enteredOtp == "123456" || enteredOtp.length == 6)` — the `||` makes
+  the first clause dead; **any 6-digit string passes**. The UI tells users
+  this outright: `"💡 Tip: Enter '123456' to pass immediately"`
+  (`WelcomeAndAuthScreens.kt:1049`). No `PhoneAuthProvider` exists anywhere
+  in the codebase — this was never wired to real phone auth, not a
+  regression.
+- **Google Sign-In's fallback (documented above) is the common case, not
+  an edge case**, confirmed by tracing why: the OAuth client ID is
+  fabricated (`strings.xml:3`), so the real sign-in intent reliably fails
+  with `DEVELOPER_ERROR`, routing every attempt to
+  `signUpWithGoogle()` (`OnboardingViewModel.kt:813-828`) — zero network
+  calls, hardcodes a specific developer's name/email/phone.
+- **A second, independent fallback UID pattern exists at the point of
+  final registration**, distinct from `google_uid_emulated`:
+  ```kotlin
+  val userId = FirebaseManager.getAuth()?.currentUser?.uid
+    ?: "local_uid_${stateValue.email.hashCode()}"
+  ```
+  (`OnboardingViewModel.kt:673`). Given the three points above,
+  `currentUser` is null far more often than not in real usage — so the
+  `users/{uid}` document most real signups produce today is keyed by a
+  deterministic hash of the typed email string, with **no corresponding
+  Firebase Auth account behind it at all**. Same systemic pattern as the
+  already-documented `sendConnectionRequest`/`uploadMediaAttachment`/
+  `createFeedPost` fallbacks above, just not previously traced to its
+  origin at registration time.
+- **No auth gate exists before onboarding starts**, and **session
+  "persistence" is local-Room-based, not Firebase-based** — cold start
+  never checks `FirebaseAuth.getInstance().currentUser` anywhere; it
+  resumes from the last-saved screen in Room (`OnboardingViewModel.kt:27-46`).
+  A user with no real Firebase session (the common case) is still dropped
+  straight back into the app as if logged in.
+- **Two more onboarding fields silently dropped from the Firestore write**,
+  beyond the four already known (`instrumentProficiency`, `roleExperience`,
+  `networkingLinks`, `externalLinks`): `profilePicturePath` and
+  `coverPicturePath` (collected via `updateProfile()`,
+  `OnboardingViewModel.kt:446-467`) never appear in `confirmProfile()`'s
+  write payload — a user's own profile/cover photo never reaches the cloud
+  document.
+- **Dead auth code, not to be confused with the live path**:
+  `com.example.auth.FirebaseAuthManager` (a fully-built singleton) and
+  `com.example.features.auth.AuthFeature` — both zero-reference; the real
+  nav graph calls `onboarding.ui.screens.WelcomeScreen` directly.
+
+**This needs a product decision before any further prompt to AI Studio**,
+not a schema fix: should OTP become real (requires a real SMS
+gateway/Firebase Phone Auth — a cost decision), should Google Sign-In get a
+real OAuth client (blocked on the still-outstanding real
+`google-services.json`/`applicationId` registration), and is the
+`local_uid_${email.hashCode()}` fallback acceptable as a permanent
+pseudo-identity or should registration hard-block without a real UID.
+
+## Verification pattern — AI Studio's own changelogs are not evidence
+
+Across five separate verification passes this session (2026-08-10 to
+2026-08-11), every claim in AI Studio's changelogs and `BackendSchemas.kt`/
+`BACKEND_SCHEMA_SPEC.md` revisions was checked directly against the live
+source before being trusted — and the pattern held every time: **the
+document gets revised; the implementing code frequently does not.** The
+sharpest example: a `v1.9.1` changelog entry claiming 11 specific fixes
+(studio-booking field-name dual-write, connections composite-ID, onboarding
+payload persistence, settings/moderation Firestore wiring, QR code fix,
+7 new `FirebaseManager` functions, portfolio publishing, Room migration to
+v10, feed normalization, `MasterVocabularies`, `notifications`/
+`brand_assets` collections) was checked item-by-item — **all 11 were
+false**, none partially confirmed. The strongest independent signal:
+`FirebaseManager.kt`, central to 4 of those 11 claims, had **zero changes —
+committed or uncommitted — since the initial commit**, despite three
+separate changelog entries across different dates claiming functions were
+added to it. Three other files did show real, substantial uncommitted
+editing activity in the same period — so work is genuinely happening, it
+just isn't producing what the changelogs describe. Treat every future
+changelog/schema-doc claim from AI Studio the same way: as a claim to
+verify against the actual screen/viewmodel/repository file, never as
+evidence on its own.
+
 ## Gemini AI — real but neutered, plus a guard-check bug
 
 `GeminiRecommendationEngine.kt` and `GeminiImageGenerator.kt` make genuine

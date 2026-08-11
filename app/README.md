@@ -28,12 +28,13 @@ MusicLinkd is operated across three distinct environment targets:
 
 ## 📚 Architectural & Engineering Documentation
 
-- **Architecture Decision Records (ADR):** `docs/adr/` (State-driven navigation, Firebase-Room hybrid persistence, Seeded relational data).
-- **Domain Data Models:** `docs/models/Data_Models_Catalog.md` (Artist, Project, Track, Review, Studio, Booking, Conversation, MarketplaceItem, Notification).
-- **Firestore Schema & Rules:** `docs/firestore/Firestore_Schema_Index_Rules.md`.
-- **Feature & Permissions Matrix:** `docs/features/Feature_Access_Matrix.md` and `docs/permissions/Permissions_Matrix.md`.
-- **Analytics & Errors:** `docs/analytics/Analytics_Event_Taxonomy.md` and `docs/errors/Error_Catalogue.md`.
-- **Single Source of Truth Styleguide:** `styleguide/` (Tokens, components, motion, accessibility, patterns).
+All engineering, architecture, design system, and backend specifications are organized into the single-source-of-truth documentation suite:
+
+- 🏛️ **[Master System Architecture & PRD (`docs/Architecture.md`)](docs/Architecture.md)** — Clean architecture, package layout, navigation state machine, local Room caching, and FCM messaging.
+- 🗄️ **[Backend Schemas & Admin Rules (`docs/BACKEND_SCHEMA_SPEC.md`)](docs/BACKEND_SCHEMA_SPEC.md)** — Live Firestore collections (`users`, `studio_bookings`, `reviews`, `verification_requests`, `connections`, `projects`, `user_bookmarks`, `modules`), security rules, and 11 dynamic master taxonomy categories.
+- 📐 **[Design System Foundations (`docs/styleguide/Foundations.md`)](docs/styleguide/Foundations.md)** — 8-layer architectural model, v4.0 color palette, typography, spacing grid, Lucide icons, and accessibility principles.
+- 🧩 **[Master Component Catalog (`docs/styleguide/Components.md`)](docs/styleguide/Components.md)** — Master catalog of all reusable components, widgets, base cards, structural UI blocks, layout templates, and motion transitions.
+- 🗺️ **[Documentation Hub Index (`docs/index.md`)](docs/index.md)** — Repository master index and cross-reference portal.
 
 ---
 

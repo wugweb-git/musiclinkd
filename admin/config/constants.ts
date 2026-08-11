@@ -24,6 +24,10 @@ export const COLLECTIONS = {
   pageContent: "page_content",
   taxonomyCategories: "taxonomy_categories",
   modules: "modules",
+  portfolioProjects: "portfolio_projects",
+  notifications: "notifications",
+  userSettings: "user_settings",
+  brandAssets: "brand_assets",
 } as const;
 
 export const STORAGE_PATHS = {
@@ -51,6 +55,7 @@ export const MODULE_PERMISSIONS = {
   marketplace: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
   bookings: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
   projects: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
+  portfolio: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
   reviews: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
   verification: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
   moderation: perm("ROLE_ADMIN", "ROLE_MODERATOR"),

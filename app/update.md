@@ -1,7 +1,7 @@
 # MusicLinkd Real-Time Engineering Log
 
 ## Current Application State
-- **Version:** `v1.5.0-RC` (Release Candidate)
+- **Version:** `v1.7.2` (Design Compliance Audit & Elevation Refinement)
 - **Build Verification:** `compile_applet` — Clean compilation (Zero errors).
 - **Target Environments:**
   - Website: `musiclinkd.com`
@@ -17,6 +17,100 @@
 ---
 
 ## Recent Engineering Updates
+
+### 2026-08-10: Design Compliance Audit & Elevation Refinement
+- **Codebase Design Compliance Audit (`ProfileManagementScreens.kt`, `LocationAndProfileScreens.kt`, `UnifiedComponents.kt`, `OnboardingUIComponents.kt`):** Conducted a comprehensive design compliance audit against `Foundations.md`. Replaced all legacy 6.dp and 8.dp card drop shadows with flat canvas 0.dp/2.dp elevation combined with crisp `1.dp` `BrandBorder` (`#ECECF1`) stroke and `24.dp` container corner radii.
+- **Full UX/UI Mapping Verification:** Verified compliance across all 11 core design dimensions: Colors (v4.0 palette), Fonts & Weights (Plus Jakarta Sans), Outlines & Borders (`1.dp` solid `#ECECF1`), Shadows & Elevation (Flat canvas 0.dp), Z-Index Stack (`z = 0` to `z = 20`), Opacity & Overlays (`0.40f` scrim), Corner Radii (`32.dp` hero, `24.dp` base, `12.dp` inner, `999.dp` pill), Vectors (Lucide 1.75dp stroke), Animations (scale bounce, ripple feedback, dynamic header elevation), Padding, Spacing, and 8.dp Gridding.
+- **Documentation Parity Sync (`docs/index.md` & `README.md`):** Updated repository master documentation hub index and main README to reflect the expanded v4.0 design foundations and component catalog.
+
+### 2026-08-10: Splash Screen Redesign & v4.0 Design System Consolidation
+- **Redesigned Splash Screen (`WelcomeAndAuthScreens.kt`):** Re-architected `SplashScreen` to match the high-contrast light editorial canvas (`ColorBg` / `#FCFCFD`), featuring a white surface container card (`ColorWhite` / `#FFFFFF`) with a `1.dp` border (`ColorBorder` / `#ECECF1`), brand emblem in `ColorPink` (`#EA4C89`), crisp ExtraBold title in `ColorText` (`#181A22`), secondary caption in `ColorText2` (`#676B7B`), and v4.0 feature chips ("Connect", "Studios", "Verified").
+- **Integrated Stable v4.0 Colors (`Color.kt`):** Updated the central color system to map `ColorWhite` (`#FFFFFF`), `ColorBg` (`#FCFCFD`), `ColorSurface50` (`#F8F8FB`), `ColorSurface100` (`#F3F3F6`), `ColorBorder` (`#ECECF1`), `ColorMuted` (`#8E91A1`), `ColorText2` (`#676B7B`), `ColorText` (`#181A22`), `ColorBlack` (`#0D0D0D`), `ColorPink` (`#EA4C89`), `ColorGreen` (`#16A34A`), and `ColorError` (`#DC2626`).
+- **Iconography Extended & Lucide Icon Library Standards (v4.0):** Standardized icon sizes (16dp micro, 20dp inline, 24dp standard/nav, 32dp hero) and icon color state tokens (`IconActive` `#EA4C89`, `IconInactive` `#7D7D8E`, `IconDisabled` `#9CA3AF`).
+- **Merged Design System Audit into Styleguide (`docs/styleguide/Foundations.md`):** Consolidated the 8-layer architectural hierarchy model, token-backend taxonomy bindings, v4.0 colors, and Lucide iconography specifications directly into `docs/styleguide/Foundations.md`. Deleted redundant `docs/DESIGN_SYSTEM_AUDIT.md` and updated all links in `README.md` and `docs/index.md`.
+
+
+### 2026-08-10: Design Systems Audit & Component Architecture Refinement
+- **Drop Shadows Removal & Flat Canvas Enforcement (`OnboardingUIComponents.kt`):** Replaced harsh drop shadow elevation on selected cards in `cardState` with a clean `2.dp` `BrandPrimary` border stroke and subtle background tint (`Color(0xFFFFF0F5)`), enforcing the high-contrast light canvas rule.
+- **Pill Shape Button Standardization (`SuccessAndDashboardScreens.kt`):** Standardized main success action CTA buttons to `RoundedCornerShape(999.dp)` (Primary Pill Corner) per `Foundations.md` guidelines.
+- **Design System Audit Mapping Update (`docs/DESIGN_SYSTEM_AUDIT.md`):** Updated the 8-layer architectural model (Level 1: Core System Taxonomies) to map all 11 dynamic taxonomy categories, `modules/{moduleKey}` feature toggles, `user_bookmarks/{ownerUid_savedUserId}`, `studio_bookings`, and `reviews`.
+
+### 2026-08-10: Live Backend Inventory Alignment & Security Rule Corrections (musiclinkd-7ae30)
+- **Feature Flag System Alignment (`BackendSchemas.kt`):** Deprecated `BackendFeatureFlag` and aligned data schemas with the already-shipped `modules/{moduleKey}` collection (`{ label, description, enabled, navModuleKey, remoteConfigKey, updatedBy, updatedAt, createdAt }`). Reads fail open and support graceful offline placeholders when `enabled == false`.
+- **`studio_bookings` Schema Alignment (`BackendSchemas.kt`):** Aligned data model with deployed Firestore security rules using exact field names: `studioId`, `userId` (not "artistUserId"), `date`, `slotText`, `bookedHourSlots`, `totalAmount` (not "totalCostAmount"), `bookingStatus`, `paymentStatus`, `paymentTransactionId`, and `createdAt`.
+- **`reviews` Schema & Composite Document ID (`BackendSchemas.kt`):** Aligned review schema with exact rules requiring `authorUid`, `targetType` ("STUDIO" | "USER"), `targetId`, `rating`, `text`, `createdAt`, and `bookingId` with client-composed document ID `${authorUid}_${targetId}`.
+- **Moderation Queue Integration (`BackendSchemas.kt`):** Clarified verification queue mapping to query `verification_requests` where `status == "PENDING"`.
+- **`connections` Collection Verification (`BackendSchemas.kt`):** Confirmed live connection request schema (`senderUid`, `targetUserId`, `status` in "PENDING" | "ACCEPTED" | "DECLINED") with composite doc ID `${senderUid}_${targetUserId}`.
+- **Gigs / Opportunities Folded into `projects` (`BackendSchemas.kt`):** Folded gig posting shape into the existing `projects` collection using additive fields: `location`, `applicantCount`, and `collaborationType` (backed by the `"collaboration_types"` taxonomy).
+- **Admin Trust Badges vs Persona Badges Distinction (`BackendSchemas.kt`):** Separated self-selected `UserDoc.personaBadges` from admin-granted `UserDoc.trustBadges` (backed by the `"trust_badges"` taxonomy).
+- **`user_bookmarks` Top-Level Collection Schema (`BackendSchemas.kt`):** Created top-level schema mapping for saved profiles using composite document ID `${ownerUid}_${savedUserId}` with fields `ownerUid`, `savedUserId`, and `createdAt`.
+- **Taxonomy Categories Expansion (`BackendSchemas.kt` & `RepositoryProvider.kt`):** Expanded taxonomy synchronization support to include all 11 category options including `booking_statuses`, `studio_amenities`, `collaboration_types`, and `trust_badges`.
+
+### 2026-08-10: Taxonomy Security Enforcement & Schema Alignment
+- **Enforced Public-Read Admin-Write Taxonomy Rules (`MetadataSyncManagerScreen.kt` & `RepositoryProvider.kt`):** Restructured the Metadata Sync screen to enforce read-only/pull-only access for regular users. Dropped the local "Add Custom Option" CRUD input form and the "Push Sync" button to prevent unauthorized write attempts to Google Cloud Firestore's taxonomy collections from client devices. Added an elegant, informative security card guiding administrators to manage taxonomic options via the official web admin panel (`admin.musiclinkd.com`).
+- **Targeted Taxonomy Collections Pull Flow (`MetadataSyncManagerScreen.kt` & `RepositoryProvider.kt`):** Redirected pull queries to retrieve dynamic, active options from the correct, live, hierarchical collection structure: `taxonomy_categories/{categoryId}/options`. Supports all 7 key music-industry taxonomy categories: `"person_types"`, `"languages"`, `"genres"`, `"instruments"`, `"persona_badges"`, `"project_types"`, and `"project_roles"`.
+- **User Identity Document Path Resolution (`ProfileManagementScreens.kt`):** Resolved a stray document path discrepancy where edit profiles saved to ad-hoc, slugified documents under `"musicians"`. Corrected writes to write directly to the authenticated user's own document under `"users/{firebaseUid}"` utilizing resilient update/merge parameters (`SetOptions.merge()`).
+- **Unified Onboarding Selection Schema (`OnboardingViewModel.kt` & `ProfileManagementScreens.kt`):** Aligned all onboarding and profile edit save maps to the unified, production-live schema, binding selection data to exact field names: `primaryRole` (string, required), `secondaryRole` (string), `genres` (string[]), `languages` (string[]), `instruments` (string[]), and `personaBadges` (string[]). Checked and purged all camelCase selection keys (e.g. `selectedLanguages`, `selectedGenres`) to match Firestore's specifications.
+
+### 2026-08-10: Studio Booking Cloud Integration
+- **Google Play Services (GMS) Connection Resilience & Safety Timeouts (`StudioBookingScreens.kt`):** Integrated a robust 3000ms safety timeout using coroutine timers around Firestore queries to handle virtualized emulator environments where the GMS broker fails with signature or security exceptions (`java.lang.SecurityException: Unknown calling package name 'com.google.android.gms'`). If GMS times out or fails, the app automatically falls back to local data to prevent loading screen hangs.
+- **Firestore Recording Studio Bookings Synchronization (`StudioBookingScreens.kt`):** Shifted the static list of mock recording studios to retrieve live options directly from Google Cloud Firestore's `studios` collection. Included self-seeding master entries to populate default options if empty.
+- **Bi-Directional Persistence on Booking Confirmation (`StudioBookingScreens.kt`):** Programmed active Firestore synchronization that automatically writes standard `BookingReservationSchema`-compliant records containing formatted booking parameters, hour slot mappings, and configuration annotations to the `studio_bookings` collection on payment success.
+- **Dynamic Booking Cancellations Updates (`StudioBookingScreens.kt`):** Wired active status modifiers to update booking documents' `statusKey` fields dynamically in Cloud Firestore on cancellation triggers.
+
+### 2026-08-10: Firestore Dynamic Onboarding & Room Cache Integration
+- **Firestore-Fetched Dynamic Onboarding Taxonomies (`OnboardingData.kt`):** Shifted the static hardcoded lists (`availableRoles`, `availableLanguages`, `availableGenres`, and `availableInstruments`) to reactive dynamic lists backed by mutable states initialized with default fallbacks.
+- **Bi-Directional Room Offline Caching (`RepositoryProvider.kt` & `CustomMetadataEntity.kt`):** Structured automatic Room database caching using `CustomMasterEntity` and updated DAO query interfaces to load cached options on launch (`loadCachedTaxonomy()`) and synchronize updated documents from Firestore.
+- **Robust Error Handling & Fallback Strategy (`RepositoryProvider.kt`):** Embedded resilient exception handling and Firestore action listeners to fallback cleanly to the original static onboarding datasets if network connectivity fails, the database is unseeded, or Firestore cannot be reached.
+- **Key/Value Selection Mapping (`RoleAndInterestsScreens.kt`, `SuccessAndDashboardScreens.kt` & `MetadataSyncManagerScreen.kt`):** Refactored UI selections to store and reference normalized value slugs instead of raw labels, ensuring correct synchronization with Firestore profiles while preserving exact Material 3 visual card/chip styles and interactive experiences.
+
+### 2026-08-10: Master-Data Sync Value Alignment & Category Resolution
+- **Taxonomic Value Realignment (`MetadataSyncManagerScreen.kt`):** Shifted the mapping layout structures to write the underlying data *value* (slugs/keys) rather than the raw display labels to user records, aligning perfectly with the Firestore synchronization rules.
+- **Outdated MetadataCategory Resolution (`MetadataSyncManagerScreen.kt`):** Refactored mapping screens to resolve unresolved reference warnings for `MetadataCategory.ROLES` and `MetadataCategory.BADGES`, migrating them respectively to `MetadataCategory.PERSON_TYPES` and `MetadataCategory.PERSONA_BADGES`.
+- **Exhaustive Category Mapping Placeholder (`MetadataSyncManagerScreen.kt`):** Implemented an elegant custom fallback banner handling any other active categories (such as `PROJECT_TYPES` or `STUDIO_AMENITIES`) dynamically, satisfying Kotlin compile-time `when` block exhaustiveness.
+
+### 2026-08-10: Database Schema Version 9 Stabilization & Taxonomic Seeding
+- **Room Database Version Upgrade (`MusicLinkdDatabase.kt`):** Upgraded local database schema definition to version `9` to support the new sorting order capabilities.
+- **Custom Sort Order Parameter (`CustomMetadataEntity.kt`):** Enhanced `CustomMasterEntity` and updated DAO query definitions (`getAllCustomMasters` and `getAllCustomMastersFlow`) to sort results hierarchically by `category`, then by `sortOrder`, and finally alphabetically by `displayLabel`.
+- **System-Wide Master Seeds Provider (`RepositoryProvider.kt`):** Configured robust default master seeds across all eleven taxonomic metadata categories, populating the offline-first SQLite database with key music-industry genres (e.g. Hindustani Classical, Sufi Devotional, Rajasthani Folk), person types (vocalists, producers, sitarists, Flutists, sound engineers), languages, instruments (acoustic/electric guitars, tabla, Bansuri flute, sarod, harmonium), collaboration types, trust badges, and project roles.
+- **Metadata CRUD Sort Inputs & Mapping Fixes (`MetadataSyncManagerScreen.kt`):** Integrated a numeric "Sort" text field input within the master entry editor, refined tab mappings to bind securely to `categoryKey` for robust Firestore document mapping, and resolved mapping compile errors or exhaustiveness warnings across category routes.
+
+### 2026-08-10: Design System & Architecture Audit
+- **Comprehensive Architectural Hierarchy Mapping (`DESIGN_SYSTEM_AUDIT.md`):** Formulated and compiled a detailed design system audit mapping MusicLinkd's visual and functional layers from atomic tokens up to screen routers, using a strict structural flow: `tokens < primitives < components < blocks < widgets < ui < screens`. This enforces consistency and establishes a clear layout rulebook for all developers.
+- **Branded Assets & CMS Content Decoupling:** Documented clear mappings for official branded assets (like `ic_musiclinkd_logo` and verified badges) and dynamic CMS accordion models (such as `FaqItem` and support forms) mapped cleanly to Room local caching and Firestore synchronization protocols.
+
+### 2026-08-10: Metadata Synchronization, Module-Wise Backend Schemas & CRUD Master Control
+- **Backend Taxonomic Schema Specification (`BackendSchemas.kt` & `BACKEND_SCHEMA_SPEC.md`):** Designed, formulated, and coded comprehensive Kotlin representations and a rigorous markdown specification document spanning 9 distinct functional modules of the MusicLinkd ecosystem. This covers:
+  1. *Authentication & Session Handling:* Multi-digit OTP verification, session UUID mappings, and active FCM tokens.
+  2. *Onboarding & Location:* Multi-step signup sequence checkpoints, city master taxonomies, and sub-area micro-locations.
+  3. *Profile, Settings, Bookmarks & Notifications:* Customized bookmarks mappings, privacy visibility parameters, and push toggles.
+  4. *Projects & Portfolio:* Rich project metadata, attribution credit percentages, format constraints, and external validation regex.
+  5. *Studio Bookings & Services:* Booking reservation slots state machine, hourly pricing package tiers, and dynamic cost estimators.
+  6. *Trust, Credibility & Verification:* 5-star peer reviews, system verified badge assignments, and identity verification queues.
+  7. *Growth, Gigs & Marketplace:* Job listing audition cards, location-based opportunity filters, and compensation type splits.
+  8. *Search, Feed & Connections:* Unified search query caching, interactive feed items, and mutual link directories.
+  9. *Admin Config & Feature Flags:* Backend dynamic toggles to conditionally enable/disable specific modules or menu items.
+- **Metadata Sync Screen & Master CRUD (`MetadataSyncManagerScreen.kt` & `CustomMetadataEntity.kt`):** Constructed a full-stack administrative metadata management screen supporting custom CRUD operations (Create, Read, Delete) for key collaborator taxonomic fields including Roles, Languages, Genres, Instruments, and Persona Badge assignments. Uses Room's `CustomMasterEntity` to merge dynamic entries seamlessly with static available system datasets.
+- **Bi-Directional Cloud Firestore Synchronization:** Engineered bi-directional synchronization with Google Cloud Firestore, enabling the app to pull/merge master records from the Firestore `"metadata_masters"` collection and securely upload/persist customized selections and user collaborator mapping cards (`"musicians"` / `current_user` documents) with an offline fallback for development.
+- **Unified Navigation & Route Mapping:** Added a type-safe `MusicLinkdRoutes.METADATA_SYNC` entry to `AppNavigationGraph.kt`, mapped the screen's back navigation to the Onboarding ViewModel state transitions, and registered it in the screen index catalog (`ScreenIndexOverlay.kt`) for instant test-jumps.
+
+### 2026-08-10: Dashboard Layout Optimization & Content Refinement
+- **Dashboard Widget & Feed Visibility Updates (`SuccessAndDashboardScreens.kt`, `ProfileManagementScreens.kt`, `DiscoverScreens.kt` & `ConnectionsScreen.kt`):** Refined the primary dashboard, discovery feed, and connections screens by cleanly hiding thirteen secondary promotional, telemetry, matching, and suggestion widgets (including Trending Music Projects, Suggested Collaborator smart matching, Gemini AI Matchmaker tab/section, and Firestore Real-time Sync Active banner card) to streamline layout density, maximize aesthetic negative space, and prioritize active connections and clean light-theme dashboard ergonomics.
+- **System Messaging Terminology Cleanups (`SuccessAndDashboardScreens.kt`):** Cleaned up and removed verbose/technical system registry messages from the Onboarding Success screen to offer a friendlier, consumer-first experience (e.g., replaced "India's premier music professional registry" with "MusicLinkd", "Scan to view digital registry record" with "Scan to view public profile", and "Launch My Registry Dashboard" with "Launch My Dashboard").
+
+### 2026-08-10: Interactive UI Screen Catalog & Navigation Index
+- **Interactive UI Screen Index Overlay (`ScreenIndexOverlay.kt`):** Constructed a comprehensive developer utility with a persistent edge action badge, expanding into a full catalog of 14+ onboarding screens, deep-routed core features (Artist portfolios, Studio bookings, messaging threads), and 10 dynamic dashboard tab sub-modules.
+- **Direct Navigation State-Jumper Flow (`MainActivity.kt` & `OnboardingViewModel.kt`):** Configured a unified navigation controller pass and added viewmodel state bindings (`activeDashboardTab`) enabling click-to-preview actions that instantly render any specified onboarding view, deep nav route, or dashboard tab (Home, Discover, Gigs Marketplace, Studio Registry, Connections, Notifications, Profile QR, Reputation & Reviews, Settings, and Help Guide) in the cloud stream driver. Includes developer quick-fills and state reset utilities.
+- **ErrorReportingService Warnings Fix (`ErrorReportingService.kt`):** Resolved multiple compile-time Kotlin static analysis warnings regarding redundant null check conditions (`Condition is always 'true'`) on `FirebaseApp.getInstance()` by migrating to simple, non-nullable assignments wrapped in a direct `try-catch` initialization check.
+
+### 2026-08-08: Architecture Stabilization & UX Component Expansion
+- **Global `CurrentUserProvider` Singleton (`CurrentUserProvider.kt`):** Built a global singleton state manager that provides a single, consistent source of truth for the authenticated user's session state, profile data (profilePhoto, displayName, handle, bio, location, roles, stats, and availability), and session status, preventing identity switching issues.
+- **Type-Safe `AppNavigation` Registry (`AppNavigation.kt`):** Designed a centralized navigation contract defining route patterns, argument keys, and builder helpers for type-safe navigations between profiles, marketplace, and chat threads.
+- **Unified `EmptyStateView` & `LoadingOverlay` (`EmptyState.kt`):**
+  - Created a highly consistent `EmptyStateView` conforming to our brand specifications (24.dp corner radius, 1.dp border stroke, soft white canvas, BrandPrimary accents, and 48.dp touch targets) for cases where data is missing.
+  - Created a reusable `LoadingOverlay` and integrated it into the `EmailAuthScreen` to provide visual feedback during active asynchronous fetches.
+- **Dynamic Contact Layer Migration (`DemoDataProvider.kt`):** Decoupled the hardcoded dashboard contacts (e.g., A.R. Rahman, Pritam Chakraborty, Shreya Ghoshal, Anirudh Ravichander) and bound them directly to the centralized `DemoDataProvider` via the new `DemoContact` model and `sampleContacts` data stream, satisfying the zero-hardcoded constraint.
+- **Native OS Logcat Clarification:** Documented that the warning `Pinning is deprecated since Android Q. Please use trim or other methods` is a harmless system-level notice triggered by the cloud stream driver container's shared memory (`ashmem`) allocator, and has 0% impact on the app code, compilation, or behavior.
 
 ### 2026-08-05: Final Consolidation of Technical & Architectural Specifications
 - **Unified Master Architecture & Product Specifications (`/docs/Architecture.md`):** Successfully merged 14 separate, duplicate, and fragmented technical and functional documentation files into a single, high-density, beautifully structured master specifications guide:

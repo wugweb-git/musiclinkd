@@ -4,11 +4,10 @@
 # Hosting site, two custom domains (musiclinkd.com, admin.musiclinkd.com)
 # both attached to it, both serving this same merged tree.
 #
-# Source moved from root website/ to frontend/website/ (the new canonical
-# location) — root website/ and guide/ are kept around only as a fallback
-# until frontend/ is fully confirmed, then get deleted. guide/ deliberately
-# still builds from the root location, not frontend/guide/, until that's
-# confirmed separately.
+# frontend/website/ is the sole source of truth for the marketing site —
+# root website/ and guide/ have been deleted; everything they used to hold
+# (including merge.html/merge2.html/merge3.html/styleguide.html) now lives
+# directly under frontend/website/ and is picked up by the plain merge below.
 #
 # Why a merge instead of two Hosting sites: Firebase Hosting rewrites only
 # match on URL path, not hostname — there's no way to serve different
@@ -36,18 +35,7 @@ echo "==> Merging frontend/website/ + admin/out/ into dist/"
 rm -rf dist
 mkdir -p dist
 cp -r frontend/website/. dist/
-rm -f dist/README.md
+rm -f dist/README.md "dist/index copy.html"
 rsync -a --exclude='index.html' --exclude='index.txt' --exclude='404.html' admin/out/ dist/
 
-echo "==> Including guide/ into dist/guide/ + root copies"
-mkdir -p dist/guide
-cp -r guide/. dist/guide/
-# Root-level copies for direct, unlisted access — not linked from any nav/footer.
-# NOT copying guide/styleguide.html to dist/styleguide.html: that would silently
-# overwrite frontend/website/styleguide.html (the one the footer actually links
-# to, from the main merge above). The guide/ copy stays reachable at
-# /guide/styleguide.html via the full dist/guide/ copy instead.
-cp guide/merge3.html dist/merge3.html
-cp guide/merge2.html dist/merge2.html
-cp guide/merge.html dist/merge1.html
 echo "==> dist/ ready ($(find dist -type f | wc -l | tr -d ' ') files)"

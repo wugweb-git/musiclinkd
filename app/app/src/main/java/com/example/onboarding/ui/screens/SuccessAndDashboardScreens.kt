@@ -89,7 +89,7 @@ fun SuccessOnboardingScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Spacer(modifier = Modifier.height(Dimens.sp4))
+        Spacer(modifier = Modifier.height(48.dp))
         
         // Brand logo
         Box(
@@ -107,11 +107,11 @@ fun SuccessOnboardingScreen(
             )
         }
         
-        Spacer(modifier = Modifier.height(Dimens.sp3))
+        Spacer(modifier = Modifier.height(32.dp))
         
         Text(
             text = "Welcome to the Grid.",
-            style = Typography.bodyLarge.copy(
+            style = MaterialTheme.typography.headlineLarge.copy(
                 fontWeight = FontWeight.Black,
                 color = NavyDark,
                 letterSpacing = (-1.5).sp
@@ -119,11 +119,11 @@ fun SuccessOnboardingScreen(
             textAlign = TextAlign.Center
         )
         
-        Spacer(modifier = Modifier.height(Dimens.sp1))
+        Spacer(modifier = Modifier.height(8.dp))
         
         Text(
-            text = "Your digital profile is live on India's premier music professional registry.",
-            style = Typography.bodyLarge.copy(
+            text = "Your digital profile is live on MusicLinkd.",
+            style = MaterialTheme.typography.bodyLarge.copy(
                 color = BrandTextSecondary,
                 lineHeight = 22.sp
             ),
@@ -137,12 +137,12 @@ fun SuccessOnboardingScreen(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3)),
-            shape = RoundedCornerShape(Dimens.r3),
+                .border(1.dp, BrandBorder, RoundedCornerShape(24.dp)),
+            shape = RoundedCornerShape(24.dp),
             colors = CardDefaults.cardColors(containerColor = BrandBackground)
         ) {
             Column(
-                modifier = Modifier.padding(Dimens.sp3),
+                modifier = Modifier.padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 // Real profile photograph or beautiful professional placeholder
@@ -160,12 +160,12 @@ fun SuccessOnboardingScreen(
                     )
                 }
                 
-                Spacer(modifier = Modifier.height(Dimens.sp2))
+                Spacer(modifier = Modifier.height(16.dp))
                 
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         text = state.fullName.ifEmpty { "Vedanshu Srivastava" },
-                        style = Typography.bodyLarge.copy(
+                        style = MaterialTheme.typography.titleLarge.copy(
                             fontWeight = FontWeight.Bold,
                             color = NavyDark
                         )
@@ -180,9 +180,10 @@ fun SuccessOnboardingScreen(
                 }
                 
                 Text(
-                    text = state.primaryRole ?: "Music Producer",
+                    text = getRoleLabel(state.primaryRole).ifEmpty { "Music Producer" },
                     color = BrandPrimary,
-                    style = Typography.bodyLarge,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
                     modifier = Modifier.padding(top = 2.dp)
                 )
                 
@@ -195,14 +196,14 @@ fun SuccessOnboardingScreen(
                 
                 HorizontalDivider(color = BrandBorder)
                 
-                Spacer(modifier = Modifier.height(Dimens.sp2))
+                Spacer(modifier = Modifier.height(16.dp))
                 
                 // Native QR Card
                 Box(
                     modifier = Modifier
                         .size(160.dp)
-                        .background(Color.White, RoundedCornerShape(Dimens.r2))
-                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
+                        .background(Color.White, RoundedCornerShape(16.dp))
+                        .border(1.dp, BrandBorder, RoundedCornerShape(16.dp))
                         .padding(16.dp),
                     contentAlignment = Alignment.Center
                 ) {
@@ -212,10 +213,10 @@ fun SuccessOnboardingScreen(
                     )
                 }
                 
-                Spacer(modifier = Modifier.height(Dimens.sp2))
+                Spacer(modifier = Modifier.height(12.dp))
                 
                 Text(
-                    text = "Scan to view digital registry record",
+                    text = "Scan to view public profile",
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     color = BrandTextSecondary
@@ -223,7 +224,7 @@ fun SuccessOnboardingScreen(
             }
         }
         
-        Spacer(modifier = Modifier.height(Dimens.sp4))
+        Spacer(modifier = Modifier.height(48.dp))
         
         // Action buttons
         Button(
@@ -232,19 +233,19 @@ fun SuccessOnboardingScreen(
                 .fillMaxWidth()
                 .height(56.dp)
                 .testTag("go_to_dashboard_button"),
-            shape = RoundedCornerShape(14.dp),
+            shape = RoundedCornerShape(999.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = BrandPrimary,
                 contentColor = Color.White
             )
         ) {
             Text(
-                text = "Launch My Registry Dashboard",
-                style = Typography.bodyLarge.copy(style = Typography.bodyLarge)
+                text = "Launch My Dashboard",
+                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold, fontSize = 16.sp)
             )
         }
         
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(12.dp))
         
         OutlinedButton(
             onClick = onShareProfile,
@@ -252,21 +253,21 @@ fun SuccessOnboardingScreen(
                 .fillMaxWidth()
                 .height(56.dp)
                 .testTag("share_profile_success_button"),
-            shape = RoundedCornerShape(14.dp),
+            shape = RoundedCornerShape(999.dp),
             colors = ButtonDefaults.outlinedButtonColors(contentColor = NavyDark),
             border = BorderStroke(1.dp, BrandBorder)
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(Icons.Default.Share, contentDescription = null, modifier = Modifier.size(16.dp))
-                Spacer(modifier = Modifier.width(Dimens.sp1))
+                Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "Share My Digital Pass",
-                    style = Typography.bodyLarge.copy(style = Typography.bodyLarge)
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold, fontSize = 16.sp)
                 )
             }
         }
         
-        Spacer(modifier = Modifier.height(Dimens.sp4))
+        Spacer(modifier = Modifier.height(48.dp))
     }
 }
 
@@ -330,7 +331,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
 
     // Dynamic posts based on the user's selected primary role
     val posts = remember(state.primaryRole) {
-        val role = state.primaryRole ?: "Composer"
+        val role = getRoleLabel(state.primaryRole).ifEmpty { "Composer" }
         val firstTitle = when {
             role.contains("Singer") || role.contains("Vocalist") -> "Refining Indian Vocal Harmonies in Modern Indie Pop"
             role.contains("Lyricist") -> "Phonetic Phrasing in Songwriting: A Lyricist's Field Guide"
@@ -419,7 +420,8 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
                     text = "musiclinkd.com/editorial",
-                    style = Typography.bodyLarge,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 14.sp,
                     color = BrandTextPrimary,
                     letterSpacing = (-0.2).sp
                 )
@@ -428,7 +430,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
             // Small indicator
             Box(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(Dimens.r1))
+                    .clip(RoundedCornerShape(8.dp))
                     .background(Color(0xFFFFECEE))
                     .padding(horizontal = 8.dp, vertical = 4.dp)
             ) {
@@ -467,15 +469,15 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                 )
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Editorial Publication Name
             Text(
                 text = if (state.fullName.isEmpty()) "Vedanshu Srivastava" else state.fullName,
-                style = Typography.bodyLarge.copy(
+                style = MaterialTheme.typography.headlineMedium.copy(
                     fontWeight = FontWeight.ExtraBold,
                     color = BrandTextPrimary,
-                    style = Typography.headlineLarge,
+                    fontSize = 24.sp,
                     letterSpacing = (-0.5).sp
                 ),
                 textAlign = TextAlign.Center
@@ -484,9 +486,10 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
             // Custom publication handle
             Text(
                 text = "The ${state.displayName.ifEmpty { "vedanshu_vocals" }} Letter",
-                style = Typography.bodyLarge.copy(
+                style = MaterialTheme.typography.bodyLarge.copy(
                     color = BrandPrimary,
-                    style = Typography.bodyLarge
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 15.sp
                 ),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(top = 2.dp)
@@ -497,7 +500,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
             // Subtitle / Editorial description
             Text(
                 text = if (state.bio.isEmpty()) "Lead playback vocal and classical folk-pop independent songwriter. Specializing in classical Hindustani arrangements." else state.bio,
-                style = Typography.bodyLarge.copy(
+                style = MaterialTheme.typography.bodyMedium.copy(
                     color = BrandTextSecondary,
                     fontSize = 13.5.sp,
                     lineHeight = 18.sp
@@ -518,27 +521,28 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                 Text(
                     text = "${subscriberCount} subscribers",
                     color = BrandTextPrimary,
-                    style = Typography.bodyLarge
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 12.sp
                 )
                 Text(
                     text = " • ",
                     color = BrandTextSecondary,
-                    style = Typography.labelLarge
+                    fontSize = 12.sp
                 )
                 Text(
                     text = "${posts.size} posts",
                     color = BrandTextSecondary,
-                    style = Typography.labelLarge
+                    fontSize = 12.sp
                 )
                 Text(
                     text = " • ",
                     color = BrandTextSecondary,
-                    style = Typography.labelLarge
+                    fontSize = 12.sp
                 )
                 Text(
                     text = "📍 ${state.city.ifEmpty { "Mumbai" }}",
                     color = BrandTextSecondary,
-                    style = Typography.labelLarge
+                    fontSize = 12.sp
                 )
             }
 
@@ -578,7 +582,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                             contentDescription = null,
                             modifier = Modifier.size(16.dp)
                         )
-                        Spacer(modifier = Modifier.width(Dimens.sp1))
+                        Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = if (isSubscribed) "Subscribed" else "Subscribe to Updates",
                             fontWeight = FontWeight.Bold,
@@ -641,9 +645,9 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                             text = tabName,
                             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
                             color = if (isSelected) BrandPrimary else BrandTextSecondary,
-                            style = Typography.labelLarge
+                            fontSize = 12.sp
                         )
-                        Spacer(modifier = Modifier.height(Dimens.sp1))
+                        Spacer(modifier = Modifier.height(4.dp))
                         Box(
                             modifier = Modifier
                                 .height(2.dp)
@@ -668,7 +672,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                             val isPlayingThis = playingPostTitle == post.title
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
-                                shape = RoundedCornerShape(Dimens.r2),
+                                shape = RoundedCornerShape(16.dp),
                                 colors = CardDefaults.cardColors(containerColor = Color.White),
                                 border = BorderStroke(1.dp, BrandBorder)
                             ) {
@@ -693,12 +697,12 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                         )
                                     }
 
-                                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                                    Spacer(modifier = Modifier.height(8.dp))
 
                                     // Post Title
                                     Text(
                                         text = post.title,
-                                        style = Typography.bodyLarge.copy(
+                                        style = MaterialTheme.typography.titleMedium.copy(
                                             fontWeight = FontWeight.Bold,
                                             color = BrandTextPrimary,
                                             lineHeight = 20.sp
@@ -711,7 +715,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                     Text(
                                         text = post.description,
                                         color = BrandTextSecondary,
-                                        style = Typography.labelLarge,
+                                        fontSize = 12.sp,
                                         lineHeight = 16.sp
                                     )
 
@@ -721,7 +725,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                     Box(
                                         modifier = Modifier
                                             .fillMaxWidth()
-                                            .clip(RoundedCornerShape(Dimens.r1))
+                                            .clip(RoundedCornerShape(8.dp))
                                             .background(BrandBackground)
                                             .padding(12.dp)
                                     ) {
@@ -741,9 +745,9 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                         Box(
                                             modifier = Modifier
                                                 .fillMaxWidth()
-                                                .clip(RoundedCornerShape(Dimens.r2))
+                                                .clip(RoundedCornerShape(12.dp))
                                                 .background(Color(0xFFFFF7F8))
-                                                .border(1.dp, BrandPrimary.copy(alpha = 0.15f), RoundedCornerShape(Dimens.r2))
+                                                .border(1.dp, BrandPrimary.copy(alpha = 0.15f), RoundedCornerShape(12.dp))
                                                 .padding(12.dp)
                                         ) {
                                             Row(
@@ -769,7 +773,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                                     )
                                                 }
 
-                                                Spacer(modifier = Modifier.width(Dimens.sp2))
+                                                Spacer(modifier = Modifier.width(12.dp))
 
                                                 // Track and simulated progress bar
                                                 Column(modifier = Modifier.weight(1f)) {
@@ -820,7 +824,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                         horizontalArrangement = Arrangement.SpaceBetween,
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
-                                        Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
+                                        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                                             Row(verticalAlignment = Alignment.CenterVertically) {
                                                 Icon(
                                                     imageVector = Icons.Default.FavoriteBorder,
@@ -828,7 +832,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                                     tint = BrandTextSecondary,
                                                     modifier = Modifier.size(13.dp)
                                                 )
-                                                Spacer(modifier = Modifier.width(Dimens.sp1))
+                                                Spacer(modifier = Modifier.width(4.dp))
                                                 Text(
                                                     text = if (post.hasAudio) "${post.initialPlayCount + (if (isPlayingThis) 1 else 0)}" else "12",
                                                     color = BrandTextSecondary,
@@ -842,7 +846,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                                     tint = BrandTextSecondary,
                                                     modifier = Modifier.size(13.dp)
                                                 )
-                                                Spacer(modifier = Modifier.width(Dimens.sp1))
+                                                Spacer(modifier = Modifier.width(4.dp))
                                                 Text(
                                                     text = if (post.hasAudio) "2" else "0",
                                                     color = BrandTextSecondary,
@@ -865,24 +869,25 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                 }
 
                 "About & Gear" -> {
-                    Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                         // Bio & Statement
                         Card(
                             modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(Dimens.r2),
+                            shape = RoundedCornerShape(16.dp),
                             colors = CardDefaults.cardColors(containerColor = Color.White),
                             border = BorderStroke(1.dp, BrandBorder)
                         ) {
                             Column(modifier = Modifier.padding(18.dp)) {
                                 Text(
                                     text = "Editorial Bio",
-                                    style = Typography.bodyLarge,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 14.sp,
                                     color = BrandTextPrimary
                                 )
-                                Spacer(modifier = Modifier.height(Dimens.sp1))
+                                Spacer(modifier = Modifier.height(8.dp))
                                 Text(
                                     text = if (state.bio.isEmpty()) "Lead vocal playback artist & classical-folk music crossover producer. Based in Mumbai, crafting warm ambient sonic stories." else state.bio,
-                                    style = Typography.bodyLarge.copy(
+                                    style = MaterialTheme.typography.bodyMedium.copy(
                                         color = BrandTextSecondary,
                                         fontSize = 13.sp,
                                         lineHeight = 18.sp
@@ -903,12 +908,14 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                         Text(
                                             text = "Primary Role Experience",
                                             color = BrandTextSecondary,
-                                            style = Typography.bodyLarge
+                                            fontSize = 12.sp,
+                                            fontWeight = FontWeight.Medium
                                         )
                                         Text(
                                             text = "${state.roleExperience.yearsOfExperience} (${state.roleExperience.proficiencyLevel})",
                                             color = BrandPrimary,
-                                            style = Typography.bodyLarge
+                                            fontSize = 12.sp,
+                                            fontWeight = FontWeight.Bold
                                         )
                                     }
                                 }
@@ -918,14 +925,15 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                         // Languages & Genres
                         Card(
                             modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(Dimens.r2),
+                            shape = RoundedCornerShape(16.dp),
                             colors = CardDefaults.cardColors(containerColor = Color.White),
                             border = BorderStroke(1.dp, BrandBorder)
                         ) {
                             Column(modifier = Modifier.padding(18.dp)) {
                                 Text(
                                     text = "Vocal Languages",
-                                    style = Typography.bodyLarge,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 14.sp,
                                     color = BrandTextPrimary
                                 )
                                 Spacer(modifier = Modifier.height(6.dp))
@@ -938,7 +946,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                     langs.forEach { lang ->
                                         Box(
                                             modifier = Modifier
-                                                .clip(RoundedCornerShape(Dimens.r1))
+                                                .clip(RoundedCornerShape(8.dp))
                                                 .background(BrandBackground)
                                                 .padding(horizontal = 8.dp, vertical = 4.dp)
                                         ) {
@@ -947,11 +955,12 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                     }
                                 }
 
-                                Spacer(modifier = Modifier.height(Dimens.sp2))
+                                Spacer(modifier = Modifier.height(16.dp))
 
                                 Text(
                                     text = "Genres & Stylistic Focus",
-                                    style = Typography.bodyLarge,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 14.sp,
                                     color = BrandTextPrimary
                                 )
                                 Spacer(modifier = Modifier.height(6.dp))
@@ -964,7 +973,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                     genres.forEach { genre ->
                                         Box(
                                             modifier = Modifier
-                                                .clip(RoundedCornerShape(Dimens.r1))
+                                                .clip(RoundedCornerShape(8.dp))
                                                 .background(BrandPrimary.copy(alpha = 0.05f))
                                                 .padding(horizontal = 8.dp, vertical = 4.dp)
                                         ) {
@@ -979,21 +988,22 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                         if (state.selectedInstruments.isNotEmpty()) {
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
-                                shape = RoundedCornerShape(Dimens.r2),
+                                shape = RoundedCornerShape(16.dp),
                                 colors = CardDefaults.cardColors(containerColor = Color.White),
                                 border = BorderStroke(1.dp, BrandBorder)
                             ) {
                                 Column(modifier = Modifier.padding(18.dp)) {
                                     Text(
                                         text = "Instruments & Performance Gear",
-                                        style = Typography.bodyLarge,
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 14.sp,
                                         color = BrandTextPrimary
                                     )
                                     Spacer(modifier = Modifier.height(10.dp))
                                     state.selectedInstruments.forEach { instrument ->
                                         val prof = state.instrumentProficiency[instrument]
                                         val levelStr = prof?.let { "${it.yearsOfExperience} (${it.proficiencyLevel})" } ?: "Advanced"
-                                        val emoji = availableInstruments.find { it.name == instrument }?.emoji ?: "🎸"
+                                        val emoji = availableInstruments.find { it.id == instrument || it.name == instrument }?.emoji ?: "🎸"
                                         Row(
                                             modifier = Modifier
                                                 .fillMaxWidth()
@@ -1002,8 +1012,9 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                             verticalAlignment = Alignment.CenterVertically
                                         ) {
                                             Text(
-                                                text = "$emoji $instrument",
-                                                style = Typography.bodyLarge,
+                                                text = "$emoji ${getInstrumentLabel(instrument)}",
+                                                fontSize = 12.sp,
+                                                fontWeight = FontWeight.Bold,
                                                 color = BrandTextPrimary
                                             )
                                             Text(
@@ -1020,14 +1031,15 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                         // External Platforms Connected
                         Card(
                             modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(Dimens.r2),
+                            shape = RoundedCornerShape(16.dp),
                             colors = CardDefaults.cardColors(containerColor = Color.White),
                             border = BorderStroke(1.dp, BrandBorder)
                         ) {
                             Column(modifier = Modifier.padding(18.dp)) {
                                 Text(
                                     text = "Connected Channels",
-                                    style = Typography.bodyLarge,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 14.sp,
                                     color = BrandTextPrimary
                                 )
                                 Spacer(modifier = Modifier.height(10.dp))
@@ -1071,19 +1083,20 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                         // Mobile Digital Subscription Pass (QR Code elegant component)
                         Card(
                             modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(Dimens.r2),
+                            shape = RoundedCornerShape(16.dp),
                             colors = CardDefaults.cardColors(containerColor = Color.White),
                             border = BorderStroke(1.dp, BrandBorder)
                         ) {
                             Row(
-                                modifier = Modifier.padding(Dimens.sp2),
+                                modifier = Modifier.padding(16.dp),
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Column(modifier = Modifier.weight(1f)) {
                                     Text(
                                         text = "Scan to Subscribe via Mobile",
-                                        style = Typography.bodyLarge,
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 12.sp,
                                         color = BrandTextPrimary
                                     )
                                     Spacer(modifier = Modifier.height(2.dp))
@@ -1094,12 +1107,12 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                         lineHeight = 14.sp
                                     )
                                 }
-                                Spacer(modifier = Modifier.width(Dimens.sp2))
+                                Spacer(modifier = Modifier.width(16.dp))
                                 NativeQRCodeCanvas(
                                     contentUrl = "https://musiclinkd.com/${state.displayName.ifEmpty { "ananya_vocals" }}",
                                     modifier = Modifier
                                         .size(64.dp)
-                                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r1))
+                                        .border(1.dp, BrandBorder, RoundedCornerShape(8.dp))
                                         .padding(4.dp)
                                 )
                             }
@@ -1111,13 +1124,14 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
                         Text(
                             text = "Publications & Writers I Recommend",
-                            style = Typography.bodyLarge,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
                             color = BrandTextPrimary
                         )
                         recommendedConnections.forEach { artist ->
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
-                                shape = RoundedCornerShape(Dimens.r2),
+                                shape = RoundedCornerShape(16.dp),
                                 colors = CardDefaults.cardColors(containerColor = Color.White),
                                 border = BorderStroke(1.dp, BrandBorder)
                             ) {
@@ -1132,9 +1146,9 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                             .background(BrandBackground),
                                         contentAlignment = Alignment.Center
                                     ) {
-                                        Text("🎹", style = Typography.headlineLarge)
+                                        Text("🎹", fontSize = 20.sp)
                                     }
-                                    Spacer(modifier = Modifier.width(Dimens.sp2))
+                                    Spacer(modifier = Modifier.width(12.dp))
                                     Column(modifier = Modifier.weight(1f)) {
                                         Text(
                                             text = artist.name,
@@ -1150,7 +1164,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                     }
                                     Box(
                                         modifier = Modifier
-                                            .clip(RoundedCornerShape(Dimens.r1))
+                                            .clip(RoundedCornerShape(8.dp))
                                             .background(BrandPrimary.copy(alpha = 0.08f))
                                             .clickable { /* trigger simulation */ }
                                             .padding(horizontal = 10.dp, vertical = 6.dp)
@@ -1180,22 +1194,23 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
         ) {
             Text(
                 text = "💬 Community Discussion",
-                style = Typography.bodyLarge,
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 16.sp,
                 color = BrandTextPrimary
             )
             Text(
                 text = "Pitch a collaboration, ask a question, or leave a message directly on this publication board.",
-                style = Typography.bodyLarge.copy(color = BrandTextSecondary),
+                style = MaterialTheme.typography.bodySmall.copy(color = BrandTextSecondary),
                 modifier = Modifier.padding(top = 2.dp, bottom = 14.dp)
             )
 
             // Dynamic live list of comments
-            Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 comments.forEach { comment ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(BrandBackground, RoundedCornerShape(Dimens.r2))
+                            .background(BrandBackground, RoundedCornerShape(12.dp))
                             .padding(12.dp),
                         verticalAlignment = Alignment.Top
                     ) {
@@ -1206,7 +1221,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                                 .background(BrandPrimary.copy(alpha = 0.1f)),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text(comment.emoji, style = Typography.bodyLarge)
+                            Text(comment.emoji, fontSize = 16.sp)
                         }
                         Spacer(modifier = Modifier.width(10.dp))
                         Column(modifier = Modifier.weight(1f)) {
@@ -1217,7 +1232,8 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                             ) {
                                 Text(
                                     text = comment.author,
-                                    style = Typography.bodyLarge,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 12.sp,
                                     color = BrandTextPrimary
                                 )
                                 Text(
@@ -1238,7 +1254,7 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Post comments form
             OutlinedTextField(
@@ -1306,11 +1322,11 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
         ) {
             Text(
                 text = "Launch My MusicLinkd Profile",
-                style = Typography.bodyLarge.copy(style = Typography.bodyLarge)
+                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold, fontSize = 15.sp)
             )
         }
 
-        Spacer(modifier = Modifier.height(Dimens.sp4))
+        Spacer(modifier = Modifier.height(48.dp))
     }
 }
 
@@ -1322,8 +1338,8 @@ fun SuccessOnboardingScreen_OLD_UNUSED(
 fun HubShortcutChip(icon: ImageVector, label: String, onClick: () -> Unit) {
     Row(
         modifier = Modifier
-            .background(Color.White, RoundedCornerShape(Dimens.r2))
-            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
+            .background(Color.White, RoundedCornerShape(12.dp))
+            .border(1.dp, BrandBorder, RoundedCornerShape(12.dp))
             .clickable(onClick = onClick)
             .padding(horizontal = 12.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -1353,7 +1369,7 @@ fun DashboardPreviewScreen(
     onSavePictures: ((String?, String?) -> Unit)? = null
 ) {
     val context = LocalContext.current
-    var activeTab by remember { mutableStateOf("Home") }
+    var activeTab by remember(state.activeDashboardTab) { mutableStateOf(state.activeDashboardTab) }
     var availabilityStatus by remember { mutableStateOf(true) }
     var connectionRequestsSent by remember { mutableStateOf(mapOf<String, Boolean>()) }
     var selectedOpportunityForDetails by remember { mutableStateOf<OpportunityItem?>(null) }
@@ -1414,7 +1430,8 @@ fun DashboardPreviewScreen(
                             Spacer(modifier = Modifier.width(6.dp))
                             Text(
                                 "MusicLinkd",
-                                style = Typography.bodyLarge,
+                                fontWeight = FontWeight.Black,
+                                fontSize = 18.sp,
                                 color = BrandPrimary,
                                 letterSpacing = (-0.5).sp
                             )
@@ -1547,7 +1564,7 @@ fun DashboardPreviewScreen(
                         onAddIncStat = { key, valStr -> },
                         onPreviewPublish = { },
                         userName = state.fullName.ifEmpty { "Vedanshu Srivastava" },
-                        userRole = state.primaryRole ?: "Composer / Sound Engineer"
+                        userRole = getRoleLabel(state.primaryRole).ifEmpty { "Composer / Sound Engineer" }
                     )
                 } else if (activeTab == "StudioSpaces") {
                     StudioBookingMainFlowContainer(
@@ -1558,7 +1575,7 @@ fun DashboardPreviewScreen(
                     val userAvatar = availableAvatars.getOrElse(state.selectedAvatarIndex) { availableAvatars[0] }
                     DiscoverMainFlowContainer(
                         userName = state.fullName.ifEmpty { "Vedanshu Srivastava" },
-                        userRole = state.primaryRole ?: "Composer",
+                        userRole = getRoleLabel(state.primaryRole).ifEmpty { "Composer" },
                         avatarImageUrl = if (state.profilePicturePath != null) state.profilePicturePath else userAvatar.imageUrl,
                         onBackClick = { activeTab = "Home" }
                     )
@@ -1620,7 +1637,7 @@ fun DashboardPreviewScreen(
             ) {
                 Column {
                     val profileType = remember(state.primaryRole) {
-                        val role = state.primaryRole ?: ""
+                        val role = getRoleLabel(state.primaryRole)
                         when {
                             role.contains("Studio") || role.contains("Label") || role.contains("Publisher") -> "Studio/Biz"
                             role.contains("Organizer") || role.contains("Venue") || role.contains("Event") -> "Live Venue"
@@ -1628,10 +1645,10 @@ fun DashboardPreviewScreen(
                             else -> "Solo Talent"
                         }
                     }
-                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(
                             text = "Hello, ${state.fullName.ifEmpty { "Vedanshu" }}!",
-                            style = Typography.bodyLarge.copy(
+                            style = MaterialTheme.typography.titleLarge.copy(
                                 fontWeight = FontWeight.Bold,
                                 color = BrandTextPrimary,
                                 letterSpacing = (-0.5).sp
@@ -1653,14 +1670,14 @@ fun DashboardPreviewScreen(
                     }
                     Text(
                         text = "musiclinkd.com/${state.displayName.ifEmpty { "vedanshu" }}",
-                        style = Typography.labelLarge,
+                        fontSize = 12.sp,
                         color = BrandPrimary,
                         fontWeight = FontWeight.Bold
                     )
                 }
 
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     // Log Out Action Button
@@ -1670,7 +1687,7 @@ fun DashboardPreviewScreen(
                             containerColor = Color(0xFFEF4444).copy(alpha = 0.1f),
                             contentColor = Color(0xFFEF4444)
                         ),
-                        shape = RoundedCornerShape(Dimens.r3),
+                        shape = RoundedCornerShape(20.dp),
                         contentPadding = PaddingValues(horizontal = 10.dp, vertical = 6.dp),
                         modifier = Modifier
                             .height(36.dp)
@@ -1681,7 +1698,7 @@ fun DashboardPreviewScreen(
                             contentDescription = "Log Out",
                             modifier = Modifier.size(14.dp)
                         )
-                        Spacer(modifier = Modifier.width(Dimens.sp1))
+                        Spacer(modifier = Modifier.width(4.dp))
                         Text("Log Out", fontSize = 11.sp, fontWeight = FontWeight.Bold)
                     }
 
@@ -1743,129 +1760,7 @@ fun DashboardPreviewScreen(
                 }
             }
 
-            // ============================================================================
-            // NEW: BUSINESS DASHBOARD KPI GRID (From HTML Mockup)
-            // ============================================================================
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 16.dp)
-            ) {
-                Text(
-                    text = "Business Dashboard",
-                    style = Typography.bodyLarge.copy(
-                        fontWeight = FontWeight.ExtraBold,
-                        color = BrandTextPrimary,
-                        fontSize = 18.sp
-                    ),
-                    modifier = Modifier.padding(bottom = 12.dp)
-                )
-
-                // 2x2 Scorecard Grid
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
-                ) {
-                    Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Card(
-                            shape = RoundedCornerShape(12.dp),
-                            colors = CardDefaults.cardColors(containerColor = Color.White),
-                            border = BorderStroke(1.dp, BrandBorder),
-                            modifier = Modifier.fillMaxWidth().height(80.dp)
-                        ) {
-                            Column(
-                                modifier = Modifier.fillMaxSize().padding(12.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.Center
-                            ) {
-                                Text("₹84.5k", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp, color = BrandTextPrimary)
-                                Text("Revenue", fontSize = 11.sp, color = BrandTextSecondary)
-                            }
-                        }
-                        Card(
-                            shape = RoundedCornerShape(12.dp),
-                            colors = CardDefaults.cardColors(containerColor = Color.White),
-                            border = BorderStroke(1.dp, BrandBorder),
-                            modifier = Modifier.fillMaxWidth().height(80.dp)
-                        ) {
-                            Column(
-                                modifier = Modifier.fillMaxSize().padding(12.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.Center
-                            ) {
-                                Text("42", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp, color = BrandTextPrimary)
-                                Text("Bookings", fontSize = 11.sp, color = BrandTextSecondary)
-                            }
-                        }
-                    }
-
-                    Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Card(
-                            shape = RoundedCornerShape(12.dp),
-                            colors = CardDefaults.cardColors(containerColor = Color.White),
-                            border = BorderStroke(1.dp, BrandBorder),
-                            modifier = Modifier.fillMaxWidth().height(80.dp)
-                        ) {
-                            Column(
-                                modifier = Modifier.fillMaxSize().padding(12.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.Center
-                            ) {
-                                Text("1,240", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp, color = BrandTextPrimary)
-                                Text("Views", fontSize = 11.sp, color = BrandTextSecondary)
-                            }
-                        }
-                        Card(
-                            shape = RoundedCornerShape(12.dp),
-                            colors = CardDefaults.cardColors(containerColor = Color.White),
-                            border = BorderStroke(1.dp, BrandBorder),
-                            modifier = Modifier.fillMaxWidth().height(80.dp)
-                        ) {
-                            Column(
-                                modifier = Modifier.fillMaxSize().padding(12.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.Center
-                            ) {
-                                Text("98%", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp, color = BrandTextPrimary)
-                                Text("Response", fontSize = 11.sp, color = BrandTextSecondary)
-                            }
-                        }
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                // Recent Activity Feed Card
-                Card(
-                    shape = RoundedCornerShape(12.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color.White),
-                    border = BorderStroke(1.dp, BrandBorder),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text(
-                            text = "Recent Activity",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp,
-                            color = BrandTextPrimary,
-                            modifier = Modifier.padding(bottom = 8.dp)
-                        )
-                        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(bottom = 6.dp)) {
-                            Box(modifier = Modifier.size(6.dp).background(BrandPrimary, CircleShape))
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text("New booking: North Room", fontSize = 12.sp, color = BrandTextSecondary, modifier = Modifier.weight(1f))
-                            Text("2h ago", fontSize = 10.sp, color = BrandTextSecondary)
-                        }
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Box(modifier = Modifier.size(6.dp).background(BrandSuccess, CircleShape))
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text("Review received: 4.9 ★", fontSize = 12.sp, color = BrandTextSecondary, modifier = Modifier.weight(1f))
-                            Text("5h ago", fontSize = 10.sp, color = BrandTextSecondary)
-                        }
-                    }
-                }
-            }
-
+            /*
             // 1. Profile Completion Banner
             Card(
                 modifier = Modifier
@@ -1876,7 +1771,7 @@ fun DashboardPreviewScreen(
                 colors = CardDefaults.cardColors(containerColor = Color.White)
             ) {
                 Row(
-                    modifier = Modifier.padding(Dimens.sp2),
+                    modifier = Modifier.padding(16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Box(
@@ -1886,7 +1781,7 @@ fun DashboardPreviewScreen(
                             .background(BrandPrimary.copy(alpha = 0.08f)),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text("💯", style = Typography.headlineLarge)
+                        Text("💯", fontSize = 20.sp)
                     }
 
                     Spacer(modifier = Modifier.width(14.dp))
@@ -1896,7 +1791,7 @@ fun DashboardPreviewScreen(
                             text = "Professional Profile Active",
                             fontWeight = FontWeight.Bold,
                             color = BrandTextPrimary,
-                            style = Typography.labelLarge
+                            fontSize = 14.sp
                         )
                         Text(
                             text = "Your identity is indexed. You are 100% discoverable to labels.",
@@ -1946,12 +1841,12 @@ fun DashboardPreviewScreen(
                                 text = "Collab Availability",
                                 fontWeight = FontWeight.Bold,
                                 color = BrandTextPrimary,
-                                style = Typography.labelLarge
+                                fontSize = 14.sp
                             )
                             Text(
                                 text = if (availabilityStatus) "Open to record & perform" else "Focused on active gigs",
                                 color = BrandTextSecondary,
-                                style = Typography.labelLarge
+                                fontSize = 12.sp
                             )
                         }
                     }
@@ -1970,7 +1865,7 @@ fun DashboardPreviewScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // FLOW 7: Studio spaces interactive booking promotion
             Card(
@@ -1978,9 +1873,9 @@ fun DashboardPreviewScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp)
                     .clickable { activeTab = "StudioSpaces" }
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
+                    .border(1.dp, BrandBorder, RoundedCornerShape(16.dp))
                     .testTag("launch_flow_7_studio_banner"),
-                shape = RoundedCornerShape(Dimens.r2),
+                shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFF0D0B26))
             ) {
                 Column(modifier = Modifier.padding(18.dp)) {
@@ -2004,7 +1899,7 @@ fun DashboardPreviewScreen(
                     
                     Text(
                         text = "Premium Studio Spaces",
-                        style = Typography.bodyLarge.copy(fontWeight = FontWeight.ExtraBold, color = Color.White)
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.ExtraBold, color = Color.White)
                     )
                     Text(
                         text = "Book world-class Indian recording studios & live rehearsal spaces in interactive real-time steps.",
@@ -2015,7 +1910,7 @@ fun DashboardPreviewScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Contacts Friends Sync card
             val syncScope = rememberCoroutineScope()
@@ -2041,8 +1936,8 @@ fun DashboardPreviewScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp)
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
-                shape = RoundedCornerShape(Dimens.r2),
+                    .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
+                shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White)
             ) {
                 Column(modifier = Modifier.padding(18.dp)) {
@@ -2053,7 +1948,7 @@ fun DashboardPreviewScreen(
                     ) {
                         Text(
                             text = "👥 Friends Already on MusicLinkd",
-                            style = Typography.bodyLarge.copy(fontWeight = FontWeight.Bold, color = BrandTextPrimary)
+                            style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold, color = BrandTextPrimary)
                         )
                         if (hasSyncedContacts) {
                             Box(
@@ -2067,7 +1962,7 @@ fun DashboardPreviewScreen(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = "Scan your device contacts or linked email accounts to instantly find fellow musicians already using the system.",
                         color = BrandTextSecondary,
@@ -2079,7 +1974,7 @@ fun DashboardPreviewScreen(
 
                     if (!hasSyncedContacts) {
                         if (isSyncingContacts) {
-                            Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
+                            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                                 repeat(3) {
                                     Row(
                                         modifier = Modifier.fillMaxWidth(),
@@ -2109,20 +2004,14 @@ fun DashboardPreviewScreen(
                                 shape = RoundedCornerShape(22.dp),
                                 colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary)
                             ) {
-                                Text("Sync Contacts", style = Typography.bodyLarge, color = Color.White)
+                                Text("Sync Contacts", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color.White)
                             }
                         }
                     } else {
                         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                             HorizontalDivider(color = BrandBorder)
                             
-                            data class ContactRecord(val name: String, val email: String, val desc: String, val imageUrl: String)
-                            val matchedContacts = listOf(
-                                ContactRecord("A.R. Rahman", "ar.rahman@gmail.com", "Composer • Chennai", "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80"),
-                                ContactRecord("Pritam Chakraborty", "pritam.music@gmail.com", "Producer • Mumbai", "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&auto=format&fit=crop&q=80"),
-                                ContactRecord("Shreya Ghoshal", "shreya.vocalist@gmail.com", "Singer • Mumbai", "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&auto=format&fit=crop&q=80"),
-                                ContactRecord("Anirudh Ravichander", "anirudh.r@gmail.com", "Composer • Chennai", "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80")
-                            )
+                            val matchedContacts = com.example.onboarding.util.DemoDataProvider.sampleContacts
 
                             matchedContacts.forEach { contact ->
                                 Row(
@@ -2147,7 +2036,7 @@ fun DashboardPreviewScreen(
                                         }
                                         Spacer(modifier = Modifier.width(10.dp))
                                         Column {
-                                            Text(contact.name, style = Typography.bodyLarge, color = BrandTextPrimary)
+                                            Text(contact.name, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandTextPrimary)
                                             Text(contact.desc + " • " + contact.email, fontSize = 10.sp, color = BrandTextSecondary)
                                         }
                                     }
@@ -2155,7 +2044,7 @@ fun DashboardPreviewScreen(
                                     var connected by remember { mutableStateOf(false) }
                                     OutlinedButton(
                                         onClick = { connected = !connected },
-                                        shape = RoundedCornerShape(Dimens.r3),
+                                        shape = RoundedCornerShape(20.dp),
                                         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 2.dp),
                                         modifier = Modifier.height(28.dp),
                                         colors = ButtonDefaults.outlinedButtonColors(
@@ -2172,15 +2061,17 @@ fun DashboardPreviewScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp3))
+            Spacer(modifier = Modifier.height(24.dp))
+            */
 
+            /*
             // 3. Recommended Connections (Quick connect slider)
             Text(
                 text = "Recommended Connections",
-                style = Typography.bodyLarge.copy(
+                style = MaterialTheme.typography.titleMedium.copy(
                     fontWeight = FontWeight.Bold,
                     color = BrandTextPrimary,
-                    style = Typography.bodyLarge
+                    fontSize = 16.sp
                 ),
                 modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 12.dp)
             )
@@ -2188,7 +2079,7 @@ fun DashboardPreviewScreen(
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
                 contentPadding = PaddingValues(horizontal = 20.dp),
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 items(recommendedConnections) { item ->
                     val isRequested = connectionRequestsSent[item.name] ?: false
@@ -2196,8 +2087,8 @@ fun DashboardPreviewScreen(
                     Card(
                         modifier = Modifier
                             .width(170.dp)
-                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
-                        shape = RoundedCornerShape(Dimens.r2),
+                            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
+                        shape = RoundedCornerShape(16.dp),
                         colors = CardDefaults.cardColors(containerColor = Color.White)
                     ) {
                         Column(
@@ -2220,7 +2111,7 @@ fun DashboardPreviewScreen(
                                 )
                             }
                             
-                            Spacer(modifier = Modifier.height(Dimens.sp1))
+                            Spacer(modifier = Modifier.height(8.dp))
                             
                             Text(
                                 text = item.name,
@@ -2247,7 +2138,7 @@ fun DashboardPreviewScreen(
                                 modifier = Modifier.padding(top = 2.dp)
                             )
                             
-                            Spacer(modifier = Modifier.height(Dimens.sp2))
+                            Spacer(modifier = Modifier.height(12.dp))
 
                             Button(
                                 onClick = {
@@ -2260,7 +2151,7 @@ fun DashboardPreviewScreen(
                                     .height(34.dp)
                                     .testTag("dash_connect_${item.name}"),
                                 contentPadding = PaddingValues(0.dp),
-                                shape = RoundedCornerShape(Dimens.r1),
+                                shape = RoundedCornerShape(8.dp),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = if (isRequested) Color(0xFFE8F0FE) else BrandPrimary,
                                     contentColor = if (isRequested) BrandPrimary else Color.White
@@ -2277,8 +2168,10 @@ fun DashboardPreviewScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp3))
+            Spacer(modifier = Modifier.height(24.dp))
+            */
 
+            /*
             // 4. Trending Opportunities
             Row(
                 modifier = Modifier
@@ -2288,13 +2181,13 @@ fun DashboardPreviewScreen(
             ) {
                 Text(
                     text = "Trending Opportunities",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold,
                         color = BrandTextPrimary,
-                        style = Typography.bodyLarge
+                        fontSize = 16.sp
                     )
                 )
-                Spacer(modifier = Modifier.width(Dimens.sp1))
+                Spacer(modifier = Modifier.width(8.dp))
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(6.dp))
@@ -2315,8 +2208,8 @@ fun DashboardPreviewScreen(
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
-                        shape = RoundedCornerShape(Dimens.r2),
+                            .border(1.dp, BrandBorder, RoundedCornerShape(12.dp)),
+                        shape = RoundedCornerShape(12.dp),
                         colors = CardDefaults.cardColors(containerColor = Color.White)
                     ) {
                         Row(
@@ -2352,7 +2245,8 @@ fun DashboardPreviewScreen(
                                 Text(
                                     text = opp.pay,
                                     color = BrandSuccess,
-                                    style = Typography.bodyLarge,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 12.sp,
                                     modifier = Modifier.padding(top = 2.dp)
                                 )
                             }
@@ -2360,7 +2254,7 @@ fun DashboardPreviewScreen(
                             Button(
                                 onClick = { selectedOpportunityForDetails = opp },
                                 contentPadding = PaddingValues(horizontal = 12.dp, vertical = 0.dp),
-                                shape = RoundedCornerShape(Dimens.r1),
+                                shape = RoundedCornerShape(8.dp),
                                 colors = ButtonDefaults.buttonColors(containerColor = BrandSecondary),
                                 modifier = Modifier.height(32.dp)
                             ) {
@@ -2371,15 +2265,17 @@ fun DashboardPreviewScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp3))
+            Spacer(modifier = Modifier.height(24.dp))
+            */
 
+            /*
             // 5. Nearby Registered Record Studios
             Text(
                 text = "Nearby Verified Studios",
-                style = Typography.bodyLarge.copy(
+                style = MaterialTheme.typography.titleMedium.copy(
                     fontWeight = FontWeight.Bold,
                     color = BrandTextPrimary,
-                    style = Typography.bodyLarge
+                    fontSize = 16.sp
                 ),
                 modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 12.dp)
             )
@@ -2387,17 +2283,17 @@ fun DashboardPreviewScreen(
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
                 contentPadding = PaddingValues(horizontal = 20.dp),
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 items(nearbyStudios) { studio ->
                     Card(
                         modifier = Modifier
                             .width(200.dp)
-                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
-                        shape = RoundedCornerShape(Dimens.r2),
+                            .border(1.dp, BrandBorder, RoundedCornerShape(12.dp)),
+                        shape = RoundedCornerShape(12.dp),
                         colors = CardDefaults.cardColors(containerColor = Color.White)
                     ) {
-                        Column(modifier = Modifier.padding(Dimens.sp2)) {
+                        Column(modifier = Modifier.padding(12.dp)) {
                             AsyncImage(
                                 model = studio.imageUrl,
                                 contentDescription = studio.name,
@@ -2405,16 +2301,16 @@ fun DashboardPreviewScreen(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(90.dp)
-                                    .clip(RoundedCornerShape(Dimens.r1))
+                                    .clip(RoundedCornerShape(8.dp))
                             )
                             
-                            Spacer(modifier = Modifier.height(Dimens.sp1))
+                            Spacer(modifier = Modifier.height(8.dp))
                             
                             Text(
                                 text = studio.name,
                                 fontWeight = FontWeight.Bold,
                                 color = BrandTextPrimary,
-                                style = Typography.labelLarge,
+                                fontSize = 12.sp,
                                 maxLines = 1
                             )
                             Text(
@@ -2424,7 +2320,7 @@ fun DashboardPreviewScreen(
                                 maxLines = 1
                             )
                             
-                            Spacer(modifier = Modifier.height(Dimens.sp1))
+                            Spacer(modifier = Modifier.height(4.dp))
                             
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
@@ -2450,6 +2346,7 @@ fun DashboardPreviewScreen(
             }
 
             Spacer(modifier = Modifier.height(40.dp))
+            */
 
             // Opportunities coming soon dialog overlay
             if (selectedOpportunityForDetails != null) {
@@ -2458,7 +2355,7 @@ fun DashboardPreviewScreen(
                     onDismissRequest = { selectedOpportunityForDetails = null },
                     title = {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text("Apply to ${opp.poster}", style = Typography.bodyLarge)
+                            Text("Apply to ${opp.poster}", fontWeight = FontWeight.Bold, fontSize = 16.sp)
                             Spacer(modifier = Modifier.width(6.dp))
                             Box(
                                 modifier = Modifier
@@ -2471,10 +2368,10 @@ fun DashboardPreviewScreen(
                         }
                     },
                     text = {
-                        Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
+                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             Text(
                                 text = "Opportunity: ${opp.title}",
-                                style = Typography.bodyLarge.copy(fontWeight = FontWeight.Bold, color = BrandTextPrimary, fontSize = 13.sp)
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold, color = BrandTextPrimary, fontSize = 13.sp)
                             )
                             Text(
                                 text = "Type: ${opp.type} • Reward: ${opp.pay}",
@@ -2504,7 +2401,7 @@ fun DashboardPreviewScreen(
                                 onValueChange = { alertEmail = it },
                                 label = { Text("Alert Email Address") },
                                 modifier = Modifier.fillMaxWidth(),
-                                shape = RoundedCornerShape(Dimens.r1)
+                                shape = RoundedCornerShape(8.dp)
                             )
                             
                             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -2532,7 +2429,7 @@ fun DashboardPreviewScreen(
                             Text("Dismiss", color = BrandTextSecondary)
                         }
                     },
-                    shape = RoundedCornerShape(Dimens.r2),
+                    shape = RoundedCornerShape(16.dp),
                     containerColor = Color.White
                 )
             }
@@ -2553,7 +2450,7 @@ fun DashboardPreviewScreen(
                 ) {
                     Text(
                         text = "Notifications",
-                        style = Typography.bodyLarge.copy(fontWeight = FontWeight.Bold, color = BrandTextPrimary)
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold, color = BrandTextPrimary)
                     )
                     if (notifications.isNotEmpty()) {
                         TextButton(onClick = { notifications.clear() }) {
@@ -2571,11 +2468,12 @@ fun DashboardPreviewScreen(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text("🎉", fontSize = 32.sp)
-                        Spacer(modifier = Modifier.height(Dimens.sp1))
+                        Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "You are all caught up!",
                             color = BrandTextSecondary,
-                            style = Typography.bodyLarge
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Medium
                         )
                     }
                 } else {
@@ -2590,7 +2488,7 @@ fun DashboardPreviewScreen(
                                 border = BorderStroke(1.dp, BrandBorder)
                             ) {
                                 Row(
-                                    modifier = Modifier.padding(Dimens.sp2),
+                                    modifier = Modifier.padding(12.dp),
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Box(
@@ -2618,7 +2516,7 @@ fun DashboardPreviewScreen(
                     onClick = { showNotificationDialog = false },
                     colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary)
                 ) {
-                    Text("Close", color = Color.White, style = Typography.labelLarge)
+                    Text("Close", color = Color.White, fontSize = 12.sp)
                 }
             },
             containerColor = Color.White
@@ -2804,18 +2702,18 @@ fun MarketplaceBetaScreen(
                     tint = BrandTextPrimary
                 )
             }
-            Spacer(modifier = Modifier.width(Dimens.sp1))
+            Spacer(modifier = Modifier.width(8.dp))
             Column {
                 Text(
                     text = "Creator Marketplace",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.titleLarge.copy(
                         fontWeight = FontWeight.Bold,
                         color = BrandTextPrimary
                     )
                 )
                 Text(
                     text = "Gear, Mixing, Beats, Session Vocalists & Studio Hire",
-                    style = Typography.bodyLarge.copy(color = BrandTextSecondary)
+                    style = MaterialTheme.typography.bodySmall.copy(color = BrandTextSecondary)
                 )
             }
         }
@@ -2830,15 +2728,15 @@ fun MarketplaceBetaScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp, vertical = 8.dp),
-                shape = RoundedCornerShape(Dimens.r2),
+                shape = RoundedCornerShape(12.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFE6F4EA))
             ) {
                 Row(
-                    modifier = Modifier.padding(Dimens.sp2),
+                    modifier = Modifier.padding(16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(Icons.Default.CheckCircle, contentDescription = "Success", tint = Color(0xFF137333))
-                    Spacer(modifier = Modifier.width(Dimens.sp2))
+                    Spacer(modifier = Modifier.width(12.dp))
                     Text(successBookingMsg, color = Color(0xFF137333), fontSize = 13.sp, fontWeight = FontWeight.Medium)
                     Spacer(modifier = Modifier.weight(1f))
                     IconButton(onClick = { successBookingMsg = "" }, modifier = Modifier.size(24.dp)) {
@@ -2853,7 +2751,7 @@ fun MarketplaceBetaScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             // Outlined Search
             UnifiedSearchBar(
@@ -2865,7 +2763,7 @@ fun MarketplaceBetaScreen(
             // Horizontal Scrollable Filter Tabs
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 val tabs = listOf(
                     Triple("all", "All Services & Gear", Icons.Default.AllInclusive),
@@ -2886,7 +2784,7 @@ fun MarketplaceBetaScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Grid/List of items
         Column(
@@ -2894,7 +2792,7 @@ fun MarketplaceBetaScreen(
                 .weight(1f)
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 20.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             if (filteredItems.isEmpty()) {
                 Box(
@@ -2930,7 +2828,7 @@ fun MarketplaceBetaScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp3))
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 
@@ -2948,32 +2846,33 @@ fun MarketplaceBetaScreen(
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .size(36.dp)
-                                .clip(RoundedCornerShape(Dimens.r1))
+                                .clip(RoundedCornerShape(8.dp))
                         )
                     } else {
                         Text(item.imageEmoji, fontSize = 28.sp)
                     }
-                    Spacer(modifier = Modifier.width(Dimens.sp2))
+                    Spacer(modifier = Modifier.width(12.dp))
                     Text(
                         text = item.name,
-                        style = Typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
                         color = BrandTextPrimary
                     )
                 }
             },
             text = {
-                Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Column {
                             Text("Price", fontSize = 11.sp, color = BrandTextSecondary)
-                            Text(item.price, style = Typography.bodyLarge, color = BrandPrimary)
+                            Text(item.price, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandPrimary)
                         }
                         Column(horizontalAlignment = Alignment.End) {
                             Text("Location", fontSize = 11.sp, color = BrandTextSecondary)
-                            Text(item.location, style = Typography.bodyLarge)
+                            Text(item.location, fontWeight = FontWeight.Bold, fontSize = 14.sp)
                         }
                     }
 
@@ -2987,7 +2886,7 @@ fun MarketplaceBetaScreen(
                     )
                     Text(
                         text = item.keySpec,
-                        style = Typography.labelLarge,
+                        fontSize = 12.sp,
                         color = BrandTextSecondary,
                         lineHeight = 18.sp
                     )
@@ -3006,11 +2905,11 @@ fun MarketplaceBetaScreen(
                         ) {
                             Text(item.owner.take(1), fontWeight = FontWeight.Bold, color = BrandPrimary)
                         }
-                        Spacer(modifier = Modifier.width(Dimens.sp2))
+                        Spacer(modifier = Modifier.width(12.dp))
                         Column {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text(item.owner, fontWeight = FontWeight.Bold, fontSize = 13.sp)
-                                Spacer(modifier = Modifier.width(Dimens.sp1))
+                                Spacer(modifier = Modifier.width(4.dp))
                                 Icon(
                                     imageVector = Icons.Default.Verified,
                                     contentDescription = "Verified",
@@ -3028,7 +2927,7 @@ fun MarketplaceBetaScreen(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.Star, contentDescription = null, tint = Color(0xFFF59E0B), modifier = Modifier.size(14.dp))
                             Spacer(modifier = Modifier.width(2.dp))
-                            Text(item.rating, style = Typography.bodyLarge)
+                            Text(item.rating, fontWeight = FontWeight.Bold, fontSize = 12.sp)
                         }
                     }
                 }
@@ -3044,7 +2943,7 @@ fun MarketplaceBetaScreen(
                         selectedItem = null
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                    shape = RoundedCornerShape(Dimens.r2)
+                    shape = RoundedCornerShape(12.dp)
                 ) {
                     Text(
                         text = if (item.category == "sale") "Contact Seller & Secure" else "Rent This Gear",
@@ -3057,7 +2956,7 @@ fun MarketplaceBetaScreen(
                     Text("Dismiss", color = BrandTextSecondary)
                 }
             },
-            shape = RoundedCornerShape(Dimens.r3),
+            shape = RoundedCornerShape(20.dp),
             containerColor = Color.White
         )
     }
@@ -3256,10 +3155,10 @@ fun NotificationsCenterScreen(
                                 color = BrandTextPrimary
                             )
                             if (unreadCount > 0) {
-                                Spacer(modifier = Modifier.width(Dimens.sp1))
+                                Spacer(modifier = Modifier.width(8.dp))
                                 Surface(
                                     color = BrandPrimary,
-                                    shape = RoundedCornerShape(Dimens.r2)
+                                    shape = RoundedCornerShape(12.dp)
                                 ) {
                                     Text(
                                         text = "$unreadCount new",
@@ -3319,7 +3218,7 @@ fun NotificationsCenterScreen(
                         .padding(bottom = 12.dp)
                 ) {
                     Row(
-                        modifier = Modifier.padding(Dimens.sp2),
+                        modifier = Modifier.padding(12.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -3328,7 +3227,7 @@ fun NotificationsCenterScreen(
                             Spacer(modifier = Modifier.width(10.dp))
                             Text(
                                 text = "Push alerts are currently muted in Settings.",
-                                style = Typography.labelLarge,
+                                fontSize = 12.sp,
                                 color = Color(0xFF92400E),
                                 fontWeight = FontWeight.Medium
                             )
@@ -3340,6 +3239,7 @@ fun NotificationsCenterScreen(
                 }
             }
 
+            /*
             // Firestore Sync Indicator Banner
             Card(
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFE8F5E9)),
@@ -3348,7 +3248,7 @@ fun NotificationsCenterScreen(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Row(
-                    modifier = Modifier.padding(Dimens.sp2),
+                    modifier = Modifier.padding(12.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
@@ -3366,7 +3266,8 @@ fun NotificationsCenterScreen(
                         Column {
                             Text(
                                 text = "Firestore Real-time Sync Active",
-                                style = Typography.bodyLarge,
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
                                 color = Color(0xFF1B5E20)
                             )
                             Text(
@@ -3396,7 +3297,8 @@ fun NotificationsCenterScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(12.dp))
+            */
 
             // Search Bar
             UnifiedSearchBar(
@@ -3405,7 +3307,7 @@ fun NotificationsCenterScreen(
                 placeholder = "Search notification alerts..."
             )
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(12.dp))
 
             // Filter Tabs Row
             Row(
@@ -3414,7 +3316,7 @@ fun NotificationsCenterScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier.weight(1f)
                 ) {
                     val tabs = listOf(
@@ -3444,7 +3346,7 @@ fun NotificationsCenterScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Pull-To-Refresh Container for Notifications List
             androidx.compose.material3.pulltorefresh.PullToRefreshBox(
@@ -3515,7 +3417,7 @@ fun NotificationsCenterScreen(
                     }
                 } else {
                     LazyColumn(
-                        verticalArrangement = Arrangement.spacedBy(Dimens.sp2),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
                         modifier = Modifier.fillMaxSize()
                     ) {
                         items(filteredNotifications, key = { it.id }) { item ->
@@ -3548,7 +3450,7 @@ fun NotificationsCenterScreen(
                                         Box(
                                             modifier = Modifier
                                                 .fillMaxSize()
-                                                .clip(RoundedCornerShape(Dimens.r2))
+                                                .clip(RoundedCornerShape(16.dp))
                                                 .background(bgColor)
                                                 .padding(horizontal = 20.dp),
                                             contentAlignment = if (dismissState.dismissDirection == SwipeToDismissBoxValue.StartToEnd)
@@ -3575,7 +3477,7 @@ fun NotificationsCenterScreen(
                                         colors = CardDefaults.cardColors(
                                             containerColor = if (!item.isRead) Color(0xFFF3F4F6) else Color.White
                                         ),
-                                        shape = RoundedCornerShape(Dimens.r2),
+                                        shape = RoundedCornerShape(16.dp),
                                         border = BorderStroke(
                                             width = if (!item.isRead) 1.5.dp else 1.dp,
                                             color = if (!item.isRead) BrandPrimary.copy(alpha = 0.4f) else BrandBorder
@@ -3589,12 +3491,13 @@ fun NotificationsCenterScreen(
                                             verticalAlignment = Alignment.CenterVertically
                                         ) {
                                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                                Text(item.iconEmoji, style = Typography.headlineLarge)
+                                                Text(item.iconEmoji, fontSize = 20.sp)
                                                 Spacer(modifier = Modifier.width(10.dp))
                                                 Column {
                                                     Text(
                                                         text = item.title,
-                                                        style = Typography.bodyLarge,
+                                                        fontWeight = FontWeight.Bold,
+                                                        fontSize = 14.sp,
                                                         color = BrandTextPrimary
                                                     )
                                                     Text(
@@ -3615,7 +3518,7 @@ fun NotificationsCenterScreen(
                                             }
                                         }
 
-                                        Spacer(modifier = Modifier.height(Dimens.sp1))
+                                        Spacer(modifier = Modifier.height(8.dp))
 
                                         Text(
                                             text = item.body,
@@ -3624,7 +3527,7 @@ fun NotificationsCenterScreen(
                                             color = BrandTextPrimary
                                         )
 
-                                        Spacer(modifier = Modifier.height(Dimens.sp2))
+                                        Spacer(modifier = Modifier.height(12.dp))
 
                                         Row(
                                             modifier = Modifier.fillMaxWidth(),
@@ -3647,7 +3550,7 @@ fun NotificationsCenterScreen(
                                                 )
                                             }
 
-                                            Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
+                                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                                 IconButton(
                                                     onClick = {
                                                         notificationsList.removeIf { it.id == item.id }
@@ -3739,7 +3642,7 @@ fun NotificationSettingsScreen(
                 .padding(paddingValues)
                 .verticalScroll(rememberScrollState())
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // Master Switch Card
             Card(
@@ -3778,11 +3681,12 @@ fun NotificationSettingsScreen(
                                 )
                             }
                         }
-                        Spacer(modifier = Modifier.width(Dimens.sp2))
+                        Spacer(modifier = Modifier.width(12.dp))
                         Column {
                             Text(
                                 text = "Master Push Gateway",
-                                style = Typography.bodyLarge,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 15.sp,
                                 color = BrandTextPrimary
                             )
                             Text(
@@ -3813,7 +3717,8 @@ fun NotificationSettingsScreen(
             // Categories Preference Section
             Text(
                 text = "Alert Categories & Channels",
-                style = Typography.bodyLarge,
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp,
                 color = BrandTextPrimary,
                 modifier = Modifier.padding(start = 4.dp, top = 4.dp)
             )
@@ -3894,7 +3799,8 @@ fun NotificationSettingsScreen(
             // Sound, Vibration & Quiet Hours Section
             Text(
                 text = "Behavior & Quiet Hours",
-                style = Typography.bodyLarge,
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp,
                 color = BrandTextPrimary,
                 modifier = Modifier.padding(start = 4.dp, top = 4.dp)
             )
@@ -3947,28 +3853,30 @@ fun NotificationSettingsScreen(
                     if (currentPrefs.quietHoursEnabled && currentPrefs.masterPushEnabled) {
                         Surface(
                             color = Color(0xFFF3F4F6),
-                            shape = RoundedCornerShape(Dimens.r2),
+                            shape = RoundedCornerShape(12.dp),
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp, vertical = 8.dp)
                         ) {
                             Row(
-                                modifier = Modifier.padding(Dimens.sp2),
+                                modifier = Modifier.padding(12.dp),
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
                                     text = "Active Quiet Schedule:",
-                                    style = Typography.bodyLarge,
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.Medium,
                                     color = BrandTextSecondary
                                 )
                                 Surface(
                                     color = BrandPrimary.copy(alpha = 0.1f),
-                                    shape = RoundedCornerShape(Dimens.r1)
+                                    shape = RoundedCornerShape(8.dp)
                                 ) {
                                     Text(
                                         text = "${currentPrefs.quietHoursStart} - ${currentPrefs.quietHoursEnd}",
-                                        style = Typography.bodyLarge,
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Bold,
                                         color = BrandPrimary,
                                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                                     )
@@ -3979,7 +3887,7 @@ fun NotificationSettingsScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
 
             // Save to Firestore Button
             Button(
@@ -4005,12 +3913,12 @@ fun NotificationSettingsScreen(
                         color = Color.White,
                         strokeWidth = 2.dp
                     )
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text("Syncing to Firestore...", fontWeight = FontWeight.Bold, color = Color.White)
                 } else {
                     Icon(Icons.Default.Save, contentDescription = null, tint = Color.White)
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
-                    Text("Save Preferences", style = Typography.bodyLarge, color = Color.White)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Save Preferences", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Color.White)
                 }
             }
         }
@@ -4044,7 +3952,7 @@ fun NotificationToggleRow(
                 tint = if (enabled) BrandPrimary else Color.Gray,
                 modifier = Modifier.size(22.dp)
             )
-            Spacer(modifier = Modifier.width(Dimens.sp2))
+            Spacer(modifier = Modifier.width(12.dp))
             Column {
                 Text(
                     text = title,

@@ -2,13 +2,16 @@ import { COLLECTIONS } from "@/config/constants";
 import type {
   AdminRoleDoc,
   AuditLogDoc,
+  BrandAssetsDoc,
   BroadcastMessageDoc,
   ConnectionDoc,
   FeedPostDoc,
   MarketplaceItemDoc,
   ModerationFlagDoc,
   ModuleRegistryDoc,
+  NotificationDoc,
   PageContentDoc,
+  PortfolioProjectDoc,
   ProjectDoc,
   ReviewDoc,
   StudioBookingDoc,
@@ -16,6 +19,7 @@ import type {
   SupportTicketDoc,
   TaxonomyCategoryDoc,
   UserDoc,
+  UserSettingsDoc,
   VerificationRequestDoc,
 } from "@/types/firestore";
 import { createRepository } from "./generic-repository";
@@ -37,3 +41,7 @@ export const auditLogsRepo = createRepository<AuditLogDoc>(COLLECTIONS.auditLogs
 export const pageContentRepo = createRepository<PageContentDoc>(COLLECTIONS.pageContent);
 export const taxonomyCategoriesRepo = createRepository<TaxonomyCategoryDoc>(COLLECTIONS.taxonomyCategories);
 export const modulesRepo = createRepository<ModuleRegistryDoc>(COLLECTIONS.modules);
+export const portfolioProjectsRepo = createRepository<PortfolioProjectDoc>(COLLECTIONS.portfolioProjects);
+export const notificationsRepo = createRepository<NotificationDoc>(COLLECTIONS.notifications);
+export const userSettingsRepo = createRepository<UserSettingsDoc>(COLLECTIONS.userSettings);
+export const brandAssetsRepo = createRepository<BrandAssetsDoc>(COLLECTIONS.brandAssets);

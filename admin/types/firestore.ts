@@ -15,6 +15,29 @@ export type AdminRole = "ROLE_ADMIN" | "ROLE_MODERATOR" | "ROLE_SUPPORT";
  * (admin-managed master data), not a fixed union — see Users_And_Masters
  * notes in admin/docs/architecture/ for the seed list.
  */
+/** { name, role, isLeader } — one entry per band-profile lineup member. */
+export interface BandLineupMember {
+  name: string;
+  role: string;
+  isLeader: boolean;
+}
+
+export type ProfileType = "TALENT" | "BAND" | "BUSINESS" | "VENUE";
+export type BusinessType = "Studio" | "Label" | "School" | "Dealer";
+
+/** Social/streaming platform links, all optional — matches Kotlin's ExternalLinksSchema. */
+export interface ExternalLinks {
+  spotify?: string;
+  instagram?: string;
+  youtube?: string;
+  linkedin?: string;
+  website?: string;
+  twitter?: string;
+  soundcloud?: string;
+  appleMusic?: string;
+  bandcamp?: string;
+}
+
 export interface UserDoc {
   displayName: string;
   email: string;
@@ -34,6 +57,48 @@ export interface UserDoc {
   trustBadges: string[];
   avatarUrl: string;
   createdAt: Timestamp;
+  updatedAt?: Timestamp;
+  /**
+   * 4-family profile classification. Optional for now — existing documents
+   * predate this field, and no app-side writer sets it yet (unverified
+   * as of this session's audits; see admin/docs/architecture/ plan notes).
+   * Once set, never writable by the owner themselves — see firestore.rules.
+   */
+  profileType?: ProfileType;
+
+  /** OTP-auth contact number — already written by the real onboarding flow (OnboardingViewModel.kt), added here to match. */
+  mobileNumber?: string;
+  whatsappNumber?: string;
+  /** Push-notification device token, if/when FCM registration is wired up app-side. */
+  fcmToken?: string;
+  externalLinks?: ExternalLinks;
+  /** Simple per-instrument label list (e.g. "Guitar (Expert)") — a flatter shape than the app's in-memory Map<instrument, SkillProficiency>; reconcile if/when that gets persisted. */
+  instrumentProficiency?: string[];
+  /** role -> experience label, e.g. { "Producer": "5 years" }. */
+  roleExperience?: Record<string, string>;
+
+  // --- Business extension (profileType === "BUSINESS") ---
+  businessName?: string;
+  businessType?: BusinessType;
+  businessAddress?: string;
+  tagline?: string;
+  operatingHours?: string;
+  gstin?: string;
+  services?: string[];
+  equipmentList?: string[];
+
+  // --- Band extension (profileType === "BAND") ---
+  bandName?: string;
+  lineupMembers?: BandLineupMember[];
+  techRiderUrl?: string;
+  stagePlotUrl?: string;
+
+  // --- Venue extension (profileType === "VENUE") ---
+  venueName?: string;
+  capacity?: number;
+  venueFeatures?: string[];
+  /** Scheduled event links/IDs — a flat string list for v1, not a subcollection. */
+  eventCalendar?: string[];
 }
 
 export interface AdminRoleDoc {
@@ -55,6 +120,13 @@ export interface FeedPostDoc {
   text?: string;
   likesCount: number;
   timestamp: Timestamp;
+  /** Denormalized so the feed can render without a join against users/{uid} — additive, unverified as app-written this session. */
+  authorName?: string;
+  authorRole?: string;
+  authorAvatarUrl?: string;
+  /** Generalized media attachments (images/audio) — audioUrl is kept for the existing single-audio shape. */
+  mediaUrls?: string[];
+  commentsCount?: number;
 }
 
 export interface StudioBookingDoc {
@@ -257,6 +329,83 @@ export interface BookmarkDoc {
   ownerUid: string;
   savedUserId: string;
   createdAt: Timestamp;
+}
+
+export type PortfolioProjectType = "ALBUM" | "SINGLE" | "EP" | "SCORE" | "BEAT_TAPE";
+
+/**
+ * portfolio_projects/{projectId} — rules already deployed (firestore.rules),
+ * owner-uid pattern matching studios/projects. No confirmed app-side writer
+ * as of this session's audits — admin type + rules land ahead of that so the
+ * collection is ready the moment the app starts writing to it.
+ */
+export interface PortfolioProjectDoc {
+  userId: string;
+  title: string;
+  description: string;
+  projectType: PortfolioProjectType;
+  projectRole: string;
+  mediaUrls: string[];
+  audioDemoUrl?: string;
+  collaboratorUids: string[];
+  genre: string;
+  releaseDate: string;
+  externalLink?: string;
+  createdAt: Timestamp;
+}
+
+export type NotificationType =
+  | "CONNECTION_REQUEST"
+  | "BOOKING_UPDATE"
+  | "REVIEW_RECEIVED"
+  | "SYSTEM_ALERT"
+  | "GIG_MATCH";
+
+/**
+ * notifications/{notificationId} — no confirmed app-side writer or reader
+ * as of this session's audits. Admin type + rules only for now.
+ */
+export interface NotificationDoc {
+  userId: string;
+  title: string;
+  body: string;
+  type: NotificationType;
+  isRead: boolean;
+  targetUrl?: string;
+  createdAt: Timestamp;
+}
+
+export type ProfileVisibility = "PUBLIC" | "CONNECTIONS_ONLY" | "PRIVATE";
+
+/**
+ * user_settings/{userId} — doc ID = the user's own UID. No confirmed
+ * app-side writer as of this session's audits (SettingsFlow was found to
+ * have zero persistence anywhere). Admin type + rules only for now.
+ */
+export interface UserSettingsDoc {
+  pushNotificationsEnabled: boolean;
+  emailNotificationsEnabled: boolean;
+  profileVisibility: ProfileVisibility;
+  darkModeEnabled: boolean;
+  currency: string;
+  language: string;
+  updatedAt: Timestamp;
+}
+
+/**
+ * brand_assets/{assetId} — owner-uid pattern, for Business-family profiles'
+ * logo/identity assets. No confirmed app-side writer as of this session's
+ * audits. Admin type + rules only for now.
+ */
+export interface BrandAssetsDoc {
+  ownerUid: string;
+  logoUrl?: string;
+  iconUrl?: string;
+  thumbnailUrl?: string;
+  heroBannerUrl?: string;
+  darkVariantUrl?: string;
+  lightVariantUrl?: string;
+  updatedAt: Timestamp;
 }
 
 export interface WithId<T> {

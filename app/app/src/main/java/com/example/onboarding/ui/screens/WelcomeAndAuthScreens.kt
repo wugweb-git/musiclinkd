@@ -72,18 +72,19 @@ fun SocialProofRow(count: String, label: String) {
         ) {
             Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp), tint = Color.Gray)
         }
-        Spacer(modifier = Modifier.width(Dimens.sp2))
+        Spacer(modifier = Modifier.width(12.dp))
         Text(
             text = count,
             fontWeight = FontWeight.ExtraBold,
             color = LightTextPrimary,
-            style = Typography.bodyLarge
+            fontSize = 16.sp
         )
         Spacer(modifier = Modifier.width(6.dp))
         Text(
             text = label,
             color = LightTextSecondary,
-            style = Typography.bodyLarge
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Medium
         )
     }
 }
@@ -116,17 +117,17 @@ fun WelcomeScreen(
             Column {
                 Text(
                     text = "MusicLinkd",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.titleLarge.copy(
                         fontWeight = FontWeight.Black,
                         color = LightTextPrimary,
                         letterSpacing = (-1).sp,
                         fontSize = 28.sp
                     )
                 )
-                Spacer(modifier = Modifier.height(Dimens.sp1))
+                Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = "Professional Network For Music",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.labelLarge.copy(
                         color = BrandPrimary,
                         fontWeight = FontWeight.Bold,
                         letterSpacing = 0.5.sp
@@ -138,7 +139,7 @@ fun WelcomeScreen(
             Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.Center) {
                 Text(
                     text = "Connect.\nCollaborate.\nCreate.",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.displayMedium.copy(
                         fontWeight = FontWeight.Black,
                         color = LightTextPrimary,
                         lineHeight = 52.sp,
@@ -146,13 +147,13 @@ fun WelcomeScreen(
                     )
                 )
                 
-                Spacer(modifier = Modifier.height(Dimens.sp2))
+                Spacer(modifier = Modifier.height(16.dp))
                 
                 Text(
                     text = "Build your profile, discover opportunities, connect with the music industry.",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.bodyLarge.copy(
                         color = LightTextSecondary,
-                        style = Typography.bodyLarge,
+                        fontSize = 16.sp,
                         lineHeight = 24.sp
                     )
                 )
@@ -162,9 +163,9 @@ fun WelcomeScreen(
                 // Social Proof
                 Column {
                     SocialProofRow(count = "12,000+", label = "Musicians")
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(12.dp))
                     SocialProofRow(count = "3,500+", label = "Studios")
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(12.dp))
                     SocialProofRow(count = "800+", label = "Labels & Agencies")
                 }
             }
@@ -177,8 +178,8 @@ fun WelcomeScreen(
                         .fillMaxWidth()
                         .height(56.dp)
                         .testTag("google_login_button")
-                        .border(1.dp, LightBorder, RoundedCornerShape(Dimens.r2)),
-                    shape = RoundedCornerShape(Dimens.r2),
+                        .border(1.dp, LightBorder, RoundedCornerShape(16.dp)),
+                    shape = RoundedCornerShape(16.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = LightCard,
                         contentColor = LightTextPrimary
@@ -190,10 +191,10 @@ fun WelcomeScreen(
                         horizontalArrangement = Arrangement.Center
                     ) {
                         GoogleIcon()
-                        Spacer(modifier = Modifier.width(Dimens.sp2))
+                        Spacer(modifier = Modifier.width(12.dp))
                         Text(
                             text = "Continue with Google",
-                            style = Typography.bodyLarge.copy(
+                            style = MaterialTheme.typography.bodyLarge.copy(
                                 fontWeight = FontWeight.Bold,
                                 color = LightTextPrimary
                             )
@@ -201,7 +202,7 @@ fun WelcomeScreen(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(Dimens.sp2))
+                Spacer(modifier = Modifier.height(12.dp))
 
                 Button(
                     onClick = onMobileClick,
@@ -209,35 +210,23 @@ fun WelcomeScreen(
                         .fillMaxWidth()
                         .height(56.dp)
                         .testTag("mobile_login_button"),
-                    shape = RoundedCornerShape(Dimens.r2),
+                    shape = RoundedCornerShape(16.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = LightTextPrimary,
                         contentColor = Color.White
                     ),
                     elevation = ButtonDefaults.buttonElevation(0.dp, 0.dp)
                 ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.PhoneAndroid,
-                            contentDescription = null,
-                            tint = Color.White,
-                            modifier = Modifier.size(20.dp)
+                    Text(
+                        text = "Continue with Mobile",
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
                         )
-                        Spacer(modifier = Modifier.width(Dimens.sp2))
-                        Text(
-                            text = "Continue with Mobile",
-                            style = Typography.bodyLarge.copy(
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            )
-                        )
-                    }
+                    )
                 }
 
-                Spacer(modifier = Modifier.height(Dimens.sp2))
+                Spacer(modifier = Modifier.height(12.dp))
 
                 OutlinedButton(
                     onClick = onEmailClick,
@@ -245,8 +234,8 @@ fun WelcomeScreen(
                         .fillMaxWidth()
                         .height(56.dp)
                         .testTag("email_login_button")
-                        .border(1.dp, LightBorder, RoundedCornerShape(Dimens.r2)),
-                    shape = RoundedCornerShape(Dimens.r2),
+                        .border(1.dp, LightBorder, RoundedCornerShape(16.dp)),
+                    shape = RoundedCornerShape(16.dp),
                     colors = ButtonDefaults.outlinedButtonColors(
                         contentColor = LightTextPrimary
                     )
@@ -261,10 +250,10 @@ fun WelcomeScreen(
                             tint = LightTextPrimary,
                             modifier = Modifier.size(20.dp)
                         )
-                        Spacer(modifier = Modifier.width(Dimens.sp2))
+                        Spacer(modifier = Modifier.width(12.dp))
                         Text(
                             text = "Continue with Email & Password",
-                            style = Typography.bodyLarge.copy(
+                            style = MaterialTheme.typography.bodyLarge.copy(
                                 fontWeight = FontWeight.Bold,
                                 color = LightTextPrimary
                             )
@@ -272,11 +261,11 @@ fun WelcomeScreen(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(Dimens.sp3))
+                Spacer(modifier = Modifier.height(24.dp))
 
                 Text(
                     text = "By continuing, you agree to Terms & Privacy",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.bodySmall.copy(
                         color = LightTextSecondary,
                         textAlign = TextAlign.Center
                     ),
@@ -296,7 +285,7 @@ fun WelcomeScreen(
                     }
                 },
                 containerColor = LightCard,
-                shape = RoundedCornerShape(Dimens.r3),
+                shape = RoundedCornerShape(24.dp),
                 title = {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -308,16 +297,17 @@ fun WelcomeScreen(
                             fontWeight = FontWeight.Black,
                             color = BrandPrimary
                         )
-                        Spacer(modifier = Modifier.height(Dimens.sp1))
+                        Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "Choose an account",
-                            style = Typography.bodyLarge,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
                             color = LightTextPrimary,
                             textAlign = TextAlign.Center
                         )
                         Text(
                             text = "to continue to MusicLinkd",
-                            style = Typography.labelLarge,
+                            fontSize = 12.sp,
                             color = LightTextSecondary,
                             textAlign = TextAlign.Center
                         )
@@ -326,7 +316,7 @@ fun WelcomeScreen(
                 text = {
                     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         HorizontalDivider(color = LightBorder)
-                        Spacer(modifier = Modifier.height(Dimens.sp1))
+                        Spacer(modifier = Modifier.height(4.dp))
 
                         // Account 1: Vedanshu
                         Row(
@@ -346,18 +336,19 @@ fun WelcomeScreen(
                                     .background(BrandPrimary),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Text("V", color = Color.White, style = Typography.bodyLarge)
+                                Text("V", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 18.sp)
                             }
-                            Spacer(modifier = Modifier.width(Dimens.sp2))
+                            Spacer(modifier = Modifier.width(12.dp))
                             Column {
                                 Text(
                                     text = "Vedanshu Srivastava",
-                                    style = Typography.bodyLarge,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 14.sp,
                                     color = LightTextPrimary
                                 )
                                 Text(
                                     text = "vedanshu.srivastava@gmail.com",
-                                    style = Typography.labelLarge,
+                                    fontSize = 12.sp,
                                     color = LightTextSecondary
                                 )
                             }
@@ -381,18 +372,19 @@ fun WelcomeScreen(
                                     .background(Color(0xFF334155)),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Text("M", color = Color(0xFFCBD5E1), style = Typography.bodyLarge)
+                                Text("M", color = Color(0xFFCBD5E1), fontWeight = FontWeight.Bold, fontSize = 18.sp)
                             }
-                            Spacer(modifier = Modifier.width(Dimens.sp2))
+                            Spacer(modifier = Modifier.width(12.dp))
                             Column {
                                 Text(
                                     text = "MusicLinkd Explorer",
-                                    style = Typography.bodyLarge,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 14.sp,
                                     color = LightTextPrimary
                                 )
                                 Text(
                                     text = "guest.explorer@gmail.com",
-                                    style = Typography.labelLarge,
+                                    fontSize = 12.sp,
                                     color = LightTextSecondary
                                 )
                             }
@@ -423,17 +415,18 @@ fun WelcomeScreen(
                                     modifier = Modifier.size(20.dp)
                                 )
                             }
-                            Spacer(modifier = Modifier.width(Dimens.sp2))
+                            Spacer(modifier = Modifier.width(12.dp))
                             Text(
                                 text = "Add another account",
-                                style = Typography.bodyLarge,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 14.sp,
                                 color = LightTextPrimary
                             )
                         }
 
                         Spacer(modifier = Modifier.height(10.dp))
                         HorizontalDivider(color = LightBorder)
-                        Spacer(modifier = Modifier.height(Dimens.sp1))
+                        Spacer(modifier = Modifier.height(4.dp))
                         Text(
                             text = "To continue, Google will share your name, email address, language preference, and profile picture with MusicLinkd. See MusicLinkd's Privacy Policy and Terms of Service.",
                             fontSize = 10.sp,
@@ -483,7 +476,7 @@ fun EmailAuthScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(Dimens.r2))
+                        .clip(RoundedCornerShape(12.dp))
                         .background(if (isFirebaseConnected) Color(0xFFE8F5E9) else Color(0xFFFFF3E0))
                         .padding(10.dp)
                 ) {
@@ -494,7 +487,7 @@ fun EmailAuthScreen(
                             tint = if (isFirebaseConnected) Color(0xFF2E7D32) else Color(0xFFEF6C00),
                             modifier = Modifier.size(16.dp)
                         )
-                        Spacer(modifier = Modifier.width(Dimens.sp1))
+                        Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = if (isFirebaseConnected) "Connected to Firebase Auth Gateway" else "Secure Offline Auth Mode Enabled",
                             fontSize = 11.sp,
@@ -502,7 +495,7 @@ fun EmailAuthScreen(
                             color = if (isFirebaseConnected) Color(0xFF2E7D32) else Color(0xFFEF6C00)
                         )
                     }
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = "🔐 Encrypted SharedPreferences Session Token Active (Auto-Refresh Enabled)",
                         fontSize = 10.sp,
@@ -511,27 +504,27 @@ fun EmailAuthScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(Dimens.sp3))
+                Spacer(modifier = Modifier.height(24.dp))
 
                 // Title
                 Text(
                     text = if (isLoginMode) "Welcome back" else "Create your account",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.headlineLarge.copy(
                         fontWeight = FontWeight.Black,
                         color = LightTextPrimary,
                         letterSpacing = (-1).sp
                     )
                 )
-                Spacer(modifier = Modifier.height(Dimens.sp1))
+                Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = if (isLoginMode) "Sign in with your email and password" else "Set up a secure professional login using Firebase",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.bodyLarge.copy(
                         color = LightTextSecondary,
-                        style = Typography.bodyLarge
+                        fontSize = 15.sp
                     )
                 )
 
-                Spacer(modifier = Modifier.height(Dimens.sp3))
+                Spacer(modifier = Modifier.height(32.dp))
 
                 // Email field
                 Text(
@@ -548,7 +541,7 @@ fun EmailAuthScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .testTag("auth_email_input"),
-                    shape = RoundedCornerShape(Dimens.r2),
+                    shape = RoundedCornerShape(16.dp),
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Email,
@@ -581,7 +574,7 @@ fun EmailAuthScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .testTag("auth_password_input"),
-                    shape = RoundedCornerShape(Dimens.r2),
+                    shape = RoundedCornerShape(16.dp),
                     singleLine = true,
                     visualTransformation = if (passwordVisible) androidx.compose.ui.text.input.VisualTransformation.None else androidx.compose.ui.text.input.PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(
@@ -606,7 +599,7 @@ fun EmailAuthScreen(
 
                 // Account Linking Card
                 var linkPhoneAccount by remember { mutableStateOf(true) }
-                Spacer(modifier = Modifier.height(Dimens.sp2))
+                Spacer(modifier = Modifier.height(16.dp))
                 Card(
                     colors = CardDefaults.cardColors(containerColor = Color.White),
                     shape = RoundedCornerShape(14.dp),
@@ -634,7 +627,8 @@ fun EmailAuthScreen(
                             Column {
                                 Text(
                                     text = "Auto-link with Phone/Google Auth",
-                                    style = Typography.bodyLarge,
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.Bold,
                                     color = LightTextPrimary
                                 )
                                 Text(
@@ -653,7 +647,7 @@ fun EmailAuthScreen(
                 }
 
                 if (error != null) {
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(16.dp))
                     Text(
                         text = error,
                         color = Color.Red,
@@ -673,7 +667,7 @@ fun EmailAuthScreen(
                         .fillMaxWidth()
                         .height(56.dp)
                         .testTag("auth_submit_button"),
-                    shape = RoundedCornerShape(Dimens.r2),
+                    shape = RoundedCornerShape(16.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = LightTextPrimary,
                         contentColor = Color.White
@@ -685,7 +679,7 @@ fun EmailAuthScreen(
                     } else {
                         Text(
                             text = if (isLoginMode) "Log In" else "Create Account & Continue",
-                            style = Typography.bodyLarge.copy(
+                            style = MaterialTheme.typography.bodyLarge.copy(
                                 fontWeight = FontWeight.Bold,
                                 color = Color.White
                             )
@@ -693,7 +687,7 @@ fun EmailAuthScreen(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(Dimens.sp2))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 // Toggle register/login
                 TextButton(
@@ -703,13 +697,15 @@ fun EmailAuthScreen(
                     Text(
                         text = if (isLoginMode) "New to MusicLinkd? Create an account" else "Already have an account? Sign In",
                         color = BrandPrimary,
-                        style = Typography.bodyLarge
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp
                     )
                 }
 
-                Spacer(modifier = Modifier.height(Dimens.sp1))
+                Spacer(modifier = Modifier.height(8.dp))
             }
         }
+        com.example.onboarding.ui.components.LoadingOverlay(isLoading = isLoading)
     }
 }
 
@@ -738,7 +734,7 @@ fun MobileAuthScreen(
             Column {
                 Text(
                     text = "Welcome to MusicLinkd",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.headlineMedium.copy(
                         fontWeight = FontWeight.Bold,
                         color = LightTextPrimary,
                         letterSpacing = (-0.5).sp
@@ -749,9 +745,9 @@ fun MobileAuthScreen(
 
                 Text(
                     text = "Create your professional music identity",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.bodyLarge.copy(
                         color = LightTextSecondary,
-                        style = Typography.bodyLarge
+                        fontSize = 15.sp
                     )
                 )
 
@@ -759,7 +755,7 @@ fun MobileAuthScreen(
 
                 Text(
                     text = "Mobile Number",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.bodyMedium.copy(
                         fontWeight = FontWeight.Bold,
                         color = LightTextPrimary
                     ),
@@ -782,15 +778,15 @@ fun MobileAuthScreen(
                     ) {
                         Text(
                             text = "🇮🇳 +91",
-                            style = Typography.bodyLarge.copy(
+                            style = MaterialTheme.typography.bodyLarge.copy(
                                 fontWeight = FontWeight.Bold,
                                 color = LightTextPrimary,
-                                style = Typography.bodyLarge
+                                fontSize = 15.sp
                             )
                         )
                     }
 
-                    Spacer(modifier = Modifier.width(Dimens.sp2))
+                    Spacer(modifier = Modifier.width(12.dp))
 
                     // Text Input field
                     OutlinedTextField(
@@ -802,7 +798,7 @@ fun MobileAuthScreen(
                             Text(
                                 text = "Enter 10-digit number",
                                 color = LightTextSecondary,
-                                style = Typography.bodyLarge
+                                fontSize = 15.sp
                             )
                         },
                         modifier = Modifier
@@ -833,7 +829,7 @@ fun MobileAuthScreen(
                     Text(
                         text = error,
                         color = Color.Red,
-                        style = Typography.labelLarge,
+                        fontSize = 12.sp,
                         modifier = Modifier.padding(top = 8.dp, start = 4.dp)
                     )
                 }
@@ -843,17 +839,17 @@ fun MobileAuthScreen(
                 // Security Note Card
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(Dimens.r2),
+                    shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.cardColors(containerColor = LightCard),
                     border = BorderStroke(1.dp, LightBorder)
                 ) {
                     Row(
-                        modifier = Modifier.padding(Dimens.sp2),
+                        modifier = Modifier.padding(16.dp),
                         verticalAlignment = Alignment.Top
                     ) {
                         Text(
                             text = "🔒",
-                            style = Typography.bodyLarge,
+                            fontSize = 18.sp,
                             modifier = Modifier.padding(end = 12.dp)
                         )
                         Column {
@@ -863,7 +859,7 @@ fun MobileAuthScreen(
                                 color = LightTextPrimary,
                                 fontSize = 13.sp
                             )
-                            Spacer(modifier = Modifier.height(Dimens.sp1))
+                            Spacer(modifier = Modifier.height(4.dp))
                             Text(
                                 text = "We verify contact numbers to build mutual trust across Indian orchestras, labels, and studios. Automatically links with your Email/Google ID and persists JWT tokens securely via EncryptedSharedPreferences.",
                                 color = LightTextSecondary,
@@ -895,8 +891,9 @@ fun MobileAuthScreen(
                 } else {
                     Text(
                         text = "Send OTP",
-                        style = Typography.bodyLarge.copy(
-                            style = Typography.bodyLarge
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 15.sp
                         )
                     )
                 }
@@ -940,7 +937,7 @@ fun OtpVerificationScreen(
             Column {
                 Text(
                     text = "Verify Number",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.headlineMedium.copy(
                         fontWeight = FontWeight.Bold,
                         color = LightTextPrimary,
                         letterSpacing = (-0.5).sp
@@ -954,9 +951,9 @@ fun OtpVerificationScreen(
                 ) {
                     Text(
                         text = "6-digit OTP code sent to +91 $mobileNumber ",
-                        style = Typography.bodyLarge.copy(
+                        style = MaterialTheme.typography.bodyLarge.copy(
                             color = LightTextSecondary,
-                            style = Typography.labelLarge
+                            fontSize = 14.sp
                         )
                     )
                     Text(
@@ -1030,7 +1027,7 @@ fun OtpVerificationScreen(
 
                             Text(
                                 text = if (char == ' ') "" else char.toString(),
-                                style = Typography.bodyLarge.copy(
+                                style = MaterialTheme.typography.headlineMedium.copy(
                                     fontWeight = FontWeight.Bold,
                                     color = LightTextPrimary,
                                     fontSize = 22.sp
@@ -1044,7 +1041,7 @@ fun OtpVerificationScreen(
                     Text(
                         text = error,
                         color = Color.Red,
-                        style = Typography.labelLarge,
+                        fontSize = 12.sp,
                         modifier = Modifier.padding(top = 12.dp, start = 4.dp)
                     )
                 } else {
@@ -1068,23 +1065,25 @@ fun OtpVerificationScreen(
                         Text(
                             text = "Resend OTP in ",
                             color = LightTextSecondary,
-                            style = Typography.labelLarge
+                            fontSize = 14.sp
                         )
                         Text(
                             text = "0:${timerCount.toString().padStart(2, '0')}",
                             color = BrandPrimary,
-                            style = Typography.bodyLarge
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp
                         )
                     } else {
                         Text(
                             text = "Didn't receive the SMS? ",
                             color = LightTextSecondary,
-                            style = Typography.labelLarge
+                            fontSize = 14.sp
                         )
                         Text(
                             text = "Resend Now",
                             color = BrandPrimary,
-                            style = Typography.bodyLarge,
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 14.sp,
                             modifier = Modifier
                                 .clickable { onResendClick() }
                                 .padding(4.dp)
@@ -1114,8 +1113,9 @@ fun OtpVerificationScreen(
                 } else {
                     Text(
                         text = "Continue",
-                        style = Typography.bodyLarge.copy(
-                            style = Typography.bodyLarge
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 15.sp
                         )
                     )
                 }
@@ -1194,38 +1194,33 @@ fun SplashScreen(
     }
 
     val scaleAnimate by animateFloatAsState(
-        targetValue = if (animateIn) 1.05f else 0.95f,
-        animationSpec = tween(durationMillis = 2800, easing = LinearOutSlowInEasing),
+        targetValue = if (animateIn) 1.0f else 0.92f,
+        animationSpec = tween(durationMillis = 800, easing = FastOutSlowInEasing),
         label = "SplashScale"
+    )
+
+    val alphaAnimate by animateFloatAsState(
+        targetValue = if (animateIn) 1.0f else 0.0f,
+        animationSpec = tween(durationMillis = 600, easing = LinearEasing),
+        label = "SplashAlpha"
     )
 
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFF09071B)), // Deep Night Canvas
+            .background(ColorBg), // High-Contrast Editorial Soft Canvas (#FCFCFD)
         contentAlignment = Alignment.Center
     ) {
-        // High-Resolution Atmospheric Studio Image with Gradient Scrim
-        coil.compose.AsyncImage(
-            model = "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1200&auto=format&fit=crop&q=80",
-            contentDescription = "Music Production Studio background photo",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxSize()
-                .graphicsLayer(scaleX = scaleAnimate, scaleY = scaleAnimate)
-                .alpha(0.38f)
-        )
-
-        // Dark Radial & Vertical Gradient Overlays for High Contrast
+        // Soft Ambient Radial Gradient Background
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(
-                    Brush.verticalGradient(
+                    Brush.radialGradient(
                         colors = listOf(
-                            Color(0xFF09071B).copy(alpha = 0.85f),
-                            Color(0xFF09071B).copy(alpha = 0.40f),
-                            Color(0xFF09071B).copy(alpha = 0.95f)
+                            ColorPink.copy(alpha = 0.06f),
+                            ColorSurface50,
+                            ColorBg
                         )
                     )
                 )
@@ -1235,131 +1230,169 @@ fun SplashScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
-                .padding(32.dp)
+                .padding(24.dp)
+                .graphicsLayer(
+                    scaleX = scaleAnimate,
+                    scaleY = scaleAnimate,
+                    alpha = alphaAnimate
+                )
                 .semantics { contentDescription = "MusicLinkd Splash Branding Screen" }
         ) {
-            // Glassmorphic Branded Logo Container
-            Box(
+            // Main Branded Logo Container Card
+            Surface(
+                shape = RoundedCornerShape(32.dp),
+                color = ColorWhite,
+                border = BorderStroke(1.dp, ColorBorder),
                 modifier = Modifier
-                    .size(108.dp)
-                    .clip(CircleShape)
-                    .background(
-                        Brush.radialGradient(
-                            colors = listOf(
-                                Color(0xFFEA4C89).copy(alpha = 0.85f),
-                                Color(0xFF7C3AED).copy(alpha = 0.65f)
+                    .padding(horizontal = 12.dp)
+                    .widthIn(max = 380.dp)
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.padding(vertical = 36.dp, horizontal = 28.dp)
+                ) {
+                    // Logo Emblem Circle
+                    Box(
+                        modifier = Modifier
+                            .size(88.dp)
+                            .clip(CircleShape)
+                            .background(
+                                Brush.linearGradient(
+                                    colors = listOf(
+                                        ColorPink,
+                                        ColorPink.copy(alpha = 0.85f)
+                                    )
+                                )
                             )
+                            .border(3.dp, ColorWhite, CircleShape)
+                            .padding(18.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = androidx.compose.ui.res.painterResource(id = com.example.R.drawable.ic_musiclinkd_logo),
+                            contentDescription = "MusicLinkd Official Brand Emblem",
+                            tint = ColorWhite,
+                            modifier = Modifier.size(44.dp)
                         )
+                    }
+
+                    Spacer(modifier = Modifier.height(24.dp))
+
+                    // Brand Title
+                    Text(
+                        text = "MusicLinkd",
+                        fontSize = 38.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = ColorText,
+                        letterSpacing = (-1.2).sp
                     )
-                    .border(2.5.dp, Color.White.copy(alpha = 0.35f), CircleShape)
-                    .padding(20.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                // Branded Logo Drawable
-                Icon(
-                    painter = androidx.compose.ui.res.painterResource(id = com.example.R.drawable.ic_musiclinkd_logo),
-                    contentDescription = "MusicLinkd Official Brand Emblem",
-                    tint = Color.White,
-                    modifier = Modifier.size(56.dp)
-                )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Text(
+                        text = "The Professional Network for Music Creators",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = ColorText2,
+                        letterSpacing = (-0.2).sp,
+                        textAlign = TextAlign.Center
+                    )
+
+                    Spacer(modifier = Modifier.height(28.dp))
+
+                    // Branded Feature Badges Row (using v4.0 design system chips)
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(10.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        // Badge 1: Connect
+                        Surface(
+                            shape = RoundedCornerShape(999.dp),
+                            color = ColorSurface50,
+                            border = BorderStroke(1.dp, ColorBorder)
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    painter = androidx.compose.ui.res.painterResource(id = com.example.R.drawable.ic_musiclinkd_connections),
+                                    contentDescription = "Global Network",
+                                    tint = ColorPink,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = "Connect",
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = ColorText
+                                )
+                            }
+                        }
+
+                        // Badge 2: Studios
+                        Surface(
+                            shape = RoundedCornerShape(999.dp),
+                            color = ColorSurface50,
+                            border = BorderStroke(1.dp, ColorBorder)
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    painter = androidx.compose.ui.res.painterResource(id = com.example.R.drawable.ic_musiclinkd_studio),
+                                    contentDescription = "Studio Booking",
+                                    tint = ColorPink,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = "Studios",
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = ColorText
+                                )
+                            }
+                        }
+
+                        // Badge 3: Verified
+                        Surface(
+                            shape = RoundedCornerShape(999.dp),
+                            color = ColorSurface50,
+                            border = BorderStroke(1.dp, ColorBorder)
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    painter = androidx.compose.ui.res.painterResource(id = com.example.R.drawable.ic_musiclinkd_verified),
+                                    contentDescription = "Verified Talent",
+                                    tint = ColorGreen,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = "Verified",
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = ColorText
+                                )
+                            }
+                        }
+                    }
+                }
             }
 
-            Spacer(modifier = Modifier.height(28.dp))
+            Spacer(modifier = Modifier.height(36.dp))
 
-            // Brand Title
-            Text(
-                text = "MusicLinkd",
-                fontSize = 44.sp,
-                fontWeight = FontWeight.ExtraBold,
-                color = Color.White,
-                letterSpacing = (-1.5).sp
-            )
-
-            Spacer(modifier = Modifier.height(6.dp))
-
-            Text(
-                text = "The Professional Network for Music Creators",
-                style = Typography.bodyLarge,
-                color = Color.White.copy(alpha = 0.85f),
-                letterSpacing = (-0.3).sp,
-                textAlign = androidx.compose.ui.text.style.TextAlign.Center
-            )
-
-            Spacer(modifier = Modifier.height(Dimens.sp3))
-
-            // Branded Feature Badges Row (using branded drawables: connections, studio, verified)
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp2),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Surface(
-                    shape = RoundedCornerShape(Dimens.r3),
-                    color = Color.White.copy(alpha = 0.12f),
-                    border = BorderStroke(1.dp, Color.White.copy(alpha = 0.2f))
-                ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            painter = androidx.compose.ui.res.painterResource(id = com.example.R.drawable.ic_musiclinkd_connections),
-                            contentDescription = "Global Network",
-                            tint = Color(0xFFEA4C89),
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text("Connect", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                    }
-                }
-
-                Surface(
-                    shape = RoundedCornerShape(Dimens.r3),
-                    color = Color.White.copy(alpha = 0.12f),
-                    border = BorderStroke(1.dp, Color.White.copy(alpha = 0.2f))
-                ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            painter = androidx.compose.ui.res.painterResource(id = com.example.R.drawable.ic_musiclinkd_studio),
-                            contentDescription = "Studio Booking",
-                            tint = Color(0xFF3B82F6),
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text("Studios", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                    }
-                }
-
-                Surface(
-                    shape = RoundedCornerShape(Dimens.r3),
-                    color = Color.White.copy(alpha = 0.12f),
-                    border = BorderStroke(1.dp, Color.White.copy(alpha = 0.2f))
-                ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            painter = androidx.compose.ui.res.painterResource(id = com.example.R.drawable.ic_musiclinkd_verified),
-                            contentDescription = "Verified Talent",
-                            tint = Color(0xFF10B981),
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text("Verified", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(Dimens.sp4))
-
-            // Loading Indicator
+            // Loading Indicator in v4.0 Brand Pink
             CircularProgressIndicator(
-                color = Color(0xFFEA4C89),
-                strokeWidth = 3.dp,
-                modifier = Modifier.size(26.dp)
+                color = ColorPink,
+                strokeWidth = 2.5.dp,
+                modifier = Modifier.size(24.dp)
             )
         }
     }

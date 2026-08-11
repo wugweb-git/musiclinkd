@@ -93,7 +93,7 @@ fun PortfolioMainFlowContainer(
                                 PortfolioScreen.PROFILE_PROJECT_VIEW -> "Project Detail"
                                 else -> "Add Project"
                             },
-                            style = Typography.bodyLarge.copy(
+                            style = MaterialTheme.typography.titleMedium.copy(
                                 fontWeight = FontWeight.Bold,
                                 color = BrandTextPrimary,
                                 letterSpacing = (-0.5).sp
@@ -306,7 +306,7 @@ fun PortfolioDashboardScreen(
                 Column {
                     Text(
                         text = "My Portfolio",
-                        style = Typography.bodyLarge.copy(
+                        style = MaterialTheme.typography.headlineMedium.copy(
                             fontWeight = FontWeight.Black,
                             color = BrandTextPrimary,
                             letterSpacing = (-1).sp
@@ -314,7 +314,7 @@ fun PortfolioDashboardScreen(
                     )
                     Text(
                         text = "MusicLinkd Indian Professional Registry",
-                        style = Typography.bodyLarge.copy(
+                        style = MaterialTheme.typography.bodySmall.copy(
                             fontWeight = FontWeight.Normal,
                             color = BrandTextSecondary
                         )
@@ -337,16 +337,16 @@ fun PortfolioDashboardScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Profile Summary Card
             Card(
                 colors = CardDefaults.cardColors(containerColor = BrandCard),
-                shape = RoundedCornerShape(Dimens.r2),
+                shape = RoundedCornerShape(16.dp),
                 border = BorderStroke(1.dp, BrandBorder),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Column(modifier = Modifier.padding(Dimens.sp2)) {
+                Column(modifier = Modifier.padding(16.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         // User Avatar
                         Box(
@@ -367,18 +367,18 @@ fun PortfolioDashboardScreen(
                             )
                         }
 
-                        Spacer(modifier = Modifier.width(Dimens.sp2))
+                        Spacer(modifier = Modifier.width(12.dp))
 
                         Column {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text(
                                     text = userName,
-                                    style = Typography.bodyLarge.copy(
+                                    style = MaterialTheme.typography.titleMedium.copy(
                                         fontWeight = FontWeight.Bold,
                                         color = BrandTextPrimary
                                     )
                                 )
-                                Spacer(modifier = Modifier.width(Dimens.sp1))
+                                Spacer(modifier = Modifier.width(4.dp))
                                 Box(
                                     modifier = Modifier
                                         .background(BrandPrimary, CircleShape)
@@ -394,23 +394,23 @@ fun PortfolioDashboardScreen(
                             }
                             Text(
                                 text = userRole,
-                                style = Typography.bodyLarge.copy(
+                                style = MaterialTheme.typography.bodySmall.copy(
                                     color = BrandPrimary,
                                     fontWeight = FontWeight.Bold
                                 )
                             )
                             Text(
                                 text = "📍 Mumbai, India",
-                                style = Typography.bodyLarge.copy(
+                                style = MaterialTheme.typography.bodySmall.copy(
                                     color = BrandTextSecondary
                                 )
                             )
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(16.dp))
                     Divider(color = BrandBorder)
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     // Stats Row
                     Row(
@@ -420,14 +420,14 @@ fun PortfolioDashboardScreen(
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
                                 text = state.projectsCount.toString(),
-                                style = Typography.bodyLarge.copy(
+                                style = MaterialTheme.typography.titleLarge.copy(
                                     fontWeight = FontWeight.Black,
                                     color = BrandTextPrimary
                                 )
                             )
                             Text(
                                 text = "Projects",
-                                style = Typography.bodyLarge.copy(
+                                style = MaterialTheme.typography.bodySmall.copy(
                                     color = BrandTextSecondary
                                 )
                             )
@@ -438,14 +438,14 @@ fun PortfolioDashboardScreen(
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
                                 text = state.creditsCount.toString(),
-                                style = Typography.bodyLarge.copy(
+                                style = MaterialTheme.typography.titleLarge.copy(
                                     fontWeight = FontWeight.Black,
                                     color = BrandTextPrimary
                                 )
                             )
                             Text(
                                 text = "Credits",
-                                style = Typography.bodyLarge.copy(
+                                style = MaterialTheme.typography.bodySmall.copy(
                                     color = BrandTextSecondary
                                 )
                             )
@@ -456,14 +456,14 @@ fun PortfolioDashboardScreen(
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
                                 text = state.profileViews.toString(),
-                                style = Typography.bodyLarge.copy(
+                                style = MaterialTheme.typography.titleLarge.copy(
                                     fontWeight = FontWeight.Black,
                                     color = BrandTextPrimary
                                 )
                             )
                             Text(
                                 text = "Views",
-                                style = Typography.bodyLarge.copy(
+                                style = MaterialTheme.typography.bodySmall.copy(
                                     color = BrandTextSecondary
                                 )
                             )
@@ -472,13 +472,13 @@ fun PortfolioDashboardScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Primary CTA Add Project
             Button(
                 onClick = onAddProjectClick,
                 colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                shape = RoundedCornerShape(Dimens.r2),
+                shape = RoundedCornerShape(12.dp),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp)
@@ -486,16 +486,17 @@ fun PortfolioDashboardScreen(
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(imageVector = Icons.Default.Add, contentDescription = null, tint = Color.White)
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         "Add Professional Project",
-                        style = Typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 15.sp,
                         color = Color.White
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp3))
+            Spacer(modifier = Modifier.height(24.dp))
 
             // Recent Projects Label
             Row(
@@ -505,7 +506,7 @@ fun PortfolioDashboardScreen(
             ) {
                 Text(
                     text = "Professional Releases & Co-Credits",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.titleSmall.copy(
                         fontWeight = FontWeight.Bold,
                         color = BrandTextPrimary,
                         letterSpacing = (-0.2).sp
@@ -513,14 +514,14 @@ fun PortfolioDashboardScreen(
                 )
                 Text(
                     text = "${state.projectsList.size} Total",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.labelSmall.copy(
                         color = BrandPrimary,
                         fontWeight = FontWeight.Bold
                     )
                 )
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(12.dp))
 
             // Projects List
             if (isLoadingPortfolio) {
@@ -541,7 +542,7 @@ fun PortfolioDashboardScreen(
                         project = project,
                         onClick = { onProjectClick(project) }
                     )
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(12.dp))
                 }
             }
             
@@ -555,7 +556,7 @@ fun PortfolioDashboardScreen(
             ) {
                 Text(
                     text = "Professional Network",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold,
                         color = BrandTextPrimary,
                         letterSpacing = (-0.2).sp
@@ -563,14 +564,14 @@ fun PortfolioDashboardScreen(
                 )
                 Text(
                     text = "0 Followers",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.labelSmall.copy(
                         color = BrandTextSecondary,
                         fontWeight = FontWeight.Bold
                     )
                 )
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(12.dp))
             
             EmptyState(
                 title = "No Followers Yet",
@@ -610,20 +611,20 @@ fun RecentProjectCard(
 ) {
     Card(
         colors = CardDefaults.cardColors(containerColor = BrandCard),
-        shape = RoundedCornerShape(Dimens.r2),
+        shape = RoundedCornerShape(16.dp),
         border = BorderStroke(1.dp, BrandBorder),
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
     ) {
-        Column(modifier = Modifier.padding(Dimens.sp2)) {
+        Column(modifier = Modifier.padding(16.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 // Colored graphic indicator based on artwork name
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
                         .size(52.dp)
-                        .clip(RoundedCornerShape(Dimens.r1))
+                        .clip(RoundedCornerShape(8.dp))
                         .background(getArtworkColor(project.artworkUrl))
                 ) {
                     Text(
@@ -639,11 +640,11 @@ fun RecentProjectCard(
                             "Music Video" -> "📹"
                             else -> "🎼"
                         },
-                        style = Typography.headlineLarge
+                        fontSize = 24.sp
                     )
                 }
 
-                Spacer(modifier = Modifier.width(Dimens.sp2))
+                Spacer(modifier = Modifier.width(12.dp))
 
                 Column(modifier = Modifier.weight(1f)) {
                     Row(
@@ -653,7 +654,7 @@ fun RecentProjectCard(
                     ) {
                         Text(
                             text = project.name,
-                            style = Typography.bodyLarge.copy(
+                            style = MaterialTheme.typography.bodyLarge.copy(
                                 fontWeight = FontWeight.Bold,
                                 color = BrandTextPrimary
                             ),
@@ -670,7 +671,7 @@ fun RecentProjectCard(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = project.type,
-                            style = Typography.bodyLarge.copy(
+                            style = MaterialTheme.typography.bodySmall.copy(
                                 color = BrandPrimary,
                                 fontWeight = FontWeight.Bold
                             )
@@ -678,7 +679,7 @@ fun RecentProjectCard(
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
                             text = "•  ${project.releaseDate}",
-                            style = Typography.bodyLarge.copy(
+                            style = MaterialTheme.typography.bodySmall.copy(
                                 color = BrandTextSecondary
                             )
                         )
@@ -692,14 +693,14 @@ fun RecentProjectCard(
                     text = project.description,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.bodySmall.copy(
                         color = BrandTextSecondary,
                         lineHeight = 16.sp
                     )
                 )
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(12.dp))
             Divider(color = BrandBorder)
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -784,7 +785,7 @@ fun StatusBadge(status: String) {
 
     Box(
         modifier = Modifier
-            .background(bg, RoundedCornerShape(Dimens.r3))
+            .background(bg, RoundedCornerShape(20.dp))
             .padding(horizontal = 8.dp, vertical = 2.dp)
     ) {
         Text(
@@ -825,17 +826,17 @@ fun ChooseProjectTypeScreen(
     ) {
         Text(
             text = "Select project format",
-            style = Typography.bodyLarge.copy(
+            style = MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.Bold,
                 color = BrandPrimary
             )
         )
         Text(
             text = "Select the type of release you want to register in your Indian music database profile.",
-            style = Typography.bodyLarge.copy(color = BrandTextSecondary)
+            style = MaterialTheme.typography.bodySmall.copy(color = BrandTextSecondary)
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(16.dp))
 
         LazyVerticalGrid(
             columns = GridCells.Adaptive(150.dp),
@@ -849,7 +850,7 @@ fun ChooseProjectTypeScreen(
                     colors = CardDefaults.cardColors(
                         containerColor = if (isSelected) Color(0xFFF5F3FF) else BrandCard
                     ),
-                    shape = RoundedCornerShape(Dimens.r2),
+                    shape = RoundedCornerShape(16.dp),
                     border = BorderStroke(
                         width = if (isSelected) 2.dp else 1.dp,
                         color = if (isSelected) BrandPrimary else BrandBorder
@@ -885,7 +886,8 @@ fun ChooseProjectTypeScreen(
                         Column {
                             Text(
                                 text = item.name,
-                                style = Typography.bodyLarge,
+                                fontWeight = FontWeight.Black,
+                                fontSize = 14.sp,
                                 color = BrandTextPrimary,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
@@ -904,18 +906,18 @@ fun ChooseProjectTypeScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Button(
             onClick = onContinue,
             colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp)
                 .testTag("portfolio_choose_type_continue_btn")
         ) {
-            Text("Confirm & Continue", color = Color.White, style = Typography.bodyLarge)
+            Text("Confirm & Continue", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 15.sp)
         }
     }
 }
@@ -949,14 +951,14 @@ fun ProjectInformationScreen(
     ) {
         Text(
             text = "Tell us about this release",
-            style = Typography.bodyLarge.copy(
+            style = MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.Bold,
                 color = BrandPrimary
             )
         )
         Text(
             text = "Add core details of your original metadata for copyright search matching and identification.",
-            style = Typography.bodyLarge.copy(color = BrandTextSecondary)
+            style = MaterialTheme.typography.bodySmall.copy(color = BrandTextSecondary)
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -975,13 +977,13 @@ fun ProjectInformationScreen(
                 focusedContainerColor = BrandCard,
                 unfocusedContainerColor = BrandCard
             ),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .testTag("portfolio_field_title")
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Input: Description
         Text("Project Description (Bio & Metadata)", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandTextPrimary)
@@ -998,13 +1000,13 @@ fun ProjectInformationScreen(
                 focusedContainerColor = BrandCard,
                 unfocusedContainerColor = BrandCard
             ),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .testTag("portfolio_field_desc")
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Input: Release Date
         Text("Release Date", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandTextPrimary)
@@ -1020,21 +1022,21 @@ fun ProjectInformationScreen(
                 focusedContainerColor = BrandCard,
                 unfocusedContainerColor = BrandCard
             ),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .testTag("portfolio_field_date")
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Input: Status selector
         Text("Project Production Status", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandTextPrimary)
-        Spacer(modifier = Modifier.height(Dimens.sp1))
+        Spacer(modifier = Modifier.height(8.dp))
         
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             val statuses = listOf("Released", "Upcoming", "In Production", "Draft")
             statuses.forEach { opt ->
@@ -1046,12 +1048,12 @@ fun ProjectInformationScreen(
                         .height(44.dp)
                         .background(
                             if (isSelected) Color(0xFFF5F3FF) else BrandCard,
-                            RoundedCornerShape(Dimens.r1)
+                            RoundedCornerShape(8.dp)
                         )
                         .border(
                             width = if (isSelected) 1.5.dp else 1.dp,
                             color = if (isSelected) BrandPrimary else BrandBorder,
-                            shape = RoundedCornerShape(Dimens.r1)
+                            shape = RoundedCornerShape(8.dp)
                         )
                         .clickable { statusState = opt; emitChanges() }
                 ) {
@@ -1076,13 +1078,13 @@ fun ProjectInformationScreen(
                 onContinue()
             },
             colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp)
                 .testTag("portfolio_info_continue_btn")
         ) {
-            Text("Confirm Details", color = Color.White, style = Typography.bodyLarge)
+            Text("Confirm Details", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 15.sp)
         }
     }
 }
@@ -1120,14 +1122,14 @@ fun AddStreamingLinksScreen(
     ) {
         Text(
             text = "Link your streaming assets",
-            style = Typography.bodyLarge.copy(
+            style = MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.Bold,
                 color = BrandPrimary
             )
         )
         Text(
             text = "Paste relevant tracks, playlists, or videos. We automatically design interactive embeds.",
-            style = Typography.bodyLarge.copy(color = BrandTextSecondary)
+            style = MaterialTheme.typography.bodySmall.copy(color = BrandTextSecondary)
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -1142,7 +1144,7 @@ fun AddStreamingLinksScreen(
             appLabel = "Spotify"
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(12.dp))
 
         // Apple Music
         LinkInputField(
@@ -1154,7 +1156,7 @@ fun AddStreamingLinksScreen(
             appLabel = "Apple Music"
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(12.dp))
 
         // YouTube
         LinkInputField(
@@ -1166,7 +1168,7 @@ fun AddStreamingLinksScreen(
             appLabel = "YouTube"
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(12.dp))
 
         // SoundCloud
         LinkInputField(
@@ -1178,7 +1180,7 @@ fun AddStreamingLinksScreen(
             appLabel = "SoundCloud"
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(12.dp))
 
         // Mixcloud
         LinkInputField(
@@ -1190,7 +1192,7 @@ fun AddStreamingLinksScreen(
             appLabel = "Mixcloud"
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(12.dp))
 
         // Instagram
         LinkInputField(
@@ -1202,7 +1204,7 @@ fun AddStreamingLinksScreen(
             appLabel = "Instagram"
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp3))
+        Spacer(modifier = Modifier.height(24.dp))
 
         // Live Preview Platform Cards List
         Text(
@@ -1226,8 +1228,8 @@ fun AddStreamingLinksScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color(0xFFF9FAFB), RoundedCornerShape(Dimens.r2))
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
+                    .background(Color(0xFFF9FAFB), RoundedCornerShape(12.dp))
+                    .border(1.dp, BrandBorder, RoundedCornerShape(12.dp))
                     .padding(24.dp),
                 contentAlignment = Alignment.Center
             ) {
@@ -1248,7 +1250,7 @@ fun AddStreamingLinksScreen(
                         .padding(bottom = 8.dp)
                 ) {
                     Row(
-                        modifier = Modifier.padding(Dimens.sp2),
+                        modifier = Modifier.padding(12.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Box(
@@ -1260,7 +1262,8 @@ fun AddStreamingLinksScreen(
                         Column {
                             Text(
                                 item.second,
-                                style = Typography.bodyLarge,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp,
                                 color = BrandTextPrimary
                             )
                             Text(
@@ -1276,7 +1279,7 @@ fun AddStreamingLinksScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(Dimens.sp3))
+        Spacer(modifier = Modifier.height(24.dp))
 
         Button(
             onClick = {
@@ -1288,13 +1291,13 @@ fun AddStreamingLinksScreen(
                 onContinue()
             },
             colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp)
                 .testTag("portfolio_links_continue_btn")
         ) {
-            Text("Verify Streaming Links", color = Color.White, style = Typography.bodyLarge)
+            Text("Verify Streaming Links", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 15.sp)
         }
     }
 }
@@ -1317,7 +1320,7 @@ fun LinkInputField(
             Spacer(modifier = Modifier.width(6.dp))
             Text(label, fontWeight = FontWeight.Bold, fontSize = 11.sp, color = BrandTextSecondary)
         }
-        Spacer(modifier = Modifier.height(Dimens.sp1))
+        Spacer(modifier = Modifier.height(4.dp))
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
@@ -1335,7 +1338,7 @@ fun LinkInputField(
                 focusedContainerColor = BrandCard,
                 unfocusedContainerColor = BrandCard
             ),
-            shape = RoundedCornerShape(Dimens.r1),
+            shape = RoundedCornerShape(8.dp),
             modifier = Modifier.fillMaxWidth()
         )
     }
@@ -1357,21 +1360,21 @@ fun SelectYourRoleScreen(
     ) {
         Text(
             text = "Your Role in This Project",
-            style = Typography.bodyLarge.copy(
+            style = MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.Bold,
                 color = BrandPrimary
             )
         )
         Text(
             text = "Select all roles you personally performed for copyright matching attribution. Multi-selection enabled.",
-            style = Typography.bodyLarge.copy(color = BrandTextSecondary)
+            style = MaterialTheme.typography.bodySmall.copy(color = BrandTextSecondary)
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(16.dp))
 
         LazyColumn(
             modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp1)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(availableProjectRoles) { role ->
                 val isSelected = selectedRoles.contains(role)
@@ -1379,7 +1382,7 @@ fun SelectYourRoleScreen(
                     colors = CardDefaults.cardColors(
                         containerColor = if (isSelected) Color(0xFFF5F3FF) else BrandCard
                     ),
-                    shape = RoundedCornerShape(Dimens.r2),
+                    shape = RoundedCornerShape(12.dp),
                     border = BorderStroke(
                         width = if (isSelected) 1.5.dp else 1.dp,
                         color = if (isSelected) BrandPrimary else BrandBorder
@@ -1420,15 +1423,15 @@ fun SelectYourRoleScreen(
                                         "Band Member" -> "👥"
                                         else -> "🎼"
                                     },
-                                    style = Typography.bodyLarge
+                                    fontSize = 18.sp
                                 )
                             }
-                            Spacer(modifier = Modifier.width(Dimens.sp2))
+                            Spacer(modifier = Modifier.width(12.dp))
                             Text(
                                 text = role,
                                 fontWeight = FontWeight.Bold,
                                 color = BrandTextPrimary,
-                                style = Typography.labelLarge
+                                fontSize = 14.sp
                             )
                         }
 
@@ -1444,7 +1447,7 @@ fun SelectYourRoleScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Button(
             onClick = {
@@ -1455,13 +1458,13 @@ fun SelectYourRoleScreen(
                 onContinue()
             },
             colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp)
                 .testTag("portfolio_roles_continue_btn")
         ) {
-            Text("Confirm Selected Roles", color = Color.White, style = Typography.bodyLarge)
+            Text("Confirm Selected Roles", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 15.sp)
         }
     }
 }
@@ -1490,17 +1493,17 @@ fun AddCollaboratorsScreen(
     ) {
         Text(
             text = "Tag project team & collaborators",
-            style = Typography.bodyLarge.copy(
+            style = MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.Bold,
                 color = BrandPrimary
             )
         )
         Text(
             text = "Tag other artists registered in India's registry to request official back-link co-credits.",
-            style = Typography.bodyLarge.copy(color = BrandTextSecondary)
+            style = MaterialTheme.typography.bodySmall.copy(color = BrandTextSecondary)
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Search Bar input
         OutlinedTextField(
@@ -1517,13 +1520,13 @@ fun AddCollaboratorsScreen(
                 focusedContainerColor = BrandCard,
                 unfocusedContainerColor = BrandCard
             ),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .testTag("portfolio_collab_search")
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(12.dp))
 
         // Tagged/Selected List
         if (taggedCollaborators.isNotEmpty()) {
@@ -1531,14 +1534,14 @@ fun AddCollaboratorsScreen(
             Spacer(modifier = Modifier.height(6.dp))
             
             LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 items(taggedCollaborators) { collab ->
                     Box(
                         modifier = Modifier
-                            .background(Color(0xFFEDE9FE), RoundedCornerShape(Dimens.r3))
-                            .border(1.dp, BrandSecondary.copy(alpha = 0.5f), RoundedCornerShape(Dimens.r3))
+                            .background(Color(0xFFEDE9FE), RoundedCornerShape(20.dp))
+                            .border(1.dp, BrandSecondary.copy(alpha = 0.5f), RoundedCornerShape(20.dp))
                             .padding(horizontal = 12.dp, vertical = 6.dp)
                     ) {
                         Row(
@@ -1573,23 +1576,23 @@ fun AddCollaboratorsScreen(
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
         }
 
         // Suggestions Directory
-        Text("Verified Directory Users", style = Typography.bodyLarge, color = BrandTextPrimary)
-        Spacer(modifier = Modifier.height(Dimens.sp1))
+        Text("Verified Directory Users", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandTextPrimary)
+        Spacer(modifier = Modifier.height(8.dp))
 
         LazyColumn(
             modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp1)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(filteredCollaborators) { item ->
                 val isAlreadyTagged = taggedCollaborators.any { it.id == item.id }
                 Card(
                     colors = CardDefaults.cardColors(containerColor = BrandCard),
                     border = BorderStroke(1.dp, BrandBorder),
-                    shape = RoundedCornerShape(Dimens.r2),
+                    shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Row(
@@ -1615,7 +1618,7 @@ fun AddCollaboratorsScreen(
                                     modifier = Modifier.fillMaxSize()
                                 )
                             }
-                            Spacer(modifier = Modifier.width(Dimens.sp2))
+                            Spacer(modifier = Modifier.width(12.dp))
                             Column {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Text(
@@ -1625,7 +1628,7 @@ fun AddCollaboratorsScreen(
                                         color = BrandTextPrimary
                                     )
                                     if (item.isVerified) {
-                                        Spacer(modifier = Modifier.width(Dimens.sp1))
+                                        Spacer(modifier = Modifier.width(4.dp))
                                         Box(
                                             modifier = Modifier
                                                 .background(BrandPrimary, CircleShape)
@@ -1655,7 +1658,7 @@ fun AddCollaboratorsScreen(
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = if (isAlreadyTagged) Color(0xFFF3F4F6) else BrandPrimary
                             ),
-                            shape = RoundedCornerShape(Dimens.r1),
+                            shape = RoundedCornerShape(8.dp),
                             contentPadding = PaddingValues(horizontal = 12.dp, vertical = 2.dp),
                             modifier = Modifier.height(32.dp)
                         ) {
@@ -1671,7 +1674,7 @@ fun AddCollaboratorsScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Button(
             onClick = {
@@ -1683,13 +1686,13 @@ fun AddCollaboratorsScreen(
                 onContinue()
             },
             colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp)
                 .testTag("portfolio_collab_continue_btn")
         ) {
-            Text("Verify Collaborators", color = Color.White, style = Typography.bodyLarge)
+            Text("Verify Collaborators", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 15.sp)
         }
     }
 }
@@ -1711,23 +1714,23 @@ fun CreditAttributionScreen(
     ) {
         Text(
             text = "Accreditation and Assignment",
-            style = Typography.bodyLarge.copy(
+            style = MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.Bold,
                 color = BrandPrimary
             )
         )
         Text(
             text = "Assign roles to your tagged collaborators. These roles will be officially cross-verified in music databases.",
-            style = Typography.bodyLarge.copy(color = BrandTextSecondary)
+            style = MaterialTheme.typography.bodySmall.copy(color = BrandTextSecondary)
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Ourselves placeholder metadata row
         Card(
             colors = CardDefaults.cardColors(containerColor = Color(0xFFF9FAFB)),
             border = BorderStroke(1.dp, BrandBorder),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 16.dp)
@@ -1752,7 +1755,7 @@ fun CreditAttributionScreen(
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Spacer(modifier = Modifier.width(Dimens.sp2))
+                Spacer(modifier = Modifier.width(12.dp))
                 Column {
                     Text("Vedanshu Srivastava (Me)", fontWeight = FontWeight.Black, fontSize = 13.sp, color = BrandTextPrimary)
                     Text("Role: Composer & Producer", fontSize = 10.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)
@@ -1760,8 +1763,8 @@ fun CreditAttributionScreen(
             }
         }
 
-        Text("Collaborator Credit Roles", style = Typography.bodyLarge, color = BrandTextPrimary)
-        Spacer(modifier = Modifier.height(Dimens.sp1))
+        Text("Collaborator Credit Roles", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandTextPrimary)
+        Spacer(modifier = Modifier.height(8.dp))
 
         LazyColumn(
             modifier = Modifier.weight(1f),
@@ -1782,7 +1785,7 @@ fun CreditAttributionScreen(
                     Card(
                         colors = CardDefaults.cardColors(containerColor = BrandCard),
                         border = BorderStroke(1.dp, BrandBorder),
-                        shape = RoundedCornerShape(Dimens.r2),
+                        shape = RoundedCornerShape(16.dp),
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Column(modifier = Modifier.padding(14.dp)) {
@@ -1810,7 +1813,7 @@ fun CreditAttributionScreen(
                                 )
                             }
 
-                            Spacer(modifier = Modifier.height(Dimens.sp2))
+                            Spacer(modifier = Modifier.height(12.dp))
                             Text("Verify Assigned Role", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = BrandTextSecondary)
                             Spacer(modifier = Modifier.height(6.dp))
 
@@ -1827,7 +1830,7 @@ fun CreditAttributionScreen(
                                         modifier = Modifier
                                             .background(
                                                 if (isSelected) BrandPrimary else Color(0xFFF3F4F6),
-                                                RoundedCornerShape(Dimens.r1)
+                                                RoundedCornerShape(8.dp)
                                             )
                                             .clickable { onUpdateCreditRole(credit.collaboratorName, role) }
                                             .padding(horizontal = 10.dp, vertical = 6.dp)
@@ -1847,18 +1850,18 @@ fun CreditAttributionScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Button(
             onClick = onContinue,
             colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp)
                 .testTag("portfolio_credits_continue_btn")
         ) {
-            Text("Confirm Accreditations", color = Color.White, style = Typography.bodyLarge)
+            Text("Confirm Accreditations", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 15.sp)
         }
     }
 }
@@ -1879,14 +1882,14 @@ fun ProjectMediaPreviewScreen(
     ) {
         Text(
             text = "Generate Profile Preview Card",
-            style = Typography.bodyLarge.copy(
+            style = MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.Bold,
                 color = BrandPrimary
             )
         )
         Text(
             text = "Review how international users and labels will see this card published on your professional MusicLinkd timeline.",
-            style = Typography.bodyLarge.copy(color = BrandTextSecondary)
+            style = MaterialTheme.typography.bodySmall.copy(color = BrandTextSecondary)
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -1894,7 +1897,7 @@ fun ProjectMediaPreviewScreen(
         // Large Mock Portfolio Card
         Card(
             colors = CardDefaults.cardColors(containerColor = BrandCard),
-            shape = RoundedCornerShape(Dimens.r3),
+            shape = RoundedCornerShape(20.dp),
             border = BorderStroke(1.dp, BrandBorder),
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -1909,7 +1912,7 @@ fun ProjectMediaPreviewScreen(
                 ) {
                     Box(
                         modifier = Modifier
-                            .background(Color.Black.copy(alpha = 0.5f), RoundedCornerShape(Dimens.r3))
+                            .background(Color.Black.copy(alpha = 0.5f), RoundedCornerShape(20.dp))
                             .padding(horizontal = 10.dp, vertical = 4.dp)
                             .align(Alignment.TopEnd)
                     ) {
@@ -1919,7 +1922,7 @@ fun ProjectMediaPreviewScreen(
                     Column(modifier = Modifier.align(Alignment.BottomStart)) {
                         Box(
                             modifier = Modifier
-                                .background(BrandPrimary, RoundedCornerShape(Dimens.r1))
+                                .background(BrandPrimary, RoundedCornerShape(4.dp))
                                 .padding(horizontal = 6.dp, vertical = 2.dp)
                         ) {
                             Text(
@@ -1929,10 +1932,10 @@ fun ProjectMediaPreviewScreen(
                                 color = Color.White
                             )
                         }
-                        Spacer(modifier = Modifier.height(Dimens.sp1))
+                        Spacer(modifier = Modifier.height(4.dp))
                         Text(
                             text = state.addingProjectName.ifEmpty { "Swar Sandhya EP" },
-                            style = Typography.bodyLarge.copy(
+                            style = MaterialTheme.typography.headlineSmall.copy(
                                 fontWeight = FontWeight.Black,
                                 color = Color.White,
                                 letterSpacing = (-0.5).sp
@@ -1942,7 +1945,7 @@ fun ProjectMediaPreviewScreen(
                 }
 
                 // Details Content
-                Column(modifier = Modifier.padding(Dimens.sp2)) {
+                Column(modifier = Modifier.padding(16.dp)) {
                     Text(
                         "METADATA DESCRIPTION",
                         fontSize = 10.sp,
@@ -1950,16 +1953,16 @@ fun ProjectMediaPreviewScreen(
                         color = BrandPrimary,
                         letterSpacing = 1.sp
                     )
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = state.addingProjectDesc.ifEmpty { "A soft acoustic Indian sarangi lo-fi reimagined soundtrack crafted live." },
-                        style = Typography.bodyLarge.copy(
+                        style = MaterialTheme.typography.bodySmall.copy(
                             color = BrandTextSecondary,
                             lineHeight = 16.sp
                         )
                     )
 
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     // Roles List
                     Text(
@@ -1975,8 +1978,8 @@ fun ProjectMediaPreviewScreen(
                         roles.forEach { role ->
                             Box(
                                 modifier = Modifier
-                                    .background(Color(0xFFEDE9FE), RoundedCornerShape(Dimens.r1))
-                                    .border(1.dp, BrandSecondary.copy(alpha = 0.3f), RoundedCornerShape(Dimens.r1))
+                                    .background(Color(0xFFEDE9FE), RoundedCornerShape(8.dp))
+                                    .border(1.dp, BrandSecondary.copy(alpha = 0.3f), RoundedCornerShape(8.dp))
                                     .padding(horizontal = 10.dp, vertical = 4.dp)
                             ) {
                                 Text(role, color = BrandSecondary, fontWeight = FontWeight.Bold, fontSize = 10.sp)
@@ -1984,7 +1987,7 @@ fun ProjectMediaPreviewScreen(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     // Credit attribution summary
                     Text(
@@ -2013,7 +2016,7 @@ fun ProjectMediaPreviewScreen(
                                         .size(16.dp)
                                         .clip(CircleShape)
                                 )
-                                Spacer(modifier = Modifier.width(Dimens.sp1))
+                                Spacer(modifier = Modifier.width(8.dp))
                                 Text(cr.collaboratorName, fontWeight = FontWeight.Bold, fontSize = 11.sp, color = BrandTextPrimary)
                                 Spacer(modifier = Modifier.width(6.dp))
                                 Text("→", color = BrandTextSecondary, fontSize = 11.sp)
@@ -2023,9 +2026,9 @@ fun ProjectMediaPreviewScreen(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(16.dp))
                     Divider(color = BrandBorder)
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(12.dp))
 
                     // Simulated streaming preview badges
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -2050,25 +2053,25 @@ fun ProjectMediaPreviewScreen(
                             ) {
                                 Text(chip, fontSize = 8.sp, fontWeight = FontWeight.Bold, color = BrandTextPrimary)
                             }
-                            Spacer(modifier = Modifier.width(Dimens.sp1))
+                            Spacer(modifier = Modifier.width(4.dp))
                         }
                     }
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(Dimens.sp3))
+        Spacer(modifier = Modifier.height(24.dp))
 
         Button(
             onClick = onContinue,
             colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp)
                 .testTag("portfolio_preview_continue_btn")
         ) {
-            Text("Confirm Preview", color = Color.White, style = Typography.bodyLarge)
+            Text("Confirm Preview", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 15.sp)
         }
     }
 }
@@ -2092,14 +2095,14 @@ fun PublishProjectScreen(
     ) {
         Text(
             text = "Safety Verification Checklist",
-            style = Typography.bodyLarge.copy(
+            style = MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.Bold,
                 color = BrandPrimary
             )
         )
         Text(
             text = "Verify that details match registered original catalog metadata before locking the record.",
-            style = Typography.bodyLarge.copy(color = BrandTextSecondary)
+            style = MaterialTheme.typography.bodySmall.copy(color = BrandTextSecondary)
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -2108,10 +2111,10 @@ fun PublishProjectScreen(
         Card(
             colors = CardDefaults.cardColors(containerColor = BrandCard),
             border = BorderStroke(1.dp, BrandBorder),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(16.dp),
             modifier = Modifier.fillMaxWidth()
         ) {
-            Column(modifier = Modifier.padding(Dimens.sp2)) {
+            Column(modifier = Modifier.padding(16.dp)) {
                 ChecklistRowItem(label = "Project Details Locked", detail = "${state.addingProjectName} (${state.addingProjectType})", done = true)
                 Divider(color = BrandBorder, modifier = Modifier.padding(vertical = 10.dp))
                 ChecklistRowItem(label = "Streaming Link Generated", detail = if (state.spotifyUrl.isNotEmpty()) "Spotify active" else "Default active link", done = true)
@@ -2122,11 +2125,11 @@ fun PublishProjectScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(Dimens.sp3))
+        Spacer(modifier = Modifier.height(24.dp))
 
         // Visibility Options Title
         Text("Visibility Options", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandTextPrimary)
-        Spacer(modifier = Modifier.height(Dimens.sp1))
+        Spacer(modifier = Modifier.height(8.dp))
 
         val visibilities = listOf(
             Triple("Public", "Visible to anyone on Web and the MusicLinkd global feed search.", Icons.Outlined.Visibility),
@@ -2140,7 +2143,7 @@ fun PublishProjectScreen(
                 colors = CardDefaults.cardColors(
                     containerColor = if (isSelected) Color(0xFFF5F3FF) else BrandCard
                 ),
-                shape = RoundedCornerShape(Dimens.r2),
+                shape = RoundedCornerShape(12.dp),
                 border = BorderStroke(
                     width = if (isSelected) 1.5.dp else 1.dp,
                     color = if (isSelected) BrandPrimary else BrandBorder
@@ -2159,7 +2162,7 @@ fun PublishProjectScreen(
                         onClick = { onVisibilityChange(opt.first) },
                         colors = RadioButtonDefaults.colors(selectedColor = BrandPrimary)
                     )
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
+                    Spacer(modifier = Modifier.width(8.dp))
                     Column {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(imageVector = opt.third, contentDescription = null, tint = BrandTextPrimary, modifier = Modifier.size(14.dp))
@@ -2188,13 +2191,13 @@ fun PublishProjectScreen(
                     onPublishClick()
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-                shape = RoundedCornerShape(Dimens.r2),
+                shape = RoundedCornerShape(12.dp),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp)
                     .testTag("portfolio_publish_btn")
             ) {
-                Text("Publish to Portfolio Canvas", color = Color.White, style = Typography.bodyLarge)
+                Text("Publish to Portfolio Canvas", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 15.sp)
             }
         }
     }
@@ -2208,7 +2211,7 @@ fun ChecklistRowItem(label: String, detail: String, done: Boolean) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(modifier = Modifier.weight(1f)) {
-            Text(label, style = Typography.bodyLarge, color = BrandTextPrimary)
+            Text(label, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandTextPrimary)
             Text(detail, fontSize = 10.sp, color = BrandTextSecondary)
         }
         Icon(
@@ -2258,43 +2261,43 @@ fun SuccessStateScreen(
             Text("🎉", fontSize = 48.sp)
         }
 
-        Spacer(modifier = Modifier.height(Dimens.sp3))
+        Spacer(modifier = Modifier.height(24.dp))
 
         Text(
             text = "Project Published Live!",
             textAlign = TextAlign.Center,
-            style = Typography.bodyLarge.copy(
+            style = MaterialTheme.typography.headlineSmall.copy(
                 fontWeight = FontWeight.Black,
                 color = BrandTextPrimary,
                 letterSpacing = (-0.5).sp
             )
         )
         
-        Spacer(modifier = Modifier.height(Dimens.sp1))
+        Spacer(modifier = Modifier.height(8.dp))
 
         Text(
             text = "Your newly registered project \"${state.lastPublishedProject?.name ?: "Swar EP"}\" was successfully uploaded and logged to India's copyright registry catalog on MusicLinkd.",
             textAlign = TextAlign.Center,
-            style = Typography.bodyLarge.copy(
+            style = MaterialTheme.typography.bodyMedium.copy(
                 color = BrandTextSecondary,
                 lineHeight = 22.sp
             ),
             modifier = Modifier.padding(horizontal = 14.dp)
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp3))
+        Spacer(modifier = Modifier.height(32.dp))
 
         // CTA Buttons
         Button(
             onClick = onViewProject,
             colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)
                 .testTag("success_cnt_view")
         ) {
-            Text("View Published Layout", color = Color.White, style = Typography.bodyLarge)
+            Text("View Published Layout", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 14.sp)
         }
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -2302,7 +2305,7 @@ fun SuccessStateScreen(
         Button(
             onClick = onShareProject,
             colors = ButtonDefaults.buttonColors(containerColor = BrandCard),
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(12.dp),
             border = BorderStroke(1.dp, BrandBorder),
             modifier = Modifier
                 .fillMaxWidth()
@@ -2311,8 +2314,8 @@ fun SuccessStateScreen(
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(imageVector = Icons.Default.Share, contentDescription = null, tint = BrandTextPrimary, modifier = Modifier.size(16.dp))
-                Spacer(modifier = Modifier.width(Dimens.sp1))
-                Text("Share Project Passport", color = BrandTextPrimary, style = Typography.bodyLarge)
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("Share Project Passport", color = BrandTextPrimary, fontWeight = FontWeight.Bold, fontSize = 14.sp)
             }
         }
 
@@ -2411,7 +2414,7 @@ fun ProfileProjectViewScreen(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Box(
                         modifier = Modifier
-                            .background(BrandSecondary, RoundedCornerShape(Dimens.r1))
+                            .background(BrandSecondary, RoundedCornerShape(4.dp))
                             .padding(horizontal = 8.dp, vertical = 2.dp)
                     ) {
                         Text(
@@ -2421,7 +2424,7 @@ fun ProfileProjectViewScreen(
                             color = Color.White
                         )
                     }
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = "Published on MusicLinkd",
                         color = Color.White.copy(alpha = 0.8f),
@@ -2430,11 +2433,11 @@ fun ProfileProjectViewScreen(
                     )
                 }
                 
-                Spacer(modifier = Modifier.height(Dimens.sp1))
+                Spacer(modifier = Modifier.height(4.dp))
                 
                 Text(
                     text = project.name,
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.headlineLarge.copy(
                         color = Color.White,
                         fontWeight = FontWeight.Black,
                         letterSpacing = (-1).sp
@@ -2450,12 +2453,12 @@ fun ProfileProjectViewScreen(
         }
 
         // Project details container
-        Column(modifier = Modifier.padding(Dimens.sp2)) {
+        Column(modifier = Modifier.padding(16.dp)) {
             
             // Statistics Card Box
             Card(
                 colors = CardDefaults.cardColors(containerColor = BrandCard),
-                shape = RoundedCornerShape(Dimens.r2),
+                shape = RoundedCornerShape(12.dp),
                 border = BorderStroke(1.dp, BrandBorder),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -2477,11 +2480,11 @@ fun ProfileProjectViewScreen(
             }
 
             // Description details
-            Text("About the Project", style = Typography.bodyLarge, color = BrandTextPrimary)
+            Text("About the Project", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandTextPrimary)
             Spacer(modifier = Modifier.height(6.dp))
             Text(
                 text = project.description,
-                style = Typography.bodyLarge.copy(
+                style = MaterialTheme.typography.bodySmall.copy(
                     color = BrandTextSecondary,
                     lineHeight = 18.sp
                 )
@@ -2490,13 +2493,13 @@ fun ProfileProjectViewScreen(
             Spacer(modifier = Modifier.height(20.dp))
 
             // My credits selection
-            Text("Licensed Roles & Accreditations", style = Typography.bodyLarge, color = BrandTextPrimary)
+            Text("Licensed Roles & Accreditations", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandTextPrimary)
             Spacer(modifier = Modifier.height(6.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 project.roles.forEach { role ->
                     Box(
                         modifier = Modifier
-                            .background(Color(0xFFEDE9FE), RoundedCornerShape(Dimens.r1))
+                            .background(Color(0xFFEDE9FE), RoundedCornerShape(8.dp))
                             .padding(horizontal = 10.dp, vertical = 6.dp)
                     ) {
                         Text(role, color = BrandSecondary, fontWeight = FontWeight.Bold, fontSize = 11.sp)
@@ -2507,8 +2510,8 @@ fun ProfileProjectViewScreen(
             Spacer(modifier = Modifier.height(20.dp))
 
             // Embedded streaming players simulated
-            Text("Official Audio Embed Platforms", style = Typography.bodyLarge, color = BrandTextPrimary)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Text("Official Audio Embed Platforms", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandTextPrimary)
+            Spacer(modifier = Modifier.height(8.dp))
 
             // Custom active players checklist
             val platforms = listOf(
@@ -2523,14 +2526,14 @@ fun ProfileProjectViewScreen(
             } else {
                 platforms.forEach { plt ->
                     SimulatedPlayerCard(label = plt.second, url = plt.first, color = plt.third)
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Credits Attribution list
-            Text("Verified Collaborator Table", style = Typography.bodyLarge, color = BrandTextPrimary)
+            Text("Verified Collaborator Table", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandTextPrimary)
             Spacer(modifier = Modifier.height(6.dp))
 
             if (project.credits.isEmpty()) {
@@ -2544,7 +2547,7 @@ fun ProfileProjectViewScreen(
                     Card(
                         colors = CardDefaults.cardColors(containerColor = BrandCard),
                         border = BorderStroke(1.dp, BrandBorder),
-                        shape = RoundedCornerShape(Dimens.r1),
+                        shape = RoundedCornerShape(8.dp),
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = 6.dp)
@@ -2570,12 +2573,12 @@ fun ProfileProjectViewScreen(
                                     )
                                 }
                                 Spacer(modifier = Modifier.width(10.dp))
-                                Text(cr.collaboratorName, style = Typography.bodyLarge, color = BrandTextPrimary)
+                                Text(cr.collaboratorName, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandTextPrimary)
                             }
                             
                             Box(
                                 modifier = Modifier
-                                    .background(Color(0xFFEDE9FE), RoundedCornerShape(Dimens.r1))
+                                    .background(Color(0xFFEDE9FE), RoundedCornerShape(4.dp))
                                     .padding(horizontal = 6.dp, vertical = 2.dp)
                             ) {
                                 Text(cr.role, fontSize = 9.sp, fontWeight = FontWeight.Bold, color = BrandSecondary)
@@ -2608,7 +2611,7 @@ fun SimulatedPlayerCard(label: String, url: String, color: Color) {
 
     Card(
         colors = CardDefaults.cardColors(containerColor = Color(0xFF111827)),
-        shape = RoundedCornerShape(Dimens.r2),
+        shape = RoundedCornerShape(12.dp),
         border = BorderStroke(1.dp, if (isPlaying) color else Color.White.copy(alpha = 0.1f)),
         modifier = Modifier
             .fillMaxWidth()
@@ -2622,7 +2625,7 @@ fun SimulatedPlayerCard(label: String, url: String, color: Color) {
             }
     ) {
         Row(
-            modifier = Modifier.padding(Dimens.sp2),
+            modifier = Modifier.padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -2646,10 +2649,10 @@ fun SimulatedPlayerCard(label: String, url: String, color: Color) {
                     )
                 }
 
-                Spacer(modifier = Modifier.width(Dimens.sp2))
+                Spacer(modifier = Modifier.width(12.dp))
 
                 Column {
-                    Text(label, color = Color.White, style = Typography.bodyLarge)
+                    Text(label, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12.sp)
                     Text(url, color = Color.Gray, fontSize = 10.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 }
             }

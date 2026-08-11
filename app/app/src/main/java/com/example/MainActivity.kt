@@ -30,6 +30,7 @@ import com.example.onboarding.ui.screens.*
 import com.example.onboarding.viewmodel.OnboardingViewModel
 import com.example.features.navigation.AppNavigationGraph
 import com.example.ui.theme.MyApplicationTheme
+import androidx.navigation.compose.rememberNavController
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +42,7 @@ class MainActivity : ComponentActivity() {
                 val viewModel: OnboardingViewModel = viewModel()
                 val state by viewModel.state.collectAsStateWithLifecycle()
                 val context = LocalContext.current
+                val navController = rememberNavController()
 
                 val gso = remember {
                     GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -135,6 +137,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             ) {
                                 AppNavigationGraph(
+                                    navController = navController,
                                     state = state,
                                     viewModel = viewModel,
                                     onGoogleSignInClick = {
@@ -153,6 +156,16 @@ class MainActivity : ComponentActivity() {
                             // Floating Persistent Global Audio Player Bar
                             com.example.onboarding.ui.components.GlobalPersistentAudioPlayerBar(
                                 modifier = Modifier.align(Alignment.BottomCenter)
+                            )
+
+                            // UI Screen Catalog / Index Overlay (Developer Tool)
+                            com.example.onboarding.ui.components.ScreenIndexOverlay(
+                                state = state,
+                                onJumpToScreen = { screen -> viewModel.jumpToScreen(screen) },
+                                onNavigateToRoute = { route -> navController.navigate(route) },
+                                onSelectDashboardTab = { tab -> viewModel.selectDashboardTab(tab) },
+                                onPrefillDeveloperData = { viewModel.skipOnboardingToSuccessFast() },
+                                onResetOnboarding = { viewModel.resetToWelcome() }
                             )
                         }
                     }

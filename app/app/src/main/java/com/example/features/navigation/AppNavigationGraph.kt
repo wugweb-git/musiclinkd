@@ -33,6 +33,7 @@ object MusicLinkdRoutes {
     const val PROFILE_CREATION = "profile_creation"
     const val SUCCESS = "success"
     const val DASHBOARD = "dashboard"
+    const val METADATA_SYNC = "metadata_sync"
     const val ARTIST_DETAIL = "artist/{artistId}"
     const val STUDIO_DETAIL = "studio/{studioId}"
     const val CHAT_THREAD = "messages/{threadId}"
@@ -65,6 +66,7 @@ fun AppNavigationGraph(
         OnboardingScreen.PROFILE_CREATION -> MusicLinkdRoutes.PROFILE_CREATION
         OnboardingScreen.SUCCESS -> MusicLinkdRoutes.SUCCESS
         OnboardingScreen.DASHBOARD -> MusicLinkdRoutes.DASHBOARD
+        OnboardingScreen.METADATA_SYNC -> MusicLinkdRoutes.METADATA_SYNC
     }
 
     val currentNavBackStackEntry by navController.currentBackStackEntryAsState()
@@ -282,6 +284,12 @@ fun AppNavigationGraph(
         composable(MusicLinkdRoutes.CHAT_THREAD) {
             Flow5MessagingWorkspace(
                 onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(MusicLinkdRoutes.METADATA_SYNC) {
+            MetadataSyncManagerScreen(
+                onBack = { viewModel.jumpToScreen(OnboardingScreen.DASHBOARD) }
             )
         }
     }

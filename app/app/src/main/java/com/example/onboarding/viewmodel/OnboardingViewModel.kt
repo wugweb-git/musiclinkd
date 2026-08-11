@@ -675,9 +675,10 @@ class OnboardingViewModel : ViewModel() {
                 "mobileNumber" to stateValue.mobileNumber,
                 "primaryRole" to (stateValue.primaryRole ?: ""),
                 "secondaryRole" to (stateValue.secondaryRole ?: ""),
-                "selectedLanguages" to stateValue.selectedLanguages.toList(),
-                "selectedGenres" to stateValue.selectedGenres.toList(),
-                "selectedInstruments" to stateValue.selectedInstruments.toList(),
+                "languages" to stateValue.selectedLanguages.toList(),
+                "genres" to stateValue.selectedGenres.toList(),
+                "instruments" to stateValue.selectedInstruments.toList(),
+                "personaBadges" to emptyList<String>(),
                 "country" to stateValue.country,
                 "state" to stateValue.state,
                 "city" to stateValue.city,
@@ -901,6 +902,7 @@ class OnboardingViewModel : ViewModel() {
             OnboardingScreen.PROFILE_CREATION -> OnboardingScreen.LOCATION
             OnboardingScreen.SUCCESS -> OnboardingScreen.PROFILE_CREATION
             OnboardingScreen.DASHBOARD -> OnboardingScreen.SUCCESS
+            OnboardingScreen.METADATA_SYNC -> OnboardingScreen.DASHBOARD
         }
         if (previous == OnboardingScreen.OTP_VERIFY) {
             // Restart resend timer if backing into OTP screen
@@ -943,6 +945,14 @@ class OnboardingViewModel : ViewModel() {
                 currentScreen = OnboardingScreen.SUCCESS
             )
         }
+    }
+
+    fun jumpToScreen(screen: OnboardingScreen) {
+        _state.update { it.copy(currentScreen = screen) }
+    }
+
+    fun selectDashboardTab(tab: String) {
+        _state.update { it.copy(activeDashboardTab = tab, currentScreen = OnboardingScreen.DASHBOARD) }
     }
 
     override fun onCleared() {

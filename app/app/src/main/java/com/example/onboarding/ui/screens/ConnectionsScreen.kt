@@ -138,17 +138,17 @@ fun ConnectionsFlow(
             .background(BrandBackground)
             .padding(horizontal = 16.dp)
     ) {
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(12.dp))
 
         // Hero Stats Header Card
         Card(
-            shape = RoundedCornerShape(Dimens.r3),
+            shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(containerColor = BrandPrimary.copy(alpha = 0.08f)),
             border = BorderStroke(1.dp, BrandPrimary.copy(alpha = 0.2f)),
             modifier = Modifier.fillMaxWidth()
         ) {
             Row(
-                modifier = Modifier.padding(Dimens.sp2),
+                modifier = Modifier.padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
@@ -163,14 +163,15 @@ fun ConnectionsFlow(
                                 Icon(Icons.Default.GroupAdd, contentDescription = null, tint = Color.White, modifier = Modifier.size(14.dp))
                             }
                         }
-                        Spacer(modifier = Modifier.width(Dimens.sp1))
+                        Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "Musician Network Registry",
-                            style = Typography.bodyLarge,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
                             color = BrandPrimary
                         )
                     }
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = "Manage follow requests, active studio collaborators & AI matches.",
                         fontSize = 11.5.sp,
@@ -180,14 +181,14 @@ fun ConnectionsFlow(
 
                 Surface(
                     color = Color.White,
-                    shape = RoundedCornerShape(Dimens.r2),
+                    shape = RoundedCornerShape(12.dp),
                     border = BorderStroke(1.dp, BrandBorder)
                 ) {
                     Column(
                         modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text("${activeCollaboratorsList.size}", style = Typography.bodyLarge, color = BrandDark)
+                        Text("${activeCollaboratorsList.size}", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
                         Text("Active", fontSize = 10.sp, color = BrandSecondaryText)
                     }
                 }
@@ -206,8 +207,7 @@ fun ConnectionsFlow(
         ) {
             val tabs = listOf(
                 "Requests (${followRequestsList.size})" to Icons.Default.PersonAdd,
-                "Collaborators (${activeCollaboratorsList.size})" to Icons.Default.Groups,
-                "Gemini AI" to Icons.Default.AutoAwesome
+                "Collaborators (${activeCollaboratorsList.size})" to Icons.Default.Groups
             )
 
             tabs.forEachIndexed { index, (label, icon) ->
@@ -229,7 +229,7 @@ fun ConnectionsFlow(
                             tint = if (isSelected) Color.White else BrandSecondaryText,
                             modifier = Modifier.size(15.dp)
                         )
-                        Spacer(modifier = Modifier.width(Dimens.sp1))
+                        Spacer(modifier = Modifier.width(4.dp))
                         Text(
                             text = label,
                             fontSize = 11.5.sp,
@@ -259,7 +259,7 @@ fun ConnectionsFlow(
                     )
                 } else {
                     LazyColumn(
-                        verticalArrangement = Arrangement.spacedBy(Dimens.sp2),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
                         modifier = Modifier.fillMaxSize()
                     ) {
                         item {
@@ -273,7 +273,7 @@ fun ConnectionsFlow(
 
                         items(followRequestsList, key = { it.id }) { req ->
                             Card(
-                                shape = RoundedCornerShape(Dimens.r2),
+                                shape = RoundedCornerShape(16.dp),
                                 colors = CardDefaults.cardColors(containerColor = BrandCardBg),
                                 border = BorderStroke(1.dp, BrandBorder),
                                 modifier = Modifier
@@ -291,10 +291,10 @@ fun ConnectionsFlow(
                                         ) {
                                             Text(req.avatarEmoji, fontSize = 22.sp)
                                         }
-                                        Spacer(modifier = Modifier.width(Dimens.sp2))
+                                        Spacer(modifier = Modifier.width(12.dp))
                                         Column(modifier = Modifier.weight(1f)) {
-                                            Text(req.name, style = Typography.bodyLarge, color = BrandDark)
-                                            Text(req.role, style = Typography.bodyLarge, color = BrandPrimary)
+                                            Text(req.name, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
+                                            Text(req.role, fontSize = 12.sp, fontWeight = FontWeight.Medium, color = BrandPrimary)
                                             Text("${req.location} • ${req.mutualCount} mutual connections", fontSize = 11.sp, color = BrandSecondaryText)
                                         }
                                     }
@@ -309,7 +309,7 @@ fun ConnectionsFlow(
                                         req.tags.forEach { tag ->
                                             Surface(
                                                 color = BrandBorder.copy(alpha = 0.3f),
-                                                shape = RoundedCornerShape(Dimens.r1)
+                                                shape = RoundedCornerShape(8.dp)
                                             ) {
                                                 Text(
                                                     text = tag,
@@ -322,7 +322,7 @@ fun ConnectionsFlow(
                                         }
                                     }
 
-                                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                                    Spacer(modifier = Modifier.height(12.dp))
 
                                     // Action Buttons: ACCEPT & DENY
                                     Row(
@@ -335,7 +335,7 @@ fun ConnectionsFlow(
                                                 updateFirestoreConnection(req.id, req.name, "REJECTED")
                                                 Toast.makeText(context, "Declined request from ${req.name}", Toast.LENGTH_SHORT).show()
                                             },
-                                            shape = RoundedCornerShape(Dimens.r2),
+                                            shape = RoundedCornerShape(12.dp),
                                             border = BorderStroke(1.dp, Color(0xFFEF4444).copy(alpha = 0.5f)),
                                             colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFFEF4444)),
                                             modifier = Modifier
@@ -344,8 +344,8 @@ fun ConnectionsFlow(
                                                 .testTag("deny_request_btn_${req.id}")
                                         ) {
                                             Icon(Icons.Default.Close, null, modifier = Modifier.size(16.dp))
-                                            Spacer(modifier = Modifier.width(Dimens.sp1))
-                                            Text("Decline", style = Typography.bodyLarge)
+                                            Spacer(modifier = Modifier.width(4.dp))
+                                            Text("Decline", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                         }
 
                                         Button(
@@ -366,7 +366,7 @@ fun ConnectionsFlow(
                                                 updateFirestoreConnection(req.id, req.name, "ACCEPTED")
                                                 Toast.makeText(context, "Accepted ${req.name}! Added to Active Collaborators.", Toast.LENGTH_SHORT).show()
                                             },
-                                            shape = RoundedCornerShape(Dimens.r2),
+                                            shape = RoundedCornerShape(12.dp),
                                             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF16A34A)),
                                             modifier = Modifier
                                                 .weight(1f)
@@ -374,8 +374,8 @@ fun ConnectionsFlow(
                                                 .testTag("accept_request_btn_${req.id}")
                                         ) {
                                             Icon(Icons.Default.Check, null, tint = Color.White, modifier = Modifier.size(16.dp))
-                                            Spacer(modifier = Modifier.width(Dimens.sp1))
-                                            Text("Accept & Follow", style = Typography.bodyLarge)
+                                            Spacer(modifier = Modifier.width(4.dp))
+                                            Text("Accept & Follow", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                         }
                                     }
                                 }
@@ -388,7 +388,7 @@ fun ConnectionsFlow(
             1 -> {
                 // TAB 1: ACTIVE COLLABORATORS LIST
                 LazyColumn(
-                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
                     modifier = Modifier.fillMaxSize()
                 ) {
                     item {
@@ -402,7 +402,7 @@ fun ConnectionsFlow(
 
                     items(activeCollaboratorsList, key = { it.id }) { collab ->
                         Card(
-                            shape = RoundedCornerShape(Dimens.r2),
+                            shape = RoundedCornerShape(16.dp),
                             colors = CardDefaults.cardColors(containerColor = BrandCardBg),
                             border = BorderStroke(1.dp, BrandBorder),
                             modifier = Modifier.fillMaxWidth()
@@ -421,13 +421,13 @@ fun ConnectionsFlow(
                                     Text(collab.avatarEmoji, fontSize = 22.sp)
                                 }
 
-                                Spacer(modifier = Modifier.width(Dimens.sp2))
+                                Spacer(modifier = Modifier.width(12.dp))
 
                                 Column(modifier = Modifier.weight(1f)) {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Text(collab.name, fontWeight = FontWeight.Bold, fontSize = 14.5.sp, color = BrandDark)
                                         if (collab.verified) {
-                                            Spacer(modifier = Modifier.width(Dimens.sp1))
+                                            Spacer(modifier = Modifier.width(4.dp))
                                             Icon(Icons.Default.CheckCircle, null, tint = BrandPrimary, modifier = Modifier.size(14.dp))
                                         }
                                     }
@@ -443,7 +443,7 @@ fun ConnectionsFlow(
                                             "Online" -> Color(0xFFDBEAFE)
                                             else -> Color(0xFFF3F4F6)
                                         },
-                                        shape = RoundedCornerShape(Dimens.r1)
+                                        shape = RoundedCornerShape(8.dp)
                                     ) {
                                         Text(
                                             text = collab.status,
@@ -458,7 +458,7 @@ fun ConnectionsFlow(
                                         )
                                     }
 
-                                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                                    Spacer(modifier = Modifier.height(8.dp))
 
                                     Button(
                                         onClick = { showSnackbar("Opening direct chat with ${collab.name}...") },
@@ -468,7 +468,7 @@ fun ConnectionsFlow(
                                         modifier = Modifier.height(30.dp)
                                     ) {
                                         Icon(Icons.Default.Chat, null, tint = Color.White, modifier = Modifier.size(12.dp))
-                                        Spacer(modifier = Modifier.width(Dimens.sp1))
+                                        Spacer(modifier = Modifier.width(4.dp))
                                         Text("Direct Chat", fontSize = 11.sp, fontWeight = FontWeight.Bold)
                                     }
                                 }
@@ -484,14 +484,14 @@ fun ConnectionsFlow(
                     com.example.onboarding.ui.components.PortfolioGridSkeletonLoader(count = 3)
                 } else {
                     LazyColumn(
-                        verticalArrangement = Arrangement.spacedBy(Dimens.sp2),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
                         modifier = Modifier.fillMaxSize()
                     ) {
                         item {
                             Card(
                                 colors = CardDefaults.cardColors(containerColor = Color(0xFFF5F3FF)),
                                 border = BorderStroke(1.dp, Color(0xFFDDD6FE)),
-                                shape = RoundedCornerShape(Dimens.r2),
+                                shape = RoundedCornerShape(16.dp),
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 Row(
@@ -499,7 +499,7 @@ fun ConnectionsFlow(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Icon(Icons.Default.AutoAwesome, null, tint = Color(0xFF7C3AED), modifier = Modifier.size(24.dp))
-                                    Spacer(modifier = Modifier.width(Dimens.sp2))
+                                    Spacer(modifier = Modifier.width(12.dp))
                                     Column {
                                         Text("Gemini AI Matchmaker Active", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Color(0xFF5B21B6))
                                         Text("Analyzed your genre tags & instrument skills against the global musician database.", fontSize = 11.sp, color = Color(0xFF6B21A8))
@@ -510,7 +510,7 @@ fun ConnectionsFlow(
 
                         items(aiRecommendations) { rec ->
                             Card(
-                                shape = RoundedCornerShape(Dimens.r2),
+                                shape = RoundedCornerShape(16.dp),
                                 colors = CardDefaults.cardColors(containerColor = BrandCardBg),
                                 border = BorderStroke(1.dp, BrandBorder),
                                 modifier = Modifier.fillMaxWidth()
@@ -526,24 +526,24 @@ fun ConnectionsFlow(
                                         ) {
                                             Text(rec.avatarEmoji, fontSize = 22.sp)
                                         }
-                                        Spacer(modifier = Modifier.width(Dimens.sp2))
+                                        Spacer(modifier = Modifier.width(12.dp))
                                         Column(modifier = Modifier.weight(1f)) {
-                                            Text(rec.name, style = Typography.bodyLarge, color = BrandDark)
-                                            Text(rec.role, style = Typography.labelLarge, color = Color(0xFF7C3AED), fontWeight = FontWeight.Medium)
+                                            Text(rec.name, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
+                                            Text(rec.role, fontSize = 12.sp, color = Color(0xFF7C3AED), fontWeight = FontWeight.Medium)
                                             Text(rec.location, fontSize = 11.sp, color = BrandSecondaryText)
                                         }
 
                                         // Match Score Pill
                                         Surface(
                                             color = Color(0xFF7C3AED),
-                                            shape = RoundedCornerShape(Dimens.r2)
+                                            shape = RoundedCornerShape(12.dp)
                                         ) {
                                             Row(
                                                 modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
                                                 verticalAlignment = Alignment.CenterVertically
                                             ) {
                                                 Icon(Icons.Default.AutoAwesome, null, tint = Color.White, modifier = Modifier.size(12.dp))
-                                                Spacer(modifier = Modifier.width(Dimens.sp1))
+                                                Spacer(modifier = Modifier.width(4.dp))
                                                 Text("${rec.matchScore}% AI Match", color = Color.White, fontSize = 10.5.sp, fontWeight = FontWeight.Bold)
                                             }
                                         }
@@ -573,13 +573,13 @@ fun ConnectionsFlow(
                                             updateFirestoreConnection("ai_collab_${rec.name.lowercase().replace(" ", "_")}", rec.name, "REQUEST_SENT")
                                             Toast.makeText(context, "Sent AI Collaboration invitation to ${rec.name}!", Toast.LENGTH_SHORT).show()
                                         },
-                                        shape = RoundedCornerShape(Dimens.r2),
+                                        shape = RoundedCornerShape(12.dp),
                                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7C3AED)),
                                         modifier = Modifier.fillMaxWidth().height(38.dp)
                                     ) {
                                         Icon(Icons.Default.Send, null, tint = Color.White, modifier = Modifier.size(14.dp))
                                         Spacer(modifier = Modifier.width(6.dp))
-                                        Text("Send Collaboration Request", style = Typography.bodyLarge)
+                                        Text("Send Collaboration Request", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                     }
                                 }
                             }

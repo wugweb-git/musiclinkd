@@ -14,9 +14,10 @@ import androidx.room.RoomDatabase
         UserProfileEntity::class,
         NotificationEntity::class,
         DiscoverFeedEntity::class,
-        SearchHistoryEntity::class
+        SearchHistoryEntity::class,
+        CustomMasterEntity::class
     ],
-    version = 7,
+    version = 9,
     exportSchema = false
 )
 abstract class MusicLinkdDatabase : RoomDatabase() {
@@ -27,6 +28,7 @@ abstract class MusicLinkdDatabase : RoomDatabase() {
     abstract fun notificationDao(): NotificationDao
     abstract fun discoverFeedDao(): DiscoverFeedDao
     abstract fun searchHistoryDao(): SearchHistoryDao
+    abstract fun customMasterDao(): CustomMasterDao
 
     companion object {
         @Volatile

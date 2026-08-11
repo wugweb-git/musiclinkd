@@ -46,7 +46,7 @@ service cloud.firestore {
         || (isOwner(userId)
             && !request.resource.data.diff(resource.data)
                  .affectedKeys()
-                 .hasAny(['isVerified', 'isBanned', 'primaryRole', 'secondaryRole', 'trustBadges']));
+                 .hasAny(['isVerified', 'isBanned', 'primaryRole', 'secondaryRole', 'trustBadges', 'profileType']));
     }
 
     match /admin_roles/{userId} {
@@ -222,6 +222,34 @@ service cloud.firestore {
     match /user_bookmarks/{bookmarkId} {
       allow create: if signedIn() && request.auth.uid == request.resource.data.ownerUid;
       allow read, delete: if signedIn() && request.auth.uid == resource.data.ownerUid;
+    }
+
+    // No Cloud Functions exist to write these server-side (Spark plan, no
+    // functions deployed) — a notification is created directly by the
+    // client of the user who triggered it (e.g. the sender of a connection
+    // request writes a notification doc targeting the recipient). Only the
+    // target user may mark it read; only they or a moderator may delete it.
+    match /notifications/{notificationId} {
+      allow create: if signedIn();
+      allow read, delete: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.userId);
+      allow update: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.userId
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['isRead']));
+    }
+
+    // Doc ID = the user's own UID — private preferences, owner-only.
+    match /user_settings/{userId} {
+      allow read, write: if isOwner(userId) || isAdmin();
+    }
+
+    // Public-read (logos/brand imagery render on public profile pages),
+    // owner-uid pattern matching portfolio_projects/social_links.
+    match /brand_assets/{assetId} {
+      allow read: if true;
+      allow create, update: if signedIn() && request.auth.uid == request.resource.data.ownerUid;
+      allow delete: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.ownerUid);
     }
   }
 }

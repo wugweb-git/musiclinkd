@@ -5,6 +5,7 @@ import {
   BarChart3,
   Bell,
   Calendar,
+  Disc3,
   FileText,
   Flag,
   Gauge,
@@ -52,6 +53,7 @@ export const NAV_GROUPS: NavGroup[] = [
     items: [
       item("marketplace", "Marketplace", ShoppingBag),
       item("projects", "Projects", Calendar),
+      item("portfolio", "Portfolio", Disc3),
       item("reviews", "Reviews", Star),
       item("tracks", "Tracks", AudioLines),
     ],

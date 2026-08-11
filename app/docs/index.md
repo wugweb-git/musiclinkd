@@ -19,18 +19,13 @@ Welcome to the master index of the **MusicLinkd** repository. To prevent documen
 
 ## 📁 Ecosystem Single-Source-of-Truth Specifications
 
-### 🏛️ 1. Master System & Product Specifications
-* 🛠️ **[Master System Architecture & Product Specifications (Architecture.md)](Architecture.md)** - Authoritative guide containing:
-  - **Product Roadmap & PRD:** Supported roles, user personas, and core functional modules.
-  - **Clean Architecture & MVVM:** Package layout, sealed navigation routing states, and system specifications.
-  - **Data Schemas & Firebase:** Room SQLite tables, remote Firestore NoSQL collections, and GMS integration parameters.
-  - **Peer Handshake Sync:** Double-opt-in connection request states and resilient message synchronization queues.
-  - **Notifications & Motion:** FCM JSON payloads, horizontal page transitions, and frequency waveform visualization physics.
-  - **Security, Native UI, & Release:** Alphanumeric form sanitization, edge-to-edge layouts, minimum touch targets, dynamic analytics taxonomy, local JVM test verification commands, and release build guidelines.
+### 🏛️ 1. Master System & Architecture Specifications
+* 🛠️ **[Master System Architecture & Product Specifications (Architecture.md)](Architecture.md)** — Clean architecture, PRD, supported roles, package layout, state-driven navigation, local Room caching, and FCM push notifications.
+* 🗄️ **[Backend Schemas & Live Firestore Sync (BACKEND_SCHEMA_SPEC.md)](BACKEND_SCHEMA_SPEC.md)** — Live backend inventory for `musiclinkd-7ae30`: `studio_bookings`, `reviews`, `verification_requests`, `connections`, `projects`, `user_bookmarks`, `modules` remote feature flags, and all 11 dynamic master taxonomy categories.
 
-### 🎨 2. Unified Brand & Design Specifications
-* 🎨 **[Design System Foundations (../styleguide/Foundations.md)](../styleguide/Foundations.md)** - Visual philosophy, color palette, typography hierarchy, spacing grids, icons, and native accessibility.
-* 🧩 **[Design System Components (../styleguide/Components.md)](../styleguide/Components.md)** - Unified components, interactive screens, layout templates, specialized widgets, and micro-animations.
+### 🎨 2. Unified Brand, Design Systems & Master Component Catalog
+* 📐 **[Design System Foundations (styleguide/Foundations.md)](styleguide/Foundations.md)** — Consolidated 8-layer architectural model, v4.0 color palette, typography hierarchy, spacing grids, Lucide iconography standards, and native accessibility.
+* 🧩 **[Master Component Catalog (styleguide/Components.md)](styleguide/Components.md)** — Master catalog of all components, widgets, base cards, structural UI blocks, layout templates, and motion transitions.
 
 ---
 

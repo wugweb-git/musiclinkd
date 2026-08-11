@@ -58,7 +58,7 @@ object GeminiRecommendationEngine {
             ""
         }
 
-        if (apiKey.isNullOrEmpty() || apiKey == "null" || apiKey == "YOUR_GEMINI_API_KEY") {
+        if (apiKey.isNullOrEmpty() || apiKey == "null" || apiKey == "MY_GEMINI_API_KEY") {
             return@withContext getFallbackRecommendations(userGenres, userSkills)
         }
 

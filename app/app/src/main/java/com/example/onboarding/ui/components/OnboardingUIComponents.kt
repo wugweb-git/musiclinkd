@@ -1,6 +1,7 @@
 package com.example.onboarding.ui.components
 
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -76,6 +77,7 @@ fun OnboardingHeader(
         OnboardingScreen.PROFILE_CREATION -> 8
         OnboardingScreen.SUCCESS -> 9
         OnboardingScreen.DASHBOARD -> 9
+        OnboardingScreen.METADATA_SYNC -> 9
     }
 
     Column(
@@ -119,7 +121,7 @@ fun OnboardingHeader(
                 Box(
                     modifier = Modifier
                         .size(30.dp)
-                        .clip(RoundedCornerShape(Dimens.r1))
+                        .clip(RoundedCornerShape(8.dp))
                         .background(BrandPrimary)
                         .padding(5.dp),
                     contentAlignment = Alignment.Center
@@ -131,10 +133,10 @@ fun OnboardingHeader(
                         modifier = Modifier.size(20.dp)
                     )
                 }
-                Spacer(modifier = Modifier.width(Dimens.sp1))
+                Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "MusicLinkd",
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold,
                         letterSpacing = (-0.5).sp,
                         color = BrandTextPrimary
@@ -150,7 +152,7 @@ fun OnboardingHeader(
                 ) {
                     Text(
                         text = "Skip",
-                        style = Typography.bodyLarge.copy(
+                        style = MaterialTheme.typography.labelLarge.copy(
                             fontWeight = FontWeight.SemiBold,
                             color = BrandSecondary
                         )
@@ -161,7 +163,7 @@ fun OnboardingHeader(
             }
         }
 
-        Spacer(modifier = Modifier.height(Dimens.sp2))
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Progress segments
         if (currentScreen != OnboardingScreen.WELCOME && currentScreen != OnboardingScreen.SUCCESS && currentScreen != OnboardingScreen.DASHBOARD) {
@@ -406,7 +408,7 @@ fun NativeQRCodeCanvas(
     Canvas(
         modifier = modifier
             .size(140.dp)
-            .background(Color.White, RoundedCornerShape(Dimens.r2))
+            .background(Color.White, RoundedCornerShape(12.dp))
             .padding(6.dp)
     ) {
         val sizePx = size.width
@@ -531,7 +533,8 @@ fun OfflineAlertBanner(isOffline: Boolean) {
             Text(
                 text = "⚠ Connection Lost. Reverting to Cached Offline Tokens and System Profiles.",
                 color = Color.White,
-                style = Typography.bodyLarge,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
                 letterSpacing = 1.sp,
                 textAlign = TextAlign.Center
             )
@@ -544,11 +547,11 @@ fun OfflineAlertBanner(isOffline: Boolean) {
 fun Modifier.cardState(state: String): Modifier {
     return when (state) {
         "Selected" -> this
-            .border(2.dp, Color(0xFFEA4C89), RoundedCornerShape(Dimens.r3))
-            .shadow(elevation = 12.dp, shape = RoundedCornerShape(Dimens.r3), clip = false)
+            .border(2.dp, Color(0xFFEA4C89), RoundedCornerShape(24.dp))
+            .background(Color(0xFFFFF0F5), RoundedCornerShape(24.dp))
         "Hired" -> this
             .background(Color(0xFFFCE7F3))
-            .border(1.dp, Color(0xFFEA4C89), RoundedCornerShape(Dimens.r3))
+            .border(1.dp, Color(0xFFEA4C89), RoundedCornerShape(24.dp))
         "Unavailable" -> this
             .alpha(0.5f)
             .background(Color(0xFFF3F3F6))
@@ -695,7 +698,8 @@ fun BrandIcon(platform: String, modifier: Modifier = Modifier) {
                     Text(
                         text = "in",
                         color = Color.White,
-                        style = Typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier.offset(y = (-1).dp)
                     )
                 }
@@ -710,7 +714,8 @@ fun BrandIcon(platform: String, modifier: Modifier = Modifier) {
                     Text(
                         text = platform.take(1),
                         color = Color.White,
-                        style = Typography.bodyLarge
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.titleMedium
                     )
                 }
             }
@@ -805,11 +810,12 @@ fun SearchAutocompleteOverlay(
                 .semantics {
                     contentDescription = "Offline search autocomplete suggestions list"
                 },
-            shape = RoundedCornerShape(Dimens.r2),
+            shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+            border = BorderStroke(1.dp, BrandBorder),
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
-            Column(modifier = Modifier.padding(Dimens.sp1)) {
+            Column(modifier = Modifier.padding(8.dp)) {
                 Text(
                     text = "Offline Room Autocomplete Suggestions",
                     fontSize = 10.sp,
@@ -835,7 +841,7 @@ fun SearchAutocompleteOverlay(
                                 }
                             },
                             label = { Text("🔍 ${item.query}", fontSize = 11.sp) },
-                            shape = RoundedCornerShape(Dimens.r2),
+                            shape = RoundedCornerShape(16.dp),
                             modifier = Modifier.semantics {
                                 contentDescription = "Search suggestion for ${item.query} in category ${item.category}"
                             }

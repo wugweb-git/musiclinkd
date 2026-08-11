@@ -44,7 +44,7 @@ object ErrorReportingService {
     fun setUserContext(userId: String, email: String? = null, role: String? = null) {
         logBreadcrumb("User Context Set: ID=$userId, Email=$email, Role=$role")
         try {
-            val isFirebaseReady = try { com.google.firebase.FirebaseApp.getInstance() != null } catch (e: Throwable) { false }
+            val isFirebaseReady = try { com.google.firebase.FirebaseApp.getInstance(); true } catch (e: Throwable) { false }
             if (isFirebaseReady) {
                 val crashlytics = FirebaseCrashlytics.getInstance()
                 crashlytics.setUserId(userId)
@@ -67,7 +67,7 @@ object ErrorReportingService {
             _breadcrumbs.add(entry)
         }
         try {
-            val isFirebaseReady = try { com.google.firebase.FirebaseApp.getInstance() != null } catch (e: Throwable) { false }
+            val isFirebaseReady = try { com.google.firebase.FirebaseApp.getInstance(); true } catch (e: Throwable) { false }
             if (isFirebaseReady) {
                 FirebaseCrashlytics.getInstance().log(message)
             }
@@ -108,7 +108,7 @@ object ErrorReportingService {
         Log.e(TAG, "[$severity] [$tag] $message\n$stackSnippet")
 
         try {
-            val isFirebaseReady = try { com.google.firebase.FirebaseApp.getInstance() != null } catch (e: Throwable) { false }
+            val isFirebaseReady = try { com.google.firebase.FirebaseApp.getInstance(); true } catch (e: Throwable) { false }
             if (isFirebaseReady) {
                 val crashlytics = FirebaseCrashlytics.getInstance()
                 crashlytics.setCustomKey("firebase_project_id", PRIMARY_PROJECT_ID)

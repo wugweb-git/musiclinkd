@@ -267,6 +267,20 @@ object DemoDataProvider {
         MediaAttachmentItem("3", "Live_Vocal_Rehearsal.jpg", "IMAGE", ImageUrls.AVATAR_FEMALE_VOCALIST, "2.4 MB")
     )
 
+    data class DemoContact(
+        val name: String,
+        val email: String,
+        val desc: String,
+        val imageUrl: String
+    )
+
+    val sampleContacts = listOf(
+        DemoContact("Rohan Sharma", "rohan.guitar@gmail.com", "Producer • Mumbai", ImageUrls.AVATAR_MALE_GUITARIST),
+        DemoContact("Aditi Sen", "aditi.jazz@gmail.com", "Singer • Bengaluru", ImageUrls.AVATAR_FEMALE_VOCALIST),
+        DemoContact("Vikramaditya Roy", "vikram.sitar@gmail.com", "Sitarist • New Delhi", ImageUrls.AVATAR_SITARIST),
+        DemoContact("Karan Malhotra", "karan.producer@gmail.com", "Producer • Pune", ImageUrls.AVATAR_PRODUCER)
+    )
+
     // Categories List
     val searchFilterCategories = listOf("All", "Musicians", "Producers", "Studios", "Bands", "Projects")
 

@@ -30,6 +30,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.util.UUID
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.delay
 
 // --------------------------------------------------------------------------------------
 // DESIGN SYSTEM DESIGN TOKENS (Pink #EA4C89, Dark #0D0B26)
@@ -98,6 +100,125 @@ data class StudioBooking(
     val status: String = "Confirmed" // Confirmed, Completed, Cancelled
 )
 
+val defaultMockStudios = listOf(
+    StudioSpace(
+        id = "yrf_sound_lab",
+        name = "Yash Raj Film Studios (YRF) - Sound Lab",
+        location = "Andheri West, Mumbai",
+        rating = 4.9,
+        reviewCount = 188,
+        pricePerHour = 8000,
+        description = "The absolute gold standard of cinematic sound in India. Features Dolby Atmos Certified mixing suites and a massive sound-engineered 2,000 sq ft Live Room. Preferred by composers like A.R. Rahman.",
+        amenities = listOf("Dolby Atmos", "Vocal Booth", "Live Room", "Valet Parking", "Resident Engineers", "Private Lounge", "24x7 Access"),
+        equipmentList = listOf(
+            StudioEquipment("SSL Duality Delta Analog Console", "Console", "🎛️", 1),
+            StudioEquipment("Neumann U87 Ai Multi-pattern Mic", "Microphone", "🎙️", 4),
+            StudioEquipment("Genelec 8361A Smart Active Monitors", "Monitors", "🔊", 11),
+            StudioEquipment("Avid Pro Tools HDX Ultimate", "DAW", "💻", 1),
+            StudioEquipment("Rupert Neve Designs Preamp", "Preamp", "⚙️", 2)
+        ),
+        hasAtmos = true,
+        coverEmoji = "🎛️",
+        imageUrl = "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=600&q=80"
+    ),
+    StudioSpace(
+        id = "beatroute_bandra",
+        name = "BeatRoute Spaces (Bandra)",
+        location = "Bandra West, Mumbai",
+        rating = 4.8,
+        reviewCount = 94,
+        pricePerHour = 3500,
+        description = "Premium editorial rehearsal and tracking space preferred by top indie artists in Mumbai. Features high-end acoustic treatment, cozy vibes, and standard vocal and instrument recording gear.",
+        amenities = listOf("Rehearsal Room", "Vocal Booth", "Chill Lounge", "Drums Included", "Parking Space", "Instruments Support"),
+        equipmentList = listOf(
+            StudioEquipment("Universal Audio Apollo x16", "Audio Interface", "💻", 1),
+            StudioEquipment("Shure SM7B Vocal Microphone", "Microphone", "🎙️", 3),
+            StudioEquipment("Yamaha HS8 Active Studio Monitors", "Monitors", "🔊", 2),
+            StudioEquipment("Pearl Export 5-Piece Drum Kit", "Instruments", "🥁", 1),
+            StudioEquipment("Fender Twin Reverb Amp", "Amplifiers", "🎸", 2)
+        ),
+        hasAtmos = false,
+        coverEmoji = "🥁",
+        imageUrl = "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80"
+    ),
+    StudioSpace(
+        id = "octave_bengaluru",
+        name = "Octave Sound Lab",
+        location = "Indiranagar, Bengaluru",
+        rating = 4.7,
+        reviewCount = 72,
+        pricePerHour = 4500,
+        description = "State-of-the-art spatial production facility offering pristine recording, post-production mixing, and Dolby Atmos rendering. Perfect for podcasts, audiobooks, and electronic music tracking.",
+        amenities = listOf("Dolby Atmos", "Vocal Booth", "Instruments Support", "24x7 Access", "Acoustics Optimized", "Fiber Internet"),
+        equipmentList = listOf(
+            StudioEquipment("Rupert Neve Designs 5088 Analog Console", "Console", "🎛️", 1),
+            StudioEquipment("Neumann TLM 103 Condenser Mic", "Microphone", "🎙️", 2),
+            StudioEquipment("Focal Trio11 Be Monitors", "Monitors", "🔊", 2),
+            StudioEquipment("Ableton Suite & Logic Pro X", "DAW", "💻", 1)
+        ),
+        hasAtmos = true,
+        coverEmoji = "🎙️",
+        imageUrl = "https://images.unsplash.com/photo-1598653222000-6b7b7a552625?auto=format&fit=crop&w=600&q=80"
+    ),
+    StudioSpace(
+        id = "humming_tree_delhi",
+        name = "The Humming Tree Live Room",
+        location = "Vasant Kunj, Delhi",
+        rating = 4.6,
+        reviewCount = 51,
+        pricePerHour = 2500,
+        description = "A massive live performance space converted into a rehearsal recording room. Highly recommended for heavy bands, rock rehearsal, and multi-mic recording setups.",
+        amenities = listOf("Live Room", "Drums Included", "Instruments Support", "24x7 Access", "Stage Monitors", "Bar & Diner Access"),
+        equipmentList = listOf(
+            StudioEquipment("Yamaha TF5 Digital Mixing Console", "Console", "🎛️", 1),
+            StudioEquipment("Sennheiser e906 Dynamic Mic", "Microphone", "🎙️", 4),
+            StudioEquipment("Marshall JVM410H Guitar Amp Stack", "Amplifiers", "🎸", 2),
+            StudioEquipment("Mapex Armory Drum Kit", "Instruments", "🥁", 1)
+        ),
+        hasAtmos = false,
+        coverEmoji = "🎸",
+        imageUrl = "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80"
+    )
+)
+
+fun seedMockStudiosAndLoad(db: com.google.firebase.firestore.FirebaseFirestore, onCompleted: (List<StudioSpace>) -> Unit) {
+    var completedCount = 0
+    defaultMockStudios.forEach { studio ->
+        val map = hashMapOf(
+            "name" to studio.name,
+            "location" to studio.location,
+            "rating" to studio.rating,
+            "reviewCount" to studio.reviewCount,
+            "pricePerHour" to studio.pricePerHour,
+            "description" to studio.description,
+            "amenities" to studio.amenities,
+            "equipmentList" to studio.equipmentList.map { eq ->
+                hashMapOf(
+                    "name" to eq.name,
+                    "type" to eq.type,
+                    "emoji" to eq.emoji,
+                    "quantity" to eq.quantity,
+                    "condition" to eq.condition,
+                    "isIncluded" to eq.isIncluded
+                )
+            },
+            "isVerified" to studio.isVerified,
+            "hasAtmos" to studio.hasAtmos,
+            "coverEmoji" to studio.coverEmoji,
+            "imageUrl" to studio.imageUrl,
+            "availableDates" to studio.availableDates,
+            "availableSlots" to studio.availableSlots
+        )
+        db.collection("studios").document(studio.id).set(map)
+            .addOnCompleteListener {
+                completedCount++
+                if (completedCount == defaultMockStudios.size) {
+                    onCompleted(defaultMockStudios)
+                }
+            }
+    }
+}
+
 // --------------------------------------------------------------------------------------
 // MAIN CONTAINER FLOW
 // --------------------------------------------------------------------------------------
@@ -108,84 +229,108 @@ fun StudioBookingMainFlowContainer(
     onBackToDashboard: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // Standard mock list
-    val mockStudios = remember {
-        listOf(
-            StudioSpace(
-                name = "Yash Raj Film Studios (YRF) - Sound Lab",
-                location = "Andheri West, Mumbai",
-                rating = 4.9,
-                reviewCount = 188,
-                pricePerHour = 8000,
-                description = "The absolute gold standard of cinematic sound in India. Features Dolby Atmos Certified mixing suites and a massive sound-engineered 2,000 sq ft Live Room. Preferred by composers like A.R. Rahman.",
-                amenities = listOf("Dolby Atmos", "Vocal Booth", "Live Room", "Valet Parking", "Resident Engineers", "Private Lounge", "24x7 Access"),
-                equipmentList = listOf(
-                    StudioEquipment("SSL Duality Delta Analog Console", "Console", "🎛️", 1),
-                    StudioEquipment("Neumann U87 Ai Multi-pattern Mic", "Microphone", "🎙️", 4),
-                    StudioEquipment("Genelec 8361A Smart Active Monitors", "Monitors", "🔊", 11),
-                    StudioEquipment("Avid Pro Tools HDX Ultimate", "DAW", "💻", 1),
-                    StudioEquipment("Rupert Neve Designs Preamp", "Preamp", "⚙️", 2)
-                ),
-                hasAtmos = true,
-                coverEmoji = "🎛️",
-                imageUrl = "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=600&q=80"
-            ),
-            StudioSpace(
-                name = "BeatRoute Spaces (Bandra)",
-                location = "Bandra West, Mumbai",
-                rating = 4.8,
-                reviewCount = 94,
-                pricePerHour = 3500,
-                description = "Premium editorial rehearsal and tracking space preferred by top indie artists in Mumbai. Features high-end acoustic treatment, cozy vibes, and standard vocal and instrument recording gear.",
-                amenities = listOf("Rehearsal Room", "Vocal Booth", "Chill Lounge", "Drums Included", "Parking Space", "Instruments Support"),
-                equipmentList = listOf(
-                    StudioEquipment("Universal Audio Apollo x16", "Audio Interface", "💻", 1),
-                    StudioEquipment("Shure SM7B Vocal Microphone", "Microphone", "🎙️", 3),
-                    StudioEquipment("Yamaha HS8 Active Studio Monitors", "Monitors", "🔊", 2),
-                    StudioEquipment("Pearl Export 5-Piece Drum Kit", "Instruments", "🥁", 1),
-                    StudioEquipment("Fender Twin Reverb Amp", "Amplifiers", "🎸", 2)
-                ),
-                hasAtmos = false,
-                coverEmoji = "🥁",
-                imageUrl = "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80"
-            ),
-            StudioSpace(
-                name = "Octave Sound Lab",
-                location = "Indiranagar, Bengaluru",
-                rating = 4.7,
-                reviewCount = 72,
-                pricePerHour = 4500,
-                description = "State-of-the-art spatial production facility offering pristine recording, post-production mixing, and Dolby Atmos rendering. Perfect for podcasts, audiobooks, and electronic music tracking.",
-                amenities = listOf("Dolby Atmos", "Vocal Booth", "Instruments Support", "24x7 Access", "Acoustics Optimized", "Fiber Internet"),
-                equipmentList = listOf(
-                    StudioEquipment("Rupert Neve Designs 5088 Analog Console", "Console", "🎛️", 1),
-                    StudioEquipment("Neumann TLM 103 Condenser Mic", "Microphone", "🎙️", 2),
-                    StudioEquipment("Focal Trio11 Be Monitors", "Monitors", "🔊", 2),
-                    StudioEquipment("Ableton Suite & Logic Pro X", "DAW", "💻", 1)
-                ),
-                hasAtmos = true,
-                coverEmoji = "🎙️",
-                imageUrl = "https://images.unsplash.com/photo-1598653222000-6b7b7a552625?auto=format&fit=crop&w=600&q=80"
-            ),
-            StudioSpace(
-                name = "The Humming Tree Live Room",
-                location = "Vasant Kunj, Delhi",
-                rating = 4.6,
-                reviewCount = 51,
-                pricePerHour = 2500,
-                description = "A massive live performance space converted into a rehearsal recording room. Highly recommended for heavy bands, rock rehearsal, and multi-mic recording setups.",
-                amenities = listOf("Live Room", "Drums Included", "Instruments Support", "24x7 Access", "Stage Monitors", "Bar & Diner Access"),
-                equipmentList = listOf(
-                    StudioEquipment("Yamaha TF5 Digital Mixing Console", "Console", "🎛️", 1),
-                    StudioEquipment("Sennheiser e906 Dynamic Mic", "Microphone", "🎙️", 4),
-                    StudioEquipment("Marshall JVM410H Guitar Amp Stack", "Amplifiers", "🎸", 2),
-                    StudioEquipment("Mapex Armory Drum Kit", "Instruments", "🥁", 1)
-                ),
-                hasAtmos = false,
-                coverEmoji = "🎸",
-                imageUrl = "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80"
-            )
-        )
+    var mockStudios by remember { mutableStateOf(defaultMockStudios) }
+    var isLoadingStudios by remember { mutableStateOf(true) }
+
+    LaunchedEffect(Unit) {
+        val timeoutJob = launch {
+            delay(3000)
+            if (isLoadingStudios) {
+                android.util.Log.w("StudioBooking", "Firestore studio fetch timed out. Falling back to local defaults.")
+                mockStudios = defaultMockStudios
+                isLoadingStudios = false
+            }
+        }
+        try {
+            val db = com.example.onboarding.database.FirebaseManager.getFirestore()
+            if (db != null) {
+                db.collection("studios")
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        timeoutJob.cancel()
+                        if (!isLoadingStudios) return@addOnSuccessListener
+                        if (querySnapshot != null && !querySnapshot.isEmpty) {
+                            val list = querySnapshot.documents.mapNotNull { doc ->
+                                try {
+                                    val name = doc.getString("name") ?: ""
+                                    val location = doc.getString("location") ?: ""
+                                    val rating = doc.getDouble("rating") ?: 4.8
+                                    val reviewCount = doc.getLong("reviewCount")?.toInt() ?: 10
+                                    val pricePerHour = doc.getLong("pricePerHour")?.toInt() ?: 3000
+                                    val description = doc.getString("description") ?: ""
+                                    val amenities = (doc.get("amenities") as? List<*>)?.mapNotNull { it?.toString() } ?: emptyList()
+                                    val equipmentRaw = doc.get("equipmentList") as? List<*>
+                                    val equipmentList = equipmentRaw?.mapNotNull { eq ->
+                                        if (eq is Map<*, *>) {
+                                            StudioEquipment(
+                                                name = eq["name"]?.toString() ?: "",
+                                                type = eq["type"]?.toString() ?: "",
+                                                emoji = eq["emoji"]?.toString() ?: "🎙️",
+                                                quantity = (eq["quantity"] as? Long)?.toInt() ?: 1,
+                                                condition = eq["condition"]?.toString() ?: "Pristine",
+                                                isIncluded = (eq["isIncluded"] as? Boolean) ?: true
+                                            )
+                                        } else null
+                                    } ?: emptyList()
+                                    val isVerified = doc.getBoolean("isVerified") ?: true
+                                    val hasAtmos = doc.getBoolean("hasAtmos") ?: false
+                                    val coverEmoji = doc.getString("coverEmoji") ?: "🎙️"
+                                    val imageUrl = doc.getString("imageUrl")
+                                    val availableDates = (doc.get("availableDates") as? List<*>)?.mapNotNull { it?.toString() } ?: listOf("2026-06-27", "2026-06-28", "2026-06-29", "2026-06-30")
+                                    val availableSlots = (doc.get("availableSlots") as? List<*>)?.mapNotNull { it?.toString() } ?: listOf("10:00 AM - 02:00 PM", "02:00 PM - 06:00 PM", "06:00 PM - 10:00 PM")
+                                    
+                                    StudioSpace(
+                                        id = doc.id,
+                                        name = name,
+                                        location = location,
+                                        rating = rating,
+                                        reviewCount = reviewCount,
+                                        pricePerHour = pricePerHour,
+                                        description = description,
+                                        amenities = amenities,
+                                        equipmentList = equipmentList,
+                                        isVerified = isVerified,
+                                        hasAtmos = hasAtmos,
+                                        coverEmoji = coverEmoji,
+                                        imageUrl = imageUrl,
+                                        availableDates = availableDates,
+                                        availableSlots = availableSlots
+                                    )
+                                } catch (e: Exception) {
+                                    null
+                                }
+                            }
+                            if (list.isNotEmpty()) {
+                                mockStudios = list
+                                isLoadingStudios = false
+                                return@addOnSuccessListener
+                            }
+                        }
+                        
+                        seedMockStudiosAndLoad(db) { seededList ->
+                            if (isLoadingStudios) {
+                                mockStudios = seededList
+                                isLoadingStudios = false
+                            }
+                        }
+                    }
+                    .addOnFailureListener {
+                        timeoutJob.cancel()
+                        if (isLoadingStudios) {
+                            mockStudios = defaultMockStudios
+                            isLoadingStudios = false
+                        }
+                    }
+            } else {
+                timeoutJob.cancel()
+                mockStudios = defaultMockStudios
+                isLoadingStudios = false
+            }
+        } catch (e: Exception) {
+            timeoutJob.cancel()
+            mockStudios = defaultMockStudios
+            isLoadingStudios = false
+        }
     }
 
     var currentScreen by remember { mutableStateOf(StudioBookingScreen.DISCOVERY) }
@@ -226,6 +371,77 @@ fun StudioBookingMainFlowContainer(
                 status = "Completed"
             )
         )
+    }
+
+    LaunchedEffect(mockStudios) {
+        if (mockStudios.isEmpty()) return@LaunchedEffect
+        try {
+            val db = com.example.onboarding.database.FirebaseManager.getFirestore()
+            val auth = com.example.onboarding.database.FirebaseManager.getAuth()
+            val currentUid = auth?.currentUser?.uid ?: "local_user_uid"
+            if (db != null) {
+                db.collection("studio_bookings")
+                    .whereEqualTo("artistUserId", currentUid)
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        if (querySnapshot != null && !querySnapshot.isEmpty) {
+                            val loaded = querySnapshot.documents.mapNotNull { doc ->
+                                try {
+                                    val bId = doc.getString("bookingId") ?: doc.id
+                                    val sId = doc.getString("studioId") ?: ""
+                                    val matchedStudio = mockStudios.find { it.id == sId } ?: mockStudios.firstOrNull() ?: defaultMockStudios[0]
+                                    val dateStr = doc.getString("bookingDateISO") ?: "2026-06-27"
+                                    
+                                    val hours = doc.get("bookedHourSlots") as? List<*>
+                                    val slotText = when (hours?.firstOrNull()?.toString()?.toIntOrNull()) {
+                                        10 -> "10:00 AM - 02:00 PM"
+                                        14 -> "02:00 PM - 06:00 PM"
+                                        18 -> "06:00 PM - 10:00 PM"
+                                        else -> "02:00 PM - 06:00 PM"
+                                    }
+                                    
+                                    val totalPaid = doc.getDouble("totalCostAmount")?.toInt() ?: 12000
+                                    val status = doc.getString("statusKey")?.replaceFirstChar { it.uppercase() } ?: "Confirmed"
+                                    
+                                    val notes = doc.getString("artistBookingNotes") ?: ""
+                                    val sessionTypeFromNotes = if (notes.contains("Session: ")) {
+                                        notes.substringAfter("Session: ").substringBefore(",")
+                                    } else "Recording & Overdubs"
+                                    
+                                    val durationFromNotes = if (notes.contains("Duration: ")) {
+                                        notes.substringAfter("Duration: ").substringBefore(".")
+                                    } else "Half Day (4 Hours)"
+                                    
+                                    val extraAddonsList = if (notes.contains("Extra addons: ")) {
+                                        notes.substringAfter("Extra addons: ").split(",").map { it.trim() }.filter { it.isNotEmpty() }
+                                    } else emptyList()
+                                    
+                                    StudioBooking(
+                                        id = bId,
+                                        studio = matchedStudio,
+                                        date = dateStr,
+                                        timeSlot = slotText,
+                                        sessionType = sessionTypeFromNotes,
+                                        duration = durationFromNotes,
+                                        hasEngineer = notes.contains("hasEngineer=true") || notes.contains("Engineer"),
+                                        extraAddons = extraAddonsList,
+                                        totalPaid = totalPaid,
+                                        status = status
+                                    )
+                                } catch (e: Exception) {
+                                    null
+                                }
+                            }
+                            if (loaded.isNotEmpty()) {
+                                myBookings.clear()
+                                myBookings.addAll(loaded)
+                            }
+                        }
+                    }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     var latestBookingId by remember { mutableStateOf("") }
@@ -270,7 +486,7 @@ fun StudioBookingMainFlowContainer(
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.CheckCircle, null, tint = Color.White, modifier = Modifier.size(20.dp))
-                            Spacer(modifier = Modifier.width(Dimens.sp1))
+                            Spacer(modifier = Modifier.width(8.dp))
                             Text(
                                 text = showSuccessBanner ?: "",
                                 color = Color.White,
@@ -412,6 +628,49 @@ fun StudioBookingMainFlowContainer(
                             )
                             myBookings.add(0, newBooking)
                             latestBookingId = newBooking.id
+
+                            // Persist to Cloud Firestore studio_bookings collection
+                            try {
+                                val db = com.example.onboarding.database.FirebaseManager.getFirestore()
+                                val auth = com.example.onboarding.database.FirebaseManager.getAuth()
+                                val currentUid = auth?.currentUser?.uid ?: "local_user_uid"
+                                if (db != null) {
+                                    val startHour = when {
+                                        selectedTimeSlot.contains("10:00 AM") -> 10
+                                        selectedTimeSlot.contains("02:00 PM") -> 14
+                                        selectedTimeSlot.contains("06:00 PM") -> 18
+                                        else -> 14
+                                    }
+                                    val hourSlots = listOf(startHour, startHour + 1, startHour + 2, startHour + 3)
+                                    val notesText = "Session: $sessionType, Duration: $durationSelection. Extra addons: ${selectedAddons.joinToString(",")}. hasEngineer=$withResidentEngineer"
+                                    
+                                    val bookingData = hashMapOf(
+                                        "bookingId" to newBooking.id,
+                                        "artistUserId" to currentUid,
+                                        "studioId" to selectedStudio.id,
+                                        "selectedServiceTierId" to "standard",
+                                        "bookingDateISO" to selectedDate,
+                                        "bookedHourSlots" to hourSlots,
+                                        "totalCostAmount" to newBooking.totalPaid.toDouble(),
+                                        "statusKey" to "confirmed",
+                                        "artistBookingNotes" to notesText,
+                                        "paymentTransactionId" to "TXN_" + System.currentTimeMillis(),
+                                        "createdAt" to System.currentTimeMillis(),
+                                        "lastUpdatedAt" to System.currentTimeMillis()
+                                    )
+                                    db.collection("studio_bookings").document(newBooking.id)
+                                        .set(bookingData)
+                                        .addOnSuccessListener {
+                                            android.util.Log.d("StudioBooking", "Booking ${newBooking.id} successfully saved to Firestore.")
+                                        }
+                                        .addOnFailureListener { e ->
+                                            android.util.Log.e("StudioBooking", "Failed to save booking to Firestore: ${e.message}")
+                                        }
+                                }
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+
                             showSuccessBanner = "🎉 Payment Secured! Session Booked successfully!"
                             currentScreen = StudioBookingScreen.CONFIRMATION_SUCCESS
                         },
@@ -440,6 +699,23 @@ fun StudioBookingMainFlowContainer(
                             if (index != -1) {
                                 myBookings[index] = myBookings[index].copy(status = "Cancelled")
                                 showSuccessBanner = "Booking $bookingId has been cancelled."
+
+                                // Sync cancellation state to Cloud Firestore
+                                try {
+                                    val db = com.example.onboarding.database.FirebaseManager.getFirestore()
+                                    if (db != null) {
+                                        db.collection("studio_bookings").document(bookingId)
+                                            .update("statusKey", "cancelled", "lastUpdatedAt", System.currentTimeMillis())
+                                            .addOnSuccessListener {
+                                                android.util.Log.d("StudioBooking", "Booking $bookingId status updated to cancelled in Firestore.")
+                                            }
+                                            .addOnFailureListener { e ->
+                                                android.util.Log.e("StudioBooking", "Failed to update booking status in Firestore: ${e.message}")
+                                            }
+                                    }
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                }
                             }
                         }
                     )
@@ -473,7 +749,7 @@ fun StudioBookingMainFlowContainer(
                     ) {
                         Text(
                             text = "Filter Spaces",
-                            style = Typography.bodyLarge.copy(fontWeight = FontWeight.Bold, color = BrandDark)
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold, color = BrandDark)
                         )
                         Text(
                             text = "Clear All",
@@ -491,10 +767,10 @@ fun StudioBookingMainFlowContainer(
 
                     HorizontalDivider(color = BrandBorder)
 
-                    Text("Capabilities & Amenities", style = Typography.bodyLarge)
+                    Text("Capabilities & Amenities", fontWeight = FontWeight.Bold, fontSize = 14.sp)
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         FilterPillToggle(
                             text = "Dolby Atmos",
@@ -515,7 +791,7 @@ fun StudioBookingMainFlowContainer(
 
                     Spacer(modifier = Modifier.height(6.dp))
 
-                    Text("Max Price Per Hour: ₹$priceMaxSelected", style = Typography.bodyLarge)
+                    Text("Max Price Per Hour: ₹$priceMaxSelected", fontWeight = FontWeight.Bold, fontSize = 14.sp)
                     Slider(
                         value = priceMaxSelected.toFloat(),
                         onValueChange = { priceMaxSelected = it.toInt() },
@@ -528,7 +804,7 @@ fun StudioBookingMainFlowContainer(
                         )
                     )
 
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(12.dp))
 
                     Button(
                         onClick = { showFiltersSheet = false },
@@ -542,7 +818,7 @@ fun StudioBookingMainFlowContainer(
                         Text("Show Matching Studios (${filteredStudios.size})", fontWeight = FontWeight.Bold)
                     }
                     
-                    Spacer(modifier = Modifier.height(Dimens.sp3))
+                    Spacer(modifier = Modifier.height(24.dp))
                 }
             }
         }
@@ -621,14 +897,14 @@ fun StudioDiscoveryScreen(
                         Text(
                             text = "MusicLinkd Spaces",
                             color = Color.White,
-                            style = Typography.bodyLarge.copy(fontWeight = FontWeight.Bold)
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                         )
                     }
 
                     // Floating Profile Button
                     Box(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(Dimens.r2))
+                            .clip(RoundedCornerShape(12.dp))
                             .background(BrandPrimary)
                             .clickable { onNavigateMyBookings() }
                             .padding(horizontal = 12.dp, vertical = 6.dp)
@@ -642,7 +918,7 @@ fun StudioDiscoveryScreen(
                 Text(
                     text = "Find, compare and book India's elite creative spaces.",
                     color = Color.White,
-                    style = Typography.bodyLarge.copy(
+                    style = MaterialTheme.typography.headlineMedium.copy(
                         fontWeight = FontWeight.ExtraBold,
                         lineHeight = 32.sp,
                         letterSpacing = (-0.5).sp
@@ -653,7 +929,7 @@ fun StudioDiscoveryScreen(
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Box(
                         modifier = Modifier
@@ -665,7 +941,7 @@ fun StudioDiscoveryScreen(
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.Search, null, tint = BrandPrimary, modifier = Modifier.size(18.dp))
-                            Spacer(modifier = Modifier.width(Dimens.sp1))
+                            Spacer(modifier = Modifier.width(8.dp))
                             BasicInputPlaceholder(
                                 text = inputQuery,
                                 onValueChange = { inputQuery = it },
@@ -690,9 +966,9 @@ fun StudioDiscoveryScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
-                .clip(RoundedCornerShape(Dimens.r2))
+                .clip(RoundedCornerShape(16.dp))
                 .background(BrandAccent.copy(alpha = 0.08f))
-                .border(1.dp, BrandAccent.copy(alpha = 0.2f), RoundedCornerShape(Dimens.r2))
+                .border(1.dp, BrandAccent.copy(alpha = 0.2f), RoundedCornerShape(16.dp))
                 .clickable { onNavigateOwnerDashboard() }
                 .padding(16.dp)
         ) {
@@ -702,8 +978,8 @@ fun StudioDiscoveryScreen(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
-                    Text("🏢", style = Typography.headlineLarge)
-                    Spacer(modifier = Modifier.width(Dimens.sp2))
+                    Text("🏢", fontSize = 24.sp)
+                    Spacer(modifier = Modifier.width(12.dp))
                     Column {
                         Text("List your rehearsal space or studio?", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
                         Text("Manage bookings, invoicing & residents.", fontSize = 11.sp, color = BrandTextSecondary)
@@ -722,13 +998,13 @@ fun StudioDiscoveryScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("Featured Sound Labs", style = Typography.bodyLarge, color = BrandDark)
-                Text("See All", color = BrandPrimary, style = Typography.bodyLarge)
+                Text("Featured Sound Labs", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandDark)
+                Text("See All", color = BrandPrimary, fontWeight = FontWeight.Bold, fontSize = 12.sp)
             }
 
             LazyRow(
                 contentPadding = PaddingValues(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(studios) { studio ->
                     FeaturedStudioCard(studio = studio, onClick = { onSelectStudio(studio) })
@@ -742,14 +1018,15 @@ fun StudioDiscoveryScreen(
         Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
             Text(
                 text = "Nearby Rehearsal & Live Rooms",
-                style = Typography.bodyLarge,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
                 color = BrandDark,
                 modifier = Modifier.padding(vertical = 12.dp)
             )
 
             studios.forEach { studio ->
                 StudioListItemCard(studio = studio, onClick = { onSelectStudio(studio) })
-                Spacer(modifier = Modifier.height(Dimens.sp2))
+                Spacer(modifier = Modifier.height(12.dp))
             }
         }
     }
@@ -763,12 +1040,12 @@ fun BasicInputPlaceholder(
 ) {
     Box(modifier = Modifier.fillMaxWidth()) {
         if (text.isEmpty()) {
-            Text(placeholder, color = BrandTextSecondary, style = Typography.labelLarge)
+            Text(placeholder, color = BrandTextSecondary, fontSize = 12.sp)
         }
         androidx.compose.foundation.text.BasicTextField(
             value = text,
             onValueChange = onValueChange,
-            textStyle = Typography.bodyLarge.copy(color = BrandTextPrimary, style = Typography.labelLarge),
+            textStyle = MaterialTheme.typography.bodyMedium.copy(color = BrandTextPrimary, fontSize = 12.sp),
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )
@@ -811,7 +1088,7 @@ fun StudioSearchResultsScreen(
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Default.Search, null, tint = BrandPrimary, modifier = Modifier.size(16.dp))
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
+                    Spacer(modifier = Modifier.width(8.dp))
                     BasicInputPlaceholder(
                         text = query,
                         onValueChange = onQueryChange,
@@ -819,7 +1096,7 @@ fun StudioSearchResultsScreen(
                     )
                 }
             }
-            Spacer(modifier = Modifier.width(Dimens.sp1))
+            Spacer(modifier = Modifier.width(8.dp))
             IconButton(
                 onClick = onOpenFilters,
                 modifier = Modifier
@@ -840,9 +1117,9 @@ fun StudioSearchResultsScreen(
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text("🏢", fontSize = 48.sp)
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(16.dp))
                     Text("No Studios Found Matching Selection", fontWeight = FontWeight.Bold, color = BrandDark)
-                    Text("Try widening your price range or turning off amenities filters.", color = BrandTextSecondary, style = Typography.labelLarge, textAlign = TextAlign.Center)
+                    Text("Try widening your price range or turning off amenities filters.", color = BrandTextSecondary, fontSize = 12.sp, textAlign = TextAlign.Center)
                 }
             }
         } else {
@@ -856,7 +1133,8 @@ fun StudioSearchResultsScreen(
                 item {
                     Text(
                         text = "Matching Studios (${studios.size})",
-                        style = Typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp,
                         color = BrandDark
                     )
                 }
@@ -925,7 +1203,7 @@ fun StudioProfileScreen(
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back", tint = Color.White)
                 }
 
-                Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     IconButton(
                         onClick = onShare,
                         modifier = Modifier
@@ -949,7 +1227,7 @@ fun StudioProfileScreen(
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
                         .padding(12.dp)
-                        .clip(RoundedCornerShape(Dimens.r1))
+                        .clip(RoundedCornerShape(8.dp))
                         .background(BrandPrimary)
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 ) {
@@ -963,7 +1241,7 @@ fun StudioProfileScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -972,17 +1250,17 @@ fun StudioProfileScreen(
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(studio.name, style = Typography.bodyLarge, color = BrandDark)
+                        Text(studio.name, fontSize = 20.sp, fontWeight = FontWeight.Bold, color = BrandDark)
                         if (studio.isVerified) {
-                            Spacer(modifier = Modifier.width(Dimens.sp1))
+                            Spacer(modifier = Modifier.width(4.dp))
                             Icon(Icons.Default.Verified, "Verified", tint = BrandPrimary, modifier = Modifier.size(16.dp))
                         }
                     }
-                    Text(studio.location, style = Typography.labelLarge, color = BrandTextSecondary)
+                    Text(studio.location, fontSize = 12.sp, color = BrandTextSecondary)
                 }
                 
                 Column(horizontalAlignment = Alignment.End) {
-                    Text("₹${studio.pricePerHour}/hr", style = Typography.bodyLarge, color = BrandPrimary)
+                    Text("₹${studio.pricePerHour}/hr", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, color = BrandPrimary)
                     Text("Base Booking Rate", fontSize = 10.sp, color = BrandTextSecondary)
                 }
             }
@@ -994,14 +1272,14 @@ fun StudioProfileScreen(
             ) {
                 Icon(Icons.Default.Star, null, tint = Color(0xFFFFB300), modifier = Modifier.size(16.dp))
                 Text(studio.rating.toString(), fontWeight = FontWeight.Bold, fontSize = 13.sp)
-                Text("(${studio.reviewCount} Reviews)", color = BrandTextSecondary, style = Typography.labelLarge)
+                Text("(${studio.reviewCount} Reviews)", color = BrandTextSecondary, fontSize = 12.sp)
             }
 
             // MAIN SECTIONS TABS
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
+                    .border(1.dp, BrandBorder, RoundedCornerShape(12.dp))
                     .background(Color.White)
             ) {
                 listOf("About", "Equipment & Gear", "Policies").forEach { tab ->
@@ -1025,11 +1303,11 @@ fun StudioProfileScreen(
 
             when (activeTab) {
                 "About" -> {
-                    Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
-                        Text("About The Facility", style = Typography.bodyLarge)
-                        Text(studio.description, style = Typography.labelLarge, color = BrandTextSecondary, lineHeight = 18.sp)
+                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Text("About The Facility", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                        Text(studio.description, fontSize = 12.sp, color = BrandTextSecondary, lineHeight = 18.sp)
                         
-                        Text("Elite Amenities Offered", style = Typography.bodyLarge)
+                        Text("Elite Amenities Offered", fontWeight = FontWeight.Bold, fontSize = 14.sp)
                         FlowRowCustom(
                             items = studio.amenities,
                             color = BrandPrimary
@@ -1038,17 +1316,18 @@ fun StudioProfileScreen(
                 }
 
                 "Equipment & Gear" -> {
-                    Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text("Resident Gear Showcase", style = Typography.bodyLarge)
+                            Text("Resident Gear Showcase", fontWeight = FontWeight.Bold, fontSize = 14.sp)
                             Text(
                                 text = "View Specifications",
                                 color = BrandPrimary,
-                                style = Typography.bodyLarge,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp,
                                 modifier = Modifier.clickable { onViewEquipment() }
                             )
                         }
@@ -1064,7 +1343,7 @@ fun StudioProfileScreen(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Text(gear.emoji, style = Typography.headlineLarge)
+                                    Text(gear.emoji, fontSize = 20.sp)
                                     Spacer(modifier = Modifier.width(10.dp))
                                     Column {
                                         Text(gear.name, fontWeight = FontWeight.Bold, fontSize = 11.5.sp)
@@ -1073,7 +1352,7 @@ fun StudioProfileScreen(
                                 }
                                 Box(
                                     modifier = Modifier
-                                        .background(BrandSuccess.copy(alpha = 0.1f), RoundedCornerShape(Dimens.r1))
+                                        .background(BrandSuccess.copy(alpha = 0.1f), RoundedCornerShape(4.dp))
                                         .padding(horizontal = 6.dp, vertical = 2.dp)
                                 ) {
                                     Text("INCLUDED", fontSize = 8.sp, color = BrandSuccess, fontWeight = FontWeight.Bold)
@@ -1085,7 +1364,7 @@ fun StudioProfileScreen(
 
                 "Policies" -> {
                     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Text("Studio Code & Guidelines", style = Typography.bodyLarge)
+                        Text("Studio Code & Guidelines", fontWeight = FontWeight.Bold, fontSize = 14.sp)
                         listOf(
                             "❌ No smoking or alcoholic beverages allowed inside the live room or console bays.",
                             "🕒 Rescheduling must be initialized at least 24 hours in advance.",
@@ -1097,7 +1376,7 @@ fun StudioProfileScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // PRIMARY RESERVE CTA
             Button(
@@ -1109,7 +1388,7 @@ fun StudioProfileScreen(
                 shape = RoundedCornerShape(99.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary)
             ) {
-                Text("Reserve Recording Session", style = Typography.bodyLarge)
+                Text("Reserve Recording Session", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             }
         }
     }
@@ -1137,7 +1416,7 @@ fun StudioEquipmentDetailsScreen(
             }
             Spacer(modifier = Modifier.width(10.dp))
             Column {
-                Text("Resident Equipment Room", style = Typography.bodyLarge, color = BrandDark)
+                Text("Resident Equipment Room", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
                 Text(studio.name, fontSize = 11.sp, color = BrandTextSecondary)
             }
         }
@@ -1145,7 +1424,7 @@ fun StudioEquipmentDetailsScreen(
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(studio.equipmentList) { gear ->
                 Card(
@@ -1155,7 +1434,7 @@ fun StudioEquipmentDetailsScreen(
                     shape = RoundedCornerShape(14.dp)
                 ) {
                     Row(
-                        modifier = Modifier.padding(Dimens.sp2),
+                        modifier = Modifier.padding(16.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -1167,7 +1446,7 @@ fun StudioEquipmentDetailsScreen(
                                     .background(BrandPrimary.copy(alpha = 0.08f)),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Text(gear.emoji, style = Typography.headlineLarge)
+                                Text(gear.emoji, fontSize = 24.sp)
                             }
                             Spacer(modifier = Modifier.width(14.dp))
                             Column {
@@ -1179,12 +1458,12 @@ fun StudioEquipmentDetailsScreen(
                         Column(horizontalAlignment = Alignment.End) {
                             Box(
                                 modifier = Modifier
-                                    .background(BrandSuccess.copy(alpha = 0.12f), RoundedCornerShape(Dimens.r1))
+                                    .background(BrandSuccess.copy(alpha = 0.12f), RoundedCornerShape(4.dp))
                                     .padding(horizontal = 8.dp, vertical = 4.dp)
                             ) {
                                 Text("Included", color = BrandSuccess, fontSize = 9.sp, fontWeight = FontWeight.Bold)
                             }
-                            Spacer(modifier = Modifier.height(Dimens.sp1))
+                            Spacer(modifier = Modifier.height(4.dp))
                             Text("Qty: ${gear.quantity}", fontSize = 11.sp, fontWeight = FontWeight.Bold)
                         }
                     }
@@ -1225,16 +1504,16 @@ fun StudioAvailabilityCalendarScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
             }
             Spacer(modifier = Modifier.width(10.dp))
-            Text("Select Date & Time Slot", style = Typography.bodyLarge)
+            Text("Select Date & Time Slot", fontWeight = FontWeight.Bold, fontSize = 15.sp)
         }
 
         Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
-            Text("Choose Reservation Date", style = Typography.bodyLarge)
+            Text("Choose Reservation Date", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             
             // Standard weekly calendar representation
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 listOf(
                     Triple("Sat", "27", "2026-06-27"),
@@ -1246,23 +1525,23 @@ fun StudioAvailabilityCalendarScreen(
                     Box(
                         modifier = Modifier
                             .weight(1f)
-                            .clip(RoundedCornerShape(Dimens.r2))
+                            .clip(RoundedCornerShape(12.dp))
                             .background(if (isSelected) BrandPrimary else Color.White)
-                            .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(Dimens.r2))
+                            .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(12.dp))
                             .clickable { onDateSelect(rawDate) }
                             .padding(vertical = 12.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(day, fontSize = 11.sp, color = if (isSelected) Color.White else BrandTextSecondary)
-                            Spacer(modifier = Modifier.height(Dimens.sp1))
-                            Text(num, style = Typography.bodyLarge, color = if (isSelected) Color.White else BrandDark)
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(num, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = if (isSelected) Color.White else BrandDark)
                         }
                     }
                 }
             }
 
-            Text("Select Time Block", style = Typography.bodyLarge)
+            Text("Select Time Block", fontWeight = FontWeight.Bold, fontSize = 14.sp)
 
             studio.availableSlots.forEach { slot ->
                 val isSelected = selectedSlot == slot
@@ -1289,7 +1568,7 @@ fun StudioAvailabilityCalendarScreen(
                             contentDescription = null,
                             tint = if (isSelected) BrandPrimary else BrandTextSecondary
                         )
-                        Spacer(modifier = Modifier.width(Dimens.sp2))
+                        Spacer(modifier = Modifier.width(12.dp))
                         Text(
                             text = slot,
                             fontWeight = FontWeight.Bold,
@@ -1302,7 +1581,7 @@ fun StudioAvailabilityCalendarScreen(
                         modifier = Modifier
                             .background(
                                 if (isBooked) Color.Red.copy(alpha = 0.1f) else if (isSelected) BrandPrimary.copy(alpha = 0.12f) else BrandSuccess.copy(alpha = 0.1f),
-                                RoundedCornerShape(Dimens.r1)
+                                RoundedCornerShape(4.dp)
                             )
                             .padding(horizontal = 8.dp, vertical = 4.dp)
                     ) {
@@ -1316,7 +1595,7 @@ fun StudioAvailabilityCalendarScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp3))
+            Spacer(modifier = Modifier.height(24.dp))
 
             Button(
                 onClick = onNext,
@@ -1366,14 +1645,14 @@ fun StudioConfigureSessionScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
             }
             Spacer(modifier = Modifier.width(10.dp))
-            Text("Configure Your Booking", style = Typography.bodyLarge)
+            Text("Configure Your Booking", fontWeight = FontWeight.Bold, fontSize = 15.sp)
         }
 
         Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
-            Text("Choose Session Mode", style = Typography.bodyLarge)
+            Text("Choose Session Mode", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 listOf("Recording & Overdubs", "Mixing & Mastering", "Podcast & Foley").forEach { type ->
                     val isSelected = sessionType == type
@@ -1398,7 +1677,7 @@ fun StudioConfigureSessionScreen(
                 }
             }
 
-            Text("Session Duration Selection", style = Typography.bodyLarge)
+            Text("Session Duration Selection", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             listOf(
                 Triple("Hourly Session", "₹ Base hourly rate applies.", 1),
                 Triple("Half Day (4 Hours)", "₹ Save 10% off hourly fee.", 4),
@@ -1408,9 +1687,9 @@ fun StudioConfigureSessionScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(Dimens.r2))
+                        .clip(RoundedCornerShape(12.dp))
                         .background(if (isSelected) BrandPrimary.copy(alpha = 0.05f) else Color.White)
-                        .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(Dimens.r2))
+                        .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(12.dp))
                         .clickable { onDurationChange(label, hrs) }
                         .padding(14.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -1428,13 +1707,13 @@ fun StudioConfigureSessionScreen(
                 }
             }
 
-            Text("Add Elite Resident Engineer?", style = Typography.bodyLarge)
+            Text("Add Elite Resident Engineer?", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(Dimens.r2))
+                    .clip(RoundedCornerShape(12.dp))
                     .background(Color.White)
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
+                    .border(1.dp, BrandBorder, RoundedCornerShape(12.dp))
                     .padding(14.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
@@ -1450,7 +1729,7 @@ fun StudioConfigureSessionScreen(
                 )
             }
 
-            Text("Exclusive Add-ons (Optional)", style = Typography.bodyLarge)
+            Text("Exclusive Add-ons (Optional)", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             listOf(
                 Triple("Valet Parking Space", "+₹400 per slot", "🚗"),
                 Triple("Artisan Coffee & Catering", "+₹800 complete service", "☕"),
@@ -1460,9 +1739,9 @@ fun StudioConfigureSessionScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(Dimens.r2))
+                        .clip(RoundedCornerShape(12.dp))
                         .background(Color.White)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
+                        .border(1.dp, BrandBorder, RoundedCornerShape(12.dp))
                         .clickable {
                             if (isChecked) selectedAddons.remove(name) else selectedAddons.add(name)
                         }
@@ -1471,10 +1750,10 @@ fun StudioConfigureSessionScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(emoji, style = Typography.bodyLarge)
-                        Spacer(modifier = Modifier.width(Dimens.sp2))
+                        Text(emoji, fontSize = 18.sp)
+                        Spacer(modifier = Modifier.width(12.dp))
                         Column {
-                            Text(name, style = Typography.bodyLarge)
+                            Text(name, fontWeight = FontWeight.Bold, fontSize = 12.sp)
                             Text(fee, fontSize = 10.5.sp, color = BrandTextSecondary)
                         }
                     }
@@ -1488,7 +1767,7 @@ fun StudioConfigureSessionScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             Button(
                 onClick = onNext,
@@ -1543,7 +1822,7 @@ fun StudioBookingSummaryScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
             }
             Spacer(modifier = Modifier.width(10.dp))
-            Text("Review Studio Session", style = Typography.bodyLarge)
+            Text("Review Studio Session", fontWeight = FontWeight.Bold, fontSize = 15.sp)
         }
 
         Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(18.dp)) {
@@ -1552,26 +1831,26 @@ fun StudioBookingSummaryScreen(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 border = BorderStroke(1.dp, BrandBorder),
-                shape = RoundedCornerShape(Dimens.r2)
+                shape = RoundedCornerShape(16.dp)
             ) {
-                Column(modifier = Modifier.padding(Dimens.sp2), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Text("Studio Reservation", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = BrandPrimary)
-                    Text(studio.name, style = Typography.bodyLarge, color = BrandDark)
-                    Text("Location: ${studio.location}", style = Typography.labelLarge, color = BrandTextSecondary)
+                    Text(studio.name, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
+                    Text("Location: ${studio.location}", fontSize = 12.sp, color = BrandTextSecondary)
                     
                     HorizontalDivider(color = BrandBorder)
 
-                    Text("Date: $date", style = Typography.bodyLarge)
-                    Text("Selected slot: $timeSlot", style = Typography.bodyLarge)
-                    Text("Mode: $sessionType", style = Typography.bodyLarge)
-                    Text("Block Type: $duration", style = Typography.bodyLarge)
+                    Text("Date: $date", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                    Text("Selected slot: $timeSlot", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                    Text("Mode: $sessionType", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                    Text("Block Type: $duration", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
                 }
             }
 
-            Text("Apply Promo Code", style = Typography.bodyLarge)
+            Text("Apply Promo Code", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
@@ -1601,7 +1880,7 @@ fun StudioBookingSummaryScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(BrandSuccess.copy(alpha = 0.1f), RoundedCornerShape(Dimens.r1))
+                        .background(BrandSuccess.copy(alpha = 0.1f), RoundedCornerShape(8.dp))
                         .padding(10.dp)
                 ) {
                     Text(
@@ -1613,7 +1892,7 @@ fun StudioBookingSummaryScreen(
                 }
             }
 
-            Text("Session Fee Breakdown", style = Typography.bodyLarge)
+            Text("Session Fee Breakdown", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             
             // Detailed breakdown
             val baseCost = studio.pricePerHour * durationMultiplier
@@ -1633,25 +1912,25 @@ fun StudioBookingSummaryScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(Dimens.r2))
+                    .clip(RoundedCornerShape(16.dp))
                     .background(Color.White)
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
+                    .border(1.dp, BrandBorder, RoundedCornerShape(16.dp))
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                    Text("Studio Hire Rate (₹${studio.pricePerHour} × $durationMultiplier hrs)", style = Typography.labelLarge, color = BrandTextSecondary)
-                    Text("₹$baseCost", style = Typography.bodyLarge)
+                    Text("Studio Hire Rate (₹${studio.pricePerHour} × $durationMultiplier hrs)", fontSize = 12.sp, color = BrandTextSecondary)
+                    Text("₹$baseCost", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                 }
                 if (hasEngineer) {
                     Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                        Text("Senior Resident Engineer (₹1,500 × $durationMultiplier hrs)", style = Typography.labelLarge, color = BrandTextSecondary)
-                        Text("₹$engineerCost", style = Typography.bodyLarge)
+                        Text("Senior Resident Engineer (₹1,500 × $durationMultiplier hrs)", fontSize = 12.sp, color = BrandTextSecondary)
+                        Text("₹$engineerCost", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     }
                 }
                 selectedAddons.forEach { addon ->
                     Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                        Text(addon, style = Typography.labelLarge, color = BrandTextSecondary)
+                        Text(addon, fontSize = 12.sp, color = BrandTextSecondary)
                         Text(
                             text = when (addon) {
                                 "Valet Parking Space" -> "₹400"
@@ -1659,27 +1938,28 @@ fun StudioBookingSummaryScreen(
                                 "Live-stream Rig Multi-cam Setup" -> "₹2500"
                                 else -> "₹0"
                             },
-                            style = Typography.bodyLarge
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold
                         )
                     }
                 }
 
                 if (discount > 0) {
                     Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                        Text("Promo Discount applied ($promoCode)", style = Typography.labelLarge, color = BrandSuccess, fontWeight = FontWeight.Bold)
-                        Text("-₹$discount", style = Typography.labelLarge, color = BrandSuccess, fontWeight = FontWeight.Bold)
+                        Text("Promo Discount applied ($promoCode)", fontSize = 12.sp, color = BrandSuccess, fontWeight = FontWeight.Bold)
+                        Text("-₹$discount", fontSize = 12.sp, color = BrandSuccess, fontWeight = FontWeight.Bold)
                     }
                 }
 
                 HorizontalDivider(color = BrandBorder)
 
                 Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                    Text("Total Session Quote", style = Typography.bodyLarge)
-                    Text("₹$totalPaid", style = Typography.bodyLarge, color = BrandPrimary)
+                    Text("Total Session Quote", fontWeight = FontWeight.ExtraBold, fontSize = 14.sp)
+                    Text("₹$totalPaid", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandPrimary)
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(12.dp))
 
             Button(
                 onClick = onNext,
@@ -1729,9 +2009,9 @@ fun StudioPaymentScreen(
             Spacer(modifier = Modifier.width(10.dp))
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Text("Secure Checkout Gateway", style = Typography.bodyLarge)
+                Text("Secure Checkout Gateway", fontWeight = FontWeight.Bold, fontSize = 15.sp)
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(6.dp))
@@ -1754,21 +2034,21 @@ fun StudioPaymentScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = BrandDark),
-                shape = RoundedCornerShape(Dimens.r2)
+                shape = RoundedCornerShape(16.dp)
             ) {
                 Column(
-                    modifier = Modifier.padding(Dimens.sp3),
+                    modifier = Modifier.padding(24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text("Securing Studio Slot at", color = Color.White.copy(alpha = 0.7f), fontSize = 11.sp)
-                    Text(studioName, color = Color.White, style = Typography.bodyLarge, textAlign = TextAlign.Center)
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Text(studioName, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 14.sp, textAlign = TextAlign.Center)
+                    Spacer(modifier = Modifier.height(12.dp))
                     Text("₹$amount", color = BrandAccent, fontWeight = FontWeight.Black, fontSize = 32.sp)
                     Text("Guaranteed 100% Booking Refund Policy", color = Color.White.copy(alpha = 0.6f), fontSize = 10.sp)
                 }
             }
 
-            Text("Choose Payment Method", style = Typography.bodyLarge)
+            Text("Choose Payment Method", fontWeight = FontWeight.Bold, fontSize = 14.sp)
 
             listOf(
                 Triple("UPI (Google Pay / PhonePe)", "Instant routing secure session lock.", "UPI"),
@@ -1779,9 +2059,9 @@ fun StudioPaymentScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(Dimens.r2))
+                        .clip(RoundedCornerShape(12.dp))
                         .background(if (isSelected) BrandPrimary.copy(alpha = 0.05f) else Color.White)
-                        .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(Dimens.r2))
+                        .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(12.dp))
                         .clickable { selectedMethod = code }
                         .padding(14.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -1799,7 +2079,7 @@ fun StudioPaymentScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             Button(
                 onClick = onPaymentSuccess,
@@ -1810,7 +2090,7 @@ fun StudioPaymentScreen(
                 shape = RoundedCornerShape(99.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary)
             ) {
-                Text("Authorize & Secure Payment", style = Typography.bodyLarge)
+                Text("Authorize & Secure Payment", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             }
 
             TextButton(
@@ -1839,7 +2119,7 @@ fun StudioBookingSuccessScreen(
             .padding(bottom = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(Dimens.sp4))
+        Spacer(modifier = Modifier.height(48.dp))
 
         // Large high-fidelity illustration checkmark
         Box(
@@ -1857,17 +2137,17 @@ fun StudioBookingSuccessScreen(
 
         Text(
             text = "Booking Secured!",
-            style = Typography.bodyLarge.copy(fontWeight = FontWeight.ExtraBold, color = BrandDark)
+            style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.ExtraBold, color = BrandDark)
         )
         Text(
             text = "Session confirmation sent to your email & registered SMS.",
-            style = Typography.labelLarge,
+            fontSize = 12.sp,
             color = BrandTextSecondary,
             modifier = Modifier.padding(horizontal = 24.dp),
             textAlign = TextAlign.Center
         )
 
-        Spacer(modifier = Modifier.height(Dimens.sp3))
+        Spacer(modifier = Modifier.height(24.dp))
 
         // Visual Receipt Card
         Card(
@@ -1876,11 +2156,11 @@ fun StudioBookingSuccessScreen(
                 .padding(horizontal = 24.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White),
             border = BorderStroke(1.dp, BrandBorder),
-            shape = RoundedCornerShape(Dimens.r2)
+            shape = RoundedCornerShape(16.dp)
         ) {
             Column(
                 modifier = Modifier.padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -1893,7 +2173,7 @@ fun StudioBookingSuccessScreen(
 
                 HorizontalDivider(color = BrandBorder)
 
-                Text(booking.studio.name, style = Typography.bodyLarge)
+                Text(booking.studio.name, fontWeight = FontWeight.Bold, fontSize = 14.sp)
                 Text("Location: ${booking.studio.location}", fontSize = 11.5.sp, color = BrandTextSecondary)
 
                 Row(
@@ -1902,11 +2182,11 @@ fun StudioBookingSuccessScreen(
                 ) {
                     Column {
                         Text("RESERVATION DATE", fontSize = 9.sp, color = BrandTextSecondary)
-                        Text(booking.date, style = Typography.bodyLarge)
+                        Text(booking.date, fontWeight = FontWeight.Bold, fontSize = 12.sp)
                     }
                     Column(horizontalAlignment = Alignment.End) {
                         Text("TIME SLOT BLOCK", fontSize = 9.sp, color = BrandTextSecondary)
-                        Text(booking.timeSlot, style = Typography.bodyLarge)
+                        Text(booking.timeSlot, fontWeight = FontWeight.Bold, fontSize = 12.sp)
                     }
                 }
 
@@ -1916,23 +2196,23 @@ fun StudioBookingSuccessScreen(
                 ) {
                     Column {
                         Text("ENGINEER SUPPORT", fontSize = 9.sp, color = BrandTextSecondary)
-                        Text(if (booking.hasEngineer) "Yes, Resident" else "No (Self Tracked)", style = Typography.bodyLarge)
+                        Text(if (booking.hasEngineer) "Yes, Resident" else "No (Self Tracked)", fontWeight = FontWeight.Bold, fontSize = 12.sp)
                     }
                     Column(horizontalAlignment = Alignment.End) {
                         Text("TOTAL PAID SECURE", fontSize = 9.sp, color = BrandTextSecondary)
-                        Text("₹${booking.totalPaid}", style = Typography.bodyLarge, color = BrandSuccess)
+                        Text("₹${booking.totalPaid}", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandSuccess)
                     }
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(Dimens.sp3))
+        Spacer(modifier = Modifier.height(32.dp))
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp),
-            horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             OutlinedButton(
                 onClick = onViewMyBookings,
@@ -1984,7 +2264,7 @@ fun StudioMyBookingsScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
             }
             Spacer(modifier = Modifier.width(10.dp))
-            Text("My Bookings Feed", style = Typography.bodyLarge)
+            Text("My Bookings Feed", fontWeight = FontWeight.Bold, fontSize = 15.sp)
         }
 
         // TABS
@@ -2010,7 +2290,7 @@ fun StudioMyBookingsScreen(
                             color = if (isSelected) BrandPrimary else BrandTextSecondary,
                             fontSize = 12.5.sp
                         )
-                        Spacer(modifier = Modifier.height(Dimens.sp1))
+                        Spacer(modifier = Modifier.height(4.dp))
                         Box(
                             modifier = Modifier
                                 .height(2.dp)
@@ -2038,7 +2318,7 @@ fun StudioMyBookingsScreen(
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(Icons.Default.ConfirmationNumber, contentDescription = null, tint = BrandTextSecondary, modifier = Modifier.size(48.dp))
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(16.dp))
                     Text("No bookings matching selection.", fontWeight = FontWeight.Bold, color = BrandDark)
                 }
             }
@@ -2053,11 +2333,11 @@ fun StudioMyBookingsScreen(
                         modifier = Modifier.fillMaxWidth(),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
                         border = BorderStroke(1.dp, BrandBorder),
-                        shape = RoundedCornerShape(Dimens.r2)
+                        shape = RoundedCornerShape(16.dp)
                     ) {
                         Column(
-                            modifier = Modifier.padding(Dimens.sp2),
-                            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+                            modifier = Modifier.padding(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
@@ -2068,7 +2348,7 @@ fun StudioMyBookingsScreen(
                                     Box(
                                         modifier = Modifier
                                             .size(24.dp)
-                                            .clip(RoundedCornerShape(Dimens.r1)),
+                                            .clip(RoundedCornerShape(4.dp)),
                                         contentAlignment = Alignment.Center
                                     ) {
                                         if (booking.studio.imageUrl != null) {
@@ -2079,17 +2359,17 @@ fun StudioMyBookingsScreen(
                                                 modifier = Modifier.fillMaxSize()
                                             )
                                         } else {
-                                            Text(booking.studio.coverEmoji, style = Typography.headlineLarge)
+                                            Text(booking.studio.coverEmoji, fontSize = 20.sp)
                                         }
                                     }
-                                    Spacer(modifier = Modifier.width(Dimens.sp1))
+                                    Spacer(modifier = Modifier.width(8.dp))
                                     Text(booking.studio.name, fontWeight = FontWeight.Bold, fontSize = 13.sp)
                                 }
                                 Box(
                                     modifier = Modifier
                                         .background(
                                             if (booking.status == "Confirmed") BrandSuccess.copy(alpha = 0.1f) else if (booking.status == "Completed") BrandPrimary.copy(alpha = 0.1f) else Color.Red.copy(alpha = 0.1f),
-                                            RoundedCornerShape(Dimens.r1)
+                                            RoundedCornerShape(4.dp)
                                         )
                                         .padding(horizontal = 6.dp, vertical = 2.dp)
                                 ) {
@@ -2121,12 +2401,12 @@ fun StudioMyBookingsScreen(
                             if (booking.status == "Confirmed") {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                                 ) {
                                     OutlinedButton(
                                         onClick = { onCancelBooking(booking.id) },
                                         modifier = Modifier.weight(1f),
-                                        shape = RoundedCornerShape(Dimens.r1),
+                                        shape = RoundedCornerShape(8.dp),
                                         colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Red),
                                         border = BorderStroke(1.dp, Color.Red.copy(alpha = 0.5f))
                                     ) {
@@ -2136,7 +2416,7 @@ fun StudioMyBookingsScreen(
                                     Button(
                                         onClick = { },
                                         modifier = Modifier.weight(1f),
-                                        shape = RoundedCornerShape(Dimens.r1),
+                                        shape = RoundedCornerShape(8.dp),
                                         colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary)
                                     ) {
                                         Text("Directions", fontSize = 11.sp, fontWeight = FontWeight.Bold)
@@ -2177,37 +2457,37 @@ fun StudioOwnerDashboard(
             }
             Spacer(modifier = Modifier.width(10.dp))
             Column {
-                Text("Studio Owner Workspace", style = Typography.bodyLarge, color = BrandDark)
+                Text("Studio Owner Workspace", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
                 Text("Managing Yash Raj Film Studios (YRF)", fontSize = 11.sp, color = BrandTextSecondary)
             }
         }
 
-        Column(modifier = Modifier.padding(Dimens.sp2), verticalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
+        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             // REVENUE METRIC HERO
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = BrandDark),
-                shape = RoundedCornerShape(Dimens.r3)
+                shape = RoundedCornerShape(20.dp)
             ) {
-                Column(modifier = Modifier.padding(Dimens.sp3)) {
+                Column(modifier = Modifier.padding(24.dp)) {
                     Text("TODAY'S ACCUMULATED REVENUE", color = Color.White.copy(alpha = 0.7f), fontSize = 10.sp, fontWeight = FontWeight.Bold)
                     Spacer(modifier = Modifier.height(6.dp))
                     Text("₹42,000", color = Color.White, fontSize = 32.sp, fontWeight = FontWeight.Black)
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
-                    Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp3)) {
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(24.dp)) {
                         Column {
                             Text("HOURS BOOKED", color = Color.White.copy(alpha = 0.6f), fontSize = 9.sp)
-                            Text("18 Hrs Today", color = Color.White, style = Typography.bodyLarge)
+                            Text("18 Hrs Today", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                         }
                         Column {
                             Text("ACTIVE ENGINES", color = Color.White.copy(alpha = 0.6f), fontSize = 9.sp)
-                            Text("2 Rooms Live", color = Color.White, style = Typography.bodyLarge)
+                            Text("2 Rooms Live", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                         }
                     }
                 }
             }
 
-            Text("Current Live Sessions (Today)", style = Typography.bodyLarge)
+            Text("Current Live Sessions (Today)", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             
             // List of today's live sessions
             listOf(
@@ -2218,22 +2498,22 @@ fun StudioOwnerDashboard(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(Dimens.r2))
+                        .clip(RoundedCornerShape(12.dp))
                         .background(Color.White)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
+                        .border(1.dp, BrandBorder, RoundedCornerShape(12.dp))
                         .padding(14.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Column {
-                        Text(title, style = Typography.bodyLarge, color = BrandDark)
+                        Text(title, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandDark)
                         Text(subtitle, fontSize = 10.5.sp, color = BrandTextSecondary)
                     }
                     Box(
                         modifier = Modifier
                             .background(
                                 if (status == "LIVE") BrandAccent.copy(alpha = 0.12f) else if (status == "CONFIRMED") BrandSuccess.copy(alpha = 0.1f) else Color.Red.copy(alpha = 0.1f),
-                                RoundedCornerShape(Dimens.r1)
+                                RoundedCornerShape(4.dp)
                             )
                             .padding(horizontal = 6.dp, vertical = 2.dp)
                     ) {
@@ -2247,7 +2527,7 @@ fun StudioOwnerDashboard(
                 }
             }
 
-            Text("Equipment Status Monitor", style = Typography.bodyLarge)
+            Text("Equipment Status Monitor", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             
             // Equipment health checks
             listOf(
@@ -2276,19 +2556,19 @@ fun FeaturedStudioCard(
 ) {
     Card(
         modifier = Modifier
-            .width(220.dp)
+            .width(280.dp)
             .clickable { onClick() },
         colors = CardDefaults.cardColors(containerColor = Color.White),
         border = BorderStroke(1.dp, BrandBorder),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(20.dp)
     ) {
-        Column(modifier = Modifier.padding(10.dp)) {
+        Column {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(Color.Gray)
+                    .height(130.dp)
+                    .background(Brush.verticalGradient(colors = listOf(BrandDark, Color(0xFF2E2A4E)))),
+                contentAlignment = Alignment.Center
             ) {
                 if (studio.imageUrl != null) {
                     AsyncImage(
@@ -2298,41 +2578,66 @@ fun FeaturedStudioCard(
                         modifier = Modifier.fillMaxSize()
                     )
                 } else {
-                    Text(studio.coverEmoji, fontSize = 40.sp, modifier = Modifier.align(Alignment.Center))
+                    Text(studio.coverEmoji, fontSize = 54.sp)
+                }
+                
+                // Overlay price chip
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(12.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Color.Black.copy(alpha = 0.7f))
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                ) {
+                    Text("₹${studio.pricePerHour}/hr", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold)
                 }
             }
-            
-            Spacer(modifier = Modifier.height(6.dp))
-            
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.Top
-            ) {
-                Column(modifier = Modifier.weight(1f)) {
+
+            Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Text(
                         text = studio.name,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 12.sp,
+                        fontSize = 13.sp,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
                         color = BrandDark,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
+                        modifier = Modifier.weight(1f)
                     )
-                    Text(
-                        text = studio.location.split(",")[0],
-                        fontSize = 9.sp,
-                        color = BrandTextSecondary,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-                
-                Column(horizontalAlignment = Alignment.End, modifier = Modifier.padding(start = 4.dp)) {
-                    Row(verticalAlignment = Alignment.Bottom) {
-                        Text("₹${if (studio.pricePerHour >= 1000) "${studio.pricePerHour/1000}k" else studio.pricePerHour.toString()}", fontWeight = FontWeight.Bold, fontSize = 10.sp, color = BrandDark)
-                        Text("/hr", fontSize = 8.sp, color = BrandTextSecondary)
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.Star, null, tint = Color(0xFFFFB300), modifier = Modifier.size(12.dp))
+                        Spacer(modifier = Modifier.width(2.dp))
+                        Text(studio.rating.toString(), fontWeight = FontWeight.Bold, fontSize = 11.sp)
                     }
-                    Text("${studio.rating} ★", fontSize = 8.sp, color = Color(0xFFF59E0B))
+                }
+
+                Text(
+                    text = studio.location,
+                    fontSize = 11.sp,
+                    color = BrandTextSecondary,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    studio.amenities.take(2).forEach { amen ->
+                        Box(
+                            modifier = Modifier
+                                .background(BrandPrimary.copy(alpha = 0.08f), RoundedCornerShape(4.dp))
+                                .padding(horizontal = 6.dp, vertical = 2.dp)
+                        ) {
+                            Text(amen, fontSize = 8.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)
+                        }
+                    }
                 }
             }
         }
@@ -2350,16 +2655,16 @@ fun StudioListItemCard(
             .clickable { onClick() },
         colors = CardDefaults.cardColors(containerColor = Color.White),
         border = BorderStroke(1.dp, BrandBorder),
-        shape = RoundedCornerShape(Dimens.r2)
+        shape = RoundedCornerShape(16.dp)
     ) {
         Row(
-            modifier = Modifier.padding(Dimens.sp2),
+            modifier = Modifier.padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
                 modifier = Modifier
                     .size(72.dp)
-                    .clip(RoundedCornerShape(Dimens.r2))
+                    .clip(RoundedCornerShape(12.dp))
                     .background(BrandPrimary.copy(alpha = 0.08f)),
                 contentAlignment = Alignment.Center
             ) {
@@ -2403,10 +2708,10 @@ fun StudioListItemCard(
                 }
             }
 
-            Spacer(modifier = Modifier.width(Dimens.sp1))
+            Spacer(modifier = Modifier.width(8.dp))
 
             Column(horizontalAlignment = Alignment.End) {
-                Text("₹${studio.pricePerHour}", style = Typography.bodyLarge, color = BrandPrimary)
+                Text("₹${studio.pricePerHour}", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandPrimary)
                 Text("per hour", fontSize = 9.sp, color = BrandTextSecondary)
             }
         }

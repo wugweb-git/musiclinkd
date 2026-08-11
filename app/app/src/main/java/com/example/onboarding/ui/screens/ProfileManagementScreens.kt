@@ -245,7 +245,7 @@ fun ProfileManagementMainFlowContainer(
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.CheckCircle, null, tint = Color.White, modifier = Modifier.size(20.dp))
-                            Spacer(modifier = Modifier.width(Dimens.sp1))
+                            Spacer(modifier = Modifier.width(8.dp))
                             Text(
                                 text = showSuccessBannerText ?: "",
                                 color = Color.White,
@@ -324,23 +324,25 @@ fun ProfileManagementMainFlowContainer(
                                 try {
                                     val db = com.example.onboarding.database.FirebaseManager.getFirestore()
                                     if (db != null) {
+                                        val roleList = userRoles.toList()
+                                        val primary = roleList.firstOrNull() ?: "music_producer"
+                                        val secondary = if (roleList.size > 1) roleList[1] else ""
+                                        val langList = userLanguages.split(",").map { it.trim() }.filter { it.isNotEmpty() }
+                                        val genreList = userGenres.split(",").map { it.trim() }.filter { it.isNotEmpty() }
                                         val profileMap = hashMapOf(
                                             "displayName" to displayName,
-                                            "professionalName" to professionalName,
-                                            "headline" to userHeadline,
                                             "bio" to userBio,
                                             "location" to userLocation,
-                                            "languages" to userLanguages,
-                                            "genres" to userGenres,
-                                            "skills" to userRoles.toList(),
-                                            "website" to linkWebsite,
-                                            "instagram" to linkInstagram,
-                                            "spotify" to linkSpotify,
-                                            "youtube" to linkYouTube,
+                                            "primaryRole" to primary,
+                                            "secondaryRole" to secondary,
+                                            "languages" to langList,
+                                            "genres" to genreList,
+                                            "instruments" to emptyList<String>(),
+                                            "personaBadges" to emptyList<String>(),
                                             "updatedAt" to com.google.firebase.Timestamp.now()
                                         )
-                                        val docId = displayName.lowercase().replace(" ", "_").ifEmpty { "musician_user" }
-                                        db.collection("musicians").document(docId)
+                                        val uid = com.example.onboarding.database.FirebaseManager.getAuth()?.currentUser?.uid ?: "local_user_uid"
+                                        db.collection("users").document(uid)
                                             .set(profileMap, com.google.firebase.firestore.SetOptions.merge())
                                     }
                                 } catch (e: Exception) {
@@ -596,9 +598,10 @@ fun ProfileManagementMainFlowContainer(
                 contentAlignment = Alignment.Center
             ) {
                 Card(
-                    shape = RoundedCornerShape(Dimens.r3),
+                    shape = RoundedCornerShape(24.dp),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+                    border = BorderStroke(1.dp, BrandBorder),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                     modifier = Modifier
                         .padding(32.dp)
                         .widthIn(max = 320.dp)
@@ -616,7 +619,7 @@ fun ProfileManagementMainFlowContainer(
                         Spacer(modifier = Modifier.height(20.dp))
                         Text(
                             text = savingMessage,
-                            style = Typography.bodyLarge.copy(
+                            style = MaterialTheme.typography.titleMedium.copy(
                                 fontWeight = FontWeight.Bold,
                                 color = Color(0xFF1E293B) // Slate Dark
                             ),
@@ -625,7 +628,7 @@ fun ProfileManagementMainFlowContainer(
                         Spacer(modifier = Modifier.height(6.dp))
                         Text(
                             text = "Please wait, syncing to cloud servers...",
-                            style = Typography.bodyLarge.copy(
+                            style = MaterialTheme.typography.bodySmall.copy(
                                 color = Color(0xFF64748B) // Slate Light
                             ),
                             textAlign = TextAlign.Center
@@ -640,7 +643,7 @@ fun ProfileManagementMainFlowContainer(
 @Composable
 fun ShimmerSkeleton(
     modifier: Modifier = Modifier,
-    shape: androidx.compose.ui.graphics.Shape = RoundedCornerShape(Dimens.r1)
+    shape: androidx.compose.ui.graphics.Shape = RoundedCornerShape(4.dp)
 ) {
     val transition = rememberInfiniteTransition(label = "shimmer")
     val alpha by transition.animateFloat(
@@ -778,7 +781,7 @@ fun ProfileDashboardScreen(
                     }
                 }
 
-                Spacer(modifier = Modifier.width(Dimens.sp2))
+                Spacer(modifier = Modifier.width(16.dp))
 
                 Column(
                     modifier = Modifier
@@ -788,7 +791,7 @@ fun ProfileDashboardScreen(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = userName,
-                            style = Typography.bodyLarge.copy(
+                            style = MaterialTheme.typography.titleLarge.copy(
                                 fontWeight = FontWeight.ExtraBold,
                                 color = BrandDark,
                                 letterSpacing = (-0.5).sp
@@ -809,7 +812,7 @@ fun ProfileDashboardScreen(
 
             Text(
                 text = userHeadline,
-                style = Typography.bodyLarge.copy(
+                style = MaterialTheme.typography.bodyMedium.copy(
                     color = BrandSecondaryText,
                     fontWeight = FontWeight.Medium,
                     lineHeight = 20.sp
@@ -817,19 +820,19 @@ fun ProfileDashboardScreen(
                 modifier = Modifier.padding(top = 4.dp)
             )
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // REPUTATION STATS ROW
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(Dimens.r2))
+                    .clip(RoundedCornerShape(16.dp))
                     .background(BrandBorder.copy(alpha = 0.25f))
                     .padding(14.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
-                    Text("$followersCountState", style = Typography.bodyLarge, color = BrandDark)
+                    Text("$followersCountState", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
                     Text("Followers", fontSize = 11.sp, color = BrandSecondaryText)
                 }
                 Box(modifier = Modifier.width(1.dp).height(24.dp).background(BrandBorder).align(Alignment.CenterVertically))
@@ -842,18 +845,18 @@ fun ProfileDashboardScreen(
                                 .padding(vertical = 2.dp)
                         )
                     } else {
-                        Text(profileViewsState ?: "---", style = Typography.bodyLarge, color = BrandDark)
+                        Text(profileViewsState ?: "---", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
                     }
                     Text("Profile Views", fontSize = 11.sp, color = BrandSecondaryText)
                 }
                 Box(modifier = Modifier.width(1.dp).height(24.dp).background(BrandBorder).align(Alignment.CenterVertically))
                 Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
-                    Text("4.9★", style = Typography.bodyLarge, color = BrandAccent)
+                    Text("4.9★", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandAccent)
                     Text("32 Reviews", fontSize = 11.sp, color = BrandSecondaryText)
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp3))
+            Spacer(modifier = Modifier.height(24.dp))
 
             // SECTION 1: PERFORMANCE & SETUP
             Text(
@@ -865,22 +868,23 @@ fun ProfileDashboardScreen(
             )
             Spacer(modifier = Modifier.height(10.dp))
 
+            /*
             // CREATOR COMPLETION CARD
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                    .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                shape = RoundedCornerShape(Dimens.r2)
+                shape = RoundedCornerShape(16.dp)
             ) {
-                Column(modifier = Modifier.padding(Dimens.sp2)) {
+                Column(modifier = Modifier.padding(16.dp)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text("Profile Completion Status", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
-                        Text("$completionPercentage% Done", fontWeight = FontWeight.Bold, color = BrandPrimary, style = Typography.labelLarge)
+                        Text("$completionPercentage% Done", fontWeight = FontWeight.Bold, color = BrandPrimary, fontSize = 12.sp)
                     }
                     Spacer(modifier = Modifier.height(10.dp))
                     LinearProgressIndicator(
@@ -892,7 +896,7 @@ fun ProfileDashboardScreen(
                         color = BrandPrimary,
                         trackColor = BrandBorder.copy(alpha = 0.5f)
                     )
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "Complete professional roles and list rates to achieve 100% visibility.",
                         fontSize = 11.sp,
@@ -901,7 +905,8 @@ fun ProfileDashboardScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp3))
+            Spacer(modifier = Modifier.height(24.dp))
+            */
 
             // PRIMARY ACTION BUTTONS
             Row(
@@ -914,11 +919,11 @@ fun ProfileDashboardScreen(
                         .weight(1.5f)
                         .height(48.dp)
                         .testTag("dashboard_preview_profile_button"),
-                    shape = RoundedCornerShape(Dimens.r2),
+                    shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = BrandDark)
                 ) {
                     Icon(Icons.Default.Visibility, null, modifier = Modifier.size(16.dp), tint = Color.White)
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text("Preview Public Page", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = Color.White)
                 }
                 
@@ -927,7 +932,7 @@ fun ProfileDashboardScreen(
                     modifier = Modifier
                         .weight(1f)
                         .height(48.dp),
-                    shape = RoundedCornerShape(Dimens.r2),
+                    shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                     border = BorderStroke(1.dp, BrandBorder)
                 ) {
@@ -937,7 +942,7 @@ fun ProfileDashboardScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp3))
+            Spacer(modifier = Modifier.height(32.dp))
 
             // MODULAR WORKSPACE DIRECTORY
             WorkspaceSectionGrid(onNavigateTo = onNavigateTo)
@@ -948,9 +953,9 @@ fun ProfileDashboardScreen(
 @Composable
 fun DashboardStat(label: String, value: String) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(value, style = Typography.bodyLarge, color = BrandDark)
-        Spacer(modifier = Modifier.width(Dimens.sp1))
-        Text(label, style = Typography.labelLarge, color = BrandSecondaryText)
+        Text(value, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
+        Spacer(modifier = Modifier.width(4.dp))
+        Text(label, fontSize = 12.sp, color = BrandSecondaryText)
     }
 }
 
@@ -967,9 +972,9 @@ fun WorkspaceItemCard(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(enabled = !isComingSoon) { onClick() }
-            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        shape = RoundedCornerShape(Dimens.r2)
+        shape = RoundedCornerShape(16.dp)
     ) {
         Row(
             modifier = Modifier
@@ -981,7 +986,7 @@ fun WorkspaceItemCard(
             Box(
                 modifier = Modifier
                     .size(40.dp)
-                    .clip(RoundedCornerShape(Dimens.r2))
+                    .clip(RoundedCornerShape(12.dp))
                     .background(BrandPrimary.copy(alpha = 0.08f)),
                 contentAlignment = Alignment.Center
             ) {
@@ -993,28 +998,29 @@ fun WorkspaceItemCard(
                 )
             }
 
-            Spacer(modifier = Modifier.width(Dimens.sp2))
+            Spacer(modifier = Modifier.width(16.dp))
 
             // Text info in the center
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = title,
-                    style = Typography.bodyLarge,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
                     color = BrandDark
                 )
                 Text(
                     text = description,
-                    style = Typography.labelLarge,
+                    fontSize = 12.sp,
                     color = BrandSecondaryText
                 )
             }
 
-            Spacer(modifier = Modifier.width(Dimens.sp1))
+            Spacer(modifier = Modifier.width(8.dp))
 
             // Status Badge and Chevron on the right
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Box(
                     modifier = Modifier
@@ -1052,7 +1058,7 @@ fun WorkspaceItemCard(
 
 @Composable
 fun WorkspaceSectionGrid(onNavigateTo: (ProfileSubScreen) -> Unit) {
-    Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp3)) {
+    Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
         
         // SECTION 1: IDENTITY & CREATIVE SHOWCASE
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -1270,7 +1276,7 @@ fun EditProfileScreen(
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = BrandDark)
                 }
                 Spacer(modifier = Modifier.width(6.dp))
-                Text("Edit Public Identity", style = Typography.bodyLarge, color = BrandDark)
+                Text("Edit Public Identity", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
             }
             TextButton(onClick = onSave, modifier = Modifier.testTag("save_edit_profile_button")) {
                 Text("Save", color = BrandPrimary, fontWeight = FontWeight.Bold)
@@ -1281,16 +1287,16 @@ fun EditProfileScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text("Visual Assets", style = Typography.bodyLarge, color = BrandDark)
+            Text("Visual Assets", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
             
             // Cover Photo editor box
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(110.dp)
-                    .clip(RoundedCornerShape(Dimens.r2))
+                    .clip(RoundedCornerShape(12.dp))
                     .background(BrandDark)
                     .clickable { coverPicker.launch("image/*") },
                 contentAlignment = Alignment.Center
@@ -1299,7 +1305,7 @@ fun EditProfileScreen(
                     AsyncImage(
                         model = File(coverPicturePath),
                         contentDescription = "Cover Banner",
-                        modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(Dimens.r2)),
+                        modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(12.dp)),
                         contentScale = ContentScale.Crop
                     )
                 } else {
@@ -1330,7 +1336,7 @@ fun EditProfileScreen(
                         Icon(Icons.Default.AddAPhoto, null, tint = Color.White)
                     }
                 }
-                Spacer(modifier = Modifier.width(Dimens.sp2))
+                Spacer(modifier = Modifier.width(16.dp))
                 Column {
                     Text("Public Avatar / Headshot", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
                     Text("Tap to capture headshot with camera or pick from gallery.", fontSize = 10.sp, color = BrandSecondaryText)
@@ -1373,7 +1379,7 @@ fun EditProfileScreen(
 
             HorizontalDivider(color = BrandBorder)
 
-            Text("Public Profile Details", style = Typography.bodyLarge, color = BrandDark)
+            Text("Public Profile Details", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
 
             LabeledInputField(label = "Display Name", value = displayName, onValueChange = onDisplayNameChange)
             LabeledInputField(label = "Professional Handle (e.g. Beats Name)", value = professionalName, onValueChange = onProfessionalNameChange)
@@ -1399,7 +1405,7 @@ fun EditProfileScreen(
                         genreList.forEach { tag ->
                             Surface(
                                 color = BrandPrimary.copy(alpha = 0.1f),
-                                shape = RoundedCornerShape(Dimens.r2),
+                                shape = RoundedCornerShape(12.dp),
                                 border = BorderStroke(1.dp, BrandPrimary.copy(alpha = 0.3f))
                             ) {
                                 Text(
@@ -1417,28 +1423,28 @@ fun EditProfileScreen(
 
             HorizontalDivider(color = BrandBorder)
 
-            Text("External Sound & Social Links", style = Typography.bodyLarge, color = BrandDark)
+            Text("External Sound & Social Links", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
 
             LabeledInputField(label = "🌐 Personal Website Portfolio Link", value = website, onValueChange = onWebsiteChange)
             LabeledInputField(label = "📸 Instagram Username", value = instagram, onValueChange = onInstagramChange)
             LabeledInputField(label = "🎵 Spotify Artist URL", value = spotify, onValueChange = onSpotifyChange)
-            LabeledInputField(label = "������ YouTube Channel URL", value = youtube, onValueChange = onYouTubeChange)
+            LabeledInputField(label = "📺 YouTube Channel URL", value = youtube, onValueChange = onYouTubeChange)
 
             // Firestore Database Sync Indicator
             Card(
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFF0FDF4)),
-                shape = RoundedCornerShape(Dimens.r2),
+                shape = RoundedCornerShape(12.dp),
                 border = BorderStroke(1.dp, Color(0xFFBBF7D0)),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Row(
-                    modifier = Modifier.padding(Dimens.sp2),
+                    modifier = Modifier.padding(12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(Icons.Default.CloudDone, contentDescription = null, tint = Color(0xFF16A34A), modifier = Modifier.size(20.dp))
                     Spacer(modifier = Modifier.width(10.dp))
                     Column {
-                        Text("Firestore Network Sync Enabled", style = Typography.bodyLarge, color = Color(0xFF15803D))
+                        Text("Firestore Network Sync Enabled", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color(0xFF15803D))
                         Text("Saving will update your musician profile in the Firestore database.", fontSize = 10.sp, color = Color(0xFF166534))
                     }
                 }
@@ -1457,7 +1463,7 @@ fun EditProfileScreen(
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Default.CloudUpload, contentDescription = null, tint = Color.White)
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text("Save & Publish to Firestore", fontWeight = FontWeight.Bold)
                 }
             }
@@ -1511,7 +1517,7 @@ fun RoleManagementScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = BrandDark)
             }
             Spacer(modifier = Modifier.width(6.dp))
-            Text("Role & Talent Settings", style = Typography.bodyLarge, color = BrandDark)
+            Text("Role & Talent Settings", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
         }
 
         Column(
@@ -1519,18 +1525,18 @@ fun RoleManagementScreen(
                 .fillMaxWidth()
                 .weight(1f)
                 .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text("Active Roles (Drag or re-arrange to sort primary priority)", style = Typography.labelLarge, color = BrandSecondaryText)
+            Text("Active Roles (Drag or re-arrange to sort primary priority)", fontSize = 12.sp, color = BrandSecondaryText)
             
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 userRoles.forEachIndexed { index, role ->
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .border(1.dp, if (index == 0) BrandPrimary else BrandBorder, RoundedCornerShape(Dimens.r2)),
+                            .border(1.dp, if (index == 0) BrandPrimary else BrandBorder, RoundedCornerShape(12.dp)),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
-                        shape = RoundedCornerShape(Dimens.r2)
+                        shape = RoundedCornerShape(12.dp)
                     ) {
                         Row(
                             modifier = Modifier.padding(14.dp),
@@ -1551,7 +1557,7 @@ fun RoleManagementScreen(
                                         fontWeight = FontWeight.Bold
                                     )
                                 }
-                                Spacer(modifier = Modifier.width(Dimens.sp2))
+                                Spacer(modifier = Modifier.width(12.dp))
                                 Text(role, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
                             }
                             IconButton(onClick = { onRemoveRole(role) }) {
@@ -1564,9 +1570,9 @@ fun RoleManagementScreen(
 
             HorizontalDivider(color = BrandBorder)
 
-            Text("Discover and Add Creative Talent Categories", style = Typography.bodyLarge, color = BrandDark)
+            Text("Discover and Add Creative Talent Categories", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
             
-            LazyRow(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
+            LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 items(availableRolePool) { poolRole ->
                     Box(
                         modifier = Modifier
@@ -1578,7 +1584,7 @@ fun RoleManagementScreen(
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.Add, null, tint = BrandPrimary, modifier = Modifier.size(14.dp))
-                            Spacer(modifier = Modifier.width(Dimens.sp1))
+                            Spacer(modifier = Modifier.width(4.dp))
                             Text(poolRole, fontSize = 11.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)
                         }
                     }
@@ -1589,8 +1595,8 @@ fun RoleManagementScreen(
             Card(
                 colors = CardDefaults.cardColors(containerColor = BrandDark)
             ) {
-                Column(modifier = Modifier.padding(Dimens.sp2)) {
-                    Text("💡 Pro Visibility Tip", color = Color.White, style = Typography.bodyLarge)
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text("💡 Pro Visibility Tip", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12.sp)
                     Text("Your first primary role represents how you show up in Discovery stacks, studio matching searches and marketplace listings. Order them carefully!", color = Color.White.copy(alpha = 0.7f), fontSize = 11.sp, lineHeight = 16.sp)
                 }
             }
@@ -1633,7 +1639,7 @@ fun AvailabilityManagementScreen(
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = BrandDark)
                 }
                 Spacer(modifier = Modifier.width(6.dp))
-                Text("Manage Studio Presence", style = Typography.bodyLarge, color = BrandDark)
+                Text("Manage Studio Presence", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
             }
             TextButton(onClick = onSave) {
                 Text("Apply", color = BrandPrimary, fontWeight = FontWeight.Bold)
@@ -1644,9 +1650,9 @@ fun AvailabilityManagementScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text("Current Booking Availability Status", style = Typography.bodyLarge, color = BrandDark)
+            Text("Current Booking Availability Status", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
 
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 statuses.forEach { (statusName, emoji) ->
@@ -1655,9 +1661,9 @@ fun AvailabilityManagementScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable { onStatusSelect(statusName) }
-                            .border(1.dp, if (isSelected) BrandAccent else BrandBorder, RoundedCornerShape(Dimens.r2)),
+                            .border(1.dp, if (isSelected) BrandAccent else BrandBorder, RoundedCornerShape(12.dp)),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
-                        shape = RoundedCornerShape(Dimens.r2)
+                        shape = RoundedCornerShape(12.dp)
                     ) {
                         Row(
                             modifier = Modifier.padding(14.dp),
@@ -1665,8 +1671,8 @@ fun AvailabilityManagementScreen(
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(emoji, style = Typography.bodyLarge)
-                                Spacer(modifier = Modifier.width(Dimens.sp2))
+                                Text(emoji, fontSize = 18.sp)
+                                Spacer(modifier = Modifier.width(12.dp))
                                 Text(statusName, fontWeight = FontWeight.Bold, fontSize = 12.5.sp, color = BrandDark)
                             }
                             if (isSelected) {
@@ -1679,7 +1685,7 @@ fun AvailabilityManagementScreen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Text("Set Expiration for Auto Expiry Date", style = Typography.bodyLarge, color = BrandDark)
+            Text("Set Expiration for Auto Expiry Date", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -1741,7 +1747,7 @@ fun ProjectManagementScreen(
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = BrandDark)
                 }
                 Spacer(modifier = Modifier.width(6.dp))
-                Text("Track & Portfolio Manager", style = Typography.bodyLarge, color = BrandDark)
+                Text("Track & Portfolio Manager", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
             }
             IconButton(onClick = onAddProject) {
                 Icon(Icons.Default.Add, null, tint = BrandPrimary)
@@ -1753,7 +1759,7 @@ fun ProjectManagementScreen(
                 .fillMaxSize()
                 .padding(horizontal = 16.dp),
             contentPadding = PaddingValues(vertical = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             item {
                 Row(
@@ -1761,9 +1767,9 @@ fun ProjectManagementScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text("Your Uploaded EP & Stems (${projects.size})", style = Typography.bodyLarge)
+                    Text("Your Uploaded EP & Stems (${projects.size})", fontWeight = FontWeight.Bold, fontSize = 14.sp)
                     TextButton(onClick = onAddProject) {
-                        Text("+ Add New Track", style = Typography.labelLarge, color = BrandPrimary, fontWeight = FontWeight.Bold)
+                        Text("+ Add New Track", fontSize = 12.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)
                     }
                 }
             }
@@ -1778,7 +1784,7 @@ fun ProjectManagementScreen(
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text("🎵", fontSize = 36.sp)
-                            Text("No projects linked yet. Paste media URL links above!", color = BrandSecondaryText, style = Typography.labelLarge)
+                            Text("No projects linked yet. Paste media URL links above!", color = BrandSecondaryText, fontSize = 12.sp)
                         }
                     }
                 }
@@ -1787,11 +1793,11 @@ fun ProjectManagementScreen(
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                            .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
-                        shape = RoundedCornerShape(Dimens.r2)
+                        shape = RoundedCornerShape(16.dp)
                     ) {
-                        Column(modifier = Modifier.padding(Dimens.sp2)) {
+                        Column(modifier = Modifier.padding(16.dp)) {
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -1799,8 +1805,8 @@ fun ProjectManagementScreen(
                             ) {
                                 Column(modifier = Modifier.weight(1f)) {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Text(project.title, style = Typography.bodyLarge, color = BrandDark)
-                                        Spacer(modifier = Modifier.width(Dimens.sp1))
+                                        Text(project.title, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
+                                        Spacer(modifier = Modifier.width(8.dp))
                                         Box(
                                             modifier = Modifier
                                                 .clip(RoundedCornerShape(6.dp))
@@ -1831,11 +1837,11 @@ fun ProjectManagementScreen(
                                 Text("👁️ ${project.views} views", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = BrandDark)
                             }
 
-                            Spacer(modifier = Modifier.height(Dimens.sp2))
+                            Spacer(modifier = Modifier.height(12.dp))
 
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
                                 TextButton(
                                     onClick = {
@@ -1847,10 +1853,10 @@ fun ProjectManagementScreen(
                                         onToggleStatus(project, nextState)
                                     }
                                 ) {
-                                    Text(if (project.status == "Published") "Unpublish" else "Publish", style = Typography.labelLarge, color = BrandPrimary, fontWeight = FontWeight.Bold)
+                                    Text(if (project.status == "Published") "Unpublish" else "Publish", fontSize = 12.sp, color = BrandPrimary, fontWeight = FontWeight.Bold)
                                 }
                                 TextButton(onClick = { onDuplicateProject(project) }) {
-                                    Text("Duplicate", style = Typography.labelLarge, color = BrandSecondaryText)
+                                    Text("Duplicate", fontSize = 12.sp, color = BrandSecondaryText)
                                 }
                                 Spacer(modifier = Modifier.weight(1f))
                                 IconButton(onClick = { onDeleteProject(project) }) {
@@ -1893,7 +1899,7 @@ fun ServicesAndPricingScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = BrandDark)
             }
             Spacer(modifier = Modifier.width(6.dp))
-            Text("Services Directory & Pricing", style = Typography.bodyLarge, color = BrandDark)
+            Text("Services Directory & Pricing", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
         }
 
         LazyColumn(
@@ -1901,21 +1907,21 @@ fun ServicesAndPricingScreen(
                 .fillMaxSize()
                 .padding(horizontal = 16.dp),
             contentPadding = PaddingValues(vertical = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                Text("List Services Offered", style = Typography.bodyLarge)
+                Text("List Services Offered", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             }
 
             items(services) { service ->
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                        .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(Dimens.r2)
+                    shape = RoundedCornerShape(16.dp)
                 ) {
-                    Column(modifier = Modifier.padding(Dimens.sp2)) {
+                    Column(modifier = Modifier.padding(16.dp)) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
@@ -1928,9 +1934,9 @@ fun ServicesAndPricingScreen(
                         }
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            Text("${service.pricing} (${service.rateType})", fontWeight = FontWeight.Bold, color = BrandPrimary, style = Typography.labelLarge)
+                            Text("${service.pricing} (${service.rateType})", fontWeight = FontWeight.Bold, color = BrandPrimary, fontSize = 12.sp)
                             ComingSoonPill()
                         }
                         Spacer(modifier = Modifier.height(6.dp))
@@ -1941,20 +1947,20 @@ fun ServicesAndPricingScreen(
 
             item {
                 HorizontalDivider(color = BrandBorder)
-                Text("Add New Creative Listing", style = Typography.bodyLarge)
+                Text("Add New Creative Listing", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             }
 
             item {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                        .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(Dimens.r2)
+                    shape = RoundedCornerShape(16.dp)
                 ) {
                     Column(
-                        modifier = Modifier.padding(Dimens.sp2),
-                        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+                        modifier = Modifier.padding(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         LabeledInputField(label = "Service Name", value = newServiceName, onValueChange = { newServiceName = it })
                         LabeledInputField(label = "Base Pricing (INR)", value = newServicePricing, onValueChange = { newServicePricing = it })
@@ -1997,7 +2003,7 @@ fun ServicesAndPricingScreen(
                             shape = RoundedCornerShape(99.dp),
                             colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary)
                         ) {
-                            Text("Launch Service Listing", style = Typography.bodyLarge)
+                            Text("Launch Service Listing", fontWeight = FontWeight.Bold, fontSize = 12.sp)
                         }
                     }
                 }
@@ -2040,16 +2046,16 @@ fun VerificationScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = BrandDark)
             }
             Spacer(modifier = Modifier.width(6.dp))
-            Text("Verify Professional Status", style = Typography.bodyLarge, color = BrandDark)
+            Text("Verify Professional Status", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
         }
 
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text("Professional Verification Timeline", style = Typography.bodyLarge)
+            Text("Professional Verification Timeline", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             
             // TIMELINE MOCK COMPONENT
             TimelineMockItem(
@@ -2072,7 +2078,7 @@ fun VerificationScreen(
 
             HorizontalDivider(color = BrandBorder)
 
-            Text("Verify Identity Under Aadhaar / PAN", style = Typography.bodyLarge)
+            Text("Verify Identity Under Aadhaar / PAN", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             
             // ID Type Selector Row
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -2081,7 +2087,7 @@ fun VerificationScreen(
                     Box(
                         modifier = Modifier
                             .weight(1f)
-                            .clip(RoundedCornerShape(Dimens.r1))
+                            .clip(RoundedCornerShape(8.dp))
                             .background(if (isSelected) BrandPrimary else BrandBorder)
                             .clickable { onIdTypeChange(idType) }
                             .padding(vertical = 10.dp),
@@ -2097,9 +2103,9 @@ fun VerificationScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(130.dp)
-                    .clip(RoundedCornerShape(Dimens.r2))
+                    .clip(RoundedCornerShape(12.dp))
                     .background(Color.White)
-                    .border(2.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
+                    .border(2.dp, BrandBorder, RoundedCornerShape(12.dp))
                     .clickable { onIdUpload("Aadhaar_Front_SwarSandhya.pdf") }
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
@@ -2108,7 +2114,8 @@ fun VerificationScreen(
                     Icon(Icons.Default.CloudUpload, null, tint = BrandPrimary, modifier = Modifier.size(36.dp))
                     Text(
                         text = idUploadFilename ?: "Upload Govt ID Document / Photo",
-                        style = Typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 12.sp,
                         color = BrandDark,
                         modifier = Modifier.padding(top = 8.dp)
                     )
@@ -2118,14 +2125,14 @@ fun VerificationScreen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Text("Verify Dolby SoundLab GST Registry", style = Typography.bodyLarge)
+            Text("Verify Dolby SoundLab GST Registry", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(130.dp)
-                    .clip(RoundedCornerShape(Dimens.r2))
+                    .clip(RoundedCornerShape(12.dp))
                     .background(Color.White)
-                    .border(2.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
+                    .border(2.dp, BrandBorder, RoundedCornerShape(12.dp))
                     .clickable { onGstUpload("GST_Verification_VedanshuMusic.pdf") }
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
@@ -2134,7 +2141,8 @@ fun VerificationScreen(
                     Icon(Icons.Default.FilePresent, null, tint = BrandAccent, modifier = Modifier.size(36.dp))
                     Text(
                         text = gstUploadFilename ?: "Attach GST Certificate (Form GST REG-06)",
-                        style = Typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 12.sp,
                         color = BrandDark,
                         modifier = Modifier.padding(top = 8.dp)
                     )
@@ -2171,9 +2179,9 @@ fun TimelineMockItem(title: String, subtitle: String, isComplete: Boolean, isAct
                 modifier = Modifier.size(12.dp)
             )
         }
-        Spacer(modifier = Modifier.width(Dimens.sp2))
+        Spacer(modifier = Modifier.width(12.dp))
         Column {
-            Text(title, style = Typography.bodyLarge, color = if (isActive || isComplete) BrandDark else BrandSecondaryText)
+            Text(title, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = if (isActive || isComplete) BrandDark else BrandSecondaryText)
             Text(subtitle, fontSize = 10.sp, color = BrandSecondaryText)
         }
     }
@@ -2208,20 +2216,20 @@ fun AnalyticsDashboardScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = BrandDark)
             }
             Spacer(modifier = Modifier.width(6.dp))
-            Text("Audience Analytics Dashboard", style = Typography.bodyLarge, color = BrandDark)
+            Text("Audience Analytics Dashboard", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
         }
 
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text("Editorial Traffic Insights", style = Typography.bodyLarge)
+            Text("Editorial Traffic Insights", fontWeight = FontWeight.Bold, fontSize = 14.sp)
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 AnalyticsScorecard(label = "Search Appearances", value = "1,120", trend = "+12%")
                 AnalyticsScorecard(label = "EP Playback Plays", value = "5,490", trend = "+28%")
@@ -2231,7 +2239,7 @@ fun AnalyticsDashboardScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
+                    .border(1.dp, BrandBorder, RoundedCornerShape(12.dp))
                     .background(Color.White)
             ) {
                 listOf("Weekly", "Monthly", "Yearly").forEach { tab ->
@@ -2253,9 +2261,9 @@ fun AnalyticsDashboardScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                    .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                shape = RoundedCornerShape(Dimens.r2)
+                shape = RoundedCornerShape(16.dp)
             ) {
                 Box(modifier = Modifier.fillMaxSize()) {
                     // Custom Draw Waveform Chart on canvas
@@ -2316,7 +2324,7 @@ fun AnalyticsDashboardScreen(
                             contentAlignment = Alignment.Center
                         ) {
                             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text("🔒 Premium Creators Only", style = Typography.bodyLarge, color = BrandDark)
+                                Text("🔒 Premium Creators Only", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
                                 Text("Upgrade to Pro to unlock comprehensive daily search impressions & booking charts.", fontSize = 11.sp, color = BrandSecondaryText, textAlign = TextAlign.Center, modifier = Modifier.padding(bottom = 12.dp))
                                 Button(
                                     onClick = onUpgradeClick,
@@ -2333,15 +2341,15 @@ fun AnalyticsDashboardScreen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Text("Session Booking Leads", style = Typography.bodyLarge)
+            Text("Session Booking Leads", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                    .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                shape = RoundedCornerShape(Dimens.r2)
+                shape = RoundedCornerShape(16.dp)
             ) {
-                Column(modifier = Modifier.padding(Dimens.sp2)) {
+                Column(modifier = Modifier.padding(16.dp)) {
                     Text("Total Direct Inbound Leads: 42 leads", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
                     Text("Average response time: 2.4 hours", fontSize = 11.sp, color = BrandSecondaryText)
                 }
@@ -2355,9 +2363,9 @@ fun AnalyticsScorecard(label: String, value: String, trend: String) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+            .border(1.dp, BrandBorder, RoundedCornerShape(12.dp)),
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        shape = RoundedCornerShape(Dimens.r2)
+        shape = RoundedCornerShape(12.dp)
     ) {
         Column(modifier = Modifier.padding(14.dp)) {
             Text(label, fontSize = 11.sp, color = BrandSecondaryText)
@@ -2366,7 +2374,7 @@ fun AnalyticsScorecard(label: String, value: String, trend: String) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(value, style = Typography.bodyLarge, color = BrandDark)
+                Text(value, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = BrandDark)
                 Text(trend, color = BrandSuccess, fontWeight = FontWeight.Bold, fontSize = 11.sp)
             }
         }
@@ -2402,7 +2410,7 @@ fun PrivacyScreen(
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = BrandDark)
                 }
                 Spacer(modifier = Modifier.width(6.dp))
-                Text("Privacy & Visibility", style = Typography.bodyLarge, color = BrandDark)
+                Text("Privacy & Visibility", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
             }
             TextButton(onClick = onSave) {
                 Text("Save", color = BrandPrimary, fontWeight = FontWeight.Bold)
@@ -2413,9 +2421,9 @@ fun PrivacyScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text("Configure Public Profile Limits", style = Typography.bodyLarge)
+            Text("Configure Public Profile Limits", fontWeight = FontWeight.Bold, fontSize = 14.sp)
 
             PrivacyToggleRow(
                 title = "Public Search Indexing",
@@ -2438,7 +2446,7 @@ fun PrivacyScreen(
 
             HorizontalDivider(color = BrandBorder)
 
-            Text("Account Actions & Data Archiving", style = Typography.bodyLarge)
+            Text("Account Actions & Data Archiving", fontWeight = FontWeight.Bold, fontSize = 14.sp)
 
             Button(
                 onClick = {},
@@ -2449,14 +2457,14 @@ fun PrivacyScreen(
                 shape = RoundedCornerShape(99.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.White)
             ) {
-                Text("Export Profile Data (JSON)", color = BrandDark, style = Typography.bodyLarge)
+                Text("Export Profile Data (JSON)", color = BrandDark, fontWeight = FontWeight.Bold, fontSize = 12.sp)
             }
 
             TextButton(
                 onClick = {},
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
-                Text("Deactivate Portfolio Account", color = BrandAccent, style = Typography.bodyLarge)
+                Text("Deactivate Portfolio Account", color = BrandAccent, fontWeight = FontWeight.Bold, fontSize = 12.sp)
             }
         }
     }
@@ -2519,7 +2527,7 @@ fun NotificationPreferencesScreen(
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = BrandDark)
                 }
                 Spacer(modifier = Modifier.width(6.dp))
-                Text("Notification Alerts Channel", style = Typography.bodyLarge, color = BrandDark)
+                Text("Notification Alerts Channel", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
             }
             TextButton(onClick = onSave) {
                 Text("Lock", color = BrandPrimary, fontWeight = FontWeight.Bold)
@@ -2530,7 +2538,7 @@ fun NotificationPreferencesScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // FCM Connected Status Banner
             val fcmToken by com.example.onboarding.database.FirebaseManager.fcmTokenState.collectAsState()
@@ -2539,13 +2547,13 @@ fun NotificationPreferencesScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFE8F5E9)),
-                shape = RoundedCornerShape(Dimens.r2),
+                shape = RoundedCornerShape(12.dp),
                 border = BorderStroke(1.dp, Color(0xFFC8E6C9))
             ) {
-                Column(modifier = Modifier.padding(Dimens.sp2)) {
+                Column(modifier = Modifier.padding(12.dp)) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.CheckCircle,
@@ -2569,7 +2577,7 @@ fun NotificationPreferencesScreen(
                         }
                     }
                     if (fcmToken != null) {
-                        Spacer(modifier = Modifier.height(Dimens.sp1))
+                        Spacer(modifier = Modifier.height(8.dp))
                         Surface(
                             shape = RoundedCornerShape(6.dp),
                             color = Color(0xFFC8E6C9).copy(alpha = 0.5f),
@@ -2585,7 +2593,7 @@ fun NotificationPreferencesScreen(
                         }
                     }
                     
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                    Spacer(modifier = Modifier.height(8.dp))
                     OutlinedButton(
                         onClick = {
                             val notificationManager = context.getSystemService(android.content.Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
@@ -2618,7 +2626,7 @@ fun NotificationPreferencesScreen(
                 }
             }
 
-            Text("Direct Sound Scout Notifications", style = Typography.bodyLarge)
+            Text("Direct Sound Scout Notifications", fontWeight = FontWeight.Bold, fontSize = 14.sp)
 
             PrivacyToggleRow(
                 title = "Push: Instant Booking requests",
@@ -2675,16 +2683,16 @@ fun SubscriptionPlanScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = BrandDark)
             }
             Spacer(modifier = Modifier.width(6.dp))
-            Text("MusicLinkd Subscriptions", style = Typography.bodyLarge, color = BrandDark)
+            Text("MusicLinkd Subscriptions", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
         }
 
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text("Select Your Professional Tier", style = Typography.bodyLarge)
+            Text("Select Your Professional Tier", fontWeight = FontWeight.Bold, fontSize = 15.sp)
 
             // FREE TIER CARD
             PlanCard(
@@ -2747,9 +2755,9 @@ fun PlanCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .border(2.dp, if (isSelected) BrandPrimary else if (isRecommended) BrandAccent else BrandBorder, RoundedCornerShape(Dimens.r2)),
+            .border(2.dp, if (isSelected) BrandPrimary else if (isRecommended) BrandAccent else BrandBorder, RoundedCornerShape(16.dp)),
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        shape = RoundedCornerShape(Dimens.r2)
+        shape = RoundedCornerShape(16.dp)
     ) {
         Column(modifier = Modifier.padding(18.dp)) {
             Row(
@@ -2757,8 +2765,8 @@ fun PlanCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
-                    Text(title, style = Typography.bodyLarge, color = BrandDark)
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(title, fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
                     if (title != "Free Basic") {
                         ComingSoonPill()
                     }
@@ -2774,14 +2782,14 @@ fun PlanCard(
                     }
                 }
             }
-            Text(price, style = Typography.bodyLarge, color = BrandPrimary, modifier = Modifier.padding(vertical = 4.dp))
+            Text(price, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandPrimary, modifier = Modifier.padding(vertical = 4.dp))
             
             HorizontalDivider(color = BrandBorder, modifier = Modifier.padding(vertical = 8.dp))
 
             features.forEach { feature ->
                 Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 2.dp)) {
                     Icon(Icons.Default.Check, null, tint = BrandSuccess, modifier = Modifier.size(16.dp))
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text(feature, fontSize = 11.sp, color = BrandSecondaryText)
                 }
             }
@@ -2800,7 +2808,8 @@ fun PlanCard(
                 Text(
                     text = if (isSelected) "Current Active Plan" else "Select Plan",
                     color = if (isSelected) Color.White else BrandDark,
-                    style = Typography.bodyLarge
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 12.sp
                 )
             }
         }
@@ -2847,7 +2856,7 @@ fun BusinessProfileManagementScreen(
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = BrandDark)
                 }
                 Spacer(modifier = Modifier.width(6.dp))
-                Text("Business Profile Settings", style = Typography.bodyLarge, color = BrandDark)
+                Text("Business Profile Settings", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
             }
             TextButton(onClick = onSave) {
                 Text("Lock", color = BrandPrimary, fontWeight = FontWeight.Bold)
@@ -2858,9 +2867,9 @@ fun BusinessProfileManagementScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text("Registered Dolby Studio & Label Info", style = Typography.bodyLarge)
+            Text("Registered Dolby Studio & Label Info", fontWeight = FontWeight.Bold, fontSize = 14.sp)
 
             LabeledInputField(label = "Business Studio Name", value = name, onValueChange = onNameChange)
             LabeledInputField(label = "Acoustic Spaces & Gear Description", value = description, onValueChange = onDescriptionChange, isMultiline = true)
@@ -2911,18 +2920,18 @@ fun ProfileShareScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = BrandDark)
             }
             Spacer(modifier = Modifier.width(6.dp))
-            Text("Share Sound Professional Card", style = Typography.bodyLarge, color = BrandDark)
+            Text("Share Sound Professional Card", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
         }
 
-        Spacer(modifier = Modifier.height(Dimens.sp3))
+        Spacer(modifier = Modifier.height(24.dp))
 
         // Large beautiful custom draw vector QR card on Canvas
         Card(
             modifier = Modifier
                 .size(280.dp)
-                .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3)),
+                .border(1.dp, BrandBorder, RoundedCornerShape(24.dp)),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(Dimens.r3)
+            shape = RoundedCornerShape(24.dp)
         ) {
             Box(
                 modifier = Modifier
@@ -2974,11 +2983,12 @@ fun ProfileShareScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(Dimens.sp3))
+        Spacer(modifier = Modifier.height(24.dp))
 
         Text(
             text = "Copy & Share Profile URL",
-            style = Typography.bodyLarge,
+            fontWeight = FontWeight.Bold,
+            fontSize = 14.sp,
             color = BrandDark
         )
 
@@ -2986,9 +2996,9 @@ fun ProfileShareScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp, vertical = 12.dp)
-                .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                .border(1.dp, BrandBorder, RoundedCornerShape(12.dp)),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RoundedCornerShape(Dimens.r2)
+            shape = RoundedCornerShape(12.dp)
         ) {
             Row(
                 modifier = Modifier.padding(14.dp),
@@ -3104,7 +3114,7 @@ fun PublicProfilePreviewScreen(
                         ) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back", tint = BrandDark)
                         }
-                        Spacer(modifier = Modifier.width(Dimens.sp1))
+                        Spacer(modifier = Modifier.width(8.dp))
                         Column {
                             Text(
                                 text = "PUBLIC VISITOR PREVIEW",
@@ -3157,10 +3167,10 @@ fun PublicProfilePreviewScreen(
                     .fillMaxHeight()
                     .align(Alignment.Center)
                     .padding(vertical = 12.dp)
-                    .shadow(12.dp, RoundedCornerShape(Dimens.r3))
+                    .shadow(12.dp, RoundedCornerShape(24.dp))
                     .background(Color.White)
-                    .border(4.dp, BrandDark, RoundedCornerShape(Dimens.r3))
-                    .clip(RoundedCornerShape(Dimens.r3))
+                    .border(4.dp, BrandDark, RoundedCornerShape(24.dp))
+                    .clip(RoundedCornerShape(20.dp))
 
                 Box(
                     modifier = deviceModifier
@@ -3231,7 +3241,7 @@ fun PublicProfilePreviewScreen(
                         }
 
                         // BOTTOM EDITORIAL FOOTER (Section 16)
-                        Spacer(modifier = Modifier.height(Dimens.sp4))
+                        Spacer(modifier = Modifier.height(48.dp))
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -3241,7 +3251,8 @@ fun PublicProfilePreviewScreen(
                         ) {
                             Text(
                                 text = "MusicLinkd",
-                                style = Typography.bodyLarge,
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.ExtraBold,
                                 color = Color.White,
                                 letterSpacing = 1.5.sp
                             )
@@ -3253,22 +3264,22 @@ fun PublicProfilePreviewScreen(
                                 fontWeight = FontWeight.Bold,
                                 letterSpacing = 2.sp
                             )
-                            Spacer(modifier = Modifier.height(Dimens.sp2))
+                            Spacer(modifier = Modifier.height(16.dp))
                             Text(
                                 text = "Generate your own gorgeous, audio-first public microsite in under 60 seconds with MusicLinkd Pro.",
-                                style = Typography.labelLarge,
+                                fontSize = 12.sp,
                                 color = Color.White.copy(alpha = 0.7f),
                                 textAlign = TextAlign.Center,
                                 lineHeight = 18.sp,
                                 modifier = Modifier.padding(horizontal = 12.dp)
                             )
-                            Spacer(modifier = Modifier.height(Dimens.sp3))
+                            Spacer(modifier = Modifier.height(24.dp))
                             Button(
                                 onClick = onBack,
                                 colors = ButtonDefaults.buttonColors(containerColor = BrandAccent),
                                 shape = RoundedCornerShape(99.dp)
                             ) {
-                                Text("Back to Portfolio Workspace", style = Typography.bodyLarge)
+                                Text("Back to Portfolio Workspace", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                             }
                             Spacer(modifier = Modifier.height(18.dp))
                             Text(
@@ -3306,7 +3317,7 @@ fun PublicProfilePreviewScreen(
                                         .clip(CircleShape)
                                         .background(BrandSuccess)
                                 )
-                                Spacer(modifier = Modifier.width(Dimens.sp1))
+                                Spacer(modifier = Modifier.width(8.dp))
                                 Text(
                                     text = "Hire $displayName",
                                     color = Color.White,
@@ -3483,7 +3494,8 @@ fun PremiumTalentProfileLayout(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         text = displayName,
-                        style = Typography.bodyLarge,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Black,
                         color = Color.White,
                         letterSpacing = (-0.5).sp
                     )
@@ -3498,7 +3510,8 @@ fun PremiumTalentProfileLayout(
                 Spacer(modifier = Modifier.height(2.dp))
                 Text(
                     text = headline,
-                    style = Typography.bodyLarge,
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Medium,
                     color = Color.White.copy(alpha = 0.8f),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -3526,10 +3539,11 @@ fun PremiumTalentProfileLayout(
                             tint = BrandPrimary,
                             modifier = Modifier.size(14.dp)
                         )
-                        Spacer(modifier = Modifier.width(Dimens.sp1))
+                        Spacer(modifier = Modifier.width(4.dp))
                         Text(
                             text = location,
-                            style = Typography.bodyLarge,
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold,
                             color = BrandDark
                         )
                     }
@@ -3561,7 +3575,7 @@ fun PremiumTalentProfileLayout(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // BIO STATEMENT (COLLAPSIBLE)
             Text(
@@ -3572,7 +3586,7 @@ fun PremiumTalentProfileLayout(
                 maxLines = if (isBioExpanded) 10 else 2,
                 overflow = TextOverflow.Ellipsis
             )
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = if (isBioExpanded) "Read Less" else "Read Full Bio",
                 fontSize = 11.sp,
@@ -3581,7 +3595,7 @@ fun PremiumTalentProfileLayout(
                 modifier = Modifier.clickable { isBioExpanded = !isBioExpanded }
             )
 
-            Spacer(modifier = Modifier.height(Dimens.sp3))
+            Spacer(modifier = Modifier.height(24.dp))
 
             // ================= SECTION 3: DARK AUDIO SHOWCASE =================
             Text(
@@ -3597,9 +3611,9 @@ fun PremiumTalentProfileLayout(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .shadow(8.dp, RoundedCornerShape(Dimens.r2)),
+                    .shadow(8.dp, RoundedCornerShape(16.dp)),
                 colors = CardDefaults.cardColors(containerColor = BrandDark),
-                shape = RoundedCornerShape(Dimens.r2)
+                shape = RoundedCornerShape(16.dp)
             ) {
                 Column(modifier = Modifier.padding(18.dp)) {
                     Row(
@@ -3629,12 +3643,13 @@ fun PremiumTalentProfileLayout(
                             )
                         }
 
-                        Spacer(modifier = Modifier.width(Dimens.sp2))
+                        Spacer(modifier = Modifier.width(16.dp))
 
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
                                 text = trackList[activeTrackIndex].first,
-                                style = Typography.bodyLarge,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold,
                                 color = Color.White,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
@@ -3660,7 +3675,7 @@ fun PremiumTalentProfileLayout(
                         trackColor = Color.White.copy(alpha = 0.15f)
                     )
 
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     // Alternating Track Queue Selector
                     Text(
@@ -3676,7 +3691,7 @@ fun PremiumTalentProfileLayout(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clip(RoundedCornerShape(Dimens.r1))
+                                .clip(RoundedCornerShape(8.dp))
                                 .background(
                                     if (activeTrackIndex == idx) Color.White.copy(alpha = 0.08f)
                                     else Color.Transparent
@@ -3693,11 +3708,11 @@ fun PremiumTalentProfileLayout(
                                     tint = if (activeTrackIndex == idx) BrandAccent else Color.White.copy(alpha = 0.4f),
                                     modifier = Modifier.size(14.dp)
                                 )
-                                Spacer(modifier = Modifier.width(Dimens.sp1))
+                                Spacer(modifier = Modifier.width(8.dp))
                                 Text(
                                     text = trackName,
                                     color = if (activeTrackIndex == idx) Color.White else Color.White.copy(alpha = 0.8f),
-                                    style = Typography.labelLarge,
+                                    fontSize = 12.sp,
                                     fontWeight = if (activeTrackIndex == idx) FontWeight.Bold else FontWeight.Normal,
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis,
@@ -3731,9 +3746,9 @@ fun PremiumTalentProfileLayout(
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                            .border(1.dp, BrandBorder, RoundedCornerShape(12.dp)),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
-                        shape = RoundedCornerShape(Dimens.r2)
+                        shape = RoundedCornerShape(12.dp)
                     ) {
                         Row(
                             modifier = Modifier.padding(14.dp),
@@ -3742,7 +3757,7 @@ fun PremiumTalentProfileLayout(
                             Box(
                                 modifier = Modifier
                                     .size(40.dp)
-                                    .clip(RoundedCornerShape(Dimens.r1))
+                                    .clip(RoundedCornerShape(8.dp))
                                     .background(BrandPrimary.copy(alpha = 0.08f)),
                                 contentAlignment = Alignment.Center
                             ) {
@@ -3773,7 +3788,7 @@ fun PremiumTalentProfileLayout(
                             }
                             Box(
                                 modifier = Modifier
-                                    .clip(RoundedCornerShape(Dimens.r1))
+                                    .clip(RoundedCornerShape(4.dp))
                                     .background(BrandBorder.copy(alpha = 0.5f))
                                     .padding(horizontal = 6.dp, vertical = 2.dp)
                             ) {
@@ -3802,7 +3817,7 @@ fun PremiumTalentProfileLayout(
             Spacer(modifier = Modifier.height(10.dp))
 
             // Discography credits timeline
-            Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf(
                     "Lead Vocalist on 'Cyber Horizon' with Neon Valley (2026)",
                     "Co-Producer on 'Acoustic Soul' with Tara Vance (2025)",
@@ -3854,7 +3869,7 @@ fun PremiumTalentProfileLayout(
                     Box(
                         modifier = Modifier
                             .weight(1f)
-                            .clip(RoundedCornerShape(Dimens.r1))
+                            .clip(RoundedCornerShape(8.dp))
                             .background(if (isSelected) BrandDark else BrandBorder.copy(alpha = 0.3f))
                             .clickable { selectedServiceTier = tier }
                             .padding(vertical = 8.dp),
@@ -3870,7 +3885,7 @@ fun PremiumTalentProfileLayout(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(12.dp))
 
             // Display Active Service details
             val activeService = when (selectedServiceTier) {
@@ -3886,7 +3901,7 @@ fun PremiumTalentProfileLayout(
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 shape = RoundedCornerShape(14.dp)
             ) {
-                Column(modifier = Modifier.padding(Dimens.sp2)) {
+                Column(modifier = Modifier.padding(16.dp)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -3894,7 +3909,8 @@ fun PremiumTalentProfileLayout(
                     ) {
                         Text(
                             text = activeService.name,
-                            style = Typography.bodyLarge,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
                             color = BrandDark
                         )
                         Box(
@@ -3911,10 +3927,10 @@ fun PremiumTalentProfileLayout(
                             )
                         }
                     }
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = activeService.description,
-                        style = Typography.labelLarge,
+                        fontSize = 12.sp,
                         color = BrandSecondaryText,
                         lineHeight = 18.sp
                     )
@@ -3927,7 +3943,7 @@ fun PremiumTalentProfileLayout(
                         colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
                         shape = RoundedCornerShape(10.dp)
                     ) {
-                        Text("Book Service with Secured Payment", style = Typography.bodyLarge)
+                        Text("Book Service with Secured Payment", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     }
                 }
             }
@@ -3973,7 +3989,7 @@ fun PremiumTalentProfileLayout(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(12.dp))
 
             // Selected Gallery Photo Card
             val activeGalleryUrl = when (selectedGalleryCategory) {
@@ -3987,8 +4003,8 @@ fun PremiumTalentProfileLayout(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(180.dp)
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
-                shape = RoundedCornerShape(Dimens.r2)
+                    .border(1.dp, BrandBorder, RoundedCornerShape(12.dp)),
+                shape = RoundedCornerShape(12.dp)
             ) {
                 AsyncImage(
                     model = activeGalleryUrl,
@@ -4018,9 +4034,9 @@ fun PremiumTalentProfileLayout(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 4.dp)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                        .border(1.dp, BrandBorder, RoundedCornerShape(12.dp)),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(Dimens.r2)
+                    shape = RoundedCornerShape(12.dp)
                 ) {
                     Column(modifier = Modifier.padding(14.dp)) {
                         Row(
@@ -4030,7 +4046,8 @@ fun PremiumTalentProfileLayout(
                         ) {
                             Text(
                                 text = client,
-                                style = Typography.bodyLarge,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp,
                                 color = BrandDark
                             )
                             Text(
@@ -4043,7 +4060,7 @@ fun PremiumTalentProfileLayout(
                         Spacer(modifier = Modifier.height(6.dp))
                         Text(
                             text = "\"$reviewText\"",
-                            style = Typography.labelLarge,
+                            fontSize = 12.sp,
                             color = BrandSecondaryText,
                             fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
                             lineHeight = 18.sp
@@ -4071,23 +4088,23 @@ fun PremiumTalentProfileLayout(
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 shape = RoundedCornerShape(14.dp)
             ) {
-                Column(modifier = Modifier.padding(Dimens.sp2)) {
+                Column(modifier = Modifier.padding(16.dp)) {
                     Text(
                         text = "Your booking communications, session agreements, and payments are protected inside secure, verified booking agreements.",
-                        style = Typography.labelLarge,
+                        fontSize = 12.sp,
                         color = BrandSecondaryText,
                         lineHeight = 18.sp
                     )
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(12.dp))
                     
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Box(
                             modifier = Modifier
                                 .weight(1f)
-                                .clip(RoundedCornerShape(Dimens.r1))
+                                .clip(RoundedCornerShape(8.dp))
                                 .background(Color(0xFFE8F5E9))
                                 .clickable { contactFeedbackMsg = "Inquiry encrypted over direct channel!" }
                                 .padding(vertical = 10.dp),
@@ -4098,7 +4115,7 @@ fun PremiumTalentProfileLayout(
                         Box(
                             modifier = Modifier
                                 .weight(1f)
-                                .clip(RoundedCornerShape(Dimens.r1))
+                                .clip(RoundedCornerShape(8.dp))
                                 .background(Color(0xFFECEFF1))
                                 .clickable { contactFeedbackMsg = "Email address copied to clipboard!" }
                                 .padding(vertical = 10.dp),
@@ -4240,7 +4257,7 @@ fun TalentProfileLayout(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(Dimens.sp2))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -4257,7 +4274,7 @@ fun TalentProfileLayout(
                         Text(displayName.take(1), color = Color.White, fontSize = 32.sp, fontWeight = FontWeight.ExtraBold)
                     }
 
-                    Spacer(modifier = Modifier.width(Dimens.sp2))
+                    Spacer(modifier = Modifier.width(16.dp))
 
                     Column {
                         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -4279,7 +4296,8 @@ fun TalentProfileLayout(
                         Text(
                             text = "Vocal Architect & Music Producer",
                             color = BrandAccent,
-                            style = Typography.bodyLarge
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold
                         )
 
                         Text(
@@ -4297,35 +4315,35 @@ fun TalentProfileLayout(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(Dimens.r2))
+                    .clip(RoundedCornerShape(16.dp))
                     .background(BrandBorder.copy(alpha = 0.25f))
                     .padding(14.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("$followerCount", style = Typography.bodyLarge, color = BrandDark)
+                    Text("$followerCount", fontWeight = FontWeight.ExtraBold, fontSize = 15.sp, color = BrandDark)
                     Text("Followers", fontSize = 10.sp, color = BrandSecondaryText)
                 }
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("4.9★", style = Typography.bodyLarge, color = BrandAccent)
+                    Text("4.9★", fontWeight = FontWeight.ExtraBold, fontSize = 15.sp, color = BrandAccent)
                     Text("32 Client Reviews", fontSize = 10.sp, color = BrandSecondaryText)
                 }
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("98%", style = Typography.bodyLarge, color = BrandSuccess)
+                    Text("98%", fontWeight = FontWeight.ExtraBold, fontSize = 15.sp, color = BrandSuccess)
                     Text("Response Rate", fontSize = 10.sp, color = BrandSecondaryText)
                 }
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("24", style = Typography.bodyLarge, color = BrandPrimary)
+                    Text("24", fontWeight = FontWeight.ExtraBold, fontSize = 15.sp, color = BrandPrimary)
                     Text("Co-Creds Verified", fontSize = 10.sp, color = BrandSecondaryText)
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Primary CTAs (Hire / Follow / Message)
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Button(
                     onClick = onInstantBook,
@@ -4352,7 +4370,7 @@ fun TalentProfileLayout(
                         text = if (userFollowed) "✓ Following" else "+ Follow",
                         fontWeight = FontWeight.Bold,
                         color = if (userFollowed) BrandDark else Color.White,
-                        style = Typography.labelLarge
+                        fontSize = 12.sp
                     )
                 }
 
@@ -4372,13 +4390,13 @@ fun TalentProfileLayout(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(Dimens.r1))
+                        .clip(RoundedCornerShape(8.dp))
                         .background(BrandAccent.copy(alpha = 0.08f))
                         .padding(10.dp)
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text("⚡", style = Typography.labelLarge)
-                        Spacer(modifier = Modifier.width(Dimens.sp1))
+                        Text("⚡", fontSize = 14.sp)
+                        Spacer(modifier = Modifier.width(8.dp))
                         Text(contactFeedbackMsg, color = BrandAccent, fontSize = 11.sp, fontWeight = FontWeight.Bold)
                     }
                 }
@@ -4386,7 +4404,7 @@ fun TalentProfileLayout(
 
             // ================= SECTION 2: BIOGRAPHY & GENRES =================
             Spacer(modifier = Modifier.height(28.dp))
-            Text("Editorial Bio & Creative Vibe", style = Typography.bodyLarge, color = BrandDark)
+            Text("Editorial Bio & Creative Vibe", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
             
             Text(
                 text = if (isBioExpanded) {
@@ -4403,13 +4421,14 @@ fun TalentProfileLayout(
             Text(
                 text = if (isBioExpanded) "Show Less" else "Read full backstory",
                 color = BrandPrimary,
-                style = Typography.bodyLarge,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .padding(top = 4.dp)
                     .clickable { isBioExpanded = !isBioExpanded }
             )
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(12.dp))
             // Genres list
             Text("Featured Spheres:", fontSize = 11.sp, color = BrandDark.copy(alpha = 0.6f), fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(6.dp))
@@ -4431,20 +4450,20 @@ fun TalentProfileLayout(
 
             // ================= SECTION 3: AUDIO SHOWCASE & RECENT TRACKS =================
             Spacer(modifier = Modifier.height(28.dp))
-            Text("Audio Discovery Player", style = Typography.bodyLarge, color = BrandDark)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Text("Audio Discovery Player", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
+            Spacer(modifier = Modifier.height(8.dp))
 
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3)),
+                    .border(1.dp, BrandBorder, RoundedCornerShape(20.dp)),
                 colors = CardDefaults.cardColors(containerColor = BrandDark),
-                shape = RoundedCornerShape(Dimens.r3)
+                shape = RoundedCornerShape(20.dp)
             ) {
                 Column(modifier = Modifier.padding(18.dp)) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         // spinning disc animation representation
                         Box(
@@ -4503,7 +4522,7 @@ fun TalentProfileLayout(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     // Waveform seeker
                     Row(
@@ -4530,17 +4549,17 @@ fun TalentProfileLayout(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(12.dp))
                     
                     // Playlist Tracks toggle list
                     Text("Playlist Queue:", fontSize = 10.sp, color = Color.White.copy(alpha = 0.5f), fontWeight = FontWeight.Bold)
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                    Spacer(modifier = Modifier.height(4.dp))
                     trackList.forEachIndexed { idx, (title, dur) ->
                         val isCurrent = idx == activeTrackIndex
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clip(RoundedCornerShape(Dimens.r1))
+                                .clip(RoundedCornerShape(8.dp))
                                 .background(if (isCurrent) Color.White.copy(alpha = 0.08f) else Color.Transparent)
                                 .clickable {
                                     activeTrackIndex = idx
@@ -4578,7 +4597,7 @@ fun TalentProfileLayout(
 
             // ================= SECTION 4: RELEASES & PROJECTS =================
             Spacer(modifier = Modifier.height(28.dp))
-            Text("Featured Studio Projects", style = Typography.bodyLarge, color = BrandDark)
+            Text("Featured Studio Projects", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
             Spacer(modifier = Modifier.height(10.dp))
 
             projects.forEach { project ->
@@ -4586,9 +4605,9 @@ fun TalentProfileLayout(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 5.dp)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                        .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(Dimens.r2)
+                    shape = RoundedCornerShape(16.dp)
                 ) {
                     Row(
                         modifier = Modifier.padding(14.dp),
@@ -4597,11 +4616,11 @@ fun TalentProfileLayout(
                         Box(
                             modifier = Modifier
                                 .size(50.dp)
-                                .clip(RoundedCornerShape(Dimens.r1))
+                                .clip(RoundedCornerShape(8.dp))
                                 .background(BrandDark),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text("💿", style = Typography.headlineLarge)
+                            Text("💿", fontSize = 24.sp)
                         }
 
                         Spacer(modifier = Modifier.width(14.dp))
@@ -4625,9 +4644,9 @@ fun TalentProfileLayout(
 
             // ================= SECTION 5: PROFESSIONAL CREDITS =================
             Spacer(modifier = Modifier.height(28.dp))
-            Text("Professional Work Timeline", style = Typography.bodyLarge, color = BrandDark)
+            Text("Professional Work Timeline", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
             Text("Collaborator credits linked and verified on MusicLinkd", fontSize = 11.sp, color = BrandSecondaryText)
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(12.dp))
 
             listOf(
                 "Bollywood Synth Scrape Theme" to "Lead Vocal Producer · 2026",
@@ -4639,7 +4658,7 @@ fun TalentProfileLayout(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 6.dp)
-                        .border(1.dp, if (approved) BrandSuccess else BrandBorder, RoundedCornerShape(Dimens.r2))
+                        .border(1.dp, if (approved) BrandSuccess else BrandBorder, RoundedCornerShape(12.dp))
                         .clickable { approvedCreditIndex = idx }
                         .padding(12.dp),
                     verticalAlignment = Alignment.CenterVertically,
@@ -4672,7 +4691,7 @@ fun TalentProfileLayout(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("Standard Offerings & Rates", style = Typography.bodyLarge, color = BrandDark)
+                Text("Standard Offerings & Rates", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
                 // Tier selector
                 Row(
                     modifier = Modifier
@@ -4711,11 +4730,11 @@ fun TalentProfileLayout(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(2.dp, BrandPrimary.copy(alpha = 0.4f), RoundedCornerShape(Dimens.r2)),
+                    .border(2.dp, BrandPrimary.copy(alpha = 0.4f), RoundedCornerShape(16.dp)),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                shape = RoundedCornerShape(Dimens.r2)
+                shape = RoundedCornerShape(16.dp)
             ) {
-                Column(modifier = Modifier.padding(Dimens.sp2)) {
+                Column(modifier = Modifier.padding(16.dp)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -4723,14 +4742,15 @@ fun TalentProfileLayout(
                     ) {
                         Text(
                             text = displayedService.name,
-                            style = Typography.bodyLarge,
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 14.sp,
                             color = BrandDark
                         )
                         Text(
                             text = displayedService.pricing,
                             fontWeight = FontWeight.ExtraBold,
                             color = BrandAccent,
-                            style = Typography.bodyLarge
+                            fontSize = 15.sp
                         )
                     }
                     Text(
@@ -4742,7 +4762,7 @@ fun TalentProfileLayout(
                     )
                     Text(
                         text = displayedService.description,
-                        style = Typography.labelLarge,
+                        fontSize = 12.sp,
                         color = BrandSecondaryText,
                         lineHeight = 16.sp,
                         modifier = Modifier.padding(bottom = 12.dp)
@@ -4753,18 +4773,18 @@ fun TalentProfileLayout(
                         shape = RoundedCornerShape(99.dp),
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text("Order ${displayedService.name} (Secured Pay)", style = Typography.bodyLarge)
+                        Text("Order ${displayedService.name} (Secured Pay)", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     }
                 }
             }
 
             // ================= SECTION 7: PORTFOLIO GALLERY =================
             Spacer(modifier = Modifier.height(28.dp))
-            Text("Visual Studio Gallery", style = Typography.bodyLarge, color = BrandDark)
+            Text("Visual Studio Gallery", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
             
             Row(
                 modifier = Modifier.padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 listOf("Studio", "Live Concerts", "Gear setup", "Press/Awards").forEach { cat ->
                     val isSel = selectedGalleryCategory == cat
@@ -4791,16 +4811,16 @@ fun TalentProfileLayout(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                    .border(1.dp, BrandBorder, RoundedCornerShape(12.dp)),
                 colors = CardDefaults.cardColors(containerColor = BrandBackground),
-                shape = RoundedCornerShape(Dimens.r2)
+                shape = RoundedCornerShape(12.dp)
             ) {
                 Column(modifier = Modifier.padding(14.dp)) {
                     Text("Selected Category: $selectedGalleryCategory", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = BrandPrimary)
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
                         text = galleryMockText,
-                        style = Typography.labelLarge,
+                        fontSize = 12.sp,
                         color = BrandDark,
                         lineHeight = 18.sp
                     )
@@ -4809,7 +4829,7 @@ fun TalentProfileLayout(
 
             // ================= SECTION 8: VIDEOS & CLIPS =================
             Spacer(modifier = Modifier.height(28.dp))
-            Text("Featured Reels & Videos", style = Typography.bodyLarge, color = BrandDark)
+            Text("Featured Reels & Videos", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
             Spacer(modifier = Modifier.height(10.dp))
 
             LazyRow(
@@ -4824,21 +4844,21 @@ fun TalentProfileLayout(
                         Card(
                             modifier = Modifier
                                 .width(220.dp)
-                                .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                                .border(1.dp, BrandBorder, RoundedCornerShape(12.dp)),
                             colors = CardDefaults.cardColors(containerColor = Color.White)
                         ) {
-                            Column(modifier = Modifier.padding(Dimens.sp2)) {
+                            Column(modifier = Modifier.padding(12.dp)) {
                                 Box(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(100.dp)
-                                        .clip(RoundedCornerShape(Dimens.r1))
+                                        .clip(RoundedCornerShape(8.dp))
                                         .background(Brush.radialGradient(colors = listOf(BrandAccent, BrandDark))),
                                     contentAlignment = Alignment.Center
                                 ) {
                                     Icon(Icons.Default.PlayArrow, null, tint = Color.White, modifier = Modifier.size(32.dp))
                                 }
-                                Spacer(modifier = Modifier.height(Dimens.sp1))
+                                Spacer(modifier = Modifier.height(8.dp))
                                 Text(title, fontWeight = FontWeight.Bold, fontSize = 11.5.sp, color = BrandDark)
                                 Text(stat, fontSize = 9.5.sp, color = BrandSecondaryText)
                             }
@@ -4849,15 +4869,15 @@ fun TalentProfileLayout(
 
             // ================= SECTION 9: TECHNICAL GEAR & DAW =================
             Spacer(modifier = Modifier.height(28.dp))
-            Text("Technical Rig & Audio Setup", style = Typography.bodyLarge, color = BrandDark)
+            Text("Technical Rig & Audio Setup", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
             Spacer(modifier = Modifier.height(10.dp))
 
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                    .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                shape = RoundedCornerShape(Dimens.r2)
+                shape = RoundedCornerShape(16.dp)
             ) {
                 Column(modifier = Modifier.padding(14.dp)) {
                     listOf(
@@ -4876,7 +4896,7 @@ fun TalentProfileLayout(
 
             // ================= SECTION 10: REVIEWS & REPUTATION =================
             Spacer(modifier = Modifier.height(28.dp))
-            Text("Verified Client Reviews", style = Typography.bodyLarge, color = BrandDark)
+            Text("Verified Client Reviews", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
             
             // Interaction to rate
             Row(
@@ -4903,7 +4923,7 @@ fun TalentProfileLayout(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
 
             listOf(
                 "James Miller (Universal Records)" to "The raw vocals Vedanshu recorded are exceptionally clean. The Kemper profile work was masterfully done. Saved us days of EQ.",
@@ -4913,11 +4933,11 @@ fun TalentProfileLayout(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 4.dp)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                        .border(1.dp, BrandBorder, RoundedCornerShape(12.dp)),
                     colors = CardDefaults.cardColors(containerColor = BrandBackground),
-                    shape = RoundedCornerShape(Dimens.r2)
+                    shape = RoundedCornerShape(12.dp)
                 ) {
-                    Column(modifier = Modifier.padding(Dimens.sp2)) {
+                    Column(modifier = Modifier.padding(12.dp)) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
@@ -4933,8 +4953,8 @@ fun TalentProfileLayout(
                                 ) {
                                     Text(client.take(1), color = Color.White, fontSize = 9.sp, fontWeight = FontWeight.Bold)
                                 }
-                                Spacer(modifier = Modifier.width(Dimens.sp1))
-                                Text(client, style = Typography.bodyLarge, color = BrandDark)
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text(client, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandDark)
                             }
                             Row {
                                 repeat(5) {
@@ -4955,11 +4975,11 @@ fun TalentProfileLayout(
 
             // ================= SECTION 11: VERIFIED COLLABORATORS =================
             Spacer(modifier = Modifier.height(28.dp))
-            Text("Verified Collaborators Network", style = Typography.bodyLarge, color = BrandDark)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Text("Verified Collaborators Network", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
+            Spacer(modifier = Modifier.height(8.dp))
 
             LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 listOf(
                     "Kabir Sen" to "Acoustic Guitarist",
@@ -4985,9 +5005,9 @@ fun TalentProfileLayout(
                                         .background(BrandPrimary.copy(alpha = 0.15f)),
                                     contentAlignment = Alignment.Center
                                 ) {
-                                    Text(name.take(1), fontWeight = FontWeight.Bold, color = BrandPrimary, style = Typography.labelLarge)
+                                    Text(name.take(1), fontWeight = FontWeight.Bold, color = BrandPrimary, fontSize = 14.sp)
                                 }
-                                Spacer(modifier = Modifier.height(Dimens.sp1))
+                                Spacer(modifier = Modifier.height(4.dp))
                                 Text(name, fontWeight = FontWeight.Bold, fontSize = 11.sp, color = BrandDark, maxLines = 1)
                                 Text(role, fontSize = 9.sp, color = BrandSecondaryText, maxLines = 1)
                             }
@@ -4998,7 +5018,7 @@ fun TalentProfileLayout(
 
             // ================= SECTION 12: ACHIEVEMENTS & MILESTONES =================
             Spacer(modifier = Modifier.height(28.dp))
-            Text("Achievements & Digital Stats", style = Typography.bodyLarge, color = BrandDark)
+            Text("Achievements & Digital Stats", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
             Spacer(modifier = Modifier.height(10.dp))
 
             Row(
@@ -5013,7 +5033,7 @@ fun TalentProfileLayout(
                     Column(
                         modifier = Modifier
                             .weight(1f)
-                            .clip(RoundedCornerShape(Dimens.r2))
+                            .clip(RoundedCornerShape(12.dp))
                             .background(BrandBorder.copy(alpha = 0.2f))
                             .padding(10.dp)
                     ) {
@@ -5025,15 +5045,15 @@ fun TalentProfileLayout(
 
             // ================= SECTION 13: AVAILABILITY & TOUR STATUS =================
             Spacer(modifier = Modifier.height(28.dp))
-            Text("Availability Status & Schedule", style = Typography.bodyLarge, color = BrandDark)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Text("Availability Status & Schedule", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
+            Spacer(modifier = Modifier.height(8.dp))
 
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                    .border(1.dp, BrandBorder, RoundedCornerShape(16.dp)),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                shape = RoundedCornerShape(Dimens.r2)
+                shape = RoundedCornerShape(16.dp)
             ) {
                 Column(modifier = Modifier.padding(14.dp)) {
                     Row(
@@ -5049,11 +5069,11 @@ fun TalentProfileLayout(
                                     .background(BrandSuccess)
                             )
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("Fully Open for Bookings", style = Typography.bodyLarge, color = BrandSuccess)
+                            Text("Fully Open for Bookings", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandSuccess)
                         }
                         Text("Response Time: ~18 mins", fontSize = 10.sp, color = BrandSecondaryText)
                     }
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "Accepting remote stem work, live gig inquiries, and sound engineering sessions in Mumbai and Pune. Booking calendar is secure with integrated milestone releases.",
                         fontSize = 11.5.sp,
@@ -5065,13 +5085,13 @@ fun TalentProfileLayout(
 
             // ================= SECTION 14: SECURED CONTACT ANCHOR =================
             Spacer(modifier = Modifier.height(28.dp))
-            Text("Secure Direct Connect Channels", style = Typography.bodyLarge, color = BrandDark)
+            Text("Secure Direct Connect Channels", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
             Text("Select a channel to query the artist directly", fontSize = 11.sp, color = BrandSecondaryText)
             Spacer(modifier = Modifier.height(10.dp))
 
             FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
-                verticalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 listOf(
                     "🟢 WhatsApp secured" to "Inquire via official chat integration",
@@ -5080,9 +5100,9 @@ fun TalentProfileLayout(
                 ).forEach { (title, description) ->
                     Box(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(Dimens.r2))
+                            .clip(RoundedCornerShape(12.dp))
                             .background(Color.White)
-                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2))
+                            .border(1.dp, BrandBorder, RoundedCornerShape(12.dp))
                             .clickable { contactFeedbackMsg = "Connected to $title channel securely." }
                             .padding(12.dp)
                     ) {
@@ -5096,7 +5116,7 @@ fun TalentProfileLayout(
 
             // ================= SECTION 15: RELATED ARTISTS FOR DISCOVERY =================
             Spacer(modifier = Modifier.height(28.dp))
-            Text("You might also like", style = Typography.bodyLarge, color = BrandDark)
+            Text("You might also like", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandDark)
             Text("Other highly-rated creators nearby", fontSize = 11.sp, color = BrandSecondaryText)
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -5112,11 +5132,11 @@ fun TalentProfileLayout(
                         Card(
                             modifier = Modifier
                                 .width(180.dp)
-                                .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                                .border(1.dp, BrandBorder, RoundedCornerShape(12.dp)),
                             colors = CardDefaults.cardColors(containerColor = BrandBackground)
                         ) {
-                            Column(modifier = Modifier.padding(Dimens.sp2)) {
-                                Text(name, style = Typography.bodyLarge, color = BrandDark)
+                            Column(modifier = Modifier.padding(12.dp)) {
+                                Text(name, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandDark)
                                 Text(info, fontSize = 10.sp, color = BrandSecondaryText)
                                 Spacer(modifier = Modifier.height(6.dp))
                                 Box(
@@ -5169,18 +5189,18 @@ fun BusinessProfileLayout(
                     Box(
                         modifier = Modifier
                             .size(60.dp)
-                            .clip(RoundedCornerShape(Dimens.r1))
+                            .clip(RoundedCornerShape(8.dp))
                             .background(Color.White)
                             .padding(8.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Text("🏢", fontSize = 28.sp)
                     }
-                    Spacer(modifier = Modifier.width(Dimens.sp2))
+                    Spacer(modifier = Modifier.width(12.dp))
                     Column {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text("Abbey Road Atmos Room", color = Color.White, style = Typography.bodyLarge)
-                            Spacer(modifier = Modifier.width(Dimens.sp1))
+                            Text("Abbey Road Atmos Room", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                            Spacer(modifier = Modifier.width(4.dp))
                             Icon(Icons.Default.Verified, null, tint = BrandAccent, modifier = Modifier.size(16.dp))
                         }
                         Text("Established facility · 4.9 ★ (110 reviews)", color = Color.White.copy(alpha = 0.7f), fontSize = 11.sp)
@@ -5191,7 +5211,7 @@ fun BusinessProfileLayout(
 
         Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp)) {
             // About Studio
-            Text("Premium Recording Facility & Outboard Racks", style = Typography.bodyLarge, color = BrandDark)
+            Text("Premium Recording Facility & Outboard Racks", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
             Text(
                 "Fully soundproofed professional suites featuring direct Neumann recording arrays, Dolby Atmos 7.1.4 configurations, and premium analog SSL mixing decks.",
                 fontSize = 11.5.sp,
@@ -5201,9 +5221,9 @@ fun BusinessProfileLayout(
             )
 
             // DOLBY ATMOS ROOM SPEC CONFIGS
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
             Text("Studio Room Specifications", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
 
             listOf(
                 "Studio A: Dolby Atmos Mastering" to "Equipped with Dolby 7.1.4, SSL Solid State Logic board, 96-channel direct preamps.",
@@ -5213,15 +5233,15 @@ fun BusinessProfileLayout(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 4.dp)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                        .border(1.dp, BrandBorder, RoundedCornerShape(12.dp)),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(Dimens.r2)
+                    shape = RoundedCornerShape(12.dp)
                 ) {
-                    Column(modifier = Modifier.padding(Dimens.sp2)) {
+                    Column(modifier = Modifier.padding(12.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text("🔊", style = Typography.bodyLarge)
-                            Spacer(modifier = Modifier.width(Dimens.sp1))
-                            Text(room, style = Typography.bodyLarge, color = BrandDark)
+                            Text("🔊", fontSize = 18.sp)
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(room, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandDark)
                         }
                         Text(desc, fontSize = 10.5.sp, color = BrandSecondaryText, modifier = Modifier.padding(top = 4.dp))
                     }
@@ -5229,7 +5249,7 @@ fun BusinessProfileLayout(
             }
 
             // EQUIPMENT LEDGER
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
             Text("Equipment Inventory Available", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
             
             FlowRow(
@@ -5252,7 +5272,7 @@ fun BusinessProfileLayout(
             // INTERACTIVE BOOKING CALENDAR PREVIEW
             Spacer(modifier = Modifier.height(20.dp))
             Text("Select Date & Book Session Slot", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
 
             // Custom Calendar row (12-18 July 2026)
             Row(
@@ -5264,7 +5284,7 @@ fun BusinessProfileLayout(
                     Box(
                         modifier = Modifier
                             .size(width = 42.dp, height = 50.dp)
-                            .clip(RoundedCornerShape(Dimens.r1))
+                            .clip(RoundedCornerShape(8.dp))
                             .background(if (isSelected) BrandAccent else BrandBorder.copy(alpha = 0.3f))
                             .clickable { onDateSelect(date) }
                             .padding(vertical = 6.dp),
@@ -5306,15 +5326,15 @@ fun BusinessProfileLayout(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 4.dp)
-                        .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(Dimens.r1))
+                        .border(1.dp, if (isSelected) BrandPrimary else BrandBorder, RoundedCornerShape(8.dp))
                         .clickable { onTimeSlotSelect(slot) },
                     colors = CardDefaults.cardColors(
                         containerColor = if (isSelected) BrandPrimary.copy(alpha = 0.05f) else Color.White
                     ),
-                    shape = RoundedCornerShape(Dimens.r1)
+                    shape = RoundedCornerShape(8.dp)
                 ) {
                     Row(
-                        modifier = Modifier.padding(Dimens.sp2),
+                        modifier = Modifier.padding(12.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -5325,7 +5345,7 @@ fun BusinessProfileLayout(
                                 tint = if (isSelected) BrandPrimary else BrandSecondaryText,
                                 modifier = Modifier.size(14.dp)
                             )
-                            Spacer(modifier = Modifier.width(Dimens.sp1))
+                            Spacer(modifier = Modifier.width(8.dp))
                             Text(slot, fontSize = 11.5.sp, color = BrandDark, fontWeight = FontWeight.Bold)
                         }
                         Text("$100 / hr", fontSize = 11.sp, color = BrandAccent, fontWeight = FontWeight.ExtraBold)
@@ -5333,14 +5353,14 @@ fun BusinessProfileLayout(
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = onInstantBook,
                 colors = ButtonDefaults.buttonColors(containerColor = BrandDark),
                 shape = RoundedCornerShape(99.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Lock Slot for July $selectedDate", style = Typography.bodyLarge)
+                Text("Lock Slot for July $selectedDate", fontSize = 12.sp, fontWeight = FontWeight.Bold)
             }
         }
     }
@@ -5380,11 +5400,11 @@ fun BandProfileLayout(
                     ) {
                         Text("🎸", fontSize = 28.sp)
                     }
-                    Spacer(modifier = Modifier.width(Dimens.sp2))
+                    Spacer(modifier = Modifier.width(12.dp))
                     Column {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text("The Midnight Decibels", color = Color.White, style = Typography.bodyLarge)
-                            Spacer(modifier = Modifier.width(Dimens.sp1))
+                            Text("The Midnight Decibels", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                            Spacer(modifier = Modifier.width(4.dp))
                             Icon(Icons.Default.Verified, null, tint = BrandAccent, modifier = Modifier.size(16.dp))
                         }
                         Text("Synth Rock Ensemble · London, UK", color = Color.White.copy(alpha = 0.7f), fontSize = 11.sp)
@@ -5396,11 +5416,11 @@ fun BandProfileLayout(
         Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp)) {
             // ENSEMBLE LINEUP CAROUSEL
             Text("Band Members & Performing Crew", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 listOf(
                     "Sarah (Lead Vocals)" to "🎤",
@@ -5411,9 +5431,9 @@ fun BandProfileLayout(
                     Card(
                         modifier = Modifier
                             .weight(1f)
-                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r2)),
+                            .border(1.dp, BrandBorder, RoundedCornerShape(12.dp)),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
-                        shape = RoundedCornerShape(Dimens.r2)
+                        shape = RoundedCornerShape(12.dp)
                     ) {
                         Column(
                             modifier = Modifier.padding(10.dp),
@@ -5426,7 +5446,7 @@ fun BandProfileLayout(
                                     .background(BrandPrimary.copy(alpha = 0.1f)),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Text(emoji, style = Typography.bodyLarge)
+                                Text(emoji, fontSize = 16.sp)
                             }
                             Spacer(modifier = Modifier.height(6.dp))
                             Text(
@@ -5453,14 +5473,14 @@ fun BandProfileLayout(
             Spacer(modifier = Modifier.height(20.dp))
             Text("Technical Stage Plot Setup Map", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
             Text("Our stage rig specification setup grid mapping vocal mics, direct boxes, monitors, and guitar feeds.", fontSize = 11.sp, color = BrandSecondaryText)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
 
             // Graphical Stage Plot map
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(130.dp)
-                    .clip(RoundedCornerShape(Dimens.r2))
+                    .clip(RoundedCornerShape(12.dp))
                     .background(BrandDark)
                     .padding(10.dp)
             ) {
@@ -5527,7 +5547,7 @@ fun BandProfileLayout(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r1)),
+                    .border(1.dp, BrandBorder, RoundedCornerShape(8.dp)),
                 colors = CardDefaults.cardColors(containerColor = BrandBackground)
             ) {
                 Row(
@@ -5535,7 +5555,7 @@ fun BandProfileLayout(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(Icons.Default.Info, null, tint = BrandPrimary, modifier = Modifier.size(16.dp))
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = "Technical Rider Spec: center vocal monitor requires high-pass filter. Guitar amp utilizes direct cabinet box bypass feed.",
                         fontSize = 9.5.sp,
@@ -5548,7 +5568,7 @@ fun BandProfileLayout(
             // UPCOMING CONCERTS
             Spacer(modifier = Modifier.height(20.dp))
             Text("Upcoming Concerts & Gigs Schedule", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
 
             listOf(
                 "Aug 15" to "O2 Academy Islington (London)",
@@ -5559,17 +5579,17 @@ fun BandProfileLayout(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 4.dp)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r1)),
+                        .border(1.dp, BrandBorder, RoundedCornerShape(8.dp)),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(Dimens.r1)
+                    shape = RoundedCornerShape(8.dp)
                 ) {
                     Row(
-                        modifier = Modifier.padding(Dimens.sp2),
+                        modifier = Modifier.padding(12.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Column {
-                            Text(date, style = Typography.bodyLarge, color = BrandAccent)
+                            Text(date, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp, color = BrandAccent)
                             Text(venue, fontSize = 10.5.sp, color = BrandDark, fontWeight = FontWeight.Medium)
                         }
                         Button(
@@ -5614,18 +5634,18 @@ fun VenueProfileLayout(
                     Box(
                         modifier = Modifier
                             .size(60.dp)
-                            .clip(RoundedCornerShape(Dimens.r1))
+                            .clip(RoundedCornerShape(8.dp))
                             .background(Color.White)
                             .padding(8.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Text("🏟️", fontSize = 28.sp)
                     }
-                    Spacer(modifier = Modifier.width(Dimens.sp2))
+                    Spacer(modifier = Modifier.width(12.dp))
                     Column {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text("The Echo Concert Arena", color = Color.White, style = Typography.bodyLarge)
-                            Spacer(modifier = Modifier.width(Dimens.sp1))
+                            Text("The Echo Concert Arena", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                            Spacer(modifier = Modifier.width(4.dp))
                             Icon(Icons.Default.Verified, null, tint = BrandAccent, modifier = Modifier.size(16.dp))
                         }
                         Text("Capacity: 500 Standing · California, US", color = Color.White.copy(alpha = 0.7f), fontSize = 11.sp)
@@ -5639,7 +5659,7 @@ fun VenueProfileLayout(
             Text("Premium Live Acoustics & Lighting Spec", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
             Text("The primary concert hall is acoustically treated with premium wall traps and integrated L-Acoustics surround audio arrays.", fontSize = 11.5.sp, color = BrandSecondaryText, lineHeight = 16.sp)
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(12.dp))
 
             // Capacity ledgers
             Row(
@@ -5654,9 +5674,9 @@ fun VenueProfileLayout(
                     Card(
                         modifier = Modifier
                             .weight(1f)
-                            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r1)),
+                            .border(1.dp, BrandBorder, RoundedCornerShape(8.dp)),
                         colors = CardDefaults.cardColors(containerColor = BrandBackground),
-                        shape = RoundedCornerShape(Dimens.r1)
+                        shape = RoundedCornerShape(8.dp)
                     ) {
                         Column(
                             modifier = Modifier.padding(10.dp),
@@ -5672,13 +5692,13 @@ fun VenueProfileLayout(
             // PHOTO GALLERY SLIDER
             Spacer(modifier = Modifier.height(20.dp))
             Text("Venue Gallery & Interior Shots", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
 
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(140.dp)
-                    .clip(RoundedCornerShape(Dimens.r2))
+                    .clip(RoundedCornerShape(12.dp))
                     .background(Color.Gray)
             ) {
                 // Renders mock visual photo corresponding to selection
@@ -5703,15 +5723,15 @@ fun VenueProfileLayout(
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(Dimens.sp2)
+                        modifier = Modifier.padding(16.dp)
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 listOf(
                     "Stage Rig" to 0,
@@ -5742,7 +5762,7 @@ fun VenueProfileLayout(
             // DYNAMIC EVENTS FEED
             Spacer(modifier = Modifier.height(20.dp))
             Text("Upcoming Concert Bookings", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = BrandDark)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
 
             listOf(
                 "Electronic Midnight Blast" to "14 Tickets Remaining",
@@ -5752,17 +5772,17 @@ fun VenueProfileLayout(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 4.dp)
-                        .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r1)),
+                        .border(1.dp, BrandBorder, RoundedCornerShape(8.dp)),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(Dimens.r1)
+                    shape = RoundedCornerShape(8.dp)
                 ) {
                     Row(
-                        modifier = Modifier.padding(Dimens.sp2),
+                        modifier = Modifier.padding(12.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Column {
-                            Text(event, style = Typography.bodyLarge, color = BrandDark)
+                            Text(event, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandDark)
                             Text(tickets, fontSize = 10.sp, color = if (tickets.contains("Remaining")) BrandAccent else BrandSecondaryText)
                         }
                         Icon(Icons.Default.ArrowForward, null, tint = BrandPrimary, modifier = Modifier.size(16.dp))

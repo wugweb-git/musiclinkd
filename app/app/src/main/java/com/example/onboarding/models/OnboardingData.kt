@@ -4,6 +4,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
 
 enum class OnboardingScreen {
     SPLASH,
@@ -19,7 +22,8 @@ enum class OnboardingScreen {
     LOCATION,
     PROFILE_CREATION,
     SUCCESS,
-    DASHBOARD
+    DASHBOARD,
+    METADATA_SYNC
 }
 
 data class SkillProficiency(
@@ -84,7 +88,8 @@ data class OnboardingState(
     // Loading indicator flags
     val isOtpSending: Boolean = false,
     val isOtpVerifying: Boolean = false,
-    val isProfileSaving: Boolean = false
+    val isProfileSaving: Boolean = false,
+    val activeDashboardTab: String = "Home"
 )
 
 data class RoleItem(
@@ -211,9 +216,30 @@ val availableInstruments = listOf(
 fun canRolePlayInstruments(role: String?): Boolean {
     if (role == null) return true
     val nonPerformingRoles = setOf(
-        "Lyricist", "Artist Manager", "Music Label", "Music Publisher", "Event Organizer"
+        "Lyricist", "Artist Manager", "Music Label", "Music Publisher", "Event Organizer",
+        "lyricist", "artist_manager", "music_label", "music_publisher", "event_organizer"
     )
     return !nonPerformingRoles.contains(role)
+}
+
+fun getRoleLabel(role: String?): String {
+    if (role == null) return ""
+    return availableRoles.find { it.id.equals(role, ignoreCase = true) || it.name.equals(role, ignoreCase = true) }?.name ?: role
+}
+
+fun getLanguageLabel(lang: String?): String {
+    if (lang == null) return ""
+    return availableLanguages.find { it.id.equals(lang, ignoreCase = true) || it.name.equals(lang, ignoreCase = true) }?.name ?: lang
+}
+
+fun getGenreLabel(genre: String?): String {
+    if (genre == null) return ""
+    return availableGenres.find { it.id.equals(genre, ignoreCase = true) || it.name.equals(genre, ignoreCase = true) }?.name ?: genre
+}
+
+fun getInstrumentLabel(instrument: String?): String {
+    if (instrument == null) return ""
+    return availableInstruments.find { it.id.equals(instrument, ignoreCase = true) || it.name.equals(instrument, ignoreCase = true) }?.name ?: instrument
 }
 
 

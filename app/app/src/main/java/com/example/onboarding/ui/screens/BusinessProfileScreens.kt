@@ -247,7 +247,7 @@ fun BusinessProfileWorkspace(
                                     tint = if (isOwnerMode) Color.White else BrandDark,
                                     modifier = Modifier.size(12.dp)
                                 )
-                                Spacer(modifier = Modifier.width(Dimens.sp1))
+                                Spacer(modifier = Modifier.width(4.dp))
                                 Text(
                                     "Owner Mode",
                                     color = if (isOwnerMode) Color.White else BrandDark,
@@ -339,7 +339,7 @@ fun BusinessProfileWorkspace(
                     onDismissRequest = { showBookingSuccess = false },
                     title = {
                         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
-                            Text("🎉 Booking Confirmed!", style = Typography.bodyLarge, color = BrandDark)
+                            Text("🎉 Booking Confirmed!", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = BrandDark)
                         }
                     },
                     text = {
@@ -352,7 +352,7 @@ fun BusinessProfileWorkspace(
                             ) {
                                 Icon(Icons.Default.Check, contentDescription = null, tint = BrandSuccess, modifier = Modifier.size(40.dp))
                             }
-                            Spacer(modifier = Modifier.height(Dimens.sp2))
+                            Spacer(modifier = Modifier.height(16.dp))
                             Text(
                                 text = "Your session at Octave Sound Labs has been securely booked. Access the invoice and chat under the Messages tab.",
                                 textAlign = TextAlign.Center,
@@ -372,7 +372,7 @@ fun BusinessProfileWorkspace(
                             Text("Manage in Workspace", fontWeight = FontWeight.Bold, color = Color.White)
                         }
                     },
-                    shape = RoundedCornerShape(Dimens.r3),
+                    shape = RoundedCornerShape(24.dp),
                     containerColor = Color.White
                 )
             }
@@ -401,7 +401,7 @@ fun TabNavigationRow(
             .fillMaxWidth()
             .background(BrandBackground)
             .padding(vertical = 10.dp),
-        horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(horizontal = 24.dp)
     ) {
         items(tabs) { tab ->
@@ -417,7 +417,7 @@ fun TabNavigationRow(
                 Text(
                     text = tab,
                     color = if (isSelected) Color.White else BrandDark,
-                    style = Typography.labelLarge,
+                    fontSize = 12.sp,
                     fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
                 )
             }
@@ -469,7 +469,7 @@ fun OverviewSubPage(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(Icons.Default.VerifiedUser, null, tint = BrandAccent, modifier = Modifier.size(14.dp))
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
+                    Spacer(modifier = Modifier.width(4.dp))
                     Text("GST Verified Storefront", color = Color.White, fontSize = 10.sp, fontWeight = FontWeight.Bold)
                 }
 
@@ -504,15 +504,15 @@ fun OverviewSubPage(
                     Box(
                         modifier = Modifier
                             .size(72.dp)
-                            .clip(RoundedCornerShape(Dimens.r3))
+                            .clip(RoundedCornerShape(24.dp))
                             .background(LightPurpleBg)
-                            .border(1.5.dp, BrandPrimary.copy(alpha = 0.3f), RoundedCornerShape(Dimens.r3)),
+                            .border(1.5.dp, BrandPrimary.copy(alpha = 0.3f), RoundedCornerShape(24.dp)),
                         contentAlignment = Alignment.Center
                     ) {
                         Text("🎹", fontSize = 36.sp)
                     }
 
-                    Row(horizontalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         // MESSAGE BUTTON
                         IconButton(
                             onClick = { /* Navigate to chat flow */ },
@@ -552,7 +552,7 @@ fun OverviewSubPage(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(Dimens.sp2))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 // Name & Metadata
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -576,10 +576,10 @@ fun OverviewSubPage(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(top = 4.dp)
                 ) {
-                    Text("Recording & Dolby Atmos Suite", color = BrandPrimary, style = Typography.bodyLarge)
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
+                    Text("Recording & Dolby Atmos Suite", color = BrandPrimary, fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text("•", color = BrandSecondaryText)
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
+                    Spacer(modifier = Modifier.width(8.dp))
                     Icon(Icons.Default.Star, "Rating star", tint = Color(0xFFFBBF24), modifier = Modifier.size(16.dp))
                     Text(" 4.9 (48 Reviews)", color = BrandDark, fontSize = 13.sp, fontWeight = FontWeight.Bold)
                 }
@@ -591,13 +591,13 @@ fun OverviewSubPage(
                     modifier = Modifier.padding(top = 2.dp)
                 )
 
-                Spacer(modifier = Modifier.height(Dimens.sp3))
+                Spacer(modifier = Modifier.height(24.dp))
 
                 // BUSINESS QUICK STATS COLUMN GRID (SCREEN 1)
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(Dimens.r3))
+                        .clip(RoundedCornerShape(24.dp))
                         .background(BrandBorder.copy(alpha = 0.30f))
                         .padding(18.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
@@ -614,11 +614,11 @@ fun OverviewSubPage(
                 Spacer(modifier = Modifier.height(28.dp))
 
                 // SCREEN 2: ABOUT / STORY
-                Text("Our Story", style = Typography.bodyLarge, color = BrandDark)
-                Spacer(modifier = Modifier.height(Dimens.sp1))
+                Text("Our Story", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
+                Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "Established in 2018, Octave Sound Labs has grown into Mumbai's premium creative haven for independent musicians and top commercial cinema directors. We blend an immaculate dual SSL 9000J tracking layout with cutting-edge 7.1.4 certified Dolby Atmos arrays. Our spaces are acoustically floated to ensure complete silence and high-end transient clarity.",
-                    style = Typography.labelLarge,
+                    fontSize = 14.sp,
                     color = BrandSecondaryText,
                     lineHeight = 22.sp
                 )
@@ -628,17 +628,17 @@ fun OverviewSubPage(
                 // OPERATING TIMELINE & SPECS
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(Dimens.r3),
+                    shape = RoundedCornerShape(20.dp),
                     colors = CardDefaults.cardColors(containerColor = LightPurpleBg.copy(alpha = 0.5f)),
                     border = BorderStroke(1.dp, BrandPrimary.copy(alpha = 0.15f))
                 ) {
-                    Column(modifier = Modifier.padding(Dimens.sp2)) {
+                    Column(modifier = Modifier.padding(16.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.Schedule, null, tint = BrandPrimary, modifier = Modifier.size(18.dp))
-                            Spacer(modifier = Modifier.width(Dimens.sp1))
+                            Spacer(modifier = Modifier.width(8.dp))
                             Text("Operating hours & contact limits", fontWeight = FontWeight.Bold, fontSize = 13.5.sp, color = BrandDark)
                         }
-                        Spacer(modifier = Modifier.height(Dimens.sp1))
+                        Spacer(modifier = Modifier.height(8.dp))
                         Text("• Monday - Saturday: 09:00 AM - 11:00 PM", fontSize = 12.5.sp, color = BrandSecondaryText)
                         Text("• Sundays: Sessional request only", fontSize = 12.5.sp, color = BrandSecondaryText)
                         Text("• GST Verification: GSTIN 27AAAAA1111A1Z1 (Fully Claimable)", fontSize = 12.5.sp, color = BrandSecondaryText)
@@ -648,11 +648,11 @@ fun OverviewSubPage(
                 Spacer(modifier = Modifier.height(28.dp))
 
                 // SCREEN 10: CONTACT DETAILS
-                Text("Contact & Location", style = Typography.bodyLarge, color = BrandDark)
-                Spacer(modifier = Modifier.height(Dimens.sp2))
+                Text("Contact & Location", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
+                Spacer(modifier = Modifier.height(12.dp))
                 ContactInfoCard()
 
-                Spacer(modifier = Modifier.height(Dimens.sp3))
+                Spacer(modifier = Modifier.height(32.dp))
 
                 // SCREEN 11: RELATED BUSINESSES
                 Row(
@@ -660,13 +660,13 @@ fun OverviewSubPage(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text("Related Organizations Near You", style = Typography.bodyLarge, color = BrandDark)
-                    Text("View All", style = Typography.bodyLarge, color = BrandPrimary)
+                    Text("Related Organizations Near You", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
+                    Text("View All", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandPrimary)
                 }
-                Spacer(modifier = Modifier.height(Dimens.sp2))
+                Spacer(modifier = Modifier.height(12.dp))
                 
                 LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(Dimens.sp2),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     items(related) { item ->
@@ -681,7 +681,7 @@ fun OverviewSubPage(
 @Composable
 fun StatBox(value: String, label: String) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(value, style = Typography.bodyLarge, color = BrandDark)
+        Text(value, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
         Spacer(modifier = Modifier.height(2.dp))
         Text(label, fontSize = 11.sp, color = BrandSecondaryText, fontWeight = FontWeight.Medium)
     }
@@ -708,10 +708,10 @@ fun ServicesSubPage(
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(24.dp),
-        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
-            Text("Our Professional Storefront Services", style = Typography.bodyLarge, color = BrandDark)
+            Text("Our Professional Storefront Services", fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
             Text(
                 "Book verified commercial services conforming strictly to professional guidelines.",
                 fontSize = 13.sp,
@@ -724,7 +724,7 @@ fun ServicesSubPage(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = BrandCard),
-                shape = RoundedCornerShape(Dimens.r3),
+                shape = RoundedCornerShape(24.dp),
                 border = BorderStroke(1.dp, BrandBorder)
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
@@ -737,29 +737,29 @@ fun ServicesSubPage(
                             Box(
                                 modifier = Modifier
                                     .size(44.dp)
-                                    .clip(RoundedCornerShape(Dimens.r2))
+                                    .clip(RoundedCornerShape(12.dp))
                                     .background(LightPurpleBg),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Icon(service.icon, null, tint = BrandPrimary, modifier = Modifier.size(20.dp))
                             }
-                            Spacer(modifier = Modifier.width(Dimens.sp2))
+                            Spacer(modifier = Modifier.width(16.dp))
                             Column {
-                                Text(service.title, style = Typography.bodyLarge, color = BrandDark)
+                                Text(service.title, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandDark)
                                 Spacer(modifier = Modifier.height(2.dp))
-                                Text("Duration: ${service.duration}", style = Typography.labelLarge, color = BrandSecondaryText)
+                                Text("Duration: ${service.duration}", fontSize = 12.sp, color = BrandSecondaryText)
                             }
                         }
                         
                         Column(horizontalAlignment = Alignment.End) {
-                            Text(service.price, style = Typography.bodyLarge, color = BrandPrimary)
+                            Text(service.price, fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = BrandPrimary)
                             Text("Starting rate", fontSize = 10.sp, color = BrandSecondaryText)
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(12.dp))
                     Text(service.description, fontSize = 13.sp, color = BrandSecondaryText, lineHeight = 19.sp)
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -768,7 +768,7 @@ fun ServicesSubPage(
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.Security, null, tint = BrandSuccess, modifier = Modifier.size(14.dp))
-                            Spacer(modifier = Modifier.width(Dimens.sp1))
+                            Spacer(modifier = Modifier.width(4.dp))
                             Text("Secure Payment Active", color = BrandSuccess, fontSize = 11.sp, fontWeight = FontWeight.Bold)
                         }
 
@@ -778,7 +778,7 @@ fun ServicesSubPage(
                             shape = RoundedCornerShape(99.dp),
                             contentPadding = PaddingValues(horizontal = 20.dp, vertical = 8.dp)
                         ) {
-                            Text("Book Suite", style = Typography.bodyLarge, color = Color.White)
+                            Text("Book Suite", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = Color.White)
                         }
                     }
                 }
@@ -801,7 +801,7 @@ fun EquipmentSubPage(equipment: List<EquipmentItem>) {
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         item {
-            Text("Premium Studio Equipment & Gear", style = Typography.bodyLarge, color = BrandDark)
+            Text("Premium Studio Equipment & Gear", fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
             Text(
                 "Browse verified technical spec sheets and backline inventory details.",
                 fontSize = 13.sp,
@@ -812,7 +812,7 @@ fun EquipmentSubPage(equipment: List<EquipmentItem>) {
             // Dynamic filter pills
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp1),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
                 contentPadding = PaddingValues(vertical = 8.dp)
             ) {
                 items(categories) { cat ->
@@ -846,8 +846,8 @@ fun EquipmentSubPage(equipment: List<EquipmentItem>) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text("📦", fontSize = 48.sp)
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
-                    Text("No equipment listed in this category.", style = Typography.labelLarge, color = BrandSecondaryText, fontWeight = FontWeight.Bold)
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text("No equipment listed in this category.", fontSize = 14.sp, color = BrandSecondaryText, fontWeight = FontWeight.Bold)
                 }
             }
         } else {
@@ -856,7 +856,7 @@ fun EquipmentSubPage(equipment: List<EquipmentItem>) {
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(containerColor = BrandCard),
                     border = BorderStroke(1.dp, BrandBorder),
-                    shape = RoundedCornerShape(Dimens.r2)
+                    shape = RoundedCornerShape(16.dp)
                 ) {
                     Row(
                         modifier = Modifier
@@ -869,17 +869,17 @@ fun EquipmentSubPage(equipment: List<EquipmentItem>) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Box(
                                     modifier = Modifier
-                                        .clip(RoundedCornerShape(Dimens.r1))
+                                        .clip(RoundedCornerShape(4.dp))
                                         .background(LightPurpleBg)
                                         .padding(horizontal = 6.dp, vertical = 2.dp)
                                 ) {
                                     Text(item.category.uppercase(), fontSize = 8.sp, fontWeight = FontWeight.Bold, color = BrandPrimary)
                                 }
-                                Spacer(modifier = Modifier.width(Dimens.sp1))
+                                Spacer(modifier = Modifier.width(8.dp))
                                 if (item.available) {
                                     Box(
                                         modifier = Modifier
-                                            .clip(RoundedCornerShape(Dimens.r1))
+                                            .clip(RoundedCornerShape(4.dp))
                                             .background(Color(0xFFF0FDF4))
                                             .padding(horizontal = 6.dp, vertical = 2.dp)
                                     ) {
@@ -887,9 +887,9 @@ fun EquipmentSubPage(equipment: List<EquipmentItem>) {
                                     }
                                 }
                             }
-                            Spacer(modifier = Modifier.height(Dimens.sp1))
-                            Text(item.name, style = Typography.bodyLarge, color = BrandDark)
-                            Text(item.spec, style = Typography.labelLarge, color = BrandSecondaryText, modifier = Modifier.padding(top = 2.dp))
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(item.name, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
+                            Text(item.spec, fontSize = 12.sp, color = BrandSecondaryText, modifier = Modifier.padding(top = 2.dp))
                         }
                         
                         Icon(Icons.Default.SettingsInputComponent, null, tint = BrandSecondaryText.copy(alpha = 0.5f), modifier = Modifier.size(20.dp))
@@ -913,12 +913,12 @@ fun TeamAndWorksSubPage(
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(24.dp),
-        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         // --- SECTION 1: THE ELITE TEAM (SCREEN 4) ---
         item {
-            Text("Meet Our Professional Engineers", style = Typography.bodyLarge, color = BrandDark)
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Text("Meet Our Professional Engineers", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
+            Spacer(modifier = Modifier.height(12.dp))
         }
 
         items(team) { member ->
@@ -926,10 +926,10 @@ fun TeamAndWorksSubPage(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = BrandCard),
                 border = BorderStroke(1.dp, BrandBorder),
-                shape = RoundedCornerShape(Dimens.r3)
+                shape = RoundedCornerShape(20.dp)
             ) {
                 Row(
-                    modifier = Modifier.padding(Dimens.sp2),
+                    modifier = Modifier.padding(16.dp),
                     verticalAlignment = Alignment.Top
                 ) {
                     Box(
@@ -939,10 +939,10 @@ fun TeamAndWorksSubPage(
                             .background(member.accentColor.copy(alpha = 0.15f)),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(member.initial, fontWeight = FontWeight.Bold, color = member.accentColor, style = Typography.bodyLarge)
+                        Text(member.initial, fontWeight = FontWeight.Bold, color = member.accentColor, fontSize = 18.sp)
                     }
 
-                    Spacer(modifier = Modifier.width(Dimens.sp2))
+                    Spacer(modifier = Modifier.width(16.dp))
 
                     Column(modifier = Modifier.weight(1f)) {
                         Row(
@@ -960,8 +960,8 @@ fun TeamAndWorksSubPage(
                                 Text(member.experience, fontSize = 9.sp, fontWeight = FontWeight.Bold, color = BrandDark)
                             }
                         }
-                        Text(member.role, style = Typography.labelLarge, color = BrandPrimary, fontWeight = FontWeight.SemiBold)
-                        Spacer(modifier = Modifier.height(Dimens.sp1))
+                        Text(member.role, fontSize = 12.sp, color = BrandPrimary, fontWeight = FontWeight.SemiBold)
+                        Spacer(modifier = Modifier.height(4.dp))
                         Text(member.bio, fontSize = 12.5.sp, color = BrandSecondaryText, lineHeight = 18.sp)
                     }
                 }
@@ -970,11 +970,11 @@ fun TeamAndWorksSubPage(
 
         // --- SECTION 2: CLIENT PORTFOLIO (SCREEN 5) ---
         item {
-            Spacer(modifier = Modifier.height(Dimens.sp2))
-            Text("Featured Studio Releases", style = Typography.bodyLarge, color = BrandDark)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(16.dp))
+            Text("Featured Studio Releases", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
+            Spacer(modifier = Modifier.height(4.dp))
             Text("Listen to recent mixes and masters generated live in our Bandra suites.", fontSize = 13.sp, color = BrandSecondaryText)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
         }
 
         items(portfolio.size) { index ->
@@ -985,9 +985,9 @@ fun TeamAndWorksSubPage(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = BrandCard),
                 border = BorderStroke(1.dp, BrandBorder),
-                shape = RoundedCornerShape(Dimens.r3)
+                shape = RoundedCornerShape(20.dp)
             ) {
-                Column(modifier = Modifier.padding(Dimens.sp2)) {
+                Column(modifier = Modifier.padding(16.dp)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -1006,16 +1006,16 @@ fun TeamAndWorksSubPage(
                                     tint = Color.White
                                 )
                             }
-                            Spacer(modifier = Modifier.width(Dimens.sp2))
+                            Spacer(modifier = Modifier.width(12.dp))
                             Column {
-                                Text(proj.title, style = Typography.bodyLarge, color = BrandDark)
-                                Text("Client: ${proj.client} • ${proj.year}", style = Typography.labelLarge, color = BrandSecondaryText)
+                                Text(proj.title, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
+                                Text("Client: ${proj.client} • ${proj.year}", fontSize = 12.sp, color = BrandSecondaryText)
                             }
                         }
 
                         Box(
                             modifier = Modifier
-                                .clip(RoundedCornerShape(Dimens.r1))
+                                .clip(RoundedCornerShape(4.dp))
                                 .background(BrandBorder.copy(alpha = 0.5f))
                                 .padding(horizontal = 8.dp, vertical = 2.dp)
                         ) {
@@ -1023,7 +1023,7 @@ fun TeamAndWorksSubPage(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(12.dp))
 
                     // Waveform visualizer simulation
                     Row(
@@ -1055,7 +1055,7 @@ fun TeamAndWorksSubPage(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(12.dp))
 
                     // Tags
                     LazyRow(
@@ -1090,27 +1090,27 @@ fun ReviewsAndGallerySubPage(
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(24.dp),
-        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         // --- SECTION 1: STUDIO PHOTO GALLERY (SCREEN 6 - EDITORIAL MASONRY) ---
         item {
-            Text("Visual Studio Gallery", style = Typography.bodyLarge, color = BrandDark)
+            Text("Visual Studio Gallery", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
             Text("Pristine recording lounges, live acoustics floated tracking rooms & master suites.", fontSize = 12.5.sp, color = BrandSecondaryText)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
             
             // Editorial Masonry Mock layout using simple layouts
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(260.dp),
-                horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 // Large left photo
                 Box(
                     modifier = Modifier
                         .weight(1.2f)
                         .fillMaxHeight()
-                        .clip(RoundedCornerShape(Dimens.r3))
+                        .clip(RoundedCornerShape(24.dp))
                         .background(
                             Brush.linearGradient(
                                 colors = listOf(BrandPrimary, BrandPrimary.copy(alpha = 0.6f))
@@ -1124,7 +1124,7 @@ fun ReviewsAndGallerySubPage(
                         modifier = Modifier
                             .align(Alignment.BottomStart)
                             .padding(12.dp)
-                            .clip(RoundedCornerShape(Dimens.r1))
+                            .clip(RoundedCornerShape(8.dp))
                             .background(Color.Black.copy(alpha = 0.5f))
                             .padding(horizontal = 8.dp, vertical = 4.dp)
                     ) {
@@ -1137,13 +1137,13 @@ fun ReviewsAndGallerySubPage(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight(),
-                    verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Box(
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(Dimens.r3))
+                            .clip(RoundedCornerShape(20.dp))
                             .background(Brush.linearGradient(colors = listOf(Color(0xFF10B981), BrandPrimary)))
                             .clickable { onZoomImage(1) },
                         contentAlignment = Alignment.Center
@@ -1165,7 +1165,7 @@ fun ReviewsAndGallerySubPage(
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(Dimens.r3))
+                            .clip(RoundedCornerShape(20.dp))
                             .background(Brush.linearGradient(colors = listOf(Color(0xFFEA4C89), Color(0xFFFFB2D2))))
                             .clickable { onZoomImage(2) },
                         contentAlignment = Alignment.Center
@@ -1188,9 +1188,9 @@ fun ReviewsAndGallerySubPage(
 
         // --- SECTION 2: TESTIMONIAL REVIEWS (SCREEN 8) ---
         item {
-            Spacer(modifier = Modifier.height(Dimens.sp2))
-            Text("Client Reviews & Verifications", style = Typography.bodyLarge, color = BrandDark)
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
+            Text("Client Reviews & Verifications", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
+            Spacer(modifier = Modifier.height(12.dp))
         }
 
         items(reviews) { r ->
@@ -1198,7 +1198,7 @@ fun ReviewsAndGallerySubPage(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = BrandCard),
                 border = BorderStroke(1.dp, BrandBorder),
-                shape = RoundedCornerShape(Dimens.r3)
+                shape = RoundedCornerShape(24.dp)
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
                     Row(
@@ -1208,7 +1208,7 @@ fun ReviewsAndGallerySubPage(
                     ) {
                         Column {
                             Text(r.reviewer, fontWeight = FontWeight.Bold, fontSize = 14.5.sp, color = BrandDark)
-                            Text("Verified Booking: ${r.project}", style = Typography.labelLarge, color = BrandPrimary, fontWeight = FontWeight.SemiBold)
+                            Text("Verified Booking: ${r.project}", fontSize = 12.sp, color = BrandPrimary, fontWeight = FontWeight.SemiBold)
                         }
 
                         // Star ratings
@@ -1219,7 +1219,7 @@ fun ReviewsAndGallerySubPage(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "\"${r.comment}\"",
                         fontSize = 13.5.sp,
@@ -1229,11 +1229,11 @@ fun ReviewsAndGallerySubPage(
                     )
 
                     r.reply?.let { reply ->
-                        Spacer(modifier = Modifier.height(Dimens.sp2))
+                        Spacer(modifier = Modifier.height(12.dp))
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clip(RoundedCornerShape(Dimens.r2))
+                                .clip(RoundedCornerShape(12.dp))
                                 .background(BrandBorder.copy(alpha = 0.35f))
                                 .padding(12.dp)
                         ) {
@@ -1243,8 +1243,8 @@ fun ReviewsAndGallerySubPage(
                                     Spacer(modifier = Modifier.width(6.dp))
                                     Text("Business Reply", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = BrandDark)
                                 }
-                                Spacer(modifier = Modifier.height(Dimens.sp1))
-                                Text(reply, style = Typography.labelLarge, color = BrandSecondaryText, lineHeight = 17.sp)
+                                Spacer(modifier = Modifier.height(4.dp))
+                                Text(reply, fontSize = 12.sp, color = BrandSecondaryText, lineHeight = 17.sp)
                             }
                         }
                     }
@@ -1270,18 +1270,18 @@ fun BookingSubPage(
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(24.dp),
-        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
-            Text("Secure Calendar Booking Setup", style = Typography.bodyLarge, color = BrandDark)
+            Text("Secure Calendar Booking Setup", fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
             Text("Choose date and tracking block. Our system ensures payments stay secure until delivery.", fontSize = 13.sp, color = BrandSecondaryText)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
         }
 
         // Horizontal visual calendar selector
         item {
-            Text("Select Sessional Date", style = Typography.bodyLarge, color = BrandDark)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Text("Select Sessional Date", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
+            Spacer(modifier = Modifier.height(8.dp))
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
                 modifier = Modifier.fillMaxWidth()
@@ -1296,7 +1296,7 @@ fun BookingSubPage(
                             containerColor = if (isSelected) BrandPrimary else Color.White
                         ),
                         border = BorderStroke(1.dp, if (isSelected) BrandPrimary else BrandBorder),
-                        shape = RoundedCornerShape(Dimens.r2)
+                        shape = RoundedCornerShape(16.dp)
                     ) {
                         Column(
                             modifier = Modifier.padding(14.dp),
@@ -1308,11 +1308,12 @@ fun BookingSubPage(
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold
                             )
-                            Spacer(modifier = Modifier.height(Dimens.sp1))
+                            Spacer(modifier = Modifier.height(4.dp))
                             Text(
                                 text = days[index].split("\n")[1],
                                 color = if (isSelected) Color.White else BrandDark,
-                                style = Typography.bodyLarge
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.ExtraBold
                             )
                         }
                     }
@@ -1322,9 +1323,9 @@ fun BookingSubPage(
 
         // Time slot picker
         item {
-            Spacer(modifier = Modifier.height(Dimens.sp1))
-            Text("Select Available Block Slot", style = Typography.bodyLarge, color = BrandDark)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
+            Text("Select Available Block Slot", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
+            Spacer(modifier = Modifier.height(8.dp))
             
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 timeSlots.forEachIndexed { index, slot ->
@@ -1337,10 +1338,10 @@ fun BookingSubPage(
                             containerColor = if (isSelected) LightPurpleBg else Color.White
                         ),
                         border = BorderStroke(1.dp, if (isSelected) BrandPrimary else BrandBorder),
-                        shape = RoundedCornerShape(Dimens.r2)
+                        shape = RoundedCornerShape(16.dp)
                     ) {
                         Row(
-                            modifier = Modifier.padding(Dimens.sp2),
+                            modifier = Modifier.padding(16.dp),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -1351,7 +1352,7 @@ fun BookingSubPage(
                                     tint = if (isSelected) BrandPrimary else BrandSecondaryText,
                                     modifier = Modifier.size(18.dp)
                                 )
-                                Spacer(modifier = Modifier.width(Dimens.sp2))
+                                Spacer(modifier = Modifier.width(12.dp))
                                 Text(slot, fontWeight = FontWeight.Bold, fontSize = 13.5.sp, color = BrandDark)
                             }
 
@@ -1374,14 +1375,14 @@ fun BookingSubPage(
 
         // Billing Summary & Payment Protection Notice
         item {
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(12.dp))
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(Dimens.r3),
+                shape = RoundedCornerShape(24.dp),
                 colors = CardDefaults.cardColors(containerColor = BrandBorder.copy(alpha = 0.25f))
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
-                    Text("Payment Security Parameters", style = Typography.bodyLarge, color = BrandDark)
+                    Text("Payment Security Parameters", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
                     Spacer(modifier = Modifier.height(10.dp))
 
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -1393,18 +1394,18 @@ fun BookingSubPage(
                         Text("Booking Service Fee", fontSize = 13.sp, color = BrandSecondaryText)
                         Text("₹450", fontSize = 13.sp, color = BrandDark, fontWeight = FontWeight.Bold)
                     }
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Divider(color = BrandBorder)
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        Text("Total Secure Deposit", style = Typography.bodyLarge, color = BrandDark)
-                        Text("₹12,450", style = Typography.bodyLarge, color = BrandPrimary)
+                        Text("Total Secure Deposit", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = BrandDark)
+                        Text("₹12,450", fontSize = 15.sp, fontWeight = FontWeight.ExtraBold, color = BrandPrimary)
                     }
 
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(16.dp))
                     Row(verticalAlignment = Alignment.Top) {
                         Icon(Icons.Default.VerifiedUser, null, tint = BrandSuccess, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(Dimens.sp1))
+                        Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "MusicLinkd Assurance: Payments remain held until the mixing studio delivers final sessional wav/stems. Complete refund guaranteed if cancel parameters match guidelines.",
                             fontSize = 11.sp,
@@ -1418,7 +1419,7 @@ fun BookingSubPage(
 
         // Confirm Book CTA
         item {
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(8.dp))
             Button(
                 onClick = onBookingConfirm,
                 colors = ButtonDefaults.buttonColors(containerColor = BrandPrimary),
@@ -1427,7 +1428,7 @@ fun BookingSubPage(
                     .fillMaxWidth()
                     .height(54.dp)
             ) {
-                Text("Lock Calendar & Pay Deposit", style = Typography.bodyLarge, color = Color.White)
+                Text("Lock Calendar & Pay Deposit", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Color.White)
             }
         }
     }
@@ -1440,7 +1441,7 @@ fun BookingSubPage(
 fun ContactInfoCard() {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(Dimens.r3),
+        shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(containerColor = BrandCard),
         border = BorderStroke(1.dp, BrandBorder)
     ) {
@@ -1450,7 +1451,7 @@ fun ContactInfoCard() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(120.dp)
-                    .clip(RoundedCornerShape(Dimens.r2))
+                    .clip(RoundedCornerShape(16.dp))
                     .background(
                         Brush.linearGradient(
                             colors = listOf(Color(0xFFE2E8F0), Color(0xFFCBD5E1))
@@ -1460,13 +1461,13 @@ fun ContactInfoCard() {
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(Icons.Default.LocationOn, null, tint = BrandAccent, modifier = Modifier.size(36.dp))
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
-                    Text("Bandra West, Link Road, Mumbai", style = Typography.bodyLarge, color = BrandDark)
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text("Bandra West, Link Road, Mumbai", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandDark)
                     Text("Interactive G-Map Mockup Active", fontSize = 10.sp, color = BrandSecondaryText)
                 }
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Contact items
             ContactRow(icon = Icons.Default.Phone, label = "Phone Support", value = "+91 98765 43210")
@@ -1474,7 +1475,7 @@ fun ContactInfoCard() {
             ContactRow(icon = Icons.Default.Email, label = "Inquiries Email", value = "booking@octavesoundlabs.com")
             ContactRow(icon = Icons.Default.Language, label = "Website Domain", value = "octavesoundlabs.com")
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(12.dp))
             Button(
                 onClick = { /* Launch Maps intent */ },
                 colors = ButtonDefaults.buttonColors(containerColor = BrandDark),
@@ -1483,7 +1484,7 @@ fun ContactInfoCard() {
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Default.Directions, null, tint = Color.White)
-                    Spacer(modifier = Modifier.width(Dimens.sp1))
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text("Get Directions", fontWeight = FontWeight.Bold, color = Color.White, fontSize = 13.sp)
                 }
             }
@@ -1500,7 +1501,7 @@ fun ContactRow(icon: ImageVector, label: String, value: String) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(icon, null, tint = BrandPrimary, modifier = Modifier.size(16.dp))
-        Spacer(modifier = Modifier.width(Dimens.sp2))
+        Spacer(modifier = Modifier.width(12.dp))
         Column {
             Text(label, fontSize = 11.sp, color = BrandSecondaryText)
             Text(value, fontSize = 13.sp, fontWeight = FontWeight.Bold, color = BrandDark)
@@ -1516,8 +1517,8 @@ fun RelatedBizCard(item: RelatedBiz) {
     Card(
         modifier = Modifier
             .width(220.dp)
-            .border(1.dp, BrandBorder, RoundedCornerShape(Dimens.r3)),
-        shape = RoundedCornerShape(Dimens.r3),
+            .border(1.dp, BrandBorder, RoundedCornerShape(20.dp)),
+        shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(containerColor = BrandCard)
     ) {
         Column(modifier = Modifier.padding(14.dp)) {
@@ -1525,14 +1526,14 @@ fun RelatedBizCard(item: RelatedBiz) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(88.dp)
-                    .clip(RoundedCornerShape(Dimens.r2))
+                    .clip(RoundedCornerShape(12.dp))
                     .background(item.bgColor),
                 contentAlignment = Alignment.Center
             ) {
-                Text(item.bannerLetter, style = Typography.bodyLarge, color = Color.White)
+                Text(item.bannerLetter, fontWeight = FontWeight.Bold, fontSize = 24.sp, color = Color.White)
             }
 
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(12.dp))
             Text(item.name, fontWeight = FontWeight.Bold, fontSize = 13.5.sp, color = BrandDark, maxLines = 1, overflow = TextOverflow.Ellipsis)
             
             Row(
@@ -1547,8 +1548,8 @@ fun RelatedBizCard(item: RelatedBiz) {
 
             Spacer(modifier = Modifier.height(6.dp))
             Text(item.location, fontSize = 11.sp, color = BrandSecondaryText)
-            Spacer(modifier = Modifier.height(Dimens.sp1))
-            Text(item.startingPrice, style = Typography.bodyLarge, color = BrandPrimary)
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(item.startingPrice, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = BrandPrimary)
         }
     }
 }
@@ -1564,7 +1565,7 @@ fun BusinessOwnerInsightsScreen(onUpgradeClick: () -> Unit) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(24.dp),
-        verticalArrangement = Arrangement.spacedBy(Dimens.sp2)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         // Stats header
         item {
@@ -1595,8 +1596,8 @@ fun BusinessOwnerInsightsScreen(onUpgradeClick: () -> Unit) {
 
         // LEADS, VIEW COUNTERS & REVENUE (SCREEN 12)
         item {
-            Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     InsightMetricCard(
                         title = "Views",
                         value = if (insightPeriod == "This Month") "4,890" else "1,120",
@@ -1613,7 +1614,7 @@ fun BusinessOwnerInsightsScreen(onUpgradeClick: () -> Unit) {
                     )
                 }
 
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(Dimens.sp2)) {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     InsightMetricCard(
                         title = "Confirmed Bookings",
                         value = if (insightPeriod == "This Month") "42" else "11",
@@ -1634,18 +1635,18 @@ fun BusinessOwnerInsightsScreen(onUpgradeClick: () -> Unit) {
 
         // REVENUE GROWTH CHARTS (SCREEN 12)
         item {
-            Spacer(modifier = Modifier.height(Dimens.sp1))
+            Spacer(modifier = Modifier.height(4.dp))
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(Dimens.r3),
+                shape = RoundedCornerShape(24.dp),
                 border = BorderStroke(1.dp, BrandBorder),
                 colors = CardDefaults.cardColors(containerColor = BrandCard)
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
-                    Text("Revenue Trends & Inquiries Tracker", style = Typography.bodyLarge, color = BrandDark)
+                    Text("Revenue Trends & Inquiries Tracker", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = BrandDark)
                     Text("Visualizing payment booking milestones across fiscal cycles.", fontSize = 11.sp, color = BrandSecondaryText)
                     
-                    Spacer(modifier = Modifier.height(Dimens.sp3))
+                    Spacer(modifier = Modifier.height(24.dp))
 
                     // Premium Chart Simulation using simple layout bars with labels
                     Row(
@@ -1684,33 +1685,34 @@ fun BusinessOwnerInsightsScreen(onUpgradeClick: () -> Unit) {
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(Dimens.r3),
+                shape = RoundedCornerShape(24.dp),
                 colors = CardDefaults.cardColors(containerColor = BrandDark)
             ) {
                 Column(
-                    modifier = Modifier.padding(Dimens.sp3),
+                    modifier = Modifier.padding(24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Box(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(Dimens.r1))
+                            .clip(RoundedCornerShape(8.dp))
                             .background(BrandAccent)
                             .padding(horizontal = 8.dp, vertical = 4.dp)
                     ) {
                         Text("PRO BUSINESS ACTIVE", color = Color.White, fontSize = 8.sp, fontWeight = FontWeight.Bold)
                     }
 
-                    Spacer(modifier = Modifier.height(Dimens.sp2))
+                    Spacer(modifier = Modifier.height(12.dp))
                     Text(
                         text = "Unlock Elite Lead Routing",
-                        style = Typography.bodyLarge,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
                         color = Color.White
                     )
-                    Spacer(modifier = Modifier.height(Dimens.sp1))
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = "MusicLinkd Pro Business prioritizes your studio booking slots in search algorithms, matches verified client budgets directly to your board, and waives sessional booking fees.",
                         color = Color.White.copy(alpha = 0.7f),
-                        style = Typography.labelLarge,
+                        fontSize = 12.sp,
                         textAlign = TextAlign.Center,
                         lineHeight = 18.sp,
                         modifier = Modifier.padding(horizontal = 8.dp)
@@ -1733,10 +1735,10 @@ fun BusinessOwnerInsightsScreen(onUpgradeClick: () -> Unit) {
         AlertDialog(
             onDismissRequest = { showUpgradeDialog = false },
             title = {
-                Text("MusicLinkd Elite Tier Benefits", style = Typography.bodyLarge, color = BrandDark)
+                Text("MusicLinkd Elite Tier Benefits", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = BrandDark)
             },
             text = {
-                Column(verticalArrangement = Arrangement.spacedBy(Dimens.sp1)) {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     BenefitRow(title = "Top Ranking", desc = "Get featured under Bandra/Mumbai recording nodes.")
                     BenefitRow(title = "Zero Commission", desc = "Pay 0% transaction fees on standard booking deposits.")
                     BenefitRow(title = "Dolby Badges", desc = "Showcase certified Dolby Atmos status verified on network.")
@@ -1750,7 +1752,7 @@ fun BusinessOwnerInsightsScreen(onUpgradeClick: () -> Unit) {
                     Text("OK", fontWeight = FontWeight.Bold, color = Color.White)
                 }
             },
-            shape = RoundedCornerShape(Dimens.r3),
+            shape = RoundedCornerShape(20.dp),
             containerColor = Color.White
         )
     }
@@ -1760,7 +1762,7 @@ fun BusinessOwnerInsightsScreen(onUpgradeClick: () -> Unit) {
 fun BenefitRow(title: String, desc: String) {
     Row(verticalAlignment = Alignment.Top) {
         Icon(Icons.Default.Check, null, tint = BrandSuccess, modifier = Modifier.size(16.dp))
-        Spacer(modifier = Modifier.width(Dimens.sp1))
+        Spacer(modifier = Modifier.width(8.dp))
         Column {
             Text(title, fontWeight = FontWeight.Bold, fontSize = 12.5.sp, color = BrandDark)
             Text(desc, fontSize = 11.5.sp, color = BrandSecondaryText)
@@ -1778,21 +1780,21 @@ fun InsightMetricCard(
 ) {
     Card(
         modifier = modifier,
-        shape = RoundedCornerShape(Dimens.r3),
+        shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(containerColor = BrandCard),
         border = BorderStroke(1.dp, BrandBorder)
     ) {
-        Column(modifier = Modifier.padding(Dimens.sp2)) {
+        Column(modifier = Modifier.padding(16.dp)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(title, style = Typography.labelLarge, color = BrandSecondaryText, fontWeight = FontWeight.Bold)
+                Text(title, fontSize = 12.sp, color = BrandSecondaryText, fontWeight = FontWeight.Bold)
                 Icon(icon, null, tint = BrandPrimary, modifier = Modifier.size(18.dp))
             }
             Spacer(modifier = Modifier.height(10.dp))
-            Text(value, style = Typography.bodyLarge, color = BrandDark)
+            Text(value, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = BrandDark)
             Spacer(modifier = Modifier.height(2.dp))
             Text(growth, fontSize = 11.sp, color = BrandSuccess, fontWeight = FontWeight.Bold)
         }
@@ -1819,7 +1821,7 @@ fun FullScreenImageOverlay(
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .height(300.dp)
-                    .clip(RoundedCornerShape(Dimens.r3))
+                    .clip(RoundedCornerShape(24.dp))
                     .background(
                         when (imageIndex) {
                             0 -> Brush.linearGradient(colors = listOf(BrandPrimary, BrandPrimary.copy(alpha = 0.6f)))
@@ -1839,7 +1841,7 @@ fun FullScreenImageOverlay(
                 )
             }
             
-            Spacer(modifier = Modifier.height(Dimens.sp2))
+            Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = when (imageIndex) {
                     0 -> "SSL Control Suite A - Flawless acoustic calibration."
@@ -1847,12 +1849,12 @@ fun FullScreenImageOverlay(
                     else -> "Premium Neumann vocal microphones configuration."
                 },
                 color = Color.White,
-                style = Typography.labelLarge,
+                fontSize = 14.sp,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 24.dp)
             )
-            Spacer(modifier = Modifier.height(Dimens.sp3))
-            Text("Tap anywhere to close zoom preview", color = Color.White.copy(alpha = 0.5f), style = Typography.labelLarge)
+            Spacer(modifier = Modifier.height(24.dp))
+            Text("Tap anywhere to close zoom preview", color = Color.White.copy(alpha = 0.5f), fontSize = 12.sp)
         }
     }
 }
