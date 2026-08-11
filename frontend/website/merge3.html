@@ -8,8 +8,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
+<style>
 
-/* ===== DESIGN TOKENS — MusicLinkd v4.0 ===== */
+/* ===== DESIGN TOKENS — MusicLinkd v4.0 & v5.0 Master ===== */
 :root {
   /* Brand Colors */
   --pink: #EA4C89;
@@ -25,8 +26,43 @@
   --err: #DC2626;
   --purple: #8B5CF6;
 
+  /* Aliases & Surface Tokens */
+  --ink: #0D0D0D;
+  --bg: #FCFCFD;
+  --surface-subtle: #F8F8FB;
+  --text-2: #676B7B;
+
+  /* Container Colors */
+  --pink-container: rgba(234, 76, 137, 0.1);
+  --purple-container: rgba(139, 92, 246, 0.1);
+  --success-container: rgba(34, 197, 94, 0.1);
+  --warn-container: rgba(245, 158, 11, 0.1);
+  --info-container: rgba(37, 99, 235, 0.1);
+
+  /* 4-Tier Scaling System Tokens (v5.0) */
+  --sp-1: 8px;
+  --sp-2: 16px;
+  --sp-3: 32px;
+  --sp-4: 64px;
+  --sp-5: 80px;
+
+  --r-1: 8px;
+  --r-2: 16px;
+  --r-3: 24px;
+  --r-4: 40px;
+
+  --fs-1: 14px;
+  --fs-2: 20px;
+  --fs-3: 40px;
+  --fs-4: 72px;
+
+  --op-1: 0.04;
+  --op-2: 0.08;
+  --op-3: 0.16;
+  --op-4: 0.32;
+
   /* Typography Scale */
-  --fs-display: clamp(48px, 6vw, 72px); /* Oversized */ /* Oversized */
+  --fs-display: clamp(48px, 6vw, 72px);
   --fs-h1: clamp(22px, 3vw, 28px);
   --fs-h2: clamp(16px, 2vw, 20px);
   --fs-h3: 16px;
@@ -63,8 +99,8 @@
 
   /* Elevation */
   --el-0: none;
-  --el-1: none; /* Border-first */ /* Border-first */
-  --el-2: 0 4px 12px rgba(0,0,0,0.03); /* Extremely subtle */ /* Extremely subtle */
+  --el-1: none;
+  --el-2: 0 4px 12px rgba(0,0,0,0.03);
   --el-3: 0 12px 32px rgba(0,0,0,0.06);
 
   /* Border Tokens */
@@ -84,8 +120,90 @@
 
   /* Transition */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
-}
 
+  /* Surface & Container Colors */
+  --bg: #FFFFFF;
+  --ink: #0D0D0D;
+  --surface-subtle: #F8F8FB;
+  --text-2: #676B7B;
+  --pink-container: #FCE7F3;
+  --purple-container: #F3E8FF;
+  --success-container: #DCFCE7;
+  --warn-container: #FEF3C7;
+  --info-container: #DBEAFE;
+
+  /* 4-Tier Scale Aliases (used by overhaul sections) */
+  --sp-1: 8px;
+  --sp-2: 16px;
+  --sp-3: 32px;
+  --sp-4: 64px;
+  --sp-5: 80px;
+  --r-1: 8px;
+  --r-2: 16px;
+  --r-3: 24px;
+  --r-4: 40px;
+  --fs-1: 14px;
+  --fs-2: 20px;
+  --fs-3: 40px;
+  --fs-4: 72px;
+  --op-1: 0.04;
+  --op-2: 0.08;
+  --op-3: 0.16;
+  --op-4: 0.32;
+
+  /* ===== GESTALT-INSPIRED TOKENS (v5.0) ===== */
+  /* Elevation — Gestalt 4-level shadow system */
+  --g-el-0: none;
+  --g-el-1: 0 1px 2px rgba(0,0,0,0.06), 0 1px 1px rgba(0,0,0,0.04);
+  --g-el-2: 0 2px 4px rgba(0,0,0,0.06), 0 4px 8px rgba(0,0,0,0.04);
+  --g-el-3: 0 4px 8px rgba(0,0,0,0.08), 0 8px 16px rgba(0,0,0,0.06);
+  --g-el-4: 0 8px 16px rgba(0,0,0,0.10), 0 16px 32px rgba(0,0,0,0.08);
+
+  /* Focus ring — Gestalt 2px pink focus */
+  --g-focus: 0 0 0 2px var(--white), 0 0 0 4px var(--pink);
+  --g-focus-subtle: 0 0 0 2px var(--white), 0 0 0 4px rgba(234, 76, 137, 0.4);
+
+  /* Interaction states — Gestalt opacity-based */
+  --g-hover-bg: rgba(13, 13, 13, 0.06);
+  --g-pressed-bg: rgba(13, 13, 13, 0.10);
+  --g-selected-bg: rgba(234, 76, 137, 0.10);
+  --g-disabled-opacity: 0.30;
+
+  /* Border radius — Gestalt consistent scale */
+  --g-r-sm: 8px;
+  --g-r-md: 12px;
+  --g-r-lg: 16px;
+  --g-r-xl: 24px;
+  --g-r-pill: 9999px;
+
+  /* Spacing — Gestalt 4px base */
+  --g-sp-1: 4px;
+  --g-sp-2: 8px;
+  --g-sp-3: 12px;
+  --g-sp-4: 16px;
+  --g-sp-5: 20px;
+  --g-sp-6: 24px;
+  --g-sp-8: 32px;
+  --g-sp-10: 40px;
+  --g-sp-12: 48px;
+  --g-sp-16: 64px;
+
+  /* Typography — Gestalt type ramp */
+  --g-fs-caption: 12px;
+  --g-fs-body: 14px;
+  --g-fs-body-lg: 16px;
+  --g-fs-title: 20px;
+  --g-fs-heading: 24px;
+  --g-fs-display: 32px;
+
+  /* Component-specific */
+  --g-btn-h: 40px;
+  --g-btn-h-sm: 32px;
+  --g-btn-h-lg: 48px;
+  --g-input-h: 40px;
+  --g-chip-h: 32px;
+  --g-touch-target: 44px;
+}
 /* ===== BASE RESET ===== */
 *, *::before, *::after { box-sizing: border-box; }
 body {
@@ -98,7 +216,6 @@ body {
 }
 h1, h2, h3, h4 { font-family: 'Inter Tight', sans-serif; letter-spacing: -0.02em; margin: 0; }
 img { max-width: 100%; height: auto; display: block; }
-
 /* ===== 4-TIER RESPONSIVE LAYOUT ===== */
 /* Mobile:  0–767px   (1 col, bottom nav) */
 /* Tablet:  768–1023px (2 col, sidebar hidden) */
@@ -110,7 +227,6 @@ img { max-width: 100%; height: auto; display: block; }
   margin-top: 100px;
   min-height: calc(100vh - 100px);
 }
-
 /* ===== SIDEBAR ===== */
 .sidebar {
   width: var(--sw);
@@ -141,7 +257,6 @@ img { max-width: 100%; height: auto; display: block; }
 .sg.open .sgi { display: flex; }
 .sgi a { display: block; padding: 4px 10px; border-radius: 5px; font-size: 11px; color: var(--muted); text-decoration: none; transition: all 150ms; }
 .sgi a:hover, .sgi a.on { background: #FCE7F3; color: var(--pink); }
-
 /* ===== MAIN CONTENT ===== */
 .main {
   flex: 1;
@@ -154,7 +269,6 @@ img { max-width: 100%; height: auto; display: block; }
 .eyebrow { font-size: var(--fs-9); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pink); margin-bottom: 6px; }
 .sec h2 { font-size: var(--fs-h2); margin-bottom: 12px; }
 .sec p.desc { color: var(--muted); font-size: var(--fs-body); max-width: 520px; margin-bottom: 20px; }
-
 /* ===== COMPONENT STYLES ===== */
 .hl { transition: transform 200ms var(--ease), box-shadow 200ms; }
 .hl:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
@@ -178,7 +292,267 @@ img { max-width: 100%; height: auto; display: block; }
 .card-s { background: #fff; border: 1px solid var(--line); border-radius: var(--r-card); padding: 16px; }
 .card-s.hl { transition: transform 200ms var(--ease), box-shadow 200ms; }
 .card-s.hl:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
-
+/* ===== GESTALT-INSPIRED COMPONENT STYLES (v5.0) ===== */
+/* Focus rings — Gestalt 2px pink focus */
+.btn:focus-visible, .chip:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible {
+  outline: none;
+  box-shadow: var(--g-focus);
+}
+.btn:active, .chip:active { transform: scale(0.97); }
+/* Button sizes — Gestalt height scale */
+.btn-lg { min-height: var(--g-btn-h-lg); padding: 12px 24px; font-size: 14px; }
+.btn-block { width: 100%; }
+.btn:disabled { opacity: var(--g-disabled-opacity); cursor: not-allowed; pointer-events: none; }
+/* Button with icon */
+.btn-icon { display: inline-flex; align-items: center; gap: 8px; }
+.btn-icon svg { width: 16px; height: 16px; flex-shrink: 0; }
+/* Segmented control — Gestalt style */
+.g-segmented {
+  display: inline-flex;
+  background: var(--surface-subtle);
+  border: 1px solid var(--line);
+  border-radius: var(--g-r-pill);
+  padding: 3px;
+  gap: 2px;
+}
+.g-segmented button {
+  padding: 6px 16px;
+  border: none;
+  background: transparent;
+  border-radius: var(--g-r-pill);
+  font: 600 12px/1 'Inter', sans-serif;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 150ms var(--ease);
+  min-height: 32px;
+}
+.g-segmented button:hover { background: var(--g-hover-bg); }
+.g-segmented button.active { background: var(--white); color: var(--black); box-shadow: var(--g-el-1); }
+/* ComboBox — search with suggestions */
+.g-combobox { position: relative; }
+.g-combobox input {
+  width: 100%;
+  padding: 10px 14px 10px 36px;
+  background: var(--surface-subtle);
+  border: 1px solid var(--line);
+  border-radius: var(--g-r-pill);
+  font: 13px 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 150ms, box-shadow 150ms;
+}
+.g-combobox input:focus { border-color: var(--pink); box-shadow: var(--g-focus-subtle); }
+.g-combobox .g-combobox-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+.g-combobox .g-combobox-clear { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--muted); cursor: pointer; font-size: 14px; padding: 4px; }
+.g-combobox .g-combobox-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0; right: 0;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--g-r-md);
+  box-shadow: var(--g-el-3);
+  z-index: 100;
+  max-height: 240px;
+  overflow-y: auto;
+  display: none;
+}
+.g-combobox .g-combobox-menu.open { display: block; }
+.g-combobox .g-combobox-item {
+  padding: 10px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 100ms;
+}
+.g-combobox .g-combobox-item:hover { background: var(--g-hover-bg); }
+.g-combobox .g-combobox-item.active { background: var(--g-selected-bg); color: var(--pink); }
+/* Modal — Gestalt centered dialog */
+.g-modal-backdrop {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.g-modal-backdrop.open { display: flex; }
+.g-modal {
+  background: var(--white);
+  border-radius: var(--g-r-xl);
+  box-shadow: var(--g-el-4);
+  max-width: 480px;
+  width: 100%;
+  padding: 24px;
+  animation: g-modal-in 200ms var(--ease);
+}
+from { opacity: 0; transform: scale(0.95) translateY(8px); }
+to { opacity: 1; transform: scale(1) translateY(0); }
+.g-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.g-modal-title { font: 700 18px/1.3 'Inter Tight', sans-serif; color: var(--black); }
+.g-modal-close { background: none; border: none; font-size: 20px; color: var(--muted); cursor: pointer; padding: 4px; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+.g-modal-close:hover { background: var(--g-hover-bg); }
+.g-modal-body { font-size: 14px; color: var(--text-2); line-height: 1.5; margin-bottom: 20px; }
+.g-modal-footer { display: flex; gap: 8px; justify-content: flex-end; }
+/* Popover — contextual menu */
+.g-popover {
+  position: relative;
+  display: inline-block;
+}
+.g-popover-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 200px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--g-r-md);
+  box-shadow: var(--g-el-3);
+  padding: 4px;
+  z-index: 100;
+  display: none;
+}
+.g-popover-menu.open { display: block; }
+.g-popover-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--g-r-sm);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 100ms;
+  color: var(--black);
+}
+.g-popover-item:hover { background: var(--g-hover-bg); }
+.g-popover-item.danger { color: var(--err); }
+.g-popover-item.danger:hover { background: rgba(220, 38, 38, 0.08); }
+/* Avatar Group — stacked avatars */
+.g-avatar-group { display: flex; align-items: center; }
+.g-avatar-group .g-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  margin-left: -8px;
+  object-fit: cover;
+  background: var(--surface-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.g-avatar-group .g-avatar:first-child { margin-left: 0; }
+.g-avatar-group .g-avatar-more {
+  background: var(--black);
+  color: var(--white);
+  font-size: 10px;
+}
+/* Skeleton — Gestalt shimmer */
+.g-skeleton {
+  background: linear-gradient(90deg, var(--line) 25%, #F3F3F6 50%, var(--line) 75%);
+  background-size: 200% 100%;
+  animation: g-shimmer 1.5s infinite linear;
+  border-radius: var(--g-r-sm);
+}
+0% { background-position: 200% 0; }
+100% { background-position: -200% 0; }
+/* Card hover elevation — Gestalt 4-level */
+.g-card-hover { transition: box-shadow 200ms var(--ease), transform 200ms var(--ease); }
+.g-card-hover:hover { box-shadow: var(--g-el-3); transform: translateY(-2px); }
+/* Input with floating label — Gestalt style */
+.g-field { position: relative; margin-bottom: 16px; }
+.g-field input, .g-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--g-r-md);
+  font: 13px 'Inter', sans-serif;
+  outline: none;
+  background: var(--white);
+  transition: border-color 150ms, box-shadow 150ms;
+}
+.g-field input:focus, .g-field textarea:focus { border-color: var(--pink); box-shadow: var(--g-focus-subtle); }
+.g-field label {
+  position: absolute;
+  top: -8px;
+  left: 12px;
+  background: var(--white);
+  padding: 0 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  pointer-events: none;
+}
+.g-field .g-field-error {
+  font-size: 11px;
+  color: var(--err);
+  margin-top: 4px;
+  display: none;
+}
+.g-field.has-error input { border-color: var(--err); }
+.g-field.has-error .g-field-error { display: block; }
+.g-field .g-field-helper { font-size: 11px; color: var(--muted); margin-top: 4px; }
+/* Toast variants — Gestalt */
+.g-toast-success { background: var(--success); }
+.g-toast-error { background: var(--err); }
+.g-toast-info { background: var(--black); }
+.g-toast-warn { background: var(--warn); }
+/* Tabs — Gestalt underline style */
+.g-tabs {
+  display: flex;
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0;
+}
+.g-tab {
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 150ms, border-color 150ms;
+}
+.g-tab:hover { color: var(--black); }
+.g-tab.active { color: var(--pink); border-bottom-color: var(--pink); }
+/* Switch with label — Gestalt */
+.g-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  gap: 16px;
+}
+.g-switch-label { font-size: 14px; font-weight: 600; color: var(--black); }
+.g-switch-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.g-switch {
+  width: 44px; height: 24px;
+  background: var(--line);
+  border-radius: 9999px;
+  position: relative;
+  cursor: pointer;
+  transition: background 200ms;
+  flex-shrink: 0;
+}
+.g-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 20px; height: 20px;
+  background: var(--white);
+  border-radius: 50%;
+  transition: left 200ms var(--ease);
+  box-shadow: var(--g-el-1);
+}
+.g-switch.on { background: var(--pink); }
+.g-switch.on::after { left: 22px; }
 /* ===== SPEC / TOKEN GRIDS ===== */
 .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
 .spec-grid.g3 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
@@ -186,87 +560,64 @@ img { max-width: 100%; height: auto; display: block; }
 .spec-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--pink); margin-bottom: 4px; }
 .token-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; overflow-x: auto; display: block; }
 .token-table th, .token-table td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); font-size: 12px; white-space: nowrap; }
-.token-table th { font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--black); }
 .ts { display: inline-block; width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--line); margin-right: 6px; vertical-align: middle; }
-
 /* ===== WAVEFORM ===== */
 .wf { display: flex; gap: 2px; align-items: flex-end; height: 22px; }
 .wf span { width: 2px; border-radius: 2px; background: var(--pink); animation: wfb 800ms ease-in-out infinite alternate; }
-.wf span:nth-child(1){height:10px;animation-delay:0ms}.wf span:nth-child(2){height:18px;animation-delay:50ms}.wf span:nth-child(3){height:7px;animation-delay:100ms}.wf span:nth-child(4){height:22px;animation-delay:150ms}.wf span:nth-child(5){height:12px;animation-delay:200ms}.wf span:nth-child(6){height:20px;animation-delay:250ms}.wf span:nth-child(7){height:8px;animation-delay:300ms}.wf span:nth-child(8){height:16px;animation-delay:350ms}.wf span:nth-child(9){height:14px;animation-delay:400ms}.wf span:nth-child(10){height:24px;animation-delay:450ms}.wf span:nth-child(11){height:6px;animation-delay:500ms}.wf span:nth-child(12){height:18px;animation-delay:550ms}
-@keyframes wfb { 0% { transform: scaleY(0.4); } 100% { transform: scaleY(1); } }
-
+.wf span:nth-child(1) {height:10px;animation-delay:0ms}
+.wf span:nth-child(2) {height:18px;animation-delay:50ms}
+.wf span:nth-child(3) {height:7px;animation-delay:100ms}
+.wf span:nth-child(4) {height:22px;animation-delay:150ms}
+.wf span:nth-child(5) {height:12px;animation-delay:200ms}
+.wf span:nth-child(6) {height:20px;animation-delay:250ms}
+.wf span:nth-child(7) {height:8px;animation-delay:300ms}
+.wf span:nth-child(8) {height:16px;animation-delay:350ms}
+.wf span:nth-child(9) {height:14px;animation-delay:400ms}
+.wf span:nth-child(10) {height:24px;animation-delay:450ms}
+.wf span:nth-child(11) {height:6px;animation-delay:500ms}
+.wf span:nth-child(12) {height:18px;animation-delay:550ms}
 /* ===== PHONE FRAME MOCKUP ===== */
-.phone-frame{width:320px;background:#1a1a2e;border-radius:36px;padding:10px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);flex-shrink:0}
-.phone-screen{background:var(--paper);border-radius:26px;overflow:hidden;min-height:580px;position:relative}
-.phone-notch{height:24px;background:#0D0D0D;display:flex;align-items:center;justify-content:center;gap:6px}
-.phone-notch .dot{width:6px;height:6px;background:#2C2F3A;border-radius:50%}
-.phone-status{display:flex;justify-content:space-between;padding:6px 14px 2px;font-size:var(--fs-9);font-weight:600;color:var(--black)}
-.phone-body{padding:10px 12px}
-.phone-navbar{display:flex;justify-content:space-around;padding:6px 14px 10px;border-top:1px solid var(--line);background:#fff}
-.phone-navbar i{width:18px;height:2px;background:var(--line);border-radius:1px}
-.phone-navbar i.on{background:var(--pink)}
-@media(max-width:700px){.phone-frame{width:100%;max-width:320px}}
-
+.phone-frame {width:320px;background:#1a1a2e;border-radius:36px;padding:10px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);flex-shrink:0}
+.phone-screen {background:var(--paper);border-radius:26px;overflow:hidden;min-height:580px;position:relative}
+.phone-notch {height:24px;background:#0D0D0D;display:flex;align-items:center;justify-content:center;gap:6px}
+.phone-notch .dot {width:6px;height:6px;background:#2C2F3A;border-radius:50%}
+.phone-status {display:flex;justify-content:space-between;padding:6px 14px 2px;font-size:var(--fs-9);font-weight:600;color:var(--black)}
+.phone-body {padding:10px 12px}
+.phone-navbar {display:flex;justify-content:space-around;padding:6px 14px 10px;border-top:1px solid var(--line);background:#fff}
+.phone-navbar i {width:18px;height:2px;background:var(--line);border-radius:1px}
+.phone-navbar i.on {background:var(--pink)}
+.phone-frame {width:100%;max-width:320px}
 /* ===== CARDS / SWIPE ===== */
 .cs { position: relative; width: min(280px, 90vw); height: 380px; margin: 0 auto; }
 .swc { position: absolute; width: 100%; height: 100%; left: 0; top: 0; transition: transform 300ms cubic-bezier(0.175,0.885,0.32,1.275), opacity 300ms; transform-origin: center bottom; background: #fff; border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column; }
-
 /* ===== TOAST ===== */
 .toast { position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: var(--black); color: #fff; padding: 12px 18px; border-radius: 14px; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 8px; transform: translateY(100px); opacity: 0; transition: all 300ms; pointer-events: none; max-width: calc(100vw - 40px); }
 .toast.sh { transform: translateY(0); opacity: 1; }
 .toast-dot { width: 16px; height: 16px; border-radius: 50%; background: var(--pink); display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; flex-shrink: 0; }
 .hide { display: none !important; }
-
 /* ===== CHAT DRAWER ===== */
 .chat-drawer { position: fixed; inset-y: 0; right: 0; z-index: 50; width: 100%; max-width: 380px; background: #fff; border-left: 1px solid var(--line); box-shadow: -8px 0 24px rgba(0,0,0,0.08); padding: 16px; display: flex; flex-direction: column; transform: translateX(100%); transition: transform 300ms var(--ease); }
 .chat-drawer.open { transform: translateX(0); }
-
 /* ===== MOBILE TOGGLE BUTTON ===== */
 .mtBtn { display: none; position: fixed; top: 18px; left: 16px; z-index: 1100; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font-size: 11px; font-weight: 600; cursor: pointer; box-shadow: var(--el-1); }
-
 /* ===== OVERLAY ===== */
 .ov { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 25; }
 .ov.show { display: block; }
-
-/* ===== RESPONSIVE — TABLET (768–1023px) ===== */
-@media (max-width: 1023px) {
-  :root { --sw: 220px; }
-  .main { padding: 32px 24px 80px; }
-  .sec { padding: 40px 0; }
-}
-
-/* ===== RESPONSIVE — MOBILE (<768px) ===== */
-@media (max-width: 767px) {
-  .sidebar {
+:root { --sw: 220px; }
+.main { padding: 32px 24px 80px; }
+.sidebar {
     position: fixed;
     left: -100%;
     top: 0;
     height: 100vh;
     z-index: 100;
   }
-  .sidebar.open { left: 0; }
-  .layout-wrapper { margin-top: 60px; }
-  .main {
-    max-width: 100%;
-    padding: 16px 14px 60px;
-  }
-  .main { padding-top: 24px; }
-  .mtBtn { display: flex; align-items: center; gap: 6px; top: 14px; }
-  .chat-drawer { max-width: 100%; }
-  .spec-grid { grid-template-columns: 1fr; }
-  .spec-grid.g3 { grid-template-columns: 1fr; }
-  .cs { width: min(260px, 85vw); }
-  .sec { padding: 28px 0; }
-}
-
-/* ===== RESPONSIVE — SMALL MOBILE (<480px) ===== */
-@media (max-width: 479px) {
-  .main { padding: 12px 10px 60px; }
-  .card-s { padding: 12px; border-radius: 16px; }
-  .token-table th, .token-table td { padding: 6px 8px; font-size: 11px; }
-  .btn { padding: 6px 12px; font-size: 11px; min-height: 36px; }
-}
-
+.sidebar.open { left: 0; }
+.layout-wrapper { margin-top: 60px; }
+.mtBtn { display: flex; align-items: center; gap: 6px; top: 14px; }
+.chat-drawer { max-width: 100%; }
+.spec-grid { grid-template-columns: 1fr; }
+.cs { width: min(260px, 85vw); }
 /* ===== TOP NAVIGATION ===== */
 .top-nav {
     position: fixed;
@@ -347,10 +698,8 @@ img { max-width: 100%; height: auto; display: block; }
     transition: all 150ms;
 }
 .top-nav .nav-btn:hover { border-color: var(--pink); color: var(--pink); }
-
 /* Mobile search icon button in nav — hidden on desktop */
 .top-nav .mob-search-btn { display: none; }
-
 .breadcrumbs {
     display: flex;
     align-items: center;
@@ -438,30 +787,8 @@ img { max-width: 100%; height: auto; display: block; }
     background: var(--pink);
     color: white;
 }
-
-/* ===== MOBILE FIRST — TOP NAV COLLAPSE ===== */
-/* Tablet: hide links */
-@media (max-width: 1023px) {
-    .top-nav { padding: 0 16px; gap: 8px; }
-    .top-nav .nav-links { display: none; }
-    .top-nav .search-area { max-width: 220px; }
-    .top-nav .nav-controls { display: none; }
-    .top-nav .breadcrumb { display: none; }
-}
-/* Mobile: logo + hamburger + search icon only */
-@media (max-width: 767px) {
-    .top-nav {
-        height: 48px;
-        padding: 0 16px;
-        gap: 0;
-    }
-    /* hide everything except logo and mob-search-btn */
-    .top-nav .breadcrumb,
-    .top-nav .search-area,
-    .top-nav .nav-links,
-    .top-nav .nav-controls,
-    .top-nav .nav-btn { display: none !important; }
-    /* show mobile search icon */
+.top-nav { padding: 0 16px; gap: 8px; }
+/* show mobile search icon */
     .top-nav .mob-search-btn {
         display: flex;
         align-items: center;
@@ -475,9 +802,9 @@ img { max-width: 100%; height: auto; display: block; }
         flex-shrink: 0;
         margin-left: auto;
     }
-    /* logo takes flex-1 */
+/* logo takes flex-1 */
     .top-nav .logo-area { flex: 1; }
-    /* hide old mtBtn — hamburger now lives in sidebar overlay */
+/* hide old mtBtn — hamburger now lives in sidebar overlay */
     .mtBtn {
         top: 10px;
         left: 10px;
@@ -486,34 +813,8 @@ img { max-width: 100%; height: auto; display: block; }
         align-items: center;
         gap: 6px;
     }
-    /* layout */
+/* layout */
     .layout-wrapper { margin-top: 56px; }
-    .main {
-        max-width: 100%;
-        padding: 20px 16px 80px;
-    }
-    .sidebar {
-        position: fixed;
-        left: -280px;
-        top: 0;
-        height: 100vh;
-        width: 280px;
-        z-index: 100;
-        transition: left 250ms var(--ease);
-        box-shadow: 4px 0 16px rgba(0,0,0,0.12);
-    }
-    .sidebar.open { left: 0; }
-    .spec-grid { grid-template-columns: 1fr !important; }
-    .spec-grid.g3 { grid-template-columns: 1fr !important; }
-    .sec { padding: 28px 0; }
-}
-/* Small mobile */
-@media (max-width: 479px) {
-    .main { padding: 16px 12px 80px; }
-    .card-s { border-radius: 16px; }
-}
-
-
 /* Bottom nav — hidden on desktop, shown on mobile */
 .mobile-bottom-nav {
     display: none;
@@ -530,8 +831,7 @@ img { max-width: 100%; height: auto; display: block; }
     justify-content: space-around;
     box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
 }
-@media (max-width: 767px) { .mobile-bottom-nav { display: flex; } }
-
+.mobile-bottom-nav { display: flex; }
 .mobile-bottom-nav .mnav-item {
     display: flex;
     flex-direction: column;
@@ -568,7 +868,6 @@ img { max-width: 100%; height: auto; display: block; }
     background: var(--pink);
     border-radius: 50%; border: 1.5px solid #fff;
 }
-
 /* FAB — hidden on desktop */
 .fab {
     display: none;
@@ -586,8 +885,7 @@ img { max-width: 100%; height: auto; display: block; }
     -webkit-tap-highlight-color: transparent;
 }
 .fab:active { transform: scale(0.91); }
-@media (max-width: 767px) { .fab { display: flex; } }
-
+.fab { display: flex; }
 /* Bottom sheet — always off-screen until opened */
 .bottom-sheet-backdrop {
     display: none;
@@ -628,7 +926,6 @@ img { max-width: 100%; height: auto; display: block; }
 .bs-action-icon { width: 40px; height: 40px; border-radius: 12px; background: #F8F8FB; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
 .bs-action-text h4 { font-size: 14px; font-weight: 600; color: var(--black); }
 .bs-action-text p { font-size: 11px; color: var(--muted); margin-top: 2px; }
-
 /* Mobile search overlay — always hidden until JS opens */
 .mob-search-overlay {
     display: none;
@@ -648,24 +945,12 @@ img { max-width: 100%; height: auto; display: block; }
 .mob-search-input-wrap:focus-within { border-color: var(--pink); }
 .mob-search-input-wrap input { flex: 1; border: none; background: transparent; font-size: 15px; outline: none; color: var(--black); }
 .mob-search-cancel { font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; min-height: 44px; display: flex; align-items: center; padding: 0 4px; border: none; background: none; }
-
-/* Touch targets: 44dp minimum on mobile */
-@media (max-width: 767px) {
-    .btn, button, [role="button"] { min-height: 44px; min-width: 44px; }
-    .btn-sm { min-height: 36px; }
-    .chip { min-height: 36px; padding: 6px 14px; font-size: 12px; }
-    .sgi a { padding: 10px 12px; font-size: 12px; }
-    .sgt { padding: 12px; font-size: 12px; }
-    .main { padding-bottom: 80px; }
-    .toast {
+.toast {
         bottom: 76px; right: auto;
         left: 50%; transform: translateX(-50%) translateY(60px);
         width: calc(100% - 32px); max-width: 340px;
         justify-content: center;
     }
-    .toast.sh { transform: translateX(-50%) translateY(0); }
-}
-
 /* Horizontal chip scroll row */
 .chip-scroll-row {
     display: flex; gap: 8px;
@@ -677,17 +962,11 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .chip-scroll-row::-webkit-scrollbar { display: none; }
 .chip-scroll-row .chip { flex-shrink: 0; }
-
 /* Ripple tap feedback */
 .ripple-host { position: relative; overflow: hidden; }
 .ripple-host::after { content: ''; position: absolute; inset: 0; background: rgba(234,76,137,0.12); border-radius: inherit; opacity: 0; transition: opacity 400ms; pointer-events: none; }
 .ripple-host:active::after { opacity: 1; transition: none; }
-
-/* ===== PINTEREST-STYLE FLUID LAYOUTS ===== */
-
-/* 1. Floating Pill Navigation (Mobile) */
-@media (max-width: 767px) {
-    .floating-pill-nav {
+.floating-pill-nav {
         position: fixed;
         top: 16px;
         left: 16px;
@@ -707,14 +986,9 @@ img { max-width: 100%; height: auto; display: block; }
         cursor: pointer;
         color: var(--black);
     }
-    .floating-pill-nav .logo-icon { color: var(--pink); font-size: 18px; font-weight: 800; }
-    /* Hide top-nav entirely on mobile now since we use the floating pill */
+.floating-pill-nav .logo-icon { color: var(--pink); font-size: 18px; font-weight: 800; }
+/* Hide top-nav entirely on mobile now since we use the floating pill */
     .top-nav { display: none !important; }
-}
-@media (min-width: 768px) {
-    .floating-pill-nav { display: none; }
-}
-
 /* 2. Hero Collage Layout */
 .fluid-hero {
     position: relative;
@@ -751,24 +1025,11 @@ img { max-width: 100%; height: auto; display: block; }
     transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .collage-item:hover { transform: scale(1.05) translateY(-10px); z-index: 15; }
-
-/* Desktop Collage Positioning */
-@media (min-width: 768px) {
-    .ci-1 { width: 220px; height: 280px; top: 10%; left: 5%; transform: rotate(-6deg); }
-    .ci-2 { width: 180px; height: 220px; top: 20%; right: 8%; transform: rotate(4deg); }
-    .ci-3 { width: 240px; height: 160px; bottom: 15%; left: 15%; transform: rotate(3deg); }
-    .ci-4 { width: 200px; height: 260px; bottom: 10%; right: 20%; transform: rotate(-5deg); }
-}
-/* Mobile Collage Positioning */
-@media (max-width: 767px) {
-    .fluid-hero { min-height: 60vh; padding-top: 140px; }
-    .collage-item { opacity: 0.8; }
-    .ci-1 { width: 120px; height: 160px; top: -20px; left: -20px; transform: rotate(-8deg); }
-    .ci-2 { width: 100px; height: 120px; top: 40px; right: -10px; transform: rotate(6deg); }
-    .ci-3 { width: 140px; height: 100px; bottom: 20px; left: -10px; transform: rotate(4deg); }
-    .ci-4 { width: 110px; height: 150px; bottom: -30px; right: -10px; transform: rotate(-6deg); }
-}
-
+.ci-1 { width: 220px; height: 280px; top: 10%; left: 5%; transform: rotate(-6deg); }
+.ci-2 { width: 180px; height: 220px; top: 20%; right: 8%; transform: rotate(4deg); }
+.ci-3 { width: 240px; height: 160px; bottom: 15%; left: 15%; transform: rotate(3deg); }
+.ci-4 { width: 200px; height: 260px; bottom: 10%; right: 20%; transform: rotate(-5deg); }
+.fluid-hero { min-height: 60vh; padding-top: 140px; }
 /* 3. Dynamic Inline Typography */
 .inline-dynamic-text {
     font-size: clamp(24px, 5vw, 42px);
@@ -796,7 +1057,6 @@ img { max-width: 100%; height: auto; display: block; }
     box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 }
 .inline-pill img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: var(--pink); }
-
 /* 4. Alternating Feature Blocks */
 .feature-block {
     display: flex;
@@ -840,7 +1100,6 @@ img { max-width: 100%; height: auto; display: block; }
     padding: 120px 20px;
 }
 .feature-block.bg-beige h2, .feature-block.bg-beige p { color: var(--black); }
-
 /* ===== 16 ADVANCED MARKETING BLOCKS (PINTEREST LAYOUTS) ===== */
 
 /* 1. Masonry Sign-up Modal */
@@ -855,15 +1114,12 @@ img { max-width: 100%; height: auto; display: block; }
 .adv-masonry-col { display: flex; flex-direction: column; gap: 16px; width: 240px; animation: masonry-scroll 40s linear infinite; }
 .adv-masonry-col:nth-child(even) { animation-direction: reverse; }
 .adv-masonry-col img { width: 100%; border-radius: 16px; object-fit: cover; }
-@keyframes masonry-scroll { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
-
 .adv-signup-modal {
     position: relative; z-index: 10; background: #fff; border-radius: 32px; padding: 48px;
     width: 100%; max-width: 480px; box-shadow: 0 24px 64px rgba(0,0,0,0.4); text-align: center;
 }
 .adv-signup-modal h3 { font-size: 32px; font-weight: 800; margin-bottom: 8px; color: var(--black); }
 .adv-signup-modal p { font-size: 16px; color: var(--text-2); margin-bottom: 32px; }
-
 /* 2. Dual-Sided Floating Hero */
 .adv-dual-hero {
     position: relative; padding: 120px 20px; text-align: center; background: #F8F8FB;
@@ -879,13 +1135,6 @@ img { max-width: 100%; height: auto; display: block; }
 .adv-hero-left-2 { width: 160px; height: 200px; left: 15%; bottom: 10%; transform: rotate(5deg); }
 .adv-hero-right-1 { width: 240px; height: 240px; right: 5%; top: 15%; transform: rotate(4deg); }
 .adv-hero-right-2 { width: 180px; height: 260px; right: 15%; bottom: 5%; transform: rotate(-4deg); }
-
-@media (max-width: 767px) {
-    .adv-hero-img { opacity: 0.3; }
-    .adv-hero-left-1 { width: 140px; height: 180px; left: -10%; }
-    .adv-hero-right-1 { width: 140px; height: 180px; right: -10%; }
-}
-
 /* 3. Three-Column Feature Grid */
 .adv-feature-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -905,7 +1154,6 @@ img { max-width: 100%; height: auto; display: block; }
 .adv-feature-list { list-style: none; padding: 0; margin: 0; }
 .adv-feature-list li { font-size: 14px; margin-bottom: 12px; display: flex; gap: 8px; color: var(--black); }
 .adv-feature-list li::before { content: '✓'; font-weight: 800; }
-
 /* 4. Graphic Banner & Article Grid */
 .adv-blog-hero {
     background: #E1F5FE; border-radius: 32px; padding: 80px 40px; text-align: center;
@@ -923,8 +1171,6 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .aac-title { font-size: 20px; font-weight: 700; color: var(--black); line-height: 1.3; margin: 0; }
 .aac-meta { display: flex; gap: 12px; align-items: center; font-size: 12px; color: var(--text-2); }
-
-
 /* ===== 17. ADVANCED MARKETING BLOCKS (PINTEREST & SUPERCHARGE) ===== */
 /* Supercharge Bento Feature Grid */
 .sc-bento-grid {
@@ -962,7 +1208,6 @@ img { max-width: 100%; height: auto; display: block; }
     font-size: var(--fs-body);
     color: var(--muted);
 }
-
 /* Supercharge Dark Bento Layout */
 .sc-dark-section {
     background: var(--navy);
@@ -997,7 +1242,6 @@ img { max-width: 100%; height: auto; display: block; }
     font-weight: 700;
     margin-bottom: var(--sp-md);
 }
-
 /* Supercharge Split Editorial */
 .sc-split-section {
     display: grid;
@@ -1033,7 +1277,6 @@ img { max-width: 100%; height: auto; display: block; }
 .sc-alert-pill i {
     color: var(--err);
 }
-
 /* Pinterest Floating Left Sidebar & Bottom Nav */
 .pin-floating-sidebar {
     position: fixed;
@@ -1078,7 +1321,6 @@ img { max-width: 100%; height: auto; display: block; }
     z-index: 100;
     padding-bottom: env(safe-area-inset-bottom, var(--sp-md));
 }
-
 /* Pinterest Profile Masonry Grid & Trends Table */
 .pin-masonry {
     column-count: 3;
@@ -1107,12 +1349,6 @@ img { max-width: 100%; height: auto; display: block; }
     border-bottom: 1px solid var(--line);
     text-align: left;
 }
-.pin-trends-table th {
-    font-size: 11px;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 700;
-}
 .pin-trend-title {
     display: flex;
     align-items: center;
@@ -1125,43 +1361,21 @@ img { max-width: 100%; height: auto; display: block; }
     border-radius: var(--r-sm);
     object-fit: cover;
 }
-
-@media (max-width: 1023px) {
-    .sc-bento-grid, .sc-dark-bento, .sc-split-section {
-        grid-template-columns: 1fr;
-    }
-    .sc-dark-card.hero-span {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
-    .pin-floating-sidebar {
+.pin-floating-sidebar {
         display: none;
     }
-    .pin-bottom-nav {
-        display: flex;
-    }
-    .pin-masonry {
+.pin-masonry {
         column-count: 2;
     }
-}
-@media (max-width: 600px) {
-    .pin-masonry {
-        column-count: 1;
-    }
-}
-
-
 /* ===== SUPERCHARGE MASSIVE OVERHAUL STYLES ===== */
 .sec-xl { padding: clamp(80px, 10vw, 160px) 0; }
 .hero-text { font-size: var(--fs-display); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 24px; }
 .hero-sub { font-size: var(--fs-body-lg); color: var(--muted); max-width: 600px; line-height: 1.6; margin-bottom: 40px; }
-
 /* Trusted By Bar */
 .trusted-bar { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 48px 0; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 32px; text-align: center; }
 .t-stat { display: flex; flex-direction: column; gap: 8px; }
 .t-stat-num { font-size: clamp(32px, 4vw, 48px); font-family: 'Inter Tight', sans-serif; font-weight: 700; }
 .t-stat-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 600; }
-
 /* Does this sound familiar Split */
 .split-xl { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
 .split-quote { font-size: clamp(32px, 5vw, 64px); font-family: 'Inter Tight', sans-serif; font-weight: 800; color: #D1D5DB; line-height: 1.1; letter-spacing: -0.03em; }
@@ -1173,14 +1387,12 @@ img { max-width: 100%; height: auto; display: block; }
 .pain-icon.good { background: #DCFCE7; color: #16A34A; }
 .pain-text { font-size: 15px; line-height: 1.5; color: var(--black); }
 .pain-text strong { color: var(--pink); }
-
 /* Feature Grid Text */
 .feat-grid-t { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
 .f-item { display: flex; gap: 16px; }
 .f-icon { width: 48px; height: 48px; background: #F3E8FF; color: var(--purple); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
 .f-content h4 { font-size: 18px; margin-bottom: 8px; }
 .f-content p { font-size: 15px; color: var(--muted); line-height: 1.6; }
-
 /* Purple CTA Block */
 .purple-cta { background: var(--black); border-radius: 32px; padding: clamp(40px, 6vw, 80px); color: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; overflow: hidden; position: relative; }
 .purple-cta h2 { font-size: clamp(32px, 5vw, 56px); color: #fff; margin-bottom: 16px; }
@@ -1189,7 +1401,6 @@ img { max-width: 100%; height: auto; display: block; }
 .cta-pill { background: rgba(0,0,0,0.2); backdrop-filter: blur(8px); padding: 12px 24px; border-radius: 99px; font-weight: 600; font-size: 14px; border: 1px solid rgba(255,255,255,0.1); transform: translateX(20px); transition: transform 300ms; cursor: pointer; display: flex; align-items: center; gap: 12px; }
 .cta-pill:hover { background: rgba(0,0,0,0.4); transform: translateX(0); }
 .cta-pill::before { content: '◀'; font-size: 10px; opacity: 0.5; }
-
 /* Masonry Testimonials */
 .test-masonry { columns: 3 320px; column-gap: 24px; }
 .t-card { break-inside: avoid; background: #fff; border: 1px solid var(--line); border-radius: var(--r-card); padding: 24px; margin-bottom: 24px; }
@@ -1201,7 +1412,6 @@ img { max-width: 100%; height: auto; display: block; }
 .t-name { font-weight: 700; font-size: 14px; }
 .t-role { font-size: 11px; color: var(--muted); }
 .t-quote { font-size: 15px; line-height: 1.6; }
-
 /* Pricing Tables */
 .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; align-items: center; }
 .p-card { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 40px; text-align: center; }
@@ -1214,246 +1424,14 @@ img { max-width: 100%; height: auto; display: block; }
 .p-features { text-align: left; margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
 .p-feat { display: flex; gap: 12px; font-size: 14px; align-items: flex-start; }
 .p-feat::before { content: '✓'; color: var(--pink); font-weight: bold; }
-
 /* FAQ Accordion */
 .faq-list { max-width: 800px; margin: 0 auto; }
 .faq-item { border-bottom: 1px solid var(--line); padding: 24px 0; cursor: pointer; }
 .faq-q { font-size: 18px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
 .faq-q::after { content: '+'; font-size: 24px; font-weight: 300; color: var(--muted); }
-
-@media(max-width: 767px) {
-  .split-xl { grid-template-columns: 1fr; }
-  .purple-cta { grid-template-columns: 1fr; padding: 32px; }
-  .cta-pills { align-items: flex-start; }
-  .p-card.pro { transform: none; }
-}
-
-/* ===== 17. ADVANCED MARKETING BLOCKS (PINTEREST & SUPERCHARGE) ===== */
-/* Supercharge Bento Feature Grid */
-.sc-bento-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--sp-lg);
-    margin: var(--sp-2xl) 0;
-}
-.sc-bento-card {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: var(--r-card);
-    padding: var(--sp-lg);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-md);
-    transition: transform 0.3s var(--ease);
-}
-.sc-bento-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--pink);
-}
-.sc-bento-img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: var(--r-md);
-    background: var(--paper);
-}
-.sc-bento-title {
-    font-size: var(--fs-h2);
-    font-weight: 700;
-}
-.sc-bento-desc {
-    font-size: var(--fs-body);
-    color: var(--muted);
-}
-
-/* Supercharge Dark Bento Layout */
-.sc-dark-section {
-    background: var(--navy);
-    color: var(--white);
-    padding: var(--sp-2xl);
-    border-radius: var(--r-card);
-    margin: var(--sp-2xl) 0;
-}
-.sc-dark-bento {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--sp-lg);
-    margin-top: var(--sp-xl);
-}
-.sc-dark-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--r-card);
-    padding: var(--sp-lg);
-}
-.sc-dark-card.hero-span {
-    grid-column: span 2;
-    grid-row: span 2;
-}
-.sc-dark-label {
-    display: inline-block;
-    background: var(--white);
-    color: var(--navy);
-    padding: 4px 12px;
-    border-radius: var(--r-pill);
-    font-size: 11px;
-    font-weight: 700;
-    margin-bottom: var(--sp-md);
-}
-
-/* Supercharge Split Editorial */
-.sc-split-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--sp-2xl);
-    align-items: center;
-    padding: var(--sp-2xl) 0;
-    border-bottom: 1px solid var(--line);
-}
-.sc-editorial-quote {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: clamp(32px, 4vw, 48px);
-    font-weight: 800;
-    line-height: 1.1;
-    color: #E2E8F0; /* Light gray text for contrast */
-}
-.sc-editorial-quote span {
-    color: var(--navy);
-}
-.sc-alert-pill {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-sm);
-    background: var(--white);
-    border: 1px solid var(--line);
-    padding: var(--sp-sm) var(--sp-md);
-    border-radius: var(--r-pill);
-    margin-bottom: var(--sp-md);
-    font-size: var(--fs-body);
-    font-weight: 500;
-    box-shadow: var(--el-2);
-}
-.sc-alert-pill i {
-    color: var(--err);
-}
-
-/* Pinterest Floating Left Sidebar & Bottom Nav */
-.pin-floating-sidebar {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    left: var(--sp-md);
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: var(--r-pill);
-    padding: var(--sp-md) var(--sp-sm);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-md);
-    z-index: 100;
-    box-shadow: var(--el-2);
-}
-.pin-nav-icon {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--r-avatar);
-    color: var(--muted);
-    cursor: pointer;
-    transition: var(--ease) 0.2s;
-}
-.pin-nav-icon:hover, .pin-nav-icon.active {
-    background: var(--paper);
-    color: var(--navy);
-}
-.pin-bottom-nav {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: var(--white);
-    border-top: 1px solid var(--line);
-    padding: var(--sp-sm) var(--sp-md);
-    justify-content: space-between;
-    z-index: 100;
-    padding-bottom: env(safe-area-inset-bottom, var(--sp-md));
-}
-
-/* Pinterest Profile Masonry Grid & Trends Table */
-.pin-masonry {
-    column-count: 3;
-    column-gap: var(--sp-lg);
-    margin-top: var(--sp-xl);
-}
-.pin-masonry-item {
-    break-inside: avoid;
-    margin-bottom: var(--sp-lg);
-    position: relative;
-    border-radius: var(--r-media);
-    overflow: hidden;
-}
-.pin-masonry-item img {
-    width: 100%;
-    border-radius: var(--r-media);
-    display: block;
-}
-.pin-trends-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: var(--sp-lg);
-}
-.pin-trends-table th, .pin-trends-table td {
-    padding: var(--sp-md);
-    border-bottom: 1px solid var(--line);
-    text-align: left;
-}
-.pin-trends-table th {
-    font-size: 11px;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 700;
-}
-.pin-trend-title {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-sm);
-    font-weight: 600;
-}
-.pin-trend-title img {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--r-sm);
-    object-fit: cover;
-}
-
-@media (max-width: 1023px) {
-    .sc-bento-grid, .sc-dark-bento, .sc-split-section {
-        grid-template-columns: 1fr;
-    }
-    .sc-dark-card.hero-span {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
-    .pin-floating-sidebar {
-        display: none;
-    }
-    .pin-bottom-nav {
-        display: flex;
-    }
-    .pin-masonry {
-        column-count: 2;
-    }
-}
-@media (max-width: 600px) {
-    .pin-masonry {
-        column-count: 1;
-    }
-}
-
-</style>
+.split-xl { grid-template-columns: 1fr; }
+.purple-cta { grid-template-columns: 1fr; padding: 32px; }
+</style></style>
 
 </head>
 <body>
@@ -1551,17 +1529,10 @@ img { max-width: 100%; height: auto; display: block; }
     <aside class="sidebar" id="sb">
 <div class="side-hd"><div class="logo">MusicLink<em>d</em></div><div class="v">Design System · Enterprise v4.0 (Consolidated)</div></div>
 <nav style="padding:0 8px">
-<div class="sg open"><button class="sgt" onclick="tgg(this)">00 Product<span class="ch">▶</span></button><div class="sgi"><a href="#strategy">Marketplace Architecture</a><a href="#f-philosophy">Design Philosophy</a><a href="#f-principles">Design Principles</a><a href="#f-responsive">Responsive Behaviour</a><a href="#bl-strategy">Strategy Cards</a><a href="#product-overview">Product Overview</a><a href="#product-vision">Vision</a><a href="#product-philosophy">Design Philosophy</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">01 Brand<span class="ch">▶</span></button><div class="sgi"><a href="#brand">MusicLinkd</a><a href="#f-colors">Colors</a><a href="#f-icons-ext">Iconography Extended</a><a href="#icons">Lucide Icon Library</a><a href="#util-illustrations">Illustration Library</a><a href="#brand-identity">Brand Identity</a><a href="#brand-colors">Brand Colors</a><a href="#brand-voice">Voice & Tone</a></div></div><div class="sg open"><button class="sgt" onclick="tgg(this)">02 Foundations<span class="ch">▶</span></button><div class="sgi"><a href="#f-typo">Typography</a><a href="#f-typo-ext">Typography Extended</a><a href="#f-spacing">Spacing</a><a href="#f-sizing">Sizing Scale</a><a href="#f-radius">Radius</a><a href="#f-elevation">Elevation & Borders</a><a href="#f-elev-levels">Elevation Levels</a><a href="#f-border-tk">Border Tokens</a><a href="#f-opacity">Opacity Tokens</a><a href="#f-zindex">Z-Index</a><a href="#f-semcolor">Semantic Colors</a><a href="#f-layout">Layout Rules</a><a href="#f-comp-rules">Component Rules</a><a href="#lay-shell">App Shell</a><a href="#lay-grid">Adaptive Grid — 4 Breakpoints</a><a href="#f-states">Component States</a><a href="#f-icons">Icons</a><a href="#f-grid">Grid</a><a href="#f-breakpoints">Breakpoints</a><a href="#f-motion">Motion</a><a href="#f-semantic">Semantic Colors</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">03 Design Tokens<span class="ch">▶</span></button><div class="sgi"><a href="#tokens">Machine-Readable Tokens</a><a href="#f-motion-tk">Motion Tokens</a></div></div><div class="sg open"><button class="sgt" onclick="tgg(this)">04 Primitives<span class="ch">▶</span></button><div class="sgi"><a href="#c-btns">Buttons</a><a href="#c2-iconbtn">Icon Button</a><a href="#c-inp">Input Fields</a><a href="#fm-select">Select</a><a href="#fm-radio">Radio</a><a href="#fm-checkbox">Checkbox</a><a href="#fm-toggle">Toggle</a><a href="#fm-upload">Upload</a><a href="#fm-textarea">Textarea</a><a href="#c-chips">Chips</a><a href="#c2-tag">Tag</a><a href="#c-srch">Search Bar</a><a href="#sr-global">Global Search</a><a href="#sr-filters">Search Filters</a><a href="#sr-pills">Filter Pills</a><a href="#c-badges">Status Badges & Verification</a><a href="#p2-badges">Trust Badges</a><a href="#vd-badges">Badge Variants</a><a href="#c-dialogs">Dialogs & Bottom Sheet</a><a href="#c-toast">Toast Notification</a><a href="#c-empty">Empty States</a><a href="#c2-tooltip">Tooltip</a><a href="#c2-tabs">Tabs</a><a href="#c2-accordion">Accordion</a><a href="#c2-timeline">Timeline</a><a href="#c2-skeleton">Skeleton Loading</a><a href="#c2-progress">Progress Bar</a><a href="#c2-divider">Divider</a><a href="#anatomy-btn">Button Anatomy</a><a href="#anatomy-input">Text Field Anatomy</a><a href="#anatomy-chip">Chip Anatomy</a><a href="#anatomy-sheet">Bottom Sheet Anatomy</a><a href="#anatomy-topbar">Top App Bar Anatomy</a><a href="#anatomy-fab">FAB Anatomy</a><a href="#p-btn">Button</a><a href="#p-input">Input</a><a href="#p-chip">Chip</a><a href="#p-search">Search</a><a href="#p-nav">Navigation</a><a href="#p-fab">FAB</a><a href="#p-badge">Badge</a><a href="#p-dialog">Dialog</a><a href="#p-toast">Toast</a><a href="#p-snackbar">Snackbar</a><a href="#p-progress">Progress</a><a href="#p-skeleton">Skeleton</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">05 Native Components<span class="ch">▶</span></button><div class="sgi"><a href="#na-topbar">Top App Bar</a><a href="#vd-topbar">Top App Bar — Large</a><a href="#na-fab">Floating Action Button</a><a href="#vd-fab">FAB Variants</a><a href="#na-drawer">Navigation Drawer</a><a href="#vd-navdrawer">Navigation Drawer</a><a href="#na-rail">Navigation Rail</a><a href="#na-tabs">Tabs</a><a href="#na-segmented">Segmented Buttons</a><a href="#vd-segmented">Segmented Buttons</a><a href="#na-progress">Progress Indicators</a><a href="#vd-progress">Progress Indicators</a><a href="#na-slider">Slider</a><a href="#vd-slider">Slider</a><a href="#na-switch">Switch</a><a href="#vd-switch">Switch</a><a href="#na-datepicker">Date Picker</a><a href="#vd-datepicker">Date Picker</a><a href="#na-snackbar">Snackbar</a><a href="#vd-snackbar">Snackbar</a><a href="#na-otp">OTP Input</a><a href="#vd-otp">OTP Input</a><a href="#na-search-suggest">Search Suggestions</a><a href="#vd-search-suggest">Search Suggestions</a><a href="#na-filter-sheet">Filter Sheet</a><a href="#na-permission">Permission Dialog</a><a href="#vd-permission">Permission Dialog</a><a href="#na-camera">Camera Picker</a><a href="#na-audio-rec">Audio Recorder</a><a href="#na-scrubber">Audio Scrubber</a><a href="#lay-android">Android App Grids</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">06 MusicLinkd Components<span class="ch">▶</span></button><div class="sgi"><a href="#cd-talent">Talent Discovery Card</a><a href="#cd-studio">Studio Card</a><a href="#cd-album">Ambient Album Card</a><a href="#cd-band">Band Card</a><a href="#cd-project">Project Card</a><a href="#cd-opp">Opportunity Card</a><a href="#cd-app">Application Card</a><a href="#cd-mkt">Marketplace Card</a><a href="#cd-rental">Rental Card</a><a href="#cd-review">Review Card</a><a href="#cd-booking">Booking Card</a><a href="#cd-notif">Notification Card</a><a href="#cd-msg">Message Card</a><a href="#vd-cards">Artist Grid Card</a><a href="#vd-row-card">Artist Row Card</a><a href="#vd-featured-studio">Featured Studio Card</a><a href="#vd-recent-project">Recent Project Card</a><a href="#vd-recommended">Recommended Collaborator</a><a href="#vd-track-card">Track Card</a><a href="#vd-msg">Message Bubble</a><a href="#vd-chat-list">Chat List</a><a href="#vd-typing">Typing Indicator</a><a href="#vd-attachments">Attachments</a><a href="#vd-booking">Calendar</a><a href="#vd-time-slot">Time Slots</a><a href="#vd-booking-summary">Booking Summary</a><a href="#vd-success">Success State</a><a href="#vd-reviews">Rating Breakdown</a><a href="#vd-write-review">Write Review</a><a href="#vd-notif">Notification List</a><a href="#vd-notif-toggle">Notification Toggle</a><a href="#c-audio">Audio Player & Waveform</a><a href="#mixer">Multi-Track Stem Mixer</a><a href="#vd-audio">Mini Player</a><a href="#vd-persistent-audio">Persistent Audio Player</a><a href="#vd-equalizer">Equalizer</a><a href="#pf-avatar">Avatar</a><a href="#pf-header">User Header</a><a href="#pf-stats">Profile Stats</a><a href="#pr-talent">Talent</a><a href="#pr-band">Band</a><a href="#pr-biz">Business</a><a href="#pr-venue">Venue</a><a href="#mp-req">Direct Request</a><a href="#mp-status">Request Status Tracker</a><a href="#mp-credits">Credits Engine</a><a href="#p2-credits">Credit Verification</a><a href="#ml-cards">Cards</a><a href="#ml-studio">Studio Card</a><a href="#ml-band">Band Card</a><a href="#ml-project">Project Card</a><a href="#ml-opp">Opportunity Card</a><a href="#ml-application">Application Card</a><a href="#ml-rental">Rental Card</a><a href="#ml-review">Review Card</a><a href="#ml-booking">Booking</a><a href="#ml-notif">Notification</a><a href="#ml-msg">Message</a><a href="#ml-audio">Audio</a><a href="#ml-profile">Profile</a><a href="#ml-marketplace">Marketplace</a><a href="#ml-badges">Badges</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">07 Blocks<span class="ch">▶</span></button><div class="sgi"><a href="#bl-search">Search Block</a><a href="#bl-trust">Trust Engine Card</a><a href="#bl-status">Status Components</a><a href="#bl-audio">Audio Preview Block</a><a href="#bl-stats">Statistics Block</a><a href="#lay-heroes">Heroes</a><a href="#trust">Credits Verification Loop</a><a href="#vd-blocks">Trending Block</a><a href="#vd-greeting">Greeting Block</a><a href="#vd-quick-actions">Quick Actions</a><a href="#vd-continue">Continue Working</a><a href="#vd-featured-artists">Featured Artists</a><a href="#vd-equipment">Equipment Block</a><a href="#vd-categories">Categories Block</a><a href="#sc-testimonial">Testimonial</a><a href="#sc-feed">Activity Feed</a><a href="#sc-comment">Comment</a><a href="#db-kpi">KPI Cards</a><a href="#db-charts">Charts</a><a href="#db-progress">Progress Cards</a><a href="#vd-analytics">Metric Card</a><a href="#vd-insights">Insights</a><a href="#vd-scorecard">Analytics Scorecard</a><a href="#vd-workspace">Workspace Card</a><a href="#bl-hero">Hero</a><a href="#bl-discovery">Discovery</a><a href="#bl-marketplace">Marketplace</a><a href="#bl-booking">Booking</a><a href="#bl-messaging">Messaging</a><a href="#bl-profile">Profile</a><a href="#bl-dashboard">Dashboard</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">08 Patterns<span class="ch">▶</span></button><div class="sgi"><a href="#p-disc">Discovery Feed</a><a href="#p-srch">Search Results</a><a href="#p-mkt">Marketplace</a><a href="#p-msg">Messaging</a><a href="#p-book">Booking Flow</a><a href="#p-checkout">Checkout</a><a href="#p2-grid">Discovery Grid</a><a href="#p2-swipe">Swipe Flow</a><a href="#p2-header">Profile Header</a><a href="#p2-cta">CTA Group</a><a href="#p2-filter">Filter Bar</a><a href="#p2-sticky">Sticky Actions</a><a href="#pat-auth">Authentication</a><a href="#pat-onboard">Onboarding Flow</a><a href="#pat-hiring">Hiring Flow</a><a href="#pat-studio-book">Studio Booking Flow</a><a href="#pat-project">Project Creation Flow</a><a href="#pat-reputation">Reputation Flow</a><a href="#pat-settings">Settings Flow</a><a href="#swipe">Tinder-Style Deck</a><a href="#brief">8-Step Project Brief</a><a href="#pat-messaging">Messaging</a><a href="#pat-marketplace">Marketplace</a><a href="#pat-reviews">Reviews</a><a href="#pat-booking">Studio Booking</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">09 Templates<span class="ch">▶</span></button><div class="sgi"><a href="#t-splash">Splash</a><a href="#t-login">Login</a><a href="#t-onboard">Onboarding</a><a href="#t-home">Home Dashboard</a><a href="#t-disc">Discover</a><a href="#t-ap">Artist Profile</a><a href="#t-sp">Studio Profile</a><a href="#t-mkt">Marketplace</a><a href="#t-settings">Settings</a><a href="#tpl-splash">Splash</a><a href="#tpl-login">Login</a><a href="#tpl-onboard">Onboarding</a><a href="#tpl-home">Home</a><a href="#tpl-discover">Discover</a><a href="#tpl-profile">Profile</a><a href="#tpl-marketplace">Marketplace</a><a href="#tpl-settings">Settings</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">10 Screens<span class="ch">▶</span></button><div class="sgi"><a href="#scr-auth">Authentication Screens</a><a href="#scr-onboard">Onboarding Screens</a><a href="#scr-discovery">Discovery Screens</a><a href="#scr-artist">Artist Screens</a><a href="#scr-business">Business Screens</a><a href="#scr-studio">Studio Screens</a><a href="#scr-marketplace">Marketplace Screens</a><a href="#scr-messaging">Messaging Screens</a><a href="#scr-projects">Projects Screens</a><a href="#scr-reputation">Reputation Screens</a><a href="#scr-settings">Settings Screens</a><a href="#scr-checkout">Checkout & Escrow Payment</a><a href="#scr-wallet">Wallet & Earnings</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">11 Motion<span class="ch">▶</span></button><div class="sgi"><a href="#motion">Timing & Easing</a><a href="#f-motion-principles">Motion Principles</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">12 Accessibility<span class="ch">▶</span></button><div class="sgi"><a href="#f-a11y">Accessibility</a><a href="#a11y">Tokens</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">13 Content<span class="ch">▶</span></button><div class="sgi"><a href="#f-voice">Voice & Tone</a><a href="#content">Guidelines</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">14 AI<span class="ch">▶</span></button><div class="sgi"><a href="#prompts">Prompt Library</a><a href="#util-ai">AI Assist Tray</a><a href="#ai-prompts">Prompt Library</a></div></div>
+<div class="sg open"><button class="sgt" onclick="tgg(this)">00 Product<span class="ch">▶</span></button><div class="sgi"><a href="#strategy">Marketplace Architecture</a><a href="#f-philosophy">Design Philosophy</a><a href="#f-principles">Design Principles</a><a href="#f-responsive">Responsive Behaviour</a><a href="#bl-strategy">Strategy Cards</a><a href="#product-overview">Product Overview</a><a href="#product-vision">Vision</a><a href="#product-philosophy">Design Philosophy</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">01 Brand<span class="ch">▶</span></button><div class="sgi"><a href="#brand">MusicLinkd</a><a href="#f-colors">Colors</a><a href="#f-icons-ext">Iconography Extended</a><a href="#icons">Lucide Icon Library</a><a href="#util-illustrations">Illustration Library</a><a href="#brand-identity">Brand Identity</a><a href="#brand-colors">Brand Colors</a><a href="#brand-voice">Voice & Tone</a></div></div><div class="sg open"><button class="sgt" onclick="tgg(this)">02 Foundations<span class="ch">▶</span></button><div class="sgi"><a href="#f-typo">Typography</a><a href="#f-typo-ext">Typography Extended</a><a href="#f-spacing">Spacing</a><a href="#f-sizing">Sizing Scale</a><a href="#f-radius">Radius</a><a href="#f-elevation">Elevation & Borders</a><a href="#f-elev-levels">Elevation Levels</a><a href="#f-border-tk">Border Tokens</a><a href="#f-opacity">Opacity Tokens</a><a href="#f-zindex">Z-Index</a><a href="#f-semcolor">Semantic Colors</a><a href="#f-layout">Layout Rules</a><a href="#f-comp-rules">Component Rules</a><a href="#lay-shell">App Shell</a><a href="#lay-grid">Adaptive Grid — 4 Breakpoints</a><a href="#f-states">Component States</a><a href="#f-icons">Icons</a><a href="#f-grid">Grid</a><a href="#f-breakpoints">Breakpoints</a><a href="#f-motion">Motion</a><a href="#f-semantic">Semantic Colors</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">03 Design Tokens<span class="ch">▶</span></button><div class="sgi"><a href="#tokens">Machine-Readable Tokens</a><a href="#f-motion-tk">Motion Tokens</a></div></div><div class="sg open"><button class="sgt" onclick="tgg(this)">04 Primitives<span class="ch">▶</span></button><div class="sgi"><a href="#c-btns">Buttons</a><a href="#c2-iconbtn">Icon Button</a><a href="#c-inp">Input Fields</a><a href="#fm-select">Select</a><a href="#fm-radio">Radio</a><a href="#fm-checkbox">Checkbox</a><a href="#fm-toggle">Toggle</a><a href="#fm-upload">Upload</a><a href="#fm-textarea">Textarea</a><a href="#c-chips">Chips</a><a href="#c2-tag">Tag</a><a href="#c-srch">Search Bar</a><a href="#sr-global">Global Search</a><a href="#sr-filters">Search Filters</a><a href="#sr-pills">Filter Pills</a><a href="#c-badges">Status Badges & Verification</a><a href="#p2-badges">Trust Badges</a><a href="#vd-badges">Badge Variants</a><a href="#c-dialogs">Dialogs & Bottom Sheet</a><a href="#c-toast">Toast Notification</a><a href="#c-empty">Empty States</a><a href="#c2-tooltip">Tooltip</a><a href="#c2-tabs">Tabs</a><a href="#c2-accordion">Accordion</a><a href="#c2-timeline">Timeline</a><a href="#c2-skeleton">Skeleton Loading</a><a href="#c2-progress">Progress Bar</a><a href="#c2-divider">Divider</a><a href="#anatomy-btn">Button Anatomy</a><a href="#anatomy-input">Text Field Anatomy</a><a href="#anatomy-chip">Chip Anatomy</a><a href="#anatomy-sheet">Bottom Sheet Anatomy</a><a href="#anatomy-topbar">Top App Bar Anatomy</a><a href="#anatomy-fab">FAB Anatomy</a><a href="#p-btn">Button</a><a href="#p-input">Input</a><a href="#p-chip">Chip</a><a href="#p-search">Search</a><a href="#p-nav">Navigation</a><a href="#p-fab">FAB</a><a href="#p-badge">Badge</a><a href="#p-dialog">Dialog</a><a href="#p-toast">Toast</a><a href="#p-snackbar">Snackbar</a><a href="#p-progress">Progress</a><a href="#p-skeleton">Skeleton</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">04.5 Gestalt-Inspired<span class="ch">▶</span></button><div class="sgi"><a href="#g-segmented">Segmented Control</a><a href="#g-combobox">ComboBox</a><a href="#g-modal">Modal Dialog</a><a href="#g-popover">Popover Menu</a><a href="#g-avatar-group">Avatar Group</a><a href="#g-skeleton">Skeleton Loader</a><a href="#g-field">Floating Label Input</a><a href="#g-switch">Switch with Label</a><a href="#g-tabs">Underline Tabs</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">05 Native Components<span class="ch">▶</span></button><div class="sgi"><a href="#na-topbar">Top App Bar</a><a href="#vd-topbar">Top App Bar — Large</a><a href="#na-fab">Floating Action Button</a><a href="#vd-fab">FAB Variants</a><a href="#na-drawer">Navigation Drawer</a><a href="#vd-navdrawer">Navigation Drawer</a><a href="#na-rail">Navigation Rail</a><a href="#na-tabs">Tabs</a><a href="#na-segmented">Segmented Buttons</a><a href="#vd-segmented">Segmented Buttons</a><a href="#na-progress">Progress Indicators</a><a href="#vd-progress">Progress Indicators</a><a href="#na-slider">Slider</a><a href="#vd-slider">Slider</a><a href="#na-switch">Switch</a><a href="#vd-switch">Switch</a><a href="#na-datepicker">Date Picker</a><a href="#vd-datepicker">Date Picker</a><a href="#na-snackbar">Snackbar</a><a href="#vd-snackbar">Snackbar</a><a href="#na-otp">OTP Input</a><a href="#vd-otp">OTP Input</a><a href="#na-search-suggest">Search Suggestions</a><a href="#vd-search-suggest">Search Suggestions</a><a href="#na-filter-sheet">Filter Sheet</a><a href="#na-permission">Permission Dialog</a><a href="#vd-permission">Permission Dialog</a><a href="#na-camera">Camera Picker</a><a href="#na-audio-rec">Audio Recorder</a><a href="#na-scrubber">Audio Scrubber</a><a href="#lay-android">Android App Grids</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">06 MusicLinkd Components<span class="ch">▶</span></button><div class="sgi"><a href="#cd-talent">Talent Discovery Card</a><a href="#cd-studio">Studio Card</a><a href="#cd-album">Ambient Album Card</a><a href="#cd-band">Band Card</a><a href="#cd-project">Project Card</a><a href="#cd-opp">Opportunity Card</a><a href="#cd-app">Application Card</a><a href="#cd-mkt">Marketplace Card</a><a href="#cd-rental">Rental Card</a><a href="#cd-review">Review Card</a><a href="#cd-booking">Booking Card</a><a href="#cd-notif">Notification Card</a><a href="#cd-msg">Message Card</a><a href="#vd-cards">Artist Grid Card</a><a href="#vd-row-card">Artist Row Card</a><a href="#vd-featured-studio">Featured Studio Card</a><a href="#vd-recent-project">Recent Project Card</a><a href="#vd-recommended">Recommended Collaborator</a><a href="#vd-track-card">Track Card</a><a href="#vd-msg">Message Bubble</a><a href="#vd-chat-list">Chat List</a><a href="#vd-typing">Typing Indicator</a><a href="#vd-attachments">Attachments</a><a href="#vd-booking">Calendar</a><a href="#vd-time-slot">Time Slots</a><a href="#vd-booking-summary">Booking Summary</a><a href="#vd-success">Success State</a><a href="#vd-reviews">Rating Breakdown</a><a href="#vd-write-review">Write Review</a><a href="#vd-notif">Notification List</a><a href="#vd-notif-toggle">Notification Toggle</a><a href="#c-audio">Audio Player & Waveform</a><a href="#mixer">Multi-Track Stem Mixer</a><a href="#vd-audio">Mini Player</a><a href="#vd-persistent-audio">Persistent Audio Player</a><a href="#vd-equalizer">Equalizer</a><a href="#pf-avatar">Avatar</a><a href="#pf-header">User Header</a><a href="#pf-stats">Profile Stats</a><a href="#pr-talent">Talent</a><a href="#pr-band">Band</a><a href="#pr-biz">Business</a><a href="#pr-venue">Venue</a><a href="#mp-req">Direct Request</a><a href="#mp-status">Request Status Tracker</a><a href="#mp-credits">Credits Engine</a><a href="#p2-credits">Credit Verification</a><a href="#ml-cards">Cards</a><a href="#ml-studio">Studio Card</a><a href="#ml-band">Band Card</a><a href="#ml-project">Project Card</a><a href="#ml-opp">Opportunity Card</a><a href="#ml-application">Application Card</a><a href="#ml-rental">Rental Card</a><a href="#ml-review">Review Card</a><a href="#ml-booking">Booking</a><a href="#ml-notif">Notification</a><a href="#ml-msg">Message</a><a href="#ml-audio">Audio</a><a href="#ml-profile">Profile</a><a href="#ml-marketplace">Marketplace</a><a href="#ml-badges">Badges</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">07 Blocks<span class="ch">▶</span></button><div class="sgi"><a href="#bl-search">Search Block</a><a href="#bl-trust">Trust Engine Card</a><a href="#bl-status">Status Components</a><a href="#bl-audio">Audio Preview Block</a><a href="#bl-stats">Statistics Block</a><a href="#lay-heroes">Heroes</a><a href="#trust">Credits Verification Loop</a><a href="#vd-blocks">Trending Block</a><a href="#vd-greeting">Greeting Block</a><a href="#vd-quick-actions">Quick Actions</a><a href="#vd-continue">Continue Working</a><a href="#vd-featured-artists">Featured Artists</a><a href="#vd-equipment">Equipment Block</a><a href="#vd-categories">Categories Block</a><a href="#sc-testimonial">Testimonial</a><a href="#sc-feed">Activity Feed</a><a href="#sc-comment">Comment</a><a href="#db-kpi">KPI Cards</a><a href="#db-charts">Charts</a><a href="#db-progress">Progress Cards</a><a href="#vd-analytics">Metric Card</a><a href="#vd-insights">Insights</a><a href="#vd-scorecard">Analytics Scorecard</a><a href="#vd-workspace">Workspace Card</a><a href="#bl-hero">Hero</a><a href="#bl-discovery">Discovery</a><a href="#bl-marketplace">Marketplace</a><a href="#bl-booking">Booking</a><a href="#bl-messaging">Messaging</a><a href="#bl-profile">Profile</a><a href="#bl-dashboard">Dashboard</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">08 Patterns<span class="ch">▶</span></button><div class="sgi"><a href="#p-disc">Discovery Feed</a><a href="#p-srch">Search Results</a><a href="#p-mkt">Marketplace</a><a href="#p-msg">Messaging</a><a href="#p-book">Booking Flow</a><a href="#p-checkout">Checkout</a><a href="#p2-grid">Discovery Grid</a><a href="#p2-swipe">Swipe Flow</a><a href="#p2-header">Profile Header</a><a href="#p2-cta">CTA Group</a><a href="#p2-filter">Filter Bar</a><a href="#p2-sticky">Sticky Actions</a><a href="#pat-auth">Authentication</a><a href="#pat-onboard">Onboarding Flow</a><a href="#pat-hiring">Hiring Flow</a><a href="#pat-studio-book">Studio Booking Flow</a><a href="#pat-project">Project Creation Flow</a><a href="#pat-reputation">Reputation Flow</a><a href="#pat-settings">Settings Flow</a><a href="#swipe">Tinder-Style Deck</a><a href="#brief">8-Step Project Brief</a><a href="#pat-messaging">Messaging</a><a href="#pat-marketplace">Marketplace</a><a href="#pat-reviews">Reviews</a><a href="#pat-booking">Studio Booking</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">09 Templates<span class="ch">▶</span></button><div class="sgi"><a href="#t-splash">Splash</a><a href="#t-login">Login</a><a href="#t-onboard">Onboarding</a><a href="#t-home">Home Dashboard</a><a href="#t-disc">Discover</a><a href="#t-ap">Artist Profile</a><a href="#t-sp">Studio Profile</a><a href="#t-mkt">Marketplace</a><a href="#t-settings">Settings</a><a href="#tpl-splash">Splash</a><a href="#tpl-login">Login</a><a href="#tpl-onboard">Onboarding</a><a href="#tpl-home">Home</a><a href="#tpl-discover">Discover</a><a href="#tpl-profile">Profile</a><a href="#tpl-marketplace">Marketplace</a><a href="#tpl-settings">Settings</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">10 Screens<span class="ch">▶</span></button><div class="sgi"><a href="#scr-auth">Authentication Screens</a><a href="#scr-onboard">Onboarding Screens</a><a href="#scr-discovery">Discovery Screens</a><a href="#scr-artist">Artist Screens</a><a href="#scr-business">Business Screens</a><a href="#scr-studio">Studio Screens</a><a href="#scr-marketplace">Marketplace Screens</a><a href="#scr-messaging">Messaging Screens</a><a href="#scr-projects">Projects Screens</a><a href="#scr-reputation">Reputation Screens</a><a href="#scr-settings">Settings Screens</a><a href="#scr-checkout">Checkout & Escrow Payment</a><a href="#scr-wallet">Wallet & Earnings</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">11 Motion<span class="ch">▶</span></button><div class="sgi"><a href="#motion">Timing & Easing</a><a href="#f-motion-principles">Motion Principles</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">12 Accessibility<span class="ch">▶</span></button><div class="sgi"><a href="#f-a11y">Accessibility</a><a href="#a11y">Tokens</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">13 Content<span class="ch">▶</span></button><div class="sgi"><a href="#f-voice">Voice & Tone</a><a href="#content">Guidelines</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)">14 AI<span class="ch">▶</span></button><div class="sgi"><a href="#prompts">Prompt Library</a><a href="#util-ai">AI Assist Tray</a><a href="#ai-prompts">Prompt Library</a></div></div>
 <div class="sg">
 <button class="sgt" onclick="tgg(this)">15 Developer Documentation<span class="ch">▶</span></button>
-<div class="sgi">
-<a href="#util-flow">Flow Containers</a>
-<a href="#util-workspace">Workspace Layouts</a>
-<a href="#cr-drop">Stem Ingestion Dropzone</a>
-<a href="#cr-edit">Inline Profile Editor</a>
-<a href="#cr-settings">Settings Matrix</a>
-<a href="#dev-docs">Architecture</a>
-</div>
+<div class="sgi"><a href="#util-flow">Flow Containers</a><a href="#util-workspace">Workspace Layouts</a><a href="#cr-drop">Stem Ingestion Dropzone</a><a href="#cr-edit">Inline Profile Editor</a><a href="#cr-settings">Settings Matrix</a><a href="#dev-docs">Architecture</a><a href="#adv-masonry">Masonry Sign-up</a><a href="#adv-dualhero">Dual-Sided Hero</a><a href="#adv-features">Feature Grid</a><a href="#adv-blog">Blog Article Grid</a><a href="#util-skeleton">Skeleton Loaders</a><a href="#util-error">Error Boundary</a><a href="#util-offline">Offline Banner</a><a href="#util-empty">Empty States</a><a href="#util-shimmer">Shimmer</a><a href="#util-qr">QR Share</a><a href="#util-adaptive">Adaptive Banner</a><a href="#util-persistent-audio">Persistent Audio Player</a><a href="#util-success">Animated Success</a><a href="#nav-bar">Navbar</a><a href="#nav-tabs2">Section Tabs</a><a href="#nav-switch">Segmented Switch</a><a href="#nav-breadcrumb">Breadcrumb</a><a href="#c-nav">Bottom Navigation</a><a href="#lay-nav">Sticky Nav</a><a href="#p2-metrics">Metrics Row</a><a href="#more">Uncategorized</a></div>
 </div>
 <div class="sg">
 <button class="sgt" onclick="tgg(this)">16 Advanced Marketing Blocks<span class="ch">▶</span></button>
@@ -1673,7 +1644,7 @@ img { max-width: 100%; height: auto; display: block; }
 <div class="eyebrow">00 Product</div>
 <h2>Product Overview <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v4.0</span></h2>
 <p class="desc"><strong>MusicLinkd</strong> is the professional network for music — connecting musicians, producers, studios, and clients in an editorial, people-first marketplace.</p>
-<div class="spec-grid"><div class="spec-card"><span style="font-size:var(--fs-h1)">🎯</span><div class="spec-label">Mission</div><p style="font-size:var(--fs-caption);color:var(--muted)">Where talent meets opportunity.</p></div><div class="spec-card"><span style="font-size:var(--fs-h1)">🗣️</span><div class="spec-label">Voice</div><p style="font-size:var(--fs-caption);color:var(--muted)">Clear, confident, creative. No hype.</p></div><div class="spec-card"><span style="font-size:var(--fs-h1)">🎨</span><div class="spec-label">Colors</div><div style="font-size:var(--fs-caption);line-height:2">Primary: <span style="display:inline-block;width:12px;height:12px;background:var(--pink);border-radius:3px;vertical-align:middle;margin:0 4px"></span><code>var(--pink)</code><br>Dark: <span style="display:inline-block;width:12px;height:12px;background:var(--black);border-radius:3px;vertical-align:middle;margin:0 4px"></span><code>var(--black)</code><br>Accent: <span style="display:inline-block;width:12px;height:12px;background:var(--purple);border-radius:3px;vertical-align:middle;margin:0 4px"></span><code>var(--purple)</code></div></div><div class="spec-card"><span style="font-size:var(--fs-h1)">✍️</span><div class="spec-label">Typography</div><p style="font-size:var(--fs-caption);color:var(--muted)"><strong>Inter Tight</strong> — Display & Headings<br><strong>Inter</strong> — Body & UI<br>Lucide icons, 1.75px stroke</p></div></div></div>
+<div class="spec-grid"><div class="spec-card"><span style="font-size:var(--fs-h1)">🎯</span><div class="spec-label">Mission</div><p style="font-size:var(--fs-caption);color:var(--muted)">Where talent meets opportunity.</p></div><div class="spec-card"><span style="font-size:var(--fs-h1)">🗣️</span><div class="spec-label">Voice</div><p style="font-size:var(--fs-caption);color:var(--muted)">Clear, confident, creative. No hype.</p></div><div class="spec-card"><span style="font-size:var(--fs-h1)">🎨</span><div class="spec-label">Colors</div><div style="font-size:var(--fs-caption);line-height:2">Primary: <span style="display:inline-block;width:12px;height:12px;background:var(--pink);border-radius:3px;vertical-align:middle;margin:0 4px"></span><code>var(--pink)</code><br>Dark: <span style="display:inline-block;width:12px;height:12px;background:var(--black);border-radius:3px;vertical-align:middle;margin:0 4px"></span><code>var(--black)</code><br>Accent: <span style="display:inline-block;width:12px;height:12px;background:var(--purple);border-radius:3px;vertical-align:middle;margin:0 4px"></span><code>var(--purple)</code></div></div><div class="spec-card"><span style="font-size:var(--fs-h1)">✍️</span><div class="spec-label">Typography</div><p style="font-size:var(--fs-caption);color:var(--muted)"><strong>Inter Tight</strong> — Display & Headings<br><strong>Inter</strong> — Body & UI<br>Lucide icons, 1.75px stroke</p></div></div>
 </section>
 <section class="sec" id="product-vision">
 <button class="copy-link-btn" onclick="copyLink('product-vision')">🔗</button>
@@ -1702,14 +1673,10 @@ img { max-width: 100%; height: auto; display: block; }
 <div class="card-s hl" style="text-align:center;padding:14px"><span style="font-size:var(--fs-h1)">🎭</span><div style="font-size:var(--fs-10);font-weight:600;margin-top:4px">Role</div><p style="font-size:var(--fs-9);color:var(--muted)">Singer/Producer/DJ</p></div>
 <div style="display:flex;align-items:center;justify-content:center;font-size:var(--fs-h3);color:var(--muted)">→</div>
 <div class="card-s hl" style="text-align:center;padding:14px"><span style="font-size:var(--fs-h1)">📸</span><div style="font-size:var(--fs-10);font-weight:600;margin-top:4px">Photo</div><p style="font-size:var(--fs-9);color:var(--muted)">1:1 crop</p></div>
-<div style="display:flex;align-items:center;justify-content:center;font-size:var(--fs-h3);color:var(--muted)">→</span></div>
+<div style="display:flex;align-items:center;justify-content:center;font-size:var(--fs-h3);color:var(--muted)">→</div>
 <div class="card-s hl" style="text-align:center;padding:14px"><span style="font-size:var(--fs-h1)">🎵</span><div style="font-size:var(--fs-10);font-weight:600;margin-top:4px">Genres</div><p style="font-size:var(--fs-9);color:var(--muted)">Multi-select chips</p></div>
 </div>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 01 BRAND -->
-<!-- ============================================================================== -->
 <section class="sec" id="brand">
 <button class="copy-link-btn" onclick="copyLink('brand')">🔗</button>
 <div class="eyebrow">01 Brand</div>
@@ -1722,10 +1689,6 @@ img { max-width: 100%; height: auto; display: block; }
 <div class="spec-card"><span style="font-size:var(--fs-h1)">✍️</span><div class="spec-label">Typography</div><p style="font-size:var(--fs-caption);color:var(--muted)"><strong>Inter Tight</strong> — Display & Headings<br><strong>Inter</strong> — Body & UI<br>Lucide icons, 1.75px stroke</p></div>
 </div>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 01 BRAND - BRANDED MEDIA -->
-<!-- ============================================================================== -->
 <section class="sec" id="branded-media">
 <button class="copy-link-btn" onclick="copyLink('branded-media')">🔗</button>
 <div class="eyebrow">01 Brand</div>
@@ -1818,11 +1781,8 @@ img { max-width: 100%; height: auto; display: block; }
 <tr><td>Success</td><td>Celebratory, brief</td><td>"Booking confirmed! 🎉"</td></tr>
 <tr><td>Trust</td><td>Authoritative, transparent</td><td>"Verified by 3 collaborators"</td></tr></table>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 02 FOUNDATIONS -->
-<!-- ============================================================================== -->
 <section class="sec" id="f-typo">
+<span id="foundations"></span>
 <button class="copy-link-btn" onclick="copyLink('f-typo')">🔗</button>
 <div class="eyebrow">02 Foundations</div>
 <h2>Typography <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v4.0</span></h2>
@@ -2094,10 +2054,6 @@ img { max-width: 100%; height: auto; display: block; }
 <tr><td>Disabled</td><td><span class="ts" style="background:#9CA3AF"></span><code>#9CA3AF</code></td><td>Inactive elements</td></tr>
 <tr><td>Scrim</td><td>rgba(0,0,0,0.32)</td><td>Backdrop overlay</td></tr></table>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 03 DESIGN TOKENS -->
-<!-- ============================================================================== -->
 <section class="sec" id="tokens">
 <button class="copy-link-btn" onclick="copyLink('tokens')">🔗</button>
 <div class="eyebrow">03 Design Tokens</div>
@@ -2125,11 +2081,8 @@ img { max-width: 100%; height: auto; display: block; }
 <tr><td>Press</td><td>scale(0.97)</td></tr>
 <tr><td>Release</td><td>scale(1.0) spring</td></tr></table>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 04 PRIMITIVES -->
-<!-- ============================================================================== -->
 <section class="sec" id="c-btns">
+<span id="primitives"></span>
 <button class="copy-link-btn" onclick="copyLink('c-btns')">🔗</button>
 <div class="eyebrow">04 Primitives</div>
 <h2>Buttons <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v4.0</span></h2>
@@ -2243,6 +2196,7 @@ img { max-width: 100%; height: auto; display: block; }
 <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span class="badge badge-vf">🎭 Persona</span><span class="badge badge-av">👥 Social</span><span class="badge badge-ug">🔖 Saved</span><span class="badge badge-biz">⭐ Premium</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:9999px;font-size:var(--fs-9);font-weight:600;background:var(--purple-container);color:var(--purple)">📍 Stage 1</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:9999px;font-size:var(--fs-9);font-weight:600;background:var(--warn-container);color:#92400E">● Active</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:9999px;font-size:var(--fs-9);font-weight:600;background:var(--success-container);color:#15803D">🤝 Connected</span></div>
 </section>
 <section class="sec" id="c-dialogs">
+<span id="p-sheet"></span>
 <button class="copy-link-btn" onclick="copyLink('c-dialogs')">🔗</button>
 <div class="eyebrow">04 Primitives</div>
 <h2>Dialogs & Bottom Sheet <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v4.0</span></h2>
@@ -2826,7 +2780,7 @@ img { max-width: 100%; height: auto; display: block; }
 .platform-tab.active{background:var(--pink);color:white;border-color:var(--pink);}
 
 /* Top Navigation Bar */
-.top-nav { height:72px;
+
     position: sticky;
     top: 0;
     z-index: 100;
@@ -2917,10 +2871,144 @@ img { max-width: 100%; height: auto; display: block; }
 }
 </style>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 05 NATIVE COMPONENTS -->
-<!-- ============================================================================== -->
+<section class="sec" id="g-segmented">
+<button class="copy-link-btn" onclick="copyLink('g-segmented')">🔗</button>
+<div class="eyebrow">04 Gestalt-Inspired</div>
+<h2>Segmented Control <span class="badge badge-av" style="margin-left:8px">New</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v5.0</span></h2>
+<p class="desc">Gestalt-style segmented control for filter switching. White active pill with subtle elevation.</p>
+<div class="g-segmented">
+  <button class="active" onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Hire Talent</button>
+  <button onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Get Hired</button>
+  <button onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Marketplace</button>
+</div>
+</section>
+<section class="sec" id="g-combobox">
+<button class="copy-link-btn" onclick="copyLink('g-combobox')">🔗</button>
+<div class="eyebrow">04 Gestalt-Inspired</div>
+<h2>ComboBox <span class="badge badge-av" style="margin-left:8px">New</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v5.0</span></h2>
+<p class="desc">Search input with suggestion dropdown. Gestalt ComboBox pattern.</p>
+<div class="g-combobox" style="max-width:360px">
+  <span class="g-combobox-icon">🔍</span>
+  <input type="text" placeholder="Search artists, studios..." onfocus="this.nextElementSibling.nextElementSibling.classList.add('open')" onblur="setTimeout(()=>this.nextElementSibling.nextElementSibling.classList.remove('open'),200)">
+  <button class="g-combobox-clear" onclick="this.previousElementSibling.value=''">✕</button>
+  <div class="g-combobox-menu">
+    <div class="g-combobox-item active">🎤 Ananya Sharma — Vocalist</div>
+    <div class="g-combobox-item">🎛️ Rahul Varma — Producer</div>
+    <div class="g-combobox-item">🏢 Yash Raj Studios — Mumbai</div>
+    <div class="g-combobox-item">🎸 Yamaha HS8 — ₹45,000</div>
+  </div>
+</div>
+</section>
+<section class="sec" id="g-modal">
+<button class="copy-link-btn" onclick="copyLink('g-modal')">🔗</button>
+<div class="eyebrow">04 Gestalt-Inspired</div>
+<h2>Modal Dialog <span class="badge badge-av" style="margin-left:8px">New</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v5.0</span></h2>
+<p class="desc">Centered modal with backdrop. Gestalt Modal pattern with 200ms entrance animation.</p>
+<div class="g-modal-backdrop" id="gModalBackdrop" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="g-modal">
+    <div class="g-modal-header">
+      <div class="g-modal-title">Confirm Booking</div>
+      <button class="g-modal-close" onclick="document.getElementById('gModalBackdrop').classList.remove('open')">✕</button>
+    </div>
+    <div class="g-modal-body">You're about to book North Room for 4 hours at ₹1,800/hr. Total: ₹7,200. This will be held in escrow until the session is complete.</div>
+    <div class="g-modal-footer">
+      <button class="btn btn-s btn-sm" onclick="document.getElementById('gModalBackdrop').classList.remove('open')">Cancel</button>
+      <button class="btn btn-p btn-sm" onclick="document.getElementById('gModalBackdrop').classList.remove('open');toastMsg('Booking confirmed!')">Confirm Booking</button>
+    </div>
+  </div>
+</div>
+<button class="btn btn-p" onclick="document.getElementById('gModalBackdrop').classList.add('open')">Open Modal</button>
+</section>
+<section class="sec" id="g-popover">
+<button class="copy-link-btn" onclick="copyLink('g-popover')">🔗</button>
+<div class="eyebrow">04 Gestalt-Inspired</div>
+<h2>Popover Menu <span class="badge badge-av" style="margin-left:8px">New</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v5.0</span></h2>
+<p class="desc">Contextual menu with Gestalt Popover pattern. Click outside to dismiss.</p>
+<div class="g-popover">
+  <button class="btn btn-s btn-sm" onclick="document.getElementById('gPopoverMenu').classList.toggle('open')">⋯ More Actions</button>
+  <div class="g-popover-menu" id="gPopoverMenu">
+    <div class="g-popover-item" onclick="this.closest('.g-popover-menu').classList.remove('open');toastMsg('View profile')">👤 View Profile</div>
+    <div class="g-popover-item" onclick="this.closest('.g-popover-menu').classList.remove('open');toastMsg('Share link')">🔗 Share Link</div>
+    <div class="g-popover-item" onclick="this.closest('.g-popover-menu').classList.remove('open');toastMsg('Report')">🚩 Report</div>
+    <div class="g-popover-item danger" onclick="this.closest('.g-popover-menu').classList.remove('open');toastMsg('Blocked')">🚫 Block User</div>
+  </div>
+</div>
+</section>
+<section class="sec" id="g-avatar-group">
+<button class="copy-link-btn" onclick="copyLink('g-avatar-group')">🔗</button>
+<div class="eyebrow">04 Gestalt-Inspired</div>
+<h2>Avatar Group <span class="badge badge-av" style="margin-left:8px">New</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v5.0</span></h2>
+<p class="desc">Stacked avatars with overlap. Gestalt AvatarGroup pattern.</p>
+<div class="g-avatar-group">
+  <div class="g-avatar" style="background:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&q=80') center/cover"></div>
+  <div class="g-avatar" style="background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=64&q=80') center/cover"></div>
+  <div class="g-avatar" style="background:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=64&q=80') center/cover"></div>
+  <div class="g-avatar g-avatar-more">+4</div>
+</div>
+</section>
+<section class="sec" id="g-skeleton">
+<button class="copy-link-btn" onclick="copyLink('g-skeleton')">🔗</button>
+<div class="eyebrow">04 Gestalt-Inspired</div>
+<h2>Skeleton Loader <span class="badge badge-av" style="margin-left:8px">New</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v5.0</span></h2>
+<p class="desc">Reusable skeleton component with shimmer animation.</p>
+<div style="display:flex;flex-direction:column;gap:8px;max-width:360px">
+  <div class="g-skeleton" style="height:120px;border-radius:16px"></div>
+  <div class="g-skeleton" style="height:14px;width:70%;border-radius:4px"></div>
+  <div class="g-skeleton" style="height:14px;width:40%;border-radius:4px"></div>
+</div>
+</section>
+<section class="sec" id="g-field">
+<button class="copy-link-btn" onclick="copyLink('g-field')">🔗</button>
+<div class="eyebrow">04 Gestalt-Inspired</div>
+<h2>Floating Label Input <span class="badge badge-av" style="margin-left:8px">New</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v5.0</span></h2>
+<p class="desc">Input with floating label, helper text, and error state. Gestalt TextField pattern.</p>
+<div style="max-width:360px">
+  <div class="g-field">
+    <input type="text" placeholder=" " value="Ananya Sharma">
+    <label>Full Name</label>
+    <div class="g-field-helper">This will appear on your public profile</div>
+  </div>
+  <div class="g-field has-error">
+    <input type="email" placeholder=" " value="invalid-email">
+    <label>Email Address</label>
+    <div class="g-field-error">Please enter a valid email address</div>
+  </div>
+</div>
+</section>
+<section class="sec" id="g-switch">
+<button class="copy-link-btn" onclick="copyLink('g-switch')">🔗</button>
+<div class="eyebrow">04 Gestalt-Inspired</div>
+<h2>Switch with Label <span class="badge badge-av" style="margin-left:8px">New</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v5.0</span></h2>
+<p class="desc">Switch with label and description. Gestalt Switch pattern.</p>
+<div style="max-width:360px">
+  <div class="g-switch-row">
+    <div>
+      <div class="g-switch-label">Direct Messages</div>
+      <div class="g-switch-desc">Allow artists to message you directly</div>
+    </div>
+    <div class="g-switch on" onclick="this.classList.toggle('on')"></div>
+  </div>
+  <div class="g-switch-row" style="border-top:1px solid var(--line)">
+    <div>
+      <div class="g-switch-label">Gig Proposals</div>
+      <div class="g-switch-desc">Receive new gig proposal notifications</div>
+    </div>
+    <div class="g-switch" onclick="this.classList.toggle('on')"></div>
+  </div>
+</div>
+</section>
+<section class="sec" id="g-tabs">
+<button class="copy-link-btn" onclick="copyLink('g-tabs')">🔗</button>
+<div class="eyebrow">04 Gestalt-Inspired</div>
+<h2>Underline Tabs <span class="badge badge-av" style="margin-left:8px">New</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v5.0</span></h2>
+<p class="desc">Gestalt-style underline tabs with pink active indicator.</p>
+<div class="g-tabs" style="max-width:400px">
+  <button class="g-tab active" onclick="this.parentElement.querySelectorAll('.g-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')">About</button>
+  <button class="g-tab" onclick="this.parentElement.querySelectorAll('.g-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')">Projects</button>
+  <button class="g-tab" onclick="this.parentElement.querySelectorAll('.g-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')">Credits</button>
+  <button class="g-tab" onclick="this.parentElement.querySelectorAll('.g-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')">Reviews</button>
+</div>
+</section>
 <section class="sec" id="na-topbar">
 <button class="copy-link-btn" onclick="copyLink('na-topbar')">🔗</button>
 <div class="eyebrow">05 Native Components</div>
@@ -3166,11 +3254,8 @@ img { max-width: 100%; height: auto; display: block; }
 </div>
 </div>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 06 MUSICLINKD COMPONENTS -->
-<!-- ============================================================================== -->
 <section class="sec" id="cd-talent">
+<span id="components"></span>
 <button class="copy-link-btn" onclick="copyLink('cd-talent')">🔗</button>
 <div class="eyebrow">06 MusicLinkd Components</div>
 <h2>Talent Discovery Card <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v4.0</span></h2>
@@ -3321,6 +3406,7 @@ img { max-width: 100%; height: auto; display: block; }
 </div>
 </section>
 <section class="sec" id="vd-booking">
+<span id="ml-calendar"></span>
 <button class="copy-link-btn" onclick="copyLink('vd-booking')">🔗</button>
 <div class="eyebrow">06 MusicLinkd Components</div>
 <h2>Calendar <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v4.0</span></h2>
@@ -3665,7 +3751,7 @@ img { max-width: 100%; height: auto; display: block; }
         <a href="#ml-cards" class="related-chip">Cards</a><a href="#bl-discovery" class="related-chip">Discovery</a>
     </div>
 </div>
-<div class="card-s hl" style="max-width:360px"><div style="display:flex;align-items:center;gap:var(--sp-2);margin-bottom:8px"><div id="wfBtn" style="width:36px;height:36px;border-radius:10px;background:var(--pink);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--white);font-size:var(--fs-body)" onclick="togWf()">▶</div><div><div style="font-weight:600;font-size:var(--fs-body)">Aarav Mehta</div><div style="font-size:var(--fs-10);color:var(--muted)">Sample reel · 0:45</div></div></div><div class="wf" id="wfBox"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+<div class="card-s hl" style="max-width:360px"><div style="display:flex;align-items:center;gap:var(--sp-2);margin-bottom:8px"><div id="wfBtn2" style="width:36px;height:36px;border-radius:10px;background:var(--pink);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--white);font-size:var(--fs-body)" onclick="togWf2()">▶</div><div><div style="font-weight:600;font-size:var(--fs-body)">Aarav Mehta</div><div style="font-size:var(--fs-10);color:var(--muted)">Sample reel · 0:45</div></div></div><div class="wf" id="wfBox2"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
 </section>
 <section class="sec" id="ml-profile">
 <button class="copy-link-btn" onclick="copyLink('ml-profile')">🔗</button>
@@ -3685,10 +3771,6 @@ img { max-width: 100%; height: auto; display: block; }
 <h2>Badges <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v4.0</span></h2>
 <div style="display:flex;gap:var(--sp-2);flex-wrap:wrap"><span class="badge badge-vf">✓ Pro Verified</span><span class="badge badge-biz">✓ Business Studio</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:var(--r-pill);font-size:var(--fs-9);font-weight:600;background:var(--purple-container);color:var(--purple)">📍 Stage 1</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:var(--r-pill);font-size:var(--fs-9);font-weight:600;background:var(--success-container);color:#15803D">🤝 Connected</span></div>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 07 BLOCKS -->
-<!-- ============================================================================== -->
 <section class="sec" id="bl-search">
 <button class="copy-link-btn" onclick="copyLink('bl-search')">🔗</button>
 <div class="eyebrow">07 Blocks</div>
@@ -3893,11 +3975,8 @@ img { max-width: 100%; height: auto; display: block; }
 <h2>Dashboard <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v4.0</span></h2>
 <div class="spec-grid g3"><div class="card-s hl"><div style="font-size:var(--fs-h1);font-weight:700;font-family:'Inter Tight'">₹84,500</div><span style="font-size:var(--fs-10);color:var(--muted)">Total Earnings</span></div><div class="card-s hl"><div style="font-size:var(--fs-h1);font-weight:700;font-family:'Inter Tight'">1,240</div><span style="font-size:var(--fs-10);color:var(--muted)">Profile Views</span></div><div class="card-s hl"><div style="font-size:var(--fs-h1);font-weight:700;font-family:'Inter Tight'">98%</div><span style="font-size:var(--fs-10);color:var(--muted)">Response Rate</span></div></div>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 08 PATTERNS -->
-<!-- ============================================================================== -->
 <section class="sec" id="p-disc">
+<span id="patterns"></span>
 <button class="copy-link-btn" onclick="copyLink('p-disc')">🔗</button>
 <div class="eyebrow">08 Patterns</div>
 <h2>Discovery Feed <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v4.0</span></h2>
@@ -4114,10 +4193,6 @@ img { max-width: 100%; height: auto; display: block; }
 <tr><td>4</td><td>Payment</td><td>Escrow, UPI/card</td></tr>
 <tr><td>5</td><td>Success</td><td>Booking confirmed + calendar</td></tr></table>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 09 TEMPLATES -->
-<!-- ============================================================================== -->
 <section class="sec" id="t-splash">
 <button class="copy-link-btn" onclick="copyLink('t-splash')">🔗</button>
 <div class="eyebrow">09 Templates</div>
@@ -4255,10 +4330,6 @@ img { max-width: 100%; height: auto; display: block; }
 <h2>Settings <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v4.0</span></h2>
 <div style="display:flex;flex-direction:column;gap:var(--sp-1);max-width:360px"><div class="card-s" style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px"><span style="font-size:var(--fs-body);font-weight:600">Profile</span><span style="font-size:var(--fs-caption);color:var(--muted)">Edit name, photo, genres</span></div><div class="card-s" style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px"><span style="font-size:var(--fs-body);font-weight:600">Account</span><span style="font-size:var(--fs-caption);color:var(--muted)">Email, password, connected</span></div><div class="card-s" style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px"><span style="font-size:var(--fs-body);font-weight:600">Notifications</span><span style="font-size:var(--fs-caption);color:var(--muted)">Push, email preferences</span></div><div class="card-s" style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px"><span style="font-size:var(--fs-body);font-weight:600">Privacy</span><span style="font-size:var(--fs-caption);color:var(--muted)">Visibility, block list</span></div><div class="card-s" style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px"><span style="font-size:var(--fs-body);font-weight:600">Logout</span><span style="color:var(--err);font-size:var(--fs-caption)">Sign out</span></div></div>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 10 SCREENS -->
-<!-- ============================================================================== -->
 <section class="sec" id="scr-auth">
 <button class="copy-link-btn" onclick="copyLink('scr-auth')">🔗</button>
 <div class="eyebrow">10 Screens</div>
@@ -4473,10 +4544,6 @@ img { max-width: 100%; height: auto; display: block; }
   </div>
 </div>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 11 MOTION -->
-<!-- ============================================================================== -->
 <section class="sec" id="motion">
 <button class="copy-link-btn" onclick="copyLink('motion')">🔗</button>
 <div class="eyebrow">11 Motion</div>
@@ -4494,10 +4561,6 @@ img { max-width: 100%; height: auto; display: block; }
 <tr><td>Spring physics</td><td>Swipe deck uses damping 0.8</td></tr>
 <tr><td>Reduced motion</td><td>Respect prefers-reduced-motion</td></tr></table>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 12 ACCESSIBILITY -->
-<!-- ============================================================================== -->
 <section class="sec" id="f-a11y">
 <button class="copy-link-btn" onclick="copyLink('f-a11y')">🔗</button>
 <div class="eyebrow">12 Accessibility</div>
@@ -4528,10 +4591,6 @@ img { max-width: 100%; height: auto; display: block; }
 <tr><td>Keyboard</td><td>Focus order</td><td>Tab navigation</td></tr>
 <tr><td>Semantic Labels</td><td>contentDescription</td><td>Compose semantics</td></tr></table>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 13 CONTENT -->
-<!-- ============================================================================== -->
 <section class="sec" id="f-voice">
 <button class="copy-link-btn" onclick="copyLink('f-voice')">🔗</button>
 <div class="eyebrow">13 Content</div>
@@ -4556,10 +4615,6 @@ img { max-width: 100%; height: auto; display: block; }
 <tr><td>Success</td><td>Celebratory, brief</td><td>"Booking confirmed! 🎉"</td></tr>
 <tr><td>Trust</td><td>Authoritative, transparent</td><td>"Verified by 3 collaborators"</td></tr></table>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 14 AI -->
-<!-- ============================================================================== -->
 <section class="sec" id="prompts">
 <button class="copy-link-btn" onclick="copyLink('prompts')">🔗</button>
 <div class="eyebrow">14 AI</div>
@@ -4601,10 +4656,6 @@ img { max-width: 100%; height: auto; display: block; }
 <div class="card-s" style="position:relative"><button style="position:absolute;top:8px;right:8px;background:var(--surface-subtle);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:var(--fs-9);font-weight:600;cursor:pointer" onclick="cpP('set')">Copy</button><h4 style="font-size:var(--fs-body);margin-bottom:2px">Settings</h4><textarea id="p2-set" class="hide">Generate MusicLinkd Settings. Read guide/README.md. Sections: Profile, Account, Notifications, Privacy, Payments, Help. Lucide icons. 24dp cards.</textarea></div>
 </div>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: 15 DEVELOPER DOCUMENTATION -->
-<!-- ============================================================================== -->
 <section class="sec" id="util-flow">
 <button class="copy-link-btn" onclick="copyLink('util-flow')">🔗</button>
 <div class="eyebrow">15 Developer Documentation</div>
@@ -4651,10 +4702,6 @@ img { max-width: 100%; height: auto; display: block; }
 <tr><td>Functions</td><td>Cloud Functions</td><td>Business logic</td></tr>
 <tr><td>Design</td><td>This HTML</td><td>Single source of truth</td></tr></table>
 </section>
-
-<!-- ============================================================================== -->
-<!-- CATEGORY: MORE -->
-<!-- ============================================================================== -->
 <section class="sec" id="util-skeleton">
 <button class="copy-link-btn" onclick="copyLink('util-skeleton')">🔗</button>
 <div class="eyebrow">More</div>
@@ -4830,7 +4877,6 @@ img { max-width: 100%; height: auto; display: block; }
         </div>
     </div>
 </section>
-
 <section class="sec" id="adv-dualhero">
     <div class="section-header">
         <h2 class="section-title">Dual-Sided Floating Hero</h2>
@@ -4848,7 +4894,6 @@ img { max-width: 100%; height: auto; display: block; }
         <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=400&q=80" alt="" class="adv-hero-img adv-hero-right-2">
     </div>
 </section>
-
 <section class="sec" id="adv-features">
     <div class="section-header">
         <h2 class="section-title">Three-Column Feature Grid</h2>
@@ -4895,7 +4940,6 @@ img { max-width: 100%; height: auto; display: block; }
         </div>
     </div>
 </section>
-
 <section class="sec" id="adv-blog">
     <div class="section-header">
         <h2 class="section-title">Graphic Banner Hero & Article Grid</h2>
@@ -4956,9 +5000,7 @@ img { max-width: 100%; height: auto; display: block; }
         </div>
     </div>
 </section>
-
-    <!-- ===== 17. PINTEREST & SUPERCHARGE BLOCKS ===== -->
-    <section class="sec" id="adv-supercharge-bento">
+<section class="sec" id="adv-supercharge-bento">
         <div class="eyebrow">Marketing Block</div>
         <h2>Supercharge Bento Grid</h2>
         <p class="desc">A conversion-optimized 3-column grid for featuring platform benefits with top-aligned imagery and border-first styling.</p>
@@ -4981,8 +5023,7 @@ img { max-width: 100%; height: auto; display: block; }
             </div>
         </div>
     </section>
-
-    <section class="sec" id="adv-supercharge-dark">
+<section class="sec" id="adv-supercharge-dark">
         <div class="eyebrow">Marketing Block</div>
         <h2>Supercharge Dark Bento</h2>
         <p class="desc">Premium dark-mode staggered grid to highlight top-tier masterclasses or features.</p>
@@ -5010,8 +5051,7 @@ img { max-width: 100%; height: auto; display: block; }
             </div>
         </div>
     </section>
-
-    <section class="sec" id="adv-supercharge-split">
+<section class="sec" id="adv-supercharge-split">
         <div class="eyebrow">Marketing Block</div>
         <h2>Supercharge Split Editorial</h2>
         <p class="desc">Massive typography addressing user pain points with floating alert pills.</p>
@@ -5031,8 +5071,7 @@ img { max-width: 100%; height: auto; display: block; }
             </div>
         </div>
     </section>
-
-    <section class="sec" id="adv-pinterest-masonry">
+<section class="sec" id="adv-pinterest-masonry">
         <div class="eyebrow">Marketing Block</div>
         <h2>MusicLinkd Trends <span class="badge badge-av" style="margin-left:8px">Stable</span></h2>
         <p class="desc">Pinterest Trends-inspired discovery engine. Real-time trending categories, artists, and gear with growth metrics. Optimized for 360dp Android viewport.</p>
@@ -5617,13 +5656,18 @@ function setupGlobalSearch() {
     });
 }
 
-function copyLink(sectionId) {
+function copyLink(sectionId, evt) {
     const url = window.location.origin + window.location.pathname + '#' + sectionId;
+    const targetBtn = evt ? (evt.target || evt.srcElement) : (typeof event !== 'undefined' ? event.target : null);
     navigator.clipboard.writeText(url).then(() => {
-        const btn = event.target;
-        btn.textContent = '✓ Copied';
-        setTimeout(() => btn.textContent = '🔗', 1200);
-    });
+        if (targetBtn) {
+            const oldText = targetBtn.textContent;
+            targetBtn.textContent = '✓ Copied';
+            setTimeout(() => targetBtn.textContent = oldText, 1200);
+        } else {
+            toastMsg('Link copied!');
+        }
+    }).catch(() => toastMsg('Copied link!'));
 }
 
 function toggleSb() {
@@ -5658,15 +5702,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Palette
 const pal=[{n:'White',h:'#FFFFFF'},{n:'Bg',h:'#FCFCFD'},{n:'Surface-50',h:'#F8F8FB'},{n:'Surface-100',h:'#F3F3F6'},{n:'Border',h:'#ECECF1'},{n:'Muted',h:'#8E91A1'},{n:'Text-2',h:'#676B7B'},{n:'Text',h:'#181A22'},{n:'Navy',h:'#0D0B26'},{n:'Pink',h:'#EA4C89'},{n:'Green',h:'#16A34A'},{n:'Error',h:'#DC2626'}];
-const pg=document.getElementById('palette');
-pal.forEach(c=>{const l=['#FFFFFF','#FCFCFD','#F8F8FB','#F3F3F6','#ECECF1'].includes(c.h);pg.insertAdjacentHTML('beforeend','<div style="background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer" onclick="navigator.clipboard.writeText(\''+c.h+'\');toastMsg(\'Copied '+c.h+'\')"><div style="height:40px;background:'+c.h+(l?';border-bottom:1px solid var(--line)':'')+'"></div><div style="padding:6px 8px"><div style="font-weight:600;font-size:var(--fs-10)">'+c.n+'</div><div style="font-size:var(--fs-9);color:var(--muted)">'+c.h+'</div></div></div>')});
+['palette', 'palette-brand'].forEach(id => {
+    const pg = document.getElementById(id);
+    if (!pg) return;
+    pg.innerHTML = '';
+    pal.forEach(c => {
+        const l = ['#FFFFFF','#FCFCFD','#F8F8FB','#F3F3F6','#ECECF1'].includes(c.h);
+        pg.insertAdjacentHTML('beforeend','<div style="background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer" onclick="navigator.clipboard.writeText(\''+c.h+'\');toastMsg(\'Copied '+c.h+'\')"><div style="height:40px;background:'+c.h+(l?';border-bottom:1px solid var(--line)':'')+'"></div><div style="padding:6px 8px"><div style="font-weight:600;font-size:var(--fs-10)">'+c.n+'</div><div style="font-size:var(--fs-9);color:var(--muted)">'+c.h+'</div></div></div>');
+    });
+});
 
 let wfOn=false,wfT=null;
-function togWf(){wfOn=!wfOn;const b=document.getElementById('wfBtn'),bars=document.querySelectorAll('#wfBox span');b.textContent=wfOn?'⏸':'▶';if(wfOn){wfT=setInterval(()=>{bars.forEach(x=>x.style.height=(Math.random()*20+4)+'px')},100)}else{clearInterval(wfT)}}
+function togWf(){wfOn=!wfOn;const b=document.getElementById('wfBtn'),bars=document.querySelectorAll('#wfBox span');if(b) b.textContent=wfOn?'⏸':'▶';if(wfOn){wfT=setInterval(()=>{bars.forEach(x=>x.style.height=(Math.random()*20+4)+'px')},100)}else{clearInterval(wfT)}}
+let wfOn2=false,wfT2=null;
+function togWf2(){wfOn2=!wfOn2;const b=document.getElementById('wfBtn2'),bars=document.querySelectorAll('#wfBox2 span');if(b)b.textContent=wfOn2?'⏸':'▶';if(wfOn2){wfT2=setInterval(()=>{bars.forEach(x=>x.style.height=(Math.random()*20+4)+'px')},100)}else{clearInterval(wfT2)}}
 
-function credDo(){document.getElementById('credAct').innerHTML='<span style="font-size:var(--fs-9);font-weight:700;color:var(--success)">✓ Verified</span>';toastMsg('Credit authorized')}
-function credRej(){document.getElementById('credAct').innerHTML='<span style="font-size:var(--fs-9);font-weight:700;color:var(--err)">✕ Rejected</span>';toastMsg('Credit rejected')}
-function trDo(id,ok){const t=document.getElementById('tr'+id);t.innerHTML=ok?'<span style="font-size:var(--fs-9);font-weight:700;color:var(--success)">✓ Verified</span>':'<span style="font-size:var(--fs-9);font-weight:700;color:var(--err)">✕ Rejected</span>';toastMsg(ok?'Credit authorized':'Credit rejected')}
+function credDo(){const el=document.getElementById('credAct');if(el)el.innerHTML='<span style="font-size:var(--fs-9);font-weight:700;color:var(--success)">✓ Verified</span>';toastMsg('Credit authorized')}
+function credRej(){const el=document.getElementById('credAct');if(el)el.innerHTML='<span style="font-size:var(--fs-9);font-weight:700;color:var(--err)">✕ Rejected</span>';toastMsg('Credit rejected')}
+function trDo(id,ok){const t=document.getElementById('tr'+id);if(t)t.innerHTML=ok?'<span style="font-size:var(--fs-9);font-weight:700;color:var(--success)">✓ Verified</span>':'<span style="font-size:var(--fs-9);font-weight:700;color:var(--err)">✕ Rejected</span>';toastMsg(ok?'Credit authorized':'Credit rejected')}
 
 const sc=[{name:'Priya Raj',title:'Female Punjabi Folk Singer',bg:'linear-gradient(135deg,#EA4C89,#0D0B26)',tag:'Match 98%'},{name:'Arjun Beats',title:'Mixing & Mastering Engineer',bg:'linear-gradient(135deg,#2563EB,#181A22)',tag:'Match 85%'},{name:'SoundSpace',title:'Dolby Atmos Room',bg:'linear-gradient(135deg,#7C3AED,#0D0B26)',tag:'Available'}];
 let sIdx=0;
