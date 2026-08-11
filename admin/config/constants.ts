@@ -89,11 +89,15 @@ export const FEATURE_FLAG_DEFAULTS = {
 };
 
 /**
- * Modules with no backing Firestore collection yet — see the approved plan's
- * flagged items. "pages" was mock (as "cms") until Page Management got a real
- * collection (page_content); it's no longer in this list.
+ * Modules with no backing Firestore collection yet. "pages" was mock (as
+ * "cms") until Page Management got a real collection (page_content);
+ * "analytics" and "tracks" were mock at launch but are now both fully wired
+ * to live Firestore data (analytics: real aggregate counts across
+ * collections; tracks: a real filtered view over marketplace_items) —
+ * removed from this list so the sidebar stops showing a stale "mock" badge
+ * on modules that actually work.
  */
-export const MOCK_ONLY_MODULES: ModuleKey[] = ["analytics", "tracks"];
+export const MOCK_ONLY_MODULES: ModuleKey[] = [];
 
 export const ANALYTICS_EVENTS = {
   adminLogin: "admin_login",
