@@ -843,8 +843,11 @@ input:checked+.slider:before{transform:translateX(20px)}
 @media(max-width:600px){.business-modal-card{grid-template-columns:1fr}.biz-modal-left{display:none}}
 
 /* ===== TOAST POPUP (spring animated, from pinterest_fluid_ui) ===== */
-.toast-popup{position:fixed;bottom:30px;left:30px;z-index:var(--z-4);background:var(--black);color:#fff;padding:var(--space-2) var(--space-3);border-radius:var(--radius-2);font:600 var(--type-1) 'Inter',sans-serif;box-shadow:var(--shadow-3);display:flex;align-items:center;gap:var(--space-2);transform:translateY(100px);opacity:0;transition:all var(--duration-3) cubic-bezier(0.175,0.885,0.32,1.275);pointer-events:none}
-.toast-popup.show{transform:translateY(0);opacity:1}
+@keyframes toastIn{0%{transform:translateY(100px);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes toastOut{0%{transform:translateY(0);opacity:1}100%{transform:translateY(100px);opacity:0}}
+.toast-popup{position:fixed;bottom:30px;left:30px;z-index:var(--z-4);background:var(--black);color:#fff;padding:var(--space-2) var(--space-3);border-radius:var(--radius-2);font:600 var(--type-1) 'Inter',sans-serif;box-shadow:var(--shadow-3);display:flex;align-items:center;gap:var(--space-2);transform:translateY(100px);opacity:0;pointer-events:none}
+.toast-popup.show{animation:toastIn 0.3s ease forwards}
+.toast-popup.hide{animation:toastOut 0.3s ease forwards}
 .toast-icon-dot{width:16px;height:16px;border-radius:50%;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:var(--type-1);font-weight:800}
 
 /* ===== TRENDS TABLE (from pinterest_fluid_ui) ===== */
@@ -5213,6 +5216,22 @@ function copyAiPrompt(promptId, btn) {
         }, 1500);
     });
 }
+
+function toastMsg(msg) {
+    const toast = document.getElementById('toast');
+    const toastMsgEl = document.getElementById('toastMsg');
+    if (!toast || !toastMsgEl) return;
+    toastMsgEl.textContent = msg;
+    toast.style.display = 'flex';
+    toast.classList.remove('hide');
+    toast.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+        toast.classList.add('hide');
+        setTimeout(() => { toast.style.display = 'none'; toast.classList.remove('hide'); }, 300);
+    }, 2500);
+}
 </script>
 
 
@@ -5240,6 +5259,6 @@ function toggleChatDrawer() {
 }
 </script>
 
-<div id="toast" class="toast" style="display:none;position:fixed;bottom:24px;right:24px;background:#0D0D0D;color:#fff;padding:12px 20px;border-radius:12px;z-index:999"><span id="toastMsg">Notification</span></div>
+<div id="toast" class="toast-popup" style="display:none"><span id="toastMsg">Notification</span></div>
 </body>
 </html>
