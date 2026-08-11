@@ -23,7 +23,41 @@ export interface BandLineupMember {
 }
 
 export type ProfileType = "TALENT" | "BAND" | "BUSINESS" | "VENUE";
-export type BusinessType = "Studio" | "Label" | "School" | "Dealer";
+export type BusinessType =
+  | "Studio"
+  | "Label"
+  | "School"
+  | "Dealer"
+  | "Production House"
+  | "Booking Agency"
+  | "Artist Manager"
+  | "Rental Company";
+
+/** One entry on a Band's shows list — upcoming or past, distinguished by `isPast`. */
+export interface BandShow {
+  title: string;
+  date: string;
+  venueName?: string;
+  ticketUrl?: string;
+  isPast: boolean;
+}
+
+/** One staff member on a Business profile's "Team & Works" tab. */
+export interface BusinessTeamMember {
+  name: string;
+  role: string;
+  experience?: string;
+  bio?: string;
+  avatarUrl?: string;
+}
+
+/** One priced service on a Business profile's service menu. */
+export interface BusinessServiceOffering {
+  title: string;
+  description?: string;
+  price?: string;
+  duration?: string;
+}
 
 /** Social/streaming platform links, all optional — matches Kotlin's ExternalLinksSchema. */
 export interface ExternalLinks {
@@ -36,6 +70,8 @@ export interface ExternalLinks {
   soundcloud?: string;
   appleMusic?: string;
   bandcamp?: string;
+  /** DJ module — missing from AI Studio's original ExternalLinksSchema despite the DJ profile flow requiring it. */
+  mixcloud?: string;
 }
 
 export interface UserDoc {
@@ -43,12 +79,26 @@ export interface UserDoc {
   email: string;
   primaryRole: string;
   secondaryRole: string;
+  /**
+   * Proposed replacement for secondaryRole (max 2) — additive, NOT yet
+   * confirmed by AI Studio (see Prompt F §11) and no app-side writer exists.
+   * secondaryRole stays live and untouched since it's a real, actively-used
+   * field; this is forward-compat scaffolding, not a migration.
+   */
+  supportingRoles?: string[];
   isVerified: boolean;
   isBanned: boolean;
   isAvailable: boolean;
   hourlyRate: string;
+  /** Coarse price-tier indicator (₹/₹₹/₹₹₹) for browse/filter display — separate from hourlyRate's exact figure. Taxonomy value from "budget_type". */
+  budgetTier?: string;
   location: string;
   bio: string;
+  /**
+   * Real field, already written by the app's onboarding flow — was missing
+   * from this type entirely until this pass (a genuine gap, not a proposal).
+   */
+  gender?: string;
   genres: string[];
   languages: string[];
   instruments: string[];
@@ -77,6 +127,21 @@ export interface UserDoc {
   /** role -> experience label, e.g. { "Producer": "5 years" }. */
   roleExperience?: Record<string, string>;
 
+  // --- Talent extension (profileType === "TALENT") — role-specific dynamic
+  // module fields, gated on primaryRole rather than a sub-type enum since
+  // Talent doesn't have Business's businessType-style discriminator. All
+  // optional; a given user only fills in the ones relevant to their role. ---
+  /** Singer module. Taxonomy value from "vocal_range" (Soprano/Alto/Tenor/Bass etc.). */
+  vocalRange?: string;
+  /** Musician module — distinct from the coarse isAvailable boolean; taxonomy value from "availability_status". */
+  sessionAvailability?: string;
+  /** Engineer module — taxonomy values from "daw_tools" (Logic/Pro Tools/Ableton/Cubase/FL Studio). */
+  dawStack?: string[];
+  /** DJ module — free-text/link summary of past gigs; no structured shape confirmed yet. */
+  performanceHistory?: string;
+  /** Lyricist module — links to writing sample documents. */
+  writingSamples?: string[];
+
   // --- Business extension (profileType === "BUSINESS") ---
   businessName?: string;
   businessType?: BusinessType;
@@ -84,8 +149,15 @@ export interface UserDoc {
   tagline?: string;
   operatingHours?: string;
   gstin?: string;
+  /** Taxonomy-backed filter tags (Recording/Mixing/Mastering) — used by Discover's filter chips, distinct from serviceOfferings below. */
   services?: string[];
   equipmentList?: string[];
+  /** Staff roster — BusinessProfileScreens.kt's "Team & Works" tab has zero schema backing until this. */
+  teamMembers?: BusinessTeamMember[];
+  /** The priced service menu shown on the profile page — richer than the flat `services` filter-tag list above. */
+  serviceOfferings?: BusinessServiceOffering[];
+  /** Photo gallery — BusinessProfileScreens.kt's "Reviews & Gallery" tab; distinct from portfolio_projects (music projects, not photos). */
+  galleryUrls?: string[];
 
   // --- Band extension (profileType === "BAND") ---
   bandName?: string;
@@ -141,6 +213,30 @@ export interface StudioBookingDoc {
   paymentStatus?: "PENDING" | "PAID" | "REFUNDED" | "FAILED";
   paymentTransactionId?: string;
   createdAt: Timestamp;
+
+  // --- Session configuration ("Configure Session" screen) ---
+  /** Taxonomy value from new "session_types" category (Recording/Mixing/Mastering/Podcast/Jam Session). */
+  sessionType?: string;
+  /** Taxonomy value from new "session_duration_tiers" category (Hourly/Half Day/Full Day). */
+  durationTier?: string;
+  engineerRequested?: boolean;
+  /** Which of the studio's StudioDoc.equipment items were included in this booking. */
+  selectedEquipment?: string[];
+  /** Taxonomy values from new "studio_addons" category (Food/Parking/Extra Hours etc.). */
+  addons?: string[];
+  /**
+   * Maps to the app's actual (differently-named) `artistBookingNotes` field
+   * found in StudioBookingScreens.kt — this is the corrected name, not yet
+   * confirmed as what the app will write; flag in the next AI Studio prompt.
+   */
+  notes?: string;
+
+  // --- Booking Summary / Payment screens ---
+  taxAmount?: number;
+  depositAmount?: number;
+  discountAmount?: number;
+  promoCode?: string;
+  paymentMethod?: "UPI" | "Card" | "Net Banking" | "Wallet";
 }
 
 export interface ChatThreadDoc {
@@ -153,6 +249,16 @@ export interface ChatMessageDoc {
   sentAt: Timestamp;
 }
 
+/** One physical piece of gear — the "Equipment" screen's card shape. */
+export interface StudioEquipmentItem {
+  name: string;
+  category?: string;
+  imageUrl?: string;
+  quantity?: number;
+  condition?: string;
+  included: boolean;
+}
+
 export interface StudioDoc {
   ownerUid: string;
   name: string;
@@ -161,9 +267,24 @@ export interface StudioDoc {
   reviewCount: number;
   hourlyRate: string;
   verifiedGold: boolean;
+  /** Taxonomy value(s) from "studio_amenities" — physical features (Dolby Atmos, Parking, 24x7 Access). */
   amenities: string[];
   consoleType: string;
   imageUrl: string;
+  createdAt?: Timestamp;
+  description?: string;
+  /** For the Studio Profile screen's "Call" button. */
+  phone?: string;
+  /** Gallery — additive alongside the single imageUrl (used as the hero/card thumbnail). */
+  images?: string[];
+  /** Taxonomy values from new "studio_services" category (Recording/Mixing/Mastering/Podcast/Jam Session) — what the studio offers, distinct from amenities (what it physically has). */
+  services?: string[];
+  /** For distance-based "Nearby" sort and the profile's location map — additive alongside the display-string `location`. */
+  geo?: { lat: number; lng: number };
+  /** Structured gear list — consoleType stays as a simple free-text fallback for records that don't have this yet. */
+  equipment?: StudioEquipmentItem[];
+  operatingHours?: string;
+  cancellationPolicy?: string;
 }
 
 export type ProjectStatus = "OPEN" | "IN_PROGRESS" | "COMPLETED";
@@ -182,16 +303,24 @@ export interface ProjectDoc {
   createdAt: Timestamp;
 }
 
-export type MarketplaceCategory = "GEAR" | "STEMS" | "SERVICES";
 export type MarketplaceCondition = "NEW" | "LIKE_NEW" | "USED";
 
 export interface MarketplaceItemDoc {
   sellerUid: string;
   title: string;
   price: string;
-  category: MarketplaceCategory;
+  /**
+   * Was a fixed "GEAR"|"STEMS"|"SERVICES" union that never matched the
+   * app's real categories (sale/rental/mixing/beats/services) — reconciled
+   * this round to a taxonomy-backed string sourced from the new
+   * "marketplace_categories" category (gear_sale/gear_rental/
+   * beats_licensing/stems/mixing_mastering/creative_services).
+   */
+  category: string;
   condition: MarketplaceCondition;
   imageUrl: string;
+  /** Which taxonomy category applies for this listing's specific item — "instruments" or the new "equipment_categories", depending on what's being sold. */
+  itemCategory?: string;
   createdAt: Timestamp;
 }
 
@@ -214,6 +343,8 @@ export interface VerificationRequestDoc {
   submittedBy: string;
   status: VerificationStatus;
   documentPaths: string[];
+  /** Taxonomy value from "verification_id_type" (Govt ID/Passport/Driving License/Company PAN-GSTIN) — field was missing despite the category already being cataloged (Part L.3). */
+  verificationIdType?: string;
   submittedAt: Timestamp;
   reviewedBy?: string;
   reviewedAt?: Timestamp;
@@ -308,6 +439,67 @@ export interface TaxonomyOptionDoc {
   updatedAt: Timestamp;
 }
 
+export type FlowStatus = "documented" | "partial" | "missing" | "app-mocked";
+
+/**
+ * flows/{flowId} — the product's flow map, as an admin-editable registry
+ * instead of only living in markdown docs. Flow is the authoritative unit;
+ * screens (subcollection below) belong to a flow, and each screen can carry
+ * multiple named states (e.g. per-profileType variants, loading/error
+ * states) — "a screen has states, but flow prevails," per the user's own
+ * framing.
+ */
+export interface FlowDoc {
+  key: string;
+  order: number;
+  title: string;
+  description: string;
+  status: FlowStatus;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
+
+/**
+ * flows/{flowId}/screens/{screenId} — one screen within a flow.
+ * `collectionsTouched` is the Flow/Screen ↔ schema mapping the user asked
+ * for: which Firestore collections this screen actually reads or writes.
+ */
+export interface FlowScreenDoc {
+  key: string;
+  order: number;
+  title: string;
+  /** Named states this screen can render as — per-role variants, loading/error/empty, etc. */
+  states?: string[];
+  /** Firestore collection names this screen reads or writes. */
+  collectionsTouched?: string[];
+  notes?: string;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
+
+export type CrmAccessLevel = "none" | "partial" | "full";
+
+/**
+ * capabilities/{roleKey} — what a profile type/role is permitted to do.
+ * roleKey spans both profileType values ("talent") and businessType
+ * sub-types ("studio"/"label"/"agency") plus "admin" — a flatter key space
+ * than a strict profileType/businessType split, matching how the user
+ * described the matrix. Public read (the app needs this to gate UI
+ * client-side), admin-only write — same pattern as ModuleRegistryDoc.
+ */
+export interface CapabilityMatrixDoc {
+  roleKey: string;
+  label: string;
+  canCreateProfile: boolean;
+  canPostOpportunities: boolean;
+  canSellEquipment: boolean;
+  canCreateEvents: boolean;
+  crmAccess: CrmAccessLevel;
+  updatedBy: string;
+  updatedAt: Timestamp;
+  createdAt: Timestamp;
+}
+
 export interface ModuleRegistryDoc {
   label: string;
   description: string;
@@ -331,27 +523,73 @@ export interface BookmarkDoc {
   createdAt: Timestamp;
 }
 
-export type PortfolioProjectType = "ALBUM" | "SINGLE" | "EP" | "SCORE" | "BEAT_TAPE";
+export type PortfolioProjectStatus = "Released" | "Upcoming" | "In Production" | "Draft";
+export type PortfolioVisibility = "Public" | "Connections Only" | "Private Draft";
+
+/** A tagged, taggable collaborator on a project — the "Add Collaborators" step. */
+export interface ProjectCollaborator {
+  id: string;
+  name: string;
+  role: string;
+  avatarEmoji: string;
+  isVerified: boolean;
+  imageUrl?: string;
+}
+
+/** The "Credit Attribution" step's output — one entry per collaborator's assigned credit. */
+export interface CreditItem {
+  collaboratorName: string;
+  role: string;
+  avatarEmoji: string;
+  imageUrl?: string;
+}
 
 /**
  * portfolio_projects/{projectId} — rules already deployed (firestore.rules),
- * owner-uid pattern matching studios/projects. No confirmed app-side writer
- * as of this session's audits — admin type + rules land ahead of that so the
- * collection is ready the moment the app starts writing to it.
+ * owner-uid pattern matching studios/projects (field name is `ownerUid`,
+ * matching the deployed rule — NOT `userId`, an earlier mismatch corrected
+ * here). No confirmed app-side writer as of this session's audits — admin
+ * type + rules land ahead of that so the collection is ready the moment the
+ * app starts writing to it.
+ *
+ * Field-by-field maps to the 11-screen "Add Project" publish flow:
+ * Screen 2 (type) -> type; Screen 3 -> name/description/releaseDate/status;
+ * Screen 4 (streaming links) -> spotifyUrl..instagramReelUrl; Screen 5
+ * (role multi-select) -> ownerRoles; Screen 6 (tag collaborators) ->
+ * collaborators; Screen 7 (credit attribution) -> credits; Screen 8
+ * (artwork preview) -> artworkTheme (a palette-keyword string, e.g.
+ * "Acoustic"/"Techno" — the real PortfolioScreens.kt artwork picker is a
+ * color-theme chooser, NOT a file upload; don't treat this as an image URL
+ * until real upload UI exists); Screen 9 -> visibility; Screen 11 (profile
+ * view stats) -> projectViews/likes/shares.
  */
 export interface PortfolioProjectDoc {
-  userId: string;
-  title: string;
+  ownerUid: string;
+  name: string;
   description: string;
-  projectType: PortfolioProjectType;
-  projectRole: string;
-  mediaUrls: string[];
-  audioDemoUrl?: string;
-  collaboratorUids: string[];
-  genre: string;
+  /** Taxonomy value from "project_types" (song/album/ep/podcast/dj_mix/film_score/commercial_jingle/live_performance/music_video/custom_project). */
+  type: string;
   releaseDate: string;
-  externalLink?: string;
+  status: PortfolioProjectStatus;
+  visibility: PortfolioVisibility;
+  spotifyUrl?: string;
+  appleMusicUrl?: string;
+  youtubeUrl?: string;
+  soundcloudUrl?: string;
+  mixcloudUrl?: string;
+  instagramReelUrl?: string;
+  /** Taxonomy values from "project_roles" (Singer/Composer/Music Director/Producer/Lyricist/Session Musician/DJ/Mix Engineer/Mastering Engineer/Sound Designer/Band Member) — multi-select, the project-scoped role(s) the owner played. */
+  ownerRoles: string[];
+  collaborators: ProjectCollaborator[];
+  credits: CreditItem[];
+  /** Generic visual media (cover art image, screenshots) — distinct from artworkTheme below, which is a palette keyword, not a real file. Dropped from the original Part F correction; re-added since AI Studio's spec's mediaUrls concept has no other home. */
+  mediaUrls?: string[];
+  artworkTheme: string;
+  projectViews: number;
+  likes: number;
+  shares: number;
   createdAt: Timestamp;
+  lastUpdatedAt: Timestamp;
 }
 
 export type NotificationType =
@@ -407,6 +645,128 @@ export interface BrandAssetsDoc {
   lightVariantUrl?: string;
   updatedAt: Timestamp;
 }
+
+export type RoleProfileKey =
+  | "singer"
+  | "musician"
+  | "lyricist"
+  | "music_director"
+  | "composer"
+  | "sound_engineer"
+  | "dj"
+  | "rj"
+  | "podcaster";
+
+interface RoleProfileBase {
+  ownerUid: string;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
+
+export interface SingerRoleProfile extends RoleProfileBase {
+  roleKey: "singer";
+  /** Taxonomy value from "vocal_range" (Soprano/Alto/Tenor/Bass etc.) — same category the Talent-extension field reuses. */
+  vocalRange?: string;
+  /** Taxonomy values from new "singing_styles" category (Playback/Classical/Ghazal/Sufi/Indie/Pop/Rock/Rap/Bhajan). */
+  singingStyles?: string[];
+  originalSongsCount?: number;
+  coversCount?: number;
+  audioSampleUrls?: string[];
+  videoSampleUrls?: string[];
+}
+
+export interface MusicianRoleProfile extends RoleProfileBase {
+  roleKey: "musician";
+  /** Taxonomy value from "instruments" (already exists — same category the flat UserDoc.instruments[] uses). */
+  primaryInstrument?: string;
+  secondaryInstruments?: string[];
+  yearsOfExperience?: number;
+  performanceVideoUrls?: string[];
+  sessionRecordingUrls?: string[];
+}
+
+export interface LyricistRoleProfile extends RoleProfileBase {
+  roleKey: "lyricist";
+  /** Taxonomy values from new "lyricist_specializations" category (Romantic/Commercial/Devotional/Rap/Film Songs/Independent). */
+  specializations?: string[];
+  publishedWorksCount?: number;
+  writingSampleUrls?: string[];
+  portfolioPdfUrls?: string[];
+}
+
+export interface MusicDirectorRoleProfile extends RoleProfileBase {
+  roleKey: "music_director";
+  /** Taxonomy values from new "director_specializations" category (Film Music/OTT/Advertising/Independent). */
+  specializations?: string[];
+  filmography?: string[];
+  discography?: string[];
+  showcaseAudioUrls?: string[];
+  showcaseVideoUrls?: string[];
+}
+
+export interface ComposerRoleProfile extends RoleProfileBase {
+  roleKey: "composer";
+  /** Taxonomy values from new "composition_styles" category (Orchestral/Electronic/Background Score/Commercial Jingles/Film Score). */
+  compositionStyles?: string[];
+  showcaseAudioUrls?: string[];
+}
+
+export interface SoundEngineerRoleProfile extends RoleProfileBase {
+  roleKey: "sound_engineer";
+  /** Taxonomy value from new "engineer_specialties" category (Recording/Mixing/Mastering/Live Sound). */
+  specialty?: string;
+  /** Taxonomy values from "daw_tools" (already exists — same category the Talent-extension dawStack field reuses). */
+  dawStack?: string[];
+  ownedEquipment?: string[];
+  pastProjectUrls?: string[];
+}
+
+export interface DjRoleProfile extends RoleProfileBase {
+  roleKey: "dj";
+  /** Taxonomy value from new "dj_types" category — proposed, not confirmed (Club/Wedding/Radio/Festival/Bollywood). */
+  djType?: string;
+  eventExperienceYears?: number;
+  mixUrls?: string[];
+  eventVideoUrls?: string[];
+}
+
+export interface RjRoleProfile extends RoleProfileBase {
+  roleKey: "rj";
+  showsHosted?: string[];
+  experienceYears?: number;
+  audioSampleUrls?: string[];
+  showClipUrls?: string[];
+}
+
+export interface PodcasterRoleProfile extends RoleProfileBase {
+  roleKey: "podcaster";
+  podcastName?: string;
+  /** Taxonomy values from new "podcast_categories" category — proposed, not confirmed. */
+  categories?: string[];
+  listenerBase?: number;
+  episodeUrls?: string[];
+  clipUrls?: string[];
+}
+
+/**
+ * role_profiles/{ownerUid_roleKey} — one document per role a user plays,
+ * so a genuinely multi-role person (e.g. Singer AND Sound Engineer) has two
+ * independent documents rather than one UserDoc bloated with every role's
+ * fields. Chosen over a flat UserDoc extension or a generic
+ * Record<string, unknown> bag specifically for this scalability, per the
+ * user's explicit choice — see the plan's Part U. No confirmed app-side
+ * writer yet.
+ */
+export type RoleProfileDoc =
+  | SingerRoleProfile
+  | MusicianRoleProfile
+  | LyricistRoleProfile
+  | MusicDirectorRoleProfile
+  | ComposerRoleProfile
+  | SoundEngineerRoleProfile
+  | DjRoleProfile
+  | RjRoleProfile
+  | PodcasterRoleProfile;
 
 export interface WithId<T> {
   id: string;

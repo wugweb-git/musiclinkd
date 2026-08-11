@@ -4,8 +4,10 @@ import type {
   AuditLogDoc,
   BrandAssetsDoc,
   BroadcastMessageDoc,
+  CapabilityMatrixDoc,
   ConnectionDoc,
   FeedPostDoc,
+  FlowDoc,
   MarketplaceItemDoc,
   ModerationFlagDoc,
   ModuleRegistryDoc,
@@ -14,6 +16,7 @@ import type {
   PortfolioProjectDoc,
   ProjectDoc,
   ReviewDoc,
+  RoleProfileDoc,
   StudioBookingDoc,
   StudioDoc,
   SupportTicketDoc,
@@ -45,3 +48,6 @@ export const portfolioProjectsRepo = createRepository<PortfolioProjectDoc>(COLLE
 export const notificationsRepo = createRepository<NotificationDoc>(COLLECTIONS.notifications);
 export const userSettingsRepo = createRepository<UserSettingsDoc>(COLLECTIONS.userSettings);
 export const brandAssetsRepo = createRepository<BrandAssetsDoc>(COLLECTIONS.brandAssets);
+export const roleProfilesRepo = createRepository<RoleProfileDoc>(COLLECTIONS.roleProfiles);
+export const flowsRepo = createRepository<FlowDoc>(COLLECTIONS.flows);
+export const capabilitiesRepo = createRepository<CapabilityMatrixDoc>(COLLECTIONS.capabilities);

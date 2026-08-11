@@ -15,7 +15,9 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { taxonomyOptionsRepo } from "@/services/repositories/taxonomy-options-repository";
-import type { TaxonomyOptionDoc, WithId } from "@/types/firestore";
+import type { ProfileType, TaxonomyOptionDoc, WithId } from "@/types/firestore";
+
+const PROFILE_TYPES: ProfileType[] = ["TALENT", "BAND", "BUSINESS", "VENUE"];
 
 interface OptionEditorSheetProps {
   categoryId: string;
@@ -48,7 +50,10 @@ export function OptionEditorSheet({
   const [value, setValue] = useState("");
   const [sortOrder, setSortOrder] = useState(0);
   const [isActive, setIsActive] = useState(true);
+  const [applicableProfileTypes, setApplicableProfileTypes] = useState<ProfileType[]>([]);
   const [saving, setSaving] = useState(false);
+
+  const showProfileTypeFilter = categoryId === "person_types";
 
   useEffect(() => {
     if (option) {
@@ -57,14 +62,23 @@ export function OptionEditorSheet({
       setValue(option.data.value);
       setSortOrder(option.data.sortOrder);
       setIsActive(option.data.isActive);
+      const raw = option.data.metadata?.applicableProfileTypes;
+      setApplicableProfileTypes(Array.isArray(raw) ? (raw as ProfileType[]) : []);
     } else {
       setOptionId("");
       setLabel("");
       setValue("");
       setSortOrder(nextSortOrder);
       setIsActive(true);
+      setApplicableProfileTypes([]);
     }
   }, [option, open, nextSortOrder]);
+
+  function toggleProfileType(type: ProfileType) {
+    setApplicableProfileTypes((prev) =>
+      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type],
+    );
+  }
 
   async function handleSave() {
     if (!label) return;
@@ -79,6 +93,9 @@ export function OptionEditorSheet({
         isActive,
         createdAt: (option?.data.createdAt ?? now) as never,
         updatedAt: now as never,
+        ...(showProfileTypeFilter && applicableProfileTypes.length > 0
+          ? { metadata: { applicableProfileTypes } }
+          : {}),
       };
       await repo.create(id, doc);
       toast.success(option ? "Option updated" : "Option created");
@@ -130,6 +147,27 @@ export function OptionEditorSheet({
             <Checkbox checked={isActive} onCheckedChange={(c) => setIsActive(c === true)} />
             Active
           </label>
+
+          {showProfileTypeFilter ? (
+            <div className="space-y-1.5">
+              <Label>Applicable profile types</Label>
+              <div className="flex flex-wrap gap-3">
+                {PROFILE_TYPES.map((t) => (
+                  <label key={t} className="flex items-center gap-2 text-sm">
+                    <Checkbox
+                      checked={applicableProfileTypes.includes(t)}
+                      onCheckedChange={() => toggleProfileType(t)}
+                    />
+                    {t.charAt(0) + t.slice(1).toLowerCase()}
+                  </label>
+                ))}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Leave all unchecked to show this role for every profile type (no filtering applied).
+                Check specific types to restrict — e.g. &quot;Recording Studio&quot; only under Business.
+              </p>
+            </div>
+          ) : null}
         </div>
         <SheetFooter>
           <Button onClick={handleSave} disabled={saving || !label}>

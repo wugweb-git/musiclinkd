@@ -10,14 +10,17 @@ import {
   Flag,
   Gauge,
   LayoutDashboard,
+  Map,
   MessageSquare,
   Newspaper,
   Power,
   ScrollText,
   Settings,
+  ShieldCheck,
   ShoppingBag,
   Star,
   Tags,
+  UserCog,
   Users,
 } from "lucide-react";
 import { MOCK_ONLY_MODULES, type ModuleKey } from "./constants";
@@ -46,7 +49,11 @@ export const NAV_GROUPS: NavGroup[] = [
   },
   {
     label: "People",
-    items: [item("users", "Users", Users), item("studios", "Studios", Gauge)],
+    items: [
+      item("users", "Users", Users),
+      item("role-profiles", "Role Profiles", UserCog),
+      item("studios", "Studios", Gauge),
+    ],
   },
   {
     label: "Content",
@@ -82,6 +89,8 @@ export const NAV_GROUPS: NavGroup[] = [
       item("analytics", "Analytics", BarChart3),
       item("master-data", "Master Data", Tags),
       item("modules", "Modules", Power),
+      item("flows", "Flows", Map),
+      item("capabilities", "Capabilities", ShieldCheck),
       item("settings", "Settings", Settings),
     ],
   },

@@ -46,7 +46,7 @@ service cloud.firestore {
         || (isOwner(userId)
             && !request.resource.data.diff(resource.data)
                  .affectedKeys()
-                 .hasAny(['isVerified', 'isBanned', 'primaryRole', 'secondaryRole', 'trustBadges', 'profileType']));
+                 .hasAny(['isVerified', 'isBanned', 'primaryRole', 'secondaryRole', 'supportingRoles', 'trustBadges', 'profileType']));
     }
 
     match /admin_roles/{userId} {
@@ -250,6 +250,38 @@ service cloud.firestore {
       allow create, update: if signedIn() && request.auth.uid == request.resource.data.ownerUid;
       allow delete: if isModerator()
         || (signedIn() && request.auth.uid == resource.data.ownerUid);
+    }
+
+    // One document per role a user plays (Singer, Musician, Sound Engineer,
+    // etc.) — doc ID "${ownerUid}_${roleKey}". Same owner-uid pattern as
+    // portfolio_projects/social_links; a person can hold several of these
+    // simultaneously (e.g. Singer AND Sound Engineer), each independent.
+    match /role_profiles/{profileId} {
+      allow read: if true;
+      allow create, update: if signedIn() && request.auth.uid == request.resource.data.ownerUid;
+      allow delete: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.ownerUid);
+    }
+
+    // Internal product/engineering documentation (flow -> screens -> schema
+    // mapping) — not user-facing data, so read is moderator-only rather than
+    // public, matching page_content/taxonomy_categories' admin-write but
+    // narrowing read since this has no public-site consumer.
+    match /flows/{flowId} {
+      allow read: if isModerator();
+      allow write: if isAdmin();
+
+      match /screens/{screenId} {
+        allow read: if isModerator();
+        allow write: if isAdmin();
+      }
+    }
+
+    // What a role/profile type is permitted to do — public read so the app
+    // can gate UI client-side, admin-only write. Same shape as /modules.
+    match /capabilities/{roleKey} {
+      allow read: if true;
+      allow write: if isAdmin();
     }
   }
 }

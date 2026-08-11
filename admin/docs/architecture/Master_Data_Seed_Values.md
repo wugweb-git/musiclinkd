@@ -110,6 +110,18 @@ underlying data, purely a UI decoration in the app).
 | Sarod | Sarod |
 | Shehnai | Shehnai |
 | Mridangam | Mridangam |
+| Santoor | Santoor |
+| Veena | Veena |
+| Tanpura | Tanpura |
+| Cello | Cello |
+
+4 new additions (2026-08-11): Santoor, Veena, Tanpura, Cello — the rest of
+the "Indian Instruments"/"Western Instruments" list the user supplied this
+round were already present under slightly different labels (e.g. "Flute
+(Bansuri)" already covers "Bansuri", "Drums / Percussion" already covers
+"Drums"). Reused this single category for both a musician's "what I play"
+and a dealer's "what I sell" rather than creating a duplicate — same
+instrument names either way.
 
 ## Category: `persona_badges` — proposed starter set, not grounded in app data
 
@@ -226,3 +238,247 @@ these are assigned by an admin via the Users editor sheet.
 | Top Host | Top Host |
 | Rising Talent | Rising Talent |
 | Studio Partner | Studio Partner |
+
+## New categories — from the profile-type and studio-booking flow gap analysis (2026-08-11)
+
+These 5 don't yet exist in Firestore. Values are proposed (industry-standard
+vocabularies, not matched against an existing app hardcoded list like the
+categories above) — confirm before seeding if a stricter source-of-truth
+list exists on the app side.
+
+### Category: `vocal_range` — Singer module (Talent profile)
+
+| label | value |
+|---|---|
+| Soprano | soprano |
+| Mezzo-Soprano | mezzo_soprano |
+| Alto | alto |
+| Tenor | tenor |
+| Baritone | baritone |
+| Bass | bass |
+
+### Category: `daw_tools` — Engineer module (Talent profile)
+
+| label | value |
+|---|---|
+| Logic Pro | logic_pro |
+| Pro Tools | pro_tools |
+| Ableton Live | ableton_live |
+| FL Studio | fl_studio |
+| Cubase | cubase |
+| Studio One | studio_one |
+| Reaper | reaper |
+
+### Category: `session_types` — Studio Booking "Configure Session" screen
+
+Feeds `StudioBookingDoc.sessionType`. Values match the exact chip labels
+from the booking flow.
+
+| label | value |
+|---|---|
+| Recording | recording |
+| Mixing | mixing |
+| Mastering | mastering |
+| Podcast | podcast |
+| Jam Session | jam_session |
+
+### Category: `session_duration_tiers` — Studio Booking "Configure Session" screen
+
+Feeds `StudioBookingDoc.durationTier`.
+
+| label | value |
+|---|---|
+| Hourly | hourly |
+| Half Day | half_day |
+| Full Day | full_day |
+
+### Category: `studio_services` — Studio Discovery filter chips
+
+Feeds `StudioDoc.services` — what a studio offers, distinct from
+`studio_amenities` (what it physically has).
+
+| label | value |
+|---|---|
+| Recording | recording |
+| Mixing | mixing |
+| Mastering | mastering |
+
+### `studio_addons` — still pending, not proposed here
+
+Referenced by `StudioBookingDoc.addons` (Food/Parking/Extra Hours from the
+"Configure Session" screen) — already flagged in Prompt F §7 as needing
+AI Studio's real value list rather than a guessed one. Not seeded yet.
+
+## New categories — for `role_profiles` (Module B role-specific fields, 2026-08-11)
+
+Proposed values (not matched against an app-side hardcoded list — confirm
+before seeding).
+
+### Category: `singing_styles` — Singer role profile
+
+| label | value |
+|---|---|
+| Playback | playback |
+| Classical | classical |
+| Ghazal | ghazal |
+| Sufi | sufi |
+| Indie | indie |
+| Pop | pop |
+| Rock | rock |
+| Rap | rap |
+| Bhajan | bhajan |
+
+### Category: `lyricist_specializations` — Lyricist role profile
+
+| label | value |
+|---|---|
+| Romantic | romantic |
+| Commercial | commercial |
+| Devotional | devotional |
+| Rap | rap |
+| Film Songs | film_songs |
+| Independent Music | independent_music |
+
+### Category: `director_specializations` — Music Director role profile
+
+| label | value |
+|---|---|
+| Film Music | film_music |
+| OTT | ott |
+| Advertising | advertising |
+| Independent | independent |
+
+### Category: `composition_styles` — Composer role profile
+
+| label | value |
+|---|---|
+| Orchestral | orchestral |
+| Electronic | electronic |
+| Background Score | background_score |
+| Commercial Jingles | commercial_jingles |
+| Film Score | film_score |
+
+### Category: `engineer_specialties` — Sound Engineer role profile
+
+| label | value |
+|---|---|
+| Recording | recording |
+| Mixing | mixing |
+| Mastering | mastering |
+| Live Sound | live_sound |
+
+### Category: `dj_types` — DJ role profile
+
+| label | value |
+|---|---|
+| Club | club |
+| Wedding | wedding |
+| Radio | radio |
+| Festival | festival |
+| Bollywood | bollywood |
+
+### Category: `verification_id_type` — Verification Queue
+
+Feeds `VerificationRequestDoc.verificationIdType` (field added this round —
+was missing despite this category being cataloged earlier).
+
+| label | value |
+|---|---|
+| Government ID (Aadhaar) | govt_id_aadhaar |
+| Passport | passport |
+| Driving License | driving_license |
+| Company PAN / GSTIN | company_pan_gstin |
+
+### Category: `availability_status` — Talent availability
+
+Feeds `UserDoc.sessionAvailability`. These 5 states were already used as
+literal strings in the Flows registry's "Services, Availability" screen
+seed this session — formalizing them here closes that inconsistency.
+
+| label | value |
+|---|---|
+| Available Now | available_now |
+| Open for Gigs | open_for_gigs |
+| Booked Soon | booked_soon |
+| On Tour | on_tour |
+| Unavailable | unavailable |
+
+**Reconciliation note (2026-08-11):** an earlier, coarser pasted filter
+list ("Available / Busy / Touring / Studio Work" — 4 values) also exists
+in this session's history for the same concept. This 5-value list is the
+canonical one — it matches the more detailed source (AI Studio's own
+MasterVocabularies.AvailabilityStatuses) and is already wired into
+`UserDoc.sessionAvailability` and the Flows registry. The 4-value list was
+a rougher early mention, not a second real source — don't seed both.
+
+### Category: `podcast_categories` — Podcaster role profile
+
+| label | value |
+|---|---|
+| Music | music |
+| Interview | interview |
+| Comedy | comedy |
+| Culture | culture |
+| Business | business |
+| Education | education |
+
+## Specialization / skills categories — confirmation, not new work (2026-08-11)
+
+The user re-supplied the Lyricist/Music Director/Composer/Sound Engineer
+specialization and skills lists this round, asking whether they'd been
+mapped. Checked against what's already documented above (role_profiles
+round, same session) — **already done, values match exactly**:
+`lyricist_specializations` (romantic/commercial/devotional/rap/
+film_songs/independent_music), `director_specializations` (film_music/ott/
+advertising/independent), `composition_styles` (orchestral/electronic/
+background_score/commercial_jingles/film_score), `engineer_specialties`
+(recording/mixing/mastering/live_sound), `daw_tools` (already a superset —
+includes Pro Tools/Logic/Cubase/Ableton/FL Studio plus Studio One/Reaper).
+No new category needed here.
+
+## New categories — Marketplace/Budget reconciliation (2026-08-11)
+
+### Category: `marketplace_categories`
+
+Feeds the corrected `MarketplaceItemDoc.category` (was a fixed "GEAR"|
+"STEMS"|"SERVICES" union that never matched the app's real values —
+reconciled to this taxonomy-backed set, matching AI Studio's own
+"reconciled" proposal since Marketplace has zero real Firestore wiring to
+conflict with yet).
+
+| label | value |
+|---|---|
+| Gear Sale | gear_sale |
+| Gear Rental | gear_rental |
+| Beats Licensing | beats_licensing |
+| Stems | stems |
+| Mixing & Mastering | mixing_mastering |
+| Creative Services | creative_services |
+
+### Category: `equipment_categories`
+
+Feeds `StudioEquipmentItem.category` (Studio Booking's Equipment screen)
+and `MarketplaceItemDoc.itemCategory` for gear listings — distinct from
+`instruments` (playable instruments) and `studio_amenities` (physical room
+features).
+
+| label | value |
+|---|---|
+| Microphones | microphones |
+| Audio Interfaces | audio_interfaces |
+| Studio Monitors | studio_monitors |
+| Mixers | mixers |
+| Preamps | preamps |
+| Headphones | headphones |
+| Controllers | controllers |
+
+### Category: `budget_type`
+
+Feeds `UserDoc.budgetTier` — a coarse price-tier indicator for browse/
+filter display, separate from the exact `hourlyRate` figure.
+
+| label | value |
+|---|---|
+| ₹ (Budget) | budget |
+| ₹₹ (Mid-range) | mid_range |
+| ₹₹₹ (Premium) | premium |

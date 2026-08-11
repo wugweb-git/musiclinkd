@@ -1,31 +1,51 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import { Trash2 } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
-import { CollectionListPage } from "@/components/shared/collection-list-page";
+import { DataTable } from "@/components/shared/data-table";
+import { PageShell } from "@/components/layout/page-shell";
+import { StatusBadge } from "@/components/shared/status-badge";
+import { useCollection } from "@/hooks/use-collection";
+import { useRequireModule } from "@/hooks/use-require-module";
 import { portfolioProjectsRepo } from "@/services/repositories";
 import type { PortfolioProjectDoc, WithId } from "@/types/firestore";
+import { PortfolioEditorSheet } from "./portfolio-editor-sheet";
 
 type Row = WithId<PortfolioProjectDoc>;
 
 const columns: ColumnDef<Row>[] = [
-  { accessorKey: "data.title", header: "Title" },
-  { accessorKey: "data.userId", header: "Owner" },
+  { accessorKey: "data.name", header: "Project" },
+  { accessorKey: "data.ownerUid", header: "Owner" },
   {
-    accessorKey: "data.projectType",
+    accessorKey: "data.type",
     header: "Type",
-    cell: ({ row }) => <Badge variant="outline">{row.original.data.projectType}</Badge>,
+    cell: ({ row }) => <Badge variant="outline">{row.original.data.type}</Badge>,
   },
-  { accessorKey: "data.genre", header: "Genre" },
+  {
+    accessorKey: "data.status",
+    header: "Status",
+    cell: ({ row }) => <StatusBadge status={row.original.data.status} />,
+  },
+  {
+    accessorKey: "data.visibility",
+    header: "Visibility",
+    cell: ({ row }) => <Badge variant="outline">{row.original.data.visibility}</Badge>,
+  },
   { accessorKey: "data.releaseDate", header: "Release date" },
   {
-    accessorKey: "data.collaboratorUids",
+    id: "roles",
+    header: "Owner roles",
+    cell: ({ row }) => (row.original.data.ownerRoles ?? []).join(", ") || "—",
+  },
+  {
+    id: "collaborators",
     header: "Collaborators",
-    cell: ({ row }) => row.original.data.collaboratorUids?.length ?? 0,
+    cell: ({ row }) => row.original.data.collaborators?.length ?? 0,
   },
   {
     id: "actions",
@@ -41,7 +61,7 @@ const columns: ColumnDef<Row>[] = [
                 <Trash2 className="size-3.5" />
               </Button>
             }
-            title={`Remove "${project.data.title}"?`}
+            title={`Remove "${project.data.name}"?`}
             description="Removes this portfolio project permanently — use for spam or abusive uploads."
             destructive
             confirmLabel="Delete"
@@ -58,17 +78,48 @@ const columns: ColumnDef<Row>[] = [
 ];
 
 export default function PortfolioPage() {
+  const { hasAccess } = useRequireModule("portfolio");
+  const { data, loading, error, refetch } = useCollection(portfolioProjectsRepo, {
+    orderByField: "createdAt",
+    orderDirection: "desc",
+  });
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [selected, setSelected] = useState<Row | null>(null);
+
+  if (!hasAccess) return null;
+
   return (
-    <CollectionListPage
-      moduleKey="portfolio"
+    <PageShell
       title="Portfolio"
-      description="User-published portfolio projects (albums, singles, EPs, scores, beat tapes). No confirmed app-side writer yet as of this session's audits — this module is ready to receive data the moment publishing is wired up. See admin/docs/architecture/Edge_Functions_And_Errors.md."
-      repo={portfolioProjectsRepo}
-      columns={columns}
-      listOptions={{ orderByField: "createdAt", orderDirection: "desc" }}
-      searchPlaceholder="Search portfolio projects..."
-      emptyTitle="No portfolio projects yet"
-      emptyDescription="Published projects will show up here once the app writes to portfolio_projects."
-    />
+      description="User-published portfolio projects (songs, albums, EPs, podcasts, DJ mixes, film scores, jingles, live performances, music videos). No confirmed app-side writer yet as of this session's audits — this module is ready to receive data the moment publishing is wired up. See admin/docs/architecture/Edge_Functions_And_Errors.md."
+      actions={
+        <Button
+          size="sm"
+          onClick={() => {
+            setSelected(null);
+            setEditorOpen(true);
+          }}
+        >
+          <Plus className="size-4" /> New project
+        </Button>
+      }
+    >
+      <DataTable
+        columns={columns}
+        data={data}
+        loading={loading}
+        error={error}
+        searchPlaceholder="Search portfolio projects..."
+        emptyTitle="No portfolio projects yet"
+        emptyDescription="Published projects will show up here once the app writes to portfolio_projects."
+        onRowClick={(row) => {
+          setSelected(row);
+          setEditorOpen(true);
+        }}
+        meta={{ refetch }}
+      />
+
+      <PortfolioEditorSheet project={selected} open={editorOpen} onOpenChange={setEditorOpen} onSaved={refetch} />
+    </PageShell>
   );
 }

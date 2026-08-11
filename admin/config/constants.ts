@@ -28,6 +28,9 @@ export const COLLECTIONS = {
   notifications: "notifications",
   userSettings: "user_settings",
   brandAssets: "brand_assets",
+  roleProfiles: "role_profiles",
+  flows: "flows",
+  capabilities: "capabilities",
 } as const;
 
 export const STORAGE_PATHS = {
@@ -56,6 +59,7 @@ export const MODULE_PERMISSIONS = {
   bookings: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
   projects: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
   portfolio: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
+  "role-profiles": perm("ROLE_ADMIN", "ROLE_MODERATOR"),
   reviews: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
   verification: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
   moderation: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
@@ -69,6 +73,8 @@ export const MODULE_PERMISSIONS = {
   settings: perm("ROLE_ADMIN"),
   "master-data": perm("ROLE_ADMIN"),
   modules: perm("ROLE_ADMIN"),
+  flows: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
+  capabilities: perm("ROLE_ADMIN"),
 } satisfies Record<string, AdminRole[]>;
 
 export type ModuleKey = keyof typeof MODULE_PERMISSIONS;
