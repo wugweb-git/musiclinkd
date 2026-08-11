@@ -128,3 +128,101 @@ the Master Data UI, this is a starting point, not a finding.
 | Full-Time | Full-Time |
 | Weekend Warrior | Weekend Warrior |
 | Open to Remote Work | Open to Remote Work |
+
+## Category: `project_types`
+
+`value` = a stable slug, matching `availableProjectTypes` in `PortfolioData.kt`.
+
+| label | value |
+|---|---|
+| Song | song |
+| Album | album |
+| EP | ep |
+| Podcast | podcast |
+| DJ Mix | dj_mix |
+| Film Score | film_score |
+| Commercial Jingle | commercial_jingle |
+| Live Performance | live_performance |
+| Music Video | music_video |
+| Custom Project | custom_project |
+
+## Category: `project_roles`
+
+`value` = the exact display string, matching `availableProjectRoles` in
+`PortfolioData.kt`. Deliberately separate from `person_types` — this is the
+role a person plays on *one project*, not their platform-wide primary role.
+
+| label | value |
+|---|---|
+| Singer | Singer |
+| Composer | Composer |
+| Music Director | Music Director |
+| Producer | Producer |
+| Lyricist | Lyricist |
+| Session Musician | Session Musician |
+| DJ | DJ |
+| Mix Engineer | Mix Engineer |
+| Mastering Engineer | Mastering Engineer |
+| Sound Designer | Sound Designer |
+| Band Member | Band Member |
+
+## Category: `booking_statuses`
+
+`value` = a stable slug. Feeds `StudioBookingDoc.bookingStatus`.
+
+| label | value |
+|---|---|
+| Requested | requested |
+| Confirmed | confirmed |
+| Payment Pending | payment_pending |
+| Cancelled | cancelled |
+| Completed | completed |
+
+## Category: `studio_amenities`
+
+`value` = the exact display string, matching the real hardcoded amenity
+tags already used in `StudioBookingScreens.kt`'s mock studio data. Feeds
+the already-deployed `StudioDoc.amenities: string[]`.
+
+| label | value |
+|---|---|
+| Dolby Atmos | Dolby Atmos |
+| Vocal Booth | Vocal Booth |
+| Live Room | Live Room |
+| Valet Parking | Valet Parking |
+| Resident Engineers | Resident Engineers |
+| Private Lounge | Private Lounge |
+| 24x7 Access | 24x7 Access |
+| Rehearsal Room | Rehearsal Room |
+| Chill Lounge | Chill Lounge |
+| Drums Included | Drums Included |
+| Parking Space | Parking Space |
+| Instruments Support | Instruments Support |
+| Acoustics Optimized | Acoustics Optimized |
+| Fiber Internet | Fiber Internet |
+| Stage Monitors | Stage Monitors |
+| Bar & Diner Access | Bar & Diner Access |
+
+## Category: `collaboration_types`
+
+`value` = a stable slug. Feeds `ProjectDoc.collaborationType`.
+
+| label | value |
+|---|---|
+| Work for Hire | work_for_hire |
+| Royalties Split | royalties_split |
+| Co-Write | co_write |
+| Session Payment | session_payment |
+
+## Category: `trust_badges` — proposed starter set, admin-granted
+
+Distinct from `persona_badges` (self-selected). Feeds `UserDoc.trustBadges`,
+which security rules block a user from ever setting on their own document —
+these are assigned by an admin via the Users editor sheet.
+
+| label | value |
+|---|---|
+| Verified Artist | Verified Artist |
+| Top Host | Top Host |
+| Rising Talent | Rising Talent |
+| Studio Partner | Studio Partner |

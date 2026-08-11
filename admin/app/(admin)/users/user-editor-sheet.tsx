@@ -37,7 +37,8 @@ interface UserEditorSheetProps {
 
 const MAX_GENRES = 3;
 
-type ArrayField = "genres" | "languages" | "instruments" | "personaBadges";
+type ArrayField = "genres" | "languages" | "instruments" | "personaBadges" | "trustBadges";
+const ARRAY_FIELDS: ArrayField[] = ["genres", "languages", "instruments", "personaBadges", "trustBadges"];
 
 function emptyForm(): UserDoc {
   return {
@@ -55,14 +56,25 @@ function emptyForm(): UserDoc {
     languages: [],
     instruments: [],
     personaBadges: [],
+    trustBadges: [],
     avatarUrl: "",
     createdAt: usersRepo.serverTimestamp() as never,
   };
 }
 
+/** Normalizes a Firestore doc that may predate this session's schema — array fields can be
+ * entirely absent on real records, and `.includes()`/`.length` on undefined would crash the form. */
+function normalizeUserDoc(data: UserDoc): UserDoc {
+  const normalized = { ...data };
+  for (const field of ARRAY_FIELDS) {
+    if (!Array.isArray(normalized[field])) normalized[field] = [];
+  }
+  return normalized;
+}
+
 /** Freeform fallback text for each array field, used only until its master-data category is seeded. */
 function emptyFallbackText(): Record<ArrayField, string> {
-  return { genres: "", languages: "", instruments: "", personaBadges: "" };
+  return { genres: "", languages: "", instruments: "", personaBadges: "", trustBadges: "" };
 }
 
 export function UserEditorSheet({ user, open, onOpenChange, onSaved }: UserEditorSheetProps) {
@@ -76,16 +88,19 @@ export function UserEditorSheet({ user, open, onOpenChange, onSaved }: UserEdito
   const languageOptions = useTaxonomyOptions("languages");
   const instrumentOptions = useTaxonomyOptions("instruments");
   const personaBadgeOptions = useTaxonomyOptions("persona_badges");
+  const trustBadgeOptions = useTaxonomyOptions("trust_badges");
 
   useEffect(() => {
     if (user) {
       setUid(user.id);
-      setForm(user.data);
+      const normalized = normalizeUserDoc(user.data);
+      setForm(normalized);
       setFallbackText({
-        genres: user.data.genres?.join(", ") ?? "",
-        languages: user.data.languages?.join(", ") ?? "",
-        instruments: user.data.instruments?.join(", ") ?? "",
-        personaBadges: user.data.personaBadges?.join(", ") ?? "",
+        genres: normalized.genres.join(", "),
+        languages: normalized.languages.join(", "),
+        instruments: normalized.instruments.join(", "),
+        personaBadges: normalized.personaBadges.join(", "),
+        trustBadges: normalized.trustBadges.join(", "),
       });
     } else {
       setUid(crypto.randomUUID());
@@ -121,6 +136,7 @@ export function UserEditorSheet({ user, open, onOpenChange, onSaved }: UserEdito
         languages: languageOptions ? form.languages : fallbackToArray(fallbackText.languages),
         instruments: instrumentOptions ? form.instruments : fallbackToArray(fallbackText.instruments),
         personaBadges: personaBadgeOptions ? form.personaBadges : fallbackToArray(fallbackText.personaBadges),
+        trustBadges: trustBadgeOptions ? form.trustBadges : fallbackToArray(fallbackText.trustBadges),
       };
       await usersRepo.create(uid, resolved);
       toast.success(user ? "User updated" : "User created");
@@ -285,6 +301,7 @@ export function UserEditorSheet({ user, open, onOpenChange, onSaved }: UserEdito
           {arrayField("languages", "Languages", languageOptions)}
           {arrayField("instruments", "Instruments", instrumentOptions)}
           {arrayField("personaBadges", "Persona badges", personaBadgeOptions)}
+          {arrayField("trustBadges", "Trust badges (admin-granted)", trustBadgeOptions)}
 
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">

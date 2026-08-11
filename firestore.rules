@@ -46,7 +46,7 @@ service cloud.firestore {
         || (isOwner(userId)
             && !request.resource.data.diff(resource.data)
                  .affectedKeys()
-                 .hasAny(['isVerified', 'isBanned', 'primaryRole', 'secondaryRole']));
+                 .hasAny(['isVerified', 'isBanned', 'primaryRole', 'secondaryRole', 'trustBadges']));
     }
 
     match /admin_roles/{userId} {
@@ -70,10 +70,19 @@ service cloud.firestore {
 
     match /studio_bookings/{bookingId} {
       allow create: if signedIn() && request.auth.uid == request.resource.data.userId;
-      allow read, update: if signedIn()
+      allow read: if signedIn()
         && (request.auth.uid == resource.data.userId
             || request.auth.uid == get(/databases/$(database)/documents/studios/$(resource.data.studioId)).data.ownerUid
             || isModerator());
+      // The booker may only ever cancel their own booking — every other
+      // status/payment transition belongs to the studio owner or a
+      // moderator, closing the window a buggy/malicious client would
+      // otherwise have to mark their own booking "completed" or "paid".
+      allow update: if isModerator()
+        || (signedIn() && request.auth.uid == get(/databases/$(database)/documents/studios/$(resource.data.studioId)).data.ownerUid)
+        || (signedIn() && request.auth.uid == resource.data.userId
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['bookingStatus'])
+            && request.resource.data.bookingStatus == 'cancelled');
     }
 
     match /chat_threads/{threadId} {
@@ -109,9 +118,15 @@ service cloud.firestore {
 
     match /reviews/{reviewId} {
       allow read: if true;
+      // An optional bookingId links this review to a "verified purchase" —
+      // if present, it must actually belong to the reviewer, checked
+      // server-side rather than trusting an unverified client flag.
       allow create, update: if signedIn()
         && request.auth.uid == request.resource.data.authorUid
-        && reviewId == request.auth.uid + '_' + request.resource.data.targetId;
+        && reviewId == request.auth.uid + '_' + request.resource.data.targetId
+        && (!('bookingId' in request.resource.data)
+            || request.resource.data.bookingId == ''
+            || get(/databases/$(database)/documents/studio_bookings/$(request.resource.data.bookingId)).data.userId == request.auth.uid);
       allow delete: if isModerator()
         || (signedIn() && request.auth.uid == resource.data.authorUid);
     }
@@ -172,6 +187,37 @@ service cloud.firestore {
       allow create: if isAdmin() && request.resource.data.enabled == false;
       allow update: if isAdmin();
       allow delete: if isAdmin();
+    }
+
+    // Corrects AI Studio's original /musicians/{userId}/portfolio_projects
+    // design — top-level collection + ownerUid field, matching the
+    // studios/projects/marketplace_items convention, not a subcollection
+    // under /users/{uid} (no precedent for that nesting anywhere in this
+    // schema). No admin UI yet — see admin/docs/architecture/ for the
+    // deferred Portfolio admin-module follow-up.
+    match /portfolio_projects/{projectId} {
+      allow read: if true;
+      allow create: if signedIn() && request.auth.uid == request.resource.data.ownerUid;
+      allow update, delete: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.ownerUid);
+    }
+
+    // Same correction as portfolio_projects — top-level, not
+    // /musicians/{userId}/social_links. Doc ID convention:
+    // "{ownerUid}_{platformKey}".
+    match /social_links/{linkId} {
+      allow read: if true;
+      allow create, update: if signedIn() && request.auth.uid == request.resource.data.ownerUid;
+      allow delete: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.ownerUid);
+    }
+
+    // Corresponds to the app's SavedProfilesScreen. Add/remove only, no
+    // update — a bookmark either exists or doesn't. Doc ID convention:
+    // "{ownerUid}_{savedUserId}".
+    match /user_bookmarks/{bookmarkId} {
+      allow create: if signedIn() && request.auth.uid == request.resource.data.ownerUid;
+      allow read, delete: if signedIn() && request.auth.uid == resource.data.ownerUid;
     }
   }
 }

@@ -30,6 +30,8 @@ export interface UserDoc {
   languages: string[];
   instruments: string[];
   personaBadges: string[];
+  /** Admin-granted trust/tier badges (e.g. "Verified Artist") — distinct from personaBadges, which is self-selected. Never writable by the owner themselves; see firestore.rules. */
+  trustBadges: string[];
   avatarUrl: string;
   createdAt: Timestamp;
 }
@@ -61,6 +63,12 @@ export interface StudioBookingDoc {
   date: string;
   slotText: string;
   totalAmount: number;
+  bookedHourSlots?: string[];
+  /** Taxonomy value from "booking_statuses" (requested/confirmed/payment_pending/cancelled/completed). */
+  bookingStatus?: string;
+  paymentStatus?: "PENDING" | "PAID" | "REFUNDED" | "FAILED";
+  paymentTransactionId?: string;
+  createdAt: Timestamp;
 }
 
 export interface ChatThreadDoc {
@@ -95,6 +103,10 @@ export interface ProjectDoc {
   budget: string;
   status: ProjectStatus;
   genres: string[];
+  location?: string;
+  applicantCount?: number;
+  /** Taxonomy value from "collaboration_types" (work_for_hire/royalties_split/co_write/session_payment). */
+  collaborationType?: string;
   createdAt: Timestamp;
 }
 
@@ -117,6 +129,8 @@ export interface ReviewDoc {
   authorUid: string;
   rating: number;
   text: string;
+  /** Links to studio_bookings/{bookingId} for "verified purchase" — enforced by firestore.rules. */
+  bookingId?: string;
   createdAt: Timestamp;
 }
 
@@ -216,6 +230,8 @@ export interface TaxonomyOptionDoc {
   value: string;
   sortOrder: number;
   isActive: boolean;
+  /** Optional escape hatch for category-specific extra data (e.g. an instrument's isAcoustic flag, a booking status's indicatorColorHex) — not editable from the admin UI yet, set via Firestore console/script until a concrete category needs it. */
+  metadata?: Record<string, unknown>;
   createdAt: Timestamp;
   updatedAt: Timestamp;
 }
@@ -230,6 +246,16 @@ export interface ModuleRegistryDoc {
   remoteConfigKey: string | null;
   updatedBy: string;
   updatedAt: Timestamp;
+  createdAt: Timestamp;
+}
+
+/**
+ * Corresponds to the app's SavedProfilesScreen (currently 100% unwired to
+ * Firestore) — admin type only for now, no admin UI built yet.
+ */
+export interface BookmarkDoc {
+  ownerUid: string;
+  savedUserId: string;
   createdAt: Timestamp;
 }
 
