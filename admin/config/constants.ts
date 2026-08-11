@@ -62,7 +62,7 @@ export const MODULE_PERMISSIONS = {
   tracks: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
   "audit-logs": perm("ROLE_ADMIN"),
   settings: perm("ROLE_ADMIN"),
-  masterData: perm("ROLE_ADMIN"),
+  "master-data": perm("ROLE_ADMIN"),
   modules: perm("ROLE_ADMIN"),
 } satisfies Record<string, AdminRole[]>;
 
@@ -73,7 +73,7 @@ export type ModuleKey = keyof typeof MODULE_PERMISSIONS;
  * is never allowed to disable, regardless of what an admin sets — core
  * admin infrastructure can't be allowed to lock itself out.
  */
-export const NON_TOGGLEABLE_MODULES: ModuleKey[] = ["dashboard", "settings", "masterData", "modules"];
+export const NON_TOGGLEABLE_MODULES: ModuleKey[] = ["dashboard", "settings", "master-data", "modules"];
 
 /** Remote Config parameter keys — must match remoteconfig.template.json at repo root. */
 export const FEATURE_FLAGS = {

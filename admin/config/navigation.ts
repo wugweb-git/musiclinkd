@@ -78,7 +78,7 @@ export const NAV_GROUPS: NavGroup[] = [
     items: [
       item("pages", "Pages", Newspaper),
       item("analytics", "Analytics", BarChart3),
-      item("masterData", "Master Data", Tags),
+      item("master-data", "Master Data", Tags),
       item("modules", "Modules", Power),
       item("settings", "Settings", Settings),
     ],

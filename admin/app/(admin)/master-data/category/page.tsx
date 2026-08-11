@@ -38,7 +38,7 @@ const columns: ColumnDef<Row>[] = [
 function CategoryDetail() {
   const searchParams = useSearchParams();
   const categoryId = searchParams.get("id") ?? "";
-  const { hasAccess } = useRequireModule("masterData");
+  const { hasAccess } = useRequireModule("master-data");
   const repo = taxonomyOptionsRepo(categoryId);
   const { data, loading, error, refetch } = useCollection(repo, {
     orderByField: "sortOrder",

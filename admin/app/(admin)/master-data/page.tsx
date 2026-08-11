@@ -63,7 +63,7 @@ const columns: ColumnDef<Row>[] = [
 ];
 
 export default function MasterDataPage() {
-  const { hasAccess } = useRequireModule("masterData");
+  const { hasAccess } = useRequireModule("master-data");
   const router = useRouter();
   const { data, loading, error, refetch } = useCollection(taxonomyCategoriesRepo);
   const [editorOpen, setEditorOpen] = useState(false);
