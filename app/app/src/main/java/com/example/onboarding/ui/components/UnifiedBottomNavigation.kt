@@ -2,7 +2,7 @@ package com.example.onboarding.ui.components
 
 import androidx.compose.ui.text.style.TextAlign
 import com.example.onboarding.database.FirebaseManager
-import com.example.onboarding.util.DemoDataProvider
+import com.example.onboarding.util.DEFAULT_CONNECTIONS_BADGE
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.R
@@ -53,7 +53,7 @@ fun UnifiedBottomNavigation(
     activeTab: String,
     onTabClick: (String) -> Unit,
     modifier: Modifier = Modifier,
-    connectionsBadgeCount: Int? = DemoDataProvider.DEFAULT_CONNECTIONS_BADGE
+    connectionsBadgeCount: Int? = DEFAULT_CONNECTIONS_BADGE
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
