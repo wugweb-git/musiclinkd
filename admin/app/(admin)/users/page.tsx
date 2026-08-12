@@ -37,6 +37,11 @@ const columns: ColumnDef<Row>[] = [
     ),
   },
   {
+    accessorKey: "data.profileType",
+    header: "Type",
+    cell: ({ row }) => (row.original.data.profileType ? <Badge variant="secondary">{row.original.data.profileType}</Badge> : <span className="text-muted-foreground">—</span>),
+  },
+  {
     accessorKey: "data.primaryRole",
     header: "Role",
     cell: ({ row }) => (
@@ -155,6 +160,11 @@ export default function UsersPage() {
           setEditorOpen(true);
         }}
         meta={{ refetch }}
+        groupableColumns={[
+          { id: "data.profileType", label: "profile type" },
+          { id: "data.primaryRole", label: "role" },
+          { id: "data.isVerified", label: "verified status" },
+        ]}
       />
 
       <UserEditorSheet user={selected} open={editorOpen} onOpenChange={setEditorOpen} onSaved={refetch} />

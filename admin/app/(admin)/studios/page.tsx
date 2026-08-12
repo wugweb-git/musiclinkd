@@ -98,6 +98,10 @@ export default function StudiosPage() {
           setEditorOpen(true);
         }}
         meta={{ refetch }}
+        groupableColumns={[
+          { id: "data.verifiedGold", label: "verified status" },
+          { id: "data.location", label: "location" },
+        ]}
       />
 
       <StudioEditorSheet studio={selected} open={editorOpen} onOpenChange={setEditorOpen} onSaved={refetch} />

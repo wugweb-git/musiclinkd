@@ -140,6 +140,12 @@ export default function BookingsPage() {
           setEditorOpen(true);
         }}
         meta={{ refetch }}
+        groupableColumns={[
+          { id: "data.bookingStatus", label: "status" },
+          { id: "data.paymentStatus", label: "payment status" },
+          { id: "data.sessionType", label: "session type" },
+          { id: "data.studioId", label: "studio" },
+        ]}
       />
 
       <BookingEditorSheet booking={selected} open={editorOpen} onOpenChange={setEditorOpen} onSaved={refetch} />

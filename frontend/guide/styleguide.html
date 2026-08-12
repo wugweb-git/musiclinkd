@@ -480,12 +480,14 @@
 }
 
 /* Mobile & Tablet Drawer Layout (< 1024px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .mtBtn {
+        display: block !important;
+    }
+}
 @media (max-width: 1023px) {
     :root {
         --sw: 0px;
-    }
-    .mtBtn {
-        display: block !important;
     }
     .top-nav {
         left: 0;
