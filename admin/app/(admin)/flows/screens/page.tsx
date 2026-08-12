@@ -4,7 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { ArrowLeft, Plus, Sparkles, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -13,12 +13,28 @@ import { DataTable } from "@/components/shared/data-table";
 import { PageShell } from "@/components/layout/page-shell";
 import { useCollection } from "@/hooks/use-collection";
 import { useRequireModule } from "@/hooks/use-require-module";
+import { flowsRepo } from "@/services/repositories";
 import { flowScreensRepo } from "@/services/repositories/flow-screens-repository";
-import type { FlowScreenDoc, WithId } from "@/types/firestore";
+import type { FlowDoc, FlowScreenDoc, WithId } from "@/types/firestore";
 import { DEFAULT_SCREENS } from "./default-screens";
 import { ScreenEditorSheet } from "./screen-editor-sheet";
 
 type Row = WithId<FlowScreenDoc>;
+
+/**
+ * "42" for a base screen, "42-2"/"42-3" for schema-driven variants (position
+ * among the screens sharing the same variantOf, 1-based) — the numbering
+ * scheme from the flows/screens audit, see FlowScreenDoc's doc comments.
+ */
+function screenLabel(row: Row, allRows: Row[]): string {
+  if (row.data.screenNumber !== undefined) return String(row.data.screenNumber);
+  if (row.data.variantOf !== undefined) {
+    const siblings = allRows.filter((r) => r.data.variantOf === row.data.variantOf).sort((a, b) => a.data.order - b.data.order);
+    const position = siblings.findIndex((r) => r.id === row.id) + 1;
+    return `${row.data.variantOf}-${position || 1}`;
+  }
+  return "—";
+}
 
 function FlowScreensDetail() {
   const searchParams = useSearchParams();
@@ -29,7 +45,13 @@ function FlowScreensDetail() {
   const [editorOpen, setEditorOpen] = useState(false);
   const [selected, setSelected] = useState<Row | null>(null);
   const [seeding, setSeeding] = useState(false);
+  const [flow, setFlow] = useState<WithId<FlowDoc> | null>(null);
   const defaultScreens = DEFAULT_SCREENS[flowId];
+
+  useEffect(() => {
+    if (!flowId) return;
+    flowsRepo.get(flowId).then(setFlow);
+  }, [flowId]);
 
   async function handleSeedScreens() {
     if (!defaultScreens) return;
@@ -64,7 +86,11 @@ function FlowScreensDetail() {
   }
 
   const columns: ColumnDef<Row>[] = [
-    { accessorKey: "data.order", header: "#" },
+    {
+      id: "screenNumber",
+      header: "No.",
+      cell: ({ row }) => <span className="font-mono text-muted-foreground">{screenLabel(row.original, data)}</span>,
+    },
     { accessorKey: "data.title", header: "Screen" },
     {
       id: "states",
@@ -116,7 +142,7 @@ function FlowScreensDetail() {
 
   return (
     <PageShell
-      title={`Flow — ${flowId}`}
+      title={flow ? `Flow ${flow.data.order} — ${flow.data.title}` : `Flow — ${flowId}`}
       description="Screens in this flow, in order, with the states each can render and the Firestore collections it reads or writes."
       actions={
         <div className="flex gap-2">

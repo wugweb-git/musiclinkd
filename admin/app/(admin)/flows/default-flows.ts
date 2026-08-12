@@ -47,7 +47,7 @@ export const DEFAULT_FLOWS: Omit<FlowDoc, "createdAt" | "updatedAt">[] = [
     title: "Opportunities",
     status: "missing",
     description:
-      "Maps to the existing projects collection (gig/collaboration postings — someone looking for a collaborator), per the round-2 reconciliation — folded in rather than a separate gig_opportunities collection. Distinct from the \"Add Portfolio\" flow (finished creative work someone already made). No confirmed real app-side writer.",
+      "Maps to the existing projects collection (gig/collaboration postings — someone looking for a collaborator), per the round-2 reconciliation — folded in rather than a separate gig_opportunities collection. Distinct from the \"Add Portfolio\" flow (finished creative work someone already made). CONFIRMED 2026-08-12 (grounded Explore audit): 100% missing, not just unconfirmed. Zero `.collection(\"projects\")` calls anywhere in the app; `ProjectSchema` (BackendSchemas.kt:112) is defined but never instantiated. The only browse/apply UI (SuccessAndDashboardScreens.kt:2174-2435) is commented-out or unreachable dead code whose own copy admits \"Opportunities are coming soon.\" `UnifiedOpportunityCard` is defined but never called. A \"Live Opportunities Feed\" nav item exists but routes to an unrelated business-storefront screen. `ChatContext.OPPORTUNITY` is just a messaging-inbox filter tab around one hardcoded demo message, not a posting/browsing flow.",
   },
   {
     key: "communication",
@@ -63,7 +63,7 @@ export const DEFAULT_FLOWS: Omit<FlowDoc, "createdAt" | "updatedAt">[] = [
     title: "Marketplace (Buy/Sell)",
     status: "app-mocked",
     description:
-      "100% mocked, not wired to Firestore. admin's MarketplaceCategory (GEAR/STEMS/SERVICES) doesn't match the app's real categories (sale/rental/mixing/beats/services) — never reconciled; low urgency until real write code exists.",
+      "100% mocked, not wired to Firestore — reconciled: MarketplaceItemDoc.category is now taxonomy-backed (marketplace_categories), matching the app's real sale/rental/mixing/beats/services split. SCREEN-MAPPED 2026-08-12 (grounded Explore audit): one real, dashboard-wired browse screen (MarketplaceBetaScreen) with 6 category tabs including a \"Gear Rentals\" filter (see equipment_rental below), an in-dialog item detail (not a separate screen), and a Saved/Favorites bookmarks tab — all backed by hardcoded lists, zero `marketplace_items` references anywhere. No create-listing, cart, checkout, or seller-messaging screens exist at all — confirmed absent by exhaustive grep, not just unaudited.",
   },
   {
     key: "booking",
@@ -79,7 +79,7 @@ export const DEFAULT_FLOWS: Omit<FlowDoc, "createdAt" | "updatedAt">[] = [
     title: "Equipment Rental",
     status: "missing",
     description:
-      "No dedicated schema. StudioDoc.equipment (added this session) covers gear display for the booking flow; no rental-specific transaction/listing model exists.",
+      "No dedicated schema. StudioDoc.equipment (added this session) covers gear display for the booking flow; no rental-specific transaction/listing model exists. RESOLVED 2026-08-12 (grounded Explore audit, was flagged \"genuinely unknown\"): confirmed NOT a standalone flow — \"rental\" is just one of six filter tabs inside the mocked Marketplace browse screen (see `marketplace` above). Its \"Rent This Gear\" confirm button only sets a local success banner with a fabricated request ID (\"#REN-5982\") — no backend write of any kind. StudioBookingDoc.selectedEquipment/addons have zero references anywhere in the app; unrelated free-text \"addons\" notes exist in Studio Booking's own configure-session screen, not this flow. No separate flow entry is warranted going forward.",
   },
   {
     key: "profile_management",
@@ -109,8 +109,9 @@ export const DEFAULT_FLOWS: Omit<FlowDoc, "createdAt" | "updatedAt">[] = [
     key: "notifications",
     order: 13,
     title: "Notifications",
-    status: "missing",
-    description: "notifications/{notificationId} typed and rules-ready this session. Zero confirmed app-side writer or reader.",
+    status: "app-mocked",
+    description:
+      "notifications/{notificationId} typed and rules-ready this session. SCREEN-MAPPED 2026-08-12 (grounded Explore audit, upgraded from \"missing\" to \"app-mocked\" — a real reader screen does exist): NotificationsCenterScreen is a genuinely reachable, feature-rich screen (search/category filters, swipe-to-dismiss, pull-to-refresh) but 100% local mock state — zero `.collection(\"notifications\")` calls anywhere, despite UI copy that falsely claims \"Firestore Real-Time Sync.\" Three separate, mutually-inconsistent preferences surfaces also exist (Notifications Center settings, an onboarding notification-permissions step, and a general Settings \"Notification Feeds\" panel) — none persist anywhere beyond local state.",
   },
   {
     key: "public_profile",
@@ -126,23 +127,23 @@ export const DEFAULT_FLOWS: Omit<FlowDoc, "createdAt" | "updatedAt">[] = [
     title: "Band",
     status: "partial",
     description:
-      "UserDoc Band extension (bandName/lineupMembers/techRiderUrl/stagePlotUrl) modeled. \"Shows\" (upcoming/past performances) not modeled — flagged and deferred, needs a shape decision (flat array vs. its own collection).",
+      "UserDoc Band extension (bandName/lineupMembers/techRiderUrl/stagePlotUrl) modeled. \"Shows\" (upcoming/past performances) closed 2026-08-12: `BandShow { title, date, venueName?, ticketUrl?, isPast }` + `UserDoc.shows?: BandShow[]` — a flat array, not a separate collection.",
   },
   {
     key: "verifications",
     order: 16,
     title: "Verifications",
-    status: "missing",
+    status: "app-mocked",
     description:
-      "verification_requests collection and the admin Verification page are both real and working. No confirmed app-side writer for the actual document-submission flow.",
+      "verification_requests collection and the admin Verification page are both real and working. SCREEN-MAPPED 2026-08-12 (grounded Explore audit, upgraded from \"missing\" to \"app-mocked\"): one real, reachable screen (VerificationScreen) exists off the Profile tab, but it's fully simulated — upload boxes hardcode literal filenames into local state (no file picker, no FirebaseStorage call) and never write to `verification_requests`. No status-tracking (pending/approved/rejected) screen exists; verified status is three local booleans driving badge colors. `VerificationRequestSchema` is defined in BackendSchemas.kt but never instantiated.",
   },
   {
     key: "reviews",
     order: 17,
     title: "Reviews",
-    status: "partial",
+    status: "app-mocked",
     description:
-      "reviews collection and admin module both real and working. No confirmed app-side writer — the bookingId \"verified purchase\" linkage exists in rules but wasn't verified end-to-end against a real review submission.",
+      "reviews collection and admin module both real and working. SCREEN-MAPPED 2026-08-12 (grounded Explore audit, upgraded from \"partial\" to \"app-mocked\" — the write side is now confirmed non-functional, not just unverified): a standalone Reputation Hub module (ReputationAndReviewsScreens.kt, reached from the dashboard, not from any post-booking prompt) has 4 real write screens — Write Review, Completed Project Review, Marketplace Gear Review, Studio Facility Review — plus business-response and report-review screens. None write to the real `reviews` Firestore collection: some persist to a local Room table, the rest are pure no-op UI. `ReviewSchema` (matching admin's ReviewDoc) exists in BackendSchemas.kt but is never referenced. The Business Profile \"Reviews & Gallery\" tab (already screen-mapped under business_profiles) remains a separate, read-only display of hardcoded data.",
   },
   {
     key: "subscription",
@@ -155,9 +156,9 @@ export const DEFAULT_FLOWS: Omit<FlowDoc, "createdAt" | "updatedAt">[] = [
     key: "search",
     order: 19,
     title: "Search",
-    status: "missing",
+    status: "app-mocked",
     description:
-      "No dedicated search schema or index strategy audited this session — likely rides on Discover's data model, which is itself 100% mocked.",
+      "CORRECTED 2026-08-13 (direct source read, SupportingScreens.kt): the 2026-08-12 audit was wrong — `UniversalSearchFlow` (SupportingScreens.kt:281, reached via the dashboard's top-bar Search icon, `SupportingModule.UNIVERSAL_SEARCH`) is a real, standalone, reachable screen, not a duplicate of Discover's or Booking's internal SEARCH_RESULTS states (those remain separately covered under `discover`/`booking`). 4-state (`SearchScreenState`: HOME/LIVE/RESULTS/EMPTY), fully mocked — a hardcoded 10-item `mockAllResults` list, zero Firestore reads. `DemoDataProvider.kt`'s `searchFilterCategories` list is still confirmed dead code, unrelated to this screen.",
   },
   {
     key: "recommendation_engine",
@@ -182,5 +183,21 @@ export const DEFAULT_FLOWS: Omit<FlowDoc, "createdAt" | "updatedAt">[] = [
     status: "partial",
     description:
       "page_content collection and the admin Pages module are both real and working, but frontend/website/ is 100% static HTML that never reads Firestore at runtime — edits made here don't reach the live site. Documented as a known gap (CMS_Content_Mapping.md), not silently dropped.",
+  },
+  {
+    key: "qr_share",
+    order: 23,
+    title: "QR Code & Profile Sharing",
+    status: "missing",
+    description:
+      "ADDED 2026-08-13 (direct source read, previously completely absent from this registry). `QrAndShareFlow` (SupportingScreens.kt:655, reached from the dashboard's QRShare shortcut) — 3-state screen (Home/Options/Preview, plain string state, not an enum) generating a shareable \"Premium Comp Card\" with a simulated PDF download (fake progress bar via `delay(150)` loop, no real file generation). No schema modeled for this at all — no shareable-link record, no QR payload, no download/share analytics. `DynamicLinkManager.kt` constructs outbound share links elsewhere in the app but this screen doesn't call it — confirmed no cross-wiring.",
+  },
+  {
+    key: "saved_favorites",
+    order: 24,
+    title: "Saved & Favorites",
+    status: "app-mocked",
+    description:
+      "ADDED 2026-08-13 (direct source read, previously only 1 of its 4 real tabs was documented — as `marketplace_saved_bookmarks` under the `marketplace` flow, which remains accurate for that one tab). `SavedAndFavoritesFlow` (SupportingScreens.kt:1023, reached from the dashboard's Saved shortcut) is the actual hub — `SavedTab` enum: ARTISTS, BANDS, STUDIOS, MARKETPLACE (+ EMPTY state), grid/list view toggle, per-tab remove action. All four tabs are 100% local `mutableStateListOf` mock data (hardcoded artists/studios/marketplace items) — zero Firestore reads or writes, no persisted \"saved\" relationship on any real document.",
   },
 ];

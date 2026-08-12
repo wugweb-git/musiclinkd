@@ -10,21 +10,32 @@ type ScreenSeed = Omit<FlowScreenDoc, "createdAt" | "updatedAt">;
  * Populated with real, audited screen breakdowns: auth, onboarding,
  * portfolio, profile_management, services_availability, user_settings,
  * booking, business_profiles, communication, discover, band, cms_pages,
- * public_profile (cross-reference only, see its entry).
+ * public_profile (cross-reference only, see its entry), marketplace,
+ * notifications, verifications, reviews, search, qr_share, saved_favorites.
  *
- * Deliberately NOT populated — opportunities, marketplace,
- * equipment_rental, notifications, verifications, reviews, subscription,
- * search, recommendation_engine — because no screen-level audit of these
- * flows' real UI was done this session (only the flow-level status in
- * default-flows.ts is grounded, e.g. "100% mocked" for marketplace). Adding
- * screen names for these now would mean guessing rather than reporting what
- * was actually found — do a proper audit pass before seeding these.
+ * CORRECTED 2026-08-13: search was previously (wrongly) left unpopulated —
+ * `UniversalSearchFlow` is a real, standalone screen, not a duplicate of
+ * discover's/booking's internal search states. qr_share and
+ * saved_favorites were previously entirely absent from default-flows.ts
+ * too (saved_favorites' Marketplace tab was documented, but 3 of its 4
+ * real tabs — Artists/Bands/Studios — were not). See each flow's
+ * default-flows.ts description for the direct-source-read evidence.
+ *
+ * Deliberately NOT populated — opportunities, equipment_rental,
+ * subscription, recommendation_engine — confirmed to have zero dedicated
+ * screens (see their default-flows.ts descriptions for the grounded
+ * evidence: equipment_rental is folded into marketplace, opportunities'
+ * only UI is commented-out/dead code, subscription has no schema or
+ * screens at all, recommendation_engine was explicitly deprioritized).
+ * Seeding placeholder rows for these would misrepresent absence as
+ * presence — do a proper audit pass first if that changes.
  */
 export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
   auth: [
     {
       key: "splash",
       order: 1,
+      screenNumber: 1,
       title: "Splash",
       states: ["loading", "resuming_local_session"],
       collectionsTouched: [],
@@ -33,6 +44,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "welcome",
       order: 2,
+      screenNumber: 2,
       title: "Welcome (choose auth method)",
       states: ["default"],
       collectionsTouched: [],
@@ -41,6 +53,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "email_auth",
       order: 3,
+      screenNumber: 3,
       title: "Email Auth (sign up / sign in)",
       states: ["signup", "signin", "loading", "error"],
       collectionsTouched: [],
@@ -50,6 +63,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "mobile_auth",
       order: 4,
+      screenNumber: 4,
       title: "Mobile Number Entry",
       states: ["default", "error"],
       collectionsTouched: [],
@@ -57,6 +71,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "otp_verification",
       order: 5,
+      screenNumber: 5,
       title: "OTP Verification",
       states: ["entering", "verifying", "error", "success"],
       collectionsTouched: [],
@@ -66,6 +81,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "google_signin",
       order: 6,
+      screenNumber: 6,
       title: "Google Sign-In",
       states: ["account_picker", "success", "fallback_fake"],
       collectionsTouched: [],
@@ -75,6 +91,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "registration_write",
       order: 7,
+      screenNumber: 7,
       title: "Registration write (implicit, end of onboarding)",
       states: ["success", "fallback_uid"],
       collectionsTouched: ["users"],
@@ -86,6 +103,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "primary_role",
       order: 1,
+      screenNumber: 8,
       title: "Primary Role Selection",
       states: ["default"],
       collectionsTouched: ["taxonomy_categories"],
@@ -94,6 +112,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "secondary_role",
       order: 2,
+      screenNumber: 9,
       title: "Secondary Role (optional)",
       states: ["default", "skipped"],
       collectionsTouched: ["taxonomy_categories"],
@@ -101,6 +120,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "genres",
       order: 3,
+      screenNumber: 10,
       title: "Genres (pick up to 3)",
       states: ["default"],
       collectionsTouched: ["taxonomy_categories"],
@@ -108,6 +128,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "languages",
       order: 4,
+      screenNumber: 11,
       title: "Languages",
       states: ["default"],
       collectionsTouched: ["taxonomy_categories"],
@@ -115,6 +136,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "instruments",
       order: 5,
+      screenNumber: 12,
       title: "Instruments",
       states: ["default", "skipped_for_non_musician"],
       collectionsTouched: ["taxonomy_categories"],
@@ -122,6 +144,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "instrument_proficiency",
       order: 6,
+      screenNumber: 13,
       title: "Instrument Proficiency (per-instrument years/level)",
       states: ["default"],
       collectionsTouched: [],
@@ -130,6 +153,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "location",
       order: 7,
+      screenNumber: 14,
       title: "Location (country/state/city/area)",
       states: ["default"],
       collectionsTouched: [],
@@ -138,6 +162,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "profile_creation",
       order: 8,
+      screenNumber: 15,
       title: "Profile Creation (name/bio/photo/cover)",
       states: ["default"],
       collectionsTouched: [],
@@ -146,6 +171,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "networking_links",
       order: 9,
+      screenNumber: 16,
       title: "Networking Links (Spotify/YouTube/SoundCloud/LinkedIn)",
       states: ["default"],
       collectionsTouched: [],
@@ -154,6 +180,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "persona_badges",
       order: 10,
+      screenNumber: 17,
       title: "Persona Badges",
       states: ["default"],
       collectionsTouched: ["taxonomy_categories"],
@@ -161,6 +188,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "review_confirm",
       order: 11,
+      screenNumber: 18,
       title: "Review / Confirm Profile",
       states: ["default"],
       collectionsTouched: [],
@@ -168,6 +196,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "submit_publish",
       order: 12,
+      screenNumber: 19,
       title: "Submit / Publish Profile",
       states: ["submitting", "success", "error"],
       collectionsTouched: ["users"],
@@ -177,6 +206,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "dashboard_handoff",
       order: 13,
+      screenNumber: 20,
       title: "Success → Dashboard Handoff",
       states: ["default"],
       collectionsTouched: [],
@@ -186,6 +216,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "portfolio_dashboard",
       order: 1,
+      screenNumber: 21,
       title: "Portfolio Dashboard",
       states: ["empty", "populated"],
       collectionsTouched: ["portfolio_projects"],
@@ -193,6 +224,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "choose_project_type",
       order: 2,
+      screenNumber: 22,
       title: "Choose Project Type",
       states: ["default"],
       collectionsTouched: ["taxonomy_categories"],
@@ -201,6 +233,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "project_information",
       order: 3,
+      screenNumber: 23,
       title: "Project Information",
       states: ["default"],
       collectionsTouched: [],
@@ -208,6 +241,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "streaming_links",
       order: 4,
+      screenNumber: 24,
       title: "Add Streaming Links",
       states: ["default"],
       collectionsTouched: [],
@@ -215,6 +249,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "select_role",
       order: 5,
+      screenNumber: 25,
       title: "Select Your Role",
       states: ["default"],
       collectionsTouched: ["taxonomy_categories"],
@@ -223,6 +258,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "add_collaborators",
       order: 6,
+      screenNumber: 26,
       title: "Add Collaborators",
       states: ["searching", "selected"],
       collectionsTouched: ["users"],
@@ -230,6 +266,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "credit_attribution",
       order: 7,
+      screenNumber: 27,
       title: "Credit Attribution",
       states: ["default"],
       collectionsTouched: [],
@@ -237,6 +274,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "media_preview",
       order: 8,
+      screenNumber: 28,
       title: "Project Media Preview",
       states: ["default"],
       collectionsTouched: [],
@@ -245,6 +283,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "publish_project",
       order: 9,
+      screenNumber: 29,
       title: "Publish Project",
       states: ["ready", "publishing", "error"],
       collectionsTouched: ["portfolio_projects"],
@@ -253,6 +292,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "success",
       order: 10,
+      screenNumber: 30,
       title: "Success State",
       states: ["default"],
       collectionsTouched: [],
@@ -260,6 +300,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "profile_project_view",
       order: 11,
+      screenNumber: 31,
       title: "Published Project — Profile View",
       states: ["default"],
       collectionsTouched: ["portfolio_projects"],
@@ -269,6 +310,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "profile_overview",
       order: 1,
+      screenNumber: 32,
       title: "Profile Overview / Dashboard",
       states: ["default"],
       collectionsTouched: ["users"],
@@ -276,6 +318,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "edit_identity",
       order: 2,
+      screenNumber: 33,
       title: "Edit Profile (name/bio/location/roles/genres/languages)",
       states: ["editing", "saving", "saved", "error"],
       collectionsTouched: ["users"],
@@ -284,6 +327,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "profile_type_selection",
       order: 3,
+      screenNumber: 34,
       title: "Profile Type Selection (Talent/Band/Business/Venue)",
       states: ["default"],
       collectionsTouched: ["users"],
@@ -292,6 +336,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "business_profile_editor",
       order: 4,
+      screenNumber: 35,
       title: "Business Profile Editor",
       states: ["visible_if_business"],
       collectionsTouched: ["users"],
@@ -299,6 +344,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "band_profile_editor",
       order: 5,
+      screenNumber: 36,
       title: "Band Profile Editor",
       states: ["visible_if_band"],
       collectionsTouched: ["users"],
@@ -306,6 +352,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "venue_profile_editor",
       order: 6,
+      screenNumber: 37,
       title: "Venue Profile Editor",
       states: ["visible_if_venue"],
       collectionsTouched: ["users"],
@@ -313,6 +360,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "talent_profile_editor",
       order: 7,
+      screenNumber: 38,
       title: "Talent Profile Editor",
       states: ["visible_if_talent"],
       collectionsTouched: ["users", "role_profiles"],
@@ -320,6 +368,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "external_links_editor",
       order: 8,
+      screenNumber: 39,
       title: "External Links Editor",
       states: ["default"],
       collectionsTouched: ["users"],
@@ -327,6 +376,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "public_profile_preview",
       order: 9,
+      screenNumber: 40,
       title: "Public Profile Preview",
       states: ["talent_template", "band_template", "business_template", "venue_template"],
       collectionsTouched: ["users", "portfolio_projects", "reviews"],
@@ -336,6 +386,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "profile_completion",
       order: 10,
+      screenNumber: 41,
       title: "Profile Completion Indicator",
       states: ["incomplete", "complete"],
       collectionsTouched: ["users"],
@@ -346,6 +397,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "availability_toggle",
       order: 1,
+      screenNumber: 42,
       title: "Availability Toggle (Talent)",
       states: ["available_now", "open_for_gigs", "booked_soon", "on_tour", "unavailable"],
       collectionsTouched: ["users"],
@@ -354,6 +406,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "service_offerings_editor",
       order: 2,
+      screenNumber: 43,
       title: "Service Offerings Editor (Business)",
       states: ["default"],
       collectionsTouched: ["users"],
@@ -362,6 +415,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "studio_services_amenities",
       order: 3,
+      screenNumber: 44,
       title: "Studio Services & Amenities",
       states: ["default"],
       collectionsTouched: ["studios", "taxonomy_categories"],
@@ -370,14 +424,16 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "rate_pricing_editor",
       order: 4,
+      screenNumber: 45,
       title: "Rate / Pricing Editor",
       states: ["default"],
       collectionsTouched: ["users", "studios"],
-      notes: "hourlyRate is still a display string, not a real sortable number — flagged, not yet migrated.",
+      notes: "hourlyRate migrated to a real number (per-hour INR equivalent, 0 = unset) — 2026-08-12. Editor sheets now use a numeric input; list columns format it via lib/utils.ts's formatHourlyRate().",
     },
     {
       key: "session_configuration",
       order: 5,
+      screenNumber: 46,
       title: "Session Configuration (booking-side service selection)",
       states: ["default"],
       collectionsTouched: ["studio_bookings", "taxonomy_categories"],
@@ -388,6 +444,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "account_settings",
       order: 1,
+      screenNumber: 47,
       title: "Account Settings",
       states: ["default"],
       collectionsTouched: ["users"],
@@ -397,6 +454,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "notification_settings",
       order: 2,
+      screenNumber: 48,
       title: "Notification Settings",
       states: ["default"],
       collectionsTouched: ["user_settings"],
@@ -405,6 +463,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "privacy_settings",
       order: 3,
+      screenNumber: 49,
       title: "Privacy Settings",
       states: ["default"],
       collectionsTouched: ["user_settings"],
@@ -413,6 +472,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "security_settings",
       order: 4,
+      screenNumber: 50,
       title: "Security Settings",
       states: ["default", "two_factor_setup"],
       collectionsTouched: [],
@@ -422,6 +482,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "appearance_settings",
       order: 5,
+      screenNumber: 51,
       title: "Appearance Settings",
       states: ["default"],
       collectionsTouched: ["user_settings"],
@@ -430,6 +491,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "help_center",
       order: 6,
+      screenNumber: 52,
       title: "Help Center",
       states: ["default"],
       collectionsTouched: [],
@@ -438,6 +500,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "faq",
       order: 7,
+      screenNumber: 53,
       title: "FAQ",
       states: ["default", "searching"],
       collectionsTouched: [],
@@ -446,6 +509,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "raise_ticket",
       order: 8,
+      screenNumber: 54,
       title: "Contact Support / Raise Ticket",
       states: ["default", "submitting", "success"],
       collectionsTouched: ["support_tickets"],
@@ -454,6 +518,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "report_user",
       order: 9,
+      screenNumber: 55,
       title: "Report User",
       states: ["default", "submitting", "success"],
       collectionsTouched: ["moderation_flags"],
@@ -462,6 +527,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "report_listing",
       order: 10,
+      screenNumber: 56,
       title: "Report Listing",
       states: ["default", "submitting", "success"],
       collectionsTouched: ["moderation_flags"],
@@ -470,6 +536,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "feedback",
       order: 11,
+      screenNumber: 57,
       title: "Feedback",
       states: ["default", "submitting", "success"],
       collectionsTouched: [],
@@ -478,6 +545,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "legal_pages",
       order: 12,
+      screenNumber: 58,
       title: "Legal Pages (Privacy Policy, Terms)",
       states: ["default"],
       collectionsTouched: ["page_content"],
@@ -487,6 +555,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "app_version",
       order: 13,
+      screenNumber: 59,
       title: "App Version / About",
       states: ["default"],
       collectionsTouched: [],
@@ -497,6 +566,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "studio_discovery",
       order: 1,
+      screenNumber: 60,
       title: "Studio Discovery",
       states: ["default"],
       collectionsTouched: ["studios"],
@@ -505,14 +575,16 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "filters",
       order: 2,
+      screenNumber: 61,
       title: "Filters (bottom sheet)",
       states: ["default"],
       collectionsTouched: ["taxonomy_categories"],
-      notes: "City/distance/price + amenity chips — distance needs StudioDoc.geo (added this session, unconfirmed as app-used); price sort needs hourlyRate as a real number (still a display string).",
+      notes: "City/distance/price + amenity chips — distance needs StudioDoc.geo (added this session, unconfirmed as app-used); hourlyRate is now a real number (migrated 2026-08-12), so price sort is unblocked on the schema side — app-side filter UI still unconfirmed.",
     },
     {
       key: "search_results",
       order: 3,
+      screenNumber: 62,
       title: "Search Results",
       states: ["default", "empty"],
       collectionsTouched: ["studios"],
@@ -520,14 +592,16 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "studio_profile",
       order: 4,
+      screenNumber: 63,
       title: "Studio Profile",
       states: ["default"],
       collectionsTouched: ["studios", "reviews"],
-      notes: "About/Rooms/Engineers sections have no schema yet — flagged and deferred earlier this session, still open.",
+      notes: "About/Rooms sections now have schema (StudioDoc.rooms, added 2026-08-12). Engineers-as-bookable-staff stays deliberately deferred — user's explicit call, not re-opened.",
     },
     {
       key: "equipment_screen",
       order: 5,
+      screenNumber: 64,
       title: "Equipment",
       states: ["default"],
       collectionsTouched: ["studios"],
@@ -536,6 +610,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "availability_calendar",
       order: 6,
+      screenNumber: 65,
       title: "Availability Calendar",
       states: ["monthly", "weekly", "timeline"],
       collectionsTouched: ["studio_bookings"],
@@ -544,6 +619,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "configure_session",
       order: 7,
+      screenNumber: 66,
       title: "Configure Session",
       states: ["default"],
       collectionsTouched: ["taxonomy_categories"],
@@ -552,6 +628,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "booking_summary",
       order: 8,
+      screenNumber: 67,
       title: "Booking Summary",
       states: ["default"],
       collectionsTouched: ["studio_bookings"],
@@ -560,6 +637,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "payment_screen",
       order: 9,
+      screenNumber: 68,
       title: "Payment",
       states: ["default", "processing", "error", "success"],
       collectionsTouched: ["studio_bookings"],
@@ -568,6 +646,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "booking_success",
       order: 10,
+      screenNumber: 69,
       title: "Booking Success",
       states: ["default"],
       collectionsTouched: ["studio_bookings"],
@@ -577,6 +656,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "my_bookings",
       order: 11,
+      screenNumber: 70,
       title: "My Bookings",
       states: ["upcoming", "past", "cancelled"],
       collectionsTouched: ["studio_bookings"],
@@ -586,6 +666,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "business_overview",
       order: 1,
+      screenNumber: 71,
       title: "Overview",
       states: ["default"],
       collectionsTouched: ["users"],
@@ -593,6 +674,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "business_services_tab",
       order: 2,
+      screenNumber: 72,
       title: "Services Tab",
       states: ["default"],
       collectionsTouched: ["users"],
@@ -601,6 +683,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "business_equipment_tab",
       order: 3,
+      screenNumber: 73,
       title: "Equipment Tab",
       states: ["default"],
       collectionsTouched: ["users", "studios"],
@@ -609,6 +692,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "business_team_tab",
       order: 4,
+      screenNumber: 74,
       title: "Team & Works Tab",
       states: ["default"],
       collectionsTouched: ["users"],
@@ -617,6 +701,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "business_reviews_gallery_tab",
       order: 5,
+      screenNumber: 75,
       title: "Reviews & Gallery Tab",
       states: ["default"],
       collectionsTouched: ["reviews", "users"],
@@ -625,6 +710,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "business_book_now",
       order: 6,
+      screenNumber: 76,
       title: "Book Now (CTA)",
       states: ["default"],
       collectionsTouched: [],
@@ -633,6 +719,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "business_owner_insights",
       order: 7,
+      screenNumber: 77,
       title: "Owner Mode / Business Insights",
       states: ["visible_if_owner"],
       collectionsTouched: [],
@@ -643,6 +730,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "connection_requests_tab",
       order: 1,
+      screenNumber: 78,
       title: "Connection Requests",
       states: ["default"],
       collectionsTouched: ["connections"],
@@ -651,6 +739,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "collaborators_tab",
       order: 2,
+      screenNumber: 79,
       title: "Collaborators",
       states: ["default"],
       collectionsTouched: ["connections"],
@@ -658,6 +747,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "ai_matchmaker_tab",
       order: 3,
+      screenNumber: 80,
       title: "AI Matchmaker Tab",
       states: ["unreachable"],
       collectionsTouched: [],
@@ -666,6 +756,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "chat_thread_list",
       order: 4,
+      screenNumber: 81,
       title: "Chat Thread List",
       states: ["default", "empty"],
       collectionsTouched: ["chat_threads"],
@@ -673,6 +764,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "chat_conversation",
       order: 5,
+      screenNumber: 82,
       title: "Chat Conversation",
       states: ["default", "sending", "error"],
       collectionsTouched: ["chat_threads"],
@@ -681,16 +773,28 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "networking_feed",
       order: 6,
+      screenNumber: 83,
       title: "Networking Feed (post / view)",
       states: ["default", "posting"],
       collectionsTouched: ["feed_posts"],
       notes: "Real read/write exists, but write side uses \"content\" not the admin schema's \"text\", plus a mediaUrl read/write mismatch — flagged, needs a migration-aware fix (Prompt F §5).",
+    },
+    {
+      key: "networking_feed_artist_profile",
+      order: 7,
+      screenNumber: 84,
+      title: "Artist Profile (from Networking Feed)",
+      states: ["default"],
+      collectionsTouched: [],
+      notes:
+        "ADDED 2026-08-13 (direct source read). SupportingModule.ARTIST_PROFILE, renders ArtistProfileScreen (UnifiedComponents.kt:2870) — reached only by tapping a post in Networking Feed. Confirmed distinct from Discover's FULL_PROFILE, which renders a different composable (FullTalentProfileScreen, DiscoverScreens.kt) — a 4th disconnected profile-view implementation on top of the 3 already flagged under profile_management's flow-level note (dashboard badge substring match, PublicProfilePreviewScreen headline match, Discover's mock-only enum). Not independently audited for its own data-source/persistence behavior this pass.",
     },
   ],
   discover: [
     {
       key: "discover_feed",
       order: 1,
+      screenNumber: 85,
       title: "Discover Feed / Home",
       states: ["default"],
       collectionsTouched: [],
@@ -699,6 +803,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "advanced_filters",
       order: 2,
+      screenNumber: 86,
       title: "Advanced Filters (bottom sheet)",
       states: ["default"],
       collectionsTouched: [],
@@ -707,6 +812,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "discover_profile_detail",
       order: 3,
+      screenNumber: 87,
       title: "Profile Detail View",
       states: ["default"],
       collectionsTouched: [],
@@ -715,6 +821,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "saved_profiles",
       order: 4,
+      screenNumber: 88,
       title: "Saved Profiles",
       states: ["empty", "populated"],
       collectionsTouched: ["user_bookmarks"],
@@ -723,6 +830,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "trending_recommended_sections",
       order: 5,
+      screenNumber: 89,
       title: "Trending Projects / Recommended Collaborators",
       states: ["hidden"],
       collectionsTouched: [],
@@ -733,6 +841,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "band_profile_layout",
       order: 1,
+      screenNumber: 90,
       title: "Band Profile (public view)",
       states: ["default"],
       collectionsTouched: ["users"],
@@ -741,6 +850,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "ensemble_lineup",
       order: 2,
+      screenNumber: 91,
       title: "Ensemble Lineup Display",
       states: ["default"],
       collectionsTouched: ["users"],
@@ -749,6 +859,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "upcoming_shows",
       order: 3,
+      screenNumber: 92,
       title: "Upcoming Shows List",
       states: ["hardcoded"],
       collectionsTouched: [],
@@ -759,6 +870,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "marketing_homepage",
       order: 1,
+      screenNumber: 93,
       title: "Marketing Homepage",
       states: ["default"],
       collectionsTouched: [],
@@ -767,6 +879,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "about_pricing_careers",
       order: 2,
+      screenNumber: 94,
       title: "About / Pricing / Careers",
       states: ["default"],
       collectionsTouched: [],
@@ -775,6 +888,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "legal_pages_site",
       order: 3,
+      screenNumber: 95,
       title: "Legal Pages (site)",
       states: ["default"],
       collectionsTouched: [],
@@ -783,6 +897,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "blog_changelog",
       order: 4,
+      screenNumber: 96,
       title: "Blog / Changelog",
       states: ["default"],
       collectionsTouched: [],
@@ -791,6 +906,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "admin_pages_editor",
       order: 5,
+      screenNumber: 97,
       title: "Admin Pages Editor",
       states: ["default"],
       collectionsTouched: ["page_content"],
@@ -801,11 +917,282 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     {
       key: "public_profile_view",
       order: 1,
+      screenNumber: 98,
       title: "Public Profile (cross-reference)",
-      states: ["talent_template", "band_template", "business_template", "venue_template"],
       collectionsTouched: ["users", "portfolio_projects", "reviews"],
       notes:
-        "Same screen as Flow 10's \"Public Profile Preview\" — this entry exists so Flow 14 isn't empty in the registry, not because there's a second, separate implementation. See Flow 10 for the full note.",
+        "Same screen as Flow 10's \"Public Profile Preview\" — this entry exists so Flow 14 isn't empty in the registry, not because there's a second, separate implementation. See Flow 10 for the full note. Forks into 4 profileType-driven templates below (98-1..98-4) — this is a genuine schema fork (different UserDoc extension fields render per template), not just a UI state, so it's modeled with variantOf rather than a plain states[] entry.",
+    },
+    {
+      key: "public_profile_view_talent",
+      order: 2,
+      variantOf: 98,
+      variantLabel: "Talent template",
+      title: "Public Profile — Talent template",
+      collectionsTouched: ["users", "portfolio_projects", "reviews"],
+      notes: "profileType === \"TALENT\" — renders base UserDoc fields (no extension block).",
+    },
+    {
+      key: "public_profile_view_band",
+      order: 3,
+      variantOf: 98,
+      variantLabel: "Band template",
+      title: "Public Profile — Band template",
+      collectionsTouched: ["users", "portfolio_projects", "reviews"],
+      notes: "profileType === \"BAND\" — renders bandName/lineupMembers/techRiderUrl/stagePlotUrl/shows.",
+    },
+    {
+      key: "public_profile_view_business",
+      order: 4,
+      variantOf: 98,
+      variantLabel: "Business template",
+      title: "Public Profile — Business template",
+      collectionsTouched: ["users", "portfolio_projects", "reviews"],
+      notes: "profileType === \"BUSINESS\" — renders the Business extension (businessName/Type/services/equipment/teamMembers/gallery, plus Label/School/Agency sub-fields).",
+    },
+    {
+      key: "public_profile_view_venue",
+      order: 5,
+      variantOf: 98,
+      variantLabel: "Venue template",
+      title: "Public Profile — Venue template",
+      collectionsTouched: ["users", "portfolio_projects", "reviews"],
+      notes: "profileType === \"VENUE\" — renders the Venue extension fields.",
+    },
+  ],
+
+  // --- 2026-08-12: grounded Explore-agent audit pass, per Part W's pending tracker.
+  // opportunities and equipment_rental deliberately get NO entry here —
+  // confirmed to have zero dedicated screens (see their updated default-flows.ts
+  // descriptions for the grounded evidence), so seeding placeholder rows here
+  // would misrepresent absence as presence.
+  marketplace: [
+    {
+      key: "marketplace_browse",
+      order: 1,
+      screenNumber: 99,
+      title: "Creator Marketplace (browse)",
+      states: ["default", "empty", "sale", "rental", "mixing", "beats", "services", "search_filtered"],
+      collectionsTouched: [],
+      notes:
+        "MarketplaceBetaScreen, wired live into the dashboard's Marketplace tab. Backed entirely by a hardcoded 8-item list — zero `marketplace_items` references anywhere in the file. \"Gear Rentals\" is just one of its 6 category tabs, not a separate flow (see equipment_rental note in default-flows.ts).",
+    },
+    {
+      key: "marketplace_item_detail",
+      order: 2,
+      screenNumber: 100,
+      title: "Listing Detail",
+      states: ["default"],
+      collectionsTouched: [],
+      notes:
+        "Rendered as an AlertDialog inside the browse screen, not a separate navigable screen. \"Contact Seller\" / \"Rent This Gear\" confirm buttons only set a local fake-success string (e.g. a fabricated request ID) — no network or DB call.",
+    },
+    {
+      key: "marketplace_saved_bookmarks",
+      order: 3,
+      screenNumber: 101,
+      title: "Saved & Favorites — Marketplace tab",
+      states: ["grid", "list", "empty"],
+      collectionsTouched: [],
+      notes:
+        "The screen MarketplaceFeature.kt actually routes to (a thin wrapper opening the Saved/Favorites hub defaulted to its Marketplace sub-tab) — not a browse/listing feature itself. Backed by a hardcoded item list, no Firestore.",
+    },
+  ],
+  notifications: [
+    {
+      key: "notifications_center",
+      order: 1,
+      screenNumber: 102,
+      title: "Notifications Center",
+      states: ["loading", "empty", "populated", "search_filtered", "category_filtered", "muted_banner"],
+      collectionsTouched: [],
+      notes:
+        "Reachable, feature-rich screen (swipe-to-dismiss, mark read/unread, pull-to-refresh) but 100% local mock state seeded with 5 hardcoded items — zero `.collection(\"notifications\")` calls, despite UI copy claiming \"Firestore Real-Time Sync\" (a commented-out banner, dead code). No tap-through/detail screen; no `targetUrl` navigation.",
+    },
+    {
+      key: "notification_settings",
+      order: 2,
+      screenNumber: 103,
+      title: "Notification Settings (in Notifications Center)",
+      states: ["default"],
+      collectionsTouched: [],
+      notes:
+        "Local-only preferences (push toggle, per-category toggles, quiet hours) — not persisted to Firestore, DataStore, or SharedPreferences. One of three separate, mutually-inconsistent \"notification preferences\" surfaces found (see the other two below) — not a single source of truth.",
+    },
+    {
+      key: "notification_preferences_onboarding",
+      order: 3,
+      screenNumber: 104,
+      title: "Notification Preferences (onboarding step)",
+      states: ["default"],
+      collectionsTouched: [],
+      notes:
+        "A separate, unconnected screen from notification_settings above, reached during profile onboarding. Its \"test notification\" action does exercise the real Android OS notification-channel API (device-level, not Firestore) — the only genuinely functional piece across all three preference surfaces.",
+    },
+    {
+      key: "notification_feeds_settings",
+      order: 4,
+      screenNumber: 105,
+      title: "Notification Feeds (general Settings tab)",
+      states: ["default"],
+      collectionsTouched: [],
+      notes: "A third, separate preferences surface in the main Settings flow. \"Save\" shows a success Snackbar with no visible persistence call.",
+    },
+  ],
+  verifications: [
+    {
+      key: "verification_screen",
+      order: 1,
+      screenNumber: 106,
+      title: "Verify Professional Status",
+      states: ["id_type_selector", "govt_id_upload", "gst_upload", "badge_timeline"],
+      collectionsTouched: [],
+      notes:
+        "Reachable from the Profile tab. Upload boxes hardcode a literal filename into local state on tap (no file picker, no FirebaseStorage call) — the exact same fake filenames (Aadhaar_Front_SwarSandhya.pdf, GST_Verification_VedanshuMusic.pdf) referenced in this session's mock-data seeding. No write to verification_requests; no status-tracking (pending/approved/rejected) screen exists anywhere — verified status is three local booleans.",
+    },
+  ],
+  reviews: [
+    {
+      key: "reputation_dashboard",
+      order: 1,
+      screenNumber: 107,
+      title: "Reputation Hub Dashboard",
+      states: ["default"],
+      collectionsTouched: [],
+      notes:
+        "ReputationSubScreen.DASHBOARD — entry point of the standalone Reputation Hub module (ReputationAndReviewsScreens.kt), reached from the main dashboard, not from any post-booking prompt. Enum state confirmed via Screens_Map.md's full-source audit; not independently re-verified for persistence behavior beyond what's already established for the module as a whole (see the write screens below — all local Room or no-op, zero real `reviews` writes).",
+    },
+    {
+      key: "review_list",
+      order: 2,
+      screenNumber: 108,
+      title: "Review List",
+      states: ["default", "empty"],
+      collectionsTouched: [],
+      notes:
+        "ReputationSubScreen.REVIEW_LIST. Reads whatever the module's local Room table holds (the same store write_review/etc. write to below) — not the real `reviews` Firestore collection the admin ReviewDoc schema targets.",
+    },
+    {
+      key: "review_detail",
+      order: 3,
+      screenNumber: 109,
+      title: "Review Detail",
+      states: ["default"],
+      collectionsTouched: [],
+      notes: "ReputationSubScreen.REVIEW_DETAIL. Single-review expanded view within the same local-Room-backed module.",
+    },
+    {
+      key: "write_review",
+      order: 4,
+      screenNumber: 110,
+      title: "Write Review",
+      states: ["default", "star_selected", "subcategory_ratings", "comment_entered", "submitted"],
+      collectionsTouched: [],
+      notes: "Part of a standalone Reputation Hub module, reached from the dashboard — not triggered by booking completion. Persists to a local Room table, not the real `reviews` Firestore collection.",
+    },
+    {
+      key: "rating_breakdown",
+      order: 5,
+      screenNumber: 111,
+      title: "Rating Breakdown",
+      states: ["default"],
+      collectionsTouched: [],
+      notes: "ReputationSubScreen.RATING_BREAKDOWN — aggregate score/category breakdown display, same local-Room-backed data as review_list.",
+    },
+    {
+      key: "completed_project_review",
+      order: 6,
+      screenNumber: 112,
+      title: "Completed Project Review",
+      states: ["default", "submitted"],
+      collectionsTouched: [],
+      notes: "Milestone-evaluation variant in the same Reputation Hub module. Fully no-op — submit only shows a snackbar and navigates back, no persistence at all.",
+    },
+    {
+      key: "marketplace_review_screen",
+      order: 7,
+      screenNumber: 113,
+      title: "Marketplace Gear Review",
+      states: ["default", "submitted"],
+      collectionsTouched: [],
+      notes: "Post-purchase gear rating in the Reputation Hub module. Fully no-op UI, no persistence.",
+    },
+    {
+      key: "studio_facility_review",
+      order: 8,
+      screenNumber: 114,
+      title: "Studio Facility Review",
+      states: ["default", "submitted"],
+      collectionsTouched: [],
+      notes: "Facility rating (acoustics/cleanliness), distinct from Business Profile's embedded Reviews & Gallery tab. Fully no-op UI, no persistence.",
+    },
+    {
+      key: "review_business_response",
+      order: 9,
+      screenNumber: 115,
+      title: "Business Response to Review",
+      states: ["default"],
+      collectionsTouched: [],
+      notes: "Business owner replies to a review. Writes to the same local Room table as write_review, not Firestore.",
+    },
+    {
+      key: "review_report",
+      order: 10,
+      screenNumber: 116,
+      title: "Report Review",
+      states: ["default"],
+      collectionsTouched: [],
+      notes: "Dispute/report a review. Fully no-op UI, no persistence.",
+    },
+    {
+      key: "public_reputation",
+      order: 11,
+      screenNumber: 117,
+      title: "Public Reputation (cross-reference)",
+      states: ["default"],
+      collectionsTouched: ["reviews"],
+      notes:
+        "ReputationSubScreen.PUBLIC_REPUTATION — the read-facing summary shown on a public profile (aggregate rating, verified-credits count). Related to but distinct from Flow 14's public_profile_view cross-reference entry; listed here since it's driven by this module's own enum, not the profile template.",
+    },
+  ],
+
+  // --- 2026-08-13: direct source read (SupportingScreens.kt) — corrects the
+  // 2026-08-12 audit's search entry and adds qr_share/saved_favorites, both
+  // previously entirely absent from this registry. See default-flows.ts.
+  search: [
+    {
+      key: "universal_search",
+      order: 1,
+      screenNumber: 118,
+      title: "Universal Search",
+      states: ["home", "live_typing", "results", "empty"],
+      collectionsTouched: [],
+      notes:
+        "UniversalSearchFlow (SupportingScreens.kt:281), SearchScreenState enum (HOME/LIVE/RESULTS/EMPTY). Reached from the dashboard's top-bar Search icon (SupportingModule.UNIVERSAL_SEARCH) — a genuinely separate screen from discover's/booking's own internal search-results states, not a duplicate. Filters a hardcoded 10-item mockAllResults list across Musicians/Bands/Projects/Studios categories; zero Firestore reads.",
+    },
+  ],
+  qr_share: [
+    {
+      key: "qr_share_flow",
+      order: 1,
+      screenNumber: 119,
+      title: "QR Code & Comp Card Sharing",
+      states: ["home", "options", "preview"],
+      collectionsTouched: [],
+      notes:
+        "QrAndShareFlow (SupportingScreens.kt:655), reached from the dashboard's QRShare shortcut. State is a plain string, not an enum. \"Preview\" generates a \"Premium Comp Card\" with a simulated PDF download (fake progress via a delay(150) loop, no real file, no real QR payload). No schema exists for this anywhere — no shareable-link record, no download/share analytics. Does not call DynamicLinkManager.kt, despite that existing elsewhere in the app for outbound share links.",
+    },
+  ],
+  saved_favorites: [
+    {
+      key: "saved_favorites_hub",
+      order: 1,
+      screenNumber: 120,
+      title: "Saved & Favorites Hub",
+      states: ["artists", "bands", "studios", "marketplace", "empty", "grid_view", "list_view"],
+      collectionsTouched: [],
+      notes:
+        "SavedAndFavoritesFlow (SupportingScreens.kt:1023), reached from the dashboard's Saved shortcut. SavedTab enum: ARTISTS, BANDS, STUDIOS, MARKETPLACE (+ EMPTY). The Marketplace tab is the same screen already documented as marketplace_saved_bookmarks under the marketplace flow (MarketplaceFeature.kt routes here, defaulted to that tab) — listed here too since it's one tab of this single real hub, not a separate implementation. All four tabs are local mutableStateListOf mock data (hardcoded artists/studios/marketplace items); zero Firestore reads or writes, no persisted \"saved\" relationship on any real document.",
     },
   ],
 };

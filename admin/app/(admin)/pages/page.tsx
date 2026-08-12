@@ -30,7 +30,7 @@ const columns: ColumnDef<Row>[] = [
  * Seed slugs matching website/'s existing page folders — create these first
  * via "New page" so the homepage and footer pages all have a record here.
  */
-const SUGGESTED_SLUGS = ["home", "about", "pricing", "careers", "blog", "legal-privacy", "legal-terms", "legal-cookies"];
+const SUGGESTED_SLUGS = ["home", "pricing", "contact", "legal-privacy", "legal-terms", "legal-cookies"];
 
 export default function PagesPage() {
   const { hasAccess } = useRequireModule("pages");

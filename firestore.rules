@@ -247,7 +247,13 @@ service cloud.firestore {
     // owner-uid pattern matching portfolio_projects/social_links.
     match /brand_assets/{assetId} {
       allow read: if true;
-      allow create, update: if signedIn() && request.auth.uid == request.resource.data.ownerUid;
+      // isModerator() bypass added 2026-08-13 so the admin panel's Brand
+      // Assets module can edit any business's assets, matching the same
+      // pattern already used on /users/{userId} — without it, an admin's
+      // auth.uid never equals the target business's ownerUid and every
+      // admin-side save would be rejected.
+      allow create, update: if isModerator()
+        || (signedIn() && request.auth.uid == request.resource.data.ownerUid);
       allow delete: if isModerator()
         || (signedIn() && request.auth.uid == resource.data.ownerUid);
     }
@@ -281,6 +287,13 @@ service cloud.firestore {
     // can gate UI client-side, admin-only write. Same shape as /modules.
     match /capabilities/{roleKey} {
       allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // The app's UI-component catalog as data — internal engineering
+    // documentation, same access shape as /flows (moderator-read, admin-write).
+    match /widgets/{widgetId} {
+      allow read: if isModerator();
       allow write: if isAdmin();
     }
   }

@@ -24,6 +24,7 @@ import type {
   UserDoc,
   UserSettingsDoc,
   VerificationRequestDoc,
+  WidgetDoc,
 } from "@/types/firestore";
 import { createRepository } from "./generic-repository";
 
@@ -51,3 +52,4 @@ export const brandAssetsRepo = createRepository<BrandAssetsDoc>(COLLECTIONS.bran
 export const roleProfilesRepo = createRepository<RoleProfileDoc>(COLLECTIONS.roleProfiles);
 export const flowsRepo = createRepository<FlowDoc>(COLLECTIONS.flows);
 export const capabilitiesRepo = createRepository<CapabilityMatrixDoc>(COLLECTIONS.capabilities);
+export const widgetsRepo = createRepository<WidgetDoc>(COLLECTIONS.widgets);

@@ -10,6 +10,7 @@ import { DataTable } from "@/components/shared/data-table";
 import { PageShell } from "@/components/layout/page-shell";
 import { useCollection } from "@/hooks/use-collection";
 import { useRequireModule } from "@/hooks/use-require-module";
+import { formatHourlyRate } from "@/lib/utils";
 import { studiosRepo } from "@/services/repositories";
 import type { StudioDoc, WithId } from "@/types/firestore";
 import { StudioEditorSheet } from "./studio-editor-sheet";
@@ -19,7 +20,7 @@ type Row = WithId<StudioDoc>;
 const columns: ColumnDef<Row>[] = [
   { accessorKey: "data.name", header: "Studio" },
   { accessorKey: "data.location", header: "Location" },
-  { accessorKey: "data.hourlyRate", header: "Rate" },
+  { accessorKey: "data.hourlyRate", header: "Rate", cell: ({ row }) => formatHourlyRate(row.original.data.hourlyRate) },
   {
     accessorKey: "data.rating",
     header: "Rating",

@@ -1,7 +1,7 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import { Check, Pencil, Plus, Sparkles, Trash2, X } from "lucide-react";
+import { Check, Pencil, Plus, Trash2, X } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
@@ -16,59 +16,6 @@ import type { CapabilityMatrixDoc, WithId } from "@/types/firestore";
 import { CapabilityEditorSheet } from "./capability-editor-sheet";
 
 type Row = WithId<CapabilityMatrixDoc>;
-
-const DEFAULT_CAPABILITIES: Omit<CapabilityMatrixDoc, "createdAt" | "updatedAt">[] = [
-  {
-    roleKey: "talent",
-    label: "Talent",
-    canCreateProfile: true,
-    canPostOpportunities: false,
-    canSellEquipment: true,
-    canCreateEvents: true,
-    crmAccess: "none",
-    updatedBy: "admin",
-  },
-  {
-    roleKey: "studio",
-    label: "Studio",
-    canCreateProfile: true,
-    canPostOpportunities: true,
-    canSellEquipment: true,
-    canCreateEvents: true,
-    crmAccess: "full",
-    updatedBy: "admin",
-  },
-  {
-    roleKey: "label",
-    label: "Label",
-    canCreateProfile: true,
-    canPostOpportunities: true,
-    canSellEquipment: false,
-    canCreateEvents: true,
-    crmAccess: "full",
-    updatedBy: "admin",
-  },
-  {
-    roleKey: "agency",
-    label: "Agency",
-    canCreateProfile: true,
-    canPostOpportunities: true,
-    canSellEquipment: false,
-    canCreateEvents: true,
-    crmAccess: "full",
-    updatedBy: "admin",
-  },
-  {
-    roleKey: "admin",
-    label: "Admin",
-    canCreateProfile: true,
-    canPostOpportunities: true,
-    canSellEquipment: true,
-    canCreateEvents: true,
-    crmAccess: "full",
-    updatedBy: "admin",
-  },
-];
 
 function boolCell(value: boolean) {
   return value ? <Check className="size-4 text-primary" /> : <X className="size-4 text-muted-foreground" />;
@@ -125,29 +72,8 @@ export default function CapabilitiesPage() {
   const { data, loading, error, refetch } = useCollection(capabilitiesRepo);
   const [editorOpen, setEditorOpen] = useState(false);
   const [selected, setSelected] = useState<Row | null>(null);
-  const [seeding, setSeeding] = useState(false);
 
   if (!hasAccess) return null;
-
-  async function handleSeed() {
-    setSeeding(true);
-    try {
-      const now = capabilitiesRepo.serverTimestamp();
-      let created = 0;
-      for (const c of DEFAULT_CAPABILITIES) {
-        const existing = await capabilitiesRepo.get(c.roleKey);
-        if (existing) continue;
-        await capabilitiesRepo.create(c.roleKey, { ...c, createdAt: now as never, updatedAt: now as never });
-        created += 1;
-      }
-      toast.success(created ? `Seeded ${created} role(s)` : "All default roles already exist");
-      refetch();
-    } catch {
-      toast.error("Failed to seed capabilities");
-    } finally {
-      setSeeding(false);
-    }
-  }
 
   const columns = buildColumns((row) => {
     setSelected(row);
@@ -160,9 +86,6 @@ export default function CapabilitiesPage() {
       description="What each role/profile type is permitted to do — public-read so the app can gate UI client-side, admin-write only. roleKey spans profileType values (talent) and businessType sub-types (studio/label/agency) plus admin, matching how this was originally specified rather than a strict profileType/businessType split."
       actions={
         <div className="flex gap-2">
-          <Button size="sm" variant="outline" onClick={handleSeed} disabled={seeding}>
-            <Sparkles className="size-4" /> {seeding ? "Seeding…" : "Seed defaults"}
-          </Button>
           <Button
             size="sm"
             onClick={() => {
@@ -182,7 +105,7 @@ export default function CapabilitiesPage() {
         error={error}
         searchPlaceholder="Search roles..."
         emptyTitle="No roles yet"
-        emptyDescription='Click "Seed defaults" to populate Talent/Studio/Label/Agency/Admin, or add one manually.'
+        emptyDescription="Add Talent/Studio/Label/Agency/Admin roles, or seed them via npm run seed."
         onRowClick={(row) => {
           setSelected(row);
           setEditorOpen(true);

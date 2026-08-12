@@ -33,7 +33,7 @@ function emptyForm(): StudioDoc {
     location: "",
     rating: 0,
     reviewCount: 0,
-    hourlyRate: "",
+    hourlyRate: 0,
     verifiedGold: false,
     amenities: [],
     consoleType: "",
@@ -123,12 +123,14 @@ export function StudioEditorSheet({ studio, open, onOpenChange, onSaved }: Studi
 
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
-              <Label htmlFor="studio-rate">Hourly rate</Label>
+              <Label htmlFor="studio-rate">Hourly rate (₹/hr, 0 = unset)</Label>
               <Input
                 id="studio-rate"
+                type="number"
+                min={0}
                 value={form.hourlyRate}
-                onChange={(e) => setForm((f) => ({ ...f, hourlyRate: e.target.value }))}
-                placeholder="₹1,200/hr"
+                onChange={(e) => setForm((f) => ({ ...f, hourlyRate: e.target.valueAsNumber || 0 }))}
+                placeholder="2500"
               />
             </div>
             <div className="space-y-1.5">

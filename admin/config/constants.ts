@@ -31,6 +31,7 @@ export const COLLECTIONS = {
   roleProfiles: "role_profiles",
   flows: "flows",
   capabilities: "capabilities",
+  widgets: "widgets",
 } as const;
 
 export const STORAGE_PATHS = {
@@ -75,6 +76,8 @@ export const MODULE_PERMISSIONS = {
   modules: perm("ROLE_ADMIN"),
   flows: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
   capabilities: perm("ROLE_ADMIN"),
+  widgets: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
+  brand: perm("ROLE_ADMIN", "ROLE_MODERATOR"),
 } satisfies Record<string, AdminRole[]>;
 
 export type ModuleKey = keyof typeof MODULE_PERMISSIONS;

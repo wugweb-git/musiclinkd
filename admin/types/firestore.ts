@@ -89,7 +89,13 @@ export interface UserDoc {
   isVerified: boolean;
   isBanned: boolean;
   isAvailable: boolean;
-  hourlyRate: string;
+  /** Module A profile-shell fields (PRD) — vanity handle, shareable URL, generated QR data, and a cover image distinct from avatarUrl. Not confirmed as app-written. */
+  username?: string;
+  vanityUrl?: string;
+  qrCodeUrl?: string;
+  coverImageUrl?: string;
+  /** Per-hour INR equivalent. 0 means unset/not hourly-priced (e.g. a label with no personal booking rate) — render as "—"/"Under Discussion" rather than "₹0". Day/session/track rates are stored as their hourly-equivalent guess; migrated from a free-text display string (see Prompt F). */
+  hourlyRate: number;
   /** Coarse price-tier indicator (₹/₹₹/₹₹₹) for browse/filter display — separate from hourlyRate's exact figure. Taxonomy value from "budget_type". */
   budgetTier?: string;
   location: string;
@@ -158,12 +164,20 @@ export interface UserDoc {
   serviceOfferings?: BusinessServiceOffering[];
   /** Photo gallery — BusinessProfileScreens.kt's "Reviews & Gallery" tab; distinct from portfolio_projects (music projects, not photos). */
   galleryUrls?: string[];
+  /** businessType === "Label" — names or user UIDs of signed artists. Simple string list, not a structured roster — matches "not detailed schema, just entities" scoping. */
+  artistRoster?: string[];
+  /** businessType === "School" — course names offered. */
+  courses?: string[];
+  /** businessType === "Booking Agency" / "Artist Manager" — names or user UIDs of represented talent. */
+  talentRoster?: string[];
 
   // --- Band extension (profileType === "BAND") ---
   bandName?: string;
   lineupMembers?: BandLineupMember[];
   techRiderUrl?: string;
   stagePlotUrl?: string;
+  /** Upcoming/past performances — not modeled until now; distinguished by BandShow.isPast rather than two separate arrays. */
+  shows?: BandShow[];
 
   // --- Venue extension (profileType === "VENUE") ---
   venueName?: string;
@@ -259,13 +273,29 @@ export interface StudioEquipmentItem {
   included: boolean;
 }
 
+/**
+ * One bookable room within a studio — a studio can have several (e.g. a
+ * live tracking room and a separate vocal booth), each with its own rate
+ * and gear. Distinct from the studio-level `equipment` list, which today
+ * represents gear the studio as a whole advertises rather than per-room.
+ */
+export interface StudioRoom {
+  name: string;
+  capacity?: number;
+  /** Per-hour INR equivalent — same convention as StudioDoc.hourlyRate. */
+  hourlyRate: number;
+  amenities?: string[];
+  imageUrl?: string;
+}
+
 export interface StudioDoc {
   ownerUid: string;
   name: string;
   location: string;
   rating: number;
   reviewCount: number;
-  hourlyRate: string;
+  /** Per-hour INR equivalent — see UserDoc.hourlyRate for the same 0-means-unset convention. */
+  hourlyRate: number;
   verifiedGold: boolean;
   /** Taxonomy value(s) from "studio_amenities" — physical features (Dolby Atmos, Parking, 24x7 Access). */
   amenities: string[];
@@ -283,6 +313,8 @@ export interface StudioDoc {
   geo?: { lat: number; lng: number };
   /** Structured gear list — consoleType stays as a simple free-text fallback for records that don't have this yet. */
   equipment?: StudioEquipmentItem[];
+  /** Individually bookable rooms within this studio, if it has more than one. Absent/empty means the studio is booked as a single space (the common case today). */
+  rooms?: StudioRoom[];
   operatingHours?: string;
   cancellationPolicy?: string;
 }
@@ -321,6 +353,8 @@ export interface MarketplaceItemDoc {
   imageUrl: string;
   /** Which taxonomy category applies for this listing's specific item — "instruments" or the new "equipment_categories", depending on what's being sold. */
   itemCategory?: string;
+  /** Units available for this listing. Undefined/1 = single item (the common case); >1 for a seller listing multiple identical units (e.g. a beat-pack license count, bulk cable stock). */
+  quantity?: number;
   createdAt: Timestamp;
 }
 
@@ -451,6 +485,7 @@ export type FlowStatus = "documented" | "partial" | "missing" | "app-mocked";
  */
 export interface FlowDoc {
   key: string;
+  /** Flow number — doubles as sort order and the stable "Flow N" label shown in the UI. 1-24, no gaps. */
   order: number;
   title: string;
   description: string;
@@ -466,7 +501,25 @@ export interface FlowDoc {
  */
 export interface FlowScreenDoc {
   key: string;
+  /** Position within this flow only (not globally unique) — drives the in-flow "#" column. */
   order: number;
+  /**
+   * Globally unique screen ID across every flow's screens, assigned once and
+   * never reused — the stable identifier for cross-referencing a screen from
+   * widgets, schema docs, or anywhere else. Absent on variant entries (see
+   * `variantOf`), which reference a base screen's number instead of owning
+   * their own.
+   */
+  screenNumber?: number;
+  /**
+   * Set when this screen is a schema-driven fork of another screen (e.g. a
+   * per-profileType template) rather than a standalone screen — the
+   * `screenNumber` of the base screen it forks from. Rendered in the UI as
+   * `{variantOf}-{n}` (n = 1-based position among that base screen's variants).
+   */
+  variantOf?: number;
+  /** Short label for what this variant is, e.g. "Business template", "Band template". */
+  variantLabel?: string;
   title: string;
   /** Named states this screen can render as — per-role variants, loading/error/empty, etc. */
   states?: string[];
@@ -767,6 +820,39 @@ export type RoleProfileDoc =
   | DjRoleProfile
   | RjRoleProfile
   | PodcasterRoleProfile;
+
+/**
+ * widgets/{widgetId} — the app's UI-component catalog as data, same
+ * pattern as flows/capabilities: internal engineering documentation, not
+ * user-facing content. Sourced from admin/docs/architecture/Widget_Directory.md.
+ * `isVisible` is left undefined until someone actually confirms whether a
+ * given widget's call site is live or commented out in the app — several
+ * entries were only "likely hidden" per the source audit, not confirmed;
+ * don't default this to true or false, that would fabricate a fact this
+ * registry exists specifically to get right.
+ */
+export interface WidgetDoc {
+  key: string;
+  /** Widget number — doubles as sort order and the stable "Widget N" label shown in the UI. */
+  order: number;
+  name: string;
+  category: string;
+  purpose: string;
+  contentComposition: string;
+  codeMapping: string;
+  isVisible?: boolean;
+  notes?: string;
+  /**
+   * screenNumbers (FlowScreenDoc.screenNumber) this widget actually renders
+   * on — many-to-many, since one widget (e.g. ArtistCard) typically appears
+   * across several screens/flows. Added 2026-08-13; empty/absent on
+   * existing seed data until each widget's real screens are confirmed
+   * against source — not populated speculatively.
+   */
+  relatedScreens?: number[];
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
 
 export interface WithId<T> {
   id: string;

@@ -84,7 +84,7 @@ function emptyForm(): UserDoc {
     isVerified: false,
     isBanned: false,
     isAvailable: true,
-    hourlyRate: "",
+    hourlyRate: 0,
     location: "",
     bio: "",
     genres: [],
@@ -844,11 +844,13 @@ export function UserEditorSheet({ user, open, onOpenChange, onSaved }: UserEdito
 
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
-              <Label htmlFor="user-rate">Hourly rate</Label>
+              <Label htmlFor="user-rate">Hourly rate (₹/hr, 0 = unset)</Label>
               <Input
                 id="user-rate"
+                type="number"
+                min={0}
                 value={form.hourlyRate}
-                onChange={(e) => setForm((f) => ({ ...f, hourlyRate: e.target.value }))}
+                onChange={(e) => setForm((f) => ({ ...f, hourlyRate: e.target.valueAsNumber || 0 }))}
               />
             </div>
             <div className="space-y-1.5">

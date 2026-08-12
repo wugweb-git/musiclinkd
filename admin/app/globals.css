@@ -45,12 +45,27 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  /* Gestalt-derived elevation (frontend/guide/tokens/tokens.json foundation.gestalt.elevation)
+     — Tailwind v4 auto-generates shadow-floating/shadow-raised-top/shadow-raised-bottom
+     utilities from these. New addition: admin had no shadow tokens at all before this. */
+  --shadow-floating: var(--elevation-floating);
+  --shadow-raised-top: var(--elevation-raised-top);
+  --shadow-raised-bottom: var(--elevation-raised-bottom);
 }
 
 /*
  * Brand tokens — must stay in sync with the marketing site's inline styles
  * (website/index.html) and app/brand.md's Color Psychology section.
  * Pink #EA4C89, Ink #141414, Paper #FCFCFD, Line #ECECF1, Muted #7D7D8E.
+ *
+ * 2026-08-13: verified these colors already match the live marketing site
+ * (frontend/website/index.html uses #141414, same as --foreground here) —
+ * frontend/guide/tokens/tokens.json's "navy" (#0D0B26) is the one that's
+ * actually out of step with production, not this file. Color reconciliation
+ * (if any) is being handled separately — not touched in this pass. See
+ * frontend/guide/tokens/tokens.json for the fuller Gestalt-derived scale
+ * (spacing/radius/opacity/elevation/motion) this file's structural tokens
+ * below draw from; colors are NOT shared between the two files by design.
  */
 :root {
   --background: #FCFCFD;
@@ -85,6 +100,9 @@
   --sidebar-accent-foreground: #141414;
   --sidebar-border: #ECECF1;
   --sidebar-ring: #EA4C89;
+  --elevation-floating: 0px 0px 8px rgba(0, 0, 0, 0.1);
+  --elevation-raised-top: 0px 2px 8px rgba(0, 0, 0, 0.12);
+  --elevation-raised-bottom: 0px -2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .dark {
@@ -119,6 +137,10 @@
   --sidebar-accent-foreground: #FCFCFD;
   --sidebar-border: rgba(255, 255, 255, 0.1);
   --sidebar-ring: #EA4C89;
+  /* Gestalt drops shadows in dark mode in favor of the border doing the separation work — matches foundation.gestalt.elevation.darkMode in tokens.json. */
+  --elevation-floating: none;
+  --elevation-raised-top: none;
+  --elevation-raised-bottom: none;
 }
 
 @layer base {

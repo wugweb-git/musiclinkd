@@ -10,6 +10,9 @@ export const MOCK_MESSAGES = [
   { id: "thread_1", participants: "Aarav Mehta, Nova Sound Studio", lastMessage: "Confirmed for Thursday 6pm", updatedAt: "2026-08-02" },
   { id: "thread_2", participants: "Priya Iyer, Beatmaker Collective", lastMessage: "Sent the STEMs over", updatedAt: "2026-08-03" },
   { id: "thread_3", participants: "Kabir Rao, Echo Chamber Studio", lastMessage: "Can we push to next week?", updatedAt: "2026-08-04" },
+  { id: "thread_4", participants: "Aditi Sen, Octave Sound Labs", lastMessage: "Booked the Atmos room for the 20th", updatedAt: "2026-08-05" },
+  { id: "thread_5", participants: "Kabeer Varma, Vikramaditya Roy", lastMessage: "Sitar take sounds great, sending stems now", updatedAt: "2026-08-07" },
+  { id: "thread_6", participants: "Rhea Kapoor, Yash Raj Sound Studios", lastMessage: "Can we move the mixing session to Friday?", updatedAt: "2026-08-08" },
 ];
 
 export const MOCK_ANALYTICS_EVENTS = [

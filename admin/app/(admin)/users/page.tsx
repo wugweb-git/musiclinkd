@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { DataTable } from "@/components/shared/data-table";
 import { PageShell } from "@/components/layout/page-shell";
+import { TrustBadgeList } from "@/components/shared/trust-badge";
 import { useCollection } from "@/hooks/use-collection";
 import { useRequireModule } from "@/hooks/use-require-module";
 import { usersRepo } from "@/services/repositories";
@@ -54,6 +55,11 @@ const columns: ColumnDef<Row>[] = [
     accessorKey: "data.isVerified",
     header: "Verified",
     cell: ({ row }) => (row.original.data.isVerified ? <BadgeCheck className="size-4 text-primary" /> : "—"),
+  },
+  {
+    id: "trustBadges",
+    header: "Trust Badges",
+    cell: ({ row }) => <TrustBadgeList badges={row.original.data.trustBadges} />,
   },
   {
     accessorKey: "data.isBanned",
