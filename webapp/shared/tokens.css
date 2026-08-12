@@ -1,0 +1,152 @@
+/**
+ * MusicLinkd design tokens + primitives — copied verbatim from the source
+ * of truth, frontend/guide/styleguide.html (class names match exactly:
+ * .btn/.btn-p/.btn-s, .phone-frame/.phone-screen/.phone-notch/.phone-status/
+ * .phone-body, OTP box dimensions, brand wordmark markup). Not reinvented;
+ * if the real system changes, update styleguide.html first and copy the
+ * diff down into this file, not the other way around.
+ *
+ * This is the VISUAL layer — color, type, spacing, shadow, components.
+ * shared/app-shell.css stays the ENVIRONMENT layer (safe-area, viewport,
+ * keyboard-awareness) and intentionally has none of this; both compose on
+ * every screen (see template/index.html's <head>).
+ */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 32px;
+  --radius-1: 8px;
+  --radius-2: 16px;
+  --radius-3: 32px;
+  --radius-4: 9999px;
+  --opacity-1: 0.08;
+  --opacity-2: 0.16;
+  --opacity-3: 0.32;
+  --opacity-4: 0.64;
+  --duration-1: 125ms;
+  --duration-2: 200ms;
+  --duration-3: 320ms;
+  --duration-4: 500ms;
+  --type-1: clamp(10px, calc(10px + 2 * (100vw - 360px) / 1080), 12px);
+  --type-2: clamp(14px, calc(14px + 4 * (100vw - 360px) / 1080), 18px);
+  --type-3: clamp(20px, calc(20px + 8 * (100vw - 360px) / 1080), 28px);
+  --type-4: clamp(28px, calc(28px + 16 * (100vw - 360px) / 1080), 44px);
+
+  --pink: #EA4C89;
+  --pink-hover: #D93C77;
+  --black: #0D0D0D;
+  --navy: #0D0B26;
+  --paper: #FCFCFD;
+  --white: #FFFFFF;
+  --line: #ECECF1;
+  --muted: #7D7D8E;
+  --success: #22C55E;
+  --warn: #F59E0B;
+  --err: #DC2626;
+  --surface-2: #F1F5F9;
+  --surface-alt: #F8F8FB;
+  --pink-container: #FCE7F3;
+
+  --shadow-1: 0 1px 3px rgba(13,11,38,0.08);
+  --shadow-2: 0 4px 12px rgba(13,11,38,0.05);
+  --shadow-3: 0 8px 24px rgba(13,11,38,0.08);
+  --shadow-4: 0 12px 32px rgba(13,11,38,0.12);
+}
+
+body {
+  background: var(--paper);
+  color: var(--black);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: var(--type-2);
+  -webkit-font-smoothing: antialiased;
+}
+
+.brand-wordmark {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 800;
+  font-size: var(--type-3);
+  color: var(--black);
+  letter-spacing: -0.04em;
+}
+.brand-wordmark em { color: var(--pink); font-style: normal; }
+.brand-wordmark.on-dark { color: #fff; }
+
+/* --- Buttons — exact classes from styleguide.html's .btn system --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-4);
+  padding: var(--space-2) var(--space-3);
+  font: 600 var(--type-2)/1 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all var(--duration-1) ease;
+  border: 1px solid transparent;
+  min-height: 48px;
+}
+.btn-p { background: var(--pink); color: #fff; }
+.btn-p:active { background: var(--pink-hover); transform: scale(0.98); }
+.btn-s { background: #fff; color: var(--black); border-color: var(--line); }
+.btn-s:active { transform: scale(0.98); }
+.btn:disabled { opacity: var(--opacity-3); cursor: not-allowed; pointer-events: none; }
+.btn-block { width: 100%; }
+
+/* --- Text fields --- */
+.field { display: flex; flex-direction: column; gap: var(--space-1); text-align: left; }
+.field label { font-size: var(--type-1); font-weight: 600; color: var(--muted); }
+.field input {
+  min-height: 48px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-4);
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--black);
+  font: var(--type-2) 'Inter', sans-serif;
+  outline: none;
+  transition: border-color var(--duration-1) ease;
+}
+.field input:focus { border-color: var(--pink); }
+.field .error-text { color: var(--err); font-size: var(--type-1); }
+.field.has-error input { border-color: var(--err); }
+
+/* --- OTP boxes — exact spec: 48x72dp, pink focus border, 12px radius --- */
+.otp-row { display: flex; gap: var(--space-2); justify-content: center; }
+.otp-box {
+  width: 48px;
+  height: 72px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--type-2);
+  font-weight: 700;
+  color: var(--muted);
+  background: #fff;
+}
+.otp-box.filled { border-color: var(--pink); color: var(--black); border-width: 2px; }
+.otp-box.error { border-color: var(--err); background: #FEF2F2; color: var(--err); }
+
+.divider-row { display: flex; align-items: center; gap: var(--space-2); color: var(--muted); font-size: var(--type-1); }
+.divider-row::before, .divider-row::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+.spinner-circular {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 3px solid var(--line); border-top-color: var(--pink);
+  animation: spin var(--duration-4) linear infinite;
+  display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.link-text { color: var(--pink); font-weight: 600; text-decoration: none; }
+
+.badge { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-1) var(--space-2); border-radius: var(--radius-4); font-size: var(--type-1); font-weight: 600; }
+.badge-av { background: rgba(34,197,94,0.12); color: #166534; }
+
+/* --- Phone frame (desktop preview chrome) — exact classes/values from styleguide.html --- */
+.phone-frame { width: 360px; background: #1a1a2e; border-radius: 36px; padding: 12px; margin: 0 auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.phone-screen { background: var(--paper); border-radius: 24px; overflow: hidden; height: 720px; position: relative; }
+.phone-notch { height: 28px; background: #0D0D0D; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.phone-notch .dot { width: 8px; height: 8px; background: #2C2F3A; border-radius: 50%; }

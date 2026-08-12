@@ -2,97 +2,58 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<!-- viewport-fit=cover is what makes env(safe-area-inset-*) resolve to real
-     values instead of 0 on notched/gesture-bar devices — without it the
-     safe-area CSS in app-shell.css is a no-op. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0B26" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<!--
-  All resource paths below are ABSOLUTE (/preview/...), not relative. This
-  build is deployed at musiclinkd.com/preview, and Firebase Hosting's
-  cleanUrls+trailingSlash:false config means a page at .../flows/auth/splash
-  has NO trailing slash — the browser then resolves relative "./x"/"../x"
-  paths against the WRONG base (one level too shallow), silently breaking
-  screen.json/CSS/JS loads. Absolute paths sidestep that entirely. If this
-  ever moves to a different mount point, update MOUNT_BASE in
-  shared/app-shell.js and the paths below together.
--->
+<meta name="screen-json-path" content="/preview/flows/auth/google_signin/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<meta name="screen-json-path" content="/preview/flows/auth/google_signin/screen.json" />
 <title>MusicLinkd — User Auth / Google Sign-In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<!--
-  THIS FILE IS A TEMPLATE, NOT A DESIGNED SCREEN.
-  It exists to prove out the native-app environment (safe areas, fixed
-  viewport, keyboard awareness, bottom-sheet mechanics, offline shell,
-  standalone display mode) so a real screen only has to bring its own
-  visual design on top — copy this file into a flows/<flow>/<screen>/
-  folder (every real screen folder already has one, generated alongside
-  its screen.json) and replace the placeholder regions below. If you copy
-  it manually (rather than letting the generator scaffold it), also add
-  <meta name="screen-json-path" content="/preview/flows/<flow>/<screen>/screen.json" />
-  next to the other meta tags — without it the dev badge falls back to a
-  relative "./screen.json" fetch, which has the same trailing-slash problem
-  described above.
--->
+<link rel="stylesheet" href="/preview/shared/tokens.css" />
+<style>
+  .account-row { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border-radius: var(--radius-2); border: 1px solid var(--line); cursor: pointer; text-align: left; background: #fff; width: 100%; font-family: inherit; }
+  .account-row:hover { background: var(--surface-alt); }
+  .avatar-circle { width: 40px; height: 40px; border-radius: 50%; background: var(--pink-container); color: var(--pink); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+</style>
 </head>
 <body>
-  <!--
-    ARTBOARD SIZING: this is fully responsive, not a fixed artboard.
-    .app-root fills 100dvh × 100% of whatever viewport it's in — the same
-    approach a real installed PWA/native app uses (there's no "canvas size"
-    on a phone, the OS gives you the real viewport). On an actual phone this
-    is edge-to-edge, matching current devices from ~360px (small Android)
-    through ~480px (large Android/Pro Max) wide, and taller aspect ratios
-    (notches, gesture bars) are handled by the safe-area insets above, not
-    by hardcoding a specific device's dimensions.
-
-    The max-width clamp below is ONLY for viewing this on a desktop browser
-    while designing/reviewing (so it doesn't stretch edge-to-edge on a 1440px
-    monitor) — it has zero effect on a real phone, where 100% already IS the
-    phone's width. Delete the inline style if you don't want the desktop
-    framing at all.
-  -->
-  <div class="app-root" style="max-width: 480px; margin-inline: auto; box-shadow: 0 0 0 1px rgba(0,0,0,0.08);">
-
-    <!-- Fixed top region — safe-area top padding baked in via app-shell.css.
-         Put a status/nav bar here; it never scrolls. -->
-    <header class="app-topbar">
-      <!-- TODO: design system top bar goes here -->
+  <div class="app-root" style="background:#fff;">
+    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
+      <a href="/preview/flows/auth/welcome/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </a>
     </header>
+    <main class="app-content" style="padding:0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);">
+      <div style="text-align:center;">
+        <svg width="32" height="32" viewBox="0 0 24 24" style="margin:0 auto var(--space-2);"><path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.67-.22-2.45H12v4.64h6.47c-.28 1.5-1.13 2.78-2.4 3.63v3.02h3.88c2.27-2.09 3.57-5.17 3.57-8.84z"/><path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.95-2.9l-3.88-3.02c-1.08.72-2.45 1.15-4.07 1.15-3.13 0-5.78-2.12-6.73-4.96H1.27v3.12C3.25 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.27c-.24-.72-.38-1.49-.38-2.27s.14-1.55.38-2.27V6.61H1.27A11.96 11.96 0 000 12c0 1.93.46 3.76 1.27 5.39l4-3.12z"/><path fill="#EA4335" d="M12 4.77c1.77 0 3.35.61 4.6 1.8l3.44-3.44C17.95 1.19 15.24 0 12 0 7.31 0 3.25 2.7 1.27 6.61l4 3.12C6.22 6.89 8.87 4.77 12 4.77z"/></svg>
+        <h1 style="font-size:var(--type-3);">Choose an account</h1>
+        <p style="color:var(--muted);font-size:var(--type-2);">to continue to MusicLinkd</p>
+      </div>
 
-    <!-- Main content — scrolls only if you add .app-content--scroll.
-         Most single-purpose screens (a form, a splash, a confirmation)
-         should NOT scroll; add the modifier only for feeds/lists/long forms. -->
-    <main class="app-content app-content--scroll">
-      <!-- TODO: design system content goes here.
-           Read window.MusicLinkd.screen (populated from this screen's
-           screen.json) for its flow/screen metadata and data contract. -->
+      <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+        <button class="account-row" type="button">
+          <div class="avatar-circle">VB</div>
+          <div>
+            <div style="font-weight:600;">Vedanshu Beats</div>
+            <div style="font-size:var(--type-1);color:var(--muted);">hello@vedanshubeats-mock.example</div>
+          </div>
+        </button>
+        <button class="account-row" type="button">
+          <div class="avatar-circle" style="background:var(--surface-2);color:var(--muted);">+</div>
+          <div style="font-weight:600;">Use another account</div>
+        </button>
+      </div>
 
-      <!-- Example bottom-sheet trigger — remove if this screen doesn't need one. -->
-      <button type="button" data-open-sheet="example-sheet">Open example sheet</button>
+      <p style="font-size:var(--type-1);color:var(--muted);text-align:center;">To continue, Google will share your name, email address, and profile picture with MusicLinkd.</p>
     </main>
-
-    <!-- Fixed bottom region — safe-area bottom padding baked in. Auto-hides
-         when the keyboard opens (see .is-keyboard-open in app-shell.css) so
-         it never floats above the keyboard on top of your inputs. -->
-    <footer class="app-bottombar">
-      <!-- TODO: design system bottom bar / CTA goes here -->
-    </footer>
+    <footer class="app-bottombar"></footer>
   </div>
-
-  <!-- Example bottom sheet — structural mechanics only (open/close, drag-down
-       transition, safe-area padding). Style its contents with your design system. -->
-  <div class="sheet-scrim" data-sheet-scrim-for="example-sheet"></div>
-  <div class="sheet" id="example-sheet">
-    <p>Example bottom sheet content.</p>
-    <button type="button" data-close-sheet="example-sheet">Close</button>
-  </div>
-
   <script src="/preview/shared/app-shell.js" defer></script>
 </body>
 </html>

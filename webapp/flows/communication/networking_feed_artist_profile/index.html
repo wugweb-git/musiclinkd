@@ -24,40 +24,41 @@
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
 <meta name="screen-json-path" content="/preview/flows/communication/networking_feed_artist_profile/screen.json" />
 <title>MusicLinkd — Communication & Collaboration / Artist Profile (from Networking Feed)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<!-- app-shell.css = native ENVIRONMENT (safe-area, viewport, keyboard).
+     tokens.css = the real MusicLinkd VISUAL design system (colors, type,
+     .btn/.field/.otp-box components) — copied verbatim from
+     frontend/guide/styleguide.html. Both compose on every screen. -->
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
+<link rel="stylesheet" href="/preview/shared/tokens.css" />
 <!--
   THIS FILE IS A TEMPLATE, NOT A DESIGNED SCREEN.
   It exists to prove out the native-app environment (safe areas, fixed
   viewport, keyboard awareness, bottom-sheet mechanics, offline shell,
-  standalone display mode) so a real screen only has to bring its own
-  visual design on top — copy this file into a flows/<flow>/<screen>/
-  folder (every real screen folder already has one, generated alongside
-  its screen.json) and replace the placeholder regions below. If you copy
-  it manually (rather than letting the generator scaffold it), also add
+  standalone display mode) plus the real design tokens/components, so a
+  real screen only has to compose them — copy this file into a
+  flows/<flow>/<screen>/ folder (every real screen folder already has one,
+  generated alongside its screen.json) and replace the placeholder regions
+  below. If you copy it manually (rather than letting the generator
+  scaffold it), also add
   <meta name="screen-json-path" content="/preview/flows/<flow>/<screen>/screen.json" />
   next to the other meta tags — without it the dev badge falls back to a
   relative "./screen.json" fetch, which has the same trailing-slash problem
   described above.
+
+  ARTBOARD SIZING: .app-root fills 100dvh x 100% of whatever viewport it's
+  in, edge-to-edge — the same approach a real installed PWA/native app
+  uses (there's no fixed "canvas size" on a phone). No desktop max-width
+  cap here on purpose: for reviewing on a desktop browser inside a proper
+  phone-frame, use the workbench at /preview/index.html instead of opening
+  a screen standalone — that's where the phone-frame chrome lives, not
+  baked into every individual screen.
 -->
 </head>
 <body>
-  <!--
-    ARTBOARD SIZING: this is fully responsive, not a fixed artboard.
-    .app-root fills 100dvh × 100% of whatever viewport it's in — the same
-    approach a real installed PWA/native app uses (there's no "canvas size"
-    on a phone, the OS gives you the real viewport). On an actual phone this
-    is edge-to-edge, matching current devices from ~360px (small Android)
-    through ~480px (large Android/Pro Max) wide, and taller aspect ratios
-    (notches, gesture bars) are handled by the safe-area insets above, not
-    by hardcoding a specific device's dimensions.
-
-    The max-width clamp below is ONLY for viewing this on a desktop browser
-    while designing/reviewing (so it doesn't stretch edge-to-edge on a 1440px
-    monitor) — it has zero effect on a real phone, where 100% already IS the
-    phone's width. Delete the inline style if you don't want the desktop
-    framing at all.
-  -->
-  <div class="app-root" style="max-width: 480px; margin-inline: auto; box-shadow: 0 0 0 1px rgba(0,0,0,0.08);">
+  <div class="app-root">
 
     <!-- Fixed top region — safe-area top padding baked in via app-shell.css.
          Put a status/nav bar here; it never scrolls. -->
@@ -74,7 +75,7 @@
            screen.json) for its flow/screen metadata and data contract. -->
 
       <!-- Example bottom-sheet trigger — remove if this screen doesn't need one. -->
-      <button type="button" data-open-sheet="example-sheet">Open example sheet</button>
+      <button type="button" class="btn btn-s" data-open-sheet="example-sheet">Open example sheet</button>
     </main>
 
     <!-- Fixed bottom region — safe-area bottom padding baked in. Auto-hides
@@ -88,9 +89,9 @@
   <!-- Example bottom sheet — structural mechanics only (open/close, drag-down
        transition, safe-area padding). Style its contents with your design system. -->
   <div class="sheet-scrim" data-sheet-scrim-for="example-sheet"></div>
-  <div class="sheet" id="example-sheet">
+  <div class="sheet" id="example-sheet" style="background:#fff;border-radius:24px 24px 0 0;padding:24px;">
     <p>Example bottom sheet content.</p>
-    <button type="button" data-close-sheet="example-sheet">Close</button>
+    <button type="button" class="btn btn-p btn-block" data-close-sheet="example-sheet">Close</button>
   </div>
 
   <script src="/preview/shared/app-shell.js" defer></script>
