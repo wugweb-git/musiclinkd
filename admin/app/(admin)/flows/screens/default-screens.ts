@@ -437,7 +437,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       title: "Session Configuration (booking-side service selection)",
       states: ["default"],
       collectionsTouched: ["studio_bookings", "taxonomy_categories"],
-      notes: "sessionType/durationTier — added this session, not yet wired into the Bookings admin UI.",
+      notes: "sessionType/durationTier and the rest of StudioBookingDoc (engineerRequested/selectedEquipment/addons/taxAmount/depositAmount/discountAmount/promoCode/paymentMethod/notes) are now editable via the Bookings admin module's row-click editor sheet (closed 2026-08-13) — previously view-only with status-transition buttons only.",
     },
   ],
   user_settings: [

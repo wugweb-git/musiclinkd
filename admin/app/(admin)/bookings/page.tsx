@@ -1,14 +1,20 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
+import { Plus } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
-import { CollectionListPage } from "@/components/shared/collection-list-page";
+import { DataTable } from "@/components/shared/data-table";
+import { PageShell } from "@/components/layout/page-shell";
 import { StatusBadge } from "@/components/shared/status-badge";
+import { useCollection } from "@/hooks/use-collection";
+import { useRequireModule } from "@/hooks/use-require-module";
 import { studioBookingsRepo } from "@/services/repositories";
 import type { StudioBookingDoc, WithId } from "@/types/firestore";
+import { BookingEditorSheet } from "./booking-editor-sheet";
 
 type Row = WithId<StudioBookingDoc>;
 
@@ -34,9 +40,14 @@ const columns: ColumnDef<Row>[] = [
   { accessorKey: "data.date", header: "Date" },
   { accessorKey: "data.slotText", header: "Slot" },
   {
+    accessorKey: "data.sessionType",
+    header: "Session",
+    cell: ({ row }) => row.original.data.sessionType ?? <span className="text-muted-foreground">—</span>,
+  },
+  {
     accessorKey: "data.totalAmount",
     header: "Amount",
-    cell: ({ row }) => `$${row.original.data.totalAmount?.toFixed(2) ?? "0.00"}`,
+    cell: ({ row }) => `₹${(row.original.data.totalAmount ?? 0).toLocaleString("en-IN")}`,
   },
   {
     accessorKey: "data.bookingStatus",
@@ -93,17 +104,45 @@ const columns: ColumnDef<Row>[] = [
 ];
 
 export default function BookingsPage() {
+  const { hasAccess } = useRequireModule("bookings");
+  const { data, loading, error, refetch } = useCollection(studioBookingsRepo, { orderByField: "createdAt", orderDirection: "desc" });
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [selected, setSelected] = useState<Row | null>(null);
+
+  if (!hasAccess) return null;
+
   return (
-    <CollectionListPage
-      moduleKey="bookings"
+    <PageShell
       title="Bookings"
-      description="Studio slot reservations across the platform. Status changes here are moderator-only — a booker can only ever cancel their own booking (see firestore.rules)."
-      repo={studioBookingsRepo}
-      columns={columns}
-      listOptions={{ orderByField: "createdAt", orderDirection: "desc" }}
-      searchPlaceholder="Search bookings..."
-      emptyTitle="No bookings yet"
-      emptyDescription="Studio reservations will show up here."
-    />
+      description="Studio slot reservations across the platform. Status changes here are moderator-only — a booker can only ever cancel their own booking (see firestore.rules). Click a row to view/edit the full session configuration and payment breakdown."
+      actions={
+        <Button
+          size="sm"
+          onClick={() => {
+            setSelected(null);
+            setEditorOpen(true);
+          }}
+        >
+          <Plus className="size-4" /> New booking
+        </Button>
+      }
+    >
+      <DataTable
+        columns={columns}
+        data={data}
+        loading={loading}
+        error={error}
+        searchPlaceholder="Search bookings..."
+        emptyTitle="No bookings yet"
+        emptyDescription="Studio reservations will show up here."
+        onRowClick={(row) => {
+          setSelected(row);
+          setEditorOpen(true);
+        }}
+        meta={{ refetch }}
+      />
+
+      <BookingEditorSheet booking={selected} open={editorOpen} onOpenChange={setEditorOpen} onSaved={refetch} />
+    </PageShell>
   );
 }
