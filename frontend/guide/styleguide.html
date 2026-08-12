@@ -99,6 +99,37 @@
     --fs-10: var(--type-1);
     --fs-caption: var(--type-1);
     --fs-h3: var(--type-2);
+
+    /* ===== Gestalt (Pinterest) full-fidelity scale — additive, namespaced
+       "gestalt-" prefix. Nothing above this block changes; these exist for work needing
+       finer steps than the 4-token core provides. Extracted verbatim from
+       github.com/pinterest/gestalt (Apache-2.0). See f-gestalt-tokens section
+       and frontend/guide/tokens/tokens.json (foundation.gestalt) for the full
+       mapping and rationale. ===== */
+    --gestalt-space-0: 0px; --gestalt-space-100: 4px; --gestalt-space-200: 8px; --gestalt-space-300: 12px;
+    --gestalt-space-400: 16px; --gestalt-space-500: 20px; --gestalt-space-600: 24px; --gestalt-space-700: 28px;
+    --gestalt-space-800: 32px; --gestalt-space-900: 36px; --gestalt-space-1000: 40px; --gestalt-space-1100: 44px;
+    --gestalt-space-1200: 48px; --gestalt-space-1300: 52px; --gestalt-space-1400: 56px; --gestalt-space-1500: 60px;
+    --gestalt-space-1600: 64px;
+    --gestalt-rounding-0: 0px; --gestalt-rounding-100: 4px; --gestalt-rounding-200: 8px; --gestalt-rounding-300: 12px;
+    --gestalt-rounding-400: 16px; --gestalt-rounding-500: 20px; --gestalt-rounding-600: 24px; --gestalt-rounding-700: 28px;
+    --gestalt-rounding-800: 32px; --gestalt-rounding-pill: 999px; --gestalt-rounding-circle: 50%;
+    --gestalt-opacity-0: 0; --gestalt-opacity-100: 0.04; --gestalt-opacity-200: 0.2; --gestalt-opacity-300: 0.4;
+    --gestalt-opacity-400: 0.8; --gestalt-opacity-500: 0.9;
+    --gestalt-font-100: 12px; --gestalt-font-200: 14px; --gestalt-font-300: 16px; --gestalt-font-400: 20px;
+    --gestalt-font-500: 28px; --gestalt-font-600: 36px;
+    --gestalt-elevation-floating: 0px 0px 8px rgba(0,0,0,0.1);
+    --gestalt-elevation-raised-top: 0px 2px 8px rgba(0,0,0,0.12);
+    --gestalt-elevation-raised-bottom: 0px -2px 8px rgba(0,0,0,0.12);
+    --gestalt-duration-0: 0ms; --gestalt-duration-50: 50ms; --gestalt-duration-100: 100ms; --gestalt-duration-150: 150ms;
+    --gestalt-duration-200: 200ms; --gestalt-duration-300: 300ms; --gestalt-duration-400: 400ms; --gestalt-duration-500: 500ms;
+    --gestalt-duration-600: 600ms; --gestalt-duration-700: 700ms; --gestalt-duration-900: 900ms;
+    --gestalt-ease-linear: cubic-bezier(0, 0, 1, 1);
+    --gestalt-ease-expressive: cubic-bezier(0.55, 0, 0, 1);
+    --gestalt-ease-lateral: cubic-bezier(0.8, 0, 0.2, 1);
+    --gestalt-ease-bounce: cubic-bezier(0, 0.35, 0, 1.25);
+    --gestalt-ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+    --gestalt-ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
 }
 
 /* Floating Hamburger Button (Active on Mobile & Tablet < 1024px) */
