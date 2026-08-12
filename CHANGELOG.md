@@ -6,6 +6,29 @@ All notable repository-level changes are recorded here.
 
 ### Added
 
+- Gestalt (Pinterest) design-system reference layer, `frontend/guide/tokens/tokens.json`'s `foundation.gestalt` — full-fidelity spacing/rounding/opacity/elevation/motion scales and 423 icons (`frontend/guide/icons/`), extracted verbatim from `github.com/pinterest/gestalt` (Apache-2.0). Additive alongside the existing 4-token core, not a replacement — brand colors untouched. 29 Gestalt-Inspired components (Segmented Control through Wash Animated) built as vanilla HTML/CSS in `frontend/guide/merge3.html`, most with explicit multi-state rows (default/hover/disabled/error/etc.), in MusicLinkd's own brand colors, not Pinterest's.
+- Android: Compose theme files (`app/.../ui/theme/Spacing.kt`, `Shape.kt`, `Elevation.kt`, `Motion.kt`) implementing the same Gestalt scale natively, wired into `Theme.kt`; starter composables (`GestaltButton`, `GestaltTag`, `GestaltStatus`, `GestaltCard`) in `app/.../ui/components/`.
+- Admin: numbered screens (`FlowScreenDoc.screenNumber`, globally unique across ~120 screens) with a `variantOf`/`variantLabel` fork scheme; flat/stacked view toggle on the Flows page (`flows-stacked-view.tsx`); seed data for the 6 previously-empty collections (`taxonomy_categories`+`options` — 28 categories/221 values sourced from `Master_Data_Seed_Values.md`, `feed_posts`, `chat_threads`+`messages`, `support_tickets`, `user_settings`, `brand_assets`); a real Brand Assets CRUD module (`admin/app/(admin)/brand/`); visual trust-badge tiers (`components/shared/trust-badge.tsx`) on the Users list; many-to-many widget↔screen linking (`WidgetDoc.relatedScreens`) with a searchable multi-select picker; Gestalt-derived elevation CSS tokens in `admin/app/globals.css` (admin previously had none).
+- Admin flows/screens registry: 2 flows previously missing entirely (`qr_share`, `saved_favorites`), `search` corrected from "no dedicated screen" to a real standalone `UniversalSearchFlow`, and `reviews` filled in from 6 to its full 11 real screens — all grounded in direct reads of the actual Android source, not the prior audit's assumptions.
+- `MarketplaceItemDoc.quantity` field (units-available), matching the `StudioEquipmentItem.quantity` field that already existed.
+- `admin/scripts/seed/` — a Firestore seed script (`npm run seed`, admin SDK, reuses the developer's existing `firebase login` session so no service-account key is needed) that populates every collection above with realistic, schema-accurate mock data consolidated from the product's original mock-data corpus, currently 672 documents across 28 collections.
+- `StudioDoc.rooms?: StudioRoom[]` — individually bookable rooms within a studio (name/capacity/hourlyRate/amenities), seeded on Octave Sound Labs and Yash Raj Sound Studios. Studio "Engineers-as-bookable-staff" stays explicitly deferred (not this round).
+- `UserDoc.hourlyRate`/`StudioDoc.hourlyRate` migrated `string` → `number` (per-hour INR equivalent; 0 = unset/not applicable) across schema, both editor sheets (now numeric inputs), the Studios list column, and all seed data — was a free-text display string, blocking any real price sort/filter.
+- `webapp/` — a PWA product-reference build, generated (not hand-authored) from `default-flows.ts`/`default-screens.ts` and the seed data: one `screen.json` data contract (flow/screen metadata + a real schema-accurate sample document) plus a scaffolded `index.html` per real screen (124 screens across 24 flows), a shared native-app shell (safe-area, 100dvh, keyboard-aware layout, bottom-sheet mechanics, offline-capable manifest/service worker) with zero visual/brand styling by design, and a flow/screen picker at `webapp/index.html`. Regenerate via `admin/scripts/webapp-map/generate.ts`; never overwrites a screen's `index.html` once designed. See `webapp/README.md`.
+- `admin/docs/architecture/Documentation_Backlog_2026-08-12.md` — a 20-category backlog of diagram/journey/lifecycle documentation (error journeys, state diagrams, Firestore/notification/analytics lifecycles, admin flows, website flows, etc.), explicitly saved for later, not actioned.
+
+### Changed
+
+- `styleguide.html`/`merge3.html` moved from `frontend/website/` to `frontend/guide/` — now the source-of-truth home for design-system material (tokens, icons, docs, and these two interactive references), deploying to `/guide/*.html` via `scripts/build-hosting.sh`. Live-site links and `merge3.html`'s asset paths updated accordingly.
+- Admin Page Management: removed `about`/`blog`/`careers` content pages, added `contact`; kept `home`/`pricing`/legal pages.
+- Admin Capabilities module: removed the one-click "Seed defaults" button (CLI `npm run seed` remains the seeding path).
+
+### Fixed
+
+- `firestore.rules`: `/brand_assets/{assetId}` create/update had no admin bypass (only the literal owner could write, unlike every other owner-scoped collection such as `/users/{userId}`) — would have silently broken the new admin Brand Assets module. Added the same `isModerator()` bypass already used elsewhere.
+
+### Added
+
 - Governance rule §8 "Changelog Discipline" — every commit must include a `CHANGELOG.md` entry following Keep a Changelog format. Applies to all repos: app, admin, website, guide.
 - Phone-frame visual mockups for all 11 screen sections in `guide/merge3.html` (Authentication, Onboarding, Discovery, Artist, Business, Studio, Marketplace, Messaging, Projects, Reputation, Settings).
 - Color swatches (`<span class="ts">`) added to all bare hex codes in documentation tables across `guide/merge3.html` — Semantic Colors, Iconography Extended, Border Tokens, Accessibility, Design Philosophy sections. Complies with Governance §2 Color Swatch Rule.
