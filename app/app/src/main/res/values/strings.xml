@@ -11,6 +11,8 @@
     <string name="nav_studios">Studios</string>
     <string name="nav_portfolio">Portfolio</string>
     <string name="nav_profile">Profile</string>
+    <string name="nav_tab_selected">%1$s navigation tab, selected</string>
+    <string name="nav_tab_unselected">%1$s navigation tab, unselected</string>
     <string name="action_search">Search</string>
     <string name="action_clear">Clear</string>
     <string name="action_share">Share</string>
