@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>MusicLinkd — Offline</title>
+<!-- Absolute path: when the service worker serves this as a navigation
+     fallback, the resulting document's URL is whatever was originally
+     requested (e.g. /preview/flows/auth/splash), not offline.html's own
+     path — a relative href would resolve against that, not against here. -->
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+<div class="app-root">
+  <div class="app-content" style="display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;">
+    <div>
+      <p>You're offline.</p>
+      <p>This screen wasn't cached — reconnect and try again.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

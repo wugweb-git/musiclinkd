@@ -1,0 +1,16 @@
+{
+  "flowKey": "cms_pages",
+  "flowTitle": "CMS Pages",
+  "flowStatus": "partial",
+  "flowOrder": 22,
+  "screenKey": "legal_pages_site",
+  "screenNumber": 95,
+  "screenTitle": "Legal Pages (site)",
+  "screenOrder": 3,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "Static HTML today — cross-reference Flow 21's \"Legal Pages\" entry point, and the admin's page_content collection below.",
+  "dataContract": []
+}

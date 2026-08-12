@@ -1,0 +1,8 @@
+{
+  "key": "profile_management",
+  "title": "Profile Management",
+  "order": 10,
+  "status": "partial",
+  "description": "profileType + Business/Band/Venue/Talent extension fields are now real schema (this session). The app previously had three disconnected profileType-guessing UI implementations (dashboard badge substring match, PublicProfilePreviewScreen headline match, Discover's mock-only enum) that should converge on the real field once wired — not independently reverified against the new field this session. IMPORTANT: this is PROFILE settings (identity, roles, links, public-facing fields) — explicitly distinct from Flow 21 \"User Settings\" (app preferences: notifications, privacy, dark mode, language, currency). Do not conflate the two when adding screens here.",
+  "screenCount": 10
+}

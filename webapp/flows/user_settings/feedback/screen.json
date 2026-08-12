@@ -1,0 +1,18 @@
+{
+  "flowKey": "user_settings",
+  "flowTitle": "Settings & Support",
+  "flowStatus": "missing",
+  "flowOrder": 21,
+  "screenKey": "feedback",
+  "screenNumber": 57,
+  "screenTitle": "Feedback",
+  "screenOrder": 11,
+  "states": [
+    "default",
+    "submitting",
+    "success"
+  ],
+  "collectionsTouched": [],
+  "notes": "No Firestore write and no external mailto/link — input is entirely discarded today.",
+  "dataContract": []
+}

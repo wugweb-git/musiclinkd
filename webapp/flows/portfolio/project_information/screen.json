@@ -1,0 +1,15 @@
+{
+  "flowKey": "portfolio",
+  "flowTitle": "Add Portfolio",
+  "flowStatus": "app-mocked",
+  "flowOrder": 3,
+  "screenKey": "project_information",
+  "screenNumber": 23,
+  "screenTitle": "Project Information",
+  "screenOrder": 3,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "dataContract": []
+}

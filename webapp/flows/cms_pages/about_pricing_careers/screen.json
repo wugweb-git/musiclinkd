@@ -1,0 +1,16 @@
+{
+  "flowKey": "cms_pages",
+  "flowTitle": "CMS Pages",
+  "flowStatus": "partial",
+  "flowOrder": 22,
+  "screenKey": "about_pricing_careers",
+  "screenNumber": 94,
+  "screenTitle": "About / Pricing / Careers",
+  "screenOrder": 2,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "Static HTML pages under frontend/website/.",
+  "dataContract": []
+}

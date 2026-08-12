@@ -1,0 +1,16 @@
+{
+  "flowKey": "business_profiles",
+  "flowTitle": "Business Profiles (Studios, Labels)",
+  "flowStatus": "partial",
+  "flowOrder": 12,
+  "screenKey": "business_book_now",
+  "screenNumber": 76,
+  "screenTitle": "Book Now (CTA)",
+  "screenOrder": 6,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "Routes into the Booking flow (Flow 8) — no schema of its own.",
+  "dataContract": []
+}

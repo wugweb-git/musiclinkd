@@ -1,0 +1,16 @@
+{
+  "flowKey": "business_profiles",
+  "flowTitle": "Business Profiles (Studios, Labels)",
+  "flowStatus": "partial",
+  "flowOrder": 12,
+  "screenKey": "business_owner_insights",
+  "screenNumber": 77,
+  "screenTitle": "Owner Mode / Business Insights",
+  "screenOrder": 7,
+  "states": [
+    "visible_if_owner"
+  ],
+  "collectionsTouched": [],
+  "notes": "100% mocked as of this session's audit — BusinessOwnerInsightsScreen has no real data source.",
+  "dataContract": []
+}

@@ -1,0 +1,18 @@
+{
+  "flowKey": "auth",
+  "flowTitle": "User Auth",
+  "flowStatus": "partial",
+  "flowOrder": 1,
+  "screenKey": "google_signin",
+  "screenNumber": 6,
+  "screenTitle": "Google Sign-In",
+  "screenOrder": 6,
+  "states": [
+    "account_picker",
+    "success",
+    "fallback_fake"
+  ],
+  "collectionsTouched": [],
+  "notes": "The fabricated OAuth client ID means the real intent reliably fails; every failure path falls back to a fully hardcoded fake profile with zero network calls.",
+  "dataContract": []
+}

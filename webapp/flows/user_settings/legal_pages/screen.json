@@ -1,0 +1,31 @@
+{
+  "flowKey": "user_settings",
+  "flowTitle": "Settings & Support",
+  "flowStatus": "missing",
+  "flowOrder": 21,
+  "screenKey": "legal_pages",
+  "screenNumber": 58,
+  "screenTitle": "Legal Pages (Privacy Policy, Terms)",
+  "screenOrder": 12,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "page_content"
+  ],
+  "notes": "Lives under Flow 22 CMS Pages' page_content collection (route \"/legal/privacy\", \"/legal/terms\") — surfaced here as an entry point since Settings is where a user would look for it.",
+  "dataContract": [
+    {
+      "collection": "page_content",
+      "sample": {
+        "route": "/",
+        "title": "MusicLinkd — Find your next collaborator",
+        "status": "PUBLISHED",
+        "content": "MusicLinkd connects singers, musicians, producers, studios, and venues across India for collaboration, booking, and hire.",
+        "seoDescription": "MusicLinkd is India's marketplace for music talent, studios, and collaboration.",
+        "updatedBy": "mock-admin-system",
+        "updatedAt": "2026-08-01T09:00:00.000Z"
+      }
+    }
+  ]
+}

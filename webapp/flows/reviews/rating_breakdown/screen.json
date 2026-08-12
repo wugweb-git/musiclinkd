@@ -1,0 +1,16 @@
+{
+  "flowKey": "reviews",
+  "flowTitle": "Reviews",
+  "flowStatus": "app-mocked",
+  "flowOrder": 17,
+  "screenKey": "rating_breakdown",
+  "screenNumber": 111,
+  "screenTitle": "Rating Breakdown",
+  "screenOrder": 5,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "ReputationSubScreen.RATING_BREAKDOWN — aggregate score/category breakdown display, same local-Room-backed data as review_list.",
+  "dataContract": []
+}

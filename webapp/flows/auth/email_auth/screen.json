@@ -1,0 +1,19 @@
+{
+  "flowKey": "auth",
+  "flowTitle": "User Auth",
+  "flowStatus": "partial",
+  "flowOrder": 1,
+  "screenKey": "email_auth",
+  "screenNumber": 3,
+  "screenTitle": "Email Auth (sign up / sign in)",
+  "screenOrder": 3,
+  "states": [
+    "signup",
+    "signin",
+    "loading",
+    "error"
+  ],
+  "collectionsTouched": [],
+  "notes": "Real Firebase Auth SDK calls (createUserWithEmailAndPassword/signInWithEmailAndPassword) — but the project's fabricated API key means these fail server-side with a real error. The one honest failure mode in this flow.",
+  "dataContract": []
+}

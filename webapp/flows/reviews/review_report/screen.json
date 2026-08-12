@@ -1,0 +1,16 @@
+{
+  "flowKey": "reviews",
+  "flowTitle": "Reviews",
+  "flowStatus": "app-mocked",
+  "flowOrder": 17,
+  "screenKey": "review_report",
+  "screenNumber": 116,
+  "screenTitle": "Report Review",
+  "screenOrder": 10,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "Dispute/report a review. Fully no-op UI, no persistence.",
+  "dataContract": []
+}

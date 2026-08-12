@@ -1,0 +1,25 @@
+{
+  "flowKey": "discover",
+  "flowTitle": "Discover",
+  "flowStatus": "app-mocked",
+  "flowOrder": 4,
+  "screenKey": "saved_profiles",
+  "screenNumber": 88,
+  "screenTitle": "Saved Profiles",
+  "screenOrder": 4,
+  "states": [
+    "empty",
+    "populated"
+  ],
+  "collectionsTouched": [
+    "user_bookmarks"
+  ],
+  "notes": "Screen exists in the real app; user_bookmarks collection is real and rules-ready, but the screen is 100% unwired to it.",
+  "dataContract": [
+    {
+      "collection": "user_bookmarks",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}

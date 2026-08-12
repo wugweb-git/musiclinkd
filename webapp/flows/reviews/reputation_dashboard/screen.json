@@ -1,0 +1,16 @@
+{
+  "flowKey": "reviews",
+  "flowTitle": "Reviews",
+  "flowStatus": "app-mocked",
+  "flowOrder": 17,
+  "screenKey": "reputation_dashboard",
+  "screenNumber": 107,
+  "screenTitle": "Reputation Hub Dashboard",
+  "screenOrder": 1,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "ReputationSubScreen.DASHBOARD — entry point of the standalone Reputation Hub module (ReputationAndReviewsScreens.kt), reached from the main dashboard, not from any post-booking prompt. Enum state confirmed via Screens_Map.md's full-source audit; not independently re-verified for persistence behavior beyond what's already established for the module as a whole (see the write screens below — all local Room or no-op, zero real `reviews` writes).",
+  "dataContract": []
+}

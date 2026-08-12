@@ -1,0 +1,5675 @@
+{
+  "generatedAt": "2026-08-12T06:13:00.877Z",
+  "flows": [
+    {
+      "key": "auth",
+      "title": "User Auth",
+      "order": 1,
+      "status": "partial",
+      "description": "Email/password calls the real Firebase Auth SDK but fails server-side (fabricated API key). OTP is 100% fake — verifyOtp()'s check is effectively \"any 6-digit string passes.\" Google Sign-In's native flow reliably fails (fabricated OAuth client) and falls back to a fully hardcoded fake profile. Most real registrations land under a local_uid_${email.hashCode()} fallback with no corresponding Firebase Auth account.",
+      "screenCount": 7
+    },
+    {
+      "key": "onboarding",
+      "title": "User Onboarding",
+      "order": 2,
+      "status": "partial",
+      "description": "13-screen real NavHost-driven flow, writes to users/{uid} on completion. instrumentProficiency, roleExperience, networkingLinks, profilePicturePath, and coverPicturePath are all collected but silently dropped from the final Firestore write.",
+      "screenCount": 13
+    },
+    {
+      "key": "portfolio",
+      "title": "Add Portfolio",
+      "order": 3,
+      "status": "app-mocked",
+      "description": "11-screen publish flow for a piece of finished creative work (song/album/EP/etc.) — distinct from the separate \"Opportunities\" flow's projects collection (gig/collaboration postings). Schema (portfolio_projects) corrected this session to match it exactly — ownerUid, 6 named streaming links, ownerRoles, collaborators/credits, status/visibility, artworkTheme. Zero confirmed app-side writer — PortfolioViewModel.publishProject() is still 100% in-memory with a hardcoded author name.",
+      "screenCount": 11
+    },
+    {
+      "key": "discover",
+      "title": "Discover",
+      "order": 4,
+      "status": "app-mocked",
+      "description": "100% mock data — DiscoverViewModel has zero Firestore references, filters a hardcoded 12-profile list. Every filterable field (experienceLevel, availabilityStatus, rating, etc.) would need to be sourced from real users/studios documents to go live.",
+      "screenCount": 5
+    },
+    {
+      "key": "opportunities",
+      "title": "Opportunities",
+      "order": 5,
+      "status": "missing",
+      "description": "Maps to the existing projects collection (gig/collaboration postings — someone looking for a collaborator), per the round-2 reconciliation — folded in rather than a separate gig_opportunities collection. Distinct from the \"Add Portfolio\" flow (finished creative work someone already made). CONFIRMED 2026-08-12 (grounded Explore audit): 100% missing, not just unconfirmed. Zero `.collection(\"projects\")` calls anywhere in the app; `ProjectSchema` (BackendSchemas.kt:112) is defined but never instantiated. The only browse/apply UI (SuccessAndDashboardScreens.kt:2174-2435) is commented-out or unreachable dead code whose own copy admits \"Opportunities are coming soon.\" `UnifiedOpportunityCard` is defined but never called. A \"Live Opportunities Feed\" nav item exists but routes to an unrelated business-storefront screen. `ChatContext.OPPORTUNITY` is just a messaging-inbox filter tab around one hardcoded demo message, not a posting/browsing flow.",
+      "screenCount": 0
+    },
+    {
+      "key": "communication",
+      "title": "Communication & Collaboration",
+      "order": 6,
+      "status": "partial",
+      "description": "connections collection has two inconsistent writers: FirebaseManager.sendConnectionRequest is correct (senderUid/targetUserId/status, composite doc ID); ConnectionsScreen.kt's second writer still writes a different, non-composite document for the same pair. chat_threads/messages exist in firestore.rules but weren't independently re-audited this session.",
+      "screenCount": 7
+    },
+    {
+      "key": "marketplace",
+      "title": "Marketplace (Buy/Sell)",
+      "order": 7,
+      "status": "app-mocked",
+      "description": "100% mocked, not wired to Firestore — reconciled: MarketplaceItemDoc.category is now taxonomy-backed (marketplace_categories), matching the app's real sale/rental/mixing/beats/services split. SCREEN-MAPPED 2026-08-12 (grounded Explore audit): one real, dashboard-wired browse screen (MarketplaceBetaScreen) with 6 category tabs including a \"Gear Rentals\" filter (see equipment_rental below), an in-dialog item detail (not a separate screen), and a Saved/Favorites bookmarks tab — all backed by hardcoded lists, zero `marketplace_items` references anywhere. No create-listing, cart, checkout, or seller-messaging screens exist at all — confirmed absent by exhaustive grep, not just unaudited.",
+      "screenCount": 3
+    },
+    {
+      "key": "booking",
+      "title": "Booking",
+      "order": 8,
+      "status": "partial",
+      "description": "Currently studio-only (StudioBookingDoc) — not conceptually limited to studios long-term, the primary bookable entity type today is just Studio. Real writer exists but uses the wrong field names (artistUserId/totalCostAmount/statusKey instead of the schema's userId/totalAmount/bookingStatus) — confirmed still broken as of this session's last verification pass, despite two rounds of AI Studio claiming it was fixed.",
+      "screenCount": 11
+    },
+    {
+      "key": "equipment_rental",
+      "title": "Equipment Rental",
+      "order": 9,
+      "status": "missing",
+      "description": "No dedicated schema. StudioDoc.equipment (added this session) covers gear display for the booking flow; no rental-specific transaction/listing model exists. RESOLVED 2026-08-12 (grounded Explore audit, was flagged \"genuinely unknown\"): confirmed NOT a standalone flow — \"rental\" is just one of six filter tabs inside the mocked Marketplace browse screen (see `marketplace` above). Its \"Rent This Gear\" confirm button only sets a local success banner with a fabricated request ID (\"#REN-5982\") — no backend write of any kind. StudioBookingDoc.selectedEquipment/addons have zero references anywhere in the app; unrelated free-text \"addons\" notes exist in Studio Booking's own configure-session screen, not this flow. No separate flow entry is warranted going forward.",
+      "screenCount": 0
+    },
+    {
+      "key": "profile_management",
+      "title": "Profile Management",
+      "order": 10,
+      "status": "partial",
+      "description": "profileType + Business/Band/Venue/Talent extension fields are now real schema (this session). The app previously had three disconnected profileType-guessing UI implementations (dashboard badge substring match, PublicProfilePreviewScreen headline match, Discover's mock-only enum) that should converge on the real field once wired — not independently reverified against the new field this session. IMPORTANT: this is PROFILE settings (identity, roles, links, public-facing fields) — explicitly distinct from Flow 21 \"User Settings\" (app preferences: notifications, privacy, dark mode, language, currency). Do not conflate the two when adding screens here.",
+      "screenCount": 10
+    },
+    {
+      "key": "services_availability",
+      "title": "Services, Availability",
+      "order": 11,
+      "status": "partial",
+      "description": "sessionAvailability (Talent), StudioDoc.services (taxonomy tags), and serviceOfferings (priced menu, Business) now modeled. No single unified \"availability\" concept spans all profile types yet — Talent/Band/Business/Venue each have their own shape.",
+      "screenCount": 5
+    },
+    {
+      "key": "business_profiles",
+      "title": "Business Profiles (Studios, Labels)",
+      "order": 12,
+      "status": "partial",
+      "description": "UserDoc Business extension (businessName/Type/tagline/hours/GSTIN/services/equipment/teamMembers/serviceOfferings/gallery) modeled this session, matching BusinessProfileScreens.kt's mock \"Octave Sound Labs\" tabs. businessType only covers 4 of the PRD's ~8 sub-types (Studio/Label/School/Dealer — missing Production House/Booking Agency/Artist Manager/Rental Company).",
+      "screenCount": 7
+    },
+    {
+      "key": "notifications",
+      "title": "Notifications",
+      "order": 13,
+      "status": "app-mocked",
+      "description": "notifications/{notificationId} typed and rules-ready this session. SCREEN-MAPPED 2026-08-12 (grounded Explore audit, upgraded from \"missing\" to \"app-mocked\" — a real reader screen does exist): NotificationsCenterScreen is a genuinely reachable, feature-rich screen (search/category filters, swipe-to-dismiss, pull-to-refresh) but 100% local mock state — zero `.collection(\"notifications\")` calls anywhere, despite UI copy that falsely claims \"Firestore Real-Time Sync.\" Three separate, mutually-inconsistent preferences surfaces also exist (Notifications Center settings, an onboarding notification-permissions step, and a general Settings \"Notification Feeds\" panel) — none persist anywhere beyond local state.",
+      "screenCount": 4
+    },
+    {
+      "key": "public_profile",
+      "title": "Public Profile",
+      "order": 14,
+      "status": "partial",
+      "description": "Depends on Profile Management's template rendering — same profileType-driven templates. The public-facing read path wasn't separately audited this session.",
+      "screenCount": 5
+    },
+    {
+      "key": "band",
+      "title": "Band",
+      "order": 15,
+      "status": "partial",
+      "description": "UserDoc Band extension (bandName/lineupMembers/techRiderUrl/stagePlotUrl) modeled. \"Shows\" (upcoming/past performances) closed 2026-08-12: `BandShow { title, date, venueName?, ticketUrl?, isPast }` + `UserDoc.shows?: BandShow[]` — a flat array, not a separate collection.",
+      "screenCount": 3
+    },
+    {
+      "key": "verifications",
+      "title": "Verifications",
+      "order": 16,
+      "status": "app-mocked",
+      "description": "verification_requests collection and the admin Verification page are both real and working. SCREEN-MAPPED 2026-08-12 (grounded Explore audit, upgraded from \"missing\" to \"app-mocked\"): one real, reachable screen (VerificationScreen) exists off the Profile tab, but it's fully simulated — upload boxes hardcode literal filenames into local state (no file picker, no FirebaseStorage call) and never write to `verification_requests`. No status-tracking (pending/approved/rejected) screen exists; verified status is three local booleans driving badge colors. `VerificationRequestSchema` is defined in BackendSchemas.kt but never instantiated.",
+      "screenCount": 1
+    },
+    {
+      "key": "reviews",
+      "title": "Reviews",
+      "order": 17,
+      "status": "app-mocked",
+      "description": "reviews collection and admin module both real and working. SCREEN-MAPPED 2026-08-12 (grounded Explore audit, upgraded from \"partial\" to \"app-mocked\" — the write side is now confirmed non-functional, not just unverified): a standalone Reputation Hub module (ReputationAndReviewsScreens.kt, reached from the dashboard, not from any post-booking prompt) has 4 real write screens — Write Review, Completed Project Review, Marketplace Gear Review, Studio Facility Review — plus business-response and report-review screens. None write to the real `reviews` Firestore collection: some persist to a local Room table, the rest are pure no-op UI. `ReviewSchema` (matching admin's ReviewDoc) exists in BackendSchemas.kt but is never referenced. The Business Profile \"Reviews & Gallery\" tab (already screen-mapped under business_profiles) remains a separate, read-only display of hardcoded data.",
+      "screenCount": 11
+    },
+    {
+      "key": "subscription",
+      "title": "Subscription",
+      "order": 18,
+      "status": "missing",
+      "description": "Not modeled at all — no subscription/plan/tier collection exists anywhere in this schema yet.",
+      "screenCount": 0
+    },
+    {
+      "key": "search",
+      "title": "Search",
+      "order": 19,
+      "status": "app-mocked",
+      "description": "CORRECTED 2026-08-13 (direct source read, SupportingScreens.kt): the 2026-08-12 audit was wrong — `UniversalSearchFlow` (SupportingScreens.kt:281, reached via the dashboard's top-bar Search icon, `SupportingModule.UNIVERSAL_SEARCH`) is a real, standalone, reachable screen, not a duplicate of Discover's or Booking's internal SEARCH_RESULTS states (those remain separately covered under `discover`/`booking`). 4-state (`SearchScreenState`: HOME/LIVE/RESULTS/EMPTY), fully mocked — a hardcoded 10-item `mockAllResults` list, zero Firestore reads. `DemoDataProvider.kt`'s `searchFilterCategories` list is still confirmed dead code, unrelated to this screen.",
+      "screenCount": 1
+    },
+    {
+      "key": "recommendation_engine",
+      "title": "Recommendation Engine",
+      "order": 20,
+      "status": "missing",
+      "description": "Explicitly deprioritized by the user (\"ignore\"). For reference: GeminiRecommendationEngine.kt is real app-side code but neutered by a placeholder-API-key guard-check bug (checks for the wrong placeholder string, so it always falls through to hardcoded fallback data).",
+      "screenCount": 0
+    },
+    {
+      "key": "user_settings",
+      "title": "Settings & Support",
+      "order": 21,
+      "status": "missing",
+      "description": "App-level settings (notifications/privacy/security/appearance), Help & Support (FAQ, raise a ticket, report user/listing, feedback), legal pages, and app version — explicitly distinct from Flow 1 Auth (password change lives there, not here) and Flow 10 Profile Management (identity/public-profile fields, not app preferences). user_settings/{userId} and support_tickets/moderation_flags are typed and rules-ready, but SettingsFlow and HelpAndSupportFlow app-side have zero real persistence anywhere — confirmed this session. Founded, ready-to-wire gaps, not speculative.",
+      "screenCount": 13
+    },
+    {
+      "key": "cms_pages",
+      "title": "CMS Pages",
+      "order": 22,
+      "status": "partial",
+      "description": "page_content collection and the admin Pages module are both real and working, but frontend/website/ is 100% static HTML that never reads Firestore at runtime — edits made here don't reach the live site. Documented as a known gap (CMS_Content_Mapping.md), not silently dropped.",
+      "screenCount": 5
+    },
+    {
+      "key": "qr_share",
+      "title": "QR Code & Profile Sharing",
+      "order": 23,
+      "status": "missing",
+      "description": "ADDED 2026-08-13 (direct source read, previously completely absent from this registry). `QrAndShareFlow` (SupportingScreens.kt:655, reached from the dashboard's QRShare shortcut) — 3-state screen (Home/Options/Preview, plain string state, not an enum) generating a shareable \"Premium Comp Card\" with a simulated PDF download (fake progress bar via `delay(150)` loop, no real file generation). No schema modeled for this at all — no shareable-link record, no QR payload, no download/share analytics. `DynamicLinkManager.kt` constructs outbound share links elsewhere in the app but this screen doesn't call it — confirmed no cross-wiring.",
+      "screenCount": 1
+    },
+    {
+      "key": "saved_favorites",
+      "title": "Saved & Favorites",
+      "order": 24,
+      "status": "app-mocked",
+      "description": "ADDED 2026-08-13 (direct source read, previously only 1 of its 4 real tabs was documented — as `marketplace_saved_bookmarks` under the `marketplace` flow, which remains accurate for that one tab). `SavedAndFavoritesFlow` (SupportingScreens.kt:1023, reached from the dashboard's Saved shortcut) is the actual hub — `SavedTab` enum: ARTISTS, BANDS, STUDIOS, MARKETPLACE (+ EMPTY state), grid/list view toggle, per-tab remove action. All four tabs are 100% local `mutableStateListOf` mock data (hardcoded artists/studios/marketplace items) — zero Firestore reads or writes, no persisted \"saved\" relationship on any real document.",
+      "screenCount": 1
+    }
+  ],
+  "screens": [
+    {
+      "flowKey": "auth",
+      "flowTitle": "User Auth",
+      "flowStatus": "partial",
+      "flowOrder": 1,
+      "screenKey": "splash",
+      "screenNumber": 1,
+      "screenTitle": "Splash",
+      "screenOrder": 1,
+      "states": [
+        "loading",
+        "resuming_local_session"
+      ],
+      "collectionsTouched": [],
+      "notes": "Session 'persistence' is local Room state resumption, not a Firebase Auth session check.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "auth",
+      "flowTitle": "User Auth",
+      "flowStatus": "partial",
+      "flowOrder": 1,
+      "screenKey": "welcome",
+      "screenNumber": 2,
+      "screenTitle": "Welcome (choose auth method)",
+      "screenOrder": 2,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Entry point offering Email, Mobile/OTP, and Google Sign-In.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "auth",
+      "flowTitle": "User Auth",
+      "flowStatus": "partial",
+      "flowOrder": 1,
+      "screenKey": "email_auth",
+      "screenNumber": 3,
+      "screenTitle": "Email Auth (sign up / sign in)",
+      "screenOrder": 3,
+      "states": [
+        "signup",
+        "signin",
+        "loading",
+        "error"
+      ],
+      "collectionsTouched": [],
+      "notes": "Real Firebase Auth SDK calls (createUserWithEmailAndPassword/signInWithEmailAndPassword) — but the project's fabricated API key means these fail server-side with a real error. The one honest failure mode in this flow.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "auth",
+      "flowTitle": "User Auth",
+      "flowStatus": "partial",
+      "flowOrder": 1,
+      "screenKey": "mobile_auth",
+      "screenNumber": 4,
+      "screenTitle": "Mobile Number Entry",
+      "screenOrder": 4,
+      "states": [
+        "default",
+        "error"
+      ],
+      "collectionsTouched": [],
+      "dataContract": []
+    },
+    {
+      "flowKey": "auth",
+      "flowTitle": "User Auth",
+      "flowStatus": "partial",
+      "flowOrder": 1,
+      "screenKey": "otp_verification",
+      "screenNumber": 5,
+      "screenTitle": "OTP Verification",
+      "screenOrder": 5,
+      "states": [
+        "entering",
+        "verifying",
+        "error",
+        "success"
+      ],
+      "collectionsTouched": [],
+      "notes": "100% fake — verifyOtp()'s check is effectively \"any 6-digit string passes.\" No PhoneAuthProvider exists anywhere in the app.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "auth",
+      "flowTitle": "User Auth",
+      "flowStatus": "partial",
+      "flowOrder": 1,
+      "screenKey": "google_signin",
+      "screenNumber": 6,
+      "screenTitle": "Google Sign-In",
+      "screenOrder": 6,
+      "states": [
+        "account_picker",
+        "success",
+        "fallback_fake"
+      ],
+      "collectionsTouched": [],
+      "notes": "The fabricated OAuth client ID means the real intent reliably fails; every failure path falls back to a fully hardcoded fake profile with zero network calls.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "auth",
+      "flowTitle": "User Auth",
+      "flowStatus": "partial",
+      "flowOrder": 1,
+      "screenKey": "registration_write",
+      "screenNumber": 7,
+      "screenTitle": "Registration write (implicit, end of onboarding)",
+      "screenOrder": 7,
+      "states": [
+        "success",
+        "fallback_uid"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "userId = FirebaseAuth.currentUser?.uid ?: \"local_uid_${email.hashCode()}\" — given the states above, most real signups today write under the fallback hash-of-email ID with no real Firebase Auth account behind it.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "primary_role",
+      "screenNumber": 8,
+      "screenTitle": "Primary Role Selection",
+      "screenOrder": 1,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "taxonomy_categories"
+      ],
+      "notes": "Reads person_types options.",
+      "dataContract": [
+        {
+          "collection": "taxonomy_categories",
+          "sample": {
+            "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+            "genres": {
+              "key": "genres",
+              "options": [
+                "Bollywood / Filmi",
+                "Indie Pop",
+                "Hindustani Classical",
+                "Carnatic Classical",
+                "Punjabi Folk / Bhangra"
+              ]
+            },
+            "person_types": {
+              "key": "person_types",
+              "options": [
+                {
+                  "label": "Singer / Vocalist",
+                  "value": "singer"
+                },
+                {
+                  "label": "Rapper / MC",
+                  "value": "rapper"
+                },
+                {
+                  "label": "Folk Vocalist",
+                  "value": "folk_vocalist"
+                },
+                {
+                  "label": "Guitarist",
+                  "value": "guitarist"
+                },
+                {
+                  "label": "Keyboardist / Pianist",
+                  "value": "keyboardist"
+                }
+              ]
+            },
+            "languages": {
+              "key": "languages",
+              "options": [
+                "English",
+                "Hindi (हिंदी)",
+                "Punjabi (ਪੰਜਾਬੀ)",
+                "Tamil (தமிழ்)",
+                "Telugu (తెలుగు)"
+              ]
+            },
+            "instruments": {
+              "key": "instruments",
+              "options": [
+                "Acoustic Guitar",
+                "Electric Guitar",
+                "Bass Guitar",
+                "Keyboard / Synthesizer",
+                "Piano"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "secondary_role",
+      "screenNumber": 9,
+      "screenTitle": "Secondary Role (optional)",
+      "screenOrder": 2,
+      "states": [
+        "default",
+        "skipped"
+      ],
+      "collectionsTouched": [
+        "taxonomy_categories"
+      ],
+      "dataContract": [
+        {
+          "collection": "taxonomy_categories",
+          "sample": {
+            "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+            "genres": {
+              "key": "genres",
+              "options": [
+                "Bollywood / Filmi",
+                "Indie Pop",
+                "Hindustani Classical",
+                "Carnatic Classical",
+                "Punjabi Folk / Bhangra"
+              ]
+            },
+            "person_types": {
+              "key": "person_types",
+              "options": [
+                {
+                  "label": "Singer / Vocalist",
+                  "value": "singer"
+                },
+                {
+                  "label": "Rapper / MC",
+                  "value": "rapper"
+                },
+                {
+                  "label": "Folk Vocalist",
+                  "value": "folk_vocalist"
+                },
+                {
+                  "label": "Guitarist",
+                  "value": "guitarist"
+                },
+                {
+                  "label": "Keyboardist / Pianist",
+                  "value": "keyboardist"
+                }
+              ]
+            },
+            "languages": {
+              "key": "languages",
+              "options": [
+                "English",
+                "Hindi (हिंदी)",
+                "Punjabi (ਪੰਜਾਬੀ)",
+                "Tamil (தமிழ்)",
+                "Telugu (తెలుగు)"
+              ]
+            },
+            "instruments": {
+              "key": "instruments",
+              "options": [
+                "Acoustic Guitar",
+                "Electric Guitar",
+                "Bass Guitar",
+                "Keyboard / Synthesizer",
+                "Piano"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "genres",
+      "screenNumber": 10,
+      "screenTitle": "Genres (pick up to 3)",
+      "screenOrder": 3,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "taxonomy_categories"
+      ],
+      "dataContract": [
+        {
+          "collection": "taxonomy_categories",
+          "sample": {
+            "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+            "genres": {
+              "key": "genres",
+              "options": [
+                "Bollywood / Filmi",
+                "Indie Pop",
+                "Hindustani Classical",
+                "Carnatic Classical",
+                "Punjabi Folk / Bhangra"
+              ]
+            },
+            "person_types": {
+              "key": "person_types",
+              "options": [
+                {
+                  "label": "Singer / Vocalist",
+                  "value": "singer"
+                },
+                {
+                  "label": "Rapper / MC",
+                  "value": "rapper"
+                },
+                {
+                  "label": "Folk Vocalist",
+                  "value": "folk_vocalist"
+                },
+                {
+                  "label": "Guitarist",
+                  "value": "guitarist"
+                },
+                {
+                  "label": "Keyboardist / Pianist",
+                  "value": "keyboardist"
+                }
+              ]
+            },
+            "languages": {
+              "key": "languages",
+              "options": [
+                "English",
+                "Hindi (हिंदी)",
+                "Punjabi (ਪੰਜਾਬੀ)",
+                "Tamil (தமிழ்)",
+                "Telugu (తెలుగు)"
+              ]
+            },
+            "instruments": {
+              "key": "instruments",
+              "options": [
+                "Acoustic Guitar",
+                "Electric Guitar",
+                "Bass Guitar",
+                "Keyboard / Synthesizer",
+                "Piano"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "languages",
+      "screenNumber": 11,
+      "screenTitle": "Languages",
+      "screenOrder": 4,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "taxonomy_categories"
+      ],
+      "dataContract": [
+        {
+          "collection": "taxonomy_categories",
+          "sample": {
+            "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+            "genres": {
+              "key": "genres",
+              "options": [
+                "Bollywood / Filmi",
+                "Indie Pop",
+                "Hindustani Classical",
+                "Carnatic Classical",
+                "Punjabi Folk / Bhangra"
+              ]
+            },
+            "person_types": {
+              "key": "person_types",
+              "options": [
+                {
+                  "label": "Singer / Vocalist",
+                  "value": "singer"
+                },
+                {
+                  "label": "Rapper / MC",
+                  "value": "rapper"
+                },
+                {
+                  "label": "Folk Vocalist",
+                  "value": "folk_vocalist"
+                },
+                {
+                  "label": "Guitarist",
+                  "value": "guitarist"
+                },
+                {
+                  "label": "Keyboardist / Pianist",
+                  "value": "keyboardist"
+                }
+              ]
+            },
+            "languages": {
+              "key": "languages",
+              "options": [
+                "English",
+                "Hindi (हिंदी)",
+                "Punjabi (ਪੰਜਾਬੀ)",
+                "Tamil (தமிழ்)",
+                "Telugu (తెలుగు)"
+              ]
+            },
+            "instruments": {
+              "key": "instruments",
+              "options": [
+                "Acoustic Guitar",
+                "Electric Guitar",
+                "Bass Guitar",
+                "Keyboard / Synthesizer",
+                "Piano"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "instruments",
+      "screenNumber": 12,
+      "screenTitle": "Instruments",
+      "screenOrder": 5,
+      "states": [
+        "default",
+        "skipped_for_non_musician"
+      ],
+      "collectionsTouched": [
+        "taxonomy_categories"
+      ],
+      "dataContract": [
+        {
+          "collection": "taxonomy_categories",
+          "sample": {
+            "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+            "genres": {
+              "key": "genres",
+              "options": [
+                "Bollywood / Filmi",
+                "Indie Pop",
+                "Hindustani Classical",
+                "Carnatic Classical",
+                "Punjabi Folk / Bhangra"
+              ]
+            },
+            "person_types": {
+              "key": "person_types",
+              "options": [
+                {
+                  "label": "Singer / Vocalist",
+                  "value": "singer"
+                },
+                {
+                  "label": "Rapper / MC",
+                  "value": "rapper"
+                },
+                {
+                  "label": "Folk Vocalist",
+                  "value": "folk_vocalist"
+                },
+                {
+                  "label": "Guitarist",
+                  "value": "guitarist"
+                },
+                {
+                  "label": "Keyboardist / Pianist",
+                  "value": "keyboardist"
+                }
+              ]
+            },
+            "languages": {
+              "key": "languages",
+              "options": [
+                "English",
+                "Hindi (हिंदी)",
+                "Punjabi (ਪੰਜਾਬੀ)",
+                "Tamil (தமிழ்)",
+                "Telugu (తెలుగు)"
+              ]
+            },
+            "instruments": {
+              "key": "instruments",
+              "options": [
+                "Acoustic Guitar",
+                "Electric Guitar",
+                "Bass Guitar",
+                "Keyboard / Synthesizer",
+                "Piano"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "instrument_proficiency",
+      "screenNumber": 13,
+      "screenTitle": "Instrument Proficiency (per-instrument years/level)",
+      "screenOrder": 6,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Collected in local state but confirmed dropped from the final Firestore write and from Room.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "location",
+      "screenNumber": 14,
+      "screenTitle": "Location (country/state/city/area)",
+      "screenOrder": 7,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Written at final submit; country has no Room column so it resets to the default on a resumed session.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "profile_creation",
+      "screenNumber": 15,
+      "screenTitle": "Profile Creation (name/bio/photo/cover)",
+      "screenOrder": 8,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "profilePicturePath/coverPicturePath collected but confirmed dropped from the final write.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "networking_links",
+      "screenNumber": 16,
+      "screenTitle": "Networking Links (Spotify/YouTube/SoundCloud/LinkedIn)",
+      "screenOrder": 9,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Collected but confirmed dropped from the final write and from Room.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "persona_badges",
+      "screenNumber": 17,
+      "screenTitle": "Persona Badges",
+      "screenOrder": 10,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "taxonomy_categories"
+      ],
+      "dataContract": [
+        {
+          "collection": "taxonomy_categories",
+          "sample": {
+            "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+            "genres": {
+              "key": "genres",
+              "options": [
+                "Bollywood / Filmi",
+                "Indie Pop",
+                "Hindustani Classical",
+                "Carnatic Classical",
+                "Punjabi Folk / Bhangra"
+              ]
+            },
+            "person_types": {
+              "key": "person_types",
+              "options": [
+                {
+                  "label": "Singer / Vocalist",
+                  "value": "singer"
+                },
+                {
+                  "label": "Rapper / MC",
+                  "value": "rapper"
+                },
+                {
+                  "label": "Folk Vocalist",
+                  "value": "folk_vocalist"
+                },
+                {
+                  "label": "Guitarist",
+                  "value": "guitarist"
+                },
+                {
+                  "label": "Keyboardist / Pianist",
+                  "value": "keyboardist"
+                }
+              ]
+            },
+            "languages": {
+              "key": "languages",
+              "options": [
+                "English",
+                "Hindi (हिंदी)",
+                "Punjabi (ਪੰਜਾਬੀ)",
+                "Tamil (தமிழ்)",
+                "Telugu (తెలుగు)"
+              ]
+            },
+            "instruments": {
+              "key": "instruments",
+              "options": [
+                "Acoustic Guitar",
+                "Electric Guitar",
+                "Bass Guitar",
+                "Keyboard / Synthesizer",
+                "Piano"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "review_confirm",
+      "screenNumber": 18,
+      "screenTitle": "Review / Confirm Profile",
+      "screenOrder": 11,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "dataContract": []
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "submit_publish",
+      "screenNumber": 19,
+      "screenTitle": "Submit / Publish Profile",
+      "screenOrder": 12,
+      "states": [
+        "submitting",
+        "success",
+        "error"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "Real write, confirmed — but missing instrumentProficiency, roleExperience, networkingLinks, profilePicturePath, coverPicturePath.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "dashboard_handoff",
+      "screenNumber": 20,
+      "screenTitle": "Success → Dashboard Handoff",
+      "screenOrder": 13,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "dataContract": []
+    },
+    {
+      "flowKey": "portfolio",
+      "flowTitle": "Add Portfolio",
+      "flowStatus": "app-mocked",
+      "flowOrder": 3,
+      "screenKey": "portfolio_dashboard",
+      "screenNumber": 21,
+      "screenTitle": "Portfolio Dashboard",
+      "screenOrder": 1,
+      "states": [
+        "empty",
+        "populated"
+      ],
+      "collectionsTouched": [
+        "portfolio_projects"
+      ],
+      "dataContract": [
+        {
+          "collection": "portfolio_projects",
+          "sample": {
+            "ownerUid": "mock-talent-arijit-sen",
+            "name": "Tum Hi Toh (Unplugged)",
+            "status": "Released",
+            "visibility": "Public",
+            "collaborators": [],
+            "credits": [],
+            "projectViews": 4200,
+            "likes": 610,
+            "shares": 88,
+            "createdAt": "2026-05-01T09:00:00.000Z",
+            "lastUpdatedAt": "2026-06-01T09:00:00.000Z",
+            "description": "Acoustic unplugged reinterpretation — 4.2M plays on Spotify.",
+            "type": "song",
+            "releaseDate": "2026-02-14",
+            "ownerRoles": [
+              "Singer"
+            ],
+            "artworkTheme": "Acoustic",
+            "spotifyUrl": "https://open.spotify.com/track/tumhitohunplugged-mock"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "portfolio",
+      "flowTitle": "Add Portfolio",
+      "flowStatus": "app-mocked",
+      "flowOrder": 3,
+      "screenKey": "choose_project_type",
+      "screenNumber": 22,
+      "screenTitle": "Choose Project Type",
+      "screenOrder": 2,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "taxonomy_categories"
+      ],
+      "notes": "project_types options.",
+      "dataContract": [
+        {
+          "collection": "taxonomy_categories",
+          "sample": {
+            "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+            "genres": {
+              "key": "genres",
+              "options": [
+                "Bollywood / Filmi",
+                "Indie Pop",
+                "Hindustani Classical",
+                "Carnatic Classical",
+                "Punjabi Folk / Bhangra"
+              ]
+            },
+            "person_types": {
+              "key": "person_types",
+              "options": [
+                {
+                  "label": "Singer / Vocalist",
+                  "value": "singer"
+                },
+                {
+                  "label": "Rapper / MC",
+                  "value": "rapper"
+                },
+                {
+                  "label": "Folk Vocalist",
+                  "value": "folk_vocalist"
+                },
+                {
+                  "label": "Guitarist",
+                  "value": "guitarist"
+                },
+                {
+                  "label": "Keyboardist / Pianist",
+                  "value": "keyboardist"
+                }
+              ]
+            },
+            "languages": {
+              "key": "languages",
+              "options": [
+                "English",
+                "Hindi (हिंदी)",
+                "Punjabi (ਪੰਜਾਬੀ)",
+                "Tamil (தமிழ்)",
+                "Telugu (తెలుగు)"
+              ]
+            },
+            "instruments": {
+              "key": "instruments",
+              "options": [
+                "Acoustic Guitar",
+                "Electric Guitar",
+                "Bass Guitar",
+                "Keyboard / Synthesizer",
+                "Piano"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "portfolio",
+      "flowTitle": "Add Portfolio",
+      "flowStatus": "app-mocked",
+      "flowOrder": 3,
+      "screenKey": "project_information",
+      "screenNumber": 23,
+      "screenTitle": "Project Information",
+      "screenOrder": 3,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "dataContract": []
+    },
+    {
+      "flowKey": "portfolio",
+      "flowTitle": "Add Portfolio",
+      "flowStatus": "app-mocked",
+      "flowOrder": 3,
+      "screenKey": "streaming_links",
+      "screenNumber": 24,
+      "screenTitle": "Add Streaming Links",
+      "screenOrder": 4,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "dataContract": []
+    },
+    {
+      "flowKey": "portfolio",
+      "flowTitle": "Add Portfolio",
+      "flowStatus": "app-mocked",
+      "flowOrder": 3,
+      "screenKey": "select_role",
+      "screenNumber": 25,
+      "screenTitle": "Select Your Role",
+      "screenOrder": 5,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "taxonomy_categories"
+      ],
+      "notes": "project_roles options.",
+      "dataContract": [
+        {
+          "collection": "taxonomy_categories",
+          "sample": {
+            "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+            "genres": {
+              "key": "genres",
+              "options": [
+                "Bollywood / Filmi",
+                "Indie Pop",
+                "Hindustani Classical",
+                "Carnatic Classical",
+                "Punjabi Folk / Bhangra"
+              ]
+            },
+            "person_types": {
+              "key": "person_types",
+              "options": [
+                {
+                  "label": "Singer / Vocalist",
+                  "value": "singer"
+                },
+                {
+                  "label": "Rapper / MC",
+                  "value": "rapper"
+                },
+                {
+                  "label": "Folk Vocalist",
+                  "value": "folk_vocalist"
+                },
+                {
+                  "label": "Guitarist",
+                  "value": "guitarist"
+                },
+                {
+                  "label": "Keyboardist / Pianist",
+                  "value": "keyboardist"
+                }
+              ]
+            },
+            "languages": {
+              "key": "languages",
+              "options": [
+                "English",
+                "Hindi (हिंदी)",
+                "Punjabi (ਪੰਜਾਬੀ)",
+                "Tamil (தமிழ்)",
+                "Telugu (తెలుగు)"
+              ]
+            },
+            "instruments": {
+              "key": "instruments",
+              "options": [
+                "Acoustic Guitar",
+                "Electric Guitar",
+                "Bass Guitar",
+                "Keyboard / Synthesizer",
+                "Piano"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "portfolio",
+      "flowTitle": "Add Portfolio",
+      "flowStatus": "app-mocked",
+      "flowOrder": 3,
+      "screenKey": "add_collaborators",
+      "screenNumber": 26,
+      "screenTitle": "Add Collaborators",
+      "screenOrder": 6,
+      "states": [
+        "searching",
+        "selected"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "portfolio",
+      "flowTitle": "Add Portfolio",
+      "flowStatus": "app-mocked",
+      "flowOrder": 3,
+      "screenKey": "credit_attribution",
+      "screenNumber": 27,
+      "screenTitle": "Credit Attribution",
+      "screenOrder": 7,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "dataContract": []
+    },
+    {
+      "flowKey": "portfolio",
+      "flowTitle": "Add Portfolio",
+      "flowStatus": "app-mocked",
+      "flowOrder": 3,
+      "screenKey": "media_preview",
+      "screenNumber": 28,
+      "screenTitle": "Project Media Preview",
+      "screenOrder": 8,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "\"Artwork\" here is a palette-theme keyword, not an uploaded image — no real upload UI exists.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "portfolio",
+      "flowTitle": "Add Portfolio",
+      "flowStatus": "app-mocked",
+      "flowOrder": 3,
+      "screenKey": "publish_project",
+      "screenNumber": 29,
+      "screenTitle": "Publish Project",
+      "screenOrder": 9,
+      "states": [
+        "ready",
+        "publishing",
+        "error"
+      ],
+      "collectionsTouched": [
+        "portfolio_projects"
+      ],
+      "notes": "Not confirmed real — PortfolioViewModel.publishProject() is still 100% in-memory.",
+      "dataContract": [
+        {
+          "collection": "portfolio_projects",
+          "sample": {
+            "ownerUid": "mock-talent-arijit-sen",
+            "name": "Tum Hi Toh (Unplugged)",
+            "status": "Released",
+            "visibility": "Public",
+            "collaborators": [],
+            "credits": [],
+            "projectViews": 4200,
+            "likes": 610,
+            "shares": 88,
+            "createdAt": "2026-05-01T09:00:00.000Z",
+            "lastUpdatedAt": "2026-06-01T09:00:00.000Z",
+            "description": "Acoustic unplugged reinterpretation — 4.2M plays on Spotify.",
+            "type": "song",
+            "releaseDate": "2026-02-14",
+            "ownerRoles": [
+              "Singer"
+            ],
+            "artworkTheme": "Acoustic",
+            "spotifyUrl": "https://open.spotify.com/track/tumhitohunplugged-mock"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "portfolio",
+      "flowTitle": "Add Portfolio",
+      "flowStatus": "app-mocked",
+      "flowOrder": 3,
+      "screenKey": "success",
+      "screenNumber": 30,
+      "screenTitle": "Success State",
+      "screenOrder": 10,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "dataContract": []
+    },
+    {
+      "flowKey": "portfolio",
+      "flowTitle": "Add Portfolio",
+      "flowStatus": "app-mocked",
+      "flowOrder": 3,
+      "screenKey": "profile_project_view",
+      "screenNumber": 31,
+      "screenTitle": "Published Project — Profile View",
+      "screenOrder": 11,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "portfolio_projects"
+      ],
+      "dataContract": [
+        {
+          "collection": "portfolio_projects",
+          "sample": {
+            "ownerUid": "mock-talent-arijit-sen",
+            "name": "Tum Hi Toh (Unplugged)",
+            "status": "Released",
+            "visibility": "Public",
+            "collaborators": [],
+            "credits": [],
+            "projectViews": 4200,
+            "likes": 610,
+            "shares": 88,
+            "createdAt": "2026-05-01T09:00:00.000Z",
+            "lastUpdatedAt": "2026-06-01T09:00:00.000Z",
+            "description": "Acoustic unplugged reinterpretation — 4.2M plays on Spotify.",
+            "type": "song",
+            "releaseDate": "2026-02-14",
+            "ownerRoles": [
+              "Singer"
+            ],
+            "artworkTheme": "Acoustic",
+            "spotifyUrl": "https://open.spotify.com/track/tumhitohunplugged-mock"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "discover_feed",
+      "screenNumber": 85,
+      "screenTitle": "Discover Feed / Home",
+      "screenOrder": 1,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "100% mocked — DiscoverViewModel has zero Firestore references, filters a hardcoded 12-profile list.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "advanced_filters",
+      "screenNumber": 86,
+      "screenTitle": "Advanced Filters (bottom sheet)",
+      "screenOrder": 2,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Sort/city/area/language/genre/experience-seniority/verified/remote/session-work — all filter mock data, not real fields.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "discover_profile_detail",
+      "screenNumber": 87,
+      "screenTitle": "Profile Detail View",
+      "screenOrder": 3,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Reads from the same mock DiscoverProfile list, not users.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "saved_profiles",
+      "screenNumber": 88,
+      "screenTitle": "Saved Profiles",
+      "screenOrder": 4,
+      "states": [
+        "empty",
+        "populated"
+      ],
+      "collectionsTouched": [
+        "user_bookmarks"
+      ],
+      "notes": "Screen exists in the real app; user_bookmarks collection is real and rules-ready, but the screen is 100% unwired to it.",
+      "dataContract": [
+        {
+          "collection": "user_bookmarks",
+          "sample": null,
+          "note": "No seed sample available for this collection in this build."
+        }
+      ]
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "trending_recommended_sections",
+      "screenNumber": 89,
+      "screenTitle": "Trending Projects / Recommended Collaborators",
+      "screenOrder": 5,
+      "states": [
+        "hidden"
+      ],
+      "collectionsTouched": [],
+      "notes": "Composable functions still exist in source but their call sites are commented out — confirmed hidden, not deleted.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "communication",
+      "flowTitle": "Communication & Collaboration",
+      "flowStatus": "partial",
+      "flowOrder": 6,
+      "screenKey": "connection_requests_tab",
+      "screenNumber": 78,
+      "screenTitle": "Connection Requests",
+      "screenOrder": 1,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "connections"
+      ],
+      "notes": "Two writers exist for this collection and disagree on document shape — see Flow-level notes / Prompt F §2.",
+      "dataContract": [
+        {
+          "collection": "connections",
+          "sample": {
+            "senderUid": "mock-talent-kabir-sethi",
+            "targetUserId": "mock-talent-vedanshu-beats-mock",
+            "status": "PENDING"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "communication",
+      "flowTitle": "Communication & Collaboration",
+      "flowStatus": "partial",
+      "flowOrder": 6,
+      "screenKey": "collaborators_tab",
+      "screenNumber": 79,
+      "screenTitle": "Collaborators",
+      "screenOrder": 2,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "connections"
+      ],
+      "dataContract": [
+        {
+          "collection": "connections",
+          "sample": {
+            "senderUid": "mock-talent-kabir-sethi",
+            "targetUserId": "mock-talent-vedanshu-beats-mock",
+            "status": "PENDING"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "communication",
+      "flowTitle": "Communication & Collaboration",
+      "flowStatus": "partial",
+      "flowOrder": 6,
+      "screenKey": "ai_matchmaker_tab",
+      "screenNumber": 80,
+      "screenTitle": "AI Matchmaker Tab",
+      "screenOrder": 3,
+      "states": [
+        "unreachable"
+      ],
+      "collectionsTouched": [],
+      "notes": "Tab exists in the underlying code but is missing from the visible tab list — unreachable through the real UI, not just hidden by a flag.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "communication",
+      "flowTitle": "Communication & Collaboration",
+      "flowStatus": "partial",
+      "flowOrder": 6,
+      "screenKey": "chat_thread_list",
+      "screenNumber": 81,
+      "screenTitle": "Chat Thread List",
+      "screenOrder": 4,
+      "states": [
+        "default",
+        "empty"
+      ],
+      "collectionsTouched": [
+        "chat_threads"
+      ],
+      "dataContract": [
+        {
+          "collection": "chat_threads",
+          "sample": null,
+          "note": "No seed sample available for this collection in this build."
+        }
+      ]
+    },
+    {
+      "flowKey": "communication",
+      "flowTitle": "Communication & Collaboration",
+      "flowStatus": "partial",
+      "flowOrder": 6,
+      "screenKey": "chat_conversation",
+      "screenNumber": 82,
+      "screenTitle": "Chat Conversation",
+      "screenOrder": 5,
+      "states": [
+        "default",
+        "sending",
+        "error"
+      ],
+      "collectionsTouched": [
+        "chat_threads"
+      ],
+      "notes": "messages subcollection under chat_threads/{threadId}.",
+      "dataContract": [
+        {
+          "collection": "chat_threads",
+          "sample": null,
+          "note": "No seed sample available for this collection in this build."
+        }
+      ]
+    },
+    {
+      "flowKey": "communication",
+      "flowTitle": "Communication & Collaboration",
+      "flowStatus": "partial",
+      "flowOrder": 6,
+      "screenKey": "networking_feed",
+      "screenNumber": 83,
+      "screenTitle": "Networking Feed (post / view)",
+      "screenOrder": 6,
+      "states": [
+        "default",
+        "posting"
+      ],
+      "collectionsTouched": [
+        "feed_posts"
+      ],
+      "notes": "Real read/write exists, but write side uses \"content\" not the admin schema's \"text\", plus a mediaUrl read/write mismatch — flagged, needs a migration-aware fix (Prompt F §5).",
+      "dataContract": [
+        {
+          "collection": "feed_posts",
+          "sample": null,
+          "note": "No seed sample available for this collection in this build."
+        }
+      ]
+    },
+    {
+      "flowKey": "communication",
+      "flowTitle": "Communication & Collaboration",
+      "flowStatus": "partial",
+      "flowOrder": 6,
+      "screenKey": "networking_feed_artist_profile",
+      "screenNumber": 84,
+      "screenTitle": "Artist Profile (from Networking Feed)",
+      "screenOrder": 7,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "ADDED 2026-08-13 (direct source read). SupportingModule.ARTIST_PROFILE, renders ArtistProfileScreen (UnifiedComponents.kt:2870) — reached only by tapping a post in Networking Feed. Confirmed distinct from Discover's FULL_PROFILE, which renders a different composable (FullTalentProfileScreen, DiscoverScreens.kt) — a 4th disconnected profile-view implementation on top of the 3 already flagged under profile_management's flow-level note (dashboard badge substring match, PublicProfilePreviewScreen headline match, Discover's mock-only enum). Not independently audited for its own data-source/persistence behavior this pass.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "marketplace",
+      "flowTitle": "Marketplace (Buy/Sell)",
+      "flowStatus": "app-mocked",
+      "flowOrder": 7,
+      "screenKey": "marketplace_browse",
+      "screenNumber": 99,
+      "screenTitle": "Creator Marketplace (browse)",
+      "screenOrder": 1,
+      "states": [
+        "default",
+        "empty",
+        "sale",
+        "rental",
+        "mixing",
+        "beats",
+        "services",
+        "search_filtered"
+      ],
+      "collectionsTouched": [],
+      "notes": "MarketplaceBetaScreen, wired live into the dashboard's Marketplace tab. Backed entirely by a hardcoded 8-item list — zero `marketplace_items` references anywhere in the file. \"Gear Rentals\" is just one of its 6 category tabs, not a separate flow (see equipment_rental note in default-flows.ts).",
+      "dataContract": []
+    },
+    {
+      "flowKey": "marketplace",
+      "flowTitle": "Marketplace (Buy/Sell)",
+      "flowStatus": "app-mocked",
+      "flowOrder": 7,
+      "screenKey": "marketplace_item_detail",
+      "screenNumber": 100,
+      "screenTitle": "Listing Detail",
+      "screenOrder": 2,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Rendered as an AlertDialog inside the browse screen, not a separate navigable screen. \"Contact Seller\" / \"Rent This Gear\" confirm buttons only set a local fake-success string (e.g. a fabricated request ID) — no network or DB call.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "marketplace",
+      "flowTitle": "Marketplace (Buy/Sell)",
+      "flowStatus": "app-mocked",
+      "flowOrder": 7,
+      "screenKey": "marketplace_saved_bookmarks",
+      "screenNumber": 101,
+      "screenTitle": "Saved & Favorites — Marketplace tab",
+      "screenOrder": 3,
+      "states": [
+        "grid",
+        "list",
+        "empty"
+      ],
+      "collectionsTouched": [],
+      "notes": "The screen MarketplaceFeature.kt actually routes to (a thin wrapper opening the Saved/Favorites hub defaulted to its Marketplace sub-tab) — not a browse/listing feature itself. Backed by a hardcoded item list, no Firestore.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "booking",
+      "flowTitle": "Booking",
+      "flowStatus": "partial",
+      "flowOrder": 8,
+      "screenKey": "studio_discovery",
+      "screenNumber": 60,
+      "screenTitle": "Studio Discovery",
+      "screenOrder": 1,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "studios"
+      ],
+      "notes": "Featured/Nearby/Popular sections — StudioDoc has no featured/popular flags yet, so these can't be real filters today.",
+      "dataContract": [
+        {
+          "collection": "studios",
+          "sample": {
+            "ownerUid": "mock-business-yash-raj-sound-studios",
+            "name": "Yash Raj Sound Studios — Sound Lab",
+            "location": "Andheri West, Mumbai",
+            "rating": 4.9,
+            "reviewCount": 188,
+            "hourlyRate": 8000,
+            "verifiedGold": true,
+            "amenities": [
+              "Dolby Atmos",
+              "Live Room",
+              "Resident Engineers",
+              "Valet Parking"
+            ],
+            "consoleType": "SSL 9000J 72-Channel Console",
+            "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "description": "Two double-height tracking rooms and a certified Dolby Atmos HE mixing suite. Mixed Pathaan and Coke Studio India here.",
+            "images": [
+              "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800"
+            ],
+            "services": [
+              "recording",
+              "mixing",
+              "mastering"
+            ],
+            "geo": {
+              "lat": 19.1197,
+              "lng": 72.8468
+            },
+            "equipment": [
+              {
+                "name": "SSL 9000J 72-Channel Console",
+                "category": "mixers",
+                "included": true
+              },
+              {
+                "name": "Dolby Atmos 7.1.4 PMC Studio Monitors",
+                "category": "studio_monitors",
+                "included": true
+              },
+              {
+                "name": "Neumann U87/U47/Telefunken ELAM 251",
+                "category": "microphones",
+                "included": true
+              },
+              {
+                "name": "Pro Tools HDX (128 Analog Inputs)",
+                "category": "controllers",
+                "included": true
+              }
+            ],
+            "operatingHours": "09:00 AM – 11:00 PM (Mon–Sat)",
+            "cancellationPolicy": "Minimum 2-hour booking; cancellations require 24h notice.",
+            "rooms": [
+              {
+                "name": "Tracking Room 1",
+                "capacity": 12,
+                "hourlyRate": 8000,
+                "amenities": [
+                  "Live Room",
+                  "Resident Engineers"
+                ]
+              },
+              {
+                "name": "Dolby Atmos Mixing Suite",
+                "capacity": 4,
+                "hourlyRate": 6500,
+                "amenities": [
+                  "Dolby Atmos"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "booking",
+      "flowTitle": "Booking",
+      "flowStatus": "partial",
+      "flowOrder": 8,
+      "screenKey": "filters",
+      "screenNumber": 61,
+      "screenTitle": "Filters (bottom sheet)",
+      "screenOrder": 2,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "taxonomy_categories"
+      ],
+      "notes": "City/distance/price + amenity chips — distance needs StudioDoc.geo (added this session, unconfirmed as app-used); hourlyRate is now a real number (migrated 2026-08-12), so price sort is unblocked on the schema side — app-side filter UI still unconfirmed.",
+      "dataContract": [
+        {
+          "collection": "taxonomy_categories",
+          "sample": {
+            "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+            "genres": {
+              "key": "genres",
+              "options": [
+                "Bollywood / Filmi",
+                "Indie Pop",
+                "Hindustani Classical",
+                "Carnatic Classical",
+                "Punjabi Folk / Bhangra"
+              ]
+            },
+            "person_types": {
+              "key": "person_types",
+              "options": [
+                {
+                  "label": "Singer / Vocalist",
+                  "value": "singer"
+                },
+                {
+                  "label": "Rapper / MC",
+                  "value": "rapper"
+                },
+                {
+                  "label": "Folk Vocalist",
+                  "value": "folk_vocalist"
+                },
+                {
+                  "label": "Guitarist",
+                  "value": "guitarist"
+                },
+                {
+                  "label": "Keyboardist / Pianist",
+                  "value": "keyboardist"
+                }
+              ]
+            },
+            "languages": {
+              "key": "languages",
+              "options": [
+                "English",
+                "Hindi (हिंदी)",
+                "Punjabi (ਪੰਜਾਬੀ)",
+                "Tamil (தமிழ்)",
+                "Telugu (తెలుగు)"
+              ]
+            },
+            "instruments": {
+              "key": "instruments",
+              "options": [
+                "Acoustic Guitar",
+                "Electric Guitar",
+                "Bass Guitar",
+                "Keyboard / Synthesizer",
+                "Piano"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "booking",
+      "flowTitle": "Booking",
+      "flowStatus": "partial",
+      "flowOrder": 8,
+      "screenKey": "search_results",
+      "screenNumber": 62,
+      "screenTitle": "Search Results",
+      "screenOrder": 3,
+      "states": [
+        "default",
+        "empty"
+      ],
+      "collectionsTouched": [
+        "studios"
+      ],
+      "dataContract": [
+        {
+          "collection": "studios",
+          "sample": {
+            "ownerUid": "mock-business-yash-raj-sound-studios",
+            "name": "Yash Raj Sound Studios — Sound Lab",
+            "location": "Andheri West, Mumbai",
+            "rating": 4.9,
+            "reviewCount": 188,
+            "hourlyRate": 8000,
+            "verifiedGold": true,
+            "amenities": [
+              "Dolby Atmos",
+              "Live Room",
+              "Resident Engineers",
+              "Valet Parking"
+            ],
+            "consoleType": "SSL 9000J 72-Channel Console",
+            "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "description": "Two double-height tracking rooms and a certified Dolby Atmos HE mixing suite. Mixed Pathaan and Coke Studio India here.",
+            "images": [
+              "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800"
+            ],
+            "services": [
+              "recording",
+              "mixing",
+              "mastering"
+            ],
+            "geo": {
+              "lat": 19.1197,
+              "lng": 72.8468
+            },
+            "equipment": [
+              {
+                "name": "SSL 9000J 72-Channel Console",
+                "category": "mixers",
+                "included": true
+              },
+              {
+                "name": "Dolby Atmos 7.1.4 PMC Studio Monitors",
+                "category": "studio_monitors",
+                "included": true
+              },
+              {
+                "name": "Neumann U87/U47/Telefunken ELAM 251",
+                "category": "microphones",
+                "included": true
+              },
+              {
+                "name": "Pro Tools HDX (128 Analog Inputs)",
+                "category": "controllers",
+                "included": true
+              }
+            ],
+            "operatingHours": "09:00 AM – 11:00 PM (Mon–Sat)",
+            "cancellationPolicy": "Minimum 2-hour booking; cancellations require 24h notice.",
+            "rooms": [
+              {
+                "name": "Tracking Room 1",
+                "capacity": 12,
+                "hourlyRate": 8000,
+                "amenities": [
+                  "Live Room",
+                  "Resident Engineers"
+                ]
+              },
+              {
+                "name": "Dolby Atmos Mixing Suite",
+                "capacity": 4,
+                "hourlyRate": 6500,
+                "amenities": [
+                  "Dolby Atmos"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "booking",
+      "flowTitle": "Booking",
+      "flowStatus": "partial",
+      "flowOrder": 8,
+      "screenKey": "studio_profile",
+      "screenNumber": 63,
+      "screenTitle": "Studio Profile",
+      "screenOrder": 4,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "studios",
+        "reviews"
+      ],
+      "notes": "About/Rooms sections now have schema (StudioDoc.rooms, added 2026-08-12). Engineers-as-bookable-staff stays deliberately deferred — user's explicit call, not re-opened.",
+      "dataContract": [
+        {
+          "collection": "studios",
+          "sample": {
+            "ownerUid": "mock-business-yash-raj-sound-studios",
+            "name": "Yash Raj Sound Studios — Sound Lab",
+            "location": "Andheri West, Mumbai",
+            "rating": 4.9,
+            "reviewCount": 188,
+            "hourlyRate": 8000,
+            "verifiedGold": true,
+            "amenities": [
+              "Dolby Atmos",
+              "Live Room",
+              "Resident Engineers",
+              "Valet Parking"
+            ],
+            "consoleType": "SSL 9000J 72-Channel Console",
+            "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "description": "Two double-height tracking rooms and a certified Dolby Atmos HE mixing suite. Mixed Pathaan and Coke Studio India here.",
+            "images": [
+              "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800"
+            ],
+            "services": [
+              "recording",
+              "mixing",
+              "mastering"
+            ],
+            "geo": {
+              "lat": 19.1197,
+              "lng": 72.8468
+            },
+            "equipment": [
+              {
+                "name": "SSL 9000J 72-Channel Console",
+                "category": "mixers",
+                "included": true
+              },
+              {
+                "name": "Dolby Atmos 7.1.4 PMC Studio Monitors",
+                "category": "studio_monitors",
+                "included": true
+              },
+              {
+                "name": "Neumann U87/U47/Telefunken ELAM 251",
+                "category": "microphones",
+                "included": true
+              },
+              {
+                "name": "Pro Tools HDX (128 Analog Inputs)",
+                "category": "controllers",
+                "included": true
+              }
+            ],
+            "operatingHours": "09:00 AM – 11:00 PM (Mon–Sat)",
+            "cancellationPolicy": "Minimum 2-hour booking; cancellations require 24h notice.",
+            "rooms": [
+              {
+                "name": "Tracking Room 1",
+                "capacity": 12,
+                "hourlyRate": 8000,
+                "amenities": [
+                  "Live Room",
+                  "Resident Engineers"
+                ]
+              },
+              {
+                "name": "Dolby Atmos Mixing Suite",
+                "capacity": 4,
+                "hourlyRate": 6500,
+                "amenities": [
+                  "Dolby Atmos"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "collection": "reviews",
+          "sample": {
+            "targetType": "USER",
+            "targetId": "mock-talent-arijit-sen",
+            "authorUid": "mock-reviewer-t-series-aandr-team",
+            "rating": 5,
+            "text": "\"Exceptional range and control across genres.\" — T-Series A&R Team",
+            "createdAt": "2026-06-10T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "booking",
+      "flowTitle": "Booking",
+      "flowStatus": "partial",
+      "flowOrder": 8,
+      "screenKey": "equipment_screen",
+      "screenNumber": 64,
+      "screenTitle": "Equipment",
+      "screenOrder": 5,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "studios"
+      ],
+      "notes": "StudioDoc.equipment (structured, added this session) — not yet confirmed as app-written.",
+      "dataContract": [
+        {
+          "collection": "studios",
+          "sample": {
+            "ownerUid": "mock-business-yash-raj-sound-studios",
+            "name": "Yash Raj Sound Studios — Sound Lab",
+            "location": "Andheri West, Mumbai",
+            "rating": 4.9,
+            "reviewCount": 188,
+            "hourlyRate": 8000,
+            "verifiedGold": true,
+            "amenities": [
+              "Dolby Atmos",
+              "Live Room",
+              "Resident Engineers",
+              "Valet Parking"
+            ],
+            "consoleType": "SSL 9000J 72-Channel Console",
+            "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "description": "Two double-height tracking rooms and a certified Dolby Atmos HE mixing suite. Mixed Pathaan and Coke Studio India here.",
+            "images": [
+              "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800"
+            ],
+            "services": [
+              "recording",
+              "mixing",
+              "mastering"
+            ],
+            "geo": {
+              "lat": 19.1197,
+              "lng": 72.8468
+            },
+            "equipment": [
+              {
+                "name": "SSL 9000J 72-Channel Console",
+                "category": "mixers",
+                "included": true
+              },
+              {
+                "name": "Dolby Atmos 7.1.4 PMC Studio Monitors",
+                "category": "studio_monitors",
+                "included": true
+              },
+              {
+                "name": "Neumann U87/U47/Telefunken ELAM 251",
+                "category": "microphones",
+                "included": true
+              },
+              {
+                "name": "Pro Tools HDX (128 Analog Inputs)",
+                "category": "controllers",
+                "included": true
+              }
+            ],
+            "operatingHours": "09:00 AM – 11:00 PM (Mon–Sat)",
+            "cancellationPolicy": "Minimum 2-hour booking; cancellations require 24h notice.",
+            "rooms": [
+              {
+                "name": "Tracking Room 1",
+                "capacity": 12,
+                "hourlyRate": 8000,
+                "amenities": [
+                  "Live Room",
+                  "Resident Engineers"
+                ]
+              },
+              {
+                "name": "Dolby Atmos Mixing Suite",
+                "capacity": 4,
+                "hourlyRate": 6500,
+                "amenities": [
+                  "Dolby Atmos"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "booking",
+      "flowTitle": "Booking",
+      "flowStatus": "partial",
+      "flowOrder": 8,
+      "screenKey": "availability_calendar",
+      "screenNumber": 65,
+      "screenTitle": "Availability Calendar",
+      "screenOrder": 6,
+      "states": [
+        "monthly",
+        "weekly",
+        "timeline"
+      ],
+      "collectionsTouched": [
+        "studio_bookings"
+      ],
+      "notes": "Slot available/booked/pending status derives from querying existing bookings for the date range.",
+      "dataContract": [
+        {
+          "collection": "studio_bookings",
+          "sample": {
+            "studioId": "mock-studio-yash-raj-sound-studios",
+            "userId": "mock-talent-aditi-sen",
+            "date": "2026-08-12",
+            "slotText": "10:00 AM – 2:00 PM",
+            "totalAmount": 32000,
+            "bookedHourSlots": [
+              "10:00",
+              "11:00",
+              "12:00",
+              "13:00"
+            ],
+            "bookingStatus": "confirmed",
+            "paymentStatus": "PAID",
+            "createdAt": "2026-08-05T09:00:00.000Z",
+            "sessionType": "recording",
+            "durationTier": "half_day",
+            "engineerRequested": true,
+            "paymentMethod": "UPI"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "booking",
+      "flowTitle": "Booking",
+      "flowStatus": "partial",
+      "flowOrder": 8,
+      "screenKey": "configure_session",
+      "screenNumber": 66,
+      "screenTitle": "Configure Session",
+      "screenOrder": 7,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "taxonomy_categories"
+      ],
+      "notes": "sessionType/durationTier/engineerRequested/selectedEquipment/addons — all typed this session, none confirmed app-wired.",
+      "dataContract": [
+        {
+          "collection": "taxonomy_categories",
+          "sample": {
+            "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+            "genres": {
+              "key": "genres",
+              "options": [
+                "Bollywood / Filmi",
+                "Indie Pop",
+                "Hindustani Classical",
+                "Carnatic Classical",
+                "Punjabi Folk / Bhangra"
+              ]
+            },
+            "person_types": {
+              "key": "person_types",
+              "options": [
+                {
+                  "label": "Singer / Vocalist",
+                  "value": "singer"
+                },
+                {
+                  "label": "Rapper / MC",
+                  "value": "rapper"
+                },
+                {
+                  "label": "Folk Vocalist",
+                  "value": "folk_vocalist"
+                },
+                {
+                  "label": "Guitarist",
+                  "value": "guitarist"
+                },
+                {
+                  "label": "Keyboardist / Pianist",
+                  "value": "keyboardist"
+                }
+              ]
+            },
+            "languages": {
+              "key": "languages",
+              "options": [
+                "English",
+                "Hindi (हिंदी)",
+                "Punjabi (ਪੰਜਾਬੀ)",
+                "Tamil (தமிழ்)",
+                "Telugu (తెలుగు)"
+              ]
+            },
+            "instruments": {
+              "key": "instruments",
+              "options": [
+                "Acoustic Guitar",
+                "Electric Guitar",
+                "Bass Guitar",
+                "Keyboard / Synthesizer",
+                "Piano"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "booking",
+      "flowTitle": "Booking",
+      "flowStatus": "partial",
+      "flowOrder": 8,
+      "screenKey": "booking_summary",
+      "screenNumber": 67,
+      "screenTitle": "Booking Summary",
+      "screenOrder": 8,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "studio_bookings"
+      ],
+      "notes": "taxAmount/depositAmount/discountAmount/promoCode — typed this session, none confirmed app-wired.",
+      "dataContract": [
+        {
+          "collection": "studio_bookings",
+          "sample": {
+            "studioId": "mock-studio-yash-raj-sound-studios",
+            "userId": "mock-talent-aditi-sen",
+            "date": "2026-08-12",
+            "slotText": "10:00 AM – 2:00 PM",
+            "totalAmount": 32000,
+            "bookedHourSlots": [
+              "10:00",
+              "11:00",
+              "12:00",
+              "13:00"
+            ],
+            "bookingStatus": "confirmed",
+            "paymentStatus": "PAID",
+            "createdAt": "2026-08-05T09:00:00.000Z",
+            "sessionType": "recording",
+            "durationTier": "half_day",
+            "engineerRequested": true,
+            "paymentMethod": "UPI"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "booking",
+      "flowTitle": "Booking",
+      "flowStatus": "partial",
+      "flowOrder": 8,
+      "screenKey": "payment_screen",
+      "screenNumber": 68,
+      "screenTitle": "Payment",
+      "screenOrder": 9,
+      "states": [
+        "default",
+        "processing",
+        "error",
+        "success"
+      ],
+      "collectionsTouched": [
+        "studio_bookings"
+      ],
+      "notes": "paymentMethod/paymentStatus/paymentTransactionId.",
+      "dataContract": [
+        {
+          "collection": "studio_bookings",
+          "sample": {
+            "studioId": "mock-studio-yash-raj-sound-studios",
+            "userId": "mock-talent-aditi-sen",
+            "date": "2026-08-12",
+            "slotText": "10:00 AM – 2:00 PM",
+            "totalAmount": 32000,
+            "bookedHourSlots": [
+              "10:00",
+              "11:00",
+              "12:00",
+              "13:00"
+            ],
+            "bookingStatus": "confirmed",
+            "paymentStatus": "PAID",
+            "createdAt": "2026-08-05T09:00:00.000Z",
+            "sessionType": "recording",
+            "durationTier": "half_day",
+            "engineerRequested": true,
+            "paymentMethod": "UPI"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "booking",
+      "flowTitle": "Booking",
+      "flowStatus": "partial",
+      "flowOrder": 8,
+      "screenKey": "booking_success",
+      "screenNumber": 69,
+      "screenTitle": "Booking Success",
+      "screenOrder": 10,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "studio_bookings"
+      ],
+      "notes": "The real write here is confirmed BROKEN as of this session's last verification pass — still uses artistUserId/totalCostAmount/statusKey instead of the schema's userId/totalAmount/bookingStatus.",
+      "dataContract": [
+        {
+          "collection": "studio_bookings",
+          "sample": {
+            "studioId": "mock-studio-yash-raj-sound-studios",
+            "userId": "mock-talent-aditi-sen",
+            "date": "2026-08-12",
+            "slotText": "10:00 AM – 2:00 PM",
+            "totalAmount": 32000,
+            "bookedHourSlots": [
+              "10:00",
+              "11:00",
+              "12:00",
+              "13:00"
+            ],
+            "bookingStatus": "confirmed",
+            "paymentStatus": "PAID",
+            "createdAt": "2026-08-05T09:00:00.000Z",
+            "sessionType": "recording",
+            "durationTier": "half_day",
+            "engineerRequested": true,
+            "paymentMethod": "UPI"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "booking",
+      "flowTitle": "Booking",
+      "flowStatus": "partial",
+      "flowOrder": 8,
+      "screenKey": "my_bookings",
+      "screenNumber": 70,
+      "screenTitle": "My Bookings",
+      "screenOrder": 11,
+      "states": [
+        "upcoming",
+        "past",
+        "cancelled"
+      ],
+      "collectionsTouched": [
+        "studio_bookings"
+      ],
+      "dataContract": [
+        {
+          "collection": "studio_bookings",
+          "sample": {
+            "studioId": "mock-studio-yash-raj-sound-studios",
+            "userId": "mock-talent-aditi-sen",
+            "date": "2026-08-12",
+            "slotText": "10:00 AM – 2:00 PM",
+            "totalAmount": 32000,
+            "bookedHourSlots": [
+              "10:00",
+              "11:00",
+              "12:00",
+              "13:00"
+            ],
+            "bookingStatus": "confirmed",
+            "paymentStatus": "PAID",
+            "createdAt": "2026-08-05T09:00:00.000Z",
+            "sessionType": "recording",
+            "durationTier": "half_day",
+            "engineerRequested": true,
+            "paymentMethod": "UPI"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "profile_management",
+      "flowTitle": "Profile Management",
+      "flowStatus": "partial",
+      "flowOrder": 10,
+      "screenKey": "profile_overview",
+      "screenNumber": 32,
+      "screenTitle": "Profile Overview / Dashboard",
+      "screenOrder": 1,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "profile_management",
+      "flowTitle": "Profile Management",
+      "flowStatus": "partial",
+      "flowOrder": 10,
+      "screenKey": "edit_identity",
+      "screenNumber": 33,
+      "screenTitle": "Edit Profile (name/bio/location/roles/genres/languages)",
+      "screenOrder": 2,
+      "states": [
+        "editing",
+        "saving",
+        "saved",
+        "error"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "Real, confirmed write (SetOptions.merge()) — this is the fix that landed correctly earlier this session.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "profile_management",
+      "flowTitle": "Profile Management",
+      "flowStatus": "partial",
+      "flowOrder": 10,
+      "screenKey": "profile_type_selection",
+      "screenNumber": 34,
+      "screenTitle": "Profile Type Selection (Talent/Band/Business/Venue)",
+      "screenOrder": 3,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "profileType — write-locked after creation, cannot be self-changed once set.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "profile_management",
+      "flowTitle": "Profile Management",
+      "flowStatus": "partial",
+      "flowOrder": 10,
+      "screenKey": "business_profile_editor",
+      "screenNumber": 35,
+      "screenTitle": "Business Profile Editor",
+      "screenOrder": 4,
+      "states": [
+        "visible_if_business"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "profile_management",
+      "flowTitle": "Profile Management",
+      "flowStatus": "partial",
+      "flowOrder": 10,
+      "screenKey": "band_profile_editor",
+      "screenNumber": 36,
+      "screenTitle": "Band Profile Editor",
+      "screenOrder": 5,
+      "states": [
+        "visible_if_band"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "profile_management",
+      "flowTitle": "Profile Management",
+      "flowStatus": "partial",
+      "flowOrder": 10,
+      "screenKey": "venue_profile_editor",
+      "screenNumber": 37,
+      "screenTitle": "Venue Profile Editor",
+      "screenOrder": 6,
+      "states": [
+        "visible_if_venue"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "profile_management",
+      "flowTitle": "Profile Management",
+      "flowStatus": "partial",
+      "flowOrder": 10,
+      "screenKey": "talent_profile_editor",
+      "screenNumber": 38,
+      "screenTitle": "Talent Profile Editor",
+      "screenOrder": 7,
+      "states": [
+        "visible_if_talent"
+      ],
+      "collectionsTouched": [
+        "users",
+        "role_profiles"
+      ],
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        },
+        {
+          "collection": "role_profiles",
+          "sample": {
+            "ownerUid": "mock-talent-arijit-sen",
+            "roleKey": "singer",
+            "vocalRange": "tenor",
+            "singingStyles": [
+              "playback",
+              "classical",
+              "sufi"
+            ],
+            "originalSongsCount": 6,
+            "coversCount": 14,
+            "createdAt": "2026-05-01T09:00:00.000Z",
+            "updatedAt": "2026-07-01T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "profile_management",
+      "flowTitle": "Profile Management",
+      "flowStatus": "partial",
+      "flowOrder": 10,
+      "screenKey": "external_links_editor",
+      "screenNumber": 39,
+      "screenTitle": "External Links Editor",
+      "screenOrder": 8,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "profile_management",
+      "flowTitle": "Profile Management",
+      "flowStatus": "partial",
+      "flowOrder": 10,
+      "screenKey": "public_profile_preview",
+      "screenNumber": 40,
+      "screenTitle": "Public Profile Preview",
+      "screenOrder": 9,
+      "states": [
+        "talent_template",
+        "band_template",
+        "business_template",
+        "venue_template"
+      ],
+      "collectionsTouched": [
+        "users",
+        "portfolio_projects",
+        "reviews"
+      ],
+      "notes": "Previously driven by 3 disconnected string-matching heuristics instead of a real field — should now key off the real profileType.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        },
+        {
+          "collection": "portfolio_projects",
+          "sample": {
+            "ownerUid": "mock-talent-arijit-sen",
+            "name": "Tum Hi Toh (Unplugged)",
+            "status": "Released",
+            "visibility": "Public",
+            "collaborators": [],
+            "credits": [],
+            "projectViews": 4200,
+            "likes": 610,
+            "shares": 88,
+            "createdAt": "2026-05-01T09:00:00.000Z",
+            "lastUpdatedAt": "2026-06-01T09:00:00.000Z",
+            "description": "Acoustic unplugged reinterpretation — 4.2M plays on Spotify.",
+            "type": "song",
+            "releaseDate": "2026-02-14",
+            "ownerRoles": [
+              "Singer"
+            ],
+            "artworkTheme": "Acoustic",
+            "spotifyUrl": "https://open.spotify.com/track/tumhitohunplugged-mock"
+          }
+        },
+        {
+          "collection": "reviews",
+          "sample": {
+            "targetType": "USER",
+            "targetId": "mock-talent-arijit-sen",
+            "authorUid": "mock-reviewer-t-series-aandr-team",
+            "rating": 5,
+            "text": "\"Exceptional range and control across genres.\" — T-Series A&R Team",
+            "createdAt": "2026-06-10T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "profile_management",
+      "flowTitle": "Profile Management",
+      "flowStatus": "partial",
+      "flowOrder": 10,
+      "screenKey": "profile_completion",
+      "screenNumber": 41,
+      "screenTitle": "Profile Completion Indicator",
+      "screenOrder": 10,
+      "states": [
+        "incomplete",
+        "complete"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "Derived client-side, not stored. Was a hidden/commented-out card in the real source as of this session's audit.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "services_availability",
+      "flowTitle": "Services, Availability",
+      "flowStatus": "partial",
+      "flowOrder": 11,
+      "screenKey": "availability_toggle",
+      "screenNumber": 42,
+      "screenTitle": "Availability Toggle (Talent)",
+      "screenOrder": 1,
+      "states": [
+        "available_now",
+        "open_for_gigs",
+        "booked_soon",
+        "on_tour",
+        "unavailable"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "sessionAvailability + the coarser isAvailable boolean.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "services_availability",
+      "flowTitle": "Services, Availability",
+      "flowStatus": "partial",
+      "flowOrder": 11,
+      "screenKey": "service_offerings_editor",
+      "screenNumber": 43,
+      "screenTitle": "Service Offerings Editor (Business)",
+      "screenOrder": 2,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "serviceOfferings (priced menu) vs. services (taxonomy filter tags) — two different fields, added this session.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "services_availability",
+      "flowTitle": "Services, Availability",
+      "flowStatus": "partial",
+      "flowOrder": 11,
+      "screenKey": "studio_services_amenities",
+      "screenNumber": 44,
+      "screenTitle": "Studio Services & Amenities",
+      "screenOrder": 3,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "studios",
+        "taxonomy_categories"
+      ],
+      "notes": "studio_services (offered) vs. studio_amenities (physical features) — distinct taxonomy categories.",
+      "dataContract": [
+        {
+          "collection": "studios",
+          "sample": {
+            "ownerUid": "mock-business-yash-raj-sound-studios",
+            "name": "Yash Raj Sound Studios — Sound Lab",
+            "location": "Andheri West, Mumbai",
+            "rating": 4.9,
+            "reviewCount": 188,
+            "hourlyRate": 8000,
+            "verifiedGold": true,
+            "amenities": [
+              "Dolby Atmos",
+              "Live Room",
+              "Resident Engineers",
+              "Valet Parking"
+            ],
+            "consoleType": "SSL 9000J 72-Channel Console",
+            "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "description": "Two double-height tracking rooms and a certified Dolby Atmos HE mixing suite. Mixed Pathaan and Coke Studio India here.",
+            "images": [
+              "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800"
+            ],
+            "services": [
+              "recording",
+              "mixing",
+              "mastering"
+            ],
+            "geo": {
+              "lat": 19.1197,
+              "lng": 72.8468
+            },
+            "equipment": [
+              {
+                "name": "SSL 9000J 72-Channel Console",
+                "category": "mixers",
+                "included": true
+              },
+              {
+                "name": "Dolby Atmos 7.1.4 PMC Studio Monitors",
+                "category": "studio_monitors",
+                "included": true
+              },
+              {
+                "name": "Neumann U87/U47/Telefunken ELAM 251",
+                "category": "microphones",
+                "included": true
+              },
+              {
+                "name": "Pro Tools HDX (128 Analog Inputs)",
+                "category": "controllers",
+                "included": true
+              }
+            ],
+            "operatingHours": "09:00 AM – 11:00 PM (Mon–Sat)",
+            "cancellationPolicy": "Minimum 2-hour booking; cancellations require 24h notice.",
+            "rooms": [
+              {
+                "name": "Tracking Room 1",
+                "capacity": 12,
+                "hourlyRate": 8000,
+                "amenities": [
+                  "Live Room",
+                  "Resident Engineers"
+                ]
+              },
+              {
+                "name": "Dolby Atmos Mixing Suite",
+                "capacity": 4,
+                "hourlyRate": 6500,
+                "amenities": [
+                  "Dolby Atmos"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "collection": "taxonomy_categories",
+          "sample": {
+            "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+            "genres": {
+              "key": "genres",
+              "options": [
+                "Bollywood / Filmi",
+                "Indie Pop",
+                "Hindustani Classical",
+                "Carnatic Classical",
+                "Punjabi Folk / Bhangra"
+              ]
+            },
+            "person_types": {
+              "key": "person_types",
+              "options": [
+                {
+                  "label": "Singer / Vocalist",
+                  "value": "singer"
+                },
+                {
+                  "label": "Rapper / MC",
+                  "value": "rapper"
+                },
+                {
+                  "label": "Folk Vocalist",
+                  "value": "folk_vocalist"
+                },
+                {
+                  "label": "Guitarist",
+                  "value": "guitarist"
+                },
+                {
+                  "label": "Keyboardist / Pianist",
+                  "value": "keyboardist"
+                }
+              ]
+            },
+            "languages": {
+              "key": "languages",
+              "options": [
+                "English",
+                "Hindi (हिंदी)",
+                "Punjabi (ਪੰਜਾਬੀ)",
+                "Tamil (தமிழ்)",
+                "Telugu (తెలుగు)"
+              ]
+            },
+            "instruments": {
+              "key": "instruments",
+              "options": [
+                "Acoustic Guitar",
+                "Electric Guitar",
+                "Bass Guitar",
+                "Keyboard / Synthesizer",
+                "Piano"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "services_availability",
+      "flowTitle": "Services, Availability",
+      "flowStatus": "partial",
+      "flowOrder": 11,
+      "screenKey": "rate_pricing_editor",
+      "screenNumber": 45,
+      "screenTitle": "Rate / Pricing Editor",
+      "screenOrder": 4,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users",
+        "studios"
+      ],
+      "notes": "hourlyRate migrated to a real number (per-hour INR equivalent, 0 = unset) — 2026-08-12. Editor sheets now use a numeric input; list columns format it via lib/utils.ts's formatHourlyRate().",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        },
+        {
+          "collection": "studios",
+          "sample": {
+            "ownerUid": "mock-business-yash-raj-sound-studios",
+            "name": "Yash Raj Sound Studios — Sound Lab",
+            "location": "Andheri West, Mumbai",
+            "rating": 4.9,
+            "reviewCount": 188,
+            "hourlyRate": 8000,
+            "verifiedGold": true,
+            "amenities": [
+              "Dolby Atmos",
+              "Live Room",
+              "Resident Engineers",
+              "Valet Parking"
+            ],
+            "consoleType": "SSL 9000J 72-Channel Console",
+            "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "description": "Two double-height tracking rooms and a certified Dolby Atmos HE mixing suite. Mixed Pathaan and Coke Studio India here.",
+            "images": [
+              "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800"
+            ],
+            "services": [
+              "recording",
+              "mixing",
+              "mastering"
+            ],
+            "geo": {
+              "lat": 19.1197,
+              "lng": 72.8468
+            },
+            "equipment": [
+              {
+                "name": "SSL 9000J 72-Channel Console",
+                "category": "mixers",
+                "included": true
+              },
+              {
+                "name": "Dolby Atmos 7.1.4 PMC Studio Monitors",
+                "category": "studio_monitors",
+                "included": true
+              },
+              {
+                "name": "Neumann U87/U47/Telefunken ELAM 251",
+                "category": "microphones",
+                "included": true
+              },
+              {
+                "name": "Pro Tools HDX (128 Analog Inputs)",
+                "category": "controllers",
+                "included": true
+              }
+            ],
+            "operatingHours": "09:00 AM – 11:00 PM (Mon–Sat)",
+            "cancellationPolicy": "Minimum 2-hour booking; cancellations require 24h notice.",
+            "rooms": [
+              {
+                "name": "Tracking Room 1",
+                "capacity": 12,
+                "hourlyRate": 8000,
+                "amenities": [
+                  "Live Room",
+                  "Resident Engineers"
+                ]
+              },
+              {
+                "name": "Dolby Atmos Mixing Suite",
+                "capacity": 4,
+                "hourlyRate": 6500,
+                "amenities": [
+                  "Dolby Atmos"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "services_availability",
+      "flowTitle": "Services, Availability",
+      "flowStatus": "partial",
+      "flowOrder": 11,
+      "screenKey": "session_configuration",
+      "screenNumber": 46,
+      "screenTitle": "Session Configuration (booking-side service selection)",
+      "screenOrder": 5,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "studio_bookings",
+        "taxonomy_categories"
+      ],
+      "notes": "sessionType/durationTier — added this session, not yet wired into the Bookings admin UI.",
+      "dataContract": [
+        {
+          "collection": "studio_bookings",
+          "sample": {
+            "studioId": "mock-studio-yash-raj-sound-studios",
+            "userId": "mock-talent-aditi-sen",
+            "date": "2026-08-12",
+            "slotText": "10:00 AM – 2:00 PM",
+            "totalAmount": 32000,
+            "bookedHourSlots": [
+              "10:00",
+              "11:00",
+              "12:00",
+              "13:00"
+            ],
+            "bookingStatus": "confirmed",
+            "paymentStatus": "PAID",
+            "createdAt": "2026-08-05T09:00:00.000Z",
+            "sessionType": "recording",
+            "durationTier": "half_day",
+            "engineerRequested": true,
+            "paymentMethod": "UPI"
+          }
+        },
+        {
+          "collection": "taxonomy_categories",
+          "sample": {
+            "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+            "genres": {
+              "key": "genres",
+              "options": [
+                "Bollywood / Filmi",
+                "Indie Pop",
+                "Hindustani Classical",
+                "Carnatic Classical",
+                "Punjabi Folk / Bhangra"
+              ]
+            },
+            "person_types": {
+              "key": "person_types",
+              "options": [
+                {
+                  "label": "Singer / Vocalist",
+                  "value": "singer"
+                },
+                {
+                  "label": "Rapper / MC",
+                  "value": "rapper"
+                },
+                {
+                  "label": "Folk Vocalist",
+                  "value": "folk_vocalist"
+                },
+                {
+                  "label": "Guitarist",
+                  "value": "guitarist"
+                },
+                {
+                  "label": "Keyboardist / Pianist",
+                  "value": "keyboardist"
+                }
+              ]
+            },
+            "languages": {
+              "key": "languages",
+              "options": [
+                "English",
+                "Hindi (हिंदी)",
+                "Punjabi (ਪੰਜਾਬੀ)",
+                "Tamil (தமிழ்)",
+                "Telugu (తెలుగు)"
+              ]
+            },
+            "instruments": {
+              "key": "instruments",
+              "options": [
+                "Acoustic Guitar",
+                "Electric Guitar",
+                "Bass Guitar",
+                "Keyboard / Synthesizer",
+                "Piano"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "business_profiles",
+      "flowTitle": "Business Profiles (Studios, Labels)",
+      "flowStatus": "partial",
+      "flowOrder": 12,
+      "screenKey": "business_overview",
+      "screenNumber": 71,
+      "screenTitle": "Overview",
+      "screenOrder": 1,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "business_profiles",
+      "flowTitle": "Business Profiles (Studios, Labels)",
+      "flowStatus": "partial",
+      "flowOrder": 12,
+      "screenKey": "business_services_tab",
+      "screenNumber": 72,
+      "screenTitle": "Services Tab",
+      "screenOrder": 2,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "serviceOfferings (priced menu) — added this session.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "business_profiles",
+      "flowTitle": "Business Profiles (Studios, Labels)",
+      "flowStatus": "partial",
+      "flowOrder": 12,
+      "screenKey": "business_equipment_tab",
+      "screenNumber": 73,
+      "screenTitle": "Equipment Tab",
+      "screenOrder": 3,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users",
+        "studios"
+      ],
+      "notes": "UserDoc.equipmentList for a general Business profile, or StudioDoc.equipment if businessType is Studio.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        },
+        {
+          "collection": "studios",
+          "sample": {
+            "ownerUid": "mock-business-yash-raj-sound-studios",
+            "name": "Yash Raj Sound Studios — Sound Lab",
+            "location": "Andheri West, Mumbai",
+            "rating": 4.9,
+            "reviewCount": 188,
+            "hourlyRate": 8000,
+            "verifiedGold": true,
+            "amenities": [
+              "Dolby Atmos",
+              "Live Room",
+              "Resident Engineers",
+              "Valet Parking"
+            ],
+            "consoleType": "SSL 9000J 72-Channel Console",
+            "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "description": "Two double-height tracking rooms and a certified Dolby Atmos HE mixing suite. Mixed Pathaan and Coke Studio India here.",
+            "images": [
+              "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800"
+            ],
+            "services": [
+              "recording",
+              "mixing",
+              "mastering"
+            ],
+            "geo": {
+              "lat": 19.1197,
+              "lng": 72.8468
+            },
+            "equipment": [
+              {
+                "name": "SSL 9000J 72-Channel Console",
+                "category": "mixers",
+                "included": true
+              },
+              {
+                "name": "Dolby Atmos 7.1.4 PMC Studio Monitors",
+                "category": "studio_monitors",
+                "included": true
+              },
+              {
+                "name": "Neumann U87/U47/Telefunken ELAM 251",
+                "category": "microphones",
+                "included": true
+              },
+              {
+                "name": "Pro Tools HDX (128 Analog Inputs)",
+                "category": "controllers",
+                "included": true
+              }
+            ],
+            "operatingHours": "09:00 AM – 11:00 PM (Mon–Sat)",
+            "cancellationPolicy": "Minimum 2-hour booking; cancellations require 24h notice.",
+            "rooms": [
+              {
+                "name": "Tracking Room 1",
+                "capacity": 12,
+                "hourlyRate": 8000,
+                "amenities": [
+                  "Live Room",
+                  "Resident Engineers"
+                ]
+              },
+              {
+                "name": "Dolby Atmos Mixing Suite",
+                "capacity": 4,
+                "hourlyRate": 6500,
+                "amenities": [
+                  "Dolby Atmos"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "business_profiles",
+      "flowTitle": "Business Profiles (Studios, Labels)",
+      "flowStatus": "partial",
+      "flowOrder": 12,
+      "screenKey": "business_team_tab",
+      "screenNumber": 74,
+      "screenTitle": "Team & Works Tab",
+      "screenOrder": 4,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "teamMembers — added this session, matches BusinessProfileScreens.kt's mock \"Octave Sound Labs\" content exactly.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "business_profiles",
+      "flowTitle": "Business Profiles (Studios, Labels)",
+      "flowStatus": "partial",
+      "flowOrder": 12,
+      "screenKey": "business_reviews_gallery_tab",
+      "screenNumber": 75,
+      "screenTitle": "Reviews & Gallery Tab",
+      "screenOrder": 5,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "reviews",
+        "users"
+      ],
+      "notes": "galleryUrls added this session; reviews collection is real and separate.",
+      "dataContract": [
+        {
+          "collection": "reviews",
+          "sample": {
+            "targetType": "USER",
+            "targetId": "mock-talent-arijit-sen",
+            "authorUid": "mock-reviewer-t-series-aandr-team",
+            "rating": 5,
+            "text": "\"Exceptional range and control across genres.\" — T-Series A&R Team",
+            "createdAt": "2026-06-10T09:00:00.000Z"
+          }
+        },
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "business_profiles",
+      "flowTitle": "Business Profiles (Studios, Labels)",
+      "flowStatus": "partial",
+      "flowOrder": 12,
+      "screenKey": "business_book_now",
+      "screenNumber": 76,
+      "screenTitle": "Book Now (CTA)",
+      "screenOrder": 6,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Routes into the Booking flow (Flow 8) — no schema of its own.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "business_profiles",
+      "flowTitle": "Business Profiles (Studios, Labels)",
+      "flowStatus": "partial",
+      "flowOrder": 12,
+      "screenKey": "business_owner_insights",
+      "screenNumber": 77,
+      "screenTitle": "Owner Mode / Business Insights",
+      "screenOrder": 7,
+      "states": [
+        "visible_if_owner"
+      ],
+      "collectionsTouched": [],
+      "notes": "100% mocked as of this session's audit — BusinessOwnerInsightsScreen has no real data source.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "notifications",
+      "flowTitle": "Notifications",
+      "flowStatus": "app-mocked",
+      "flowOrder": 13,
+      "screenKey": "notifications_center",
+      "screenNumber": 102,
+      "screenTitle": "Notifications Center",
+      "screenOrder": 1,
+      "states": [
+        "loading",
+        "empty",
+        "populated",
+        "search_filtered",
+        "category_filtered",
+        "muted_banner"
+      ],
+      "collectionsTouched": [],
+      "notes": "Reachable, feature-rich screen (swipe-to-dismiss, mark read/unread, pull-to-refresh) but 100% local mock state seeded with 5 hardcoded items — zero `.collection(\"notifications\")` calls, despite UI copy claiming \"Firestore Real-Time Sync\" (a commented-out banner, dead code). No tap-through/detail screen; no `targetUrl` navigation.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "notifications",
+      "flowTitle": "Notifications",
+      "flowStatus": "app-mocked",
+      "flowOrder": 13,
+      "screenKey": "notification_settings",
+      "screenNumber": 103,
+      "screenTitle": "Notification Settings (in Notifications Center)",
+      "screenOrder": 2,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Local-only preferences (push toggle, per-category toggles, quiet hours) — not persisted to Firestore, DataStore, or SharedPreferences. One of three separate, mutually-inconsistent \"notification preferences\" surfaces found (see the other two below) — not a single source of truth.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "notifications",
+      "flowTitle": "Notifications",
+      "flowStatus": "app-mocked",
+      "flowOrder": 13,
+      "screenKey": "notification_preferences_onboarding",
+      "screenNumber": 104,
+      "screenTitle": "Notification Preferences (onboarding step)",
+      "screenOrder": 3,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "A separate, unconnected screen from notification_settings above, reached during profile onboarding. Its \"test notification\" action does exercise the real Android OS notification-channel API (device-level, not Firestore) — the only genuinely functional piece across all three preference surfaces.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "notifications",
+      "flowTitle": "Notifications",
+      "flowStatus": "app-mocked",
+      "flowOrder": 13,
+      "screenKey": "notification_feeds_settings",
+      "screenNumber": 105,
+      "screenTitle": "Notification Feeds (general Settings tab)",
+      "screenOrder": 4,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "A third, separate preferences surface in the main Settings flow. \"Save\" shows a success Snackbar with no visible persistence call.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "public_profile",
+      "flowTitle": "Public Profile",
+      "flowStatus": "partial",
+      "flowOrder": 14,
+      "screenKey": "public_profile_view",
+      "screenNumber": 98,
+      "screenTitle": "Public Profile (cross-reference)",
+      "screenOrder": 1,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users",
+        "portfolio_projects",
+        "reviews"
+      ],
+      "notes": "Same screen as Flow 10's \"Public Profile Preview\" — this entry exists so Flow 14 isn't empty in the registry, not because there's a second, separate implementation. See Flow 10 for the full note. Forks into 4 profileType-driven templates below (98-1..98-4) — this is a genuine schema fork (different UserDoc extension fields render per template), not just a UI state, so it's modeled with variantOf rather than a plain states[] entry.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        },
+        {
+          "collection": "portfolio_projects",
+          "sample": {
+            "ownerUid": "mock-talent-arijit-sen",
+            "name": "Tum Hi Toh (Unplugged)",
+            "status": "Released",
+            "visibility": "Public",
+            "collaborators": [],
+            "credits": [],
+            "projectViews": 4200,
+            "likes": 610,
+            "shares": 88,
+            "createdAt": "2026-05-01T09:00:00.000Z",
+            "lastUpdatedAt": "2026-06-01T09:00:00.000Z",
+            "description": "Acoustic unplugged reinterpretation — 4.2M plays on Spotify.",
+            "type": "song",
+            "releaseDate": "2026-02-14",
+            "ownerRoles": [
+              "Singer"
+            ],
+            "artworkTheme": "Acoustic",
+            "spotifyUrl": "https://open.spotify.com/track/tumhitohunplugged-mock"
+          }
+        },
+        {
+          "collection": "reviews",
+          "sample": {
+            "targetType": "USER",
+            "targetId": "mock-talent-arijit-sen",
+            "authorUid": "mock-reviewer-t-series-aandr-team",
+            "rating": 5,
+            "text": "\"Exceptional range and control across genres.\" — T-Series A&R Team",
+            "createdAt": "2026-06-10T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "public_profile",
+      "flowTitle": "Public Profile",
+      "flowStatus": "partial",
+      "flowOrder": 14,
+      "screenKey": "public_profile_view_talent",
+      "screenTitle": "Public Profile — Talent template",
+      "screenOrder": 2,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users",
+        "portfolio_projects",
+        "reviews"
+      ],
+      "notes": "profileType === \"TALENT\" — renders base UserDoc fields (no extension block).",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        },
+        {
+          "collection": "portfolio_projects",
+          "sample": {
+            "ownerUid": "mock-talent-arijit-sen",
+            "name": "Tum Hi Toh (Unplugged)",
+            "status": "Released",
+            "visibility": "Public",
+            "collaborators": [],
+            "credits": [],
+            "projectViews": 4200,
+            "likes": 610,
+            "shares": 88,
+            "createdAt": "2026-05-01T09:00:00.000Z",
+            "lastUpdatedAt": "2026-06-01T09:00:00.000Z",
+            "description": "Acoustic unplugged reinterpretation — 4.2M plays on Spotify.",
+            "type": "song",
+            "releaseDate": "2026-02-14",
+            "ownerRoles": [
+              "Singer"
+            ],
+            "artworkTheme": "Acoustic",
+            "spotifyUrl": "https://open.spotify.com/track/tumhitohunplugged-mock"
+          }
+        },
+        {
+          "collection": "reviews",
+          "sample": {
+            "targetType": "USER",
+            "targetId": "mock-talent-arijit-sen",
+            "authorUid": "mock-reviewer-t-series-aandr-team",
+            "rating": 5,
+            "text": "\"Exceptional range and control across genres.\" — T-Series A&R Team",
+            "createdAt": "2026-06-10T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "public_profile",
+      "flowTitle": "Public Profile",
+      "flowStatus": "partial",
+      "flowOrder": 14,
+      "screenKey": "public_profile_view_band",
+      "screenTitle": "Public Profile — Band template",
+      "screenOrder": 3,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users",
+        "portfolio_projects",
+        "reviews"
+      ],
+      "notes": "profileType === \"BAND\" — renders bandName/lineupMembers/techRiderUrl/stagePlotUrl/shows.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        },
+        {
+          "collection": "portfolio_projects",
+          "sample": {
+            "ownerUid": "mock-talent-arijit-sen",
+            "name": "Tum Hi Toh (Unplugged)",
+            "status": "Released",
+            "visibility": "Public",
+            "collaborators": [],
+            "credits": [],
+            "projectViews": 4200,
+            "likes": 610,
+            "shares": 88,
+            "createdAt": "2026-05-01T09:00:00.000Z",
+            "lastUpdatedAt": "2026-06-01T09:00:00.000Z",
+            "description": "Acoustic unplugged reinterpretation — 4.2M plays on Spotify.",
+            "type": "song",
+            "releaseDate": "2026-02-14",
+            "ownerRoles": [
+              "Singer"
+            ],
+            "artworkTheme": "Acoustic",
+            "spotifyUrl": "https://open.spotify.com/track/tumhitohunplugged-mock"
+          }
+        },
+        {
+          "collection": "reviews",
+          "sample": {
+            "targetType": "USER",
+            "targetId": "mock-talent-arijit-sen",
+            "authorUid": "mock-reviewer-t-series-aandr-team",
+            "rating": 5,
+            "text": "\"Exceptional range and control across genres.\" — T-Series A&R Team",
+            "createdAt": "2026-06-10T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "public_profile",
+      "flowTitle": "Public Profile",
+      "flowStatus": "partial",
+      "flowOrder": 14,
+      "screenKey": "public_profile_view_business",
+      "screenTitle": "Public Profile — Business template",
+      "screenOrder": 4,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users",
+        "portfolio_projects",
+        "reviews"
+      ],
+      "notes": "profileType === \"BUSINESS\" — renders the Business extension (businessName/Type/services/equipment/teamMembers/gallery, plus Label/School/Agency sub-fields).",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        },
+        {
+          "collection": "portfolio_projects",
+          "sample": {
+            "ownerUid": "mock-talent-arijit-sen",
+            "name": "Tum Hi Toh (Unplugged)",
+            "status": "Released",
+            "visibility": "Public",
+            "collaborators": [],
+            "credits": [],
+            "projectViews": 4200,
+            "likes": 610,
+            "shares": 88,
+            "createdAt": "2026-05-01T09:00:00.000Z",
+            "lastUpdatedAt": "2026-06-01T09:00:00.000Z",
+            "description": "Acoustic unplugged reinterpretation — 4.2M plays on Spotify.",
+            "type": "song",
+            "releaseDate": "2026-02-14",
+            "ownerRoles": [
+              "Singer"
+            ],
+            "artworkTheme": "Acoustic",
+            "spotifyUrl": "https://open.spotify.com/track/tumhitohunplugged-mock"
+          }
+        },
+        {
+          "collection": "reviews",
+          "sample": {
+            "targetType": "USER",
+            "targetId": "mock-talent-arijit-sen",
+            "authorUid": "mock-reviewer-t-series-aandr-team",
+            "rating": 5,
+            "text": "\"Exceptional range and control across genres.\" — T-Series A&R Team",
+            "createdAt": "2026-06-10T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "public_profile",
+      "flowTitle": "Public Profile",
+      "flowStatus": "partial",
+      "flowOrder": 14,
+      "screenKey": "public_profile_view_venue",
+      "screenTitle": "Public Profile — Venue template",
+      "screenOrder": 5,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users",
+        "portfolio_projects",
+        "reviews"
+      ],
+      "notes": "profileType === \"VENUE\" — renders the Venue extension fields.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        },
+        {
+          "collection": "portfolio_projects",
+          "sample": {
+            "ownerUid": "mock-talent-arijit-sen",
+            "name": "Tum Hi Toh (Unplugged)",
+            "status": "Released",
+            "visibility": "Public",
+            "collaborators": [],
+            "credits": [],
+            "projectViews": 4200,
+            "likes": 610,
+            "shares": 88,
+            "createdAt": "2026-05-01T09:00:00.000Z",
+            "lastUpdatedAt": "2026-06-01T09:00:00.000Z",
+            "description": "Acoustic unplugged reinterpretation — 4.2M plays on Spotify.",
+            "type": "song",
+            "releaseDate": "2026-02-14",
+            "ownerRoles": [
+              "Singer"
+            ],
+            "artworkTheme": "Acoustic",
+            "spotifyUrl": "https://open.spotify.com/track/tumhitohunplugged-mock"
+          }
+        },
+        {
+          "collection": "reviews",
+          "sample": {
+            "targetType": "USER",
+            "targetId": "mock-talent-arijit-sen",
+            "authorUid": "mock-reviewer-t-series-aandr-team",
+            "rating": 5,
+            "text": "\"Exceptional range and control across genres.\" — T-Series A&R Team",
+            "createdAt": "2026-06-10T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "band",
+      "flowTitle": "Band",
+      "flowStatus": "partial",
+      "flowOrder": 15,
+      "screenKey": "band_profile_layout",
+      "screenNumber": 90,
+      "screenTitle": "Band Profile (public view)",
+      "screenOrder": 1,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "Renders off profileType === \"BAND\" now; previously one of three disconnected template-selection heuristics.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "band",
+      "flowTitle": "Band",
+      "flowStatus": "partial",
+      "flowOrder": 15,
+      "screenKey": "ensemble_lineup",
+      "screenNumber": 91,
+      "screenTitle": "Ensemble Lineup Display",
+      "screenOrder": 2,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "lineupMembers — real field, confirmed matches the app's existing lineup-carousel UI shape.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "band",
+      "flowTitle": "Band",
+      "flowStatus": "partial",
+      "flowOrder": 15,
+      "screenKey": "upcoming_shows",
+      "screenNumber": 92,
+      "screenTitle": "Upcoming Shows List",
+      "screenOrder": 3,
+      "states": [
+        "hardcoded"
+      ],
+      "collectionsTouched": [],
+      "notes": "\"Shows\" is not modeled anywhere — the real UI shows a hardcoded list. Flagged, deferred pending a shape decision (flat array vs. own collection).",
+      "dataContract": []
+    },
+    {
+      "flowKey": "verifications",
+      "flowTitle": "Verifications",
+      "flowStatus": "app-mocked",
+      "flowOrder": 16,
+      "screenKey": "verification_screen",
+      "screenNumber": 106,
+      "screenTitle": "Verify Professional Status",
+      "screenOrder": 1,
+      "states": [
+        "id_type_selector",
+        "govt_id_upload",
+        "gst_upload",
+        "badge_timeline"
+      ],
+      "collectionsTouched": [],
+      "notes": "Reachable from the Profile tab. Upload boxes hardcode a literal filename into local state on tap (no file picker, no FirebaseStorage call) — the exact same fake filenames (Aadhaar_Front_SwarSandhya.pdf, GST_Verification_VedanshuMusic.pdf) referenced in this session's mock-data seeding. No write to verification_requests; no status-tracking (pending/approved/rejected) screen exists anywhere — verified status is three local booleans.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "reviews",
+      "flowTitle": "Reviews",
+      "flowStatus": "app-mocked",
+      "flowOrder": 17,
+      "screenKey": "reputation_dashboard",
+      "screenNumber": 107,
+      "screenTitle": "Reputation Hub Dashboard",
+      "screenOrder": 1,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "ReputationSubScreen.DASHBOARD — entry point of the standalone Reputation Hub module (ReputationAndReviewsScreens.kt), reached from the main dashboard, not from any post-booking prompt. Enum state confirmed via Screens_Map.md's full-source audit; not independently re-verified for persistence behavior beyond what's already established for the module as a whole (see the write screens below — all local Room or no-op, zero real `reviews` writes).",
+      "dataContract": []
+    },
+    {
+      "flowKey": "reviews",
+      "flowTitle": "Reviews",
+      "flowStatus": "app-mocked",
+      "flowOrder": 17,
+      "screenKey": "review_list",
+      "screenNumber": 108,
+      "screenTitle": "Review List",
+      "screenOrder": 2,
+      "states": [
+        "default",
+        "empty"
+      ],
+      "collectionsTouched": [],
+      "notes": "ReputationSubScreen.REVIEW_LIST. Reads whatever the module's local Room table holds (the same store write_review/etc. write to below) — not the real `reviews` Firestore collection the admin ReviewDoc schema targets.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "reviews",
+      "flowTitle": "Reviews",
+      "flowStatus": "app-mocked",
+      "flowOrder": 17,
+      "screenKey": "review_detail",
+      "screenNumber": 109,
+      "screenTitle": "Review Detail",
+      "screenOrder": 3,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "ReputationSubScreen.REVIEW_DETAIL. Single-review expanded view within the same local-Room-backed module.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "reviews",
+      "flowTitle": "Reviews",
+      "flowStatus": "app-mocked",
+      "flowOrder": 17,
+      "screenKey": "write_review",
+      "screenNumber": 110,
+      "screenTitle": "Write Review",
+      "screenOrder": 4,
+      "states": [
+        "default",
+        "star_selected",
+        "subcategory_ratings",
+        "comment_entered",
+        "submitted"
+      ],
+      "collectionsTouched": [],
+      "notes": "Part of a standalone Reputation Hub module, reached from the dashboard — not triggered by booking completion. Persists to a local Room table, not the real `reviews` Firestore collection.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "reviews",
+      "flowTitle": "Reviews",
+      "flowStatus": "app-mocked",
+      "flowOrder": 17,
+      "screenKey": "rating_breakdown",
+      "screenNumber": 111,
+      "screenTitle": "Rating Breakdown",
+      "screenOrder": 5,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "ReputationSubScreen.RATING_BREAKDOWN — aggregate score/category breakdown display, same local-Room-backed data as review_list.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "reviews",
+      "flowTitle": "Reviews",
+      "flowStatus": "app-mocked",
+      "flowOrder": 17,
+      "screenKey": "completed_project_review",
+      "screenNumber": 112,
+      "screenTitle": "Completed Project Review",
+      "screenOrder": 6,
+      "states": [
+        "default",
+        "submitted"
+      ],
+      "collectionsTouched": [],
+      "notes": "Milestone-evaluation variant in the same Reputation Hub module. Fully no-op — submit only shows a snackbar and navigates back, no persistence at all.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "reviews",
+      "flowTitle": "Reviews",
+      "flowStatus": "app-mocked",
+      "flowOrder": 17,
+      "screenKey": "marketplace_review_screen",
+      "screenNumber": 113,
+      "screenTitle": "Marketplace Gear Review",
+      "screenOrder": 7,
+      "states": [
+        "default",
+        "submitted"
+      ],
+      "collectionsTouched": [],
+      "notes": "Post-purchase gear rating in the Reputation Hub module. Fully no-op UI, no persistence.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "reviews",
+      "flowTitle": "Reviews",
+      "flowStatus": "app-mocked",
+      "flowOrder": 17,
+      "screenKey": "studio_facility_review",
+      "screenNumber": 114,
+      "screenTitle": "Studio Facility Review",
+      "screenOrder": 8,
+      "states": [
+        "default",
+        "submitted"
+      ],
+      "collectionsTouched": [],
+      "notes": "Facility rating (acoustics/cleanliness), distinct from Business Profile's embedded Reviews & Gallery tab. Fully no-op UI, no persistence.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "reviews",
+      "flowTitle": "Reviews",
+      "flowStatus": "app-mocked",
+      "flowOrder": 17,
+      "screenKey": "review_business_response",
+      "screenNumber": 115,
+      "screenTitle": "Business Response to Review",
+      "screenOrder": 9,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Business owner replies to a review. Writes to the same local Room table as write_review, not Firestore.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "reviews",
+      "flowTitle": "Reviews",
+      "flowStatus": "app-mocked",
+      "flowOrder": 17,
+      "screenKey": "review_report",
+      "screenNumber": 116,
+      "screenTitle": "Report Review",
+      "screenOrder": 10,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Dispute/report a review. Fully no-op UI, no persistence.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "reviews",
+      "flowTitle": "Reviews",
+      "flowStatus": "app-mocked",
+      "flowOrder": 17,
+      "screenKey": "public_reputation",
+      "screenNumber": 117,
+      "screenTitle": "Public Reputation (cross-reference)",
+      "screenOrder": 11,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "reviews"
+      ],
+      "notes": "ReputationSubScreen.PUBLIC_REPUTATION — the read-facing summary shown on a public profile (aggregate rating, verified-credits count). Related to but distinct from Flow 14's public_profile_view cross-reference entry; listed here since it's driven by this module's own enum, not the profile template.",
+      "dataContract": [
+        {
+          "collection": "reviews",
+          "sample": {
+            "targetType": "USER",
+            "targetId": "mock-talent-arijit-sen",
+            "authorUid": "mock-reviewer-t-series-aandr-team",
+            "rating": 5,
+            "text": "\"Exceptional range and control across genres.\" — T-Series A&R Team",
+            "createdAt": "2026-06-10T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "search",
+      "flowTitle": "Search",
+      "flowStatus": "app-mocked",
+      "flowOrder": 19,
+      "screenKey": "universal_search",
+      "screenNumber": 118,
+      "screenTitle": "Universal Search",
+      "screenOrder": 1,
+      "states": [
+        "home",
+        "live_typing",
+        "results",
+        "empty"
+      ],
+      "collectionsTouched": [],
+      "notes": "UniversalSearchFlow (SupportingScreens.kt:281), SearchScreenState enum (HOME/LIVE/RESULTS/EMPTY). Reached from the dashboard's top-bar Search icon (SupportingModule.UNIVERSAL_SEARCH) — a genuinely separate screen from discover's/booking's own internal search-results states, not a duplicate. Filters a hardcoded 10-item mockAllResults list across Musicians/Bands/Projects/Studios categories; zero Firestore reads.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "account_settings",
+      "screenNumber": 47,
+      "screenTitle": "Account Settings",
+      "screenOrder": 1,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "SettingsSubPage.ACCOUNT — edits name/email/phone/primaryRole/genres. Overlaps with Flow 10's Edit Profile screen in the real app; worth reconciling into one screen if the app ever gets rebuilt, not something to silently merge here.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "notification_settings",
+      "screenNumber": 48,
+      "screenTitle": "Notification Settings",
+      "screenOrder": 2,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "user_settings"
+      ],
+      "notes": "pushNotify/emailNotify/smsNotify/marketplaceAlerts/bookingsAlerts — no real persistence in the app yet.",
+      "dataContract": [
+        {
+          "collection": "user_settings",
+          "sample": null,
+          "note": "No seed sample available for this collection in this build."
+        }
+      ]
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "privacy_settings",
+      "screenNumber": 49,
+      "screenTitle": "Privacy Settings",
+      "screenOrder": 3,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "user_settings"
+      ],
+      "notes": "profileVisible/hideContactDetails/hideFollowersList + a \"Download My Data\" action (UI-only today).",
+      "dataContract": [
+        {
+          "collection": "user_settings",
+          "sample": null,
+          "note": "No seed sample available for this collection in this build."
+        }
+      ]
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "security_settings",
+      "screenNumber": 50,
+      "screenTitle": "Security Settings",
+      "screenOrder": 4,
+      "states": [
+        "default",
+        "two_factor_setup"
+      ],
+      "collectionsTouched": [],
+      "notes": "Two-factor toggle + a \"Reset Access Password\" button live here in the real app today — conceptually that action belongs to Flow 1 (Auth), per this flow's scope note. Flag to AI Studio if you want it physically moved, not just re-labeled.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "appearance_settings",
+      "screenNumber": 51,
+      "screenTitle": "Appearance Settings",
+      "screenOrder": 5,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "user_settings"
+      ],
+      "notes": "Theme (Light/Dark/Cosmic) + accent color — darkModeEnabled is the only piece of this in the typed schema.",
+      "dataContract": [
+        {
+          "collection": "user_settings",
+          "sample": null,
+          "note": "No seed sample available for this collection in this build."
+        }
+      ]
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "help_center",
+      "screenNumber": 52,
+      "screenTitle": "Help Center",
+      "screenOrder": 6,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Landing/menu screen for the sub-flows below.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "faq",
+      "screenNumber": 53,
+      "screenTitle": "FAQ",
+      "screenOrder": 7,
+      "states": [
+        "default",
+        "searching"
+      ],
+      "collectionsTouched": [],
+      "notes": "Static hardcoded 4-item list — not Firestore-backed.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "raise_ticket",
+      "screenNumber": 54,
+      "screenTitle": "Contact Support / Raise Ticket",
+      "screenOrder": 8,
+      "states": [
+        "default",
+        "submitting",
+        "success"
+      ],
+      "collectionsTouched": [
+        "support_tickets"
+      ],
+      "notes": "Real collection exists and is rules-ready; the app currently fabricates a fake client-side ticket ID instead of writing one.",
+      "dataContract": [
+        {
+          "collection": "support_tickets",
+          "sample": null,
+          "note": "No seed sample available for this collection in this build."
+        }
+      ]
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "report_user",
+      "screenNumber": 55,
+      "screenTitle": "Report User",
+      "screenOrder": 9,
+      "states": [
+        "default",
+        "submitting",
+        "success"
+      ],
+      "collectionsTouched": [
+        "moderation_flags"
+      ],
+      "notes": "Real collection + admin moderation queue exist; the app currently just shows a snackbar and discards the input.",
+      "dataContract": [
+        {
+          "collection": "moderation_flags",
+          "sample": {
+            "targetType": "REVIEW",
+            "targetId": "mock-review-sanjay-k-vedanshu",
+            "reportedBy": "mock-reporter-anon-user-1",
+            "reason": "Reported as suspected fake/incentivized review.",
+            "status": "DISMISSED",
+            "createdAt": "2026-06-03T09:00:00.000Z",
+            "reviewedBy": "mock-admin-system",
+            "reviewedAt": "2026-06-04T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "report_listing",
+      "screenNumber": 56,
+      "screenTitle": "Report Listing",
+      "screenOrder": 10,
+      "states": [
+        "default",
+        "submitting",
+        "success"
+      ],
+      "collectionsTouched": [
+        "moderation_flags"
+      ],
+      "notes": "Same gap as Report User.",
+      "dataContract": [
+        {
+          "collection": "moderation_flags",
+          "sample": {
+            "targetType": "REVIEW",
+            "targetId": "mock-review-sanjay-k-vedanshu",
+            "reportedBy": "mock-reporter-anon-user-1",
+            "reason": "Reported as suspected fake/incentivized review.",
+            "status": "DISMISSED",
+            "createdAt": "2026-06-03T09:00:00.000Z",
+            "reviewedBy": "mock-admin-system",
+            "reviewedAt": "2026-06-04T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "feedback",
+      "screenNumber": 57,
+      "screenTitle": "Feedback",
+      "screenOrder": 11,
+      "states": [
+        "default",
+        "submitting",
+        "success"
+      ],
+      "collectionsTouched": [],
+      "notes": "No Firestore write and no external mailto/link — input is entirely discarded today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "legal_pages",
+      "screenNumber": 58,
+      "screenTitle": "Legal Pages (Privacy Policy, Terms)",
+      "screenOrder": 12,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "page_content"
+      ],
+      "notes": "Lives under Flow 22 CMS Pages' page_content collection (route \"/legal/privacy\", \"/legal/terms\") — surfaced here as an entry point since Settings is where a user would look for it.",
+      "dataContract": [
+        {
+          "collection": "page_content",
+          "sample": {
+            "route": "/",
+            "title": "MusicLinkd — Find your next collaborator",
+            "status": "PUBLISHED",
+            "content": "MusicLinkd connects singers, musicians, producers, studios, and venues across India for collaboration, booking, and hire.",
+            "seoDescription": "MusicLinkd is India's marketplace for music talent, studios, and collaboration.",
+            "updatedBy": "mock-admin-system",
+            "updatedAt": "2026-08-01T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "app_version",
+      "screenNumber": 59,
+      "screenTitle": "App Version / About",
+      "screenOrder": 13,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Static build info (version name/code) — no Firestore involvement expected.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "cms_pages",
+      "flowTitle": "CMS Pages",
+      "flowStatus": "partial",
+      "flowOrder": 22,
+      "screenKey": "marketing_homepage",
+      "screenNumber": 93,
+      "screenTitle": "Marketing Homepage",
+      "screenOrder": 1,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Static HTML, never reads Firestore at runtime.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "cms_pages",
+      "flowTitle": "CMS Pages",
+      "flowStatus": "partial",
+      "flowOrder": 22,
+      "screenKey": "about_pricing_careers",
+      "screenNumber": 94,
+      "screenTitle": "About / Pricing / Careers",
+      "screenOrder": 2,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Static HTML pages under frontend/website/.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "cms_pages",
+      "flowTitle": "CMS Pages",
+      "flowStatus": "partial",
+      "flowOrder": 22,
+      "screenKey": "legal_pages_site",
+      "screenNumber": 95,
+      "screenTitle": "Legal Pages (site)",
+      "screenOrder": 3,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Static HTML today — cross-reference Flow 21's \"Legal Pages\" entry point, and the admin's page_content collection below.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "cms_pages",
+      "flowTitle": "CMS Pages",
+      "flowStatus": "partial",
+      "flowOrder": 22,
+      "screenKey": "blog_changelog",
+      "screenNumber": 96,
+      "screenTitle": "Blog / Changelog",
+      "screenOrder": 4,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Generated from CHANGELOG.md at build time via scripts/generate-changelog.mjs — not Firestore-backed.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "cms_pages",
+      "flowTitle": "CMS Pages",
+      "flowStatus": "partial",
+      "flowOrder": 22,
+      "screenKey": "admin_pages_editor",
+      "screenNumber": 97,
+      "screenTitle": "Admin Pages Editor",
+      "screenOrder": 5,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [
+        "page_content"
+      ],
+      "notes": "Real, working admin CRUD — but frontend/website/ never reads this collection at runtime, so edits here don't reach the live site. The core documented gap for this flow.",
+      "dataContract": [
+        {
+          "collection": "page_content",
+          "sample": {
+            "route": "/",
+            "title": "MusicLinkd — Find your next collaborator",
+            "status": "PUBLISHED",
+            "content": "MusicLinkd connects singers, musicians, producers, studios, and venues across India for collaboration, booking, and hire.",
+            "seoDescription": "MusicLinkd is India's marketplace for music talent, studios, and collaboration.",
+            "updatedBy": "mock-admin-system",
+            "updatedAt": "2026-08-01T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "qr_share",
+      "flowTitle": "QR Code & Profile Sharing",
+      "flowStatus": "missing",
+      "flowOrder": 23,
+      "screenKey": "qr_share_flow",
+      "screenNumber": 119,
+      "screenTitle": "QR Code & Comp Card Sharing",
+      "screenOrder": 1,
+      "states": [
+        "home",
+        "options",
+        "preview"
+      ],
+      "collectionsTouched": [],
+      "notes": "QrAndShareFlow (SupportingScreens.kt:655), reached from the dashboard's QRShare shortcut. State is a plain string, not an enum. \"Preview\" generates a \"Premium Comp Card\" with a simulated PDF download (fake progress via a delay(150) loop, no real file, no real QR payload). No schema exists for this anywhere — no shareable-link record, no download/share analytics. Does not call DynamicLinkManager.kt, despite that existing elsewhere in the app for outbound share links.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "saved_favorites",
+      "flowTitle": "Saved & Favorites",
+      "flowStatus": "app-mocked",
+      "flowOrder": 24,
+      "screenKey": "saved_favorites_hub",
+      "screenNumber": 120,
+      "screenTitle": "Saved & Favorites Hub",
+      "screenOrder": 1,
+      "states": [
+        "artists",
+        "bands",
+        "studios",
+        "marketplace",
+        "empty",
+        "grid_view",
+        "list_view"
+      ],
+      "collectionsTouched": [],
+      "notes": "SavedAndFavoritesFlow (SupportingScreens.kt:1023), reached from the dashboard's Saved shortcut. SavedTab enum: ARTISTS, BANDS, STUDIOS, MARKETPLACE (+ EMPTY). The Marketplace tab is the same screen already documented as marketplace_saved_bookmarks under the marketplace flow (MarketplaceFeature.kt routes here, defaulted to that tab) — listed here too since it's one tab of this single real hub, not a separate implementation. All four tabs are local mutableStateListOf mock data (hardcoded artists/studios/marketplace items); zero Firestore reads or writes, no persisted \"saved\" relationship on any real document.",
+      "dataContract": []
+    }
+  ]
+}

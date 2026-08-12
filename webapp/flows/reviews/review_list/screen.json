@@ -1,0 +1,17 @@
+{
+  "flowKey": "reviews",
+  "flowTitle": "Reviews",
+  "flowStatus": "app-mocked",
+  "flowOrder": 17,
+  "screenKey": "review_list",
+  "screenNumber": 108,
+  "screenTitle": "Review List",
+  "screenOrder": 2,
+  "states": [
+    "default",
+    "empty"
+  ],
+  "collectionsTouched": [],
+  "notes": "ReputationSubScreen.REVIEW_LIST. Reads whatever the module's local Room table holds (the same store write_review/etc. write to below) — not the real `reviews` Firestore collection the admin ReviewDoc schema targets.",
+  "dataContract": []
+}

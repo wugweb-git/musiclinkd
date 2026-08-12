@@ -1,0 +1,18 @@
+{
+  "flowKey": "qr_share",
+  "flowTitle": "QR Code & Profile Sharing",
+  "flowStatus": "missing",
+  "flowOrder": 23,
+  "screenKey": "qr_share_flow",
+  "screenNumber": 119,
+  "screenTitle": "QR Code & Comp Card Sharing",
+  "screenOrder": 1,
+  "states": [
+    "home",
+    "options",
+    "preview"
+  ],
+  "collectionsTouched": [],
+  "notes": "QrAndShareFlow (SupportingScreens.kt:655), reached from the dashboard's QRShare shortcut. State is a plain string, not an enum. \"Preview\" generates a \"Premium Comp Card\" with a simulated PDF download (fake progress via a delay(150) loop, no real file, no real QR payload). No schema exists for this anywhere — no shareable-link record, no download/share analytics. Does not call DynamicLinkManager.kt, despite that existing elsewhere in the app for outbound share links.",
+  "dataContract": []
+}

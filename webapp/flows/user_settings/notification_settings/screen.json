@@ -1,0 +1,24 @@
+{
+  "flowKey": "user_settings",
+  "flowTitle": "Settings & Support",
+  "flowStatus": "missing",
+  "flowOrder": 21,
+  "screenKey": "notification_settings",
+  "screenNumber": 48,
+  "screenTitle": "Notification Settings",
+  "screenOrder": 2,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "user_settings"
+  ],
+  "notes": "pushNotify/emailNotify/smsNotify/marketplaceAlerts/bookingsAlerts — no real persistence in the app yet.",
+  "dataContract": [
+    {
+      "collection": "user_settings",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}

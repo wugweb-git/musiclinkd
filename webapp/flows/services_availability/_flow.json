@@ -1,0 +1,8 @@
+{
+  "key": "services_availability",
+  "title": "Services, Availability",
+  "order": 11,
+  "status": "partial",
+  "description": "sessionAvailability (Talent), StudioDoc.services (taxonomy tags), and serviceOfferings (priced menu, Business) now modeled. No single unified \"availability\" concept spans all profile types yet — Talent/Band/Business/Venue each have their own shape.",
+  "screenCount": 5
+}

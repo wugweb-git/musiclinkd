@@ -1,0 +1,15 @@
+{
+  "flowKey": "portfolio",
+  "flowTitle": "Add Portfolio",
+  "flowStatus": "app-mocked",
+  "flowOrder": 3,
+  "screenKey": "credit_attribution",
+  "screenNumber": 27,
+  "screenTitle": "Credit Attribution",
+  "screenOrder": 7,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "dataContract": []
+}

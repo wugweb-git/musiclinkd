@@ -1,0 +1,17 @@
+{
+  "flowKey": "user_settings",
+  "flowTitle": "Settings & Support",
+  "flowStatus": "missing",
+  "flowOrder": 21,
+  "screenKey": "faq",
+  "screenNumber": 53,
+  "screenTitle": "FAQ",
+  "screenOrder": 7,
+  "states": [
+    "default",
+    "searching"
+  ],
+  "collectionsTouched": [],
+  "notes": "Static hardcoded 4-item list — not Firestore-backed.",
+  "dataContract": []
+}

@@ -1,0 +1,23 @@
+{
+  "flowKey": "marketplace",
+  "flowTitle": "Marketplace (Buy/Sell)",
+  "flowStatus": "app-mocked",
+  "flowOrder": 7,
+  "screenKey": "marketplace_browse",
+  "screenNumber": 99,
+  "screenTitle": "Creator Marketplace (browse)",
+  "screenOrder": 1,
+  "states": [
+    "default",
+    "empty",
+    "sale",
+    "rental",
+    "mixing",
+    "beats",
+    "services",
+    "search_filtered"
+  ],
+  "collectionsTouched": [],
+  "notes": "MarketplaceBetaScreen, wired live into the dashboard's Marketplace tab. Backed entirely by a hardcoded 8-item list — zero `marketplace_items` references anywhere in the file. \"Gear Rentals\" is just one of its 6 category tabs, not a separate flow (see equipment_rental note in default-flows.ts).",
+  "dataContract": []
+}

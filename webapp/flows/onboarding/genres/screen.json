@@ -1,0 +1,79 @@
+{
+  "flowKey": "onboarding",
+  "flowTitle": "User Onboarding",
+  "flowStatus": "partial",
+  "flowOrder": 2,
+  "screenKey": "genres",
+  "screenNumber": 10,
+  "screenTitle": "Genres (pick up to 3)",
+  "screenOrder": 3,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "taxonomy_categories"
+  ],
+  "dataContract": [
+    {
+      "collection": "taxonomy_categories",
+      "sample": {
+        "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+        "genres": {
+          "key": "genres",
+          "options": [
+            "Bollywood / Filmi",
+            "Indie Pop",
+            "Hindustani Classical",
+            "Carnatic Classical",
+            "Punjabi Folk / Bhangra"
+          ]
+        },
+        "person_types": {
+          "key": "person_types",
+          "options": [
+            {
+              "label": "Singer / Vocalist",
+              "value": "singer"
+            },
+            {
+              "label": "Rapper / MC",
+              "value": "rapper"
+            },
+            {
+              "label": "Folk Vocalist",
+              "value": "folk_vocalist"
+            },
+            {
+              "label": "Guitarist",
+              "value": "guitarist"
+            },
+            {
+              "label": "Keyboardist / Pianist",
+              "value": "keyboardist"
+            }
+          ]
+        },
+        "languages": {
+          "key": "languages",
+          "options": [
+            "English",
+            "Hindi (हिंदी)",
+            "Punjabi (ਪੰਜਾਬੀ)",
+            "Tamil (தமிழ்)",
+            "Telugu (తెలుగు)"
+          ]
+        },
+        "instruments": {
+          "key": "instruments",
+          "options": [
+            "Acoustic Guitar",
+            "Electric Guitar",
+            "Bass Guitar",
+            "Keyboard / Synthesizer",
+            "Piano"
+          ]
+        }
+      }
+    }
+  ]
+}

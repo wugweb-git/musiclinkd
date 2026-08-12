@@ -1,0 +1,16 @@
+{
+  "flowKey": "auth",
+  "flowTitle": "User Auth",
+  "flowStatus": "partial",
+  "flowOrder": 1,
+  "screenKey": "mobile_auth",
+  "screenNumber": 4,
+  "screenTitle": "Mobile Number Entry",
+  "screenOrder": 4,
+  "states": [
+    "default",
+    "error"
+  ],
+  "collectionsTouched": [],
+  "dataContract": []
+}

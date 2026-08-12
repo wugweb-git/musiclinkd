@@ -1,0 +1,22 @@
+{
+  "flowKey": "saved_favorites",
+  "flowTitle": "Saved & Favorites",
+  "flowStatus": "app-mocked",
+  "flowOrder": 24,
+  "screenKey": "saved_favorites_hub",
+  "screenNumber": 120,
+  "screenTitle": "Saved & Favorites Hub",
+  "screenOrder": 1,
+  "states": [
+    "artists",
+    "bands",
+    "studios",
+    "marketplace",
+    "empty",
+    "grid_view",
+    "list_view"
+  ],
+  "collectionsTouched": [],
+  "notes": "SavedAndFavoritesFlow (SupportingScreens.kt:1023), reached from the dashboard's Saved shortcut. SavedTab enum: ARTISTS, BANDS, STUDIOS, MARKETPLACE (+ EMPTY). The Marketplace tab is the same screen already documented as marketplace_saved_bookmarks under the marketplace flow (MarketplaceFeature.kt routes here, defaulted to that tab) — listed here too since it's one tab of this single real hub, not a separate implementation. All four tabs are local mutableStateListOf mock data (hardcoded artists/studios/marketplace items); zero Firestore reads or writes, no persisted \"saved\" relationship on any real document.",
+  "dataContract": []
+}

@@ -1,0 +1,27 @@
+{
+  "flowKey": "communication",
+  "flowTitle": "Communication & Collaboration",
+  "flowStatus": "partial",
+  "flowOrder": 6,
+  "screenKey": "connection_requests_tab",
+  "screenNumber": 78,
+  "screenTitle": "Connection Requests",
+  "screenOrder": 1,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "connections"
+  ],
+  "notes": "Two writers exist for this collection and disagree on document shape — see Flow-level notes / Prompt F §2.",
+  "dataContract": [
+    {
+      "collection": "connections",
+      "sample": {
+        "senderUid": "mock-talent-kabir-sethi",
+        "targetUserId": "mock-talent-vedanshu-beats-mock",
+        "status": "PENDING"
+      }
+    }
+  ]
+}

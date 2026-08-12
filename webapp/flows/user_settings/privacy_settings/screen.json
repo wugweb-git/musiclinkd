@@ -1,0 +1,24 @@
+{
+  "flowKey": "user_settings",
+  "flowTitle": "Settings & Support",
+  "flowStatus": "missing",
+  "flowOrder": 21,
+  "screenKey": "privacy_settings",
+  "screenNumber": 49,
+  "screenTitle": "Privacy Settings",
+  "screenOrder": 3,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "user_settings"
+  ],
+  "notes": "profileVisible/hideContactDetails/hideFollowersList + a \"Download My Data\" action (UI-only today).",
+  "dataContract": [
+    {
+      "collection": "user_settings",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}

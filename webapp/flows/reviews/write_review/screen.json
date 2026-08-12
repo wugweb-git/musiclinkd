@@ -1,0 +1,20 @@
+{
+  "flowKey": "reviews",
+  "flowTitle": "Reviews",
+  "flowStatus": "app-mocked",
+  "flowOrder": 17,
+  "screenKey": "write_review",
+  "screenNumber": 110,
+  "screenTitle": "Write Review",
+  "screenOrder": 4,
+  "states": [
+    "default",
+    "star_selected",
+    "subcategory_ratings",
+    "comment_entered",
+    "submitted"
+  ],
+  "collectionsTouched": [],
+  "notes": "Part of a standalone Reputation Hub module, reached from the dashboard — not triggered by booking completion. Persists to a local Room table, not the real `reviews` Firestore collection.",
+  "dataContract": []
+}

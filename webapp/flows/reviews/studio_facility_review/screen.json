@@ -1,0 +1,17 @@
+{
+  "flowKey": "reviews",
+  "flowTitle": "Reviews",
+  "flowStatus": "app-mocked",
+  "flowOrder": 17,
+  "screenKey": "studio_facility_review",
+  "screenNumber": 114,
+  "screenTitle": "Studio Facility Review",
+  "screenOrder": 8,
+  "states": [
+    "default",
+    "submitted"
+  ],
+  "collectionsTouched": [],
+  "notes": "Facility rating (acoustics/cleanliness), distinct from Business Profile's embedded Reviews & Gallery tab. Fully no-op UI, no persistence.",
+  "dataContract": []
+}

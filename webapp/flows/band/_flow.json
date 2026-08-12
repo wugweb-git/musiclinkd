@@ -1,0 +1,8 @@
+{
+  "key": "band",
+  "title": "Band",
+  "order": 15,
+  "status": "partial",
+  "description": "UserDoc Band extension (bandName/lineupMembers/techRiderUrl/stagePlotUrl) modeled. \"Shows\" (upcoming/past performances) closed 2026-08-12: `BandShow { title, date, venueName?, ticketUrl?, isPast }` + `UserDoc.shows?: BandShow[]` — a flat array, not a separate collection.",
+  "screenCount": 3
+}

@@ -1,0 +1,8 @@
+{
+  "key": "user_settings",
+  "title": "Settings & Support",
+  "order": 21,
+  "status": "missing",
+  "description": "App-level settings (notifications/privacy/security/appearance), Help & Support (FAQ, raise a ticket, report user/listing, feedback), legal pages, and app version — explicitly distinct from Flow 1 Auth (password change lives there, not here) and Flow 10 Profile Management (identity/public-profile fields, not app preferences). user_settings/{userId} and support_tickets/moderation_flags are typed and rules-ready, but SettingsFlow and HelpAndSupportFlow app-side have zero real persistence anywhere — confirmed this session. Founded, ready-to-wire gaps, not speculative.",
+  "screenCount": 13
+}

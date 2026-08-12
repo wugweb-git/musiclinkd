@@ -1,0 +1,42 @@
+{
+  "flowKey": "booking",
+  "flowTitle": "Booking",
+  "flowStatus": "partial",
+  "flowOrder": 8,
+  "screenKey": "booking_summary",
+  "screenNumber": 67,
+  "screenTitle": "Booking Summary",
+  "screenOrder": 8,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "studio_bookings"
+  ],
+  "notes": "taxAmount/depositAmount/discountAmount/promoCode — typed this session, none confirmed app-wired.",
+  "dataContract": [
+    {
+      "collection": "studio_bookings",
+      "sample": {
+        "studioId": "mock-studio-yash-raj-sound-studios",
+        "userId": "mock-talent-aditi-sen",
+        "date": "2026-08-12",
+        "slotText": "10:00 AM – 2:00 PM",
+        "totalAmount": 32000,
+        "bookedHourSlots": [
+          "10:00",
+          "11:00",
+          "12:00",
+          "13:00"
+        ],
+        "bookingStatus": "confirmed",
+        "paymentStatus": "PAID",
+        "createdAt": "2026-08-05T09:00:00.000Z",
+        "sessionType": "recording",
+        "durationTier": "half_day",
+        "engineerRequested": true,
+        "paymentMethod": "UPI"
+      }
+    }
+  ]
+}

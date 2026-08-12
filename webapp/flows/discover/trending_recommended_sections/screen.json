@@ -1,0 +1,16 @@
+{
+  "flowKey": "discover",
+  "flowTitle": "Discover",
+  "flowStatus": "app-mocked",
+  "flowOrder": 4,
+  "screenKey": "trending_recommended_sections",
+  "screenNumber": 89,
+  "screenTitle": "Trending Projects / Recommended Collaborators",
+  "screenOrder": 5,
+  "states": [
+    "hidden"
+  ],
+  "collectionsTouched": [],
+  "notes": "Composable functions still exist in source but their call sites are commented out — confirmed hidden, not deleted.",
+  "dataContract": []
+}

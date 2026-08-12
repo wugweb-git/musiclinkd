@@ -1,0 +1,8 @@
+{
+  "key": "qr_share",
+  "title": "QR Code & Profile Sharing",
+  "order": 23,
+  "status": "missing",
+  "description": "ADDED 2026-08-13 (direct source read, previously completely absent from this registry). `QrAndShareFlow` (SupportingScreens.kt:655, reached from the dashboard's QRShare shortcut) — 3-state screen (Home/Options/Preview, plain string state, not an enum) generating a shareable \"Premium Comp Card\" with a simulated PDF download (fake progress bar via `delay(150)` loop, no real file generation). No schema modeled for this at all — no shareable-link record, no QR payload, no download/share analytics. `DynamicLinkManager.kt` constructs outbound share links elsewhere in the app but this screen doesn't call it — confirmed no cross-wiring.",
+  "screenCount": 1
+}

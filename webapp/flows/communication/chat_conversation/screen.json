@@ -1,0 +1,26 @@
+{
+  "flowKey": "communication",
+  "flowTitle": "Communication & Collaboration",
+  "flowStatus": "partial",
+  "flowOrder": 6,
+  "screenKey": "chat_conversation",
+  "screenNumber": 82,
+  "screenTitle": "Chat Conversation",
+  "screenOrder": 5,
+  "states": [
+    "default",
+    "sending",
+    "error"
+  ],
+  "collectionsTouched": [
+    "chat_threads"
+  ],
+  "notes": "messages subcollection under chat_threads/{threadId}.",
+  "dataContract": [
+    {
+      "collection": "chat_threads",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}

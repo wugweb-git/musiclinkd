@@ -1,0 +1,104 @@
+{
+  "flowKey": "services_availability",
+  "flowTitle": "Services, Availability",
+  "flowStatus": "partial",
+  "flowOrder": 11,
+  "screenKey": "session_configuration",
+  "screenNumber": 46,
+  "screenTitle": "Session Configuration (booking-side service selection)",
+  "screenOrder": 5,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "studio_bookings",
+    "taxonomy_categories"
+  ],
+  "notes": "sessionType/durationTier — added this session, not yet wired into the Bookings admin UI.",
+  "dataContract": [
+    {
+      "collection": "studio_bookings",
+      "sample": {
+        "studioId": "mock-studio-yash-raj-sound-studios",
+        "userId": "mock-talent-aditi-sen",
+        "date": "2026-08-12",
+        "slotText": "10:00 AM – 2:00 PM",
+        "totalAmount": 32000,
+        "bookedHourSlots": [
+          "10:00",
+          "11:00",
+          "12:00",
+          "13:00"
+        ],
+        "bookingStatus": "confirmed",
+        "paymentStatus": "PAID",
+        "createdAt": "2026-08-05T09:00:00.000Z",
+        "sessionType": "recording",
+        "durationTier": "half_day",
+        "engineerRequested": true,
+        "paymentMethod": "UPI"
+      }
+    },
+    {
+      "collection": "taxonomy_categories",
+      "sample": {
+        "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+        "genres": {
+          "key": "genres",
+          "options": [
+            "Bollywood / Filmi",
+            "Indie Pop",
+            "Hindustani Classical",
+            "Carnatic Classical",
+            "Punjabi Folk / Bhangra"
+          ]
+        },
+        "person_types": {
+          "key": "person_types",
+          "options": [
+            {
+              "label": "Singer / Vocalist",
+              "value": "singer"
+            },
+            {
+              "label": "Rapper / MC",
+              "value": "rapper"
+            },
+            {
+              "label": "Folk Vocalist",
+              "value": "folk_vocalist"
+            },
+            {
+              "label": "Guitarist",
+              "value": "guitarist"
+            },
+            {
+              "label": "Keyboardist / Pianist",
+              "value": "keyboardist"
+            }
+          ]
+        },
+        "languages": {
+          "key": "languages",
+          "options": [
+            "English",
+            "Hindi (हिंदी)",
+            "Punjabi (ਪੰਜਾਬੀ)",
+            "Tamil (தமிழ்)",
+            "Telugu (తెలుగు)"
+          ]
+        },
+        "instruments": {
+          "key": "instruments",
+          "options": [
+            "Acoustic Guitar",
+            "Electric Guitar",
+            "Bass Guitar",
+            "Keyboard / Synthesizer",
+            "Piano"
+          ]
+        }
+      }
+    }
+  ]
+}

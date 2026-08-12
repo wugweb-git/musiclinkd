@@ -1,0 +1,16 @@
+{
+  "flowKey": "cms_pages",
+  "flowTitle": "CMS Pages",
+  "flowStatus": "partial",
+  "flowOrder": 22,
+  "screenKey": "blog_changelog",
+  "screenNumber": 96,
+  "screenTitle": "Blog / Changelog",
+  "screenOrder": 4,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "Generated from CHANGELOG.md at build time via scripts/generate-changelog.mjs — not Firestore-backed.",
+  "dataContract": []
+}

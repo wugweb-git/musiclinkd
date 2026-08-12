@@ -1,0 +1,15 @@
+{
+  "flowKey": "onboarding",
+  "flowTitle": "User Onboarding",
+  "flowStatus": "partial",
+  "flowOrder": 2,
+  "screenKey": "dashboard_handoff",
+  "screenNumber": 20,
+  "screenTitle": "Success → Dashboard Handoff",
+  "screenOrder": 13,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "dataContract": []
+}

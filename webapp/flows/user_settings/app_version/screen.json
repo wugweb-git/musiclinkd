@@ -1,0 +1,16 @@
+{
+  "flowKey": "user_settings",
+  "flowTitle": "Settings & Support",
+  "flowStatus": "missing",
+  "flowOrder": 21,
+  "screenKey": "app_version",
+  "screenNumber": 59,
+  "screenTitle": "App Version / About",
+  "screenOrder": 13,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "Static build info (version name/code) — no Firestore involvement expected.",
+  "dataContract": []
+}

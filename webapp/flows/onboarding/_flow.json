@@ -1,0 +1,8 @@
+{
+  "key": "onboarding",
+  "title": "User Onboarding",
+  "order": 2,
+  "status": "partial",
+  "description": "13-screen real NavHost-driven flow, writes to users/{uid} on completion. instrumentProficiency, roleExperience, networkingLinks, profilePicturePath, and coverPicturePath are all collected but silently dropped from the final Firestore write.",
+  "screenCount": 13
+}

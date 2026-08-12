@@ -1,0 +1,17 @@
+{
+  "flowKey": "reviews",
+  "flowTitle": "Reviews",
+  "flowStatus": "app-mocked",
+  "flowOrder": 17,
+  "screenKey": "completed_project_review",
+  "screenNumber": 112,
+  "screenTitle": "Completed Project Review",
+  "screenOrder": 6,
+  "states": [
+    "default",
+    "submitted"
+  ],
+  "collectionsTouched": [],
+  "notes": "Milestone-evaluation variant in the same Reputation Hub module. Fully no-op — submit only shows a snackbar and navigates back, no persistence at all.",
+  "dataContract": []
+}

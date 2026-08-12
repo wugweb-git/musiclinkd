@@ -1,0 +1,16 @@
+{
+  "flowKey": "notifications",
+  "flowTitle": "Notifications",
+  "flowStatus": "app-mocked",
+  "flowOrder": 13,
+  "screenKey": "notification_feeds_settings",
+  "screenNumber": 105,
+  "screenTitle": "Notification Feeds (general Settings tab)",
+  "screenOrder": 4,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "A third, separate preferences surface in the main Settings flow. \"Save\" shows a success Snackbar with no visible persistence call.",
+  "dataContract": []
+}

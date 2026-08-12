@@ -1,0 +1,8 @@
+{
+  "key": "discover",
+  "title": "Discover",
+  "order": 4,
+  "status": "app-mocked",
+  "description": "100% mock data — DiscoverViewModel has zero Firestore references, filters a hardcoded 12-profile list. Every filterable field (experienceLevel, availabilityStatus, rating, etc.) would need to be sourced from real users/studios documents to go live.",
+  "screenCount": 5
+}

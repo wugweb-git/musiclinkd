@@ -1,0 +1,19 @@
+{
+  "flowKey": "search",
+  "flowTitle": "Search",
+  "flowStatus": "app-mocked",
+  "flowOrder": 19,
+  "screenKey": "universal_search",
+  "screenNumber": 118,
+  "screenTitle": "Universal Search",
+  "screenOrder": 1,
+  "states": [
+    "home",
+    "live_typing",
+    "results",
+    "empty"
+  ],
+  "collectionsTouched": [],
+  "notes": "UniversalSearchFlow (SupportingScreens.kt:281), SearchScreenState enum (HOME/LIVE/RESULTS/EMPTY). Reached from the dashboard's top-bar Search icon (SupportingModule.UNIVERSAL_SEARCH) — a genuinely separate screen from discover's/booking's own internal search-results states, not a duplicate. Filters a hardcoded 10-item mockAllResults list across Musicians/Bands/Projects/Studios categories; zero Firestore reads.",
+  "dataContract": []
+}

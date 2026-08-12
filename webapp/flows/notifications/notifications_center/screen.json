@@ -1,0 +1,21 @@
+{
+  "flowKey": "notifications",
+  "flowTitle": "Notifications",
+  "flowStatus": "app-mocked",
+  "flowOrder": 13,
+  "screenKey": "notifications_center",
+  "screenNumber": 102,
+  "screenTitle": "Notifications Center",
+  "screenOrder": 1,
+  "states": [
+    "loading",
+    "empty",
+    "populated",
+    "search_filtered",
+    "category_filtered",
+    "muted_banner"
+  ],
+  "collectionsTouched": [],
+  "notes": "Reachable, feature-rich screen (swipe-to-dismiss, mark read/unread, pull-to-refresh) but 100% local mock state seeded with 5 hardcoded items — zero `.collection(\"notifications\")` calls, despite UI copy claiming \"Firestore Real-Time Sync\" (a commented-out banner, dead code). No tap-through/detail screen; no `targetUrl` navigation.",
+  "dataContract": []
+}

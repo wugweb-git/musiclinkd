@@ -1,0 +1,30 @@
+{
+  "flowKey": "reviews",
+  "flowTitle": "Reviews",
+  "flowStatus": "app-mocked",
+  "flowOrder": 17,
+  "screenKey": "public_reputation",
+  "screenNumber": 117,
+  "screenTitle": "Public Reputation (cross-reference)",
+  "screenOrder": 11,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "reviews"
+  ],
+  "notes": "ReputationSubScreen.PUBLIC_REPUTATION — the read-facing summary shown on a public profile (aggregate rating, verified-credits count). Related to but distinct from Flow 14's public_profile_view cross-reference entry; listed here since it's driven by this module's own enum, not the profile template.",
+  "dataContract": [
+    {
+      "collection": "reviews",
+      "sample": {
+        "targetType": "USER",
+        "targetId": "mock-talent-arijit-sen",
+        "authorUid": "mock-reviewer-t-series-aandr-team",
+        "rating": 5,
+        "text": "\"Exceptional range and control across genres.\" — T-Series A&R Team",
+        "createdAt": "2026-06-10T09:00:00.000Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "flowKey": "communication",
+  "flowTitle": "Communication & Collaboration",
+  "flowStatus": "partial",
+  "flowOrder": 6,
+  "screenKey": "chat_thread_list",
+  "screenNumber": 81,
+  "screenTitle": "Chat Thread List",
+  "screenOrder": 4,
+  "states": [
+    "default",
+    "empty"
+  ],
+  "collectionsTouched": [
+    "chat_threads"
+  ],
+  "dataContract": [
+    {
+      "collection": "chat_threads",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<!-- viewport-fit=cover is what makes env(safe-area-inset-*) resolve to real
+     values instead of 0 on notched/gesture-bar devices — without it the
+     safe-area CSS in app-shell.css is a no-op. -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0B26" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<!--
+  All resource paths below are ABSOLUTE (/preview/...), not relative. This
+  build is deployed at musiclinkd.com/preview, and Firebase Hosting's
+  cleanUrls+trailingSlash:false config means a page at .../flows/auth/splash
+  has NO trailing slash — the browser then resolves relative "./x"/"../x"
+  paths against the WRONG base (one level too shallow), silently breaking
+  screen.json/CSS/JS loads. Absolute paths sidestep that entirely. If this
+  ever moves to a different mount point, update MOUNT_BASE in
+  shared/app-shell.js and the paths below together.
+-->
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<meta name="screen-json-path" content="/preview/flows/communication/networking_feed_artist_profile/screen.json" />
+<title>MusicLinkd — Communication & Collaboration / Artist Profile (from Networking Feed)</title>
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+<!--
+  THIS FILE IS A TEMPLATE, NOT A DESIGNED SCREEN.
+  It exists to prove out the native-app environment (safe areas, fixed
+  viewport, keyboard awareness, bottom-sheet mechanics, offline shell,
+  standalone display mode) so a real screen only has to bring its own
+  visual design on top — copy this file into a flows/<flow>/<screen>/
+  folder (every real screen folder already has one, generated alongside
+  its screen.json) and replace the placeholder regions below. If you copy
+  it manually (rather than letting the generator scaffold it), also add
+  <meta name="screen-json-path" content="/preview/flows/<flow>/<screen>/screen.json" />
+  next to the other meta tags — without it the dev badge falls back to a
+  relative "./screen.json" fetch, which has the same trailing-slash problem
+  described above.
+-->
+</head>
+<body>
+  <!--
+    ARTBOARD SIZING: this is fully responsive, not a fixed artboard.
+    .app-root fills 100dvh × 100% of whatever viewport it's in — the same
+    approach a real installed PWA/native app uses (there's no "canvas size"
+    on a phone, the OS gives you the real viewport). On an actual phone this
+    is edge-to-edge, matching current devices from ~360px (small Android)
+    through ~480px (large Android/Pro Max) wide, and taller aspect ratios
+    (notches, gesture bars) are handled by the safe-area insets above, not
+    by hardcoding a specific device's dimensions.
+
+    The max-width clamp below is ONLY for viewing this on a desktop browser
+    while designing/reviewing (so it doesn't stretch edge-to-edge on a 1440px
+    monitor) — it has zero effect on a real phone, where 100% already IS the
+    phone's width. Delete the inline style if you don't want the desktop
+    framing at all.
+  -->
+  <div class="app-root" style="max-width: 480px; margin-inline: auto; box-shadow: 0 0 0 1px rgba(0,0,0,0.08);">
+
+    <!-- Fixed top region — safe-area top padding baked in via app-shell.css.
+         Put a status/nav bar here; it never scrolls. -->
+    <header class="app-topbar">
+      <!-- TODO: design system top bar goes here -->
+    </header>
+
+    <!-- Main content — scrolls only if you add .app-content--scroll.
+         Most single-purpose screens (a form, a splash, a confirmation)
+         should NOT scroll; add the modifier only for feeds/lists/long forms. -->
+    <main class="app-content app-content--scroll">
+      <!-- TODO: design system content goes here.
+           Read window.MusicLinkd.screen (populated from this screen's
+           screen.json) for its flow/screen metadata and data contract. -->
+
+      <!-- Example bottom-sheet trigger — remove if this screen doesn't need one. -->
+      <button type="button" data-open-sheet="example-sheet">Open example sheet</button>
+    </main>
+
+    <!-- Fixed bottom region — safe-area bottom padding baked in. Auto-hides
+         when the keyboard opens (see .is-keyboard-open in app-shell.css) so
+         it never floats above the keyboard on top of your inputs. -->
+    <footer class="app-bottombar">
+      <!-- TODO: design system bottom bar / CTA goes here -->
+    </footer>
+  </div>
+
+  <!-- Example bottom sheet — structural mechanics only (open/close, drag-down
+       transition, safe-area padding). Style its contents with your design system. -->
+  <div class="sheet-scrim" data-sheet-scrim-for="example-sheet"></div>
+  <div class="sheet" id="example-sheet">
+    <p>Example bottom sheet content.</p>
+    <button type="button" data-close-sheet="example-sheet">Close</button>
+  </div>
+
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>

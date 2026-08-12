@@ -1,0 +1,42 @@
+{
+  "flowKey": "booking",
+  "flowTitle": "Booking",
+  "flowStatus": "partial",
+  "flowOrder": 8,
+  "screenKey": "booking_success",
+  "screenNumber": 69,
+  "screenTitle": "Booking Success",
+  "screenOrder": 10,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "studio_bookings"
+  ],
+  "notes": "The real write here is confirmed BROKEN as of this session's last verification pass — still uses artistUserId/totalCostAmount/statusKey instead of the schema's userId/totalAmount/bookingStatus.",
+  "dataContract": [
+    {
+      "collection": "studio_bookings",
+      "sample": {
+        "studioId": "mock-studio-yash-raj-sound-studios",
+        "userId": "mock-talent-aditi-sen",
+        "date": "2026-08-12",
+        "slotText": "10:00 AM – 2:00 PM",
+        "totalAmount": 32000,
+        "bookedHourSlots": [
+          "10:00",
+          "11:00",
+          "12:00",
+          "13:00"
+        ],
+        "bookingStatus": "confirmed",
+        "paymentStatus": "PAID",
+        "createdAt": "2026-08-05T09:00:00.000Z",
+        "sessionType": "recording",
+        "durationTier": "half_day",
+        "engineerRequested": true,
+        "paymentMethod": "UPI"
+      }
+    }
+  ]
+}

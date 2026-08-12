@@ -1,0 +1,16 @@
+{
+  "flowKey": "communication",
+  "flowTitle": "Communication & Collaboration",
+  "flowStatus": "partial",
+  "flowOrder": 6,
+  "screenKey": "networking_feed_artist_profile",
+  "screenNumber": 84,
+  "screenTitle": "Artist Profile (from Networking Feed)",
+  "screenOrder": 7,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "ADDED 2026-08-13 (direct source read). SupportingModule.ARTIST_PROFILE, renders ArtistProfileScreen (UnifiedComponents.kt:2870) — reached only by tapping a post in Networking Feed. Confirmed distinct from Discover's FULL_PROFILE, which renders a different composable (FullTalentProfileScreen, DiscoverScreens.kt) — a 4th disconnected profile-view implementation on top of the 3 already flagged under profile_management's flow-level note (dashboard badge substring match, PublicProfilePreviewScreen headline match, Discover's mock-only enum). Not independently audited for its own data-source/persistence behavior this pass.",
+  "dataContract": []
+}

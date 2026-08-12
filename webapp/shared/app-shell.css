@@ -1,0 +1,148 @@
+/**
+ * Native-app ENVIRONMENT only — viewport, safe-area, scroll containment,
+ * keyboard-awareness, bottom-sheet mechanics, touch behavior. No color,
+ * type, spacing-scale, or brand tokens here on purpose: that's the
+ * project's own design system (frontend/guide/tokens/), layered on top of
+ * this shell per-screen. Every selector below is about *how the app
+ * behaves as a native surface*, not what it looks like.
+ */
+
+:root {
+  /* Safe-area insets, with a 0px fallback for browsers/devices without a
+     notch/gesture-bar — env() with no matching hardware just resolves to 0. */
+  --app-safe-top: env(safe-area-inset-top, 0px);
+  --app-safe-right: env(safe-area-inset-right, 0px);
+  --app-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --app-safe-left: env(safe-area-inset-left, 0px);
+
+  /* 100dvh accounts for mobile browser chrome (address bar) showing/hiding;
+     100vh does not and causes content to jump/clip on scroll in-browser.
+     The JS fallback (--app-vh, set in app-shell.js) covers browsers that
+     don't support dvh at all. */
+  --app-height: 100dvh;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overscroll-behavior: none; /* kills the native pull-to-refresh/bounce so it feels like an app, not a webpage */
+  overflow: hidden;
+}
+
+body {
+  touch-action: manipulation; /* removes the ~300ms tap delay */
+}
+
+/**
+ * The single fixed app surface. One per screen. Nothing outside this
+ * scrolls; content that needs scrolling opts in via .app-content--scroll.
+ */
+.app-root {
+  position: fixed;
+  inset: 0;
+  height: var(--app-height, var(--app-vh, 100vh));
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.app-topbar {
+  flex: 0 0 auto;
+  padding-top: var(--app-safe-top);
+  padding-left: var(--app-safe-left);
+  padding-right: var(--app-safe-right);
+}
+
+.app-content {
+  flex: 1 1 auto;
+  min-height: 0; /* required for flex children to actually respect overflow instead of pushing the layout */
+  overflow: hidden;
+  padding-left: var(--app-safe-left);
+  padding-right: var(--app-safe-right);
+}
+
+.app-content--scroll {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain; /* lets this region scroll without triggering the page-level bounce */
+}
+
+.app-bottombar {
+  flex: 0 0 auto;
+  padding-bottom: var(--app-safe-bottom);
+  padding-left: var(--app-safe-left);
+  padding-right: var(--app-safe-right);
+}
+
+/* Toggled by app-shell.js via the VisualViewport API when the on-screen
+   keyboard opens, so a focused input/bottom-sheet stays above it instead
+   of being covered — the #1 thing that makes a web form feel non-native. */
+.app-root.is-keyboard-open .app-bottombar {
+  display: none;
+}
+.app-root.is-keyboard-open .app-content {
+  padding-bottom: 0;
+}
+
+/* --- Bottom sheet primitive: structural/motion only --- */
+.sheet-scrim {
+  position: fixed;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+  z-index: 40;
+}
+.sheet-scrim.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateY(100%);
+  transition: transform 280ms cubic-bezier(0.32, 0.72, 0, 1);
+  padding-bottom: var(--app-safe-bottom);
+  z-index: 50;
+  max-height: 90%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.sheet.is-open {
+  transform: translateY(0);
+}
+
+/* Reduced-motion respect — required for anything claiming "native-feeling transitions" */
+@media (prefers-reduced-motion: reduce) {
+  .sheet,
+  .sheet-scrim {
+    transition-duration: 1ms;
+  }
+}
+
+/* --- Dev-only overlay: flow/screen/state identifiers. Deliberately styled
+   minimally and neutrally (not part of the app's visual design) — strip
+   this whole block, or the element it targets, before a real design pass. --- */
+.dev-meta-badge {
+  position: fixed;
+  top: calc(var(--app-safe-top) + 8px);
+  right: calc(var(--app-safe-right) + 8px);
+  z-index: 9999;
+  font: 10px/1.4 ui-monospace, "SF Mono", Menlo, monospace;
+  background: rgba(13, 11, 38, 0.82);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  pointer-events: none;
+  white-space: nowrap;
+}

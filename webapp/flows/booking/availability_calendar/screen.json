@@ -1,0 +1,44 @@
+{
+  "flowKey": "booking",
+  "flowTitle": "Booking",
+  "flowStatus": "partial",
+  "flowOrder": 8,
+  "screenKey": "availability_calendar",
+  "screenNumber": 65,
+  "screenTitle": "Availability Calendar",
+  "screenOrder": 6,
+  "states": [
+    "monthly",
+    "weekly",
+    "timeline"
+  ],
+  "collectionsTouched": [
+    "studio_bookings"
+  ],
+  "notes": "Slot available/booked/pending status derives from querying existing bookings for the date range.",
+  "dataContract": [
+    {
+      "collection": "studio_bookings",
+      "sample": {
+        "studioId": "mock-studio-yash-raj-sound-studios",
+        "userId": "mock-talent-aditi-sen",
+        "date": "2026-08-12",
+        "slotText": "10:00 AM – 2:00 PM",
+        "totalAmount": 32000,
+        "bookedHourSlots": [
+          "10:00",
+          "11:00",
+          "12:00",
+          "13:00"
+        ],
+        "bookingStatus": "confirmed",
+        "paymentStatus": "PAID",
+        "createdAt": "2026-08-05T09:00:00.000Z",
+        "sessionType": "recording",
+        "durationTier": "half_day",
+        "engineerRequested": true,
+        "paymentMethod": "UPI"
+      }
+    }
+  ]
+}

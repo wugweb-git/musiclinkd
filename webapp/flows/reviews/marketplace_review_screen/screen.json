@@ -1,0 +1,17 @@
+{
+  "flowKey": "reviews",
+  "flowTitle": "Reviews",
+  "flowStatus": "app-mocked",
+  "flowOrder": 17,
+  "screenKey": "marketplace_review_screen",
+  "screenNumber": 113,
+  "screenTitle": "Marketplace Gear Review",
+  "screenOrder": 7,
+  "states": [
+    "default",
+    "submitted"
+  ],
+  "collectionsTouched": [],
+  "notes": "Post-purchase gear rating in the Reputation Hub module. Fully no-op UI, no persistence.",
+  "dataContract": []
+}

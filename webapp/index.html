@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0B26" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<!-- Absolute paths, not relative — see shared/app-shell.js's MOUNT_BASE
+     comment: cleanUrls+trailingSlash:false means "/preview" (no trailing
+     slash) is treated as a file-position segment, breaking relative
+     resolution for anything loaded from this page. -->
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Flow / Screen Index</title>
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+<style>
+  /* Minimal, non-brand index-page styling — this page is developer tooling
+     (a picker into the real screens), not part of the app itself, so it's
+     exempt from "no visual design here" the way the dev-meta-badge is. */
+  .app-content { padding: max(16px, var(--app-safe-left)) 16px 16px; }
+  h1 { font: 600 20px/1.3 -apple-system, system-ui, sans-serif; margin: 8px 0 4px; }
+  p.hint { font: 13px/1.5 -apple-system, system-ui, sans-serif; color: #666; margin: 0 0 20px; }
+  .flow { margin-bottom: 20px; }
+  .flow summary { font: 600 15px/1.4 -apple-system, system-ui, sans-serif; cursor: pointer; padding: 8px 0; }
+  .flow-status { font-size: 11px; padding: 2px 8px; border-radius: 999px; margin-left: 8px; vertical-align: 1px; }
+  .status-partial { background: #FEF3C7; color: #92400E; }
+  .status-app-mocked { background: #DBEAFE; color: #1E40AF; }
+  .status-missing { background: #FEE2E2; color: #991B1B; }
+  ul { list-style: none; margin: 4px 0 0; padding: 0 0 0 8px; }
+  li a { display: block; padding: 8px 8px; text-decoration: none; color: #0D0D0D; font: 14px/1.4 -apple-system, system-ui, sans-serif; border-radius: 8px; }
+  li a:hover { background: #F1F1F1; }
+  li .screen-num { color: #999; font-variant-numeric: tabular-nums; margin-right: 6px; }
+  .empty-flow { font: 13px/1.5 -apple-system, system-ui, sans-serif; color: #999; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<div class="app-root">
+  <header class="app-topbar"></header>
+  <main class="app-content app-content--scroll">
+    <h1>MusicLinkd — Flow / Screen Index</h1>
+    <p class="hint">Generated from <code>webapp/data/flows-map.json</code> — the same source-of-truth as the admin panel's Flows registry. Re-run <code>admin/scripts/webapp-map/generate.ts</code> after schema/flow changes.</p>
+    <div id="flow-list"></div>
+  </main>
+  <footer class="app-bottombar"></footer>
+</div>
+
+<script src="/preview/shared/app-shell.js" defer></script>
+<script>
+  fetch("/preview/data/flows-map.json", { cache: "no-store" })
+    .then((r) => r.json())
+    .then((data) => {
+      const container = document.getElementById("flow-list");
+      const byFlow = {};
+      for (const s of data.screens) (byFlow[s.flowKey] ??= []).push(s);
+
+      const sorted = [...data.flows].sort((a, b) => a.order - b.order);
+      for (const flow of sorted) {
+        const details = document.createElement("details");
+        details.className = "flow";
+        details.open = flow.screenCount > 0 && byFlow[flow.key]?.length <= 15;
+
+        const summary = document.createElement("summary");
+        summary.innerHTML = `${flow.order}. ${flow.title} <span class="flow-status status-${flow.status}">${flow.status}</span> <span style="color:#999;font-weight:400;">(${flow.screenCount} screens)</span>`;
+        details.appendChild(summary);
+
+        const screens = (byFlow[flow.key] ?? []).sort((a, b) => a.screenOrder - b.screenOrder);
+        if (screens.length === 0) {
+          const p = document.createElement("p");
+          p.className = "empty-flow";
+          p.textContent = flow.description;
+          details.appendChild(p);
+        } else {
+          const ul = document.createElement("ul");
+          for (const screen of screens) {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.href = `/preview/flows/${screen.flowKey}/${screen.screenKey}/index.html`;
+            a.innerHTML = `<span class="screen-num">${screen.screenNumber ?? "—"}</span>${screen.screenTitle}`;
+            li.appendChild(a);
+            ul.appendChild(li);
+          }
+          details.appendChild(ul);
+        }
+        container.appendChild(details);
+      }
+    })
+    .catch((err) => {
+      document.getElementById("flow-list").textContent = "Could not load data/flows-map.json — run the generator first.";
+      console.error(err);
+    });
+</script>
+</body>
+</html>

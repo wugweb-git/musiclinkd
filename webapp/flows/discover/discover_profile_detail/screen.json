@@ -1,0 +1,16 @@
+{
+  "flowKey": "discover",
+  "flowTitle": "Discover",
+  "flowStatus": "app-mocked",
+  "flowOrder": 4,
+  "screenKey": "discover_profile_detail",
+  "screenNumber": 87,
+  "screenTitle": "Profile Detail View",
+  "screenOrder": 3,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "Reads from the same mock DiscoverProfile list, not users.",
+  "dataContract": []
+}

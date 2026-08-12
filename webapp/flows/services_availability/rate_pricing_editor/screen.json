@@ -1,0 +1,144 @@
+{
+  "flowKey": "services_availability",
+  "flowTitle": "Services, Availability",
+  "flowStatus": "partial",
+  "flowOrder": 11,
+  "screenKey": "rate_pricing_editor",
+  "screenNumber": 45,
+  "screenTitle": "Rate / Pricing Editor",
+  "screenOrder": 4,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "users",
+    "studios"
+  ],
+  "notes": "hourlyRate migrated to a real number (per-hour INR equivalent, 0 = unset) — 2026-08-12. Editor sheets now use a numeric input; list columns format it via lib/utils.ts's formatHourlyRate().",
+  "dataContract": [
+    {
+      "collection": "users",
+      "sample": {
+        "displayName": "Arijit Sen",
+        "email": "arijit.sen@musiclinkd-mock.example",
+        "primaryRole": "singer",
+        "secondaryRole": "composer",
+        "isVerified": true,
+        "isBanned": false,
+        "isAvailable": true,
+        "hourlyRate": 4500,
+        "budgetTier": "premium",
+        "location": "Mumbai, MH · Andheri",
+        "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+        "gender": "Male",
+        "genres": [
+          "Bollywood / Filmi",
+          "Sufi Devotional",
+          "Acoustic / Unplugged"
+        ],
+        "languages": [
+          "Hindi (हिंदी)",
+          "Bengali (বাংলা)",
+          "English"
+        ],
+        "instruments": [
+          "Acoustic Guitar"
+        ],
+        "personaBadges": [
+          "Available for Collab",
+          "Touring"
+        ],
+        "trustBadges": [
+          "Verified Artist",
+          "Rising Talent"
+        ],
+        "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+        "createdAt": "2026-08-01T09:00:00.000Z",
+        "profileType": "TALENT",
+        "vocalRange": "tenor",
+        "sessionAvailability": "open_for_gigs",
+        "externalLinks": {
+          "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+          "youtube": "https://youtube.com/@arijitsen-mock"
+        }
+      }
+    },
+    {
+      "collection": "studios",
+      "sample": {
+        "ownerUid": "mock-business-yash-raj-sound-studios",
+        "name": "Yash Raj Sound Studios — Sound Lab",
+        "location": "Andheri West, Mumbai",
+        "rating": 4.9,
+        "reviewCount": 188,
+        "hourlyRate": 8000,
+        "verifiedGold": true,
+        "amenities": [
+          "Dolby Atmos",
+          "Live Room",
+          "Resident Engineers",
+          "Valet Parking"
+        ],
+        "consoleType": "SSL 9000J 72-Channel Console",
+        "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800",
+        "createdAt": "2026-08-01T09:00:00.000Z",
+        "description": "Two double-height tracking rooms and a certified Dolby Atmos HE mixing suite. Mixed Pathaan and Coke Studio India here.",
+        "images": [
+          "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800"
+        ],
+        "services": [
+          "recording",
+          "mixing",
+          "mastering"
+        ],
+        "geo": {
+          "lat": 19.1197,
+          "lng": 72.8468
+        },
+        "equipment": [
+          {
+            "name": "SSL 9000J 72-Channel Console",
+            "category": "mixers",
+            "included": true
+          },
+          {
+            "name": "Dolby Atmos 7.1.4 PMC Studio Monitors",
+            "category": "studio_monitors",
+            "included": true
+          },
+          {
+            "name": "Neumann U87/U47/Telefunken ELAM 251",
+            "category": "microphones",
+            "included": true
+          },
+          {
+            "name": "Pro Tools HDX (128 Analog Inputs)",
+            "category": "controllers",
+            "included": true
+          }
+        ],
+        "operatingHours": "09:00 AM – 11:00 PM (Mon–Sat)",
+        "cancellationPolicy": "Minimum 2-hour booking; cancellations require 24h notice.",
+        "rooms": [
+          {
+            "name": "Tracking Room 1",
+            "capacity": 12,
+            "hourlyRate": 8000,
+            "amenities": [
+              "Live Room",
+              "Resident Engineers"
+            ]
+          },
+          {
+            "name": "Dolby Atmos Mixing Suite",
+            "capacity": 4,
+            "hourlyRate": 6500,
+            "amenities": [
+              "Dolby Atmos"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

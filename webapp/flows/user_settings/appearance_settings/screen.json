@@ -1,0 +1,24 @@
+{
+  "flowKey": "user_settings",
+  "flowTitle": "Settings & Support",
+  "flowStatus": "missing",
+  "flowOrder": 21,
+  "screenKey": "appearance_settings",
+  "screenNumber": 51,
+  "screenTitle": "Appearance Settings",
+  "screenOrder": 5,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "user_settings"
+  ],
+  "notes": "Theme (Light/Dark/Cosmic) + accent color — darkModeEnabled is the only piece of this in the typed schema.",
+  "dataContract": [
+    {
+      "collection": "user_settings",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}

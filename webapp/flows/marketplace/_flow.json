@@ -1,0 +1,8 @@
+{
+  "key": "marketplace",
+  "title": "Marketplace (Buy/Sell)",
+  "order": 7,
+  "status": "app-mocked",
+  "description": "100% mocked, not wired to Firestore — reconciled: MarketplaceItemDoc.category is now taxonomy-backed (marketplace_categories), matching the app's real sale/rental/mixing/beats/services split. SCREEN-MAPPED 2026-08-12 (grounded Explore audit): one real, dashboard-wired browse screen (MarketplaceBetaScreen) with 6 category tabs including a \"Gear Rentals\" filter (see equipment_rental below), an in-dialog item detail (not a separate screen), and a Saved/Favorites bookmarks tab — all backed by hardcoded lists, zero `marketplace_items` references anywhere. No create-listing, cart, checkout, or seller-messaging screens exist at all — confirmed absent by exhaustive grep, not just unaudited.",
+  "screenCount": 3
+}

@@ -1,0 +1,18 @@
+{
+  "flowKey": "marketplace",
+  "flowTitle": "Marketplace (Buy/Sell)",
+  "flowStatus": "app-mocked",
+  "flowOrder": 7,
+  "screenKey": "marketplace_saved_bookmarks",
+  "screenNumber": 101,
+  "screenTitle": "Saved & Favorites — Marketplace tab",
+  "screenOrder": 3,
+  "states": [
+    "grid",
+    "list",
+    "empty"
+  ],
+  "collectionsTouched": [],
+  "notes": "The screen MarketplaceFeature.kt actually routes to (a thin wrapper opening the Saved/Favorites hub defaulted to its Marketplace sub-tab) — not a browse/listing feature itself. Backed by a hardcoded item list, no Firestore.",
+  "dataContract": []
+}

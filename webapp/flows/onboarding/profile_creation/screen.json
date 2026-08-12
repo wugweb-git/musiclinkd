@@ -1,0 +1,16 @@
+{
+  "flowKey": "onboarding",
+  "flowTitle": "User Onboarding",
+  "flowStatus": "partial",
+  "flowOrder": 2,
+  "screenKey": "profile_creation",
+  "screenNumber": 15,
+  "screenTitle": "Profile Creation (name/bio/photo/cover)",
+  "screenOrder": 8,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "profilePicturePath/coverPicturePath collected but confirmed dropped from the final write.",
+  "dataContract": []
+}

@@ -1,0 +1,16 @@
+{
+  "flowKey": "user_settings",
+  "flowTitle": "Settings & Support",
+  "flowStatus": "missing",
+  "flowOrder": 21,
+  "screenKey": "help_center",
+  "screenNumber": 52,
+  "screenTitle": "Help Center",
+  "screenOrder": 6,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "Landing/menu screen for the sub-flows below.",
+  "dataContract": []
+}

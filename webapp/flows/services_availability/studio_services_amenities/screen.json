@@ -1,0 +1,158 @@
+{
+  "flowKey": "services_availability",
+  "flowTitle": "Services, Availability",
+  "flowStatus": "partial",
+  "flowOrder": 11,
+  "screenKey": "studio_services_amenities",
+  "screenNumber": 44,
+  "screenTitle": "Studio Services & Amenities",
+  "screenOrder": 3,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "studios",
+    "taxonomy_categories"
+  ],
+  "notes": "studio_services (offered) vs. studio_amenities (physical features) — distinct taxonomy categories.",
+  "dataContract": [
+    {
+      "collection": "studios",
+      "sample": {
+        "ownerUid": "mock-business-yash-raj-sound-studios",
+        "name": "Yash Raj Sound Studios — Sound Lab",
+        "location": "Andheri West, Mumbai",
+        "rating": 4.9,
+        "reviewCount": 188,
+        "hourlyRate": 8000,
+        "verifiedGold": true,
+        "amenities": [
+          "Dolby Atmos",
+          "Live Room",
+          "Resident Engineers",
+          "Valet Parking"
+        ],
+        "consoleType": "SSL 9000J 72-Channel Console",
+        "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800",
+        "createdAt": "2026-08-01T09:00:00.000Z",
+        "description": "Two double-height tracking rooms and a certified Dolby Atmos HE mixing suite. Mixed Pathaan and Coke Studio India here.",
+        "images": [
+          "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800"
+        ],
+        "services": [
+          "recording",
+          "mixing",
+          "mastering"
+        ],
+        "geo": {
+          "lat": 19.1197,
+          "lng": 72.8468
+        },
+        "equipment": [
+          {
+            "name": "SSL 9000J 72-Channel Console",
+            "category": "mixers",
+            "included": true
+          },
+          {
+            "name": "Dolby Atmos 7.1.4 PMC Studio Monitors",
+            "category": "studio_monitors",
+            "included": true
+          },
+          {
+            "name": "Neumann U87/U47/Telefunken ELAM 251",
+            "category": "microphones",
+            "included": true
+          },
+          {
+            "name": "Pro Tools HDX (128 Analog Inputs)",
+            "category": "controllers",
+            "included": true
+          }
+        ],
+        "operatingHours": "09:00 AM – 11:00 PM (Mon–Sat)",
+        "cancellationPolicy": "Minimum 2-hour booking; cancellations require 24h notice.",
+        "rooms": [
+          {
+            "name": "Tracking Room 1",
+            "capacity": 12,
+            "hourlyRate": 8000,
+            "amenities": [
+              "Live Room",
+              "Resident Engineers"
+            ]
+          },
+          {
+            "name": "Dolby Atmos Mixing Suite",
+            "capacity": 4,
+            "hourlyRate": 6500,
+            "amenities": [
+              "Dolby Atmos"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "collection": "taxonomy_categories",
+      "sample": {
+        "_note": "Not a single-doc shape — taxonomy_categories/{key}/options/{id}. Three representative categories shown.",
+        "genres": {
+          "key": "genres",
+          "options": [
+            "Bollywood / Filmi",
+            "Indie Pop",
+            "Hindustani Classical",
+            "Carnatic Classical",
+            "Punjabi Folk / Bhangra"
+          ]
+        },
+        "person_types": {
+          "key": "person_types",
+          "options": [
+            {
+              "label": "Singer / Vocalist",
+              "value": "singer"
+            },
+            {
+              "label": "Rapper / MC",
+              "value": "rapper"
+            },
+            {
+              "label": "Folk Vocalist",
+              "value": "folk_vocalist"
+            },
+            {
+              "label": "Guitarist",
+              "value": "guitarist"
+            },
+            {
+              "label": "Keyboardist / Pianist",
+              "value": "keyboardist"
+            }
+          ]
+        },
+        "languages": {
+          "key": "languages",
+          "options": [
+            "English",
+            "Hindi (हिंदी)",
+            "Punjabi (ਪੰਜਾਬੀ)",
+            "Tamil (தமிழ்)",
+            "Telugu (తెలుగు)"
+          ]
+        },
+        "instruments": {
+          "key": "instruments",
+          "options": [
+            "Acoustic Guitar",
+            "Electric Guitar",
+            "Bass Guitar",
+            "Keyboard / Synthesizer",
+            "Piano"
+          ]
+        }
+      }
+    }
+  ]
+}

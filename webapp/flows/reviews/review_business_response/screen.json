@@ -1,0 +1,16 @@
+{
+  "flowKey": "reviews",
+  "flowTitle": "Reviews",
+  "flowStatus": "app-mocked",
+  "flowOrder": 17,
+  "screenKey": "review_business_response",
+  "screenNumber": 115,
+  "screenTitle": "Business Response to Review",
+  "screenOrder": 9,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "Business owner replies to a review. Writes to the same local Room table as write_review, not Firestore.",
+  "dataContract": []
+}

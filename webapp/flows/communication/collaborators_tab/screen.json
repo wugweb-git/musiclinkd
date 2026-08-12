@@ -1,0 +1,26 @@
+{
+  "flowKey": "communication",
+  "flowTitle": "Communication & Collaboration",
+  "flowStatus": "partial",
+  "flowOrder": 6,
+  "screenKey": "collaborators_tab",
+  "screenNumber": 79,
+  "screenTitle": "Collaborators",
+  "screenOrder": 2,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "connections"
+  ],
+  "dataContract": [
+    {
+      "collection": "connections",
+      "sample": {
+        "senderUid": "mock-talent-kabir-sethi",
+        "targetUserId": "mock-talent-vedanshu-beats-mock",
+        "status": "PENDING"
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "flowKey": "notifications",
+  "flowTitle": "Notifications",
+  "flowStatus": "app-mocked",
+  "flowOrder": 13,
+  "screenKey": "notification_settings",
+  "screenNumber": 103,
+  "screenTitle": "Notification Settings (in Notifications Center)",
+  "screenOrder": 2,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "Local-only preferences (push toggle, per-category toggles, quiet hours) — not persisted to Firestore, DataStore, or SharedPreferences. One of three separate, mutually-inconsistent \"notification preferences\" surfaces found (see the other two below) — not a single source of truth.",
+  "dataContract": []
+}

@@ -1,0 +1,34 @@
+{
+  "flowKey": "user_settings",
+  "flowTitle": "Settings & Support",
+  "flowStatus": "missing",
+  "flowOrder": 21,
+  "screenKey": "report_listing",
+  "screenNumber": 56,
+  "screenTitle": "Report Listing",
+  "screenOrder": 10,
+  "states": [
+    "default",
+    "submitting",
+    "success"
+  ],
+  "collectionsTouched": [
+    "moderation_flags"
+  ],
+  "notes": "Same gap as Report User.",
+  "dataContract": [
+    {
+      "collection": "moderation_flags",
+      "sample": {
+        "targetType": "REVIEW",
+        "targetId": "mock-review-sanjay-k-vedanshu",
+        "reportedBy": "mock-reporter-anon-user-1",
+        "reason": "Reported as suspected fake/incentivized review.",
+        "status": "DISMISSED",
+        "createdAt": "2026-06-03T09:00:00.000Z",
+        "reviewedBy": "mock-admin-system",
+        "reviewedAt": "2026-06-04T09:00:00.000Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "flowKey": "user_settings",
+  "flowTitle": "Settings & Support",
+  "flowStatus": "missing",
+  "flowOrder": 21,
+  "screenKey": "raise_ticket",
+  "screenNumber": 54,
+  "screenTitle": "Contact Support / Raise Ticket",
+  "screenOrder": 8,
+  "states": [
+    "default",
+    "submitting",
+    "success"
+  ],
+  "collectionsTouched": [
+    "support_tickets"
+  ],
+  "notes": "Real collection exists and is rules-ready; the app currently fabricates a fake client-side ticket ID instead of writing one.",
+  "dataContract": [
+    {
+      "collection": "support_tickets",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}

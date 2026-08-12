@@ -1,0 +1,16 @@
+{
+  "flowKey": "communication",
+  "flowTitle": "Communication & Collaboration",
+  "flowStatus": "partial",
+  "flowOrder": 6,
+  "screenKey": "ai_matchmaker_tab",
+  "screenNumber": 80,
+  "screenTitle": "AI Matchmaker Tab",
+  "screenOrder": 3,
+  "states": [
+    "unreachable"
+  ],
+  "collectionsTouched": [],
+  "notes": "Tab exists in the underlying code but is missing from the visible tab list — unreachable through the real UI, not just hidden by a flag.",
+  "dataContract": []
+}

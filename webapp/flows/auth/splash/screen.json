@@ -1,0 +1,17 @@
+{
+  "flowKey": "auth",
+  "flowTitle": "User Auth",
+  "flowStatus": "partial",
+  "flowOrder": 1,
+  "screenKey": "splash",
+  "screenNumber": 1,
+  "screenTitle": "Splash",
+  "screenOrder": 1,
+  "states": [
+    "loading",
+    "resuming_local_session"
+  ],
+  "collectionsTouched": [],
+  "notes": "Session 'persistence' is local Room state resumption, not a Firebase Auth session check.",
+  "dataContract": []
+}

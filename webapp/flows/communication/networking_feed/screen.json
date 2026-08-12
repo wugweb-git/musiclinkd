@@ -1,0 +1,25 @@
+{
+  "flowKey": "communication",
+  "flowTitle": "Communication & Collaboration",
+  "flowStatus": "partial",
+  "flowOrder": 6,
+  "screenKey": "networking_feed",
+  "screenNumber": 83,
+  "screenTitle": "Networking Feed (post / view)",
+  "screenOrder": 6,
+  "states": [
+    "default",
+    "posting"
+  ],
+  "collectionsTouched": [
+    "feed_posts"
+  ],
+  "notes": "Real read/write exists, but write side uses \"content\" not the admin schema's \"text\", plus a mediaUrl read/write mismatch — flagged, needs a migration-aware fix (Prompt F §5).",
+  "dataContract": [
+    {
+      "collection": "feed_posts",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}

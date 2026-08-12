@@ -1,0 +1,42 @@
+{
+  "flowKey": "portfolio",
+  "flowTitle": "Add Portfolio",
+  "flowStatus": "app-mocked",
+  "flowOrder": 3,
+  "screenKey": "profile_project_view",
+  "screenNumber": 31,
+  "screenTitle": "Published Project — Profile View",
+  "screenOrder": 11,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "portfolio_projects"
+  ],
+  "dataContract": [
+    {
+      "collection": "portfolio_projects",
+      "sample": {
+        "ownerUid": "mock-talent-arijit-sen",
+        "name": "Tum Hi Toh (Unplugged)",
+        "status": "Released",
+        "visibility": "Public",
+        "collaborators": [],
+        "credits": [],
+        "projectViews": 4200,
+        "likes": 610,
+        "shares": 88,
+        "createdAt": "2026-05-01T09:00:00.000Z",
+        "lastUpdatedAt": "2026-06-01T09:00:00.000Z",
+        "description": "Acoustic unplugged reinterpretation — 4.2M plays on Spotify.",
+        "type": "song",
+        "releaseDate": "2026-02-14",
+        "ownerRoles": [
+          "Singer"
+        ],
+        "artworkTheme": "Acoustic",
+        "spotifyUrl": "https://open.spotify.com/track/tumhitohunplugged-mock"
+      }
+    }
+  ]
+}

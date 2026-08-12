@@ -1,0 +1,16 @@
+{
+  "flowKey": "auth",
+  "flowTitle": "User Auth",
+  "flowStatus": "partial",
+  "flowOrder": 1,
+  "screenKey": "welcome",
+  "screenNumber": 2,
+  "screenTitle": "Welcome (choose auth method)",
+  "screenOrder": 2,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "Entry point offering Email, Mobile/OTP, and Google Sign-In.",
+  "dataContract": []
+}

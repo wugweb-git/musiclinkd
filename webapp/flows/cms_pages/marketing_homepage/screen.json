@@ -1,0 +1,16 @@
+{
+  "flowKey": "cms_pages",
+  "flowTitle": "CMS Pages",
+  "flowStatus": "partial",
+  "flowOrder": 22,
+  "screenKey": "marketing_homepage",
+  "screenNumber": 93,
+  "screenTitle": "Marketing Homepage",
+  "screenOrder": 1,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "Static HTML, never reads Firestore at runtime.",
+  "dataContract": []
+}

@@ -1,0 +1,16 @@
+{
+  "flowKey": "portfolio",
+  "flowTitle": "Add Portfolio",
+  "flowStatus": "app-mocked",
+  "flowOrder": 3,
+  "screenKey": "media_preview",
+  "screenNumber": 28,
+  "screenTitle": "Project Media Preview",
+  "screenOrder": 8,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "\"Artwork\" here is a palette-theme keyword, not an uploaded image — no real upload UI exists.",
+  "dataContract": []
+}

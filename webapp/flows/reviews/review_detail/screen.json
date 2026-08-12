@@ -1,0 +1,16 @@
+{
+  "flowKey": "reviews",
+  "flowTitle": "Reviews",
+  "flowStatus": "app-mocked",
+  "flowOrder": 17,
+  "screenKey": "review_detail",
+  "screenNumber": 109,
+  "screenTitle": "Review Detail",
+  "screenOrder": 3,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "ReputationSubScreen.REVIEW_DETAIL. Single-review expanded view within the same local-Room-backed module.",
+  "dataContract": []
+}
