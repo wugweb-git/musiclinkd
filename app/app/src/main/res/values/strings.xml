@@ -3,11 +3,65 @@
     <string name="default_web_client_id">1003456789012-mockclientid123456789.apps.googleusercontent.com</string>
 
     <!-- Navigation & Core Actions -->
+    <string name="nav_home">Home</string>
     <string name="nav_discover">Discover</string>
+    <string name="nav_connections">Connections</string>
+    <string name="nav_market">Market</string>
     <string name="nav_messages">Messages</string>
     <string name="nav_studios">Studios</string>
     <string name="nav_portfolio">Portfolio</string>
     <string name="nav_profile">Profile</string>
+    <string name="action_search">Search</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_share">Share</string>
+    <string name="action_back">Back</string>
+    <string name="action_remove">Remove</string>
+    <string name="action_clear_all">Clear All</string>
+    <string name="action_save">Save</string>
+    <string name="action_retry">Retry</string>
+
+    <!-- Discovery -->
+    <string name="discover_subtitle">Connect with India’s Music Grid</string>
+    <string name="discover_search_placeholder">Search talent, studios, bands...</string>
+    <string name="discover_hot_match">Swipe n' Match</string>
+    <string name="discover_hot_match_description">Discover collaborators game-show style!</string>
+    <string name="discover_hot_match_action">Hot-Match</string>
+    <string name="discover_quick_categories">Quick Categories</string>
+    <string name="discover_see_all">See All</string>
+    <string name="discover_featured_professionals">Featured Professionals</string>
+    <string name="discover_trending_bands">Trending Independent Bands</string>
+    <string name="discover_nearby_studios">Nearby Studios &amp; Venues</string>
+    <string name="discover_saved_profiles">Saved Profiles</string>
+    <string name="discover_recommendations">Recommendations</string>
+    <string name="discover_search_results">Search Results</string>
+
+    <!-- Search -->
+    <string name="search_artists_studios_instruments">Search artists, studios, instruments...</string>
+    <string name="search_suggested_categories">Suggested Categories</string>
+    <string name="search_recent">Recent Searches</string>
+    <string name="search_trending">Trending Searches</string>
+
+    <!-- Success / Profile -->
+    <string name="success_welcome">Welcome to the Grid.</string>
+    <string name="success_description">Your digital profile is live on India’s premier music professional registry.</string>
+    <string name="verified_professional">Verified Professional</string>
+    <string name="success_scan_record">Scan to view digital registry record</string>
+    <string name="success_launch_dashboard">Launch My Registry Dashboard</string>
+    <string name="success_share_pass">Share My Digital Pass</string>
+    <string name="default_profile_name">Your MusicLinkd Profile</string>
+    <string name="default_profile_role">Music Professional</string>
+
+    <!-- Supporting Hub -->
+    <string name="hub_title">MusicLinkd Hub</string>
+    <string name="hub_supporting_flows">SUPPORTING FLOWS</string>
+    <string name="hub_connections">Connections</string>
+    <string name="hub_feed">Feed</string>
+    <string name="hub_artist_profile">Artist Profile</string>
+    <string name="hub_search">Search</string>
+    <string name="hub_qr_share">QR &amp; Share</string>
+    <string name="hub_saved">Saved</string>
+    <string name="hub_settings">Settings</string>
+    <string name="hub_help_support">Help &amp; Support</string>
 
     <!-- Professional Roles & Journey -->
     <string name="role_musician">Musician / Singer</string>
