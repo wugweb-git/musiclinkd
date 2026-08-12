@@ -60,10 +60,10 @@ export const DEFAULT_FLOWS: Omit<FlowDoc, "createdAt" | "updatedAt">[] = [
   {
     key: "marketplace",
     order: 7,
-    title: "Marketplace (Buy/Sell)",
+    title: "Marketplace — Buy/Sell/Rent",
     status: "app-mocked",
     description:
-      "100% mocked, not wired to Firestore — reconciled: MarketplaceItemDoc.category is now taxonomy-backed (marketplace_categories), matching the app's real sale/rental/mixing/beats/services split. SCREEN-MAPPED 2026-08-12 (grounded Explore audit): one real, dashboard-wired browse screen (MarketplaceBetaScreen) with 6 category tabs including a \"Gear Rentals\" filter (see equipment_rental below), an in-dialog item detail (not a separate screen), and a Saved/Favorites bookmarks tab — all backed by hardcoded lists, zero `marketplace_items` references anywhere. No create-listing, cart, checkout, or seller-messaging screens exist at all — confirmed absent by exhaustive grep, not just unaudited.",
+      "100% mocked, not wired to Firestore — reconciled: MarketplaceItemDoc.category is now taxonomy-backed (marketplace_categories), matching the app's real sale/rental/mixing/beats/services split. SCREEN-MAPPED 2026-08-12 (grounded Explore audit): one real, dashboard-wired browse screen (MarketplaceBetaScreen) with 6 category tabs including \"Gear Rentals\", an in-dialog item detail (not a separate screen), and a Saved/Favorites bookmarks tab — all backed by hardcoded lists, zero `marketplace_items` references anywhere. No create-listing, cart, checkout, or seller-messaging screens exist at all — confirmed absent by exhaustive grep, not just unaudited. MERGED 2026-08-13 (user call): the standalone \"Equipment Rental\" flow entry was folded in here rather than kept separate — rental was never anything more than one of this screen's own category tabs; see the equipment_rental key's former slot (order 9, now retired, not reassigned) for the original grounded finding this merge is based on.",
   },
   {
     key: "booking",
@@ -73,14 +73,14 @@ export const DEFAULT_FLOWS: Omit<FlowDoc, "createdAt" | "updatedAt">[] = [
     description:
       "Currently studio-only (StudioBookingDoc) — not conceptually limited to studios long-term, the primary bookable entity type today is just Studio. Real writer exists but uses the wrong field names (artistUserId/totalCostAmount/statusKey instead of the schema's userId/totalAmount/bookingStatus) — confirmed still broken as of this session's last verification pass, despite two rounds of AI Studio claiming it was fixed.",
   },
-  {
-    key: "equipment_rental",
-    order: 9,
-    title: "Equipment Rental",
-    status: "missing",
-    description:
-      "No dedicated schema. StudioDoc.equipment (added this session) covers gear display for the booking flow; no rental-specific transaction/listing model exists. RESOLVED 2026-08-12 (grounded Explore audit, was flagged \"genuinely unknown\"): confirmed NOT a standalone flow — \"rental\" is just one of six filter tabs inside the mocked Marketplace browse screen (see `marketplace` above). Its \"Rent This Gear\" confirm button only sets a local success banner with a fabricated request ID (\"#REN-5982\") — no backend write of any kind. StudioBookingDoc.selectedEquipment/addons have zero references anywhere in the app; unrelated free-text \"addons\" notes exist in Studio Booking's own configure-session screen, not this flow. No separate flow entry is warranted going forward.",
-  },
+  // key: "equipment_rental" (formerly order 9) — REMOVED 2026-08-13 (user
+  // call): merged into `marketplace` above rather than kept as its own
+  // entry. Order 9 is deliberately left unassigned, not reused by the next
+  // flow — several other flows' descriptions reference each other by
+  // number in prose (e.g. "distinct from Flow 21"), and renumbering all of
+  // them to close the gap risked introducing new stale cross-references
+  // for a purely cosmetic gain. See `marketplace`'s description for the
+  // grounded finding this merge is based on.
   {
     key: "profile_management",
     order: 10,

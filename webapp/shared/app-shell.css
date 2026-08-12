@@ -20,6 +20,34 @@
      The JS fallback (--app-vh, set in app-shell.js) covers browsers that
      don't support dvh at all. */
   --app-height: 100dvh;
+
+  /* --- 20:9 viewport system (standardized aspect ratio) ---
+     MusicLinkd standardizes app screens around a 20:9 aspect ratio
+     (reference frame 390×844 / 360×800), while gracefully supporting
+     19.5:9 through 20:9 devices. We do NOT force an exact pixel height —
+     .app-root fills 100dvh edge-to-edge and the *actual* viewport plus
+     safe-area insets define the usable area, so every phone in that range
+     renders naturally.
+
+     Practical UI-safe-area values per the 20:9 reference frame:
+       Top status/notification area   ~24px (Android) / ~59px (iPhone)
+       Bottom system/nav area         ~24–48px (Android) / ~34px (iPhone)
+       App content area               between the two
+     These land automatically via env(safe-area-inset-*) where the OS
+     reports real insets; the fallbacks below keep a floor for browsers
+     that don't report them.
+
+     For chrome that sits OUTSIDE the app content but must respect the
+     notches/gesture bar, use:
+       top bar:    calc(var(--app-safe-top) + var(--app-top-inset))
+       bottom bar: calc(var(--app-safe-bottom) + var(--app-bottom-inset))
+
+     Reference tokens (kept as documentation + usable in the workbench):
+       --app-aspect: ideal aspect ratio for mockup/preview frames
+       --app-top-inset / --app-bottom-inset: min chrome offsets (px)     */
+  --app-aspect: 20 / 9;
+  --app-top-inset: 24px;
+  --app-bottom-inset: 24px;
 }
 
 * {

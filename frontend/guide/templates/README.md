@@ -2,7 +2,7 @@
 
 Canonical layout families. A new page should start from one of these templates.
 
-**Interactive reference:** `guide/index.html` § Templates — section-by-section breakdown of all 9 template families.
+**Interactive reference:** `guide/styleguide.html` § Templates — section-by-section breakdown of all 9 template families.
 
 ## Template families
 

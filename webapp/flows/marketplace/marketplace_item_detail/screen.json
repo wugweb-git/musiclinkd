@@ -1,6 +1,6 @@
 {
   "flowKey": "marketplace",
-  "flowTitle": "Marketplace (Buy/Sell)",
+  "flowTitle": "Marketplace — Buy/Sell/Rent",
   "flowStatus": "app-mocked",
   "flowOrder": 7,
   "screenKey": "marketplace_item_detail",

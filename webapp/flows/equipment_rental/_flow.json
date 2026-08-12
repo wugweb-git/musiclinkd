@@ -1,8 +1,0 @@
-{
-  "key": "equipment_rental",
-  "title": "Equipment Rental",
-  "order": 9,
-  "status": "missing",
-  "description": "No dedicated schema. StudioDoc.equipment (added this session) covers gear display for the booking flow; no rental-specific transaction/listing model exists. RESOLVED 2026-08-12 (grounded Explore audit, was flagged \"genuinely unknown\"): confirmed NOT a standalone flow — \"rental\" is just one of six filter tabs inside the mocked Marketplace browse screen (see `marketplace` above). Its \"Rent This Gear\" confirm button only sets a local success banner with a fabricated request ID (\"#REN-5982\") — no backend write of any kind. StudioBookingDoc.selectedEquipment/addons have zero references anywhere in the app; unrelated free-text \"addons\" notes exist in Studio Booking's own configure-session screen, not this flow. No separate flow entry is warranted going forward.",
-  "screenCount": 0
-}

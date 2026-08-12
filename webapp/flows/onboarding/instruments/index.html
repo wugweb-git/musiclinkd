@@ -2,98 +2,98 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<!-- viewport-fit=cover is what makes env(safe-area-inset-*) resolve to real
-     values instead of 0 on notched/gesture-bar devices — without it the
-     safe-area CSS in app-shell.css is a no-op. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0B26" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<!--
-  All resource paths below are ABSOLUTE (/preview/...), not relative. This
-  build is deployed at musiclinkd.com/preview, and Firebase Hosting's
-  cleanUrls+trailingSlash:false config means a page at .../flows/auth/splash
-  has NO trailing slash — the browser then resolves relative "./x"/"../x"
-  paths against the WRONG base (one level too shallow), silently breaking
-  screen.json/CSS/JS loads. Absolute paths sidestep that entirely. If this
-  ever moves to a different mount point, update MOUNT_BASE in
-  shared/app-shell.js and the paths below together.
--->
+<meta name="screen-json-path" content="/preview/flows/onboarding/instruments/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<meta name="screen-json-path" content="/preview/flows/onboarding/instruments/screen.json" />
 <title>MusicLinkd — User Onboarding / Instruments</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
-<!-- app-shell.css = native ENVIRONMENT (safe-area, viewport, keyboard).
-     tokens.css = the real MusicLinkd VISUAL design system (colors, type,
-     .btn/.field/.otp-box components) — copied verbatim from
-     frontend/guide/styleguide.html. Both compose on every screen. -->
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
-<!--
-  THIS FILE IS A TEMPLATE, NOT A DESIGNED SCREEN.
-  It exists to prove out the native-app environment (safe areas, fixed
-  viewport, keyboard awareness, bottom-sheet mechanics, offline shell,
-  standalone display mode) plus the real design tokens/components, so a
-  real screen only has to compose them — copy this file into a
-  flows/<flow>/<screen>/ folder (every real screen folder already has one,
-  generated alongside its screen.json) and replace the placeholder regions
-  below. If you copy it manually (rather than letting the generator
-  scaffold it), also add
-  <meta name="screen-json-path" content="/preview/flows/<flow>/<screen>/screen.json" />
-  next to the other meta tags — without it the dev badge falls back to a
-  relative "./screen.json" fetch, which has the same trailing-slash problem
-  described above.
+<style>
+  .onb-step { font-size: var(--type-1); color: var(--muted); font-weight: 600; letter-spacing: 0.02em; }
+  .onb-progress { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .onb-progress > span { display: block; height: 100%; background: var(--pink); border-radius: 2px; }
 
-  ARTBOARD SIZING: .app-root fills 100dvh x 100% of whatever viewport it's
-  in, edge-to-edge — the same approach a real installed PWA/native app
-  uses (there's no fixed "canvas size" on a phone). No desktop max-width
-  cap here on purpose: for reviewing on a desktop browser inside a proper
-  phone-frame, use the workbench at /preview/index.html instead of opening
-  a screen standalone — that's where the phone-frame chrome lives, not
-  baked into every individual screen.
--->
+  .instr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
+  .instr-tile {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius-2);
+    padding: var(--space-3); display: flex; flex-direction: column; align-items: center; gap: var(--space-2);
+    cursor: pointer; text-align: center; font-family: inherit;
+    transition: border-color var(--duration-1) ease, background var(--duration-1) ease;
+  }
+  .instr-tile:hover { background: var(--surface-alt); }
+  .instr-tile.selected { border: 2px solid var(--pink); background: var(--pink-container); padding: calc(var(--space-3) - 1px); }
+  .instr-tile .instr-icon {
+    width: 48px; height: 48px; border-radius: var(--radius-2); background: var(--surface-2);
+    display: flex; align-items: center; justify-content: center; font-size: var(--type-3);
+  }
+  .instr-tile.selected .instr-icon { background: #fff; }
+  .instr-tile span { font-size: var(--type-1); font-weight: 600; }
+  .instr-tile.selected span { color: var(--pink); }
+  .skip-link { color: var(--muted); font-weight: 600; text-decoration: none; text-align: center; }
+</style>
 </head>
 <body>
   <div class="app-root">
-
-    <!-- Fixed top region — safe-area top padding baked in via app-shell.css.
-         Put a status/nav bar here; it never scrolls. -->
-    <header class="app-topbar">
-      <!-- TODO: design system top bar goes here -->
+    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
+      <a href="/preview/flows/onboarding/languages/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </a>
+      <div class="onb-step" style="margin-left:var(--space-2);">Step 5 of 13</div>
     </header>
+    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);">
+      <div class="onb-progress"><span style="width:38%"></span></div>
+      <div>
+        <h1 style="font-size:var(--type-3);">Which instruments do you play?</h1>
+        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);">Select all that apply. Skilled musicians can be discovered for more work.</p>
+      </div>
 
-    <!-- Main content — scrolls only if you add .app-content--scroll.
-         Most single-purpose screens (a form, a splash, a confirmation)
-         should NOT scroll; add the modifier only for feeds/lists/long forms. -->
-    <main class="app-content app-content--scroll">
-      <!-- TODO: design system content goes here.
-           Read window.MusicLinkd.screen (populated from this screen's
-           screen.json) for its flow/screen metadata and data contract. -->
+      <div class="instr-grid" role="group" aria-label="Instruments">
+        <button class="instr-tile" type="button">
+          <div class="instr-icon">🎸</div>
+          <span>Acoustic Guitar</span>
+        </button>
+        <button class="instr-tile" type="button">
+          <div class="instr-icon">⚡</div>
+          <span>Electric Guitar</span>
+        </button>
+        <button class="instr-tile selected" type="button">
+          <div class="instr-icon">🎸</div>
+          <span>Bass Guitar</span>
+        </button>
+        <button class="instr-tile" type="button">
+          <div class="instr-icon">🎹</div>
+          <span>Keyboard / Synthesizer</span>
+        </button>
+        <button class="instr-tile" type="button">
+          <div class="instr-icon">🎹</div>
+          <span>Piano</span>
+        </button>
+        <button class="instr-tile" type="button">
+          <div class="instr-icon">🥁</div>
+          <span>Drums</span>
+        </button>
+      </div>
 
-      <!-- Example bottom-sheet trigger — remove if this screen doesn't need one. -->
-      <button type="button" class="btn btn-s" data-open-sheet="example-sheet">Open example sheet</button>
+      <a class="skip-link" href="/preview/flows/onboarding/instrument_proficiency/index.html">Not a musician — skip instruments</a>
     </main>
-
-    <!-- Fixed bottom region — safe-area bottom padding baked in. Auto-hides
-         when the keyboard opens (see .is-keyboard-open in app-shell.css) so
-         it never floats above the keyboard on top of your inputs. -->
-    <footer class="app-bottombar">
-      <!-- TODO: design system bottom bar / CTA goes here -->
+    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
+      <a class="btn btn-p btn-block" href="/preview/flows/onboarding/instrument_proficiency/index.html" style="text-decoration:none;">Continue</a>
     </footer>
   </div>
-
-  <!-- Example bottom sheet — structural mechanics only (open/close, drag-down
-       transition, safe-area padding). Style its contents with your design system. -->
-  <div class="sheet-scrim" data-sheet-scrim-for="example-sheet"></div>
-  <div class="sheet" id="example-sheet" style="background:#fff;border-radius:24px 24px 0 0;padding:24px;">
-    <p>Example bottom sheet content.</p>
-    <button type="button" class="btn btn-p btn-block" data-close-sheet="example-sheet">Close</button>
-  </div>
-
   <script src="/preview/shared/app-shell.js" defer></script>
+  <script>
+    // Presentation-only multi-select.
+    document.querySelectorAll(".instr-tile").forEach((tile) => {
+      tile.addEventListener("click", () => tile.classList.toggle("selected"));
+    });
+  </script>
 </body>
 </html>

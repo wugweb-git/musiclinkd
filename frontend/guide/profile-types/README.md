@@ -2,7 +2,7 @@
 
 Use shared modules — identity, hero, audio, projects, credits, gallery, services, equipment, availability, reviews, contact, and business information — to compose profiles. Do not create a wholly separate layout for every role.
 
-**Interactive reference:** `guide/index.html` § Profiles — role variants and module composition for all 4 profile families.
+**Interactive reference:** `guide/styleguide.html` § Profiles — role variants and module composition for all 4 profile families.
 
 ## Primary template families
 

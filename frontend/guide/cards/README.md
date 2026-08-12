@@ -2,7 +2,7 @@
 
 Cards drive discovery and conversion. Every card conforms to the unified base container specification.
 
-**Interactive reference:** `guide/index.html` § Cards — live previews of all 9 card types with anatomy, tokens, and state specs.
+**Interactive reference:** `guide/styleguide.html` § Cards — live previews of all 9 card types with anatomy, tokens, and state specs.
 
 ## Canonical card types
 

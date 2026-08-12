@@ -109,12 +109,108 @@
     <button class="wb-menu-btn" id="menu-btn" aria-label="Open screen list">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
     </button>
-    <div class="phone-frame">
-      <div class="phone-screen">
-        <div class="phone-notch"><div class="dot"></div></div>
-        <iframe id="preview-frame" title="Screen preview" src="about:blank"></iframe>
+    <!-- Device selector + 20:9 phone-frame mockup -->
+  <div class="wb-device-selector" style="display:flex;gap:6px;align-items:center;justify-content:center;margin-bottom:var(--space-2)">
+    <button class="wb-device-btn" data-device="pixel7" aria-label="Pixel 7 (360×800)">📱 Pixel 7</button>
+    <button class="wb-device-btn wb-device-btn--active" data-device="iphone14" aria-label="iPhone 14 Pro (390×844)">📱 iPhone 14 Pro</button>
+    <button class="wb-device-btn" data-device="galaxys23" aria-label="Galaxy S23 (308×656)">📱 Galaxy S23</button>
+  </div>
+
+  <div class="phone-frame" style="--device: pixel7">
+    <div class="phone-notch" style="--device: pixel7">
+      <div class="dot" style="--device: pixel7"></div>
+    </div>
+    <div class="phone-status" style="--device: pixel7">
+      <div class="carrier">MusicLinkd</div>
+      <div class="battery">100%</div>
+    </div>
+    <iframe id="preview-frame" title="Screen preview" src="about:blank" style="--device: pixel7"></iframe>
+    <div class="phone-body" style="--device: pixel7">
+      <div style="position:relative;inset:0;border-radius:26px;overflow:hidden">
+        <!-- screen content via iframe -->
       </div>
     </div>
+  </div>
+
+  <style>
+    /* 20:9 device frame — standardized across all supported phones.
+       The aspect-ratio + safe-area insets are driven by CSS vars set by
+       the device-selector JS below. All phones share the same visual
+       language: black border, pill-shaped notch, centered carrier/battery. */
+    .phone-frame {
+      position: relative;
+      width: 100%;
+      max-width: 360px; /* Pixel 7 baseline; other devices scale via aspect-ratio */
+      aspect-ratio: 9 / 20; /* 20:9 — 360×800 base; iPhone 14 Pro → 390×844 via scale */
+      background: #1a1a2e;
+      border-radius: 36px;
+      margin: 0 auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+    .phone-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(rgba(0,0,0,0.3) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    /* Notch — same shape, position driven by --device CSS var */
+    .phone-notch {
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 36px; height: 24px;
+      background: #0D0D0D;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 6px; pointer-events: none;
+    }
+    .phone-notch .dot {
+      width: 6px; height: 6px;
+      background: #2C2F3A; border-radius: 50%;
+      pointer-events: none;
+    }
+    /* Status bar — carrier + battery, position driven by --device */
+    .phone-status {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      padding: 0 14px; height: 24px;
+      display: flex; justify-content: space-between;
+      align-items: center; font-size: 10px; font-weight: 600;
+      color: #fff; pointer-events: none;
+    }
+    .phone-status .carrier { color: #888; }
+    .phone-status .battery { display: flex; align-items: center; gap: 2px; }
+    .phone-status .battery div {
+      width: 16px; height: 8px;
+      background: #FFD60A; border-radius: 2px;
+    }
+    /* Body — the actual screen content lives inside the iframe */
+    .phone-body { padding: 12px; }
+    /* Device selector buttons */
+    .wb-device-selector { margin-bottom: var(--space-2); }
+    .wb-device-btn {
+      font: 600 11px/1 'Inter', sans-serif;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 9999px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all 150ms var(--ease);
+      white-space: nowrap;
+    }
+    .wb-device-btn:hover { background: #F8F8FB; }
+    .wb-device-btn--active {
+      color: var(--pink);
+      border-color: var(--pink);
+      background: var(--pink-container);
+    }
+    /* Aspect-ratio override per device — set by JS */
+    .phone-frame[data-device="iphone14"] { aspect-ratio: 9 / 20; max-width: 390px; }
+    .phone-frame[data-device="galaxys23"] { aspect-ratio: 9 / 20; max-width: 308px; }
+  </style>
   </main>
 </div>
 

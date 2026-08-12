@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-12T06:26:01.210Z",
+  "generatedAt": "2026-08-12T16:14:17.300Z",
   "flows": [
     {
       "key": "auth",
@@ -51,10 +51,10 @@
     },
     {
       "key": "marketplace",
-      "title": "Marketplace (Buy/Sell)",
+      "title": "Marketplace — Buy/Sell/Rent",
       "order": 7,
       "status": "app-mocked",
-      "description": "100% mocked, not wired to Firestore — reconciled: MarketplaceItemDoc.category is now taxonomy-backed (marketplace_categories), matching the app's real sale/rental/mixing/beats/services split. SCREEN-MAPPED 2026-08-12 (grounded Explore audit): one real, dashboard-wired browse screen (MarketplaceBetaScreen) with 6 category tabs including a \"Gear Rentals\" filter (see equipment_rental below), an in-dialog item detail (not a separate screen), and a Saved/Favorites bookmarks tab — all backed by hardcoded lists, zero `marketplace_items` references anywhere. No create-listing, cart, checkout, or seller-messaging screens exist at all — confirmed absent by exhaustive grep, not just unaudited.",
+      "description": "100% mocked, not wired to Firestore — reconciled: MarketplaceItemDoc.category is now taxonomy-backed (marketplace_categories), matching the app's real sale/rental/mixing/beats/services split. SCREEN-MAPPED 2026-08-12 (grounded Explore audit): one real, dashboard-wired browse screen (MarketplaceBetaScreen) with 6 category tabs including \"Gear Rentals\", an in-dialog item detail (not a separate screen), and a Saved/Favorites bookmarks tab — all backed by hardcoded lists, zero `marketplace_items` references anywhere. No create-listing, cart, checkout, or seller-messaging screens exist at all — confirmed absent by exhaustive grep, not just unaudited. MERGED 2026-08-13 (user call): the standalone \"Equipment Rental\" flow entry was folded in here rather than kept separate — rental was never anything more than one of this screen's own category tabs; see the equipment_rental key's former slot (order 9, now retired, not reassigned) for the original grounded finding this merge is based on.",
       "screenCount": 3
     },
     {
@@ -64,14 +64,6 @@
       "status": "partial",
       "description": "Currently studio-only (StudioBookingDoc) — not conceptually limited to studios long-term, the primary bookable entity type today is just Studio. Real writer exists but uses the wrong field names (artistUserId/totalCostAmount/statusKey instead of the schema's userId/totalAmount/bookingStatus) — confirmed still broken as of this session's last verification pass, despite two rounds of AI Studio claiming it was fixed.",
       "screenCount": 11
-    },
-    {
-      "key": "equipment_rental",
-      "title": "Equipment Rental",
-      "order": 9,
-      "status": "missing",
-      "description": "No dedicated schema. StudioDoc.equipment (added this session) covers gear display for the booking flow; no rental-specific transaction/listing model exists. RESOLVED 2026-08-12 (grounded Explore audit, was flagged \"genuinely unknown\"): confirmed NOT a standalone flow — \"rental\" is just one of six filter tabs inside the mocked Marketplace browse screen (see `marketplace` above). Its \"Rent This Gear\" confirm button only sets a local success banner with a fabricated request ID (\"#REN-5982\") — no backend write of any kind. StudioBookingDoc.selectedEquipment/addons have zero references anywhere in the app; unrelated free-text \"addons\" notes exist in Studio Booking's own configure-session screen, not this flow. No separate flow entry is warranted going forward.",
-      "screenCount": 0
     },
     {
       "key": "profile_management",
@@ -1689,7 +1681,7 @@
     },
     {
       "flowKey": "marketplace",
-      "flowTitle": "Marketplace (Buy/Sell)",
+      "flowTitle": "Marketplace — Buy/Sell/Rent",
       "flowStatus": "app-mocked",
       "flowOrder": 7,
       "screenKey": "marketplace_browse",
@@ -1712,7 +1704,7 @@
     },
     {
       "flowKey": "marketplace",
-      "flowTitle": "Marketplace (Buy/Sell)",
+      "flowTitle": "Marketplace — Buy/Sell/Rent",
       "flowStatus": "app-mocked",
       "flowOrder": 7,
       "screenKey": "marketplace_item_detail",
@@ -1728,7 +1720,7 @@
     },
     {
       "flowKey": "marketplace",
-      "flowTitle": "Marketplace (Buy/Sell)",
+      "flowTitle": "Marketplace — Buy/Sell/Rent",
       "flowStatus": "app-mocked",
       "flowOrder": 7,
       "screenKey": "marketplace_saved_bookmarks",
@@ -3686,7 +3678,7 @@
         "studio_bookings",
         "taxonomy_categories"
       ],
-      "notes": "sessionType/durationTier — added this session, not yet wired into the Bookings admin UI.",
+      "notes": "sessionType/durationTier and the rest of StudioBookingDoc (engineerRequested/selectedEquipment/addons/taxAmount/depositAmount/discountAmount/promoCode/paymentMethod/notes) are now editable via the Bookings admin module's row-click editor sheet (closed 2026-08-13) — previously view-only with status-transition buttons only.",
       "dataContract": [
         {
           "collection": "studio_bookings",

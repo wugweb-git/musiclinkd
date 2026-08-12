@@ -2,7 +2,7 @@
 
 Approved components are shared primitives, controls, and composable blocks. Create an implementation and a usage specification together.
 
-**Interactive reference:** `guide/index.html` § Components — live demos of buttons, inputs, chips, search, navigation, audio player, bottom sheets, and empty states.
+**Interactive reference:** `guide/styleguide.html` § Components — live demos of buttons, inputs, chips, search, navigation, audio player, bottom sheets, and empty states.
 
 ## Canonical component list
 

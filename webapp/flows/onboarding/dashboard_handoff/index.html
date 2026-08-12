@@ -2,98 +2,67 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<!-- viewport-fit=cover is what makes env(safe-area-inset-*) resolve to real
-     values instead of 0 on notched/gesture-bar devices — without it the
-     safe-area CSS in app-shell.css is a no-op. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0B26" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<!--
-  All resource paths below are ABSOLUTE (/preview/...), not relative. This
-  build is deployed at musiclinkd.com/preview, and Firebase Hosting's
-  cleanUrls+trailingSlash:false config means a page at .../flows/auth/splash
-  has NO trailing slash — the browser then resolves relative "./x"/"../x"
-  paths against the WRONG base (one level too shallow), silently breaking
-  screen.json/CSS/JS loads. Absolute paths sidestep that entirely. If this
-  ever moves to a different mount point, update MOUNT_BASE in
-  shared/app-shell.js and the paths below together.
--->
+<meta name="screen-json-path" content="/preview/flows/onboarding/dashboard_handoff/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<meta name="screen-json-path" content="/preview/flows/onboarding/dashboard_handoff/screen.json" />
-<title>MusicLinkd — User Onboarding / Success → Dashboard Handoff</title>
+<title>MusicLinkd — User Onboarding / You're all set</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
-<!-- app-shell.css = native ENVIRONMENT (safe-area, viewport, keyboard).
-     tokens.css = the real MusicLinkd VISUAL design system (colors, type,
-     .btn/.field/.otp-box components) — copied verbatim from
-     frontend/guide/styleguide.html. Both compose on every screen. -->
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
-<!--
-  THIS FILE IS A TEMPLATE, NOT A DESIGNED SCREEN.
-  It exists to prove out the native-app environment (safe areas, fixed
-  viewport, keyboard awareness, bottom-sheet mechanics, offline shell,
-  standalone display mode) plus the real design tokens/components, so a
-  real screen only has to compose them — copy this file into a
-  flows/<flow>/<screen>/ folder (every real screen folder already has one,
-  generated alongside its screen.json) and replace the placeholder regions
-  below. If you copy it manually (rather than letting the generator
-  scaffold it), also add
-  <meta name="screen-json-path" content="/preview/flows/<flow>/<screen>/screen.json" />
-  next to the other meta tags — without it the dev badge falls back to a
-  relative "./screen.json" fetch, which has the same trailing-slash problem
-  described above.
-
-  ARTBOARD SIZING: .app-root fills 100dvh x 100% of whatever viewport it's
-  in, edge-to-edge — the same approach a real installed PWA/native app
-  uses (there's no fixed "canvas size" on a phone). No desktop max-width
-  cap here on purpose: for reviewing on a desktop browser inside a proper
-  phone-frame, use the workbench at /preview/index.html instead of opening
-  a screen standalone — that's where the phone-frame chrome lives, not
-  baked into every individual screen.
--->
+<style>
+  .success-check { width: 72px; height: 72px; border-radius: 50%; background: var(--success); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto; animation: pop var(--duration-4) ease; }
+  @keyframes pop { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); width: 100%; }
+  .setup-tile { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-2); padding: var(--space-3); text-align: center; }
+  .setup-tile .tile-icon { width: 40px; height: 40px; border-radius: var(--radius-2); background: var(--pink-container); color: var(--pink); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-2); font-size: var(--type-2); }
+  .setup-tile span { font-size: var(--type-1); font-weight: 600; }
+</style>
 </head>
 <body>
   <div class="app-root">
+    <header class="app-topbar"></header>
+    <main class="app-content app-content--scroll" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-4);text-align:center;padding:0 var(--space-4);">
+      <div>
+        <div class="success-check">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h1 style="font-size:var(--type-4);margin-top:var(--space-4);">Welcome to MusicLink<em style="color:var(--pink);font-style:normal;">d</em></h1>
+        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-2);">Your profile is live. Here's where to go from here:</p>
+      </div>
 
-    <!-- Fixed top region — safe-area top padding baked in via app-shell.css.
-         Put a status/nav bar here; it never scrolls. -->
-    <header class="app-topbar">
-      <!-- TODO: design system top bar goes here -->
-    </header>
+      <div class="setup-grid">
+        <div class="setup-tile">
+          <div class="tile-icon">🎤</div>
+          <span>Complete your portfolio</span>
+        </div>
+        <div class="setup-tile">
+          <div class="tile-icon">🔍</div>
+          <span>Explore talent & studios</span>
+        </div>
+        <div class="setup-tile">
+          <div class="tile-icon">🤝</div>
+          <span>Connect & collaborate</span>
+        </div>
+        <div class="setup-tile">
+          <div class="tile-icon">🔐</div>
+          <span>Get verified</span>
+        </div>
+      </div>
 
-    <!-- Main content — scrolls only if you add .app-content--scroll.
-         Most single-purpose screens (a form, a splash, a confirmation)
-         should NOT scroll; add the modifier only for feeds/lists/long forms. -->
-    <main class="app-content app-content--scroll">
-      <!-- TODO: design system content goes here.
-           Read window.MusicLinkd.screen (populated from this screen's
-           screen.json) for its flow/screen metadata and data contract. -->
-
-      <!-- Example bottom-sheet trigger — remove if this screen doesn't need one. -->
-      <button type="button" class="btn btn-s" data-open-sheet="example-sheet">Open example sheet</button>
+      <p style="font-size:var(--type-1);color:var(--muted);">Onboarding complete — 13 of 13 steps done.</p>
     </main>
-
-    <!-- Fixed bottom region — safe-area bottom padding baked in. Auto-hides
-         when the keyboard opens (see .is-keyboard-open in app-shell.css) so
-         it never floats above the keyboard on top of your inputs. -->
-    <footer class="app-bottombar">
-      <!-- TODO: design system bottom bar / CTA goes here -->
+    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
+      <a class="btn btn-p btn-block" href="/preview/flows/discover/discover_feed/index.html" style="text-decoration:none;">Explore MusicLinkd</a>
+      <a class="btn btn-s btn-block" href="/preview/flows/profile_management/profile_overview/index.html" style="text-decoration:none;margin-top:var(--space-2);">View my profile</a>
     </footer>
   </div>
-
-  <!-- Example bottom sheet — structural mechanics only (open/close, drag-down
-       transition, safe-area padding). Style its contents with your design system. -->
-  <div class="sheet-scrim" data-sheet-scrim-for="example-sheet"></div>
-  <div class="sheet" id="example-sheet" style="background:#fff;border-radius:24px 24px 0 0;padding:24px;">
-    <p>Example bottom sheet content.</p>
-    <button type="button" class="btn btn-p btn-block" data-close-sheet="example-sheet">Close</button>
-  </div>
-
   <script src="/preview/shared/app-shell.js" defer></script>
 </body>
 </html>

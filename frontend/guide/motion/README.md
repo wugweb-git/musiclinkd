@@ -2,7 +2,7 @@
 
 Use purposeful motion only: pressed state, gentle card lift, sheet/modal fade and scale, swipeable discovery, audio waveform feedback, and skeleton loading. Respect reduced-motion preferences.
 
-**Interactive reference:** `guide/index.html` § Motion — interactive hover and press demos with live easing.
+**Interactive reference:** `guide/styleguide.html` § Motion — interactive hover and press demos with live easing.
 
 ## Timing
 
