@@ -4,6 +4,7 @@ import androidx.compose.ui.text.style.TextAlign
 import com.example.onboarding.database.FirebaseManager
 import com.example.onboarding.util.DemoDataProvider
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.example.R
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.BorderStroke
@@ -51,7 +52,8 @@ import com.example.ui.theme.*
 fun UnifiedBottomNavigation(
     activeTab: String,
     onTabClick: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    connectionsBadgeCount: Int? = DemoDataProvider.DEFAULT_CONNECTIONS_BADGE
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
@@ -66,39 +68,47 @@ fun UnifiedBottomNavigation(
             tonalElevation = 0.dp
         ) {
             val menuItems = listOf(
-                Triple("Home", Icons.Default.Home, Icons.Outlined.Home),
-                Triple("Discover", Icons.Default.Explore, Icons.Outlined.Explore),
-                Triple("Connections", Icons.Default.Group, Icons.Outlined.Group),
-                Triple("Marketplace", Icons.Default.Storefront, Icons.Outlined.Storefront),
-                Triple("Profile", Icons.Default.AccountCircle, Icons.Outlined.AccountCircle)
+                Triple(stringResource(R.string.nav_home), Icons.Default.Home, Icons.Outlined.Home),
+                Triple(stringResource(R.string.nav_discover), Icons.Default.Explore, Icons.Outlined.Explore),
+                Triple(stringResource(R.string.nav_connections), Icons.Default.Group, Icons.Outlined.Group),
+                Triple(stringResource(R.string.nav_market), Icons.Default.Storefront, Icons.Outlined.Storefront),
+                Triple(stringResource(R.string.nav_profile), Icons.Default.AccountCircle, Icons.Outlined.AccountCircle)
             )
 
             menuItems.forEach { (label, filledIcon, outlinedIcon) ->
-                val isActive = activeTab.lowercase() == label.lowercase()
+                val isActive = activeTab.equals(label, ignoreCase = true)
+                val isConnections = label.equals(stringResource(R.string.nav_connections), ignoreCase = true)
                 val tag = "tab_${label.lowercase()}"
-                
+
                 NavigationBarItem(
                     selected = isActive,
                     onClick = { onTabClick(label) },
                     modifier = Modifier
                         .testTag(tag)
                         .semantics {
-                            contentDescription = "$label navigation tab, ${if (isActive) "selected" else "unselected"}"
+                            contentDescription = stringResource(
+                                if (isActive) R.string.nav_tab_selected else R.string.nav_tab_unselected,
+                                label
+                            )
                         },
                     icon = {
                         BadgedBox(
                             badge = {
-                                if (label == "Connections") {
+                                if (isConnections && connectionsBadgeCount != null && connectionsBadgeCount > 0) {
                                     Badge(
                                         containerColor = BrandPrimary,
                                         contentColor = Color.White
                                     ) {
-                                        Text("3", fontSize = 9.sp, fontWeight = FontWeight.Bold)
+                                        Text(
+                                            connectionsBadgeCount.toString(),
+                                            fontSize = 9.sp,
+                                            fontWeight = FontWeight.Bold
+                                        )
                                     }
                                 }
                             }
                         ) {
-                            if (label == "Connections") {
+                            if (isConnections) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.ic_musiclinkd_connections),
                                     contentDescription = label,
@@ -117,7 +127,7 @@ fun UnifiedBottomNavigation(
                     },
                     label = {
                         Text(
-                            text = if (label == "Marketplace") "Market" else label,
+                            text = label,
                             fontSize = 11.sp,
                             fontWeight = if (isActive) FontWeight.Bold else FontWeight.Medium,
                             color = if (isActive) BrandPrimary else BrandTextSecondary
