@@ -599,7 +599,7 @@ function PulsarDemo() {
 // .TopItem, .NestedItem, .Group, .NestedGroup), not fabricated.
 function SideNavigationDemo() {
   return (
-    <Box maxHeight={220} overflow="scroll" maxWidth={220} borderStyle="sm" rounding={2} padding={2}>
+    <Box maxHeight={220} overflow="scroll" maxWidth={W.tile} borderStyle="sm" rounding={2} padding={3}>
       <SideNavigation accessibilityLabel="MusicLinkd navigation example">
         <SideNavigation.Section label="Library">
           <SideNavigation.TopItem href="#" label="Releases" active="page" />
@@ -618,7 +618,7 @@ function SideNavigationDemo() {
 // Box with two Sticky children that pin to the top as you scroll past them.
 function StickyDemo() {
   return (
-    <Box color="default" height={140} maxWidth={220} overflow="scroll" tabIndex={0} borderStyle="sm" rounding={2}>
+    <Box color="default" height={140} maxWidth={W.tile} overflow="scroll" tabIndex={0} borderStyle="sm" rounding={2}>
       <Box height={360}>
         <Sticky top={0}>
           <Box alignItems="center" color="infoWeak" display="flex" height={32} padding={2}>
@@ -804,7 +804,7 @@ function ComponentGallery({ query }: { query: string }) {
 function ArtistProfileBlock() {
   const [following, setFollowing] = useState(false);
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={360}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.screen}>
       <Flex gap={3} alignItems="center">
         <Avatar name="Mei Tanaka" size="lg" />
         <Box flex="grow">
@@ -831,7 +831,7 @@ function ArtistProfileBlock() {
 function TrackRowBlock() {
   const [playing, setPlaying] = useState(false);
   return (
-    <Box borderStyle="sm" rounding={3} padding={3} maxWidth={420}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={420}>
       <Flex gap={3} alignItems="center">
         <IconButton icon={playing ? "pause" : "play"} accessibilityLabel={playing ? "Pause" : "Play"} onClick={() => setPlaying((p) => !p)} bgColor="red" iconColor="white" />
         <Box flex="grow">
@@ -849,7 +849,7 @@ function UploadFormBlock() {
   const [genre, setGenre] = useState("pop");
   const [explicit, setExplicit] = useState(false);
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={360}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.screen}>
       <Box marginBottom={3}><Heading size="300">Upload a release</Heading></Box>
       <Flex direction="column" gap={3}>
         <TextField id="block-upload-title" label="Track title" value={title} onChange={({ value }) => setTitle(value)} />
@@ -877,7 +877,7 @@ function StatsRowBlock() {
 
 function EmptyStateBlock() {
   return (
-    <Box borderStyle="sm" rounding={4} padding={6} maxWidth={360} display="flex" direction="column" alignItems="center">
+    <Box borderStyle="sm" rounding={4} padding={6} maxWidth={W.screen} display="flex" direction="column" alignItems="center">
       <Icon icon="music-on" accessibilityLabel="" size={32} color="subtle" />
       <Box marginTop={3} marginBottom={1}><Heading size="300" align="center">No tracks yet</Heading></Box>
       <Box marginBottom={3}><Text align="center" color="subtle">Upload your first release to start building your catalog.</Text></Box>
@@ -899,10 +899,10 @@ function NotificationStackBlock() {
 function NavHeaderBlock() {
   const [value, setValue] = useState("");
   return (
-    <Box borderStyle="sm" rounding={3} padding={3}>
+    <Box borderStyle="sm" rounding={3} padding={4}>
       <Flex gap={3} alignItems="center">
         <Text weight="bold">MusicLinkd</Text>
-        <Box flex="grow" maxWidth={260}>
+        <Box flex="grow" maxWidth={W.compact}>
           <SearchField id="block-nav-search" accessibilityLabel="Search" placeholder="Search artists, tracks…" value={value} onChange={({ value }) => setValue(value)} />
         </Box>
         <IconButton icon="bell" accessibilityLabel="Notifications" />
@@ -968,7 +968,7 @@ function BottomNavBlock() {
   ] as const;
   const [active, setActive] = useState<string>("home");
   return (
-    <Box maxWidth={360} borderStyle="sm" rounding={4} overflow="hidden">
+    <Box maxWidth={W.screen} borderStyle="sm" rounding={4} overflow="hidden">
       <Box padding={4}>
         <Text size="100" color="subtle">Screen content sits above the bar — tap an item below.</Text>
       </Box>
@@ -1044,7 +1044,7 @@ function MetricsScorecardBlock() {
   return (
     <div className="ml-comp-grid">
       {metrics.map((m) => (
-        <Box key={m.title} borderStyle="sm" rounding={3} padding={3}>
+        <Box key={m.title} borderStyle="sm" rounding={3} padding={4}>
           <Flex gap={2} alignItems="center">
             <Icon icon={m.icon} accessibilityLabel="" color="subtle" />
             <Text size="100" color="subtle">{m.title}</Text>
@@ -1141,7 +1141,7 @@ function AvatarStackBlock() {
 
 function TestimonialBlock() {
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={360}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.screen}>
       <Box marginBottom={2}>
         <Flex gap={1}>
           {[0, 1, 2, 3].map((i) => <Icon key={i} icon="star" accessibilityLabel="" color="warning" size={16} />)}
@@ -1202,7 +1202,7 @@ function PricingPlansBlock() {
 // ₹32,000, recording session, half-day, engineer requested, paid via UPI.
 function BookingSummaryBlock() {
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={340}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.card}>
       <Flex justifyContent="between" alignItems="center">
         <Text weight="bold">Booking summary</Text>
         <Status type="ok" title="Confirmed" />
@@ -1236,7 +1236,7 @@ function AvailabilityCalendarBlock() {
   ];
   const statusColor = { available: "successWeak", booked: "errorWeak", pending: "warningWeak" } as const;
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={340}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.card}>
       {/* Was a single justifyContent="between" row (label + 3-segment control
           side by side) — inside this card's 340px maxWidth that left the
           SegmentedControl only ~150-180px, too narrow for "monthly" /
@@ -1275,7 +1275,7 @@ function ChatBlock() {
   ];
   return (
     <Flex gap={3} wrap>
-      <Box borderStyle="sm" rounding={3} padding={3} width={160}>
+      <Box borderStyle="sm" rounding={3} padding={4} width={160}>
         <Text size="100" weight="bold">Threads</Text>
         <Box marginTop={2}>
           <Flex direction="column" gap={2}>
@@ -1291,7 +1291,7 @@ function ChatBlock() {
           </Flex>
         </Box>
       </Box>
-      <Box borderStyle="sm" rounding={3} padding={3} width={200}>
+      <Box borderStyle="sm" rounding={3} padding={4} width={200}>
         <Flex direction="column" gap={2}>
           {messages.map((m, i) => (
             <Box key={i} alignSelf={m.from === "me" ? "end" : "start"} maxWidth={160} rounding={3} paddingX={2} paddingY={1} color={m.from === "me" ? "infoWeak" : "secondary"}>
@@ -1314,7 +1314,7 @@ function RatingBreakdownBlock() {
     { label: "Sound quality", value: 4.9 },
   ];
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={300}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.compact}>
       <Box marginBottom={3}>
         <Flex gap={3} alignItems="center">
           <Heading size="600">4.8</Heading>
@@ -1345,7 +1345,7 @@ function WriteReviewBlock() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={320}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.panel}>
       <Text weight="bold">Rate your session</Text>
       <Box marginTop={2} marginBottom={3}>
         <Flex gap={1}>
@@ -1366,7 +1366,7 @@ function WriteReviewBlock() {
 // screen (flowStatus app-mocked).
 function SuccessStateBlock() {
   return (
-    <Box borderStyle="sm" rounding={4} padding={6} maxWidth={300} display="flex" direction="column" alignItems="center">
+    <Box borderStyle="sm" rounding={4} padding={6} maxWidth={W.compact} display="flex" direction="column" alignItems="center">
       <Box color="successWeak" rounding="circle" padding={4}>
         <Icon icon="check-circle-fill" accessibilityLabel="" color="success" size={32} />
       </Box>
@@ -1384,7 +1384,7 @@ function SuccessStateBlock() {
 // implying it's fully wired.
 function QrShareBlock() {
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={280} display="flex" direction="column" alignItems="center">
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.compact} display="flex" direction="column" alignItems="center">
       <Badge text="UI only — backend missing" type="warning" />
       <Box marginTop={3} marginBottom={3} padding={3} borderStyle="sm" rounding={2}>
         <Icon icon="qr-code" accessibilityLabel="QR code" size={96} />
@@ -1405,7 +1405,7 @@ function CreditAttributionBlock() {
     { name: "Ava Chen", role: "Vocalist" },
   ];
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={300}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.compact}>
       <Text weight="bold">Credits</Text>
       <Box marginTop={3}>
         <Flex direction="column" gap={2}>
@@ -1433,7 +1433,7 @@ function SectionTabsBlock() {
   const tabs = ["Overview", "Services", "Team & Works", "Reviews & Gallery"];
   const [active, setActive] = useState(0);
   return (
-    <Box borderStyle="sm" rounding={3} padding={2} maxWidth={340}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.card}>
       {/* Tabs' own flex row doesn't wrap, and 4 real section names (incl.
           "Team & Works" / "Reviews & Gallery") need more than this card's
           ~300px inner width — without a scroll boundary the overflow was
@@ -1468,7 +1468,7 @@ function AdminDataTableBlock() {
   ];
   const toggle = (id: string) => setSelected((s) => { const n = new Set(s); n.has(id) ? n.delete(id) : n.add(id); return n; });
   return (
-    <Box borderStyle="sm" rounding={3} padding={3} maxWidth={420}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={420}>
       <Table accessibilityLabel="Admin users table">
         <Table.Header>
           <Table.Row>
@@ -1516,7 +1516,7 @@ function AdminDataTableBlock() {
 
 function AdminSidebarBlock() {
   return (
-    <Box maxHeight={240} overflow="scroll" maxWidth={220} borderStyle="sm" rounding={2} padding={2}>
+    <Box maxHeight={240} overflow="scroll" maxWidth={W.tile} borderStyle="sm" rounding={2} padding={3}>
       <SideNavigation accessibilityLabel="Admin navigation">
         <SideNavigation.TopItem href="#" label="Dashboard" icon="gauge" active="page" />
         <SideNavigation.TopItem href="#" label="Users" icon="person" />
@@ -1534,11 +1534,11 @@ function AdminSidebarBlock() {
 function AdminTopBarBlock() {
   const [query, setQuery] = useState("");
   return (
-    <Box borderStyle="sm" rounding={3} padding={3}>
+    <Box borderStyle="sm" rounding={3} padding={4}>
       <Flex gap={3} alignItems="center">
         <Text weight="bold">Admin</Text>
         <Badge text="v5.5" type="neutral" />
-        <Box flex="grow" maxWidth={220}>
+        <Box flex="grow" maxWidth={W.tile}>
           <SearchField id="block-admin-search" accessibilityLabel="Search admin" placeholder="Search users, bookings…" value={query} onChange={({ value }) => setQuery(value)} />
         </Box>
         <IconButton icon="bell" accessibilityLabel="Notifications" size="sm" />
@@ -1581,7 +1581,7 @@ type Block = { name: string; category: BlockCategory; description: string; rende
 // given, not backfilled with invented Venue fields.
 function PublicProfileVenueBlock() {
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={360}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.screen}>
       <Flex justifyContent="between" alignItems="center">
         <IconButton icon="arrow-back" accessibilityLabel="Back" size="sm" />
         <IconButton icon="share" accessibilityLabel="Share" size="sm" />
@@ -1657,7 +1657,7 @@ function PublicProfileVenueBlock() {
 // distinct form factor from the existing horizontal "Track row".
 function TrackCardBlock() {
   return (
-    <Box borderStyle="sm" rounding={3} padding={3} maxWidth={220}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.tile}>
       <Box rounding={2} overflow="hidden" marginBottom={2}>
         <Image alt="Track artwork" src={IMG.mixing} naturalWidth={220} naturalHeight={220} />
       </Box>
@@ -1680,7 +1680,7 @@ function TrackCardBlock() {
 // UnifiedStudioCard (Widget_Directory §2)
 function StudioCardBlock() {
   return (
-    <Box borderStyle="sm" rounding={3} padding={3} maxWidth={260}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.compact}>
       <Box rounding={2} overflow="hidden" marginBottom={2}>
         <Image alt="Studio room" src={IMG.controller} naturalWidth={260} naturalHeight={150} />
       </Box>
@@ -1709,7 +1709,7 @@ function StudioCardBlock() {
 // distinct from the standard StudioCard above.
 function FeaturedStudioCardBlock() {
   return (
-    <Box borderStyle="sm" rounding={4} overflow="hidden" maxWidth={360}>
+    <Box borderStyle="sm" rounding={4} overflow="hidden" maxWidth={W.screen}>
       <Image alt="Featured studio" src={IMG.dj} naturalWidth={360} naturalHeight={180} />
       <Box padding={4}>
         <Text weight="bold" size="300">Yash Raj Sound Studios</Text>
@@ -1728,7 +1728,7 @@ function FeaturedStudioCardBlock() {
 // UnifiedMarketplaceCard (Widget_Directory §3)
 function MarketplaceCardBlock() {
   return (
-    <Box borderStyle="sm" rounding={3} padding={3} maxWidth={220}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.tile}>
       <Box rounding={2} overflow="hidden" marginBottom={2}>
         <Image alt="Gear photo" src={IMG.mic} naturalWidth={220} naturalHeight={160} />
       </Box>
@@ -1750,7 +1750,7 @@ function MarketplaceCardBlock() {
 // UnifiedOpportunityCard (Widget_Directory §3)
 function OpportunityCardBlock() {
   return (
-    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={340}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.card}>
       <Flex justifyContent="between" alignItems="start">
         <Text weight="bold">Session vocalist for indie EP</Text>
         <Tag text="₹15,000 budget" />
@@ -1782,7 +1782,7 @@ function OpportunityCardBlock() {
 // timestamp).
 function ReviewCardBlock() {
   return (
-    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={340}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.card}>
       <Flex gap={2} alignItems="center">
         <Avatar name="Priya Menon" size="sm" />
         <Box>
@@ -1834,7 +1834,7 @@ function NotificationCardBlock() {
 // distinct from the badge-chip-row "Trust badges" block above.
 function PublicReputationWidgetBlock() {
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={320}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.panel}>
       <Flex alignItems="center" gap={3}>
         <Text weight="bold" size="600">4.9</Text>
         <Box>
@@ -1873,7 +1873,7 @@ function PublicReputationWidgetBlock() {
 // styleguide #ml-band — Band Card
 function BandCardBlock() {
   return (
-    <Box borderStyle="sm" rounding={4} padding={4} maxWidth={340}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.card}>
       <Flex justifyContent="between" alignItems="start">
         <Box>
           <Text weight="bold" size="300">The Local Train</Text>
@@ -1900,7 +1900,7 @@ function BandCardBlock() {
 // styleguide #vd-greeting — Greeting Block
 function GreetingBlock() {
   return (
-    <Box maxWidth={360}>
+    <Box maxWidth={W.screen}>
       <Heading size="400">Welcome back, Ananya 👋</Heading>
       <Box marginTop={1}><Text color="subtle">You have 3 new gig proposals</Text></Box>
     </Box>
@@ -1910,7 +1910,7 @@ function GreetingBlock() {
 // styleguide #pf-stats — Profile Stats
 function ProfileStatsBlock() {
   return (
-    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={340}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.card}>
       <Flex justifyContent="between">
         {[["12.4k","Followers"],["42","Credits"],["4.9 ★","Rating"]].map(([v,l]) => (
           <Box key={l}><Text weight="bold" size="300" align="center">{v}</Text><Text size="100" color="subtle" align="center">{l}</Text></Box>
@@ -1924,7 +1924,7 @@ function ProfileStatsBlock() {
 function FeaturedArtistsBlock() {
   const people = [{ n: "Ananya", r: "Vocalist" }, { n: "Rahul", r: "Producer" }, { n: "Mei", r: "Mix engineer" }];
   return (
-    <Box maxWidth={360}>
+    <Box maxWidth={W.screen}>
       <Box marginBottom={2}><Text weight="bold">Featured artists</Text></Box>
       <Flex gap={4}>
         {people.map((p) => (
@@ -1966,7 +1966,7 @@ function InsightsBlock() {
     { l: "Response time", v: "2.4h", d: "flat" },
   ];
   return (
-    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={320}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.panel}>
       <Box marginBottom={2}><Text weight="bold">This week</Text></Box>
       <Flex direction="column" gap={2}>
         {rows.map((r) => (
@@ -1991,7 +1991,7 @@ function WorkspaceCardBlock() {
     { n: "Safar OST", s: "Pending", t: "neutral" },
   ];
   return (
-    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={320}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.panel}>
       <Flex justifyContent="between" alignItems="center">
         <Text weight="bold">Active projects</Text>
         <Badge text="3 active" type="neutral" />
@@ -2043,7 +2043,7 @@ function TalentRoleVariantsBlock() {
     { icon: "audio-mix" as const, t: "DJ/Performer", d: "Deck setup · Residencies" },
   ];
   return (
-    <Box maxWidth={360}>
+    <Box maxWidth={W.screen}>
       <Box marginBottom={2}><Text weight="bold">Talent role variants</Text></Box>
       <Flex direction="column" gap={2}>
         {roles.map((r) => (
@@ -2069,12 +2069,12 @@ function VenueProfileFlowBlock() {
     { icon: "clipboard" as const, t: "Booking" },
   ];
   return (
-    <Box maxWidth={360}>
+    <Box maxWidth={W.screen}>
       <Box marginBottom={2}><Text weight="bold">Venue profile flow</Text></Box>
       <Flex gap={2} alignItems="center" wrap>
         {steps.map((s, i) => (
           <Flex key={s.t} gap={2} alignItems="center">
-            <Box borderStyle="sm" rounding={2} padding={2}>
+            <Box borderStyle="sm" rounding={2} padding={3}>
               <Flex direction="column" alignItems="center" gap={1}>
                 <Icon icon={s.icon} accessibilityLabel="" size={16} />
                 <Text size="100">{s.t}</Text>
@@ -2110,6 +2110,31 @@ const COVERS = {
   D: IMG.vocalist, E: IMG.mic, F: IMG.controller,
 } as const;
 
+
+// ===== Block sizing + shape scale =====
+// Blocks had drifted to ELEVEN different maxWidth values and EIGHT
+// rounding/padding pairings. Nothing was individually wrong; collectively it
+// meant two cards sitting side by side in the same grid disagreed about how
+// wide a card is and how round a corner is, which is exactly the drift a
+// design system exists to prevent.
+//
+// Five width tiers, chosen from what the blocks were already clustering
+// around rather than invented:
+const W = {
+  screen: 360,   // a full mobile screen surface (auth, wizards, feeds)
+  card: 340,     // the standard card - the most common width by a wide margin
+  panel: 320,    // a narrower panel or sheet
+  compact: 300,  // compact card, sits two-up comfortably
+  tile: 220,     // a tile in a horizontal rail
+} as const;
+
+// Three shape tiers. Radius and padding move together: a bigger surface gets
+// a bigger radius AND more air, so they are defined as pairs rather than
+// left to be combined freely.
+//   surface  rounding 4 / padding 5  - a standalone card or sheet
+//   inner    rounding 3 / padding 4  - a card nested inside another surface
+//   tile     rounding 2 / padding 3  - a chip, row or dense tile
+
 // ===== Premium card + interactive blocks, 2026-08-16 =====
 // Added after review of reference UI the user supplied (image-led travel and
 // product cards, and an onboarding wizard). These are the MusicLinkd
@@ -2141,7 +2166,7 @@ function OnboardingWizardBlock() {
   }
 
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={360}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.screen}>
       <Flex justifyContent="between" alignItems="center">
         <Text size="100" color="subtle">Step {step + 1} of {steps.length}</Text>
         <Badge text={cur.title} type="info" />
@@ -2205,7 +2230,7 @@ function OnboardingWizardBlock() {
 function DiscoveryHeroCardBlock() {
   const [saved, setSaved] = useState(false);
   return (
-    <Box maxWidth={300}>
+    <Box maxWidth={W.compact}>
       <Box position="relative" rounding={4} overflow="hidden">
         <Image alt="Yash Raj Sound Studios, Mumbai"
           src={IMG.studio}
@@ -2244,7 +2269,7 @@ function DiscoveryHeroCardBlock() {
 // title/subtitle/description stack, then a price + CTA row.
 function ProductCardBlock() {
   return (
-    <Box borderStyle="sm" rounding={4} overflow="hidden" maxWidth={300}>
+    <Box borderStyle="sm" rounding={4} overflow="hidden" maxWidth={W.compact}>
       <Box position="relative">
         <Image alt="Neumann U87 microphone" src={IMG.mic}
           naturalWidth={300} naturalHeight={240} />
@@ -2276,7 +2301,7 @@ function DiscoveryHeaderBlock() {
   const [active, setActive] = useState("All");
   const [q, setQ] = useState("");
   return (
-    <Box maxWidth={360}>
+    <Box maxWidth={W.screen}>
       <Flex justifyContent="between" alignItems="center">
         <Box>
           <Heading size="400">Hello, Ananya</Heading>
@@ -2322,7 +2347,7 @@ function DiscoveryHeaderBlock() {
 // RecommendedCollaboratorCard — AI match card (match %, synergy reasons)
 function RecommendedCollaboratorBlock() {
   return (
-    <Box borderStyle="sm" rounding={4} padding={4} maxWidth={320}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.panel}>
       <Flex gap={3} alignItems="start">
         <Avatar name="Mei Tanaka" size="lg" />
         <Box flex="grow">
@@ -2363,7 +2388,7 @@ function DiscoverySearchResultBlock() {
     { n: "Session vocalist for EP", c: "Opportunity", d: "₹15,000 · Mumbai", m: "12 applied" },
   ];
   return (
-    <Box borderStyle="sm" rounding={3} maxWidth={360} overflow="hidden">
+    <Box borderStyle="sm" rounding={3} maxWidth={W.screen} overflow="hidden">
       {rows.map((r, i) => (
         <Box key={r.n} padding={3} borderStyle={i > 0 ? "shadow" : "none"}>
           <Flex gap={3} alignItems="center">
@@ -2386,7 +2411,7 @@ function DiscoverySearchResultBlock() {
 // ProfilePreviewSheet — quick-look sheet before opening a full profile
 function ProfilePreviewSheetBlock() {
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={330}
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.panel}
       dangerouslySetInlineStyle={{ __style: { borderTopLeftRadius: 28, borderTopRightRadius: 28 } }}>
       <Box marginBottom={3} display="flex" justifyContent="center">
         <Box width={40} height={4} rounding="pill" color="secondary" />
@@ -2410,7 +2435,7 @@ function ProfilePreviewSheetBlock() {
 function NetworkingFeedBlock() {
   const [liked, setLiked] = useState(false);
   return (
-    <Box borderStyle="sm" rounding={4} maxWidth={340} overflow="hidden">
+    <Box borderStyle="sm" rounding={4} maxWidth={W.card} overflow="hidden">
       <Box padding={3}>
         <Flex gap={2} alignItems="center">
           <Avatar name="Ravi Nair" size="sm" />
@@ -2445,7 +2470,7 @@ function BandMembersBlock() {
     { n: "Sahil Sarin", r: "Drums", lead: false },
   ];
   return (
-    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={320}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.panel}>
       <Box marginBottom={3}><Text weight="bold">Band members</Text></Box>
       <Flex direction="column" gap={3}>
         {members.map((m) => (
@@ -2467,10 +2492,10 @@ function StudioVenueListItemBlock() {
     { n: "Bloom Studio A", l: "Bandra, Mumbai", r: "4.6", p: "₹2,500/hr", atmos: false },
   ];
   return (
-    <Box maxWidth={360}>
+    <Box maxWidth={W.screen}>
       <Flex direction="column" gap={2}>
         {rows.map((s) => (
-          <Box key={s.n} borderStyle="sm" rounding={2} padding={2}>
+          <Box key={s.n} borderStyle="sm" rounding={2} padding={3}>
             <Flex gap={3} alignItems="center">
               <Box width={56} height={56} rounding={2} overflow="hidden">
                 <Image alt={s.n} src={IMG.studio} naturalWidth={56} naturalHeight={56} />
@@ -2505,7 +2530,7 @@ function StudioSpecBlock() {
     ["Format", "Dolby Atmos 7.1.4"],
   ];
   return (
-    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={340}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.card}>
       <Box marginBottom={3}><Text weight="bold">Technical specification</Text></Box>
       <Flex direction="column" gap={2}>
         {specs.map(([k, v]) => (
@@ -2522,7 +2547,7 @@ function StudioSpecBlock() {
 // RecentProjectCard — compact dashboard portfolio row with edit action
 function RecentProjectBlock() {
   return (
-    <Box borderStyle="sm" rounding={3} padding={3} maxWidth={340}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.card}>
       <Flex gap={3} alignItems="center">
         <Box width={52} height={52} rounding={2} overflow="hidden">
           <Image alt="Artwork" src={IMG.mixing} naturalWidth={52} naturalHeight={52} />
@@ -2548,7 +2573,7 @@ function WaveformPlayerBlock() {
   const [pos, setPos] = useState(38);
   const bars = Array.from({ length: 44 }, (_, i) => 12 + Math.round(22 * Math.abs(Math.sin(i * 0.7))));
   return (
-    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={340}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.card}>
       <Flex gap={3} alignItems="center">
         <IconButton icon={playing ? "pause" : "play"} accessibilityLabel={playing ? "Pause" : "Play"}
           bgColor="red" iconColor="white" size="lg" onClick={() => setPlaying((p) => !p)} />
@@ -2577,7 +2602,7 @@ function HireContactBlock() {
   const [scope, setScope] = useState("session");
   const [budget, setBudget] = useState("");
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={340}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.card}>
       <Heading size="400">Hire Arijit Sen</Heading>
       <Box marginTop={3}>
         <Flex direction="column" gap={3}>
@@ -2604,7 +2629,7 @@ function AdvancedFiltersBlock() {
   const [cats, setCats] = useState<string[]>(["Studios"]);
   const toggle = (c: string) => setCats((p) => (p.includes(c) ? p.filter((x) => x !== c) : [...p, c]));
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={330}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.panel}>
       <Flex justifyContent="between" alignItems="center">
         <Text weight="bold">Filters</Text>
         <Button text="Reset" color="transparent" size="sm" />
@@ -2652,7 +2677,7 @@ function ArtistPlaylistBlock() {
   ];
   const [nowPlaying, setNowPlaying] = useState(0);
   return (
-    <Box maxWidth={340}>
+    <Box maxWidth={W.card}>
       {/* Featured card: full-bleed art, gradient scrim, bold name over it. */}
       <Box position="relative" rounding={4} overflow="hidden" marginBottom={4}>
         <Image alt="Arijit Sen" src={IMG.vocalist} naturalWidth={340} naturalHeight={220} />
@@ -2728,7 +2753,7 @@ function ProjectCardBlock() {
     { n: "Ravi Nair", r: "Producer", v: false },
   ];
   return (
-    <Box borderStyle="sm" rounding={4} overflow="hidden" maxWidth={340}>
+    <Box borderStyle="sm" rounding={4} overflow="hidden" maxWidth={W.card}>
       <Box position="relative">
         <Image alt="Dil Ki Raah artwork" src={IMG.mixing} naturalWidth={340} naturalHeight={170} />
         <Box position="absolute" top right padding={3}><Badge text="Released" type="success" /></Box>
@@ -2765,7 +2790,7 @@ function StemMixerBlock() {
   const [muted, setMuted] = useState<string[]>([]);
   const toggle = (n: string) => setMuted((p) => (p.includes(n) ? p.filter((x) => x !== n) : [...p, n]));
   return (
-    <Box borderStyle="sm" rounding={4} padding={4} maxWidth={340}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.card}>
       <Text weight="bold">Neon Horizon — Mix Pass v3</Text>
       <Text size="100" color="subtle">128 BPM · F#m · 24-bit/48kHz</Text>
       <Box marginTop={4}>
@@ -2799,7 +2824,7 @@ function BriefWizardBlock() {
   const steps = ["Role", "Genre", "Budget", "Dates", "Location", "Skills", "Refs", "Review"];
   const [i, setI] = useState(2);
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={360}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.screen}>
       <Text size="100" color="subtle">Casting brief · step {i + 1} of {steps.length}</Text>
       {/* Step dots double as the progress indicator and as jump targets. */}
       <Box marginTop={3} marginBottom={4}>
@@ -2844,7 +2869,7 @@ function TexturesBlock() {
     { n: "Noise", css: { background: "#F1F5F9", backgroundImage: "repeating-linear-gradient(45deg, rgba(13,13,13,0.045) 0 1px, transparent 1px 3px)" } },
   ];
   return (
-    <Box maxWidth={340}>
+    <Box maxWidth={W.card}>
       <Flex gap={2} wrap>
         {fx.map((f) => (
           <Box key={f.n} width={104}>
@@ -2899,7 +2924,7 @@ function LogoMark({ size = 64, tone = "brand" }: { size?: number; tone?: "brand"
 function SplashBlock() {
   const [state, setState] = useState<"loading" | "resuming_local_session">("loading");
   return (
-    <Box maxWidth={300}>
+    <Box maxWidth={W.compact}>
       <Box rounding={4} overflow="hidden" height={400} position="relative"
         dangerouslySetInlineStyle={{ __style: { background: "#0D0D0D" } }}>
         <Box position="absolute" top left right bottom display="flex"
@@ -2933,7 +2958,7 @@ function SplashBlock() {
 function AppIconSetBlock() {
   const sizes = [{ s: 96, l: "512 / store" }, { s: 64, l: "192 / launcher" }, { s: 44, l: "96 / notification" }, { s: 28, l: "48 / favicon" }];
   return (
-    <Box maxWidth={340}>
+    <Box maxWidth={W.card}>
       <Box marginBottom={3}><Text weight="bold">App icon</Text></Box>
       <Flex gap={4} alignItems="end" wrap>
         {sizes.map((z) => (
@@ -2969,7 +2994,7 @@ function AppIconSetBlock() {
 // Welcome / sign-in entry — real screen auth/welcome + google_signin.
 function AuthWelcomeBlock() {
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={320}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.panel}>
       <Flex direction="column" alignItems="center" gap={3}>
         <LogoMark size={56} />
         <Heading size="400">Welcome to MusicLinkd</Heading>
@@ -2999,7 +3024,7 @@ function OtpVerificationBlock() {
   const digits = state === "entering" ? ["4", "8", "2", "", "", ""] : ["4", "8", "2", "9", "1", "7"];
   const border = state === "error" ? "#DC2626" : state === "success" ? "#22C55E" : "#ECECF1";
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={320}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.panel}>
       <Heading size="400">Verify your number</Heading>
       <Box marginTop={1} marginBottom={4}><Text size="100" color="subtle">Code sent to +91 98••• ••210</Text></Box>
       <Flex gap={2} justifyContent="center">
@@ -3032,7 +3057,7 @@ function EmailAuthBlock() {
   const [pw, setPw] = useState("");
   const bad = email.length > 0 && !email.includes("@");
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={320}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.panel}>
       <SegmentedControl items={["Sign up", "Sign in"]} selectedItemIndex={mode === "signup" ? 0 : 1}
         onChange={({ activeIndex }) => setMode(activeIndex === 0 ? "signup" : "signin")} />
       <Box marginTop={4}>
@@ -3068,7 +3093,7 @@ function ReplayRecapBlock() {
   const [m, setM] = useState(2);
   const mins = [2139, 1704, 1362, 980, 1518];
   return (
-    <Box maxWidth={340} rounding={4} overflow="hidden" borderStyle="sm">
+    <Box maxWidth={W.card} rounding={4} overflow="hidden" borderStyle="sm">
       {/* Warm wash bleeding from the top edge — the signature of this family. */}
       <Box padding={5}
         dangerouslySetInlineStyle={{ __style: {
@@ -3110,7 +3135,7 @@ function RankedArtistsBlock() {
     { r: 3, n: "Ravi Nair", m: 312, img: IMG.mixing },
   ];
   return (
-    <Box maxWidth={340}>
+    <Box maxWidth={W.card}>
       <Box marginBottom={3}>
         <Flex gap={1} alignItems="center">
           <Heading size="400">Your top artists</Heading>
@@ -3145,7 +3170,7 @@ function RankedArtistsBlock() {
 // act, not an apology: it says what to do next and why it's low-stakes.
 function IllustratedEmptyStateBlock() {
   return (
-    <Box maxWidth={300} rounding={4} overflow="hidden" borderStyle="sm">
+    <Box maxWidth={W.compact} rounding={4} overflow="hidden" borderStyle="sm">
       <Box padding={5}
         dangerouslySetInlineStyle={{ __style: {
           background: "linear-gradient(170deg,#FFFFFF 0%,#FBE3DC 42%,#E9B7C6 100%)" } }}>
@@ -3186,7 +3211,7 @@ function AvatarClusterBlock() {
   const imgs = [IMG.vocalist, IMG.dj, IMG.mixing, IMG.studio, IMG.mic, IMG.controller];
   const tiles = [...imgs, ...imgs].slice(0, 11);
   return (
-    <Box maxWidth={320}>
+    <Box maxWidth={W.panel}>
       <Box display="flex" justifyContent="center">
         <Flex gap={2} wrap justifyContent="center">
           {tiles.map((src, i) => {
@@ -3217,7 +3242,7 @@ function AvatarClusterBlock() {
 // Shareable stat card — dark, editorial, one gold-accented fact.
 function ShareStatCardBlock() {
   return (
-    <Box maxWidth={300} rounding={4} overflow="hidden">
+    <Box maxWidth={W.compact} rounding={4} overflow="hidden">
       <Box padding={6}
         dangerouslySetInlineStyle={{ __style: {
           background: "radial-gradient(circle at 50% 12%, #4A4327 0%, #2A2718 55%, #1A1810 100%)",
@@ -3256,7 +3281,7 @@ function ShareStatCardBlock() {
 function MiniPlayerBlock() {
   const [playing, setPlaying] = useState(true);
   return (
-    <Box maxWidth={340} rounding="pill" padding={2} borderStyle="sm"
+    <Box maxWidth={W.card} rounding="pill" padding={2} borderStyle="sm"
       dangerouslySetInlineStyle={{ __style: {
         background: "rgba(255,255,255,0.86)",
         backdropFilter: "blur(12px)",
@@ -3302,7 +3327,7 @@ function SwipeDeckBlock() {
   const done = i >= deck.length;
 
   return (
-    <Box maxWidth={280}>
+    <Box maxWidth={W.compact}>
       <Box position="relative" height={330}>
         {done ? (
           <Box borderStyle="sm" rounding={4} height={330} display="flex"
@@ -3381,7 +3406,7 @@ function SkeletonLoaderBlock() {
     animation: "mlShimmer 1.4s linear infinite",
   };
   return (
-    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={340}>
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.card}>
       {/* Keyframes are injected once here rather than in styles.css so this
           block stays self-contained and copyable. */}
       <style>{"@keyframes mlShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}@media (prefers-reduced-motion: reduce){[data-ml-skeleton]{animation:none!important}}"}</style>
@@ -3408,7 +3433,7 @@ function SkeletonLoaderBlock() {
 function ConnectionStatesBlock() {
   const [online, setOnline] = useState(false);
   return (
-    <Box maxWidth={340}>
+    <Box maxWidth={W.card}>
       <Flex direction="column" gap={3}>
         {!online && (
           <BannerSlim type="warning" iconAccessibilityLabel="Offline"
@@ -3445,7 +3470,7 @@ function AudioPodcastDemoBlock() {
   const [playing, setPlaying] = useState(false);
   const bars = Array.from({ length: 28 }, (_, i) => 6 + Math.round(14 * Math.abs(Math.cos(i * 0.55))));
   return (
-    <Box borderStyle="sm" rounding={3} padding={3} maxWidth={300} color="secondary">
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={W.compact} color="secondary">
       <Flex gap={3} alignItems="center">
         <IconButton icon={playing ? "pause" : "play"} accessibilityLabel={playing ? "Pause" : "Play"}
           bgColor="red" iconColor="white" size="md" onClick={() => setPlaying((p) => !p)} />
@@ -3471,9 +3496,9 @@ function AudioPodcastDemoBlock() {
 // share buttons as UI-only fakes (showSnackbar, no real intent fired).
 function WhatsAppShareBlock() {
   return (
-    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={320}>
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={W.panel}>
       <Text weight="bold">Share this profile</Text>
-      <Box marginTop={3} marginBottom={3} borderStyle="sm" rounding={3} padding={3}>
+      <Box marginTop={3} marginBottom={3} borderStyle="sm" rounding={3} padding={4}>
         <Flex gap={3} alignItems="center">
           <Box width={48} height={48} rounding={2} overflow="hidden">
             <Image alt="" src={IMG.vocalist} naturalWidth={48} naturalHeight={48} />
@@ -3505,7 +3530,7 @@ function WhatsAppShareBlock() {
 // HomeFeatureCard — hero featured slot on the main feed.
 function HomeFeatureCardBlock() {
   return (
-    <Box maxWidth={340} rounding={4} overflow="hidden" position="relative">
+    <Box maxWidth={W.card} rounding={4} overflow="hidden" position="relative">
       <Image alt="Featured studio" src={IMG.studio} naturalWidth={340} naturalHeight={240} />
       <Box position="absolute" top left padding={3}>
         <Badge text="Featured" type="darkWash" />
@@ -3533,7 +3558,7 @@ function HomeFeatureCardBlock() {
 function DarkProductCardBlock() {
   const [inCart, setInCart] = useState(false);
   return (
-    <Box maxWidth={240} rounding={4} overflow="hidden"
+    <Box maxWidth={W.tile} rounding={4} overflow="hidden"
       dangerouslySetInlineStyle={{ __style: { background: "#141414" } }}>
       <Box margin={3} rounding={3} overflow="hidden" position="relative">
         <Image alt="Neumann U87" src={IMG.mic} naturalWidth={216} naturalHeight={170} />
@@ -3602,7 +3627,7 @@ function OrbitClusterBlock() {
   ];
   const imgs = [IMG.vocalist, IMG.dj, IMG.mixing, IMG.studio, IMG.mic, IMG.controller, IMG.vocalist, IMG.dj];
   return (
-    <Box maxWidth={300}>
+    <Box maxWidth={W.compact}>
       <Box position="relative" height={260}>
         {orbit.map((o, i) => (
           <Box key={i} position="absolute" width={o.s} height={o.s} overflow="hidden"
@@ -3652,7 +3677,7 @@ function TimelineBlock() {
   ];
   const dot = { done: "#22C55E", current: "var(--ml-accent)", todo: "transparent" };
   return (
-    <Box maxWidth={320}>
+    <Box maxWidth={W.panel}>
       {rows.map((r, i) => (
         <Flex key={r.t} gap={3}>
           <Flex direction="column" alignItems="center">
@@ -3678,7 +3703,7 @@ function TimelineBlock() {
 function UploadDropzoneBlock() {
   const [pct, setPct] = useState(62);
   return (
-    <Box maxWidth={320}>
+    <Box maxWidth={W.panel}>
       <Box padding={5} rounding={3}
         dangerouslySetInlineStyle={{ __style: {
           border: "2px dashed #E9E9E9", background: "#FAFAFB", textAlign: "center" } }}>
@@ -3720,7 +3745,7 @@ function ProgressBar({ pct, tone = "accent" }: { pct: number; tone?: "accent" | 
 
 function ProgressBarBlock() {
   return (
-    <Box maxWidth={300}>
+    <Box maxWidth={W.compact}>
       <Flex direction="column" gap={4}>
         {[["Profile completeness", 78], ["Upload", 34], ["Verification", 100]].map(([l, v]) => (
           <Box key={l as string}>
@@ -3742,7 +3767,7 @@ function SliderDatePickerBlock() {
   const [rate, setRate] = useState(8000);
   const [date, setDate] = useState("2026-08-12");
   return (
-    <Box maxWidth={300}>
+    <Box maxWidth={W.compact}>
       <Flex justifyContent="between">
         <Text size="100" color="subtle">Max rate</Text>
         <Text size="100" weight="bold">₹{rate.toLocaleString("en-IN")}/hr</Text>
@@ -3992,7 +4017,7 @@ function NotBuiltRegistry() {
           <Box marginBottom={3}><Text size="100" color="subtle">{g.reason}</Text></Box>
           <Flex gap={2} wrap>
             {g.items.map((item) => (
-              <Box key={item} borderStyle="sm" rounding={2} padding={2} color="default">
+              <Box key={item} borderStyle="sm" rounding={2} padding={3} color="default">
                 <Text size="100">{item}</Text>
               </Box>
             ))}

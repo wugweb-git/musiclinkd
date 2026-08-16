@@ -42102,7 +42102,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function SideNavigationDemo() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxHeight: 220, overflow: "scroll", maxWidth: 220, borderStyle: "sm", rounding: 2, padding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(SideNavigation, { accessibilityLabel: "MusicLinkd navigation example", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxHeight: 220, overflow: "scroll", maxWidth: W.tile, borderStyle: "sm", rounding: 2, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(SideNavigation, { accessibilityLabel: "MusicLinkd navigation example", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(SideNavigation.Section, { label: "Library", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Releases", active: "page" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Playlists" })
@@ -42114,7 +42114,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] }) });
   }
   function StickyDemo() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { color: "default", height: 140, maxWidth: 220, overflow: "scroll", tabIndex: 0, borderStyle: "sm", rounding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { height: 360, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { color: "default", height: 140, maxWidth: W.tile, overflow: "scroll", tabIndex: 0, borderStyle: "sm", rounding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { height: 360, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Sticky, { top: 0, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { alignItems: "center", color: "infoWeak", display: "flex", height: 32, padding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: "Sticks on scroll" }) }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { padding: 2, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: "Scroll down\u2026" }),
@@ -42239,7 +42239,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   function ArtistProfileBlock() {
     const [following, setFollowing] = (0, import_react2.useState)(false);
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 360, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.screen, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: "Mei Tanaka", size: "lg" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { flex: "grow", children: [
@@ -42266,7 +42266,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   function TrackRowBlock() {
     const [playing, setPlaying] = (0, import_react2.useState)(false);
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, maxWidth: 420, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: 420, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconButtonWithForwardRef, { icon: playing ? "pause" : "play", accessibilityLabel: playing ? "Pause" : "Play", onClick: () => setPlaying((p) => !p), bgColor: "red", iconColor: "white" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { flex: "grow", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Neon Tide" }),
@@ -42279,7 +42279,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     const [title, setTitle] = (0, import_react2.useState)("");
     const [genre, setGenre] = (0, import_react2.useState)("pop");
     const [explicit, setExplicit] = (0, import_react2.useState)(false);
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 360, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.screen, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", children: "Upload a release" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", gap: 3, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextFieldWithForwardRef, { id: "block-upload-title", label: "Track title", value: title, onChange: ({ value }) => setTitle(value) }),
@@ -42302,7 +42302,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function EmptyStateBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 6, maxWidth: 360, display: "flex", direction: "column", alignItems: "center", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 6, maxWidth: W.screen, display: "flex", direction: "column", alignItems: "center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "music-on", accessibilityLabel: "", size: 32, color: "subtle" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, marginBottom: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", align: "center", children: "No tracks yet" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { align: "center", color: "subtle", children: "Upload your first release to start building your catalog." }) }),
@@ -42319,9 +42319,9 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   function NavHeaderBlock() {
     const [value, setValue] = (0, import_react2.useState)("");
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "MusicLinkd" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { flex: "grow", maxWidth: 260, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SearchFieldWithForwardRef, { id: "block-nav-search", accessibilityLabel: "Search", placeholder: "Search artists, tracks\u2026", value, onChange: ({ value: value2 }) => setValue(value2) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { flex: "grow", maxWidth: W.compact, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SearchFieldWithForwardRef, { id: "block-nav-search", accessibilityLabel: "Search", placeholder: "Search artists, tracks\u2026", value, onChange: ({ value: value2 }) => setValue(value2) }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconButtonWithForwardRef, { icon: "bell", accessibilityLabel: "Notifications" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: "Vedanshu K", size: "sm" })
     ] }) });
@@ -42364,7 +42364,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { key: "profile", label: "Profile", icon: "person", iconActive: "person-fill" }
     ];
     const [active, setActive] = (0, import_react2.useState)("home");
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 360, borderStyle: "sm", rounding: 4, overflow: "hidden", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.screen, borderStyle: "sm", rounding: 4, overflow: "hidden", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { padding: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Screen content sits above the bar \u2014 tap an item below." }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", padding: 1, display: "flex", justifyContent: "around", children: items.map((item) => {
         const isActive = active === item.key;
@@ -42412,7 +42412,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { icon: "gauge", title: "Engagement rate", value: "6.4%", trend: -2 },
       { icon: "rocketship", title: "Profile views", value: "9,120", trend: 18 }
     ];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "ml-comp-grid", children: metrics.map((m) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "ml-comp-grid", children: metrics.map((m) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: m.icon, accessibilityLabel: "", color: "subtle" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: m.title })
@@ -42486,7 +42486,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function TestimonialBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 360, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.screen, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 1, children: [
         [0, 1, 2, 3].map((i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "star", accessibilityLabel: "", color: "warning", size: 16 }, i)),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "star-half", accessibilityLabel: "4.5 out of 5 stars", color: "warning", size: 16 })
@@ -42517,7 +42517,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] }, p.name)) });
   }
   function BookingSummaryBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Booking summary" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Status, { type: "ok", title: "Confirmed" })
@@ -42563,7 +42563,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { time: "14:00", status: "available" }
     ];
     const statusColor = { available: "successWeak", booked: "errorWeak", pending: "warningWeak" };
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 3, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Availability" }) }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SegmentedControl, { items: ["monthly", "weekly", "timeline"], selectedItemIndex: ["monthly", "weekly", "timeline"].indexOf(view), onChange: ({ activeIndex }) => setView(["monthly", "weekly", "timeline"][activeIndex]) })
@@ -42585,7 +42585,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { from: "them", text: "Perfect, thanks \u{1F64F}" }
     ];
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, wrap: true, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, width: 160, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, width: 160, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: "Threads" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: threads2.map((t) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
           /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: t.name, size: "sm" }),
@@ -42595,7 +42595,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
           ] })
         ] }, t.name)) }) })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, width: 200, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: messages.map((m, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { alignSelf: m.from === "me" ? "end" : "start", maxWidth: 160, rounding: 3, paddingX: 2, paddingY: 1, color: m.from === "me" ? "infoWeak" : "secondary", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: m.text }) }, i)) }) })
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, width: 200, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: messages.map((m, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { alignSelf: m.from === "me" ? "end" : "start", maxWidth: 160, rounding: 3, paddingX: 2, paddingY: 1, color: m.from === "me" ? "infoWeak" : "secondary", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: m.text }) }, i)) }) })
     ] });
   }
   function RatingBreakdownBlock() {
@@ -42604,7 +42604,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { label: "Punctuality", value: 4.6 },
       { label: "Sound quality", value: 4.9 }
     ];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 300, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.compact, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "600", children: "4.8" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
@@ -42625,7 +42625,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   function WriteReviewBlock() {
     const [rating, setRating] = (0, import_react2.useState)(0);
     const [comment, setComment] = (0, import_react2.useState)("");
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 320, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.panel, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Rate your session" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 1, children: [1, 2, 3, 4, 5].map((n) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TapAreaWithForwardRef, { onTap: () => setRating(n), accessibilityLabel: `${n} stars`, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: n <= rating ? "star" : "star-outline", accessibilityLabel: "", color: n <= rating ? "warning" : "subtle", size: 22 }) }, n)) }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextAreaWithForwardRef, { id: "block-write-review", placeholder: "How was the session?", value: comment, onChange: ({ value }) => setComment(value) }),
@@ -42634,7 +42634,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function SuccessStateBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 6, maxWidth: 300, display: "flex", direction: "column", alignItems: "center", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 6, maxWidth: W.compact, display: "flex", direction: "column", alignItems: "center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { color: "successWeak", rounding: "circle", padding: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "check-circle-fill", accessibilityLabel: "", color: "success", size: 32 }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, marginBottom: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", align: "center", children: "Booking confirmed" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { align: "center", color: "subtle", children: "You're all set for Aug 12 at Yash Raj Sound Studios." }),
@@ -42643,7 +42643,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function QrShareBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 280, display: "flex", direction: "column", alignItems: "center", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.compact, display: "flex", direction: "column", alignItems: "center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "UI only \u2014 backend missing", type: "warning" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, marginBottom: 3, padding: 3, borderStyle: "sm", rounding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "qr-code", accessibilityLabel: "QR code", size: 96 }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", align: "center", children: "Share your Comp Card" }),
@@ -42658,7 +42658,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { name: "Mei Tanaka", role: "Mix engineer" },
       { name: "Ava Chen", role: "Vocalist" }
     ];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 300, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.compact, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Credits" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: credits.map((c) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", justifyContent: "between", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
@@ -42674,7 +42674,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   function SectionTabsBlock() {
     const tabs = ["Overview", "Services", "Team & Works", "Reviews & Gallery"];
     const [active, setActive] = (0, import_react2.useState)(0);
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 2, maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { overflow: "scrollX", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
         Tabs,
         {
@@ -42703,7 +42703,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       n.has(id) ? n.delete(id) : n.add(id);
       return n;
     });
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, maxWidth: 420, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: 420, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(Table, { accessibilityLabel: "Admin users table", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Table.Header, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(Table.Row, { children: [
           /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Table.HeaderCell, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "100", children: " " }) }),
@@ -42755,7 +42755,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function AdminSidebarBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxHeight: 240, overflow: "scroll", maxWidth: 220, borderStyle: "sm", rounding: 2, padding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(SideNavigation, { accessibilityLabel: "Admin navigation", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxHeight: 240, overflow: "scroll", maxWidth: W.tile, borderStyle: "sm", rounding: 2, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(SideNavigation, { accessibilityLabel: "Admin navigation", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Dashboard", icon: "gauge", active: "page" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Users", icon: "person" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Bookings", icon: "calendar" }),
@@ -42768,10 +42768,10 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   function AdminTopBarBlock() {
     const [query, setQuery] = (0, import_react2.useState)("");
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Admin" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "v5.5", type: "neutral" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { flex: "grow", maxWidth: 220, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SearchFieldWithForwardRef, { id: "block-admin-search", accessibilityLabel: "Search admin", placeholder: "Search users, bookings\u2026", value: query, onChange: ({ value }) => setQuery(value) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { flex: "grow", maxWidth: W.tile, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SearchFieldWithForwardRef, { id: "block-admin-search", accessibilityLabel: "Search admin", placeholder: "Search users, bookings\u2026", value: query, onChange: ({ value }) => setQuery(value) }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconButtonWithForwardRef, { icon: "bell", accessibilityLabel: "Notifications", size: "sm" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconButtonWithForwardRef, { icon: "cog", accessibilityLabel: "Settings", size: "sm" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: "Admin User", size: "sm" })
@@ -42793,7 +42793,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     "Admin"
   ];
   function PublicProfileVenueBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 360, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.screen, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconButtonWithForwardRef, { icon: "arrow-back", accessibilityLabel: "Back", size: "sm" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconButtonWithForwardRef, { icon: "share", accessibilityLabel: "Share", size: "sm" })
@@ -42841,7 +42841,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function TrackCardBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, maxWidth: 220, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.tile, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { rounding: 2, overflow: "hidden", marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Track artwork", src: IMG.mixing, naturalWidth: 220, naturalHeight: 220 }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "100", children: "Neon Tide" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Mei Tanaka \xB7 3:42" }),
@@ -42856,7 +42856,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function StudioCardBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, maxWidth: 260, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.compact, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { rounding: 2, overflow: "hidden", marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Studio room", src: IMG.controller, naturalWidth: 260, naturalHeight: 150 }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "start", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "200", children: "Bloom Studio A" }),
@@ -42876,7 +42876,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function FeaturedStudioCardBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, overflow: "hidden", maxWidth: 360, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, overflow: "hidden", maxWidth: W.screen, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Featured studio", src: IMG.dj, naturalWidth: 360, naturalHeight: 180 }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { padding: 4, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "300", children: "Yash Raj Sound Studios" }),
@@ -42889,7 +42889,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function MarketplaceCardBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, maxWidth: 220, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.tile, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { rounding: 2, overflow: "hidden", marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Gear photo", src: IMG.mic, naturalWidth: 220, naturalHeight: 160 }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "start", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "100", children: "Neumann U87 Mic" }),
@@ -42903,7 +42903,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function OpportunityCardBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "start", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Session vocalist for indie EP" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Tag, { text: "\u20B915,000 budget" })
@@ -42927,7 +42927,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function ReviewCardBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: "Priya Menon", size: "sm" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
@@ -42966,7 +42966,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] }) }, i)) });
   }
   function PublicReputationWidgetBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 320, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.panel, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { alignItems: "center", gap: 3, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "600", children: "4.9" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
@@ -42988,7 +42988,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function BandCardBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 4, maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "start", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
           /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "300", children: "The Local Train" }),
@@ -43015,20 +43015,20 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function GreetingBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 360, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.screen, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: "Welcome back, Ananya \u{1F44B}" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { color: "subtle", children: "You have 3 new gig proposals" }) })
     ] });
   }
   function ProfileStatsBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: 340, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { justifyContent: "between", children: [["12.4k", "Followers"], ["42", "Credits"], ["4.9 \u2605", "Rating"]].map(([v, l]) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.card, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { justifyContent: "between", children: [["12.4k", "Followers"], ["42", "Credits"], ["4.9 \u2605", "Rating"]].map(([v, l]) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "300", align: "center", children: v }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", align: "center", children: l })
     ] }, l)) }) });
   }
   function FeaturedArtistsBlock() {
     const people2 = [{ n: "Ananya", r: "Vocalist" }, { n: "Rahul", r: "Producer" }, { n: "Mei", r: "Mix engineer" }];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 360, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.screen, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Featured artists" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 4, children: people2.map((p) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 1, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: p.n, size: "md" }),
@@ -43052,7 +43052,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { l: "Hire requests", v: "12", d: "up" },
       { l: "Response time", v: "2.4h", d: "flat" }
     ];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: 320, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.panel, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "This week" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: rows.map((r) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: r.l }),
@@ -43069,7 +43069,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { n: "Neon Horizon", s: "Mastering", t: "success" },
       { n: "Safar OST", s: "Pending", t: "neutral" }
     ];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: 320, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.panel, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Active projects" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "3 active", type: "neutral" })
@@ -43107,7 +43107,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { icon: "knoop", t: "Producer/Engineer", d: "DAW \xB7 Outboard gear" },
       { icon: "audio-mix", t: "DJ/Performer", d: "Deck setup \xB7 Residencies" }
     ];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 360, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.screen, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Talent role variants" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: roles.map((r) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 2, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: r.icon, accessibilityLabel: "", size: 16 }),
@@ -43126,10 +43126,10 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { icon: "calendar", t: "Calendar" },
       { icon: "clipboard", t: "Booking" }
     ];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 360, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.screen, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Venue profile flow" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 2, alignItems: "center", wrap: true, children: steps.map((s, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 2, padding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 1, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 2, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 1, children: [
           /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: s.icon, accessibilityLabel: "", size: 16 }),
           /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: s.t })
         ] }) }),
@@ -43153,6 +43153,18 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     E: IMG.mic,
     F: IMG.controller
   };
+  var W = {
+    screen: 360,
+    // a full mobile screen surface (auth, wizards, feeds)
+    card: 340,
+    // the standard card - the most common width by a wide margin
+    panel: 320,
+    // a narrower panel or sheet
+    compact: 300,
+    // compact card, sits two-up comfortably
+    tile: 220
+    // a tile in a horizontal rail
+  };
   function OnboardingWizardBlock() {
     const steps = [
       { title: "Primary role", hint: "What do you mainly do?", options: ["Vocalist", "Producer", "Instrumentalist", "Engineer"] },
@@ -43170,7 +43182,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
         return { ...prev, [step]: cur2.includes(opt) ? cur2.filter((o) => o !== opt) : [...cur2, opt] };
       });
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 360, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.screen, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
           "Step ",
@@ -43223,7 +43235,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   function DiscoveryHeroCardBlock() {
     const [saved2, setSaved] = (0, import_react2.useState)(false);
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 300, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "relative", rounding: 4, overflow: "hidden", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: W.compact, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "relative", rounding: 4, overflow: "hidden", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
         Image,
         {
@@ -43278,7 +43290,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] }) });
   }
   function ProductCardBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, overflow: "hidden", maxWidth: 300, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, overflow: "hidden", maxWidth: W.compact, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "relative", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
           Image,
@@ -43309,7 +43321,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     const cats = ["All", "Vocalists", "Producers", "Studios", "Gear", "Gigs"];
     const [active, setActive] = (0, import_react2.useState)("All");
     const [q, setQ] = (0, import_react2.useState)("");
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 360, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.screen, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
           /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: "Hello, Ananya" }),
@@ -43344,7 +43356,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function RecommendedCollaboratorBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 4, maxWidth: 320, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.panel, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "start", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: "Mei Tanaka", size: "lg" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { flex: "grow", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "start", children: [
@@ -43374,7 +43386,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { n: "Yash Raj Sound Studios", c: "Studio", d: "Andheri \xB7 Atmos", m: "4.8 \u2605" },
       { n: "Session vocalist for EP", c: "Opportunity", d: "\u20B915,000 \xB7 Mumbai", m: "12 applied" }
     ];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, maxWidth: 360, overflow: "hidden", children: rows.map((r, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { padding: 3, borderStyle: i > 0 ? "shadow" : "none", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, maxWidth: W.screen, overflow: "hidden", children: rows.map((r, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { padding: 3, borderStyle: i > 0 ? "shadow" : "none", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: r.n, size: "sm" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { flex: "grow", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 1, alignItems: "center", children: [
@@ -43393,7 +43405,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
         borderStyle: "sm",
         rounding: 4,
         padding: 5,
-        maxWidth: 330,
+        maxWidth: W.panel,
         dangerouslySetInlineStyle: { __style: { borderTopLeftRadius: 28, borderTopRightRadius: 28 } },
         children: [
           /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, display: "flex", justifyContent: "center", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 40, height: 4, rounding: "pill", color: "secondary" }) }),
@@ -43417,7 +43429,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   function NetworkingFeedBlock() {
     const [liked, setLiked] = (0, import_react2.useState)(false);
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, maxWidth: 340, overflow: "hidden", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, maxWidth: W.card, overflow: "hidden", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { padding: 3, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
           /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: "Ravi Nair", size: "sm" }),
@@ -43453,7 +43465,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { n: "Ramit Mehra", r: "Bass", lead: false },
       { n: "Sahil Sarin", r: "Drums", lead: false }
     ];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: 320, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.panel, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Band members" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 3, children: members.map((m) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: m.n, size: "sm" }),
@@ -43470,7 +43482,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { n: "Yash Raj Sound Studios", l: "Andheri, Mumbai", r: "4.8", p: "\u20B98,000/hr", atmos: true },
       { n: "Bloom Studio A", l: "Bandra, Mumbai", r: "4.6", p: "\u20B92,500/hr", atmos: false }
     ];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 360, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: rows.map((s) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 2, padding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: W.screen, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: rows.map((s) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 2, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 56, height: 56, rounding: 2, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: s.n, src: IMG.studio, naturalWidth: 56, naturalHeight: 56 }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { flex: "grow", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 1, alignItems: "center", children: [
@@ -43494,7 +43506,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       ["Outboard", "LA-2A \xB7 1176 \xB7 Lexicon 480L"],
       ["Format", "Dolby Atmos 7.1.4"]
     ];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Technical specification" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: specs.map(([k, v]) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", gap: 3, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: k }),
@@ -43503,7 +43515,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function RecentProjectBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, maxWidth: 340, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.card, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 52, height: 52, rounding: 2, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Artwork", src: IMG.mixing, naturalWidth: 52, naturalHeight: 52 }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { flex: "grow", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: "Tum Hi Toh (Unplugged)" }),
@@ -43520,7 +43532,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     const [playing, setPlaying] = (0, import_react2.useState)(false);
     const [pos, setPos] = (0, import_react2.useState)(38);
     const bars = Array.from({ length: 44 }, (_, i) => 12 + Math.round(22 * Math.abs(Math.sin(i * 0.7))));
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
           IconButtonWithForwardRef,
@@ -43558,7 +43570,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   function HireContactBlock() {
     const [scope, setScope] = (0, import_react2.useState)("session");
     const [budget, setBudget] = (0, import_react2.useState)("");
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: "Hire Arijit Sen" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", gap: 3, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(SelectList, { id: "hire-scope", name: "scope", label: "Project scope", value: scope, onChange: ({ value }) => setScope(value), children: [
@@ -43577,7 +43589,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     const [budget, setBudget] = (0, import_react2.useState)(8e3);
     const [cats, setCats] = (0, import_react2.useState)(["Studios"]);
     const toggle2 = (c) => setCats((p) => p.includes(c) ? p.filter((x) => x !== c) : [...p, c]);
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 330, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.panel, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Filters" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Reset", color: "transparent", size: "sm" })
@@ -43619,7 +43631,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { n: "Safar", a: "Ravi Nair", d: "3:18", img: IMG.dj }
     ];
     const [nowPlaying, setNowPlaying] = (0, import_react2.useState)(0);
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "relative", rounding: 4, overflow: "hidden", marginBottom: 4, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Arijit Sen", src: IMG.vocalist, naturalWidth: 340, naturalHeight: 220 }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
@@ -43692,7 +43704,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { n: "Rahul Varma", r: "Mixing engineer", v: true },
       { n: "Ravi Nair", r: "Producer", v: false }
     ];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, overflow: "hidden", maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, overflow: "hidden", maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "relative", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Dil Ki Raah artwork", src: IMG.mixing, naturalWidth: 340, naturalHeight: 170 }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { position: "absolute", top: true, right: true, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "Released", type: "success" }) })
@@ -43725,7 +43737,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ];
     const [muted, setMuted] = (0, import_react2.useState)([]);
     const toggle2 = (n) => setMuted((p) => p.includes(n) ? p.filter((x) => x !== n) : [...p, n]);
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 4, maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Neon Horizon \u2014 Mix Pass v3" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "128 BPM \xB7 F#m \xB7 24-bit/48kHz" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 3, children: stems.map((s) => {
@@ -43760,7 +43772,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   function BriefWizardBlock() {
     const steps = ["Role", "Genre", "Budget", "Dates", "Location", "Skills", "Refs", "Review"];
     const [i, setI] = (0, import_react2.useState)(2);
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 360, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.screen, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
         "Casting brief \xB7 step ",
         i + 1,
@@ -43805,7 +43817,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { n: "Glass", css: { background: "rgba(255,255,255,0.55)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.7)" } },
       { n: "Noise", css: { background: "#F1F5F9", backgroundImage: "repeating-linear-gradient(45deg, rgba(13,13,13,0.045) 0 1px, transparent 1px 3px)" } }
     ];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 340, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 2, wrap: true, children: fx.map((f) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { width: 104, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: W.card, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 2, wrap: true, children: fx.map((f) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { width: 104, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
         BoxWithForwardRef,
         {
@@ -43833,7 +43845,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   function SplashBlock() {
     const [state, setState] = (0, import_react2.useState)("loading");
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 300, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.compact, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
         BoxWithForwardRef,
         {
@@ -43879,7 +43891,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   function AppIconSetBlock() {
     const sizes2 = [{ s: 96, l: "512 / store" }, { s: 64, l: "192 / launcher" }, { s: 44, l: "96 / notification" }, { s: 28, l: "48 / favicon" }];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "App icon" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 4, alignItems: "end", wrap: true, children: sizes2.map((z) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 1, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(LogoMark, { size: z.s }),
@@ -43911,7 +43923,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function AuthWelcomeBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 320, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.panel, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 3, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(LogoMark, { size: 56 }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: "Welcome to MusicLinkd" }),
@@ -43929,7 +43941,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     const [state, setState] = (0, import_react2.useState)("entering");
     const digits = state === "entering" ? ["4", "8", "2", "", "", ""] : ["4", "8", "2", "9", "1", "7"];
     const border2 = state === "error" ? "#DC2626" : state === "success" ? "#22C55E" : "#ECECF1";
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 320, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.panel, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: "Verify your number" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, marginBottom: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Code sent to +91 98\u2022\u2022\u2022 \u2022\u2022210" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 2, justifyContent: "center", children: digits.map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
@@ -43974,7 +43986,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     const [email, setEmail] = (0, import_react2.useState)("");
     const [pw, setPw] = (0, import_react2.useState)("");
     const bad = email.length > 0 && !email.includes("@");
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 320, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.panel, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
         SegmentedControl,
         {
@@ -44012,7 +44024,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     const months = ["Jan", "Feb", "Mar", "Apr", "May"];
     const [m, setM] = (0, import_react2.useState)(2);
     const mins = [2139, 1704, 1362, 980, 1518];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 340, rounding: 4, overflow: "hidden", borderStyle: "sm", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: W.card, rounding: 4, overflow: "hidden", borderStyle: "sm", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
       BoxWithForwardRef,
       {
         padding: 5,
@@ -44056,7 +44068,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { r: 2, n: "Mei Tanaka", m: 483, img: IMG.dj },
       { r: 3, n: "Ravi Nair", m: 312, img: IMG.mixing }
     ];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 1, alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: "Your top artists" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "arrow-forward", accessibilityLabel: "", size: 14 })
@@ -44088,7 +44100,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function IllustratedEmptyStateBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 300, rounding: 4, overflow: "hidden", borderStyle: "sm", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: W.compact, rounding: 4, overflow: "hidden", borderStyle: "sm", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
       BoxWithForwardRef,
       {
         padding: 5,
@@ -44134,7 +44146,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   function AvatarClusterBlock() {
     const imgs = [IMG.vocalist, IMG.dj, IMG.mixing, IMG.studio, IMG.mic, IMG.controller];
     const tiles = [...imgs, ...imgs].slice(0, 11);
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 320, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.panel, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { display: "flex", justifyContent: "center", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 2, wrap: true, justifyContent: "center", children: tiles.map((src, i) => {
         const s = i === 5 ? 88 : 56;
         return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
@@ -44159,7 +44171,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function ShareStatCardBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 300, rounding: 4, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: W.compact, rounding: 4, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
       BoxWithForwardRef,
       {
         padding: 6,
@@ -44203,7 +44215,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
       BoxWithForwardRef,
       {
-        maxWidth: 340,
+        maxWidth: W.card,
         rounding: "pill",
         padding: 2,
         borderStyle: "sm",
@@ -44251,7 +44263,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       }, 220);
     }
     const done = i >= deck.length;
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 280, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.compact, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { position: "relative", height: 330, children: done ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
         BoxWithForwardRef,
         {
@@ -44354,7 +44366,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       backgroundSize: "200% 100%",
       animation: "mlShimmer 1.4s linear infinite"
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: 340, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.card, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("style", { children: "@keyframes mlShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}@media (prefers-reduced-motion: reduce){[data-ml-skeleton]{animation:none!important}}" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 44, height: 44, rounding: "circle", dangerouslySetInlineStyle: { __style: shimmer } }),
@@ -44387,7 +44399,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   function ConnectionStatesBlock() {
     const [online, setOnline] = (0, import_react2.useState)(false);
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 340, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", gap: 3, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: W.card, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", gap: 3, children: [
       !online && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
         BannerSlim,
         {
@@ -44419,7 +44431,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   function AudioPodcastDemoBlock() {
     const [playing, setPlaying] = (0, import_react2.useState)(false);
     const bars = Array.from({ length: 28 }, (_, i) => 6 + Math.round(14 * Math.abs(Math.cos(i * 0.55))));
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, maxWidth: 300, color: "secondary", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: W.compact, color: "secondary", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
         IconButtonWithForwardRef,
         {
@@ -44451,9 +44463,9 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] }) });
   }
   function WhatsAppShareBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 320, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: W.panel, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Share this profile" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, marginBottom: 3, borderStyle: "sm", rounding: 3, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, marginBottom: 3, borderStyle: "sm", rounding: 3, padding: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 48, height: 48, rounding: 2, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "", src: IMG.vocalist, naturalWidth: 48, naturalHeight: 48 }) }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { flex: "grow", children: [
           /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: "Arijit Sen" }),
@@ -44469,7 +44481,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ] });
   }
   function HomeFeatureCardBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 340, rounding: 4, overflow: "hidden", position: "relative", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.card, rounding: 4, overflow: "hidden", position: "relative", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Featured studio", src: IMG.studio, naturalWidth: 340, naturalHeight: 240 }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { position: "absolute", top: true, left: true, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "Featured", type: "darkWash" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
@@ -44498,7 +44510,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
       BoxWithForwardRef,
       {
-        maxWidth: 240,
+        maxWidth: W.tile,
         rounding: 4,
         overflow: "hidden",
         dangerouslySetInlineStyle: { __style: { background: "#141414" } },
@@ -44581,7 +44593,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { x: 66, y: 70, s: 46 }
     ];
     const imgs = [IMG.vocalist, IMG.dj, IMG.mixing, IMG.studio, IMG.mic, IMG.controller, IMG.vocalist, IMG.dj];
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 300, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.compact, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "relative", height: 260, children: [
         orbit.map((o, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
           BoxWithForwardRef,
@@ -44632,7 +44644,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { t: "Credits verified", d: "After delivery", state: "todo" }
     ];
     const dot = { done: "#22C55E", current: "var(--ml-accent)", todo: "transparent" };
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 320, children: rows.map((r, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: W.panel, children: rows.map((r, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
           BoxWithForwardRef,
@@ -44656,7 +44668,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   function UploadDropzoneBlock() {
     const [pct, setPct] = (0, import_react2.useState)(62);
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 320, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.panel, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
         BoxWithForwardRef,
         {
@@ -44711,7 +44723,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     ) });
   }
   function ProgressBarBlock() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 300, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 4, children: [["Profile completeness", 78], ["Upload", 34], ["Verification", 100]].map(([l, v]) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: W.compact, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 4, children: [["Profile completeness", 78], ["Upload", 34], ["Verification", 100]].map(([l, v]) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: l }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", weight: "bold", children: [
@@ -44725,7 +44737,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   function SliderDatePickerBlock() {
     const [rate, setRate] = (0, import_react2.useState)(8e3);
     const [date2, setDate] = (0, import_react2.useState)("2026-08-12");
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 300, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: W.compact, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Max rate" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", weight: "bold", children: [
@@ -44966,7 +44978,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       NOT_BUILT.map((g) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 6, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", children: g.title }) }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: g.reason }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 2, wrap: true, children: g.items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 2, padding: 2, color: "default", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: item }) }, item)) })
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 2, wrap: true, children: g.items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 2, padding: 3, color: "default", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: item }) }, item)) })
       ] }, g.title))
     ] });
   }
