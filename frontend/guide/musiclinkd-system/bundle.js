@@ -44385,6 +44385,214 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       )
     ] }) });
   }
+  function AudioPodcastDemoBlock() {
+    const [playing, setPlaying] = (0, import_react2.useState)(false);
+    const bars = Array.from({ length: 28 }, (_, i) => 6 + Math.round(14 * Math.abs(Math.cos(i * 0.55))));
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, maxWidth: 300, color: "secondary", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        IconButtonWithForwardRef,
+        {
+          icon: playing ? "pause" : "play",
+          accessibilityLabel: playing ? "Pause" : "Play",
+          bgColor: "red",
+          iconColor: "white",
+          size: "md",
+          onClick: () => setPlaying((p) => !p)
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { flex: "grow", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: "Studio walkthrough" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 1, alignItems: "center", children: bars.map((b, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          BoxWithForwardRef,
+          {
+            width: 3,
+            height: playing ? b : 6,
+            rounding: "pill",
+            dangerouslySetInlineStyle: { __style: {
+              background: "var(--ml-accent)",
+              transition: "height 260ms cubic-bezier(0.55,0,0,1)"
+            } }
+          },
+          i
+        )) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "2:14" })
+    ] }) });
+  }
+  function WhatsAppShareBlock() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 320, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Share this profile" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, marginBottom: 3, borderStyle: "sm", rounding: 3, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 48, height: 48, rounding: 2, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "", src: IMG.vocalist, naturalWidth: 48, naturalHeight: 48 }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { flex: "grow", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: "Arijit Sen" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "musiclinkd.com/arijit-sen" })
+        ] })
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, padding: 3, rounding: 2, color: "secondary", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: "Check out Arijit Sen on MusicLinkd - singer and composer, Mumbai. Verified credits and portfolio here:" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Share", color: "red", size: "sm" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Copy link", color: "gray", size: "sm" })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, padding: 2, rounding: 1, color: "warningWeak", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: "UI only. The real app's per-channel share buttons fire a snackbar, not a share intent." }) })
+    ] });
+  }
+  function HomeFeatureCardBlock() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 340, rounding: 4, overflow: "hidden", position: "relative", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Featured studio", src: IMG.studio, naturalWidth: 340, naturalHeight: 240 }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { position: "absolute", top: true, left: true, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "Featured", type: "darkWash" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        BoxWithForwardRef,
+        {
+          position: "absolute",
+          bottom: true,
+          left: true,
+          right: true,
+          height: 150,
+          dangerouslySetInlineStyle: { __style: {
+            background: "linear-gradient(to top, rgba(13,13,13,0.92), rgba(13,13,13,0))"
+          } }
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "absolute", bottom: true, left: true, right: true, padding: 4, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "light", children: "STUDIO OF THE WEEK" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", color: "light", children: "Yash Raj Sound Studios" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "light", children: "Dolby Atmos 7.1.4 \xB7 SSL 9000J \xB7 Andheri" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "View studio", color: "white", size: "sm" })
+      ] })
+    ] });
+  }
+  function DarkProductCardBlock() {
+    const [inCart, setInCart] = (0, import_react2.useState)(false);
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+      BoxWithForwardRef,
+      {
+        maxWidth: 240,
+        rounding: 4,
+        overflow: "hidden",
+        dangerouslySetInlineStyle: { __style: { background: "#141414" } },
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { margin: 3, rounding: 3, overflow: "hidden", position: "relative", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Neumann U87", src: IMG.mic, naturalWidth: 216, naturalHeight: 170 }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { position: "absolute", top: true, right: true, padding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+              IconButtonWithForwardRef,
+              {
+                icon: "heart-outline",
+                accessibilityLabel: "Save",
+                size: "sm",
+                bgColor: "transparentDarkGray",
+                iconColor: "white"
+              }
+            ) })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { paddingX: 4, paddingY: 3, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", color: "light", children: "Neumann U87 Ai" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "light", children: "Condenser mic" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "400", weight: "bold", color: "light", children: "\u20B9800" }),
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                IconButtonWithForwardRef,
+                {
+                  icon: inCart ? "check" : "add",
+                  size: "lg",
+                  bgColor: "white",
+                  iconColor: "darkGray",
+                  accessibilityLabel: inCart ? "Added to cart" : "Add to cart",
+                  onClick: () => setInCart((c) => !c)
+                }
+              )
+            ] }) })
+          ] })
+        ]
+      }
+    );
+  }
+  function FeatureStepCardBlock() {
+    const steps = [
+      { n: "CARD 1", lead: "Set up your", strong: "session in minutes", tail: ": name it, date it, done." },
+      { n: "CARD 2", lead: "Invite the", strong: "players you need", tail: " and share one link." }
+    ];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 3, wrap: true, children: steps.map((s) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+      BoxWithForwardRef,
+      {
+        width: 210,
+        rounding: 4,
+        overflow: "hidden",
+        dangerouslySetInlineStyle: { __style: {
+          background: "#F4F4F6",
+          boxShadow: "0 10px 30px rgba(13,13,13,0.10)"
+        } },
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { margin: 3, rounding: 4, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "", src: IMG.studio, naturalWidth: 186, naturalHeight: 116 }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { paddingX: 4, paddingY: 3, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", weight: "bold", children: s.n }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "200", color: "subtle", children: [
+              s.lead,
+              " ",
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { inline: true, size: "200", weight: "bold", color: "default", children: s.strong }),
+              s.tail
+            ] }) })
+          ] })
+        ]
+      },
+      s.n
+    )) });
+  }
+  function OrbitClusterBlock() {
+    const orbit = [
+      { x: 6, y: 4, s: 46 },
+      { x: 34, y: 0, s: 40 },
+      { x: 62, y: 6, s: 52 },
+      { x: 0, y: 34, s: 54 },
+      { x: 78, y: 32, s: 44 },
+      { x: 4, y: 66, s: 42 },
+      { x: 30, y: 76, s: 50 },
+      { x: 66, y: 70, s: 46 }
+    ];
+    const imgs = [IMG.vocalist, IMG.dj, IMG.mixing, IMG.studio, IMG.mic, IMG.controller, IMG.vocalist, IMG.dj];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 300, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "relative", height: 260, children: [
+        orbit.map((o, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          BoxWithForwardRef,
+          {
+            position: "absolute",
+            width: o.s,
+            height: o.s,
+            overflow: "hidden",
+            dangerouslySetInlineStyle: { __style: {
+              left: `${o.x}%`,
+              top: `${o.y}%`,
+              borderRadius: `${Math.round(o.s * 0.3)}px`,
+              boxShadow: "0 8px 20px rgba(13,13,13,0.16)",
+              filter: "grayscale(1)"
+            } },
+            children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "", src: imgs[i], naturalWidth: o.s, naturalHeight: o.s })
+          },
+          i
+        )),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          BoxWithForwardRef,
+          {
+            position: "absolute",
+            width: 92,
+            height: 92,
+            overflow: "hidden",
+            dangerouslySetInlineStyle: { __style: {
+              left: "34%",
+              top: "34%",
+              borderRadius: "28px",
+              boxShadow: "0 14px 34px rgba(13,13,13,0.26)"
+            } },
+            children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Top collaborator", src: IMG.vocalist, naturalWidth: 92, naturalHeight: 92 })
+          }
+        )
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginTop: 4, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", align: "center", children: "Inspired people" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", align: "center", children: "1,284 people saved or shared your work this month." }) })
+      ] })
+    ] });
+  }
   var BLOCKS = [
     { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NavHeaderBlock, {}) },
     { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ArtistProfileBlock, {}) },
@@ -44439,6 +44647,12 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     { name: "Stem mixer", description: "Ported from styleguide #mixer \u2014 per-stem mute with live level meters.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(StemMixerBlock, {}) },
     { name: "Brief wizard", description: "Ported from styleguide #pattern-brief-wizard \u2014 8-step casting brief, dots jump.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BriefWizardBlock, {}) },
     { name: "Textures & effects", description: "Ported from styleguide #vd-effects \u2014 real CSS backgrounds, not screenshots.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TexturesBlock, {}) },
+    { name: "Dark product card", description: "Air Force reference \u2014 light media panel on a dark body, round cart action.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(DarkProductCardBlock, {}) },
+    { name: "Feature step cards", description: "CARD 1 reference \u2014 numbered label, one sentence with bold emphasis in the same face.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FeatureStepCardBlock, {}) },
+    { name: "Orbit cluster", description: "Inspired people reference \u2014 scattered tiles around a full-colour hero, greyscale surround.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(OrbitClusterBlock, {}) },
+    { name: "Audio podcast demo", description: "Widget Directory \xA75 \u2014 inline dashboard demo player with live bars.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(AudioPodcastDemoBlock, {}) },
+    { name: "WhatsApp share sheet", description: "Widget Directory \xA78 \u2014 share preview + prefilled message. Labelled UI-only.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(WhatsAppShareBlock, {}) },
+    { name: "Home feature card", description: "Widget Directory \xA79 \u2014 hero featured slot on the main feed.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(HomeFeatureCardBlock, {}) },
     { name: "Skeleton loader", description: "Shape-matched skeleton so nothing jumps when content arrives. Honours reduced motion.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SkeletonLoaderBlock, {}) },
     { name: "Offline & error states", description: "Offline banner plus a recoverable error. Copy explains what happened and how to fix it.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ConnectionStatesBlock, {}) },
     { name: "Swipe deck", description: "Ported from styleguide #swipe \u2014 left passes, right shortlists, real deck state.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SwipeDeckBlock, {}) },

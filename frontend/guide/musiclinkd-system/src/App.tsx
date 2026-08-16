@@ -3399,6 +3399,207 @@ function ConnectionStatesBlock() {
   );
 }
 
+
+// ===== The three Widget_Directory entries I skipped =====
+// These were silently omitted from the earlier "fully built out" pass. Built
+// here so that claim is actually true. Composition follows each widget's own
+// "Content / Composition" column.
+
+// AudioPodcastDemoWidget — in-line dashboard demo player.
+function AudioPodcastDemoBlock() {
+  const [playing, setPlaying] = useState(false);
+  const bars = Array.from({ length: 28 }, (_, i) => 6 + Math.round(14 * Math.abs(Math.cos(i * 0.55))));
+  return (
+    <Box borderStyle="sm" rounding={3} padding={3} maxWidth={300} color="secondary">
+      <Flex gap={3} alignItems="center">
+        <IconButton icon={playing ? "pause" : "play"} accessibilityLabel={playing ? "Pause" : "Play"}
+          bgColor="red" iconColor="white" size="md" onClick={() => setPlaying((p) => !p)} />
+        <Box flex="grow">
+          <Text size="100" weight="bold">Studio walkthrough</Text>
+          <Flex gap={1} alignItems="center">
+            {bars.map((b, i) => (
+              <Box key={i} width={3} height={playing ? b : 6} rounding="pill"
+                dangerouslySetInlineStyle={{ __style: {
+                  background: "var(--ml-accent)",
+                  transition: "height 260ms cubic-bezier(0.55,0,0,1)" } }} />
+            ))}
+          </Flex>
+        </Box>
+        <Text size="100" color="subtle">2:14</Text>
+      </Flex>
+    </Box>
+  );
+}
+
+// WhatsAppShareSheet — share preview + pre-populated message.
+// Labelled honestly: the widget directory records the real app's per-channel
+// share buttons as UI-only fakes (showSnackbar, no real intent fired).
+function WhatsAppShareBlock() {
+  return (
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={320}>
+      <Text weight="bold">Share this profile</Text>
+      <Box marginTop={3} marginBottom={3} borderStyle="sm" rounding={3} padding={3}>
+        <Flex gap={3} alignItems="center">
+          <Box width={48} height={48} rounding={2} overflow="hidden">
+            <Image alt="" src={IMG.vocalist} naturalWidth={48} naturalHeight={48} />
+          </Box>
+          <Box flex="grow">
+            <Text size="100" weight="bold">Arijit Sen</Text>
+            <Text size="100" color="subtle">musiclinkd.com/arijit-sen</Text>
+          </Box>
+        </Flex>
+      </Box>
+      <Box marginBottom={3} padding={3} rounding={2} color="secondary">
+        <Text size="100">
+          Check out Arijit Sen on MusicLinkd - singer and composer, Mumbai. Verified credits and portfolio here:
+        </Text>
+      </Box>
+      <Flex gap={2}>
+        <Button text="Share" color="red" size="sm" />
+        <Button text="Copy link" color="gray" size="sm" />
+      </Flex>
+      <Box marginTop={3} padding={2} rounding={1} color="warningWeak">
+        <Text size="100">
+          UI only. The real app&apos;s per-channel share buttons fire a snackbar, not a share intent.
+        </Text>
+      </Box>
+    </Box>
+  );
+}
+
+// HomeFeatureCard — hero featured slot on the main feed.
+function HomeFeatureCardBlock() {
+  return (
+    <Box maxWidth={340} rounding={4} overflow="hidden" position="relative">
+      <Image alt="Featured studio" src={IMG.studio} naturalWidth={340} naturalHeight={240} />
+      <Box position="absolute" top left padding={3}>
+        <Badge text="Featured" type="darkWash" />
+      </Box>
+      <Box position="absolute" bottom left right height={150}
+        dangerouslySetInlineStyle={{ __style: {
+          background: "linear-gradient(to top, rgba(13,13,13,0.92), rgba(13,13,13,0))" } }} />
+      <Box position="absolute" bottom left right padding={4}>
+        <Text size="100" color="light">STUDIO OF THE WEEK</Text>
+        <Heading size="400" color="light">Yash Raj Sound Studios</Heading>
+        <Box marginTop={1} marginBottom={3}>
+          <Text size="100" color="light">Dolby Atmos 7.1.4 · SSL 9000J · Andheri</Text>
+        </Box>
+        <Button text="View studio" color="white" size="sm" />
+      </Box>
+    </Box>
+  );
+}
+
+
+// ===== The three reference cards not previously covered =====
+
+// Dark product tile (Air Force 1 reference): light media panel sitting on a
+// dark body, title + price left, single round action right.
+function DarkProductCardBlock() {
+  const [inCart, setInCart] = useState(false);
+  return (
+    <Box maxWidth={240} rounding={4} overflow="hidden"
+      dangerouslySetInlineStyle={{ __style: { background: "#141414" } }}>
+      <Box margin={3} rounding={3} overflow="hidden" position="relative">
+        <Image alt="Neumann U87" src={IMG.mic} naturalWidth={216} naturalHeight={170} />
+        <Box position="absolute" top right padding={2}>
+          <IconButton icon="heart-outline" accessibilityLabel="Save" size="sm"
+            bgColor="transparentDarkGray" iconColor="white" />
+        </Box>
+      </Box>
+      <Box paddingX={4} paddingY={3}>
+        <Text size="100" weight="bold" color="light">Neumann U87 Ai</Text>
+        <Text size="100" color="light">Condenser mic</Text>
+        <Box marginTop={4}>
+          <Flex justifyContent="between" alignItems="center">
+            <Text size="400" weight="bold" color="light">₹800</Text>
+            <IconButton icon={inCart ? "check" : "add"} size="lg" bgColor="white" iconColor="darkGray"
+              accessibilityLabel={inCart ? "Added to cart" : "Add to cart"}
+              onClick={() => setInCart((c) => !c)} />
+          </Flex>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+// Stepped feature card (the "CARD 1" reference): rounded media panel on a
+// pale body, a quiet numbered label, then one sentence whose key words are
+// bold. The emphasis is bold of the SAME face, never a swapped-in serif.
+function FeatureStepCardBlock() {
+  const steps = [
+    { n: "CARD 1", lead: "Set up your", strong: "session in minutes", tail: ": name it, date it, done." },
+    { n: "CARD 2", lead: "Invite the", strong: "players you need", tail: " and share one link." },
+  ];
+  return (
+    <Flex gap={3} wrap>
+      {steps.map((s) => (
+        <Box key={s.n} width={210} rounding={4} overflow="hidden"
+          dangerouslySetInlineStyle={{ __style: {
+            background: "#F4F4F6", boxShadow: "0 10px 30px rgba(13,13,13,0.10)" } }}>
+          <Box margin={3} rounding={4} overflow="hidden">
+            <Image alt="" src={IMG.studio} naturalWidth={186} naturalHeight={116} />
+          </Box>
+          <Box paddingX={4} paddingY={3}>
+            <Text size="100" color="subtle" weight="bold">{s.n}</Text>
+            <Box marginTop={1}>
+              <Text size="200" color="subtle">
+                {s.lead}{" "}
+                <Text inline size="200" weight="bold" color="default">{s.strong}</Text>
+                {s.tail}
+              </Text>
+            </Box>
+          </Box>
+        </Box>
+      ))}
+    </Flex>
+  );
+}
+
+// Scattered/orbit cluster (the "Inspired people" reference proper): tiles
+// positioned around a hero rather than flowed in a grid. Positions are a fixed
+// table, not random, so the composition is stable between paints.
+function OrbitClusterBlock() {
+  const orbit = [
+    { x: 6, y: 4, s: 46 }, { x: 34, y: 0, s: 40 }, { x: 62, y: 6, s: 52 },
+    { x: 0, y: 34, s: 54 }, { x: 78, y: 32, s: 44 },
+    { x: 4, y: 66, s: 42 }, { x: 30, y: 76, s: 50 }, { x: 66, y: 70, s: 46 },
+  ];
+  const imgs = [IMG.vocalist, IMG.dj, IMG.mixing, IMG.studio, IMG.mic, IMG.controller, IMG.vocalist, IMG.dj];
+  return (
+    <Box maxWidth={300}>
+      <Box position="relative" height={260}>
+        {orbit.map((o, i) => (
+          <Box key={i} position="absolute" width={o.s} height={o.s} overflow="hidden"
+            dangerouslySetInlineStyle={{ __style: {
+              left: `${o.x}%`, top: `${o.y}%`,
+              borderRadius: `${Math.round(o.s * 0.3)}px`,
+              boxShadow: "0 8px 20px rgba(13,13,13,0.16)",
+              filter: "grayscale(1)" } }}>
+            <Image alt="" src={imgs[i]} naturalWidth={o.s} naturalHeight={o.s} />
+          </Box>
+        ))}
+        {/* Hero tile: larger, centred, and the only one in full colour, so the
+            eye lands there before reading the cluster. */}
+        <Box position="absolute" width={92} height={92} overflow="hidden"
+          dangerouslySetInlineStyle={{ __style: {
+            left: "34%", top: "34%", borderRadius: "28px",
+            boxShadow: "0 14px 34px rgba(13,13,13,0.26)" } }}>
+          <Image alt="Top collaborator" src={IMG.vocalist} naturalWidth={92} naturalHeight={92} />
+        </Box>
+      </Box>
+      <Box marginTop={4}>
+        <Heading size="400" align="center">Inspired people</Heading>
+        <Box marginTop={1}>
+          <Text size="100" color="subtle" align="center">
+            1,284 people saved or shared your work this month.
+          </Text>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
 const BLOCKS: Block[] = [
   { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => <NavHeaderBlock /> },
   { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => <ArtistProfileBlock /> },
@@ -3453,6 +3654,12 @@ const BLOCKS: Block[] = [
   { name: "Stem mixer", description: "Ported from styleguide #mixer — per-stem mute with live level meters.", render: () => <StemMixerBlock /> },
   { name: "Brief wizard", description: "Ported from styleguide #pattern-brief-wizard — 8-step casting brief, dots jump.", render: () => <BriefWizardBlock /> },
   { name: "Textures & effects", description: "Ported from styleguide #vd-effects — real CSS backgrounds, not screenshots.", render: () => <TexturesBlock /> },
+  { name: "Dark product card", description: "Air Force reference — light media panel on a dark body, round cart action.", render: () => <DarkProductCardBlock /> },
+  { name: "Feature step cards", description: "CARD 1 reference — numbered label, one sentence with bold emphasis in the same face.", render: () => <FeatureStepCardBlock /> },
+  { name: "Orbit cluster", description: "Inspired people reference — scattered tiles around a full-colour hero, greyscale surround.", render: () => <OrbitClusterBlock /> },
+  { name: "Audio podcast demo", description: "Widget Directory §5 — inline dashboard demo player with live bars.", render: () => <AudioPodcastDemoBlock /> },
+  { name: "WhatsApp share sheet", description: "Widget Directory §8 — share preview + prefilled message. Labelled UI-only.", render: () => <WhatsAppShareBlock /> },
+  { name: "Home feature card", description: "Widget Directory §9 — hero featured slot on the main feed.", render: () => <HomeFeatureCardBlock /> },
   { name: "Skeleton loader", description: "Shape-matched skeleton so nothing jumps when content arrives. Honours reduced motion.", render: () => <SkeletonLoaderBlock /> },
   { name: "Offline & error states", description: "Offline banner plus a recoverable error. Copy explains what happened and how to fix it.", render: () => <ConnectionStatesBlock /> },
   { name: "Swipe deck", description: "Ported from styleguide #swipe — left passes, right shortlists, real deck state.", render: () => <SwipeDeckBlock /> },
