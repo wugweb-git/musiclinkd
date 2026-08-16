@@ -1549,7 +1549,22 @@ function AdminTopBarBlock() {
   );
 }
 
-type Block = { name: string; description: string; render: () => React.ReactNode };
+type BlockCategory =
+  | "Brand & identity" | "Auth & onboarding" | "Discovery" | "Profile & reputation"
+  | "Media & audio" | "Studios & venues" | "Marketplace & work" | "Booking"
+  | "Social & messaging" | "Data & insight" | "States" | "Navigation & chrome" | "Admin";
+
+// Ordered so the list reads like a user's journey through the product rather
+// than the order things happened to get built: identity, then sign-up, then
+// find someone, then their profile, then the work, then money, then chatter,
+// then the states and chrome that hold it together.
+const BLOCK_CATEGORY_ORDER: BlockCategory[] = [
+  "Brand & identity", "Auth & onboarding", "Discovery", "Profile & reputation",
+  "Media & audio", "Studios & venues", "Marketplace & work", "Booking",
+  "Social & messaging", "Data & insight", "States", "Navigation & chrome", "Admin",
+];
+
+type Block = { name: string; category: BlockCategory; description: string; render: () => React.ReactNode };
 
 // dist/preview/flows/public_profile/public_profile_view_venue/screen.json —
 // the same real dataContract sample now actually designed and deployed to
@@ -3756,100 +3771,100 @@ function SliderDatePickerBlock() {
 }
 
 const BLOCKS: Block[] = [
-  { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => <NavHeaderBlock /> },
-  { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => <ArtistProfileBlock /> },
-  { name: "Track row", description: "Play/pause toggles the icon and status live.", render: () => <TrackRowBlock /> },
-  { name: "Upload release form", description: "TextField + SelectList + Checkbox, button disables until valid.", render: () => <UploadFormBlock /> },
-  { name: "Stats row", description: "Three Datapoints with real trend arrows.", render: () => <StatsRowBlock /> },
-  { name: "Empty state", description: "Icon + heading + CTA for a catalog with nothing in it yet.", render: () => <EmptyStateBlock /> },
-  { name: "Notification stack", description: "Three real BannerSlim variants stacked.", render: () => <NotificationStackBlock /> },
-  { name: "Cover art gallery", description: "Real Masonry layout (Pinterest's own algorithm) packing variable-height tiles.", render: () => <GalleryBlock /> },
-  { name: "Bottom navigation bar", description: "Mobile tab bar — real TapArea + Icon + Text, live active-tab state.", render: () => <BottomNavBlock /> },
-  { name: "Trust badges", description: "Real tiers from admin/components/shared/trust-badge.tsx, mapped to Gestalt Badge + Icon.", render: () => <TrustBadgesBlock /> },
-  { name: "Hero", description: "Gradient hero banner — real brand colors, Box + Heading + Text + Button.", render: () => <HeroBlock /> },
-  { name: "Metrics scorecard", description: "Grid of real Datapoints with icons and trend arrows.", render: () => <MetricsScorecardBlock /> },
-  { name: "Activity feed", description: "Avatar + text feed rows, real components.", render: () => <ActivityFeedBlock /> },
-  { name: "Search & filters", description: "Real SearchField + Dropdown + removable Tag pills.", render: () => <SearchAndFiltersBlock /> },
-  { name: "Quick actions", description: "Row of real IconButtons with labels.", render: () => <QuickActionsBlock /> },
-  { name: "Avatar stack / social proof", description: "Real AvatarGroup with a count.", render: () => <AvatarStackBlock /> },
-  { name: "Testimonial", description: "Star rating (real Icon) + quote + real Avatar.", render: () => <TestimonialBlock /> },
-  { name: "Pricing plans", description: "Two real Box cards with feature lists and a highlighted plan.", render: () => <PricingPlansBlock /> },
-  { name: "Booking summary", description: "Real data from booking_summary/screen.json — Yash Raj Sound Studios, Aug 12, ₹32,000.", render: () => <BookingSummaryBlock /> },
-  { name: "Availability calendar", description: "Real states from availability_calendar/screen.json — monthly/weekly/timeline, live SegmentedControl.", render: () => <AvailabilityCalendarBlock /> },
-  { name: "Chat", description: "Thread list + conversation bubbles — real screens chat_thread_list + chat_conversation.", render: () => <ChatBlock /> },
-  { name: "Rating breakdown", description: "Aggregate score + category bars — real screen rating_breakdown.", render: () => <RatingBreakdownBlock /> },
-  { name: "Write review", description: "Live star selector + comment — real states from write_review/screen.json.", render: () => <WriteReviewBlock /> },
-  { name: "Success state", description: "Confirmation screen — real screen portfolio/success.", render: () => <SuccessStateBlock /> },
-  { name: "QR share", description: "Real screen (qr_share_flow) — flowStatus \"missing\": UI exists, backend doesn't. Labeled honestly.", render: () => <QrShareBlock /> },
-  { name: "Credit attribution", description: "Collaborator credits list — real screen credit_attribution.", render: () => <CreditAttributionBlock /> },
-  { name: "Section tabs", description: "Real Gestalt Tabs over real section names from business-profile screens.", render: () => <SectionTabsBlock /> },
-  { name: "Public profile", description: "Real screen public_profile_view_venue — same data as the now-live webapp screen at admin.musiclinkd.com/preview.", render: () => <PublicProfileVenueBlock /> },
-  { name: "Track card", description: "UnifiedTrackCard (Widget Directory §5) — artwork, platform badges, play count.", render: () => <TrackCardBlock /> },
-  { name: "Studio card", description: "UnifiedStudioCard (Widget Directory §2) — imagery, Atmos badge, rating, hourly rate.", render: () => <StudioCardBlock /> },
-  { name: "Featured studio card", description: "FeaturedStudioCard (Widget Directory §2) — hero promotion banner variant.", render: () => <FeaturedStudioCardBlock /> },
-  { name: "Marketplace card", description: "UnifiedMarketplaceCard (Widget Directory §3) — gear rental listing.", render: () => <MarketplaceCardBlock /> },
-  { name: "Opportunity card", description: "UnifiedOpportunityCard (Widget Directory §3) — gig/job/collab posting.", render: () => <OpportunityCardBlock /> },
-  { name: "Review card", description: "UnifiedReviewCard (Widget Directory §7) — reviewer, org, stars, quote, timestamp.", render: () => <ReviewCardBlock /> },
-  { name: "Notification card", description: "UnifiedNotificationCard (Widget Directory §7) — per-item event-type icon + unread state.", render: () => <NotificationCardBlock /> },
-  { name: "Public reputation widget", description: "PublicReputationWidget (Widget Directory §7) — aggregate rating, credits, response rate.", render: () => <PublicReputationWidgetBlock /> },
-  { name: "Recommended collaborator", description: "Widget Directory §1 — AI match card with match % and synergy reasons.", render: () => <RecommendedCollaboratorBlock /> },
-  { name: "Discovery search results", description: "Widget Directory §1 — mixed-entity global search rows.", render: () => <DiscoverySearchResultBlock /> },
-  { name: "Profile preview sheet", description: "Widget Directory §1 — quick-look sheet before the full profile.", render: () => <ProfilePreviewSheetBlock /> },
-  { name: "Networking feed", description: "Widget Directory §1 — feed post with media and live like toggle.", render: () => <NetworkingFeedBlock /> },
-  { name: "Band members", description: "Widget Directory §1 — roster with instrument roles and lead.", render: () => <BandMembersBlock /> },
-  { name: "Studio/venue list item", description: "Widget Directory §2 — compact directory rows.", render: () => <StudioVenueListItemBlock /> },
-  { name: "Studio spec", description: "Widget Directory §2 — console, monitors, mics, outboard.", render: () => <StudioSpecBlock /> },
-  { name: "Recent project", description: "Widget Directory §4 — dashboard portfolio row with edit action.", render: () => <RecentProjectBlock /> },
-  { name: "Waveform audio player", description: "Widget Directory §5 — transport + scrubbable waveform, live state.", render: () => <WaveformPlayerBlock /> },
-  { name: "Hire contact", description: "Widget Directory §6 — enquiry form, CTA gated on budget.", render: () => <HireContactBlock /> },
-  { name: "Advanced filters", description: "Widget Directory §8 — chips, range slider, Atmos switch. UI only; filtering is mock in the real app.", render: () => <AdvancedFiltersBlock /> },
-  { name: "Artist card & playlist rows", description: "Apple Music reference — full-bleed art, gradient scrim, live now-playing row.", render: () => <ArtistPlaylistBlock /> },
-  { name: "Masonry discovery grid", description: "Real Gestalt Masonry (Pinterest's own algorithm) with overlay captions.", render: () => <MasonryDiscoveryBlock /> },
-  { name: "Project card", description: "Ported from styleguide #ml-project — artwork, status, verified credits.", render: () => <ProjectCardBlock /> },
-  { name: "Stem mixer", description: "Ported from styleguide #mixer — per-stem mute with live level meters.", render: () => <StemMixerBlock /> },
-  { name: "Brief wizard", description: "Ported from styleguide #pattern-brief-wizard — 8-step casting brief, dots jump.", render: () => <BriefWizardBlock /> },
-  { name: "Textures & effects", description: "Ported from styleguide #vd-effects — real CSS backgrounds, not screenshots.", render: () => <TexturesBlock /> },
-  { name: "Dark product card", description: "Air Force reference — light media panel on a dark body, round cart action.", render: () => <DarkProductCardBlock /> },
-  { name: "Feature step cards", description: "CARD 1 reference — numbered label, one sentence with bold emphasis in the same face.", render: () => <FeatureStepCardBlock /> },
-  { name: "Orbit cluster", description: "Inspired people reference — scattered tiles around a full-colour hero, greyscale surround.", render: () => <OrbitClusterBlock /> },
-  { name: "Audio podcast demo", description: "Widget Directory §5 — inline dashboard demo player with live bars.", render: () => <AudioPodcastDemoBlock /> },
-  { name: "WhatsApp share sheet", description: "Widget Directory §8 — share preview + prefilled message. Labelled UI-only.", render: () => <WhatsAppShareBlock /> },
-  { name: "Home feature card", description: "Widget Directory §9 — hero featured slot on the main feed.", render: () => <HomeFeatureCardBlock /> },
-  { name: "Timeline", description: "Composed - Gestalt ships no Timeline. Booking lifecycle, done/current/upcoming.", render: () => <TimelineBlock /> },
-  { name: "Upload dropzone", description: "Composed - Gestalt ships no Upload. Dropzone plus live per-file progress.", render: () => <UploadDropzoneBlock /> },
-  { name: "Progress bar", description: "Composed - Gestalt ships none. Single shared definition, not re-implemented per block.", render: () => <ProgressBarBlock /> },
-  { name: "Slider & date picker", description: "Composed - Gestalt ships neither. Native inputs tinted to the accent.", render: () => <SliderDatePickerBlock /> },
-  { name: "Skeleton loader", description: "Shape-matched skeleton so nothing jumps when content arrives. Honours reduced motion.", render: () => <SkeletonLoaderBlock /> },
-  { name: "Offline & error states", description: "Offline banner plus a recoverable error. Copy explains what happened and how to fix it.", render: () => <ConnectionStatesBlock /> },
-  { name: "Swipe deck", description: "Ported from styleguide #swipe — left passes, right shortlists, real deck state.", render: () => <SwipeDeckBlock /> },
-  { name: "Replay recap", description: "Apple Music Replay reference — warm wash, month scrubber, mixed-weight editorial stat.", render: () => <ReplayRecapBlock /> },
-  { name: "Ranked artists", description: "Oversized rank numeral inside the artwork, scrim for legibility.", render: () => <RankedArtistsBlock /> },
-  { name: "Illustrated empty state", description: "Gradient card, glossy mark, pill CTA — copy invites action rather than apologising.", render: () => <IllustratedEmptyStateBlock /> },
-  { name: "Avatar cluster", description: "Squircle tiles with one hero — reads as artwork, not profile photos.", render: () => <AvatarClusterBlock /> },
-  { name: "Share stat card", description: "Dark editorial share card, one gold-accented fact.", render: () => <ShareStatCardBlock /> },
-  { name: "Mini player", description: "Persistent glassy transport bar — distinct from the full waveform player.", render: () => <MiniPlayerBlock /> },
-  { name: "Splash artwork", description: "Real screen auth/splash — brand mark, wordmark, both real states.", render: () => <SplashBlock /> },
-  { name: "App icon & logo", description: "Real MusicLinkd mark at ship sizes, plus pink-field and monochrome variants.", render: () => <AppIconSetBlock /> },
-  { name: "Auth welcome", description: "Real screens auth/welcome + google_signin — real ButtonSocial.", render: () => <AuthWelcomeBlock /> },
-  { name: "OTP verification", description: "Real screen auth/otp_verification — all four real states, switchable.", render: () => <OtpVerificationBlock /> },
-  { name: "Email auth", description: "Real screen auth/email_auth — signup/signin, live validation.", render: () => <EmailAuthBlock /> },
-  { name: "Onboarding wizard", description: "Multi-step with live progress bar, selectable chips, and a review step.", render: () => <OnboardingWizardBlock /> },
-  { name: "Discovery hero card", description: "Image-led card with gradient scrim, live favourite toggle, rating.", render: () => <DiscoveryHeroCardBlock /> },
-  { name: "Product card", description: "Marketplace rental card — media, copy stack, price + CTA row.", render: () => <ProductCardBlock /> },
-  { name: "Discovery header", description: "Greeting + search + filter + scrollable category rail, all live.", render: () => <DiscoveryHeaderBlock /> },
-  { name: "Band card", description: "Ported from styleguide #ml-band — roster, AvatarGroup, next show.", render: () => <BandCardBlock /> },
-  { name: "Greeting", description: "Ported from styleguide #vd-greeting — dashboard welcome header.", render: () => <GreetingBlock /> },
-  { name: "Profile stats", description: "Ported from styleguide #pf-stats — followers / credits / rating.", render: () => <ProfileStatsBlock /> },
-  { name: "Featured artists", description: "Ported from styleguide #vd-featured-artists.", render: () => <FeaturedArtistsBlock /> },
-  { name: "KPI cards", description: "Ported from styleguide #db-kpi — real Datapoints with trends.", render: () => <KpiCardsBlock /> },
-  { name: "Insights", description: "Ported from styleguide #vd-insights — weekly metric deltas.", render: () => <InsightsBlock /> },
-  { name: "Workspace card", description: "Ported from styleguide #vd-workspace — active projects by stage.", render: () => <WorkspaceCardBlock /> },
-  { name: "Footer CTA", description: "Ported from styleguide #vd-footer-cta — gradient conversion block.", render: () => <FooterCtaBlock /> },
-  { name: "Talent role variants", description: "Ported from styleguide #pr-talent — 6 roles, one skeleton.", render: () => <TalentRoleVariantsBlock /> },
-  { name: "Venue profile flow", description: "Ported from styleguide #pr-venue — hero to booking.", render: () => <VenueProfileFlowBlock /> },
-  { name: "Admin data table", description: "Real Table.SortableHeaderCell + Checkbox selection + pagination controls.", render: () => <AdminDataTableBlock /> },
-  { name: "Admin sidebar", description: "Real SideNavigation themed for the admin panel.", render: () => <AdminSidebarBlock /> },
-  { name: "Admin top bar", description: "Real SearchField + IconButtons + Avatar, admin-panel framing.", render: () => <AdminTopBarBlock /> },
+  { name: "Navigation header", category: "Navigation & chrome", description: "Brand + real SearchField + notifications + avatar.", render: () => <NavHeaderBlock /> },
+  { name: "Artist profile card", category: "Profile & reputation", description: "Avatar, tags, and a real toggling Follow button.", render: () => <ArtistProfileBlock /> },
+  { name: "Track row", category: "Media & audio", description: "Play/pause toggles the icon and status live.", render: () => <TrackRowBlock /> },
+  { name: "Upload release form", category: "Marketplace & work", description: "TextField + SelectList + Checkbox, button disables until valid.", render: () => <UploadFormBlock /> },
+  { name: "Stats row", category: "Data & insight", description: "Three Datapoints with real trend arrows.", render: () => <StatsRowBlock /> },
+  { name: "Empty state", category: "States", description: "Icon + heading + CTA for a catalog with nothing in it yet.", render: () => <EmptyStateBlock /> },
+  { name: "Notification stack", category: "Social & messaging", description: "Three real BannerSlim variants stacked.", render: () => <NotificationStackBlock /> },
+  { name: "Cover art gallery", category: "Media & audio", description: "Real Masonry layout (Pinterest's own algorithm) packing variable-height tiles.", render: () => <GalleryBlock /> },
+  { name: "Bottom navigation bar", category: "Navigation & chrome", description: "Mobile tab bar — real TapArea + Icon + Text, live active-tab state.", render: () => <BottomNavBlock /> },
+  { name: "Trust badges", category: "Profile & reputation", description: "Real tiers from admin/components/shared/trust-badge.tsx, mapped to Gestalt Badge + Icon.", render: () => <TrustBadgesBlock /> },
+  { name: "Hero", category: "Brand & identity", description: "Gradient hero banner — real brand colors, Box + Heading + Text + Button.", render: () => <HeroBlock /> },
+  { name: "Metrics scorecard", category: "Data & insight", description: "Grid of real Datapoints with icons and trend arrows.", render: () => <MetricsScorecardBlock /> },
+  { name: "Activity feed", category: "Social & messaging", description: "Avatar + text feed rows, real components.", render: () => <ActivityFeedBlock /> },
+  { name: "Search & filters", category: "Discovery", description: "Real SearchField + Dropdown + removable Tag pills.", render: () => <SearchAndFiltersBlock /> },
+  { name: "Quick actions", category: "Navigation & chrome", description: "Row of real IconButtons with labels.", render: () => <QuickActionsBlock /> },
+  { name: "Avatar stack / social proof", category: "Profile & reputation", description: "Real AvatarGroup with a count.", render: () => <AvatarStackBlock /> },
+  { name: "Testimonial", category: "Social & messaging", description: "Star rating (real Icon) + quote + real Avatar.", render: () => <TestimonialBlock /> },
+  { name: "Pricing plans", category: "Marketplace & work", description: "Two real Box cards with feature lists and a highlighted plan.", render: () => <PricingPlansBlock /> },
+  { name: "Booking summary", category: "Booking", description: "Real data from booking_summary/screen.json — Yash Raj Sound Studios, Aug 12, ₹32,000.", render: () => <BookingSummaryBlock /> },
+  { name: "Availability calendar", category: "Booking", description: "Real states from availability_calendar/screen.json — monthly/weekly/timeline, live SegmentedControl.", render: () => <AvailabilityCalendarBlock /> },
+  { name: "Chat", category: "Social & messaging", description: "Thread list + conversation bubbles — real screens chat_thread_list + chat_conversation.", render: () => <ChatBlock /> },
+  { name: "Rating breakdown", category: "Social & messaging", description: "Aggregate score + category bars — real screen rating_breakdown.", render: () => <RatingBreakdownBlock /> },
+  { name: "Write review", category: "Social & messaging", description: "Live star selector + comment — real states from write_review/screen.json.", render: () => <WriteReviewBlock /> },
+  { name: "Success state", category: "Booking", description: "Confirmation screen — real screen portfolio/success.", render: () => <SuccessStateBlock /> },
+  { name: "QR share", category: "Social & messaging", description: "Real screen (qr_share_flow) — flowStatus \"missing\": UI exists, backend doesn't. Labeled honestly.", render: () => <QrShareBlock /> },
+  { name: "Credit attribution", category: "Profile & reputation", description: "Collaborator credits list — real screen credit_attribution.", render: () => <CreditAttributionBlock /> },
+  { name: "Section tabs", category: "Navigation & chrome", description: "Real Gestalt Tabs over real section names from business-profile screens.", render: () => <SectionTabsBlock /> },
+  { name: "Public profile", category: "Profile & reputation", description: "Real screen public_profile_view_venue — same data as the now-live webapp screen at admin.musiclinkd.com/preview.", render: () => <PublicProfileVenueBlock /> },
+  { name: "Track card", category: "Media & audio", description: "UnifiedTrackCard (Widget Directory §5) — artwork, platform badges, play count.", render: () => <TrackCardBlock /> },
+  { name: "Studio card", category: "Studios & venues", description: "UnifiedStudioCard (Widget Directory §2) — imagery, Atmos badge, rating, hourly rate.", render: () => <StudioCardBlock /> },
+  { name: "Featured studio card", category: "Studios & venues", description: "FeaturedStudioCard (Widget Directory §2) — hero promotion banner variant.", render: () => <FeaturedStudioCardBlock /> },
+  { name: "Marketplace card", category: "Marketplace & work", description: "UnifiedMarketplaceCard (Widget Directory §3) — gear rental listing.", render: () => <MarketplaceCardBlock /> },
+  { name: "Opportunity card", category: "Marketplace & work", description: "UnifiedOpportunityCard (Widget Directory §3) — gig/job/collab posting.", render: () => <OpportunityCardBlock /> },
+  { name: "Review card", category: "Social & messaging", description: "UnifiedReviewCard (Widget Directory §7) — reviewer, org, stars, quote, timestamp.", render: () => <ReviewCardBlock /> },
+  { name: "Notification card", category: "Social & messaging", description: "UnifiedNotificationCard (Widget Directory §7) — per-item event-type icon + unread state.", render: () => <NotificationCardBlock /> },
+  { name: "Public reputation widget", category: "Profile & reputation", description: "PublicReputationWidget (Widget Directory §7) — aggregate rating, credits, response rate.", render: () => <PublicReputationWidgetBlock /> },
+  { name: "Recommended collaborator", category: "Discovery", description: "Widget Directory §1 — AI match card with match % and synergy reasons.", render: () => <RecommendedCollaboratorBlock /> },
+  { name: "Discovery search results", category: "Discovery", description: "Widget Directory §1 — mixed-entity global search rows.", render: () => <DiscoverySearchResultBlock /> },
+  { name: "Profile preview sheet", category: "Profile & reputation", description: "Widget Directory §1 — quick-look sheet before the full profile.", render: () => <ProfilePreviewSheetBlock /> },
+  { name: "Networking feed", category: "Social & messaging", description: "Widget Directory §1 — feed post with media and live like toggle.", render: () => <NetworkingFeedBlock /> },
+  { name: "Band members", category: "Studios & venues", description: "Widget Directory §1 — roster with instrument roles and lead.", render: () => <BandMembersBlock /> },
+  { name: "Studio/venue list item", category: "Studios & venues", description: "Widget Directory §2 — compact directory rows.", render: () => <StudioVenueListItemBlock /> },
+  { name: "Studio spec", category: "Studios & venues", description: "Widget Directory §2 — console, monitors, mics, outboard.", render: () => <StudioSpecBlock /> },
+  { name: "Recent project", category: "Marketplace & work", description: "Widget Directory §4 — dashboard portfolio row with edit action.", render: () => <RecentProjectBlock /> },
+  { name: "Waveform audio player", category: "Media & audio", description: "Widget Directory §5 — transport + scrubbable waveform, live state.", render: () => <WaveformPlayerBlock /> },
+  { name: "Hire contact", category: "Marketplace & work", description: "Widget Directory §6 — enquiry form, CTA gated on budget.", render: () => <HireContactBlock /> },
+  { name: "Advanced filters", category: "Discovery", description: "Widget Directory §8 — chips, range slider, Atmos switch. UI only; filtering is mock in the real app.", render: () => <AdvancedFiltersBlock /> },
+  { name: "Artist card & playlist rows", category: "Media & audio", description: "Apple Music reference — full-bleed art, gradient scrim, live now-playing row.", render: () => <ArtistPlaylistBlock /> },
+  { name: "Masonry discovery grid", category: "Discovery", description: "Real Gestalt Masonry (Pinterest's own algorithm) with overlay captions.", render: () => <MasonryDiscoveryBlock /> },
+  { name: "Project card", category: "Marketplace & work", description: "Ported from styleguide #ml-project — artwork, status, verified credits.", render: () => <ProjectCardBlock /> },
+  { name: "Stem mixer", category: "Media & audio", description: "Ported from styleguide #mixer — per-stem mute with live level meters.", render: () => <StemMixerBlock /> },
+  { name: "Brief wizard", category: "Auth & onboarding", description: "Ported from styleguide #pattern-brief-wizard — 8-step casting brief, dots jump.", render: () => <BriefWizardBlock /> },
+  { name: "Textures & effects", category: "Brand & identity", description: "Ported from styleguide #vd-effects — real CSS backgrounds, not screenshots.", render: () => <TexturesBlock /> },
+  { name: "Dark product card", category: "Marketplace & work", description: "Air Force reference — light media panel on a dark body, round cart action.", render: () => <DarkProductCardBlock /> },
+  { name: "Feature step cards", category: "Navigation & chrome", description: "CARD 1 reference — numbered label, one sentence with bold emphasis in the same face.", render: () => <FeatureStepCardBlock /> },
+  { name: "Orbit cluster", category: "Profile & reputation", description: "Inspired people reference — scattered tiles around a full-colour hero, greyscale surround.", render: () => <OrbitClusterBlock /> },
+  { name: "Audio podcast demo", category: "Media & audio", description: "Widget Directory §5 — inline dashboard demo player with live bars.", render: () => <AudioPodcastDemoBlock /> },
+  { name: "WhatsApp share sheet", category: "Social & messaging", description: "Widget Directory §8 — share preview + prefilled message. Labelled UI-only.", render: () => <WhatsAppShareBlock /> },
+  { name: "Home feature card", category: "Discovery", description: "Widget Directory §9 — hero featured slot on the main feed.", render: () => <HomeFeatureCardBlock /> },
+  { name: "Timeline", category: "Booking", description: "Composed - Gestalt ships no Timeline. Booking lifecycle, done/current/upcoming.", render: () => <TimelineBlock /> },
+  { name: "Upload dropzone", category: "Marketplace & work", description: "Composed - Gestalt ships no Upload. Dropzone plus live per-file progress.", render: () => <UploadDropzoneBlock /> },
+  { name: "Progress bar", category: "Data & insight", description: "Composed - Gestalt ships none. Single shared definition, not re-implemented per block.", render: () => <ProgressBarBlock /> },
+  { name: "Slider & date picker", category: "Booking", description: "Composed - Gestalt ships neither. Native inputs tinted to the accent.", render: () => <SliderDatePickerBlock /> },
+  { name: "Skeleton loader", category: "States", description: "Shape-matched skeleton so nothing jumps when content arrives. Honours reduced motion.", render: () => <SkeletonLoaderBlock /> },
+  { name: "Offline & error states", category: "States", description: "Offline banner plus a recoverable error. Copy explains what happened and how to fix it.", render: () => <ConnectionStatesBlock /> },
+  { name: "Swipe deck", category: "Discovery", description: "Ported from styleguide #swipe — left passes, right shortlists, real deck state.", render: () => <SwipeDeckBlock /> },
+  { name: "Replay recap", category: "Media & audio", description: "Apple Music Replay reference — warm wash, month scrubber, mixed-weight editorial stat.", render: () => <ReplayRecapBlock /> },
+  { name: "Ranked artists", category: "Media & audio", description: "Oversized rank numeral inside the artwork, scrim for legibility.", render: () => <RankedArtistsBlock /> },
+  { name: "Illustrated empty state", category: "States", description: "Gradient card, glossy mark, pill CTA — copy invites action rather than apologising.", render: () => <IllustratedEmptyStateBlock /> },
+  { name: "Avatar cluster", category: "Profile & reputation", description: "Squircle tiles with one hero — reads as artwork, not profile photos.", render: () => <AvatarClusterBlock /> },
+  { name: "Share stat card", category: "Social & messaging", description: "Dark editorial share card, one gold-accented fact.", render: () => <ShareStatCardBlock /> },
+  { name: "Mini player", category: "Media & audio", description: "Persistent glassy transport bar — distinct from the full waveform player.", render: () => <MiniPlayerBlock /> },
+  { name: "Splash artwork", category: "Brand & identity", description: "Real screen auth/splash — brand mark, wordmark, both real states.", render: () => <SplashBlock /> },
+  { name: "App icon & logo", category: "Brand & identity", description: "Real MusicLinkd mark at ship sizes, plus pink-field and monochrome variants.", render: () => <AppIconSetBlock /> },
+  { name: "Auth welcome", category: "Auth & onboarding", description: "Real screens auth/welcome + google_signin — real ButtonSocial.", render: () => <AuthWelcomeBlock /> },
+  { name: "OTP verification", category: "Auth & onboarding", description: "Real screen auth/otp_verification — all four real states, switchable.", render: () => <OtpVerificationBlock /> },
+  { name: "Email auth", category: "Auth & onboarding", description: "Real screen auth/email_auth — signup/signin, live validation.", render: () => <EmailAuthBlock /> },
+  { name: "Onboarding wizard", category: "Auth & onboarding", description: "Multi-step with live progress bar, selectable chips, and a review step.", render: () => <OnboardingWizardBlock /> },
+  { name: "Discovery hero card", category: "Discovery", description: "Image-led card with gradient scrim, live favourite toggle, rating.", render: () => <DiscoveryHeroCardBlock /> },
+  { name: "Product card", category: "Marketplace & work", description: "Marketplace rental card — media, copy stack, price + CTA row.", render: () => <ProductCardBlock /> },
+  { name: "Discovery header", category: "Discovery", description: "Greeting + search + filter + scrollable category rail, all live.", render: () => <DiscoveryHeaderBlock /> },
+  { name: "Band card", category: "Studios & venues", description: "Ported from styleguide #ml-band — roster, AvatarGroup, next show.", render: () => <BandCardBlock /> },
+  { name: "Greeting", category: "Auth & onboarding", description: "Ported from styleguide #vd-greeting — dashboard welcome header.", render: () => <GreetingBlock /> },
+  { name: "Profile stats", category: "Profile & reputation", description: "Ported from styleguide #pf-stats — followers / credits / rating.", render: () => <ProfileStatsBlock /> },
+  { name: "Featured artists", category: "Discovery", description: "Ported from styleguide #vd-featured-artists.", render: () => <FeaturedArtistsBlock /> },
+  { name: "KPI cards", category: "Data & insight", description: "Ported from styleguide #db-kpi — real Datapoints with trends.", render: () => <KpiCardsBlock /> },
+  { name: "Insights", category: "Data & insight", description: "Ported from styleguide #vd-insights — weekly metric deltas.", render: () => <InsightsBlock /> },
+  { name: "Workspace card", category: "Marketplace & work", description: "Ported from styleguide #vd-workspace — active projects by stage.", render: () => <WorkspaceCardBlock /> },
+  { name: "Footer CTA", category: "Brand & identity", description: "Ported from styleguide #vd-footer-cta — gradient conversion block.", render: () => <FooterCtaBlock /> },
+  { name: "Talent role variants", category: "Profile & reputation", description: "Ported from styleguide #pr-talent — 6 roles, one skeleton.", render: () => <TalentRoleVariantsBlock /> },
+  { name: "Venue profile flow", category: "Profile & reputation", description: "Ported from styleguide #pr-venue — hero to booking.", render: () => <VenueProfileFlowBlock /> },
+  { name: "Admin data table", category: "Admin", description: "Real Table.SortableHeaderCell + Checkbox selection + pagination controls.", render: () => <AdminDataTableBlock /> },
+  { name: "Admin sidebar", category: "Admin", description: "Real SideNavigation themed for the admin panel.", render: () => <AdminSidebarBlock /> },
+  { name: "Admin top bar", category: "Admin", description: "Real SearchField + IconButtons + Avatar, admin-panel framing.", render: () => <AdminTopBarBlock /> },
 ];
 
 function visibilityBadge(w: WidgetEntry) {
@@ -4007,21 +4022,40 @@ function BlocksGallery({ query }: { query: string }) {
         <Box>
           <Box marginBottom={5}>
             <Text color="subtle">
-              Composed patterns — each built entirely from the components in the Components tab, arranged the way they'd actually appear in a MusicLinkd screen.
+              Composed patterns, built entirely from the components in the Components tab and arranged the way they would actually appear in a MusicLinkd screen. Grouped by where they sit in the product, not by when they were built.
             </Text>
           </Box>
-          <div className="ml-block-grid">
-            {filtered.map((b) => (
-              <Box key={b.name} borderStyle="sm" rounding={4} padding={5}>
-                <Box marginBottom={3}>
-                  <Text weight="bold">{b.name}</Text>
-                  <Text size="100" color="subtle">{b.description}</Text>
+          {/* Grouped rather than one flat list. At 94 blocks a single grid is
+              not browsable: you cannot tell what exists without reading every
+              card. Category headers give the eye somewhere to rest and make
+              absence visible, which is half the point of a system catalogue. */}
+          {BLOCK_CATEGORY_ORDER.map((cat) => {
+            const items = filtered.filter((b) => b.category === cat);
+            if (items.length === 0) return null;
+            return (
+              <Box key={cat} marginBottom={8}>
+                <Box marginBottom={1}>
+                  <Flex alignItems="baseline" gap={2}>
+                    <Heading size="300">{cat}</Heading>
+                    <Text size="100" color="subtle">{items.length}</Text>
+                  </Flex>
                 </Box>
-                {b.render()}
+                <Box marginBottom={4}><Divider /></Box>
+                <div className="ml-block-grid">
+                  {items.map((b) => (
+                    <Box key={b.name} borderStyle="sm" rounding={4} padding={5}>
+                      <Box marginBottom={3}>
+                        <Text weight="bold">{b.name}</Text>
+                        <Text size="100" color="subtle">{b.description}</Text>
+                      </Box>
+                      {b.render()}
+                    </Box>
+                  ))}
+                </div>
               </Box>
-            ))}
-          </div>
-          {filtered.length === 0 && <Text color="subtle">No blocks match “{query}”.</Text>}
+            );
+          })}
+          {filtered.length === 0 && <Text color="subtle">No blocks match that filter.</Text>}
         </Box>
       )}
 
