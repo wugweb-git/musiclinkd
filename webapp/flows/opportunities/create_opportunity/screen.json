@@ -1,0 +1,38 @@
+{
+  "flowKey": "opportunities",
+  "flowTitle": "Opportunities",
+  "flowStatus": "missing",
+  "flowOrder": 5,
+  "screenKey": "create_opportunity",
+  "screenNumber": 134,
+  "screenTitle": "Create Opportunity / Edit Opportunity",
+  "screenOrder": 5,
+  "states": [
+    "default",
+    "publishing",
+    "error"
+  ],
+  "collectionsTouched": [
+    "projects"
+  ],
+  "notes": "MVP, shipped minimal (decided 2026-08-16): title, description, roleRequired, budget, location, publish — writes to projects using rules that already exist. Richer fields (skillsRequired/languagesRequired/locationType/deadline/opportunityType, status-widening beyond OPEN/IN_PROGRESS/COMPLETED) are Phase 2. Not built.",
+  "dataContract": [
+    {
+      "collection": "projects",
+      "sample": {
+        "creatorUid": "mock-business-ironwood-records",
+        "title": "Indie Rock Vocalist Wanted — The Sound Attic",
+        "roleRequired": "Singer / Vocalist",
+        "budget": "₹15,000 / Session",
+        "status": "OPEN",
+        "genres": [
+          "Rock / Metal"
+        ],
+        "applicantCount": 6,
+        "createdAt": "2026-07-25T09:00:00.000Z",
+        "collaborationType": "session_payment",
+        "location": "Mumbai, MH"
+      }
+    }
+  ]
+}

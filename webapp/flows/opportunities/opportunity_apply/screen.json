@@ -1,0 +1,27 @@
+{
+  "flowKey": "opportunities",
+  "flowTitle": "Opportunities",
+  "flowStatus": "missing",
+  "flowOrder": 5,
+  "screenKey": "opportunity_apply",
+  "screenNumber": 132,
+  "screenTitle": "Apply / Submit Portfolio / Application Preview / Submitted",
+  "screenOrder": 3,
+  "states": [
+    "default",
+    "submitting",
+    "submitted",
+    "error"
+  ],
+  "collectionsTouched": [
+    "opportunity_applications"
+  ],
+  "notes": "Phase 2, not MVP — MVP substitutes \"Message the poster\" (reuses chat_threads) for a formal application. Needs the new opportunity_applications collection. Not built.",
+  "dataContract": [
+    {
+      "collection": "opportunity_applications",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}

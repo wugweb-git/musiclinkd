@@ -1,0 +1,36 @@
+{
+  "flowKey": "opportunities",
+  "flowTitle": "Opportunities",
+  "flowStatus": "missing",
+  "flowOrder": 5,
+  "screenKey": "opportunity_detail",
+  "screenNumber": 131,
+  "screenTitle": "Opportunity Detail",
+  "screenOrder": 2,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [
+    "projects"
+  ],
+  "notes": "MVP. Needs ProjectDoc.description (schema landed 2026-08-16). Not built.",
+  "dataContract": [
+    {
+      "collection": "projects",
+      "sample": {
+        "creatorUid": "mock-business-ironwood-records",
+        "title": "Indie Rock Vocalist Wanted — The Sound Attic",
+        "roleRequired": "Singer / Vocalist",
+        "budget": "₹15,000 / Session",
+        "status": "OPEN",
+        "genres": [
+          "Rock / Metal"
+        ],
+        "applicantCount": 6,
+        "createdAt": "2026-07-25T09:00:00.000Z",
+        "collaborationType": "session_payment",
+        "location": "Mumbai, MH"
+      }
+    }
+  ]
+}

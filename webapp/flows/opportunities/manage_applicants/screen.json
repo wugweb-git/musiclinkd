@@ -1,0 +1,25 @@
+{
+  "flowKey": "opportunities",
+  "flowTitle": "Opportunities",
+  "flowStatus": "missing",
+  "flowOrder": 5,
+  "screenKey": "manage_applicants",
+  "screenNumber": 135,
+  "screenTitle": "Manage Applicants",
+  "screenOrder": 6,
+  "states": [
+    "default",
+    "empty"
+  ],
+  "collectionsTouched": [
+    "opportunity_applications"
+  ],
+  "notes": "Phase 2, not MVP. Poster-side view of opportunity_applications where opportunityId == this project. Not built.",
+  "dataContract": [
+    {
+      "collection": "opportunity_applications",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}

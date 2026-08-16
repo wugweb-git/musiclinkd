@@ -1,0 +1,29 @@
+{
+  "flowKey": "opportunities",
+  "flowTitle": "Opportunities",
+  "flowStatus": "missing",
+  "flowOrder": 5,
+  "screenKey": "my_applications",
+  "screenNumber": 133,
+  "screenTitle": "My Applications / Application Status",
+  "screenOrder": 4,
+  "states": [
+    "submitted",
+    "viewed",
+    "shortlisted",
+    "accepted",
+    "rejected",
+    "empty"
+  ],
+  "collectionsTouched": [
+    "opportunity_applications"
+  ],
+  "notes": "Phase 2, not MVP. Not built.",
+  "dataContract": [
+    {
+      "collection": "opportunity_applications",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}
