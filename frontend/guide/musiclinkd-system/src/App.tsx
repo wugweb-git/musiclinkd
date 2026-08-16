@@ -3242,6 +3242,91 @@ function MiniPlayerBlock() {
   );
 }
 
+
+// styleguide #swipe + #p2-swipe — Tinder-style discovery deck.
+// Left = pass, right = shortlist, per the styleguide's own spec.
+// Motion is CSS transform/opacity only (never top/left/width), and it is
+// motivated rather than decorative: the card leaving in the direction you
+// chose is the feedback that your choice registered.
+function SwipeDeckBlock() {
+  const deck = [
+    { n: "Arijit Sen", r: "Singer · Mumbai", img: IMG.vocalist },
+    { n: "Mei Tanaka", r: "Producer · Tokyo", img: IMG.dj },
+    { n: "Ravi Nair", r: "Mix engineer · Delhi", img: IMG.mixing },
+  ];
+  const [i, setI] = useState(0);
+  const [exit, setExit] = useState<"left" | "right" | null>(null);
+  const [shortlist, setShortlist] = useState<string[]>([]);
+
+  function decide(dir: "left" | "right") {
+    if (i >= deck.length) return;
+    if (dir === "right") setShortlist((s) => [...s, deck[i].n]);
+    setExit(dir);
+    window.setTimeout(() => { setExit(null); setI((v) => v + 1); }, 220);
+  }
+  const done = i >= deck.length;
+
+  return (
+    <Box maxWidth={280}>
+      <Box position="relative" height={330}>
+        {done ? (
+          <Box borderStyle="sm" rounding={4} height={330} display="flex"
+            alignItems="center" justifyContent="center" padding={5}>
+            <Flex direction="column" alignItems="center" gap={3}>
+              <Icon icon="check-circle" accessibilityLabel="" size={32} color="success" />
+              <Text align="center" weight="bold">
+                {shortlist.length} shortlisted
+              </Text>
+              <Text size="100" color="subtle" align="center">
+                {shortlist.join(", ") || "You passed on everyone in this deck."}
+              </Text>
+              <Button text="Reload deck" color="gray" size="sm"
+                onClick={() => { setI(0); setShortlist([]); }} />
+            </Flex>
+          </Box>
+        ) : (
+          deck.slice(i, i + 2).reverse().map((c, revIdx, arr) => {
+            const isTop = revIdx === arr.length - 1;
+            const depth = arr.length - 1 - revIdx;
+            const t = isTop && exit
+              ? `translateX(${exit === "left" ? -320 : 320}px) rotate(${exit === "left" ? -14 : 14}deg)`
+              : `scale(${1 - depth * 0.05}) translateY(${depth * 10}px)`;
+            return (
+              <Box key={c.n} position="absolute" top left right
+                dangerouslySetInlineStyle={{ __style: {
+                  transform: t,
+                  opacity: isTop && exit ? 0 : 1,
+                  transition: "transform 220ms cubic-bezier(0.16,1,0.3,1), opacity 220ms ease",
+                } }}>
+                <Box rounding={4} overflow="hidden" borderStyle="sm" position="relative">
+                  <Image alt={c.n} src={c.img} naturalWidth={280} naturalHeight={330} />
+                  <Box position="absolute" bottom left right height={130}
+                    dangerouslySetInlineStyle={{ __style: {
+                      background: "linear-gradient(to top, rgba(13,13,13,0.9), rgba(13,13,13,0))" } }} />
+                  <Box position="absolute" bottom left right padding={4}>
+                    <Heading size="400" color="light">{c.n}</Heading>
+                    <Text size="100" color="light">{c.r}</Text>
+                  </Box>
+                </Box>
+              </Box>
+            );
+          })
+        )}
+      </Box>
+      {!done && (
+        <Box marginTop={4}>
+          <Flex gap={4} justifyContent="center" alignItems="center">
+            <IconButton icon="cancel" accessibilityLabel="Pass" size="lg"
+              bgColor="lightGray" onClick={() => decide("left")} />
+            <IconButton icon="heart" accessibilityLabel="Shortlist" size="lg"
+              bgColor="red" iconColor="white" onClick={() => decide("right")} />
+          </Flex>
+        </Box>
+      )}
+    </Box>
+  );
+}
+
 const BLOCKS: Block[] = [
   { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => <NavHeaderBlock /> },
   { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => <ArtistProfileBlock /> },
@@ -3296,6 +3381,7 @@ const BLOCKS: Block[] = [
   { name: "Stem mixer", description: "Ported from styleguide #mixer — per-stem mute with live level meters.", render: () => <StemMixerBlock /> },
   { name: "Brief wizard", description: "Ported from styleguide #pattern-brief-wizard — 8-step casting brief, dots jump.", render: () => <BriefWizardBlock /> },
   { name: "Textures & effects", description: "Ported from styleguide #vd-effects — real CSS backgrounds, not screenshots.", render: () => <TexturesBlock /> },
+  { name: "Swipe deck", description: "Ported from styleguide #swipe — left passes, right shortlists, real deck state.", render: () => <SwipeDeckBlock /> },
   { name: "Replay recap", description: "Apple Music Replay reference — warm wash, month scrubber, mixed-weight editorial stat.", render: () => <ReplayRecapBlock /> },
   { name: "Ranked artists", description: "Oversized rank numeral inside the artwork, scrim for legibility.", render: () => <RankedArtistsBlock /> },
   { name: "Illustrated empty state", description: "Gradient card, glossy mark, pill CTA — copy invites action rather than apologising.", render: () => <IllustratedEmptyStateBlock /> },
@@ -3419,7 +3505,7 @@ const NOT_BUILT: NotBuiltGroup[] = [
     reason:
       "Checked against both the 27-widget admin directory and all 124 real screens in dist/preview/flows/**/screen.json (titles, notes, dataContracts) — no screen, note, code reference, or widget entry backs any of these. Not built because there's nothing real to build from, not because they're hard.",
     items: [
-      "Skeleton Loaders", "Error Boundary", "Offline Banner", "Shimmer", "Adaptive Banner", "Navbar", "Navbar (Alt)", "Sticky Nav", "Segmented Switch", "Metrics Row", "Uncategorized", "Swipe Deck",
+      "Skeleton Loaders", "Error Boundary", "Offline Banner", "Shimmer", "Adaptive Banner", "Navbar", "Navbar (Alt)", "Sticky Nav", "Segmented Switch", "Metrics Row", "Uncategorized",
       "Ambient Album Card", "Artist Grid Card", "Artist Row Card", "Typing Indicator", "Attachments", "Notification Toggle (distinct from the real NotificationCard widget)",
       "User Header", "Business profile as a distinct card type (Talent and Venue are now built as 'Talent role variants' and 'Venue profile flow')", "Direct Request", "Request Status Tracker", "Application Card", "Rental Card",
     ],

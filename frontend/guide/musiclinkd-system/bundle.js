@@ -44201,6 +44201,122 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       }
     );
   }
+  function SwipeDeckBlock() {
+    const deck = [
+      { n: "Arijit Sen", r: "Singer \xB7 Mumbai", img: IMG.vocalist },
+      { n: "Mei Tanaka", r: "Producer \xB7 Tokyo", img: IMG.dj },
+      { n: "Ravi Nair", r: "Mix engineer \xB7 Delhi", img: IMG.mixing }
+    ];
+    const [i, setI] = (0, import_react2.useState)(0);
+    const [exit, setExit] = (0, import_react2.useState)(null);
+    const [shortlist, setShortlist] = (0, import_react2.useState)([]);
+    function decide(dir) {
+      if (i >= deck.length) return;
+      if (dir === "right") setShortlist((s) => [...s, deck[i].n]);
+      setExit(dir);
+      window.setTimeout(() => {
+        setExit(null);
+        setI((v) => v + 1);
+      }, 220);
+    }
+    const done = i >= deck.length;
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 280, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { position: "relative", height: 330, children: done ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        BoxWithForwardRef,
+        {
+          borderStyle: "sm",
+          rounding: 4,
+          height: 330,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 5,
+          children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 3, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "check-circle", accessibilityLabel: "", size: 32, color: "success" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { align: "center", weight: "bold", children: [
+              shortlist.length,
+              " shortlisted"
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", align: "center", children: shortlist.join(", ") || "You passed on everyone in this deck." }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+              ButtonWithForwardRef,
+              {
+                text: "Reload deck",
+                color: "gray",
+                size: "sm",
+                onClick: () => {
+                  setI(0);
+                  setShortlist([]);
+                }
+              }
+            )
+          ] })
+        }
+      ) : deck.slice(i, i + 2).reverse().map((c, revIdx, arr) => {
+        const isTop = revIdx === arr.length - 1;
+        const depth = arr.length - 1 - revIdx;
+        const t = isTop && exit ? `translateX(${exit === "left" ? -320 : 320}px) rotate(${exit === "left" ? -14 : 14}deg)` : `scale(${1 - depth * 0.05}) translateY(${depth * 10}px)`;
+        return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          BoxWithForwardRef,
+          {
+            position: "absolute",
+            top: true,
+            left: true,
+            right: true,
+            dangerouslySetInlineStyle: { __style: {
+              transform: t,
+              opacity: isTop && exit ? 0 : 1,
+              transition: "transform 220ms cubic-bezier(0.16,1,0.3,1), opacity 220ms ease"
+            } },
+            children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { rounding: 4, overflow: "hidden", borderStyle: "sm", position: "relative", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: c.n, src: c.img, naturalWidth: 280, naturalHeight: 330 }),
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                BoxWithForwardRef,
+                {
+                  position: "absolute",
+                  bottom: true,
+                  left: true,
+                  right: true,
+                  height: 130,
+                  dangerouslySetInlineStyle: { __style: {
+                    background: "linear-gradient(to top, rgba(13,13,13,0.9), rgba(13,13,13,0))"
+                  } }
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "absolute", bottom: true, left: true, right: true, padding: 4, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", color: "light", children: c.n }),
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "light", children: c.r })
+              ] })
+            ] })
+          },
+          c.n
+        );
+      }) }),
+      !done && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 4, justifyContent: "center", alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          IconButtonWithForwardRef,
+          {
+            icon: "cancel",
+            accessibilityLabel: "Pass",
+            size: "lg",
+            bgColor: "lightGray",
+            onClick: () => decide("left")
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          IconButtonWithForwardRef,
+          {
+            icon: "heart",
+            accessibilityLabel: "Shortlist",
+            size: "lg",
+            bgColor: "red",
+            iconColor: "white",
+            onClick: () => decide("right")
+          }
+        )
+      ] }) })
+    ] });
+  }
   var BLOCKS = [
     { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NavHeaderBlock, {}) },
     { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ArtistProfileBlock, {}) },
@@ -44255,6 +44371,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     { name: "Stem mixer", description: "Ported from styleguide #mixer \u2014 per-stem mute with live level meters.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(StemMixerBlock, {}) },
     { name: "Brief wizard", description: "Ported from styleguide #pattern-brief-wizard \u2014 8-step casting brief, dots jump.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BriefWizardBlock, {}) },
     { name: "Textures & effects", description: "Ported from styleguide #vd-effects \u2014 real CSS backgrounds, not screenshots.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TexturesBlock, {}) },
+    { name: "Swipe deck", description: "Ported from styleguide #swipe \u2014 left passes, right shortlists, real deck state.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SwipeDeckBlock, {}) },
     { name: "Replay recap", description: "Apple Music Replay reference \u2014 warm wash, month scrubber, mixed-weight editorial stat.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ReplayRecapBlock, {}) },
     { name: "Ranked artists", description: "Oversized rank numeral inside the artwork, scrim for legibility.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(RankedArtistsBlock, {}) },
     { name: "Illustrated empty state", description: "Gradient card, glossy mark, pill CTA \u2014 copy invites action rather than apologising.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IllustratedEmptyStateBlock, {}) },
@@ -44356,7 +44473,6 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
         "Segmented Switch",
         "Metrics Row",
         "Uncategorized",
-        "Swipe Deck",
         "Ambient Album Card",
         "Artist Grid Card",
         "Artist Row Card",
