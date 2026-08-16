@@ -2737,6 +2737,12 @@ function WidgetsDirectory({ query }: { query: string }) {
   );
 }
 
+// RECONCILED 2026-08-16 (eighth pass): this list is only honest if it shrinks
+// when things get built. Removed from it this pass because they now exist as
+// real Blocks: Band Card, Gradient Hero Cards (-> "Hero"), Footer CTA Block,
+// and the Talent/Venue halves of the profile-card entry. Everything still
+// listed below was re-checked and genuinely has no backing.
+//
 // Every one of these was checked against a real source (Gestalt's actual
 // export list, the 27-widget admin directory, or the 124-screen
 // dist/preview/flows/**/screen.json registry) before being left out — none
@@ -2764,14 +2770,14 @@ const NOT_BUILT: NotBuiltGroup[] = [
     items: [
       "Skeleton Loaders", "Error Boundary", "Offline Banner", "Shimmer", "Adaptive Banner", "Navbar", "Navbar (Alt)", "Sticky Nav", "Segmented Switch", "Metrics Row", "Uncategorized", "Swipe Deck", "Brief Wizard",
       "Ambient Album Card", "Artist Grid Card", "Artist Row Card", "Typing Indicator", "Attachments", "Notification Toggle (distinct from the real NotificationCard widget)",
-      "Multi-Track Stem Mixer", "Equalizer", "User Header", "Talent/Band/Business/Venue as separate card types", "Direct Request", "Request Status Tracker", "Band Card", "Application Card", "Rental Card",
+      "Multi-Track Stem Mixer", "Equalizer", "User Header", "Business profile as a distinct card type (Talent and Venue are now built as 'Talent role variants' and 'Venue profile flow')", "Direct Request", "Request Status Tracker", "Application Card", "Rental Card",
     ],
   },
   {
     title: "Aesthetic-inspiration references, not real screens",
     reason:
       "The old styleguide's “24 Inspired” section was explicit moodboard/inspiration material, not real MusicLinkd screens or components — building these as if they were real product UI would misrepresent what actually exists.",
-    items: ["Gradient Hero Cards", "Content Design Patterns", "Artist Cards & Playlist Rows (as a distinct inspired pattern)", "Masonry Card Grid (as inspiration — the real Masonry component itself IS used, in Cover art gallery)", "Full-Bleed Bold Cards"],
+    items: ["Content Design Patterns", "Artist Cards & Playlist Rows (as a distinct inspired pattern)", "Masonry Card Grid (as inspiration — the real Masonry component itself IS used, in Cover art gallery)", "Full-Bleed Bold Cards"],
   },
 ];
 

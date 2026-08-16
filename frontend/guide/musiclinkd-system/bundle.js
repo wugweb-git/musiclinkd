@@ -43729,10 +43729,9 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
         "Multi-Track Stem Mixer",
         "Equalizer",
         "User Header",
-        "Talent/Band/Business/Venue as separate card types",
+        "Business profile as a distinct card type (Talent and Venue are now built as 'Talent role variants' and 'Venue profile flow')",
         "Direct Request",
         "Request Status Tracker",
-        "Band Card",
         "Application Card",
         "Rental Card"
       ]
@@ -43740,7 +43739,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     {
       title: "Aesthetic-inspiration references, not real screens",
       reason: "The old styleguide's \u201C24 Inspired\u201D section was explicit moodboard/inspiration material, not real MusicLinkd screens or components \u2014 building these as if they were real product UI would misrepresent what actually exists.",
-      items: ["Gradient Hero Cards", "Content Design Patterns", "Artist Cards & Playlist Rows (as a distinct inspired pattern)", "Masonry Card Grid (as inspiration \u2014 the real Masonry component itself IS used, in Cover art gallery)", "Full-Bleed Bold Cards"]
+      items: ["Content Design Patterns", "Artist Cards & Playlist Rows (as a distinct inspired pattern)", "Masonry Card Grid (as inspiration \u2014 the real Masonry component itself IS used, in Cover art gallery)", "Full-Bleed Bold Cards"]
     }
   ];
   function NotBuiltRegistry() {

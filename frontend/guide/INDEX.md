@@ -41,7 +41,17 @@ Upload / file-dropzone, Timeline, Skeleton Loading, Progress Bar, Time Picker, D
 
 **"06 MusicLinkd Components" / "07 Blocks" / "24 Inspired" — validated against the real screen registry, not just the widget directory this time.** Newly confirmed real and built this round: Booking Summary (real screen, real dataContract sample used verbatim — studio "Yash Raj Sound Studios," ₹32,000, Aug 12), Availability Calendar (real screen, real `monthly/weekly/timeline` states), Chat / Message Bubble (real screens `chat_thread_list` + `chat_conversation`), Rating Breakdown (real screen), Write Review (real screen, real states used for the star/comment flow), Success State (real screen), Credit Attribution (real screen), Section Tabs (real tab names taken directly from real business-profile screens: Services Tab, Team & Works Tab, Reviews & Gallery Tab, Equipment Tab).
 
-Still **no confirmed backing anywhere** (neither the widget directory nor the 124-screen registry) — not built: Ambient Album Card, Artist Grid Card, Artist Row Card, Typing Indicator, Attachments, Notification Toggle (Notification *Settings* is real and already covered by the widget directory's `NotificationCard`/settings screens, but a distinct "toggle" widget isn't), Multi-Track Stem Mixer, Equalizer, User Header, Talent/Band/Business/Venue as separate card types, Direct Request, Request Status Tracker, Band Card, Application Card, Rental Card, plus effectively all of "24 Inspired" (Gradient Hero Cards, Content Design Patterns, Full-Bleed Bold Cards, etc. — these were explicitly aesthetic-inspiration references in the old file, not real MusicLinkd screens).
+Still **no confirmed backing anywhere** (neither the widget directory nor the 124-screen registry) — not built: Ambient Album Card, Artist Grid Card, Artist Row Card, Typing Indicator, Attachments, Notification Toggle (Notification *Settings* is real and already covered by the widget directory's `NotificationCard`/settings screens, but a distinct "toggle" widget isn't), Multi-Track Stem Mixer, Equalizer, User Header, Business profile as a distinct card type, Direct Request, Request Status Tracker, Application Card, Rental Card, plus most of "24 Inspired" (Content Design Patterns, Full-Bleed Bold Cards, etc. — explicitly aesthetic-inspiration references in the old file, not real MusicLinkd screens).
+
+**Registry reconciled, eighth pass.** The in-app "Not built" list is only
+honest if it shrinks when things get built, so it was re-checked against the
+current Blocks and went **57 -> 55 items**. Removed because they now exist as
+real Blocks: **Band Card**, **Gradient Hero Cards** (built as "Hero"),
+**Footer CTA Block**, and the Talent and Venue halves of the profile-card
+entry (now "Talent role variants" and "Venue profile flow"). Everything still
+listed was re-verified as genuinely unbacked. The 19 Android-native items and
+the 9 not-in-Gestalt components are unchanged — those are platform and
+upstream-library facts, not backlog.
 
 Also built this round, admin-panel perspective (not from the old styleguide list, per the direct request): Admin data table (real `Table.SortableHeaderCell` + `Checkbox` selection + pagination), Admin sidebar (real `SideNavigation`, admin-themed), Admin top bar.
 
