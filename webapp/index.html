@@ -49,7 +49,6 @@
     position: relative;
   }
   .wb-main .phone-frame { flex-shrink: 0; }
-  .wb-main .phone-screen iframe { width: 100%; height: 100%; border: 0; display: block; background: var(--paper); }
   .wb-empty { color: var(--muted); text-align: center; font-size: var(--type-2); }
 
   .wb-menu-btn { display: none; }
@@ -161,11 +160,6 @@
       <div class="battery">100%</div>
     </div>
     <iframe id="preview-frame" title="Screen preview" src="about:blank"></iframe>
-    <div class="phone-body">
-      <div style="position:relative;inset:0;border-radius:26px;overflow:hidden">
-        <!-- screen content via iframe -->
-      </div>
-    </div>
   </div>
 
   <style>
@@ -222,8 +216,24 @@
       width: 16px; height: 8px;
       background: #FFD60A; border-radius: 2px;
     }
-    /* Body — the actual screen content lives inside the iframe */
-    .phone-body { padding: 12px; }
+    /* Screen content lives in this iframe. It used to be an unstyled bare
+       child of .phone-frame with no width/height rule reaching it at all
+       (the old CSS targeted ".phone-screen iframe", a class that doesn't
+       exist anywhere in this markup) — so it rendered at the browser's
+       default replaced-element size (~300×150px) and every preview showed
+       as a small clipped box in the top-left of the frame instead of
+       filling the device outline. Positioned + sized explicitly here,
+       starting below the status bar and filling the rest of the frame. */
+    #preview-frame {
+      position: absolute;
+      inset: 24px 0 0 0;
+      width: 100%;
+      height: calc(100% - 24px);
+      border: 0;
+      display: block;
+      background: var(--paper, #fff);
+      border-radius: 0 0 34px 34px;
+    }
   </style>
   </main>
 </div>
