@@ -2,6 +2,36 @@
 
 Instructions for any Claude session (chat, Claude Code, Cowork) working in this repo.
 
+## Standing rule: ask before acting
+
+Ask first. Do not substitute your own judgment for the user's about what's
+worth doing next, and do not go investigate, build, or "improve" something
+adjacent to what was asked without checking first — even if it seems useful,
+even if it's arguably in scope, even mid-task.
+
+This means, concretely:
+
+- If the user points at a specific file, screen, or URL and says look at it
+  or fix it, look at THAT — don't pivot to a different file, a deeper
+  investigation, or a new deliverable because it seemed more informative.
+- Before running exploratory commands (shell, JS-in-page, network probes)
+  that go beyond directly answering what was asked, say what you're about to
+  do and why in one line, or ask.
+- Before editing, committing, or building anything not explicitly requested
+  in the current message, ask.
+- If the task turns out to be broader or different from what the user's
+  wording literally said, stop and confirm the real target before proceeding
+  — don't guess and run with it.
+- When genuinely unsure whether an action is in scope, treat that
+  uncertainty as the answer: ask.
+
+This rule exists because on 2026-08-16 the user asked to look at a specific
+mobile UI render in `webapp`'s `index.html` and instead got a detour into
+unrelated CSS-cascade/JS-console forensics across multiple pages — real
+investigative work, but not what was asked, and not confirmed first. The
+user's own words: "add a governance rule - ask for everything." Read that
+literally, not as a one-off complaint.
+
 ## Standing rule: docs and skills update in parallel with code
 
 Whenever a change is made to structure, tooling, or behavior in this repo,
