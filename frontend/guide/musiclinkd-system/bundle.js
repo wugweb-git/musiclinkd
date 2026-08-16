@@ -43580,6 +43580,212 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Apply filters", color: "red", fullWidth: true })
     ] });
   }
+  function ArtistPlaylistBlock() {
+    const rows = [
+      { n: "Tum Hi Toh (Unplugged)", a: "Arijit Sen", d: "3:42", img: IMG.vocalist },
+      { n: "Neon Tide", a: "Mei Tanaka", d: "4:05", img: IMG.mixing },
+      { n: "Safar", a: "Ravi Nair", d: "3:18", img: IMG.dj }
+    ];
+    const [nowPlaying, setNowPlaying] = (0, import_react2.useState)(0);
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 340, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "relative", rounding: 4, overflow: "hidden", marginBottom: 4, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Arijit Sen", src: IMG.vocalist, naturalWidth: 340, naturalHeight: 220 }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          BoxWithForwardRef,
+          {
+            position: "absolute",
+            bottom: true,
+            left: true,
+            right: true,
+            height: 130,
+            dangerouslySetInlineStyle: { __style: { background: "linear-gradient(to top, rgba(13,13,13,0.92), rgba(13,13,13,0))" } }
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "absolute", bottom: true, left: true, right: true, padding: 4, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "light", children: "FEATURED ARTIST" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "600", color: "light", children: "Arijit Sen" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "light", children: "482K monthly listeners" })
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 1, children: rows.map((r, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TapAreaWithForwardRef, { onTap: () => setNowPlaying(i), rounding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { padding: 2, rounding: 2, color: nowPlaying === i ? "secondary" : "transparent", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 44, height: 44, rounding: 1, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "", src: r.img, naturalWidth: 44, naturalHeight: 44 }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { flex: "grow", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: r.n }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: r.a })
+        ] }),
+        nowPlaying === i ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "sound", accessibilityLabel: "Now playing", size: 14 }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: r.d })
+      ] }) }) }, r.n)) })
+    ] });
+  }
+  function MasonryDiscoveryBlock() {
+    const pins = [
+      { id: 1, h: 200, img: IMG.studio, t: "Yash Raj Studios", s: "Andheri \xB7 \u20B98,000/hr" },
+      { id: 2, h: 140, img: IMG.dj, t: "Ravi Nair", s: "Producer \xB7 Mumbai" },
+      { id: 3, h: 175, img: IMG.mic, t: "Neumann U87", s: "\u20B9800/day" },
+      { id: 4, h: 155, img: IMG.mixing, t: "Neon Tide", s: "482K plays" },
+      { id: 5, h: 185, img: IMG.controller, t: "Bloom Studio A", s: "Atmos \xB7 4.6 \u2605" },
+      { id: 6, h: 130, img: IMG.vocalist, t: "Arijit Sen", s: "Singer \xB7 Verified" }
+    ];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 340, height: 430, overflow: "scrollY", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+      Masonry$1,
+      {
+        columnWidth: 158,
+        gutterWidth: 10,
+        minCols: 2,
+        items: pins,
+        renderItem: ({ data }) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "relative", rounding: 3, overflow: "hidden", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: data.t, src: data.img, naturalWidth: 158, naturalHeight: data.h }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            BoxWithForwardRef,
+            {
+              position: "absolute",
+              bottom: true,
+              left: true,
+              right: true,
+              height: 70,
+              dangerouslySetInlineStyle: { __style: { background: "linear-gradient(to top, rgba(13,13,13,0.85), rgba(13,13,13,0))" } }
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "absolute", bottom: true, left: true, right: true, padding: 2, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", color: "light", children: data.t }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "light", children: data.s })
+          ] })
+        ] })
+      }
+    ) });
+  }
+  function ProjectCardBlock() {
+    const credits = [
+      { n: "Ananya Sharma", r: "Singer", v: true },
+      { n: "Rahul Varma", r: "Mixing engineer", v: true },
+      { n: "Ravi Nair", r: "Producer", v: false }
+    ];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, overflow: "hidden", maxWidth: 340, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "relative", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Dil Ki Raah artwork", src: IMG.mixing, naturalWidth: 340, naturalHeight: 170 }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { position: "absolute", top: true, right: true, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "Released", type: "success" }) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { padding: 4, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: "Dil Ki Raah" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Vocal production \xB7 2026" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Divider, {}) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", color: "subtle", children: "CREDITS" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: credits.map((c) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: c.n }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: c.r })
+          ] }),
+          c.v ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 1, alignItems: "center", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "check-circle-fill", accessibilityLabel: "Verified", size: 12, color: "success" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "success", children: "Verified" })
+          ] }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "Pending", type: "neutral" })
+        ] }, c.n)) }) })
+      ] })
+    ] });
+  }
+  function StemMixerBlock() {
+    const stems = [
+      { n: "Lead vocal", lvl: 82 },
+      { n: "Backing vox", lvl: 54 },
+      { n: "Guitars", lvl: 68 },
+      { n: "Bass", lvl: 74 },
+      { n: "Drums", lvl: 90 }
+    ];
+    const [muted, setMuted] = (0, import_react2.useState)([]);
+    const toggle2 = (n) => setMuted((p) => p.includes(n) ? p.filter((x) => x !== n) : [...p, n]);
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 4, maxWidth: 340, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Neon Horizon \u2014 Mix Pass v3" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "128 BPM \xB7 F#m \xB7 24-bit/48kHz" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 3, children: stems.map((s) => {
+        const off = muted.includes(s.n);
+        return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 92, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: off ? "subtle" : "default", children: s.n }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { flex: "grow", height: 8, rounding: "pill", color: "secondary", overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            BoxWithForwardRef,
+            {
+              height: 8,
+              rounding: "pill",
+              dangerouslySetInlineStyle: { __style: {
+                width: `${off ? 0 : s.lvl}%`,
+                background: "var(--ml-accent)",
+                transition: "width 200ms cubic-bezier(0.55,0,0,1)"
+              } }
+            }
+          ) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            IconButtonWithForwardRef,
+            {
+              icon: off ? "mute" : "sound",
+              accessibilityLabel: off ? `Unmute ${s.n}` : `Mute ${s.n}`,
+              size: "sm",
+              onClick: () => toggle2(s.n)
+            }
+          )
+        ] }, s.n);
+      }) }) })
+    ] });
+  }
+  function BriefWizardBlock() {
+    const steps = ["Role", "Genre", "Budget", "Dates", "Location", "Skills", "Refs", "Review"];
+    const [i, setI] = (0, import_react2.useState)(2);
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 360, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
+        "Casting brief \xB7 step ",
+        i + 1,
+        " of ",
+        steps.length
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, marginBottom: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 1, alignItems: "center", children: steps.map((s, n) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TapAreaWithForwardRef, { onTap: () => setI(n), rounding: "circle", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        BoxWithForwardRef,
+        {
+          width: n === i ? 24 : 8,
+          height: 8,
+          rounding: "pill",
+          dangerouslySetInlineStyle: { __style: {
+            background: n <= i ? "var(--ml-black)" : "#E9E9E9",
+            transition: "width 180ms ease"
+          } }
+        }
+      ) }, s)) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: steps[i] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, marginBottom: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: i === 7 ? "Confirm and post this brief to the marketplace." : `Tell us about the ${steps[i].toLowerCase()} for this casting call.` }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, children: [
+        i > 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Back", color: "gray", size: "sm", onClick: () => setI((v) => v - 1) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { flex: "grow", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          ButtonWithForwardRef,
+          {
+            fullWidth: true,
+            color: "red",
+            size: "sm",
+            text: i === steps.length - 1 ? "Post brief" : "Next",
+            onClick: () => i < steps.length - 1 && setI((v) => v + 1)
+          }
+        ) })
+      ] })
+    ] });
+  }
+  function TexturesBlock() {
+    const fx = [
+      { n: "Dots", css: { backgroundImage: "radial-gradient(#0D0D0D 1px, transparent 1px)", backgroundSize: "12px 12px", opacity: 0.5 } },
+      { n: "Grid", css: { backgroundImage: "linear-gradient(#ECECF1 1px, transparent 1px), linear-gradient(90deg, #ECECF1 1px, transparent 1px)", backgroundSize: "16px 16px" } },
+      { n: "Brand gradient", css: { background: "linear-gradient(135deg, #EA4C89 0%, #0D0B26 100%)" } },
+      { n: "Glow", css: { background: "radial-gradient(circle at 30% 30%, rgba(234,76,137,0.55), transparent 60%), #0D0B26" } },
+      { n: "Glass", css: { background: "rgba(255,255,255,0.55)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.7)" } },
+      { n: "Noise", css: { background: "#F1F5F9", backgroundImage: "repeating-linear-gradient(45deg, rgba(13,13,13,0.045) 0 1px, transparent 1px 3px)" } }
+    ];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 340, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 2, wrap: true, children: fx.map((f) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { width: 104, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        BoxWithForwardRef,
+        {
+          height: 64,
+          rounding: 2,
+          overflow: "hidden",
+          dangerouslySetInlineStyle: { __style: f.css }
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", align: "center", children: f.n }) })
+    ] }, f.n)) }) });
+  }
   var BLOCKS = [
     { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NavHeaderBlock, {}) },
     { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ArtistProfileBlock, {}) },
@@ -43628,6 +43834,12 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     { name: "Waveform audio player", description: "Widget Directory \xA75 \u2014 transport + scrubbable waveform, live state.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(WaveformPlayerBlock, {}) },
     { name: "Hire contact", description: "Widget Directory \xA76 \u2014 enquiry form, CTA gated on budget.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(HireContactBlock, {}) },
     { name: "Advanced filters", description: "Widget Directory \xA78 \u2014 chips, range slider, Atmos switch. UI only; filtering is mock in the real app.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(AdvancedFiltersBlock, {}) },
+    { name: "Artist card & playlist rows", description: "Apple Music reference \u2014 full-bleed art, gradient scrim, live now-playing row.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ArtistPlaylistBlock, {}) },
+    { name: "Masonry discovery grid", description: "Real Gestalt Masonry (Pinterest's own algorithm) with overlay captions.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(MasonryDiscoveryBlock, {}) },
+    { name: "Project card", description: "Ported from styleguide #ml-project \u2014 artwork, status, verified credits.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ProjectCardBlock, {}) },
+    { name: "Stem mixer", description: "Ported from styleguide #mixer \u2014 per-stem mute with live level meters.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(StemMixerBlock, {}) },
+    { name: "Brief wizard", description: "Ported from styleguide #pattern-brief-wizard \u2014 8-step casting brief, dots jump.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BriefWizardBlock, {}) },
+    { name: "Textures & effects", description: "Ported from styleguide #vd-effects \u2014 real CSS backgrounds, not screenshots.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TexturesBlock, {}) },
     { name: "Onboarding wizard", description: "Multi-step with live progress bar, selectable chips, and a review step.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(OnboardingWizardBlock, {}) },
     { name: "Discovery hero card", description: "Image-led card with gradient scrim, live favourite toggle, rating.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(DiscoveryHeroCardBlock, {}) },
     { name: "Product card", description: "Marketplace rental card \u2014 media, copy stack, price + CTA row.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ProductCardBlock, {}) },
@@ -43719,15 +43931,12 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
         "Metrics Row",
         "Uncategorized",
         "Swipe Deck",
-        "Brief Wizard",
         "Ambient Album Card",
         "Artist Grid Card",
         "Artist Row Card",
         "Typing Indicator",
         "Attachments",
         "Notification Toggle (distinct from the real NotificationCard widget)",
-        "Multi-Track Stem Mixer",
-        "Equalizer",
         "User Header",
         "Business profile as a distinct card type (Talent and Venue are now built as 'Talent role variants' and 'Venue profile flow')",
         "Direct Request",

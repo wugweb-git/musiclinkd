@@ -219,6 +219,37 @@ instead of stretching to the tallest in the row (verified in-browser: a row
 locked at 175px each relaxed to 175/143/143/151/135). Added
 `scroll-margin-top: 76px` so anchor jumps clear the 61px sticky nav.
 
+
+### Ninth pass — music-first cards, textures, interactive audio (2026-08-16)
+
+Six more Blocks ported from `styleguide.html`, taking the total to **70**.
+Visual reference for the music-first cards is Apple Music / Shazam: large
+imagery, gradient scrims for legibility over photography, bold names, minimal
+chrome.
+
+- **Artist card & playlist rows** (`#vd-apple-music`) — full-bleed artwork
+  with a gradient scrim, plus playlist rows with a live now-playing state.
+- **Masonry discovery grid** (`#vd-pinterest`) — real Gestalt `Masonry`
+  (Pinterest's own algorithm), not a CSS-column imitation.
+- **Project card** (`#ml-project`) — artwork, release status, and the
+  verified/pending credit distinction.
+- **Stem mixer** (`#mixer` + `#vd-equalizer`) — per-stem mute with live level
+  meters. Levels are deterministic per stem, not randomised, so the demo
+  renders identically on every paint instead of flickering.
+- **Brief wizard** (`#pattern-brief-wizard`) — the 8-step casting brief as a
+  real navigable stepper; the step dots double as jump targets.
+- **Textures & effects** (`#vd-effects`) — dots, grid, brand gradient, glow,
+  glass, noise. Every swatch is a real CSS background, so the block is
+  copyable reference rather than a picture of one.
+
+All imagery comes from the shared `IMG` map — the same Unsplash assets
+`styleguide.html` uses.
+
+**Not-built registry: 55 -> 52.** Removed Multi-Track Stem Mixer, Equalizer
+and Brief Wizard, which now exist. Masonry Card Grid remains listed under the
+aesthetic-inspiration group even though the grid is built, because that entry
+refers to the *Pinterest-inspired visual treatment* rather than the component.
+
 ## styleguide.html — seventh pass (2026-08-16)
 
 Real booking data replaced the fabricated "North Room / 20 Aug / Rs 7,200"

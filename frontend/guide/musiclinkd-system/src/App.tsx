@@ -2608,6 +2608,228 @@ function AdvancedFiltersBlock() {
   );
 }
 
+
+// ===== Music-first cards, textures and interactive audio =====
+// Ported from styleguide.html (#pattern-brief-wizard, #vd-effects,
+// #vd-apple-music, #vd-pinterest, #ml-project, #mixer, #vd-equalizer).
+// Visual reference for the music-first cards is Apple Music / Shazam:
+// large imagery, gradient overlays for legibility, bold names, minimal chrome.
+
+// styleguide #vd-apple-music — Featured artist card + playlist rows.
+function ArtistPlaylistBlock() {
+  const rows = [
+    { n: "Tum Hi Toh (Unplugged)", a: "Arijit Sen", d: "3:42", img: IMG.vocalist },
+    { n: "Neon Tide", a: "Mei Tanaka", d: "4:05", img: IMG.mixing },
+    { n: "Safar", a: "Ravi Nair", d: "3:18", img: IMG.dj },
+  ];
+  const [nowPlaying, setNowPlaying] = useState(0);
+  return (
+    <Box maxWidth={340}>
+      {/* Featured card: full-bleed art, gradient scrim, bold name over it. */}
+      <Box position="relative" rounding={4} overflow="hidden" marginBottom={4}>
+        <Image alt="Arijit Sen" src={IMG.vocalist} naturalWidth={340} naturalHeight={220} />
+        <Box position="absolute" bottom left right height={130}
+          dangerouslySetInlineStyle={{ __style: { background: "linear-gradient(to top, rgba(13,13,13,0.92), rgba(13,13,13,0))" } }} />
+        <Box position="absolute" bottom left right padding={4}>
+          <Text size="100" color="light">FEATURED ARTIST</Text>
+          <Heading size="600" color="light">Arijit Sen</Heading>
+          <Text size="100" color="light">482K monthly listeners</Text>
+        </Box>
+      </Box>
+      <Flex direction="column" gap={1}>
+        {rows.map((r, i) => (
+          <TapArea key={r.n} onTap={() => setNowPlaying(i)} rounding={2}>
+            <Box padding={2} rounding={2} color={nowPlaying === i ? "secondary" : "transparent"}>
+              <Flex gap={3} alignItems="center">
+                <Box width={44} height={44} rounding={1} overflow="hidden">
+                  <Image alt="" src={r.img} naturalWidth={44} naturalHeight={44} />
+                </Box>
+                <Box flex="grow">
+                  <Text size="100" weight="bold">{r.n}</Text>
+                  <Text size="100" color="subtle">{r.a}</Text>
+                </Box>
+                {nowPlaying === i
+                  ? <Icon icon="sound" accessibilityLabel="Now playing" size={14} />
+                  : <Text size="100" color="subtle">{r.d}</Text>}
+              </Flex>
+            </Box>
+          </TapArea>
+        ))}
+      </Flex>
+    </Box>
+  );
+}
+
+// styleguide #vd-pinterest — Masonry discovery grid. Uses Gestalt's real
+// Masonry (Pinterest's own algorithm), not a CSS column fake.
+function MasonryDiscoveryBlock() {
+  type Pin = { id: number; h: number; img: string; t: string; s: string };
+  const pins: Pin[] = [
+    { id: 1, h: 200, img: IMG.studio, t: "Yash Raj Studios", s: "Andheri · ₹8,000/hr" },
+    { id: 2, h: 140, img: IMG.dj, t: "Ravi Nair", s: "Producer · Mumbai" },
+    { id: 3, h: 175, img: IMG.mic, t: "Neumann U87", s: "₹800/day" },
+    { id: 4, h: 155, img: IMG.mixing, t: "Neon Tide", s: "482K plays" },
+    { id: 5, h: 185, img: IMG.controller, t: "Bloom Studio A", s: "Atmos · 4.6 ★" },
+    { id: 6, h: 130, img: IMG.vocalist, t: "Arijit Sen", s: "Singer · Verified" },
+  ];
+  return (
+    <Box width={340} height={430} overflow="scrollY">
+      <Masonry
+        columnWidth={158} gutterWidth={10} minCols={2} items={pins}
+        renderItem={({ data }) => (
+          <Box position="relative" rounding={3} overflow="hidden">
+            <Image alt={data.t} src={data.img} naturalWidth={158} naturalHeight={data.h} />
+            <Box position="absolute" bottom left right height={70}
+              dangerouslySetInlineStyle={{ __style: { background: "linear-gradient(to top, rgba(13,13,13,0.85), rgba(13,13,13,0))" } }} />
+            <Box position="absolute" bottom left right padding={2}>
+              <Text size="100" weight="bold" color="light">{data.t}</Text>
+              <Text size="100" color="light">{data.s}</Text>
+            </Box>
+          </Box>
+        )}
+      />
+    </Box>
+  );
+}
+
+// styleguide #ml-project — Project card with verified credits.
+function ProjectCardBlock() {
+  const credits = [
+    { n: "Ananya Sharma", r: "Singer", v: true },
+    { n: "Rahul Varma", r: "Mixing engineer", v: true },
+    { n: "Ravi Nair", r: "Producer", v: false },
+  ];
+  return (
+    <Box borderStyle="sm" rounding={4} overflow="hidden" maxWidth={340}>
+      <Box position="relative">
+        <Image alt="Dil Ki Raah artwork" src={IMG.mixing} naturalWidth={340} naturalHeight={170} />
+        <Box position="absolute" top right padding={3}><Badge text="Released" type="success" /></Box>
+      </Box>
+      <Box padding={4}>
+        <Heading size="400">Dil Ki Raah</Heading>
+        <Text size="100" color="subtle">Vocal production · 2026</Text>
+        <Box marginTop={3} marginBottom={3}><Divider /></Box>
+        <Text size="100" weight="bold" color="subtle">CREDITS</Text>
+        <Box marginTop={2}>
+          <Flex direction="column" gap={2}>
+            {credits.map((c) => (
+              <Flex key={c.n} justifyContent="between" alignItems="center">
+                <Box><Text size="100">{c.n}</Text><Text size="100" color="subtle">{c.r}</Text></Box>
+                {c.v
+                  ? <Flex gap={1} alignItems="center"><Icon icon="check-circle-fill" accessibilityLabel="Verified" size={12} color="success" /><Text size="100" color="success">Verified</Text></Flex>
+                  : <Badge text="Pending" type="neutral" />}
+              </Flex>
+            ))}
+          </Flex>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+// styleguide #mixer + #vd-equalizer — Multi-track stem mixer with per-stem
+// mute and a live level meter. Levels are deterministic per stem, not random.
+function StemMixerBlock() {
+  const stems = [
+    { n: "Lead vocal", lvl: 82 }, { n: "Backing vox", lvl: 54 },
+    { n: "Guitars", lvl: 68 }, { n: "Bass", lvl: 74 }, { n: "Drums", lvl: 90 },
+  ];
+  const [muted, setMuted] = useState<string[]>([]);
+  const toggle = (n: string) => setMuted((p) => (p.includes(n) ? p.filter((x) => x !== n) : [...p, n]));
+  return (
+    <Box borderStyle="sm" rounding={4} padding={4} maxWidth={340}>
+      <Text weight="bold">Neon Horizon — Mix Pass v3</Text>
+      <Text size="100" color="subtle">128 BPM · F#m · 24-bit/48kHz</Text>
+      <Box marginTop={4}>
+        <Flex direction="column" gap={3}>
+          {stems.map((s) => {
+            const off = muted.includes(s.n);
+            return (
+              <Flex key={s.n} gap={2} alignItems="center">
+                <Box width={92}><Text size="100" color={off ? "subtle" : "default"}>{s.n}</Text></Box>
+                <Box flex="grow" height={8} rounding="pill" color="secondary" overflow="hidden">
+                  <Box height={8} rounding="pill"
+                    dangerouslySetInlineStyle={{ __style: {
+                      width: `${off ? 0 : s.lvl}%`,
+                      background: "var(--ml-accent)",
+                      transition: "width 200ms cubic-bezier(0.55,0,0,1)" } }} />
+                </Box>
+                <IconButton icon={off ? "mute" : "sound"} accessibilityLabel={off ? `Unmute ${s.n}` : `Mute ${s.n}`}
+                  size="sm" onClick={() => toggle(s.n)} />
+              </Flex>
+            );
+          })}
+        </Flex>
+      </Box>
+    </Box>
+  );
+}
+
+// styleguide #pattern-brief-wizard — 8-step casting brief. Condensed to a
+// real, navigable stepper rather than all 8 panes at once.
+function BriefWizardBlock() {
+  const steps = ["Role", "Genre", "Budget", "Dates", "Location", "Skills", "Refs", "Review"];
+  const [i, setI] = useState(2);
+  return (
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={360}>
+      <Text size="100" color="subtle">Casting brief · step {i + 1} of {steps.length}</Text>
+      {/* Step dots double as the progress indicator and as jump targets. */}
+      <Box marginTop={3} marginBottom={4}>
+        <Flex gap={1} alignItems="center">
+          {steps.map((s, n) => (
+            <TapArea key={s} onTap={() => setI(n)} rounding="circle">
+              <Box width={n === i ? 24 : 8} height={8} rounding="pill"
+                dangerouslySetInlineStyle={{ __style: {
+                  background: n <= i ? "var(--ml-black)" : "#E9E9E9",
+                  transition: "width 180ms ease" } }} />
+            </TapArea>
+          ))}
+        </Flex>
+      </Box>
+      <Heading size="400">{steps[i]}</Heading>
+      <Box marginTop={3} marginBottom={4}>
+        <Text size="100" color="subtle">
+          {i === 7 ? "Confirm and post this brief to the marketplace." : `Tell us about the ${steps[i].toLowerCase()} for this casting call.`}
+        </Text>
+      </Box>
+      <Flex gap={2}>
+        {i > 0 && <Button text="Back" color="gray" size="sm" onClick={() => setI((v) => v - 1)} />}
+        <Box flex="grow">
+          <Button fullWidth color="red" size="sm" text={i === steps.length - 1 ? "Post brief" : "Next"}
+            onClick={() => i < steps.length - 1 && setI((v) => v + 1)} />
+        </Box>
+      </Flex>
+    </Box>
+  );
+}
+
+// styleguide #vd-effects — Visual effects and textures. Every swatch is a real
+// CSS background, so this doubles as copyable reference rather than a picture
+// of one.
+function TexturesBlock() {
+  const fx: { n: string; css: React.CSSProperties }[] = [
+    { n: "Dots", css: { backgroundImage: "radial-gradient(#0D0D0D 1px, transparent 1px)", backgroundSize: "12px 12px", opacity: 0.5 } },
+    { n: "Grid", css: { backgroundImage: "linear-gradient(#ECECF1 1px, transparent 1px), linear-gradient(90deg, #ECECF1 1px, transparent 1px)", backgroundSize: "16px 16px" } },
+    { n: "Brand gradient", css: { background: "linear-gradient(135deg, #EA4C89 0%, #0D0B26 100%)" } },
+    { n: "Glow", css: { background: "radial-gradient(circle at 30% 30%, rgba(234,76,137,0.55), transparent 60%), #0D0B26" } },
+    { n: "Glass", css: { background: "rgba(255,255,255,0.55)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.7)" } },
+    { n: "Noise", css: { background: "#F1F5F9", backgroundImage: "repeating-linear-gradient(45deg, rgba(13,13,13,0.045) 0 1px, transparent 1px 3px)" } },
+  ];
+  return (
+    <Box maxWidth={340}>
+      <Flex gap={2} wrap>
+        {fx.map((f) => (
+          <Box key={f.n} width={104}>
+            <Box height={64} rounding={2} overflow="hidden"
+              dangerouslySetInlineStyle={{ __style: f.css as { [key: string]: string | number } }} />
+            <Box marginTop={1}><Text size="100" color="subtle" align="center">{f.n}</Text></Box>
+          </Box>
+        ))}
+      </Flex>
+    </Box>
+  );
+}
+
 const BLOCKS: Block[] = [
   { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => <NavHeaderBlock /> },
   { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => <ArtistProfileBlock /> },
@@ -2656,6 +2878,12 @@ const BLOCKS: Block[] = [
   { name: "Waveform audio player", description: "Widget Directory §5 — transport + scrubbable waveform, live state.", render: () => <WaveformPlayerBlock /> },
   { name: "Hire contact", description: "Widget Directory §6 — enquiry form, CTA gated on budget.", render: () => <HireContactBlock /> },
   { name: "Advanced filters", description: "Widget Directory §8 — chips, range slider, Atmos switch. UI only; filtering is mock in the real app.", render: () => <AdvancedFiltersBlock /> },
+  { name: "Artist card & playlist rows", description: "Apple Music reference — full-bleed art, gradient scrim, live now-playing row.", render: () => <ArtistPlaylistBlock /> },
+  { name: "Masonry discovery grid", description: "Real Gestalt Masonry (Pinterest's own algorithm) with overlay captions.", render: () => <MasonryDiscoveryBlock /> },
+  { name: "Project card", description: "Ported from styleguide #ml-project — artwork, status, verified credits.", render: () => <ProjectCardBlock /> },
+  { name: "Stem mixer", description: "Ported from styleguide #mixer — per-stem mute with live level meters.", render: () => <StemMixerBlock /> },
+  { name: "Brief wizard", description: "Ported from styleguide #pattern-brief-wizard — 8-step casting brief, dots jump.", render: () => <BriefWizardBlock /> },
+  { name: "Textures & effects", description: "Ported from styleguide #vd-effects — real CSS backgrounds, not screenshots.", render: () => <TexturesBlock /> },
   { name: "Onboarding wizard", description: "Multi-step with live progress bar, selectable chips, and a review step.", render: () => <OnboardingWizardBlock /> },
   { name: "Discovery hero card", description: "Image-led card with gradient scrim, live favourite toggle, rating.", render: () => <DiscoveryHeroCardBlock /> },
   { name: "Product card", description: "Marketplace rental card — media, copy stack, price + CTA row.", render: () => <ProductCardBlock /> },
@@ -2768,9 +2996,9 @@ const NOT_BUILT: NotBuiltGroup[] = [
     reason:
       "Checked against both the 27-widget admin directory and all 124 real screens in dist/preview/flows/**/screen.json (titles, notes, dataContracts) — no screen, note, code reference, or widget entry backs any of these. Not built because there's nothing real to build from, not because they're hard.",
     items: [
-      "Skeleton Loaders", "Error Boundary", "Offline Banner", "Shimmer", "Adaptive Banner", "Navbar", "Navbar (Alt)", "Sticky Nav", "Segmented Switch", "Metrics Row", "Uncategorized", "Swipe Deck", "Brief Wizard",
+      "Skeleton Loaders", "Error Boundary", "Offline Banner", "Shimmer", "Adaptive Banner", "Navbar", "Navbar (Alt)", "Sticky Nav", "Segmented Switch", "Metrics Row", "Uncategorized", "Swipe Deck",
       "Ambient Album Card", "Artist Grid Card", "Artist Row Card", "Typing Indicator", "Attachments", "Notification Toggle (distinct from the real NotificationCard widget)",
-      "Multi-Track Stem Mixer", "Equalizer", "User Header", "Business profile as a distinct card type (Talent and Venue are now built as 'Talent role variants' and 'Venue profile flow')", "Direct Request", "Request Status Tracker", "Application Card", "Rental Card",
+      "User Header", "Business profile as a distinct card type (Talent and Venue are now built as 'Talent role variants' and 'Venue profile flow')", "Direct Request", "Request Status Tracker", "Application Card", "Rental Card",
     ],
   },
   {
