@@ -60,6 +60,19 @@ service cloud.firestore {
             || request.auth.uid == resource.data.targetUserId);
     }
 
+    // One-directional block — distinct from moderation_flags (a one-time
+    // report). Doc ID convention: "{blockerUid}_{blockedUid}", matching
+    // user_bookmarks below. Only the blocker (and moderators) can read/
+    // delete their own block docs; the blocked user has no read access to
+    // who has blocked them. Proposed 2026-08-16 per
+    // docs/04-Wireframes/PERSON-PROFILE-SPEC.md §4 — no confirmed app-side
+    // writer yet.
+    match /blocks/{blockId} {
+      allow create: if signedIn() && request.auth.uid == request.resource.data.blockerUid;
+      allow read, delete: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.blockerUid);
+    }
+
     match /feed_posts/{postId} {
       allow read: if true;
       allow create, update: if signedIn()
@@ -113,6 +126,24 @@ service cloud.firestore {
         || (signedIn() && request.auth.uid == resource.data.creatorUid);
     }
 
+    // Also the backing collection for Flow 5 (Opportunities) applications —
+    // /projects/{projectId} above is the opportunity itself, this is one
+    // person's application to it. Applicant creates; applicant or the
+    // opportunity's poster (fetched via get()) can read; only the poster
+    // (or a moderator) can update status — same shape as D.3's spec note.
+    // Proposed 2026-08-16 per docs/04-Wireframes/PRODUCT-SPEC.md §D.2/§D.3
+    // — Phase 2, not built yet (MVP uses "Message the poster" instead).
+    match /opportunity_applications/{applicationId} {
+      allow read: if isModerator()
+        || (signedIn() && (request.auth.uid == resource.data.applicantUid
+            || request.auth.uid == get(/databases/$(database)/documents/projects/$(resource.data.opportunityId)).data.creatorUid));
+      allow create: if signedIn() && request.auth.uid == request.resource.data.applicantUid;
+      allow update: if isModerator()
+        || (signedIn() && request.auth.uid == get(/databases/$(database)/documents/projects/$(resource.data.opportunityId)).data.creatorUid);
+      allow delete: if isModerator()
+        || (signedIn() && request.auth.uid == resource.data.applicantUid);
+    }
+
     match /marketplace_items/{itemId} {
       allow read: if true;
       allow create: if signedIn() && request.auth.uid == request.resource.data.sellerUid;
@@ -120,17 +151,54 @@ service cloud.firestore {
         || (signedIn() && request.auth.uid == resource.data.sellerUid);
     }
 
+    // The shared Make Offer / Negotiate / Accept primitive for Marketplace
+    // (both sale and rental listings — rent stayed merged into Marketplace,
+    // not a separate flow). Buyer initiates; either party negotiates via
+    // update (counter/accept/decline). Proposed 2026-08-16 per
+    // docs/04-Wireframes/PRODUCT-SPEC.md §B.3 — Phase 2, not built yet.
+    match /offers/{offerId} {
+      allow read: if isModerator()
+        || (signedIn() && (request.auth.uid == resource.data.buyerUid
+            || request.auth.uid == resource.data.sellerUid));
+      allow create: if signedIn() && request.auth.uid == request.resource.data.buyerUid;
+      allow update: if isModerator()
+        || (signedIn() && (request.auth.uid == resource.data.buyerUid
+            || request.auth.uid == resource.data.sellerUid));
+    }
+
+    // One order/transaction record for both a Buy purchase and a Rent
+    // booking (rent didn't get its own booking collection). Either party
+    // may create it (e.g. the seller creating it once an offer is
+    // accepted). Proposed 2026-08-16 per
+    // docs/04-Wireframes/PRODUCT-SPEC.md §B.3 — Phase 2, not built yet.
+    match /marketplace_orders/{orderId} {
+      allow read: if isModerator()
+        || (signedIn() && (request.auth.uid == resource.data.buyerUid
+            || request.auth.uid == resource.data.sellerUid));
+      allow create: if signedIn() && (request.auth.uid == request.resource.data.buyerUid
+          || request.auth.uid == request.resource.data.sellerUid);
+      allow update: if isModerator()
+        || (signedIn() && (request.auth.uid == resource.data.buyerUid
+            || request.auth.uid == resource.data.sellerUid));
+    }
+
     match /reviews/{reviewId} {
       allow read: if true;
       // An optional bookingId links this review to a "verified purchase" —
       // if present, it must actually belong to the reviewer, checked
-      // server-side rather than trusting an unverified client flag.
+      // server-side rather than trusting an unverified client flag. Same
+      // idea for the new optional orderId (added 2026-08-16 alongside the
+      // MARKETPLACE_ITEM targetType, PRODUCT-SPEC.md §B.3, Phase 2) —
+      // verifies against marketplace_orders instead of studio_bookings.
       allow create, update: if signedIn()
         && request.auth.uid == request.resource.data.authorUid
         && reviewId == request.auth.uid + '_' + request.resource.data.targetId
         && (!('bookingId' in request.resource.data)
             || request.resource.data.bookingId == ''
-            || get(/databases/$(database)/documents/studio_bookings/$(request.resource.data.bookingId)).data.userId == request.auth.uid);
+            || get(/databases/$(database)/documents/studio_bookings/$(request.resource.data.bookingId)).data.userId == request.auth.uid)
+        && (!('orderId' in request.resource.data)
+            || request.resource.data.orderId == ''
+            || get(/databases/$(database)/documents/marketplace_orders/$(request.resource.data.orderId)).data.buyerUid == request.auth.uid);
       allow delete: if isModerator()
         || (signedIn() && request.auth.uid == resource.data.authorUid);
     }
@@ -241,6 +309,24 @@ service cloud.firestore {
     // Doc ID = the user's own UID — private preferences, owner-only.
     match /user_settings/{userId} {
       allow read, write: if isOwner(userId) || isAdmin();
+    }
+
+    // Doc ID = the profile owner's UID, same convention as user_settings.
+    // Private to the owner (and admins) — analytics aren't public data.
+    // Counter fields are incremented by the *viewing* client (no Cloud
+    // Functions on this project's Spark plan — same constraint documented
+    // on /notifications above), so any signed-in user may update, but only
+    // the listed counter fields; only the owner/admin may write anything
+    // else (e.g. correcting a value). Proposed 2026-08-16 per
+    // docs/04-Wireframes/PERSON-PROFILE-SPEC.md §4.
+    match /profile_analytics/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId) || isAdmin();
+      allow update: if isOwner(userId) || isAdmin()
+        || (signedIn() && request.resource.data.diff(resource.data).affectedKeys()
+              .hasOnly(['profileViews', 'portfolioViews', 'audioPlays', 'videoPlays',
+                        'searchAppearances', 'shareCount', 'connectionRequestsReceived',
+                        'updatedAt']));
     }
 
     // Public-read (logos/brand imagery render on public profile pages),
