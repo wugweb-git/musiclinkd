@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .phase2-banner { background: #FEF3C7; color: #92400E; font-size: var(--type-1); padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
+  .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#92400E; background:#FEF3C7; padding:3px 8px; border-radius:999px; margin-left:auto; }
   .listing-mini { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--line); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
   .listing-mini img { width: 48px; height: 48px; border-radius: var(--radius-1); object-fit: cover; }
   .status-banner { padding: var(--space-3); border-radius: var(--radius-2); text-align: center; font-weight: 600; margin-bottom: var(--space-3); }
@@ -29,10 +29,10 @@
       <a href="/preview/flows/marketplace/marketplace_item_detail/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
+      <!-- Phase 2, not MVP: needs the new offers collection (schema landed 2026-08-16, not yet built into the app). -->
+      <span class="status-tag">Phase 2</span>
     </header>
     <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <div class="phase2-banner">Phase 2, not MVP — needs the new <code>offers</code> collection (schema landed 2026-08-16, not yet built into the app). Shown as designed.</div>
-
       <div class="listing-mini">
         <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200" alt="" />
         <div><b style="display:block;font-size:var(--type-2);">Yamaha HS8 Studio Monitors</b><span style="font-size:var(--type-1);color:var(--muted);">Asking ₹42,000</span></div>

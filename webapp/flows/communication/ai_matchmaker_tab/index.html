@@ -20,7 +20,7 @@
   .net-tabs { display: flex; gap: var(--space-1); padding: 0 var(--space-3); border-bottom: 1px solid var(--line); }
   .net-tabs a { flex: 1; text-align: center; padding: var(--space-2) 0; font-size: var(--type-1); font-weight: 600; color: var(--muted); text-decoration: none; border-bottom: 2px solid transparent; }
   .net-tabs a.active { color: var(--black); border-color: var(--black); }
-  .unreachable-banner { background: #FEF3C7; color: #92400E; font-size: var(--type-1); padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); margin: var(--space-3) var(--space-4) 0; }
+  .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#92400E; background:#FEF3C7; padding:3px 8px; border-radius:999px; margin-left:auto; }
   .match-card { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-3); border: 1px solid var(--line); border-radius: var(--radius-2); margin-bottom: var(--space-2); }
   .match-card img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex: none; }
   .match-pct { font-weight: 700; color: var(--pink); font-size: var(--type-2); flex: none; }
@@ -30,13 +30,14 @@
   <div class="app-root">
     <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);height:56px;display:flex;align-items:center;">
       <h1 style="font-size:var(--type-3);">Network</h1>
+      <!-- Tab exists in the underlying code but is missing from the visible tab list today — not reachable through the real app's UI, not just hidden by a flag. -->
+      <span class="status-tag">Unreachable in app</span>
     </header>
     <nav class="net-tabs">
       <a href="/preview/flows/communication/connection_requests_tab/index.html">Requests</a>
       <a href="/preview/flows/communication/collaborators_tab/index.html">Collaborators</a>
       <a href="/preview/flows/communication/ai_matchmaker_tab/index.html" class="active">AI Match</a>
     </nav>
-    <div class="unreachable-banner">This tab exists in the underlying code but is missing from the visible tab list today — not reachable through the real app's UI, not just hidden by a flag. Shown here as designed.</div>
     <main class="app-content app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4);">
       <p style="color:var(--muted);font-size:var(--type-2);margin-top:0;margin-bottom:var(--space-3);">Matched on genre, location, and complementary roles.</p>
 

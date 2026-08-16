@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .mvp-banner { background: #E0E7FF; color: #3730A3; font-size: var(--type-1); padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); margin: var(--space-2) var(--space-3) 0; }
+  .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#3730A3; background:#E0E7FF; padding:3px 8px; border-radius:999px; flex:none; }
   .chip-wrap { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-3); }
   .item-row { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
   .item-row img { width: 56px; height: 56px; border-radius: var(--radius-1); object-fit: cover; flex: none; }
@@ -30,8 +30,9 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
       <input type="search" placeholder="Search listings…" value="studio monitors" style="flex:1;min-height:40px;border-radius:var(--radius-4);border:1px solid var(--line);padding:0 var(--space-3);font:var(--type-2) 'Inter',sans-serif;" />
+      <!-- Proposed screen (spec: PRODUCT-SPEC.md Part B.2) — no Kotlin/webapp implementation exists yet. Real search/filter logic doesn't exist today; browse's category tabs are hardcoded. -->
+      <span class="status-tag">Proposed</span>
     </header>
-    <div class="mvp-banner">Proposed screen (spec: PRODUCT-SPEC.md Part B.2) — no Kotlin/webapp implementation exists yet. Real search/filter logic doesn't exist today; browse's category tabs are hardcoded. Shown as designed.</div>
     <main class="app-content app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4);">
       <div class="chip-wrap">
         <button type="button" class="chip sel" style="background:var(--black);border-color:var(--black);color:#fff;">Studio Monitors</button>

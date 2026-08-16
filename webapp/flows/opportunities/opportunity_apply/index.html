@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .phase2-banner { background: #FEF3C7; color: #92400E; font-size: var(--type-1); padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
+  .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#92400E; background:#FEF3C7; padding:3px 8px; border-radius:999px; margin-left:auto; }
   .field textarea { min-height: 96px; padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); border: 1px solid var(--line); background: #fff; font: var(--type-2) 'Inter', sans-serif; resize: none; }
   .project-pick { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--line); border-radius: var(--radius-2); }
   .project-pick img { width: 40px; height: 40px; border-radius: var(--radius-1); object-fit: cover; }
@@ -29,10 +29,10 @@
       <a href="/preview/flows/opportunities/opportunity_detail/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
+      <!-- Phase 2, not MVP: substitutes "Message the poster" in MVP. Needs opportunity_applications collection. Shown as designed. -->
+      <span class="status-tag">Phase 2</span>
     </header>
     <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <div class="phase2-banner">Phase 2, not MVP — MVP substitutes "Message the poster" for this. Needs the new <code>opportunity_applications</code> collection. Shown as designed.</div>
-
       <div id="panel-default" style="display:flex;flex-direction:column;gap:var(--space-3);">
         <h1 style="font-size:var(--type-3);margin:0;">Apply — Indie Rock Vocalist Wanted</h1>
         <div class="project-pick">

@@ -1,0 +1,67 @@
+{
+  "flowKey": "public_profile",
+  "flowTitle": "Public Profile",
+  "flowStatus": "partial",
+  "flowOrder": 14,
+  "screenKey": "media_gallery",
+  "screenNumber": 121,
+  "screenTitle": "Media Gallery (photo/video full-screen viewer)",
+  "screenOrder": 6,
+  "states": [
+    "default",
+    "empty"
+  ],
+  "collectionsTouched": [
+    "users"
+  ],
+  "notes": "Talent/Band only — reads UserDoc.galleryUrls (new field, proposed 2026-08-16, no confirmed app-side writer yet). Not built.",
+  "dataContract": [
+    {
+      "collection": "users",
+      "sample": {
+        "displayName": "Arijit Sen",
+        "email": "arijit.sen@musiclinkd-mock.example",
+        "primaryRole": "singer",
+        "secondaryRole": "composer",
+        "isVerified": true,
+        "isBanned": false,
+        "isAvailable": true,
+        "hourlyRate": 4500,
+        "budgetTier": "premium",
+        "location": "Mumbai, MH · Andheri",
+        "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+        "gender": "Male",
+        "genres": [
+          "Bollywood / Filmi",
+          "Sufi Devotional",
+          "Acoustic / Unplugged"
+        ],
+        "languages": [
+          "Hindi (हिंदी)",
+          "Bengali (বাংলা)",
+          "English"
+        ],
+        "instruments": [
+          "Acoustic Guitar"
+        ],
+        "personaBadges": [
+          "Available for Collab",
+          "Touring"
+        ],
+        "trustBadges": [
+          "Verified Artist",
+          "Rising Talent"
+        ],
+        "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+        "createdAt": "2026-08-01T09:00:00.000Z",
+        "profileType": "TALENT",
+        "vocalRange": "tenor",
+        "sessionAvailability": "open_for_gigs",
+        "externalLinks": {
+          "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+          "youtube": "https://youtube.com/@arijitsen-mock"
+        }
+      }
+    }
+  ]
+}

@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .phase2-banner { background: #FEF3C7; color: #92400E; font-size: var(--type-1); padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
+  .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#92400E; background:#FEF3C7; padding:3px 8px; border-radius:999px; margin-left:auto; }
   .status-pill { display: inline-flex; padding: 4px 12px; border-radius: var(--radius-4); font-size: var(--type-1); font-weight: 700; }
   .timeline { margin-top: var(--space-4); }
   .t-row { display: flex; gap: var(--space-2); }
@@ -33,11 +33,11 @@
       <a href="/preview/flows/marketplace/marketplace_my_listings/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
+      <!-- Phase 2, not MVP: needs marketplace_orders collection. One screen covers both Buy and Rent lifecycles per the 2026-08-16 "rent stays merged" decision. -->
+      <span class="status-tag">Phase 2</span>
     </header>
     <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <div class="phase2-banner">Phase 2, not MVP — needs the new <code>marketplace_orders</code> collection. One screen covers both Buy and Rent lifecycles, per the 2026-08-16 "rent stays merged" decision — no separate rental-booking sequence.</div>
-
-      <h1 style="font-size:var(--type-3);margin:0 0 4px;">Yamaha HS8 Studio Monitors</h1>
+      <h1 style="font-size:var(--type-3);margin:var(--space-3) 0 4px;">Yamaha HS8 Studio Monitors</h1>
       <p style="color:var(--muted);font-size:var(--type-1);margin-bottom:var(--space-3);">Order #MK-58201 · ₹38,000</p>
       <span class="status-pill" id="status-pill" style="background:#FEF3C7;color:#92400E;">Pending payment</span>
 

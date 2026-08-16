@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .mvp-banner { background: #E0E7FF; color: #3730A3; font-size: var(--type-1); padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
+  .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#3730A3; background:#E0E7FF; padding:3px 8px; border-radius:999px; margin-left:auto; }
   .field textarea { min-height: 88px; padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); border: 1px solid var(--line); background: #fff; font: var(--type-2) 'Inter', sans-serif; resize: none; }
 </style>
 </head>
@@ -27,10 +27,10 @@
       <a href="/preview/flows/opportunities/opportunities_home/index.html" aria-label="Close" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </a>
+      <!-- MVP, shipped minimal: title, description, role, budget, location, publish. Richer fields (skills/languages/deadline/opportunity type) are Phase 2. -->
+      <span class="status-tag">MVP scope</span>
     </header>
     <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <div class="mvp-banner">MVP, shipped minimal: title, description, role, budget, location, publish. Richer fields (skills/languages/deadline/opportunity type) are Phase 2.</div>
-
       <div id="panel-default" style="display:flex;flex-direction:column;gap:var(--space-3);">
         <h1 style="font-size:var(--type-3);margin:0;">Post an opportunity</h1>
         <div class="field"><label for="t">Title</label><input id="t" type="text" value="Indie Rock Vocalist Wanted" /></div>

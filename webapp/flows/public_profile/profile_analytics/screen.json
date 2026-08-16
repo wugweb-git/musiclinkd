@@ -1,0 +1,25 @@
+{
+  "flowKey": "public_profile",
+  "flowTitle": "Public Profile",
+  "flowStatus": "partial",
+  "flowOrder": 14,
+  "screenKey": "profile_analytics",
+  "screenNumber": 122,
+  "screenTitle": "Profile Analytics / Insights",
+  "screenOrder": 7,
+  "states": [
+    "default",
+    "empty"
+  ],
+  "collectionsTouched": [
+    "profile_analytics"
+  ],
+  "notes": "New collection (proposed 2026-08-16) — profileViews/portfolioViews/audioPlays/videoPlays/searchAppearances/shareCount/connectionRequestsReceived, doc ID = owner UID. Owner-only read. Not built.",
+  "dataContract": [
+    {
+      "collection": "profile_analytics",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}

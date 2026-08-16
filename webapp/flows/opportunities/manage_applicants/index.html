@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .phase2-banner { background: #FEF3C7; color: #92400E; font-size: var(--type-1); padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
+  .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#92400E; background:#FEF3C7; padding:3px 8px; border-radius:999px; margin-left:auto; }
   .applicant-row { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) 0; border-bottom: 1px solid var(--line); }
   .applicant-row img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex: none; }
   .applicant-row .meta { flex: 1; min-width: 0; }
@@ -35,11 +35,11 @@
       <a href="/preview/flows/opportunities/opportunity_detail/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
+      <!-- Phase 2, not MVP: poster-side view of opportunity_applications. Shown as designed. -->
+      <span class="status-tag">Phase 2</span>
     </header>
     <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <div class="phase2-banner">Phase 2, not MVP — poster-side view of <code>opportunity_applications</code>. Shown as designed.</div>
-
-      <h1 style="font-size:var(--type-3);margin:0 0 var(--space-2);">Indie Rock Vocalist Wanted</h1>
+      <h1 style="font-size:var(--type-3);margin:var(--space-3) 0 var(--space-2);">Indie Rock Vocalist Wanted</h1>
 
       <div id="panel-default">
         <div class="applicant-row">

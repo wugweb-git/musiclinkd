@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .mvp-banner { background: #E0E7FF; color: #3730A3; font-size: var(--type-1); padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); margin: var(--space-2) var(--space-3) 0; }
+  .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#3730A3; background:#E0E7FF; padding:3px 8px; border-radius:999px; margin-left:auto; }
   .opp-card { display: block; border: 1px solid var(--line); border-radius: var(--radius-2); padding: var(--space-3); margin-bottom: var(--space-2); text-decoration: none; color: inherit; }
   .opp-card b { font-size: var(--type-2); display: block; }
   .opp-card .poster { font-size: var(--type-1); color: var(--muted); margin-top: 2px; }
@@ -30,8 +30,9 @@
   <div class="app-root">
     <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);height:56px;display:flex;align-items:center;">
       <h1 style="font-size:var(--type-3);">Opportunities</h1>
+      <!-- MVP scope: real Browse + Detail + "Message the poster" — no formal Application record yet. This whole flow is confirmed 100% missing in the real app today (zero real screens, zero Firestore reads) — shown here as the spec's build target. -->
+      <span class="status-tag">MVP scope</span>
     </header>
-    <div class="mvp-banner">MVP scope: real Browse + Detail + "Message the poster" — no formal Application record yet. This whole flow is confirmed 100% missing in the real app today (zero real screens, zero Firestore reads) — shown here as the spec's build target.</div>
     <main class="app-content app-content--scroll" style="padding:var(--space-2) var(--space-4) var(--space-4);">
 
       <div id="panel-default">

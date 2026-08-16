@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .phase2-banner { background: #FEF3C7; color: #92400E; font-size: var(--type-1); padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); margin: var(--space-2) var(--space-3) 0; }
+  .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#92400E; background:#FEF3C7; padding:3px 8px; border-radius:999px; margin-left:auto; }
   .my-tabs { display: flex; gap: var(--space-1); padding: 0 var(--space-3); border-bottom: 1px solid var(--line); }
   .my-tabs a { flex: 1; text-align: center; padding: var(--space-2) 0; font-size: var(--type-1); font-weight: 600; color: var(--muted); text-decoration: none; border-bottom: 2px solid transparent; }
   .my-tabs a.active { color: var(--black); border-color: var(--black); }
@@ -29,13 +29,14 @@
   <div class="app-root">
     <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);height:56px;display:flex;align-items:center;">
       <h1 style="font-size:var(--type-3);">My Marketplace</h1>
+      <!-- Phase 2, not MVP. Shown as designed. -->
+      <span class="status-tag">Phase 2</span>
     </header>
     <nav class="my-tabs">
       <a href="#" class="active">Listings</a>
       <a href="#">Purchases</a>
       <a href="#">Rentals</a>
     </nav>
-    <div class="phase2-banner">Phase 2, not MVP. Shown as designed.</div>
     <main class="app-content app-content--scroll" style="padding:var(--space-2) var(--space-4) var(--space-4);">
       <div id="panel-listings">
         <a class="item-row" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
