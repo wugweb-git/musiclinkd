@@ -42342,7 +42342,16 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
         columnWidth: 90,
         gutterWidth: 8,
         layout: "basic",
-        renderItem: ({ data }) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 90, height: data.h, rounding: 3, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: `Cover ${data.label}`, src: placeholderImg(data.color, data.label, 200, 200), color: data.color, naturalWidth: 200, naturalHeight: data.h }) })
+        renderItem: ({ data }) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 90, height: data.h, rounding: 3, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          Image,
+          {
+            alt: `Cover ${data.label}`,
+            src: COVERS[data.label] ?? IMG.mixing,
+            color: data.color,
+            naturalWidth: 200,
+            naturalHeight: data.h
+          }
+        ) })
       }
     ) });
   }
@@ -43121,6 +43130,14 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     mixing: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
     vocalist: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
   };
+  var COVERS = {
+    A: IMG.mixing,
+    B: IMG.dj,
+    C: IMG.studio,
+    D: IMG.vocalist,
+    E: IMG.mic,
+    F: IMG.controller
+  };
   function OnboardingWizardBlock() {
     const steps = [
       { title: "Primary role", hint: "What do you mainly do?", options: ["Vocalist", "Producer", "Instrumentalist", "Engineer"] },
@@ -43786,14 +43803,18 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", align: "center", children: f.n }) })
     ] }, f.n)) }) });
   }
-  function LogoMark({ size = 64 }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("svg", { viewBox: "0 0 64 64", width: size, height: size, role: "img", "aria-label": "MusicLinkd logo", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { width: "64", height: "64", rx: "16", fill: "#0D0D0D" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "16", y: "26", width: "5", height: "20", rx: "2.5", fill: "#FFFFFF" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "25.5", y: "16", width: "5", height: "32", rx: "2.5", fill: "#EA4C89" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "35", y: "22", width: "5", height: "24", rx: "2.5", fill: "#FFFFFF" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "44.5", y: "30", width: "5", height: "16", rx: "2.5", fill: "#EA4C89" })
-    ] });
+  function LogoMark({ size = 64, tone = "brand" }) {
+    let svg = favicon_mark_default.replace(/<\?xml[^>]*\?>/, "").replace("<svg ", `<svg style="width:${size}px;height:${size}px;display:block" `);
+    if (tone !== "brand") {
+      svg = svg.replace(/fill="(white|#[0-9a-fA-F]{3,8})"/g, 'fill="currentColor"');
+    }
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+      BoxWithForwardRef,
+      {
+        dangerouslySetInlineStyle: { __style: tone === "light" ? { color: "#FFFFFF" } : tone === "mono" ? { color: "#0D0D0D" } : {} },
+        children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { role: "img", "aria-label": "MusicLinkd logo", dangerouslySetInnerHTML: { __html: svg } })
+      }
+    );
   }
   function SplashBlock() {
     const [state, setState] = (0, import_react2.useState)("loading");
@@ -43818,7 +43839,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
               alignItems: "center",
               justifyContent: "center",
               children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 4, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(LogoMark, { size: 72 }),
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(LogoMark, { size: 72, tone: "light" }),
                 /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "600", weight: "bold", color: "light", align: "center", children: [
                   "MusicLink",
                   /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { inline: true, size: "600", weight: "bold", color: "error", children: "d" })
@@ -43851,32 +43872,27 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       ] }, z.l)) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 5, marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Variants" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { rounding: 3, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(LogoMark, { size: 56 }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(LogoMark, { size: 56 }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
           BoxWithForwardRef,
           {
-            width: 56,
-            height: 56,
+            width: 72,
+            height: 72,
             rounding: 3,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             dangerouslySetInlineStyle: { __style: { background: "var(--ml-accent)" } },
-            children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("svg", { viewBox: "0 0 64 64", width: 34, height: 34, "aria-hidden": "true", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "16", y: "26", width: "5", height: "20", rx: "2.5", fill: "#FFFFFF" }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "25.5", y: "16", width: "5", height: "32", rx: "2.5", fill: "#FFFFFF" }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "35", y: "22", width: "5", height: "24", rx: "2.5", fill: "#FFFFFF" }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "44.5", y: "30", width: "5", height: "16", rx: "2.5", fill: "#FFFFFF" })
-            ] })
+            children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(LogoMark, { size: 44, tone: "light" })
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 56, height: 56, rounding: 3, display: "flex", alignItems: "center", justifyContent: "center", color: "secondary", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("svg", { viewBox: "0 0 64 64", width: 34, height: 34, "aria-hidden": "true", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "16", y: "26", width: "5", height: "20", rx: "2.5", fill: "#0D0D0D" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "25.5", y: "16", width: "5", height: "32", rx: "2.5", fill: "#0D0D0D" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "35", y: "22", width: "5", height: "24", rx: "2.5", fill: "#0D0D0D" }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "44.5", y: "30", width: "5", height: "16", rx: "2.5", fill: "#0D0D0D" })
-        ] }) })
-      ] })
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 72, height: 72, rounding: 3, display: "flex", alignItems: "center", justifyContent: "center", color: "secondary", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(LogoMark, { size: 44, tone: "mono" }) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
+        "All four sizes and all three variants render the same file:",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: " brand/assets/favicon-mark.svg" }),
+        ". Nothing here is redrawn."
+      ] }) })
     ] });
   }
   function AuthWelcomeBlock() {

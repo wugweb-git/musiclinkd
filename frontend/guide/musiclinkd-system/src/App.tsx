@@ -114,9 +114,12 @@ import markGreySvgRaw from "../../brand/assets/mark-grey.svg";
 // visual output, and Video which needs a real media file we don't have).
 // ---------------------------------------------------------------------------
 
-// A trivial, self-generated SVG placeholder — used anywhere Gestalt needs an
-// image `src`. Not sourced from Pinterest's site; drawn here so there's no
-// question about licensing.
+// A trivial, self-generated SVG placeholder. After the brand-asset pass this
+// is used in exactly THREE places, all of them Gestalt component demos
+// (Image, Mask, Letterbox) where the placeholder colour is literally the prop
+// being demonstrated. Every MusicLinkd block uses real photography from IMG /
+// COVERS and the real brand mark from brand/assets/ instead. If you find this
+// function in a block, that block is wrong.
 function placeholderImg(hex: string, label: string, w = 320, h = 320) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="100%" height="100%" fill="${hex}"/><text x="50%" y="50%" font-family="sans-serif" font-size="20" fill="white" text-anchor="middle" dy=".3em">${label}</text></svg>`;
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
@@ -931,7 +934,11 @@ function GalleryBlock() {
         layout="basic"
         renderItem={({ data }) => (
           <Box width={90} height={data.h} rounding={3} overflow="hidden">
-            <Image alt={`Cover ${data.label}`} src={placeholderImg(data.color, data.label, 200, 200)} color={data.color} naturalWidth={200} naturalHeight={data.h} />
+            {/* Real photography, not generated swatches. `color` is still set
+                so the tile shows a tinted block while the image decodes
+                instead of a white gap - that is what the prop is for. */}
+            <Image alt={`Cover ${data.label}`} src={COVERS[data.label as keyof typeof COVERS] ?? IMG.mixing}
+              color={data.color} naturalWidth={200} naturalHeight={data.h} />
           </Box>
         )}
       />
@@ -2082,6 +2089,12 @@ const IMG = {
   vocalist:   "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
 } as const;
 
+// Cover art for the gallery block, keyed by the tile labels that block uses.
+const COVERS = {
+  A: IMG.mixing, B: IMG.dj, C: IMG.studio,
+  D: IMG.vocalist, E: IMG.mic, F: IMG.controller,
+} as const;
+
 // ===== Premium card + interactive blocks, 2026-08-16 =====
 // Added after review of reference UI the user supplied (image-led travel and
 // product cards, and an onboarding wizard). These are the MusicLinkd
@@ -2841,17 +2854,28 @@ function TexturesBlock() {
 //   email_auth: signup | signin | loading | error
 //   google_signin: account_picker | success | fallback_fake
 
-// The real MusicLinkd mark, transcribed from the SVG in styleguide.html:
-// four equaliser bars on a rounded black tile, bars 2 and 4 in brand pink.
-function LogoMark({ size = 64 }: { size?: number }) {
+// LogoMark renders the REAL brand asset from frontend/guide/brand/assets/,
+// not a transcription. An earlier version of this function hand-drew four
+// rects approximating the mark, which meant the design system was shipping a
+// lookalike while the actual file sat two directories away. Same import the
+// Brand Kit tab uses (esbuild text loader, literal file content).
+//
+// `tone` swaps the fill: "brand" keeps the file's own colours, "mono" and
+// "light" recolour every path via currentColor for print, masking and
+// dark-surface use.
+function LogoMark({ size = 64, tone = "brand" }: { size?: number; tone?: "brand" | "mono" | "light" }) {
+  let svg = faviconMarkSvgRaw
+    .replace(/<\?xml[^>]*\?>/, "")
+    .replace("<svg ", `<svg style="width:${size}px;height:${size}px;display:block" `);
+  if (tone !== "brand") {
+    svg = svg.replace(/fill="(white|#[0-9a-fA-F]{3,8})"/g, 'fill="currentColor"');
+  }
   return (
-    <svg viewBox="0 0 64 64" width={size} height={size} role="img" aria-label="MusicLinkd logo">
-      <rect width="64" height="64" rx="16" fill="#0D0D0D" />
-      <rect x="16" y="26" width="5" height="20" rx="2.5" fill="#FFFFFF" />
-      <rect x="25.5" y="16" width="5" height="32" rx="2.5" fill="#EA4C89" />
-      <rect x="35" y="22" width="5" height="24" rx="2.5" fill="#FFFFFF" />
-      <rect x="44.5" y="30" width="5" height="16" rx="2.5" fill="#EA4C89" />
-    </svg>
+    <Box
+      dangerouslySetInlineStyle={{ __style: tone === "light" ? { color: "#FFFFFF" } : tone === "mono" ? { color: "#0D0D0D" } : {} }}
+    >
+      <div role="img" aria-label="MusicLinkd logo" dangerouslySetInnerHTML={{ __html: svg }} />
+    </Box>
   );
 }
 
@@ -2866,7 +2890,7 @@ function SplashBlock() {
         <Box position="absolute" top left right bottom display="flex"
           alignItems="center" justifyContent="center">
           <Flex direction="column" alignItems="center" gap={4}>
-            <LogoMark size={72} />
+            <LogoMark size={72} tone="light" />
             <Box>
               <Text size="600" weight="bold" color="light" align="center">
                 MusicLink<Text inline size="600" weight="bold" color="error">d</Text>
@@ -2906,27 +2930,23 @@ function AppIconSetBlock() {
       </Flex>
       <Box marginTop={5} marginBottom={3}><Text weight="bold">Variants</Text></Box>
       <Flex gap={3} alignItems="center">
-        <Box rounding={3} overflow="hidden"><LogoMark size={56} /></Box>
-        {/* Pink field: mark inverted onto the brand accent for light surfaces. */}
-        <Box width={56} height={56} rounding={3} display="flex" alignItems="center" justifyContent="center"
+        <LogoMark size={56} />
+        {/* Accent field: the real mark recoloured to white over brand pink. */}
+        <Box width={72} height={72} rounding={3} display="flex" alignItems="center" justifyContent="center"
           dangerouslySetInlineStyle={{ __style: { background: "var(--ml-accent)" } }}>
-          <svg viewBox="0 0 64 64" width={34} height={34} aria-hidden="true">
-            <rect x="16" y="26" width="5" height="20" rx="2.5" fill="#FFFFFF" />
-            <rect x="25.5" y="16" width="5" height="32" rx="2.5" fill="#FFFFFF" />
-            <rect x="35" y="22" width="5" height="24" rx="2.5" fill="#FFFFFF" />
-            <rect x="44.5" y="30" width="5" height="16" rx="2.5" fill="#FFFFFF" />
-          </svg>
+          <LogoMark size={44} tone="light" />
         </Box>
-        {/* Monochrome: required wherever the icon prints or masks. */}
-        <Box width={56} height={56} rounding={3} display="flex" alignItems="center" justifyContent="center" color="secondary">
-          <svg viewBox="0 0 64 64" width={34} height={34} aria-hidden="true">
-            <rect x="16" y="26" width="5" height="20" rx="2.5" fill="#0D0D0D" />
-            <rect x="25.5" y="16" width="5" height="32" rx="2.5" fill="#0D0D0D" />
-            <rect x="35" y="22" width="5" height="24" rx="2.5" fill="#0D0D0D" />
-            <rect x="44.5" y="30" width="5" height="16" rx="2.5" fill="#0D0D0D" />
-          </svg>
+        {/* Monochrome: what masking, print and single-colour contexts need. */}
+        <Box width={72} height={72} rounding={3} display="flex" alignItems="center" justifyContent="center" color="secondary">
+          <LogoMark size={44} tone="mono" />
         </Box>
       </Flex>
+      <Box marginTop={3}>
+        <Text size="100" color="subtle">
+          All four sizes and all three variants render the same file:
+          <code> brand/assets/favicon-mark.svg</code>. Nothing here is redrawn.
+        </Text>
+      </Box>
     </Box>
   );
 }
