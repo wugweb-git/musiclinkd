@@ -132,6 +132,36 @@ export interface UserDoc {
   instrumentProficiency?: string[];
   /** role -> experience label, e.g. { "Producer": "5 years" }. */
   roleExperience?: Record<string, string>;
+  /**
+   * Denormalized fan-out of every collaborator UID this person has been
+   * tagged as (across all of their portfolio_projects). Firestore has no
+   * server-side joins, so without this, rendering "who has this person
+   * worked with" on a profile would require reading every project they
+   * appear on. Written client-side whenever a project's `collaborators`
+   * list changes — no confirmed app-side writer yet. Proposed 2026-08-16
+   * per the Person Profile spec (docs/04-Wireframes/PERSON-PROFILE-SPEC.md
+   * §4) to back the new Collaborators screen (screenNumber 123).
+   */
+  collaboratorUids?: string[];
+  /**
+   * Coordinates for distance-based "Nearby" sort in Discover — mirrors
+   * StudioDoc.geo's existing shape exactly. Studios already have this;
+   * People didn't, so Discover's Nearby tab only worked for Studios.
+   * Proposed 2026-08-16 per docs/04-Wireframes/PRODUCT-SPEC.md §C.2.
+   * No confirmed app-side writer yet.
+   */
+  geo?: { lat: number; lng: number };
+  /**
+   * Performance/studio photography gallery — shared across any profileType,
+   * not Business-only (moved out of the Business-extension block below,
+   * where it previously lived scoped to BusinessProfileScreens.kt's
+   * "Reviews & Gallery" tab). Talent and Band profiles need this too (brief
+   * §16). No confirmed app-side writer yet. Distinct from portfolio_projects
+   * (music projects, not photos) and mediaUrls on PortfolioProjectDoc
+   * (per-project media, not a profile-level gallery). Proposed 2026-08-16
+   * per docs/04-Wireframes/PERSON-PROFILE-SPEC.md §4 (new screen 121).
+   */
+  galleryUrls?: string[];
 
   // --- Talent extension (profileType === "TALENT") — role-specific dynamic
   // module fields, gated on primaryRole rather than a sub-type enum since
@@ -160,10 +190,17 @@ export interface UserDoc {
   equipmentList?: string[];
   /** Staff roster — BusinessProfileScreens.kt's "Team & Works" tab has zero schema backing until this. */
   teamMembers?: BusinessTeamMember[];
-  /** The priced service menu shown on the profile page — richer than the flat `services` filter-tag list above. */
+  /**
+   * The priced service menu shown on the profile page — richer than the
+   * flat `services` filter-tag list above. NOTE (2026-08-16): Talent
+   * professionals (mixing/mastering/session engineers etc.) also need a
+   * priced service menu per the Person Profile spec (§4/§5 open question 2:
+   * docs/04-Wireframes/PERSON-PROFILE-SPEC.md), but whether that means
+   * widening this field to the base UserDoc or adding a separate
+   * Talent-scoped field is an unanswered product decision — not resolved
+   * here, deliberately left Business-scoped until that's decided.
+   */
   serviceOfferings?: BusinessServiceOffering[];
-  /** Photo gallery — BusinessProfileScreens.kt's "Reviews & Gallery" tab; distinct from portfolio_projects (music projects, not photos). */
-  galleryUrls?: string[];
   /** businessType === "Label" — names or user UIDs of signed artists. Simple string list, not a structured roster — matches "not detailed schema, just entities" scoping. */
   artistRoster?: string[];
   /** businessType === "School" — course names offered. */
@@ -197,6 +234,23 @@ export interface ConnectionDoc {
   senderUid: string;
   targetUserId: string;
   status: "PENDING" | "ACCEPTED" | "DECLINED";
+}
+
+/**
+ * blocks/{blockerUid_blockedUid} — one-directional block, distinct from
+ * ModerationFlagDoc (a one-time report). Doc ID convention matches
+ * user_bookmarks ("{ownerUid}_{targetId}" style): "{blockerUid}_{blockedUid}".
+ * Only the blocker (and moderators) can read/delete their own block docs —
+ * the blocked user has no visibility into who has blocked them, same
+ * expectation as most social products. Proposed 2026-08-16 per
+ * docs/04-Wireframes/PERSON-PROFILE-SPEC.md §4. No confirmed app-side
+ * writer yet — admin type + rules only for now, same posture as
+ * NotificationDoc/UserSettingsDoc when they were first added.
+ */
+export interface BlockDoc {
+  blockerUid: string;
+  blockedUid: string;
+  createdAt: Timestamp;
 }
 
 export interface FeedPostDoc {
@@ -319,8 +373,24 @@ export interface StudioDoc {
   cancellationPolicy?: string;
 }
 
-export type ProjectStatus = "OPEN" | "IN_PROGRESS" | "COMPLETED";
+/**
+ * Widened 2026-08-16 (additive — existing OPEN/IN_PROGRESS/COMPLETED values
+ * stay valid) so a poster can pause or close a listing without deleting it.
+ * Per docs/04-Wireframes/PRODUCT-SPEC.md §D.2. Phase 2 — MVP only writes
+ * OPEN/IN_PROGRESS/COMPLETED, same as before.
+ */
+export type ProjectStatus = "DRAFT" | "OPEN" | "PAUSED" | "IN_PROGRESS" | "CLOSED" | "COMPLETED";
 
+/**
+ * projects/{projectId} — also the backing collection for Flow 5
+ * (Opportunities), per a prior reconciliation decision (see
+ * webapp/flows/opportunities/_flow.json): "folded in rather than a
+ * separate gig_opportunities collection." Fields below `collaborationType`
+ * were added 2026-08-16 per docs/04-Wireframes/PRODUCT-SPEC.md §D.2 to
+ * actually support an Opportunity Detail screen — `description` is the one
+ * MVP-required addition (an Opportunity Detail screen with no body text
+ * isn't a detail screen); the rest are Phase 2.
+ */
 export interface ProjectDoc {
   creatorUid: string;
   title: string;
@@ -333,6 +403,55 @@ export interface ProjectDoc {
   /** Taxonomy value from "collaboration_types" (work_for_hire/royalties_split/co_write/session_payment). */
   collaborationType?: string;
   createdAt: Timestamp;
+
+  // --- Opportunities fields, added 2026-08-16 (PRODUCT-SPEC.md §D.2) ---
+  /** MVP-required — an Opportunity Detail screen with no body text isn't a detail screen. */
+  description?: string;
+  /** Multi-select, additive alongside the single roleRequired. Phase 2. */
+  skillsRequired?: string[];
+  /** Phase 2. */
+  languagesRequired?: string[];
+  /** Phase 2 — the brief separates "Location" from "Remote/On-site" as two different questions. */
+  locationType?: "remote" | "on_site" | "hybrid";
+  /** Phase 2. */
+  deadline?: Timestamp;
+  /**
+   * Taxonomy value from the new "opportunity_types" category — a real,
+   * separate axis from collaborationType (which is about compensation
+   * structure, not what kind of opportunity this is). Phase 2 — taxonomy
+   * drafted in PRODUCT-SPEC.md §D.6, not yet seeded.
+   */
+  opportunityType?: string;
+  /**
+   * Denormalized poster identity — same justification already accepted for
+   * FeedPostDoc's authorName/authorAvatarUrl: render a list of opportunity
+   * cards without one Firestore read per poster. Phase 2 (MVP can do one
+   * read per row at small scale).
+   */
+  posterName?: string;
+  posterAvatarUrl?: string;
+}
+
+/**
+ * opportunity_applications/{applicationId} — the single biggest gap
+ * identified in the Opportunities flow: `ProjectDoc.applicantCount` was a
+ * bare counter, nothing tracked *who* applied, with *what*, or their
+ * status. Deliberately kept separate from Marketplace's `offers` — gigs/
+ * collaboration (Shortlist → Accept on a person) and commercial
+ * negotiation (Counter → Accept on a price) are different domains with
+ * different state machines, confirmed 2026-08-16 (PRODUCT-SPEC.md §D.2/
+ * §D.4-2). Phase 2 — not built for the Opportunities MVP, which uses
+ * "Message the poster" instead. No confirmed app-side writer yet.
+ */
+export interface OpportunityApplicationDoc {
+  /** → projects/{projectId} doc ID. */
+  opportunityId: string;
+  applicantUid: string;
+  attachedPortfolioProjectIds?: string[];
+  message?: string;
+  status: "SUBMITTED" | "VIEWED" | "SHORTLISTED" | "ACCEPTED" | "REJECTED";
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
 }
 
 export type MarketplaceCondition = "NEW" | "LIKE_NEW" | "USED";
@@ -355,17 +474,73 @@ export interface MarketplaceItemDoc {
   itemCategory?: string;
   /** Units available for this listing. Undefined/1 = single item (the common case); >1 for a seller listing multiple identical units (e.g. a beat-pack license count, bulk cable stock). */
   quantity?: number;
+  /**
+   * Dates already booked for `category === "gear_rental"` listings — a
+   * simple blocked-dates list, not a full calendar engine. Proposed
+   * 2026-08-16 per docs/04-Wireframes/PRODUCT-SPEC.md §B.3. No confirmed
+   * app-side writer yet.
+   */
+  blockedDates?: string[];
+  createdAt: Timestamp;
+}
+
+/**
+ * offers/{offerId} — the shared Make Offer / Negotiate / Accept primitive
+ * for Marketplace, covering both `sale` and `rental` listings (rent stayed
+ * merged into Marketplace as a listing category, not a separate flow — see
+ * PRODUCT-SPEC.md §B.1). Deliberately NOT reused by Opportunities'
+ * application flow — different domain, different state machine (Shortlist
+ * → Accept on a person, vs. Counter → Accept on a price), confirmed
+ * 2026-08-16 per §D.2. No confirmed app-side writer yet.
+ */
+export interface OfferDoc {
+  listingId: string;
+  buyerUid: string;
+  sellerUid: string;
+  amount: number;
+  message?: string;
+  status: "PENDING" | "COUNTERED" | "ACCEPTED" | "DECLINED" | "EXPIRED";
+  counterAmount?: number;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
+
+/**
+ * marketplace_orders/{orderId} — one order/transaction record for both a
+ * straight Buy purchase and a Rent booking (rent didn't get its own
+ * booking collection — see PRODUCT-SPEC.md §B.1/§B.3). Payment fields
+ * deliberately mirror StudioBookingDoc's existing shape verbatim (decided
+ * 2026-08-16, §B.4) rather than inventing a new payments model. Proposed
+ * 2026-08-16, no confirmed app-side writer yet.
+ */
+export interface MarketplaceOrderDoc {
+  listingId: string;
+  buyerUid: string;
+  sellerUid: string;
+  amount: number;
+  status: "PENDING" | "PAID" | "COMPLETED" | "CANCELLED" | "ACTIVE" | "RETURNED";
+  /** Same shape as StudioBookingDoc.paymentMethod. */
+  paymentMethod?: "UPI" | "Card" | "Net Banking" | "Wallet";
+  /** Same shape as StudioBookingDoc.paymentStatus. */
+  paymentStatus?: "PENDING" | "PAID" | "REFUNDED" | "FAILED";
+  paymentTransactionId?: string;
+  /** Only set when the listing's category is a rental (`gear_rental`). */
+  startDate?: string;
+  endDate?: string;
+  deliveryMethod?: "pickup" | "delivery";
   createdAt: Timestamp;
 }
 
 export interface ReviewDoc {
-  targetType: "STUDIO" | "USER";
+  targetType: "STUDIO" | "USER" | "MARKETPLACE_ITEM";
   targetId: string;
   authorUid: string;
   rating: number;
   text: string;
   /** Links to studio_bookings/{bookingId} for "verified purchase" — enforced by firestore.rules. */
   bookingId?: string;
+  /** Links to marketplace_orders/{orderId} for a Marketplace "verified purchase" — same idea as bookingId, added 2026-08-16 alongside the MARKETPLACE_ITEM targetType per PRODUCT-SPEC.md §B.3. */
+  orderId?: string;
   createdAt: Timestamp;
 }
 
@@ -576,6 +751,29 @@ export interface BookmarkDoc {
   createdAt: Timestamp;
 }
 
+/**
+ * profile_analytics/{uid} — doc ID = the profile owner's UID, same
+ * convention as UserSettingsDoc. Nothing modeled profile-level analytics
+ * before this (PortfolioProjectDoc only has per-project projectViews/
+ * likes/shares) — proposed 2026-08-16 per
+ * docs/04-Wireframes/PERSON-PROFILE-SPEC.md §4 to back the new Profile
+ * Analytics screen (screenNumber 122). Counters, not derived client-side —
+ * this project stays on the Spark plan with no Cloud Functions deployed
+ * (see the /notifications rule's own note), so counter increments are
+ * written directly by the viewing client, same pattern as everything else
+ * here. Private to the owner (and admins), not public — see firestore.rules.
+ */
+export interface ProfileAnalyticsDoc {
+  profileViews: number;
+  portfolioViews: number;
+  audioPlays: number;
+  videoPlays: number;
+  searchAppearances: number;
+  shareCount: number;
+  connectionRequestsReceived: number;
+  updatedAt: Timestamp;
+}
+
 export type PortfolioProjectStatus = "Released" | "Upcoming" | "In Production" | "Draft";
 export type PortfolioVisibility = "Public" | "Connections Only" | "Private Draft";
 
@@ -650,7 +848,12 @@ export type NotificationType =
   | "BOOKING_UPDATE"
   | "REVIEW_RECEIVED"
   | "SYSTEM_ALERT"
-  | "GIG_MATCH";
+  | "GIG_MATCH"
+  /** Marketplace — added 2026-08-16 per PRODUCT-SPEC.md §B.3, Phase 2 (not MVP). */
+  | "OFFER_RECEIVED"
+  | "ORDER_STATUS_UPDATE"
+  /** Opportunities — added 2026-08-16 per PRODUCT-SPEC.md §D.2, Phase 2 (not MVP; opportunity_applications isn't built yet either). */
+  | "APPLICATION_STATUS_UPDATE";
 
 /**
  * notifications/{notificationId} — no confirmed app-side writer or reader

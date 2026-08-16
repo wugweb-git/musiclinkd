@@ -482,3 +482,51 @@ filter display, separate from the exact `hourlyRate` figure.
 | ₹ (Budget) | budget |
 | ₹₹ (Mid-range) | mid_range |
 | ₹₹₹ (Premium) | premium |
+
+## New category — Opportunities/Flow 5 (2026-08-16, proposed, not grounded in app data)
+
+### Category: `opportunity_types`
+
+Feeds `ProjectDoc.opportunityType` — a separate axis from `collaboration_types`
+(which is about compensation structure, not what kind of opportunity this
+is). Two-level in the source brief (6 groups, each with sub-types); this
+schema's taxonomy pattern is deliberately flat (2 Firestore levels only,
+per the existing `metadata`-escape-hatch convention used for city
+sub-areas — see `TaxonomyOptionDoc.metadata`), so the group is carried in
+each option's `metadata.group` instead of a 3rd Firestore level. Phase 2 —
+not yet wired into any screen. Drafted in
+`docs/04-Wireframes/PRODUCT-SPEC.md` §D.6.
+
+**Naming overlap, deliberate, not an error:** `recording`/`mixing`/`mastering`
+below share their exact `value` string with entries already seeded in
+`engineer_specialties` and `studio_services` — different axis (what an
+opportunity needs vs. what a person/studio provides), kept as separate
+categories, but intentionally value-aligned so a future matching feature
+can compare them directly without a translation table.
+
+| label | value | metadata.group |
+|---|---|---|
+| Looking for Singer | looking_for_singer | Collaboration |
+| Looking for Musician | looking_for_musician | Collaboration |
+| Looking for Producer | looking_for_producer | Collaboration |
+| Looking for Composer | looking_for_composer | Collaboration |
+| Looking for Lyricist | looking_for_lyricist | Collaboration |
+| Recording | recording | Professional Work |
+| Mixing | mixing | Professional Work |
+| Mastering | mastering | Professional Work |
+| Session Work | session_work | Professional Work |
+| Sound Engineering | sound_engineering | Professional Work |
+| Gigs | gigs | Performance |
+| Shows | shows | Performance |
+| Events | events | Performance |
+| Touring | touring | Performance |
+| Film | film | Production |
+| Advertising | advertising | Production |
+| Albums | albums | Production |
+| Digital Content | digital_content | Production |
+| Studio Required | studio_required | Studio / Space |
+| Rehearsal Required | rehearsal_required | Studio / Space |
+| Venue Required | venue_required | Studio / Space |
+| Equipment Required | equipment_required | Equipment |
+| Rental Required | rental_required | Equipment |
+| ₹₹₹ (Premium) | premium |

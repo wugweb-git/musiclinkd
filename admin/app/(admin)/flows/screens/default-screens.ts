@@ -21,14 +21,23 @@ type ScreenSeed = Omit<FlowScreenDoc, "createdAt" | "updatedAt">;
  * real tabs — Artists/Bands/Studios — were not). See each flow's
  * default-flows.ts description for the direct-source-read evidence.
  *
- * Deliberately NOT populated — opportunities, equipment_rental,
- * subscription, recommendation_engine — confirmed to have zero dedicated
- * screens (see their default-flows.ts descriptions for the grounded
- * evidence: equipment_rental is folded into marketplace, opportunities'
- * only UI is commented-out/dead code, subscription has no schema or
- * screens at all, recommendation_engine was explicitly deprioritized).
+ * Deliberately NOT populated — equipment_rental, subscription,
+ * recommendation_engine — confirmed to have zero dedicated screens (see
+ * their default-flows.ts descriptions for the grounded evidence:
+ * equipment_rental is folded into marketplace, subscription has no schema
+ * or screens at all, recommendation_engine was explicitly deprioritized).
  * Seeding placeholder rows for these would misrepresent absence as
  * presence — do a proper audit pass first if that changes.
+ *
+ * UPDATED 2026-08-16: `opportunities` is now populated, but NOT because
+ * real UI was found (it still has none — see
+ * webapp/flows/opportunities/_flow.json's "100% missing... commented-out
+ * or unreachable dead code"). These are screens 130–135, PROPOSED by
+ * docs/04-Wireframes/PRODUCT-SPEC.md §D after MVP scope was confirmed —
+ * unlike every other entry in this file, they are not grounded in a
+ * Kotlin-source audit. Each entry's own notes say "Not built." Marketplace
+ * also gained 5 proposed screens (125–129) the same way, appended after
+ * its 3 real (if fully mocked) screens.
  */
 export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
   auth: [
@@ -959,6 +968,50 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       collectionsTouched: ["users", "portfolio_projects", "reviews"],
       notes: "profileType === \"VENUE\" — renders the Venue extension fields.",
     },
+    // --- 2026-08-16: new screens proposed by the Person Profile spec
+    // (docs/04-Wireframes/PERSON-PROFILE-SPEC.md §2/§4) — Talent/Band scope
+    // only, not built yet. Each depends on a schema addition landed the
+    // same session (admin/types/firestore.ts) — see each entry's notes.
+    {
+      key: "media_gallery",
+      order: 6,
+      screenNumber: 121,
+      title: "Media Gallery (photo/video full-screen viewer)",
+      states: ["default", "empty"],
+      collectionsTouched: ["users"],
+      notes:
+        "Talent/Band only — reads UserDoc.galleryUrls (new field, proposed 2026-08-16, no confirmed app-side writer yet). Not built.",
+    },
+    {
+      key: "profile_analytics",
+      order: 7,
+      screenNumber: 122,
+      title: "Profile Analytics / Insights",
+      states: ["default", "empty"],
+      collectionsTouched: ["profile_analytics"],
+      notes:
+        "New collection (proposed 2026-08-16) — profileViews/portfolioViews/audioPlays/videoPlays/searchAppearances/shareCount/connectionRequestsReceived, doc ID = owner UID. Owner-only read. Not built.",
+    },
+    {
+      key: "collaborators_graph",
+      order: 8,
+      screenNumber: 123,
+      title: "Collaborators (cross-project graph)",
+      states: ["default", "empty"],
+      collectionsTouched: ["users", "portfolio_projects"],
+      notes:
+        "Reads UserDoc.collaboratorUids (new denormalized field, proposed 2026-08-16, no confirmed app-side writer yet) to avoid fanning out across every portfolio_projects doc on each profile view. Not built.",
+    },
+    {
+      key: "talent_services_view",
+      order: 9,
+      screenNumber: 124,
+      title: "Services (public view, Talent/Band)",
+      states: ["default", "empty"],
+      collectionsTouched: ["users"],
+      notes:
+        "BLOCKED on an unanswered product decision (see PERSON-PROFILE-SPEC.md §5, open question 2): whether UserDoc.serviceOfferings moves out of the Business-extension block or gets a separate Talent-scoped field. Screen slot registered; UI not started.",
+    },
   ],
 
   // --- 2026-08-12: grounded Explore-agent audit pass, per Part W's pending tracker.
@@ -996,6 +1049,126 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       collectionsTouched: [],
       notes:
         "The screen MarketplaceFeature.kt actually routes to (a thin wrapper opening the Saved/Favorites hub defaulted to its Marketplace sub-tab) — not a browse/listing feature itself. Backed by a hardcoded item list, no Firestore.",
+    },
+    // --- 2026-08-16: new screens proposed by the Product Spec
+    // (docs/04-Wireframes/PRODUCT-SPEC.md §B.2/§B.3) — Buy/Sell/Rent,
+    // rent kept merged into Marketplace as a listing category (not a
+    // separate flow), MVP scope confirmed. NOT audited from Kotlin source
+    // like the three screens above — proposed and not built. See each
+    // entry's notes for MVP vs. Phase 2.
+    {
+      key: "marketplace_search_filters",
+      order: 4,
+      screenNumber: 125,
+      title: "Market Search / Category / Filters / Sort",
+      states: ["default", "empty"],
+      collectionsTouched: ["marketplace_items"],
+      notes: "MVP. Not built — proposed screen, no Kotlin/webapp implementation exists yet.",
+    },
+    {
+      key: "marketplace_make_offer",
+      order: 5,
+      screenNumber: 126,
+      title: "Make Offer / Negotiate",
+      states: ["default", "countered", "accepted", "declined", "expired"],
+      collectionsTouched: ["offers"],
+      notes: "Phase 2, not MVP. Needs the new offers collection (schema landed 2026-08-16). Not built.",
+    },
+    {
+      key: "marketplace_order_status",
+      order: 6,
+      screenNumber: 127,
+      title: "Transaction / Order Status (covers both Buy and Rent lifecycles)",
+      states: ["pending", "paid", "active", "returned", "completed", "cancelled"],
+      collectionsTouched: ["marketplace_orders"],
+      notes:
+        "Phase 2, not MVP. One screen for both Buy's Purchase/Transaction/Order Status and Rent's Summary/Confirm/Pickup-Delivery/Active/Return — no separate rental-booking screen sequence, per the rent-stays-merged decision. Needs the new marketplace_orders collection. Not built.",
+    },
+    {
+      key: "marketplace_create_listing",
+      order: 7,
+      screenNumber: 128,
+      title: "Create Listing (Sell + Rent Out, shared, listingType param)",
+      states: ["default", "publishing", "error"],
+      collectionsTouched: ["marketplace_items"],
+      notes:
+        "MVP, shipped minimal (decided 2026-08-16): title, category, condition, price, one photo, description, publish. Full 8-step brief polish (gallery, location picker, preview step) is Phase 2. Rent Out is listingType: \"rental\" on this same screen, not a separate flow. Not built.",
+    },
+    {
+      key: "marketplace_my_listings",
+      order: 8,
+      screenNumber: 129,
+      title: "My Listings / My Purchases / My Rentals",
+      states: ["listings", "purchases", "rentals", "empty"],
+      collectionsTouched: ["marketplace_items", "marketplace_orders"],
+      notes: "Phase 2, not MVP. Not built.",
+    },
+  ],
+  opportunities: [
+    // --- 2026-08-16: Flow 5 was previously deliberately left unpopulated
+    // (see this file's header) — confirmed zero real UI exists in the app
+    // (webapp/flows/opportunities/_flow.json: "100% missing... commented-out
+    // or unreachable dead code"). These are new screens PROPOSED by the
+    // Product Spec (docs/04-Wireframes/PRODUCT-SPEC.md §D.1/§D.2), not
+    // audited from Kotlin source — this is a real build from zero, not a
+    // rewiring job like Discover. MVP scope confirmed 2026-08-16. Reuses
+    // the existing `projects` collection per a prior reconciliation
+    // decision (not a new gig_opportunities collection).
+    {
+      key: "opportunities_home",
+      order: 1,
+      screenNumber: 130,
+      title: "Opportunities Home / Search / Categories / Results / Filters",
+      states: ["default", "empty"],
+      collectionsTouched: ["projects"],
+      notes: "MVP. Reads projects where status == \"OPEN\". Not built.",
+    },
+    {
+      key: "opportunity_detail",
+      order: 2,
+      screenNumber: 131,
+      title: "Opportunity Detail",
+      states: ["default"],
+      collectionsTouched: ["projects"],
+      notes: "MVP. Needs ProjectDoc.description (schema landed 2026-08-16). Not built.",
+    },
+    {
+      key: "opportunity_apply",
+      order: 3,
+      screenNumber: 132,
+      title: "Apply / Submit Portfolio / Application Preview / Submitted",
+      states: ["default", "submitting", "submitted", "error"],
+      collectionsTouched: ["opportunity_applications"],
+      notes:
+        "Phase 2, not MVP — MVP substitutes \"Message the poster\" (reuses chat_threads) for a formal application. Needs the new opportunity_applications collection. Not built.",
+    },
+    {
+      key: "my_applications",
+      order: 4,
+      screenNumber: 133,
+      title: "My Applications / Application Status",
+      states: ["submitted", "viewed", "shortlisted", "accepted", "rejected", "empty"],
+      collectionsTouched: ["opportunity_applications"],
+      notes: "Phase 2, not MVP. Not built.",
+    },
+    {
+      key: "create_opportunity",
+      order: 5,
+      screenNumber: 134,
+      title: "Create Opportunity / Edit Opportunity",
+      states: ["default", "publishing", "error"],
+      collectionsTouched: ["projects"],
+      notes:
+        "MVP, shipped minimal (decided 2026-08-16): title, description, roleRequired, budget, location, publish — writes to projects using rules that already exist. Richer fields (skillsRequired/languagesRequired/locationType/deadline/opportunityType, status-widening beyond OPEN/IN_PROGRESS/COMPLETED) are Phase 2. Not built.",
+    },
+    {
+      key: "manage_applicants",
+      order: 6,
+      screenNumber: 135,
+      title: "Manage Applicants",
+      states: ["default", "empty"],
+      collectionsTouched: ["opportunity_applications"],
+      notes: "Phase 2, not MVP. Poster-side view of opportunity_applications where opportunityId == this project. Not built.",
     },
   ],
   notifications: [

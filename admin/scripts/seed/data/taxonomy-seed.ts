@@ -19,7 +19,12 @@ type CategorySeed = {
   key: string;
   label: string;
   description: string;
-  options: Array<{ label: string; value: string }>;
+  /**
+   * `metadata` widened onto this local type 2026-08-16 for `opportunity_types`
+   * — the first category here to need it (TaxonomyOptionDoc.metadata already
+   * supported this; this seed's own type just hadn't needed it before).
+   */
+  options: Array<{ label: string; value: string; metadata?: Record<string, unknown> }>;
 };
 
 const CATEGORIES: CategorySeed[] = [
@@ -439,6 +444,37 @@ const CATEGORIES: CategorySeed[] = [
       { label: "₹₹₹ (Premium)", value: "premium" },
     ],
   },
+  {
+    key: "opportunity_types",
+    label: "Opportunity Types",
+    description:
+      "Feeds ProjectDoc.opportunityType (Flow 5, Opportunities) — a separate axis from collaboration_types (compensation structure, not opportunity kind). Proposed 2026-08-16, Phase 2, not yet wired into any screen — see docs/04-Wireframes/PRODUCT-SPEC.md §D.6. Group carried in metadata.group rather than a 3rd Firestore level, per the existing sub-area/metadata convention. recording/mixing/mastering deliberately value-aligned with engineer_specialties/studio_services — different axis, same value strings, on purpose.",
+    options: [
+      { label: "Looking for Singer", value: "looking_for_singer", metadata: { group: "Collaboration" } },
+      { label: "Looking for Musician", value: "looking_for_musician", metadata: { group: "Collaboration" } },
+      { label: "Looking for Producer", value: "looking_for_producer", metadata: { group: "Collaboration" } },
+      { label: "Looking for Composer", value: "looking_for_composer", metadata: { group: "Collaboration" } },
+      { label: "Looking for Lyricist", value: "looking_for_lyricist", metadata: { group: "Collaboration" } },
+      { label: "Recording", value: "recording", metadata: { group: "Professional Work" } },
+      { label: "Mixing", value: "mixing", metadata: { group: "Professional Work" } },
+      { label: "Mastering", value: "mastering", metadata: { group: "Professional Work" } },
+      { label: "Session Work", value: "session_work", metadata: { group: "Professional Work" } },
+      { label: "Sound Engineering", value: "sound_engineering", metadata: { group: "Professional Work" } },
+      { label: "Gigs", value: "gigs", metadata: { group: "Performance" } },
+      { label: "Shows", value: "shows", metadata: { group: "Performance" } },
+      { label: "Events", value: "events", metadata: { group: "Performance" } },
+      { label: "Touring", value: "touring", metadata: { group: "Performance" } },
+      { label: "Film", value: "film", metadata: { group: "Production" } },
+      { label: "Advertising", value: "advertising", metadata: { group: "Production" } },
+      { label: "Albums", value: "albums", metadata: { group: "Production" } },
+      { label: "Digital Content", value: "digital_content", metadata: { group: "Production" } },
+      { label: "Studio Required", value: "studio_required", metadata: { group: "Studio / Space" } },
+      { label: "Rehearsal Required", value: "rehearsal_required", metadata: { group: "Studio / Space" } },
+      { label: "Venue Required", value: "venue_required", metadata: { group: "Studio / Space" } },
+      { label: "Equipment Required", value: "equipment_required", metadata: { group: "Equipment" } },
+      { label: "Rental Required", value: "rental_required", metadata: { group: "Equipment" } },
+    ],
+  },
 ];
 
 export const TAXONOMY_CATEGORIES: Array<{ id: string; data: Omit<TaxonomyCategoryDoc, "createdAt" | "updatedAt"> & { createdAt: typeof SEEDED_ON; updatedAt: typeof SEEDED_ON } }> = CATEGORIES.map((c) => ({
@@ -463,6 +499,10 @@ export const TAXONOMY_OPTIONS: Array<{ categoryId: string; id: string; data: Omi
       value: opt.value,
       sortOrder: i + 1,
       isActive: true,
+      // Carries opt.metadata through when present (added 2026-08-16 for
+      // opportunity_types' group tagging) — previously dropped silently
+      // since no category needed it until now.
+      ...(opt.metadata ? { metadata: opt.metadata } : {}),
       createdAt: SEEDED_ON,
       updatedAt: SEEDED_ON,
     },
