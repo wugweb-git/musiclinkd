@@ -3016,6 +3016,232 @@ function EmailAuthBlock() {
   );
 }
 
+
+// ===== Editorial / "Replay" family =====
+// Reference set: Apple Music Replay, Spotify-style share cards, and glossy 3D
+// empty states. What those share, and what these blocks adopt:
+//   - editorial-scale type with MIXED WEIGHT in one sentence (the number is
+//     bold, the sentence around it is not) — the number is the story
+//   - warm gradient washes bleeding from the top edge, not flat fills
+//   - SQUIRCLE avatars (rounded square), not circles — reads as artwork
+//   - oversized rank numerals sitting inside the artwork, not beside it
+//   - gradient scrims so white text stays legible over any photo
+
+// Recap header — the "You listened for N minutes" pattern.
+function ReplayRecapBlock() {
+  const months = ["Jan", "Feb", "Mar", "Apr", "May"];
+  const [m, setM] = useState(2);
+  const mins = [2139, 1704, 1362, 980, 1518];
+  return (
+    <Box maxWidth={340} rounding={4} overflow="hidden" borderStyle="sm">
+      {/* Warm wash bleeding from the top edge — the signature of this family. */}
+      <Box padding={5}
+        dangerouslySetInlineStyle={{ __style: {
+          background: "linear-gradient(180deg,#FF8A00 0%,#FFC46B 34%,#FFFFFF 88%)" } }}>
+        <Flex justifyContent="between" alignItems="center">
+          <Heading size="600">Replay</Heading>
+          <Box paddingX={3} paddingY={1} rounding="pill"
+            dangerouslySetInlineStyle={{ __style: { background: "rgba(255,255,255,0.55)" } }}>
+            <Text size="100" weight="bold">2026</Text>
+          </Box>
+        </Flex>
+        <Box marginTop={4} marginBottom={4}>
+          <Flex gap={4}>
+            {months.map((mo, i) => (
+              <TapArea key={mo} onTap={() => setM(i)}>
+                <Text size="300" weight="bold" color={i === m ? "default" : "subtle"}>{mo}</Text>
+              </TapArea>
+            ))}
+          </Flex>
+        </Box>
+        {/* Mixed weight in one sentence: the figure carries the emphasis. */}
+        <Text size="500" color="subtle">
+          You listened for{" "}
+          <Text inline size="500" weight="bold" color="default">
+            {mins[m].toLocaleString("en-IN")} minutes
+          </Text>{" "}
+          in {["January","February","March","April","May"][m]}.
+        </Text>
+      </Box>
+    </Box>
+  );
+}
+
+// Ranked artist cards — oversized numeral inside the artwork.
+function RankedArtistsBlock() {
+  const top = [
+    { r: 1, n: "Arijit Sen", m: 993, img: IMG.vocalist },
+    { r: 2, n: "Mei Tanaka", m: 483, img: IMG.dj },
+    { r: 3, n: "Ravi Nair", m: 312, img: IMG.mixing },
+  ];
+  return (
+    <Box maxWidth={340}>
+      <Box marginBottom={3}>
+        <Flex gap={1} alignItems="center">
+          <Heading size="400">Your top artists</Heading>
+          <Icon icon="arrow-forward" accessibilityLabel="" size={14} />
+        </Flex>
+      </Box>
+      <Box overflow="scrollX">
+        <Flex gap={3}>
+          {top.map((a) => (
+            <Box key={a.n} width={170} flex="none" position="relative" rounding={3} overflow="hidden">
+              <Image alt={a.n} src={a.img} naturalWidth={170} naturalHeight={215} />
+              <Box position="absolute" top left padding={3}>
+                <Text size="600" weight="bold" color="light">{a.r}</Text>
+              </Box>
+              <Box position="absolute" bottom left right height={100}
+                dangerouslySetInlineStyle={{ __style: {
+                  background: "linear-gradient(to top, rgba(13,13,13,0.9), rgba(13,13,13,0))" } }} />
+              <Box position="absolute" bottom left right padding={3}>
+                <Text size="100" weight="bold" color="light">{a.n}</Text>
+                <Text size="100" color="light">{a.m} minutes</Text>
+              </Box>
+            </Box>
+          ))}
+        </Flex>
+      </Box>
+    </Box>
+  );
+}
+
+// Illustrated empty state — gradient card, centred art, pill CTA.
+// Copy follows the UX-writing rule that an empty screen is an invitation to
+// act, not an apology: it says what to do next and why it's low-stakes.
+function IllustratedEmptyStateBlock() {
+  return (
+    <Box maxWidth={300} rounding={4} overflow="hidden" borderStyle="sm">
+      <Box padding={5}
+        dangerouslySetInlineStyle={{ __style: {
+          background: "linear-gradient(170deg,#FFFFFF 0%,#FBE3DC 42%,#E9B7C6 100%)" } }}>
+        <Heading size="400" align="center">No tracks yet</Heading>
+        <Box marginTop={6} marginBottom={6} display="flex" justifyContent="center">
+          {/* Glossy mark stands in for the reference's 3D object — a real
+              gradient sphere behind the brand icon, no external asset. */}
+          <Box width={132} height={132} rounding="circle" display="flex"
+            alignItems="center" justifyContent="center"
+            dangerouslySetInlineStyle={{ __style: {
+              background: "radial-gradient(circle at 34% 28%, #FFFFFF 0%, #F4A8C0 38%, #7C4C8F 100%)",
+              boxShadow: "0 18px 40px rgba(124,76,143,0.32)" } }}>
+            <Icon icon="music-on" accessibilityLabel="" size={52} color="light" />
+          </Box>
+        </Box>
+        <Box display="flex" justifyContent="center">
+          <Box paddingX={5} paddingY={3} rounding="pill"
+            dangerouslySetInlineStyle={{ __style: { background: "rgba(255,255,255,0.72)" } }}>
+            <Flex gap={2} alignItems="center">
+              <Icon icon="add-circle" accessibilityLabel="" size={16} />
+              <Text weight="bold">Add track</Text>
+            </Flex>
+          </Box>
+        </Box>
+        <Box marginTop={4}>
+          <Text size="100" align="center" color="subtle">
+            Your first track is for experimenting. Nothing here is published until you say so.
+          </Text>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+// Squircle avatar cluster — "inspired people". Squircle, not circle: at small
+// sizes a rounded square reads as artwork/tile, which is the whole point here.
+function AvatarClusterBlock() {
+  const imgs = [IMG.vocalist, IMG.dj, IMG.mixing, IMG.studio, IMG.mic, IMG.controller];
+  const tiles = [...imgs, ...imgs].slice(0, 11);
+  return (
+    <Box maxWidth={320}>
+      <Box display="flex" justifyContent="center">
+        <Flex gap={2} wrap justifyContent="center">
+          {tiles.map((src, i) => {
+            const s = i === 5 ? 88 : 56; // one hero tile, as in the reference
+            return (
+              <Box key={i} width={s} height={s} overflow="hidden"
+                dangerouslySetInlineStyle={{ __style: {
+                  borderRadius: `${Math.round(s * 0.3)}px`,
+                  boxShadow: "0 6px 16px rgba(13,13,13,0.14)" } }}>
+                <Image alt="" src={src} naturalWidth={s} naturalHeight={s} />
+              </Box>
+            );
+          })}
+        </Flex>
+      </Box>
+      <Box marginTop={5}>
+        <Heading size="400" align="center">Inspired people</Heading>
+        <Box marginTop={1}>
+          <Text size="100" color="subtle" align="center">
+            1,284 people saved or shared your work this month.
+          </Text>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+// Shareable stat card — dark, editorial, one gold-accented fact.
+function ShareStatCardBlock() {
+  return (
+    <Box maxWidth={300} rounding={4} overflow="hidden">
+      <Box padding={6}
+        dangerouslySetInlineStyle={{ __style: {
+          background: "radial-gradient(circle at 50% 12%, #4A4327 0%, #2A2718 55%, #1A1810 100%)",
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px)",
+          backgroundSize: "14px 14px" } }}>
+        <Box display="flex" justifyContent="center" marginBottom={5}>
+          <Box position="relative" width={116} height={148} overflow="hidden"
+            dangerouslySetInlineStyle={{ __style: { borderRadius: "58px 58px 58px 58px" } }}>
+            <Image alt="Arijit Sen" src={IMG.vocalist} naturalWidth={116} naturalHeight={148} />
+          </Box>
+        </Box>
+        <Text size="600" weight="bold" color="light" align="center">You</Text>
+        <Box marginTop={1}><Text size="100" color="light" align="center">are the #1 listener of</Text></Box>
+        <Box marginTop={1}>
+          {/* Text has no dangerouslySetInlineStyle prop (checked Text.d.ts) and
+              its colour union has no gold, so the accent is applied by a Box
+              wrapper via CSS inheritance rather than faking a Text prop. */}
+          <Box dangerouslySetInlineStyle={{ __style: { color: "#E8C88A", textAlign: "center" } }}>
+            <Text size="500" weight="bold" align="center">Arijit Sen</Text>
+          </Box>
+        </Box>
+        <Box marginTop={1}><Text size="100" color="light" align="center">out of all MusicLinkd listeners</Text></Box>
+        <Box marginTop={5} display="flex" justifyContent="center">
+          <Box paddingX={4} paddingY={2} rounding="pill"
+            dangerouslySetInlineStyle={{ __style: { background: "rgba(255,255,255,0.14)" } }}>
+            <Text size="100" color="light">Share</Text>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+// Persistent mini player — the bar that rides above the tab bar in every
+// reference. Distinct from the Waveform player (a full transport surface).
+function MiniPlayerBlock() {
+  const [playing, setPlaying] = useState(true);
+  return (
+    <Box maxWidth={340} rounding="pill" padding={2} borderStyle="sm"
+      dangerouslySetInlineStyle={{ __style: {
+        background: "rgba(255,255,255,0.86)",
+        backdropFilter: "blur(12px)",
+        boxShadow: "0 8px 24px rgba(13,11,38,0.14)" } }}>
+      <Flex gap={3} alignItems="center">
+        <Box width={40} height={40} rounding={3} overflow="hidden">
+          <Image alt="" src={IMG.mixing} naturalWidth={40} naturalHeight={40} />
+        </Box>
+        <Box flex="grow">
+          <Text size="100" weight="bold">Tum Hi Toh (Unplugged)</Text>
+          <Text size="100" color="subtle">Arijit Sen</Text>
+        </Box>
+        <IconButton icon={playing ? "pause" : "play"} size="sm"
+          accessibilityLabel={playing ? "Pause" : "Play"} onClick={() => setPlaying((p) => !p)} />
+        <IconButton icon="forward" size="sm" accessibilityLabel="Next track" />
+      </Flex>
+    </Box>
+  );
+}
+
 const BLOCKS: Block[] = [
   { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => <NavHeaderBlock /> },
   { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => <ArtistProfileBlock /> },
@@ -3070,6 +3296,12 @@ const BLOCKS: Block[] = [
   { name: "Stem mixer", description: "Ported from styleguide #mixer — per-stem mute with live level meters.", render: () => <StemMixerBlock /> },
   { name: "Brief wizard", description: "Ported from styleguide #pattern-brief-wizard — 8-step casting brief, dots jump.", render: () => <BriefWizardBlock /> },
   { name: "Textures & effects", description: "Ported from styleguide #vd-effects — real CSS backgrounds, not screenshots.", render: () => <TexturesBlock /> },
+  { name: "Replay recap", description: "Apple Music Replay reference — warm wash, month scrubber, mixed-weight editorial stat.", render: () => <ReplayRecapBlock /> },
+  { name: "Ranked artists", description: "Oversized rank numeral inside the artwork, scrim for legibility.", render: () => <RankedArtistsBlock /> },
+  { name: "Illustrated empty state", description: "Gradient card, glossy mark, pill CTA — copy invites action rather than apologising.", render: () => <IllustratedEmptyStateBlock /> },
+  { name: "Avatar cluster", description: "Squircle tiles with one hero — reads as artwork, not profile photos.", render: () => <AvatarClusterBlock /> },
+  { name: "Share stat card", description: "Dark editorial share card, one gold-accented fact.", render: () => <ShareStatCardBlock /> },
+  { name: "Mini player", description: "Persistent glassy transport bar — distinct from the full waveform player.", render: () => <MiniPlayerBlock /> },
   { name: "Splash artwork", description: "Real screen auth/splash — brand mark, wordmark, both real states.", render: () => <SplashBlock /> },
   { name: "App icon & logo", description: "Real MusicLinkd mark at ship sizes, plus pink-field and monochrome variants.", render: () => <AppIconSetBlock /> },
   { name: "Auth welcome", description: "Real screens auth/welcome + google_signin — real ButtonSocial.", render: () => <AuthWelcomeBlock /> },

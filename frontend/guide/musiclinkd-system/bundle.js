@@ -43977,6 +43977,230 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       ) })
     ] });
   }
+  function ReplayRecapBlock() {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May"];
+    const [m, setM] = (0, import_react2.useState)(2);
+    const mins = [2139, 1704, 1362, 980, 1518];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 340, rounding: 4, overflow: "hidden", borderStyle: "sm", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+      BoxWithForwardRef,
+      {
+        padding: 5,
+        dangerouslySetInlineStyle: { __style: {
+          background: "linear-gradient(180deg,#FF8A00 0%,#FFC46B 34%,#FFFFFF 88%)"
+        } },
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "600", children: "Replay" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+              BoxWithForwardRef,
+              {
+                paddingX: 3,
+                paddingY: 1,
+                rounding: "pill",
+                dangerouslySetInlineStyle: { __style: { background: "rgba(255,255,255,0.55)" } },
+                children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: "2026" })
+              }
+            )
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 4, marginBottom: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 4, children: months.map((mo, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TapAreaWithForwardRef, { onTap: () => setM(i), children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "300", weight: "bold", color: i === m ? "default" : "subtle", children: mo }) }, mo)) }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "500", color: "subtle", children: [
+            "You listened for",
+            " ",
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { inline: true, size: "500", weight: "bold", color: "default", children: [
+              mins[m].toLocaleString("en-IN"),
+              " minutes"
+            ] }),
+            " ",
+            "in ",
+            ["January", "February", "March", "April", "May"][m],
+            "."
+          ] })
+        ]
+      }
+    ) });
+  }
+  function RankedArtistsBlock() {
+    const top2 = [
+      { r: 1, n: "Arijit Sen", m: 993, img: IMG.vocalist },
+      { r: 2, n: "Mei Tanaka", m: 483, img: IMG.dj },
+      { r: 3, n: "Ravi Nair", m: 312, img: IMG.mixing }
+    ];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 340, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 1, alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: "Your top artists" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "arrow-forward", accessibilityLabel: "", size: 14 })
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { overflow: "scrollX", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 3, children: top2.map((a) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { width: 170, flex: "none", position: "relative", rounding: 3, overflow: "hidden", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: a.n, src: a.img, naturalWidth: 170, naturalHeight: 215 }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { position: "absolute", top: true, left: true, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "600", weight: "bold", color: "light", children: a.r }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          BoxWithForwardRef,
+          {
+            position: "absolute",
+            bottom: true,
+            left: true,
+            right: true,
+            height: 100,
+            dangerouslySetInlineStyle: { __style: {
+              background: "linear-gradient(to top, rgba(13,13,13,0.9), rgba(13,13,13,0))"
+            } }
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "absolute", bottom: true, left: true, right: true, padding: 3, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", color: "light", children: a.n }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "light", children: [
+            a.m,
+            " minutes"
+          ] })
+        ] })
+      ] }, a.n)) }) })
+    ] });
+  }
+  function IllustratedEmptyStateBlock() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 300, rounding: 4, overflow: "hidden", borderStyle: "sm", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+      BoxWithForwardRef,
+      {
+        padding: 5,
+        dangerouslySetInlineStyle: { __style: {
+          background: "linear-gradient(170deg,#FFFFFF 0%,#FBE3DC 42%,#E9B7C6 100%)"
+        } },
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", align: "center", children: "No tracks yet" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 6, marginBottom: 6, display: "flex", justifyContent: "center", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            BoxWithForwardRef,
+            {
+              width: 132,
+              height: 132,
+              rounding: "circle",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              dangerouslySetInlineStyle: { __style: {
+                background: "radial-gradient(circle at 34% 28%, #FFFFFF 0%, #F4A8C0 38%, #7C4C8F 100%)",
+                boxShadow: "0 18px 40px rgba(124,76,143,0.32)"
+              } },
+              children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "music-on", accessibilityLabel: "", size: 52, color: "light" })
+            }
+          ) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { display: "flex", justifyContent: "center", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            BoxWithForwardRef,
+            {
+              paddingX: 5,
+              paddingY: 3,
+              rounding: "pill",
+              dangerouslySetInlineStyle: { __style: { background: "rgba(255,255,255,0.72)" } },
+              children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "add-circle", accessibilityLabel: "", size: 16 }),
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Add track" })
+              ] })
+            }
+          ) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", align: "center", color: "subtle", children: "Your first track is for experimenting. Nothing here is published until you say so." }) })
+        ]
+      }
+    ) });
+  }
+  function AvatarClusterBlock() {
+    const imgs = [IMG.vocalist, IMG.dj, IMG.mixing, IMG.studio, IMG.mic, IMG.controller];
+    const tiles = [...imgs, ...imgs].slice(0, 11);
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 320, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { display: "flex", justifyContent: "center", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 2, wrap: true, justifyContent: "center", children: tiles.map((src, i) => {
+        const s = i === 5 ? 88 : 56;
+        return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          BoxWithForwardRef,
+          {
+            width: s,
+            height: s,
+            overflow: "hidden",
+            dangerouslySetInlineStyle: { __style: {
+              borderRadius: `${Math.round(s * 0.3)}px`,
+              boxShadow: "0 6px 16px rgba(13,13,13,0.14)"
+            } },
+            children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "", src, naturalWidth: s, naturalHeight: s })
+          },
+          i
+        );
+      }) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginTop: 5, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", align: "center", children: "Inspired people" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", align: "center", children: "1,284 people saved or shared your work this month." }) })
+      ] })
+    ] });
+  }
+  function ShareStatCardBlock() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 300, rounding: 4, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+      BoxWithForwardRef,
+      {
+        padding: 6,
+        dangerouslySetInlineStyle: { __style: {
+          background: "radial-gradient(circle at 50% 12%, #4A4327 0%, #2A2718 55%, #1A1810 100%)",
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px)",
+          backgroundSize: "14px 14px"
+        } },
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { display: "flex", justifyContent: "center", marginBottom: 5, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            BoxWithForwardRef,
+            {
+              position: "relative",
+              width: 116,
+              height: 148,
+              overflow: "hidden",
+              dangerouslySetInlineStyle: { __style: { borderRadius: "58px 58px 58px 58px" } },
+              children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Arijit Sen", src: IMG.vocalist, naturalWidth: 116, naturalHeight: 148 })
+            }
+          ) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "600", weight: "bold", color: "light", align: "center", children: "You" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "light", align: "center", children: "are the #1 listener of" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { dangerouslySetInlineStyle: { __style: { color: "#E8C88A", textAlign: "center" } }, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "500", weight: "bold", align: "center", children: "Arijit Sen" }) }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "light", align: "center", children: "out of all MusicLinkd listeners" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 5, display: "flex", justifyContent: "center", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            BoxWithForwardRef,
+            {
+              paddingX: 4,
+              paddingY: 2,
+              rounding: "pill",
+              dangerouslySetInlineStyle: { __style: { background: "rgba(255,255,255,0.14)" } },
+              children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "light", children: "Share" })
+            }
+          ) })
+        ]
+      }
+    ) });
+  }
+  function MiniPlayerBlock() {
+    const [playing, setPlaying] = (0, import_react2.useState)(true);
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+      BoxWithForwardRef,
+      {
+        maxWidth: 340,
+        rounding: "pill",
+        padding: 2,
+        borderStyle: "sm",
+        dangerouslySetInlineStyle: { __style: {
+          background: "rgba(255,255,255,0.86)",
+          backdropFilter: "blur(12px)",
+          boxShadow: "0 8px 24px rgba(13,11,38,0.14)"
+        } },
+        children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 40, height: 40, rounding: 3, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "", src: IMG.mixing, naturalWidth: 40, naturalHeight: 40 }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { flex: "grow", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: "Tum Hi Toh (Unplugged)" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Arijit Sen" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            IconButtonWithForwardRef,
+            {
+              icon: playing ? "pause" : "play",
+              size: "sm",
+              accessibilityLabel: playing ? "Pause" : "Play",
+              onClick: () => setPlaying((p) => !p)
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconButtonWithForwardRef, { icon: "forward", size: "sm", accessibilityLabel: "Next track" })
+        ] })
+      }
+    );
+  }
   var BLOCKS = [
     { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NavHeaderBlock, {}) },
     { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ArtistProfileBlock, {}) },
@@ -44031,6 +44255,12 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     { name: "Stem mixer", description: "Ported from styleguide #mixer \u2014 per-stem mute with live level meters.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(StemMixerBlock, {}) },
     { name: "Brief wizard", description: "Ported from styleguide #pattern-brief-wizard \u2014 8-step casting brief, dots jump.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BriefWizardBlock, {}) },
     { name: "Textures & effects", description: "Ported from styleguide #vd-effects \u2014 real CSS backgrounds, not screenshots.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TexturesBlock, {}) },
+    { name: "Replay recap", description: "Apple Music Replay reference \u2014 warm wash, month scrubber, mixed-weight editorial stat.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ReplayRecapBlock, {}) },
+    { name: "Ranked artists", description: "Oversized rank numeral inside the artwork, scrim for legibility.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(RankedArtistsBlock, {}) },
+    { name: "Illustrated empty state", description: "Gradient card, glossy mark, pill CTA \u2014 copy invites action rather than apologising.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IllustratedEmptyStateBlock, {}) },
+    { name: "Avatar cluster", description: "Squircle tiles with one hero \u2014 reads as artwork, not profile photos.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(AvatarClusterBlock, {}) },
+    { name: "Share stat card", description: "Dark editorial share card, one gold-accented fact.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ShareStatCardBlock, {}) },
+    { name: "Mini player", description: "Persistent glassy transport bar \u2014 distinct from the full waveform player.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(MiniPlayerBlock, {}) },
     { name: "Splash artwork", description: "Real screen auth/splash \u2014 brand mark, wordmark, both real states.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SplashBlock, {}) },
     { name: "App icon & logo", description: "Real MusicLinkd mark at ship sizes, plus pink-field and monochrome variants.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(AppIconSetBlock, {}) },
     { name: "Auth welcome", description: "Real screens auth/welcome + google_signin \u2014 real ButtonSocial.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(AuthWelcomeBlock, {}) },

@@ -90,3 +90,23 @@ assert("Dark mode toggles data-theme attribute", window.document.documentElement
 
 console.log(`\n${errors.length} console/window error(s) captured:`);
 errors.forEach((e) => console.log(" -", e));
+
+// --- Source guard: invalid Gestalt Heading sizes -------------------------
+// Gestalt's Heading Size union is '100'|'200'|'300'|'400'|'600'|'700' — it
+// SKIPS 500. Passing "500" renders a literal <hundefined> tag: invisible in
+// the UI, only surfaced as a console warning. This was shipped twice before
+// the guard existed, so it is checked at source rather than left to whoever
+// happens to read the console.
+{
+  const src = fs.readFileSync("src/App.tsx", "utf8");
+  const VALID = ["100", "200", "300", "400", "600", "700"];
+  const bad = [...src.matchAll(/<Heading[^>]*\bsize="(\d+)"/g)]
+    .map((m) => m[1])
+    .filter((s) => !VALID.includes(s));
+  if (bad.length) {
+    console.log(`FAIL — invalid Heading size(s): ${[...new Set(bad)].join(", ")} (valid: ${VALID.join("|")})`);
+    process.exitCode = 1;
+  } else {
+    console.log("OK   — all Heading sizes valid");
+  }
+}

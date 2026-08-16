@@ -23,7 +23,7 @@ Full detail: [`gestalt-library.md`](./gestalt-library.md).
 A separate, standalone React app (own `package.json`/`node_modules`, bundled with esbuild) that renders the *real* Gestalt components, the *real* shipped design tokens, and the *real* icon set — genuinely interactive, not a mockup. Branded "MusicLinkd System." Five tabs:
 
 - **Components (60 cards)** — every practically demoable Gestalt component, real and interactive, across 8 categories (Actions, Forms, Feedback, Data Display, **Navigation**, Overlays, Typography & Layout, Media & Gallery). The handful deliberately left out (Video, Collage/MasonryV2, search-index-specific pieces, infra-only providers/hooks, Layer, Container) are listed by name at the bottom of that tab, with why.
-- **Blocks (75 composed patterns + admin widget directory)** — two sub-tabs. "Composed patterns" now spans four provenance tiers, all honestly distinguished: (1) originally designed patterns not tied to a specific data source (navigation header, artist profile card, track row, upload form, stats row, empty state, notification stack, cover art gallery, bottom navigation bar, trust badges — sourced from `admin/components/shared/trust-badge.tsx` — hero, metrics scorecard, activity feed, search & filters, quick actions, avatar stack/social proof, testimonial, pricing plans); (2) patterns validated against the real 124-screen registry (`dist/preview/flows/**/screen.json`) — booking summary, availability calendar, chat, rating breakdown, write review, success state, QR share, credit attribution, section tabs, public profile — several using the screens' own real seed data verbatim; (3) admin-panel-perspective patterns (data table, sidebar, top bar); (4) widget-directory-backed visual cards, added seventh pass — track card, studio card, featured studio card, marketplace card, opportunity card, review card, notification card, public reputation widget. "Admin widget directory": a read-only mirror of the real 27-widget catalog from `admin/app/(admin)/widgets/default-widgets.ts` (backed by `admin/docs/architecture/Widget_Directory.md`), transcribed verbatim, grouped by the same 9 categories, filterable by the same search box — a reference mirror, not the source of truth; see `musiclinkd-system/src/widgets-mirror.ts` for the re-transcription note.
+- **Blocks (81 composed patterns + admin widget directory)** — two sub-tabs. "Composed patterns" now spans four provenance tiers, all honestly distinguished: (1) originally designed patterns not tied to a specific data source (navigation header, artist profile card, track row, upload form, stats row, empty state, notification stack, cover art gallery, bottom navigation bar, trust badges — sourced from `admin/components/shared/trust-badge.tsx` — hero, metrics scorecard, activity feed, search & filters, quick actions, avatar stack/social proof, testimonial, pricing plans); (2) patterns validated against the real 124-screen registry (`dist/preview/flows/**/screen.json`) — booking summary, availability calendar, chat, rating breakdown, write review, success state, QR share, credit attribution, section tabs, public profile — several using the screens' own real seed data verbatim; (3) admin-panel-perspective patterns (data table, sidebar, top bar); (4) widget-directory-backed visual cards, added seventh pass — track card, studio card, featured studio card, marketplace card, opportunity card, review card, notification card, public reputation widget. "Admin widget directory": a read-only mirror of the real 27-widget catalog from `admin/app/(admin)/widgets/default-widgets.ts` (backed by `admin/docs/architecture/Widget_Directory.md`), transcribed verbatim, grouped by the same 9 categories, filterable by the same search box — a reference mirror, not the source of truth; see `musiclinkd-system/src/widgets-mirror.ts` for the re-transcription note.
 
 > **Superseded in part.** This audit was accurate when written, but the
 > eighth and ninth passes built several things it lists as not-built —
@@ -226,6 +226,38 @@ locked at 175px each relaxed to 175/143/143/151/135). Added
 `scroll-margin-top: 76px` so anchor jumps clear the 61px sticky nav.
 
 
+
+
+### Eleventh pass — editorial "Replay" family (2026-08-16)
+
+Six Blocks from a new reference set (Apple Music Replay, Spotify-style share
+cards, glossy 3D empty states), taking the total to **81**. What those
+references share, and what these adopt as house rules:
+
+- **Mixed weight inside one sentence** — the figure is bold, the sentence
+  around it is not. The number is the story; the prose is scaffolding.
+- **Warm gradient washes bleeding from the top edge**, never flat fills.
+- **Squircle avatars, not circles** — at small sizes a rounded square reads as
+  artwork rather than a profile photo, which is the whole point in a cluster.
+- **Oversized rank numerals inside the artwork**, not beside it.
+- **Gradient scrims** so white text stays legible over any photograph.
+
+Blocks: Replay recap, Ranked artists, Illustrated empty state, Avatar cluster,
+Share stat card, Mini player (distinct from the full Waveform player — this is
+the bar that rides above the tab bar).
+
+Empty-state copy deliberately invites action rather than apologising: "Your
+first track is for experimenting. Nothing here is published until you say so."
+
+**Two bugs found and fixed in this pass, both mine:**
+- `Heading size="500"` again — Gestalt's Heading union skips 500, and it
+  renders a literal `<hundefined>` tag. Having shipped this twice, it is now
+  caught by a **source guard in `dev-verify-headless.mjs`** rather than left
+  to whoever reads the console. The guard was tested by deliberately
+  reintroducing the bug and confirming it fails.
+- `Text` has no `dangerouslySetInlineStyle` prop (checked `Text.d.ts`) and its
+  colour union has no gold, so the accent is applied by a `Box` wrapper via
+  inheritance instead of inventing a prop that does not exist.
 
 ### Tenth pass — auth blocks and brand artwork (2026-08-16)
 
