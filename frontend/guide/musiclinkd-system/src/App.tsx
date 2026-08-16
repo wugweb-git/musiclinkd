@@ -4007,7 +4007,16 @@ const BLOCKS_TABS = ["Composed patterns", "Admin widget directory", "Not built"]
 
 function BlocksGallery({ query }: { query: string }) {
   const [sub, setSub] = useState<(typeof BLOCKS_TABS)[number]>("Composed patterns");
-  const filtered = BLOCKS.filter((b) => b.name.toLowerCase().includes(query.toLowerCase()));
+  // Matches category and description too, not just the name: with 94 blocks
+  // across 13 groups, typing "booking" or "audio" should narrow to a section
+  // rather than only hitting blocks whose title happens to contain the word.
+  const q = query.toLowerCase();
+  const filtered = BLOCKS.filter(
+    (b) =>
+      b.name.toLowerCase().includes(q) ||
+      b.category.toLowerCase().includes(q) ||
+      b.description.toLowerCase().includes(q)
+  );
   return (
     <Box>
       <div className="ml-token-cat-nav">

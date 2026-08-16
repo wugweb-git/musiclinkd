@@ -44973,7 +44973,10 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   var BLOCKS_TABS = ["Composed patterns", "Admin widget directory", "Not built"];
   function BlocksGallery({ query }) {
     const [sub, setSub] = (0, import_react2.useState)("Composed patterns");
-    const filtered = BLOCKS.filter((b) => b.name.toLowerCase().includes(query.toLowerCase()));
+    const q = query.toLowerCase();
+    const filtered = BLOCKS.filter(
+      (b) => b.name.toLowerCase().includes(q) || b.category.toLowerCase().includes(q) || b.description.toLowerCase().includes(q)
+    );
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "ml-token-cat-nav", children: BLOCKS_TABS.map((t) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { className: `ml-token-cat-btn ${sub === t ? "active" : ""}`, onClick: () => setSub(t), children: t }, t)) }),
       sub === "Composed patterns" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
