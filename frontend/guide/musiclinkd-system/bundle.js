@@ -41418,6 +41418,280 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     "youtube"
   ];
 
+  // src/widgets-mirror.ts
+  var WIDGET_CATEGORIES_ORDER = [
+    "Discovery & Collaboration",
+    "Studios & Venues",
+    "Marketplace & Opportunities",
+    "Portfolio & Projects",
+    "Media",
+    "Bookings & Hiring",
+    "Reputation & Activity",
+    "Search, Filters & Sharing",
+    "Home & Featured Content"
+  ];
+  var WIDGETS = [
+    // 1. Discovery & Collaboration
+    {
+      key: "artist_card",
+      order: 1,
+      name: "ArtistCard",
+      category: "Discovery & Collaboration",
+      purpose: "Talent discovery and artist showcase",
+      contentComposition: "Avatar, name, role/instrument, location, rating, verification, connect CTA",
+      codeMapping: "UnifiedArtistCard / ArtistCard"
+    },
+    {
+      key: "recommended_collaborator_card",
+      order: 2,
+      name: "RecommendedCollaboratorCard",
+      category: "Discovery & Collaboration",
+      purpose: "AI-powered collaborator matching card",
+      contentComposition: "Cover/avatar, match %, synergy reasons, skills, collaboration actions",
+      codeMapping: "RecommendedCollaboratorCard"
+    },
+    {
+      key: "discovery_search_result_card",
+      order: 3,
+      name: "DiscoverySearchResultCard",
+      category: "Discovery & Collaboration",
+      purpose: "Global discovery and search result item",
+      contentComposition: "Profile/entity identity, category, genres, location, match data, preview action",
+      codeMapping: "DiscoverySearchResultCard"
+    },
+    {
+      key: "profile_preview_sheet",
+      order: 4,
+      name: "ProfilePreviewSheet",
+      category: "Discovery & Collaboration",
+      purpose: "Quick profile inspection modal sheet",
+      contentComposition: "Profile summary, bio, top tracks, gear/skills, full-profile CTA button",
+      codeMapping: "ProfilePreviewSheet"
+    },
+    {
+      key: "networking_feed",
+      order: 5,
+      name: "NetworkingFeed",
+      category: "Discovery & Collaboration",
+      purpose: "Social/network activity feed list widget",
+      contentComposition: "User header, text, media/audio attachment preview, likes, comments, sharing",
+      codeMapping: "NetworkingFeed",
+      notes: 'Already audited (Flow 6 "Communication", screen networking_feed) \u2014 real Firestore read/write exists but with field-name divergence from the admin schema (content vs text, mediaUrl mismatch). Not a visibility question so much as a data-contract bug; isVisible intentionally left unset.'
+    },
+    {
+      key: "band_members_widget",
+      order: 6,
+      name: "BandMembersWidget",
+      category: "Discovery & Collaboration",
+      purpose: "Band & performing crew roster display",
+      contentComposition: "Member avatars, instrument role tags, lead-member designation",
+      codeMapping: "BandMembersWidget"
+    },
+    {
+      key: "collaborator_match_widget",
+      order: 7,
+      name: "CollaboratorMatchWidget",
+      category: "Discovery & Collaboration",
+      purpose: "Collection of AI-recommended collaborators",
+      contentComposition: "Horizontal/vertical cards, match scores, synergy information, actions",
+      codeMapping: "RecommendedCollaboratorsSection",
+      isVisible: false,
+      notes: "Confirmed hidden in the Discover audit (Flow 4) \u2014 call site commented out."
+    },
+    // 2. Studios & Venues
+    {
+      key: "studio_card",
+      order: 8,
+      name: "StudioCard",
+      category: "Studios & Venues",
+      purpose: "Standard studio discovery and booking card",
+      contentComposition: "Studio imagery, room name, location, Dolby Atmos badge, rating, hourly rate",
+      codeMapping: "UnifiedStudioCard"
+    },
+    {
+      key: "studio_venue_list_item",
+      order: 9,
+      name: "StudioVenueListItem",
+      category: "Studios & Venues",
+      purpose: "Compact studio/venue directory list item",
+      contentComposition: "Thumbnail, venue name, location, rating, pricing, Atmos indicator badge",
+      codeMapping: "StudioVenueListItem"
+    },
+    {
+      key: "featured_studio_card",
+      order: 10,
+      name: "FeaturedStudioCard",
+      category: "Studios & Venues",
+      purpose: "Hero studio promotion banner card",
+      contentComposition: "Large photography, studio/room identity, Atmos spec, pricing, booking CTA",
+      codeMapping: "FeaturedStudioCard"
+    },
+    {
+      key: "studio_spec_widget",
+      order: 11,
+      name: "StudioSpecWidget",
+      category: "Studios & Venues",
+      purpose: "Detailed studio technical specs widget",
+      contentComposition: "Outboard gear, console models (SSL 9000J), monitors, microphone inventory",
+      codeMapping: "StudioSpecWidget"
+    },
+    // 3. Marketplace & Opportunities
+    {
+      key: "marketplace_card",
+      order: 12,
+      name: "MarketplaceCard",
+      category: "Marketplace & Opportunities",
+      purpose: "Equipment rental and service discovery card",
+      contentComposition: "Product/gear photo, name, rental rate, seller rating, availability tag",
+      codeMapping: "UnifiedMarketplaceCard"
+    },
+    {
+      key: "opportunity_card",
+      order: 13,
+      name: "OpportunityCard",
+      category: "Marketplace & Opportunities",
+      purpose: "Gigs, jobs, auditions & collaboration card",
+      contentComposition: "Project title, creator/role, budget tag, required skills, applicant count, deadline",
+      codeMapping: "UnifiedOpportunityCard"
+    },
+    // 4. Portfolio & Projects
+    {
+      key: "project_card",
+      order: 14,
+      name: "ProjectCard",
+      category: "Portfolio & Projects",
+      purpose: "Public portfolio & release presentation card",
+      contentComposition: "Cover artwork, project title, release date, status badge, collaborators & credits",
+      codeMapping: "UnifiedProjectCard"
+    },
+    {
+      key: "recent_project_card",
+      order: 15,
+      name: "RecentProjectCard",
+      category: "Portfolio & Projects",
+      purpose: "Compact dashboard portfolio card",
+      contentComposition: "Artwork, track/project name, role, release year, streaming links, edit action",
+      codeMapping: "RecentProjectCard"
+    },
+    // 5. Media
+    {
+      key: "track_card",
+      order: 16,
+      name: "TrackCard",
+      category: "Media",
+      purpose: "Music & track release discovery item",
+      contentComposition: "Artwork thumbnail, title, duration, platform badges (Spotify/YouTube), play count",
+      codeMapping: "UnifiedTrackCard"
+    },
+    {
+      key: "audio_player_widget",
+      order: 17,
+      name: "AudioPlayerWidget",
+      category: "Media",
+      purpose: "Dedicated embedded audio playback widget",
+      contentComposition: "Waveform visualizer, play/pause, timeline slider, duration counter",
+      codeMapping: "WaveformAudioPlayer",
+      notes: "Maps directly to WaveformAudioPlayer as its implementation (per the source doc's audio-architecture unification note)."
+    },
+    {
+      key: "persistent_audio_player",
+      order: 18,
+      name: "PersistentAudioPlayer",
+      category: "Media",
+      purpose: "Global sticky audio playback bar",
+      contentComposition: "Mini artwork, track title, play/pause controls, progress bar, close trigger",
+      codeMapping: "GlobalPersistentAudioPlayerBar",
+      notes: "Maps directly to GlobalPersistentAudioPlayerBar. That file was named in an earlier dead-code audit as one shown 'D' (deleted) in git status at that session's start \u2014 confirm the file still exists before assuming this widget is live; isVisible intentionally left unset pending that check."
+    },
+    {
+      key: "audio_podcast_demo_widget",
+      order: 19,
+      name: "AudioPodcastDemoWidget",
+      category: "Media",
+      purpose: "In-line audio demo player in dashboards",
+      contentComposition: "Audio identity, waveform controls, duration display, playback state",
+      codeMapping: "AudioPodcastDemoWidget"
+    },
+    // 6. Bookings & Hiring
+    {
+      key: "booking_card",
+      order: 20,
+      name: "BookingCard",
+      category: "Bookings & Hiring",
+      purpose: "Studio session booking record card",
+      contentComposition: "Studio name, date/time slot, room type, total price, booking status tag",
+      codeMapping: "UnifiedBookingCard"
+    },
+    {
+      key: "hire_contact_modal",
+      order: 21,
+      name: "HireContactModal",
+      category: "Bookings & Hiring",
+      purpose: "Direct hiring & booking inquiry modal",
+      contentComposition: "Project scope options, proposed date picker, budget field, inquiry submission CTA",
+      codeMapping: "HireContactModal"
+    },
+    // 7. Reputation & Activity
+    {
+      key: "public_reputation_widget",
+      order: 22,
+      name: "PublicReputationWidget",
+      category: "Reputation & Activity",
+      purpose: "Public trust and endorsement presentation",
+      contentComposition: "Aggregated rating score, verified credits count, client reviews, response rate",
+      codeMapping: "PublicReputationWidget"
+    },
+    {
+      key: "review_card",
+      order: 23,
+      name: "ReviewCard",
+      category: "Reputation & Activity",
+      purpose: "Individual client review/endorsement card",
+      contentComposition: "Reviewer identity, organization, rating star row, review quote, timestamp",
+      codeMapping: "UnifiedReviewCard"
+    },
+    {
+      key: "notification_card",
+      order: 24,
+      name: "NotificationCard",
+      category: "Reputation & Activity",
+      purpose: "Notification and activity item card",
+      contentComposition: "Actor avatar, event description, event type icon, timestamp",
+      codeMapping: "UnifiedNotificationCard"
+    },
+    // 8. Search, Filters & Sharing
+    {
+      key: "advanced_filters_bottom_sheet",
+      order: 25,
+      name: "AdvancedFiltersBottomSheet",
+      category: "Search, Filters & Sharing",
+      purpose: "Advanced discovery filtering bottom sheet",
+      contentComposition: "Distance/budget sliders, category toggles, Dolby Atmos switch, apply CTA",
+      codeMapping: "AdvancedFiltersBottomSheet",
+      notes: "Documented in the Discover audit (Flow 4, advanced_filters screen) as filtering 100% mock data \u2014 a data-wiring gap, not a visibility question; isVisible intentionally left unset."
+    },
+    {
+      key: "whatsapp_share_sheet",
+      order: 26,
+      name: "WhatsAppShareSheet",
+      category: "Search, Filters & Sharing",
+      purpose: "External profile & project sharing sheet",
+      contentComposition: "Share preview card, pre-populated message text, WhatsApp share action trigger",
+      codeMapping: "WhatsAppShareSheet",
+      notes: "Likely relates to the Options screen's per-channel share buttons found to be UI-only fakes (SupportingScreens.kt:924-969, showSnackbar only, no real WhatsApp intent) \u2014 unverified whether this specific widget is the same code path. isVisible intentionally left unset."
+    },
+    // 9. Home & Featured Content
+    {
+      key: "home_feature_card",
+      order: 27,
+      name: "HomeFeatureCard",
+      category: "Home & Featured Content",
+      purpose: "Hero featured content on main feed",
+      contentComposition: "Featured artist, studio, track, playlist or promotion with imagery and CTA",
+      codeMapping: "HomeFeatureCard"
+    }
+  ];
+
   // src/tokens.ts
   var GROUPS = [
     { label: "Color", prefix: "--color-" },
@@ -41425,6 +41699,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     { label: "Rounding", prefix: "--rounding-" },
     { label: "Font Size", prefix: "--font-size-" },
     { label: "Font Weight", prefix: "--font-weight-" },
+    { label: "Font Family", prefix: "--font-family-" },
     { label: "Elevation", prefix: "--elevation-" },
     { label: "Opacity", prefix: "--opacity-" }
   ];
@@ -41441,12 +41716,65 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       tokens: all.filter((t) => t.name.startsWith(g.prefix))
     })).filter((g) => g.tokens.length > 0);
   }
+  var SEMANTIC_COLOR_RE = /^--color-(background|text|border|icon|shadow)-/;
+  function splitColorGroup(colorGroup) {
+    if (!colorGroup) return { raw: [], semantic: [] };
+    const semantic = colorGroup.tokens.filter((t) => SEMANTIC_COLOR_RE.test(t.name));
+    const raw = colorGroup.tokens.filter((t) => !SEMANTIC_COLOR_RE.test(t.name));
+    return { raw, semantic };
+  }
+  var BREAKPOINTS = [
+    { name: "sm", value: "576px" },
+    { name: "md", value: "768px" },
+    { name: "lg", value: "1312px" }
+  ];
+  var BREAKPOINTS_SOURCE = "gestalt/packages/gestalt/src/contexts/useResponsiveMinWidth.ts";
+  var GRID = {
+    columns: 12,
+    responsiveProps: ["span", "smSpan", "mdSpan", "lgSpan"],
+    description: "Column is Gestalt's real 12-unit grid primitive: span (0\u201312) sets the base column width, with smSpan/mdSpan/lgSpan overriding it at each breakpoint above. There is no separate gutter-width token \u2014 gutters come from the parent Flex/Box gap props (the Spacing scale)."
+  };
+  var GRID_SOURCE = "gestalt/packages/gestalt/dist/Column.d.ts";
+  var Z_INDEX = {
+    pattern: "Compositional, not a numeric scale.",
+    description: "FixedZIndex(n) declares a literal base layer. CompositeZIndex([...deps]) computes itself as max(deps.map(d => d.index())) + 1 at render time \u2014 later layers (modals, toasts, popovers) stack automatically above whatever they're told to depend on, instead of the app hand-picking numbers from a shared scale."
+  };
+  var Z_INDEX_SOURCE = "gestalt/packages/gestalt/src/zIndex.ts";
+  var Z_INDEX_GAP = "No --z-index-* CSS custom properties exist anywhere in the shipped output \u2014 stacking is resolved in JS via these two classes, not a static token scale. Not fabricating numbers here.";
+  var BORDER = {
+    colorRoleCount: 36,
+    // counted from --color-border-* at render time, see splitColorGroup
+    observedWidths: ["1px", "2px", "3px", "4px"]
+  };
+  var BORDER_SOURCE = "observed literal border-width declarations in the compiled gestalt/dist/gestalt.css";
+  var BORDER_GAP = "Border COLOR is tokenized (--color-border-*, by role \u2014 container, focus, error, formfield, etc). Border WIDTH is not: components use hardcoded pixel literals (1px/2px/3px/4px) baked into compiled CSS, not a --border-width-* custom-property scale. Reporting the literals observed, not a token that doesn't exist.";
+  var MOTION_NAMES = [
+    "--base-motion-easing-linear",
+    "--base-motion-easing-bounce",
+    "--base-motion-easing-lateral",
+    "--base-motion-duration-150",
+    "--base-motion-duration-200",
+    "--base-motion-duration-300",
+    "--comp-checkbox-motion-background-colorchange-easing",
+    "--comp-checkbox-icon-motion-collapse-in-easing",
+    "--comp-radiogroupbutton-motion-border-scale-easing",
+    "--comp-spinner-motion-enter-duration",
+    "--sema-motion-opacity-duration-instant"
+  ];
+  var MOTION_SOURCE = "referenced in compiled component CSS: Switch.css, Checkbox/InternalCheckbox.css, RadioGroup/RadioButton.css, utils/tapScaleAnimation.css, gestalt.css";
+  var MOTION_GAP = "A real gap in Gestalt's own shipped 'classic' theme, verified by grep against the compiled output: these custom properties are referenced BY NAME in component CSS but never DEFINED anywhere in variables.css or gestalt.css \u2014 so var(--base-motion-easing-bounce) currently resolves to nothing (the browser falls back to CSS defaults). Actual easing curves/durations only exist as raw source under Gestalt's newer, uncompiled vr-theme token set, which isn't part of what's shipped. Listing the real names Gestalt itself uses, not inventing ms/curve values to fill the gap.";
 
   // variables.css
   var variables_default = "/**\n * File is autogenerated\n * Do not edit directly\n * Generated on Tue, 09 Dec 2025 17:06:26 GMT\n */\n\n:root {\n  --elevation-datepicker: 0px 0px 8px 0px rgba(0, 0, 0, 0.1);\n  --elevation-raised-bottom: 0px -2px 8px 0px rgba(0, 0, 0, 0.12);\n  --elevation-raised-top: 0px 2px 8px 0px rgba(0, 0, 0, 0.12);\n  --elevation-floating: 0px 0px 8px 0px rgba(0, 0, 0, 0.1);\n  --space-negative-1600: -64px;\n  --space-negative-1500: -60px;\n  --space-negative-1400: -56px;\n  --space-negative-1300: -52px;\n  --space-negative-1200: -48px;\n  --space-negative-1100: -44px;\n  --space-negative-1000: -40px;\n  --space-negative-900: -36px;\n  --space-negative-800: -32px;\n  --space-negative-700: -28px;\n  --space-negative-600: -24px;\n  --space-negative-500: -20px;\n  --space-negative-400: -16px;\n  --space-negative-300: -12px;\n  --space-negative-200: -8px;\n  --space-negative-100: -4px;\n  --space-1600: 64px;\n  --space-1500: 60px;\n  --space-1400: 56px;\n  --space-1300: 52px;\n  --space-1200: 48px;\n  --space-1100: 44px;\n  --space-1000: 40px;\n  --space-900: 36px;\n  --space-800: 32px;\n  --space-700: 28px;\n  --space-600: 24px;\n  --space-500: 20px;\n  --space-400: 16px;\n  --space-300: 12px;\n  --space-200: 8px;\n  --space-100: 4px;\n  --space-0: 0px;\n  --rounding-circle: 50%;\n  --rounding-pill: 999px;\n  --rounding-800: 32px;\n  --rounding-700: 28px;\n  --rounding-600: 24px;\n  --rounding-500: 20px;\n  --rounding-400: 16px;\n  --rounding-300: 12px;\n  --rounding-200: 8px;\n  --rounding-100: 4px;\n  --rounding-0: 0px;\n  --opacity-500: 0.9;\n  --opacity-400: 0.8;\n  --opacity-300: 0.4;\n  --opacity-200: 0.2;\n  --opacity-100: 0.04;\n  --opacity-0: 0;\n  --font-textdecoration-datepicker-heading: none;\n  --font-textdecoration-datepicker-date: none;\n  --font-lineheight-datepicker-heading: normal;\n  --font-lineheight-datepicker-date: 22px;\n  --font-letterspacing-datepicker-heading: normal;\n  --font-letterspacing-datepicker-date: normal;\n  --font-family-code: SFMono-Medium, 'SF Mono', 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Mono', Menlo, Consolas, Courier, monospace;\n  --font-family-default-japanese: 'SF Pro JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica, '\u30D2\u30E9\u30AE\u30CE\u89D2\u30B4 Pro W3', 'Hiragino Kaku Gothic Pro', '\u30E1\u30A4\u30EA\u30AA', Meiryo, '\uFF2D\uFF33 \uFF30\u30B4\u30B7\u30C3\u30AF', Arial, sans-serif;\n  --font-family-default-latin: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica, '\u30D2\u30E9\u30AE\u30CE\u89D2\u30B4 Pro W3', '\u30E1\u30A4\u30EA\u30AA', Meiryo, '\uFF2D\uFF33 \uFF30\u30B4\u30B7\u30C3\u30AF', Arial, sans-serif;\n  --font-weight-bold: 700;\n  --font-weight-semibold: 600;\n  --font-weight-normal: 400;\n  --font-size-600: 36px;\n  --font-size-500: 28px;\n  --font-size-400: 20px;\n  --font-size-300: 16px;\n  --font-size-200: 14px;\n  --font-size-100: 12px;\n  --color-data-visualization-error-graph: #ed0000;\n  --color-data-visualization-09: #f2681f;\n  --color-data-visualization-07: #00ab55;\n  --color-data-visualization-06: #ff5383;\n  --color-data-visualization-05: #0081fe;\n  --color-data-visualization-04: #d17711;\n  --color-data-visualization-03: #924af7;\n  --color-data-visualization-02: #11a69c;\n  --color-border-pulsar-hover: #dce9fa;\n  --color-border-pulsar-default: #0074e8;\n  --color-border-popover-secondary: #111111;\n  --color-border-popover-primary: #ffffff;\n  --color-border-formfield-disabled: #efefef;\n  --color-border-formfield-error-hover: #ad081b;\n  --color-border-avatar: #ffffff;\n  --color-border-focus: rgba(0, 132, 255, 0.5);\n  --color-background-tiledata-disabled: #efefef;\n  --color-background-tagdata-disabled: #efefef;\n  --color-background-table-row-selected: #efefef;\n  --color-background-table-row-hover: #efefef;\n  --color-background-table-footer: #ffffff;\n  --color-background-switch-pressed-unselected: #ffffff;\n  --color-background-switch-pressed-selected: #111111;\n  --color-background-switch-hover-unselected: #ffffff;\n  --color-background-switch-hover-selected: #111111;\n  --color-background-switch-disabled-unselected: #efefef;\n  --color-background-switch-default-unselected: #ffffff;\n  --color-background-switch-default-selected: #111111;\n  --color-background-segmentedcontrol-tab-selected: #ffffff;\n  --color-background-segmentedcontrol-container: #efefef;\n  --color-background-tag-error-active: #a3081a;\n  --color-background-tag-error-hover: #ad081b;\n  --color-background-tag-primary-active: #dadada;\n  --color-background-tag-primary-hover: #e2e2e2;\n  --color-background-tabs-transparent-active: rgba(0, 0, 0, 0.1);\n  --color-background-tabs-transparent-hover: rgba(0, 0, 0, 0.06);\n  --color-background-tabs-default-active: #e2e2e2;\n  --color-background-popover-secondary: #111111;\n  --color-background-mask-wash: rgba(0, 0, 0, 0.04);\n  --color-background-iconbutton-semitransparentdark-active: #1f1f1f;\n  --color-background-iconbutton-semitransparentdark-hover: #121212;\n  --color-background-iconbutton-semitransparentdark-default: rgba(51, 51, 51, 0.8);\n  --color-background-formfield-selected: #111111;\n  --color-background-formfield-disabled: #efefef;\n  --color-background-formfield-primary: #ffffff;\n  --color-background-datepicker-button-selected-active: #111111;\n  --color-background-datepicker-button-selected-hover: #111111;\n  --color-background-datepicker-button-selected-default: #111111;\n  --color-background-datepicker-button-unselected-active: rgba(0, 0, 0, 0.06);\n  --color-background-datepicker-button-unselected-hover: rgba(0, 0, 0, 0.06);\n  --color-background-datepicker-button-unselected-default: #ffffff;\n  --color-background-datepicker-range-active: rgba(0, 0, 0, 0.06);\n  --color-background-datepicker-range-hover: rgba(0, 0, 0, 0.06);\n  --color-background-datepicker-range-default: rgba(0, 0, 0, 0.06);\n  --color-background-datepicker-container: #ffffff;\n  --color-background-combobox-item-hover: #efefef;\n  --color-background-chartgraph-neutral: #767676;\n  --color-background-button-transparentdarkbackground-active: rgba(0, 0, 0, 0.1);\n  --color-background-button-transparentdarkbackground-hover: rgba(0, 0, 0, 0.06);\n  --color-background-button-semitransparentdark-active: #1f1f1f;\n  --color-background-button-semitransparentdark-hover: #121212;\n  --color-background-button-semitransparentdark-default: rgba(51, 51, 51, 0.8);\n  --color-background-button-semitransparentwhite-active: rgba(255, 255, 255, 0.8);\n  --color-background-button-semitransparentwhite-hover: #f0f0f0;\n  --color-background-button-semitransparentwhite-default: rgba(255, 255, 255, 0.8);\n  --color-background-button-semitransparentdefault-active: #e0e0e0;\n  --color-background-button-semitransparentdefault-hover: #f0f0f0;\n  --color-background-button-semitransparentdefault-default: rgba(255, 255, 255, 0.8);\n  --color-background-button-gray-active: #828282;\n  --color-background-button-gray-hover: #878787;\n  --color-background-button-light-active: #f8f7f2;\n  --color-background-button-light-hover: #f8f7f2;\n  --color-background-button-dark-active: #000000;\n  --color-background-button-dark-hover: #000000;\n  --color-background-button-white-active: #e0e0e0;\n  --color-background-button-white-hover: #f0f0f0;\n  --color-background-button-shopping-active: #4a85c9;\n  --color-background-button-shopping-hover: #4a8ad4;\n  --color-background-button-elevation-active: rgba(0, 0, 0, 0.1);\n  --color-background-button-elevation-hover: rgba(0, 0, 0, 0.06);\n  --color-background-button-tertiary-active: rgba(0, 0, 0, 0.1);\n  --color-background-button-tertiary-hover: rgba(0, 0, 0, 0.06);\n  --color-background-button-secondary-active: #dadada;\n  --color-background-button-secondary-hover: #e2e2e2;\n  --color-background-button-primary-active: #a3081a;\n  --color-background-box-transparentdarkgray: rgba(51, 51, 51, 0.8);\n  --color-background-box-darkwash: #dadada;\n  --color-background-box-lightwash: #e2e2e2;\n  --color-background-avatar-wash: rgba(0, 0, 0, 0.06);\n  --color-background-avatar-placeholder: #efefef;\n  --color-background-wash-light: rgba(255, 255, 255, 0.9);\n  --color-background-wash-dark: rgba(0, 0, 0, 0.8);\n  --color-icon-avatar-default: #111111;\n  --color-text-formfield-default: #111111;\n  --color-transparent: rgba(0, 0, 0, 0);\n  --color-black-cosmicore-900: #111111;\n  --color-gray-roboflow-800: #191919;\n  --color-gray-roboflow-700: #2b2b2b;\n  --color-gray-roboflow-600: #4a4a4a;\n  --color-gray-roboflow-550: #5f5f5f;\n  --color-gray-roboflow-500: #767676;\n  --color-gray-roboflow-400: #a5a5a5;\n  --color-gray-roboflow-300: #cdcdcd;\n  --color-gray-roboflow-200: #e9e9e9;\n  --color-gray-roboflow-100: #f1f1f1;\n  --color-gray-roboflow-50: #f9f9f9;\n  --color-white-mochimalist-0: #ffffff;\n  --color-yellow-caramellow-900: #662400;\n  --color-yellow-caramellow-800: #7c2d00;\n  --color-yellow-caramellow-700: #943a00;\n  --color-yellow-caramellow-600: #aa4900;\n  --color-yellow-caramellow-500: #bd5b00;\n  --color-yellow-caramellow-450: #d86800;\n  --color-yellow-caramellow-400: #e18d00;\n  --color-yellow-caramellow-300: #fdc900;\n  --color-yellow-caramellow-200: #fae600;\n  --color-yellow-caramellow-100: #fffd92;\n  --color-yellow-caramellow-50: #fffebb;\n  --color-yellow-caramellow-0: #fffedb;\n  --color-orange-firetini-900: #660e00;\n  --color-orange-firetini-800: #842000;\n  --color-orange-firetini-700: #a42700;\n  --color-orange-firetini-600: #c32f00;\n  --color-orange-firetini-500: #de3700;\n  --color-orange-firetini-450: #ff5b45;\n  --color-orange-firetini-400: #f77a38;\n  --color-orange-firetini-300: #fda161;\n  --color-orange-firetini-200: #ffc58f;\n  --color-orange-firetini-100: #ffe4c1;\n  --color-orange-firetini-50: #fff0db;\n  --color-orange-firetini-0: #fff6eb;\n  --color-purple-mysticool-900: #2c0066;\n  --color-purple-mysticool-800: #400387;\n  --color-purple-mysticool-700: #550aa9;\n  --color-purple-mysticool-600: #6b16ca;\n  --color-purple-mysticool-500: #812ae7;\n  --color-purple-mysticool-450: #8a39fa;\n  --color-purple-mysticool-400: #9e68ff;\n  --color-purple-mysticool-300: #b190ff;\n  --color-purple-mysticool-200: #d5c7ff;\n  --color-purple-mysticool-100: #e9e4ff;\n  --color-purple-mysticool-50: #f0edff;\n  --color-purple-mysticool-0: #f8f7ff;\n  --color-green-matchacado-900: #00261a;\n  --color-green-matchacado-800: #003020;\n  --color-green-matchacado-700: #00422c;\n  --color-green-matchacado-600: #005f3e;\n  --color-green-matchacado-500: #008753;\n  --color-green-matchacado-450: #1dad65;\n  --color-green-matchacado-400: #39d377;\n  --color-green-matchacado-300: #6bec8c;\n  --color-green-matchacado-200: #a4f9ac;\n  --color-green-matchacado-100: #c3f9c2;\n  --color-green-matchacado-50: #e3fae1;\n  --color-green-matchacado-0: #f6fdf5;\n  --color-teal-spabattical-900: #003440;\n  --color-teal-spabattical-800: #005062;\n  --color-teal-spabattical-700: #005c62;\n  --color-teal-spabattical-600: #006b6c;\n  --color-teal-spabattical-500: #00857c;\n  --color-teal-spabattical-450: #009990;\n  --color-teal-spabattical-400: #26c0b4;\n  --color-teal-spabattical-300: #48d5c6;\n  --color-teal-spabattical-200: #75e4d5;\n  --color-teal-spabattical-100: #ccf6ee;\n  --color-teal-spabattical-50: #e6faf5;\n  --color-teal-spabattical-0: #f7fdfc;\n  --color-blue-skycicle-900: #002966;\n  --color-blue-skycicle-800: #003c96;\n  --color-blue-skycicle-700: #004ba9;\n  --color-blue-skycicle-600: #005fcb;\n  --color-blue-skycicle-500: #0074e8;\n  --color-blue-skycicle-450: #007cff;\n  --color-blue-skycicle-400: #45a3fe;\n  --color-blue-skycicle-300: #75bfff;\n  --color-blue-skycicle-200: #abdbff;\n  --color-blue-skycicle-100: #d7edff;\n  --color-blue-skycicle-50: #e6f4ff;\n  --color-blue-skycicle-0: #f7fbff;\n  --color-pink-flaminglow-900: #630233;\n  --color-pink-flaminglow-800: #82053e;\n  --color-pink-flaminglow-700: #a30c4a;\n  --color-pink-flaminglow-600: #c31952;\n  --color-pink-flaminglow-500: #de2c62;\n  --color-pink-flaminglow-450: #ee376a;\n  --color-pink-flaminglow-400: #f76593;\n  --color-pink-flaminglow-300: #fe8eb1;\n  --color-pink-flaminglow-200: #ffbed2;\n  --color-pink-flaminglow-100: #ffdfe9;\n  --color-pink-flaminglow-50: #ffebf1;\n  --color-pink-flaminglow-0: #fff8fa;\n  --color-red-pushpin-900: #660000;\n  --color-red-pushpin-800: #800000;\n  --color-red-pushpin-700: #9b0000;\n  --color-red-pushpin-600: #b60000;\n  --color-red-pushpin-500: #cc0000;\n  --color-red-pushpin-450: #e60023;\n  --color-red-pushpin-400: #eb4242;\n  --color-red-pushpin-300: #f47171;\n  --color-red-pushpin-200: #fcbbbb;\n  --color-red-pushpin-100: #ffe0e0;\n  --color-red-pushpin-50: #ffebeb;\n  --color-red-pushpin-0: #fff7f7;\n  --rounding-datepicker-range-end: var(--rounding-0) var(--rounding-circle) var(--rounding-circle) var(--rounding-0);\n  --rounding-datepicker-range-middle: var(--rounding-0);\n  --rounding-datepicker-range-start: var(--rounding-circle) var(--rounding-0) var(--rounding-0) var(--rounding-circle);\n  --rounding-datepicker-navigation: var(--rounding-circle);\n  --rounding-datepicker-days: var(--rounding-circle);\n  --rounding-datepicker-container: var(--rounding-400);\n  --font-family-datepicker-heading: var(--font-family-default-latin);\n  --font-family-datepicker-date: var(--font-family-default-latin);\n  --font-weight-datepicker-heading: var(--font-weight-bold);\n  --font-weight-datepicker-date: var(--font-weight-normal);\n  --font-size-datepicker-heading: var(--font-size-400);\n  --font-size-datepicker-date: var(--font-size-300);\n  --color-data-visualization-error-text: var(--color-red-pushpin-500);\n  --color-data-visualization-success-text: var(--color-green-matchacado-600);\n  --color-data-visualization-success-graph: var(--color-green-matchacado-500);\n  --color-data-visualization-primary: var(--color-data-visualization-05);\n  --color-data-visualization-08: var(--color-purple-mysticool-800);\n  --color-data-visualization-01: var(--color-blue-skycicle-800);\n  --color-data-visualization-12: var(--color-orange-firetini-900);\n  --color-data-visualization-11: var(--color-pink-flaminglow-500);\n  --color-data-visualization-10: var(--color-teal-spabattical-800);\n  --color-border-tag-disabled: var(--color-gray-roboflow-500);\n  --color-border-table-row-selected: var(--color-black-cosmicore-900);\n  --color-border-indicator: var(--color-white-mochimalist-0);\n  --color-border-checkbox-unchecked-pressed: var(--color-gray-roboflow-400);\n  --color-border-checkbox-unchecked-hover: var(--color-gray-roboflow-400);\n  --color-border-checkbox-disabled: var(--color-border-formfield-disabled);\n  --color-border-badge-dark: var(--color-black-cosmicore-900);\n  --color-border-badge-light: var(--color-white-mochimalist-0);\n  --color-border-badge-default: var(--color-white-mochimalist-0);\n  --color-border-error: var(--color-red-pushpin-500);\n  --color-border-default: var(--color-gray-roboflow-500);\n  --color-border-container: var(--color-gray-roboflow-300);\n  --color-background-video-container-secondary: var(--color-transparent);\n  --color-background-tiledata-neutral: var(--color-background-chartgraph-neutral)1A;\n  --color-background-tiledata-09: var(--color-data-visualization-09)1A;\n  --color-background-tiledata-07: var(--color-data-visualization-07)1A;\n  --color-background-tiledata-06: var(--color-data-visualization-06)1A;\n  --color-background-tiledata-05: var(--color-data-visualization-05)1A;\n  --color-background-tiledata-04: var(--color-data-visualization-04)1A;\n  --color-background-tiledata-03: var(--color-data-visualization-03)1A;\n  --color-background-tiledata-02: var(--color-data-visualization-02)1A;\n  --color-background-tableofcontents-item-default: var(--color-transparent);\n  --color-background-switch-disabled-selected: var(--color-gray-roboflow-500);\n  --color-background-searchguide-active-09: var(--color-red-pushpin-200);\n  --color-background-searchguide-active-08: var(--color-orange-firetini-100);\n  --color-background-searchguide-active-07: var(--color-green-matchacado-100);\n  --color-background-searchguide-active-06: var(--color-blue-skycicle-100);\n  --color-background-searchguide-active-05: var(--color-purple-mysticool-200);\n  --color-background-searchguide-active-04: var(--color-red-pushpin-200);\n  --color-background-searchguide-active-03: var(--color-orange-firetini-200);\n  --color-background-searchguide-active-02: var(--color-green-matchacado-200);\n  --color-background-searchguide-active-01: var(--color-blue-skycicle-200);\n  --color-background-searchguide-active-10: var(--color-purple-mysticool-100);\n  --color-background-searchguide-hover-09: var(--color-red-pushpin-200);\n  --color-background-searchguide-hover-08: var(--color-orange-firetini-100);\n  --color-background-searchguide-hover-07: var(--color-green-matchacado-100);\n  --color-background-searchguide-hover-06: var(--color-blue-skycicle-100);\n  --color-background-searchguide-hover-05: var(--color-purple-mysticool-200);\n  --color-background-searchguide-hover-04: var(--color-red-pushpin-200);\n  --color-background-searchguide-hover-03: var(--color-orange-firetini-200);\n  --color-background-searchguide-hover-02: var(--color-green-matchacado-200);\n  --color-background-searchguide-hover-01: var(--color-blue-skycicle-200);\n  --color-background-searchguide-hover-10: var(--color-purple-mysticool-100);\n  --color-background-searchguide-default-09: var(--color-red-pushpin-200);\n  --color-background-searchguide-default-08: var(--color-orange-firetini-100);\n  --color-background-searchguide-default-07: var(--color-green-matchacado-100);\n  --color-background-searchguide-default-06: var(--color-blue-skycicle-100);\n  --color-background-searchguide-default-05: var(--color-purple-mysticool-200);\n  --color-background-searchguide-default-04: var(--color-red-pushpin-200);\n  --color-background-searchguide-default-03: var(--color-orange-firetini-200);\n  --color-background-searchguide-default-02: var(--color-green-matchacado-200);\n  --color-background-searchguide-default-01: var(--color-blue-skycicle-200);\n  --color-background-searchguide-default-10: var(--color-purple-mysticool-100);\n  --color-background-tag-warning-active: var(--color-yellow-caramellow-700);\n  --color-background-tag-warning-hover: var(--color-yellow-caramellow-600);\n  --color-background-tabs-transparent-base: var(--color-transparent);\n  --color-background-checkbox-unchecked-error: var(--color-background-formfield-primary);\n  --color-background-checkbox-unchecked-default: var(--color-background-formfield-primary);\n  --color-background-checkbox-checked-error: var(--color-background-formfield-selected);\n  --color-background-checkbox-checked-default: var(--color-background-formfield-selected);\n  --color-background-checkbox-disabled: var(--color-background-formfield-disabled);\n  --color-background-combobox-item-default: var(--color-transparent);\n  --color-background-button-transparentdarkbackground-default: var(--color-transparent);\n  --color-background-button-white-default: var(--color-white-mochimalist-0);\n  --color-background-button-elevation-default: var(--color-transparent);\n  --color-background-button-tertiary-default: var(--color-transparent);\n  --color-background-box-transparent: var(--color-transparent);\n  --color-background-badge-darkwash-hover: var(--color-background-wash-dark);\n  --color-background-badge-darkwash-default: var(--color-background-wash-dark);\n  --color-background-badge-lightwash-hover: var(--color-background-wash-light);\n  --color-background-badge-lightwash-default: var(--color-background-wash-light);\n  --color-background-elevation-raised: var(--color-transparent);\n  --color-background-elevation-floating: var(--color-transparent);\n  --color-background-elevation-accent: var(--color-gray-roboflow-100);\n  --color-background-light: var(--color-white-mochimalist-0);\n  --color-background-dark: var(--color-black-cosmicore-900);\n  --color-background-education: var(--color-blue-skycicle-500);\n  --color-background-brand: var(--color-red-pushpin-450);\n  --color-background-inverse-strong: var(--color-gray-roboflow-200);\n  --color-background-inverse-base: var(--color-black-cosmicore-900);\n  --color-background-selected-weak: var(--color-gray-roboflow-400);\n  --color-background-selected-strong: var(--color-gray-roboflow-700);\n  --color-background-selected-base: var(--color-black-cosmicore-900);\n  --color-background-tertiary-weak: var(--color-gray-roboflow-300);\n  --color-background-tertiary-strong: var(--color-gray-roboflow-700);\n  --color-background-tertiary-base: var(--color-gray-roboflow-500);\n  --color-background-secondary-weak: var(--color-gray-roboflow-300);\n  --color-background-secondary-strong: var(--color-gray-roboflow-400);\n  --color-background-secondary-base: var(--color-gray-roboflow-200);\n  --color-background-primary-weak: var(--color-red-pushpin-300);\n  --color-background-primary-strong: var(--color-red-pushpin-600);\n  --color-background-primary-base: var(--color-red-pushpin-450);\n  --color-background-shopping: var(--color-blue-skycicle-500);\n  --color-background-neutral: var(--color-gray-roboflow-500);\n  --color-background-recommendation-weak: var(--color-purple-mysticool-100);\n  --color-background-recommendation-base: var(--color-purple-mysticool-500);\n  --color-background-success-weak: var(--color-green-matchacado-100);\n  --color-background-success-base: var(--color-green-matchacado-500);\n  --color-background-warning-weak: var(--color-orange-firetini-100);\n  --color-background-warning-base: var(--color-yellow-caramellow-500);\n  --color-background-error-weak: var(--color-red-pushpin-100);\n  --color-background-error-base: var(--color-red-pushpin-500);\n  --color-background-info-strong: var(--color-blue-skycicle-600);\n  --color-background-info-weak: var(--color-blue-skycicle-100);\n  --color-background-info-base: var(--color-blue-skycicle-500);\n  --color-background-default: var(--color-white-mochimalist-0);\n  --color-icon-dark: var(--color-black-cosmicore-900);\n  --color-icon-light: var(--color-white-mochimalist-0);\n  --color-icon-brand-primary: var(--color-red-pushpin-450);\n  --color-icon-shopping: var(--color-blue-skycicle-500);\n  --color-icon-inverse: var(--color-white-mochimalist-0);\n  --color-icon-recommendation: var(--color-purple-mysticool-500);\n  --color-icon-info: var(--color-blue-skycicle-500);\n  --color-icon-warning: var(--color-yellow-caramellow-500);\n  --color-icon-error: var(--color-red-pushpin-500);\n  --color-icon-disabled: var(--color-gray-roboflow-400);\n  --color-icon-success: var(--color-green-matchacado-600);\n  --color-icon-subtle-accent: var(--color-gray-roboflow-550);\n  --color-icon-subtle: var(--color-gray-roboflow-500);\n  --color-icon-default: var(--color-black-cosmicore-900);\n  --color-text-formfield-placeholder: var(--color-gray-roboflow-500);\n  --color-text-formfield-disabled: var(--color-gray-roboflow-500);\n  --color-text-link: var(--color-blue-skycicle-700);\n  --color-text-shopping: var(--color-blue-skycicle-500);\n  --color-text-light: var(--color-white-mochimalist-0);\n  --color-text-dark: var(--color-black-cosmicore-900);\n  --color-text-inverse: var(--color-white-mochimalist-0);\n  --color-text-warning: var(--color-yellow-caramellow-500);\n  --color-text-error: var(--color-red-pushpin-500);\n  --color-text-disabled: var(--color-gray-roboflow-400);\n  --color-text-success: var(--color-green-matchacado-600);\n  --color-text-subtle: var(--color-gray-roboflow-500);\n  --color-text-default: var(--color-black-cosmicore-900);\n  --color-border-switch-pressed-unselected: var(--color-border-default);\n  --color-border-switch-hover-unselected: var(--color-border-default);\n  --color-border-switch-focus-outer: var(--color-border-default);\n  --color-border-switch-focus-inner: var(--color-border-default);\n  --color-border-switch-disabled-unselected: var(--color-border-container);\n  --color-border-switch-disabled-selected: var(--color-background-default);\n  --color-border-switch-default-unselected: var(--color-border-default);\n  --color-border-switch-default-selected: var(--color-background-selected-base);\n  --color-border-popover-education: var(--color-background-education);\n  --color-border-formfield-error-default: var(--color-border-error);\n  --color-border-checkbox-unchecked-error: var(--color-border-error);\n  --color-border-checkbox-unchecked-default: var(--color-border-default);\n  --color-border-checkbox-checked-error: var(--color-border-error);\n  --color-border-checkbox-checked-default: var(--color-background-selected-base);\n  --color-border-button-pressed: var(--color-border-container);\n  --color-border-button-hover: var(--color-border-container);\n  --color-background-video-container-primary: var(--color-background-inverse-base);\n  --color-background-tiledata-hover: var(--color-background-secondary-base);\n  --color-background-tiledata-08: var(--color-data-visualization-08)1A;\n  --color-background-tiledata-01: var(--color-data-visualization-01)1A;\n  --color-background-tiledata-12: var(--color-data-visualization-12)1A;\n  --color-background-tiledata-11: var(--color-data-visualization-11)1A;\n  --color-background-tiledata-10: var(--color-data-visualization-10)1A;\n  --color-background-tableofcontents-item-hover: var(--color-background-secondary-base);\n  --color-background-tagdata-secondary: var(--color-background-default);\n  --color-background-tagdata-primary: var(--color-background-secondary-base);\n  --color-background-searchguide-active-11: var(--color-background-secondary-base);\n  --color-background-searchguide-hover-11: var(--color-background-secondary-base);\n  --color-background-searchguide-default-11: var(--color-background-secondary-base);\n  --color-background-tag-warning-default: var(--color-background-warning-base);\n  --color-background-tag-error-default: var(--color-background-error-base);\n  --color-background-tag-primary-default: var(--color-background-secondary-base);\n  --color-background-tabs-default-hover: var(--color-background-secondary-base);\n  --color-background-tabs-default-base: var(--color-background-default);\n  --color-background-popover-education: var(--color-background-education);\n  --color-background-popover-primary: var(--color-background-default);\n  --color-background-overlay: var(--color-background-default);\n  --color-background-indicator: var(--color-background-primary-base);\n  --color-background-iconbutton-semitransparentdark-disabled-selected: var(--color-background-secondary-base);\n  --color-background-iconbutton-semitransparentdark-disabled-default: var(--color-background-secondary-base);\n  --color-background-button-selected-disabled: var(--color-background-selected-base);\n  --color-background-button-selected-default: var(--color-background-selected-base);\n  --color-background-button-disabled-default: var(--color-background-secondary-base);\n  --color-background-button-transparentdarkbackground-disabled: var(--color-background-secondary-base);\n  --color-background-button-semitransparentdark-disabled: var(--color-background-secondary-base);\n  --color-background-button-semitransparentwhite-disabled: var(--color-background-secondary-base);\n  --color-background-button-gray-disabled: var(--color-background-secondary-base);\n  --color-background-button-gray-default: var(--color-background-neutral);\n  --color-background-button-light-default: var(--color-background-light);\n  --color-background-button-dark-default: var(--color-background-dark);\n  --color-background-button-white-disabled: var(--color-background-secondary-base);\n  --color-background-button-shopping-default: var(--color-background-shopping);\n  --color-background-button-elevation-disabled: var(--color-background-secondary-base);\n  --color-background-button-tertiary-disabled: var(--color-background-secondary-base);\n  --color-background-button-secondary-disabled: var(--color-background-secondary-base);\n  --color-background-button-secondary-default: var(--color-background-secondary-base);\n  --color-background-button-primary-disabled: var(--color-background-secondary-base);\n  --color-background-button-primary-hover: var(--color-background-primary-strong);\n  --color-background-button-primary-default: var(--color-background-primary-base);\n  --color-background-box-light: var(--color-background-light);\n  --color-background-box-dark: var(--color-background-dark);\n  --color-background-box-elevation-raised: var(--color-background-elevation-raised);\n  --color-background-box-elevation-floating: var(--color-background-elevation-floating);\n  --color-background-box-elevation-accent: var(--color-background-elevation-accent);\n  --color-background-box-education: var(--color-background-education);\n  --color-background-box-brand: var(--color-background-brand);\n  --color-background-box-inverse: var(--color-background-inverse-base);\n  --color-background-box-selected: var(--color-background-selected-base);\n  --color-background-box-tertiary: var(--color-background-tertiary-base);\n  --color-background-box-secondary: var(--color-background-secondary-base);\n  --color-background-box-primary: var(--color-background-primary-base);\n  --color-background-box-shopping: var(--color-background-shopping);\n  --color-background-box-recommendation-weak: var(--color-background-recommendation-weak);\n  --color-background-box-recommendation-base: var(--color-background-recommendation-base);\n  --color-background-box-success-weak: var(--color-background-success-weak);\n  --color-background-box-success-base: var(--color-background-success-base);\n  --color-background-box-warning-weak: var(--color-background-warning-weak);\n  --color-background-box-warning-base: var(--color-background-warning-base);\n  --color-background-box-error-weak: var(--color-background-error-weak);\n  --color-background-box-error-base: var(--color-background-error-base);\n  --color-background-box-info-weak: var(--color-background-info-weak);\n  --color-background-box-info-base: var(--color-background-info-base);\n  --color-background-box-default: var(--color-background-default);\n  --color-background-badge-recommendation-hover: var(--color-background-recommendation-base);\n  --color-background-badge-recommendation-default: var(--color-background-recommendation-base);\n  --color-background-badge-success-hover: var(--color-background-success-base);\n  --color-background-badge-success-default: var(--color-background-success-base);\n  --color-background-badge-warning-hover: var(--color-background-warning-base);\n  --color-background-badge-warning-default: var(--color-background-warning-base);\n  --color-background-badge-error-hover: var(--color-background-error-base);\n  --color-background-badge-error-default: var(--color-background-error-base);\n  --color-background-badge-info-hover: var(--color-background-info-strong);\n  --color-background-badge-info-default: var(--color-background-info-base);\n  --color-background-badge-neutral-hover: var(--color-background-tertiary-base);\n  --color-background-badge-neutral-default: var(--color-background-tertiary-base);\n}\n";
 
   // variables-dark.css
   var variables_dark_default = "/**\n * File is autogenerated\n * Do not edit directly\n * Generated on Tue, 09 Dec 2025 17:06:27 GMT\n */\n\n:root {\n  --elevation-datepicker: 0px 0px 8px 0px rgba(250, 250, 250, 0.06);\n  --elevation-raised-bottom: 0px -0.5px 0px 0px rgba(249, 249, 249, 0);\n  --elevation-raised-top: 0px 0.5px 0px 0px rgba(249, 249, 249, 0);\n  --elevation-floating: none;\n  --color-data-visualization-04: #fda600;\n  --color-data-visualization-03: #b190ff;\n  --color-data-visualization-10: #007a72;\n  --color-border-tag-disabled: #ababab;\n  --color-border-pulsar-hover: #dce9fa;\n  --color-border-pulsar-default: #0074e8;\n  --color-border-popover-secondary: #efefef;\n  --color-border-popover-primary: #212121;\n  --color-border-indicator: #000000;\n  --color-border-formfield-disabled: #404040;\n  --color-border-formfield-error-hover: #cf001f;\n  --color-border-avatar: #030303;\n  --color-border-focus: rgba(0, 132, 255, 0.5);\n  --color-background-tiledata-disabled: #404040;\n  --color-background-tagdata-disabled: #404040;\n  --color-background-table-row-selected: #404040;\n  --color-background-table-row-hover: #404040;\n  --color-background-table-footer: #030303;\n  --color-background-switch-pressed-unselected: #030303;\n  --color-background-switch-pressed-selected: #efefef;\n  --color-background-switch-hover-unselected: #030303;\n  --color-background-switch-hover-selected: #efefef;\n  --color-background-switch-disabled-unselected: #404040;\n  --color-background-switch-disabled-selected: #ababab;\n  --color-background-switch-default-unselected: #030303;\n  --color-background-switch-default-selected: #efefef;\n  --color-background-segmentedcontrol-tab-selected: #030303;\n  --color-background-segmentedcontrol-container: #404040;\n  --color-background-tag-error-active: #b8001b;\n  --color-background-tag-error-hover: #cf001f;\n  --color-background-tag-primary-active: #666666;\n  --color-background-tag-primary-hover: #535353;\n  --color-background-tabs-transparent-active: rgba(0, 0, 0, 0.1);\n  --color-background-tabs-transparent-hover: rgba(0, 0, 0, 0.06);\n  --color-background-tabs-default-active: #535353;\n  --color-background-popover-secondary: #efefef;\n  --color-background-mask-wash: rgba(0, 0, 0, 0.04);\n  --color-background-iconbutton-semitransparentdark-active: #e0e0e0;\n  --color-background-iconbutton-semitransparentdark-hover: #f0f0f0;\n  --color-background-iconbutton-semitransparentdark-default: rgba(255, 255, 255, 0.8);\n  --color-background-formfield-selected: #efefef;\n  --color-background-formfield-disabled: #404040;\n  --color-background-formfield-primary: #030303;\n  --color-background-datepicker-button-selected-active: #efefef;\n  --color-background-datepicker-button-selected-hover: #efefef;\n  --color-background-datepicker-button-selected-default: #efefef;\n  --color-background-datepicker-button-unselected-active: rgba(250, 250, 250, 0.5);\n  --color-background-datepicker-button-unselected-hover: rgba(250, 250, 250, 0.5);\n  --color-background-datepicker-button-unselected-default: #212121;\n  --color-background-datepicker-range-active: rgba(250, 250, 250, 0.5);\n  --color-background-datepicker-range-hover: rgba(250, 250, 250, 0.5);\n  --color-background-datepicker-range-default: rgba(250, 250, 250, 0.5);\n  --color-background-datepicker-container: #212121;\n  --color-background-combobox-item-hover: #404040;\n  --color-background-chartgraph-neutral: #cdcdcd;\n  --color-background-button-transparentdarkbackground-active: rgba(250, 250, 250, 0.6);\n  --color-background-button-transparentdarkbackground-hover: rgba(250, 250, 250, 0.5);\n  --color-background-button-semitransparentdark-active: #e0e0e0;\n  --color-background-button-semitransparentdark-hover: #f0f0f0;\n  --color-background-button-semitransparentdark-default: rgba(255, 255, 255, 0.8);\n  --color-background-button-semitransparentwhite-active: #1f1f1f;\n  --color-background-button-semitransparentwhite-hover: #121212;\n  --color-background-button-semitransparentwhite-default: rgba(51, 51, 51, 0.8);\n  --color-background-button-semitransparentdefault-active: #1f1f1f;\n  --color-background-button-semitransparentdefault-hover: #121212;\n  --color-background-button-semitransparentdefault-default: rgba(51, 51, 51, 0.8);\n  --color-background-button-gray-active: #9b9b9b;\n  --color-background-button-gray-hover: #919191;\n  --color-background-button-light-active: #f8f7f2;\n  --color-background-button-light-hover: #f8f7f2;\n  --color-background-button-dark-active: #000000;\n  --color-background-button-dark-hover: #000000;\n  --color-background-button-white-active: #1f1f1f;\n  --color-background-button-white-hover: #121212;\n  --color-background-button-white-default: #030303;\n  --color-background-button-shopping-active: #4a85c9;\n  --color-background-button-shopping-hover: #4a8ad4;\n  --color-background-button-elevation-active: rgba(250, 250, 250, 0.6);\n  --color-background-button-elevation-hover: rgba(250, 250, 250, 0.5);\n  --color-background-button-tertiary-active: rgba(250, 250, 250, 0.6);\n  --color-background-button-tertiary-hover: rgba(250, 250, 250, 0.5);\n  --color-background-button-secondary-active: #666666;\n  --color-background-button-secondary-hover: #535353;\n  --color-background-button-primary-active: #b8001b;\n  --color-background-box-transparentdarkgray: rgba(255, 255, 255, 0.8);\n  --color-background-box-darkwash: #666666;\n  --color-background-box-lightwash: #535353;\n  --color-background-avatar-wash: rgba(250, 250, 250, 0.5);\n  --color-background-avatar-placeholder: #404040;\n  --color-background-wash-light: rgba(255, 255, 255, 0.9);\n  --color-background-wash-dark: rgba(0, 0, 0, 0.8);\n  --color-icon-avatar-default: #efefef;\n  --color-text-formfield-placeholder: #ababab;\n  --color-text-formfield-disabled: #ababab;\n  --color-text-formfield-default: #efefef;\n  --color-transparent: rgba(0, 0, 0, 0);\n  --color-black-cosmicore-900: #111111;\n  --color-gray-roboflow-800: #191919;\n  --color-gray-roboflow-700: #2b2b2b;\n  --color-gray-roboflow-600: #4a4a4a;\n  --color-gray-roboflow-550: #5f5f5f;\n  --color-gray-roboflow-500: #767676;\n  --color-gray-roboflow-400: #a5a5a5;\n  --color-gray-roboflow-300: #cdcdcd;\n  --color-gray-roboflow-200: #e9e9e9;\n  --color-gray-roboflow-100: #f1f1f1;\n  --color-gray-roboflow-50: #f9f9f9;\n  --color-white-mochimalist-0: #ffffff;\n  --color-yellow-caramellow-900: #662400;\n  --color-yellow-caramellow-800: #7c2d00;\n  --color-yellow-caramellow-700: #943a00;\n  --color-yellow-caramellow-600: #aa4900;\n  --color-yellow-caramellow-500: #bd5b00;\n  --color-yellow-caramellow-450: #d86800;\n  --color-yellow-caramellow-400: #e18d00;\n  --color-yellow-caramellow-300: #fdc900;\n  --color-yellow-caramellow-200: #fae600;\n  --color-yellow-caramellow-100: #fffd92;\n  --color-yellow-caramellow-50: #fffebb;\n  --color-yellow-caramellow-0: #fffedb;\n  --color-orange-firetini-900: #660e00;\n  --color-orange-firetini-800: #842000;\n  --color-orange-firetini-700: #a42700;\n  --color-orange-firetini-600: #c32f00;\n  --color-orange-firetini-500: #de3700;\n  --color-orange-firetini-450: #ff5b45;\n  --color-orange-firetini-400: #f77a38;\n  --color-orange-firetini-300: #fda161;\n  --color-orange-firetini-200: #ffc58f;\n  --color-orange-firetini-100: #ffe4c1;\n  --color-orange-firetini-50: #fff0db;\n  --color-orange-firetini-0: #fff6eb;\n  --color-purple-mysticool-900: #2c0066;\n  --color-purple-mysticool-800: #400387;\n  --color-purple-mysticool-700: #550aa9;\n  --color-purple-mysticool-600: #6b16ca;\n  --color-purple-mysticool-500: #812ae7;\n  --color-purple-mysticool-450: #8a39fa;\n  --color-purple-mysticool-400: #9e68ff;\n  --color-purple-mysticool-300: #b190ff;\n  --color-purple-mysticool-200: #d5c7ff;\n  --color-purple-mysticool-100: #e9e4ff;\n  --color-purple-mysticool-50: #f0edff;\n  --color-purple-mysticool-0: #f8f7ff;\n  --color-green-matchacado-900: #00261a;\n  --color-green-matchacado-800: #003020;\n  --color-green-matchacado-700: #00422c;\n  --color-green-matchacado-600: #005f3e;\n  --color-green-matchacado-500: #008753;\n  --color-green-matchacado-450: #1dad65;\n  --color-green-matchacado-400: #39d377;\n  --color-green-matchacado-300: #6bec8c;\n  --color-green-matchacado-200: #a4f9ac;\n  --color-green-matchacado-100: #c3f9c2;\n  --color-green-matchacado-50: #e3fae1;\n  --color-green-matchacado-0: #f6fdf5;\n  --color-teal-spabattical-900: #003440;\n  --color-teal-spabattical-800: #005062;\n  --color-teal-spabattical-700: #005c62;\n  --color-teal-spabattical-600: #006b6c;\n  --color-teal-spabattical-500: #00857c;\n  --color-teal-spabattical-450: #009990;\n  --color-teal-spabattical-400: #26c0b4;\n  --color-teal-spabattical-300: #48d5c6;\n  --color-teal-spabattical-200: #75e4d5;\n  --color-teal-spabattical-100: #ccf6ee;\n  --color-teal-spabattical-50: #e6faf5;\n  --color-teal-spabattical-0: #f7fdfc;\n  --color-blue-skycicle-900: #002966;\n  --color-blue-skycicle-800: #003c96;\n  --color-blue-skycicle-700: #004ba9;\n  --color-blue-skycicle-600: #005fcb;\n  --color-blue-skycicle-500: #0074e8;\n  --color-blue-skycicle-450: #007cff;\n  --color-blue-skycicle-400: #45a3fe;\n  --color-blue-skycicle-300: #75bfff;\n  --color-blue-skycicle-200: #abdbff;\n  --color-blue-skycicle-100: #d7edff;\n  --color-blue-skycicle-50: #e6f4ff;\n  --color-blue-skycicle-0: #f7fbff;\n  --color-pink-flaminglow-900: #630233;\n  --color-pink-flaminglow-800: #82053e;\n  --color-pink-flaminglow-700: #a30c4a;\n  --color-pink-flaminglow-600: #c31952;\n  --color-pink-flaminglow-500: #de2c62;\n  --color-pink-flaminglow-450: #ee376a;\n  --color-pink-flaminglow-400: #f76593;\n  --color-pink-flaminglow-300: #fe8eb1;\n  --color-pink-flaminglow-200: #ffbed2;\n  --color-pink-flaminglow-100: #ffdfe9;\n  --color-pink-flaminglow-50: #ffebf1;\n  --color-pink-flaminglow-0: #fff8fa;\n  --color-red-pushpin-900: #660000;\n  --color-red-pushpin-800: #800000;\n  --color-red-pushpin-700: #9b0000;\n  --color-red-pushpin-600: #b60000;\n  --color-red-pushpin-500: #cc0000;\n  --color-red-pushpin-450: #e60023;\n  --color-red-pushpin-400: #eb4242;\n  --color-red-pushpin-300: #f47171;\n  --color-red-pushpin-200: #fcbbbb;\n  --color-red-pushpin-100: #ffe0e0;\n  --color-red-pushpin-50: #ffebeb;\n  --color-red-pushpin-0: #fff7f7;\n  --color-data-visualization-error-text: var(--color-red-pushpin-400);\n  --color-data-visualization-error-graph: var(--color-red-pushpin-300);\n  --color-data-visualization-success-text: var(--color-green-matchacado-400);\n  --color-data-visualization-success-graph: var(--color-green-matchacado-300);\n  --color-data-visualization-09: var(--color-orange-firetini-450);\n  --color-data-visualization-08: var(--color-purple-mysticool-500);\n  --color-data-visualization-07: var(--color-green-matchacado-200);\n  --color-data-visualization-06: var(--color-pink-flaminglow-500);\n  --color-data-visualization-05: var(--color-blue-skycicle-300);\n  --color-data-visualization-02: var(--color-teal-spabattical-200);\n  --color-data-visualization-01: var(--color-blue-skycicle-600);\n  --color-data-visualization-12: var(--color-orange-firetini-200);\n  --color-data-visualization-11: var(--color-pink-flaminglow-400);\n  --color-border-table-row-selected: var(--color-white-mochimalist-0);\n  --color-border-badge-dark: var(--color-black-cosmicore-900);\n  --color-border-badge-light: var(--color-white-mochimalist-0);\n  --color-border-badge-default: var(--color-black-cosmicore-900);\n  --color-border-error: var(--color-red-pushpin-300);\n  --color-border-default: var(--color-gray-roboflow-300);\n  --color-border-container: var(--color-gray-roboflow-500);\n  --color-background-video-container-secondary: var(--color-transparent);\n  --color-background-tiledata-neutral: var(--color-background-chartgraph-neutral)1A;\n  --color-background-tiledata-04: var(--color-data-visualization-04)1A;\n  --color-background-tiledata-03: var(--color-data-visualization-03)1A;\n  --color-background-tiledata-10: var(--color-data-visualization-10)1A;\n  --color-background-tableofcontents-item-default: var(--color-transparent);\n  --color-background-searchguide-active-09: var(--color-red-pushpin-200);\n  --color-background-searchguide-active-08: var(--color-orange-firetini-100);\n  --color-background-searchguide-active-07: var(--color-green-matchacado-100);\n  --color-background-searchguide-active-06: var(--color-blue-skycicle-100);\n  --color-background-searchguide-active-05: var(--color-purple-mysticool-200);\n  --color-background-searchguide-active-04: var(--color-red-pushpin-200);\n  --color-background-searchguide-active-03: var(--color-orange-firetini-200);\n  --color-background-searchguide-active-02: var(--color-green-matchacado-200);\n  --color-background-searchguide-active-01: var(--color-blue-skycicle-200);\n  --color-background-searchguide-active-10: var(--color-purple-mysticool-100);\n  --color-background-searchguide-hover-09: var(--color-red-pushpin-200);\n  --color-background-searchguide-hover-08: var(--color-orange-firetini-100);\n  --color-background-searchguide-hover-07: var(--color-green-matchacado-100);\n  --color-background-searchguide-hover-06: var(--color-blue-skycicle-100);\n  --color-background-searchguide-hover-05: var(--color-purple-mysticool-200);\n  --color-background-searchguide-hover-04: var(--color-red-pushpin-200);\n  --color-background-searchguide-hover-03: var(--color-orange-firetini-200);\n  --color-background-searchguide-hover-02: var(--color-green-matchacado-200);\n  --color-background-searchguide-hover-01: var(--color-blue-skycicle-200);\n  --color-background-searchguide-hover-10: var(--color-purple-mysticool-100);\n  --color-background-searchguide-default-09: var(--color-red-pushpin-200);\n  --color-background-searchguide-default-08: var(--color-orange-firetini-100);\n  --color-background-searchguide-default-07: var(--color-green-matchacado-100);\n  --color-background-searchguide-default-06: var(--color-blue-skycicle-100);\n  --color-background-searchguide-default-05: var(--color-purple-mysticool-200);\n  --color-background-searchguide-default-04: var(--color-red-pushpin-200);\n  --color-background-searchguide-default-03: var(--color-orange-firetini-200);\n  --color-background-searchguide-default-02: var(--color-green-matchacado-200);\n  --color-background-searchguide-default-01: var(--color-blue-skycicle-200);\n  --color-background-searchguide-default-10: var(--color-purple-mysticool-100);\n  --color-background-tag-warning-active: var(--color-yellow-caramellow-450);\n  --color-background-tag-warning-hover: var(--color-yellow-caramellow-400);\n  --color-background-tabs-transparent-base: var(--color-transparent);\n  --color-background-combobox-item-default: var(--color-transparent);\n  --color-background-button-disabled-default: var(--color-gray-roboflow-700);\n  --color-background-button-transparentdarkbackground-default: var(--color-transparent);\n  --color-background-button-elevation-default: var(--color-transparent);\n  --color-background-button-tertiary-default: var(--color-transparent);\n  --color-background-button-secondary-default: var(--color-gray-roboflow-600);\n  --color-background-box-transparent: var(--color-transparent);\n  --color-background-badge-darkwash-hover: var(--color-background-wash-dark);\n  --color-background-badge-darkwash-default: var(--color-background-wash-dark);\n  --color-background-badge-lightwash-hover: var(--color-background-wash-light);\n  --color-background-badge-lightwash-default: var(--color-background-wash-light);\n  --color-background-elevation-raised: var(--color-gray-roboflow-600);\n  --color-background-elevation-floating: var(--color-gray-roboflow-700);\n  --color-background-elevation-accent: var(--color-gray-roboflow-800);\n  --color-background-light: var(--color-white-mochimalist-0);\n  --color-background-dark: var(--color-black-cosmicore-900);\n  --color-background-education: var(--color-blue-skycicle-300);\n  --color-background-brand: var(--color-red-pushpin-450);\n  --color-background-inverse-strong: var(--color-gray-roboflow-200);\n  --color-background-inverse-base: var(--color-gray-roboflow-50);\n  --color-background-selected-weak: var(--color-gray-roboflow-400);\n  --color-background-selected-strong: var(--color-gray-roboflow-700);\n  --color-background-selected-base: var(--color-gray-roboflow-200);\n  --color-background-tertiary-weak: var(--color-gray-roboflow-300);\n  --color-background-tertiary-strong: var(--color-gray-roboflow-700);\n  --color-background-tertiary-base: var(--color-gray-roboflow-300);\n  --color-background-secondary-weak: var(--color-gray-roboflow-300);\n  --color-background-secondary-strong: var(--color-gray-roboflow-400);\n  --color-background-secondary-base: var(--color-gray-roboflow-500);\n  --color-background-primary-weak: var(--color-red-pushpin-300);\n  --color-background-primary-strong: var(--color-red-pushpin-600);\n  --color-background-primary-base: var(--color-red-pushpin-450);\n  --color-background-shopping: var(--color-blue-skycicle-300);\n  --color-background-neutral: var(--color-gray-roboflow-300);\n  --color-background-recommendation-weak: var(--color-purple-mysticool-700);\n  --color-background-recommendation-base: var(--color-purple-mysticool-300);\n  --color-background-success-weak: var(--color-green-matchacado-700);\n  --color-background-success-base: var(--color-green-matchacado-300);\n  --color-background-warning-weak: var(--color-yellow-caramellow-800);\n  --color-background-warning-base: var(--color-yellow-caramellow-300);\n  --color-background-error-weak: var(--color-red-pushpin-900);\n  --color-background-error-base: var(--color-red-pushpin-300);\n  --color-background-info-strong: var(--color-blue-skycicle-200);\n  --color-background-info-weak: var(--color-blue-skycicle-800);\n  --color-background-info-base: var(--color-blue-skycicle-300);\n  --color-background-default: var(--color-black-cosmicore-900);\n  --color-icon-dark: var(--color-black-cosmicore-900);\n  --color-icon-light: var(--color-white-mochimalist-0);\n  --color-icon-brand-primary: var(--color-red-pushpin-450);\n  --color-icon-shopping: var(--color-blue-skycicle-300);\n  --color-icon-inverse: var(--color-black-cosmicore-900);\n  --color-icon-recommendation: var(--color-purple-mysticool-300);\n  --color-icon-info: var(--color-blue-skycicle-300);\n  --color-icon-warning: var(--color-yellow-caramellow-400);\n  --color-icon-error: var(--color-red-pushpin-300);\n  --color-icon-disabled: var(--color-gray-roboflow-600);\n  --color-icon-success: var(--color-green-matchacado-400);\n  --color-icon-subtle-accent: var(--color-gray-roboflow-300);\n  --color-icon-subtle: var(--color-gray-roboflow-400);\n  --color-icon-default: var(--color-white-mochimalist-0);\n  --color-text-link: var(--color-blue-skycicle-400);\n  --color-text-shopping: var(--color-blue-skycicle-300);\n  --color-text-light: var(--color-white-mochimalist-0);\n  --color-text-dark: var(--color-black-cosmicore-900);\n  --color-text-inverse: var(--color-black-cosmicore-900);\n  --color-text-warning: var(--color-yellow-caramellow-400);\n  --color-text-error: var(--color-red-pushpin-300);\n  --color-text-disabled: var(--color-gray-roboflow-600);\n  --color-text-success: var(--color-green-matchacado-400);\n  --color-text-subtle: var(--color-gray-roboflow-400);\n  --color-text-default: var(--color-white-mochimalist-0);\n  --color-data-visualization-primary: var(--color-data-visualization-05);\n  --color-border-switch-disabled-unselected: var(--color-border-container);\n  --color-border-switch-disabled-selected: var(--color-background-default);\n  --color-border-switch-focus-inner: var(--color-border-default);\n  --color-border-popover-education: var(--color-background-education);\n  --color-border-formfield-error-default: var(--color-border-error);\n  --color-background-video-container-primary: var(--color-background-inverse-base);\n  --color-background-tiledata-hover: var(--color-background-secondary-base);\n  --color-background-tiledata-09: var(--color-data-visualization-09)1A;\n  --color-background-tiledata-08: var(--color-data-visualization-08)1A;\n  --color-background-tiledata-07: var(--color-data-visualization-07)1A;\n  --color-background-tiledata-06: var(--color-data-visualization-06)1A;\n  --color-background-tiledata-05: var(--color-data-visualization-05)1A;\n  --color-background-tiledata-02: var(--color-data-visualization-02)1A;\n  --color-background-tiledata-01: var(--color-data-visualization-01)1A;\n  --color-background-tiledata-12: var(--color-data-visualization-12)1A;\n  --color-background-tiledata-11: var(--color-data-visualization-11)1A;\n  --color-background-tableofcontents-item-hover: var(--color-background-secondary-base);\n  --color-background-tagdata-secondary: var(--color-background-default);\n  --color-background-tagdata-primary: var(--color-background-secondary-base);\n  --color-background-searchguide-active-11: var(--color-background-secondary-base);\n  --color-background-searchguide-hover-11: var(--color-background-secondary-base);\n  --color-background-searchguide-default-11: var(--color-background-secondary-base);\n  --color-background-tag-warning-default: var(--color-background-warning-base);\n  --color-background-tag-error-default: var(--color-background-error-base);\n  --color-background-tag-primary-default: var(--color-background-secondary-base);\n  --color-background-tabs-default-hover: var(--color-background-secondary-base);\n  --color-background-tabs-default-base: var(--color-background-default);\n  --color-background-popover-education: var(--color-background-education);\n  --color-background-popover-primary: var(--color-background-elevation-floating);\n  --color-background-overlay: var(--color-background-elevation-floating);\n  --color-background-indicator: var(--color-background-primary-base);\n  --color-background-button-selected-default: var(--color-background-selected-base);\n  --color-background-button-gray-default: var(--color-background-neutral);\n  --color-background-button-light-default: var(--color-background-light);\n  --color-background-button-dark-default: var(--color-background-dark);\n  --color-background-button-shopping-default: var(--color-background-shopping);\n  --color-background-button-primary-hover: var(--color-background-primary-strong);\n  --color-background-button-primary-default: var(--color-background-primary-base);\n  --color-background-box-light: var(--color-background-light);\n  --color-background-box-dark: var(--color-background-dark);\n  --color-background-box-elevation-raised: var(--color-background-elevation-raised);\n  --color-background-box-elevation-floating: var(--color-background-elevation-floating);\n  --color-background-box-elevation-accent: var(--color-background-elevation-accent);\n  --color-background-box-education: var(--color-background-education);\n  --color-background-box-brand: var(--color-background-brand);\n  --color-background-box-inverse: var(--color-background-inverse-base);\n  --color-background-box-selected: var(--color-background-selected-base);\n  --color-background-box-tertiary: var(--color-background-tertiary-base);\n  --color-background-box-secondary: var(--color-background-secondary-base);\n  --color-background-box-primary: var(--color-background-primary-base);\n  --color-background-box-shopping: var(--color-background-shopping);\n  --color-background-box-recommendation-weak: var(--color-background-recommendation-weak);\n  --color-background-box-recommendation-base: var(--color-background-recommendation-base);\n  --color-background-box-success-weak: var(--color-background-success-weak);\n  --color-background-box-success-base: var(--color-background-success-base);\n  --color-background-box-warning-weak: var(--color-background-warning-weak);\n  --color-background-box-warning-base: var(--color-background-warning-base);\n  --color-background-box-error-weak: var(--color-background-error-weak);\n  --color-background-box-error-base: var(--color-background-error-base);\n  --color-background-box-info-weak: var(--color-background-info-weak);\n  --color-background-box-info-base: var(--color-background-info-base);\n  --color-background-box-default: var(--color-background-default);\n  --color-background-badge-recommendation-hover: var(--color-background-recommendation-base);\n  --color-background-badge-recommendation-default: var(--color-background-recommendation-base);\n  --color-background-badge-success-hover: var(--color-background-success-base);\n  --color-background-badge-success-default: var(--color-background-success-base);\n  --color-background-badge-warning-hover: var(--color-background-warning-base);\n  --color-background-badge-warning-default: var(--color-background-warning-base);\n  --color-background-badge-error-hover: var(--color-background-error-base);\n  --color-background-badge-error-default: var(--color-background-error-base);\n  --color-background-badge-info-hover: var(--color-background-info-strong);\n  --color-background-badge-info-default: var(--color-background-info-base);\n  --color-background-badge-neutral-hover: var(--color-background-tertiary-base);\n  --color-background-badge-neutral-default: var(--color-background-tertiary-base);\n}\n";
+
+  // ../brand/assets/favicon-mark.svg
+  var favicon_mark_default = '<svg width="641" height="550" viewBox="0 0 641 550" fill="none" xmlns="http://www.w3.org/2000/svg">\n<path d="M625 0C633.837 0 641 7.16344 641 16V534C641 542.837 633.837 550 625 550H16C7.16344 550 5.83896e-08 542.837 0 534V16C0 7.16344 7.16344 2.01329e-09 16 0H625ZM485.763 136.924C479.896 127.395 459.413 118.285 448.231 120.276C426.532 124.141 413.82 138.417 408.354 158.445C396.505 201.869 386.374 245.765 374.362 289.141C371.237 300.425 365.536 312.063 357.874 320.766C347.066 333.042 333.299 341.456 314.788 337.963C290.774 333.431 276.661 317.963 270.636 296.337C258.921 254.287 248.645 211.796 239.122 169.186C231.106 133.317 199.722 111.036 171.475 125.983C160.301 131.896 151.246 146.384 146.553 158.958C139.054 179.05 136.444 200.921 130.956 221.826C124.368 246.92 117.51 271.974 109.669 296.696C103.655 315.657 91.4896 329.477 72.1992 337.056C66.5382 339.28 59.413 345.445 58.5059 350.753C55.0657 370.885 53.5303 391.379 52.0723 411.795C51.5155 419.591 54.0668 427.373 63.8135 427.801C79.5225 428.491 94.9065 427.207 107.599 414.577C108.171 414.008 108.654 413.352 109.06 412.654C113.744 404.589 118.453 397.453 121.527 389.672C140.346 342.045 204.397 319.918 244.057 368.228C251.637 377.461 255.597 389.706 263.311 398.789C272.122 409.164 281.791 420.89 293.683 426.155C323.212 439.229 361.834 424.595 379.11 397.195C389.817 380.215 396.839 361.185 417.142 350.783C448.747 334.591 489.962 342.632 509.545 372.291C516.951 383.508 522.417 396.007 529.793 407.247C539.995 422.794 555.596 428.233 573.311 425.545C577.651 424.886 583.685 418.737 584.478 414.312C587.342 398.312 588.763 382.001 589.858 365.748C590.981 349.096 585.515 342.559 570.019 336.941C563.686 334.646 557.077 331.088 552.504 326.282C522.062 294.291 520.275 251.124 510.223 211.594C503.711 185.988 499.895 159.878 485.763 136.924Z" fill="white"/>\n</svg>\n';
+
+  // ../brand/assets/mark-grey.svg
+  var mark_grey_default = '<svg width="538" height="311" viewBox="0 0 538 311" fill="none" xmlns="http://www.w3.org/2000/svg">\n<path d="M57.0601 292.654C56.6548 293.352 56.171 294.008 55.599 294.577C42.9067 307.208 27.5224 308.49 11.8131 307.801C2.06647 307.372 -0.484647 299.591 0.0720966 291.795C1.53011 271.38 3.06573 250.885 6.50594 230.753C7.41304 225.445 14.5379 219.28 20.1989 217.056C39.4896 209.477 51.6559 195.657 57.6693 176.696C65.5099 151.974 72.3681 126.92 78.9562 101.826C84.4446 80.9212 87.0536 59.0503 94.5523 38.9584C99.2453 26.3837 108.301 11.8967 119.475 5.98369C147.723 -8.96403 179.106 13.3171 187.122 49.1854C196.646 91.7959 206.921 134.287 218.636 176.337C224.66 197.963 238.774 213.431 262.788 217.963C281.299 221.456 295.066 213.042 305.874 200.766C313.536 192.063 319.237 180.425 322.362 169.14C334.374 125.765 344.505 81.8687 356.354 38.445C361.82 18.4165 374.532 4.14042 396.231 0.276162C407.413 -1.71513 427.896 7.39413 433.763 16.9233C447.895 39.8781 451.711 65.9878 458.223 91.5934C468.275 131.124 470.061 174.292 500.503 206.283C505.076 211.088 511.685 214.646 518.018 216.942C533.515 222.559 538.981 229.096 537.859 245.748C536.763 262 535.342 278.311 532.477 294.312C531.685 298.737 525.651 304.886 521.31 305.544C503.595 308.232 487.996 302.794 477.793 287.247C470.417 276.007 464.952 263.508 457.545 252.291C437.962 222.631 396.747 214.591 365.142 230.783C344.839 241.184 337.817 260.215 327.111 277.195C309.835 304.595 271.212 319.229 241.683 306.156C229.79 300.891 220.122 289.164 211.31 278.789C203.596 269.706 199.637 257.461 192.057 248.227C152.397 199.917 88.346 222.045 69.5276 269.672C66.4529 277.453 61.7441 284.588 57.0601 292.654Z" fill="#24211C"/>\n</svg>\n';
 
   // src/App.tsx
   var import_jsx_runtime2 = __toESM(require_jsx_runtime());
@@ -41600,6 +41928,18 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
         } }
       }
     );
+  }
+  function BannerOverlayDemo() {
+    const [show, setShow] = (0, import_react2.useState)(false);
+    return show ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+      BannerOverlay,
+      {
+        message: "Discover trending remixes in the app!",
+        offset: { top: 130, bottom: 24 },
+        onDismiss: () => setShow(false),
+        primaryAction: { role: "button", onClick: () => setShow(false), label: "Get the app", accessibilityLabel: "Get the app" }
+      }
+    ) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Show BannerOverlay", color: "gray", onClick: () => setShow(true) });
   }
   function TagDemo() {
     const [tags, setTags] = (0, import_react2.useState)(["Indie", "Synth-pop", "Remix"]);
@@ -41761,6 +42101,29 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { position: "absolute", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "pin", accessibilityLabel: "New" }) })
     ] });
   }
+  function SideNavigationDemo() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxHeight: 220, overflow: "scroll", maxWidth: 220, borderStyle: "sm", rounding: 2, padding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(SideNavigation, { accessibilityLabel: "MusicLinkd navigation example", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(SideNavigation.Section, { label: "Library", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Releases", active: "page" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Playlists" })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(SideNavigation.Section, { label: "Account", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Payouts", badge: { text: "New", type: "info" } }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Settings" })
+      ] })
+    ] }) });
+  }
+  function StickyDemo() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { color: "default", height: 140, maxWidth: 220, overflow: "scroll", tabIndex: 0, borderStyle: "sm", rounding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { height: 360, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Sticky, { top: 0, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { alignItems: "center", color: "infoWeak", display: "flex", height: 32, padding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: "Sticks on scroll" }) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { padding: 2, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: "Scroll down\u2026" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: "Keep scrolling\u2026" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: "Almost there\u2026" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: "Still scrolling\u2026" })
+      ] })
+    ] }) });
+  }
   function ImageDemo() {
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 160, height: 160, rounding: 2, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Album artwork placeholder", src: placeholderImg("#7c3aed", "Cover"), color: "#7c3aed", naturalWidth: 320, naturalHeight: 320 }) });
   }
@@ -41768,7 +42131,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Mask, { rounding: "circle", width: 96, height: 96, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Artist avatar placeholder", src: placeholderImg("#ea580c", "Artist"), color: "#ea580c", naturalWidth: 320, naturalHeight: 320 }) });
   }
   function LetterboxDemo() {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 220, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Letterbox, { contentAspectRatio: 1, height: 110, width: 220, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Wide artwork placeholder", src: placeholderImg("#0891b2", "Banner", 640, 640), color: "#0891b2", naturalWidth: 640, naturalHeight: 640 }) }) });
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 160, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Letterbox, { contentAspectRatio: 1, height: 110, width: 160, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Wide artwork placeholder", src: placeholderImg("#0891b2", "Banner", 640, 640), color: "#0891b2", naturalWidth: 640, naturalHeight: 640 }) }) });
   }
   var DEMOS = [
     { name: "Button", category: "Actions", description: "Real onClick handler, live click counter.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonDemo, {}) },
@@ -41800,6 +42163,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     { name: "ActivationCard", category: "Feedback", description: "Onboarding step card with status.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ActivationCardDemo, {}) },
     { name: "Toast", category: "Feedback", description: "Ephemeral confirmation message.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ToastDemo, {}) },
     { name: "Status", category: "Feedback", description: "State indicator icon.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Status, { type: "ok", title: "Live" }) },
+    { name: "BannerOverlay", category: "Feedback", description: "Fixed-position promo overlay, dismissible.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BannerOverlayDemo, {}) },
     { name: "Indicator", category: "Feedback", description: "Numeric badge indicator.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "relative", width: 32, height: 32, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "bell", accessibilityLabel: "Notifications" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Indicator, { accessibilityLabel: "3 new", count: 3 })
@@ -41840,12 +42204,14 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconCompact, { accessibilityLabel: "Verified", icon: "compact-check" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconCompact, { accessibilityLabel: "Locked", icon: "compact-lock" })
     ] }) },
+    { name: "SideNavigation", category: "Navigation", description: "Sectioned nav with real subcomponents (Section, TopItem, badges).", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigationDemo, {}) },
+    { name: "Sticky", category: "Navigation", description: "Pins children to a scroll threshold \u2014 scroll the box to see it stick.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(StickyDemo, {}) },
     { name: "Image", category: "Media & Gallery", description: "Image with placeholder color.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ImageDemo, {}) },
     { name: "Mask", category: "Media & Gallery", description: "Rounds/crops any child content.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(MaskDemo, {}) },
     { name: "Letterbox", category: "Media & Gallery", description: "Fits content to a fixed aspect ratio.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(LetterboxDemo, {}) }
   ];
-  var CATEGORIES = ["Actions", "Forms", "Feedback", "Data Display", "Overlays", "Typography & Layout", "Media & Gallery"];
-  var EXCLUDED_NOTE = "Not demoed here, on purpose: Video (needs a real media file), Collage/MasonryV2 (Masonry \u2014 the real component, not a stand-in \u2014 is demoed in the Blocks tab's Cover art gallery instead), SearchGuide/SearchGuideLink (search-index-specific), ScrollBoundaryContainer/ScrollFetch/TableOfContents (no standalone visual output), WashAnimated/TileData/TagData (Masonry-overlay-specific), Container (a plain unstyled wrapper with nothing to show on its own \u2014 not imported here at all). Providers and hooks (ColorSchemeProvider, useColorScheme, etc.) power this app itself rather than being shown as cards.";
+  var CATEGORIES = ["Actions", "Forms", "Feedback", "Data Display", "Navigation", "Overlays", "Typography & Layout", "Media & Gallery"];
+  var EXCLUDED_NOTE = "Not demoed here, on purpose: Video (needs a real media file), Collage/MasonryV2 (Masonry \u2014 the real component, not a stand-in \u2014 is demoed in the Blocks tab's Cover art gallery instead), SearchGuide/SearchGuideLink (search-index-specific), ScrollBoundaryContainer/ScrollFetch/TableOfContents (no standalone visual output), WashAnimated/TileData/TagData (Masonry-overlay-specific), Layer (a React createPortal wrapper \u2014 renders children outside the normal DOM tree with no visual output of its own; Modal/Popover/Toast use it internally rather than exposing it directly), Container (a Box wrapper that centers content and caps it at 800px wide \u2014 real layout behavior, but nothing to show as an isolated card). Providers and hooks (ColorSchemeProvider, useColorScheme, etc.) power this app itself rather than being shown as cards.";
   function ComponentGallery({ query }) {
     const filtered = DEMOS.filter((d) => d.name.toLowerCase().includes(query.toLowerCase()) || d.category.toLowerCase().includes(query.toLowerCase()));
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
@@ -41980,6 +42346,428 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       }
     ) });
   }
+  function BottomNavBlock() {
+    const items = [
+      { key: "home", label: "Home", icon: "home", iconActive: "home-fill" },
+      { key: "discover", label: "Discover", icon: "compass", iconActive: "compass-fill" },
+      { key: "upload", label: "Upload", icon: "add-circle", iconActive: "add-circle" },
+      { key: "inbox", label: "Inbox", icon: "speech-ellipsis", iconActive: "speech-ellipsis-fill" },
+      { key: "profile", label: "Profile", icon: "person", iconActive: "person-fill" }
+    ];
+    const [active, setActive] = (0, import_react2.useState)("home");
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 360, borderStyle: "sm", rounding: 4, overflow: "hidden", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { padding: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Screen content sits above the bar \u2014 tap an item below." }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", padding: 1, display: "flex", justifyContent: "around", children: items.map((item) => {
+        const isActive = active === item.key;
+        return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TapAreaWithForwardRef, { onTap: () => setActive(item.key), accessibilityLabel: item.label, rounding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 1, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { height: 3, width: 3, rounding: "circle", marginBottom: 1, dangerouslySetInlineStyle: { __style: { background: isActive ? "var(--ml-accent)" : "transparent" } } }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: isActive ? item.iconActive : item.icon, accessibilityLabel: "", color: isActive ? "dark" : "subtle", size: 20 }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: isActive ? "default" : "subtle", children: item.label })
+        ] }) }, item.key);
+      }) })
+    ] });
+  }
+  function TrustBadgesBlock() {
+    const tiers = [
+      { label: "Verified Artist", icon: "protect", type: "info" },
+      { label: "Top Host", icon: "ribbon", type: "success" },
+      { label: "Rising Talent", icon: "trending", type: "recommendation" },
+      { label: "Studio Partner", icon: "building-business", type: "neutral" }
+    ];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 2, wrap: true, children: tiers.map((t) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: "pill", paddingX: 3, paddingY: 2, display: "flex", alignItems: "center", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 1, alignItems: "center", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: t.icon, accessibilityLabel: "", size: 14 }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: t.label })
+    ] }) }, t.label)) });
+  }
+  function HeroBlock() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+      BoxWithForwardRef,
+      {
+        rounding: 4,
+        padding: 6,
+        overflow: "hidden",
+        dangerouslySetInlineStyle: { __style: { backgroundImage: "linear-gradient(135deg, #EA4C89 0%, #0D0B26 100%)" } },
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { color: "light", size: "100", weight: "bold", children: "FEATURED THIS WEEK" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { color: "light", size: "400", children: "Studios booking Dolby Atmos rooms" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { color: "light", children: "12 verified rooms near you, ready this weekend." }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Browse studios", color: "white" }) })
+        ]
+      }
+    );
+  }
+  function MetricsScorecardBlock() {
+    const metrics = [
+      { icon: "graph-bar", title: "Monthly listeners", value: "482K", trend: 12 },
+      { icon: "people", title: "Followers", value: "18.2K", trend: 4 },
+      { icon: "gauge", title: "Engagement rate", value: "6.4%", trend: -2 },
+      { icon: "rocketship", title: "Profile views", value: "9,120", trend: 18 }
+    ];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "ml-comp-grid", children: metrics.map((m) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: m.icon, accessibilityLabel: "", color: "subtle" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: m.title })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Datapoint, { size: "md", title: "", value: m.value, trend: { value: m.trend, accessibilityLabel: m.trend >= 0 ? "Trending up" : "Trending down" } }) })
+    ] }, m.title)) });
+  }
+  function ActivityFeedBlock() {
+    const items = [
+      { name: "Ravi Nair", action: "commented on your track", detail: '"Neon Tide"', time: "2m" },
+      { name: "Mei Tanaka", action: "booked", detail: "Bloom Studio A", time: "1h" },
+      { name: "Ava Chen", action: "followed you", detail: "", time: "3h" }
+    ];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 3, children: items.map((it, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "start", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: it.name, size: "sm" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { flex: "grow", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { inline: true, weight: "bold", size: "100", children: it.name }),
+          " ",
+          it.action,
+          " ",
+          it.detail
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
+          it.time,
+          " ago"
+        ] })
+      ] })
+    ] }, i)) });
+  }
+  function SearchAndFiltersBlock() {
+    const [query, setQuery] = (0, import_react2.useState)("");
+    const [open, setOpen] = (0, import_react2.useState)(false);
+    const anchorRef = import_react2.default.useRef(null);
+    const [pills, setPills] = (0, import_react2.useState)({ "Dolby Atmos": true, "Available today": false, "Under \u20B92,000/hr": false });
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { flex: "grow", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SearchFieldWithForwardRef, { id: "block-search-filters", accessibilityLabel: "Search studios", placeholder: "Search studios, artists, gear\u2026", value: query, onChange: ({ value }) => setQuery(value) }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { ref: anchorRef, text: "Filters", color: "gray", onClick: () => setOpen((o) => !o) })
+      ] }),
+      open && anchorRef.current && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(Dropdown, { anchor: anchorRef.current, id: "block-filters-dropdown", onDismiss: () => setOpen(false), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Dropdown.Item, { option: { label: "Distance: nearest first", value: "distance" }, onSelect: () => setOpen(false) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Dropdown.Item, { option: { label: "Price: low to high", value: "price" }, onSelect: () => setOpen(false) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 1, wrap: true, children: Object.entries(pills).map(([label, active]) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Tag, { text: label, onRemove: active ? () => setPills((p) => ({ ...p, [label]: false })) : void 0 }, label)) }) })
+    ] });
+  }
+  function QuickActionsBlock() {
+    const actions = [
+      { icon: "upload-feed", label: "Upload" },
+      { icon: "envelope", label: "Message" },
+      { icon: "calendar", label: "Book" },
+      { icon: "search", label: "Discover" }
+    ];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 4, children: actions.map((a) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 1, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconButtonWithForwardRef, { icon: a.icon, accessibilityLabel: a.label, bgColor: "lightGray", size: "lg" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: a.label })
+    ] }, a.label)) });
+  }
+  function AvatarStackBlock() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        AvatarGroupWithForwardRef,
+        {
+          accessibilityLabel: "Collaborators nearby",
+          collaborators: [{ name: "Ava" }, { name: "Ravi" }, { name: "Mei" }, { name: "Leo" }, { name: "Zoe" }],
+          size: "md"
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "128 collaborators active near you" })
+    ] });
+  }
+  function TestimonialBlock() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 360, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 1, children: [
+        [0, 1, 2, 3].map((i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "star", accessibilityLabel: "", color: "warning", size: 16 }, i)),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "star-half", accessibilityLabel: "4.5 out of 5 stars", color: "warning", size: 16 })
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { italic: true, children: '"Booked Bloom Studio through MusicLinkd and the Atmos room specs were exactly as listed. Smooth session."' }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: "Jordan Blake", size: "sm" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: "Jordan Blake" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Independent producer" })
+        ] })
+      ] }) })
+    ] });
+  }
+  function PricingPlansBlock() {
+    const plans = [
+      { name: "Free", price: "\u20B90", features: ["3 uploads/mo", "Standard support"], highlight: false },
+      { name: "Pro", price: "\u20B9499/mo", features: ["Unlimited uploads", "Advanced analytics", "Priority support"], highlight: true }
+    ];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 3, wrap: true, children: plans.map((p) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, width: 180, color: p.highlight ? "infoWeak" : "default", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: p.name }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: p.price }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 1, children: p.features.map((f) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 1, alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "check-circle-fill", accessibilityLabel: "", size: 12, color: p.highlight ? "info" : "success" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: f })
+      ] }, f)) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: p.highlight ? "Upgrade" : "Current plan", color: p.highlight ? "red" : "gray", fullWidth: true }) })
+    ] }, p.name)) });
+  }
+  function BookingSummaryBlock() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 340, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Booking summary" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Status, { type: "ok", title: "Confirmed" })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Divider, {}) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", gap: 2, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Studio" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: "Yash Raj Sound Studios" })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Date" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: "Aug 12, 2026" })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Slot" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: "10:00 AM \u2013 2:00 PM" })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Session" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: "Recording \xB7 Half-day \xB7 +Engineer" })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Payment" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "Paid via UPI", type: "success" })
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Divider, {}) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Total" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "\u20B932,000" })
+      ] })
+    ] });
+  }
+  function AvailabilityCalendarBlock() {
+    const [view, setView] = (0, import_react2.useState)("weekly");
+    const slots = [
+      { time: "9:00", status: "available" },
+      { time: "10:00", status: "booked" },
+      { time: "11:00", status: "booked" },
+      { time: "12:00", status: "pending" },
+      { time: "13:00", status: "available" },
+      { time: "14:00", status: "available" }
+    ];
+    const statusColor = { available: "successWeak", booked: "errorWeak", pending: "warningWeak" };
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 340, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 3, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Availability" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SegmentedControl, { items: ["monthly", "weekly", "timeline"], selectedItemIndex: ["monthly", "weekly", "timeline"].indexOf(view), onChange: ({ activeIndex }) => setView(["monthly", "weekly", "timeline"][activeIndex]) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 1, children: slots.map((s) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 48, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: s.time }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { flex: "grow", height: 20, rounding: 1, color: statusColor[s.status], display: "flex", alignItems: "center", paddingX: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: s.status }) })
+      ] }, s.time)) })
+    ] });
+  }
+  function ChatBlock() {
+    const threads2 = [
+      { name: "Ravi Nair", preview: "Sent you the stems", time: "2m" },
+      { name: "Bloom Studio A", preview: "Booking confirmed for Aug 12", time: "1h" }
+    ];
+    const messages = [
+      { from: "them", text: "Hey! Can you send the reference track?" },
+      { from: "me", text: "Sure, uploading now." },
+      { from: "them", text: "Perfect, thanks \u{1F64F}" }
+    ];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, wrap: true, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, width: 160, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: "Threads" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: threads2.map((t) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: t.name, size: "sm" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { overflow: "hidden", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: t.name }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: t.preview })
+          ] })
+        ] }, t.name)) }) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, width: 200, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: messages.map((m, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { alignSelf: m.from === "me" ? "end" : "start", maxWidth: 160, rounding: 3, paddingX: 2, paddingY: 1, color: m.from === "me" ? "infoWeak" : "secondary", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: m.text }) }, i)) }) })
+    ] });
+  }
+  function RatingBreakdownBlock() {
+    const categories = [
+      { label: "Communication", value: 4.8 },
+      { label: "Punctuality", value: 4.6 },
+      { label: "Sound quality", value: 4.9 }
+    ];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 300, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "600", children: "4.8" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 1, children: [
+            [0, 1, 2, 3].map((i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "star", accessibilityLabel: "", color: "warning", size: 14 }, i)),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "star-half", accessibilityLabel: "", color: "warning", size: 14 })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "128 reviews" })
+        ] })
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: categories.map((c) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: c.label }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 100, height: 6, rounding: 1, color: "secondary", overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { height: 6, color: "warning", dangerouslySetInlineStyle: { __style: { width: `${c.value / 5 * 100}%` } } }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: c.value })
+      ] }, c.label)) })
+    ] });
+  }
+  function WriteReviewBlock() {
+    const [rating, setRating] = (0, import_react2.useState)(0);
+    const [comment, setComment] = (0, import_react2.useState)("");
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 320, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Rate your session" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 1, children: [1, 2, 3, 4, 5].map((n) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TapAreaWithForwardRef, { onTap: () => setRating(n), accessibilityLabel: `${n} stars`, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: n <= rating ? "star" : "star-outline", accessibilityLabel: "", color: n <= rating ? "warning" : "subtle", size: 22 }) }, n)) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextAreaWithForwardRef, { id: "block-write-review", placeholder: "How was the session?", value: comment, onChange: ({ value }) => setComment(value) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Submit review", color: "red", disabled: rating === 0, onClick: () => {
+      } }) })
+    ] });
+  }
+  function SuccessStateBlock() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 6, maxWidth: 300, display: "flex", direction: "column", alignItems: "center", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { color: "successWeak", rounding: "circle", padding: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "check-circle-fill", accessibilityLabel: "", color: "success", size: 32 }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, marginBottom: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", align: "center", children: "Booking confirmed" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { align: "center", color: "subtle", children: "You're all set for Aug 12 at Yash Raj Sound Studios." }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "View booking", color: "red", onClick: () => {
+      } }) })
+    ] });
+  }
+  function QrShareBlock() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 280, display: "flex", direction: "column", alignItems: "center", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "UI only \u2014 backend missing", type: "warning" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, marginBottom: 3, padding: 3, borderStyle: "sm", rounding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "qr-code", accessibilityLabel: "QR code", size: 96 }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", align: "center", children: "Share your Comp Card" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", align: "center", children: "Scan to view profile & portfolio" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Download PDF", color: "gray", onClick: () => {
+      } }) })
+    ] });
+  }
+  function CreditAttributionBlock() {
+    const credits = [
+      { name: "Ravi Nair", role: "Producer" },
+      { name: "Mei Tanaka", role: "Mix engineer" },
+      { name: "Ava Chen", role: "Vocalist" }
+    ];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 300, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Credits" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: credits.map((c) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", justifyContent: "between", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: c.name, size: "sm" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: c.name })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: c.role, type: "neutral" })
+      ] }, c.name)) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Add collaborator", color: "gray", size: "sm", onClick: () => {
+      } }) })
+    ] });
+  }
+  function SectionTabsBlock() {
+    const tabs = ["Overview", "Services", "Team & Works", "Reviews & Gallery"];
+    const [active, setActive] = (0, import_react2.useState)(0);
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 2, maxWidth: 340, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { overflow: "scrollX", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        Tabs,
+        {
+          activeTabIndex: active,
+          onChange: ({ activeTabIndex }) => setActive(activeTabIndex),
+          tabs: tabs.map((t, i) => ({ href: "#", text: t, id: `sec-tab-${i}` }))
+        }
+      ) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
+        tabs[active],
+        " content goes here."
+      ] }) })
+    ] });
+  }
+  function AdminDataTableBlock() {
+    const [sortCol, setSortCol] = (0, import_react2.useState)("name");
+    const [sortOrder, setSortOrder] = (0, import_react2.useState)("asc");
+    const [selected, setSelected] = (0, import_react2.useState)(/* @__PURE__ */ new Set());
+    const rows = [
+      { id: "1", name: "Ava Chen", role: "Talent", status: "Active" },
+      { id: "2", name: "Bloom Studio A", role: "Studio", status: "Pending" },
+      { id: "3", name: "Ravi Nair", role: "Talent", status: "Active" }
+    ];
+    const toggle2 = (id) => setSelected((s) => {
+      const n = new Set(s);
+      n.has(id) ? n.delete(id) : n.add(id);
+      return n;
+    });
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, maxWidth: 420, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(Table, { accessibilityLabel: "Admin users table", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Table.Header, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(Table.Row, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Table.HeaderCell, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "100", children: " " }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            Table.SortableHeaderCell,
+            {
+              status: sortCol === "name" ? "active" : "inactive",
+              sortOrder,
+              onSortChange: () => {
+                setSortCol("name");
+                setSortOrder((o) => o === "asc" ? "desc" : "asc");
+              },
+              children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "100", children: "Name" })
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Table.HeaderCell, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "100", children: "Role" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            Table.SortableHeaderCell,
+            {
+              status: sortCol === "status" ? "active" : "inactive",
+              sortOrder,
+              onSortChange: () => {
+                setSortCol("status");
+                setSortOrder((o) => o === "asc" ? "desc" : "asc");
+              },
+              children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "100", children: "Status" })
+            }
+          )
+        ] }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Table.Body, { children: rows.map((r) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(Table.Row, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Table.Cell, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(CheckboxWithForwardRef, { id: `row-${r.id}`, checked: selected.has(r.id), onChange: () => toggle2(r.id) }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Table.Cell, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: r.name }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Table.Cell, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: r.role }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Table.Cell, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Status, { type: r.status === "Active" ? "ok" : "inProgress", title: r.status }) })
+        ] }, r.id)) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
+          selected.size,
+          " selected \xB7 ",
+          rows.length,
+          " rows"
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 1, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconButtonWithForwardRef, { icon: "arrow-back", accessibilityLabel: "Previous page", size: "sm" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconButtonWithForwardRef, { icon: "arrow-forward", accessibilityLabel: "Next page", size: "sm" })
+        ] })
+      ] }) })
+    ] });
+  }
+  function AdminSidebarBlock() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxHeight: 240, overflow: "scroll", maxWidth: 220, borderStyle: "sm", rounding: 2, padding: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(SideNavigation, { accessibilityLabel: "Admin navigation", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Dashboard", icon: "gauge", active: "page" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Users", icon: "person" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Bookings", icon: "calendar" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(SideNavigation.Section, { label: "Content", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Widgets", icon: "apps" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Flows & Screens", icon: "layout" })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SideNavigation.TopItem, { href: "#", label: "Settings", icon: "cog" })
+    ] }) });
+  }
+  function AdminTopBarBlock() {
+    const [query, setQuery] = (0, import_react2.useState)("");
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Admin" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "v5.5", type: "neutral" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { flex: "grow", maxWidth: 220, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SearchFieldWithForwardRef, { id: "block-admin-search", accessibilityLabel: "Search admin", placeholder: "Search users, bookings\u2026", value: query, onChange: ({ value }) => setQuery(value) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconButtonWithForwardRef, { icon: "bell", accessibilityLabel: "Notifications", size: "sm" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconButtonWithForwardRef, { icon: "cog", accessibilityLabel: "Settings", size: "sm" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: "Admin User", size: "sm" })
+    ] }) });
+  }
   var BLOCKS = [
     { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NavHeaderBlock, {}) },
     { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ArtistProfileBlock, {}) },
@@ -41988,30 +42776,176 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     { name: "Stats row", description: "Three Datapoints with real trend arrows.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(StatsRowBlock, {}) },
     { name: "Empty state", description: "Icon + heading + CTA for a catalog with nothing in it yet.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(EmptyStateBlock, {}) },
     { name: "Notification stack", description: "Three real BannerSlim variants stacked.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NotificationStackBlock, {}) },
-    { name: "Cover art gallery", description: "Real Masonry layout (Pinterest's own algorithm) packing variable-height tiles.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(GalleryBlock, {}) }
+    { name: "Cover art gallery", description: "Real Masonry layout (Pinterest's own algorithm) packing variable-height tiles.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(GalleryBlock, {}) },
+    { name: "Bottom navigation bar", description: "Mobile tab bar \u2014 real TapArea + Icon + Text, live active-tab state.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BottomNavBlock, {}) },
+    { name: "Trust badges", description: "Real tiers from admin/components/shared/trust-badge.tsx, mapped to Gestalt Badge + Icon.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TrustBadgesBlock, {}) },
+    { name: "Hero", description: "Gradient hero banner \u2014 real brand colors, Box + Heading + Text + Button.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(HeroBlock, {}) },
+    { name: "Metrics scorecard", description: "Grid of real Datapoints with icons and trend arrows.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(MetricsScorecardBlock, {}) },
+    { name: "Activity feed", description: "Avatar + text feed rows, real components.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ActivityFeedBlock, {}) },
+    { name: "Search & filters", description: "Real SearchField + Dropdown + removable Tag pills.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SearchAndFiltersBlock, {}) },
+    { name: "Quick actions", description: "Row of real IconButtons with labels.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(QuickActionsBlock, {}) },
+    { name: "Avatar stack / social proof", description: "Real AvatarGroup with a count.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(AvatarStackBlock, {}) },
+    { name: "Testimonial", description: "Star rating (real Icon) + quote + real Avatar.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TestimonialBlock, {}) },
+    { name: "Pricing plans", description: "Two real Box cards with feature lists and a highlighted plan.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(PricingPlansBlock, {}) },
+    { name: "Booking summary", description: "Real data from booking_summary/screen.json \u2014 Yash Raj Sound Studios, Aug 12, \u20B932,000.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BookingSummaryBlock, {}) },
+    { name: "Availability calendar", description: "Real states from availability_calendar/screen.json \u2014 monthly/weekly/timeline, live SegmentedControl.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(AvailabilityCalendarBlock, {}) },
+    { name: "Chat", description: "Thread list + conversation bubbles \u2014 real screens chat_thread_list + chat_conversation.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ChatBlock, {}) },
+    { name: "Rating breakdown", description: "Aggregate score + category bars \u2014 real screen rating_breakdown.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(RatingBreakdownBlock, {}) },
+    { name: "Write review", description: "Live star selector + comment \u2014 real states from write_review/screen.json.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(WriteReviewBlock, {}) },
+    { name: "Success state", description: "Confirmation screen \u2014 real screen portfolio/success.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SuccessStateBlock, {}) },
+    { name: "QR share", description: `Real screen (qr_share_flow) \u2014 flowStatus "missing": UI exists, backend doesn't. Labeled honestly.`, render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(QrShareBlock, {}) },
+    { name: "Credit attribution", description: "Collaborator credits list \u2014 real screen credit_attribution.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(CreditAttributionBlock, {}) },
+    { name: "Section tabs", description: "Real Gestalt Tabs over real section names from business-profile screens.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SectionTabsBlock, {}) },
+    { name: "Admin data table", description: "Real Table.SortableHeaderCell + Checkbox selection + pagination controls.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(AdminDataTableBlock, {}) },
+    { name: "Admin sidebar", description: "Real SideNavigation themed for the admin panel.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(AdminSidebarBlock, {}) },
+    { name: "Admin top bar", description: "Real SearchField + IconButtons + Avatar, admin-panel framing.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(AdminTopBarBlock, {}) }
   ];
-  function BlocksGallery({ query }) {
-    const filtered = BLOCKS.filter((b) => b.name.toLowerCase().includes(query.toLowerCase()));
+  function visibilityBadge(w) {
+    if (w.isVisible === false) return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "Hidden", type: "neutral" });
+    if (w.isVisible === true) return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "Visible", type: "success" });
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "Unconfirmed", type: "lightWash" });
+  }
+  function WidgetsDirectory({ query }) {
+    const filtered = WIDGETS.filter(
+      (w) => w.name.toLowerCase().includes(query.toLowerCase()) || w.category.toLowerCase().includes(query.toLowerCase()) || w.codeMapping.toLowerCase().includes(query.toLowerCase())
+    );
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 5, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { color: "subtle", children: "Composed patterns \u2014 each built entirely from the components in the Components tab, arranged the way they'd actually appear in a MusicLinkd screen." }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "ml-block-grid", children: filtered.map((b) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 3, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: b.name }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: b.description })
-        ] }),
-        b.render()
-      ] }, b.name)) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 5, padding: 4, rounding: 2, color: "infoWeak", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "200", children: [
+        "Read-only mirror of ",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "admin/app/(admin)/widgets/default-widgets.ts" }),
+        " (backed by",
+        " ",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "admin/docs/architecture/Widget_Directory.md" }),
+        ") \u2014 the real home/dashboard content-composition widgets used by the admin panel's widget editor. This is a reference, not the source of truth: widget behavior is edited in the admin app; this list gets re-transcribed here if that changes, not the other way around. ",
+        WIDGETS.length,
+        " widgets across ",
+        WIDGET_CATEGORIES_ORDER.length,
+        " categories."
+      ] }) }),
+      WIDGET_CATEGORIES_ORDER.map((cat) => {
+        const items = filtered.filter((w) => w.category === cat);
+        if (items.length === 0) return null;
+        return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 7, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", children: cat }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "ml-block-grid", children: items.map((w) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "start", gap: 2, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: w.name }),
+              visibilityBadge(w)
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: w.purpose }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: w.contentComposition }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: w.codeMapping }) }),
+            w.notes && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, padding: 2, rounding: 1, color: "warningWeak", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: w.notes }) })
+          ] }, w.key)) })
+        ] }, cat);
+      }),
       filtered.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { color: "subtle", children: [
-        "No blocks match \u201C",
+        "No widgets match \u201C",
         query,
         "\u201D."
       ] })
+    ] });
+  }
+  var NOT_BUILT = [
+    {
+      title: "Not available in Gestalt",
+      reason: "Checked directly against the real installed package\u2019s export list (gestalt/packages/gestalt/src/index.ts) \u2014 these components genuinely don\u2019t exist in it. Breadcrumb specifically was checked against PageHeader.d.ts, which has no breadcrumb prop anywhere.",
+      items: ["Upload / file-dropzone", "Timeline", "Skeleton Loading", "Progress Bar", "Time Picker", "Date Picker", "Slider", "A distinct Snackbar (Gestalt uses Toast for both)", "Breadcrumb"]
+    },
+    {
+      title: "Different platform \u2014 Android native, out of scope",
+      reason: "These are Android Material 3 native widgets from the old styleguide's \u201C05 Native Components\u201D section. They belong to the real native app (app/, Kotlin), a separate codebase this web install doesn't cover \u2014 Gestalt is web-only and can never render these here.",
+      items: ["Top App Bar", "Floating Action Button", "Navigation Drawer", "Navigation Rail", "Segmented Buttons", "Progress Indicators", "OTP Input", "Search Suggestions", "Filter Sheet", "Permission Dialog", "Camera Picker", "Audio Recorder", "Audio Scrubber", "Android App Grids", "M3 Navigation Bar"]
+    },
+    {
+      title: "No real backing found",
+      reason: "Checked against both the 27-widget admin directory and all 124 real screens in dist/preview/flows/**/screen.json (titles, notes, dataContracts) \u2014 no screen, note, code reference, or widget entry backs any of these. Not built because there's nothing real to build from, not because they're hard.",
+      items: [
+        "Skeleton Loaders",
+        "Error Boundary",
+        "Offline Banner",
+        "Shimmer",
+        "Adaptive Banner",
+        "Navbar",
+        "Navbar (Alt)",
+        "Sticky Nav",
+        "Segmented Switch",
+        "Metrics Row",
+        "Uncategorized",
+        "Swipe Deck",
+        "Brief Wizard",
+        "Ambient Album Card",
+        "Artist Grid Card",
+        "Artist Row Card",
+        "Typing Indicator",
+        "Attachments",
+        "Notification Toggle (distinct from the real NotificationCard widget)",
+        "Multi-Track Stem Mixer",
+        "Equalizer",
+        "User Header",
+        "Talent/Band/Business/Venue as separate card types",
+        "Direct Request",
+        "Request Status Tracker",
+        "Band Card",
+        "Application Card",
+        "Rental Card"
+      ]
+    },
+    {
+      title: "Aesthetic-inspiration references, not real screens",
+      reason: "The old styleguide's \u201C24 Inspired\u201D section was explicit moodboard/inspiration material, not real MusicLinkd screens or components \u2014 building these as if they were real product UI would misrepresent what actually exists.",
+      items: ["Gradient Hero Cards", "Content Design Patterns", "Artist Cards & Playlist Rows (as a distinct inspired pattern)", "Masonry Card Grid (as inspiration \u2014 the real Masonry component itself IS used, in Cover art gallery)", "Full-Bleed Bold Cards"]
+    }
+  ];
+  function NotBuiltRegistry() {
+    const total = NOT_BUILT.reduce((n, g) => n + g.items.length, 0);
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 5, padding: 4, rounding: 2, color: "warningWeak", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "200", children: [
+        total,
+        ` items from the old styleguide's nav were checked and left out \u2014 every one for a specific, checked reason, grouped below. This list exists so "not built" doesn't quietly mean "forgotten." Component-level exclusions from the Components tab (Video, Layer, Container, provider/hook internals, etc.) are covered separately by the note at the bottom of that tab.`
+      ] }) }),
+      NOT_BUILT.map((g) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 6, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", children: g.title }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: g.reason }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 2, wrap: true, children: g.items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 2, padding: 2, color: "default", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: item }) }, item)) })
+      ] }, g.title))
+    ] });
+  }
+  var BLOCKS_TABS = ["Composed patterns", "Admin widget directory", "Not built"];
+  function BlocksGallery({ query }) {
+    const [sub, setSub] = (0, import_react2.useState)("Composed patterns");
+    const filtered = BLOCKS.filter((b) => b.name.toLowerCase().includes(query.toLowerCase()));
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "ml-token-cat-nav", children: BLOCKS_TABS.map((t) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { className: `ml-token-cat-btn ${sub === t ? "active" : ""}`, onClick: () => setSub(t), children: t }, t)) }),
+      sub === "Composed patterns" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 5, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { color: "subtle", children: "Composed patterns \u2014 each built entirely from the components in the Components tab, arranged the way they'd actually appear in a MusicLinkd screen." }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "ml-block-grid", children: filtered.map((b) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 3, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: b.name }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: b.description })
+          ] }),
+          b.render()
+        ] }, b.name)) }),
+        filtered.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { color: "subtle", children: [
+          "No blocks match \u201C",
+          query,
+          "\u201D."
+        ] })
+      ] }),
+      sub === "Admin widget directory" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(WidgetsDirectory, { query }),
+      sub === "Not built" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NotBuiltRegistry, {})
     ] });
   }
   function FoundationsView({ tokenGroups, baseTokenGroups }) {
     const spacing = baseTokenGroups.find((g) => g.label === "Spacing");
     const rounding2 = baseTokenGroups.find((g) => g.label === "Rounding");
     const elevation = (tokenGroups.find((g) => g.label === "Elevation")?.tokens.length ? tokenGroups : baseTokenGroups).find((g) => g.label === "Elevation");
+    const fontFamily = baseTokenGroups.find((g) => g.label === "Font Family")?.tokens.find((t) => t.name === "--font-family-default-latin");
+    const cardRecipes = [
+      { label: "Card (large)", borderStyle: "sm", rounding: 4, usedIn: "Artist profile, Upload form, Empty state, Bottom nav" },
+      { label: "Card (medium)", borderStyle: "sm", rounding: 3, usedIn: "Track row, Nav header, component cards" },
+      { label: "Card (tight)", borderStyle: "sm", rounding: 2, usedIn: "Foundations swatches, token items" }
+    ];
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 8, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", children: "Typography scale" }) }),
@@ -42043,6 +42977,40 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
           /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: t.value })
         ] }, t.name)) })
       ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 8, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 3, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", children: "Styles" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Real composed CSS in use \u2014 font stack, observed border widths, and this app's own recurring card recipes \u2014 not abstract token names." })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 5, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "100", children: "Font stack" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, padding: 3, rounding: 2, borderStyle: "sm", dangerouslySetInlineStyle: { __style: { fontFamily: fontFamily?.value } }, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { children: "The quick brown fox jumps over the lazy dog \u2014 0123456789" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: fontFamily ? fontFamily.value : "Not found in shipped CSS." }) })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 5, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "100", children: "Border widths (observed)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 4, wrap: true, children: BORDER.observedWidths.map((w) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 1, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 56, height: 56, rounding: 2, dangerouslySetInlineStyle: { __style: { border: `${w} solid var(--color-border-container)` } } }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: w })
+          ] }, w)) }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: BORDER_GAP }) })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "100", children: "Card recipes used in this app's Blocks" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 3, wrap: true, children: cardRecipes.map((r) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { width: 200, borderStyle: r.borderStyle, rounding: r.rounding, padding: 3, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: r.label }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
+              'borderStyle="',
+              r.borderStyle,
+              '" rounding=',
+              "{",
+              r.rounding,
+              "}"
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: r.usedIn }) })
+          ] }, r.label)) }) })
+        ] })
+      ] }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", children: "Icon sizes" }) }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 4, alignItems: "center", children: [12, 16, 24, 32, 48].map((s) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 1, children: [
@@ -42055,28 +43023,258 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       ] })
     ] });
   }
+  function TokenGroupBlock({ group, query }) {
+    if (!group) return null;
+    const items = group.tokens.filter((t) => t.name.toLowerCase().includes(query.toLowerCase()));
+    if (items.length === 0) return null;
+    const isColor = group.label.toLowerCase().includes("color");
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 6, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 3, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", children: group.label }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
+          items.length,
+          " tokens"
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: isColor ? "ml-token-grid" : "ml-token-list", children: items.map((t) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "ml-token-item", children: [
+        isColor && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "ml-swatch", style: { background: `var(${t.name})` } }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "ml-token-meta", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: t.name }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: t.value })
+        ] })
+      ] }, t.name)) })
+    ] });
+  }
+  function TokenGroupBlockRaw({
+    label,
+    items,
+    query,
+    isColor
+  }) {
+    const filtered = items.filter((t) => t.name.toLowerCase().includes(query.toLowerCase()));
+    if (filtered.length === 0) return null;
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 6, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 3, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", children: label }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
+          filtered.length,
+          " tokens"
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: isColor ? "ml-token-grid" : "ml-token-list", children: filtered.map((t) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "ml-token-item", children: [
+        isColor && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "ml-swatch", style: { background: `var(${t.name})` } }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "ml-token-meta", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: t.name }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: t.value })
+        ] })
+      ] }, t.name)) })
+    ] });
+  }
+  function TokenNote({ tone = "info", children }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+      BoxWithForwardRef,
+      {
+        marginBottom: 5,
+        padding: 4,
+        rounding: 2,
+        color: tone === "gap" ? "warningWeak" : "infoWeak",
+        children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "200", children })
+      }
+    );
+  }
+  var TOKEN_CATEGORIES = [
+    { id: "foundation", number: "01", label: "Foundation" },
+    { id: "semantic", number: "02", label: "Semantic" },
+    { id: "layout", number: "03", label: "Layout" },
+    { id: "component", number: "04", label: "Component" },
+    { id: "state", number: "05", label: "State" },
+    { id: "interaction", number: "06", label: "Interaction" },
+    { id: "responsive", number: "07", label: "Responsive" },
+    { id: "platform", number: "08", label: "Platform" }
+  ];
   function TokenSwatches({ groups, query }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { children: groups.map((g) => {
-      const items = g.tokens.filter((t) => t.name.toLowerCase().includes(query.toLowerCase()));
-      if (items.length === 0) return null;
-      const isColor = g.label.toLowerCase().includes("color");
-      return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 8, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 3, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", children: g.label }),
+    const [category, setCategory] = (0, import_react2.useState)("foundation");
+    const { raw: rawColor, semantic: semanticColor } = (0, import_react2.useMemo)(
+      () => splitColorGroup(groups.find((g) => g.label === "Color")),
+      [groups]
+    );
+    const spacing = groups.find((g) => g.label === "Spacing");
+    const rounding2 = groups.find((g) => g.label === "Rounding");
+    const fontSize = groups.find((g) => g.label === "Font Size");
+    const fontWeight = groups.find((g) => g.label === "Font Weight");
+    const elevation = groups.find((g) => g.label === "Elevation");
+    const opacity2 = groups.find((g) => g.label === "Opacity");
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "ml-token-cat-nav", children: TOKEN_CATEGORIES.map((c) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+        "button",
+        {
+          className: `ml-token-cat-btn ${category === c.id ? "active" : ""}`,
+          onClick: () => setCategory(c.id),
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: "ml-token-cat-num", children: c.number }),
+            " ",
+            c.label
+          ]
+        },
+        c.id
+      )) }),
+      category === "foundation" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenNote, { children: "Raw building blocks: color, typography, spacing, sizing, radius, border, opacity, elevation, and motion primitives \u2014 everything with a literal, unstyled value before any purpose is attached to it." }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenGroupBlockRaw, { label: "Color \u2014 raw palette", items: rawColor, query, isColor: true }),
+        fontSize && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenGroupBlock, { group: fontSize, query }),
+        fontWeight && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenGroupBlock, { group: fontWeight, query }),
+        spacing && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenGroupBlock, { group: spacing, query }),
+        rounding2 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenGroupBlock, { group: rounding2, query }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          TokenGroupBlockRaw,
+          {
+            label: "Border \u2014 observed widths",
+            items: BORDER.observedWidths.map((v) => ({ name: v, value: `${BORDER.colorRoleCount} color roles use this scale of widths` })),
+            query
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TokenNote, { tone: "gap", children: [
+          "Border: ",
+          BORDER_GAP,
+          " Source: ",
+          BORDER_SOURCE,
+          "."
+        ] }),
+        opacity2 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenGroupBlock, { group: opacity2, query }),
+        elevation && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenGroupBlock, { group: elevation, query }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          TokenGroupBlockRaw,
+          {
+            label: "Motion primitives \u2014 referenced names",
+            items: MOTION_NAMES.map((n) => ({ name: n, value: "unresolved in classic theme" })),
+            query
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TokenNote, { tone: "gap", children: [
+          "Motion: ",
+          MOTION_GAP,
+          " Source: ",
+          MOTION_SOURCE,
+          "."
+        ] })
+      ] }),
+      category === "semantic" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TokenNote, { children: [
+          "Purpose-named tokens \u2014 the layer components actually consume. Gestalt's real semantic color roles (background / text / border / icon / shadow) are distinguished from the raw palette above by name, not by a separate file \u2014 split out here from the same",
+          " ",
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "--color-*" }),
+          " set."
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenGroupBlockRaw, { label: "Color \u2014 semantic roles", items: semanticColor, query, isColor: true })
+      ] }),
+      category === "layout" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenNote, { children: "Container, grid, columns, gutters, padding, positioning. Gestalt expresses this as components/props, not standalone CSS custom properties \u2014 real values below, sourced from the actual component API." }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          TokenGroupBlockRaw,
+          {
+            label: "Breakpoints",
+            items: BREAKPOINTS.map((b) => ({ name: b.name, value: b.value })),
+            query
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
+          "Source: ",
+          BREAKPOINTS_SOURCE
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginTop: 6, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            TokenGroupBlockRaw,
+            {
+              label: "Grid \u2014 Column",
+              items: [
+                { name: "columns", value: String(GRID.columns) },
+                { name: "responsive props", value: GRID.responsiveProps.join(", ") }
+              ],
+              query
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: GRID.description }),
           /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
-            items.length,
-            " tokens"
+            "Source: ",
+            GRID_SOURCE
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: isColor ? "ml-token-grid" : "ml-token-list", children: items.map((t) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "ml-token-item", children: [
-          isColor && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "ml-swatch", style: { background: `var(${t.name})` } }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "ml-token-meta", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: t.name }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: t.value })
-          ] })
-        ] }, t.name)) })
-      ] }, g.label);
-    }) });
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 6, children: spacing && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenGroupBlock, { group: spacing, query }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TokenNote, { children: [
+          "Gutters and padding reuse the Spacing scale above (Flex/Box ",
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "gap" }),
+          " and",
+          " ",
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "padding" }),
+          " props) \u2014 Gestalt has no separate gutter-specific token."
+        ] })
+      ] }),
+      category === "component" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TokenNote, { children: [
+        "Component anatomy (button, input, card, modal, navigation, tabs, list, avatar, etc.) isn't expressed as standalone design tokens in Gestalt \u2014 it's the components themselves. See the ",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("strong", { children: "Components" }),
+        " tab (57 real, interactive cards) and",
+        " ",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("strong", { children: "Blocks" }),
+        " tab (8 composed patterns) for real anatomy, not a token list here."
+      ] }),
+      category === "state" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TokenNote, { children: [
+        "Default, hover, focus, pressed, selected, disabled, error, etc. Gestalt encodes these as component props and CSS pseudo-classes/data-attributes (e.g. Checkbox's",
+        " ",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "checked" }),
+        "/",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "disabled" }),
+        "/",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "errorMessage" }),
+        ", Button's",
+        " ",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "disabled" }),
+        "), not as a standalone state-token file. The semantic color roles above already carry state in their names where Gestalt does tokenize it \u2014 e.g.",
+        " ",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "--color-border-checkbox-checked-error" }),
+        ",",
+        " ",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "--color-background-switch-hover-selected" }),
+        ". Try the real states on the Checkbox, Switch, and Button cards in the Components tab."
+      ] }),
+      category === "interaction" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenNote, { children: "Hit area, touch target, gesture, scroll, dismissal. Gestalt enforces these through component sizing and behavior (e.g. IconButton's minimum tap target, TapArea's ripple and keyboard handling) rather than exposing standalone interaction tokens. No literal CSS custom properties exist for this category \u2014 see TapArea, IconButton, and Pulsar in the Components tab for the real implementations." }),
+      category === "responsive" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenNote, { children: "Breakpoints, adaptive sizing, responsive component transformations \u2014 the same real breakpoint and grid data as Layout, viewed from the responsive-behavior angle." }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          TokenGroupBlockRaw,
+          {
+            label: "Breakpoints",
+            items: BREAKPOINTS.map((b) => ({ name: b.name, value: b.value })),
+            query
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TokenNote, { children: [
+          "Column's ",
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "smSpan" }),
+          "/",
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "mdSpan" }),
+          "/",
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "lgSpan" }),
+          ` props (Layout category) are Gestalt's actual responsive mechanism \u2014 span changes per breakpoint instead of a separate "responsive spacing" token set. There's no distinct density token either; Gestalt doesn't ship a compact/comfortable density variant.`
+        ] })
+      ] }),
+      category === "platform" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          TokenGroupBlockRaw,
+          {
+            label: "Z-Index \u2014 pattern",
+            items: [{ name: "FixedZIndex / CompositeZIndex", value: Z_INDEX.pattern }],
+            query
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: Z_INDEX.description }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
+          "Source: ",
+          Z_INDEX_SOURCE
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenNote, { tone: "gap", children: Z_INDEX_GAP }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenNote, { tone: "gap", children: "App vs Web platform tokens (touch vs pointer, safe area, system UI, native navigation) genuinely don't exist in Gestalt \u2014 it's a web-only React component library with no native-app token layer. MusicLinkd's actual native app is a separate codebase outside this Gestalt installation; if it needs platform tokens they'd be defined there, not here. Not fabricating an App/Web split that Gestalt itself doesn't have." })
+      ] })
+    ] });
   }
   function IconGrid({ query }) {
     const filtered = icons_default.filter((n) => n.includes(query.toLowerCase()));
@@ -42092,7 +43290,95 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       ] })
     ] });
   }
-  var TABS = ["components", "blocks", "foundations", "tokens", "icons"];
+  var LOGO_SET_FILES = [
+    { file: "logo-badge-inverse.svg", fills: "white" },
+    { file: "logo-dark-pill.svg", fills: "#FDFDFD, white" },
+    { file: "logo-lockup-black.svg", fills: "white, #24211C" },
+    { file: "logo-lockup-grey.svg", fills: "white" },
+    { file: "logo-lockup-wide-caps.svg", fills: "white" },
+    { file: "logo-watermark-stacked.svg", fills: "#F8F9F4, #24211C" }
+  ];
+  function BrandKitView() {
+    const [markColor, setMarkColor] = (0, import_react2.useState)("#0D0B26");
+    const faviconInline = favicon_mark_default.replace(/<\?xml[^>]*\?>/, "").replace(/fill="(white|#[0-9a-fA-F]{6})"/g, 'fill="currentColor"').replace("<svg ", '<svg style="width:64px;height:auto" ');
+    const markGreyInline = mark_grey_default.replace(/<\?xml[^>]*\?>/, "").replace(/fill="(white|#[0-9a-fA-F]{6})"/g, 'fill="currentColor"').replace("<svg ", '<svg style="width:64px;height:auto" ');
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 6, padding: 4, rounding: 2, color: "infoWeak", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "200", children: [
+        "Real MusicLinkd brand assets from ",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "frontend/guide/brand/README.md" }),
+        " and",
+        " ",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: "frontend/guide/brand/assets/" }),
+        " \u2014 same source as the standalone",
+        " ",
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("a", { href: "../brandkit/index.html", children: "brandkit/index.html" }),
+        ". Typography is intentionally left out here: this app's own chrome uses Gestalt's real system-font stack, not MusicLinkd's brand typefaces, so showing both together in the same view would misrepresent which font this app actually renders in. See the standalone Brand Kit page for type specimens."
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 8, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", children: "Color" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, wrap: true, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, overflow: "hidden", width: 200, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { height: 90, dangerouslySetInlineStyle: { __style: { background: "#EA4C89" } } }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { padding: 3, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "100", children: "Primary" }),
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "#EA4C89" })
+            ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, overflow: "hidden", width: 200, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { height: 90, dangerouslySetInlineStyle: { __style: { background: "#0D0B26" } } }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { padding: 3, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "100", children: "Primary dark" }),
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "#0D0B26" })
+            ] })
+          ] })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Only two colors are documented in brand/README.md \u2014 no wider palette is invented here." }) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 8, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 3, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", children: "Logo set" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: `6 files \u2014 multi-path lockups. Fill colors mix in ways that don't resolve to one "correct" background from static analysis, so each is shown on both.` })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "ml-comp-grid", children: LOGO_SET_FILES.map((l) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, overflow: "hidden", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr" }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { height: 90, padding: 3, display: "flex", alignItems: "center", justifyContent: "center", dangerouslySetInlineStyle: { __style: { background: "#FAFAFA" } }, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: `../brand/assets/${l.file}`, alt: `${l.file} on light`, style: { maxWidth: "100%", maxHeight: "100%" } }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { height: 90, padding: 3, display: "flex", alignItems: "center", justifyContent: "center", dangerouslySetInlineStyle: { __style: { background: "#0D0B26" } }, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: `../brand/assets/${l.file}`, alt: `${l.file} on dark`, style: { maxWidth: "100%", maxHeight: "100%" } }) })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { padding: 2, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("code", { children: l.file }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
+              "Fills: ",
+              l.fills
+            ] })
+          ] })
+        ] }, l.file)) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginBottom: 3, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "300", children: "App icon set \u2014 recolor live" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "2 files \u2014 single path, single fill each, so unlike the Logo set there's no ambiguity. Inlined with the real fill swapped for currentColor." })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("label", { htmlFor: "ml-brandkit-color", style: { fontSize: 12, color: "var(--color-text-subtle, #767676)" }, children: "Mark color" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            "input",
+            {
+              id: "ml-brandkit-color",
+              type: "color",
+              value: markColor,
+              onChange: (e) => setMarkColor(e.target.value),
+              style: { width: 36, height: 28, border: "1px solid var(--color-border-container, #e2e2e2)", borderRadius: 6, padding: 2, cursor: "pointer" }
+            }
+          )
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, wrap: true, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, display: "flex", alignItems: "center", justifyContent: "center", dangerouslySetInlineStyle: { __style: { background: "#0D0B26", color: markColor } }, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { dangerouslySetInnerHTML: { __html: faviconInline } }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, display: "flex", alignItems: "center", justifyContent: "center", dangerouslySetInlineStyle: { __style: { background: "#FAFAFA", color: markColor } }, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { dangerouslySetInnerHTML: { __html: markGreyInline } }) })
+        ] }) })
+      ] })
+    ] });
+  }
+  var TABS = ["components", "blocks", "foundations", "tokens", "icons", "brandkit"];
   function App() {
     const [tab, setTab] = (0, import_react2.useState)("components");
     const [query, setQuery] = (0, import_react2.useState)("");
@@ -42110,7 +43396,8 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       if (t === "blocks") return `Blocks (${BLOCKS.length})`;
       if (t === "foundations") return "Foundations";
       if (t === "tokens") return "Design Tokens";
-      return `Icons (${icons_default.length})`;
+      if (t === "icons") return `Icons (${icons_default.length})`;
+      return "Brand Kit";
     };
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ColorSchemeProvider, { colorScheme: darkMode ? "dark" : "light", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(DefaultLabelProvider, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "ml-app", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("header", { className: "ml-header", children: [
@@ -42132,7 +43419,8 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
         tab === "blocks" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BlocksGallery, { query }),
         tab === "foundations" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FoundationsView, { tokenGroups, baseTokenGroups }),
         tab === "tokens" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TokenSwatches, { groups: tokenGroups, query }),
-        tab === "icons" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconGrid, { query })
+        tab === "icons" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconGrid, { query }),
+        tab === "brandkit" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BrandKitView, {})
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("footer", { className: "ml-footer", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
         "Source: pinterest/gestalt v177.0.13, vendored at ",

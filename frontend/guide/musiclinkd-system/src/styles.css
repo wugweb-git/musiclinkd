@@ -2,6 +2,16 @@
    themselves come entirely from gestalt.css + the token CSS files — this
    file only lays out the header/nav/grid around them. */
 
+/* MusicLinkd's own real brand accent (#EA4C89, from frontend/guide/brand/
+   README.md) — used only for this app's own chrome (active-tab underline,
+   token-category nav). A dedicated variable rather than piggybacking on
+   Gestalt's --color-icon-brand-primary, because that token resolves to
+   Gestalt's Pinterest red and would never fall through to a fallback value.
+   Real Gestalt component demos (e.g. Button color="red") are untouched and
+   still show Gestalt's actual red — this only recolors MusicLinkd's own
+   wrapper UI. */
+:root { --ml-accent: #EA4C89; }
+
 * { box-sizing: border-box; }
 
 html, body { margin: 0; height: 100%; background: var(--color-background-page-default, #fff); }
@@ -50,11 +60,19 @@ body {
 
 .ml-tab-btn.active {
   color: var(--color-text-default, #111);
-  border-bottom-color: var(--color-icon-brand-primary, #e60023);
+  border-bottom-color: var(--ml-accent);
   font-weight: 600;
 }
 
-.ml-search { margin-left: auto; width: 260px; padding: 10px 0; }
+.ml-search {
+  margin-left: auto;
+  /* was a fixed 260px, which overflowed .ml-nav on viewports under ~324px
+     (nav's 64px horizontal padding + 260px > 320px iPhone SE width).
+     min() caps it at 260px on wide screens but lets it shrink to fit on
+     narrow ones instead of forcing horizontal scroll. */
+  width: min(260px, 100%);
+  padding: 10px 0;
+}
 
 .ml-main { padding: 28px 32px 80px; flex: 1; }
 
@@ -65,13 +83,17 @@ body {
 
 .ml-comp-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  /* min(280px, 100%) instead of a bare 280px: on a 375px-or-narrower
+     viewport (.ml-main leaves ~311px of content width after padding),
+     a bare 280px minmax still fits, but the same pattern is applied to
+     every grid here so none of them can force horizontal overflow. */
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
   gap: 14px;
 }
 
 .ml-icon-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(96px, 100%), 1fr));
   gap: 8px;
 }
 
@@ -97,15 +119,37 @@ body {
   max-width: 100%;
 }
 
+/* Defensive fix for a real, confirmed bug (screenshotted by the repo owner):
+   a card whose own width is deliberately capped (Gestalt Box maxWidth, e.g.
+   Section tabs / Booking summary at 340px) sits inside a much wider CSS
+   Grid track on a wide screen. If that card's inner content is wider than
+   its own maxWidth (e.g. Tabs with 4 real section names, one of them "Reviews
+   & Gallery"), the default CSS `overflow: visible` lets that content spill
+   out of the card's own right edge and render on top of whatever card is
+   next to it in the grid — not a grid problem, a plain overflow problem.
+   min-width: 0 stops a grid item's own box from being forced wider than its
+   track by content in the first place. The worst offender (Tabs in Section
+   tabs) also got its own overflow-x fix directly in App.tsx. */
+.ml-comp-grid > *,
+.ml-block-grid > *,
+.ml-token-grid > * {
+  min-width: 0;
+}
+
 .ml-block-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  /* This was the main source of the reported overflow/overlap: a bare
+     340px minmax is wider than the ~311px of content width left on a
+     375px viewport (.ml-main's 64px total horizontal padding), so cards
+     were forced past the container edge. min(340px, 100%) lets a single
+     column shrink to fit instead. */
+  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
   gap: 16px;
 }
 
 .ml-token-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr));
   gap: 10px;
 }
 
@@ -136,5 +180,62 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.ml-token-cat-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border-container, #e2e2e2);
+}
+
+.ml-token-cat-btn {
+  background: none;
+  border: 1px solid var(--color-border-container, #e2e2e2);
+  border-radius: 999px;
+  font-size: 12px;
+  padding: 7px 14px;
+  cursor: pointer;
+  color: var(--color-text-subtle, #767676);
+}
+
+.ml-token-cat-btn.active {
+  color: #fff;
+  background: var(--ml-accent);
+  border-color: var(--ml-accent);
+  font-weight: 600;
+}
+
+.ml-token-cat-num {
+  opacity: 0.7;
+  font-variant-numeric: tabular-nums;
+}
+
+/* No media queries existed anywhere in this file before this pass — the
+   28px/32px chrome padding was constant at every viewport width, eating
+   into content width on phones. Tightened below ~600px (covers all common
+   phone widths: 320/360/375/390/414). Grid minmax() fixes above handle
+   card-level overflow; this handles the outer chrome. */
+@media (max-width: 600px) {
+  .ml-header,
+  .ml-nav,
+  .ml-main,
+  .ml-footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .ml-search {
+    /* Drop out of the "squeeze into the tab row" layout entirely below
+       600px — full-width on its own line reads better than a shrunk
+       search box competing with wrapped tabs. */
+    margin-left: 0;
+    width: 100%;
+    order: 10;
+  }
+
+  .ml-header-title { max-width: 100%; }
 }
 

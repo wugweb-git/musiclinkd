@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MusicLinkd — Brand Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --brand-primary: #EA4C89;
+    --brand-dark: #0D0B26;
+    --page-bg: #FFFFFF;
+    --panel-border: #E5E5E8;
+    --text-muted: #6B6B75;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--page-bg); }
+  body {
+    font-family: "Inter", -apple-system, sans-serif;
+    color: var(--brand-dark);
+    line-height: 1.5;
+  }
+  h1, h2, h3 { font-family: "Inter Tight", "Inter", sans-serif; margin: 0; }
+  a { color: var(--brand-primary); }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 56px 32px 100px; }
+
+  header.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--panel-border);
+    flex-wrap: wrap;
+  }
+  header.hero img { height: 56px; width: auto; }
+  header.hero .eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand-primary);
+    margin-bottom: 8px;
+  }
+  header.hero h1 { font-size: 34px; font-weight: 700; }
+  header.hero .positioning { font-size: 17px; color: var(--text-muted); margin-top: 6px; max-width: 44ch; }
+
+  section { margin-bottom: 64px; }
+  section h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  section .section-note { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; max-width: 68ch; }
+
+  .honest-callout {
+    background: #FBF7F9;
+    border: 1px solid #F1DCE7;
+    border-left: 3px solid var(--brand-primary);
+    border-radius: 6px;
+    padding: 16px 20px;
+    font-size: 13.5px;
+    color: #3a3742;
+    margin-bottom: 56px;
+  }
+  .honest-callout strong { color: var(--brand-dark); }
+
+  /* Color */
+  .swatch-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .swatch {
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .swatch .fill { height: 110px; }
+  .swatch .meta { padding: 12px 14px; }
+  .swatch .meta .label { font-weight: 600; font-size: 13.5px; }
+  .swatch .meta code { display: block; font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+  /* Type */
+  .type-specimen { border: 1px solid var(--panel-border); border-radius: 10px; padding: 24px 28px; margin-bottom: 14px; }
+  .type-specimen .role { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+  .type-specimen .sample { font-size: 30px; }
+  .type-specimen .weights { margin-top: 14px; font-size: 13px; color: var(--text-muted); }
+
+  /* Logos */
+  .logo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+  .logo-card { border: 1px solid var(--panel-border); border-radius: 10px; overflow: hidden; }
+  .logo-card .stage { display: flex; align-items: center; justify-content: center; height: 140px; padding: 20px; }
+  .logo-card .stage.light { background: #FAFAFA; }
+  .logo-card .stage.dark { background: var(--brand-dark); }
+  .logo-card .stage img { max-width: 100%; max-height: 100%; }
+  .logo-card-dual .dual-stage { display: grid; grid-template-columns: 1fr 1fr; }
+  .logo-card-dual .stage { height: 110px; padding: 14px; }
+  .recolor-stage { transition: color 0.1s ease; }
+  .recolor-stage svg.ml-recolor-svg { width: 72px; height: auto; max-height: 100%; }
+  #recolor-picker { width: 36px; height: 28px; border: 1px solid var(--panel-border); border-radius: 6px; padding: 2px; cursor: pointer; }
+  .logo-card .caption { padding: 12px 14px; border-top: 1px solid var(--panel-border); }
+  .logo-card .caption .name { font-family: monospace; font-size: 12px; font-weight: 600; }
+  .logo-card .caption .use { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+  /* Voice */
+  .voice-list { display: grid; gap: 12px; }
+  .voice-item { display: flex; gap: 14px; align-items: baseline; border: 1px solid var(--panel-border); border-radius: 8px; padding: 14px 16px; }
+  .voice-item .k { font-family: "Inter Tight"; font-weight: 700; font-size: 13px; min-width: 90px; color: var(--brand-primary); }
+  .voice-item .v { font-size: 14px; }
+
+  footer { border-top: 1px solid var(--panel-border); padding-top: 24px; font-size: 12.5px; color: var(--text-muted); }
+  footer code { background: #F5F5F7; padding: 1px 6px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div>
+      <div class="eyebrow">Brand Kit</div>
+      <h1>MusicLinkd</h1>
+      <div class="positioning">The professional network for music.</div>
+    </div>
+    <img src="../brand/assets/mark-grey.svg" alt="MusicLinkd mark" />
+    <!-- Using mark-grey.svg here specifically: it's single-path/single-fill
+         (#24211C, dark ink), confirmed safe to place directly on this
+         page's white background. The 6-file Logo set below mixes fill
+         colors in ways that don't resolve to one safe placement from
+         static analysis alone (see that section's note) — not risking one
+         of those in a fixed spot outside the "shown on both backgrounds"
+         treatment. -->
+  </header>
+
+  <div class="honest-callout">
+    <strong>What this is, plainly:</strong> a single reference page assembling MusicLinkd's already-approved
+    brand assets and documented values from <code>frontend/guide/brand/README.md</code> and
+    <code>frontend/guide/brand/assets/</code> — real logos, the two real brand colors, and the two real
+    typefaces already in use. <strong>What this is not:</strong> no new logo variants, no invented color
+    palette, and no AI-generated marketing imagery — there's no image-generation tool available in this
+    session, so nothing here was synthesized. Every asset below is a file that already existed in this repo
+    before this page was built.
+  </div>
+
+  <section>
+    <h2>Color</h2>
+    <div class="section-note">
+      The two colors defined in <code>brand/README.md</code>. That file doesn't specify a wider palette
+      (tints, shades, semantic roles) — only these two — so only these two are shown here.
+    </div>
+    <div class="swatch-row">
+      <div class="swatch">
+        <div class="fill" style="background:#EA4C89"></div>
+        <div class="meta"><div class="label">Primary</div><code>#EA4C89</code></div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:#0D0B26"></div>
+        <div class="meta"><div class="label">Primary dark</div><code>#0D0B26</code></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Typography</h2>
+    <div class="section-note">
+      Inter Tight for display, Inter for body — as documented. Loaded live from Google Fonts on this page.
+      <code>brand/README.md</code> doesn't specify a size scale, so none is fabricated here; MusicLinkd
+      System (<code>../musiclinkd-system/</code>) uses Gestalt's own type scale for that purpose.
+    </div>
+    <div class="type-specimen">
+      <div class="role">Display — Inter Tight</div>
+      <div class="sample" style="font-family:'Inter Tight'; font-weight:700;">The professional network for music.</div>
+      <div class="weights">Weights used: 500, 600, 700, 800</div>
+    </div>
+    <div class="type-specimen">
+      <div class="role">Body — Inter</div>
+      <div class="sample" style="font-family:'Inter'; font-weight:400; font-size:18px;">Clear, confident, creative, and professional. Avoid hype and generic marketplace language.</div>
+      <div class="weights">Weights used: 400, 500, 600, 700</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Logos</h2>
+    <div class="section-note">
+      This section is generated by <code>generate.mjs</code> from a real read of <code>brand/assets/</code> —
+      not a hand-typed inventory. Filenames are as delivered (Figma export names, not yet normalized) and
+      shown exactly as they exist on disk. Two sets, confirmed directly rather than guessed from the names:
+      <strong>Logo</strong> (the 6 wordmark/lockup/badge files) and <strong>App icon</strong> (the 2 mark-only
+      files, <code>favicon-mark.svg</code> and <code>mark-grey.svg</code>). Every file here is an <code>.svg</code>
+      — vector, so it can be recolored; the two App icon marks below are inlined live so you can actually try it.
+    </div>
+
+    <h3 style="font-size:15px; margin-bottom:14px;">Logo set</h3>
+    <div class="logo-grid" style="margin-bottom:36px;">
+      <!-- LOGO_SET_START -->
+      <div class="logo-card logo-card-dual">
+        <div class="dual-stage">
+          <div class="stage light"><img src="../brand/assets/logo-badge-inverse.svg" alt="logo-badge-inverse.svg on light" /></div>
+          <div class="stage dark"><img src="../brand/assets/logo-badge-inverse.svg" alt="logo-badge-inverse.svg on dark" /></div>
+        </div>
+        <div class="caption"><div class="name">logo-badge-inverse.svg</div><div class="use">Fill colors in source: <code>white</code> — shown on both, since multi-path fill mixes don't resolve to a single "correct" background from static analysis.</div></div>
+      </div>
+      <div class="logo-card logo-card-dual">
+        <div class="dual-stage">
+          <div class="stage light"><img src="../brand/assets/logo-dark-pill.svg" alt="logo-dark-pill.svg on light" /></div>
+          <div class="stage dark"><img src="../brand/assets/logo-dark-pill.svg" alt="logo-dark-pill.svg on dark" /></div>
+        </div>
+        <div class="caption"><div class="name">logo-dark-pill.svg</div><div class="use">Fill colors in source: <code>#FDFDFD, white</code> — shown on both, since multi-path fill mixes don't resolve to a single "correct" background from static analysis.</div></div>
+      </div>
+      <div class="logo-card logo-card-dual">
+        <div class="dual-stage">
+          <div class="stage light"><img src="../brand/assets/logo-lockup-black.svg" alt="logo-lockup-black.svg on light" /></div>
+          <div class="stage dark"><img src="../brand/assets/logo-lockup-black.svg" alt="logo-lockup-black.svg on dark" /></div>
+        </div>
+        <div class="caption"><div class="name">logo-lockup-black.svg</div><div class="use">Fill colors in source: <code>white, #24211C</code> — shown on both, since multi-path fill mixes don't resolve to a single "correct" background from static analysis.</div></div>
+      </div>
+      <div class="logo-card logo-card-dual">
+        <div class="dual-stage">
+          <div class="stage light"><img src="../brand/assets/logo-lockup-grey.svg" alt="logo-lockup-grey.svg on light" /></div>
+          <div class="stage dark"><img src="../brand/assets/logo-lockup-grey.svg" alt="logo-lockup-grey.svg on dark" /></div>
+        </div>
+        <div class="caption"><div class="name">logo-lockup-grey.svg</div><div class="use">Fill colors in source: <code>white</code> — shown on both, since multi-path fill mixes don't resolve to a single "correct" background from static analysis.</div></div>
+      </div>
+      <div class="logo-card logo-card-dual">
+        <div class="dual-stage">
+          <div class="stage light"><img src="../brand/assets/logo-lockup-wide-caps.svg" alt="logo-lockup-wide-caps.svg on light" /></div>
+          <div class="stage dark"><img src="../brand/assets/logo-lockup-wide-caps.svg" alt="logo-lockup-wide-caps.svg on dark" /></div>
+        </div>
+        <div class="caption"><div class="name">logo-lockup-wide-caps.svg</div><div class="use">Fill colors in source: <code>white</code> — shown on both, since multi-path fill mixes don't resolve to a single "correct" background from static analysis.</div></div>
+      </div>
+      <div class="logo-card logo-card-dual">
+        <div class="dual-stage">
+          <div class="stage light"><img src="../brand/assets/logo-watermark-stacked.svg" alt="logo-watermark-stacked.svg on light" /></div>
+          <div class="stage dark"><img src="../brand/assets/logo-watermark-stacked.svg" alt="logo-watermark-stacked.svg on dark" /></div>
+        </div>
+        <div class="caption"><div class="name">logo-watermark-stacked.svg</div><div class="use">Fill colors in source: <code>#F8F9F4, #24211C</code> — shown on both, since multi-path fill mixes don't resolve to a single "correct" background from static analysis.</div></div>
+      </div>
+      <!-- LOGO_SET_END -->
+    </div>
+
+    <h3 style="font-size:15px; margin-bottom:6px;">App icon set — recolor live</h3>
+    <div class="section-note">
+      Drag the swatch to change the mark's color in real time — these two are inlined SVG with the real
+      shipped fill swapped for <code>currentColor</code>, controlled by the <code>color</code> CSS property.
+      The 6-file Logo set above is left as delivered (multi-path lockups — safely recoloring every internal
+      path is out of scope for this pass).
+    </div>
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+      <label for="recolor-picker" style="font-size:12.5px; color:var(--text-muted);">Mark color</label>
+      <input id="recolor-picker" type="color" value="#0D0B26" oninput="document.querySelectorAll('.recolor-stage').forEach(el => { el.style.color = event.target.value; })" />
+    </div>
+    <div class="logo-grid">
+      <!-- APP_ICON_SET_START -->
+      <div class="logo-card">
+        <div class="stage dark recolor-stage"><svg class="ml-recolor-svg" width="641" height="550" viewBox="0 0 641 550" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M625 0C633.837 0 641 7.16344 641 16V534C641 542.837 633.837 550 625 550H16C7.16344 550 5.83896e-08 542.837 0 534V16C0 7.16344 7.16344 2.01329e-09 16 0H625ZM485.763 136.924C479.896 127.395 459.413 118.285 448.231 120.276C426.532 124.141 413.82 138.417 408.354 158.445C396.505 201.869 386.374 245.765 374.362 289.141C371.237 300.425 365.536 312.063 357.874 320.766C347.066 333.042 333.299 341.456 314.788 337.963C290.774 333.431 276.661 317.963 270.636 296.337C258.921 254.287 248.645 211.796 239.122 169.186C231.106 133.317 199.722 111.036 171.475 125.983C160.301 131.896 151.246 146.384 146.553 158.958C139.054 179.05 136.444 200.921 130.956 221.826C124.368 246.92 117.51 271.974 109.669 296.696C103.655 315.657 91.4896 329.477 72.1992 337.056C66.5382 339.28 59.413 345.445 58.5059 350.753C55.0657 370.885 53.5303 391.379 52.0723 411.795C51.5155 419.591 54.0668 427.373 63.8135 427.801C79.5225 428.491 94.9065 427.207 107.599 414.577C108.171 414.008 108.654 413.352 109.06 412.654C113.744 404.589 118.453 397.453 121.527 389.672C140.346 342.045 204.397 319.918 244.057 368.228C251.637 377.461 255.597 389.706 263.311 398.789C272.122 409.164 281.791 420.89 293.683 426.155C323.212 439.229 361.834 424.595 379.11 397.195C389.817 380.215 396.839 361.185 417.142 350.783C448.747 334.591 489.962 342.632 509.545 372.291C516.951 383.508 522.417 396.007 529.793 407.247C539.995 422.794 555.596 428.233 573.311 425.545C577.651 424.886 583.685 418.737 584.478 414.312C587.342 398.312 588.763 382.001 589.858 365.748C590.981 349.096 585.515 342.559 570.019 336.941C563.686 334.646 557.077 331.088 552.504 326.282C522.062 294.291 520.275 251.124 510.223 211.594C503.711 185.988 499.895 159.878 485.763 136.924Z" fill="currentColor"/>
+</svg>
+</div>
+        <div class="caption"><div class="name">favicon-mark.svg</div><div class="use">Single fill in source (<code>white</code>) — recolorable below, live.</div></div>
+      </div>
+      <div class="logo-card">
+        <div class="stage light recolor-stage"><svg class="ml-recolor-svg" width="538" height="311" viewBox="0 0 538 311" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M57.0601 292.654C56.6548 293.352 56.171 294.008 55.599 294.577C42.9067 307.208 27.5224 308.49 11.8131 307.801C2.06647 307.372 -0.484647 299.591 0.0720966 291.795C1.53011 271.38 3.06573 250.885 6.50594 230.753C7.41304 225.445 14.5379 219.28 20.1989 217.056C39.4896 209.477 51.6559 195.657 57.6693 176.696C65.5099 151.974 72.3681 126.92 78.9562 101.826C84.4446 80.9212 87.0536 59.0503 94.5523 38.9584C99.2453 26.3837 108.301 11.8967 119.475 5.98369C147.723 -8.96403 179.106 13.3171 187.122 49.1854C196.646 91.7959 206.921 134.287 218.636 176.337C224.66 197.963 238.774 213.431 262.788 217.963C281.299 221.456 295.066 213.042 305.874 200.766C313.536 192.063 319.237 180.425 322.362 169.14C334.374 125.765 344.505 81.8687 356.354 38.445C361.82 18.4165 374.532 4.14042 396.231 0.276162C407.413 -1.71513 427.896 7.39413 433.763 16.9233C447.895 39.8781 451.711 65.9878 458.223 91.5934C468.275 131.124 470.061 174.292 500.503 206.283C505.076 211.088 511.685 214.646 518.018 216.942C533.515 222.559 538.981 229.096 537.859 245.748C536.763 262 535.342 278.311 532.477 294.312C531.685 298.737 525.651 304.886 521.31 305.544C503.595 308.232 487.996 302.794 477.793 287.247C470.417 276.007 464.952 263.508 457.545 252.291C437.962 222.631 396.747 214.591 365.142 230.783C344.839 241.184 337.817 260.215 327.111 277.195C309.835 304.595 271.212 319.229 241.683 306.156C229.79 300.891 220.122 289.164 211.31 278.789C203.596 269.706 199.637 257.461 192.057 248.227C152.397 199.917 88.346 222.045 69.5276 269.672C66.4529 277.453 61.7441 284.588 57.0601 292.654Z" fill="currentColor"/>
+</svg>
+</div>
+        <div class="caption"><div class="name">mark-grey.svg</div><div class="use">Single fill in source (<code>#24211C</code>) — recolorable below, live.</div></div>
+      </div>
+      <!-- APP_ICON_SET_END -->
+    </div>
+  </section>
+
+  <section>
+    <h2>Voice</h2>
+    <div class="section-note">Quoted directly from <code>brand/README.md</code>.</div>
+    <div class="voice-list">
+      <div class="voice-item"><span class="k">Positioning</span><span class="v">The professional network for music.</span></div>
+      <div class="voice-item"><span class="k">Voice</span><span class="v">Clear, confident, creative, and professional. Avoid hype and generic marketplace language.</span></div>
+      <div class="voice-item"><span class="k">Imagery</span><span class="v">Use real artist and business photography rather than initials, emoji, or illustrated avatars.</span></div>
+    </div>
+  </section>
+
+  <footer>
+    Source of truth: <code>frontend/guide/brand/README.md</code> and <code>frontend/guide/brand/assets/</code>
+    (both pre-existing, unmodified by this page). Part of the <code>/guide</code> library — see
+    <a href="../INDEX.md">../INDEX.md</a>. No AI image generation was used anywhere on this page.
+  </footer>
+
+</div>
+</body>
+</html>

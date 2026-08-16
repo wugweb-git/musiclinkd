@@ -12,7 +12,7 @@ await esbuild.build({
   format: "iife",
   platform: "browser",
   jsx: "automatic",
-  loader: { ".json": "json", ".css": "text" },
+  loader: { ".json": "json", ".css": "text", ".svg": "text" },
   minify: false,
   sourcemap: true,
   logLevel: "info",

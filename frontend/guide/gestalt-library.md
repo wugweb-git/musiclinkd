@@ -52,18 +52,21 @@ Plus from the satellite packages: ChartGraph (`gestalt-charts`), DateField / Dat
 
 A second, separate deliverable: a genuinely live, interactive component/token/icon browser branded "MusicLinkd System" — not a static mockup. It's a standalone React app (own `package.json`, own `node_modules`, bundled with esbuild) that imports the *real* `gestalt` package and the *real* shipped design-token CSS, so what you see is exactly what the library ships, not hand-copied values or screenshots.
 
-- **Components tab** — ~28 real Gestalt components (Button, TextField, Checkbox, Switch, Tabs, Modal, Popover, ComboBox, RadioGroup, and more), grouped by category, each genuinely interactive (click a button, type in a field, toggle a switch — real React state, not decoration).
-- **Tokens tab** — color/spacing/font/elevation/opacity tokens parsed live at runtime from the actual `gestalt-design-tokens` CSS shipped in the npm package (`variables.css`), rendered as real color swatches.
-- **Icons tab** — same 423 icons, searchable.
-- Light/dark toggle switches the real token CSS file and Gestalt's `ColorSchemeProvider`.
+- **Components tab** — 60 real Gestalt components across 8 categories, each genuinely interactive (click a button, type in a field, toggle a switch — real React state, not decoration).
+- **Blocks tab** — 9 composed, realistic screens (navigation header, artist profile, upload form, notification stack, a cover-art gallery using the real `Masonry` packing algorithm, a mobile bottom navigation bar, etc).
+- **Foundations tab** — typography/rounding/elevation/spacing/icon-size scales, rendered live from real tokens.
+- **Tokens tab** — now organized into an 8-category taxonomy (Foundation, Semantic, Layout, Component, State, Interaction, Responsive, Platform) instead of a flat dump — see `INDEX.md` for the full per-category breakdown, including which categories map to real CSS tokens vs. real non-token data (breakpoints, grid, z-index pattern) vs. genuine gaps in what Gestalt ships (motion easing/duration, border-width scale).
+- **Icons tab** — all 423 icons, searchable.
+- Light/dark toggle switches the real token CSS and Gestalt's `ColorSchemeProvider`.
 - Search bar filters whichever tab is active.
 
-**To open it:** `frontend/guide/musiclinkd-system/index.html` after running `npm run build` in that folder (already built once; rerun `npm run build` if you edit the source). It needs to be served over HTTP, not opened as a bare `file://` — the token viewer fetches `variables.css` at runtime, which browsers block over `file://`. A one-liner: `cd frontend/guide/musiclinkd-system && python3 -m http.server 8080`, then visit `http://localhost:8080`.
+**To open it:** `frontend/guide/musiclinkd-system/index.html` after running `npm run build` in that folder. It's a plain static page — no server needed. (This used to require HTTP because the token viewer `fetch()`ed `variables.css` at runtime; that was replaced with build-time CSS inlining via esbuild's text loader, so it now works as a bare double-clicked `file://` page.)
 
-**How this was verified:** No GUI browser was available in the build sandbox, so I could not take a screenshot. I verified it the next best way — rendered the real bundle in a headless DOM (jsdom), simulated clicks across every button on all three tabs (including opening the Modal and Popover), and confirmed zero console errors/warnings and no broken component output. One real bug was caught and fixed this way (an invalid `Heading` `size` prop that silently produced a broken tag). Worth having a human open it once in an actual browser to confirm the visual layout looks right — jsdom doesn't render CSS.
+**How this was verified:** no GUI browser is available in this sandbox, so verification is functional, not visual — the real bundle rendered in a headless DOM (jsdom), every tab and every token category clicked through in both light and dark mode, checked for console errors and broken (`undefined`) output. `npm run typecheck` (real `tsc`, not just esbuild's type-stripping) also runs clean. One jsdom-only caveat found: the real `Masonry` component (Blocks tab) calls `requestAnimationFrame`, which jsdom doesn't implement — this throws in the headless harness only, not in any real browser; polyfilling it in the test script confirmed the tab itself is clean. Worth a human opening it once in an actual browser to confirm visual layout — jsdom doesn't render CSS.
 
 ## What was NOT done
 
-- Not pushed to GitHub (local commit only, per instruction).
+- Not pushed to GitHub (local commit only, per instruction) — still blocked by an unremovable `.git/index.lock` and no configured GitHub credentials in this sandbox.
 - Old `frontend/guide/styleguide.html` and its sibling folders left untouched.
 - `webapp/` and `frontend/website/` not modified.
+- No AI-generated imagery anywhere in `brandkit/` — no image-generation tool is available in this environment, so that page is coded from real, already-existing brand assets rather than synthesized.
