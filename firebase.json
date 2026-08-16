@@ -6,6 +6,18 @@
     "ignore": ["**/.*", "**/node_modules/**", "**/README.md"],
     "headers": [
       {
+        "source": "**/musiclinkd-system/**.@(js|css|map)",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        ]
+      },
+      {
+        "source": "/preview/**.@(js|css)",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        ]
+      },
+      {
         "source": "**/*.@(js|css|svg|png|jpg|jpeg|gif|webp|avif|woff|woff2|ico)",
         "headers": [
           { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
