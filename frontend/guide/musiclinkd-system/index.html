@@ -4,12 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MusicLinkd System — Live UI Library</title>
-<link rel="stylesheet" href="variables.css">
-<link rel="stylesheet" href="gestalt.css">
-<link rel="stylesheet" href="styles.css">
+<!--
+  ABSOLUTE paths (/guide/musiclinkd-system/...), not relative ("bundle.js").
+  This is deployed at musiclinkd.com/guide/musiclinkd-system and Firebase
+  Hosting runs cleanUrls:true + trailingSlash:false, so the live URL has NO
+  trailing slash. A browser then treats "musiclinkd-system" as a FILE, not a
+  directory, and resolves every relative reference one level too shallow:
+  "bundle.js" was being requested as /guide/bundle.js, which 404s. The page
+  loaded an empty <div id="root"> and rendered nothing — which looked like a
+  failed or stale deploy for days, but dist/ was correct the whole time.
+
+  Same root cause, same fix as webapp/shared/app-shell.js (see MOUNT_BASE
+  there). If this app is ever mounted at a different path, these four lines
+  and that constant change together.
+
+  Trade-off, stated plainly: opening this file directly via file:// no longer
+  resolves the assets. Serve the folder over HTTP instead (npx serve .).
+  dev-verify-headless.mjs is unaffected — it injects bundle.js itself rather
+  than resolving this tag.
+-->
+<link rel="stylesheet" href="/guide/musiclinkd-system/variables.css">
+<link rel="stylesheet" href="/guide/musiclinkd-system/gestalt.css">
+<link rel="stylesheet" href="/guide/musiclinkd-system/styles.css">
 </head>
 <body>
 <div id="root"></div>
-<script src="bundle.js"></script>
+<script src="/guide/musiclinkd-system/bundle.js"></script>
 </body>
 </html>
