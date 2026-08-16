@@ -61,20 +61,37 @@
   <div class="app-root">
 
     <!-- Fixed top region — safe-area top padding baked in via app-shell.css.
-         Put a status/nav bar here; it never scrolls. -->
-    <header class="app-topbar">
-      <!-- TODO: design system top bar goes here -->
+         Real back button + screen title (filled from screen.json below),
+         not empty. When copied into flows/<flow>/<screen>/, replace this
+         whole header with the screen's actual top bar. -->
+    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
+      <a href="javascript:history.back()" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;flex:none;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </a>
+      <span id="tpl-title" style="font-size:var(--type-2);font-weight:600;margin-left:var(--space-2);"></span>
     </header>
 
     <!-- Main content — scrolls only if you add .app-content--scroll.
          Most single-purpose screens (a form, a splash, a confirmation)
-         should NOT scroll; add the modifier only for feeds/lists/long forms. -->
-    <main class="app-content app-content--scroll">
-      <!-- TODO: design system content goes here.
-           Read window.MusicLinkd.screen (populated from this screen's
-           screen.json) for its flow/screen metadata and data contract. -->
+         should NOT scroll; add the modifier only for feeds/lists/long forms.
 
-      <!-- Example bottom-sheet trigger — remove if this screen doesn't need one. -->
+         This "not yet designed" body is what every one of the 103 screens
+         still on this raw template shows today. Real content replaces it
+         screen by screen; until then it should look like an on-brand
+         placeholder state, not a blank page with a stray dev button. -->
+    <main class="app-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 var(--space-4);gap:var(--space-3);">
+      <div style="width:64px;height:64px;border-radius:var(--radius-2);background:var(--surface-alt);display:flex;align-items:center;justify-content:center;color:var(--muted);">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </div>
+      <div>
+        <div id="tpl-flowkey" style="font-size:var(--type-1);color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600;"></div>
+        <h1 id="tpl-heading" style="font-size:var(--type-3);margin:var(--space-1) 0 0;">Not designed yet</h1>
+        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);max-width:280px;">This screen is scaffolded (real flow/schema data is wired up) but hasn't had a UI pass. Read <code>window.MusicLinkd.screen</code> for its data contract.</p>
+      </div>
+
+      <!-- Example bottom-sheet trigger — structural reference only for the
+           sheet mechanics in app-shell.css; remove once this screen is
+           actually designed and doesn't need it. -->
       <button type="button" class="btn btn-s" data-open-sheet="example-sheet">Open example sheet</button>
     </main>
 
@@ -85,6 +102,18 @@
       <!-- TODO: design system bottom bar / CTA goes here -->
     </footer>
   </div>
+  <script>
+    // Fills the topbar title + flow-key eyebrow from this screen's real
+    // screen.json once app-shell.js loads it — no hardcoded screen name in
+    // this shared template. Falls back to the raw pathname if screen.json
+    // 404s (e.g. this file opened directly, outside /flows/).
+    document.addEventListener("musiclinkd:screen-ready", (e) => {
+      const data = e.detail || {};
+      document.getElementById("tpl-title").textContent = data.screenTitle ?? "";
+      document.getElementById("tpl-heading").textContent = data.screenTitle ? `${data.screenTitle} — not designed yet` : "Not designed yet";
+      document.getElementById("tpl-flowkey").textContent = data.flowTitle ?? "";
+    });
+  </script>
 
   <!-- Example bottom sheet — structural mechanics only (open/close, drag-down
        transition, safe-area padding). Style its contents with your design system. -->
