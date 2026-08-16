@@ -1,0 +1,29 @@
+{
+  "flowKey": "marketplace",
+  "flowTitle": "Marketplace — Buy/Sell/Rent",
+  "flowStatus": "app-mocked",
+  "flowOrder": 7,
+  "screenKey": "marketplace_order_status",
+  "screenNumber": 127,
+  "screenTitle": "Transaction / Order Status (covers both Buy and Rent lifecycles)",
+  "screenOrder": 6,
+  "states": [
+    "pending",
+    "paid",
+    "active",
+    "returned",
+    "completed",
+    "cancelled"
+  ],
+  "collectionsTouched": [
+    "marketplace_orders"
+  ],
+  "notes": "Phase 2, not MVP. One screen for both Buy's Purchase/Transaction/Order Status and Rent's Summary/Confirm/Pickup-Delivery/Active/Return — no separate rental-booking screen sequence, per the rent-stays-merged decision. Needs the new marketplace_orders collection. Not built.",
+  "dataContract": [
+    {
+      "collection": "marketplace_orders",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}

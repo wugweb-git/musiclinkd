@@ -1,0 +1,28 @@
+{
+  "flowKey": "marketplace",
+  "flowTitle": "Marketplace — Buy/Sell/Rent",
+  "flowStatus": "app-mocked",
+  "flowOrder": 7,
+  "screenKey": "marketplace_make_offer",
+  "screenNumber": 126,
+  "screenTitle": "Make Offer / Negotiate",
+  "screenOrder": 5,
+  "states": [
+    "default",
+    "countered",
+    "accepted",
+    "declined",
+    "expired"
+  ],
+  "collectionsTouched": [
+    "offers"
+  ],
+  "notes": "Phase 2, not MVP. Needs the new offers collection (schema landed 2026-08-16). Not built.",
+  "dataContract": [
+    {
+      "collection": "offers",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}

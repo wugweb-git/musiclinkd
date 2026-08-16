@@ -1,0 +1,34 @@
+{
+  "flowKey": "marketplace",
+  "flowTitle": "Marketplace — Buy/Sell/Rent",
+  "flowStatus": "app-mocked",
+  "flowOrder": 7,
+  "screenKey": "marketplace_create_listing",
+  "screenNumber": 128,
+  "screenTitle": "Create Listing (Sell + Rent Out, shared, listingType param)",
+  "screenOrder": 7,
+  "states": [
+    "default",
+    "publishing",
+    "error"
+  ],
+  "collectionsTouched": [
+    "marketplace_items"
+  ],
+  "notes": "MVP, shipped minimal (decided 2026-08-16): title, category, condition, price, one photo, description, publish. Full 8-step brief polish (gallery, location picker, preview step) is Phase 2. Rent Out is listingType: \"rental\" on this same screen, not a separate flow. Not built.",
+  "dataContract": [
+    {
+      "collection": "marketplace_items",
+      "sample": {
+        "sellerUid": "mock-seller-arjun-mehta",
+        "title": "Yamaha HS8 Active Studio Monitors (Pair)",
+        "price": "₹42,000",
+        "category": "gear_sale",
+        "condition": "LIKE_NEW",
+        "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600",
+        "itemCategory": "studio_monitors",
+        "createdAt": "2026-07-15T09:00:00.000Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "flowKey": "marketplace",
+  "flowTitle": "Marketplace — Buy/Sell/Rent",
+  "flowStatus": "app-mocked",
+  "flowOrder": 7,
+  "screenKey": "marketplace_search_filters",
+  "screenNumber": 125,
+  "screenTitle": "Market Search / Category / Filters / Sort",
+  "screenOrder": 4,
+  "states": [
+    "default",
+    "empty"
+  ],
+  "collectionsTouched": [
+    "marketplace_items"
+  ],
+  "notes": "MVP. Not built — proposed screen, no Kotlin/webapp implementation exists yet.",
+  "dataContract": [
+    {
+      "collection": "marketplace_items",
+      "sample": {
+        "sellerUid": "mock-seller-arjun-mehta",
+        "title": "Yamaha HS8 Active Studio Monitors (Pair)",
+        "price": "₹42,000",
+        "category": "gear_sale",
+        "condition": "LIKE_NEW",
+        "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600",
+        "itemCategory": "studio_monitors",
+        "createdAt": "2026-07-15T09:00:00.000Z"
+      }
+    }
+  ]
+}

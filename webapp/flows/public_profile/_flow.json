@@ -4,5 +4,5 @@
   "order": 14,
   "status": "partial",
   "description": "Depends on Profile Management's template rendering — same profileType-driven templates. The public-facing read path wasn't separately audited this session.",
-  "screenCount": 5
+  "screenCount": 9
 }

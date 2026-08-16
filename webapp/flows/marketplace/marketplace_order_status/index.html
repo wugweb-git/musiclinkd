@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0B26" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/marketplace/marketplace_order_status/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Marketplace / Order Status</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+<link rel="stylesheet" href="/preview/shared/tokens.css" />
+<style>
+  .phase2-banner { background: #FEF3C7; color: #92400E; font-size: var(--type-1); padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
+  .status-pill { display: inline-flex; padding: 4px 12px; border-radius: var(--radius-4); font-size: var(--type-1); font-weight: 700; }
+  .timeline { margin-top: var(--space-4); }
+  .t-row { display: flex; gap: var(--space-2); }
+  .t-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); margin-top: 4px; flex: none; }
+  .t-dot.done { background: var(--black); }
+  .t-line { width: 1px; flex: 1; background: var(--line); margin: 2px 0; }
+  .t-row.last .t-line { display: none; }
+</style>
+</head>
+<body>
+  <div class="app-root">
+    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
+      <a href="/preview/flows/marketplace/marketplace_my_listings/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </a>
+    </header>
+    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
+      <div class="phase2-banner">Phase 2, not MVP — needs the new <code>marketplace_orders</code> collection. One screen covers both Buy and Rent lifecycles, per the 2026-08-16 "rent stays merged" decision — no separate rental-booking sequence.</div>
+
+      <h1 style="font-size:var(--type-3);margin:0 0 4px;">Yamaha HS8 Studio Monitors</h1>
+      <p style="color:var(--muted);font-size:var(--type-1);margin-bottom:var(--space-3);">Order #MK-58201 · ₹38,000</p>
+      <span class="status-pill" id="status-pill" style="background:#FEF3C7;color:#92400E;">Pending payment</span>
+
+      <div class="timeline" id="timeline">
+        <div class="t-row"><div><div class="t-dot done"></div><div class="t-line"></div></div><div style="padding-bottom:var(--space-3);"><b style="font-size:var(--type-2);">Offer accepted</b><p style="font-size:var(--type-1);color:var(--muted);margin:2px 0 0;">16 Aug 2026</p></div></div>
+        <div class="t-row"><div><div class="t-dot" id="dot-paid"></div><div class="t-line"></div></div><div style="padding-bottom:var(--space-3);"><b style="font-size:var(--type-2);">Payment</b><p style="font-size:var(--type-1);color:var(--muted);margin:2px 0 0;">Awaiting payment</p></div></div>
+        <div class="t-row"><div><div class="t-dot" id="dot-active"></div><div class="t-line"></div></div><div style="padding-bottom:var(--space-3);"><b style="font-size:var(--type-2);">Handover</b><p style="font-size:var(--type-1);color:var(--muted);margin:2px 0 0;">Not started</p></div></div>
+        <div class="t-row last"><div><div class="t-dot" id="dot-completed"></div></div><div><b style="font-size:var(--type-2);">Completed</b><p style="font-size:var(--type-1);color:var(--muted);margin:2px 0 0;">—</p></div></div>
+      </div>
+    </main>
+    <footer class="app-bottombar"></footer>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+  <script>
+    // states: pending | paid | active | returned | completed | cancelled
+    const CONFIG = {
+      pending: { label: "Pending payment", bg: "#FEF3C7", fg: "#92400E", dots: [] },
+      paid: { label: "Paid", bg: "#DBEAFE", fg: "#1E40AF", dots: ["paid"] },
+      active: { label: "Active", bg: "#DCFCE7", fg: "#166534", dots: ["paid", "active"] },
+      returned: { label: "Returned", bg: "var(--surface-alt)", fg: "var(--muted)", dots: ["paid", "active"] },
+      completed: { label: "Completed", bg: "#DCFCE7", fg: "#166534", dots: ["paid", "active", "completed"] },
+      cancelled: { label: "Cancelled", bg: "#FEE2E2", fg: "#991B1B", dots: [] },
+    };
+    document.addEventListener("musiclinkd:screen-ready", () => {
+      const state = window.MusicLinkd.currentState;
+      const cfg = CONFIG[state];
+      if (!cfg) return;
+      const pill = document.getElementById("status-pill");
+      pill.textContent = cfg.label;
+      pill.style.background = cfg.bg;
+      pill.style.color = cfg.fg;
+      cfg.dots.forEach((d) => document.getElementById("dot-" + d)?.classList.add("done"));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0B26" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/marketplace/marketplace_make_offer/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Marketplace / Make Offer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+<link rel="stylesheet" href="/preview/shared/tokens.css" />
+<style>
+  .phase2-banner { background: #FEF3C7; color: #92400E; font-size: var(--type-1); padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
+  .listing-mini { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--line); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
+  .listing-mini img { width: 48px; height: 48px; border-radius: var(--radius-1); object-fit: cover; }
+  .status-banner { padding: var(--space-3); border-radius: var(--radius-2); text-align: center; font-weight: 600; margin-bottom: var(--space-3); }
+</style>
+</head>
+<body>
+  <div class="app-root">
+    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
+      <a href="/preview/flows/marketplace/marketplace_item_detail/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </a>
+    </header>
+    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
+      <div class="phase2-banner">Phase 2, not MVP — needs the new <code>offers</code> collection (schema landed 2026-08-16, not yet built into the app). Shown as designed.</div>
+
+      <div class="listing-mini">
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200" alt="" />
+        <div><b style="display:block;font-size:var(--type-2);">Yamaha HS8 Studio Monitors</b><span style="font-size:var(--type-1);color:var(--muted);">Asking ₹42,000</span></div>
+      </div>
+
+      <div id="panel-default">
+        <div class="field"><label for="offer">Your offer</label><input id="offer" type="text" value="₹38,000" /></div>
+        <div class="field" style="margin-top:var(--space-2);"><label for="msg">Message (optional)</label><input id="msg" type="text" placeholder="Add a note for the seller" /></div>
+        <button type="button" class="btn btn-p btn-block" style="margin-top:var(--space-3);">Send offer</button>
+      </div>
+
+      <div id="panel-countered" style="display:none;">
+        <div class="status-banner" style="background:#FEF3C7;color:#92400E;">Seller countered: ₹40,000</div>
+        <div style="display:flex;gap:var(--space-2);"><button type="button" class="btn btn-p" style="flex:1;">Accept</button><button type="button" class="btn btn-s" style="flex:1;">Counter again</button></div>
+      </div>
+
+      <div id="panel-accepted" style="display:none;">
+        <div class="status-banner" style="background:#DCFCE7;color:#166534;">Offer accepted — ₹38,000</div>
+        <a class="btn btn-p btn-block" href="/preview/flows/marketplace/marketplace_order_status/index.html" style="text-decoration:none;">Continue to order</a>
+      </div>
+
+      <div id="panel-declined" style="display:none;">
+        <div class="status-banner" style="background:#FEE2E2;color:#991B1B;">Offer declined</div>
+      </div>
+
+      <div id="panel-expired" style="display:none;">
+        <div class="status-banner" style="background:var(--surface-alt);color:var(--muted);">This offer has expired</div>
+      </div>
+    </main>
+    <footer class="app-bottombar"></footer>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+  <script>
+    document.addEventListener("musiclinkd:screen-ready", () => {
+      const state = window.MusicLinkd.currentState;
+      if (state && state !== "default") {
+        document.getElementById("panel-default").style.display = "none";
+        const el = document.getElementById("panel-" + state);
+        if (el) el.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>
