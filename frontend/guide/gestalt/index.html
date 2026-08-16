@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestalt Library — MusicLinkd</title>
+<style>
+  :root {
+    --bg: #0b0b0d;
+    --panel: #151517;
+    --border: #26262a;
+    --text: #f2f2f3;
+    --muted: #9a9aa0;
+    --accent: #e60023;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    padding: 40px 32px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  header h1 {
+    margin: 0 0 6px;
+    font-size: 28px;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 680px;
+    line-height: 1.5;
+  }
+  header .meta {
+    margin-top: 14px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  header .meta a { color: var(--accent); text-decoration: none; }
+  nav {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 4px;
+    padding: 0 32px;
+    z-index: 10;
+    overflow-x: auto;
+  }
+  nav button {
+    background: none;
+    border: none;
+    color: var(--muted);
+    padding: 14px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  nav button.active {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+  section { display: none; padding: 28px 32px 60px; }
+  section.active { display: block; }
+  section h2 { font-size: 16px; margin: 0 0 4px; }
+  section .count { color: var(--muted); font-size: 12px; margin-bottom: 20px; }
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+  }
+  .comp-card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 14px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .comp-card:hover { border-color: var(--accent); }
+  .comp-name { font-size: 13px; font-weight: 600; }
+  .comp-local { font-size: 10px; color: var(--muted); font-family: ui-monospace, monospace; }
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 8px;
+  }
+  .icon-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 4px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .icon-card img { width: 20px; height: 20px; filter: invert(1); }
+  .icon-card span {
+    font-size: 9px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  .token-group {
+    margin-bottom: 20px;
+  }
+  .token-group h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin: 0 0 8px;
+  }
+  .token-group ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 4px;
+  }
+  .token-group code {
+    font-size: 12px;
+    color: var(--text);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-block;
+  }
+  .about { max-width: 780px; line-height: 1.7; font-size: 14px; color: var(--text); }
+  .about h3 { font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 28px; }
+  .about table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  .about td, .about th { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+  .about code { background: var(--panel); padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+  .warn { border-left: 3px solid var(--accent); padding: 10px 14px; background: var(--panel); margin: 12px 0; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Gestalt Library</h1>
+  <p>Pinterest's Gestalt design system, vendored fresh into this repo as a standalone reference library. Separate from the existing style guide — nothing old was touched.</p>
+  <p style="margin-top:10px;padding:12px 16px;background:var(--panel);border:1px solid var(--border);border-radius:8px;">
+    This page links out to source on GitHub for browsing. For a <strong>live, dynamic</strong> version — real components actually rendered and clickable, real design tokens, plus composed "Blocks" and a Foundations scale view — open <a href="../musiclinkd-system/index.html">MusicLinkd System →</a> (needs to be served over HTTP; see its README/manifest entry for the one-line command).
+  </p>
+  <div class="meta">
+    <span>Version 177.0.13</span>
+    <span>Commit 22874a7</span>
+    <span><a href="https://github.com/pinterest/gestalt" target="_blank" rel="noopener">Source: pinterest/gestalt →</a></span>
+    <span><a href="../gestalt-library.md" target="_blank">Full manifest →</a></span>
+    <span><a href="../INDEX.md" target="_blank">Library index →</a></span>
+  </div>
+</header>
+
+<nav>
+  <button class="tab-btn active" data-tab="components">Components (108)</button>
+  <button class="tab-btn" data-tab="icons">Icons (423)</button>
+  <button class="tab-btn" data-tab="tokens">Design Tokens</button>
+  <button class="tab-btn" data-tab="about">About / Compatibility</button>
+</nav>
+
+<section id="components" class="active">
+  <h2>Components</h2>
+  <div class="count">108 top-level React components — click to view source on GitHub.</div>
+  <div class="comp-grid">
+    <a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Accordion.tsx" target="_blank" rel="noopener"><span class="comp-name">Accordion</span><span class="comp-local">packages/gestalt/src/Accordion.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/AccordionExpandable.tsx" target="_blank" rel="noopener"><span class="comp-name">AccordionExpandable</span><span class="comp-local">packages/gestalt/src/AccordionExpandable.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/ActivationCard.tsx" target="_blank" rel="noopener"><span class="comp-name">ActivationCard</span><span class="comp-local">packages/gestalt/src/ActivationCard.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Avatar.tsx" target="_blank" rel="noopener"><span class="comp-name">Avatar</span><span class="comp-local">packages/gestalt/src/Avatar.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/AvatarGroup.tsx" target="_blank" rel="noopener"><span class="comp-name">AvatarGroup</span><span class="comp-local">packages/gestalt/src/AvatarGroup.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/AvatarGroupCluster.tsx" target="_blank" rel="noopener"><span class="comp-name">AvatarGroupCluster</span><span class="comp-local">packages/gestalt/src/AvatarGroupCluster.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Backdrop.tsx" target="_blank" rel="noopener"><span class="comp-name">Backdrop</span><span class="comp-local">packages/gestalt/src/Backdrop.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Badge.tsx" target="_blank" rel="noopener"><span class="comp-name">Badge</span><span class="comp-local">packages/gestalt/src/Badge.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/BannerCallout.tsx" target="_blank" rel="noopener"><span class="comp-name">BannerCallout</span><span class="comp-local">packages/gestalt/src/BannerCallout.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/BannerOverlay.tsx" target="_blank" rel="noopener"><span class="comp-name">BannerOverlay</span><span class="comp-local">packages/gestalt/src/BannerOverlay.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/BannerSlim.tsx" target="_blank" rel="noopener"><span class="comp-name">BannerSlim</span><span class="comp-local">packages/gestalt/src/BannerSlim.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/BannerUpsell.tsx" target="_blank" rel="noopener"><span class="comp-name">BannerUpsell</span><span class="comp-local">packages/gestalt/src/BannerUpsell.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/BannerUpsellForm.tsx" target="_blank" rel="noopener"><span class="comp-name">BannerUpsellForm</span><span class="comp-local">packages/gestalt/src/BannerUpsellForm.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Box.tsx" target="_blank" rel="noopener"><span class="comp-name">Box</span><span class="comp-local">packages/gestalt/src/Box.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Button.tsx" target="_blank" rel="noopener"><span class="comp-name">Button</span><span class="comp-local">packages/gestalt/src/Button.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/ButtonGroup.tsx" target="_blank" rel="noopener"><span class="comp-name">ButtonGroup</span><span class="comp-local">packages/gestalt/src/ButtonGroup.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/ButtonLink.tsx" target="_blank" rel="noopener"><span class="comp-name">ButtonLink</span><span class="comp-local">packages/gestalt/src/ButtonLink.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/ButtonSocial.tsx" target="_blank" rel="noopener"><span class="comp-name">ButtonSocial</span><span class="comp-local">packages/gestalt/src/ButtonSocial.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/ButtonToggle.tsx" target="_blank" rel="noopener"><span class="comp-name">ButtonToggle</span><span class="comp-local">packages/gestalt/src/ButtonToggle.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Caret.tsx" target="_blank" rel="noopener"><span class="comp-name">Caret</span><span class="comp-local">packages/gestalt/src/Caret.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Checkbox.tsx" target="_blank" rel="noopener"><span class="comp-name">Checkbox</span><span class="comp-local">packages/gestalt/src/Checkbox.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Collage.tsx" target="_blank" rel="noopener"><span class="comp-name">Collage</span><span class="comp-local">packages/gestalt/src/Collage.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Column.tsx" target="_blank" rel="noopener"><span class="comp-name">Column</span><span class="comp-local">packages/gestalt/src/Column.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/ComboBox.tsx" target="_blank" rel="noopener"><span class="comp-name">ComboBox</span><span class="comp-local">packages/gestalt/src/ComboBox.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Container.tsx" target="_blank" rel="noopener"><span class="comp-name">Container</span><span class="comp-local">packages/gestalt/src/Container.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Datapoint.tsx" target="_blank" rel="noopener"><span class="comp-name">Datapoint</span><span class="comp-local">packages/gestalt/src/Datapoint.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Divider.tsx" target="_blank" rel="noopener"><span class="comp-name">Divider</span><span class="comp-local">packages/gestalt/src/Divider.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Dropdown.tsx" target="_blank" rel="noopener"><span class="comp-name">Dropdown</span><span class="comp-local">packages/gestalt/src/Dropdown.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/DropdownItem.tsx" target="_blank" rel="noopener"><span class="comp-name">DropdownItem</span><span class="comp-local">packages/gestalt/src/DropdownItem.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/DropdownLink.tsx" target="_blank" rel="noopener"><span class="comp-name">DropdownLink</span><span class="comp-local">packages/gestalt/src/DropdownLink.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/DropdownSection.tsx" target="_blank" rel="noopener"><span class="comp-name">DropdownSection</span><span class="comp-local">packages/gestalt/src/DropdownSection.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Fieldset.tsx" target="_blank" rel="noopener"><span class="comp-name">Fieldset</span><span class="comp-local">packages/gestalt/src/Fieldset.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Flex.tsx" target="_blank" rel="noopener"><span class="comp-name">Flex</span><span class="comp-local">packages/gestalt/src/Flex.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/FlexItem.tsx" target="_blank" rel="noopener"><span class="comp-name">FlexItem</span><span class="comp-local">packages/gestalt/src/FlexItem.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Heading.tsx" target="_blank" rel="noopener"><span class="comp-name">Heading</span><span class="comp-local">packages/gestalt/src/Heading.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/HelpButton.tsx" target="_blank" rel="noopener"><span class="comp-name">HelpButton</span><span class="comp-local">packages/gestalt/src/HelpButton.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Icon.tsx" target="_blank" rel="noopener"><span class="comp-name">Icon</span><span class="comp-local">packages/gestalt/src/Icon.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/IconButton.tsx" target="_blank" rel="noopener"><span class="comp-name">IconButton</span><span class="comp-local">packages/gestalt/src/IconButton.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/IconButtonFloating.tsx" target="_blank" rel="noopener"><span class="comp-name">IconButtonFloating</span><span class="comp-local">packages/gestalt/src/IconButtonFloating.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/IconButtonLink.tsx" target="_blank" rel="noopener"><span class="comp-name">IconButtonLink</span><span class="comp-local">packages/gestalt/src/IconButtonLink.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/IconCompact.tsx" target="_blank" rel="noopener"><span class="comp-name">IconCompact</span><span class="comp-local">packages/gestalt/src/IconCompact.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Image.tsx" target="_blank" rel="noopener"><span class="comp-name">Image</span><span class="comp-local">packages/gestalt/src/Image.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Indicator.tsx" target="_blank" rel="noopener"><span class="comp-name">Indicator</span><span class="comp-local">packages/gestalt/src/Indicator.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Label.tsx" target="_blank" rel="noopener"><span class="comp-name">Label</span><span class="comp-local">packages/gestalt/src/Label.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Layer.tsx" target="_blank" rel="noopener"><span class="comp-name">Layer</span><span class="comp-local">packages/gestalt/src/Layer.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Letterbox.tsx" target="_blank" rel="noopener"><span class="comp-name">Letterbox</span><span class="comp-local">packages/gestalt/src/Letterbox.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Link.tsx" target="_blank" rel="noopener"><span class="comp-name">Link</span><span class="comp-local">packages/gestalt/src/Link.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/List.tsx" target="_blank" rel="noopener"><span class="comp-name">List</span><span class="comp-local">packages/gestalt/src/List.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/ListItem.tsx" target="_blank" rel="noopener"><span class="comp-name">ListItem</span><span class="comp-local">packages/gestalt/src/ListItem.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Mask.tsx" target="_blank" rel="noopener"><span class="comp-name">Mask</span><span class="comp-local">packages/gestalt/src/Mask.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Masonry.tsx" target="_blank" rel="noopener"><span class="comp-name">Masonry</span><span class="comp-local">packages/gestalt/src/Masonry.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/MasonryV2.tsx" target="_blank" rel="noopener"><span class="comp-name">MasonryV2</span><span class="comp-local">packages/gestalt/src/MasonryV2.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Modal.tsx" target="_blank" rel="noopener"><span class="comp-name">Modal</span><span class="comp-local">packages/gestalt/src/Modal.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/ModalAlert.tsx" target="_blank" rel="noopener"><span class="comp-name">ModalAlert</span><span class="comp-local">packages/gestalt/src/ModalAlert.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/NumberField.tsx" target="_blank" rel="noopener"><span class="comp-name">NumberField</span><span class="comp-local">packages/gestalt/src/NumberField.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/OverlayPanel.tsx" target="_blank" rel="noopener"><span class="comp-name">OverlayPanel</span><span class="comp-local">packages/gestalt/src/OverlayPanel.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/PageHeader.tsx" target="_blank" rel="noopener"><span class="comp-name">PageHeader</span><span class="comp-local">packages/gestalt/src/PageHeader.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Pog.tsx" target="_blank" rel="noopener"><span class="comp-name">Pog</span><span class="comp-local">packages/gestalt/src/Pog.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Popover.tsx" target="_blank" rel="noopener"><span class="comp-name">Popover</span><span class="comp-local">packages/gestalt/src/Popover.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/PopoverMessage.tsx" target="_blank" rel="noopener"><span class="comp-name">PopoverMessage</span><span class="comp-local">packages/gestalt/src/PopoverMessage.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Pulsar.tsx" target="_blank" rel="noopener"><span class="comp-name">Pulsar</span><span class="comp-local">packages/gestalt/src/Pulsar.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/RadioGroup.tsx" target="_blank" rel="noopener"><span class="comp-name">RadioGroup</span><span class="comp-local">packages/gestalt/src/RadioGroup.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/RadioGroupButton.tsx" target="_blank" rel="noopener"><span class="comp-name">RadioGroupButton</span><span class="comp-local">packages/gestalt/src/RadioGroupButton.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/ScrollBoundaryContainer.tsx" target="_blank" rel="noopener"><span class="comp-name">ScrollBoundaryContainer</span><span class="comp-local">packages/gestalt/src/ScrollBoundaryContainer.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/ScrollFetch.tsx" target="_blank" rel="noopener"><span class="comp-name">ScrollFetch</span><span class="comp-local">packages/gestalt/src/ScrollFetch.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/SearchField.tsx" target="_blank" rel="noopener"><span class="comp-name">SearchField</span><span class="comp-local">packages/gestalt/src/SearchField.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/SearchGuide.tsx" target="_blank" rel="noopener"><span class="comp-name">SearchGuide</span><span class="comp-local">packages/gestalt/src/SearchGuide.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/SearchGuideLink.tsx" target="_blank" rel="noopener"><span class="comp-name">SearchGuideLink</span><span class="comp-local">packages/gestalt/src/SearchGuideLink.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/SegmentedControl.tsx" target="_blank" rel="noopener"><span class="comp-name">SegmentedControl</span><span class="comp-local">packages/gestalt/src/SegmentedControl.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/SelectList.tsx" target="_blank" rel="noopener"><span class="comp-name">SelectList</span><span class="comp-local">packages/gestalt/src/SelectList.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/SheetMobile.tsx" target="_blank" rel="noopener"><span class="comp-name">SheetMobile</span><span class="comp-local">packages/gestalt/src/SheetMobile.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/SideNavigation.tsx" target="_blank" rel="noopener"><span class="comp-name">SideNavigation</span><span class="comp-local">packages/gestalt/src/SideNavigation.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/SideNavigationGroup.tsx" target="_blank" rel="noopener"><span class="comp-name">SideNavigationGroup</span><span class="comp-local">packages/gestalt/src/SideNavigationGroup.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/SideNavigationNestedGroup.tsx" target="_blank" rel="noopener"><span class="comp-name">SideNavigationNestedGroup</span><span class="comp-local">packages/gestalt/src/SideNavigationNestedGroup.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/SideNavigationNestedItem.tsx" target="_blank" rel="noopener"><span class="comp-name">SideNavigationNestedItem</span><span class="comp-local">packages/gestalt/src/SideNavigationNestedItem.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/SideNavigationSection.tsx" target="_blank" rel="noopener"><span class="comp-name">SideNavigationSection</span><span class="comp-local">packages/gestalt/src/SideNavigationSection.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/SideNavigationTopItem.tsx" target="_blank" rel="noopener"><span class="comp-name">SideNavigationTopItem</span><span class="comp-local">packages/gestalt/src/SideNavigationTopItem.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Spinner.tsx" target="_blank" rel="noopener"><span class="comp-name">Spinner</span><span class="comp-local">packages/gestalt/src/Spinner.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Status.tsx" target="_blank" rel="noopener"><span class="comp-name">Status</span><span class="comp-local">packages/gestalt/src/Status.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Sticky.tsx" target="_blank" rel="noopener"><span class="comp-name">Sticky</span><span class="comp-local">packages/gestalt/src/Sticky.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Switch.tsx" target="_blank" rel="noopener"><span class="comp-name">Switch</span><span class="comp-local">packages/gestalt/src/Switch.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Table.tsx" target="_blank" rel="noopener"><span class="comp-name">Table</span><span class="comp-local">packages/gestalt/src/Table.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TableBody.tsx" target="_blank" rel="noopener"><span class="comp-name">TableBody</span><span class="comp-local">packages/gestalt/src/TableBody.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TableCell.tsx" target="_blank" rel="noopener"><span class="comp-name">TableCell</span><span class="comp-local">packages/gestalt/src/TableCell.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TableFooter.tsx" target="_blank" rel="noopener"><span class="comp-name">TableFooter</span><span class="comp-local">packages/gestalt/src/TableFooter.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TableHeader.tsx" target="_blank" rel="noopener"><span class="comp-name">TableHeader</span><span class="comp-local">packages/gestalt/src/TableHeader.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TableHeaderCell.tsx" target="_blank" rel="noopener"><span class="comp-name">TableHeaderCell</span><span class="comp-local">packages/gestalt/src/TableHeaderCell.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TableOfContents.tsx" target="_blank" rel="noopener"><span class="comp-name">TableOfContents</span><span class="comp-local">packages/gestalt/src/TableOfContents.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TableOfContentsItem.tsx" target="_blank" rel="noopener"><span class="comp-name">TableOfContentsItem</span><span class="comp-local">packages/gestalt/src/TableOfContentsItem.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TableRow.tsx" target="_blank" rel="noopener"><span class="comp-name">TableRow</span><span class="comp-local">packages/gestalt/src/TableRow.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TableRowDrawer.tsx" target="_blank" rel="noopener"><span class="comp-name">TableRowDrawer</span><span class="comp-local">packages/gestalt/src/TableRowDrawer.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TableRowExpandable.tsx" target="_blank" rel="noopener"><span class="comp-name">TableRowExpandable</span><span class="comp-local">packages/gestalt/src/TableRowExpandable.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TableSortableHeaderCell.tsx" target="_blank" rel="noopener"><span class="comp-name">TableSortableHeaderCell</span><span class="comp-local">packages/gestalt/src/TableSortableHeaderCell.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Tabs.tsx" target="_blank" rel="noopener"><span class="comp-name">Tabs</span><span class="comp-local">packages/gestalt/src/Tabs.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Tag.tsx" target="_blank" rel="noopener"><span class="comp-name">Tag</span><span class="comp-local">packages/gestalt/src/Tag.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TagData.tsx" target="_blank" rel="noopener"><span class="comp-name">TagData</span><span class="comp-local">packages/gestalt/src/TagData.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TapArea.tsx" target="_blank" rel="noopener"><span class="comp-name">TapArea</span><span class="comp-local">packages/gestalt/src/TapArea.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TapAreaLink.tsx" target="_blank" rel="noopener"><span class="comp-name">TapAreaLink</span><span class="comp-local">packages/gestalt/src/TapAreaLink.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Text.tsx" target="_blank" rel="noopener"><span class="comp-name">Text</span><span class="comp-local">packages/gestalt/src/Text.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TextArea.tsx" target="_blank" rel="noopener"><span class="comp-name">TextArea</span><span class="comp-local">packages/gestalt/src/TextArea.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TextCompact.tsx" target="_blank" rel="noopener"><span class="comp-name">TextCompact</span><span class="comp-local">packages/gestalt/src/TextCompact.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TextField.tsx" target="_blank" rel="noopener"><span class="comp-name">TextField</span><span class="comp-local">packages/gestalt/src/TextField.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TextUI.tsx" target="_blank" rel="noopener"><span class="comp-name">TextUI</span><span class="comp-local">packages/gestalt/src/TextUI.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/TileData.tsx" target="_blank" rel="noopener"><span class="comp-name">TileData</span><span class="comp-local">packages/gestalt/src/TileData.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Toast.tsx" target="_blank" rel="noopener"><span class="comp-name">Toast</span><span class="comp-local">packages/gestalt/src/Toast.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Tooltip.tsx" target="_blank" rel="noopener"><span class="comp-name">Tooltip</span><span class="comp-local">packages/gestalt/src/Tooltip.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/Video.tsx" target="_blank" rel="noopener"><span class="comp-name">Video</span><span class="comp-local">packages/gestalt/src/Video.tsx</span></a>
+<a class="comp-card" href="https://github.com/pinterest/gestalt/blob/master/packages/gestalt/src/WashAnimated.tsx" target="_blank" rel="noopener"><span class="comp-name">WashAnimated</span><span class="comp-local">packages/gestalt/src/WashAnimated.tsx</span></a>
+  </div>
+</section>
+
+<section id="icons">
+  <h2>Icons</h2>
+  <div class="count">423 SVG icons, rendered locally from <code>packages/gestalt/src/icons/</code>.</div>
+  <div class="icon-grid">
+    <div class="icon-card" title="packages/gestalt/src/icons/360.svg"><img src="packages/gestalt/src/icons/360.svg" loading="lazy" alt="packages/gestalt/src/icons/360.svg"><span>360</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/3d-move.svg"><img src="packages/gestalt/src/icons/3d-move.svg" loading="lazy" alt="packages/gestalt/src/icons/3d-move.svg"><span>3d-move</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/3d.svg"><img src="packages/gestalt/src/icons/3d.svg" loading="lazy" alt="packages/gestalt/src/icons/3d.svg"><span>3d</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/accessibility.svg"><img src="packages/gestalt/src/icons/accessibility.svg" loading="lazy" alt="packages/gestalt/src/icons/accessibility.svg"><span>accessibility</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/ad-group.svg"><img src="packages/gestalt/src/icons/ad-group.svg" loading="lazy" alt="packages/gestalt/src/icons/ad-group.svg"><span>ad-group</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/ad.svg"><img src="packages/gestalt/src/icons/ad.svg" loading="lazy" alt="packages/gestalt/src/icons/ad.svg"><span>ad</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/add-circle.svg"><img src="packages/gestalt/src/icons/add-circle.svg" loading="lazy" alt="packages/gestalt/src/icons/add-circle.svg"><span>add-circle</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/add-layout.svg"><img src="packages/gestalt/src/icons/add-layout.svg" loading="lazy" alt="packages/gestalt/src/icons/add-layout.svg"><span>add-layout</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/add-pin.svg"><img src="packages/gestalt/src/icons/add-pin.svg" loading="lazy" alt="packages/gestalt/src/icons/add-pin.svg"><span>add-pin</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/add-section.svg"><img src="packages/gestalt/src/icons/add-section.svg" loading="lazy" alt="packages/gestalt/src/icons/add-section.svg"><span>add-section</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/add.svg"><img src="packages/gestalt/src/icons/add.svg" loading="lazy" alt="packages/gestalt/src/icons/add.svg"><span>add</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/ads-overview.svg"><img src="packages/gestalt/src/icons/ads-overview.svg" loading="lazy" alt="packages/gestalt/src/icons/ads-overview.svg"><span>ads-overview</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/ads-stats.svg"><img src="packages/gestalt/src/icons/ads-stats.svg" loading="lazy" alt="packages/gestalt/src/icons/ads-stats.svg"><span>ads-stats</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/alert.svg"><img src="packages/gestalt/src/icons/alert.svg" loading="lazy" alt="packages/gestalt/src/icons/alert.svg"><span>alert</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/align-bottom-center.svg"><img src="packages/gestalt/src/icons/align-bottom-center.svg" loading="lazy" alt="packages/gestalt/src/icons/align-bottom-center.svg"><span>align-bottom-center</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/align-bottom-left.svg"><img src="packages/gestalt/src/icons/align-bottom-left.svg" loading="lazy" alt="packages/gestalt/src/icons/align-bottom-left.svg"><span>align-bottom-left</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/align-bottom-right.svg"><img src="packages/gestalt/src/icons/align-bottom-right.svg" loading="lazy" alt="packages/gestalt/src/icons/align-bottom-right.svg"><span>align-bottom-right</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/align-bottom.svg"><img src="packages/gestalt/src/icons/align-bottom.svg" loading="lazy" alt="packages/gestalt/src/icons/align-bottom.svg"><span>align-bottom</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/align-middle.svg"><img src="packages/gestalt/src/icons/align-middle.svg" loading="lazy" alt="packages/gestalt/src/icons/align-middle.svg"><span>align-middle</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/align-top-center.svg"><img src="packages/gestalt/src/icons/align-top-center.svg" loading="lazy" alt="packages/gestalt/src/icons/align-top-center.svg"><span>align-top-center</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/align-top-left.svg"><img src="packages/gestalt/src/icons/align-top-left.svg" loading="lazy" alt="packages/gestalt/src/icons/align-top-left.svg"><span>align-top-left</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/align-top-right.svg"><img src="packages/gestalt/src/icons/align-top-right.svg" loading="lazy" alt="packages/gestalt/src/icons/align-top-right.svg"><span>align-top-right</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/align-top.svg"><img src="packages/gestalt/src/icons/align-top.svg" loading="lazy" alt="packages/gestalt/src/icons/align-top.svg"><span>align-top</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/alphabetical.svg"><img src="packages/gestalt/src/icons/alphabetical.svg" loading="lazy" alt="packages/gestalt/src/icons/alphabetical.svg"><span>alphabetical</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/amazon.svg"><img src="packages/gestalt/src/icons/amazon.svg" loading="lazy" alt="packages/gestalt/src/icons/amazon.svg"><span>amazon</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/android-share.svg"><img src="packages/gestalt/src/icons/android-share.svg" loading="lazy" alt="packages/gestalt/src/icons/android-share.svg"><span>android-share</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/angled-pin.svg"><img src="packages/gestalt/src/icons/angled-pin.svg" loading="lazy" alt="packages/gestalt/src/icons/angled-pin.svg"><span>angled-pin</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/animate.svg"><img src="packages/gestalt/src/icons/animate.svg" loading="lazy" alt="packages/gestalt/src/icons/animate.svg"><span>animate</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/api.svg"><img src="packages/gestalt/src/icons/api.svg" loading="lazy" alt="packages/gestalt/src/icons/api.svg"><span>api</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/apple.svg"><img src="packages/gestalt/src/icons/apple.svg" loading="lazy" alt="packages/gestalt/src/icons/apple.svg"><span>apple</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/apps.svg"><img src="packages/gestalt/src/icons/apps.svg" loading="lazy" alt="packages/gestalt/src/icons/apps.svg"><span>apps</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/ar-try-on.svg"><img src="packages/gestalt/src/icons/ar-try-on.svg" loading="lazy" alt="packages/gestalt/src/icons/ar-try-on.svg"><span>ar-try-on</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-back.svg"><img src="packages/gestalt/src/icons/arrow-back.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-back.svg"><span>arrow-back</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-circle-back.svg"><img src="packages/gestalt/src/icons/arrow-circle-back.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-circle-back.svg"><span>arrow-circle-back</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-circle-down.svg"><img src="packages/gestalt/src/icons/arrow-circle-down.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-circle-down.svg"><span>arrow-circle-down</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-circle-forward.svg"><img src="packages/gestalt/src/icons/arrow-circle-forward.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-circle-forward.svg"><span>arrow-circle-forward</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-circle-up.svg"><img src="packages/gestalt/src/icons/arrow-circle-up.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-circle-up.svg"><span>arrow-circle-up</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-counter-clockwise.svg"><img src="packages/gestalt/src/icons/arrow-counter-clockwise.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-counter-clockwise.svg"><span>arrow-counter-clockwise</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-double-back.svg"><img src="packages/gestalt/src/icons/arrow-double-back.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-double-back.svg"><span>arrow-double-back</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-double-forward.svg"><img src="packages/gestalt/src/icons/arrow-double-forward.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-double-forward.svg"><span>arrow-double-forward</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-down.svg"><img src="packages/gestalt/src/icons/arrow-down.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-down.svg"><span>arrow-down</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-end.svg"><img src="packages/gestalt/src/icons/arrow-end.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-end.svg"><span>arrow-end</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-forward.svg"><img src="packages/gestalt/src/icons/arrow-forward.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-forward.svg"><span>arrow-forward</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-left-curved.svg"><img src="packages/gestalt/src/icons/arrow-left-curved.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-left-curved.svg"><span>arrow-left-curved</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-nested.svg"><img src="packages/gestalt/src/icons/arrow-nested.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-nested.svg"><span>arrow-nested</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-start.svg"><img src="packages/gestalt/src/icons/arrow-start.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-start.svg"><span>arrow-start</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-up-left.svg"><img src="packages/gestalt/src/icons/arrow-up-left.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-up-left.svg"><span>arrow-up-left</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-up-right.svg"><img src="packages/gestalt/src/icons/arrow-up-right.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-up-right.svg"><span>arrow-up-right</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrow-up.svg"><img src="packages/gestalt/src/icons/arrow-up.svg" loading="lazy" alt="packages/gestalt/src/icons/arrow-up.svg"><span>arrow-up</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/arrows-vertical.svg"><img src="packages/gestalt/src/icons/arrows-vertical.svg" loading="lazy" alt="packages/gestalt/src/icons/arrows-vertical.svg"><span>arrows-vertical</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/aspect-ratio.svg"><img src="packages/gestalt/src/icons/aspect-ratio.svg" loading="lazy" alt="packages/gestalt/src/icons/aspect-ratio.svg"><span>aspect-ratio</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/audio-bars.svg"><img src="packages/gestalt/src/icons/audio-bars.svg" loading="lazy" alt="packages/gestalt/src/icons/audio-bars.svg"><span>audio-bars</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/audio-mix.svg"><img src="packages/gestalt/src/icons/audio-mix.svg" loading="lazy" alt="packages/gestalt/src/icons/audio-mix.svg"><span>audio-mix</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/audio-playing.svg"><img src="packages/gestalt/src/icons/audio-playing.svg" loading="lazy" alt="packages/gestalt/src/icons/audio-playing.svg"><span>audio-playing</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/bell-fill.svg"><img src="packages/gestalt/src/icons/bell-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/bell-fill.svg"><span>bell-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/bell.svg"><img src="packages/gestalt/src/icons/bell.svg" loading="lazy" alt="packages/gestalt/src/icons/bell.svg"><span>bell</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/birthday-cake.svg"><img src="packages/gestalt/src/icons/birthday-cake.svg" loading="lazy" alt="packages/gestalt/src/icons/birthday-cake.svg"><span>birthday-cake</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/blur.svg"><img src="packages/gestalt/src/icons/blur.svg" loading="lazy" alt="packages/gestalt/src/icons/blur.svg"><span>blur</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/board-sticker-large.svg"><img src="packages/gestalt/src/icons/board-sticker-large.svg" loading="lazy" alt="packages/gestalt/src/icons/board-sticker-large.svg"><span>board-sticker-large</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/board-sticker-small.svg"><img src="packages/gestalt/src/icons/board-sticker-small.svg" loading="lazy" alt="packages/gestalt/src/icons/board-sticker-small.svg"><span>board-sticker-small</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/board.svg"><img src="packages/gestalt/src/icons/board.svg" loading="lazy" alt="packages/gestalt/src/icons/board.svg"><span>board</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/bold.svg"><img src="packages/gestalt/src/icons/bold.svg" loading="lazy" alt="packages/gestalt/src/icons/bold.svg"><span>bold</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/border-shadow.svg"><img src="packages/gestalt/src/icons/border-shadow.svg" loading="lazy" alt="packages/gestalt/src/icons/border-shadow.svg"><span>border-shadow</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/border.svg"><img src="packages/gestalt/src/icons/border.svg" loading="lazy" alt="packages/gestalt/src/icons/border.svg"><span>border</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/briefcase.svg"><img src="packages/gestalt/src/icons/briefcase.svg" loading="lazy" alt="packages/gestalt/src/icons/briefcase.svg"><span>briefcase</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/building-business.svg"><img src="packages/gestalt/src/icons/building-business.svg" loading="lazy" alt="packages/gestalt/src/icons/building-business.svg"><span>building-business</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/business-hierarchy.svg"><img src="packages/gestalt/src/icons/business-hierarchy.svg" loading="lazy" alt="packages/gestalt/src/icons/business-hierarchy.svg"><span>business-hierarchy</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/calendar-check.svg"><img src="packages/gestalt/src/icons/calendar-check.svg" loading="lazy" alt="packages/gestalt/src/icons/calendar-check.svg"><span>calendar-check</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/calendar.svg"><img src="packages/gestalt/src/icons/calendar.svg" loading="lazy" alt="packages/gestalt/src/icons/calendar.svg"><span>calendar</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/camera-flip.svg"><img src="packages/gestalt/src/icons/camera-flip.svg" loading="lazy" alt="packages/gestalt/src/icons/camera-flip.svg"><span>camera-flip</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/camera-roll.svg"><img src="packages/gestalt/src/icons/camera-roll.svg" loading="lazy" alt="packages/gestalt/src/icons/camera-roll.svg"><span>camera-roll</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/camera.svg"><img src="packages/gestalt/src/icons/camera.svg" loading="lazy" alt="packages/gestalt/src/icons/camera.svg"><span>camera</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/cancel.svg"><img src="packages/gestalt/src/icons/cancel.svg" loading="lazy" alt="packages/gestalt/src/icons/cancel.svg"><span>cancel</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/canonical-pin.svg"><img src="packages/gestalt/src/icons/canonical-pin.svg" loading="lazy" alt="packages/gestalt/src/icons/canonical-pin.svg"><span>canonical-pin</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/captions-outline.svg"><img src="packages/gestalt/src/icons/captions-outline.svg" loading="lazy" alt="packages/gestalt/src/icons/captions-outline.svg"><span>captions-outline</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/captions.svg"><img src="packages/gestalt/src/icons/captions.svg" loading="lazy" alt="packages/gestalt/src/icons/captions.svg"><span>captions</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/card-stack-refresh.svg"><img src="packages/gestalt/src/icons/card-stack-refresh.svg" loading="lazy" alt="packages/gestalt/src/icons/card-stack-refresh.svg"><span>card-stack-refresh</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/card-stack.svg"><img src="packages/gestalt/src/icons/card-stack.svg" loading="lazy" alt="packages/gestalt/src/icons/card-stack.svg"><span>card-stack</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/check-circle-fill.svg"><img src="packages/gestalt/src/icons/check-circle-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/check-circle-fill.svg"><span>check-circle-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/check-circle.svg"><img src="packages/gestalt/src/icons/check-circle.svg" loading="lazy" alt="packages/gestalt/src/icons/check-circle.svg"><span>check-circle</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/check.svg"><img src="packages/gestalt/src/icons/check.svg" loading="lazy" alt="packages/gestalt/src/icons/check.svg"><span>check</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/chevron-down-circle.svg"><img src="packages/gestalt/src/icons/chevron-down-circle.svg" loading="lazy" alt="packages/gestalt/src/icons/chevron-down-circle.svg"><span>chevron-down-circle</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/chevron-left-circle.svg"><img src="packages/gestalt/src/icons/chevron-left-circle.svg" loading="lazy" alt="packages/gestalt/src/icons/chevron-left-circle.svg"><span>chevron-left-circle</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/chevron-right-circle.svg"><img src="packages/gestalt/src/icons/chevron-right-circle.svg" loading="lazy" alt="packages/gestalt/src/icons/chevron-right-circle.svg"><span>chevron-right-circle</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/chevron-up-circle.svg"><img src="packages/gestalt/src/icons/chevron-up-circle.svg" loading="lazy" alt="packages/gestalt/src/icons/chevron-up-circle.svg"><span>chevron-up-circle</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/circle-ellipsis.svg"><img src="packages/gestalt/src/icons/circle-ellipsis.svg" loading="lazy" alt="packages/gestalt/src/icons/circle-ellipsis.svg"><span>circle-ellipsis</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/circle-information-fill.svg"><img src="packages/gestalt/src/icons/circle-information-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/circle-information-fill.svg"><span>circle-information-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/circle-initializing.svg"><img src="packages/gestalt/src/icons/circle-initializing.svg" loading="lazy" alt="packages/gestalt/src/icons/circle-initializing.svg"><span>circle-initializing</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/circle.svg"><img src="packages/gestalt/src/icons/circle.svg" loading="lazy" alt="packages/gestalt/src/icons/circle.svg"><span>circle</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/clear.svg"><img src="packages/gestalt/src/icons/clear.svg" loading="lazy" alt="packages/gestalt/src/icons/clear.svg"><span>clear</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/clipboard.svg"><img src="packages/gestalt/src/icons/clipboard.svg" loading="lazy" alt="packages/gestalt/src/icons/clipboard.svg"><span>clipboard</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/clips.svg"><img src="packages/gestalt/src/icons/clips.svg" loading="lazy" alt="packages/gestalt/src/icons/clips.svg"><span>clips</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/clock-checked.svg"><img src="packages/gestalt/src/icons/clock-checked.svg" loading="lazy" alt="packages/gestalt/src/icons/clock-checked.svg"><span>clock-checked</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/clock.svg"><img src="packages/gestalt/src/icons/clock.svg" loading="lazy" alt="packages/gestalt/src/icons/clock.svg"><span>clock</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/cloud-server.svg"><img src="packages/gestalt/src/icons/cloud-server.svg" loading="lazy" alt="packages/gestalt/src/icons/cloud-server.svg"><span>cloud-server</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/code-check.svg"><img src="packages/gestalt/src/icons/code-check.svg" loading="lazy" alt="packages/gestalt/src/icons/code-check.svg"><span>code-check</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/code.svg"><img src="packages/gestalt/src/icons/code.svg" loading="lazy" alt="packages/gestalt/src/icons/code.svg"><span>code</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/cog-fill.svg"><img src="packages/gestalt/src/icons/cog-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/cog-fill.svg"><span>cog-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/cog.svg"><img src="packages/gestalt/src/icons/cog.svg" loading="lazy" alt="packages/gestalt/src/icons/cog.svg"><span>cog</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/collage.svg"><img src="packages/gestalt/src/icons/collage.svg" loading="lazy" alt="packages/gestalt/src/icons/collage.svg"><span>collage</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/collapse.svg"><img src="packages/gestalt/src/icons/collapse.svg" loading="lazy" alt="packages/gestalt/src/icons/collapse.svg"><span>collapse</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/color-palette.svg"><img src="packages/gestalt/src/icons/color-palette.svg" loading="lazy" alt="packages/gestalt/src/icons/color-palette.svg"><span>color-palette</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/color-picker.svg"><img src="packages/gestalt/src/icons/color-picker.svg" loading="lazy" alt="packages/gestalt/src/icons/color-picker.svg"><span>color-picker</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/color-solid.svg"><img src="packages/gestalt/src/icons/color-solid.svg" loading="lazy" alt="packages/gestalt/src/icons/color-solid.svg"><span>color-solid</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/color-split.svg"><img src="packages/gestalt/src/icons/color-split.svg" loading="lazy" alt="packages/gestalt/src/icons/color-split.svg"><span>color-split</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/color.svg"><img src="packages/gestalt/src/icons/color.svg" loading="lazy" alt="packages/gestalt/src/icons/color.svg"><span>color</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-add.svg"><img src="packages/gestalt/src/icons/compact/compact-add.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-add.svg"><span>compact-add</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-angled-pin.svg"><img src="packages/gestalt/src/icons/compact/compact-angled-pin.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-angled-pin.svg"><span>compact-angled-pin</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-arrow-up-right.svg"><img src="packages/gestalt/src/icons/compact/compact-arrow-up-right.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-arrow-up-right.svg"><span>compact-arrow-up-right</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-cancel.svg"><img src="packages/gestalt/src/icons/compact/compact-cancel.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-cancel.svg"><span>compact-cancel</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-check-circle-fill.svg"><img src="packages/gestalt/src/icons/compact/compact-check-circle-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-check-circle-fill.svg"><span>compact-check-circle-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-check.svg"><img src="packages/gestalt/src/icons/compact/compact-check.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-check.svg"><span>compact-check</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-chevron-down.svg"><img src="packages/gestalt/src/icons/compact/compact-chevron-down.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-chevron-down.svg"><span>compact-chevron-down</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-chevron-left.svg"><img src="packages/gestalt/src/icons/compact/compact-chevron-left.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-chevron-left.svg"><span>compact-chevron-left</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-chevron-right.svg"><img src="packages/gestalt/src/icons/compact/compact-chevron-right.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-chevron-right.svg"><span>compact-chevron-right</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-chevron-up.svg"><img src="packages/gestalt/src/icons/compact/compact-chevron-up.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-chevron-up.svg"><span>compact-chevron-up</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-dash.svg"><img src="packages/gestalt/src/icons/compact/compact-dash.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-dash.svg"><span>compact-dash</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-ellipsis.svg"><img src="packages/gestalt/src/icons/compact/compact-ellipsis.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-ellipsis.svg"><span>compact-ellipsis</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-info-circle-fill.svg"><img src="packages/gestalt/src/icons/compact/compact-info-circle-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-info-circle-fill.svg"><span>compact-info-circle-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-lock.svg"><img src="packages/gestalt/src/icons/compact/compact-lock.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-lock.svg"><span>compact-lock</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-maximize.svg"><img src="packages/gestalt/src/icons/compact/compact-maximize.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-maximize.svg"><span>compact-maximize</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-mute.svg"><img src="packages/gestalt/src/icons/compact/compact-mute.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-mute.svg"><span>compact-mute</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-sound-slash.svg"><img src="packages/gestalt/src/icons/compact/compact-sound-slash.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-sound-slash.svg"><span>compact-sound-slash</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-sound.svg"><img src="packages/gestalt/src/icons/compact/compact-sound.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-sound.svg"><span>compact-sound</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-sparkle.svg"><img src="packages/gestalt/src/icons/compact/compact-sparkle.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-sparkle.svg"><span>compact-sparkle</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-workflow-status-canceled.svg"><img src="packages/gestalt/src/icons/compact/compact-workflow-status-canceled.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-workflow-status-canceled.svg"><span>compact-workflow-status-canceled</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-workflow-status-halted.svg"><img src="packages/gestalt/src/icons/compact/compact-workflow-status-halted.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-workflow-status-halted.svg"><span>compact-workflow-status-halted</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-workflow-status-in-progress.svg"><img src="packages/gestalt/src/icons/compact/compact-workflow-status-in-progress.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-workflow-status-in-progress.svg"><span>compact-workflow-status-in-progress</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-workflow-status-problem.svg"><img src="packages/gestalt/src/icons/compact/compact-workflow-status-problem.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-workflow-status-problem.svg"><span>compact-workflow-status-problem</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-workflow-status-unstarted.svg"><img src="packages/gestalt/src/icons/compact/compact-workflow-status-unstarted.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-workflow-status-unstarted.svg"><span>compact-workflow-status-unstarted</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compact/compact-workflow-status-warning.svg"><img src="packages/gestalt/src/icons/compact/compact-workflow-status-warning.svg" loading="lazy" alt="packages/gestalt/src/icons/compact/compact-workflow-status-warning.svg"><span>compact-workflow-status-warning</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compass-fill.svg"><img src="packages/gestalt/src/icons/compass-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/compass-fill.svg"><span>compass-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compass.svg"><img src="packages/gestalt/src/icons/compass.svg" loading="lazy" alt="packages/gestalt/src/icons/compass.svg"><span>compass</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/compose.svg"><img src="packages/gestalt/src/icons/compose.svg" loading="lazy" alt="packages/gestalt/src/icons/compose.svg"><span>compose</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/contrast.svg"><img src="packages/gestalt/src/icons/contrast.svg" loading="lazy" alt="packages/gestalt/src/icons/contrast.svg"><span>contrast</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/conversion-tag.svg"><img src="packages/gestalt/src/icons/conversion-tag.svg" loading="lazy" alt="packages/gestalt/src/icons/conversion-tag.svg"><span>conversion-tag</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/copy-to-clipboard.svg"><img src="packages/gestalt/src/icons/copy-to-clipboard.svg" loading="lazy" alt="packages/gestalt/src/icons/copy-to-clipboard.svg"><span>copy-to-clipboard</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/credit-card-plus.svg"><img src="packages/gestalt/src/icons/credit-card-plus.svg" loading="lazy" alt="packages/gestalt/src/icons/credit-card-plus.svg"><span>credit-card-plus</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/credit-card.svg"><img src="packages/gestalt/src/icons/credit-card.svg" loading="lazy" alt="packages/gestalt/src/icons/credit-card.svg"><span>credit-card</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/crop.svg"><img src="packages/gestalt/src/icons/crop.svg" loading="lazy" alt="packages/gestalt/src/icons/crop.svg"><span>crop</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/crystal-ball.svg"><img src="packages/gestalt/src/icons/crystal-ball.svg" loading="lazy" alt="packages/gestalt/src/icons/crystal-ball.svg"><span>crystal-ball</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/cutout.svg"><img src="packages/gestalt/src/icons/cutout.svg" loading="lazy" alt="packages/gestalt/src/icons/cutout.svg"><span>cutout</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/dash.svg"><img src="packages/gestalt/src/icons/dash.svg" loading="lazy" alt="packages/gestalt/src/icons/dash.svg"><span>dash</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/data-source.svg"><img src="packages/gestalt/src/icons/data-source.svg" loading="lazy" alt="packages/gestalt/src/icons/data-source.svg"><span>data-source</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/deselect.svg"><img src="packages/gestalt/src/icons/deselect.svg" loading="lazy" alt="packages/gestalt/src/icons/deselect.svg"><span>deselect</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/design.svg"><img src="packages/gestalt/src/icons/design.svg" loading="lazy" alt="packages/gestalt/src/icons/design.svg"><span>design</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/desktop.svg"><img src="packages/gestalt/src/icons/desktop.svg" loading="lazy" alt="packages/gestalt/src/icons/desktop.svg"><span>desktop</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/diagnostics.svg"><img src="packages/gestalt/src/icons/diagnostics.svg" loading="lazy" alt="packages/gestalt/src/icons/diagnostics.svg"><span>diagnostics</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/directional-arrow-left.svg"><img src="packages/gestalt/src/icons/directional-arrow-left.svg" loading="lazy" alt="packages/gestalt/src/icons/directional-arrow-left.svg"><span>directional-arrow-left</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/directional-arrow-right.svg"><img src="packages/gestalt/src/icons/directional-arrow-right.svg" loading="lazy" alt="packages/gestalt/src/icons/directional-arrow-right.svg"><span>directional-arrow-right</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/download.svg"><img src="packages/gestalt/src/icons/download.svg" loading="lazy" alt="packages/gestalt/src/icons/download.svg"><span>download</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/drag-drop.svg"><img src="packages/gestalt/src/icons/drag-drop.svg" loading="lazy" alt="packages/gestalt/src/icons/drag-drop.svg"><span>drag-drop</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/draw.svg"><img src="packages/gestalt/src/icons/draw.svg" loading="lazy" alt="packages/gestalt/src/icons/draw.svg"><span>draw</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/dropbox.svg"><img src="packages/gestalt/src/icons/dropbox.svg" loading="lazy" alt="packages/gestalt/src/icons/dropbox.svg"><span>dropbox</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/duplicate.svg"><img src="packages/gestalt/src/icons/duplicate.svg" loading="lazy" alt="packages/gestalt/src/icons/duplicate.svg"><span>duplicate</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/edit.svg"><img src="packages/gestalt/src/icons/edit.svg" loading="lazy" alt="packages/gestalt/src/icons/edit.svg"><span>edit</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/ellipsis.svg"><img src="packages/gestalt/src/icons/ellipsis.svg" loading="lazy" alt="packages/gestalt/src/icons/ellipsis.svg"><span>ellipsis</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/envelope.svg"><img src="packages/gestalt/src/icons/envelope.svg" loading="lazy" alt="packages/gestalt/src/icons/envelope.svg"><span>envelope</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/erase-auto.svg"><img src="packages/gestalt/src/icons/erase-auto.svg" loading="lazy" alt="packages/gestalt/src/icons/erase-auto.svg"><span>erase-auto</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/erase.svg"><img src="packages/gestalt/src/icons/erase.svg" loading="lazy" alt="packages/gestalt/src/icons/erase.svg"><span>erase</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/etsy.svg"><img src="packages/gestalt/src/icons/etsy.svg" loading="lazy" alt="packages/gestalt/src/icons/etsy.svg"><span>etsy</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/expand.svg"><img src="packages/gestalt/src/icons/expand.svg" loading="lazy" alt="packages/gestalt/src/icons/expand.svg"><span>expand</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/eye-hide.svg"><img src="packages/gestalt/src/icons/eye-hide.svg" loading="lazy" alt="packages/gestalt/src/icons/eye-hide.svg"><span>eye-hide</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/eye.svg"><img src="packages/gestalt/src/icons/eye.svg" loading="lazy" alt="packages/gestalt/src/icons/eye.svg"><span>eye</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/face-happy.svg"><img src="packages/gestalt/src/icons/face-happy.svg" loading="lazy" alt="packages/gestalt/src/icons/face-happy.svg"><span>face-happy</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/face-neutral.svg"><img src="packages/gestalt/src/icons/face-neutral.svg" loading="lazy" alt="packages/gestalt/src/icons/face-neutral.svg"><span>face-neutral</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/face-sad.svg"><img src="packages/gestalt/src/icons/face-sad.svg" loading="lazy" alt="packages/gestalt/src/icons/face-sad.svg"><span>face-sad</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/face-smiley-outline.svg"><img src="packages/gestalt/src/icons/face-smiley-outline.svg" loading="lazy" alt="packages/gestalt/src/icons/face-smiley-outline.svg"><span>face-smiley-outline</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/face-smiley-plus.svg"><img src="packages/gestalt/src/icons/face-smiley-plus.svg" loading="lazy" alt="packages/gestalt/src/icons/face-smiley-plus.svg"><span>face-smiley-plus</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/face-smiley.svg"><img src="packages/gestalt/src/icons/face-smiley.svg" loading="lazy" alt="packages/gestalt/src/icons/face-smiley.svg"><span>face-smiley</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/face-tryon.svg"><img src="packages/gestalt/src/icons/face-tryon.svg" loading="lazy" alt="packages/gestalt/src/icons/face-tryon.svg"><span>face-tryon</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/facebook.svg"><img src="packages/gestalt/src/icons/facebook.svg" loading="lazy" alt="packages/gestalt/src/icons/facebook.svg"><span>facebook</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/fade.svg"><img src="packages/gestalt/src/icons/fade.svg" loading="lazy" alt="packages/gestalt/src/icons/fade.svg"><span>fade</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/ferris-wheel.svg"><img src="packages/gestalt/src/icons/ferris-wheel.svg" loading="lazy" alt="packages/gestalt/src/icons/ferris-wheel.svg"><span>ferris-wheel</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/file-box.svg"><img src="packages/gestalt/src/icons/file-box.svg" loading="lazy" alt="packages/gestalt/src/icons/file-box.svg"><span>file-box</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/file-unknown.svg"><img src="packages/gestalt/src/icons/file-unknown.svg" loading="lazy" alt="packages/gestalt/src/icons/file-unknown.svg"><span>file-unknown</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/fill-opaque.svg"><img src="packages/gestalt/src/icons/fill-opaque.svg" loading="lazy" alt="packages/gestalt/src/icons/fill-opaque.svg"><span>fill-opaque</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/fill-transparent.svg"><img src="packages/gestalt/src/icons/fill-transparent.svg" loading="lazy" alt="packages/gestalt/src/icons/fill-transparent.svg"><span>fill-transparent</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/filter.svg"><img src="packages/gestalt/src/icons/filter.svg" loading="lazy" alt="packages/gestalt/src/icons/filter.svg"><span>filter</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/flag.svg"><img src="packages/gestalt/src/icons/flag.svg" loading="lazy" alt="packages/gestalt/src/icons/flag.svg"><span>flag</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/flame.svg"><img src="packages/gestalt/src/icons/flame.svg" loading="lazy" alt="packages/gestalt/src/icons/flame.svg"><span>flame</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/flash-automatic.svg"><img src="packages/gestalt/src/icons/flash-automatic.svg" loading="lazy" alt="packages/gestalt/src/icons/flash-automatic.svg"><span>flash-automatic</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/flash-slash.svg"><img src="packages/gestalt/src/icons/flash-slash.svg" loading="lazy" alt="packages/gestalt/src/icons/flash-slash.svg"><span>flash-slash</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/flash.svg"><img src="packages/gestalt/src/icons/flash.svg" loading="lazy" alt="packages/gestalt/src/icons/flash.svg"><span>flash</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/flashlight.svg"><img src="packages/gestalt/src/icons/flashlight.svg" loading="lazy" alt="packages/gestalt/src/icons/flashlight.svg"><span>flashlight</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/flip-horizontal.svg"><img src="packages/gestalt/src/icons/flip-horizontal.svg" loading="lazy" alt="packages/gestalt/src/icons/flip-horizontal.svg"><span>flip-horizontal</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/flip-vertical.svg"><img src="packages/gestalt/src/icons/flip-vertical.svg" loading="lazy" alt="packages/gestalt/src/icons/flip-vertical.svg"><span>flip-vertical</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/folder-fill.svg"><img src="packages/gestalt/src/icons/folder-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/folder-fill.svg"><span>folder-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/folder.svg"><img src="packages/gestalt/src/icons/folder.svg" loading="lazy" alt="packages/gestalt/src/icons/folder.svg"><span>folder</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/forward.svg"><img src="packages/gestalt/src/icons/forward.svg" loading="lazy" alt="packages/gestalt/src/icons/forward.svg"><span>forward</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/gauge.svg"><img src="packages/gestalt/src/icons/gauge.svg" loading="lazy" alt="packages/gestalt/src/icons/gauge.svg"><span>gauge</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/ghost-fill.svg"><img src="packages/gestalt/src/icons/ghost-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/ghost-fill.svg"><span>ghost-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/ghost.svg"><img src="packages/gestalt/src/icons/ghost.svg" loading="lazy" alt="packages/gestalt/src/icons/ghost.svg"><span>ghost</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/gif-visual.svg"><img src="packages/gestalt/src/icons/gif-visual.svg" loading="lazy" alt="packages/gestalt/src/icons/gif-visual.svg"><span>gif-visual</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/gif.svg"><img src="packages/gestalt/src/icons/gif.svg" loading="lazy" alt="packages/gestalt/src/icons/gif.svg"><span>gif</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/gift.svg"><img src="packages/gestalt/src/icons/gift.svg" loading="lazy" alt="packages/gestalt/src/icons/gift.svg"><span>gift</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/globe-checked.svg"><img src="packages/gestalt/src/icons/globe-checked.svg" loading="lazy" alt="packages/gestalt/src/icons/globe-checked.svg"><span>globe-checked</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/globe.svg"><img src="packages/gestalt/src/icons/globe.svg" loading="lazy" alt="packages/gestalt/src/icons/globe.svg"><span>globe</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/gmail.svg"><img src="packages/gestalt/src/icons/gmail.svg" loading="lazy" alt="packages/gestalt/src/icons/gmail.svg"><span>gmail</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/graph-bar.svg"><img src="packages/gestalt/src/icons/graph-bar.svg" loading="lazy" alt="packages/gestalt/src/icons/graph-bar.svg"><span>graph-bar</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/graph-pie.svg"><img src="packages/gestalt/src/icons/graph-pie.svg" loading="lazy" alt="packages/gestalt/src/icons/graph-pie.svg"><span>graph-pie</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/hand-pointing.svg"><img src="packages/gestalt/src/icons/hand-pointing.svg" loading="lazy" alt="packages/gestalt/src/icons/hand-pointing.svg"><span>hand-pointing</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/hand.svg"><img src="packages/gestalt/src/icons/hand.svg" loading="lazy" alt="packages/gestalt/src/icons/hand.svg"><span>hand</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/handle.svg"><img src="packages/gestalt/src/icons/handle.svg" loading="lazy" alt="packages/gestalt/src/icons/handle.svg"><span>handle</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/heart-broken.svg"><img src="packages/gestalt/src/icons/heart-broken.svg" loading="lazy" alt="packages/gestalt/src/icons/heart-broken.svg"><span>heart-broken</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/heart-health.svg"><img src="packages/gestalt/src/icons/heart-health.svg" loading="lazy" alt="packages/gestalt/src/icons/heart-health.svg"><span>heart-health</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/heart-outline.svg"><img src="packages/gestalt/src/icons/heart-outline.svg" loading="lazy" alt="packages/gestalt/src/icons/heart-outline.svg"><span>heart-outline</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/heart.svg"><img src="packages/gestalt/src/icons/heart.svg" loading="lazy" alt="packages/gestalt/src/icons/heart.svg"><span>heart</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/highlights.svg"><img src="packages/gestalt/src/icons/highlights.svg" loading="lazy" alt="packages/gestalt/src/icons/highlights.svg"><span>highlights</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/history.svg"><img src="packages/gestalt/src/icons/history.svg" loading="lazy" alt="packages/gestalt/src/icons/history.svg"><span>history</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/home-fill.svg"><img src="packages/gestalt/src/icons/home-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/home-fill.svg"><span>home-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/home.svg"><img src="packages/gestalt/src/icons/home.svg" loading="lazy" alt="packages/gestalt/src/icons/home.svg"><span>home</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/idea-pin.svg"><img src="packages/gestalt/src/icons/idea-pin.svg" loading="lazy" alt="packages/gestalt/src/icons/idea-pin.svg"><span>idea-pin</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/image-portrait.svg"><img src="packages/gestalt/src/icons/image-portrait.svg" loading="lazy" alt="packages/gestalt/src/icons/image-portrait.svg"><span>image-portrait</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/imessage.svg"><img src="packages/gestalt/src/icons/imessage.svg" loading="lazy" alt="packages/gestalt/src/icons/imessage.svg"><span>imessage</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/impressum.svg"><img src="packages/gestalt/src/icons/impressum.svg" loading="lazy" alt="packages/gestalt/src/icons/impressum.svg"><span>impressum</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/indent.svg"><img src="packages/gestalt/src/icons/indent.svg" loading="lazy" alt="packages/gestalt/src/icons/indent.svg"><span>indent</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/info-circle.svg"><img src="packages/gestalt/src/icons/info-circle.svg" loading="lazy" alt="packages/gestalt/src/icons/info-circle.svg"><span>info-circle</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/information.svg"><img src="packages/gestalt/src/icons/information.svg" loading="lazy" alt="packages/gestalt/src/icons/information.svg"><span>information</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/insights-audience.svg"><img src="packages/gestalt/src/icons/insights-audience.svg" loading="lazy" alt="packages/gestalt/src/icons/insights-audience.svg"><span>insights-audience</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/insights-conversion.svg"><img src="packages/gestalt/src/icons/insights-conversion.svg" loading="lazy" alt="packages/gestalt/src/icons/insights-conversion.svg"><span>insights-conversion</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/instagram-stories.svg"><img src="packages/gestalt/src/icons/instagram-stories.svg" loading="lazy" alt="packages/gestalt/src/icons/instagram-stories.svg"><span>instagram-stories</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/instagram.svg"><img src="packages/gestalt/src/icons/instagram.svg" loading="lazy" alt="packages/gestalt/src/icons/instagram.svg"><span>instagram</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/invoice.svg"><img src="packages/gestalt/src/icons/invoice.svg" loading="lazy" alt="packages/gestalt/src/icons/invoice.svg"><span>invoice</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/italics.svg"><img src="packages/gestalt/src/icons/italics.svg" loading="lazy" alt="packages/gestalt/src/icons/italics.svg"><span>italics</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/kakao-talk.svg"><img src="packages/gestalt/src/icons/kakao-talk.svg" loading="lazy" alt="packages/gestalt/src/icons/kakao-talk.svg"><span>kakao-talk</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/key.svg"><img src="packages/gestalt/src/icons/key.svg" loading="lazy" alt="packages/gestalt/src/icons/key.svg"><span>key</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/knoop.svg"><img src="packages/gestalt/src/icons/knoop.svg" loading="lazy" alt="packages/gestalt/src/icons/knoop.svg"><span>knoop</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/lab-flask.svg"><img src="packages/gestalt/src/icons/lab-flask.svg" loading="lazy" alt="packages/gestalt/src/icons/lab-flask.svg"><span>lab-flask</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/lasso-magic.svg"><img src="packages/gestalt/src/icons/lasso-magic.svg" loading="lazy" alt="packages/gestalt/src/icons/lasso-magic.svg"><span>lasso-magic</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/layers-stack.svg"><img src="packages/gestalt/src/icons/layers-stack.svg" loading="lazy" alt="packages/gestalt/src/icons/layers-stack.svg"><span>layers-stack</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/layout.svg"><img src="packages/gestalt/src/icons/layout.svg" loading="lazy" alt="packages/gestalt/src/icons/layout.svg"><span>layout</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/lightbulb.svg"><img src="packages/gestalt/src/icons/lightbulb.svg" loading="lazy" alt="packages/gestalt/src/icons/lightbulb.svg"><span>lightbulb</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/lightning-bolt-circle.svg"><img src="packages/gestalt/src/icons/lightning-bolt-circle.svg" loading="lazy" alt="packages/gestalt/src/icons/lightning-bolt-circle.svg"><span>lightning-bolt-circle</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/link-broken.svg"><img src="packages/gestalt/src/icons/link-broken.svg" loading="lazy" alt="packages/gestalt/src/icons/link-broken.svg"><span>link-broken</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/link.svg"><img src="packages/gestalt/src/icons/link.svg" loading="lazy" alt="packages/gestalt/src/icons/link.svg"><span>link</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/lips.svg"><img src="packages/gestalt/src/icons/lips.svg" loading="lazy" alt="packages/gestalt/src/icons/lips.svg"><span>lips</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/list-bullets.svg"><img src="packages/gestalt/src/icons/list-bullets.svg" loading="lazy" alt="packages/gestalt/src/icons/list-bullets.svg"><span>list-bullets</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/list-numbered-rtl.svg"><img src="packages/gestalt/src/icons/list-numbered-rtl.svg" loading="lazy" alt="packages/gestalt/src/icons/list-numbered-rtl.svg"><span>list-numbered-rtl</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/list-numbered.svg"><img src="packages/gestalt/src/icons/list-numbered.svg" loading="lazy" alt="packages/gestalt/src/icons/list-numbered.svg"><span>list-numbered</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/location.svg"><img src="packages/gestalt/src/icons/location.svg" loading="lazy" alt="packages/gestalt/src/icons/location.svg"><span>location</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/lock.svg"><img src="packages/gestalt/src/icons/lock.svg" loading="lazy" alt="packages/gestalt/src/icons/lock.svg"><span>lock</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/logo-large.svg"><img src="packages/gestalt/src/icons/logo-large.svg" loading="lazy" alt="packages/gestalt/src/icons/logo-large.svg"><span>logo-large</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/logo-small.svg"><img src="packages/gestalt/src/icons/logo-small.svg" loading="lazy" alt="packages/gestalt/src/icons/logo-small.svg"><span>logo-small</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/logout.svg"><img src="packages/gestalt/src/icons/logout.svg" loading="lazy" alt="packages/gestalt/src/icons/logout.svg"><span>logout</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/magic-pen.svg"><img src="packages/gestalt/src/icons/magic-pen.svg" loading="lazy" alt="packages/gestalt/src/icons/magic-pen.svg"><span>magic-pen</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/magic-wand.svg"><img src="packages/gestalt/src/icons/magic-wand.svg" loading="lazy" alt="packages/gestalt/src/icons/magic-wand.svg"><span>magic-wand</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/magnifying-glass-sparkle.svg"><img src="packages/gestalt/src/icons/magnifying-glass-sparkle.svg" loading="lazy" alt="packages/gestalt/src/icons/magnifying-glass-sparkle.svg"><span>magnifying-glass-sparkle</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/manage-access.svg"><img src="packages/gestalt/src/icons/manage-access.svg" loading="lazy" alt="packages/gestalt/src/icons/manage-access.svg"><span>manage-access</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/margins-large.svg"><img src="packages/gestalt/src/icons/margins-large.svg" loading="lazy" alt="packages/gestalt/src/icons/margins-large.svg"><span>margins-large</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/margins-medium.svg"><img src="packages/gestalt/src/icons/margins-medium.svg" loading="lazy" alt="packages/gestalt/src/icons/margins-medium.svg"><span>margins-medium</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/margins-small.svg"><img src="packages/gestalt/src/icons/margins-small.svg" loading="lazy" alt="packages/gestalt/src/icons/margins-small.svg"><span>margins-small</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/maximize.svg"><img src="packages/gestalt/src/icons/maximize.svg" loading="lazy" alt="packages/gestalt/src/icons/maximize.svg"><span>maximize</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/megaphone.svg"><img src="packages/gestalt/src/icons/megaphone.svg" loading="lazy" alt="packages/gestalt/src/icons/megaphone.svg"><span>megaphone</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/menu.svg"><img src="packages/gestalt/src/icons/menu.svg" loading="lazy" alt="packages/gestalt/src/icons/menu.svg"><span>menu</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/messenger.svg"><img src="packages/gestalt/src/icons/messenger.svg" loading="lazy" alt="packages/gestalt/src/icons/messenger.svg"><span>messenger</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/microphone.svg"><img src="packages/gestalt/src/icons/microphone.svg" loading="lazy" alt="packages/gestalt/src/icons/microphone.svg"><span>microphone</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/minimize.svg"><img src="packages/gestalt/src/icons/minimize.svg" loading="lazy" alt="packages/gestalt/src/icons/minimize.svg"><span>minimize</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/mobile.svg"><img src="packages/gestalt/src/icons/mobile.svg" loading="lazy" alt="packages/gestalt/src/icons/mobile.svg"><span>mobile</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/moon.svg"><img src="packages/gestalt/src/icons/moon.svg" loading="lazy" alt="packages/gestalt/src/icons/moon.svg"><span>moon</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/move-pin.svg"><img src="packages/gestalt/src/icons/move-pin.svg" loading="lazy" alt="packages/gestalt/src/icons/move-pin.svg"><span>move-pin</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/music-off.svg"><img src="packages/gestalt/src/icons/music-off.svg" loading="lazy" alt="packages/gestalt/src/icons/music-off.svg"><span>music-off</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/music-on.svg"><img src="packages/gestalt/src/icons/music-on.svg" loading="lazy" alt="packages/gestalt/src/icons/music-on.svg"><span>music-on</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/mute-fill.svg"><img src="packages/gestalt/src/icons/mute-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/mute-fill.svg"><span>mute-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/mute.svg"><img src="packages/gestalt/src/icons/mute.svg" loading="lazy" alt="packages/gestalt/src/icons/mute.svg"><span>mute</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/orientation-landscape.svg"><img src="packages/gestalt/src/icons/orientation-landscape.svg" loading="lazy" alt="packages/gestalt/src/icons/orientation-landscape.svg"><span>orientation-landscape</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/orientation-portrait.svg"><img src="packages/gestalt/src/icons/orientation-portrait.svg" loading="lazy" alt="packages/gestalt/src/icons/orientation-portrait.svg"><span>orientation-portrait</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/outdent.svg"><img src="packages/gestalt/src/icons/outdent.svg" loading="lazy" alt="packages/gestalt/src/icons/outdent.svg"><span>outdent</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/outlook.svg"><img src="packages/gestalt/src/icons/outlook.svg" loading="lazy" alt="packages/gestalt/src/icons/outlook.svg"><span>outlook</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/overlay-text-outline.svg"><img src="packages/gestalt/src/icons/overlay-text-outline.svg" loading="lazy" alt="packages/gestalt/src/icons/overlay-text-outline.svg"><span>overlay-text-outline</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/overlay-text.svg"><img src="packages/gestalt/src/icons/overlay-text.svg" loading="lazy" alt="packages/gestalt/src/icons/overlay-text.svg"><span>overlay-text</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/overview.svg"><img src="packages/gestalt/src/icons/overview.svg" loading="lazy" alt="packages/gestalt/src/icons/overview.svg"><span>overview</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/paper-clip.svg"><img src="packages/gestalt/src/icons/paper-clip.svg" loading="lazy" alt="packages/gestalt/src/icons/paper-clip.svg"><span>paper-clip</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/paper-lines-plus.svg"><img src="packages/gestalt/src/icons/paper-lines-plus.svg" loading="lazy" alt="packages/gestalt/src/icons/paper-lines-plus.svg"><span>paper-lines-plus</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/pause.svg"><img src="packages/gestalt/src/icons/pause.svg" loading="lazy" alt="packages/gestalt/src/icons/pause.svg"><span>pause</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/pen-auto.svg"><img src="packages/gestalt/src/icons/pen-auto.svg" loading="lazy" alt="packages/gestalt/src/icons/pen-auto.svg"><span>pen-auto</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/pen.svg"><img src="packages/gestalt/src/icons/pen.svg" loading="lazy" alt="packages/gestalt/src/icons/pen.svg"><span>pen</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/people.svg"><img src="packages/gestalt/src/icons/people.svg" loading="lazy" alt="packages/gestalt/src/icons/people.svg"><span>people</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/performance-plus.svg"><img src="packages/gestalt/src/icons/performance-plus.svg" loading="lazy" alt="packages/gestalt/src/icons/performance-plus.svg"><span>performance-plus</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/person-add.svg"><img src="packages/gestalt/src/icons/person-add.svg" loading="lazy" alt="packages/gestalt/src/icons/person-add.svg"><span>person-add</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/person-fill.svg"><img src="packages/gestalt/src/icons/person-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/person-fill.svg"><span>person-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/person-magnifying-glass.svg"><img src="packages/gestalt/src/icons/person-magnifying-glass.svg" loading="lazy" alt="packages/gestalt/src/icons/person-magnifying-glass.svg"><span>person-magnifying-glass</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/person.svg"><img src="packages/gestalt/src/icons/person.svg" loading="lazy" alt="packages/gestalt/src/icons/person.svg"><span>person</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/phone.svg"><img src="packages/gestalt/src/icons/phone.svg" loading="lazy" alt="packages/gestalt/src/icons/phone.svg"><span>phone</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/pin-hide.svg"><img src="packages/gestalt/src/icons/pin-hide.svg" loading="lazy" alt="packages/gestalt/src/icons/pin-hide.svg"><span>pin-hide</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/pin.svg"><img src="packages/gestalt/src/icons/pin.svg" loading="lazy" alt="packages/gestalt/src/icons/pin.svg"><span>pin</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/pincode.svg"><img src="packages/gestalt/src/icons/pincode.svg" loading="lazy" alt="packages/gestalt/src/icons/pincode.svg"><span>pincode</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/pinterest.svg"><img src="packages/gestalt/src/icons/pinterest.svg" loading="lazy" alt="packages/gestalt/src/icons/pinterest.svg"><span>pinterest</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/play.svg"><img src="packages/gestalt/src/icons/play.svg" loading="lazy" alt="packages/gestalt/src/icons/play.svg"><span>play</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/protect.svg"><img src="packages/gestalt/src/icons/protect.svg" loading="lazy" alt="packages/gestalt/src/icons/protect.svg"><span>protect</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/qr-code.svg"><img src="packages/gestalt/src/icons/qr-code.svg" loading="lazy" alt="packages/gestalt/src/icons/qr-code.svg"><span>qr-code</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/question-mark.svg"><img src="packages/gestalt/src/icons/question-mark.svg" loading="lazy" alt="packages/gestalt/src/icons/question-mark.svg"><span>question-mark</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/quote.svg"><img src="packages/gestalt/src/icons/quote.svg" loading="lazy" alt="packages/gestalt/src/icons/quote.svg"><span>quote</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/record-limit-10.svg"><img src="packages/gestalt/src/icons/record-limit-10.svg" loading="lazy" alt="packages/gestalt/src/icons/record-limit-10.svg"><span>record-limit-10</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/record-limit-15.svg"><img src="packages/gestalt/src/icons/record-limit-15.svg" loading="lazy" alt="packages/gestalt/src/icons/record-limit-15.svg"><span>record-limit-15</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/record-limit-30.svg"><img src="packages/gestalt/src/icons/record-limit-30.svg" loading="lazy" alt="packages/gestalt/src/icons/record-limit-30.svg"><span>record-limit-30</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/record-limit-5.svg"><img src="packages/gestalt/src/icons/record-limit-5.svg" loading="lazy" alt="packages/gestalt/src/icons/record-limit-5.svg"><span>record-limit-5</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/record-limit-60.svg"><img src="packages/gestalt/src/icons/record-limit-60.svg" loading="lazy" alt="packages/gestalt/src/icons/record-limit-60.svg"><span>record-limit-60</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/record-limit.svg"><img src="packages/gestalt/src/icons/record-limit.svg" loading="lazy" alt="packages/gestalt/src/icons/record-limit.svg"><span>record-limit</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/redo.svg"><img src="packages/gestalt/src/icons/redo.svg" loading="lazy" alt="packages/gestalt/src/icons/redo.svg"><span>redo</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/refresh.svg"><img src="packages/gestalt/src/icons/refresh.svg" loading="lazy" alt="packages/gestalt/src/icons/refresh.svg"><span>refresh</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/remove.svg"><img src="packages/gestalt/src/icons/remove.svg" loading="lazy" alt="packages/gestalt/src/icons/remove.svg"><span>remove</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/reorder-images.svg"><img src="packages/gestalt/src/icons/reorder-images.svg" loading="lazy" alt="packages/gestalt/src/icons/reorder-images.svg"><span>reorder-images</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/replace.svg"><img src="packages/gestalt/src/icons/replace.svg" loading="lazy" alt="packages/gestalt/src/icons/replace.svg"><span>replace</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/report.svg"><img src="packages/gestalt/src/icons/report.svg" loading="lazy" alt="packages/gestalt/src/icons/report.svg"><span>report</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/rewind.svg"><img src="packages/gestalt/src/icons/rewind.svg" loading="lazy" alt="packages/gestalt/src/icons/rewind.svg"><span>rewind</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/ribbon.svg"><img src="packages/gestalt/src/icons/ribbon.svg" loading="lazy" alt="packages/gestalt/src/icons/ribbon.svg"><span>ribbon</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/rocketship.svg"><img src="packages/gestalt/src/icons/rocketship.svg" loading="lazy" alt="packages/gestalt/src/icons/rocketship.svg"><span>rocketship</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/rotate.svg"><img src="packages/gestalt/src/icons/rotate.svg" loading="lazy" alt="packages/gestalt/src/icons/rotate.svg"><span>rotate</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/saturation.svg"><img src="packages/gestalt/src/icons/saturation.svg" loading="lazy" alt="packages/gestalt/src/icons/saturation.svg"><span>saturation</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/save-outline.svg"><img src="packages/gestalt/src/icons/save-outline.svg" loading="lazy" alt="packages/gestalt/src/icons/save-outline.svg"><span>save-outline</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/saved.svg"><img src="packages/gestalt/src/icons/saved.svg" loading="lazy" alt="packages/gestalt/src/icons/saved.svg"><span>saved</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/scale.svg"><img src="packages/gestalt/src/icons/scale.svg" loading="lazy" alt="packages/gestalt/src/icons/scale.svg"><span>scale</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/scissors.svg"><img src="packages/gestalt/src/icons/scissors.svg" loading="lazy" alt="packages/gestalt/src/icons/scissors.svg"><span>scissors</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/search-by-image.svg"><img src="packages/gestalt/src/icons/search-by-image.svg" loading="lazy" alt="packages/gestalt/src/icons/search-by-image.svg"><span>search-by-image</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/search-fill.svg"><img src="packages/gestalt/src/icons/search-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/search-fill.svg"><span>search-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/search.svg"><img src="packages/gestalt/src/icons/search.svg" loading="lazy" alt="packages/gestalt/src/icons/search.svg"><span>search</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/security.svg"><img src="packages/gestalt/src/icons/security.svg" loading="lazy" alt="packages/gestalt/src/icons/security.svg"><span>security</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/select.svg"><img src="packages/gestalt/src/icons/select.svg" loading="lazy" alt="packages/gestalt/src/icons/select.svg"><span>select</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/send.svg"><img src="packages/gestalt/src/icons/send.svg" loading="lazy" alt="packages/gestalt/src/icons/send.svg"><span>send</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/shadows.svg"><img src="packages/gestalt/src/icons/shadows.svg" loading="lazy" alt="packages/gestalt/src/icons/shadows.svg"><span>shadows</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/shapes.svg"><img src="packages/gestalt/src/icons/shapes.svg" loading="lazy" alt="packages/gestalt/src/icons/shapes.svg"><span>shapes</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/share.svg"><img src="packages/gestalt/src/icons/share.svg" loading="lazy" alt="packages/gestalt/src/icons/share.svg"><span>share</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/shopping-bag-fill.svg"><img src="packages/gestalt/src/icons/shopping-bag-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/shopping-bag-fill.svg"><span>shopping-bag-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/shopping-bag.svg"><img src="packages/gestalt/src/icons/shopping-bag.svg" loading="lazy" alt="packages/gestalt/src/icons/shopping-bag.svg"><span>shopping-bag</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/shrink.svg"><img src="packages/gestalt/src/icons/shrink.svg" loading="lazy" alt="packages/gestalt/src/icons/shrink.svg"><span>shrink</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/shuffles.svg"><img src="packages/gestalt/src/icons/shuffles.svg" loading="lazy" alt="packages/gestalt/src/icons/shuffles.svg"><span>shuffles</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/skintone.svg"><img src="packages/gestalt/src/icons/skintone.svg" loading="lazy" alt="packages/gestalt/src/icons/skintone.svg"><span>skintone</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/slide.svg"><img src="packages/gestalt/src/icons/slide.svg" loading="lazy" alt="packages/gestalt/src/icons/slide.svg"><span>slide</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/smiley.svg"><img src="packages/gestalt/src/icons/smiley.svg" loading="lazy" alt="packages/gestalt/src/icons/smiley.svg"><span>smiley</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/snapchat.svg"><img src="packages/gestalt/src/icons/snapchat.svg" loading="lazy" alt="packages/gestalt/src/icons/snapchat.svg"><span>snapchat</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/sort-ascending.svg"><img src="packages/gestalt/src/icons/sort-ascending.svg" loading="lazy" alt="packages/gestalt/src/icons/sort-ascending.svg"><span>sort-ascending</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/sort-descending.svg"><img src="packages/gestalt/src/icons/sort-descending.svg" loading="lazy" alt="packages/gestalt/src/icons/sort-descending.svg"><span>sort-descending</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/sound-fill.svg"><img src="packages/gestalt/src/icons/sound-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/sound-fill.svg"><span>sound-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/sound-slash-fill.svg"><img src="packages/gestalt/src/icons/sound-slash-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/sound-slash-fill.svg"><span>sound-slash-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/sound-slash.svg"><img src="packages/gestalt/src/icons/sound-slash.svg" loading="lazy" alt="packages/gestalt/src/icons/sound-slash.svg"><span>sound-slash</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/sound.svg"><img src="packages/gestalt/src/icons/sound.svg" loading="lazy" alt="packages/gestalt/src/icons/sound.svg"><span>sound</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/sparkle.svg"><img src="packages/gestalt/src/icons/sparkle.svg" loading="lazy" alt="packages/gestalt/src/icons/sparkle.svg"><span>sparkle</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/speech-ellipsis-fill.svg"><img src="packages/gestalt/src/icons/speech-ellipsis-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/speech-ellipsis-fill.svg"><span>speech-ellipsis-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/speech-ellipsis.svg"><img src="packages/gestalt/src/icons/speech-ellipsis.svg" loading="lazy" alt="packages/gestalt/src/icons/speech-ellipsis.svg"><span>speech-ellipsis</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/speech-exclamation-point.svg"><img src="packages/gestalt/src/icons/speech-exclamation-point.svg" loading="lazy" alt="packages/gestalt/src/icons/speech-exclamation-point.svg"><span>speech-exclamation-point</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/speech-heart.svg"><img src="packages/gestalt/src/icons/speech-heart.svg" loading="lazy" alt="packages/gestalt/src/icons/speech-heart.svg"><span>speech-heart</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/speech-outline.svg"><img src="packages/gestalt/src/icons/speech-outline.svg" loading="lazy" alt="packages/gestalt/src/icons/speech-outline.svg"><span>speech-outline</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/speech.svg"><img src="packages/gestalt/src/icons/speech.svg" loading="lazy" alt="packages/gestalt/src/icons/speech.svg"><span>speech</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/speed-.3x.svg"><img src="packages/gestalt/src/icons/speed-.3x.svg" loading="lazy" alt="packages/gestalt/src/icons/speed-.3x.svg"><span>speed-.3x</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/speed-.5x.svg"><img src="packages/gestalt/src/icons/speed-.5x.svg" loading="lazy" alt="packages/gestalt/src/icons/speed-.5x.svg"><span>speed-.5x</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/speed-1x.svg"><img src="packages/gestalt/src/icons/speed-1x.svg" loading="lazy" alt="packages/gestalt/src/icons/speed-1x.svg"><span>speed-1x</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/speed-2x.svg"><img src="packages/gestalt/src/icons/speed-2x.svg" loading="lazy" alt="packages/gestalt/src/icons/speed-2x.svg"><span>speed-2x</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/speed-3x.svg"><img src="packages/gestalt/src/icons/speed-3x.svg" loading="lazy" alt="packages/gestalt/src/icons/speed-3x.svg"><span>speed-3x</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/speed.svg"><img src="packages/gestalt/src/icons/speed.svg" loading="lazy" alt="packages/gestalt/src/icons/speed.svg"><span>speed</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/spread.svg"><img src="packages/gestalt/src/icons/spread.svg" loading="lazy" alt="packages/gestalt/src/icons/spread.svg"><span>spread</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/square-plus-fill.svg"><img src="packages/gestalt/src/icons/square-plus-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/square-plus-fill.svg"><span>square-plus-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/square-plus.svg"><img src="packages/gestalt/src/icons/square-plus.svg" loading="lazy" alt="packages/gestalt/src/icons/square-plus.svg"><span>square-plus</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/star-half.svg"><img src="packages/gestalt/src/icons/star-half.svg" loading="lazy" alt="packages/gestalt/src/icons/star-half.svg"><span>star-half</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/star-outline.svg"><img src="packages/gestalt/src/icons/star-outline.svg" loading="lazy" alt="packages/gestalt/src/icons/star-outline.svg"><span>star-outline</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/star.svg"><img src="packages/gestalt/src/icons/star.svg" loading="lazy" alt="packages/gestalt/src/icons/star.svg"><span>star</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/sticker-image.svg"><img src="packages/gestalt/src/icons/sticker-image.svg" loading="lazy" alt="packages/gestalt/src/icons/sticker-image.svg"><span>sticker-image</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/sticker.svg"><img src="packages/gestalt/src/icons/sticker.svg" loading="lazy" alt="packages/gestalt/src/icons/sticker.svg"><span>sticker</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/sun.svg"><img src="packages/gestalt/src/icons/sun.svg" loading="lazy" alt="packages/gestalt/src/icons/sun.svg"><span>sun</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/swap.svg"><img src="packages/gestalt/src/icons/swap.svg" loading="lazy" alt="packages/gestalt/src/icons/swap.svg"><span>swap</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/switch-account.svg"><img src="packages/gestalt/src/icons/switch-account.svg" loading="lazy" alt="packages/gestalt/src/icons/switch-account.svg"><span>switch-account</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/table.svg"><img src="packages/gestalt/src/icons/table.svg" loading="lazy" alt="packages/gestalt/src/icons/table.svg"><span>table</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/tag-star.svg"><img src="packages/gestalt/src/icons/tag-star.svg" loading="lazy" alt="packages/gestalt/src/icons/tag-star.svg"><span>tag-star</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/tag.svg"><img src="packages/gestalt/src/icons/tag.svg" loading="lazy" alt="packages/gestalt/src/icons/tag.svg"><span>tag</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/target.svg"><img src="packages/gestalt/src/icons/target.svg" loading="lazy" alt="packages/gestalt/src/icons/target.svg"><span>target</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/telegram.svg"><img src="packages/gestalt/src/icons/telegram.svg" loading="lazy" alt="packages/gestalt/src/icons/telegram.svg"><span>telegram</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/template.svg"><img src="packages/gestalt/src/icons/template.svg" loading="lazy" alt="packages/gestalt/src/icons/template.svg"><span>template</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/terms.svg"><img src="packages/gestalt/src/icons/terms.svg" loading="lazy" alt="packages/gestalt/src/icons/terms.svg"><span>terms</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text-align-center.svg"><img src="packages/gestalt/src/icons/text-align-center.svg" loading="lazy" alt="packages/gestalt/src/icons/text-align-center.svg"><span>text-align-center</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text-align-left.svg"><img src="packages/gestalt/src/icons/text-align-left.svg" loading="lazy" alt="packages/gestalt/src/icons/text-align-left.svg"><span>text-align-left</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text-align-right.svg"><img src="packages/gestalt/src/icons/text-align-right.svg" loading="lazy" alt="packages/gestalt/src/icons/text-align-right.svg"><span>text-align-right</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text-all-caps.svg"><img src="packages/gestalt/src/icons/text-all-caps.svg" loading="lazy" alt="packages/gestalt/src/icons/text-all-caps.svg"><span>text-all-caps</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text-extra-small.svg"><img src="packages/gestalt/src/icons/text-extra-small.svg" loading="lazy" alt="packages/gestalt/src/icons/text-extra-small.svg"><span>text-extra-small</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text-invert.svg"><img src="packages/gestalt/src/icons/text-invert.svg" loading="lazy" alt="packages/gestalt/src/icons/text-invert.svg"><span>text-invert</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text-large.svg"><img src="packages/gestalt/src/icons/text-large.svg" loading="lazy" alt="packages/gestalt/src/icons/text-large.svg"><span>text-large</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text-line-height.svg"><img src="packages/gestalt/src/icons/text-line-height.svg" loading="lazy" alt="packages/gestalt/src/icons/text-line-height.svg"><span>text-line-height</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text-medium.svg"><img src="packages/gestalt/src/icons/text-medium.svg" loading="lazy" alt="packages/gestalt/src/icons/text-medium.svg"><span>text-medium</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text-sentence-case.svg"><img src="packages/gestalt/src/icons/text-sentence-case.svg" loading="lazy" alt="packages/gestalt/src/icons/text-sentence-case.svg"><span>text-sentence-case</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text-size.svg"><img src="packages/gestalt/src/icons/text-size.svg" loading="lazy" alt="packages/gestalt/src/icons/text-size.svg"><span>text-size</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text-small.svg"><img src="packages/gestalt/src/icons/text-small.svg" loading="lazy" alt="packages/gestalt/src/icons/text-small.svg"><span>text-small</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text-spacing.svg"><img src="packages/gestalt/src/icons/text-spacing.svg" loading="lazy" alt="packages/gestalt/src/icons/text-spacing.svg"><span>text-spacing</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text-sticker.svg"><img src="packages/gestalt/src/icons/text-sticker.svg" loading="lazy" alt="packages/gestalt/src/icons/text-sticker.svg"><span>text-sticker</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/text.svg"><img src="packages/gestalt/src/icons/text.svg" loading="lazy" alt="packages/gestalt/src/icons/text.svg"><span>text</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/threads.svg"><img src="packages/gestalt/src/icons/threads.svg" loading="lazy" alt="packages/gestalt/src/icons/threads.svg"><span>threads</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/thumbs-down.svg"><img src="packages/gestalt/src/icons/thumbs-down.svg" loading="lazy" alt="packages/gestalt/src/icons/thumbs-down.svg"><span>thumbs-down</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/thumbs-up.svg"><img src="packages/gestalt/src/icons/thumbs-up.svg" loading="lazy" alt="packages/gestalt/src/icons/thumbs-up.svg"><span>thumbs-up</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/timer-10.svg"><img src="packages/gestalt/src/icons/timer-10.svg" loading="lazy" alt="packages/gestalt/src/icons/timer-10.svg"><span>timer-10</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/timer-3.svg"><img src="packages/gestalt/src/icons/timer-3.svg" loading="lazy" alt="packages/gestalt/src/icons/timer-3.svg"><span>timer-3</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/timer.svg"><img src="packages/gestalt/src/icons/timer.svg" loading="lazy" alt="packages/gestalt/src/icons/timer.svg"><span>timer</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/tint.svg"><img src="packages/gestalt/src/icons/tint.svg" loading="lazy" alt="packages/gestalt/src/icons/tint.svg"><span>tint</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/trash-can.svg"><img src="packages/gestalt/src/icons/trash-can.svg" loading="lazy" alt="packages/gestalt/src/icons/trash-can.svg"><span>trash-can</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/trending.svg"><img src="packages/gestalt/src/icons/trending.svg" loading="lazy" alt="packages/gestalt/src/icons/trending.svg"><span>trending</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/underline.svg"><img src="packages/gestalt/src/icons/underline.svg" loading="lazy" alt="packages/gestalt/src/icons/underline.svg"><span>underline</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/undo.svg"><img src="packages/gestalt/src/icons/undo.svg" loading="lazy" alt="packages/gestalt/src/icons/undo.svg"><span>undo</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/unlock.svg"><img src="packages/gestalt/src/icons/unlock.svg" loading="lazy" alt="packages/gestalt/src/icons/unlock.svg"><span>unlock</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/upload-feed.svg"><img src="packages/gestalt/src/icons/upload-feed.svg" loading="lazy" alt="packages/gestalt/src/icons/upload-feed.svg"><span>upload-feed</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/viber.svg"><img src="packages/gestalt/src/icons/viber.svg" loading="lazy" alt="packages/gestalt/src/icons/viber.svg"><span>viber</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/vibrance.svg"><img src="packages/gestalt/src/icons/vibrance.svg" loading="lazy" alt="packages/gestalt/src/icons/vibrance.svg"><span>vibrance</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/video-advance-10-seconds.svg"><img src="packages/gestalt/src/icons/video-advance-10-seconds.svg" loading="lazy" alt="packages/gestalt/src/icons/video-advance-10-seconds.svg"><span>video-advance-10-seconds</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/video-camera.svg"><img src="packages/gestalt/src/icons/video-camera.svg" loading="lazy" alt="packages/gestalt/src/icons/video-camera.svg"><span>video-camera</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/video-rewind-10-seconds.svg"><img src="packages/gestalt/src/icons/video-rewind-10-seconds.svg" loading="lazy" alt="packages/gestalt/src/icons/video-rewind-10-seconds.svg"><span>video-rewind-10-seconds</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/view-type-default-fill.svg"><img src="packages/gestalt/src/icons/view-type-default-fill.svg" loading="lazy" alt="packages/gestalt/src/icons/view-type-default-fill.svg"><span>view-type-default-fill</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/view-type-default.svg"><img src="packages/gestalt/src/icons/view-type-default.svg" loading="lazy" alt="packages/gestalt/src/icons/view-type-default.svg"><span>view-type-default</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/view-type-dense.svg"><img src="packages/gestalt/src/icons/view-type-dense.svg" loading="lazy" alt="packages/gestalt/src/icons/view-type-dense.svg"><span>view-type-dense</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/view-type-list.svg"><img src="packages/gestalt/src/icons/view-type-list.svg" loading="lazy" alt="packages/gestalt/src/icons/view-type-list.svg"><span>view-type-list</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/view-type-sparse.svg"><img src="packages/gestalt/src/icons/view-type-sparse.svg" loading="lazy" alt="packages/gestalt/src/icons/view-type-sparse.svg"><span>view-type-sparse</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/visit.svg"><img src="packages/gestalt/src/icons/visit.svg" loading="lazy" alt="packages/gestalt/src/icons/visit.svg"><span>visit</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/warmth.svg"><img src="packages/gestalt/src/icons/warmth.svg" loading="lazy" alt="packages/gestalt/src/icons/warmth.svg"><span>warmth</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/wave.svg"><img src="packages/gestalt/src/icons/wave.svg" loading="lazy" alt="packages/gestalt/src/icons/wave.svg"><span>wave</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/whatsapp.svg"><img src="packages/gestalt/src/icons/whatsapp.svg" loading="lazy" alt="packages/gestalt/src/icons/whatsapp.svg"><span>whatsapp</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/wifi-no.svg"><img src="packages/gestalt/src/icons/wifi-no.svg" loading="lazy" alt="packages/gestalt/src/icons/wifi-no.svg"><span>wifi-no</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/workflow-status-all.svg"><img src="packages/gestalt/src/icons/workflow-status-all.svg" loading="lazy" alt="packages/gestalt/src/icons/workflow-status-all.svg"><span>workflow-status-all</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/workflow-status-canceled.svg"><img src="packages/gestalt/src/icons/workflow-status-canceled.svg" loading="lazy" alt="packages/gestalt/src/icons/workflow-status-canceled.svg"><span>workflow-status-canceled</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/workflow-status-halted.svg"><img src="packages/gestalt/src/icons/workflow-status-halted.svg" loading="lazy" alt="packages/gestalt/src/icons/workflow-status-halted.svg"><span>workflow-status-halted</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/workflow-status-in-progress.svg"><img src="packages/gestalt/src/icons/workflow-status-in-progress.svg" loading="lazy" alt="packages/gestalt/src/icons/workflow-status-in-progress.svg"><span>workflow-status-in-progress</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/workflow-status-ok.svg"><img src="packages/gestalt/src/icons/workflow-status-ok.svg" loading="lazy" alt="packages/gestalt/src/icons/workflow-status-ok.svg"><span>workflow-status-ok</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/workflow-status-problem.svg"><img src="packages/gestalt/src/icons/workflow-status-problem.svg" loading="lazy" alt="packages/gestalt/src/icons/workflow-status-problem.svg"><span>workflow-status-problem</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/workflow-status-queued.svg"><img src="packages/gestalt/src/icons/workflow-status-queued.svg" loading="lazy" alt="packages/gestalt/src/icons/workflow-status-queued.svg"><span>workflow-status-queued</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/workflow-status-unstarted.svg"><img src="packages/gestalt/src/icons/workflow-status-unstarted.svg" loading="lazy" alt="packages/gestalt/src/icons/workflow-status-unstarted.svg"><span>workflow-status-unstarted</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/workflow-status-warning.svg"><img src="packages/gestalt/src/icons/workflow-status-warning.svg" loading="lazy" alt="packages/gestalt/src/icons/workflow-status-warning.svg"><span>workflow-status-warning</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/x-social.svg"><img src="packages/gestalt/src/icons/x-social.svg" loading="lazy" alt="packages/gestalt/src/icons/x-social.svg"><span>x-social</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/yahoo.svg"><img src="packages/gestalt/src/icons/yahoo.svg" loading="lazy" alt="packages/gestalt/src/icons/yahoo.svg"><span>yahoo</span></div>
+<div class="icon-card" title="packages/gestalt/src/icons/youtube.svg"><img src="packages/gestalt/src/icons/youtube.svg" loading="lazy" alt="packages/gestalt/src/icons/youtube.svg"><span>youtube</span></div>
+  </div>
+</section>
+
+<section id="tokens">
+  <h2>Design Tokens</h2>
+  <div class="count">Color, spacing, typography, elevation and motion tokens from <code>packages/gestalt-design-tokens/tokens/</code>.</div>
+  <div class="token-group"><h3>classic</h3><ul><li><code>base-color-dataviz-dark.json</code></li>
+<li><code>base-color-dataviz-light.json</code></li>
+<li><code>base-color.json</code></li>
+<li><code>base-elevation-dark.json</code></li>
+<li><code>base-elevation-light.json</code></li>
+<li><code>base-font.json</code></li>
+<li><code>base-opacity.json</code></li>
+<li><code>base-rounding.json</code></li>
+<li><code>base-space.json</code></li>
+<li><code>comp-web-color-dark.json</code></li>
+<li><code>comp-web-color-light.json</code></li>
+<li><code>comp-web-elevation-dark.json</code></li>
+<li><code>comp-web-elevation-light.json</code></li>
+<li><code>comp-web-font.json</code></li>
+<li><code>comp-web-rounding.json</code></li>
+<li><code>sema-color-dark.json</code></li>
+<li><code>sema-color-dataviz-dark.json</code></li>
+<li><code>sema-color-dataviz-light.json</code></li>
+<li><code>sema-color-light.json</code></li></ul></div>
+<div class="token-group"><h3>vr-theme</h3><ul><li><code>$metadata.json</code></li>
+<li><code>$themes.json</code></li>
+<li><code>base</code></li>
+<li><code>comp</code></li>
+<li><code>sema</code></li></ul></div>
+<div class="token-group"><h3>vr-theme-web-mapping</h3><ul><li><code>base-color-dataviz-dark.json</code></li>
+<li><code>base-color-dataviz-light.json</code></li>
+<li><code>base-color.json</code></li>
+<li><code>base-elevation-dark.json</code></li>
+<li><code>base-elevation-light.json</code></li>
+<li><code>base-font.json</code></li>
+<li><code>base-opacity.json</code></li>
+<li><code>base-rounding.json</code></li>
+<li><code>base-space.json</code></li>
+<li><code>comp-web-color-dark.json</code></li>
+<li><code>comp-web-color-light.json</code></li>
+<li><code>comp-web-font.json</code></li>
+<li><code>comp-web-rounding.json</code></li>
+<li><code>sema-color-dataviz-dark.json</code></li>
+<li><code>sema-color-dataviz-light.json</code></li>
+<li><code>sema-color.json</code></li></ul></div>
+
+</section>
+
+<section id="about">
+  <h2>About this library</h2>
+  <div class="about">
+    <p>This is a fresh, full vendor copy of Pinterest's Gestalt design system (source, docs, tokens, icons — 3,975 files, 34MB), stored under <code>frontend/guide/gestalt/</code> as a new, separate reference library. It does not replace or modify the existing style guide at <code>frontend/guide/styleguide.html</code>.</p>
+
+    <h3>Stack compatibility</h3>
+    <table>
+      <tr><th>App</th><th>Stack</th><th>Gestalt status</th></tr>
+      <tr><td>/admin</td><td>Next.js 15 + React 19.1</td><td>Compatible — installed as a dependency</td></tr>
+      <tr><td>/webapp</td><td>Vanilla HTML/JS PWA</td><td>Not compatible — Gestalt is React-only. Kept here for reference (tokens/icons can be hand-ported).</td></tr>
+      <tr><td>/frontend/website</td><td>Vanilla HTML/JS</td><td>Not compatible — same reason.</td></tr>
+    </table>
+
+    <div class="warn">
+      <strong>Honest note:</strong> /admin already has its own component layer (shadcn/ui + Tailwind v4 + Base UI). Installing Gestalt makes its components importable there, but running two visual systems side by side risks style collisions and an inconsistent UI unless one is deliberately chosen for new work. Gestalt's global stylesheet (<code>gestalt/dist/gestalt.css</code>) was deliberately <em>not</em> imported app-wide for this reason — import it scoped to whichever route actually uses Gestalt.
+    </div>
+
+    <h3>What's in the manifest</h3>
+    <p>See <a href="../gestalt-library.md">gestalt-library.md</a> for the full package-by-package breakdown, commit hash, and what was and wasn't touched.</p>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+.textField {
+  composes: borderBox from "../Layout.css";
+  composes: Text from "../Text.css";
+  composes: xsCol12 from "../Column.css";
+}
+
+.textField.sm {
+  padding: var(--space-100) var(--space-200);
+}
+
+.textField.md {
+  padding: var(--space-200) var(--space-300);
+}
+
+.textField.lg {
+  padding: var(--space-300) var(--space-400);
+}
+
+.textField::placeholder {
+  color: var(--color-text-formfield-placeholder);
+}
+
+.unstyledTextField,
+.textFieldSpacer {
+  composes: unstyled from "../sharedSubcomponents/FormElement.css";
+  composes: Text from "../Text.css";
+  composes: fontSize300 from "../Typography.css";
+  margin-bottom: var(--space-100);
+  padding: var(--space-100) var(--space-0);
+}
+
+.unstyledTextField {
+  composes: absolute left0 top0 right0 bottom0 from "../Layout.css";
+  width: 100%;
+}
+
+.unstyledTextField:focus {
+  outline: 0;
+}
+
+.textFieldSpacer {
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+.textFieldWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*
+Overriding the default bottom padding with important because tags need less padding at the bottom
+*/
+
+.sm.textFieldWrapper {
+  /* The tag's margin bottom adds the other 2px */
+  /* stylelint-disable-next-line declaration-no-important */
+  padding-bottom: var(--space-0) !important;
+  /* stylelint-disable-next-line declaration-no-important */
+  padding-top: 2px !important;
+}
+
+.md.textFieldWrapper {
+  /* The tag's margin bottom adds the other 2px */
+  /* stylelint-disable-next-line declaration-no-important */
+  padding-bottom: var(--space-100) !important;
+  /* stylelint-disable-next-line declaration-no-important */
+  padding-top: 6px !important;
+}
+
+.lg.textFieldWrapper {
+  /* The larger tag's extra height and margin add the other 6px */
+  /* stylelint-disable-next-line declaration-no-important */
+  padding-bottom: var(--space-0) !important;
+  /* stylelint-disable-next-line declaration-no-important */
+  padding-top: 6px !important;
+}
+
+html:not([dir="rtl"]) .actionButton {
+  padding-right: var(--space-800);
+}
+
+html[dir="rtl"] .actionButton {
+  padding-left: var(--space-800);
+}
+
+.actionButtonContainer {
+  bottom: var(--space-0);
+  position: absolute;
+  top: var(--space-0);
+}
+
+html:not([dir="rtl"]) .actionButtonContainer {
+  right: var(--space-0);
+}
+
+html[dir="rtl"] .actionButtonContainer {
+  left: var(--space-0);
+}

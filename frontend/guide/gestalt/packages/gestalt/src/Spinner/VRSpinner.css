@@ -1,0 +1,110 @@
+.spinner {
+  /* The value may be set from `styles` attirbute. */
+  --g-enter-delay: 0ms;
+
+  /* Shorthand for long token name. */
+  --g-intro-duration: var(--comp-spinner-motion-enter-duration);
+
+  /* Declaration the variable. Actual value is read from `styles` attirbute. */
+  --g-size: 40px;
+
+  animation-composition: add;
+  animation-delay: var(--g-enter-delay), 0s;
+  animation-duration: 1s, var(--comp-spinner-motion-exit-duration);
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite, 1;
+  animation-name: spin;
+  animation-timing-function: linear, ease-out;
+  height: var(--g-size);
+  width: var(--g-size);
+}
+
+.spinner.exit {
+  animation-name: spin, spinner-outro;
+}
+
+svg * {
+  transform-box: fill-box;
+}
+
+.spinner circle {
+  /* Declaration of variables. Actual values are read from `styles` attirbute. */
+  --g-start-x: 0;
+  --g-start-y: 0;
+
+  /* Shorthand for calculated delay. */
+  --g-base-delay: calc(var(--g-intro-duration) + var(--g-enter-delay));
+
+  animation-composition: add;
+  animation-duration: 800ms, 1.8s, var(--g-intro-duration);
+  animation-fill-mode: both;
+  animation-iteration-count: infinite, infinite, 1;
+  animation-name: scale, colors, dot-intro;
+  animation-timing-function: linear, linear, ease-in-out;
+  transform-origin: center center;
+}
+
+.spinner circle:nth-child(1) {
+  animation-delay: calc(var(--g-base-delay) + 0ms), var(--g-base-delay),
+    var(--g-enter-delay);
+}
+
+.spinner circle:nth-child(2) {
+  animation-delay: calc(var(--g-base-delay) + 100ms), var(--g-base-delay),
+    calc(var(--g-enter-delay) + 150ms);
+}
+
+.spinner circle:nth-child(3) {
+  animation-delay: calc(var(--g-base-delay) + 200ms), var(--g-base-delay),
+    calc(var(--g-enter-delay) + 300ms);
+}
+
+@keyframes dot-intro {
+  from {
+    transform: translate(var(--g-start-x), var(--g-start-y)) scale(0);
+  }
+
+  to {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes spinner-outro {
+  to {
+    transform: scale(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes scale {
+  50% {
+    transform: scale(0.666);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes colors {
+  0% {
+    fill: var(--comp-spinner-color-background-1);
+  }
+
+  33.333% {
+    fill: var(--comp-spinner-color-background-2);
+  }
+
+  66.666% {
+    fill: var(--comp-spinner-color-background-3);
+  }
+
+  100% {
+    fill: var(--comp-spinner-color-background-1);
+  }
+}

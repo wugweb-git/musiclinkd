@@ -1,0 +1,263 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Desktop Modal renders 1`] = `
+<body
+  style="overflow: hidden;"
+>
+  <div>
+    <div
+      name="trap-focus"
+    >
+      <div
+        aria-label="Test modal"
+        class="container"
+        role="dialog"
+      >
+        <div
+          class="backdrop zoomOut"
+        />
+        <div
+          class="wrapper hideOutline"
+          style="width: 540px;"
+          tabindex="-1"
+        >
+          <div
+            class="box flexGrow relative xsDirectionColumn xsDisplayFlex"
+            style="width: 100%;"
+          >
+            <div
+              class="box fit relative"
+              style="z-index: 1;"
+            >
+              <div
+                class="box justifyCenter paddingX600 paddingY600"
+              >
+                <h1
+                  class="Heading fontSize600 default alignCenter breakWord"
+                >
+                  Heading
+                </h1>
+                <div
+                  class="box marginTop100"
+                >
+                  <div
+                    class="default alignCenter breakWord Text fontSize300 fontWeightNormal"
+                  >
+                    Subheading
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="box flexGrow overflowAuto paddingX600 paddingY600 relative"
+              style="height: 100%;"
+            >
+              Modal content
+            </div>
+            <div
+              class="box fit relative"
+              style="z-index: 1;"
+            >
+              <div
+                class="box paddingX600 paddingY600"
+              >
+                <div
+                  class="Flex rowGap200 columnGap200 justifyEnd xsDirectionRow"
+                >
+                  <div
+                    class="FlexItem"
+                  >
+                    <button
+                      class="button inline accessibilityOutline parentButton"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <div
+                        class="button inline accessibilityOutline tapTransition md gray enabled childrenDiv"
+                      >
+                        <div
+                          class="default alignCenter Text fontSize300 fontWeightSemiBold"
+                        >
+                          Cancel
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="FlexItem"
+                  >
+                    <button
+                      class="button inline accessibilityOutline parentButton"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <div
+                        class="button inline accessibilityOutline tapTransition md red enabled childrenDiv"
+                      >
+                        <div
+                          class="inverse alignCenter Text fontSize300 fontWeightSemiBold"
+                        >
+                          Next
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Modal Mobile Modal renders 1`] = `
+<body
+  style="overflow: hidden;"
+>
+  <div>
+    <div
+      name="trap-focus"
+    >
+      <div
+        class="container fullPageContainer"
+      >
+        <div
+          class="backdrop"
+        />
+        <div
+          aria-label="Bottom sheet"
+          class="fullPageWrapper hideOutline"
+          id=":r0:"
+          role="dialog"
+          style="width: 100%;"
+          tabindex="-1"
+        >
+          <div
+            class="box relative xsDirectionColumn xsDisplayFlex"
+            style="width: 100%;"
+          >
+            <div
+              class="box fit paddingX400 paddingY400 relative"
+            >
+              <div
+                class="Flex rowGap400 columnGap400 justifyCenter xsDirectionRow xsItemsCenter"
+              >
+                <div
+                  class="FlexItem flexNone"
+                >
+                  <button
+                    aria-controls=":r0:"
+                    aria-label="Dismiss bottom sheet"
+                    class="parentButton"
+                    type="button"
+                  >
+                    <div
+                      class="button tapTransition enabled"
+                    >
+                      <div
+                        class="pog roundingCircle transparent"
+                        style="height: 48px; width: 48px;"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          aria-label=""
+                          class="default icon iconBlock"
+                          height="20"
+                          role="img"
+                          viewBox="0 0 24 24"
+                          width="20"
+                        >
+                          <path
+                            d="test-file-stub"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+                <div
+                  class="FlexItem flexGrow"
+                >
+                  <div
+                    class="Flex rowGap0 columnGap0 xsDirectionColumn"
+                  >
+                    <h1
+                      class="Heading fontSize300 default alignCenter breakWord lineClamp"
+                      title="Heading"
+                    >
+                      Heading
+                    </h1>
+                    <div
+                      class="default alignCenter breakWord Text fontSize100 fontWeightNormal"
+                    >
+                      Subheading
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="box flexGrow overflowAuto paddingX400 paddingY200"
+            >
+              Modal content
+            </div>
+            <div
+              class="box fit relative"
+            >
+              <div
+                class="box paddingX400 paddingY400"
+              >
+                <div
+                  class="Flex rowGap200 columnGap200 justifyEnd xsDirectionRow"
+                >
+                  <div
+                    class="FlexItem"
+                  >
+                    <button
+                      class="button inline accessibilityOutline parentButton"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <div
+                        class="button inline accessibilityOutline tapTransition md gray enabled childrenDiv"
+                      >
+                        <div
+                          class="default alignCenter Text fontSize300 fontWeightSemiBold"
+                        >
+                          Cancel
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="FlexItem"
+                  >
+                    <button
+                      class="button inline accessibilityOutline parentButton"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <div
+                        class="button inline accessibilityOutline tapTransition md red enabled childrenDiv"
+                      >
+                        <div
+                          class="inverse alignCenter Text fontSize300 fontWeightSemiBold"
+                        >
+                          Next
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

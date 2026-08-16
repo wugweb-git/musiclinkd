@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NumberField NumberField normal 1`] = `
+<span>
+  <div
+    className="box relative"
+  >
+    <input
+      aria-invalid="false"
+      className="textField base enabled normal md medium md truncate"
+      disabled={false}
+      id="test"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      pattern="\\\\d*"
+      readOnly={false}
+      type="number"
+    />
+  </div>
+</span>
+`;
+
+exports[`NumberField NumberField with autocomplete 1`] = `
+<span>
+  <div
+    className="box relative"
+  >
+    <input
+      aria-invalid="false"
+      autoComplete="on"
+      className="textField base enabled normal md medium md truncate"
+      disabled={false}
+      id="test"
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      pattern="\\\\d*"
+      readOnly={false}
+      type="number"
+    />
+  </div>
+</span>
+`;
+
+exports[`NumberField NumberField with enterKeyHint 1`] = `
+<span>
+  <div
+    className="box relative"
+  >
+    <input
+      aria-invalid="false"
+      className="textField base enabled normal md medium md truncate"
+      disabled={false}
+      enterKeyHint="go"
+      id="test"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      pattern="\\\\d*"
+      readOnly={false}
+      type="number"
+    />
+  </div>
+</span>
+`;
+
+exports[`NumberField NumberField with error 1`] = `
+<span>
+  <div
+    className="box relative"
+  >
+    <input
+      aria-invalid="true"
+      className="textField base enabled errored md medium md truncate"
+      disabled={false}
+      id="test"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      pattern="\\\\d*"
+      readOnly={false}
+      type="number"
+    />
+  </div>
+  <div
+    className="md_startPadding md_topPadding"
+    id="test-error"
+  >
+    <div
+      className="error alignStart breakWord Text fontSize100 fontWeightNormal"
+    >
+      <span
+        className="formErrorMessage"
+        id="test-error"
+      >
+        <div
+          className="box"
+          role="alert"
+        >
+          <div
+            className="Flex rowGap200 columnGap200 xsDirectionRow xsItemsCenter"
+          >
+            <div
+              className="FlexItem"
+            >
+              <div
+                className="box"
+              >
+                <svg
+                  aria-hidden={true}
+                  aria-label=""
+                  className="error icon iconBlock"
+                  height={16}
+                  role="img"
+                  viewBox="0 0 16 16"
+                  width={16}
+                >
+                  <path
+                    d="test-file-stub"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div
+              className="FlexItem"
+            >
+              error message
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</span>
+`;
+
+exports[`NumberField NumberField with name 1`] = `
+<span>
+  <div
+    className="box relative"
+  >
+    <input
+      aria-invalid="false"
+      className="textField base enabled normal md medium md truncate"
+      disabled={false}
+      id="test"
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      pattern="\\\\d*"
+      readOnly={false}
+      type="number"
+    />
+  </div>
+</span>
+`;

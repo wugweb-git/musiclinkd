@@ -1,0 +1,196 @@
+.button {
+  composes: border from "./Borders.css";
+  composes: borderBox minWidth60 from "./Layout.css";
+}
+
+.buttonVr {
+  box-sizing: border-box;
+  min-width: 60px;
+}
+
+.rounding600 {
+  border-radius: var(--rounding-600);
+}
+
+.rounding400 {
+  border-radius: var(--rounding-400);
+}
+
+.rounding300 {
+  border-radius: var(--rounding-300);
+}
+
+.rounding200 {
+  border-radius: var(--rounding-200);
+}
+
+.rounding100 {
+  border-radius: var(--rounding-100);
+}
+
+.parentButton {
+  composes: paddingX0 paddingY0 from "./boxWhitespace.css";
+  composes: noBorder from "./Borders.css";
+  background-color: var(--color-transparent);
+}
+
+.colorPickerButton {
+  composes: noBorder from "./Borders.css";
+  background-color: var(--color-transparent);
+  cursor: pointer;
+  padding: 0;
+}
+
+.thumbnailDark img,
+.colorPickerButtonDark {
+  filter: invert(100%);
+}
+
+.thumbnailDisabled img {
+  filter: invert(46%) brightness(99%) contrast(91%);
+}
+
+.colorPickerButtonDisabled {
+  cursor: default;
+  filter: opacity(0.5);
+}
+
+.childrenDiv {
+  composes: flex from "./Layout.css";
+  composes: xsItemsCenter justifyCenter from "./Layout.css";
+  composes: fullWidth from "./TapArea.css";
+}
+
+.sm {
+  composes: small from "./Layout.css";
+  composes: paddingX300 paddingY100 from "./boxWhitespace.css";
+}
+
+.md {
+  composes: medium from "./Layout.css";
+  composes: paddingX300 paddingY200 from "./boxWhitespace.css";
+}
+
+.lg {
+  composes: large from "./Layout.css";
+  composes: paddingX400 paddingY300 from "./boxWhitespace.css";
+}
+
+.smVr {
+  min-height: 28px;
+  padding: var(--sema-space-100) var(--sema-space-200);
+}
+
+.mdVr {
+  min-height: var(--sema-space-900);
+  padding: var(--sema-space-200) var(--sema-space-300);
+}
+
+.lgVr {
+  min-height: var(--sema-space-1200);
+  padding: var(--sema-space-300) var(--sema-space-400);
+}
+
+.compact {
+  min-width: 0;
+}
+
+.thumbnailSm {
+  composes: small from "./Layout.css";
+  composes: paddingX100 from "./boxWhitespace.css";
+  padding-bottom: 2px;
+  padding-top: var(--space-200);
+}
+
+.thumbnailMd {
+  composes: medium from "./Layout.css";
+  composes: paddingX200 paddingY200 from "./boxWhitespace.css";
+}
+
+.thumbnailLg {
+  composes: large from "./Layout.css";
+  composes: paddingX300 paddingY200 from "./boxWhitespace.css";
+}
+
+.enabled {
+  composes: pointer from "./Cursor.css";
+}
+
+/* STATES */
+
+.activeBorderVr {
+  border: 1px solid var(--sema-color-border-interactive);
+}
+
+.disabledBorderVr {
+  border: 1px solid var(--color-background-button-disabled-default);
+}
+
+.disabledTransparentBorderVr {
+  border: 1px solid var(--sema-color-border-disabled);
+}
+
+.disabled {
+  background-color: var(--color-background-button-disabled-default);
+  cursor: default;
+  pointer-events: none;
+}
+
+.disabledTransparent {
+  background-color: var(--color-background-button-tertiary-default);
+}
+
+.disabledRed {
+  background-color: var(--color-background-button-disabled-default);
+}
+
+.selected {
+  composes: borderColorSelected from "./Borders.css";
+  background-color: var(--color-background-button-selected-default);
+}
+
+.selectedDisabled {
+  composes: sizeLg from "./Borders.css";
+  background-color: var(--color-background-button-disabled-default);
+  margin: calc(var(--g-border-width-lg) / 2 * -1);
+}
+
+.accessibilityOutlineLightBackground {
+  border-color: var(--sema-color-border-focus-inner-default);
+  outline: 2px solid var(--sema-color-border-focus-outer-default);
+  outline-offset: 2px;
+}
+
+.interactiveBorder:hover {
+  border-color: var(--sema-color-hover-border-interactive);
+}
+
+.interactiveBorder:active {
+  border-color: var(--sema-color-pressed-border-interactive);
+}
+
+/* COLORS */
+
+.red {
+  background-color: var(--color-background-button-primary-default);
+}
+
+.red:hover {
+  background-color: var(--color-background-button-primary-hover);
+}
+
+.red:active {
+  background-color: var(--color-background-button-primary-active);
+}
+
+.transparent {
+  background-color: var(--color-background-button-tertiary-default);
+}
+
+.transparent:hover {
+  background-color: var(--color-background-button-tertiary-default);
+}
+
+.transparent:active {
+  background-color: var(--color-background-button-tertiary-default);
+}

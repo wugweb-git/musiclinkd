@@ -1,0 +1,92 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
+  "ignoreFiles": [
+    "packages/*/dist/**/*.css",
+    "packages/**/*.js",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "packages/stylelint-plugin-gestalt/src/__fixtures__/**/*.css"
+  ],
+  "plugins": [
+    "stylelint-value-no-unknown-custom-properties",
+    "stylelint-order",
+    "./packages/stylelint-plugin-gestalt/src/no-invalid-design-tokens.js"
+  ],
+  "rules": {
+    "stylelint-gestalt-plugin/no-invalid-design-tokens": true,
+    "alpha-value-notation": null,
+    "color-named": [
+      "never",
+      {
+        "ignoreProperties": ["composes"]
+      }
+    ],
+    "custom-property-pattern": "g|color|font|elevation|space|opacity|motion|font-.+",
+    "value-keyword-case": [
+      "lower",
+      {
+        "ignoreProperties": ["composes"],
+        "camelCaseSvgKeywords": true
+      }
+    ],
+    "declaration-block-no-duplicate-properties": [
+      true,
+      {
+        "ignore": ["consecutive-duplicates"]
+      }
+    ],
+    "declaration-no-important": true,
+    "function-url-quotes": "always",
+    "max-nesting-depth": 0,
+    "media-feature-name-no-unknown": [
+      true,
+      {
+        "ignoreMediaFeatureNames": ["inverted-colors"]
+      }
+    ],
+    "no-descending-specificity": true,
+    "no-duplicate-selectors": true,
+    "no-unknown-animations": true,
+    "csstools/value-no-unknown-custom-properties": [
+      true,
+      {
+        "importFrom": [
+          "packages/gestalt-design-tokens/dist/css/vr-theme-web-mapping/variables.css",
+          "packages/gestalt-design-tokens/dist/css/classic/variables.css",
+          "packages/gestalt-design-tokens/dist/css/classic/variables.css",
+          "packages/gestalt/src/Column.css",
+          "packages/gestalt/src/Borders.css"
+        ]
+      }
+    ],
+    "number-max-precision": 5,
+    "order/properties-order": [
+      ["composes"],
+      {
+        "unspecified": "bottomAlphabetical"
+      }
+    ],
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": ["composes"]
+      }
+    ],
+    "property-no-vendor-prefix": true,
+    "rule-empty-line-before": [
+      "always",
+      {
+        "except": ["first-nested"]
+      }
+    ],
+    "selector-class-pattern": "[a-z]+((\\d)|([A-Z0-9][a-z0-9]+))*([A-Z])?",
+    "selector-max-id": 0,
+    "selector-no-vendor-prefix": true,
+    "selector-pseudo-class-no-unknown": [
+      true,
+      { "ignorePseudoClasses": ["global"] }
+    ],
+    "unit-disallowed-list": ["em"],
+    "value-no-vendor-prefix": true
+  }
+}

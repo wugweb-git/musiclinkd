@@ -1,0 +1,9 @@
+coverage
+docs/.next
+docs/docs-components/metadata.js
+node_modules
+packages/gestalt/dist
+packages/gestalt-charts/dist
+packages/gestalt-datepicker/dist
+packages/eslint-plugin-gestalt/dist
+packages/eslint-plugin-gestalt/src/__fixtures__

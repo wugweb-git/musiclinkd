@@ -1,0 +1,38 @@
+html:not([dir="rtl"]) .borderRight {
+  border-right: var(--g-border-width) solid var(--color-border-container);
+}
+
+html[dir="rtl"] .borderRight {
+  border-left: var(--g-border-width) solid var(--color-border-container);
+}
+
+.dateFieldSection {
+  background-color: transparent;
+  border-bottom: var(--g-border-width) solid var(--color-border-container);
+  border-radius: inherit;
+  padding: var(--space-300);
+  position: relative;
+}
+
+.dateFieldSection:first-child {
+  border-top-right-radius: var(--rounding-400);
+}
+
+.dateFieldSectionTopLeftBorder:first-child {
+  border-top-left-radius: var(--rounding-400);
+}
+
+.dateFieldSectionActive {
+  background-color: var(--color-gray-roboflow-100);
+}
+
+.dateFieldSectionLeftBorder {
+  background-color: var(--color-black-cosmicore-900);
+  border-radius: 10px;
+  height: 60%;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+}

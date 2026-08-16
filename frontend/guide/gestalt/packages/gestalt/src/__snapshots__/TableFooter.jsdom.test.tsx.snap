@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table.Footer renders correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="box overflowAuto"
+      style="max-height: 200px;"
+      tabindex="0"
+    >
+      <table
+        class="table"
+      >
+        <caption
+          class="absolute box overflowHidden"
+          style="clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; height: 1px; width: 1px;"
+        >
+          Sticky footer
+        </caption>
+        <tfoot
+          class="tfooter"
+        >
+          <tr
+            class=""
+          >
+            <td
+              class="td"
+            >
+              <div
+                class="default alignStart breakWord Text fontSize300 fontWeightSemiBold"
+              >
+                Total
+              </div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Table.Footer sticky footer renders correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="box overflowAuto"
+      style="max-height: 200px;"
+      tabindex="0"
+    >
+      <table
+        class="table"
+      >
+        <caption
+          class="absolute box overflowHidden"
+          style="clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; height: 1px; width: 1px;"
+        >
+          Sticky footer
+        </caption>
+        <tfoot
+          class="stickyFooter"
+        >
+          <tr
+            class=""
+          >
+            <td
+              class="td"
+            >
+              <div
+                class="default alignStart breakWord Text fontSize300 fontWeightSemiBold"
+              >
+                Total
+              </div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</body>
+`;

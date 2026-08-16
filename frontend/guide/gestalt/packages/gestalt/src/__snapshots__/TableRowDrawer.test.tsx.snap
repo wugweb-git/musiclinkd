@@ -1,0 +1,307 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with drawer 1`] = `
+<div
+  className="box overflowAuto"
+  style={
+    Object {
+      "maxHeight": undefined,
+    }
+  }
+  tabIndex={0}
+>
+  <table
+    className="table"
+  >
+    <caption
+      className="absolute box overflowHidden"
+      style={
+        Object {
+          "clip": "rect(1px, 1px, 1px, 1px)",
+          "height": 1,
+          "whiteSpace": "nowrap",
+          "width": 1,
+        }
+      }
+    >
+      Table Row Drawer
+    </caption>
+    <thead
+      className="thead"
+    >
+      <tr
+        className=""
+      >
+        <th
+          className="th"
+          scope="col"
+          style={
+            Object {
+              "left": undefined,
+              "right": undefined,
+            }
+          }
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            TestA
+          </div>
+        </th>
+        <th
+          className="th"
+          scope="col"
+          style={
+            Object {
+              "left": undefined,
+              "right": undefined,
+            }
+          }
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            TestB
+          </div>
+        </th>
+        <th
+          className="th"
+          scope="col"
+          style={
+            Object {
+              "left": undefined,
+              "right": undefined,
+            }
+          }
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            TestC
+          </div>
+        </th>
+        <th
+          className="th"
+          scope="col"
+          style={
+            Object {
+              "left": undefined,
+              "right": undefined,
+            }
+          }
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            TestD
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      className="tbody"
+    >
+      <tr
+        aria-details="drawerTest"
+        className=""
+      >
+        <td
+          className="td"
+          style={
+            Object {
+              "left": undefined,
+              "right": undefined,
+            }
+          }
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Row1A
+          </div>
+        </td>
+        <td
+          className="td"
+          style={
+            Object {
+              "left": undefined,
+              "right": undefined,
+            }
+          }
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Row1B
+          </div>
+        </td>
+        <td
+          className="td"
+          style={
+            Object {
+              "left": undefined,
+              "right": undefined,
+            }
+          }
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Row1C
+          </div>
+        </td>
+        <td
+          className="td"
+          style={
+            Object {
+              "left": undefined,
+              "right": undefined,
+            }
+          }
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Row1D
+          </div>
+        </td>
+      </tr>
+      <tr
+        id="drawerTest"
+      >
+        <td
+          className="drawer"
+          colSpan={4}
+        >
+          <div
+            className="box paddingX200 paddingY200"
+          >
+            <div
+              className="box mdDirectionRow paddingX400 paddingY400 recommendationWeak rounding4 smPaddingY400 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+              style={
+                Object {
+                  "width": "100%",
+                }
+              }
+            >
+              <div
+                className="Flex rowGap400 columnGap0 flexGrow mdItemsCenter xsDirectionRow xsItemsStart"
+                style={
+                  Object {
+                    "width": "100%",
+                  }
+                }
+              >
+                <div
+                  className="FlexItem"
+                >
+                  <svg
+                    aria-hidden={null}
+                    aria-label="test"
+                    className="recommendation icon iconBlock"
+                    height={16}
+                    role="img"
+                    viewBox="0 0 24 24"
+                    width={16}
+                  >
+                    <path
+                      d="test-file-stub"
+                    />
+                  </svg>
+                </div>
+                <div
+                  className="FlexItem flexGrow"
+                >
+                  <div
+                    className="box"
+                    style={
+                      Object {
+                        "marginTop": "-1px",
+                      }
+                    }
+                  >
+                    <div>
+                      <span
+                        className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+                      />
+                      <span
+                        className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+                      >
+                        Test BannerSlim
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr
+        className=""
+      >
+        <td
+          className="td"
+          style={
+            Object {
+              "left": undefined,
+              "right": undefined,
+            }
+          }
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Row2A
+          </div>
+        </td>
+        <td
+          className="td"
+          style={
+            Object {
+              "left": undefined,
+              "right": undefined,
+            }
+          }
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Row2B
+          </div>
+        </td>
+        <td
+          className="td"
+          style={
+            Object {
+              "left": undefined,
+              "right": undefined,
+            }
+          }
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Row2C
+          </div>
+        </td>
+        <td
+          className="td"
+          style={
+            Object {
+              "left": undefined,
+              "right": undefined,
+            }
+          }
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Row2D
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

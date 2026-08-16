@@ -1,0 +1,399 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Toast /> Error Toast 1`] = `
+<div
+  className="toast"
+  role="status"
+>
+  <div
+    className="box errorBase paddingY300 rounding4"
+    style={
+      Object {
+        "minHeight": undefined,
+        "paddingInlineEnd": "var(--rounding-400)",
+        "paddingInlineStart": "var(--rounding-400)",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="Flex rowGap400 columnGap400 xsDirectionRow xsItemsCenter"
+    >
+      <div
+        className="FlexItem flexNone"
+      >
+        <svg
+          aria-hidden={null}
+          aria-label="Error message"
+          className="inverse icon iconBlock"
+          height={24}
+          role="img"
+          viewBox="0 0 24 24"
+          width={24}
+        >
+          <path
+            d="test-file-stub"
+          />
+        </svg>
+      </div>
+      <div
+        className="FlexItem flexGrow"
+      >
+        <span
+          className="inverse alignStart breakWord lineClamp Text fontSize300 fontWeightSemiBold"
+          style={
+            Object {
+              "WebkitLineClamp": 2,
+            }
+          }
+        >
+          Same great profile, slightly new look. Learn more?
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Toast /> Text + _dangerouslySetPrimaryAction 1`] = `
+<div
+  className="toast"
+  role="status"
+>
+  <div
+    className="box inverse paddingY300 rounding4"
+    style={
+      Object {
+        "minHeight": undefined,
+        "paddingInlineEnd": "var(--rounding-400)",
+        "paddingInlineStart": "var(--rounding-400)",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="Flex rowGap400 columnGap400 xsDirectionRow xsItemsCenter"
+    >
+      <div
+        className="FlexItem flexGrow"
+      >
+        <span
+          className="fontSize300Override textColorOverrideLight"
+        >
+          <span
+            className="default alignStart breakWord Text fontSize300 fontWeightSemiBold"
+          >
+            Saved to
+             
+            <a
+              className="noOutline inheritColor rounding0 inlineBlock tapTransition hoverUnderline noUnderline outlineFocus"
+              href="https://www.pinterest.com/search/pins/?q=home%20decor"
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyPress={[Function]}
+              onMouseDown={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchCancel={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              rel=""
+            >
+              Home decor
+            </a>
+          </span>
+        </span>
+      </div>
+      <div
+        className="FlexItem flexNone"
+      >
+        <button
+          aria-label="test"
+          className="button inline accessibilityOutline parentButton"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <div
+            className="button inline accessibilityOutline tapTransition lg gray enabled childrenDiv"
+          >
+            <div
+              className="default alignCenter Text fontSize300 fontWeightSemiBold"
+            >
+              Undo
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Toast /> Text + Image + Button 1`] = `
+<div
+  className="toast"
+  role="status"
+>
+  <div
+    className="box inverse paddingY300 rounding4"
+    style={
+      Object {
+        "minHeight": undefined,
+        "paddingInlineEnd": "var(--rounding-400)",
+        "paddingInlineStart": "var(--rounding-400)",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="Flex rowGap400 columnGap400 xsDirectionRow xsItemsCenter"
+    >
+      <div
+        className="FlexItem flexNone"
+      >
+        <div
+          aria-hidden={true}
+          className="box"
+        >
+          <div
+            className="Mask rounding2 willChangeTransform"
+            style={
+              Object {
+                "height": 32,
+                "width": 32,
+              }
+            }
+          >
+            <div
+              className="box relative"
+              style={
+                Object {
+                  "backgroundColor": "transparent",
+                  "paddingBottom": "100%",
+                }
+              }
+            >
+              <img
+                alt=""
+                className="img"
+                fetchpriority="auto"
+                loading="auto"
+                onError={[Function]}
+                onLoad={[Function]}
+                src="https://i.pinimg.com/474x/b2/55/ed/b255edbf773ffb3985394e6efb9d2a49.jpg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="FlexItem flexGrow"
+      >
+        <span
+          className="fontSize300Override textColorOverrideLight"
+        >
+          <span
+            className="default alignStart breakWord Text fontSize300 fontWeightSemiBold"
+          >
+            Saved to
+             
+            <a
+              className="noOutline inheritColor rounding0 inlineBlock tapTransition hoverUnderline noUnderline outlineFocus"
+              href="https://www.pinterest.com/search/pins/?q=home%20decor"
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyPress={[Function]}
+              onMouseDown={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchCancel={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              rel=""
+            >
+              Home decor
+            </a>
+          </span>
+        </span>
+      </div>
+      <div
+        className="FlexItem flexNone"
+      >
+        <button
+          aria-label="Undo undo action"
+          className="button inline accessibilityOutline parentButton"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <div
+            className="button inline accessibilityOutline tapTransition sm gray enabled childrenDiv"
+          >
+            <div
+              className="default alignCenter Text fontSize200 fontWeightSemiBold"
+            >
+              Undo
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Toast /> Text + Image 1`] = `
+<div
+  className="toast"
+  role="status"
+>
+  <div
+    className="box inverse paddingY300 rounding4"
+    style={
+      Object {
+        "minHeight": undefined,
+        "paddingInlineEnd": "var(--rounding-400)",
+        "paddingInlineStart": "var(--rounding-400)",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="Flex rowGap400 columnGap400 xsDirectionRow xsItemsCenter"
+    >
+      <div
+        className="FlexItem flexNone"
+      >
+        <div
+          aria-hidden={true}
+          className="box"
+        >
+          <div
+            className="Mask rounding2 willChangeTransform"
+            style={
+              Object {
+                "height": 32,
+                "width": 32,
+              }
+            }
+          >
+            <div
+              className="box relative"
+              style={
+                Object {
+                  "backgroundColor": "transparent",
+                  "paddingBottom": "100%",
+                }
+              }
+            >
+              <img
+                alt=""
+                className="img"
+                fetchpriority="auto"
+                loading="auto"
+                onError={[Function]}
+                onLoad={[Function]}
+                src="https://i.pinimg.com/474x/b2/55/ed/b255edbf773ffb3985394e6efb9d2a49.jpg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="FlexItem flexGrow"
+      >
+        <span
+          className="fontSize300Override textColorOverrideLight"
+        >
+          <span
+            className="default alignStart breakWord Text fontSize300 fontWeightSemiBold"
+          >
+            Saved to
+             
+            <a
+              className="noOutline inheritColor rounding0 inlineBlock tapTransition hoverUnderline noUnderline outlineFocus"
+              href="https://www.pinterest.com/search/pins/?q=home%20decor"
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyPress={[Function]}
+              onMouseDown={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchCancel={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              rel=""
+            >
+              Home decor
+            </a>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Toast /> Text Only 1`] = `
+<div
+  className="toast"
+  role="status"
+>
+  <div
+    className="box inverse paddingY300 rounding4"
+    style={
+      Object {
+        "minHeight": undefined,
+        "paddingInlineEnd": "var(--rounding-400)",
+        "paddingInlineStart": "var(--rounding-400)",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="Flex rowGap400 columnGap400 xsDirectionRow xsItemsCenter"
+    >
+      <div
+        className="FlexItem flexGrow"
+      >
+        <span
+          className="inverse alignStart breakWord lineClamp Text fontSize300 fontWeightNormal"
+          style={
+            Object {
+              "WebkitLineClamp": 2,
+            }
+          }
+        >
+          Same great profile, slightly new look. Learn more?
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

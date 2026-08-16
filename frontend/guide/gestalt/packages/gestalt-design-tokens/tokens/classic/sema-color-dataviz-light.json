@@ -1,0 +1,25 @@
+{
+  "color": {
+    "data-visualization": {
+      "primary": {
+        "value": "{color.data-visualization.05.value}"
+      },
+      "success": {
+        "graph": {
+          "value": "{color.green.matchacado.500.value}"
+        },
+        "text": {
+          "value": "{color.green.matchacado.600.value}"
+        }
+      },
+      "error": {
+        "graph": {
+          "value": "#ED0000"
+        },
+        "text": {
+          "value": "{color.red.pushpin.500.value}"
+        }
+      }
+    }
+  }
+}

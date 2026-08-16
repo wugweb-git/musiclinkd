@@ -1,0 +1,12 @@
+__fixtures__
+__testfixtures__
+build
+coverage
+dist
+docs/.next/
+docs/docs-components/metadata.js
+docs/markdown/**/*.md
+node_modules
+package.json
+docs/graphics/year-in-review-2023/lottie/*.json
+.rollup.cache/

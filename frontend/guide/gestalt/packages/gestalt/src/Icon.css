@@ -1,0 +1,77 @@
+.icon {
+  fill: currentColor;
+  stroke-width: 0;
+  vertical-align: middle;
+}
+
+.iconBlock {
+  composes: block from "./Layout.css";
+}
+
+html[dir="rtl"] .rtlSupport {
+  /*
+  Using `scale` instead of `rotateY`.
+  This is a workaround for the bug in iOS browsers with rendering rotated SVGs over video.
+  Bug repro: https://gist.github.com/diyorbek/945189e3036552d2de34ae955a1605ee
+  */
+  transform: scale(-1, 1);
+  transform-origin: center;
+}
+
+/* semantic icon colors */
+
+.inherit {
+  color: inherit;
+}
+
+.inverse {
+  color: var(--color-icon-inverse);
+}
+
+.error {
+  color: var(--color-icon-error);
+}
+
+.default {
+  color: var(--color-icon-default);
+}
+
+.disabled {
+  color: var(--color-icon-disabled);
+}
+
+.subtle {
+  color: var(--color-icon-subtle);
+}
+
+.warning {
+  color: var(--color-icon-warning);
+}
+
+.success {
+  color: var(--color-icon-success);
+}
+
+.recommendation {
+  color: var(--color-icon-recommendation);
+}
+
+.shopping {
+  color: var(--color-icon-shopping);
+}
+
+.info {
+  color: var(--color-icon-info);
+}
+
+.brandPrimary {
+  color: var(--color-icon-brand-primary);
+}
+
+.light {
+  color: var(--color-icon-light);
+}
+
+.dark {
+  color: var(--color-icon-dark);
+}

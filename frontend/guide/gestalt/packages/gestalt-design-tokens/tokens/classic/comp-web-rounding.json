@@ -1,0 +1,26 @@
+{
+  "rounding": {
+    "datepicker": {
+      "container": {
+        "value": "{rounding.400.value}"
+      },
+      "days": {
+        "value": "{rounding.circle.value}"
+      },
+      "navigation": {
+        "value": "{rounding.circle.value}"
+      },
+      "range": {
+        "start": {
+          "value": "{rounding.circle.value} {rounding.0.value} {rounding.0.value} {rounding.circle.value}"
+        },
+        "middle": {
+          "value": "{rounding.0.value}"
+        },
+        "end": {
+          "value": "{rounding.0.value} {rounding.circle.value} {rounding.circle.value} {rounding.0.value}"
+        }
+      }
+    }
+  }
+}

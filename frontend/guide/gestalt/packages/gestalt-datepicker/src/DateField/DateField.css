@@ -1,0 +1,128 @@
+:global .MuiDialog-root {
+  display: none;
+}
+
+.visuallyHidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.label {
+  cursor: pointer;
+  display: block;
+}
+
+.formLabel {
+  padding-bottom: var(--space-200);
+}
+
+.formErrorMessage * {
+  font-family: var(--font-family-default-latin);
+  /* stylelint-disable-next-line declaration-no-important */
+  font-size: var(--font-size-100) !important;
+}
+
+.textField {
+  box-sizing: border-box;
+  font-size: var(--font-size-300);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  padding: var(--space-200) var(--space-400);
+  width: calc(12 / var(--g-ncols) * 100%);
+}
+
+:lang(ja) .textField {
+  font-family: var(--font-family-default-japanese);
+  quotes: "「" "」";
+}
+
+.textField::placeholder {
+  color: var(--color-text-formfield-placeholder);
+}
+
+.formElementBase {
+  appearance: none;
+  border-color: var(--color-border-container);
+  border-radius: 16px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.formElementBase:focus {
+  outline: 4px solid var(--color-border-focus);
+}
+
+.formElementNormal {
+  border-color: var(--color-border-container);
+}
+
+.formElementNormal:hover:not(:focus):not(.disabled) {
+  border-color: var(--color-gray-roboflow-400);
+}
+
+.formElementErrored {
+  border-color: var(--color-border-formfield-error-default);
+  outline: none;
+}
+
+.formElementErrored:focus {
+  border-color: var(--color-border-container);
+}
+
+.formElementErrored:hover:not(:focus) {
+  border-color: var(--color-border-formfield-error-hover);
+}
+
+.formElementEnabled {
+  background-color: var(--color-background-formfield-primary);
+  color: var(--color-text-formfield-default);
+}
+
+.formElementDisabled {
+  background-color: var(--color-background-formfield-disabled);
+  border-color: var(--color-border-formfield-disabled);
+  color: var(--color-text-formfield-disabled);
+}
+
+.typographyTruncate {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.layoutMedium {
+  min-height: 40px;
+}
+
+.layoutLarge {
+  min-height: 48px;
+}
+
+.actionButtonWrapper {
+  bottom: var(--space-0);
+  position: absolute;
+  top: var(--space-0);
+}
+
+html:not([dir="rtl"]) .actionButtonWrapper {
+  right: var(--space-0);
+}
+
+html[dir="rtl"] .actionButtonWrapper {
+  left: var(--space-0);
+}
+
+html:not([dir="rtl"]) .actionButton {
+  padding-right: var(--space-800);
+}
+
+html[dir="rtl"] .actionButton {
+  padding-left: var(--space-800);
+}

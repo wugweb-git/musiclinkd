@@ -1,0 +1,485 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextArea TextArea normal 1`] = `
+<span>
+  <textarea
+    aria-invalid="false"
+    className="textArea base lg enabled normal"
+    disabled={false}
+    id="test"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    readOnly={false}
+    rows={3}
+  />
+</span>
+`;
+
+exports[`TextArea TextArea with disabled 1`] = `
+<span>
+  <textarea
+    aria-invalid="false"
+    className="textArea base lg disabled normal"
+    disabled={true}
+    id="test"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    readOnly={false}
+    rows={3}
+  />
+</span>
+`;
+
+exports[`TextArea TextArea with error 1`] = `
+<span>
+  <textarea
+    aria-invalid="true"
+    className="textArea base lg enabled errored"
+    disabled={false}
+    id="test"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    readOnly={false}
+    rows={3}
+  />
+  <div
+    className=""
+    id="test-error"
+  >
+    <div
+      className="error alignStart breakWord Text fontSize100 fontWeightNormal"
+    >
+      <span
+        className="formErrorMessage"
+        id="test-error"
+      >
+        <div
+          className="box"
+          role="alert"
+        >
+          <div
+            className="Flex rowGap200 columnGap200 xsDirectionRow xsItemsCenter"
+          >
+            <div
+              className="FlexItem"
+            >
+              <div
+                className="box"
+              >
+                <svg
+                  aria-hidden={true}
+                  aria-label=""
+                  className="error icon iconBlock"
+                  height={16}
+                  role="img"
+                  viewBox="0 0 16 16"
+                  width={16}
+                >
+                  <path
+                    d="test-file-stub"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div
+              className="FlexItem"
+            >
+              error message
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</span>
+`;
+
+exports[`TextArea TextArea with hasError 1`] = `
+<span>
+  <textarea
+    aria-invalid="true"
+    className="textArea base lg enabled errored"
+    disabled={false}
+    id="test"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    readOnly={false}
+    rows={3}
+  />
+</span>
+`;
+
+exports[`TextArea TextArea with readOnly 1`] = `
+<span>
+  <textarea
+    aria-invalid="false"
+    className="textArea base lg enabled normal"
+    disabled={false}
+    id="test"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    readOnly={true}
+    rows={3}
+  />
+</span>
+`;
+
+exports[`TextArea TextArea with rows 1`] = `
+<span>
+  <textarea
+    aria-invalid="false"
+    className="textArea base lg enabled normal"
+    disabled={false}
+    id="test"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    readOnly={false}
+    rows={5}
+  />
+</span>
+`;
+
+exports[`TextArea TextField with maxLength character counter 1`] = `
+<span>
+  <textarea
+    aria-invalid="false"
+    className="textArea base lg enabled normal"
+    disabled={false}
+    id="test"
+    maxLength={20}
+    name="maxLength"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    readOnly={false}
+    rows={3}
+  />
+  <div
+    className=""
+    id="test-helperText"
+  >
+    <div
+      className="Flex rowGap400 columnGap400 xsDirectionRow"
+    >
+      <div
+        className="FlexItem flexGrow"
+      />
+      <div
+        className="FlexItem"
+      >
+        <div
+          className="absolute box"
+          style={
+            Object {
+              "visibility": "hidden",
+            }
+          }
+        >
+          <div
+            className="subtle alignStart breakWord Text fontSize100 fontWeightNormal"
+          >
+            20/20
+          </div>
+        </div>
+        <div
+          className="Flex rowGap100 columnGap100 justifyCenter xsDirectionRow"
+        >
+          <div
+            className="FlexItem"
+          >
+            <div
+              className="box"
+              style={
+                Object {
+                  "width": 16,
+                }
+              }
+            />
+          </div>
+          <div
+            className="FlexItem"
+          >
+            <div
+              className="Flex rowGap0 columnGap0 justifyEnd xsDirectionRow"
+              style={
+                Object {
+                  "width": undefined,
+                }
+              }
+            >
+              <div
+                className="subtle alignEnd breakWord Text fontSize100 fontWeightNormal"
+              >
+                <div
+                  className="box xsDisplayVisuallyHidden"
+                >
+                  ,
+                </div>
+                0/20
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</span>
+`;
+
+exports[`TextArea renders tags when supplied 1`] = `
+<span>
+  <div
+    className="textArea base lg enabled normal textAreaWrapper"
+    style={
+      Object {
+        "maxHeight": 92,
+        "minHeight": 92,
+      }
+    }
+  >
+    <div
+      className="box marginBottom100 marginEnd100"
+    >
+      <div
+        aria-disabled={false}
+        className="box paddingX200 paddingY100 relative rounding2 secondary xsDisplayInlineBlock"
+        style={
+          Object {
+            "height": 32,
+            "maxWidth": 300,
+          }
+        }
+      >
+        <div
+          className="box marginEnd500 xsDisplayFlex xsItemsCenter"
+          style={
+            Object {
+              "height": "100%",
+            }
+          }
+        >
+          <span
+            className="default alignStart breakAll lineClamp Text fontSize200 fontWeightNormal"
+            style={
+              Object {
+                "WebkitLineClamp": 1,
+              }
+            }
+            title="a@pinterest.com"
+          >
+            a@pinterest.com
+          </span>
+          <div
+            className="box"
+          >
+            <button
+              className="closeButton default tapTransition accessibilityOutline md"
+              onClick={[Function]}
+              type="button"
+            >
+              <div
+                className="box justifyCenter xsDisplayFlex xsItemsCenter"
+                style={
+                  Object {
+                    "marginTop": "1px",
+                    "width": "100%",
+                  }
+                }
+              >
+                <svg
+                  aria-hidden={null}
+                  aria-label="Remove email tag"
+                  className="default icon iconBlock"
+                  height={8}
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width={8}
+                >
+                  <path
+                    d="test-file-stub"
+                  />
+                </svg>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="box marginBottom100 marginEnd100"
+    >
+      <div
+        aria-disabled={false}
+        className="box paddingX200 paddingY100 relative rounding2 secondary xsDisplayInlineBlock"
+        style={
+          Object {
+            "height": 32,
+            "maxWidth": 300,
+          }
+        }
+      >
+        <div
+          className="box marginEnd500 xsDisplayFlex xsItemsCenter"
+          style={
+            Object {
+              "height": "100%",
+            }
+          }
+        >
+          <span
+            className="default alignStart breakAll lineClamp Text fontSize200 fontWeightNormal"
+            style={
+              Object {
+                "WebkitLineClamp": 1,
+              }
+            }
+            title="b@pinterest.com"
+          >
+            b@pinterest.com
+          </span>
+          <div
+            className="box"
+          >
+            <button
+              className="closeButton default tapTransition accessibilityOutline md"
+              onClick={[Function]}
+              type="button"
+            >
+              <div
+                className="box justifyCenter xsDisplayFlex xsItemsCenter"
+                style={
+                  Object {
+                    "marginTop": "1px",
+                    "width": "100%",
+                  }
+                }
+              >
+                <svg
+                  aria-hidden={null}
+                  aria-label="Remove email tag"
+                  className="default icon iconBlock"
+                  height={8}
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width={8}
+                >
+                  <path
+                    d="test-file-stub"
+                  />
+                </svg>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="box marginBottom100 marginEnd100"
+    >
+      <div
+        aria-disabled={false}
+        className="box paddingX200 paddingY100 relative rounding2 secondary xsDisplayInlineBlock"
+        style={
+          Object {
+            "height": 32,
+            "maxWidth": 300,
+          }
+        }
+      >
+        <div
+          className="box marginEnd500 xsDisplayFlex xsItemsCenter"
+          style={
+            Object {
+              "height": "100%",
+            }
+          }
+        >
+          <span
+            className="default alignStart breakAll lineClamp Text fontSize200 fontWeightNormal"
+            style={
+              Object {
+                "WebkitLineClamp": 1,
+              }
+            }
+            title="c@pinterest.com"
+          >
+            c@pinterest.com
+          </span>
+          <div
+            className="box"
+          >
+            <button
+              className="closeButton default tapTransition accessibilityOutline md"
+              onClick={[Function]}
+              type="button"
+            >
+              <div
+                className="box justifyCenter xsDisplayFlex xsItemsCenter"
+                style={
+                  Object {
+                    "marginTop": "1px",
+                    "width": "100%",
+                  }
+                }
+              >
+                <svg
+                  aria-hidden={null}
+                  aria-label="Remove email tag"
+                  className="default icon iconBlock"
+                  height={8}
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width={8}
+                >
+                  <path
+                    d="test-file-stub"
+                  />
+                </svg>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="box flexGrow overflowHidden relative"
+      style={
+        Object {
+          "maxWidth": "100%",
+        }
+      }
+    >
+      <div
+        aria-hidden={true}
+        className="textAreaSpacer"
+      >
+        -
+      </div>
+      <textarea
+        aria-invalid="false"
+        className="unstyledTextArea"
+        disabled={false}
+        id="test"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        readOnly={false}
+      />
+    </div>
+  </div>
+</span>
+`;

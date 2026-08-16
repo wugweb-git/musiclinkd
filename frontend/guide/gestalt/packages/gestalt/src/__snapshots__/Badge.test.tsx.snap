@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge renders 1`] = `
+<div
+  className="badge info padding middle"
+>
+  <div
+    className="Flex rowGap100 columnGap0 xsDirectionRow xsItemsCenter"
+  >
+    <div
+      className="FlexItem"
+    >
+      <div
+        className="box contentCenter xsDisplayFlex"
+      >
+        <span
+          className="inverse alignStart breakWord Text fontWeightSemiBold fontSize200"
+        >
+          Badge
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

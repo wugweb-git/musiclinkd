@@ -1,0 +1,25 @@
+{
+  "name": "eslint-plugin-gestalt",
+  "version": "177.0.13",
+  "license": "Apache-2.0",
+  "homepage": "https://gestalt.pinterest.systems/",
+  "description": "ESLint rules for Pinterest's design language Gestalt",
+  "main": "dist/eslint-plugin-gestalt.js",
+  "jsnext:main": "dist/eslint-plugin-gestalt.es.js",
+  "module": "dist/eslint-plugin-gestalt.es.js",
+  "devDependencies": {
+    "eslint": "8.23.0"
+  },
+  "keywords": [
+    "eslint",
+    "eslint plugin",
+    "gestalt",
+    "pinterest"
+  ],
+  "dependencies": {},
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "build:prod": "NODE_ENV=production rollup -c rollup.config.js",
+    "watch": "rollup -c rollup.config.js --watch"
+  }
+}

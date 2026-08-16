@@ -1,0 +1,479 @@
+.react-datepicker {
+  background-color: var(--color-background-datepicker-container);
+  border-radius: var(--rounding-datepicker-container);
+  box-shadow: var(--elevation-datepicker);
+  display: inline-block;
+  font-family: var(--font-family-default-latin);
+  padding: var(--space-400);
+  position: relative;
+}
+
+.react-datepicker-inline {
+  background-color: var(--color-background-datepicker-container);
+  border-radius: var(--rounding-400);
+  color: var(--color-text-default);
+  display: inline-block;
+  font-family: var(--font-family-default-latin);
+  padding: var(--space-400);
+  position: relative;
+}
+
+:global ._gestalt .react-datepicker__current-month {
+  color: var(--color-text-default);
+  font-family: var(--font-family-datepicker-heading);
+  font-size: var(--font-size-datepicker-heading);
+  font-weight: var(--font-weight-datepicker-heading);
+  line-height: var(--font-lineheight-datepicker-heading);
+  margin-bottom: var(--space-400);
+  margin-top: var(--space-0);
+  text-decoration: var(--font-textdecoration-datepicker-heading);
+}
+
+/* It must be named different than .react-datepicker__day
+to prevent conflict with another CSS module */
+
+.react-datepicker__days {
+  border-radius: var(--rounding-datepicker-days);
+  color: var(--color-text-default);
+  cursor: pointer;
+  display: inline-block;
+  line-height: var(--space-1000);
+  text-align: center;
+  width: var(--space-1000);
+}
+
+.react-datepicker__days:focus-visible {
+  background-color: var(--color-background-datepicker-button-unselected-hover);
+  outline: 4px solid var(--color-border-focus);
+}
+
+.react-datepicker__days:hover {
+  background-color: var(--color-background-datepicker-button-unselected-hover);
+  color: var(--color-text-default);
+}
+
+.react-datepicker__days:active {
+  background-color: var(--color-background-datepicker-button-unselected-active);
+  color: var(--color-text-default);
+}
+
+:global ._gestalt .react-datepicker__aria-live {
+  display: none;
+}
+
+:global ._gestalt .react-datepicker__day--highlighted {
+  background-color: var(--color-background-datepicker-button-selected-default);
+  color: var(--color-text-inverse);
+}
+
+:global ._gestalt .react-datepicker__day--disabled {
+  color: var(--color-text-disabled);
+  cursor: default;
+}
+
+:global ._gestalt .react-datepicker__day--disabled:focus {
+  box-shadow: none;
+}
+
+:global ._gestalt .react-datepicker__day--selected {
+  background-color: var(--color-background-datepicker-button-selected-default);
+  color: var(--color-text-inverse);
+}
+
+:global ._gestalt .react-datepicker__day--selected:hover {
+  background-color: var(--color-background-datepicker-button-selected-hover);
+  color: var(--color-text-inverse);
+}
+
+:global ._gestalt .react-datepicker__day--selected:active {
+  background-color: var(--color-background-datepicker-button-selected-active);
+  color: var(--color-text-inverse);
+}
+
+:global ._gestalt .react-datepicker__day--in-range {
+  background-color: var(--color-background-datepicker-range-default);
+  border-radius: var(--rounding-0);
+  color: var(--color-text-default);
+}
+
+:global ._gestalt .react-datepicker__day--in-range:hover {
+  background-color: var(--color-background-datepicker-range-hover);
+  border-radius: var(--rounding-datepicker-days);
+  color: var(--color-text-dark);
+  position: relative;
+}
+
+:global ._gestalt .react-datepicker__day--in-range:active {
+  background-color: var(--color-background-datepicker-range-active);
+  border-radius: var(--rounding-datepicker-days);
+  color: var(--color-text-dark);
+  position: relative;
+}
+
+:global ._gestalt .react-datepicker__day--in-range:first-child {
+  border-bottom-left-radius: var(--rounding-datepicker-days);
+  border-top-left-radius: var(--rounding-datepicker-days);
+}
+
+:global ._gestalt .react-datepicker__day--in-range:last-child {
+  border-bottom-right-radius: var(--rounding-datepicker-days);
+  border-top-right-radius: var(--rounding-datepicker-days);
+}
+
+:global
+  ._gestalt
+  .react-datepicker__day--in-range:not(
+    .react-datepicker__day--selected
+  ):hover::before {
+  background: var(--color-background-datepicker-range-default);
+  border-radius: var(--rounding-0);
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: var(--space-0);
+  width: 100%;
+
+  /* z-index required to position pseudo-elements behind parent */
+  z-index: -1;
+}
+
+:global ._gestalt .react-datepicker__day--in-range:first-child:hover::before {
+  border-bottom-left-radius: var(--rounding-datepicker-days);
+  border-top-left-radius: var(--rounding-datepicker-days);
+}
+
+:global ._gestalt .react-datepicker__day--in-range:last-child:hover::before {
+  border-bottom-right-radius: var(--rounding-datepicker-days);
+  border-top-right-radius: var(--rounding-datepicker-days);
+}
+
+:global ._gestalt .react-datepicker__day--range-start {
+  background-color: var(--color-background-datepicker-button-selected-default);
+  border-radius: var(--rounding-datepicker-days);
+  color: var(--color-text-inverse);
+  position: relative;
+}
+
+:global
+  ._gestalt
+  .react-datepicker__day--range-start:not(:last-child):not(
+    .react-datepicker__day--range-end
+  )::before {
+  background: var(--color-background-datepicker-range-default);
+  border-radius: var(--rounding-datepicker-range-start);
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: var(--space-0);
+  width: 100%;
+
+  /* z-index required to position pseudo-elements behind parent */
+  z-index: -1;
+}
+
+:global ._gestalt .react-datepicker__day--range-start:hover {
+  background-color: inherit;
+  border-radius: var(--rounding-datepicker-days);
+  color: var(--color-text-inverse);
+  position: relative;
+}
+
+:global ._gestalt .react-datepicker__day--range-start:hover::after {
+  background: var(--color-background-datepicker-button-selected-hover);
+  border-radius: var(--rounding-datepicker-days);
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: var(--space-0);
+  width: 100%;
+
+  /* z-index required to position pseudo-elements behind parent */
+  z-index: -1;
+}
+
+:global ._gestalt .react-datepicker__day--range-end {
+  background-color: var(--color-background-datepicker-button-selected-default);
+  border-radius: var(--rounding-datepicker-days);
+  color: var(--color-text-inverse);
+  position: relative;
+}
+
+:global
+  ._gestalt
+  .react-datepicker__day--range-end:not(:first-child):not(
+    .react-datepicker__day--range-start
+  )::before {
+  background: var(--color-background-datepicker-range-default);
+  border-radius: var(--rounding-datepicker-range-end);
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: var(--space-0);
+  width: 100%;
+
+  /* z-index required to position pseudo-elements behind parent */
+  z-index: -1;
+}
+
+:global ._gestalt .react-datepicker__day--range-end:hover {
+  background-color: inherit;
+  border-radius: var(--rounding-datepicker-days);
+  color: var(--color-text-inverse);
+  position: relative;
+}
+
+:global ._gestalt .react-datepicker__day--range-end:hover::after {
+  background: var(--color-background-datepicker-button-selected-hover);
+  border-radius: var(--rounding-datepicker-days);
+  color: var(--color-text-inverse);
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: var(--space-0);
+  width: 100%;
+
+  /* z-index required to position pseudo-elements behind parent */
+  z-index: -1;
+}
+
+:global
+  ._gestalt
+  .react-datepicker__day--selecting-range-start:not(
+    .react-datepicker__day--in-range
+  ):not(.react-datepicker__day--highlighted),
+:global
+  ._gestalt
+  .react-datepicker__day--selecting-range-end:not(
+    .react-datepicker__day--in-range
+  ):not(.react-datepicker__day--highlighted) {
+  background-color: var(--color-background-datepicker-button-selected-hover);
+  color: var(--color-text-inverse);
+}
+
+:global ._gestalt .react-datepicker__day--outside-month {
+  visibility: hidden;
+}
+
+:global ._gestalt .react-datepicker__day-name {
+  color: var(--color-text-subtle);
+  display: inline-block;
+  font-family: var(--font-family-datepicker-date);
+  font-size: var(--font-size-datepicker-date);
+  font-weight: var(--font-weight-datepicker-date);
+  line-height: var(--font-lineheight-datepicker-date);
+  margin-bottom: calc(
+    (var(--space-1000) - var(--font-lineheight-datepicker-date)) * 0.5
+  );
+  margin-top: calc(
+    (var(--space-1000) - var(--font-lineheight-datepicker-date)) * 0.5
+  );
+  text-align: center;
+  text-decoration: var(--font-textdecoration-datepicker-date);
+  width: var(--space-1000);
+}
+
+:global ._gestalt .react-datepicker__day-names {
+  display: flex;
+  white-space: nowrap;
+}
+
+:global ._gestalt .react-datepicker__header {
+  position: relative;
+  text-align: center;
+}
+
+:global ._gestalt .react-datepicker__input-container {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+:global ._gestalt .react-datepicker__input-container input {
+  padding-right: var(--space-900);
+}
+
+:global ._gestalt .react-datepicker__month {
+  color: var(--color-text-inverse);
+  text-align: center;
+}
+
+:global ._gestalt .react-datepicker__week {
+  display: flex;
+  position: relative;
+  white-space: nowrap;
+
+  /* z-index required to position pseudo-elements behind parent */
+  z-index: 1;
+}
+
+:global ._gestalt .react-datepicker__month-container {
+  float: left;
+  font-family: var(--font-family-datepicker-date);
+  font-size: var(--font-size-datepicker-date);
+  font-weight: var(--font-weight-datepicker-date);
+  line-height: var(--font-lineheight-datepicker-date);
+  text-decoration: var(--font-textdecoration-datepicker-date);
+}
+
+:global
+  ._gestalt
+  ._gestalt_daterange
+  .react-datepicker__month-container:last-child {
+  margin-left: var(--space-900);
+}
+
+:global ._gestalt .react-datepicker__navigation {
+  background: none;
+  border: none;
+  border-radius: var(--rounding-datepicker-navigation);
+  cursor: pointer;
+  height: auto;
+  outline: none;
+  overflow: visible;
+  padding: var(--space-200);
+  position: absolute;
+  top: var(--space-400);
+  width: auto;
+  z-index: 1;
+}
+
+:global ._gestalt .react-datepicker__navigation:focus-visible {
+  background: var(--color-background-datepicker-button-unselected-default);
+  outline: 4px solid var(--color-border-focus);
+}
+
+:global ._gestalt .react-datepicker__navigation:hover {
+  background: var(--color-background-datepicker-button-unselected-hover);
+}
+
+:global ._gestalt .react-datepicker__navigation:active {
+  background: var(--color-background-datepicker-button-unselected-active);
+}
+
+:global ._gestalt .react-datepicker__navigation:active::before {
+  background: transparent;
+  border-radius: var(--rounding-datepicker-navigation);
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  right: var(--space-0);
+  top: var(--space-0);
+  width: 100%;
+}
+
+html[dir="rtl"] :global ._gestalt .react-datepicker__navigation--previous {
+  right: var(--space-200);
+}
+
+html:not([dir="rtl"])
+  :global
+  ._gestalt
+  .react-datepicker__navigation--previous {
+  left: var(--space-200);
+}
+
+html[dir="rtl"] :global ._gestalt .react-datepicker__navigation--next {
+  left: var(--space-200);
+}
+
+html:not([dir="rtl"]) :global ._gestalt .react-datepicker__navigation--next {
+  right: var(--space-200);
+}
+
+:global ._gestalt .react-datepicker__navigation--previous--disabled,
+:global ._gestalt .react-datepicker__navigation--previous--disabled:hover {
+  cursor: default;
+}
+
+:global ._gestalt .react-datepicker__navigation--next--disabled,
+:global ._gestalt .react-datepicker__navigation--next--disabled:hover {
+  cursor: default;
+}
+
+.react-datepicker-popper {
+  z-index: 1;
+}
+
+/* styles secondary in range days */
+
+.react-datepicker__day--in-range-secondary {
+  background-color: var(--color-background-datepicker-range-default);
+  font-weight: bold;
+}
+
+/* Year / Month dropdown  */
+
+:global ._gestalt .react-datepicker__month-select,
+:global ._gestalt .react-datepicker__year-select {
+  background-color: var(--color-background-formfield-primary);
+  border-color: var(--color-border-container);
+  border-radius: var(--rounding-400);
+  border-style: solid;
+  border-width: 2px;
+  color: var(--color-text-subtle);
+  cursor: pointer;
+  font-family: var(--font-family-datepicker-date);
+  font-size: var(--font-size-datepicker-date);
+  font-weight: var(--font-weight-datepicker-date);
+  height: var(--space-1000);
+  line-height: var(--font-lineheight-datepicker-date);
+  margin-bottom: var(--space-200);
+  margin-top: var(--space-200);
+  padding: var(--space-100) var(--space-400); /* horizontal padding prevents it from running into arrow */
+  position: relative;
+  text-decoration: var(--font-textdecoration-datepicker-date);
+  width: 100%;
+}
+
+:global ._gestalt .react-datepicker__month-select:focus-visible,
+:global ._gestalt .react-datepicker__year-select:focus-visible {
+  outline: 4px solid var(--color-border-focus);
+}
+
+:global ._gestalt .react-datepicker__year-dropdown-container--select,
+:global ._gestalt .react-datepicker__month-dropdown-container--select,
+:global ._gestalt .react-datepicker__month-year-dropdown-container--select,
+:global ._gestalt .react-datepicker__year-dropdown-container--scroll,
+:global ._gestalt .react-datepicker__month-dropdown-container--scroll,
+:global ._gestalt .react-datepicker__month-year-dropdown-container--scroll {
+  display: inline-block;
+  margin: var(--space-0) var(--space-200);
+}
+
+/* Override the textfield container since gestalt has block not inline block */
+
+:global ._gestalt .reactDatepickerWrapper {
+  display: block;
+}
+
+.calendarIcon {
+  position: absolute;
+}
+
+html[dir="rtl"] .calendarIcon {
+  left: var(--space-0);
+}
+
+html:not([dir="rtl"]) .calendarIcon {
+  right: var(--space-0);
+}
+
+.truncate {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lineClamp {
+  -webkit-box-orient: vertical; /* stylelint-disable-line property-no-vendor-prefix */
+  display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix */
+  max-width: 100%;
+  overflow: hidden;
+}

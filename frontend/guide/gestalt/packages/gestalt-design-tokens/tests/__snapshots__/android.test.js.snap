@@ -1,0 +1,1176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`All Android Tokens Exist 1`] = `
+Object {
+  "dist/android/classic/color-dark.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <color name=\\"color_red_pushpin_0\\">#fffff7f7</color>
+  <color name=\\"color_red_pushpin_50\\">#ffffebeb</color>
+  <color name=\\"color_red_pushpin_100\\">#ffffe0e0</color>
+  <color name=\\"color_red_pushpin_200\\">#fffcbbbb</color>
+  <color name=\\"color_red_pushpin_300\\">#fff47171</color>
+  <color name=\\"color_red_pushpin_400\\">#ffeb4242</color>
+  <color name=\\"color_red_pushpin_450\\">#ffe60023</color>
+  <color name=\\"color_red_pushpin_500\\">#ffcc0000</color>
+  <color name=\\"color_red_pushpin_600\\">#ffb60000</color>
+  <color name=\\"color_red_pushpin_700\\">#ff9b0000</color>
+  <color name=\\"color_red_pushpin_800\\">#ff800000</color>
+  <color name=\\"color_red_pushpin_900\\">#ff660000</color>
+  <color name=\\"color_pink_flaminglow_0\\">#fffff8fa</color>
+  <color name=\\"color_pink_flaminglow_50\\">#ffffebf1</color>
+  <color name=\\"color_pink_flaminglow_100\\">#ffffdfe9</color>
+  <color name=\\"color_pink_flaminglow_200\\">#ffffbed2</color>
+  <color name=\\"color_pink_flaminglow_300\\">#fffe8eb1</color>
+  <color name=\\"color_pink_flaminglow_400\\">#fff76593</color>
+  <color name=\\"color_pink_flaminglow_450\\">#ffee376a</color>
+  <color name=\\"color_pink_flaminglow_500\\">#ffde2c62</color>
+  <color name=\\"color_pink_flaminglow_600\\">#ffc31952</color>
+  <color name=\\"color_pink_flaminglow_700\\">#ffa30c4a</color>
+  <color name=\\"color_pink_flaminglow_800\\">#ff82053e</color>
+  <color name=\\"color_pink_flaminglow_900\\">#ff630233</color>
+  <color name=\\"color_blue_skycicle_0\\">#fff7fbff</color>
+  <color name=\\"color_blue_skycicle_50\\">#ffe6f4ff</color>
+  <color name=\\"color_blue_skycicle_100\\">#ffd7edff</color>
+  <color name=\\"color_blue_skycicle_200\\">#ffabdbff</color>
+  <color name=\\"color_blue_skycicle_300\\">#ff75bfff</color>
+  <color name=\\"color_blue_skycicle_400\\">#ff45a3fe</color>
+  <color name=\\"color_blue_skycicle_450\\">#ff007cff</color>
+  <color name=\\"color_blue_skycicle_500\\">#ff0074e8</color>
+  <color name=\\"color_blue_skycicle_600\\">#ff005fcb</color>
+  <color name=\\"color_blue_skycicle_700\\">#ff004ba9</color>
+  <color name=\\"color_blue_skycicle_800\\">#ff003c96</color>
+  <color name=\\"color_blue_skycicle_900\\">#ff002966</color>
+  <color name=\\"color_teal_spabattical_0\\">#fff7fdfc</color>
+  <color name=\\"color_teal_spabattical_50\\">#ffe6faf5</color>
+  <color name=\\"color_teal_spabattical_100\\">#ffccf6ee</color>
+  <color name=\\"color_teal_spabattical_200\\">#ff75e4d5</color>
+  <color name=\\"color_teal_spabattical_300\\">#ff48d5c6</color>
+  <color name=\\"color_teal_spabattical_400\\">#ff26c0b4</color>
+  <color name=\\"color_teal_spabattical_450\\">#ff009990</color>
+  <color name=\\"color_teal_spabattical_500\\">#ff00857c</color>
+  <color name=\\"color_teal_spabattical_600\\">#ff006b6c</color>
+  <color name=\\"color_teal_spabattical_700\\">#ff005c62</color>
+  <color name=\\"color_teal_spabattical_800\\">#ff005062</color>
+  <color name=\\"color_teal_spabattical_900\\">#ff003440</color>
+  <color name=\\"color_green_matchacado_0\\">#fff6fdf5</color>
+  <color name=\\"color_green_matchacado_50\\">#ffe3fae1</color>
+  <color name=\\"color_green_matchacado_100\\">#ffc3f9c2</color>
+  <color name=\\"color_green_matchacado_200\\">#ffa4f9ac</color>
+  <color name=\\"color_green_matchacado_300\\">#ff6bec8c</color>
+  <color name=\\"color_green_matchacado_400\\">#ff39d377</color>
+  <color name=\\"color_green_matchacado_450\\">#ff1dad65</color>
+  <color name=\\"color_green_matchacado_500\\">#ff008753</color>
+  <color name=\\"color_green_matchacado_600\\">#ff005f3e</color>
+  <color name=\\"color_green_matchacado_700\\">#ff00422c</color>
+  <color name=\\"color_green_matchacado_800\\">#ff003020</color>
+  <color name=\\"color_green_matchacado_900\\">#ff00261a</color>
+  <color name=\\"color_purple_mysticool_0\\">#fff8f7ff</color>
+  <color name=\\"color_purple_mysticool_50\\">#fff0edff</color>
+  <color name=\\"color_purple_mysticool_100\\">#ffe9e4ff</color>
+  <color name=\\"color_purple_mysticool_200\\">#ffd5c7ff</color>
+  <color name=\\"color_purple_mysticool_300\\">#ffb190ff</color>
+  <color name=\\"color_purple_mysticool_400\\">#ff9e68ff</color>
+  <color name=\\"color_purple_mysticool_450\\">#ff8a39fa</color>
+  <color name=\\"color_purple_mysticool_500\\">#ff812ae7</color>
+  <color name=\\"color_purple_mysticool_600\\">#ff6b16ca</color>
+  <color name=\\"color_purple_mysticool_700\\">#ff550aa9</color>
+  <color name=\\"color_purple_mysticool_800\\">#ff400387</color>
+  <color name=\\"color_purple_mysticool_900\\">#ff2c0066</color>
+  <color name=\\"color_orange_firetini_0\\">#fffff6eb</color>
+  <color name=\\"color_orange_firetini_50\\">#fffff0db</color>
+  <color name=\\"color_orange_firetini_100\\">#ffffe4c1</color>
+  <color name=\\"color_orange_firetini_200\\">#ffffc58f</color>
+  <color name=\\"color_orange_firetini_300\\">#fffda161</color>
+  <color name=\\"color_orange_firetini_400\\">#fff77a38</color>
+  <color name=\\"color_orange_firetini_450\\">#ffff5b45</color>
+  <color name=\\"color_orange_firetini_500\\">#ffde3700</color>
+  <color name=\\"color_orange_firetini_600\\">#ffc32f00</color>
+  <color name=\\"color_orange_firetini_700\\">#ffa42700</color>
+  <color name=\\"color_orange_firetini_800\\">#ff842000</color>
+  <color name=\\"color_orange_firetini_900\\">#ff660e00</color>
+  <color name=\\"color_yellow_caramellow_0\\">#fffffedb</color>
+  <color name=\\"color_yellow_caramellow_50\\">#fffffebb</color>
+  <color name=\\"color_yellow_caramellow_100\\">#fffffd92</color>
+  <color name=\\"color_yellow_caramellow_200\\">#fffae600</color>
+  <color name=\\"color_yellow_caramellow_300\\">#fffdc900</color>
+  <color name=\\"color_yellow_caramellow_400\\">#ffe18d00</color>
+  <color name=\\"color_yellow_caramellow_450\\">#ffd86800</color>
+  <color name=\\"color_yellow_caramellow_500\\">#ffbd5b00</color>
+  <color name=\\"color_yellow_caramellow_600\\">#ffaa4900</color>
+  <color name=\\"color_yellow_caramellow_700\\">#ff943a00</color>
+  <color name=\\"color_yellow_caramellow_800\\">#ff7c2d00</color>
+  <color name=\\"color_yellow_caramellow_900\\">#ff662400</color>
+  <color name=\\"color_white_mochimalist_0\\">#ffffffff</color>
+  <color name=\\"color_gray_roboflow_50\\">#fff9f9f9</color>
+  <color name=\\"color_gray_roboflow_100\\">#fff1f1f1</color>
+  <color name=\\"color_gray_roboflow_200\\">#ffe9e9e9</color>
+  <color name=\\"color_gray_roboflow_300\\">#ffcdcdcd</color>
+  <color name=\\"color_gray_roboflow_400\\">#ffa5a5a5</color>
+  <color name=\\"color_gray_roboflow_500\\">#ff767676</color>
+  <color name=\\"color_gray_roboflow_550\\">#ff5f5f5f</color>
+  <color name=\\"color_gray_roboflow_600\\">#ff4a4a4a</color>
+  <color name=\\"color_gray_roboflow_700\\">#ff2b2b2b</color>
+  <color name=\\"color_gray_roboflow_800\\">#ff191919</color>
+  <color name=\\"color_black_cosmicore_900\\">#ff111111</color>
+  <color name=\\"color_transparent\\">#00000000</color>
+  <color name=\\"color_text_default\\">@color/color_white_mochimalist_0</color>
+  <color name=\\"color_text_subtle\\">@color/color_gray_roboflow_400</color>
+  <color name=\\"color_text_success\\">@color/color_green_matchacado_400</color>
+  <color name=\\"color_text_disabled\\">@color/color_gray_roboflow_600</color>
+  <color name=\\"color_text_error\\">@color/color_red_pushpin_300</color>
+  <color name=\\"color_text_warning\\">@color/color_yellow_caramellow_400</color>
+  <color name=\\"color_text_inverse\\">@color/color_black_cosmicore_900</color>
+  <color name=\\"color_text_dark\\">@color/color_black_cosmicore_900</color>
+  <color name=\\"color_text_light\\">@color/color_white_mochimalist_0</color>
+  <color name=\\"color_text_shopping\\">@color/color_blue_skycicle_300</color>
+  <color name=\\"color_text_link\\">@color/color_blue_skycicle_400</color>
+  <color name=\\"color_icon_default\\">@color/color_white_mochimalist_0</color>
+  <color name=\\"color_icon_subtle\\">@color/color_gray_roboflow_400</color>
+  <color name=\\"color_icon_subtle_accent\\">@color/color_gray_roboflow_300</color>
+  <color name=\\"color_icon_success\\">@color/color_green_matchacado_400</color>
+  <color name=\\"color_icon_disabled\\">@color/color_gray_roboflow_600</color>
+  <color name=\\"color_icon_error\\">@color/color_red_pushpin_300</color>
+  <color name=\\"color_icon_warning\\">@color/color_yellow_caramellow_400</color>
+  <color name=\\"color_icon_info\\">@color/color_blue_skycicle_300</color>
+  <color name=\\"color_icon_recommendation\\">@color/color_purple_mysticool_300</color>
+  <color name=\\"color_icon_inverse\\">@color/color_black_cosmicore_900</color>
+  <color name=\\"color_icon_shopping\\">@color/color_blue_skycicle_300</color>
+  <color name=\\"color_icon_brand_primary\\">@color/color_red_pushpin_450</color>
+  <color name=\\"color_icon_light\\">@color/color_white_mochimalist_0</color>
+  <color name=\\"color_icon_dark\\">@color/color_black_cosmicore_900</color>
+  <color name=\\"color_background_default\\">@color/color_black_cosmicore_900</color>
+  <color name=\\"color_background_info_base\\">@color/color_blue_skycicle_300</color>
+  <color name=\\"color_background_info_weak\\">@color/color_blue_skycicle_800</color>
+  <color name=\\"color_background_info_strong\\">@color/color_blue_skycicle_200</color>
+  <color name=\\"color_background_error_base\\">@color/color_red_pushpin_300</color>
+  <color name=\\"color_background_error_weak\\">@color/color_red_pushpin_900</color>
+  <color name=\\"color_background_warning_base\\">@color/color_yellow_caramellow_300</color>
+  <color name=\\"color_background_warning_weak\\">@color/color_yellow_caramellow_800</color>
+  <color name=\\"color_background_success_base\\">@color/color_green_matchacado_300</color>
+  <color name=\\"color_background_success_weak\\">@color/color_green_matchacado_700</color>
+  <color name=\\"color_background_recommendation_base\\">@color/color_purple_mysticool_300</color>
+  <color name=\\"color_background_recommendation_weak\\">@color/color_purple_mysticool_700</color>
+  <color name=\\"color_background_neutral\\">@color/color_gray_roboflow_300</color>
+  <color name=\\"color_background_shopping\\">@color/color_blue_skycicle_300</color>
+  <color name=\\"color_background_primary_base\\">@color/color_red_pushpin_450</color>
+  <color name=\\"color_background_primary_strong\\">@color/color_red_pushpin_600</color>
+  <color name=\\"color_background_primary_weak\\">@color/color_red_pushpin_300</color>
+  <color name=\\"color_background_secondary_base\\">@color/color_gray_roboflow_500</color>
+  <color name=\\"color_background_secondary_strong\\">@color/color_gray_roboflow_400</color>
+  <color name=\\"color_background_secondary_weak\\">@color/color_gray_roboflow_300</color>
+  <color name=\\"color_background_tertiary_base\\">@color/color_gray_roboflow_300</color>
+  <color name=\\"color_background_tertiary_strong\\">@color/color_gray_roboflow_700</color>
+  <color name=\\"color_background_tertiary_weak\\">@color/color_gray_roboflow_300</color>
+  <color name=\\"color_background_selected_base\\">@color/color_gray_roboflow_200</color>
+  <color name=\\"color_background_selected_strong\\">@color/color_gray_roboflow_700</color>
+  <color name=\\"color_background_selected_weak\\">@color/color_gray_roboflow_400</color>
+  <color name=\\"color_background_inverse_base\\">@color/color_gray_roboflow_50</color>
+  <color name=\\"color_background_inverse_strong\\">@color/color_gray_roboflow_200</color>
+  <color name=\\"color_background_brand\\">@color/color_red_pushpin_450</color>
+  <color name=\\"color_background_education\\">@color/color_blue_skycicle_300</color>
+  <color name=\\"color_background_wash_dark\\">#cc000000</color>
+  <color name=\\"color_background_wash_light\\">#e6ffffff</color>
+  <color name=\\"color_background_dark\\">@color/color_black_cosmicore_900</color>
+  <color name=\\"color_background_light\\">@color/color_white_mochimalist_0</color>
+  <color name=\\"color_background_elevation_accent\\">@color/color_gray_roboflow_800</color>
+  <color name=\\"color_background_elevation_floating\\">@color/color_gray_roboflow_700</color>
+  <color name=\\"color_background_elevation_raised\\">@color/color_gray_roboflow_600</color>
+  <color name=\\"color_border_container\\">@color/color_gray_roboflow_500</color>
+  <color name=\\"color_border_default\\">@color/color_gray_roboflow_300</color>
+  <color name=\\"color_border_error\\">@color/color_red_pushpin_300</color>
+  <color name=\\"color_border_focus\\">#800084ff</color>
+  <color name=\\"color_data_visualization_10\\">#ff007a72</color>
+  <color name=\\"color_data_visualization_11\\">@color/color_pink_flaminglow_400</color>
+  <color name=\\"color_data_visualization_12\\">@color/color_orange_firetini_200</color>
+  <color name=\\"color_data_visualization_01\\">@color/color_blue_skycicle_600</color>
+  <color name=\\"color_data_visualization_02\\">@color/color_teal_spabattical_200</color>
+  <color name=\\"color_data_visualization_03\\">#ffb190ff</color>
+  <color name=\\"color_data_visualization_04\\">#fffda600</color>
+  <color name=\\"color_data_visualization_05\\">@color/color_blue_skycicle_300</color>
+  <color name=\\"color_data_visualization_06\\">@color/color_pink_flaminglow_500</color>
+  <color name=\\"color_data_visualization_07\\">@color/color_green_matchacado_200</color>
+  <color name=\\"color_data_visualization_08\\">@color/color_purple_mysticool_500</color>
+  <color name=\\"color_data_visualization_09\\">@color/color_orange_firetini_450</color>
+  <color name=\\"color_data_visualization_primary\\">@color/color_data_visualization_05</color>
+  <color name=\\"color_data_visualization_success_graph\\">@color/color_green_matchacado_300</color>
+  <color name=\\"color_data_visualization_success_text\\">@color/color_green_matchacado_400</color>
+  <color name=\\"color_data_visualization_error_graph\\">@color/color_red_pushpin_300</color>
+  <color name=\\"color_data_visualization_error_text\\">@color/color_red_pushpin_400</color>
+
+  </resources>
+",
+  "dist/android/classic/colors-light.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <color name=\\"color_red_pushpin_0\\">#fffff7f7</color>
+  <color name=\\"color_red_pushpin_50\\">#ffffebeb</color>
+  <color name=\\"color_red_pushpin_100\\">#ffffe0e0</color>
+  <color name=\\"color_red_pushpin_200\\">#fffcbbbb</color>
+  <color name=\\"color_red_pushpin_300\\">#fff47171</color>
+  <color name=\\"color_red_pushpin_400\\">#ffeb4242</color>
+  <color name=\\"color_red_pushpin_450\\">#ffe60023</color>
+  <color name=\\"color_red_pushpin_500\\">#ffcc0000</color>
+  <color name=\\"color_red_pushpin_600\\">#ffb60000</color>
+  <color name=\\"color_red_pushpin_700\\">#ff9b0000</color>
+  <color name=\\"color_red_pushpin_800\\">#ff800000</color>
+  <color name=\\"color_red_pushpin_900\\">#ff660000</color>
+  <color name=\\"color_pink_flaminglow_0\\">#fffff8fa</color>
+  <color name=\\"color_pink_flaminglow_50\\">#ffffebf1</color>
+  <color name=\\"color_pink_flaminglow_100\\">#ffffdfe9</color>
+  <color name=\\"color_pink_flaminglow_200\\">#ffffbed2</color>
+  <color name=\\"color_pink_flaminglow_300\\">#fffe8eb1</color>
+  <color name=\\"color_pink_flaminglow_400\\">#fff76593</color>
+  <color name=\\"color_pink_flaminglow_450\\">#ffee376a</color>
+  <color name=\\"color_pink_flaminglow_500\\">#ffde2c62</color>
+  <color name=\\"color_pink_flaminglow_600\\">#ffc31952</color>
+  <color name=\\"color_pink_flaminglow_700\\">#ffa30c4a</color>
+  <color name=\\"color_pink_flaminglow_800\\">#ff82053e</color>
+  <color name=\\"color_pink_flaminglow_900\\">#ff630233</color>
+  <color name=\\"color_blue_skycicle_0\\">#fff7fbff</color>
+  <color name=\\"color_blue_skycicle_50\\">#ffe6f4ff</color>
+  <color name=\\"color_blue_skycicle_100\\">#ffd7edff</color>
+  <color name=\\"color_blue_skycicle_200\\">#ffabdbff</color>
+  <color name=\\"color_blue_skycicle_300\\">#ff75bfff</color>
+  <color name=\\"color_blue_skycicle_400\\">#ff45a3fe</color>
+  <color name=\\"color_blue_skycicle_450\\">#ff007cff</color>
+  <color name=\\"color_blue_skycicle_500\\">#ff0074e8</color>
+  <color name=\\"color_blue_skycicle_600\\">#ff005fcb</color>
+  <color name=\\"color_blue_skycicle_700\\">#ff004ba9</color>
+  <color name=\\"color_blue_skycicle_800\\">#ff003c96</color>
+  <color name=\\"color_blue_skycicle_900\\">#ff002966</color>
+  <color name=\\"color_teal_spabattical_0\\">#fff7fdfc</color>
+  <color name=\\"color_teal_spabattical_50\\">#ffe6faf5</color>
+  <color name=\\"color_teal_spabattical_100\\">#ffccf6ee</color>
+  <color name=\\"color_teal_spabattical_200\\">#ff75e4d5</color>
+  <color name=\\"color_teal_spabattical_300\\">#ff48d5c6</color>
+  <color name=\\"color_teal_spabattical_400\\">#ff26c0b4</color>
+  <color name=\\"color_teal_spabattical_450\\">#ff009990</color>
+  <color name=\\"color_teal_spabattical_500\\">#ff00857c</color>
+  <color name=\\"color_teal_spabattical_600\\">#ff006b6c</color>
+  <color name=\\"color_teal_spabattical_700\\">#ff005c62</color>
+  <color name=\\"color_teal_spabattical_800\\">#ff005062</color>
+  <color name=\\"color_teal_spabattical_900\\">#ff003440</color>
+  <color name=\\"color_green_matchacado_0\\">#fff6fdf5</color>
+  <color name=\\"color_green_matchacado_50\\">#ffe3fae1</color>
+  <color name=\\"color_green_matchacado_100\\">#ffc3f9c2</color>
+  <color name=\\"color_green_matchacado_200\\">#ffa4f9ac</color>
+  <color name=\\"color_green_matchacado_300\\">#ff6bec8c</color>
+  <color name=\\"color_green_matchacado_400\\">#ff39d377</color>
+  <color name=\\"color_green_matchacado_450\\">#ff1dad65</color>
+  <color name=\\"color_green_matchacado_500\\">#ff008753</color>
+  <color name=\\"color_green_matchacado_600\\">#ff005f3e</color>
+  <color name=\\"color_green_matchacado_700\\">#ff00422c</color>
+  <color name=\\"color_green_matchacado_800\\">#ff003020</color>
+  <color name=\\"color_green_matchacado_900\\">#ff00261a</color>
+  <color name=\\"color_purple_mysticool_0\\">#fff8f7ff</color>
+  <color name=\\"color_purple_mysticool_50\\">#fff0edff</color>
+  <color name=\\"color_purple_mysticool_100\\">#ffe9e4ff</color>
+  <color name=\\"color_purple_mysticool_200\\">#ffd5c7ff</color>
+  <color name=\\"color_purple_mysticool_300\\">#ffb190ff</color>
+  <color name=\\"color_purple_mysticool_400\\">#ff9e68ff</color>
+  <color name=\\"color_purple_mysticool_450\\">#ff8a39fa</color>
+  <color name=\\"color_purple_mysticool_500\\">#ff812ae7</color>
+  <color name=\\"color_purple_mysticool_600\\">#ff6b16ca</color>
+  <color name=\\"color_purple_mysticool_700\\">#ff550aa9</color>
+  <color name=\\"color_purple_mysticool_800\\">#ff400387</color>
+  <color name=\\"color_purple_mysticool_900\\">#ff2c0066</color>
+  <color name=\\"color_orange_firetini_0\\">#fffff6eb</color>
+  <color name=\\"color_orange_firetini_50\\">#fffff0db</color>
+  <color name=\\"color_orange_firetini_100\\">#ffffe4c1</color>
+  <color name=\\"color_orange_firetini_200\\">#ffffc58f</color>
+  <color name=\\"color_orange_firetini_300\\">#fffda161</color>
+  <color name=\\"color_orange_firetini_400\\">#fff77a38</color>
+  <color name=\\"color_orange_firetini_450\\">#ffff5b45</color>
+  <color name=\\"color_orange_firetini_500\\">#ffde3700</color>
+  <color name=\\"color_orange_firetini_600\\">#ffc32f00</color>
+  <color name=\\"color_orange_firetini_700\\">#ffa42700</color>
+  <color name=\\"color_orange_firetini_800\\">#ff842000</color>
+  <color name=\\"color_orange_firetini_900\\">#ff660e00</color>
+  <color name=\\"color_yellow_caramellow_0\\">#fffffedb</color>
+  <color name=\\"color_yellow_caramellow_50\\">#fffffebb</color>
+  <color name=\\"color_yellow_caramellow_100\\">#fffffd92</color>
+  <color name=\\"color_yellow_caramellow_200\\">#fffae600</color>
+  <color name=\\"color_yellow_caramellow_300\\">#fffdc900</color>
+  <color name=\\"color_yellow_caramellow_400\\">#ffe18d00</color>
+  <color name=\\"color_yellow_caramellow_450\\">#ffd86800</color>
+  <color name=\\"color_yellow_caramellow_500\\">#ffbd5b00</color>
+  <color name=\\"color_yellow_caramellow_600\\">#ffaa4900</color>
+  <color name=\\"color_yellow_caramellow_700\\">#ff943a00</color>
+  <color name=\\"color_yellow_caramellow_800\\">#ff7c2d00</color>
+  <color name=\\"color_yellow_caramellow_900\\">#ff662400</color>
+  <color name=\\"color_white_mochimalist_0\\">#ffffffff</color>
+  <color name=\\"color_gray_roboflow_50\\">#fff9f9f9</color>
+  <color name=\\"color_gray_roboflow_100\\">#fff1f1f1</color>
+  <color name=\\"color_gray_roboflow_200\\">#ffe9e9e9</color>
+  <color name=\\"color_gray_roboflow_300\\">#ffcdcdcd</color>
+  <color name=\\"color_gray_roboflow_400\\">#ffa5a5a5</color>
+  <color name=\\"color_gray_roboflow_500\\">#ff767676</color>
+  <color name=\\"color_gray_roboflow_550\\">#ff5f5f5f</color>
+  <color name=\\"color_gray_roboflow_600\\">#ff4a4a4a</color>
+  <color name=\\"color_gray_roboflow_700\\">#ff2b2b2b</color>
+  <color name=\\"color_gray_roboflow_800\\">#ff191919</color>
+  <color name=\\"color_black_cosmicore_900\\">#ff111111</color>
+  <color name=\\"color_transparent\\">#00000000</color>
+  <color name=\\"color_text_default\\">@color/color_black_cosmicore_900</color>
+  <color name=\\"color_text_subtle\\">@color/color_gray_roboflow_500</color>
+  <color name=\\"color_text_success\\">@color/color_green_matchacado_600</color>
+  <color name=\\"color_text_disabled\\">@color/color_gray_roboflow_400</color>
+  <color name=\\"color_text_error\\">@color/color_red_pushpin_500</color>
+  <color name=\\"color_text_warning\\">@color/color_yellow_caramellow_500</color>
+  <color name=\\"color_text_inverse\\">@color/color_white_mochimalist_0</color>
+  <color name=\\"color_text_dark\\">@color/color_black_cosmicore_900</color>
+  <color name=\\"color_text_light\\">@color/color_white_mochimalist_0</color>
+  <color name=\\"color_text_shopping\\">@color/color_blue_skycicle_500</color>
+  <color name=\\"color_text_link\\">@color/color_blue_skycicle_700</color>
+  <color name=\\"color_icon_default\\">@color/color_black_cosmicore_900</color>
+  <color name=\\"color_icon_subtle\\">@color/color_gray_roboflow_500</color>
+  <color name=\\"color_icon_subtle_accent\\">@color/color_gray_roboflow_550</color>
+  <color name=\\"color_icon_success\\">@color/color_green_matchacado_600</color>
+  <color name=\\"color_icon_disabled\\">@color/color_gray_roboflow_400</color>
+  <color name=\\"color_icon_error\\">@color/color_red_pushpin_500</color>
+  <color name=\\"color_icon_warning\\">@color/color_yellow_caramellow_500</color>
+  <color name=\\"color_icon_info\\">@color/color_blue_skycicle_500</color>
+  <color name=\\"color_icon_recommendation\\">@color/color_purple_mysticool_500</color>
+  <color name=\\"color_icon_inverse\\">@color/color_white_mochimalist_0</color>
+  <color name=\\"color_icon_shopping\\">@color/color_blue_skycicle_500</color>
+  <color name=\\"color_icon_brand_primary\\">@color/color_red_pushpin_450</color>
+  <color name=\\"color_icon_light\\">@color/color_white_mochimalist_0</color>
+  <color name=\\"color_icon_dark\\">@color/color_black_cosmicore_900</color>
+  <color name=\\"color_background_default\\">@color/color_white_mochimalist_0</color>
+  <color name=\\"color_background_info_base\\">@color/color_blue_skycicle_500</color>
+  <color name=\\"color_background_info_weak\\">@color/color_blue_skycicle_100</color>
+  <color name=\\"color_background_info_strong\\">@color/color_blue_skycicle_600</color>
+  <color name=\\"color_background_error_base\\">@color/color_red_pushpin_500</color>
+  <color name=\\"color_background_error_weak\\">@color/color_red_pushpin_100</color>
+  <color name=\\"color_background_warning_base\\">@color/color_yellow_caramellow_500</color>
+  <color name=\\"color_background_warning_weak\\">@color/color_orange_firetini_100</color>
+  <color name=\\"color_background_success_base\\">@color/color_green_matchacado_500</color>
+  <color name=\\"color_background_success_weak\\">@color/color_green_matchacado_100</color>
+  <color name=\\"color_background_recommendation_base\\">@color/color_purple_mysticool_500</color>
+  <color name=\\"color_background_recommendation_weak\\">@color/color_purple_mysticool_100</color>
+  <color name=\\"color_background_neutral\\">@color/color_gray_roboflow_500</color>
+  <color name=\\"color_background_shopping\\">@color/color_blue_skycicle_500</color>
+  <color name=\\"color_background_primary_base\\">@color/color_red_pushpin_450</color>
+  <color name=\\"color_background_primary_strong\\">@color/color_red_pushpin_600</color>
+  <color name=\\"color_background_primary_weak\\">@color/color_red_pushpin_300</color>
+  <color name=\\"color_background_secondary_base\\">@color/color_gray_roboflow_200</color>
+  <color name=\\"color_background_secondary_strong\\">@color/color_gray_roboflow_400</color>
+  <color name=\\"color_background_secondary_weak\\">@color/color_gray_roboflow_300</color>
+  <color name=\\"color_background_tertiary_base\\">@color/color_gray_roboflow_500</color>
+  <color name=\\"color_background_tertiary_strong\\">@color/color_gray_roboflow_700</color>
+  <color name=\\"color_background_tertiary_weak\\">@color/color_gray_roboflow_300</color>
+  <color name=\\"color_background_selected_base\\">@color/color_black_cosmicore_900</color>
+  <color name=\\"color_background_selected_strong\\">@color/color_gray_roboflow_700</color>
+  <color name=\\"color_background_selected_weak\\">@color/color_gray_roboflow_400</color>
+  <color name=\\"color_background_inverse_base\\">@color/color_black_cosmicore_900</color>
+  <color name=\\"color_background_inverse_strong\\">@color/color_gray_roboflow_200</color>
+  <color name=\\"color_background_brand\\">@color/color_red_pushpin_450</color>
+  <color name=\\"color_background_education\\">@color/color_blue_skycicle_500</color>
+  <color name=\\"color_background_wash_dark\\">#cc000000</color>
+  <color name=\\"color_background_wash_light\\">#e6ffffff</color>
+  <color name=\\"color_background_dark\\">@color/color_black_cosmicore_900</color>
+  <color name=\\"color_background_light\\">@color/color_white_mochimalist_0</color>
+  <color name=\\"color_background_elevation_accent\\">@color/color_gray_roboflow_100</color>
+  <color name=\\"color_background_elevation_floating\\">@color/color_transparent</color>
+  <color name=\\"color_background_elevation_raised\\">@color/color_transparent</color>
+  <color name=\\"color_border_container\\">@color/color_gray_roboflow_300</color>
+  <color name=\\"color_border_default\\">@color/color_gray_roboflow_500</color>
+  <color name=\\"color_border_error\\">@color/color_red_pushpin_500</color>
+  <color name=\\"color_border_focus\\">#800084ff</color>
+  <color name=\\"color_data_visualization_10\\">@color/color_teal_spabattical_800</color>
+  <color name=\\"color_data_visualization_11\\">@color/color_pink_flaminglow_500</color>
+  <color name=\\"color_data_visualization_12\\">@color/color_orange_firetini_900</color>
+  <color name=\\"color_data_visualization_01\\">@color/color_blue_skycicle_800</color>
+  <color name=\\"color_data_visualization_02\\">#ff11a69c</color>
+  <color name=\\"color_data_visualization_03\\">#ff924af7</color>
+  <color name=\\"color_data_visualization_04\\">#ffd17711</color>
+  <color name=\\"color_data_visualization_05\\">#ff0081fe</color>
+  <color name=\\"color_data_visualization_06\\">#ffff5383</color>
+  <color name=\\"color_data_visualization_07\\">#ff00ab55</color>
+  <color name=\\"color_data_visualization_08\\">@color/color_purple_mysticool_800</color>
+  <color name=\\"color_data_visualization_09\\">#fff2681f</color>
+  <color name=\\"color_data_visualization_primary\\">@color/color_data_visualization_05</color>
+  <color name=\\"color_data_visualization_success_graph\\">@color/color_green_matchacado_500</color>
+  <color name=\\"color_data_visualization_success_text\\">@color/color_green_matchacado_600</color>
+  <color name=\\"color_data_visualization_error_graph\\">#ffed0000</color>
+  <color name=\\"color_data_visualization_error_text\\">@color/color_red_pushpin_500</color>
+
+  </resources>
+",
+  "dist/android/classic/font-size.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"font_size_100\\">12sp</dimen>
+  <dimen name=\\"font_size_200\\">14sp</dimen>
+  <dimen name=\\"font_size_300\\">16sp</dimen>
+  <dimen name=\\"font_size_400\\">20sp</dimen>
+  <dimen name=\\"font_size_500\\">28sp</dimen>
+  <dimen name=\\"font_size_600\\">36sp</dimen>
+
+  </resources>
+",
+  "dist/android/classic/font-weight.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"font_weight_normal\\">400</dimen>
+  <dimen name=\\"font_weight_semibold\\">600</dimen>
+  <dimen name=\\"font_weight_bold\\">700</dimen>
+
+  </resources>
+",
+  "dist/android/classic/opacity.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"opacity_0\\">0</dimen>
+  <dimen name=\\"opacity_100\\">0.04</dimen>
+  <dimen name=\\"opacity_200\\">0.2</dimen>
+  <dimen name=\\"opacity_300\\">0.4</dimen>
+  <dimen name=\\"opacity_400\\">0.8</dimen>
+  <dimen name=\\"opacity_500\\">0.9</dimen>
+
+  </resources>
+",
+  "dist/android/classic/rounding.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"rounding_0\\">0dp</dimen>
+  <dimen name=\\"rounding_100\\">4dp</dimen>
+  <dimen name=\\"rounding_200\\">8dp</dimen>
+  <dimen name=\\"rounding_300\\">12dp</dimen>
+  <dimen name=\\"rounding_400\\">16dp</dimen>
+  <dimen name=\\"rounding_500\\">20dp</dimen>
+  <dimen name=\\"rounding_600\\">24dp</dimen>
+  <dimen name=\\"rounding_700\\">28dp</dimen>
+  <dimen name=\\"rounding_800\\">32dp</dimen>
+  <dimen name=\\"rounding_pill\\">999dp</dimen>
+  <dimen name=\\"rounding_circle\\">0.5</dimen>
+
+  </resources>
+",
+  "dist/android/classic/space.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"space_0\\">0dp</dimen>
+  <dimen name=\\"space_100\\">4dp</dimen>
+  <dimen name=\\"space_200\\">8dp</dimen>
+  <dimen name=\\"space_300\\">12dp</dimen>
+  <dimen name=\\"space_400\\">16dp</dimen>
+  <dimen name=\\"space_500\\">20dp</dimen>
+  <dimen name=\\"space_600\\">24dp</dimen>
+  <dimen name=\\"space_700\\">28dp</dimen>
+  <dimen name=\\"space_800\\">32dp</dimen>
+  <dimen name=\\"space_900\\">36dp</dimen>
+  <dimen name=\\"space_1000\\">40dp</dimen>
+  <dimen name=\\"space_1100\\">44dp</dimen>
+  <dimen name=\\"space_1200\\">48dp</dimen>
+  <dimen name=\\"space_1300\\">52dp</dimen>
+  <dimen name=\\"space_1400\\">56dp</dimen>
+  <dimen name=\\"space_1500\\">60dp</dimen>
+  <dimen name=\\"space_1600\\">64dp</dimen>
+  <dimen name=\\"space_negative_100\\">-4dp</dimen>
+  <dimen name=\\"space_negative_200\\">-8dp</dimen>
+  <dimen name=\\"space_negative_300\\">-12dp</dimen>
+  <dimen name=\\"space_negative_400\\">-16dp</dimen>
+  <dimen name=\\"space_negative_500\\">-20dp</dimen>
+  <dimen name=\\"space_negative_600\\">-24dp</dimen>
+  <dimen name=\\"space_negative_700\\">-28dp</dimen>
+  <dimen name=\\"space_negative_800\\">-32dp</dimen>
+  <dimen name=\\"space_negative_900\\">-36dp</dimen>
+  <dimen name=\\"space_negative_1000\\">-40dp</dimen>
+  <dimen name=\\"space_negative_1100\\">-44dp</dimen>
+  <dimen name=\\"space_negative_1200\\">-48dp</dimen>
+  <dimen name=\\"space_negative_1300\\">-52dp</dimen>
+  <dimen name=\\"space_negative_1400\\">-56dp</dimen>
+  <dimen name=\\"space_negative_1500\\">-60dp</dimen>
+  <dimen name=\\"space_negative_1600\\">-64dp</dimen>
+
+  </resources>
+",
+  "dist/android/vr-theme/color-dark.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <color name=\\"base_color_transparent\\">#00ffffff</color>
+  <color name=\\"base_color_grayscale_0\\">#ffffffff</color>
+  <color name=\\"base_color_grayscale_25\\">#fffffef7</color>
+  <color name=\\"base_color_grayscale_50\\">#fff5f4ed</color>
+  <color name=\\"base_color_grayscale_100\\">#ffe8e7e1</color>
+  <color name=\\"base_color_grayscale_150\\">#ffc7c6c1</color>
+  <color name=\\"base_color_grayscale_200\\">#ff969292</color>
+  <color name=\\"base_color_grayscale_250\\">#ff757570</color>
+  <color name=\\"base_color_grayscale_300\\">#ff636361</color>
+  <color name=\\"base_color_grayscale_350\\">#ff4c4c4a</color>
+  <color name=\\"base_color_grayscale_400\\">#ff2e2e2d</color>
+  <color name=\\"base_color_grayscale_450\\">#ff1c1b1b</color>
+  <color name=\\"base_color_grayscale_500\\">#ff000000</color>
+  <color name=\\"base_color_red_100\\">#ffffd3d1</color>
+  <color name=\\"base_color_red_200\\">#ffff9494</color>
+  <color name=\\"base_color_red_300\\">#ffe60023</color>
+  <color name=\\"base_color_red_400\\">#ffb2001a</color>
+  <color name=\\"base_color_red_500\\">#ff8a0f0f</color>
+  <color name=\\"base_color_purple_100\\">#fffcd8fc</color>
+  <color name=\\"base_color_purple_200\\">#ffefadef</color>
+  <color name=\\"base_color_purple_300\\">#ffc65dd0</color>
+  <color name=\\"base_color_purple_400\\">#ff8f4696</color>
+  <color name=\\"base_color_purple_500\\">#ff6d4270</color>
+  <color name=\\"base_color_blue_100\\">#ffc5eaf7</color>
+  <color name=\\"base_color_blue_200\\">#ff7cbede</color>
+  <color name=\\"base_color_blue_300\\">#ff2597d0</color>
+  <color name=\\"base_color_blue_400\\">#ff007db8</color>
+  <color name=\\"base_color_blue_500\\">#ff215d82</color>
+  <color name=\\"base_color_green_100\\">#ffd0e2a8</color>
+  <color name=\\"base_color_green_200\\">#ffa8bb63</color>
+  <color name=\\"base_color_green_300\\">#ff83a343</color>
+  <color name=\\"base_color_green_400\\">#ff517d3b</color>
+  <color name=\\"base_color_green_500\\">#ff265926</color>
+  <color name=\\"base_color_orange_100\\">#fffde7c9</color>
+  <color name=\\"base_color_orange_200\\">#fffbc55b</color>
+  <color name=\\"base_color_orange_300\\">#fffea239</color>
+  <color name=\\"base_color_orange_400\\">#fff06d22</color>
+  <color name=\\"base_color_orange_500\\">#ff9b4b1c</color>
+  <color name=\\"sema_color_background_default\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_background_primary\\">@color/base_color_red_300</color>
+  <color name=\\"sema_color_background_secondary\\">@color/base_color_grayscale_250</color>
+  <color name=\\"sema_color_background_tertiary\\">@color/base_color_grayscale_150</color>
+  <color name=\\"sema_color_background_selected\\">@color/base_color_grayscale_100</color>
+  <color name=\\"sema_color_background_education\\">@color/base_color_blue_200</color>
+  <color name=\\"sema_color_background_elevation\\">@color/base_color_grayscale_400</color>
+  <color name=\\"sema_color_background_scrim\\">@color/base_color_grayscale_450</color>
+  <color name=\\"sema_color_background_inverse\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_background_light\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_background_dark\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_background_disabled\\">@color/base_color_grayscale_400</color>
+  <color name=\\"sema_color_background_transparent\\">#00ffffff</color>
+  <color name=\\"sema_color_background_info_default\\">@color/base_color_blue_200</color>
+  <color name=\\"sema_color_background_info_weak\\">@color/base_color_blue_500</color>
+  <color name=\\"sema_color_background_neutral_default\\">@color/base_color_grayscale_150</color>
+  <color name=\\"sema_color_background_neutral_weak\\">@color/base_color_grayscale_300</color>
+  <color name=\\"sema_color_background_recommendation_default\\">@color/base_color_purple_200</color>
+  <color name=\\"sema_color_background_recommendation_weak\\">@color/base_color_purple_500</color>
+  <color name=\\"sema_color_background_success_default\\">@color/base_color_green_200</color>
+  <color name=\\"sema_color_background_success_weak\\">@color/base_color_green_500</color>
+  <color name=\\"sema_color_background_warning_default\\">@color/base_color_orange_200</color>
+  <color name=\\"sema_color_background_warning_weak\\">@color/base_color_orange_500</color>
+  <color name=\\"sema_color_background_error_default\\">@color/base_color_red_200</color>
+  <color name=\\"sema_color_background_error_weak\\">@color/base_color_red_500</color>
+  <color name=\\"sema_color_background_wash_default\\">#cc000000</color>
+  <color name=\\"sema_color_background_wash_dark\\">#cc000000</color>
+  <color name=\\"sema_color_background_wash_light\\">#e6ffffff</color>
+  <color name=\\"sema_color_background_wash_image_tint\\">#0a000000</color>
+  <color name=\\"sema_color_background_wash_scrims_default\\">#66757570</color>
+  <color name=\\"sema_color_background_wash_scrims_opaque\\">#cc4c4c4a</color>
+  <color name=\\"sema_color_border_decorative\\">@color/base_color_grayscale_250</color>
+  <color name=\\"sema_color_border_interactive\\">@color/base_color_grayscale_150</color>
+  <color name=\\"sema_color_border_selected\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_border_disabled\\">@color/base_color_grayscale_350</color>
+  <color name=\\"sema_color_border_success\\">@color/base_color_green_200</color>
+  <color name=\\"sema_color_border_error\\">@color/base_color_red_200</color>
+  <color name=\\"sema_color_border_inverse\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_border_focus_outer_default\\">@color/base_color_blue_100</color>
+  <color name=\\"sema_color_border_focus_outer_inverse\\">@color/base_color_blue_500</color>
+  <color name=\\"sema_color_border_focus_outer_dark\\">@color/base_color_blue_400</color>
+  <color name=\\"sema_color_border_focus_outer_light\\">@color/base_color_blue_100</color>
+  <color name=\\"sema_color_border_focus_inner_default\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_border_focus_inner_inverse\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_border_focus_inner_dark\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_border_focus_inner_light\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_text_default\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_text_neutral\\">@color/base_color_grayscale_100</color>
+  <color name=\\"sema_color_text_subtle\\">@color/base_color_grayscale_200</color>
+  <color name=\\"sema_color_text_link\\">@color/base_color_blue_100</color>
+  <color name=\\"sema_color_text_info\\">@color/base_color_blue_100</color>
+  <color name=\\"sema_color_text_recommendation\\">@color/base_color_purple_100</color>
+  <color name=\\"sema_color_text_success\\">@color/base_color_green_100</color>
+  <color name=\\"sema_color_text_warning\\">@color/base_color_orange_100</color>
+  <color name=\\"sema_color_text_error\\">@color/base_color_red_100</color>
+  <color name=\\"sema_color_text_primary\\">@color/base_color_red_300</color>
+  <color name=\\"sema_color_text_inverse\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_text_light\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_text_dark\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_text_disabled\\">@color/base_color_grayscale_350</color>
+  <color name=\\"sema_color_icon_default\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_icon_neutral\\">@color/base_color_grayscale_100</color>
+  <color name=\\"sema_color_icon_subtle\\">@color/base_color_grayscale_200</color>
+  <color name=\\"sema_color_icon_link\\">@color/base_color_blue_100</color>
+  <color name=\\"sema_color_icon_info\\">@color/base_color_blue_100</color>
+  <color name=\\"sema_color_icon_recommendation\\">@color/base_color_purple_100</color>
+  <color name=\\"sema_color_icon_success\\">@color/base_color_green_100</color>
+  <color name=\\"sema_color_icon_warning\\">@color/base_color_orange_100</color>
+  <color name=\\"sema_color_icon_error\\">@color/base_color_red_100</color>
+  <color name=\\"sema_color_icon_primary\\">@color/base_color_red_300</color>
+  <color name=\\"sema_color_icon_inverse\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_icon_light\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_icon_dark\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_icon_disabled\\">@color/base_color_grayscale_350</color>
+  <color name=\\"sema_color_dataviz_10\\">#ff007a72</color>
+  <color name=\\"sema_color_dataviz_11\\">#fff76593</color>
+  <color name=\\"sema_color_dataviz_12\\">#ffffc58f</color>
+  <color name=\\"sema_color_dataviz_01\\">#ff005fcb</color>
+  <color name=\\"sema_color_dataviz_02\\">#ff75e4d5</color>
+  <color name=\\"sema_color_dataviz_03\\">#ffb190ff</color>
+  <color name=\\"sema_color_dataviz_04\\">#fffda600</color>
+  <color name=\\"sema_color_dataviz_05\\">#ff75bfff</color>
+  <color name=\\"sema_color_dataviz_06\\">#ffde2c62</color>
+  <color name=\\"sema_color_dataviz_07\\">#ffa4f9ac</color>
+  <color name=\\"sema_color_dataviz_08\\">#ff812ae7</color>
+  <color name=\\"sema_color_dataviz_09\\">#ffff5b45</color>
+
+  </resources>
+",
+  "dist/android/vr-theme/colors-light.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <color name=\\"base_color_transparent\\">#00ffffff</color>
+  <color name=\\"base_color_grayscale_0\\">#ffffffff</color>
+  <color name=\\"base_color_grayscale_25\\">#fffffef7</color>
+  <color name=\\"base_color_grayscale_50\\">#fff5f4ed</color>
+  <color name=\\"base_color_grayscale_100\\">#ffe8e7e1</color>
+  <color name=\\"base_color_grayscale_150\\">#ffc7c6c1</color>
+  <color name=\\"base_color_grayscale_200\\">#ff969292</color>
+  <color name=\\"base_color_grayscale_250\\">#ff757570</color>
+  <color name=\\"base_color_grayscale_300\\">#ff636361</color>
+  <color name=\\"base_color_grayscale_350\\">#ff4c4c4a</color>
+  <color name=\\"base_color_grayscale_400\\">#ff2e2e2d</color>
+  <color name=\\"base_color_grayscale_450\\">#ff1c1b1b</color>
+  <color name=\\"base_color_grayscale_500\\">#ff000000</color>
+  <color name=\\"base_color_red_100\\">#ffffd3d1</color>
+  <color name=\\"base_color_red_200\\">#ffff9494</color>
+  <color name=\\"base_color_red_300\\">#ffe60023</color>
+  <color name=\\"base_color_red_400\\">#ffb2001a</color>
+  <color name=\\"base_color_red_500\\">#ff8a0f0f</color>
+  <color name=\\"base_color_purple_100\\">#fffcd8fc</color>
+  <color name=\\"base_color_purple_200\\">#ffefadef</color>
+  <color name=\\"base_color_purple_300\\">#ffc65dd0</color>
+  <color name=\\"base_color_purple_400\\">#ff8f4696</color>
+  <color name=\\"base_color_purple_500\\">#ff6d4270</color>
+  <color name=\\"base_color_blue_100\\">#ffc5eaf7</color>
+  <color name=\\"base_color_blue_200\\">#ff7cbede</color>
+  <color name=\\"base_color_blue_300\\">#ff2597d0</color>
+  <color name=\\"base_color_blue_400\\">#ff007db8</color>
+  <color name=\\"base_color_blue_500\\">#ff215d82</color>
+  <color name=\\"base_color_green_100\\">#ffd0e2a8</color>
+  <color name=\\"base_color_green_200\\">#ffa8bb63</color>
+  <color name=\\"base_color_green_300\\">#ff83a343</color>
+  <color name=\\"base_color_green_400\\">#ff517d3b</color>
+  <color name=\\"base_color_green_500\\">#ff265926</color>
+  <color name=\\"base_color_orange_100\\">#fffde7c9</color>
+  <color name=\\"base_color_orange_200\\">#fffbc55b</color>
+  <color name=\\"base_color_orange_300\\">#fffea239</color>
+  <color name=\\"base_color_orange_400\\">#fff06d22</color>
+  <color name=\\"base_color_orange_500\\">#ff9b4b1c</color>
+  <color name=\\"sema_color_background_default\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_background_primary\\">@color/base_color_red_300</color>
+  <color name=\\"sema_color_background_secondary\\">@color/base_color_grayscale_100</color>
+  <color name=\\"sema_color_background_tertiary\\">@color/base_color_grayscale_250</color>
+  <color name=\\"sema_color_background_selected\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_background_education\\">@color/base_color_blue_400</color>
+  <color name=\\"sema_color_background_elevation\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_background_scrim\\">@color/base_color_grayscale_50</color>
+  <color name=\\"sema_color_background_inverse\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_background_light\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_background_dark\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_background_disabled\\">@color/base_color_grayscale_100</color>
+  <color name=\\"sema_color_background_transparent\\">#00ffffff</color>
+  <color name=\\"sema_color_background_info_default\\">@color/base_color_blue_400</color>
+  <color name=\\"sema_color_background_info_weak\\">@color/base_color_blue_100</color>
+  <color name=\\"sema_color_background_neutral_default\\">@color/base_color_grayscale_250</color>
+  <color name=\\"sema_color_background_neutral_weak\\">@color/base_color_grayscale_150</color>
+  <color name=\\"sema_color_background_recommendation_default\\">@color/base_color_purple_400</color>
+  <color name=\\"sema_color_background_recommendation_weak\\">@color/base_color_purple_100</color>
+  <color name=\\"sema_color_background_success_default\\">@color/base_color_green_400</color>
+  <color name=\\"sema_color_background_success_weak\\">@color/base_color_green_100</color>
+  <color name=\\"sema_color_background_warning_default\\">@color/base_color_orange_500</color>
+  <color name=\\"sema_color_background_warning_weak\\">@color/base_color_orange_100</color>
+  <color name=\\"sema_color_background_error_default\\">@color/base_color_red_400</color>
+  <color name=\\"sema_color_background_error_weak\\">@color/base_color_red_100</color>
+  <color name=\\"sema_color_background_wash_default\\">#e6ffffff</color>
+  <color name=\\"sema_color_background_wash_dark\\">#cc000000</color>
+  <color name=\\"sema_color_background_wash_light\\">#e6ffffff</color>
+  <color name=\\"sema_color_background_wash_image_tint\\">#0a000000</color>
+  <color name=\\"sema_color_background_wash_scrims_default\\">#66757570</color>
+  <color name=\\"sema_color_background_wash_scrims_opaque\\">#ccf5f4ed</color>
+  <color name=\\"sema_color_border_decorative\\">@color/base_color_grayscale_150</color>
+  <color name=\\"sema_color_border_interactive\\">@color/base_color_grayscale_250</color>
+  <color name=\\"sema_color_border_selected\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_border_disabled\\">@color/base_color_grayscale_150</color>
+  <color name=\\"sema_color_border_success\\">@color/base_color_green_400</color>
+  <color name=\\"sema_color_border_error\\">@color/base_color_red_400</color>
+  <color name=\\"sema_color_border_inverse\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_border_focus_outer_default\\">@color/base_color_blue_400</color>
+  <color name=\\"sema_color_border_focus_outer_inverse\\">@color/base_color_blue_100</color>
+  <color name=\\"sema_color_border_focus_outer_dark\\">@color/base_color_blue_400</color>
+  <color name=\\"sema_color_border_focus_outer_light\\">@color/base_color_blue_100</color>
+  <color name=\\"sema_color_border_focus_inner_default\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_border_focus_inner_inverse\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_border_focus_inner_dark\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_border_focus_inner_light\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_text_default\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_text_neutral\\">@color/base_color_grayscale_350</color>
+  <color name=\\"sema_color_text_subtle\\">@color/base_color_grayscale_300</color>
+  <color name=\\"sema_color_text_link\\">@color/base_color_blue_500</color>
+  <color name=\\"sema_color_text_info\\">@color/base_color_blue_500</color>
+  <color name=\\"sema_color_text_recommendation\\">@color/base_color_purple_500</color>
+  <color name=\\"sema_color_text_success\\">@color/base_color_green_500</color>
+  <color name=\\"sema_color_text_warning\\">@color/base_color_orange_500</color>
+  <color name=\\"sema_color_text_error\\">@color/base_color_red_500</color>
+  <color name=\\"sema_color_text_primary\\">@color/base_color_red_300</color>
+  <color name=\\"sema_color_text_inverse\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_text_light\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_text_dark\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_text_disabled\\">@color/base_color_grayscale_200</color>
+  <color name=\\"sema_color_icon_default\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_icon_neutral\\">@color/base_color_grayscale_350</color>
+  <color name=\\"sema_color_icon_subtle\\">@color/base_color_grayscale_300</color>
+  <color name=\\"sema_color_icon_link\\">@color/base_color_blue_500</color>
+  <color name=\\"sema_color_icon_info\\">@color/base_color_blue_500</color>
+  <color name=\\"sema_color_icon_recommendation\\">@color/base_color_purple_500</color>
+  <color name=\\"sema_color_icon_success\\">@color/base_color_green_500</color>
+  <color name=\\"sema_color_icon_warning\\">@color/base_color_orange_500</color>
+  <color name=\\"sema_color_icon_error\\">@color/base_color_red_500</color>
+  <color name=\\"sema_color_icon_primary\\">@color/base_color_red_300</color>
+  <color name=\\"sema_color_icon_inverse\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_icon_light\\">@color/base_color_grayscale_0</color>
+  <color name=\\"sema_color_icon_dark\\">@color/base_color_grayscale_500</color>
+  <color name=\\"sema_color_icon_disabled\\">@color/base_color_grayscale_200</color>
+  <color name=\\"sema_color_dataviz_10\\">#ff005062</color>
+  <color name=\\"sema_color_dataviz_11\\">#ffde2c62</color>
+  <color name=\\"sema_color_dataviz_12\\">#ff660e00</color>
+  <color name=\\"sema_color_dataviz_01\\">#ff003c96</color>
+  <color name=\\"sema_color_dataviz_02\\">#ff11a69c</color>
+  <color name=\\"sema_color_dataviz_03\\">#ff924af7</color>
+  <color name=\\"sema_color_dataviz_04\\">#ffd17711</color>
+  <color name=\\"sema_color_dataviz_05\\">#ff0081fe</color>
+  <color name=\\"sema_color_dataviz_06\\">#ffff5383</color>
+  <color name=\\"sema_color_dataviz_07\\">#ff00ab55</color>
+  <color name=\\"sema_color_dataviz_08\\">#ff400387</color>
+  <color name=\\"sema_color_dataviz_09\\">#fff2681f</color>
+
+  </resources>
+",
+  "dist/android/vr-theme/component/checkbox.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"comp_checkbox_motion_background_colorchange_easing\\">@dimen/base_motion_easing_linear</dimen>
+  <dimen name=\\"comp_checkbox_motion_background_colorchange_duration\\">@dimen/base_motion_duration_150</dimen>
+  <dimen name=\\"comp_checkbox_icon_motion_collapse_in_easing\\">@dimen/base_motion_easing_expressive</dimen>
+  <dimen name=\\"comp_checkbox_icon_motion_collapse_in_duration\\">@dimen/base_motion_duration_200</dimen>
+  <dimen name=\\"comp_checkbox_icon_motion_collapse_out_easing\\">@dimen/base_motion_easing_exit</dimen>
+  <dimen name=\\"comp_checkbox_icon_motion_collapse_out_duration\\">@dimen/base_motion_duration_150</dimen>
+
+  </resources>
+",
+  "dist/android/vr-theme/component/radiogroupbutton.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"comp_radiogroupbutton_motion_border_scale_easing\\">@dimen/base_motion_easing_bounce</dimen>
+  <dimen name=\\"comp_radiogroupbutton_motion_border_scale_duration\\">@dimen/base_motion_duration_150</dimen>
+  <dimen name=\\"comp_radiogroupbutton_motion_border_fade_easing\\">@dimen/base_motion_easing_exit</dimen>
+  <dimen name=\\"comp_radiogroupbutton_motion_border_fade_duration\\">@dimen/base_motion_duration_150</dimen>
+
+  </resources>
+",
+  "dist/android/vr-theme/component/spinner.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"comp_spinner_color_background_1\\">#c85bd2</dimen>
+  <dimen name=\\"comp_spinner_color_background_2\\">#e57534</dimen>
+  <dimen name=\\"comp_spinner_color_background_3\\">#22a596</dimen>
+  <dimen name=\\"comp_spinner_motion_enter_duration\\">@dimen/base_motion_duration_300</dimen>
+  <dimen name=\\"comp_spinner_motion_enter_easing\\">@dimen/base_motion_easing_enter</dimen>
+  <dimen name=\\"comp_spinner_motion_exit_duration\\">@dimen/base_motion_duration_150</dimen>
+  <dimen name=\\"comp_spinner_motion_exit_easing\\">@dimen/base_motion_easing_enter</dimen>
+
+  </resources>
+",
+  "dist/android/vr-theme/font-lineheight-ck.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"base_font_lineheight_110\\">1.1</dimen>
+  <dimen name=\\"base_font_lineheight_120\\">1.2</dimen>
+  <dimen name=\\"base_font_lineheight_130\\">1.3</dimen>
+  <dimen name=\\"base_font_lineheight_140\\">1.4</dimen>
+  <dimen name=\\"base_font_lineheight_150\\">1.5</dimen>
+  <dimen name=\\"base_font_lineheight_160\\">1.6</dimen>
+  <dimen name=\\"base_font_lineheight_170\\">1.7</dimen>
+  <dimen name=\\"base_font_lineheight_180\\">1.8</dimen>
+  <dimen name=\\"sema_font_lineheight_xl\\">@dimen/base_font_lineheight_150</dimen>
+  <dimen name=\\"sema_font_lineheight_lg\\">@dimen/base_font_lineheight_150</dimen>
+  <dimen name=\\"sema_font_lineheight_md\\">@dimen/base_font_lineheight_150</dimen>
+  <dimen name=\\"sema_font_lineheight_sm\\">@dimen/base_font_lineheight_130</dimen>
+  <dimen name=\\"sema_font_lineheight_xs\\">@dimen/base_font_lineheight_120</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_lg\\">43sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_md\\">34sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_sm\\">26sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_xs\\">24sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_xxs\\">21sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_lg\\">26sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_md\\">21sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_sm\\">18sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_xs\\">18sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_lg\\">30sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_md\\">24sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_sm\\">21sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_xs\\">18sp</dimen>
+  <dimen name=\\"sema_font_lineheight_compact_xs\\">16sp</dimen>
+
+  </resources>
+",
+  "dist/android/vr-theme/font-lineheight-default.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"base_font_lineheight_110\\">1.1</dimen>
+  <dimen name=\\"base_font_lineheight_120\\">1.2</dimen>
+  <dimen name=\\"base_font_lineheight_130\\">1.3</dimen>
+  <dimen name=\\"base_font_lineheight_140\\">1.4</dimen>
+  <dimen name=\\"base_font_lineheight_150\\">1.5</dimen>
+  <dimen name=\\"base_font_lineheight_160\\">1.6</dimen>
+  <dimen name=\\"base_font_lineheight_170\\">1.7</dimen>
+  <dimen name=\\"base_font_lineheight_180\\">1.8</dimen>
+  <dimen name=\\"sema_font_lineheight_xl\\">@dimen/base_font_lineheight_150</dimen>
+  <dimen name=\\"sema_font_lineheight_lg\\">@dimen/base_font_lineheight_140</dimen>
+  <dimen name=\\"sema_font_lineheight_md\\">@dimen/base_font_lineheight_130</dimen>
+  <dimen name=\\"sema_font_lineheight_sm\\">@dimen/base_font_lineheight_120</dimen>
+  <dimen name=\\"sema_font_lineheight_xs\\">@dimen/base_font_lineheight_110</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_lg\\">40sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_md\\">31sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_sm\\">24sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_xs\\">22sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_xxs\\">20sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_lg\\">24sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_md\\">19sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_sm\\">17sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_xs\\">16sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_lg\\">28sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_md\\">22sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_sm\\">20sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_xs\\">17sp</dimen>
+  <dimen name=\\"sema_font_lineheight_compact_xs\\">14sp</dimen>
+
+  </resources>
+",
+  "dist/android/vr-theme/font-lineheight-ja.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"base_font_lineheight_110\\">1.1</dimen>
+  <dimen name=\\"base_font_lineheight_120\\">1.2</dimen>
+  <dimen name=\\"base_font_lineheight_130\\">1.3</dimen>
+  <dimen name=\\"base_font_lineheight_140\\">1.4</dimen>
+  <dimen name=\\"base_font_lineheight_150\\">1.5</dimen>
+  <dimen name=\\"base_font_lineheight_160\\">1.6</dimen>
+  <dimen name=\\"base_font_lineheight_170\\">1.7</dimen>
+  <dimen name=\\"base_font_lineheight_180\\">1.8</dimen>
+  <dimen name=\\"sema_font_lineheight_xl\\">@dimen/base_font_lineheight_160</dimen>
+  <dimen name=\\"sema_font_lineheight_lg\\">@dimen/base_font_lineheight_160</dimen>
+  <dimen name=\\"sema_font_lineheight_md\\">@dimen/base_font_lineheight_150</dimen>
+  <dimen name=\\"sema_font_lineheight_sm\\">@dimen/base_font_lineheight_130</dimen>
+  <dimen name=\\"sema_font_lineheight_xs\\">@dimen/base_font_lineheight_120</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_lg\\">43sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_md\\">34sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_sm\\">26sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_xs\\">26sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_xxs\\">22sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_lg\\">26sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_md\\">21sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_sm\\">18sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_xs\\">18sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_lg\\">32sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_md\\">26sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_sm\\">22sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_xs\\">19sp</dimen>
+  <dimen name=\\"sema_font_lineheight_compact_xs\\">16sp</dimen>
+
+  </resources>
+",
+  "dist/android/vr-theme/font-lineheight-tall.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"base_font_lineheight_110\\">1.1</dimen>
+  <dimen name=\\"base_font_lineheight_120\\">1.2</dimen>
+  <dimen name=\\"base_font_lineheight_130\\">1.3</dimen>
+  <dimen name=\\"base_font_lineheight_140\\">1.4</dimen>
+  <dimen name=\\"base_font_lineheight_150\\">1.5</dimen>
+  <dimen name=\\"base_font_lineheight_160\\">1.6</dimen>
+  <dimen name=\\"base_font_lineheight_170\\">1.7</dimen>
+  <dimen name=\\"base_font_lineheight_180\\">1.8</dimen>
+  <dimen name=\\"sema_font_lineheight_xl\\">@dimen/base_font_lineheight_170</dimen>
+  <dimen name=\\"sema_font_lineheight_lg\\">@dimen/base_font_lineheight_170</dimen>
+  <dimen name=\\"sema_font_lineheight_md\\">@dimen/base_font_lineheight_160</dimen>
+  <dimen name=\\"sema_font_lineheight_sm\\">@dimen/base_font_lineheight_140</dimen>
+  <dimen name=\\"sema_font_lineheight_xs\\">@dimen/base_font_lineheight_130</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_lg\\">46sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_md\\">36sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_sm\\">28sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_xs\\">27sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_xxs\\">24sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_lg\\">28sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_md\\">22sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_sm\\">20sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_xs\\">20sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_lg\\">34sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_md\\">27sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_sm\\">24sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_xs\\">22sp</dimen>
+  <dimen name=\\"sema_font_lineheight_compact_xs\\">17sp</dimen>
+
+  </resources>
+",
+  "dist/android/vr-theme/font-lineheight-th.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"base_font_lineheight_110\\">1.1</dimen>
+  <dimen name=\\"base_font_lineheight_120\\">1.2</dimen>
+  <dimen name=\\"base_font_lineheight_130\\">1.3</dimen>
+  <dimen name=\\"base_font_lineheight_140\\">1.4</dimen>
+  <dimen name=\\"base_font_lineheight_150\\">1.5</dimen>
+  <dimen name=\\"base_font_lineheight_160\\">1.6</dimen>
+  <dimen name=\\"base_font_lineheight_170\\">1.7</dimen>
+  <dimen name=\\"base_font_lineheight_180\\">1.8</dimen>
+  <dimen name=\\"sema_font_lineheight_xl\\">@dimen/base_font_lineheight_180</dimen>
+  <dimen name=\\"sema_font_lineheight_lg\\">@dimen/base_font_lineheight_180</dimen>
+  <dimen name=\\"sema_font_lineheight_md\\">@dimen/base_font_lineheight_170</dimen>
+  <dimen name=\\"sema_font_lineheight_sm\\">@dimen/base_font_lineheight_150</dimen>
+  <dimen name=\\"sema_font_lineheight_xs\\">@dimen/base_font_lineheight_130</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_lg\\">47sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_md\\">36sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_sm\\">30sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_xs\\">29sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_xxs\\">25sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_lg\\">30sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_md\\">24sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_sm\\">21sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_xs\\">20sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_lg\\">36sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_md\\">29sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_sm\\">25sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_xs\\">22sp</dimen>
+  <dimen name=\\"sema_font_lineheight_compact_xs\\">18sp</dimen>
+
+  </resources>
+",
+  "dist/android/vr-theme/font-lineheight-vi.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"base_font_lineheight_110\\">1.1</dimen>
+  <dimen name=\\"base_font_lineheight_120\\">1.2</dimen>
+  <dimen name=\\"base_font_lineheight_130\\">1.3</dimen>
+  <dimen name=\\"base_font_lineheight_140\\">1.4</dimen>
+  <dimen name=\\"base_font_lineheight_150\\">1.5</dimen>
+  <dimen name=\\"base_font_lineheight_160\\">1.6</dimen>
+  <dimen name=\\"base_font_lineheight_170\\">1.7</dimen>
+  <dimen name=\\"base_font_lineheight_180\\">1.8</dimen>
+  <dimen name=\\"sema_font_lineheight_xl\\">@dimen/base_font_lineheight_140</dimen>
+  <dimen name=\\"sema_font_lineheight_lg\\">@dimen/base_font_lineheight_130</dimen>
+  <dimen name=\\"sema_font_lineheight_md\\">@dimen/base_font_lineheight_120</dimen>
+  <dimen name=\\"sema_font_lineheight_sm\\">@dimen/base_font_lineheight_120</dimen>
+  <dimen name=\\"sema_font_lineheight_xs\\">@dimen/base_font_lineheight_120</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_lg\\">43sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_md\\">34sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_sm\\">24sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_xs\\">21sp</dimen>
+  <dimen name=\\"sema_font_lineheight_heading_xxs\\">18sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_lg\\">24sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_md\\">19sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_sm\\">17sp</dimen>
+  <dimen name=\\"sema_font_lineheight_ui_xs\\">14sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_lg\\">26sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_md\\">21sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_sm\\">18sp</dimen>
+  <dimen name=\\"sema_font_lineheight_body_xs\\">16sp</dimen>
+  <dimen name=\\"sema_font_lineheight_compact_xs\\">14sp</dimen>
+
+  </resources>
+",
+  "dist/android/vr-theme/font-size.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"base_font_size_12\\">12sp</dimen>
+  <dimen name=\\"base_font_size_14\\">14sp</dimen>
+  <dimen name=\\"base_font_size_16\\">16sp</dimen>
+  <dimen name=\\"base_font_size_20\\">20sp</dimen>
+  <dimen name=\\"base_font_size_28\\">28sp</dimen>
+  <dimen name=\\"base_font_size_36\\">36sp</dimen>
+  <dimen name=\\"sema_font_size_heading_xxs\\">@dimen/base_font_size_14</dimen>
+  <dimen name=\\"sema_font_size_heading_xs\\">@dimen/base_font_size_16</dimen>
+  <dimen name=\\"sema_font_size_heading_sm\\">@dimen/base_font_size_20</dimen>
+  <dimen name=\\"sema_font_size_heading_md\\">@dimen/base_font_size_28</dimen>
+  <dimen name=\\"sema_font_size_heading_lg\\">@dimen/base_font_size_36</dimen>
+  <dimen name=\\"sema_font_size_ui_xs\\">@dimen/base_font_size_12</dimen>
+  <dimen name=\\"sema_font_size_ui_sm\\">@dimen/base_font_size_14</dimen>
+  <dimen name=\\"sema_font_size_ui_md\\">@dimen/base_font_size_16</dimen>
+  <dimen name=\\"sema_font_size_ui_lg\\">@dimen/base_font_size_20</dimen>
+  <dimen name=\\"sema_font_size_body_xs\\">@dimen/base_font_size_12</dimen>
+  <dimen name=\\"sema_font_size_body_sm\\">@dimen/base_font_size_14</dimen>
+  <dimen name=\\"sema_font_size_body_md\\">@dimen/base_font_size_16</dimen>
+  <dimen name=\\"sema_font_size_body_lg\\">@dimen/base_font_size_20</dimen>
+  <dimen name=\\"sema_font_size_compact_xs\\">@dimen/base_font_size_12</dimen>
+
+  </resources>
+",
+  "dist/android/vr-theme/font-weight.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"base_font_weight_400\\">400</dimen>
+  <dimen name=\\"base_font_weight_500\\">500</dimen>
+  <dimen name=\\"base_font_weight_700\\">700</dimen>
+  <dimen name=\\"sema_font_weight_heading_lg\\">@dimen/base_font_weight_700</dimen>
+  <dimen name=\\"sema_font_weight_heading_md\\">@dimen/base_font_weight_700</dimen>
+  <dimen name=\\"sema_font_weight_heading_sm\\">@dimen/base_font_weight_500</dimen>
+  <dimen name=\\"sema_font_weight_heading_xs\\">@dimen/base_font_weight_500</dimen>
+  <dimen name=\\"sema_font_weight_heading_xxs\\">@dimen/base_font_weight_500</dimen>
+  <dimen name=\\"sema_font_weight_ui_lg\\">@dimen/base_font_weight_500</dimen>
+  <dimen name=\\"sema_font_weight_ui_md\\">@dimen/base_font_weight_500</dimen>
+  <dimen name=\\"sema_font_weight_ui_sm\\">@dimen/base_font_weight_500</dimen>
+  <dimen name=\\"sema_font_weight_ui_xs\\">@dimen/base_font_weight_500</dimen>
+  <dimen name=\\"sema_font_weight_ui_xxs\\">@dimen/base_font_weight_500</dimen>
+  <dimen name=\\"sema_font_weight_body_lg_default\\">@dimen/base_font_weight_400</dimen>
+  <dimen name=\\"sema_font_weight_body_lg_emphasis\\">@dimen/base_font_weight_700</dimen>
+  <dimen name=\\"sema_font_weight_body_md_default\\">@dimen/base_font_weight_400</dimen>
+  <dimen name=\\"sema_font_weight_body_md_emphasis\\">@dimen/base_font_weight_700</dimen>
+  <dimen name=\\"sema_font_weight_body_sm_default\\">@dimen/base_font_weight_400</dimen>
+  <dimen name=\\"sema_font_weight_body_sm_emphasis\\">@dimen/base_font_weight_700</dimen>
+  <dimen name=\\"sema_font_weight_body_xs_default\\">@dimen/base_font_weight_400</dimen>
+  <dimen name=\\"sema_font_weight_body_xs_emphasis\\">@dimen/base_font_weight_700</dimen>
+  <dimen name=\\"sema_font_weight_compact_xs_default\\">@dimen/base_font_weight_400</dimen>
+  <dimen name=\\"sema_font_weight_compact_xs_emphasis\\">@dimen/base_font_weight_700</dimen>
+
+  </resources>
+",
+  "dist/android/vr-theme/motion-duration.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <integer name=\\"base_motion_duration_0\\">0</integer>
+  <integer name=\\"base_motion_duration_50\\">50</integer>
+  <integer name=\\"base_motion_duration_100\\">100</integer>
+  <integer name=\\"base_motion_duration_150\\">150</integer>
+  <integer name=\\"base_motion_duration_200\\">200</integer>
+  <integer name=\\"base_motion_duration_300\\">300</integer>
+  <integer name=\\"base_motion_duration_400\\">400</integer>
+  <integer name=\\"base_motion_duration_500\\">500</integer>
+  <integer name=\\"base_motion_duration_600\\">600</integer>
+  <integer name=\\"base_motion_duration_700\\">700</integer>
+  <integer name=\\"base_motion_duration_900\\">900</integer>
+  <integer name=\\"sema_motion_position_fadein_duration\\">@integer/base_motion_duration_300</integer>
+  <integer name=\\"sema_motion_position_fadeout_duration\\">@integer/base_motion_duration_200</integer>
+  <integer name=\\"sema_motion_position_enter_duration\\">@integer/base_motion_duration_300</integer>
+  <integer name=\\"sema_motion_position_exit_duration\\">@integer/base_motion_duration_300</integer>
+  <integer name=\\"sema_motion_position_on_duration\\">@integer/base_motion_duration_300</integer>
+  <integer name=\\"sema_motion_position_off_duration\\">@integer/base_motion_duration_200</integer>
+  <integer name=\\"sema_motion_position_swipe_duration\\">@integer/base_motion_duration_400</integer>
+  <integer name=\\"sema_motion_scale_on_duration\\">@integer/base_motion_duration_150</integer>
+  <integer name=\\"sema_motion_scale_swipe_duration\\">@integer/base_motion_duration_400</integer>
+  <integer name=\\"sema_motion_colorchange_duration\\">@integer/base_motion_duration_300</integer>
+  <integer name=\\"sema_motion_opacity_duration_default\\">@integer/base_motion_duration_300</integer>
+  <integer name=\\"sema_motion_opacity_duration_instant\\">@integer/base_motion_duration_0</integer>
+
+  </resources>
+",
+  "dist/android/vr-theme/motion-easing.kt": "
+
+
+
+
+package interpolator;
+
+import androidx.core.view.animation.PathInterpolatorCompat
+
+object GestaltInterpolators {
+  val base_motion_easing_exit = PathInterpolatorCompat.create(0.3f, 0f, 0.8f, 0.15f)
+  val base_motion_easing_enter = PathInterpolatorCompat.create(0.05f, 0.7f, 0.1f, 1f)
+  val base_motion_easing_bounce = PathInterpolatorCompat.create(0f, 0.35f, 0f, 1.25f)
+  val base_motion_easing_lateral = PathInterpolatorCompat.create(0.8f, 0f, 0.2f, 1f)
+  val base_motion_easing_expressive = PathInterpolatorCompat.create(0.55f, 0f, 0f, 1f)
+  val base_motion_easing_linear = PathInterpolatorCompat.create(0f, 0f, 1f, 1f)
+  val sema_motion_opacity_easing_instant = base_motion_easing_linear
+  val sema_motion_opacity_easing_default = base_motion_easing_linear
+  val sema_motion_colorchange_easing = base_motion_easing_linear
+  val sema_motion_scale_swipe_easing = base_motion_easing_lateral
+  val sema_motion_scale_on_easing = base_motion_easing_linear
+  val sema_motion_position_swipe_easing = base_motion_easing_lateral
+  val sema_motion_position_off_easing = base_motion_easing_lateral
+  val sema_motion_position_on_easing = base_motion_easing_bounce
+  val sema_motion_position_exit_easing = base_motion_easing_exit
+  val sema_motion_position_enter_easing = base_motion_easing_bounce
+  val sema_motion_position_fadeout_easing = base_motion_easing_lateral
+  val sema_motion_position_fadein_easing = base_motion_easing_lateral
+}
+",
+  "dist/android/vr-theme/opacity.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"sema_opacity_0\\">0</dimen>
+  <dimen name=\\"sema_opacity_4\\">0.04</dimen>
+  <dimen name=\\"sema_opacity_20\\">0.2</dimen>
+  <dimen name=\\"sema_opacity_40\\">0.4</dimen>
+  <dimen name=\\"sema_opacity_60\\">0.6</dimen>
+  <dimen name=\\"sema_opacity_80\\">0.8</dimen>
+  <dimen name=\\"sema_opacity_90\\">0.9</dimen>
+  <dimen name=\\"sema_opacity_100\\">1</dimen>
+
+  </resources>
+",
+  "dist/android/vr-theme/rounding.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"base_rounding_unit\\">4dp</dimen>
+  <dimen name=\\"sema_rounding_0\\">0dp</dimen>
+  <dimen name=\\"sema_rounding_100\\">4dp</dimen>
+  <dimen name=\\"sema_rounding_200\\">8dp</dimen>
+  <dimen name=\\"sema_rounding_300\\">12dp</dimen>
+  <dimen name=\\"sema_rounding_400\\">16dp</dimen>
+  <dimen name=\\"sema_rounding_500\\">20dp</dimen>
+  <dimen name=\\"sema_rounding_600\\">24dp</dimen>
+  <dimen name=\\"sema_rounding_700\\">28dp</dimen>
+  <dimen name=\\"sema_rounding_800\\">32dp</dimen>
+  <dimen name=\\"sema_rounding_pill\\">999dp</dimen>
+  <dimen name=\\"sema_rounding_circle\\">0.5</dimen>
+
+  </resources>
+",
+  "dist/android/vr-theme/space.xml": "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+
+<resources>
+  <dimen name=\\"base_space_unit\\">4dp</dimen>
+  <dimen name=\\"sema_space_0\\">0dp</dimen>
+  <dimen name=\\"sema_space_25\\">1dp</dimen>
+  <dimen name=\\"sema_space_50\\">2dp</dimen>
+  <dimen name=\\"sema_space_100\\">4dp</dimen>
+  <dimen name=\\"sema_space_150\\">6dp</dimen>
+  <dimen name=\\"sema_space_200\\">8dp</dimen>
+  <dimen name=\\"sema_space_300\\">12dp</dimen>
+  <dimen name=\\"sema_space_400\\">16dp</dimen>
+  <dimen name=\\"sema_space_500\\">20dp</dimen>
+  <dimen name=\\"sema_space_600\\">24dp</dimen>
+  <dimen name=\\"sema_space_700\\">28dp</dimen>
+  <dimen name=\\"sema_space_800\\">32dp</dimen>
+  <dimen name=\\"sema_space_900\\">36dp</dimen>
+  <dimen name=\\"sema_space_1000\\">40dp</dimen>
+  <dimen name=\\"sema_space_1100\\">44dp</dimen>
+  <dimen name=\\"sema_space_1200\\">48dp</dimen>
+  <dimen name=\\"sema_space_1300\\">52dp</dimen>
+  <dimen name=\\"sema_space_1400\\">56dp</dimen>
+  <dimen name=\\"sema_space_1500\\">60dp</dimen>
+  <dimen name=\\"sema_space_1600\\">64dp</dimen>
+  <dimen name=\\"sema_space_negative_25\\">-1dp</dimen>
+  <dimen name=\\"sema_space_negative_50\\">-2dp</dimen>
+  <dimen name=\\"sema_space_negative_100\\">-4dp</dimen>
+  <dimen name=\\"sema_space_negative_150\\">-6dp</dimen>
+  <dimen name=\\"sema_space_negative_200\\">-8dp</dimen>
+  <dimen name=\\"sema_space_negative_300\\">-12dp</dimen>
+  <dimen name=\\"sema_space_negative_400\\">-16dp</dimen>
+  <dimen name=\\"sema_space_negative_500\\">-20dp</dimen>
+  <dimen name=\\"sema_space_negative_600\\">-24dp</dimen>
+  <dimen name=\\"sema_space_negative_700\\">-28dp</dimen>
+  <dimen name=\\"sema_space_negative_800\\">-32dp</dimen>
+  <dimen name=\\"sema_space_negative_900\\">-36dp</dimen>
+  <dimen name=\\"sema_space_negative_1000\\">-40dp</dimen>
+  <dimen name=\\"sema_space_negative_1100\\">-44dp</dimen>
+  <dimen name=\\"sema_space_negative_1200\\">-48dp</dimen>
+  <dimen name=\\"sema_space_negative_1300\\">-52dp</dimen>
+  <dimen name=\\"sema_space_negative_1400\\">-56dp</dimen>
+  <dimen name=\\"sema_space_negative_1500\\">-60dp</dimen>
+  <dimen name=\\"sema_space_negative_1600\\">-64dp</dimen>
+
+  </resources>
+",
+}
+`;

@@ -1,0 +1,45 @@
+.video {
+  composes: block from "./Layout.css";
+  composes: absolute from "./Layout.css";
+  composes: xsCol12 from "./Column.css";
+  height: 100%;
+}
+
+.player {
+  composes: relative from "./Layout.css";
+  composes: xsCol12 from "./Column.css";
+}
+
+.playhead {
+  composes: flex from "./Layout.css";
+  composes: xsItemsCenter from "./Layout.css";
+  composes: xsCol12 from "./Column.css";
+  composes: pointer from "./Cursor.css";
+  height: 100%;
+}
+
+.controls {
+  composes: absolute from "./Layout.css";
+  composes: flex from "./Layout.css";
+  composes: xsItemsCenter from "./Layout.css";
+  composes: bottom0 from "./Layout.css";
+  composes: left0 from "./Layout.css";
+  composes: right0 from "./Layout.css";
+  composes: paddingX200 from "./boxWhitespace.css";
+  composes: paddingY200 from "./boxWhitespace.css";
+  background-image: linear-gradient(
+    to bottom,
+    rgb(181 181 181 / 0),
+    rgb(0 0 0 / 0.2) 33%,
+    rgb(0 0 0 / 0.5) 66%,
+    rgb(0 0 0 / 0.7)
+  );
+}
+
+.blackBg {
+  background-color: var(--color-background-video-container-primary);
+}
+
+.transparentBg {
+  background-color: var(--color-background-video-container-secondary);
+}

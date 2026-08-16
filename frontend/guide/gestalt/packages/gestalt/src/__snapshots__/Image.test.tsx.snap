@@ -1,0 +1,218 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image matches snapshot 1`] = `
+<div
+  className="box relative"
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "paddingBottom": "100%",
+    }
+  }
+>
+  <img
+    alt="foo"
+    className="img"
+    fetchpriority="auto"
+    loading="auto"
+    onError={[Function]}
+    onLoad={[Function]}
+    src="foo.png"
+  />
+</div>
+`;
+
+exports[`Image with crossorigin specified matches snapshot 1`] = `
+<div
+  className="box relative"
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "paddingBottom": "100%",
+    }
+  }
+>
+  <img
+    alt="foo"
+    className="img"
+    crossOrigin="anonymous"
+    fetchpriority="auto"
+    loading="auto"
+    onError={[Function]}
+    onLoad={[Function]}
+    src="foo.png"
+  />
+</div>
+`;
+
+exports[`Image with decoding specified matches snapshot 1`] = `
+<div
+  className="box relative"
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "paddingBottom": "100%",
+    }
+  }
+>
+  <img
+    alt="foo"
+    className="img"
+    decoding="sync"
+    fetchpriority="auto"
+    loading="auto"
+    onError={[Function]}
+    onLoad={[Function]}
+    src="foo.png"
+  />
+</div>
+`;
+
+exports[`Image with fetchPriority specified matches snapshot 1`] = `
+<div
+  className="box relative"
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "paddingBottom": "100%",
+    }
+  }
+>
+  <img
+    alt="foo"
+    className="img"
+    fetchpriority="high"
+    loading="auto"
+    onError={[Function]}
+    onLoad={[Function]}
+    src="foo.png"
+  />
+</div>
+`;
+
+exports[`Image with fit: contain and role matches snapshot 1`] = `
+<div
+  className="box relative"
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "height": "100%",
+      "paddingBottom": undefined,
+    }
+  }
+>
+  <img
+    alt="foo"
+    className="img scaledImg"
+    fetchpriority="auto"
+    loading="auto"
+    onError={[Function]}
+    onLoad={[Function]}
+    role="presentation"
+    src="foo.png"
+    style={
+      Object {
+        "objectFit": "contain",
+      }
+    }
+  />
+  <div
+    className="absolute bottom0 box left0 overflowHidden right0 top0"
+  >
+    Foo.png
+  </div>
+</div>
+`;
+
+exports[`Image with fit: contain matches snapshot 1`] = `
+<div
+  className="box relative"
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "height": "100%",
+      "paddingBottom": undefined,
+    }
+  }
+>
+  <img
+    alt="foo"
+    className="img scaledImg"
+    fetchpriority="auto"
+    loading="auto"
+    onError={[Function]}
+    onLoad={[Function]}
+    src="foo.png"
+    style={
+      Object {
+        "objectFit": "contain",
+      }
+    }
+  />
+  <div
+    className="absolute bottom0 box left0 overflowHidden right0 top0"
+  >
+    Foo.png
+  </div>
+</div>
+`;
+
+exports[`Image with fit: cover matches snapshot 1`] = `
+<div
+  className="box relative"
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "height": "100%",
+      "paddingBottom": undefined,
+    }
+  }
+>
+  <img
+    alt="foo"
+    className="img scaledImg"
+    fetchpriority="auto"
+    loading="auto"
+    onError={[Function]}
+    onLoad={[Function]}
+    src="foo.png"
+    style={
+      Object {
+        "objectFit": "cover",
+      }
+    }
+  />
+  <div
+    className="absolute bottom0 box left0 overflowHidden right0 top0"
+  >
+    Foo.png
+  </div>
+</div>
+`;
+
+exports[`Image with overlay matches snapshot 1`] = `
+<div
+  className="box relative"
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "paddingBottom": "100%",
+    }
+  }
+>
+  <img
+    alt="foo"
+    className="img"
+    fetchpriority="auto"
+    loading="auto"
+    onError={[Function]}
+    onLoad={[Function]}
+    src="foo.png"
+  />
+  <div
+    className="absolute bottom0 box left0 overflowHidden right0 top0"
+  >
+    Foo.png
+  </div>
+</div>
+`;

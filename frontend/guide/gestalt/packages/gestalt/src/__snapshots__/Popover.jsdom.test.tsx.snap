@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Popover does not render when the anchor is null 1`] = `<div />`;
+
+exports[`Popover renders correctly 1`] = `
+<div>
+  <div>
+    <span
+      aria-hidden="true"
+      data-floating-ui-focus-guard=""
+      data-floating-ui-inert=""
+      data-type="inside"
+      role="button"
+      style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: fixed; white-space: nowrap; width: 1px; top: 0px; left: 0px;"
+      tabindex="0"
+    />
+    <div
+      class="absolute block borderBox shadow rounding4"
+      style="position: absolute; left: 0px; top: 0px; visibility: visible; outline: none; transform: translate(0px, 0px);"
+      tabindex="0"
+    >
+      <div
+        aria-label="text"
+        class="relative maxDimensions minDimensions primary rounding4"
+        role="dialog"
+        style="max-width: 230px; overflow: auto;"
+      >
+        <div
+          class="default alignStart breakWord Text fontSize300 fontWeightNormal"
+        >
+          Custom children
+        </div>
+      </div>
+    </div>
+    <span
+      aria-hidden="true"
+      data-floating-ui-focus-guard=""
+      data-floating-ui-inert=""
+      data-type="inside"
+      role="button"
+      style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: fixed; white-space: nowrap; width: 1px; top: 0px; left: 0px;"
+      tabindex="0"
+    />
+  </div>
+</div>
+`;
+
+exports[`Popover renders correctly with portal 1`] = `
+<body>
+  <div
+    aria-hidden="true"
+    data-floating-ui-inert=""
+  />
+  <div
+    data-floating-ui-portal=""
+    id=":r1:"
+  >
+    <div>
+      <span
+        aria-hidden="true"
+        data-floating-ui-focus-guard=""
+        data-floating-ui-inert=""
+        data-type="inside"
+        role="button"
+        style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: fixed; white-space: nowrap; width: 1px; top: 0px; left: 0px;"
+        tabindex="0"
+      />
+      <div
+        class="absolute block borderBox shadow rounding4"
+        style="position: absolute; left: 0px; top: 0px; visibility: visible; outline: none; transform: translate(0px, 0px);"
+        tabindex="0"
+      >
+        <div
+          aria-label="text"
+          class="relative maxDimensions minDimensions primary rounding4"
+          role="dialog"
+          style="max-width: 230px; overflow: auto;"
+        >
+          <div
+            class="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Children
+          </div>
+        </div>
+      </div>
+      <span
+        aria-hidden="true"
+        data-floating-ui-focus-guard=""
+        data-floating-ui-inert=""
+        data-type="inside"
+        role="button"
+        style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: fixed; white-space: nowrap; width: 1px; top: 0px; left: 0px;"
+        tabindex="0"
+      />
+    </div>
+  </div>
+</body>
+`;

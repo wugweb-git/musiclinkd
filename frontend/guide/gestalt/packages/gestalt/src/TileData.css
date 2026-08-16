@@ -1,0 +1,76 @@
+.baseTile {
+  composes: flex from "./Layout.css";
+  composes: paddingX400 from "./boxWhitespace.css";
+  composes: paddingY400 from "./boxWhitespace.css";
+  composes: rounding4 from "./Borders.css";
+  composes: borderBox from "./Layout.css";
+  composes: sizeLg from "./Borders.css";
+  composes: solid from "./Borders.css";
+  composes: transparentBorder from "./Borders.css";
+  box-sizing: border-box;
+}
+
+.hovered {
+  background-color: var(--color-background-tiledata-hover);
+}
+
+.focused {
+  composes: accessibilityOutlineFocus from "./Focus.css";
+}
+
+.disabled {
+  composes: transparentBorder from "./Borders.css";
+  background-color: var(--color-background-tiledata-disabled);
+}
+
+.dataVisualizationColor01 {
+  background-color: var(--color-background-tiledata-01);
+}
+
+.dataVisualizationColor02 {
+  background-color: var(--color-background-tiledata-02);
+}
+
+.dataVisualizationColor03 {
+  background-color: var(--color-background-tiledata-03);
+}
+
+.dataVisualizationColor04 {
+  background-color: var(--color-background-tiledata-04);
+}
+
+.dataVisualizationColor05 {
+  background-color: var(--color-background-tiledata-05);
+}
+
+.dataVisualizationColor06 {
+  background-color: var(--color-background-tiledata-06);
+}
+
+.dataVisualizationColor07 {
+  background-color: var(--color-background-tiledata-07);
+}
+
+.dataVisualizationColor08 {
+  background-color: var(--color-background-tiledata-08);
+}
+
+.dataVisualizationColor09 {
+  background-color: var(--color-background-tiledata-09);
+}
+
+.dataVisualizationColor10 {
+  background-color: var(--color-background-tiledata-10);
+}
+
+.dataVisualizationColor11 {
+  background-color: var(--color-background-tiledata-11);
+}
+
+.dataVisualizationColor12 {
+  background-color: var(--color-background-tiledata-12);
+}
+
+.dataVisualizationColorneutral {
+  background-color: var(--color-background-tiledata-neutral);
+}

@@ -1,0 +1,13 @@
+{
+  "name": "stylelint-plugin-gestalt",
+  "version": "155.1.3",
+  "license": "Apache-2.0",
+  "homepage": "https://gestalt.pinterest.systems/",
+  "description": "THIS PACKAGE IS NOT READY FOR CONSUMTION StyleLint rules for Pinterest's design language Gestalt",
+  "keywords": [
+    "stylelint",
+    "stylelint plugin",
+    "gestalt",
+    "pinterest"
+  ]
+}

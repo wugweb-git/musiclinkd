@@ -1,0 +1,341 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tag clips long strings 1`] = `
+<div
+  aria-disabled={false}
+  className="box paddingX200 paddingY100 relative rounding2 secondary xsDisplayInlineBlock"
+  style={
+    Object {
+      "height": 32,
+      "maxWidth": 300,
+    }
+  }
+>
+  <div
+    className="box marginEnd500 xsDisplayFlex xsItemsCenter"
+    style={
+      Object {
+        "height": "100%",
+      }
+    }
+  >
+    <span
+      className="default alignStart breakAll lineClamp Text fontSize200 fontWeightNormal"
+      style={
+        Object {
+          "WebkitLineClamp": 1,
+        }
+      }
+      title="The quick brown fox jumps over the lazy dog"
+    >
+      The quick brown fox jumps over the lazy dog
+    </span>
+    <div
+      className="box"
+    >
+      <button
+        className="closeButton default tapTransition accessibilityOutline md"
+        onClick={[Function]}
+        type="button"
+      >
+        <div
+          className="box justifyCenter xsDisplayFlex xsItemsCenter"
+          style={
+            Object {
+              "marginTop": "1px",
+              "width": "100%",
+            }
+          }
+        >
+          <svg
+            aria-hidden={null}
+            aria-label="Remove long example tag"
+            className="default icon iconBlock"
+            height={8}
+            role="img"
+            viewBox="0 0 24 24"
+            width={8}
+          >
+            <path
+              d="test-file-stub"
+            />
+          </svg>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Tag renders 1`] = `
+<div
+  aria-disabled={false}
+  className="box paddingX200 paddingY100 relative rounding2 secondary xsDisplayInlineBlock"
+  style={
+    Object {
+      "height": 32,
+      "maxWidth": 300,
+    }
+  }
+>
+  <div
+    className="box marginEnd500 xsDisplayFlex xsItemsCenter"
+    style={
+      Object {
+        "height": "100%",
+      }
+    }
+  >
+    <span
+      className="default alignStart breakAll lineClamp Text fontSize200 fontWeightNormal"
+      style={
+        Object {
+          "WebkitLineClamp": 1,
+        }
+      }
+      title="New"
+    >
+      New
+    </span>
+    <div
+      className="box"
+    >
+      <button
+        className="closeButton default tapTransition accessibilityOutline md"
+        onClick={[Function]}
+        type="button"
+      >
+        <div
+          className="box justifyCenter xsDisplayFlex xsItemsCenter"
+          style={
+            Object {
+              "marginTop": "1px",
+              "width": "100%",
+            }
+          }
+        >
+          <svg
+            aria-hidden={null}
+            aria-label="Remove New tag"
+            className="default icon iconBlock"
+            height={8}
+            role="img"
+            viewBox="0 0 24 24"
+            width={8}
+          >
+            <path
+              d="test-file-stub"
+            />
+          </svg>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Tag renders a disabled tag 1`] = `
+<div
+  aria-disabled={true}
+  className="box paddingX200 paddingY100 relative rounding2 secondary xsDisplayInlineBlock"
+  style={
+    Object {
+      "border": "solid 1px var(--color-border-tag-disabled)",
+      "height": 32,
+      "maxWidth": 300,
+    }
+  }
+>
+  <div
+    className="box marginEnd0 xsDisplayFlex xsItemsCenter"
+    style={
+      Object {
+        "height": "100%",
+      }
+    }
+  >
+    <span
+      className="subtle alignStart breakAll lineClamp Text fontSize200 fontWeightNormal"
+      style={
+        Object {
+          "WebkitLineClamp": 1,
+        }
+      }
+      title="New"
+    >
+      New
+    </span>
+    <div
+      className="box"
+    />
+  </div>
+</div>
+`;
+
+exports[`Tag renders a tag with a warning state 1`] = `
+<div
+  aria-disabled={false}
+  className="box paddingX200 paddingY100 relative rounding2 warningBase xsDisplayInlineBlock"
+  style={
+    Object {
+      "height": 32,
+      "maxWidth": 300,
+    }
+  }
+>
+  <div
+    className="box marginEnd500 xsDisplayFlex xsItemsCenter"
+    style={
+      Object {
+        "height": "100%",
+      }
+    }
+  >
+    <div
+      className="box marginEnd100 marginStart100"
+    >
+      <svg
+        aria-hidden={null}
+        aria-label="Warning"
+        className="inverse icon iconBlock"
+        height={12}
+        role="img"
+        viewBox="0 0 16 16"
+        width={12}
+      >
+        <path
+          d="test-file-stub"
+        />
+      </svg>
+    </div>
+    <span
+      className="inverse alignStart breakAll lineClamp Text fontSize200 fontWeightNormal"
+      style={
+        Object {
+          "WebkitLineClamp": 1,
+        }
+      }
+      title="New"
+    >
+      New
+    </span>
+    <div
+      className="box"
+    >
+      <button
+        className="closeButton warning tapTransition accessibilityOutline md"
+        onClick={[Function]}
+        type="button"
+      >
+        <div
+          className="box justifyCenter xsDisplayFlex xsItemsCenter"
+          style={
+            Object {
+              "marginTop": "1px",
+              "width": "100%",
+            }
+          }
+        >
+          <svg
+            aria-hidden={null}
+            aria-label="Remove tag"
+            className="inverse icon iconBlock"
+            height={8}
+            role="img"
+            viewBox="0 0 24 24"
+            width={8}
+          >
+            <path
+              d="test-file-stub"
+            />
+          </svg>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Tag renders a tag with an error state 1`] = `
+<div
+  aria-disabled={false}
+  className="box errorBase paddingX200 paddingY100 relative rounding2 xsDisplayInlineBlock"
+  style={
+    Object {
+      "height": 32,
+      "maxWidth": 300,
+    }
+  }
+>
+  <div
+    className="box marginEnd500 xsDisplayFlex xsItemsCenter"
+    style={
+      Object {
+        "height": "100%",
+      }
+    }
+  >
+    <div
+      className="box marginEnd100 marginStart100"
+    >
+      <svg
+        aria-hidden={null}
+        aria-label="Error"
+        className="inverse icon iconBlock"
+        height={12}
+        role="img"
+        viewBox="0 0 16 16"
+        width={12}
+      >
+        <path
+          d="test-file-stub"
+        />
+      </svg>
+    </div>
+    <span
+      className="inverse alignStart breakAll lineClamp Text fontSize200 fontWeightNormal"
+      style={
+        Object {
+          "WebkitLineClamp": 1,
+        }
+      }
+      title="New"
+    >
+      New
+    </span>
+    <div
+      className="box"
+    >
+      <button
+        className="closeButton error tapTransition accessibilityOutline md"
+        onClick={[Function]}
+        type="button"
+      >
+        <div
+          className="box justifyCenter xsDisplayFlex xsItemsCenter"
+          style={
+            Object {
+              "marginTop": "1px",
+              "width": "100%",
+            }
+          }
+        >
+          <svg
+            aria-hidden={null}
+            aria-label="Remove tag"
+            className="inverse icon iconBlock"
+            height={8}
+            role="img"
+            viewBox="0 0 24 24"
+            width={8}
+          >
+            <path
+              d="test-file-stub"
+            />
+          </svg>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+`;

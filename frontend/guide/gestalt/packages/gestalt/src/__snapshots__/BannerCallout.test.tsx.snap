@@ -1,0 +1,883 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BannerCallout /> Error BannerCallout 1`] = `
+<div
+  className="box errorWeak paddingX600 paddingY600 relative rounding4 smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter smDirectionRow smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottom400 marginTop0 smMarginBottomAuto smMarginTopAuto"
+      >
+        <svg
+          aria-hidden={null}
+          aria-label="error"
+          className="error icon iconBlock"
+          height={32}
+          role="img"
+          viewBox="0 0 24 24"
+          width={32}
+        >
+          <path
+            d="test-file-stub"
+          />
+        </svg>
+      </div>
+      <div
+        className="box marginBottomAuto marginTopAuto paddingX600"
+        style={
+          Object {
+            "maxWidth": 648,
+          }
+        }
+      >
+        <div
+          className="box marginBottomAuto marginTopAuto smDisplayBlock xsDirectionColumn xsDisplayFlex xsItemsCenter"
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Insert a clever error bannercallout message here
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<BannerCallout /> Info BannerCallout 1`] = `
+<div
+  className="box infoWeak paddingX600 paddingY600 relative rounding4 smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter smDirectionRow smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottom400 marginTop0 smMarginBottomAuto smMarginTopAuto"
+      >
+        <svg
+          aria-hidden={null}
+          aria-label="info"
+          className="info icon iconBlock"
+          height={32}
+          role="img"
+          viewBox="0 0 24 24"
+          width={32}
+        >
+          <path
+            d="test-file-stub"
+          />
+        </svg>
+      </div>
+      <div
+        className="box marginBottomAuto marginTopAuto paddingX600"
+        style={
+          Object {
+            "maxWidth": 648,
+          }
+        }
+      >
+        <div
+          className="box marginBottomAuto marginTopAuto smDisplayBlock xsDirectionColumn xsDisplayFlex xsItemsCenter"
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Insert a clever info bannercallout message here
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<BannerCallout /> Warning BannerCallout 1`] = `
+<div
+  className="box paddingX600 paddingY600 relative rounding4 smDirectionRow smPaddingX800 smPaddingY800 warningWeak xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter smDirectionRow smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottom400 marginTop0 smMarginBottomAuto smMarginTopAuto"
+      >
+        <svg
+          aria-hidden={null}
+          aria-label="warning"
+          className="warning icon iconBlock"
+          height={32}
+          role="img"
+          viewBox="0 0 24 24"
+          width={32}
+        >
+          <path
+            d="test-file-stub"
+          />
+        </svg>
+      </div>
+      <div
+        className="box marginBottomAuto marginTopAuto paddingX600"
+        style={
+          Object {
+            "maxWidth": 648,
+          }
+        }
+      >
+        <div
+          className="box marginBottomAuto marginTopAuto smDisplayBlock xsDirectionColumn xsDisplayFlex xsItemsCenter"
+        >
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Insert a clever warning bannercallout message here
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<BannerCallout /> bannercallout with rich text message 1`] = `
+<div
+  className="box infoWeak paddingX600 paddingY600 relative rounding4 smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter marginBottom400 smDirectionRow smMarginBottom0 smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottom400 marginTop0 smMarginBottomAuto smMarginTopAuto"
+      >
+        <svg
+          aria-hidden={null}
+          aria-label="Info"
+          className="info icon iconBlock"
+          height={32}
+          role="img"
+          viewBox="0 0 24 24"
+          width={32}
+        >
+          <path
+            d="test-file-stub"
+          />
+        </svg>
+      </div>
+      <div
+        className="box marginBottomAuto marginTopAuto paddingX600"
+        style={
+          Object {
+            "maxWidth": 648,
+          }
+        }
+      >
+        <div
+          className="box marginBottomAuto marginTopAuto smDisplayBlock xsDirectionColumn xsDisplayFlex xsItemsCenter"
+        >
+          <div
+            className="box marginBottom200"
+          >
+            <div
+              className="default alignStart breakWord Text fontSize400 fontWeightSemiBold"
+            >
+              You've sent an invite
+            </div>
+          </div>
+          <span
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            You have invited
+             
+            <span
+              className="default alignStart breakWord Text fontSize300 fontWeightSemiBold"
+            >
+              Leaf Media Agency
+            </span>
+             
+            to your business hierarchy. Once they accept, you will be able to manage their business account.
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      className="box marginStartAuto smDisplayFlex smMarginEnd400 smPaddingY300"
+    >
+      <div
+        className="box justifyCenter paddingX100 smDisplayFlex smMarginBottomAuto smMarginTopAuto xsDisplayBlock xsItemsCenter"
+      >
+        <button
+          aria-label="Cancel invite"
+          className="button block accessibilityOutline parentButton"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <div
+            className="button block accessibilityOutline tapTransition lg transparent enabled childrenDiv"
+          >
+            <div
+              className="default alignCenter Text fontSize300 fontWeightSemiBold"
+            >
+              Cancel invite
+            </div>
+          </div>
+        </button>
+      </div>
+      <div
+        className="box justifyCenter paddingX100 smDisplayFlex smMarginBottomAuto smMarginTopAuto xsDisplayBlock xsItemsCenter"
+      >
+        <button
+          aria-label="Resend invite"
+          className="button block accessibilityOutline parentButton"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <div
+            className="button block accessibilityOutline tapTransition lg white enabled childrenDiv"
+          >
+            <div
+              className="default alignCenter Text fontSize300 fontWeightSemiBold"
+            >
+              Resend invite
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    className="dismissButton rtlPos"
+  >
+    <button
+      aria-label="Dismiss this banner"
+      className="parentButton"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseDown={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchCancel={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <div
+        className="button tapTransition enabled"
+      >
+        <div
+          className="pog roundingCircle transparent"
+          style={
+            Object {
+              "height": 48,
+              "width": 48,
+            }
+          }
+        >
+          <svg
+            aria-hidden={true}
+            aria-label=""
+            className="default icon iconBlock"
+            height={16}
+            role="img"
+            viewBox="0 0 24 24"
+            width={16}
+          >
+            <path
+              d="test-file-stub"
+            />
+          </svg>
+        </div>
+      </div>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`<BannerCallout /> message + title + primaryAction + dismissButton 1`] = `
+<div
+  className="box infoWeak paddingX600 paddingY600 relative rounding4 smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter marginBottom400 smDirectionRow smMarginBottom0 smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottom400 marginTop0 smMarginBottomAuto smMarginTopAuto"
+      >
+        <svg
+          aria-hidden={null}
+          aria-label="info"
+          className="info icon iconBlock"
+          height={32}
+          role="img"
+          viewBox="0 0 24 24"
+          width={32}
+        >
+          <path
+            d="test-file-stub"
+          />
+        </svg>
+      </div>
+      <div
+        className="box marginBottomAuto marginTopAuto paddingX600"
+        style={
+          Object {
+            "maxWidth": 648,
+          }
+        }
+      >
+        <div
+          className="box marginBottomAuto marginTopAuto smDisplayBlock xsDirectionColumn xsDisplayFlex xsItemsCenter"
+        >
+          <div
+            className="box marginBottom200"
+          >
+            <div
+              className="default alignStart breakWord Text fontSize400 fontWeightSemiBold"
+            >
+              A Title
+            </div>
+          </div>
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Insert a clever info bannercallout message here
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="box marginStartAuto smDisplayFlex smMarginEnd400 smPaddingY300"
+    >
+      <div
+        className="box justifyCenter paddingX100 smDisplayFlex smMarginBottomAuto smMarginTopAuto xsDisplayBlock xsItemsCenter"
+      >
+        <a
+          aria-label=""
+          className="noOutline inheritColor noUnderline tapTransition pill accessibilityOutline flex justifyCenter xsItemsCenter button lg white"
+          href="pinterest.com"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseDown={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          rel=""
+          tabIndex={0}
+        >
+          <div
+            className="default alignCenter Text fontSize300 fontWeightSemiBold"
+          >
+            Visit Pinterest
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    className="dismissButton rtlPos"
+  >
+    <button
+      aria-label="Dismiss banner"
+      className="parentButton"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseDown={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchCancel={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <div
+        className="button tapTransition enabled"
+      >
+        <div
+          className="pog roundingCircle transparent"
+          style={
+            Object {
+              "height": 48,
+              "width": 48,
+            }
+          }
+        >
+          <svg
+            aria-hidden={true}
+            aria-label=""
+            className="default icon iconBlock"
+            height={16}
+            role="img"
+            viewBox="0 0 24 24"
+            width={16}
+          >
+            <path
+              d="test-file-stub"
+            />
+          </svg>
+        </div>
+      </div>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`<BannerCallout /> message + title + primaryAction + secondaryAction 1`] = `
+<div
+  className="box infoWeak paddingX600 paddingY600 relative rounding4 smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter marginBottom400 smDirectionRow smMarginBottom0 smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottom400 marginTop0 smMarginBottomAuto smMarginTopAuto"
+      >
+        <svg
+          aria-hidden={null}
+          aria-label="info"
+          className="info icon iconBlock"
+          height={32}
+          role="img"
+          viewBox="0 0 24 24"
+          width={32}
+        >
+          <path
+            d="test-file-stub"
+          />
+        </svg>
+      </div>
+      <div
+        className="box marginBottomAuto marginTopAuto paddingX600"
+        style={
+          Object {
+            "maxWidth": 648,
+          }
+        }
+      >
+        <div
+          className="box marginBottomAuto marginTopAuto smDisplayBlock xsDirectionColumn xsDisplayFlex xsItemsCenter"
+        >
+          <div
+            className="box marginBottom200"
+          >
+            <div
+              className="default alignStart breakWord Text fontSize400 fontWeightSemiBold"
+            >
+              A Title
+            </div>
+          </div>
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Insert a clever info bannercallout message here
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="box marginStartAuto smDisplayFlex smMarginEnd400 smPaddingY300"
+    >
+      <div
+        className="box justifyCenter paddingX100 smDisplayFlex smMarginBottomAuto smMarginTopAuto xsDisplayBlock xsItemsCenter"
+      >
+        <a
+          aria-label="Learn more: bannercallout messages"
+          className="noOutline inheritColor noUnderline tapTransition pill accessibilityOutline flex justifyCenter xsItemsCenter button lg transparent"
+          href="pinterest.com/help"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseDown={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          rel=""
+          tabIndex={0}
+        >
+          <div
+            className="default alignCenter Text fontSize300 fontWeightSemiBold"
+          >
+            Learn more
+          </div>
+        </a>
+      </div>
+      <div
+        className="box justifyCenter paddingX100 smDisplayFlex smMarginBottomAuto smMarginTopAuto xsDisplayBlock xsItemsCenter"
+      >
+        <a
+          aria-label=""
+          className="noOutline inheritColor noUnderline tapTransition pill accessibilityOutline flex justifyCenter xsItemsCenter button lg white"
+          href="pinterest.com"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseDown={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          rel=""
+          tabIndex={0}
+        >
+          <div
+            className="default alignCenter Text fontSize300 fontWeightSemiBold"
+          >
+            Visit Pinterest
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<BannerCallout /> message + title + primaryAction with href 1`] = `
+<div
+  className="box infoWeak paddingX600 paddingY600 relative rounding4 smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter marginBottom400 smDirectionRow smMarginBottom0 smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottom400 marginTop0 smMarginBottomAuto smMarginTopAuto"
+      >
+        <svg
+          aria-hidden={null}
+          aria-label="info"
+          className="info icon iconBlock"
+          height={32}
+          role="img"
+          viewBox="0 0 24 24"
+          width={32}
+        >
+          <path
+            d="test-file-stub"
+          />
+        </svg>
+      </div>
+      <div
+        className="box marginBottomAuto marginTopAuto paddingX600"
+        style={
+          Object {
+            "maxWidth": 648,
+          }
+        }
+      >
+        <div
+          className="box marginBottomAuto marginTopAuto smDisplayBlock xsDirectionColumn xsDisplayFlex xsItemsCenter"
+        >
+          <div
+            className="box marginBottom200"
+          >
+            <div
+              className="default alignStart breakWord Text fontSize400 fontWeightSemiBold"
+            >
+              A Title
+            </div>
+          </div>
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Insert a clever info bannercallout message here
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="box marginStartAuto smDisplayFlex smMarginEnd400 smPaddingY300"
+    >
+      <div
+        className="box justifyCenter paddingX100 smDisplayFlex smMarginBottomAuto smMarginTopAuto xsDisplayBlock xsItemsCenter"
+      >
+        <a
+          aria-label=""
+          className="noOutline inheritColor noUnderline tapTransition pill accessibilityOutline flex justifyCenter xsItemsCenter button lg white"
+          href="pinterest.com"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseDown={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          rel=""
+          tabIndex={0}
+        >
+          <div
+            className="default alignCenter Text fontSize300 fontWeightSemiBold"
+          >
+            Visit Pinterest
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<BannerCallout /> message + title + primaryAction without href 1`] = `
+<div
+  className="box infoWeak paddingX600 paddingY600 relative rounding4 smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter marginBottom400 smDirectionRow smMarginBottom0 smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottom400 marginTop0 smMarginBottomAuto smMarginTopAuto"
+      >
+        <svg
+          aria-hidden={null}
+          aria-label="info"
+          className="info icon iconBlock"
+          height={32}
+          role="img"
+          viewBox="0 0 24 24"
+          width={32}
+        >
+          <path
+            d="test-file-stub"
+          />
+        </svg>
+      </div>
+      <div
+        className="box marginBottomAuto marginTopAuto paddingX600"
+        style={
+          Object {
+            "maxWidth": 648,
+          }
+        }
+      >
+        <div
+          className="box marginBottomAuto marginTopAuto smDisplayBlock xsDirectionColumn xsDisplayFlex xsItemsCenter"
+        >
+          <div
+            className="box marginBottom200"
+          >
+            <div
+              className="default alignStart breakWord Text fontSize400 fontWeightSemiBold"
+            >
+              A Title
+            </div>
+          </div>
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Insert a clever info bannercallout message here
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="box marginStartAuto smDisplayFlex smMarginEnd400 smPaddingY300"
+    >
+      <div
+        className="box justifyCenter paddingX100 smDisplayFlex smMarginBottomAuto smMarginTopAuto xsDisplayBlock xsItemsCenter"
+      >
+        <button
+          aria-label=""
+          className="button block accessibilityOutline parentButton"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <div
+            className="button block accessibilityOutline tapTransition lg white enabled childrenDiv"
+          >
+            <div
+              className="default alignCenter Text fontSize300 fontWeightSemiBold"
+            >
+              Visit Pinterest
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<BannerCallout /> message + title 1`] = `
+<div
+  className="box infoWeak paddingX600 paddingY600 relative rounding4 smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter smDirectionRow smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottom400 marginTop0 smMarginBottomAuto smMarginTopAuto"
+      >
+        <svg
+          aria-hidden={null}
+          aria-label="info"
+          className="info icon iconBlock"
+          height={32}
+          role="img"
+          viewBox="0 0 24 24"
+          width={32}
+        >
+          <path
+            d="test-file-stub"
+          />
+        </svg>
+      </div>
+      <div
+        className="box marginBottomAuto marginTopAuto paddingX600"
+        style={
+          Object {
+            "maxWidth": 648,
+          }
+        }
+      >
+        <div
+          className="box marginBottomAuto marginTopAuto smDisplayBlock xsDirectionColumn xsDisplayFlex xsItemsCenter"
+        >
+          <div
+            className="box marginBottom200"
+          >
+            <div
+              className="default alignStart breakWord Text fontSize400 fontWeightSemiBold"
+            >
+              A Title
+            </div>
+          </div>
+          <div
+            className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+          >
+            Insert a clever info bannercallout message here
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

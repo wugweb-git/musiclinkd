@@ -1,0 +1,93 @@
+.default {
+  background-color: var(--color-background-tag-primary-default);
+}
+
+.default:hover {
+  background-color: var(--color-background-tag-primary-hover);
+}
+
+.default:active {
+  background-color: var(--color-background-tag-primary-active);
+}
+
+.error {
+  background-color: var(--color-background-tag-error-default);
+}
+
+.error:hover {
+  background-color: var(--color-background-tag-error-hover);
+}
+
+.error:active {
+  background-color: var(--color-background-tag-error-active);
+}
+
+.warning {
+  background-color: var(--color-background-tag-warning-default);
+}
+
+.warning:hover {
+  background-color: var(--color-background-tag-warning-hover);
+}
+
+.warning:active {
+  background-color: var(--color-background-tag-warning-active);
+}
+
+.closeButton {
+  composes: noBorder from "./Borders.css";
+  composes: pointer from "./Cursor.css";
+  composes: paddingX0 from "./boxWhitespace.css";
+  composes: paddingY0 from "./boxWhitespace.css";
+  height: 100%;
+  outline: none;
+  position: absolute;
+}
+
+html[dir="rtl"] .closeButton {
+  left: 0;
+  right: unset;
+  top: 0;
+}
+
+html:not([dir="rtl"]) .closeButton {
+  left: unset;
+  right: 0;
+  top: 0;
+}
+
+.sm {
+  width: 20px;
+}
+
+.md {
+  width: 24px;
+}
+
+.lg {
+  width: 32px;
+}
+
+html[dir="rtl"] .sm {
+  border-radius: var(--rounding-100) 0 0 var(--rounding-100);
+}
+
+html:not([dir="rtl"]) .sm {
+  border-radius: 0 var(--rounding-100) var(--rounding-100) 0;
+}
+
+html[dir="rtl"] .md {
+  border-radius: var(--rounding-200) 0 0 var(--rounding-200);
+}
+
+html:not([dir="rtl"]) .md {
+  border-radius: 0 var(--rounding-200) var(--rounding-200) 0;
+}
+
+html[dir="rtl"] .lg {
+  border-radius: var(--rounding-300) 0 0 var(--rounding-300);
+}
+
+html:not([dir="rtl"]) .lg {
+  border-radius: 0 var(--rounding-300) var(--rounding-300) 0;
+}

@@ -1,0 +1,21 @@
+.toast {
+  border-radius: var(--rounding-400);
+  margin-left: var(--space-400);
+  margin-right: var(--space-400);
+
+  /*  Ensure that maxWidth isn't greater than viewport width (for small screens)  */
+  max-width: min(716px, 100vw);
+}
+
+@media (--g-sm) {
+  .toast {
+    border-radius: var(--rounding-400);
+    display: inline-block;
+    margin-left: var(--space-400);
+    margin-right: var(--space-400);
+
+    /*  Ensure that maxWidth isn't greater than viewport width (for small screens)  */
+    max-width: "min(716px, 100vw)";
+    width: auto;
+  }
+}

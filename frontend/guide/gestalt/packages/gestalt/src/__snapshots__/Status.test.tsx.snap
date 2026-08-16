@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Status renders with accessibilityLabel 1`] = `
+<div
+  className="Flex rowGap0 columnGap0 xsDirectionColumn"
+>
+  <div
+    className="Flex rowGap200 columnGap0 xsDirectionRow xsItemsCenter"
+  >
+    <div
+      className="FlexItem"
+    >
+      <svg
+        aria-hidden={null}
+        aria-label="some accessibilityLabel"
+        className="default icon iconBlock"
+        height={16}
+        role="img"
+        viewBox="0 0 16 16"
+        width={16}
+      >
+        <path
+          d="test-file-stub"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Status renders with basic title 1`] = `
+<div
+  className="Flex rowGap0 columnGap0 xsDirectionColumn"
+>
+  <div
+    className="Flex rowGap200 columnGap0 xsDirectionRow xsItemsCenter"
+  >
+    <div
+      className="FlexItem"
+    >
+      <svg
+        aria-hidden={true}
+        aria-label=""
+        className="default icon iconBlock"
+        height={16}
+        role="img"
+        viewBox="0 0 16 16"
+        width={16}
+      >
+        <path
+          d="test-file-stub"
+        />
+      </svg>
+    </div>
+    <div
+      className="FlexItem"
+    >
+      <div
+        className="default alignStart breakWord Text fontSize200 fontWeightNormal"
+      >
+        Unstarted
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Status renders with rich title 1`] = `
+<div
+  className="Flex rowGap0 columnGap0 xsDirectionColumn"
+>
+  <div
+    className="Flex rowGap200 columnGap0 xsDirectionRow xsItemsCenter"
+  >
+    <div
+      className="FlexItem"
+    >
+      <svg
+        aria-hidden={true}
+        aria-label=""
+        className="default icon iconBlock"
+        height={16}
+        role="img"
+        viewBox="0 0 16 16"
+        width={16}
+      >
+        <path
+          d="test-file-stub"
+        />
+      </svg>
+    </div>
+    <div
+      className="FlexItem"
+    >
+      <span
+        className="fontSize200Override textColorOverrideDark"
+      >
+        <div
+          className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+        >
+          <a
+            aria-label="label"
+            className="noOutline inheritColor rounding0 block tapTransition hoverUnderline noUnderline outlineFocus"
+            href="http://www.pinterest.com"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyPress={[Function]}
+            onMouseDown={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchCancel={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            rel=""
+          >
+            Title
+          </a>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Status renders with title and subtext 1`] = `
+<div
+  className="Flex rowGap0 columnGap0 xsDirectionColumn"
+>
+  <div
+    className="Flex rowGap200 columnGap0 xsDirectionRow xsItemsCenter"
+  >
+    <div
+      className="FlexItem"
+    >
+      <svg
+        aria-hidden={true}
+        aria-label=""
+        className="default icon iconBlock"
+        height={16}
+        role="img"
+        viewBox="0 0 16 16"
+        width={16}
+      >
+        <path
+          d="test-file-stub"
+        />
+      </svg>
+    </div>
+    <div
+      className="FlexItem"
+    >
+      <div
+        className="default alignStart breakWord Text fontSize200 fontWeightNormal"
+      >
+        Unstarted
+      </div>
+    </div>
+  </div>
+  <div
+    className="box marginStart600"
+  >
+    <div
+      className="subtle alignStart breakWord Text fontSize200 fontWeightNormal"
+    >
+      some subtext
+    </div>
+  </div>
+</div>
+`;

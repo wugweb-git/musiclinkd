@@ -1,0 +1,15 @@
+{
+  "elevation": {
+    "floatingappenda": {
+      "value": "{sema.elevation.floating.value}"
+    },
+    "raisedappenda": {
+      "top": {
+        "value": "{sema.elevation.raised.top.value}"
+      },
+      "bottom": {
+        "value": "{sema.elevation.raised.bottom.value}"
+      }
+    }
+  }
+}

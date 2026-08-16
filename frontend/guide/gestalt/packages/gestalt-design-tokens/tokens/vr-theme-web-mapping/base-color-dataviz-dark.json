@@ -1,0 +1,42 @@
+{
+  "color": {
+    "data-visualization": {
+      "01": {
+        "value": "{sema.color.dataviz.01.value}"
+      },
+      "02": {
+        "value": "{sema.color.dataviz.02.value}"
+      },
+      "03": {
+        "value": "{sema.color.dataviz.03.value}"
+      },
+      "04": {
+        "value": "{sema.color.dataviz.04.value}"
+      },
+      "05": {
+        "value": "{sema.color.dataviz.05.value}"
+      },
+      "06": {
+        "value": "{sema.color.dataviz.06.value}"
+      },
+      "07": {
+        "value": "{sema.color.dataviz.07.value}"
+      },
+      "08": {
+        "value": "{sema.color.dataviz.08.value}"
+      },
+      "09": {
+        "value": "{sema.color.dataviz.09.value}"
+      },
+      "10": {
+        "value": "{sema.color.dataviz.10.value}"
+      },
+      "11": {
+        "value": "{sema.color.dataviz.11.value}"
+      },
+      "12": {
+        "value": "{sema.color.dataviz.12.value}"
+      }
+    }
+  }
+}

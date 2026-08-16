@@ -1,0 +1,33 @@
+{
+  "elevation": {
+    "floating": {
+      "value": "none"
+    },
+    "raised": {
+      "top": {
+        "value": {
+          "0": {
+            "offsetX": 0,
+            "offsetY": 0.5,
+            "blurRadius": 0,
+            "spreadRadius": 0,
+            "color": "#F9F9F9",
+            "opacity": 0
+          }
+        }
+      },
+      "bottom": {
+        "value": {
+          "0": {
+            "offsetX": 0,
+            "offsetY": -0.5,
+            "blurRadius": 0,
+            "spreadRadius": 0,
+            "color": "#F9F9F9",
+            "opacity": 0
+          }
+        }
+      }
+    }
+  }
+}

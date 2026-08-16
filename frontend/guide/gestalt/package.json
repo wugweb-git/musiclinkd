@@ -1,0 +1,221 @@
+{
+  "private": true,
+  "workspaces": [
+    "docs",
+    "packages/*"
+  ],
+  "dependencies": {
+    "eslint-plugin-react-compiler": "^0.0.0-experimental-0998c1e-20240625",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "stylelint-value-no-unknown-custom-properties": "5.0.0"
+  },
+  "devDependencies": {
+    "@actions/core": "^1.9.1",
+    "@actions/github": "^4.0.0",
+    "@axe-core/playwright": "^4.4.3",
+    "@babel/core": "^7.12.9",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/node": "^7.23.9",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-transform-react-jsx": "^7.12.7",
+    "@babel/plugin-transform-react-jsx-self": "^7.12.13",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.13.13",
+    "@babel/preset-typescript": "^7.24.1",
+    "@babel/register": "^7.11.5",
+    "@codesandbox/sandpack-react": "^2.6.0",
+    "@netlify/plugin-nextjs": "^4.41.3",
+    "@next/eslint-plugin-next": "^12.2.0",
+    "@playwright/test": "^1.49",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^18.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@rollup/plugin-replace": "^2.4.2",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@testing-library/dom": "^8.16.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@testing-library/user-event": "^14.4.2",
+    "@types/eslint": "^8.56.10",
+    "@types/jscodeshift": "^0.11.11",
+    "@types/react": "^18.1.0",
+    "@types/react-dom": "^18.1.0",
+    "@types/react-test-renderer": "^18.3.0",
+    "@types/ua-parser-js": "^0.7.39",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.14.1",
+    "acorn-jsx": "^5.3.2",
+    "axe-core": "^4.1.1",
+    "babel-jest": "^28.0.3",
+    "babel-plugin-inline-react-svg": "^2.0.1",
+    "blueimp-md5": "^2.18.0",
+    "chalk": "^4.1.0",
+    "classnames": "^2.5.1",
+    "cssnano": "^6.0.3",
+    "enhanced-resolve": "^5.16.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-gestalt": ">0.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jest": "^26.1.5",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-playwright": "^0.10.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-testing-library": "^5.6.0",
+    "eslint-plugin-validate-jsx-nesting": "^0.1.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "28.0.3",
+    "jest-environment-jsdom": "^28.0.2",
+    "jest-fail-on-console": "^2.4.2",
+    "jscodeshift": "^17.3.0",
+    "jscodeshift-helper": "^1.0.0",
+    "lint-staged": "^10.4.0",
+    "lottie-react": "^2.3.1",
+    "netlify-cli": "^7.1.0",
+    "nodemon": "^2.0.12",
+    "postcss": "^8.4.31",
+    "postcss-modules": "^4.3.0",
+    "postcss-preset-env": "^7.2.0",
+    "prettier": "2.8.0",
+    "react-docgen": "^6.0.4",
+    "react-lazy-hydration": "^0.1.0",
+    "react-test-renderer": "^18.1.0",
+    "rollup": "^2.79.2",
+    "semver": "^7.5.3",
+    "shellcheck": "^1.1.0",
+    "shelljs": "^0.8.5",
+    "slugify": "^1.4.5",
+    "stylelint": "^15.10.1",
+    "stylelint-config-prettier": "^9.0.4",
+    "stylelint-config-standard": "^23.0.0",
+    "stylelint-order": "^5.0.0",
+    "sucrase": "^3.35.0",
+    "typescript": "5.6.2",
+    "typescript-plugin-css-modules": "^5.1.0",
+    "xml2js": "^0.5.0"
+  },
+  "resolutions": {
+    "ansi-regex": "5.0.1",
+    "bl": "4.0.3",
+    "browserslist": "4.24.4",
+    "cssnano": "6.0.3",
+    "css-select": "4.1.3",
+    "glob-parent": "5.1.2",
+    "immer": "8.0.1",
+    "lodash": "4.17.21",
+    "minimist": "1.2.6",
+    "multicast-dns": "7.2.3",
+    "node-fetch": "^2.6.7",
+    "node-forge": "^1.0.0",
+    "normalize-url": "4.5.1",
+    "nth-check": "2.1.1",
+    "semver": "^7.5.3",
+    "serialize-javascript": "3.1.0",
+    "trim-newlines": "3.0.1",
+    "ws": "7.4.6",
+    "xml2js": "^0.5.0"
+  },
+  "scripts": {
+    "a11y:generate": "./scripts/generateAccessibilitySpec.js",
+    "a11y:validate": "yarn babel-node ./scripts/validateAccessibilitySpecs.js",
+    "babel-node": "./node_modules/.bin/babel-node -x .ts -x .js",
+    "build": "cd packages/gestalt-design-tokens && yarn build && cd ../gestalt && yarn build && cd ../gestalt-charts && yarn build && cd ../gestalt-datepicker && yarn build && cd ../eslint-plugin-gestalt && yarn build && cd ../../docs && yarn build",
+    "codemod": "./packages/gestalt-codemods/generic-codemods/entry.sh",
+    "css:validate": "./scripts/cssValidate.js",
+    "dev": "(cd docs && yarn dev) & (cd packages/gestalt && yarn watch) & (cd packages/gestalt-charts && yarn watch) & (cd packages/gestalt-datepicker && yarn watch) & (cd packages/eslint-plugin-gestalt && yarn watch) & (cd packages/gestalt-design-tokens && yarn watch)",
+    "docs": "(cd docs && yarn start)",
+    "eslint": "eslint --max-warnings 0",
+    "format": "prettier --write \"**/*.{css,html,js,md,yml,json}\"",
+    "generate": "./scripts/generateComponent.js",
+    "lint:css": "stylelint --max-warnings 0 \"**/*.css\"",
+    "lint:js": "eslint --max-warnings 0 .",
+    "lint:sh": "shellcheck $(find . -type f -iname '*.sh' ! -path '*/node_modules/*' ! -path '*/.git/*')",
+    "playwright:test": "npx playwright test playwright/accessibility/ playwright/masonry/ --config=playwright/playwright.config.ts",
+    "playwright:visual-test": "npx playwright test playwright/visual-test --config=playwright/playwright.config.ts",
+    "playwright:test-masonry": "npx playwright test playwright/masonry --config=playwright/playwright.config.ts",
+    "playwright:test-masonry-debug": "PWDEBUG=1 npx playwright test --config=playwright/playwright.config.ts --retries 0",
+    "playwright:update-visual-test": "npx playwright test --config=playwright/playwright.config.ts",
+    "precommit": "lint-staged",
+    "prettier": "prettier",
+    "slack-generate:post": "./scripts/generateSlackBlockKitPost.js",
+    "start": "netlify dev -c \"yarn dev\"",
+    "svgIcons:validate": "./scripts/validateIconSvgSpecs.js",
+    "test": "./scripts/test.sh",
+    "tokens:test": "(cd packages/gestalt-design-tokens && yarn test --updateSnapshot)",
+    "tsc": "tsc --build --force",
+    "ts:removeUnusedTsExpectErrors": "./scripts/ts/tsRemoveUnusedTsExpectErrors.sh"
+  },
+  "jest": {
+    "projects": [
+      {
+        "displayName": "node",
+        "testEnvironment": "node",
+        "moduleNameMapper": {
+          "\\.(svg)$": "<rootDir>/scripts/fileMock.js",
+          "\\.(css)$": "identity-obj-proxy"
+        },
+        "testPathIgnorePatterns": [
+          "/node_modules/",
+          "/.rollup.cache/",
+          "<rootDir>/playwright/",
+          "<rootDir>/scripts/templates/",
+          ".jsdom.test.ts",
+          ".jsdom.test.tsx",
+          "<rootDir>/packages/gestalt-codemods/generic-codemods/__tests__/utils.ts",
+          "<rootDir>/packages/gestalt-design-tokens/"
+        ],
+        "setupFilesAfterEnv": [
+          "<rootDir>scripts/setupJest.js"
+        ]
+      },
+      {
+        "displayName": "jsdom",
+        "testEnvironment": "jsdom",
+        "moduleNameMapper": {
+          "\\.(svg)$": "<rootDir>/scripts/fileMock.js",
+          "\\.(css)$": "identity-obj-proxy"
+        },
+        "testPathIgnorePatterns": [
+          "/node_modules/",
+          "/.rollup.cache/",
+          "<rootDir>/playwright/",
+          "<rootDir>/scripts/templates/",
+          "<rootDir>/packages/gestalt-codemods",
+          "<rootDir>/packages/gestalt-core",
+          "<rootDir>/packages/gestalt-design-tokens"
+        ],
+        "setupFilesAfterEnv": [
+          "<rootDir>scripts/setupJest.js"
+        ]
+      }
+    ],
+    "reporters": [
+      "default",
+      "github-actions"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint",
+      "jest --findRelatedTests"
+    ],
+    "*.css": [
+      "stylelint"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pinterest/gestalt"
+  },
+  "stackblitz": {
+    "startCommand": "./scripts/stackblitz.sh"
+  },
+  "sideEffects": false
+}

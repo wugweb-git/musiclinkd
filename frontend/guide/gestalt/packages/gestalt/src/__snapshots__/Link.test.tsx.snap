@@ -1,0 +1,309 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`default 1`] = `
+<a
+  className="noOutline inheritColor rounding0 block tapTransition hoverUnderline noUnderline outlineFocus"
+  href="https://example.com"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel=""
+>
+  Link
+</a>
+`;
+
+exports[`download string 1`] = `
+<a
+  className="noOutline inheritColor rounding0 block tapTransition hoverUnderline noUnderline outlineFocus"
+  download="file"
+  href="https://example.com"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel=""
+>
+  Link
+</a>
+`;
+
+exports[`download true 1`] = `
+<a
+  className="noOutline inheritColor rounding0 block tapTransition hoverUnderline noUnderline outlineFocus"
+  download={true}
+  href="https://example.com"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel=""
+>
+  Link
+</a>
+`;
+
+exports[`external link with nofollow 1`] = `
+<a
+  className="noOutline inheritColor rounding0 block tapTransition hoverUnderline noUnderline outlineFocus"
+  href="https://example.com"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel="nofollow"
+>
+  Link
+  <div
+    className="box marginStart100 xsDisplayInlineBlock"
+  >
+    <svg
+      className="rtlSupport inherit icon"
+      height={16}
+      role="img"
+      viewBox="0 0 24 24"
+      width={16}
+    >
+      <title>
+        , Opens a new tab
+      </title>
+      <path
+        d="test-file-stub"
+      />
+    </svg>
+  </div>
+</a>
+`;
+
+exports[`inline and auto underline 1`] = `
+<a
+  className="noOutline inheritColor rounding0 inlineBlock tapTransition hoverNoUnderline underline outlineFocus"
+  href="https://example.com"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel=""
+>
+  Link
+</a>
+`;
+
+exports[`inline and overriden underline="hover" 1`] = `
+<a
+  className="noOutline inheritColor rounding0 inlineBlock tapTransition hoverUnderline noUnderline outlineFocus"
+  href="https://example.com"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel=""
+>
+  Link
+</a>
+`;
+
+exports[`inline and overriden underline="none" 1`] = `
+<a
+  className="noOutline inheritColor rounding0 inlineBlock tapTransition noUnderline outlineFocus"
+  href="https://example.com"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel=""
+>
+  Link
+</a>
+`;
+
+exports[`regular 1`] = `
+<a
+  className="noOutline inheritColor rounding0 block tapTransition hoverUnderline noUnderline outlineFocus"
+  href="https://example.com"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel=""
+>
+  Link
+</a>
+`;
+
+exports[`target blank 1`] = `
+<a
+  className="noOutline inheritColor rounding0 block tapTransition hoverUnderline noUnderline outlineFocus"
+  href="https://example.com"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel="noopener noreferrer"
+  target="_blank"
+>
+  Link
+</a>
+`;
+
+exports[`target null 1`] = `
+<a
+  className="noOutline inheritColor rounding0 block tapTransition hoverUnderline noUnderline outlineFocus"
+  href="https://example.com"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel=""
+>
+  Link
+</a>
+`;
+
+exports[`target self 1`] = `
+<a
+  className="noOutline inheritColor rounding0 block tapTransition hoverUnderline noUnderline outlineFocus"
+  href="https://example.com"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel=""
+  target="_self"
+>
+  Link
+</a>
+`;
+
+exports[`with custom rounding, and tapStyle 1`] = `
+<a
+  className="noOutline inheritColor pill block tapTransition hoverUnderline noUnderline outlineFocus"
+  href="https://example.com"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel=""
+>
+  Link
+</a>
+`;
+
+exports[`with onClick 1`] = `
+<a
+  className="noOutline inheritColor rounding0 block tapTransition hoverUnderline noUnderline outlineFocus"
+  href="https://example.com"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel=""
+>
+  Link
+</a>
+`;

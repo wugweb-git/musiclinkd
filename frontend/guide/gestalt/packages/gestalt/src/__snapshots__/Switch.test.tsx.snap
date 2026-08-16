@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch 1`] = `
+<div
+  className="switch enabledUnselected borderColorTransition"
+>
+  <input
+    checked={false}
+    className="checkbox checkboxEnabled"
+    disabled={false}
+    id="test"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="checkbox"
+  />
+  <div
+    className="slider sliderLeft sliderDark"
+  />
+</div>
+`;
+
+exports[`Switch disabled 1`] = `
+<div
+  className="switch disabledUnselected borderColorTransition"
+>
+  <input
+    checked={false}
+    className="checkbox"
+    disabled={true}
+    id="test"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="checkbox"
+  />
+  <div
+    className="slider sliderLeft sliderLight"
+  />
+</div>
+`;
+
+exports[`Switch switched & disabled 1`] = `
+<div
+  className="switch disabledUnselected borderColorTransition"
+>
+  <input
+    checked={false}
+    className="checkbox"
+    disabled={true}
+    id="test"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="checkbox"
+  />
+  <div
+    className="slider sliderLeft sliderLight"
+  />
+</div>
+`;
+
+exports[`Switch switched 1`] = `
+<div
+  className="switch enabledUnselected borderColorTransition"
+>
+  <input
+    checked={false}
+    className="checkbox checkboxEnabled"
+    disabled={false}
+    id="test"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="checkbox"
+  />
+  <div
+    className="slider sliderLeft sliderDark"
+  />
+</div>
+`;

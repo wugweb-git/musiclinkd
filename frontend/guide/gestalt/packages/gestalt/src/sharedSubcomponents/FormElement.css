@@ -1,0 +1,66 @@
+.base {
+  composes: accessibilityOutline from "../Focus.css";
+  appearance: none;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.base.sm {
+  border-radius: var(--rounding-200);
+  font-size: var(--font-size-200);
+}
+
+.base.md {
+  border-radius: var(--rounding-300);
+  font-size: var(--font-size-300);
+}
+
+.base.lg {
+  border-radius: var(--rounding-400);
+  font-size: var(--font-size-300);
+}
+
+.normal {
+  composes: borderColorLightGray from "../Borders.css";
+}
+
+.normal:hover:not(:focus):not(.disabled) {
+  border-color: var(--color-gray-roboflow-400);
+}
+
+.errored {
+  border-color: var(--color-border-formfield-error-default);
+  outline: none;
+}
+
+.errored:focus {
+  border-color: var(--color-border-container);
+}
+
+.errored:hover:not(:focus) {
+  border-color: var(--color-border-formfield-error-hover);
+}
+
+.enabled {
+  background-color: var(--color-background-formfield-primary);
+  color: var(--color-text-formfield-default);
+}
+
+.enabledTransparent {
+  background-color: var(--color-transparent);
+  color: var(--color-text-formfield-default);
+}
+
+.disabled {
+  composes: borderColorLightGrayDisabled from "../Borders.css";
+  background-color: var(--color-background-formfield-disabled);
+  color: var(--color-text-formfield-disabled);
+}
+
+.unstyled {
+  appearance: none;
+  background: none;
+  border: none;
+  border-radius: var(--rounding-200);
+  color: inherit;
+}

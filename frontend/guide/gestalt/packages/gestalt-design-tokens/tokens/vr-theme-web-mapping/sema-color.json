@@ -1,0 +1,236 @@
+{
+  "color": {
+    "text": {
+      "default": {
+        "value": "{sema.color.text.default.value}"
+      },
+      "subtle": {
+        "value": "{sema.color.text.subtle.value}"
+      },
+      "success": {
+        "value": "{sema.color.text.success.value}"
+      },
+      "disabled": {
+        "value": "{sema.color.text.disabled.value}"
+      },
+      "error": {
+        "value": "{sema.color.text.error.value}"
+      },
+      "warning": {
+        "value": "{sema.color.text.warning.value}"
+      },
+      "inverse": {
+        "value": "{sema.color.text.inverse.value}"
+      },
+      "dark": {
+        "value": "{sema.color.text.dark.value}"
+      },
+      "light": {
+        "value": "{sema.color.text.light.value}"
+      },
+      "shopping": {
+        "value": "{sema.color.text.info.value}"
+      },
+      "link": {
+        "value": "{sema.color.text.link.value}"
+      }
+    },
+    "icon": {
+      "default": {
+        "value": "{sema.color.icon.default.value}"
+      },
+      "subtle": {
+        "value": "{sema.color.icon.subtle.value}"
+      },
+      "subtle-accent": {
+        "value": "{sema.color.icon.subtle.value}"
+      },
+      "success": {
+        "value": "{sema.color.icon.success.value}"
+      },
+      "disabled": {
+        "value": "{sema.color.icon.disabled.value}"
+      },
+      "error": {
+        "value": "{sema.color.icon.error.value}"
+      },
+      "warning": {
+        "value": "{sema.color.icon.warning.value}"
+      },
+      "info": {
+        "value": "{sema.color.icon.info.value}"
+      },
+      "recommendation": {
+        "value": "{sema.color.icon.recommendation.value}"
+      },
+      "inverse": {
+        "value": "{sema.color.icon.inverse.value}"
+      },
+      "shopping": {
+        "value": "{sema.color.icon.default.value}"
+      },
+      "brand": {
+        "primary": {
+          "value": "{sema.color.icon.primary.value}"
+        }
+      },
+      "light": {
+        "value": "{sema.color.icon.light.value}"
+      },
+      "dark": {
+        "value": "{sema.color.icon.dark.value}"
+      }
+    },
+    "background": {
+      "default": {
+        "value": "{sema.color.background.default.value}"
+      },
+      "info": {
+        "base": {
+          "value": "{sema.color.background.info.default.value}"
+        },
+        "weak": {
+          "value": "{sema.color.background.info.weak.value}"
+        },
+        "strong": {
+          "value": "{sema.color.background.info.default.value}"
+        }
+      },
+      "error": {
+        "base": {
+          "value": "{sema.color.background.error.default.value}"
+        },
+        "weak": {
+          "value": "{sema.color.background.error.weak.value}"
+        }
+      },
+      "warning": {
+        "base": {
+          "value": "{sema.color.background.warning.default.value}"
+        },
+        "weak": {
+          "value": "{sema.color.background.warning.weak.value}"
+        }
+      },
+      "success": {
+        "base": {
+          "value": "{sema.color.background.success.default.value}"
+        },
+        "weak": {
+          "value": "{sema.color.background.success.weak.value}"
+        }
+      },
+      "recommendation": {
+        "base": {
+          "value": "{sema.color.background.recommendation.default.value}"
+        },
+        "weak": {
+          "value": "{sema.color.background.recommendation.weak.value}"
+        }
+      },
+      "neutral": {
+        "value": "{sema.color.background.info.default.value}"
+      },
+      "shopping": {
+        "value": "{sema.color.background.default.value}"
+      },
+      "primary": {
+        "base": {
+          "value": "{sema.color.background.primary.value}"
+        },
+        "weak": {
+          "value": "{sema.color.background.primary.value}"
+        },
+        "strong": {
+          "value": "{sema.color.background.primary.value}"
+        }
+      },
+      "secondary": {
+        "base": {
+          "value": "{sema.color.background.secondary.value}"
+        },
+        "weak": {
+          "value": "{sema.color.background.secondary.value}"
+        },
+        "strong": {
+          "value": "{sema.color.background.secondary.value}"
+        }
+      },
+      "tertiary": {
+        "base": {
+          "value": "{sema.color.background.tertiary.value}"
+        },
+        "weak": {
+          "value": "{sema.color.background.tertiary.value}"
+        },
+        "strong": {
+          "value": "{sema.color.background.tertiary.value}"
+        }
+      },
+      "selected": {
+        "base": {
+          "value": "{sema.color.background.selected.value}"
+        },
+        "weak": {
+          "value": "{sema.color.background.selected.value}"
+        },
+        "strong": {
+          "value": "{sema.color.background.selected.value}"
+        }
+      },
+      "inverse": {
+        "base": {
+          "value": "{sema.color.background.inverse.value}"
+        },
+        "strong": {
+          "value": "{sema.color.background.inverse.value}"
+        }
+      },
+      "brand": {
+        "value": "{sema.color.background.primary.value}"
+      },
+      "education": {
+        "value": "{sema.color.background.education.value}"
+      },
+      "wash": {
+        "dark": {
+          "value": "{sema.color.background.default.value}"
+        },
+        "light": {
+          "value": "{sema.color.background.default.value}"
+        }
+      },
+      "dark": {
+        "value": "{sema.color.background.wash.dark.value}"
+      },
+      "light": {
+        "value": "{sema.color.background.wash.light.value}"
+      },
+      "elevation": {
+        "accent": {
+          "value": "{sema.color.background.scrim.value}"
+        },
+        "floating": {
+          "value": "{sema.color.background.elevation.value}"
+        },
+        "raised": {
+          "value": "{sema.color.background.elevation.value}"
+        }
+      }
+    },
+    "border": {
+      "container": {
+        "value": "{sema.color.border.decorative.value}"
+      },
+      "default": {
+        "value": "{sema.color.border.interactive.value}"
+      },
+      "error": {
+        "value": "{sema.color.border.error.value}"
+      },
+      "focus": {
+        "value": "{sema.color.border.focus.outer.default.value}"
+      }
+    }
+  }
+}

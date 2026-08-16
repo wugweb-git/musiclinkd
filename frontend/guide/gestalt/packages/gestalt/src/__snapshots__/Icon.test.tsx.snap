@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Compact Icons Component supports 16x16 1`] = `
+<svg
+  aria-hidden={null}
+  aria-label="check-circle-icon"
+  className="subtle icon iconBlock"
+  height={16}
+  role="img"
+  viewBox="0 0 16 16"
+  width={16}
+>
+  <path
+    d="test-file-stub"
+  />
+</svg>
+`;
+
+exports[`Icon flipped if its in the flip on rtl list 1`] = `
+<svg
+  aria-hidden={null}
+  aria-label="send"
+  className="rtlSupport subtle icon iconBlock"
+  height={16}
+  role="img"
+  viewBox="0 0 24 24"
+  width={16}
+>
+  <path
+    d="test-file-stub"
+  />
+</svg>
+`;
+
+exports[`Icon has correct aria-hidden property applied when accessibilityLabel is an empty string 1`] = `
+<svg
+  aria-hidden={true}
+  aria-label=""
+  className="subtle icon iconBlock"
+  height={16}
+  role="img"
+  viewBox="0 0 24 24"
+  width={16}
+>
+  <path
+    d="test-file-stub"
+  />
+</svg>
+`;
+
+exports[`Icon renders 1`] = `
+<svg
+  aria-hidden={null}
+  aria-label="Add"
+  className="subtle icon iconBlock"
+  height={16}
+  role="img"
+  viewBox="0 0 24 24"
+  width={16}
+>
+  <path
+    d="test-file-stub"
+  />
+</svg>
+`;
+
+exports[`Icon uses the dangerouslySetSvgPath prop when icon path is not specified 1`] = `
+<svg
+  aria-hidden={null}
+  aria-label="Line"
+  className="subtle icon iconBlock"
+  height={16}
+  role="img"
+  viewBox="0 0 24 24"
+  width={16}
+>
+  <path
+    d="M13.00,20.00"
+  />
+</svg>
+`;

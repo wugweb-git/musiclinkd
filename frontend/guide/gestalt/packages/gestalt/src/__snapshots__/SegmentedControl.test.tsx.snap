@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SegmentedControl renders 1`] = `
+<div
+  className="SegmentedControl medium md"
+  role="tablist"
+>
+  <button
+    aria-selected={true}
+    className="item itemIsSelected accessibilityOutline md"
+    onClick={[Function]}
+    role="tab"
+    style={
+      Object {
+        "width": "25%",
+      }
+    }
+    type="button"
+  >
+    <div
+      className="default alignCenter breakWord Text fontSize300 fontWeightSemiBold"
+    >
+      News
+    </div>
+  </button>
+  <button
+    aria-selected={false}
+    className="item itemIsNotSelected accessibilityOutline md"
+    onClick={[Function]}
+    role="tab"
+    style={
+      Object {
+        "width": "25%",
+      }
+    }
+    type="button"
+  >
+    <div
+      className="default alignCenter breakWord Text fontSize300 fontWeightSemiBold"
+    >
+      You
+    </div>
+  </button>
+  <button
+    aria-selected={false}
+    className="item itemIsNotSelected accessibilityOutline md"
+    onClick={[Function]}
+    role="tab"
+    style={
+      Object {
+        "width": "25%",
+      }
+    }
+    type="button"
+  >
+    <div
+      className="default alignCenter breakWord Text fontSize300 fontWeightSemiBold"
+    >
+      Messages
+    </div>
+  </button>
+  <button
+    aria-selected={false}
+    className="item itemIsNotSelected accessibilityOutline md"
+    onClick={[Function]}
+    role="tab"
+    style={
+      Object {
+        "width": "25%",
+      }
+    }
+    type="button"
+  >
+    <div
+      className="box justifyCenter xsDisplayFlex"
+    >
+      <div />
+    </div>
+  </button>
+</div>
+`;
+
+exports[`SegmentedControl with responsive widths renders 1`] = `
+<div
+  className="SegmentedControl medium md"
+  role="tablist"
+>
+  <button
+    aria-selected={true}
+    className="item itemIsSelected accessibilityOutline md"
+    onClick={[Function]}
+    role="tab"
+    style={
+      Object {
+        "width": undefined,
+      }
+    }
+    type="button"
+  >
+    <div
+      className="default alignCenter breakWord Text fontSize300 fontWeightSemiBold"
+    >
+      Short
+    </div>
+  </button>
+  <button
+    aria-selected={false}
+    className="item itemIsNotSelected accessibilityOutline md"
+    onClick={[Function]}
+    role="tab"
+    style={
+      Object {
+        "width": undefined,
+      }
+    }
+    type="button"
+  >
+    <div
+      className="default alignCenter breakWord Text fontSize300 fontWeightSemiBold"
+    >
+      Really really really long title
+    </div>
+  </button>
+</div>
+`;

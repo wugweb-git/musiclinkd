@@ -1,0 +1,203 @@
+:root {
+  --g-size-sm: var(--space-400);
+  --g-size-md: var(--space-600);
+}
+
+.sizeSm {
+  height: var(--g-size-sm);
+  width: var(--g-size-sm);
+}
+
+.sizeMd {
+  height: var(--g-size-md);
+  width: var(--g-size-md);
+}
+
+.enabled {
+  background-color: var(--color-background-checkbox-unchecked-default);
+}
+
+.disabled {
+  background-color: var(--color-background-checkbox-disabled);
+}
+
+.checked {
+  background-color: var(--color-background-checkbox-checked-default);
+}
+
+.errorChecked {
+  background-color: var(--color-background-checkbox-checked-error);
+}
+
+.error {
+  background-color: var(--color-background-checkbox-unchecked-error);
+}
+
+.border {
+  border-color: var(--color-border-checkbox-unchecked-default);
+}
+
+.borderSelected {
+  border-color: var(--color-border-checkbox-checked-default);
+}
+
+.borderDisabled {
+  border-color: var(--color-border-checkbox-disabled);
+}
+
+.borderErrorChecked {
+  border-color: var(--color-border-checkbox-checked-error);
+}
+
+.borderErrorUnchecked {
+  border-color: var(--color-border-checkbox-unchecked-error);
+}
+
+.borderHovered {
+  border-color: var(--color-border-checkbox-unchecked-hover);
+}
+
+.borderHoveredError {
+  border-color: var(--sema-color-hover-border-error);
+}
+
+.borderPressed {
+  border-color: var(--sema-color-pressed-border-interactive);
+}
+
+.borderPressedError {
+  border-color: var(--sema-color-pressed-border-error);
+}
+
+.hovered {
+  background-color: var(--sema-color-hover-background-selected);
+  border-color: var(--sema-color-hover-background-selected);
+}
+
+.focus {
+  border-color: var(--sema-color-border-focus-inner-default);
+  border-style: solid;
+  border-width: 2px;
+  outline: 2px solid var(--sema-color-border-focus-outer-default);
+  outline-offset: 0;
+}
+
+.hoveredError {
+  background-color: var(--sema-color-hover-background-error-default);
+  border-color: var(--sema-color-hover-background-error-default);
+}
+
+.pressed {
+  background-color: var(--sema-color-pressed-background-selected);
+  border-color: var(--sema-color-pressed-background-selected);
+}
+
+.pressedError {
+  background-color: var(--sema-color-pressed-background-error-default);
+  border-color: var(--sema-color-pressed-background-error-default);
+}
+
+.borderRadiusSm {
+  composes: rounding1 from "../Borders.css";
+}
+
+.borderRadiusMd {
+  composes: rounding2 from "../Borders.css";
+}
+
+.vrBorderRadiusSm {
+  border-radius: var(--sema-rounding-100);
+}
+
+.vrBorderRadiusMd {
+  border-radius: var(--sema-rounding-200);
+}
+
+.check {
+  composes: block from "../Layout.css";
+  composes: borderBox from "../Layout.css";
+  composes: flex from "../Layout.css";
+  composes: xsItemsCenter from "../Layout.css";
+  composes: justifyCenter from "../Layout.css";
+  composes: solid from "../Borders.css";
+}
+
+.vrCheckBackground {
+  transition-duration: var(
+    --comp-checkbox-motion-background-colorchange-duration
+  );
+  transition-property: background-color, border-color;
+  transition-timing-function: var(
+    --comp-checkbox-motion-background-colorchange-easing
+  );
+}
+
+.vrCheckBackground.focus,
+.vrCheckBackground:not(.checked) {
+  /* Don't animate border-color when focused or not checked  */
+  transition-property: background-color;
+}
+
+.vrCheckIconWrapper {
+  composes: overflowHidden from "../Layout.css";
+}
+
+.vrCheckIconEnterTransition {
+  transition: width var(--comp-checkbox-icon-motion-collapse-in-duration)
+    var(--comp-checkbox-icon-motion-collapse-in-easing);
+}
+
+.vrCheckIconExitTransition {
+  transition: width var(--comp-checkbox-icon-motion-collapse-out-duration)
+    var(--comp-checkbox-icon-motion-collapse-out-easing);
+}
+
+.sizeLg {
+  height: var(--space-600);
+  width: var(--space-600);
+}
+
+.thinBorder {
+  composes: sizeSm from "../Borders.css";
+}
+
+.thickBorder {
+  composes: sizeLg from "../Borders.css";
+}
+
+.inputEnabled {
+  composes: pointer from "../Cursor.css";
+}
+
+.readOnly {
+  pointer-events: none;
+}
+
+.input {
+  composes: absolute from "../Layout.css";
+  composes: top0 from "../Layout.css";
+  composes: m0 from "../Whitespace.css";
+  appearance: none;
+  opacity: var(--opacity-0);
+  outline: 0;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.inputWrapperPaddingTop {
+  padding-top: var(--sema-space-50);
+}
+
+html:not([dir="rtl"]) .labelWrapper {
+  padding-left: var(--sema-space-200);
+}
+
+html[dir="rtl"] .labelWrapper {
+  padding-right: var(--sema-space-200);
+}
+
+.labelWrapperPaddingTop {
+  padding-top: var(--sema-space-25);
+}

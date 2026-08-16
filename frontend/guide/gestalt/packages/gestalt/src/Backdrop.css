@@ -1,0 +1,41 @@
+@keyframes fade-in {
+  0% {
+    opacity: var(--opacity-0);
+  }
+
+  100% {
+    opacity: var(--opacity-500);
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: var(--opacity-500);
+  }
+
+  100% {
+    opacity: var(--opacity-0);
+  }
+}
+
+.backdrop {
+  composes: absolute left0 top0 right0 bottom0 overflowScrollY from "./Layout.css";
+  background: rgb(0 0 0 / 0.8);
+  height: 100%;
+}
+
+.initialize {
+  opacity: var(--opacity-0);
+}
+
+.backdropAnimationIn {
+  animation: fade-in 400ms linear;
+}
+
+.backdropAnimationOut {
+  animation: fade-out 400ms linear;
+}
+
+.zoomOut {
+  composes: zoomOut from "./Cursor.css";
+}

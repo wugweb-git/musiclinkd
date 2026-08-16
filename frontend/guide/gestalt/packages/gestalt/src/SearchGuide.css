@@ -1,0 +1,243 @@
+.searchguide {
+  border: 0;
+  border-radius: var(--rounding-600);
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  height: 48px;
+  isolation: isolate;
+  min-width: 60px;
+  padding-left: var(--space-100);
+  padding-right: var(--space-100);
+}
+
+.searchguideVr {
+  background: transparent;
+  border-color: transparent;
+  border-radius: var(--sema-rounding-400);
+  border-style: solid;
+  border-width: 2px;
+  box-sizing: border-box;
+  display: inherit;
+  isolation: isolate;
+  padding: var(--sema-space-0) var(--sema-space-0);
+  text-wrap: balance;
+}
+
+.gradient {
+  border-width: 0;
+  margin: var(--sema-space-25);
+}
+
+.parentSearchGuide {
+  composes: paddingX0 from "./boxWhitespace.css";
+  composes: paddingY0 from "./boxWhitespace.css";
+  background-color: var(--color-transparent);
+}
+
+.childrenDiv {
+  composes: flex from "./Layout.css";
+  composes: xsItemsCenter from "./Layout.css";
+  composes: justifyCenter from "./Layout.css";
+  border-radius: var(--rounding-400);
+  min-height: 48px;
+}
+
+.imageThumbnailMask {
+  border-radius: var(--sema-rounding-400);
+  overflow: hidden;
+}
+
+.imageDiv {
+  background-color: var(--opacity-100);
+  border-radius: 99px;
+  height: 40px;
+  overflow: hidden;
+  width: 40px;
+}
+
+.imageDivVr {
+  height: 48px;
+  position: relative;
+  width: 44px;
+}
+
+.imageDivVr::before {
+  background-color: var(--sema-color-background-wash-image-tint);
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+/* STATES */
+
+.selected {
+  background-color: var(--color-background-selected-base);
+}
+
+.selectedVr {
+  background-color: var(--sema-color-background-selected);
+}
+
+.imageDivVr.selectedVr,
+.childrenDiv.selectedVr {
+  height: 44px;
+  min-height: 44px;
+}
+
+.searchguideVr.selectedVr {
+  margin-bottom: 2px;
+  margin-top: 2px;
+}
+
+.selectedVr:hover {
+  background-color: var(--sema-color-hover-background-selected);
+}
+
+.selectedVr:active {
+  background-color: var(--sema-color-pressed-background-selected);
+}
+
+.vrFocused:focus {
+  border: var(--g-border-width-lg) solid;
+  border-color: var(--sema-color-border-focus-inner-default);
+  outline: var(--g-border-width-lg) solid;
+  outline-color: var(--sema-color-border-focus-outer-default);
+  outline-offset: 0;
+}
+
+/* COLORS */
+
+.color01 {
+  background-color: var(--color-background-searchguide-default-01);
+}
+
+.color01:hover {
+  background-color: var(--color-background-searchguide-hover-01);
+}
+
+.color01:active {
+  background-color: var(--color-background-searchguide-active-01);
+}
+
+.color02 {
+  background-color: var(--color-background-searchguide-default-02);
+}
+
+.color02:hover {
+  background-color: var(--color-background-searchguide-hover-02);
+}
+
+.color02:active {
+  background-color: var(--color-background-searchguide-active-02);
+}
+
+.color03 {
+  background-color: var(--color-background-searchguide-default-03);
+}
+
+.color03:hover {
+  background-color: var(--color-background-searchguide-hover-03);
+}
+
+.color03:active {
+  background-color: var(--color-background-searchguide-active-03);
+}
+
+.color04 {
+  background-color: var(--color-background-searchguide-default-04);
+}
+
+.color04:hover {
+  background-color: var(--color-background-searchguide-hover-04);
+}
+
+.color04:active {
+  background-color: var(--color-background-searchguide-active-04);
+}
+
+.color05 {
+  background-color: var(--color-background-searchguide-default-05);
+}
+
+.color05:hover {
+  background-color: var(--color-background-searchguide-hover-05);
+}
+
+.color05:active {
+  background-color: var(--color-background-searchguide-active-05);
+}
+
+.color06 {
+  background-color: var(--color-background-searchguide-default-06);
+}
+
+.color06:hover {
+  background-color: var(--color-background-searchguide-hover-06);
+}
+
+.color06:active {
+  background-color: var(--color-background-searchguide-active-06);
+}
+
+.color07 {
+  background-color: var(--color-background-searchguide-default-07);
+}
+
+.color07:hover {
+  background-color: var(--color-background-searchguide-hover-07);
+}
+
+.color07:active {
+  background-color: var(--color-background-searchguide-active-07);
+}
+
+.color08 {
+  background-color: var(--color-background-searchguide-default-08);
+}
+
+.color08:hover {
+  background-color: var(--color-background-searchguide-hover-08);
+}
+
+.color08:active {
+  background-color: var(--color-background-searchguide-active-08);
+}
+
+.color09 {
+  background-color: var(--color-background-searchguide-default-09);
+}
+
+.color09:hover {
+  background-color: var(--color-background-searchguide-hover-09);
+}
+
+.color09:active {
+  background-color: var(--color-background-searchguide-active-09);
+}
+
+.color10 {
+  background-color: var(--color-background-searchguide-default-10);
+}
+
+.color10:hover {
+  background-color: var(--color-background-searchguide-hover-10);
+}
+
+.color10:active {
+  background-color: var(--color-background-searchguide-active-10);
+}
+
+.color11 {
+  background-color: var(--color-background-searchguide-default-11);
+}
+
+.color11:hover {
+  background-color: var(--color-background-searchguide-hover-11);
+}
+
+.color11:active {
+  background-color: var(--color-background-searchguide-active-11);
+}

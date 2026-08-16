@@ -1,0 +1,2062 @@
+{
+  "icons": [
+    {
+      "name": "360",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to rotate an item to get a 360º view",
+      "keywords": ["label", "view"]
+    },
+    {
+      "name": "3D",
+      "categories": ["Utility and tools"],
+      "description": "Indicates 3D format is available",
+      "keywords": ["three-dimensional", "spacial"]
+    },
+    {
+      "name": "3D-move",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to rotate a 3D element",
+      "keywords": ["three-dimensional", "spacial", "rotate"]
+    },
+    {
+      "name": "accessibility",
+      "categories": ["Utility and tools"],
+      "description": "Indicates accessibility features or adjustments",
+      "keywords": ["a11y", "ally"]
+    },
+    {
+      "name": "ad",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates an ad type",
+      "keywords": ["promotion", "campaign"]
+    },
+    {
+      "name": "ad-group",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates a group of ads accounts",
+      "keywords": ["ads", "promotions", "campaigns"]
+    },
+    {
+      "name": "add",
+      "categories": ["Add"],
+      "description": "Indicates the ability to create or add content",
+      "keywords": ["plus", "create", "new"]
+    },
+    {
+      "name": "add-circle",
+      "categories": ["Add"],
+      "description": "Indicates the ability to display more content or additional information",
+      "keywords": ["plus circle", "create", "new"]
+    },
+    {
+      "name": "add-layout",
+      "categories": ["Add"],
+      "description": "Indicates the ability to choose a new file and create a layout",
+      "keywords": ["plus layout", "create", "new"]
+    },
+    {
+      "name": "add-pin",
+      "categories": ["Add"],
+      "description": "Indicates the ability to send a Pin",
+      "keywords": ["plus pin", "create", "new"]
+    },
+    {
+      "name": "add-section",
+      "categories": ["Add"],
+      "description": "Indicates the ability to add or create a section of a board",
+      "keywords": ["plus", "create", "new", "section", "board"]
+    },
+    {
+      "name": "ads-overview",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates ads overview",
+      "keywords": ["dashboard", "summary", "measurement"]
+    },
+    {
+      "name": "ads-stats",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates ads stats",
+      "keywords": ["data", "metrics"]
+    },
+    {
+      "name": "alert",
+      "categories": ["Utility and tools"],
+      "description": "Indicates an alert message bringing awareness to an important content",
+      "keywords": ["exclamation", "awareness", "warning", "error"]
+    },
+    {
+      "name": "align-bottom",
+      "categories": ["Alignment"],
+      "description": "Indicates a bottom alignment",
+      "keywords": ["formatting"]
+    },
+    {
+      "name": "align-bottom-center",
+      "categories": ["Alignment"],
+      "description": "Indicates a bottom-center alignment",
+      "keywords": ["formatting"]
+    },
+    {
+      "name": "align-bottom-left",
+      "categories": ["Alignment"],
+      "description": "Indicates a bottom-left alignment",
+      "keywords": ["formatting"]
+    },
+    {
+      "name": "align-bottom-right",
+      "categories": ["Alignment"],
+      "description": "Indicates a bottom-right alignment",
+      "keywords": ["formatting"]
+    },
+    {
+      "name": "align-middle",
+      "categories": ["Alignment"],
+      "description": "Indicates a middle alignment",
+      "keywords": ["formatting", "center"]
+    },
+    {
+      "name": "align-top",
+      "categories": ["Alignment"],
+      "description": "Indicates a top alignment",
+      "keywords": ["formatting"]
+    },
+    {
+      "name": "align-top-center",
+      "categories": ["Alignment"],
+      "description": "Indicates a top-center alignment",
+      "keywords": ["formatting"]
+    },
+    {
+      "name": "align-top-left",
+      "categories": ["Alignment"],
+      "description": "Indicates a top-left alignment",
+      "keywords": ["formatting"]
+    },
+    {
+      "name": "align-top-right",
+      "categories": ["Alignment"],
+      "description": "Indicates a top-right alignment",
+      "keywords": ["formatting"]
+    },
+    {
+      "name": "alphabetical",
+      "categories": ["Text"],
+      "description": "Indicates an alphabetical list",
+      "keywords": ["text", "sequence", "letter", "formatting"]
+    },
+    {
+      "name": "amazon",
+      "categories": ["Logo"],
+      "description": "Symbolizes amazon or its subsidiaries",
+      "keywords": ["aws"]
+    },
+    {
+      "name": "android-share",
+      "categories": ["Platform specific"],
+      "description": "On Android, indicates the ability to share an element",
+      "keywords": ["send"]
+    },
+    {
+      "name": "angled-pin",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the number of times a Pin was saved to a board",
+      "keywords": ["diagonal"]
+    },
+    {
+      "name": "api",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates a connection to an API",
+      "keywords": ["conversion", "insights", "ad"]
+    },
+    {
+      "name": "apple",
+      "categories": ["Social"],
+      "description": "Indicates Apple service or feature",
+      "keywords": ["fruit", "ios"]
+    },
+    {
+      "name": "apps",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a collection of apps",
+      "keywords": ["list", "waffle", "grid"]
+    },
+    {
+      "name": "ar-try-on",
+      "categories": ["Utility and tools", "Time"],
+      "description": "Indicates the ability to try on an item in augmented reality.",
+      "keywords": ["augmented", "reality", "test", "fashion", "makeup"]
+    },
+    {
+      "name": "arrow-back",
+      "categories": ["Arrows", "Platform specific"],
+      "description": "On iOS, indicates backward movement",
+      "keywords": ["previous", "left", "chevron"]
+    },
+    { "name": "arrow-circle-back", "categories": ["Arrows"], "keywords": [] },
+    { "name": "arrow-circle-down", "categories": ["Arrows"], "keywords": [] },
+    {
+      "name": "arrow-circle-forward",
+      "categories": ["Arrows"],
+      "description": "Indicates a forward movement",
+      "keywords": ["next", "go"]
+    },
+    {
+      "name": "arrow-circle-left",
+      "categories": ["Arrows"],
+      "description": "Indicates a backward movement",
+      "keywords": ["previous", "back"]
+    },
+    {
+      "name": "arrow-circle-up",
+      "categories": ["Arrows"],
+      "description": "Indicates the ability to choose a file to upload",
+      "keywords": ["import", "upload"]
+    },
+    {
+      "name": "arrow-counter-clockwise",
+      "categories": ["Arrows"],
+      "description": "Indicates a backward action",
+      "keywords": ["reset", "refresh"]
+    },
+    {
+      "name": "arrow-down",
+      "categories": ["Arrows"],
+      "description": "Indicates a list or more content available to view/expand",
+      "keywords": ["chevron", "expand"]
+    },
+    {
+      "name": "arrow-end",
+      "categories": ["Arrows"],
+      "description": "Indicates the end of a sequence in a list of items or pages",
+      "keywords": ["last", "skip", "end", "forward"]
+    },
+    {
+      "name": "arrow-forward",
+      "categories": ["Arrows"],
+      "description": "Indicates the ability to move forward",
+      "keywords": ["next", "chevron", "right"]
+    },
+    {
+      "name": "arrow-left-curved",
+      "categories": ["Arrows"],
+      "keywords": ["back", "left", "previous", "angle"]
+    },
+    {
+      "name": "arrow-start",
+      "categories": ["Arrows"],
+      "description": "Indicates the beginning of a sequence in a list of items or pages",
+      "keywords": ["first", "start", "beginning", "rewind", "back", "skip"]
+    },
+    {
+      "name": "arrow-up",
+      "categories": ["Arrows"],
+      "description": "Indicates an expanded content is being displayed",
+      "keywords": ["collapse", "chevron"]
+    },
+    {
+      "name": "arrow-up-left",
+      "categories": ["Arrows"],
+      "description": "Indicates going to a previous content/page",
+      "keywords": ["angled"]
+    },
+    {
+      "name": "arrow-up-right",
+      "categories": ["Arrows"],
+      "description": "Indicates going to a different content/page when inside of a dropdown list",
+      "keywords": ["angled"]
+    },
+    {
+      "name": "arrows-vertical",
+      "categories": ["Arrows"],
+      "description": "Description pending",
+      "keywords": []
+    },
+    {
+      "name": "bell",
+      "categories": ["Utility and tools"],
+      "description": "Indicates notifications",
+      "keywords": ["notifications"]
+    },
+    {
+      "name": "birthday-cake",
+      "categories": ["Utility and tools"],
+      "description": "Used to suggest a birthday date",
+      "keywords": ["birthdate", "celebrate", "year"]
+    },
+    {
+      "name": "blur",
+      "categories": ["Creation"],
+      "description": "Indicates the ability to blur something.",
+      "keywords": ["soften", "fadecd s"]
+    },
+    {
+      "name": "board",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a board",
+      "keywords": ["layout", "grid"]
+    },
+    {
+      "name": "bold",
+      "categories": ["Formatting"],
+      "description": "Indicates the ability to bold text",
+      "keywords": ["font", "markdown"]
+    },
+    {
+      "name": "briefcase",
+      "categories": ["Utility and tools"],
+      "description": "Indicates business manager and business-related tasks",
+      "keywords": ["business manager", "business", "company"]
+    },
+    {
+      "name": "building-business",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a business or market",
+      "keywords": ["place", "location"]
+    },
+    {
+      "name": "business-hierarchy",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates the business hierarchy in Business access",
+      "keywords": ["org chart", "company"]
+    },
+    {
+      "name": "calendar",
+      "categories": ["Time", "Toggle"],
+      "description": "Indicates date selection",
+      "keywords": ["date", "schedule", "time"]
+    },
+    {
+      "name": "calendar-check",
+      "categories": ["Time", "Toggle"],
+      "description": "Indicates a date is selected",
+      "keywords": ["date", "schedule", "time", "date picker", "success"]
+    },
+    {
+      "name": "camera",
+      "categories": ["Media controls"],
+      "description": "Indicates the ability to open the camera settings",
+      "keywords": ["photo", "thumbnail", "picture", "image"]
+    },
+    {
+      "name": "camera-flip",
+      "categories": ["Media controls"],
+      "description": "Description pending",
+      "keywords": []
+    },
+    {
+      "name": "camera-roll",
+      "categories": ["Media controls", "Utility and tools"],
+      "description": "Indicates the ability to open the camera roll on your device or to be able to add a photo comment",
+      "keywords": ["image", "photo", "picture", "image", "comment"]
+    },
+    {
+      "name": "cancel",
+      "categories": ["Utility and tools"],
+      "description": "Indicates closing or dismissing a message",
+      "keywords": ["close", "dismiss", "back", "x"]
+    },
+    {
+      "name": "canonical-pin",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a list/sequence of saved Pins",
+      "keywords": []
+    },
+    {
+      "name": "captions",
+      "categories": ["Media controls"],
+      "description": "Indicates that captions are currently turned on and can be turned off for a video",
+      "keywords": ["subtitles", "video"]
+    },
+    {
+      "name": "captions-outline",
+      "categories": ["Media controls"],
+      "description": "Indicates that captions are currently turned on and can be turned off if they are not disabled for a video",
+      "keywords": ["subtitles", "video"]
+    },
+    {
+      "name": "card-stack",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a collection of cards",
+      "keywords": ["group"]
+    },
+    {
+      "name": "card-stack-refresh",
+      "categories": ["Object"],
+      "description": "Refreshes a collection of cards",
+      "keywords": ["group", "update", "new"]
+    },
+    {
+      "name": "check",
+      "categories": ["Platform specific"],
+      "description": "Instead of a radio button on iOS, use the check icon",
+      "keywords": ["done", "completed", "success", "selected"]
+    },
+    {
+      "name": "check-circle",
+      "categories": ["Status"],
+      "description": "Indicates a to-do list or verified user",
+      "keywords": [
+        "done",
+        "completed",
+        "success",
+        "selected",
+        "verified",
+        "user"
+      ]
+    },
+    {
+      "name": "check-circle-fill",
+      "categories": ["Status"],
+      "description": "Indicates a to-do list or verified user",
+      "keywords": [
+        "done",
+        "completed",
+        "success",
+        "selected",
+        "verified",
+        "user"
+      ]
+    },
+    {
+      "name": "chevron-down-circle",
+      "categories": ["arrows"],
+      "description": "Indicates ability to expand selection or navigate down.",
+      "keywords": ["expand"]
+    },
+    {
+      "name": "chevron-left-circle",
+      "categories": ["arrows"],
+      "description": "Navigate backwards or left, or to collapse something to the left.",
+      "keywords": ["back", "close", "collapse"]
+    },
+    {
+      "name": "chevron-right-circle",
+      "categories": ["arrows"],
+      "description": "Indicates the ability to open something to the right.",
+      "keywords": ["expand"]
+    },
+    {
+      "name": "chevron-up-circle",
+      "categories": ["Arrows"],
+      "description": "Indicates an expanded content is being displayed. Background is needed to emphasize visibility",
+      "keywords": ["arrow"]
+    },
+    { "name": "circle", "categories": [], "description": "", "keywords": [] },
+    {
+      "name": "circle-initializing",
+      "categories": ["Status"],
+      "description": "Indicates a project that is starting up",
+      "keywords": ["begin", "start", "in", "progress"]
+    },
+    {
+      "name": "clear",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to clear the entered text in form elements",
+      "keywords": ["erase", "x", "delete"]
+    },
+    {
+      "name": "clipboard",
+      "categories": ["Object"],
+      "description": "Indicates the ability to paste something",
+      "keywords": ["paste", "copy"]
+    },
+    {
+      "name": "clock",
+      "categories": ["Time"],
+      "description": "Indicates time",
+      "keywords": ["time", "schedule"]
+    },
+    {
+      "name": "clock-checked",
+      "categories": ["Time"],
+      "description": "Indicates that a time range has been set",
+      "keywords": ["time", "schedule", "time range", "select", "set time"]
+    },
+    {
+      "name": "cloud-server",
+      "categories": ["Utility and tools", "Ads and measurement"],
+      "description": "Indicates integration, conversions and APIs via the cloud",
+      "keywords": ["API", "computing", "conversions", "integration", "nodes"]
+    },
+    {
+      "name": "code",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a code view or connection",
+      "keywords": ["insert", "tag", "developer", "development"]
+    },
+    {
+      "name": "code-checked",
+      "categories": ["Utility and tools"],
+      "description": "Indicates that a code view is on",
+      "keywords": ["insert", "tag", "developer", "development"]
+    },
+    {
+      "name": "cog",
+      "categories": ["Utility and tools"],
+      "description": "Indicates setting options are available",
+      "keywords": ["settings", "gear", "nut"]
+    },
+    {
+      "name": "cog-fill",
+      "categories": ["Controls"],
+      "description": "Indicates setting options are available.",
+      "keywords": ["settings", "gear", "nut"]
+    },
+    {
+      "name": "collapse",
+      "categories": [],
+      "description": "Description pending",
+      "keywords": []
+    },
+    {
+      "name": "color-picker",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to pick a specific color",
+      "keywords": ["eyedropper"]
+    },
+    {
+      "name": "color-solid",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a solid color",
+      "keywords": ["swatch"]
+    },
+    {
+      "name": "color-split",
+      "categories": ["Utility and tools"],
+      "description": "Indicates color split",
+      "keywords": ["dual"]
+    },
+    {
+      "name": "compact-angled-pin",
+      "categories": ["Object"],
+      "description": "Indicates the number of times a Pin was saved to a board.",
+      "keywords": ["diagonal"]
+    },
+    {
+      "name": "compact-ellipsis",
+      "categories": ["navigation"],
+      "description": "Indicates an overflow menu.",
+      "keywords": ["...", "kebab", "more", "overflow", "menu", "meatballs"]
+    },
+    {
+      "name": "compact-maximize",
+      "categories": ["Arrows"],
+      "description": "Indicates the ability to maximize the view.",
+      "keywords": ["increase", "expand"]
+    },
+    {
+      "name": "compact-mute",
+      "categories": ["Controls"],
+      "description": "Indicates the ability to mute the audio.",
+      "keywords": ["sound", "off", "audio", "volume"]
+    },
+    {
+      "name": "compact-sound",
+      "categories": ["Controls"],
+      "description": "Indicates the ability to turn the audio on.",
+      "keywords": ["audio", "volume"]
+    },
+    {
+      "name": "compact-sound-slash",
+      "categories": ["Controls"],
+      "description": "Indicates the ability to mute audio.",
+      "keywords": ["audio", "volume", "off", "media", "mute"]
+    },
+    {
+      "name": "compact-workflow-status-canceled",
+      "categories": ["Status"],
+      "description": "Indicates an element's state as canceled.",
+      "keywords": ["abandon"]
+    },
+    {
+      "name": "compact-workflow-status-halted",
+      "categories": ["Status"],
+      "description": "Indicates an element's state as halted.",
+      "keywords": ["paused"]
+    },
+    {
+      "name": "compact-workflow-status-in-progress",
+      "categories": ["Status"],
+      "description": "Indicates an element's state as in progress.",
+      "keywords": ["processing"]
+    },
+    {
+      "name": "compact-workflow-status-unstarted",
+      "categories": ["Status"],
+      "description": "Indicates an element's state as unstarted.",
+      "keywords": [""]
+    },
+    {
+      "name": "compass",
+      "categories": ["Utility and tools"],
+      "description": "Indicates directions",
+      "keywords": ["direction", "explore"]
+    },
+    {
+      "name": "compass-fill",
+      "categories": ["Object"],
+      "description": "Indicates directions or exploration",
+      "keywords": ["direction", "explore"]
+    },
+    {
+      "name": "compose",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to compose a new content",
+      "keywords": ["new", "note", "write", "edit", "pencil"]
+    },
+    {
+      "name": "conversion-tag",
+      "categories": ["Ads and measurement", "Utility and tools"],
+      "description": "Indicates code sources or API references",
+      "keywords": ["code", "api"]
+    },
+    {
+      "name": "copy-to-clipboard",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to copy items to clipboard",
+      "keywords": ["duplicate"]
+    },
+    {
+      "name": "credit-card",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a credit card option is available as a payment method",
+      "keywords": ["payment"]
+    },
+    {
+      "name": "credit-card-plus",
+      "categories": ["Commerce"],
+      "description": "Indicates the ability to add a payment method or credit/debit card.",
+      "keywords": ["debit", "add", "payment"]
+    },
+    {
+      "name": "crop",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to crop an image",
+      "keywords": ["cut", "edit"]
+    },
+    {
+      "name": "crystal-ball",
+      "categories": ["Object"],
+      "description": "Indicates predictions",
+      "keywords": ["predicts", "future", "magic", "sparkles", "trends"]
+    },
+    {
+      "name": "dash",
+      "categories": ["Utility and tools"],
+      "description": "Indicates there isn't data/numbers to show",
+      "keywords": ["minus", "empty", "remove"]
+    },
+    {
+      "name": "data-source",
+      "categories": ["Ads and measurement", "Utility and tools"],
+      "description": "Indicates a data source for API conversion insights or a general database icon",
+      "keywords": ["database", "conversion", "insights", "ad"]
+    },
+    {
+      "name": "deselect",
+      "categories": ["Creation"],
+      "description": "Indicates the ability to deselect something",
+      "keywords": ["remove", "selection", "minus"]
+    },
+    {
+      "name": "desktop",
+      "categories": ["Toggle"],
+      "description": "Indicates a desktop screen",
+      "keywords": ["screen", "size", "break point", "responsive", "computer"]
+    },
+    {
+      "name": "diagnostics",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates a diagnostics tool",
+      "keywords": [
+        "monitor",
+        "diagnosis",
+        "analyze",
+        "conversion",
+        "insights",
+        "ad"
+      ]
+    },
+    {
+      "name": "directional-arrow-left",
+      "categories": ["Arrows", "Platform specific"],
+      "description": "On Android, indicates backward movement. Also used on web to indicate backward movement",
+      "keywords": ["previous", "backward"]
+    },
+    {
+      "name": "directional-arrow-right",
+      "categories": ["Arrows"],
+      "description": "Indicates forward movement",
+      "keywords": ["next", "forward"]
+    },
+    {
+      "name": "download",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to download items",
+      "keywords": ["save"]
+    },
+    {
+      "name": "drag-drop",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to drag and drop items",
+      "keywords": ["move", "drag and drop"]
+    },
+    {
+      "name": "duplicate",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to duplicate an element or asset",
+      "keywords": ["copy", "add"]
+    },
+    {
+      "name": "edit",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to edit something",
+      "keywords": ["pencil", "write"]
+    },
+    {
+      "name": "ellipsis",
+      "categories": ["Utility and tools"],
+      "description": "Indicates an overflow menu",
+      "keywords": ["kebab", "more", "overflow", "menu", "meatballs"]
+    },
+    {
+      "name": "ellipsis-circle",
+      "categories": ["Utility and tools"],
+      "description": "Indicates an overflow menu",
+      "keywords": ["kebab", "more", "overflow", "menu", "meatballs"]
+    },
+    {
+      "name": "envelope",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to send content",
+      "keywords": ["mail", "send"]
+    },
+    {
+      "name": "expand",
+      "categories": [],
+      "description": "Description pending",
+      "keywords": []
+    },
+    {
+      "name": "eye",
+      "categories": ["Toggle"],
+      "description": "Indicates the ability to view data, or convey a number of views",
+      "keywords": ["view", "preview"]
+    },
+    {
+      "name": "eye-hide",
+      "categories": ["Toggle"],
+      "description": "Indicates the ability to hide items, such as passwords or confidential information",
+      "keywords": ["hide", "view", "privacy"]
+    },
+    {
+      "name": "face-happy",
+      "categories": ["Reactions and ratings"],
+      "description": "Indicates a super happy feeling or satisfied opinion",
+      "keywords": ["laugh", "excited", "smile"]
+    },
+    {
+      "name": "face-neutral",
+      "categories": ["Reactions and ratings"],
+      "description": "Indicates a neutral feeling or opinion",
+      "keywords": ["reaction", "impartial"]
+    },
+    {
+      "name": "face-sad",
+      "categories": ["Reactions and ratings"],
+      "description": "Indicates a sad/unsatisfied feeling or opinion",
+      "keywords": ["unhappy", "disappointed"]
+    },
+    {
+      "name": "face-smiley",
+      "categories": ["Reactions and ratings"],
+      "description": "Indicates a mild happy feeling or opinion",
+      "keywords": ["happy"]
+    },
+    {
+      "name": "face-smiley-add",
+      "categories": ["Reactions and ratings"],
+      "description": "Indicates the ability to add a reaction",
+      "keywords": ["reaction", "smile", "emoji", "add"]
+    },
+    {
+      "name": "face-tryon",
+      "categories": ["Utility and tools"],
+      "description": "Description pending",
+      "keywords": []
+    },
+    {
+      "name": "facebook",
+      "categories": ["Social"],
+      "description": "Indicates a Facebook service",
+      "keywords": ["logo", "social media"]
+    },
+    {
+      "name": "fade",
+      "categories": [],
+      "description": "Description pending",
+      "keywords": []
+    },
+    {
+      "name": "ferris-wheel",
+      "categories": ["Object"],
+      "description": "Indicates Coachella",
+      "keywords": ["festival"]
+    },
+    {
+      "name": "file-box",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a file box collection",
+      "keywords": ["folder", "document", "archive"]
+    },
+    {
+      "name": "file-unknown",
+      "categories": ["Utility and tools"],
+      "description": "Indicates an unknown file",
+      "keywords": ["document"]
+    },
+    {
+      "name": "fill-opaque",
+      "categories": ["Utility and tools"],
+      "description": "Indicates an opaque fill",
+      "keywords": ["solid"]
+    },
+    {
+      "name": "fill-transparent",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a transparent fill",
+      "keywords": ["sheer", "opacity"]
+    },
+    {
+      "name": "filter",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to filter options",
+      "keywords": ["refine"]
+    },
+    {
+      "name": "flag",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a flagged item",
+      "keywords": ["priority", "highlight"]
+    },
+    {
+      "name": "flame",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates trends",
+      "keywords": ["fire", "hot", "trend"]
+    },
+    {
+      "name": "flash",
+      "categories": ["Media controls"],
+      "description": "Indicates the ability to enable a flash feature",
+      "keywords": ["lightning", "bolt", "activity", "lightening"]
+    },
+    {
+      "name": "flashlight",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a visual search feature",
+      "keywords": ["search", "visual", "magnifier"]
+    },
+    {
+      "name": "flipHorizontal",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to flip an image horizontally",
+      "keywords": ["orientation"]
+    },
+    {
+      "name": "flipVertical",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to flip an image vertically",
+      "keywords": ["orientation"]
+    },
+    {
+      "name": "folder",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a folder storage",
+      "keywords": ["files", "projects"]
+    },
+    {
+      "name": "folder-fill",
+      "categories": ["File"],
+      "description": "Indicates a folder storage.",
+      "keywords": ["files", "projects"]
+    },
+    {
+      "name": "forward",
+      "categories": ["Media controls"],
+      "description": "Indicates a forward movement in a video context",
+      "keywords": ["advance"]
+    },
+    {
+      "name": "ghost-fill",
+      "categories": ["Creation"],
+      "description": "Indicates a ghosted image effect.",
+      "keywords": ["image", "create", "effect"]
+    },
+    {
+      "name": "gif",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a GIF media",
+      "keywords": ["media", "animated", "image"]
+    },
+    {
+      "name": "gift",
+      "categories": ["Reactions and ratings"],
+      "description": "Indicates a gift feature or concept.",
+      "keywords": ["present", "celebrate", "birthday", "box"]
+    },
+    {
+      "name": "globe",
+      "categories": ["Toggle"],
+      "description": "Indicates the ability to claim a website account",
+      "keywords": [
+        "URL",
+        "profile",
+        "merchant",
+        "global",
+        "internet",
+        "website",
+        "world",
+        "sphere"
+      ]
+    },
+    {
+      "name": "globe-checked",
+      "categories": ["Toggle"],
+      "description": "Indicates a profile-verified URL",
+      "keywords": [
+        "URL",
+        "profile",
+        "merchant",
+        "success",
+        "done",
+        "completed",
+        "global",
+        "internet",
+        "website",
+        "world",
+        "sphere"
+      ]
+    },
+    {
+      "name": "gmail",
+      "categories": ["Social"],
+      "description": "Indicates a Gmail service",
+      "keywords": ["logo", "share", "email", "send"]
+    },
+    {
+      "name": "graph-bar",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates a graph-bar data format",
+      "keywords": [
+        "chart",
+        "column",
+        "bar",
+        "metrics",
+        "analytics",
+        "measurement"
+      ]
+    },
+    {
+      "name": "graph-pie",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates a graph-pie data format",
+      "keywords": [
+        "chart",
+        "wedge",
+        "pie",
+        "metrics",
+        "analytics",
+        "measurement"
+      ]
+    },
+    {
+      "name": "hand-pointing",
+      "categories": ["Platform specific"],
+      "description": "Indicates a hand point gesture",
+      "keywords": ["gesture", "cursor"]
+    },
+    {
+      "name": "handle",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to reorder elements",
+      "keywords": ["move", "drag", "organize", "rearrange"]
+    },
+    {
+      "name": "heart",
+      "categories": ["Reactions and ratings", "Toggle"],
+      "description": "Indicates a loved feedback",
+      "keywords": ["love", "like"]
+    },
+    {
+      "name": "heart-broken",
+      "categories": ["Reactions and ratings", "Toggle"],
+      "description": "Indicates a heart-broken reaction",
+      "keywords": ["love", "dislike"]
+    },
+    {
+      "name": "heart-health",
+      "categories": ["Ads and measurement", "Utility and tools"],
+      "description": "Indicates the health of a process",
+      "keywords": ["issues", "status", "conversion", "insights", "ad"]
+    },
+    {
+      "name": "heart-outline",
+      "categories": ["Reactions and ratings", "Toggle"],
+      "description": "Indicates an unselected love reaction",
+      "keywords": ["love", "like"]
+    },
+    {
+      "name": "history",
+      "categories": ["Time"],
+      "description": "Indicates history view",
+      "keywords": ["viewed", "versions", "time"]
+    },
+    {
+      "name": "home",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a home screen or feed",
+      "keywords": ["main", "house"]
+    },
+    {
+      "name": "idea-pin",
+      "categories": ["Utility and tools"],
+      "description": "Indicates IdeaPin format",
+      "keywords": ["stories"]
+    },
+    {
+      "name": "image-portrait",
+      "categories": ["Utility and tools"],
+      "description": "Indicates portrait-mode orientation",
+      "keywords": ["orientation", "picture", "photo"]
+    },
+    {
+      "name": "imessage",
+      "categories": ["Logo"],
+      "description": "Indicates a message from the imessage application",
+      "keywords": ["apple", "messaging"]
+    },
+    {
+      "name": "impressum",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a legal statement of ownership/authorship",
+      "keywords": []
+    },
+    {
+      "name": "indent",
+      "categories": ["Text"],
+      "description": "Indicates a text indent.",
+      "keywords": ["formatting"]
+    },
+    {
+      "name": "info-circle",
+      "categories": ["Utility and tools"],
+      "description": "Indicates more information is available",
+      "keywords": ["assistance", "help", "more", "tooltip"]
+    },
+    {
+      "name": "information",
+      "categories": ["Utility and tools"],
+      "description": "Indicates more information is available",
+      "keywords": ["assistance", "help", "more", "tooltip"]
+    },
+    {
+      "name": "insights-audience",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates insights from the audience",
+      "keywords": ["metrics", "users", "audience", "measurement"]
+    },
+    {
+      "name": "insights-conversion",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates insights conversion data",
+      "keywords": ["metrics", "measurement"]
+    },
+    {
+      "name": "instagram",
+      "categories": ["Social"],
+      "description": "Indicates the Instagram service",
+      "keywords": ["social", "service", "share"]
+    },
+    {
+      "name": "instagram-stories",
+      "categories": ["Logo"],
+      "description": "Indicates branding for instagram stories",
+      "keywords": ["ig", "story"]
+    },
+    {
+      "name": "invoice",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates the ability to see or take action on an invoice",
+      "keywords": ["receipt", "billing", "payment"]
+    },
+    {
+      "name": "italics",
+      "categories": ["Formatting"],
+      "description": "Indicates the ability to italicize text",
+      "keywords": ["font", "markdown"]
+    },
+    {
+      "name": "kakao-talk",
+      "categories": ["Brand"],
+      "description": "Indicates Kakao Talk service or feature.",
+      "keywords": ["message"]
+    },
+    {
+      "name": "key",
+      "categories": ["Utility and tools"],
+      "description": "Indicates keywords",
+      "keywords": ["password", "confidential", "access"]
+    },
+    {
+      "name": "knoop",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a loading behavior",
+      "keywords": ["loading", "button", "spinner"]
+    },
+    {
+      "name": "layers-stack",
+      "categories": ["Creation"],
+      "description": "indicates a stack of layers in order",
+      "keywords": ["order"]
+    },
+    {
+      "name": "layout",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a layout setting",
+      "keywords": ["structure", "page", "grid"]
+    },
+    {
+      "name": "lightbulb",
+      "categories": ["Utility and tools"],
+      "description": "Indicates insights or educational content such as trends",
+      "keywords": ["idea", "lamp", "insight"]
+    },
+    {
+      "name": "lightning-bolt-circle",
+      "categories": ["Utility and tools"],
+      "description": "Indicates service-amp is available",
+      "keywords": ["flash", "service", "bolt", "lightening"]
+    },
+    {
+      "name": "line-logo",
+      "categories": ["Brand"],
+      "description": "Indicates Line service or feature.",
+      "keywords": ["message"]
+    },
+    {
+      "name": "link",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a link source, to copy a link to clipboard, or to jump into a new page section",
+      "keywords": ["chain", "section"]
+    },
+    {
+      "name": "link-broken",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a disconnected link",
+      "keywords": ["chain", "section", "disconnected"]
+    },
+    {
+      "name": "lips",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to try a lipstick color",
+      "keywords": ["mouth", "lipstick"]
+    },
+    {
+      "name": "list-bullets",
+      "categories": ["Formatting"],
+      "description": "Represents a bulleted list or the ability to add a bulleted list",
+      "keywords": ["dots", "markdown"]
+    },
+    {
+      "name": "list-numbered",
+      "categories": ["Text"],
+      "description": "Indicates the ability to add a numbered list in a left to right language.",
+      "keywords": ["numbers", "bullets"]
+    },
+    {
+      "name": "list-numbered-rtl",
+      "categories": ["Text"],
+      "description": "Indicates the ability to add a numbered list in a right to left language.",
+      "keywords": ["numbers", "bullets"]
+    },
+    {
+      "name": "live",
+      "categories": ["Utility and tools"],
+      "description": "Indicates live videos, Pinterest tv",
+      "keywords": ["tv", "television", "video"]
+    },
+    {
+      "name": "location",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a location orientation",
+      "keywords": ["map", "marker"]
+    },
+    {
+      "name": "lock",
+      "categories": ["Utility and tools", "Status"],
+      "description": "Indicates private content",
+      "keywords": ["private", "safe", "privacy"]
+    },
+    {
+      "name": "logo-large",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a large logo size",
+      "keywords": ["size"]
+    },
+    {
+      "name": "logo-small",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a small logo size",
+      "keywords": ["size"]
+    },
+    {
+      "name": "logout",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to end access to a session",
+      "keywords": ["power", "end"]
+    },
+    {
+      "name": "magic-pen",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to select an object or an entire area of an image",
+      "keywords": ["wand"]
+    },
+    {
+      "name": "magnifying-glass-sparkle",
+      "categories": ["Object"],
+      "description": "specialized search symbol for visual search",
+      "keywords": ["visual", "search", "image"]
+    },
+    {
+      "name": "manage-access",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to manage access to docs or dashboards",
+      "keywords": ["management", "access", "share", "private"]
+    },
+    {
+      "name": "margins-large",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a large margin configuration",
+      "keywords": ["space", "page", "layout"]
+    },
+    {
+      "name": "margins-medium",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a medium margin configuration",
+      "keywords": ["space", "page", "layout"]
+    },
+    {
+      "name": "margins-small",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a small margin configuration",
+      "keywords": ["space", "page", "layout"]
+    },
+    {
+      "name": "maximize",
+      "categories": ["Arrows", "Utility and tools"],
+      "description": "Indicates the ability to maximize the view",
+      "keywords": ["increase", "expand"]
+    },
+    {
+      "name": "megaphone",
+      "categories": ["Utility and tools"],
+      "description": "Indicates engagement or announcement",
+      "keywords": ["announcements", "engagement", "new", "speaker"]
+    },
+    {
+      "name": "menu",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a condensed menu",
+      "keywords": ["hamburger", "overflow", "more"]
+    },
+    {
+      "name": "minimize",
+      "categories": ["Arrows", "Utility and tools"],
+      "description": "Indicates the ability to minimize the view",
+      "keywords": ["decrease", "shrink"]
+    },
+    {
+      "name": "mobile",
+      "categories": ["Toggle"],
+      "description": "Indicates mobile screen",
+      "keywords": ["screen", "size", "break point", "responsive", "phone"]
+    },
+    {
+      "name": "moon",
+      "categories": ["Toggle"],
+      "description": "Indicates dark mode",
+      "keywords": ["dark mode"]
+    },
+    {
+      "name": "move",
+      "categories": ["Arrows", "Utility and tools"],
+      "description": "Indicates an ability to move an object",
+      "keywords": ["arrange", "shift", "drag"]
+    },
+    {
+      "name": "move-pin",
+      "categories": ["Arrows", "Utility and tools"],
+      "description": "Indicates an ability to move a pin to a different section",
+      "keywords": ["arrange", "organize", "publish"]
+    },
+    {
+      "name": "music-off",
+      "categories": ["Media controls", "Toggle"],
+      "description": "Indicates the ability to turn the music off",
+      "keywords": ["sound", "off", "mute", "audio", "volume"]
+    },
+    {
+      "name": "music-on",
+      "categories": ["Media controls", "Toggle"],
+      "description": "Indicates the ability to turn the music on",
+      "keywords": ["sound", "on", "mute", "audio", "volume"]
+    },
+    {
+      "name": "mute",
+      "categories": ["Media controls", "Toggle"],
+      "description": "Indicates the ability to mute the audio",
+      "keywords": ["sound", "off", "audio", "volume"]
+    },
+    {
+      "name": "outdent",
+      "categories": ["Text"],
+      "description": "Indicates a text outdent.",
+      "keywords": ["formatting"]
+    },
+    {
+      "name": "overlay-text",
+      "categories": ["Text"],
+      "description": "Indicates text overlay settings",
+      "keywords": []
+    },
+    {
+      "name": "overlay-text-outline.svg",
+      "categories": ["Text"],
+      "description": "Indicates text overlay settings",
+      "keywords": []
+    },
+    {
+      "name": "overview",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates a dashboard overview",
+      "keywords": ["summary", "layout", "grid", "square"]
+    },
+    {
+      "name": "pause",
+      "categories": ["Media controls"],
+      "description": "Indicates the ability to pause video or audio",
+      "keywords": ["halt", "hold"]
+    },
+    {
+      "name": "people",
+      "categories": ["Utility and tools"],
+      "description": "Indicates users",
+      "keywords": ["users", "shared", "audience"]
+    },
+    {
+      "name": "performance-plus",
+      "categories": ["Utilities and tools"],
+      "description": "Logo for the Performance Plus product",
+      "keywords": ["sparkles", "circle"]
+    },
+    {
+      "name": "person",
+      "categories": ["Utility and tools"],
+      "description": "Indicates profile or a person",
+      "keywords": ["user", "avatar", "profile", "audience"]
+    },
+    {
+      "name": "person-add",
+      "categories": ["Add"],
+      "description": "Indicates the ability to add a new person/collaborator",
+      "keywords": ["plus person", "collaborator", "create", "new", "share"]
+    },
+    {
+      "name": "phone",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a phone service or number",
+      "keywords": ["call"]
+    },
+    {
+      "name": "pin",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to save Pins",
+      "keywords": []
+    },
+    {
+      "name": "pin-hide",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to hide a pin",
+      "keywords": []
+    },
+    {
+      "name": "pincode",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to scan and open a Pincode.",
+      "keywords": ["scan", "code"]
+    },
+    {
+      "name": "pinterest",
+      "categories": ["Social", "Utility and tools"],
+      "description": "Indicates the Pinterest logo",
+      "keywords": ["logo"]
+    },
+    {
+      "name": "play",
+      "categories": ["Media controls"],
+      "description": "Indicates the ability to play a video",
+      "keywords": ["start"]
+    },
+    {
+      "name": "protect",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the data or content is protected, or privacy",
+      "keywords": ["shield", "safe"]
+    },
+    {
+      "name": "publish",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to move Pins within sections/boards",
+      "keywords": ["move", "reorganize"]
+    },
+    {
+      "name": "qr-code",
+      "categories": ["Technology"],
+      "description": "Indicates a scannable qr code",
+      "keywords": ["authentication", "quick", "response", "barcode"]
+    },
+    {
+      "name": "question-mark",
+      "categories": ["Utility and tools"],
+      "description": "Indicates help is available",
+      "keywords": ["help", "support"]
+    },
+    {
+      "name": "quote",
+      "categories": ["Formatting"],
+      "description": "Indicates the ability to add a quotation style",
+      "keywords": ["quotation", "mark", "markdown"]
+    },
+    {
+      "name": "reddit",
+      "categories": ["Brand"],
+      "description": "Indicates Reddit service or feature.",
+      "keywords": ["social", "media"]
+    },
+    {
+      "name": "refresh",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to refresh content",
+      "keywords": ["reload", "restart"]
+    },
+    {
+      "name": "remove",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to remove an item",
+      "keywords": ["delete"]
+    },
+    {
+      "name": "reorder-images",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to reorder images",
+      "keywords": ["reorganize"]
+    },
+    {
+      "name": "replace",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to replace an item, usually an image",
+      "keywords": ["change", "swap"]
+    },
+    {
+      "name": "report",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to report an inappropriate content",
+      "keywords": ["block", "disclose"]
+    },
+    {
+      "name": "rewind",
+      "categories": ["Media controls"],
+      "description": "Indicates the ability to rewind a video content",
+      "keywords": ["backwards", "beginning"]
+    },
+    {
+      "name": "ribbon",
+      "categories": ["Reactions and ratings"],
+      "description": "Indicates an award or achievement",
+      "keywords": [
+        "medal",
+        "award",
+        "winning",
+        "achievement",
+        "victory",
+        "competition"
+      ]
+    },
+    {
+      "name": "rocketship",
+      "categories": ["Technology"],
+      "description": "Indicates launch",
+      "keywords": ["deploying", "launch", "space", "spaceship"]
+    },
+    {
+      "name": "rotate",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to rotate an element",
+      "keywords": ["turn", "orientation"]
+    },
+    {
+      "name": "save-outline",
+      "categories": ["Toggle"],
+      "description": "Indicates the ability to save a pin or video ",
+      "keywords": ["favorite", "library", "bookmark"]
+    },
+    {
+      "name": "saved",
+      "categories": ["Toggle"],
+      "description": "Indicates a pin or video is saved",
+      "keywords": ["favorite", "library", "bookmark"]
+    },
+    {
+      "name": "scale",
+      "categories": ["Arrows", "Utility and tools"],
+      "description": "Indicates the ability to scale an image",
+      "keywords": ["enlarge", "amplify", "grow", "full size"]
+    },
+    {
+      "name": "scissors",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to select and cut part of an image to create a collage",
+      "keywords": ["collage", "cut", "edit"]
+    },
+    {
+      "name": "search",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to reorder images",
+      "keywords": ["find", "magnifying glass"]
+    },
+    {
+      "name": "search-by-image",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a visual search feature",
+      "keywords": ["search", "visual", "camera"]
+    },
+    {
+      "name": "security",
+      "categories": ["Utility and tools"],
+      "description": "Indicates security standards",
+      "keywords": ["shield", "safe", "secure"]
+    },
+    {
+      "name": "send",
+      "categories": ["Platform specific"],
+      "description": "Indicates the ability to send a message",
+      "keywords": ["direct", "paper airplane", "share"]
+    },
+    {
+      "name": "service-dropbox",
+      "categories": [],
+      "description": "Description pending",
+      "keywords": []
+    },
+    {
+      "name": "service-etsy",
+      "categories": [],
+      "description": "Description pending",
+      "keywords": []
+    },
+    {
+      "name": "service-messenger",
+      "categories": [],
+      "description": "Description pending",
+      "keywords": []
+    },
+    {
+      "name": "service-outlook",
+      "categories": [],
+      "description": "Description pending",
+      "keywords": []
+    },
+    {
+      "name": "service-yahoo",
+      "categories": [],
+      "description": "Description pending",
+      "keywords": []
+    },
+    {
+      "name": "service-youtube",
+      "categories": [],
+      "description": "Description pending",
+      "keywords": []
+    },
+    {
+      "name": "share",
+      "categories": ["Platform specific"],
+      "description": "On iOS, indicates the ability to share an element",
+      "keywords": ["send"]
+    },
+    {
+      "name": "shopping-bag",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a shopping bag on shopping experience",
+      "keywords": ["cart", "buying"]
+    },
+    {
+      "name": "shopping-bag-fill",
+      "categories": ["Commerce"],
+      "description": "Indicates a shopping bag on shopping experience.",
+      "keywords": ["cart", "buying"]
+    },
+    {
+      "name": "shrink",
+      "categories": [],
+      "description": "Description pending",
+      "keywords": []
+    },
+    {
+      "name": "skintone",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to select skintones",
+      "keywords": []
+    },
+    {
+      "name": "skype",
+      "categories": ["Brand"],
+      "description": "Indicates Skype service or feature.",
+      "keywords": ["message"]
+    },
+    {
+      "name": "smiley",
+      "categories": ["Reactions and ratings"],
+      "description": "Indicates a mild happy reaction",
+      "keywords": ["happy"]
+    },
+    {
+      "name": "smiley-outline",
+      "categories": ["Reactions and ratings"],
+      "description": "Indicates an unselected mild happy reaction",
+      "keywords": ["happy"]
+    },
+    {
+      "name": "snapchat",
+      "categories": ["Brand"],
+      "description": "Indicates SnapChat service or feature.",
+      "keywords": ["social", "media"]
+    },
+    {
+      "name": "sort-ascending",
+      "categories": ["Arrows"],
+      "description": "Indicates the ability to sort a list in an ascending format",
+      "keywords": ["arrow", "order"]
+    },
+    {
+      "name": "sort-descending",
+      "categories": ["Arrows"],
+      "description": "Indicates the ability to sort a list in a descending format",
+      "keywords": ["arrow", "order"]
+    },
+    {
+      "name": "sound",
+      "categories": ["Media controls", "Toggle"],
+      "description": "Indicates the ability to turn the audio on",
+      "keywords": ["audio", "volume"]
+    },
+    {
+      "name": "sparkle",
+      "categories": ["Utility and tools"],
+      "description": "Indicates more ideas and recommendations",
+      "keywords": ["shine", "recommendation", "idea"]
+    },
+    {
+      "name": "speech",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to comment",
+      "keywords": ["chat", "message", "comment", "bubble"]
+    },
+    {
+      "name": "speech-ellipsis",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the messages inbox",
+      "keywords": ["chat", "message", "inbox", "bubble"]
+    },
+    {
+      "name": "speech-heart",
+      "categories": ["Utility and tools"],
+      "description": "Description pending",
+      "keywords": ["chat", "message", "comment", "bubble"]
+    },
+    {
+      "name": "speech-outline",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to comment. Use for the unselected state or when grouped with other outlined icons.",
+      "keywords": ["chat", "message", "comment", "bubble"]
+    },
+    {
+      "name": "spread",
+      "categories": [],
+      "description": "Description pending",
+      "keywords": []
+    },
+    {
+      "name": "square-plus",
+      "categories": ["navigation"],
+      "description": "Indicates the ability to create or add content.",
+      "keywords": ["add", "create", "new"]
+    },
+    {
+      "name": "square-plus-fill",
+      "categories": ["navigation"],
+      "description": "Indicates the ability to create or add content.",
+      "keywords": ["add", "create", "new"]
+    },
+    {
+      "name": "star",
+      "categories": ["Reactions and ratings"],
+      "description": "Indicates that something has been added as a favorite, or to represent a review rating",
+      "keywords": ["favorite", "rating", "review"]
+    },
+    {
+      "name": "star-half",
+      "categories": ["Reactions and ratings"],
+      "description": "Indicates a half-star review rating",
+      "keywords": ["rating", "review"]
+    },
+    {
+      "name": "star-outline",
+      "categories": ["Reactions and ratings"],
+      "description": "Indicates the ability to add to favorites",
+      "keywords": ["favorite", "rating"]
+    },
+    {
+      "name": "sticker",
+      "categories": ["Reactions and ratings", "Utility and tools"],
+      "description": "Indicates the ability to add a sticker to a Pin or a comment",
+      "keywords": ["reaction", "comment"]
+    },
+    {
+      "name": "story-pin",
+      "categories": ["Utility and tools"],
+      "description": "Indicates a Story Pin",
+      "keywords": []
+    },
+    {
+      "name": "sun",
+      "categories": ["Toggle"],
+      "description": "Indicates light mode",
+      "keywords": ["light mode"]
+    },
+    {
+      "name": "switch-account",
+      "categories": ["Arrows"],
+      "description": "Indicates the ability to reorder pages",
+      "keywords": ["reorder", "arrows"]
+    },
+    {
+      "name": "table",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates tabular representation of data",
+      "keywords": ["table", "tabular", "data", "cell", "grid", "row", "column"]
+    },
+    {
+      "name": "tag",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to view products and shop",
+      "keywords": ["label", "shopping"]
+    },
+    {
+      "name": "tag-star",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to view products which have a deal associated with them.",
+      "keywords": ["label", "shopping", "deal", "indicator"]
+    },
+    {
+      "name": "target",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates the target audience",
+      "keywords": [
+        "audience",
+        "audience tracking",
+        "bullseye",
+        "demographics",
+        "engagement",
+        "focus"
+      ]
+    },
+    {
+      "name": "telegram",
+      "categories": ["Brand"],
+      "description": "Indicates Telegram service or feature.",
+      "keywords": ["message"]
+    },
+    {
+      "name": "terms",
+      "categories": ["Utility and tools"],
+      "description": "Indicates terms and services",
+      "keywords": ["list", "bullet points"]
+    },
+    {
+      "name": "text-align-center",
+      "categories": ["Text"],
+      "description": "Indicates a text centered-alignment",
+      "keywords": ["formatting"]
+    },
+    {
+      "name": "text-align-left",
+      "categories": ["Text"],
+      "description": "Indicates a text left-alignment",
+      "keywords": ["formatting"]
+    },
+    {
+      "name": "text-align-right",
+      "categories": ["Text"],
+      "description": "Indicates a text right-alignment",
+      "keywords": ["formatting"]
+    },
+    {
+      "name": "text-all-caps",
+      "categories": ["Text"],
+      "description": "Indicates all caps text format",
+      "keywords": ["uppercase"]
+    },
+    {
+      "name": "text-extra-small",
+      "categories": ["Text"],
+      "description": "Indicates an extra-small text size",
+      "keywords": ["font size", "typography"]
+    },
+    {
+      "name": "text-invert",
+      "categories": ["Text"],
+      "description": "Indicates ability to invert text color",
+      "keywords": ["type", "flip", "opposite", "change", "inverse"]
+    },
+    {
+      "name": "text-large",
+      "categories": ["Text"],
+      "description": "Indicates a large text size",
+      "keywords": ["font size", "typography"]
+    },
+    {
+      "name": "text-line-height",
+      "categories": ["Text"],
+      "description": "Indicates the ability to change a text line-height",
+      "keywords": ["typography"]
+    },
+    {
+      "name": "text-medium",
+      "categories": ["Text"],
+      "description": "Indicates a medium text size",
+      "keywords": ["font size", "typography"]
+    },
+    {
+      "name": "text-sentence-case",
+      "categories": ["Text"],
+      "description": "Indicates text sentence case format",
+      "keywords": ["mixed case"]
+    },
+    {
+      "name": "text-size",
+      "categories": ["Text"],
+      "description": "Indicates the ability to change the text size settings",
+      "keywords": ["font size", "typography"]
+    },
+    {
+      "name": "text-small",
+      "categories": ["Text"],
+      "description": "Indicates a small text size",
+      "keywords": ["font size", "typography"]
+    },
+    {
+      "name": "text-spacing",
+      "categories": ["Text"],
+      "description": "Indicates the ability to change text spacing between characters",
+      "keywords": ["kerning"]
+    },
+    {
+      "name": "threads",
+      "categories": ["Logo"],
+      "description": "Indicates branding for the threads app",
+      "keywords": ["ig", "instagram"]
+    },
+    {
+      "name": "thumbs-down",
+      "categories": ["Reactions and ratings"],
+      "description": "Indicates a dislike reaction",
+      "keywords": ["dislike", "no"]
+    },
+    {
+      "name": "thumbs-up",
+      "categories": ["Reactions and ratings"],
+      "description": "Indicates a like reaction",
+      "keywords": ["like", "yes", "approve"]
+    },
+    {
+      "name": "tint",
+      "categories": ["Creation"],
+      "description": "Indicates an ability to change the tint of an image.",
+      "keywords": ["color", "hue", "green", "magenta"]
+    },
+    {
+      "name": "trash-can",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to delete items",
+      "keywords": ["delete", "remove", "bin"]
+    },
+    {
+      "name": "trending",
+      "categories": ["Ads and measurement"],
+      "description": "Indicates trends",
+      "keywords": ["arrow up"]
+    },
+    {
+      "name": "underline",
+      "categories": ["Formatting"],
+      "description": "Indicates the ability to underline text",
+      "keywords": ["font", "markdown"]
+    },
+    {
+      "name": "upload-feed",
+      "categories": ["Utility and tools", "Ads and measurement"],
+      "description": "Indicates the ability to upload a feed, usually for ad conversions",
+      "keywords": ["conversions", "api"]
+    },
+    {
+      "name": "viber",
+      "categories": ["Brand"],
+      "description": "Indicates Viber service or feature.",
+      "keywords": ["message"]
+    },
+    {
+      "name": "vibrance",
+      "categories": ["Creation"],
+      "description": "Indicates an ability to change the vibrance of an image.",
+      "keywords": ["Keywords: bright", "intensity", "intense"]
+    },
+    {
+      "name": "video-advance-10-seconds",
+      "categories": ["Media controls"],
+      "description": "Indicates the ability to advance videos by 10 seconds",
+      "keywords": ["speed up", "forward", "skip"]
+    },
+    {
+      "name": "video-camera",
+      "categories": ["Media controls"],
+      "description": "Indicates the ability to use a video camera",
+      "keywords": ["record"]
+    },
+    {
+      "name": "video-rewind-10-seconds",
+      "categories": ["Media controls"],
+      "description": "Indicates the ability to rewind videos by 10 seconds",
+      "keywords": ["back", "repeat"]
+    },
+    {
+      "name": "view-type-default",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to change the view type to default",
+      "keywords": ["square", "grid"]
+    },
+    {
+      "name": "view-type-default-fill",
+      "categories": ["Toggle"],
+      "description": "Indicates the ability to change the view type to default.",
+      "keywords": ["square", "grid", "categories"]
+    },
+    {
+      "name": "view-type-dense",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to change the view type to dense",
+      "keywords": ["square", "grid"]
+    },
+    {
+      "name": "view-type-list",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to change the view type to a list",
+      "keywords": []
+    },
+    {
+      "name": "view-type-sparse",
+      "categories": ["Utility and tools"],
+      "description": "Indicates the ability to change the view type to space",
+      "keywords": ["square"]
+    },
+    {
+      "name": "visit",
+      "categories": ["Utility and tools"],
+      "description": "Indicates an external link or domain",
+      "keywords": ["external", "link", "new window"]
+    },
+    {
+      "name": "wechat",
+      "categories": ["Brand"],
+      "description": "Indicates WeChat service or feature.",
+      "keywords": ["message"]
+    },
+    {
+      "name": "whats-app",
+      "categories": ["Social"],
+      "description": "Indicates the WhatsApp service",
+      "keywords": ["social", "chat", "service", "share"]
+    },
+    {
+      "name": "wifi-no",
+      "categories": ["Utility and tools"],
+      "description": "Indicates there is no wifi available",
+      "keywords": ["connection", "internet", "offline", "signal"]
+    },
+    {
+      "name": "workflow-status-all",
+      "categories": ["Status"],
+      "description": "Indicates the workflow status all",
+      "keywords": []
+    },
+    {
+      "name": "workflow-status-canceled",
+      "categories": ["Status"],
+      "description": "Indicates an element's state as canceled",
+      "keywords": ["abandon"]
+    },
+    {
+      "name": "workflow-status-halted",
+      "categories": ["Status"],
+      "description": "Indicates an element's state as halted",
+      "keywords": ["paused"]
+    },
+    {
+      "name": "workflow-status-in-progress",
+      "categories": ["Status"],
+      "description": "Indicates an element's state as in progress",
+      "keywords": ["processing"]
+    },
+    {
+      "name": "workflow-status-ok",
+      "categories": ["Status"],
+      "description": "Indicates an element's state as completed or a success",
+      "keywords": ["completed", "done", "success"]
+    },
+    {
+      "name": "workflow-status-problem",
+      "categories": ["Status"],
+      "description": "Indicates an element's state as a problem or to convey an error",
+      "keywords": ["error", "alert"]
+    },
+    {
+      "name": "workflow-status-queued",
+      "categories": ["Status", "Time"],
+      "description": "Indicates an element's state as something waiting in the queue",
+      "keywords": ["queue", "waiting", "hourglass", "time"]
+    },
+    {
+      "name": "workflow-status-unstarted",
+      "categories": ["Status"],
+      "description": "Indicates an element's state as unstarted",
+      "keywords": []
+    },
+    {
+      "name": "x-social",
+      "categories": ["Social"],
+      "description": "Indicates an X service",
+      "keywords": ["Twitter"]
+    }
+  ]
+}

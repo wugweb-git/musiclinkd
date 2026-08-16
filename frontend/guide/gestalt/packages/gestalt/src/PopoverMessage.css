@@ -1,0 +1,4 @@
+.textColorOverride * {
+  /* stylelint-disable-next-line declaration-no-important */
+  color: var(--color-text-inverse) !important;
+}

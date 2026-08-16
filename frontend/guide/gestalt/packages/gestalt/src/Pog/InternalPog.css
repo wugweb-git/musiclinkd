@@ -1,0 +1,261 @@
+.pog {
+  composes: flex from "../Layout.css";
+  composes: xsItemsCenter from "../Layout.css";
+  composes: justifyCenter from "../Layout.css";
+
+  /* This fixes a mobile Safari bug (device only) that makes the icon disappear when rotated for RTL support
+  https://stackoverflow.com/a/28617071/5253702 */
+  perspective: 1px;
+}
+
+.rounding0 {
+  border-radius: var(--rounding-0);
+}
+
+.rounding100 {
+  border-radius: var(--rounding-100);
+}
+
+.rounding200 {
+  border-radius: var(--rounding-200);
+}
+
+.rounding300 {
+  border-radius: var(--rounding-300);
+}
+
+.rounding400 {
+  border-radius: var(--rounding-400);
+}
+
+.rounding500 {
+  border-radius: var(--rounding-500);
+}
+
+.roundingCircle {
+  border-radius: var(--rounding-circle);
+}
+
+/* TOKENIZED */
+
+/* STATES */
+
+.disabledSelected {
+  background-color: var(--color-background-button-selected-disabled);
+}
+
+.selected {
+  background-color: var(--color-background-button-selected-default);
+}
+
+.focused {
+  composes: accessibilityOutlineFocus from "./Focus.css";
+}
+
+.vrFocused {
+  border: 2px solid;
+  border-color: var(--sema-color-border-focus-inner-default);
+  box-sizing: border-box;
+  outline: 2px solid var(--sema-color-border-focus-outer-default);
+  outline-offset: 0;
+  padding: var(--space-0) var(--space-0);
+}
+
+.vrFocused.lightOuterFocus {
+  outline: 2px solid var(--sema-color-border-focus-outer-light);
+}
+
+.vrFocused.inverseOuterFocus {
+  outline: 2px solid var(--sema-color-border-focus-outer-inverse);
+}
+
+.vrFocused.transparentInnerFocus {
+  border-color: transparent;
+}
+
+.vrFocused.darkInnerFocus {
+  border: 2px solid var(--sema-color-border-focus-inner-dark);
+}
+
+/* COLORS */
+
+.semitransparent svg {
+  opacity: 0.4;
+}
+
+.red {
+  background-color: var(--color-background-button-primary-default);
+}
+
+.red.hovered,
+.red.focused {
+  background-color: var(--color-background-button-primary-hover);
+}
+
+.red.active {
+  background-color: var(--color-background-button-primary-active);
+}
+
+.red.disabled {
+  background-color: var(--color-background-button-primary-disabled);
+}
+
+.lightGray {
+  background-color: var(--color-background-button-secondary-default);
+}
+
+.lightGray.hovered,
+.lightGray.focused {
+  background-color: var(--color-background-button-secondary-hover);
+}
+
+.lightGray.active {
+  background-color: var(--color-background-button-secondary-active);
+}
+
+.lightGray.disabled {
+  background-color: var(--color-background-button-secondary-disabled);
+}
+
+.transparent {
+  background-color: var(--color-background-button-tertiary-default);
+}
+
+.transparent.hovered,
+.transparent.focused {
+  background-color: var(--color-background-button-tertiary-hover);
+}
+
+.transparent.active {
+  background-color: var(--color-background-button-tertiary-active);
+}
+
+.transparent.disabled {
+  background-color: var(--color-background-button-tertiary-disabled);
+}
+
+.transparentDarkBackground {
+  background-color: var(
+    --color-background-button-transparentdarkbackground-default
+  );
+}
+
+.transparentDarkBackground.hovered,
+.transparentDarkBackground.focused {
+  background-color: var(
+    --color-background-button-transparentdarkbackground-hover
+  );
+}
+
+.transparentDarkBackground.active {
+  background-color: var(
+    --color-background-button-transparentdarkbackground-active
+  );
+}
+
+.transparentDarkBackground.disabled {
+  background-color: var(
+    --color-background-button-transparentdarkbackground-disabled
+  );
+}
+
+.washLight {
+  background-color: var(--color-background-button-semitransparentwhite-default);
+}
+
+.washLight.hovered,
+.washLight.focused {
+  background-color: var(--color-background-button-semitransparentwhite-hover);
+}
+
+.washLight.active {
+  background-color: var(--color-background-button-semitransparentwhite-active);
+}
+
+.washLight.disabled {
+  background-color: var(
+    --color-background-button-semitransparentwhite-disabled
+  );
+}
+
+.white {
+  background-color: var(--color-background-button-white-default);
+}
+
+.white.hovered,
+.white.focused {
+  background-color: var(--color-background-button-white-hover);
+}
+
+.white.active {
+  background-color: var(--color-background-button-white-active);
+}
+
+.white.disabled {
+  background-color: var(--color-background-button-white-disabled);
+}
+
+.transparentDarkGray {
+  background-color: var(
+    --color-background-iconbutton-semitransparentdark-default
+  );
+}
+
+.transparentDarkGray.hovered,
+.transparentDarkGray.focused {
+  background-color: var(
+    --color-background-iconbutton-semitransparentdark-hover
+  );
+}
+
+.transparentDarkGray.active {
+  background-color: var(
+    --color-background-iconbutton-semitransparentdark-active
+  );
+}
+
+.transparentDarkGray.disabled {
+  background-color: var(
+    --color-background-iconbutton-semitransparentdark-disabled-default
+  );
+}
+
+.transparentDarkGray.disabled.selected {
+  background-color: var(
+    --color-background-iconbutton-semitransparentdark-disabled-selected
+  );
+}
+
+.gray {
+  background-color: var(--color-background-button-gray-default);
+}
+
+.gray.hovered,
+.gray.focused {
+  background-color: var(--color-background-button-gray-hover);
+}
+
+.gray.active {
+  background-color: var(--color-background-button-gray-active);
+}
+
+.gray.disabled {
+  background-color: var(--color-background-button-gray-disabled);
+}
+
+.elevation {
+  background-color: var(--color-background-button-elevation-default);
+}
+
+.elevation.hovered,
+.elevation.focused {
+  background-color: var(--color-background-button-elevation-hover);
+}
+
+.elevation.active {
+  background-color: var(--color-background-button-elevation-active);
+}
+
+.elevation.disabled {
+  background-color: var(--color-background-button-elevation-disabled);
+}

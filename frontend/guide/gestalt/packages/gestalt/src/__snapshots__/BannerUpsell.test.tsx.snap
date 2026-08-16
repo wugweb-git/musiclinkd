@@ -1,0 +1,794 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BannerUpsell /> Basic BannerUpsell 1`] = `
+<div
+  className="box default paddingX1200 paddingY600 relative rounding4 shadow smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter smDirectionRow smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottomAuto marginEnd0 marginStart0 marginTopAuto smDisplayBlock smMarginEnd600 smMarginStart0 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+      >
+        <div
+          className="box marginBottom200"
+        >
+          <div
+            className="default alignStart breakWord Text fontSize400 fontWeightSemiBold"
+          >
+            title
+          </div>
+        </div>
+        <div
+          className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+        >
+          Insert a clever upsell message here
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<BannerUpsell /> message + title + dismissButton + image + form 1`] = `
+<div
+  className="box default paddingX1200 paddingY600 relative rounding4 shadow smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box flexGrow justifyCenter smDirectionRow smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box flexNone marginBottom400 smMarginBottom0"
+        style={
+          Object {
+            "width": undefined,
+          }
+        }
+      >
+        <div
+          className="Mask rounding0 willChangeTransform"
+          style={
+            Object {
+              "height": undefined,
+              "width": undefined,
+            }
+          }
+        >
+          <svg
+            aria-hidden={null}
+            aria-label="Pin"
+            className="default icon iconBlock"
+            height={32}
+            role="img"
+            viewBox="0 0 24 24"
+            width={32}
+          >
+            <path
+              d="test-file-stub"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="box flexGrow marginBottomAuto marginEnd0 marginStart0 marginTopAuto smDisplayBlock smMarginEnd600 smMarginStart600 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+      >
+        <div
+          className="box marginBottom200"
+        >
+          <div
+            className="default alignStart breakWord Text fontSize400 fontWeightSemiBold"
+          >
+            A Title
+          </div>
+        </div>
+        <div
+          className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+        >
+          Insert a clever upsell message here
+        </div>
+        <div
+          className="box flexGrow justifyEnd smDisplayFlex smMarginEnd400 smPaddingY300"
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <form
+            onSubmit={[Function]}
+            style={
+              Object {
+                "width": "100%",
+              }
+            }
+          >
+            <div
+              className="Flex rowGap200 columnGap0 justifyEnd xsDirectionRow"
+            >
+              <div
+                className="FlexItem flexGrow"
+              >
+                <div
+                  className="box marginBottom0 smMarginBottom200"
+                >
+                  <span>
+                    <div
+                      className="box relative"
+                    >
+                      <input
+                        aria-invalid="false"
+                        className="textField base enabled normal md medium md truncate"
+                        disabled={false}
+                        id="name"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onClick={[Function]}
+                        onFocus={[Function]}
+                        onKeyDown={[Function]}
+                        placeholder="Name"
+                        readOnly={false}
+                        type="text"
+                      />
+                    </div>
+                  </span>
+                </div>
+              </div>
+              <div
+                className="FlexItem flexNone"
+              >
+                <button
+                  aria-label="Submit button"
+                  className="button inline accessibilityOutline parentButton"
+                  disabled={false}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchCancel={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  tabIndex={0}
+                  type="submit"
+                >
+                  <div
+                    className="button inline accessibilityOutline tapTransition md red enabled childrenDiv"
+                  >
+                    <div
+                      className="inverse alignCenter Text fontSize300 fontWeightSemiBold"
+                    >
+                      Submit
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="rtlPos"
+  >
+    <button
+      aria-label="Dismiss banner"
+      className="parentButton"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseDown={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchCancel={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <div
+        className="button tapTransition enabled"
+      >
+        <div
+          className="pog roundingCircle transparent"
+          style={
+            Object {
+              "height": 48,
+              "width": 48,
+            }
+          }
+        >
+          <svg
+            aria-hidden={true}
+            aria-label=""
+            className="default icon iconBlock"
+            height={16}
+            role="img"
+            viewBox="0 0 24 24"
+            width={16}
+          >
+            <path
+              d="test-file-stub"
+            />
+          </svg>
+        </div>
+      </div>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`<BannerUpsell /> message + title + primaryAction + dismissButton + image 1`] = `
+<div
+  className="box default paddingX1200 paddingY600 relative rounding4 shadow smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter marginBottom400 smDirectionRow smMarginBottom0 smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box flexNone marginBottom400 smMarginBottom0"
+        style={
+          Object {
+            "width": undefined,
+          }
+        }
+      >
+        <div
+          className="Mask rounding0 willChangeTransform"
+          style={
+            Object {
+              "height": undefined,
+              "width": undefined,
+            }
+          }
+        >
+          <svg
+            aria-hidden={null}
+            aria-label="Pin"
+            className="default icon iconBlock"
+            height={32}
+            role="img"
+            viewBox="0 0 24 24"
+            width={32}
+          >
+            <path
+              d="test-file-stub"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="box marginBottomAuto marginEnd0 marginStart0 marginTopAuto smDisplayBlock smMarginEnd600 smMarginStart600 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+      >
+        <div
+          className="box marginBottom200"
+        >
+          <div
+            className="default alignStart breakWord Text fontSize400 fontWeightSemiBold"
+          >
+            A Title
+          </div>
+        </div>
+        <div
+          className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+        >
+          Insert a clever upsell message here
+        </div>
+      </div>
+    </div>
+    <div
+      className="box marginStartAuto smDisplayFlex smMarginEnd400 smPaddingY300"
+    >
+      <div
+        className="box justifyCenter paddingX100 smDisplayFlex smMarginBottomAuto smMarginTopAuto xsDisplayBlock xsItemsCenter"
+      >
+        <a
+          aria-label=""
+          className="noOutline inheritColor noUnderline tapTransition pill accessibilityOutline flex justifyCenter xsItemsCenter button lg red"
+          href="pinterest.com"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseDown={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          rel=""
+          tabIndex={0}
+        >
+          <div
+            className="inverse alignCenter Text fontSize300 fontWeightSemiBold"
+          >
+            Visit Pinterest
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    className="rtlPos"
+  >
+    <button
+      aria-label="Dismiss banner"
+      className="parentButton"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseDown={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchCancel={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <div
+        className="button tapTransition enabled"
+      >
+        <div
+          className="pog roundingCircle transparent"
+          style={
+            Object {
+              "height": 48,
+              "width": 48,
+            }
+          }
+        >
+          <svg
+            aria-hidden={true}
+            aria-label=""
+            className="default icon iconBlock"
+            height={16}
+            role="img"
+            viewBox="0 0 24 24"
+            width={16}
+          >
+            <path
+              d="test-file-stub"
+            />
+          </svg>
+        </div>
+      </div>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`<BannerUpsell /> message + title + primaryAction + dismissButton 1`] = `
+<div
+  className="box default paddingX1200 paddingY600 relative rounding4 shadow smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter marginBottom400 smDirectionRow smMarginBottom0 smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottomAuto marginEnd0 marginStart0 marginTopAuto smDisplayBlock smMarginEnd600 smMarginStart0 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+      >
+        <div
+          className="box marginBottom200"
+        >
+          <div
+            className="default alignStart breakWord Text fontSize400 fontWeightSemiBold"
+          >
+            A Title
+          </div>
+        </div>
+        <div
+          className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+        >
+          Insert a clever upsell message here
+        </div>
+      </div>
+    </div>
+    <div
+      className="box marginStartAuto smDisplayFlex smMarginEnd400 smPaddingY300"
+    >
+      <div
+        className="box justifyCenter paddingX100 smDisplayFlex smMarginBottomAuto smMarginTopAuto xsDisplayBlock xsItemsCenter"
+      >
+        <a
+          aria-label=""
+          className="noOutline inheritColor noUnderline tapTransition pill accessibilityOutline flex justifyCenter xsItemsCenter button lg red"
+          href="pinterest.com"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseDown={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          rel=""
+          tabIndex={0}
+        >
+          <div
+            className="inverse alignCenter Text fontSize300 fontWeightSemiBold"
+          >
+            Visit Pinterest
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    className="rtlPos"
+  >
+    <button
+      aria-label="Dismiss banner"
+      className="parentButton"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseDown={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchCancel={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <div
+        className="button tapTransition enabled"
+      >
+        <div
+          className="pog roundingCircle transparent"
+          style={
+            Object {
+              "height": 48,
+              "width": 48,
+            }
+          }
+        >
+          <svg
+            aria-hidden={true}
+            aria-label=""
+            className="default icon iconBlock"
+            height={16}
+            role="img"
+            viewBox="0 0 24 24"
+            width={16}
+          >
+            <path
+              d="test-file-stub"
+            />
+          </svg>
+        </div>
+      </div>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`<BannerUpsell /> message + title + primaryAction + secondaryAction 1`] = `
+<div
+  className="box default paddingX1200 paddingY600 relative rounding4 shadow smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter marginBottom400 smDirectionRow smMarginBottom0 smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottomAuto marginEnd0 marginStart0 marginTopAuto smDisplayBlock smMarginEnd600 smMarginStart0 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+      >
+        <div
+          className="box marginBottom200"
+        >
+          <div
+            className="default alignStart breakWord Text fontSize400 fontWeightSemiBold"
+          >
+            A Title
+          </div>
+        </div>
+        <div
+          className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+        >
+          Insert a clever upsell message here
+        </div>
+      </div>
+    </div>
+    <div
+      className="box marginStartAuto smDisplayFlex smMarginEnd400 smPaddingY300"
+    >
+      <div
+        className="box justifyCenter paddingX100 smDisplayFlex smMarginBottomAuto smMarginTopAuto xsDisplayBlock xsItemsCenter"
+      >
+        <a
+          aria-label="Learn more: upsell messages"
+          className="noOutline inheritColor noUnderline tapTransition pill accessibilityOutline flex justifyCenter xsItemsCenter button lg gray"
+          href="pinterest.com/help"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseDown={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          rel=""
+          tabIndex={0}
+        >
+          <div
+            className="default alignCenter Text fontSize300 fontWeightSemiBold"
+          >
+            Learn more
+          </div>
+        </a>
+      </div>
+      <div
+        className="box justifyCenter paddingX100 smDisplayFlex smMarginBottomAuto smMarginTopAuto xsDisplayBlock xsItemsCenter"
+      >
+        <a
+          aria-label=""
+          className="noOutline inheritColor noUnderline tapTransition pill accessibilityOutline flex justifyCenter xsItemsCenter button lg red"
+          href="pinterest.com"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseDown={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          rel=""
+          tabIndex={0}
+        >
+          <div
+            className="inverse alignCenter Text fontSize300 fontWeightSemiBold"
+          >
+            Visit Pinterest
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<BannerUpsell /> message + title + primaryAction with href 1`] = `
+<div
+  className="box default paddingX1200 paddingY600 relative rounding4 shadow smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter marginBottom400 smDirectionRow smMarginBottom0 smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottomAuto marginEnd0 marginStart0 marginTopAuto smDisplayBlock smMarginEnd600 smMarginStart0 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+      >
+        <div
+          className="box marginBottom200"
+        >
+          <div
+            className="default alignStart breakWord Text fontSize400 fontWeightSemiBold"
+          >
+            A Title
+          </div>
+        </div>
+        <div
+          className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+        >
+          Insert a clever upsell message here
+        </div>
+      </div>
+    </div>
+    <div
+      className="box marginStartAuto smDisplayFlex smMarginEnd400 smPaddingY300"
+    >
+      <div
+        className="box justifyCenter paddingX100 smDisplayFlex smMarginBottomAuto smMarginTopAuto xsDisplayBlock xsItemsCenter"
+      >
+        <a
+          aria-label=""
+          className="noOutline inheritColor noUnderline tapTransition pill accessibilityOutline flex justifyCenter xsItemsCenter button lg red"
+          href="pinterest.com"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseDown={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          rel=""
+          tabIndex={0}
+        >
+          <div
+            className="inverse alignCenter Text fontSize300 fontWeightSemiBold"
+          >
+            Visit Pinterest
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<BannerUpsell /> message + title + primaryAction without href 1`] = `
+<div
+  className="box default paddingX1200 paddingY600 relative rounding4 shadow smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter marginBottom400 smDirectionRow smMarginBottom0 smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottomAuto marginEnd0 marginStart0 marginTopAuto smDisplayBlock smMarginEnd600 smMarginStart0 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+      >
+        <div
+          className="box marginBottom200"
+        >
+          <div
+            className="default alignStart breakWord Text fontSize400 fontWeightSemiBold"
+          >
+            A Title
+          </div>
+        </div>
+        <div
+          className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+        >
+          Insert a clever upsell message here
+        </div>
+      </div>
+    </div>
+    <div
+      className="box marginStartAuto smDisplayFlex smMarginEnd400 smPaddingY300"
+    >
+      <div
+        className="box justifyCenter paddingX100 smDisplayFlex smMarginBottomAuto smMarginTopAuto xsDisplayBlock xsItemsCenter"
+      >
+        <button
+          aria-label=""
+          className="button block accessibilityOutline parentButton"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchCancel={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <div
+            className="button block accessibilityOutline tapTransition lg red enabled childrenDiv"
+          >
+            <div
+              className="inverse alignCenter Text fontSize300 fontWeightSemiBold"
+            >
+              Visit Pinterest
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<BannerUpsell /> message + title 1`] = `
+<div
+  className="box default paddingX1200 paddingY600 relative rounding4 shadow smDirectionRow smPaddingX800 smPaddingY800 xsDirectionColumn xsDisplayFlex"
+>
+  <div
+    className="box flexWrap smDisplayFlex smMarginBottomN300 smMarginTopN300"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="box justifyCenter smDirectionRow smPaddingY300 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+    >
+      <div
+        className="box marginBottomAuto marginEnd0 marginStart0 marginTopAuto smDisplayBlock smMarginEnd600 smMarginStart0 xsDirectionColumn xsDisplayFlex xsItemsCenter"
+      >
+        <div
+          className="box marginBottom200"
+        >
+          <div
+            className="default alignStart breakWord Text fontSize400 fontWeightSemiBold"
+          >
+            A Title
+          </div>
+        </div>
+        <div
+          className="default alignStart breakWord Text fontSize300 fontWeightNormal"
+        >
+          Insert a clever upsell message here
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

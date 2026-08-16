@@ -1,0 +1,28 @@
+node_modules/
+coverage/
+docs/.next/
+docs/build/
+docs/out/
+docs/docs-components/metadata.js
+*.log
+stats.html
+screenshots
+.DS_Store
+# We use yarn, not npm
+package-lock.json
+
+packages/gestalt/dist/*
+packages/gestalt-charts/dist/*
+packages/gestalt-datepicker/dist/*
+packages/eslint-plugin-gestalt/dist/*
+packages/gestalt-design-tokens/dist
+
+playwright/test-results
+
+.rollup.cache/
+
+# TypeScript build info file https://www.typescriptlang.org/tsconfig#tsBuildInfoFile
+*.tsbuildinfo
+
+# Local Netlify folder
+.netlify

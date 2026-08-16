@@ -1,0 +1,48 @@
+.fullHeight {
+  height: 100%;
+}
+
+.fullWidth {
+  composes: xsCol12 from "./Column.css";
+}
+
+.pointer {
+  composes: pointer from "./Cursor.css";
+}
+
+.zoomIn {
+  composes: zoomIn from "./Cursor.css";
+}
+
+.zoomOut {
+  composes: zoomOut from "./Cursor.css";
+}
+
+.copy {
+  composes: copy from "./Cursor.css";
+}
+
+.move {
+  composes: move from "./Cursor.css";
+}
+
+.noDrop {
+  composes: noDrop from "./Cursor.css";
+}
+
+.grab {
+  composes: grab from "./Cursor.css";
+}
+
+.grabbing {
+  composes: grabbing from "./Cursor.css";
+}
+
+.tapTransition {
+  transition: transform 85ms ease-out;
+}
+
+.tapCompress {
+  transform: scale(0.99);
+  transform-origin: center;
+}

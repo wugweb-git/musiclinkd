@@ -1,0 +1,11 @@
+.formLabel {
+  padding-bottom: var(--space-100);
+}
+
+.vrFormLabel {
+  padding-bottom: var(--space-300);
+}
+
+.formLabelLarge {
+  padding-bottom: var(--space-200);
+}

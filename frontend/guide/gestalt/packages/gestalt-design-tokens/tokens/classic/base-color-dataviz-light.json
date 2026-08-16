@@ -1,0 +1,42 @@
+{
+  "color": {
+    "data-visualization": {
+      "01": {
+        "value": "{color.blue.skycicle.800.value}"
+      },
+      "02": {
+        "value": "#11A69C"
+      },
+      "03": {
+        "value": "#924AF7"
+      },
+      "04": {
+        "value": "#D17711"
+      },
+      "05": {
+        "value": "#0081FE"
+      },
+      "06": {
+        "value": "#FF5383"
+      },
+      "07": {
+        "value": "#00AB55"
+      },
+      "08": {
+        "value": "{color.purple.mysticool.800.value}"
+      },
+      "09": {
+        "value": "#F2681F"
+      },
+      "10": {
+        "value": "{color.teal.spabattical.800.value}"
+      },
+      "11": {
+        "value": "{color.pink.flaminglow.500.value}"
+      },
+      "12": {
+        "value": "{color.orange.firetini.900.value}"
+      }
+    }
+  }
+}

@@ -1,0 +1,156 @@
+:root {
+  --g-switch-height: 24px;
+  --g-slider-height-on: 18px;
+  --g-slider-height-off: 16px;
+  --g-switch-width: 40px;
+  --g-switch-border: 1px;
+}
+
+.switch {
+  composes: block from "./Layout.css";
+  composes: borderBox from "./Layout.css";
+  composes: relative from "./Layout.css";
+  border-radius: calc(var(--g-switch-height) * 2);
+  border-style: solid;
+  border-width: var(--g-switch-border);
+  flex-shrink: 0;
+  height: var(--g-switch-height);
+  width: var(--g-switch-width);
+}
+
+.borderColorTransition {
+  transition: background-color 250ms cubic-bezier(0.25, 0.375, 0.1, 0.975),
+    border-color 250ms cubic-bezier(0.25, 0.375, 0.1, 0.975);
+}
+
+html[dir="rtl"] .switch {
+  transform: rotateY(180deg);
+}
+
+.enabledUnselected {
+  background-color: var(--color-background-switch-default-unselected);
+  border-color: var(--color-border-switch-default-unselected);
+}
+
+.enabledUnselected:hover {
+  background-color: var(--color-background-switch-hover-unselected);
+  border-color: var(--color-border-switch-hover-unselected);
+}
+
+.enabledUnselected:active {
+  background-color: var(--color-background-switch-pressed-unselected);
+  border-color: var(--color-border-switch-pressed-unselected);
+}
+
+.enabledSelected {
+  background-color: var(--color-background-switch-default-selected);
+  border-color: var(--color-border-switch-default-selected);
+}
+
+.enabledSelected:hover {
+  background-color: var(--color-background-switch-hover-selected);
+}
+
+.enabledSelected:active {
+  background-color: var(--color-background-switch-pressed-selected);
+}
+
+.focus {
+  border: 1px solid;
+  border-color: var(--color-border-switch-focus-inner);
+  outline: 2px solid var(--color-border-switch-focus-outer);
+  outline-offset: 0;
+  padding: var(--space-0) var(--space-100);
+}
+
+.disabledUnselected {
+  background-color: var(--color-background-switch-disabled-unselected);
+  border-color: var(--color-border-switch-disabled-unselected);
+}
+
+.disabledSelected {
+  background-color: var(--color-background-switch-disabled-selected);
+  border-color: var(--color-transparent);
+}
+
+.slider {
+  composes: borderBox absolute from "./Layout.css";
+  composes: circle from "./Borders.css";
+  background-color: var(--color-background-switch-default-unselected);
+  border-style: solid;
+  border-width: 1px;
+  height: var(--g-switch-height);
+  margin: -1px;
+  transition: left 0.2s ease;
+  width: var(--g-switch-height);
+}
+
+.sliderVr {
+  composes: borderBox absolute from "./Layout.css";
+  composes: circle from "./Borders.css";
+  left: 0;
+  transition-property: transform, width, height, background-color;
+}
+
+.sliderVrOn {
+  background-color: var(--sema-color-background-default);
+  height: var(--g-slider-height-on);
+  margin: 2px;
+  transform: translateX(16px);
+  transition-duration: var(--base-motion-duration-300),
+    var(--base-motion-duration-200);
+  transition-timing-function: var(--base-motion-easing-bounce),
+    var(--base-motion-easing-linear);
+  width: var(--g-slider-height-on);
+}
+
+.sliderVrOff {
+  background-color: var(--sema-color-background-inverse);
+  height: var(--g-slider-height-off);
+  margin: 3px;
+  transition-duration: var(--base-motion-duration-200);
+  transition-timing-function: var(--base-motion-easing-lateral),
+    var(--base-motion-easing-linear);
+  width: var(--g-slider-height-off);
+}
+
+.disabledSlider {
+  background-color: var(--color-background-switch-disabled-selected);
+}
+
+.sliderRight {
+  right: 0;
+}
+
+.sliderLeft {
+  left: 0;
+}
+
+.sliderDark {
+  composes: borderColorDarkGray from "./Borders.css";
+}
+
+.sliderLight {
+  composes: borderColorLightGray from "./Borders.css";
+}
+
+.checkbox {
+  composes: absolute from "./Layout.css";
+  composes: xsCol12 from "./Column.css";
+  composes: m0 from "./Whitespace.css";
+  composes: noBorder from "./Borders.css";
+  composes: p0 from "./Whitespace.css";
+  height: 100%;
+  opacity: var(--opacity-0);
+  z-index: 2;
+}
+
+.checkboxEnabled {
+  composes: pointer from "./Cursor.css";
+}
+
+@media (prefers-reduced-motion) {
+  .sliderVr {
+    transition: none;
+  }
+}

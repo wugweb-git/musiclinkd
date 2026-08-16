@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonLink renders 1`] = `
+<a
+  className="noOutline inheritColor noUnderline tapTransition pill accessibilityOutline inlineFlex justifyCenter xsItemsCenter button lg gray"
+  href="#"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel="noopener noreferrer nofollow"
+  tabIndex={0}
+  target="_blank"
+>
+  <div
+    className="default alignCenter Text fontSize300 fontWeightSemiBold"
+  >
+    Visit Pinterest
+  </div>
+  <div
+    className="box relative"
+    style={
+      Object {
+        "display": "inline",
+      }
+    }
+  >
+    <div
+      className="box xsDisplayVisuallyHidden"
+    >
+      ; Opens a new tab
+    </div>
+  </div>
+</a>
+`;
+
+exports[`ButtonLink renders disabled 1`] = `
+<a
+  className="noOutline inheritColor noUnderline tapTransition pill inlineFlex justifyCenter xsItemsCenter button disabled lg"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel="noopener noreferrer nofollow"
+  target="_blank"
+>
+  <div
+    className="disabled alignCenter Text fontSize300 fontWeightSemiBold"
+  >
+    Visit Pinterest
+  </div>
+  <div
+    className="box relative"
+    style={
+      Object {
+        "display": "inline",
+      }
+    }
+  >
+    <div
+      className="box xsDisplayVisuallyHidden"
+    >
+      ; Opens a new tab
+    </div>
+  </div>
+</a>
+`;
+
+exports[`ButtonLink renders with icon on the right 1`] = `
+<a
+  className="noOutline inheritColor noUnderline tapTransition pill accessibilityOutline inlineFlex justifyCenter xsItemsCenter button lg gray"
+  href="#"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyPress={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  rel="noopener noreferrer nofollow"
+  tabIndex={0}
+  target="_blank"
+>
+  <div
+    className="default alignCenter Text fontSize300 fontWeightSemiBold"
+  >
+    Visit Pinterest
+  </div>
+  <div
+    className="box marginStart150"
+    style={
+      Object {
+        "height": 12,
+        "width": 12,
+      }
+    }
+  >
+    <svg
+      aria-hidden={true}
+      aria-label=""
+      className="rtlSupport default icon iconBlock"
+      height={12}
+      role="img"
+      viewBox="0 0 24 24"
+      width={12}
+    >
+      <path
+        d="test-file-stub"
+      />
+    </svg>
+  </div>
+  <div
+    className="box relative"
+    style={
+      Object {
+        "display": "inline",
+      }
+    }
+  >
+    <div
+      className="box xsDisplayVisuallyHidden"
+    >
+      ; Opens a new tab
+    </div>
+  </div>
+</a>
+`;

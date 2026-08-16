@@ -1,0 +1,144 @@
+/* aliasing */
+
+.antialiased {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* font size */
+
+.fontSize100 {
+  font-size: var(--font-size-100);
+}
+
+.fontSize200 {
+  font-size: var(--font-size-200);
+}
+
+.fontSize300 {
+  font-size: var(--font-size-300);
+}
+
+.fontSize400 {
+  font-size: var(--font-size-400);
+}
+
+.fontSize500 {
+  font-size: var(--font-size-500);
+}
+
+.fontSize600 {
+  font-size: var(--font-size-600);
+}
+
+.fontSize100Override * {
+  /* stylelint-disable-next-line declaration-no-important */
+  font-size: var(--font-size-100) !important;
+}
+
+.fontSize200Override * {
+  /* stylelint-disable-next-line declaration-no-important */
+  font-size: var(--font-size-200) !important;
+}
+
+.fontSize300Override * {
+  /* stylelint-disable-next-line declaration-no-important */
+  font-size: var(--font-size-300) !important;
+}
+
+.fontSize400Override * {
+  /* stylelint-disable-next-line declaration-no-important */
+  font-size: var(--font-size-400) !important;
+}
+
+.fontSize500Override * {
+  /* stylelint-disable-next-line declaration-no-important */
+  font-size: var(--font-size-500) !important;
+}
+
+.fontSize600Override * {
+  /* stylelint-disable-next-line declaration-no-important */
+  font-size: var(--font-size-600) !important;
+}
+
+/* fonts */
+
+.sansSerif {
+  font-family: var(--font-family-default-latin);
+}
+
+:lang(ja) .sansSerif {
+  font-family: var(--font-family-default-japanese);
+  quotes: "「" "」";
+}
+
+/* font weight */
+
+.fontWeightNormal {
+  font-weight: var(--font-weight-normal);
+}
+
+.fontWeightSemiBold {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* emphasis */
+
+.fontStyleRegular {
+  font-style: normal;
+}
+
+.fontStyleItalic {
+  font-style: italic;
+}
+
+/* overflow */
+
+.breakWord {
+  /* Use word-wrap internally as a result of existing usage (e.g. Instances of Text can break with word-break. E.g TileData) */
+  word-wrap: break-word;
+}
+
+.breakAll {
+  word-break: break-all;
+}
+
+.noWrap {
+  white-space: nowrap;
+}
+
+.truncate {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* alignment */
+
+html:not([dir="rtl"]) .alignStart,
+html[dir="rtl"] .alignEnd,
+.alignForceLeft {
+  text-align: left;
+}
+
+html:not([dir="rtl"]) .alignEnd,
+html[dir="rtl"] .alignStart,
+.alignForceRight {
+  text-align: right;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignJustify {
+  text-align: justify;
+}
+
+.lineClamp {
+  -webkit-box-orient: vertical; /* stylelint-disable-line property-no-vendor-prefix */
+  display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix */
+  max-width: 100%;
+  overflow: hidden;
+}

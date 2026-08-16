@@ -1,0 +1,54 @@
+.SegmentedControl {
+  composes: borderBox from "./Layout.css";
+  composes: flex from "./Layout.css";
+  composes: justifyBetween from "./Layout.css";
+  background-color: var(--color-background-segmentedcontrol-container);
+  user-select: none;
+}
+
+.SegmentedControl.sm {
+  border-radius: var(--rounding-200);
+  padding: var(--space-100);
+}
+
+.SegmentedControl.md {
+  border-radius: var(--rounding-300);
+  padding: var(--space-100);
+}
+
+.SegmentedControl.lg {
+  border-radius: var(--rounding-400);
+  padding: var(--space-100);
+}
+
+.item {
+  composes: flexGrow from "./Layout.css";
+  composes: m0 from "./Whitespace.css";
+  composes: noBorder from "./Borders.css";
+  composes: pointer from "./Cursor.css";
+  flex-basis: 0;
+  flex-shrink: 1;
+}
+
+.item.sm {
+  border-radius: var(--rounding-100);
+  padding: var(--space-0) var(--space-200);
+}
+
+.item.md {
+  border-radius: var(--rounding-200);
+  padding: var(--space-100) var(--space-300);
+}
+
+.item.lg {
+  border-radius: var(--rounding-300);
+  padding: var(--space-200) var(--space-400);
+}
+
+.itemIsNotSelected {
+  background: transparent;
+}
+
+.itemIsSelected {
+  background-color: var(--color-background-segmentedcontrol-tab-selected);
+}

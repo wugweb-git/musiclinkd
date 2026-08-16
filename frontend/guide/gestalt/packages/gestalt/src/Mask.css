@@ -1,0 +1,19 @@
+.Mask {
+  composes: overflowHidden from "./Layout.css";
+  composes: relative from "./Layout.css";
+}
+
+.willChangeTransform {
+  /* ⬇ https://github.com/pinterest/gestalt/pull/965 */
+  will-change: transform;
+}
+
+.wash {
+  composes: absolute from "./Layout.css";
+  composes: bottom0 from "./Layout.css";
+  composes: left0 from "./Layout.css";
+  composes: right0 from "./Layout.css";
+  composes: top0 from "./Layout.css";
+  background: var(--color-background-mask-wash);
+  pointer-events: none;
+}

@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BannerUpsellForm renders 1`] = `
+<form
+  onSubmit={[Function]}
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="Flex rowGap200 columnGap0 justifyEnd xsDirectionRow"
+  >
+    <div
+      className="FlexItem flexGrow"
+    >
+      <div
+        className="box marginBottom0 smMarginBottom200"
+      >
+        <span>
+          <div
+            className="box relative"
+          >
+            <input
+              aria-invalid="false"
+              className="textField base enabled normal md medium md truncate"
+              disabled={false}
+              id="name"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              placeholder="Name"
+              readOnly={false}
+              type="text"
+            />
+          </div>
+        </span>
+      </div>
+    </div>
+    <div
+      className="FlexItem flexNone"
+    >
+      <button
+        aria-label="Submit button"
+        className="button inline accessibilityOutline parentButton"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        onTouchCancel={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="submit"
+      >
+        <div
+          className="button inline accessibilityOutline tapTransition md red enabled childrenDiv"
+        >
+          <div
+            className="inverse alignCenter Text fontSize300 fontWeightSemiBold"
+          >
+            Submit
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+</form>
+`;

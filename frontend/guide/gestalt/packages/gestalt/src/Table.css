@@ -1,0 +1,110 @@
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  isolation: isolate;
+  width: 100%;
+}
+
+.th {
+  composes: alignStart from "./Typography.css";
+}
+
+.th,
+.td {
+  composes: paddingY300 from "./boxWhitespace.css";
+  composes: paddingX300 from "./boxWhitespace.css";
+}
+
+.stickyHeader {
+  composes: raisedTop from "./Borders.css";
+}
+
+.stickyFooter {
+  composes: raisedBottom from "./Borders.css";
+}
+
+.stickyHeader,
+.stickyHeader tr th {
+  top: 0;
+}
+
+.stickyFooter,
+.stickyFooter tr td {
+  bottom: 0;
+}
+
+.columnSticky {
+  left: 0;
+  z-index: 1;
+}
+
+.stickyHeader,
+.stickyFooter,
+.stickyHeader tr th,
+.stickyFooter tr td {
+  z-index: 2;
+}
+
+.columnSticky,
+.stickyHeader,
+.stickyFooter,
+.stickyHeader tr th,
+.stickyFooter tr td {
+  background-color: var(--color-background-table-footer);
+  position: sticky;
+}
+
+.stickyHeader .columnSticky,
+.stickyFooter .columnSticky {
+  z-index: 3;
+}
+
+.horizontalScrollRight .columnStickyShadow {
+  box-shadow: 8px 0 8px -8px var(--color-border-container);
+}
+
+.horizontalScrollLeft .columnStickyShadow {
+  box-shadow: -8px 0 8px -8px var(--color-border-container);
+}
+
+.tfooter tr td {
+  border-top: 2px solid var(--color-border-container);
+}
+
+.thead tr:first-child th {
+  border-bottom: 1px solid var(--color-border-container);
+}
+
+.thead tr:not(:first-child) th,
+.tbody tr td {
+  border-top: 1px solid var(--color-border-container);
+}
+
+.tbody tr td.drawer {
+  border-top: none;
+}
+
+.hoverShadeGray:hover,
+.hoverShadeGray:hover .columnSticky {
+  background-color: var(--color-background-table-row-hover);
+}
+
+.selected {
+  background-color: var(--color-background-table-row-selected);
+}
+
+html:not([dir="rtl"]) .selected td:first-child {
+  border-left: 3px solid var(--color-border-table-row-selected);
+}
+
+html[dir="rtl"] .selected td:first-child {
+  border-right: 3px solid var(--color-border-table-row-selected);
+}
+
+html:not([dir="rtl"]) .unselected td:first-child {
+  border-left: 3px solid var(--color-background-elevation-floating);
+}
+
+html[dir="rtl"] .unselected td:first-child {
+  border-right: 3px solid var(--color-background-elevation-floating);
+}
