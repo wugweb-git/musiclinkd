@@ -8,7 +8,10 @@
    color tokens below. Previous comment here said Gestalt's color="red"
    demos were deliberately left untouched — reversed on explicit request
    ("replace primary red color with pink, rest is fine"). */
-:root { --ml-accent: #EA4C89; }
+:root {
+  --ml-accent: #EA4C89;  /* SECONDARY / brand accent — not the primary CTA */
+  --ml-black: #0D0D0D;   /* PRIMARY action colour (matches --black in tokens.css) */
+}
 
 /* Primary → pink override, scoped to the "primary"/"brand" SEMANTIC alias
    layer only — not the raw --color-red-pushpin-* palette and not
@@ -30,13 +33,25 @@
    the base with white/black at the same proportion Gestalt's own
    red-pushpin-300 (weak) and its hardcoded active hex sit relative to
    red-pushpin-450/600, not lifted from any official MusicLinkd swatch. */
+/* CORRECTED 2026-08-16 per the brand owner: the PRIMARY action colour is
+   BLACK, not pink. Pink (--ml-accent #EA4C89) is the SECONDARY / brand accent
+   — used for active states, brand marks and highlights, not for the main CTA.
+   An earlier pass here mapped primary to pink; that was wrong and is reversed
+   below. Greys carry most of the surface work, so the neutral ramp is left
+   entirely to Gestalt's roboflow scale rather than being overridden. */
 :root {
-  --color-background-primary-base: var(--ml-accent);       /* was --color-red-pushpin-450 #e60023 */
-  --color-background-primary-strong: #D93C77;               /* was --color-red-pushpin-600 #b60000; = --pink-hover */
-  --color-background-primary-weak: #F28FB4;                  /* was --color-red-pushpin-300 #f47171; derived tint */
-  --color-background-button-primary-active: #B23A67;         /* was hardcoded #a3081a; derived shade */
-  --color-icon-brand-primary: var(--ml-accent);               /* was --color-red-pushpin-450 #e60023 */
-  --color-background-brand: var(--ml-accent);                 /* was --color-red-pushpin-450 #e60023 */
+  /* Primary action = black. Gestalt's Button color="red" reads these, so
+     every primary Button/IconButton renders black without changing the prop
+     (Gestalt's type union has no "black" or "pink" option — see the note
+     above about why the literal stays "red"). */
+  --color-background-primary-base: var(--ml-black);
+  --color-background-primary-strong: #000000;        /* hover: pure black */
+  --color-background-button-primary-active: #2B2B2B; /* pressed: lifts off black so the state is visible */
+  --color-background-primary-weak: #E9E9E9;          /* weak/disabled wash — grey, not tinted black */
+
+  /* Brand accent stays pink: brand marks and icon accents only. */
+  --color-icon-brand-primary: var(--ml-accent);
+  --color-background-brand: var(--ml-accent);
 }
 
 * { box-sizing: border-box; }
@@ -266,3 +281,16 @@ body {
   .ml-header-title { max-width: 100%; }
 }
 
+
+/* Cards hug their content instead of stretching to the tallest card in the
+   row. Grid's default (align-items:normal = stretch) was forcing every card
+   in a row to match the tallest one, leaving large empty voids inside short
+   cards. Verified in a real browser: a row locked at 175px each became
+   175/143/143/151/135. */
+.ml-comp-grid > *,
+.ml-block-grid > *,
+.ml-token-grid > * { align-self: start; }
+
+/* Sticky .ml-nav is 61px tall; without this, anchor jumps and in-page links
+   land with the target hidden underneath it. */
+:where(h2, h3, section, [id]) { scroll-margin-top: 76px; }

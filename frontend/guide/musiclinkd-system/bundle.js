@@ -43113,6 +43113,196 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       ] }, s.t)) })
     ] });
   }
+  function OnboardingWizardBlock() {
+    const steps = [
+      { title: "Primary role", hint: "What do you mainly do?", options: ["Vocalist", "Producer", "Instrumentalist", "Engineer"] },
+      { title: "Instruments", hint: "Pick what you play", options: ["Guitar", "Keys", "Drums", "Bass"] },
+      { title: "Genres", hint: "Where do you fit?", options: ["Bollywood", "Sufi", "Indie", "Electronic"] },
+      { title: "Review", hint: "Confirm and publish", options: [] }
+    ];
+    const [step, setStep] = (0, import_react2.useState)(0);
+    const [picked, setPicked] = (0, import_react2.useState)({});
+    const cur = steps[step];
+    const isLast = step === steps.length - 1;
+    function toggle2(opt) {
+      setPicked((prev) => {
+        const cur2 = prev[step] ?? [];
+        return { ...prev, [step]: cur2.includes(opt) ? cur2.filter((o) => o !== opt) : [...cur2, opt] };
+      });
+    }
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 360, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
+          "Step ",
+          step + 1,
+          " of ",
+          steps.length
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: cur.title, type: "info" })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, marginBottom: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { height: 6, rounding: "pill", color: "secondary", overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        BoxWithForwardRef,
+        {
+          height: 6,
+          rounding: "pill",
+          dangerouslySetInlineStyle: { __style: { width: `${(step + 1) / steps.length * 100}%`, background: "var(--ml-accent)", transition: "width 240ms cubic-bezier(0.55,0,0,1)" } }
+        }
+      ) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: cur.title }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: cur.hint }) }),
+      isLast ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 2, children: steps.slice(0, 3).map((s, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: s.title }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: (picked[i] ?? []).join(", ") || "\u2014" })
+      ] }, s.title)) }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 2, wrap: true, children: cur.options.map((o) => {
+        const on = (picked[step] ?? []).includes(o);
+        return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TapAreaWithForwardRef, { onTap: () => toggle2(o), rounding: "pill", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          BoxWithForwardRef,
+          {
+            paddingX: 4,
+            paddingY: 2,
+            rounding: "pill",
+            borderStyle: "sm",
+            color: on ? "selected" : "default",
+            children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", color: on ? "inverse" : "default", children: o })
+          }
+        ) }, o);
+      }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 5, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, children: [
+        step > 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Back", color: "gray", onClick: () => setStep((s) => s - 1) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { flex: "grow", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          ButtonWithForwardRef,
+          {
+            fullWidth: true,
+            color: "red",
+            text: isLast ? "Publish profile" : "Continue",
+            onClick: () => !isLast && setStep((s) => s + 1)
+          }
+        ) })
+      ] }) })
+    ] });
+  }
+  function DiscoveryHeroCardBlock() {
+    const [saved2, setSaved] = (0, import_react2.useState)(false);
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 300, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "relative", rounding: 4, overflow: "hidden", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        Image,
+        {
+          alt: "Yash Raj Sound Studios, Mumbai",
+          src: placeholderImg("#0D0B26", "Studio", 300, 380),
+          naturalWidth: 300,
+          naturalHeight: 380
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        BoxWithForwardRef,
+        {
+          position: "absolute",
+          bottom: true,
+          left: true,
+          right: true,
+          height: 180,
+          dangerouslySetInlineStyle: { __style: { background: "linear-gradient(to top, rgba(13,11,38,0.88), rgba(13,11,38,0))" } }
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { position: "absolute", top: true, right: true, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        IconButtonWithForwardRef,
+        {
+          icon: saved2 ? "heart" : "heart-outline",
+          iconColor: saved2 ? "red" : "white",
+          bgColor: "transparentDarkGray",
+          accessibilityLabel: saved2 ? "Saved" : "Save",
+          size: "md",
+          onClick: () => setSaved((s) => !s)
+        }
+      ) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "absolute", bottom: true, left: true, right: true, padding: 4, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "light", children: "Mumbai, MH" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", color: "light", children: "Yash Raj Sound Studios" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            BoxWithForwardRef,
+            {
+              paddingX: 2,
+              paddingY: 1,
+              rounding: "pill",
+              dangerouslySetInlineStyle: { __style: { background: "rgba(255,255,255,0.18)" } },
+              children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 1, alignItems: "center", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "star", accessibilityLabel: "", size: 11, color: "light" }),
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "light", weight: "bold", children: "4.8" })
+              ] })
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "light", children: "213 reviews" })
+        ] }) })
+      ] })
+    ] }) });
+  }
+  function ProductCardBlock() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, overflow: "hidden", maxWidth: 300, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { position: "relative", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          Image,
+          {
+            alt: "Neumann U87 microphone",
+            src: placeholderImg("#F1F5F9", "Gear", 300, 240),
+            naturalWidth: 300,
+            naturalHeight: 240
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { position: "absolute", top: true, left: true, padding: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "Best seller", type: "darkWash" }) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { padding: 4, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: "Neumann U87" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Studio condenser mic" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, marginBottom: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Large-diaphragm classic \u2014 the vocal chain standard for four decades." }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { paddingX: 4, paddingY: 2, rounding: "pill", color: "secondary", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { weight: "bold", children: [
+            "\u20B9800",
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { inline: true, size: "100", color: "subtle", children: "/day" })
+          ] }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Rent now", color: "red" })
+        ] })
+      ] })
+    ] });
+  }
+  function DiscoveryHeaderBlock() {
+    const cats = ["All", "Vocalists", "Producers", "Studios", "Gear", "Gigs"];
+    const [active, setActive] = (0, import_react2.useState)("All");
+    const [q, setQ] = (0, import_react2.useState)("");
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 360, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: "Hello, Ananya" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "3 new gig proposals" })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Avatar, { name: "Ananya Sharma", size: "md" })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 4, marginBottom: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { flex: "grow", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          SearchFieldWithForwardRef,
+          {
+            id: "disc-search",
+            accessibilityLabel: "Search talent, studios, gigs",
+            placeholder: "Search talent, studios, gigs",
+            value: q,
+            onChange: ({ value }) => setQ(value)
+          }
+        ) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(IconButtonWithForwardRef, { icon: "filter", accessibilityLabel: "Filters", bgColor: "red", iconColor: "white", size: "lg" })
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { overflow: "scrollX", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 2, children: cats.map((c) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TapAreaWithForwardRef, { onTap: () => setActive(c), rounding: "pill", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        BoxWithForwardRef,
+        {
+          paddingX: 4,
+          paddingY: 2,
+          rounding: "pill",
+          borderStyle: "sm",
+          color: active === c ? "selected" : "default",
+          children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", color: active === c ? "inverse" : "default", children: c })
+        }
+      ) }, c)) }) })
+    ] });
+  }
   var BLOCKS = [
     { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NavHeaderBlock, {}) },
     { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ArtistProfileBlock, {}) },
@@ -43150,6 +43340,10 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     { name: "Review card", description: "UnifiedReviewCard (Widget Directory \xA77) \u2014 reviewer, org, stars, quote, timestamp.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ReviewCardBlock, {}) },
     { name: "Notification card", description: "UnifiedNotificationCard (Widget Directory \xA77) \u2014 per-item event-type icon + unread state.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NotificationCardBlock, {}) },
     { name: "Public reputation widget", description: "PublicReputationWidget (Widget Directory \xA77) \u2014 aggregate rating, credits, response rate.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(PublicReputationWidgetBlock, {}) },
+    { name: "Onboarding wizard", description: "Multi-step with live progress bar, selectable chips, and a review step.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(OnboardingWizardBlock, {}) },
+    { name: "Discovery hero card", description: "Image-led card with gradient scrim, live favourite toggle, rating.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(DiscoveryHeroCardBlock, {}) },
+    { name: "Product card", description: "Marketplace rental card \u2014 media, copy stack, price + CTA row.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ProductCardBlock, {}) },
+    { name: "Discovery header", description: "Greeting + search + filter + scrollable category rail, all live.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(DiscoveryHeaderBlock, {}) },
     { name: "Band card", description: "Ported from styleguide #ml-band \u2014 roster, AvatarGroup, next show.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BandCardBlock, {}) },
     { name: "Greeting", description: "Ported from styleguide #vd-greeting \u2014 dashboard welcome header.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(GreetingBlock, {}) },
     { name: "Profile stats", description: "Ported from styleguide #pf-stats \u2014 followers / credits / rating.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ProfileStatsBlock, {}) },

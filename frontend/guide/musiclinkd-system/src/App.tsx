@@ -2066,6 +2066,206 @@ function VenueProfileFlowBlock() {
   );
 }
 
+
+// ===== Premium card + interactive blocks, 2026-08-16 =====
+// Added after review of reference UI the user supplied (image-led travel and
+// product cards, and an onboarding wizard). These are the MusicLinkd
+// equivalents, built from real Gestalt primitives rather than raw HTML so
+// they inherit the token system and the pink primary.
+
+// Multi-step onboarding wizard. Real state: Next/Back move between steps,
+// the progress bar and step dots update, and the final step swaps the CTA.
+// Mirrors the real onboarding flow in webapp/flows/onboarding (primary role
+// -> instruments -> genres -> review), which is one of the two fully-designed
+// flows in the preview build.
+function OnboardingWizardBlock() {
+  const steps = [
+    { title: "Primary role", hint: "What do you mainly do?", options: ["Vocalist", "Producer", "Instrumentalist", "Engineer"] },
+    { title: "Instruments", hint: "Pick what you play", options: ["Guitar", "Keys", "Drums", "Bass"] },
+    { title: "Genres", hint: "Where do you fit?", options: ["Bollywood", "Sufi", "Indie", "Electronic"] },
+    { title: "Review", hint: "Confirm and publish", options: [] },
+  ];
+  const [step, setStep] = useState(0);
+  const [picked, setPicked] = useState<Record<number, string[]>>({});
+  const cur = steps[step];
+  const isLast = step === steps.length - 1;
+
+  function toggle(opt: string) {
+    setPicked((prev) => {
+      const cur2 = prev[step] ?? [];
+      return { ...prev, [step]: cur2.includes(opt) ? cur2.filter((o) => o !== opt) : [...cur2, opt] };
+    });
+  }
+
+  return (
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={360}>
+      <Flex justifyContent="between" alignItems="center">
+        <Text size="100" color="subtle">Step {step + 1} of {steps.length}</Text>
+        <Badge text={cur.title} type="info" />
+      </Flex>
+
+      {/* Progress bar — plain Boxes, since Gestalt has no ProgressBar
+          component (already recorded in the Not built registry). */}
+      <Box marginTop={3} marginBottom={4}>
+        <Box height={6} rounding="pill" color="secondary" overflow="hidden">
+          <Box height={6} rounding="pill"
+            dangerouslySetInlineStyle={{ __style: { width: `${((step + 1) / steps.length) * 100}%`, background: "var(--ml-accent)", transition: "width 240ms cubic-bezier(0.55,0,0,1)" } }} />
+        </Box>
+      </Box>
+
+      <Heading size="400">{cur.title}</Heading>
+      <Box marginTop={1} marginBottom={3}><Text size="100" color="subtle">{cur.hint}</Text></Box>
+
+      {isLast ? (
+        <Flex direction="column" gap={2}>
+          {steps.slice(0, 3).map((s, i) => (
+            <Flex key={s.title} justifyContent="between" alignItems="center">
+              <Text size="100" color="subtle">{s.title}</Text>
+              <Text size="100" weight="bold">{(picked[i] ?? []).join(", ") || "—"}</Text>
+            </Flex>
+          ))}
+        </Flex>
+      ) : (
+        <Flex gap={2} wrap>
+          {cur.options.map((o) => {
+            const on = (picked[step] ?? []).includes(o);
+            return (
+              <TapArea key={o} onTap={() => toggle(o)} rounding="pill">
+                <Box paddingX={4} paddingY={2} rounding="pill" borderStyle="sm"
+                  color={on ? "selected" : "default"}>
+                  <Text size="100" weight="bold" color={on ? "inverse" : "default"}>{o}</Text>
+                </Box>
+              </TapArea>
+            );
+          })}
+        </Flex>
+      )}
+
+      <Box marginTop={5}>
+        <Flex gap={2}>
+          {step > 0 && <Button text="Back" color="gray" onClick={() => setStep((s) => s - 1)} />}
+          <Box flex="grow">
+            {/* color="red" is Gestalt's primary slot, which this app remaps to
+                BLACK (see src/styles.css). Primary CTA = black; pink is the
+                secondary/brand accent, used on the progress bar above. */}
+            <Button fullWidth color="red" text={isLast ? "Publish profile" : "Continue"}
+              onClick={() => !isLast && setStep((s) => s + 1)} />
+          </Box>
+        </Flex>
+      </Box>
+    </Box>
+  );
+}
+
+// Image-led discovery card with an overlay caption, favourite toggle and
+// rating — the talent/venue equivalent of the reference travel card.
+function DiscoveryHeroCardBlock() {
+  const [saved, setSaved] = useState(false);
+  return (
+    <Box maxWidth={300}>
+      <Box position="relative" rounding={4} overflow="hidden">
+        <Image alt="Yash Raj Sound Studios, Mumbai"
+          src={placeholderImg("#0D0B26", "Studio", 300, 380)}
+          naturalWidth={300} naturalHeight={380} />
+        {/* Gradient scrim so overlay text stays legible on any photo —
+            without it, white-on-image contrast is unpredictable. */}
+        <Box position="absolute" bottom left right height={180}
+          dangerouslySetInlineStyle={{ __style: { background: "linear-gradient(to top, rgba(13,11,38,0.88), rgba(13,11,38,0))" } }} />
+        <Box position="absolute" top right padding={3}>
+          <IconButton icon={saved ? "heart" : "heart-outline"} iconColor={saved ? "red" : "white"}
+            bgColor="transparentDarkGray" accessibilityLabel={saved ? "Saved" : "Save"}
+            size="md" onClick={() => setSaved((s) => !s)} />
+        </Box>
+        <Box position="absolute" bottom left right padding={4}>
+          <Text size="100" color="light">Mumbai, MH</Text>
+          <Heading size="400" color="light">Yash Raj Sound Studios</Heading>
+          <Box marginTop={2}>
+            <Flex gap={2} alignItems="center">
+              <Box paddingX={2} paddingY={1} rounding="pill"
+                dangerouslySetInlineStyle={{ __style: { background: "rgba(255,255,255,0.18)" } }}>
+                <Flex gap={1} alignItems="center">
+                  <Icon icon="star" accessibilityLabel="" size={11} color="light" />
+                  <Text size="100" color="light" weight="bold">4.8</Text>
+                </Flex>
+              </Box>
+              <Text size="100" color="light">213 reviews</Text>
+            </Flex>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+// Marketplace product card in the reference's proportions: large media,
+// title/subtitle/description stack, then a price + CTA row.
+function ProductCardBlock() {
+  return (
+    <Box borderStyle="sm" rounding={4} overflow="hidden" maxWidth={300}>
+      <Box position="relative">
+        <Image alt="Neumann U87 microphone" src={placeholderImg("#F1F5F9", "Gear", 300, 240)}
+          naturalWidth={300} naturalHeight={240} />
+        <Box position="absolute" top left padding={3}>
+          <Badge text="Best seller" type="darkWash" />
+        </Box>
+      </Box>
+      <Box padding={4}>
+        <Heading size="400">Neumann U87</Heading>
+        <Text size="100" color="subtle">Studio condenser mic</Text>
+        <Box marginTop={2} marginBottom={4}>
+          <Text size="100" color="subtle">Large-diaphragm classic — the vocal chain standard for four decades.</Text>
+        </Box>
+        <Flex justifyContent="between" alignItems="center">
+          <Box paddingX={4} paddingY={2} rounding="pill" color="secondary">
+            <Text weight="bold">₹800<Text inline size="100" color="subtle">/day</Text></Text>
+          </Box>
+          <Button text="Rent now" color="red" />
+        </Flex>
+      </Box>
+    </Box>
+  );
+}
+
+// Dashboard header: greeting + avatar, search with a filter affordance, and a
+// horizontally scrollable category rail (real overflow, not a static row).
+function DiscoveryHeaderBlock() {
+  const cats = ["All", "Vocalists", "Producers", "Studios", "Gear", "Gigs"];
+  const [active, setActive] = useState("All");
+  const [q, setQ] = useState("");
+  return (
+    <Box maxWidth={360}>
+      <Flex justifyContent="between" alignItems="center">
+        <Box>
+          <Heading size="400">Hello, Ananya</Heading>
+          <Text size="100" color="subtle">3 new gig proposals</Text>
+        </Box>
+        <Avatar name="Ananya Sharma" size="md" />
+      </Flex>
+      <Box marginTop={4} marginBottom={4}>
+        <Flex gap={2} alignItems="center">
+          <Box flex="grow">
+            <SearchField id="disc-search" accessibilityLabel="Search talent, studios, gigs"
+              placeholder="Search talent, studios, gigs" value={q} onChange={({ value }) => setQ(value)} />
+          </Box>
+          <IconButton icon="filter" accessibilityLabel="Filters" bgColor="red" iconColor="white" size="lg" />
+        </Flex>
+      </Box>
+      <Box overflow="scrollX">
+        <Flex gap={2}>
+          {cats.map((c) => (
+            <TapArea key={c} onTap={() => setActive(c)} rounding="pill">
+              <Box paddingX={4} paddingY={2} rounding="pill" borderStyle="sm"
+                color={active === c ? "selected" : "default"}>
+                <Text size="100" weight="bold" color={active === c ? "inverse" : "default"}>{c}</Text>
+              </Box>
+            </TapArea>
+          ))}
+        </Flex>
+      </Box>
+    </Box>
+  );
+}
+
 const BLOCKS: Block[] = [
   { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => <NavHeaderBlock /> },
   { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => <ArtistProfileBlock /> },
@@ -2103,6 +2303,10 @@ const BLOCKS: Block[] = [
   { name: "Review card", description: "UnifiedReviewCard (Widget Directory §7) — reviewer, org, stars, quote, timestamp.", render: () => <ReviewCardBlock /> },
   { name: "Notification card", description: "UnifiedNotificationCard (Widget Directory §7) — per-item event-type icon + unread state.", render: () => <NotificationCardBlock /> },
   { name: "Public reputation widget", description: "PublicReputationWidget (Widget Directory §7) — aggregate rating, credits, response rate.", render: () => <PublicReputationWidgetBlock /> },
+  { name: "Onboarding wizard", description: "Multi-step with live progress bar, selectable chips, and a review step.", render: () => <OnboardingWizardBlock /> },
+  { name: "Discovery hero card", description: "Image-led card with gradient scrim, live favourite toggle, rating.", render: () => <DiscoveryHeroCardBlock /> },
+  { name: "Product card", description: "Marketplace rental card — media, copy stack, price + CTA row.", render: () => <ProductCardBlock /> },
+  { name: "Discovery header", description: "Greeting + search + filter + scrollable category rail, all live.", render: () => <DiscoveryHeaderBlock /> },
   { name: "Band card", description: "Ported from styleguide #ml-band — roster, AvatarGroup, next show.", render: () => <BandCardBlock /> },
   { name: "Greeting", description: "Ported from styleguide #vd-greeting — dashboard welcome header.", render: () => <GreetingBlock /> },
   { name: "Profile stats", description: "Ported from styleguide #pf-stats — followers / credits / rating.", render: () => <ProfileStatsBlock /> },
