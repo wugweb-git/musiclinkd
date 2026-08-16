@@ -67,6 +67,15 @@
  * (spacing/radius/opacity/elevation/motion) this file's structural tokens
  * below draw from; colors are NOT shared between the two files by design.
  */
+/* PRIMARY = BLACK, PINK = SECONDARY / BRAND ACCENT (corrected 2026-08-16).
+   Per the brand owner: the primary action colour is black; pink (#EA4C89) is
+   the brand accent used for focus, selection, highlights and brand marks, not
+   for the main CTA. Both --primary values below were #EA4C89, which made
+   every default button pink. --ring, --accent and --sidebar-accent
+   deliberately STAY pink: a focus ring and a selected-nav wash are exactly
+   where a brand accent belongs, and a black focus ring would be invisible
+   against black text. Matches the same correction made in
+   frontend/guide/musiclinkd-system/src/styles.css. */
 :root {
   --background: #FCFCFD;
   --foreground: #141414;
@@ -74,7 +83,7 @@
   --card-foreground: #141414;
   --popover: #FFFFFF;
   --popover-foreground: #141414;
-  --primary: #EA4C89;
+  --primary: #0D0D0D;
   --primary-foreground: #FFFFFF;
   --secondary: #F5F5F8;
   --secondary-foreground: #141414;
@@ -94,7 +103,7 @@
   --radius: 0.75rem;
   --sidebar: #FFFFFF;
   --sidebar-foreground: #141414;
-  --sidebar-primary: #EA4C89;
+  --sidebar-primary: #0D0D0D;
   --sidebar-primary-foreground: #FFFFFF;
   --sidebar-accent: #FDECF2;
   --sidebar-accent-foreground: #141414;
@@ -112,8 +121,11 @@
   --card-foreground: #FCFCFD;
   --popover: #16143A;
   --popover-foreground: #FCFCFD;
-  --primary: #EA4C89;
-  --primary-foreground: #FFFFFF;
+  /* Dark mode inverts: a black primary on a near-black surface would be
+     invisible, so the primary action becomes the light tone with dark text.
+     This is the standard inversion, not a different brand colour. */
+  --primary: #FCFCFD;
+  --primary-foreground: #0D0D0D;
   --secondary: #1E1C46;
   --secondary-foreground: #FCFCFD;
   --muted: #1E1C46;
@@ -131,7 +143,7 @@
   --chart-5: #1E1C46;
   --sidebar: #16143A;
   --sidebar-foreground: #FCFCFD;
-  --sidebar-primary: #EA4C89;
+  --sidebar-primary: #FCFCFD;
   --sidebar-primary-foreground: #FFFFFF;
   --sidebar-accent: #33203A;
   --sidebar-accent-foreground: #FCFCFD;

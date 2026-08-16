@@ -59,3 +59,31 @@ design pass; it's a dev tool, not UI). Preview a specific state with
   audit (see each flow's `description` in `default-flows.ts`). Don't
   invent placeholder screens for these; if that changes, re-run a real
   audit first.
+
+
+## Regenerating `data/designed-screens.json`
+
+The Flow/Screen Index badges each row **Designed** or **Stub**. That comes from
+`data/designed-screens.json`, which is a static list, so it goes stale the
+moment you design a screen without regenerating it. From `webapp/`:
+
+```bash
+python3 - <<'EOF'
+import os, json
+designed = []
+for flow in sorted(os.listdir('flows')):
+    fp = os.path.join('flows', flow)
+    if not os.path.isdir(fp): continue
+    for scr in sorted(os.listdir(fp)):
+        idx = os.path.join(fp, scr, 'index.html')
+        if not os.path.isfile(idx): continue
+        if 'THIS FILE IS A TEMPLATE, NOT A DESIGNED SCREEN' not in open(idx, encoding='utf-8').read():
+            designed.append(f"{flow}/{scr}")
+json.dump({"_note": "Regenerate with the snippet in webapp/README.md.",
+           "designed": designed}, open('data/designed-screens.json', 'w'), indent=2)
+print(len(designed), "designed")
+EOF
+```
+
+The marker string is the one the scaffolder writes into every fresh template,
+so a screen counts as designed the moment that line is removed.

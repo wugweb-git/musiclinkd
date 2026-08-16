@@ -33,6 +33,16 @@
   --type-3: clamp(20px, calc(20px + 8 * (100vw - 360px) / 1080), 28px);
   --type-4: clamp(28px, calc(28px + 16 * (100vw - 360px) / 1080), 44px);
 
+  /* Colour ROLES, corrected 2026-08-16 per the brand owner: the primary
+     action colour is BLACK; pink is the brand ACCENT (focus, selection,
+     highlights, brand marks), not the main CTA. --pink itself is unchanged
+     so nothing that already references it breaks; these two names make the
+     role explicit so new screens stop reaching for --pink for buttons.
+     Mirrors frontend/guide/musiclinkd-system/src/styles.css. */
+  --action: #0D0D0D;          /* primary CTA */
+  --action-hover: #000000;
+  --action-pressed: #2B2B2B;
+  --accent: #EA4C89;          /* brand accent = --pink */
   --pink: #EA4C89;
   --pink-hover: #D93C77;
   --black: #0D0D0D;
