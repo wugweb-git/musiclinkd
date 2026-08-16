@@ -48,6 +48,27 @@
   --color-background-brand: var(--ml-accent);
 }
 
+
+/* DARK MODE PRIMARY (added after a real browser check, 2026-08-16).
+   The :root block above sets the primary action to black. Under
+   [data-theme="dark"] that put a #0D0D0D button on a near-black surface -
+   effectively invisible. The whole override had no dark variant at all,
+   which the light-mode-only testing never surfaced.
+
+   Dark inverts the same way admin/app/globals.css already does: the primary
+   action becomes the light tone with dark text. Same brand logic, opposite
+   surface. The pink accent does NOT invert - it reads correctly on both, and
+   inverting it would mean two different brand colours depending on theme. */
+[data-theme="dark"] {
+  --color-background-primary-base: #FCFCFD;
+  --color-background-primary-strong: #FFFFFF;
+  --color-background-button-primary-active: #E2E2E2;
+  --color-background-primary-weak: #4A4A4A;
+  /* accent unchanged on purpose */
+  --color-icon-brand-primary: var(--ml-accent);
+  --color-background-brand: var(--ml-accent);
+}
+
 * { box-sizing: border-box; }
 
 html, body { margin: 0; height: 100%; background: var(--color-background-page-default, #fff); }
