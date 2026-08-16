@@ -34,64 +34,105 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <!--
-  THIS FILE IS A TEMPLATE, NOT A DESIGNED SCREEN.
-  It exists to prove out the native-app environment (safe areas, fixed
-  viewport, keyboard awareness, bottom-sheet mechanics, offline shell,
-  standalone display mode) plus the real design tokens/components, so a
-  real screen only has to compose them — copy this file into a
-  flows/<flow>/<screen>/ folder (every real screen folder already has one,
-  generated alongside its screen.json) and replace the placeholder regions
-  below. If you copy it manually (rather than letting the generator
-  scaffold it), also add
-  <meta name="screen-json-path" content="/preview/flows/<flow>/<screen>/screen.json" />
-  next to the other meta tags — without it the dev badge falls back to a
-  relative "./screen.json" fetch, which has the same trailing-slash problem
-  described above.
+  Designed 2026-08-16, replacing the raw template. Data below is the exact
+  dataContract sample from this screen's own screen.json — not invented.
 
-  ARTBOARD SIZING: .app-root fills 100dvh x 100% of whatever viewport it's
-  in, edge-to-edge — the same approach a real installed PWA/native app
-  uses (there's no fixed "canvas size" on a phone). No desktop max-width
-  cap here on purpose: for reviewing on a desktop browser inside a proper
-  phone-frame, use the workbench at /preview/index.html instead of opening
-  a screen standalone — that's where the phone-frame chrome lives, not
-  baked into every individual screen.
+  HONEST GAP, not silently smoothed over: this screen's notes field says
+  "profileType === VENUE — renders the Venue extension fields," but the
+  actual dataContract sample in screen.json is the same generic Arijit Sen
+  TALENT record used across most other screens (vocalRange,
+  sessionAvailability — Talent-only fields, no Venue fields like capacity/
+  address/amenities anywhere in it). No Venue-shaped sample exists anywhere
+  in this build to build the real Venue-specific fields from, so this
+  screen renders the real sample as given (profile identity, bio, genres,
+  trust badges, one portfolio project, one review) rather than fabricating
+  Venue fields that aren't backed by any real schema seen so far. Revisit
+  once a real Venue sample exists.
 -->
 </head>
 <body>
   <div class="app-root">
 
-    <!-- Fixed top region — safe-area top padding baked in via app-shell.css.
-         Put a status/nav bar here; it never scrolls. -->
-    <header class="app-topbar">
-      <!-- TODO: design system top bar goes here -->
+    <!-- Icon buttons: 44x44px minimum tap target, not the .btn class's own
+         48px minimum — 44px is Apple HIG's floor for icon-only controls and
+         was picked deliberately (not shrunk below either real guideline)
+         since .btn's 48px is sized for text+icon buttons with side padding,
+         not a bare glyph. Caught on re-audit 2026-08-16: this was 36px in
+         the first pass, undercutting both real minimums. -->
+    <header class="app-topbar" style="display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-3);">
+      <button type="button" class="btn btn-s" style="min-height:44px;width:44px;padding:0;border-radius:50%;" aria-label="Back">←</button>
+      <button type="button" class="btn btn-s" style="min-height:44px;width:44px;padding:0;border-radius:50%;" aria-label="Share">⤴</button>
     </header>
 
-    <!-- Main content — scrolls only if you add .app-content--scroll.
-         Most single-purpose screens (a form, a splash, a confirmation)
-         should NOT scroll; add the modifier only for feeds/lists/long forms. -->
-    <main class="app-content app-content--scroll">
-      <!-- TODO: design system content goes here.
-           Read window.MusicLinkd.screen (populated from this screen's
-           screen.json) for its flow/screen metadata and data contract. -->
+    <main class="app-content app-content--scroll" style="padding:0 var(--space-3) var(--space-4);">
+      <div style="text-align:center;padding:var(--space-3) 0;">
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400" alt="Arijit Sen" style="width:88px;height:88px;border-radius:50%;object-fit:cover;margin:0 auto var(--space-2);display:block;" />
+        <div style="display:flex;align-items:center;justify-content:center;gap:var(--space-1);">
+          <span class="brand-wordmark" style="font-size:var(--type-3);">Arijit Sen</span>
+          <span class="badge badge-av" role="img" aria-label="Verified Artist" title="Verified Artist">✓</span>
+        </div>
+        <div style="color:var(--muted);font-size:var(--type-1);margin-top:2px;">Singer · Composer · Mumbai, MH · Andheri</div>
+      </div>
 
-      <!-- Example bottom-sheet trigger — remove if this screen doesn't need one. -->
-      <button type="button" class="btn btn-s" data-open-sheet="example-sheet">Open example sheet</button>
+      <div style="display:flex;gap:var(--space-1);flex-wrap:wrap;justify-content:center;margin-bottom:var(--space-3);">
+        <span class="chip sel">Verified Artist</span>
+        <span class="chip sel">Rising Talent</span>
+        <span class="chip">Available for Collab</span>
+        <span class="chip">Touring</span>
+      </div>
+
+      <p style="font-size:var(--type-2);color:var(--black);line-height:1.5;text-align:center;margin:0 0 var(--space-4);">
+        Playback &amp; classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.
+      </p>
+
+      <div style="display:flex;gap:var(--space-1);flex-wrap:wrap;margin-bottom:var(--space-4);">
+        <span class="chip">Bollywood / Filmi</span>
+        <span class="chip">Sufi Devotional</span>
+        <span class="chip">Acoustic / Unplugged</span>
+        <span class="chip">Acoustic Guitar</span>
+        <span class="chip">Hindi</span>
+        <span class="chip">Bengali</span>
+        <span class="chip">English</span>
+      </div>
+
+      <div class="card-s">
+        <div style="font-size:var(--type-1);font-weight:600;color:var(--muted);margin-bottom:var(--space-2);">PORTFOLIO</div>
+        <div style="display:flex;justify-content:space-between;align-items:start;">
+          <div>
+            <div style="font-weight:700;">Tum Hi Toh (Unplugged)</div>
+            <div style="font-size:var(--type-1);color:var(--muted);margin-top:2px;">Acoustic unplugged reinterpretation — 4.2M plays on Spotify.</div>
+          </div>
+          <span class="badge" style="background:var(--surface-2);color:var(--muted);flex-shrink:0;">Released</span>
+        </div>
+        <div style="display:flex;gap:var(--space-3);margin-top:var(--space-2);font-size:var(--type-1);color:var(--muted);">
+          <span>4.2K views</span><span>610 likes</span><span>88 shares</span>
+        </div>
+      </div>
+
+      <div class="card-s" style="margin-bottom:0;">
+        <div style="font-size:var(--type-1);font-weight:600;color:var(--muted);margin-bottom:var(--space-2);">REVIEWS</div>
+        <!-- Not var(--warn) (#F59E0B) here on purpose — checked its contrast
+             against white on re-audit: ~2.2:1, fails WCAG's 3:1 floor even
+             for non-text UI components. #B45309 is the same amber family,
+             darkened for contrast; --warn itself is unchanged (still right
+             for badges/status chips with their own background, just not
+             safe as bare text on white). -->
+        <div style="color:#B45309;font-size:var(--type-2);" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <p style="font-size:var(--type-2);margin:var(--space-1) 0;">"Exceptional range and control across genres."</p>
+        <div style="font-size:var(--type-1);color:var(--muted);">— T-Series A&amp;R Team</div>
+      </div>
     </main>
 
-    <!-- Fixed bottom region — safe-area bottom padding baked in. Auto-hides
-         when the keyboard opens (see .is-keyboard-open in app-shell.css) so
-         it never floats above the keyboard on top of your inputs. -->
-    <footer class="app-bottombar">
-      <!-- TODO: design system bottom bar / CTA goes here -->
+    <footer class="app-bottombar" style="padding:var(--space-2) var(--space-3);">
+      <button type="button" class="btn btn-p btn-block" data-open-sheet="contact-sheet">Contact Arijit</button>
     </footer>
   </div>
 
-  <!-- Example bottom sheet — structural mechanics only (open/close, drag-down
-       transition, safe-area padding). Style its contents with your design system. -->
-  <div class="sheet-scrim" data-sheet-scrim-for="example-sheet"></div>
-  <div class="sheet" id="example-sheet" style="background:#fff;border-radius:24px 24px 0 0;padding:24px;">
-    <p>Example bottom sheet content.</p>
-    <button type="button" class="btn btn-p btn-block" data-close-sheet="example-sheet">Close</button>
+  <div class="sheet-scrim" data-sheet-scrim-for="contact-sheet"></div>
+  <div class="sheet" id="contact-sheet" style="background:#fff;border-radius:24px 24px 0 0;padding:24px;">
+    <p style="font-weight:700;margin-bottom:var(--space-2);">Contact Arijit Sen</p>
+    <p style="color:var(--muted);font-size:var(--type-1);margin-bottom:var(--space-3);">Send a direct message or request a booking. (Structural demo only — no real messaging/booking backend wired here.)</p>
+    <button type="button" class="btn btn-p btn-block" data-close-sheet="contact-sheet">Close</button>
   </div>
 
   <script src="/preview/shared/app-shell.js" defer></script>

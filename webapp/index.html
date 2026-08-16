@@ -109,23 +109,23 @@
     <button class="wb-menu-btn" id="menu-btn" aria-label="Open screen list">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
     </button>
-    <!-- Device selector + 20:9 phone-frame mockup -->
-  <div class="wb-device-selector" style="display:flex;gap:6px;align-items:center;justify-content:center;margin-bottom:var(--space-2)">
-    <button class="wb-device-btn" data-device="pixel7" aria-label="Pixel 7 (360×800)">📱 Pixel 7</button>
-    <button class="wb-device-btn wb-device-btn--active" data-device="iphone14" aria-label="iPhone 14 Pro (390×844)">📱 iPhone 14 Pro</button>
-    <button class="wb-device-btn" data-device="galaxys23" aria-label="Galaxy S23 (308×656)">📱 Galaxy S23</button>
-  </div>
-
-  <div class="phone-frame" style="--device: pixel7">
-    <div class="phone-notch" style="--device: pixel7">
-      <div class="dot" style="--device: pixel7"></div>
+    <!-- 20:9 phone-frame mockup. A device selector (Pixel 7/iPhone 14 Pro/
+         Galaxy S23) used to sit here — removed 2026-08-16 rather than
+         fixed: it was found completely non-functional on re-audit (no
+         click handler ever existed, .phone-frame never got the
+         data-device attribute the CSS keyed off), and a single real,
+         standard 360×800 frame is a reasonable fixed baseline rather than
+         reintroducing three sizes' worth of surface area to maintain. -->
+  <div class="phone-frame" id="phone-frame">
+    <div class="phone-notch">
+      <div class="dot"></div>
     </div>
-    <div class="phone-status" style="--device: pixel7">
+    <div class="phone-status">
       <div class="carrier">MusicLinkd</div>
       <div class="battery">100%</div>
     </div>
-    <iframe id="preview-frame" title="Screen preview" src="about:blank" style="--device: pixel7"></iframe>
-    <div class="phone-body" style="--device: pixel7">
+    <iframe id="preview-frame" title="Screen preview" src="about:blank"></iframe>
+    <div class="phone-body">
       <div style="position:relative;inset:0;border-radius:26px;overflow:hidden">
         <!-- screen content via iframe -->
       </div>
@@ -156,7 +156,7 @@
       background: linear-gradient(rgba(0,0,0,0.3) 0%, transparent 100%);
       pointer-events: none;
     }
-    /* Notch — same shape, position driven by --device CSS var */
+    /* Notch — fixed shape/position for the single supported 360×800 frame. */
     .phone-notch {
       position: absolute;
       top: 0; left: 50%; transform: translateX(-50%);
@@ -171,7 +171,7 @@
       background: #2C2F3A; border-radius: 50%;
       pointer-events: none;
     }
-    /* Status bar — carrier + battery, position driven by --device */
+    /* Status bar — carrier + battery, fixed for the single supported frame. */
     .phone-status {
       position: absolute;
       top: 0; left: 0; right: 0;
@@ -188,28 +188,6 @@
     }
     /* Body — the actual screen content lives inside the iframe */
     .phone-body { padding: 12px; }
-    /* Device selector buttons */
-    .wb-device-selector { margin-bottom: var(--space-2); }
-    .wb-device-btn {
-      font: 600 11px/1 'Inter', sans-serif;
-      color: var(--muted);
-      background: transparent;
-      border: 1px solid var(--line);
-      border-radius: 9999px;
-      padding: 6px 12px;
-      cursor: pointer;
-      transition: all 150ms var(--ease);
-      white-space: nowrap;
-    }
-    .wb-device-btn:hover { background: #F8F8FB; }
-    .wb-device-btn--active {
-      color: var(--pink);
-      border-color: var(--pink);
-      background: var(--pink-container);
-    }
-    /* Aspect-ratio override per device — set by JS */
-    .phone-frame[data-device="iphone14"] { aspect-ratio: 9 / 20; max-width: 390px; }
-    .phone-frame[data-device="galaxys23"] { aspect-ratio: 9 / 20; max-width: 308px; }
   </style>
   </main>
 </div>
@@ -285,9 +263,18 @@
         container.appendChild(details);
       }
 
+      // Minor edge case fixed on the same re-audit: this used to load
+      // `preselect` unconditionally whenever the loop above never matched
+      // it (e.g. a stale/hand-edited ?screen= pointing at a screen that no
+      // longer exists) — silently showing a broken iframe instead of
+      // falling back to the first real screen the way a truly-empty
+      // ?screen= already does.
       if (!frame.src || frame.src === "about:blank") {
-        if (preselect) { frame.src = preselect; }
-        else if (firstUrl) { frame.src = firstUrl; }
+        if (preselect && sorted.some((f) => (byFlow[f.key] ?? []).some((s) => `/preview/flows/${s.flowKey}/${s.screenKey}/index.html` === preselect))) {
+          frame.src = preselect;
+        } else if (firstUrl) {
+          frame.src = firstUrl;
+        }
       }
     })
     .catch((err) => {

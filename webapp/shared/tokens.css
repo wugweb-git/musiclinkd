@@ -145,6 +145,14 @@ body {
 .badge { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-1) var(--space-2); border-radius: var(--radius-4); font-size: var(--type-1); font-weight: 600; }
 .badge-av { background: rgba(34,197,94,0.12); color: #166534; }
 
+/* --- Card & chip — copied down 2026-08-16 from styleguide.html's real
+   .card-s / .chip (same source-of-truth rule as this file's header
+   comment). Needed once screens beyond Auth/OTP started getting built —
+   profile/card-shaped screens have nothing to compose with otherwise. --- */
+.card-s { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-3); padding: var(--space-4); box-shadow: var(--shadow-1); margin-bottom: var(--space-4); }
+.chip { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: var(--radius-4); background: #fff; border: 1px solid var(--line); font-size: var(--type-1); font-weight: 500; color: var(--muted); white-space: nowrap; }
+.chip.sel { background: var(--pink); border-color: var(--pink); color: #fff; }
+
 /* --- Phone frame (desktop preview chrome) — exact classes/values from styleguide.html --- */
 .phone-frame { width: 360px; background: #1a1a2e; border-radius: 36px; padding: 12px; margin: 0 auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
 .phone-screen { background: var(--paper); border-radius: 24px; overflow: hidden; height: 720px; position: relative; }

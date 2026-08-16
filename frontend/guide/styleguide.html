@@ -4,6 +4,14 @@
 <style>
 /* ===== MASTER UNIFIED DESIGN SYSTEM CSS (SINGLE SOURCE OF TRUTH) ===== */
 :root {
+    /* ===== 01 Foundation — raw scale primitives (color, type, spacing, sizing,
+       radius, border, opacity, shadow/elevation, motion). No meaning attached
+       yet; that's the Semantic layer below. Grouped per the 8-category token
+       architecture (Foundation/Semantic/Layout/Component/State/Interaction/
+       Responsive/Platform) that Layout/Component/State/Interaction/Responsive/
+       Platform already follow further down this block — this comment and the
+       "02 Semantic" one below are additive labels only, added to make that
+       existing structure explicit; no token values changed. ===== */
     /* 4-token exponential scale (r=2) — every numeric category, no exceptions.
        Legacy names below are aliases so existing usages keep working. */
     --space-1: 4px;
@@ -73,6 +81,9 @@
     --dur-medium: var(--duration-2);
     --dur-slow: var(--duration-3);
     --dur-entrance: var(--duration-4);
+    /* ===== 02 Semantic — purpose/meaning tokens (content, surface, border,
+       action, feedback/status). Everything from here down in this original
+       block is a semantic color; the raw Foundation primitives are above. ===== */
     --pink: #EA4C89;
     --black: #0D0D0D;
     --paper: #FCFCFD;
@@ -220,6 +231,14 @@
   --layout-aspect-card: 4/3;
   --layout-aspect-hero: 16/9;
   --layout-aspect-avatar: 1/1;
+  /* Column/grid counts — previously only hardcoded inline in the @media rules
+     below ("4-Column"/"3-Column"/"2-Column"/"1-Column" spec-card grids,
+     .masonry-grid column-count:3). Tokenized here so the two stay in sync;
+     values match what those real rules already use, not invented. */
+  --grid-cols-mobile: 1;
+  --grid-cols-tablet: 2;
+  --grid-cols-desktop: 3;
+  --grid-cols-wide: 4;
 
   /* ===== Component — named sizing tokens (previously prose-only in f-sizing) ===== */
   --comp-btn-h-sm: var(--sz-sm);
@@ -585,6 +604,43 @@ h1, h2, h3 {
     border: 1px solid var(--line);
     border-radius: var(--r-card);
     padding: 20px;
+}
+
+/* .visual-demo / .demo-label / .demo-row / .demo-grid were used ~131 times across this file's
+   component sections (every "Live Preview" block) but had no real definition anywhere — only
+   .visual-demo had two stray min/max-height rules (line ~1128/1135) from an unrelated responsive
+   patch. Every demo block in this file has been rendering as unstyled, un-laid-out plain <div>s:
+   no card background/border, no row/grid layout for the items inside. Added 2026-08-16 to match
+   this file's real .card-s / .spec-card / .spec-grid visual language rather than inventing a new
+   one. This is additive only — doesn't touch the existing min/max-height clamp rules below. */
+.visual-demo {
+    background: var(--surface-alt);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    padding: var(--space-3);
+    margin-bottom: var(--space-3);
+}
+
+.demo-label {
+    font-size: var(--type-1);
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-2);
+}
+
+.demo-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    align-items: center;
+}
+
+.demo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--space-2);
 }
 
 .swc {
@@ -1062,9 +1118,12 @@ button, input, select, textarea, .chip, .btn, .sgt, .platform-tab {
 <div class="phone-body">
 <div style="font-size:var(--type-2);font-weight:700;margin-bottom:8px">Book Studio</div>
 <div class="card-s" style="margin-bottom:8px">
-<div style="font-size:var(--type-1);font-weight:600">North Room · Andheri</div>
-<div style="font-size:var(--type-1);color:var(--muted)">Mon, 20 Aug · 2:00–6:00 PM</div>
-<div style="font-weight:700;margin-top:4px">₹7,200</div>
+<!-- Real data: dist/preview/flows/booking/booking_summary/screen.json. Was a
+     fabricated "North Room / 20 Aug / ₹7,200" placeholder. See the booking
+     provenance note at #ml-booking. -->
+<div style="font-size:var(--type-1);font-weight:600">Yash Raj Sound Studios</div>
+<div style="font-size:var(--type-1);color:var(--muted)">Wed, 12 Aug · 10:00 AM – 2:00 PM</div>
+<div style="font-weight:700;margin-top:4px">₹32,000</div>
 <div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-p btn-sm" style="flex:1">Confirm</button><button class="btn btn-s btn-sm" style="flex:1">Cancel</button></div>
 </div>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
@@ -1447,8 +1506,9 @@ input:checked+.slider:before{transform:translateX(20px)}
     </div>
     <div class="v">Enterprise Design System · v5.5 Synced</div>
 </div>
+
 <nav style="padding:0 8px">
-<div class="sg open"><button class="sgt" onclick="tgg(this)" aria-expanded="false">00 Product<span class="ch">▶</span></button><div class="sgi"><a href="#strategy">Marketplace Architecture</a><a href="#f-philosophy">Design Philosophy</a><a href="#f-principles">Design Principles</a><a href="#f-responsive">Responsive Behaviour</a><a href="#bl-strategy">Strategy Cards</a><a href="#product-overview">Product Overview</a><a href="#product-vision">Vision</a><a href="#product-philosophy">Design Philosophy</a><a href="#p-personas">Roles & Personas</a><a href="#p-modules">Platform Modules</a><a href="#p-journeys">User Journeys</a><a href="#p-catalog">Languages & Catalog</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">01 Brand<span class="ch">▶</span></button><div class="sgi"><a href="#brand">MusicLinkd</a><a href="#f-colors">Colors</a><a href="#f-icons-ext">Iconography Extended</a><a href="#icons">Lucide Icon Library</a><a href="#icons-gestalt">Gestalt Icon Library</a><a href="#icon-states">Icon States & Sizes</a><a href="#util-illustrations">Illustration Library</a><a href="#util-textures">Texture & Background Library</a><a href="#util-motion-assets">GIF & Lottie Library</a><a href="#brand-identity">Brand Identity</a><a href="#brand-colors">Brand Colors</a><a href="#brand-asset-library">Asset Library</a></div></div><div class="sg open"><button class="sgt" onclick="tgg(this)" aria-expanded="false">02 Foundations<span class="ch">▶</span></button><div class="sgi"><a href="#f-typo">Typography</a><a href="#f-typo-ext">Typography Extended</a><a href="#f-spacing">Spacing</a><a href="#f-sizing">Sizing Scale</a><a href="#f-radius">Radius</a><a href="#f-elevation">Elevation & Borders</a><a href="#f-elev-levels">Elevation Levels</a><a href="#f-border-tk">Border Tokens</a><a href="#f-opacity">Opacity Tokens</a><a href="#f-zindex">Z-Index</a><a href="#f-layout">Layout Rules</a><a href="#f-comp-rules">Component Rules</a><a href="#lay-shell">App Shell</a><a href="#lay-grid">Adaptive Grid — 4 Breakpoints</a><a href="#f-states">Component States</a><a href="#f-grid">Grid</a><a href="#f-breakpoints">Breakpoints</a><a href="#f-motion">Motion</a><a href="#f-semantic">Semantic Colors</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">03 Design Tokens<span class="ch">▶</span></button><div class="sgi"><a href="#tokens">Machine-Readable Tokens</a><a href="#f-motion-tk">Motion Tokens</a></div></div><div class="sg open"><button class="sgt" onclick="tgg(this)" aria-expanded="false">04 Primitives<span class="ch">▶</span></button><div class="sgi"><a href="#c-btns">Buttons</a><a href="#c2-iconbtn">Icon Button</a><a href="#c-inp">Input Fields</a><a href="#fm-select">Select</a><a href="#fm-radio">Radio</a><a href="#fm-checkbox">Checkbox</a><a href="#fm-toggle">Toggle</a><a href="#fm-upload">Upload</a><a href="#fm-textarea">Textarea</a><a href="#c-chips">Chips</a><a href="#c2-tag">Tag</a><a href="#c-srch">Search Bar</a><a href="#sr-global">Global Search</a><a href="#sr-filters">Search Filters</a><a href="#sr-pills">Filter Pills</a><a href="#c-badges">Status Badges & Verification</a><a href="#p2-badges">Trust Badges</a><a href="#vd-badges">Badge Variants</a><a href="#c-dialogs">Dialogs & Bottom Sheet</a><a href="#c-toast">Toast Notification</a><a href="#c-empty">Empty States</a><a href="#c2-tooltip">Tooltip</a><a href="#c2-tabs">Tabs</a><a href="#c2-accordion">Accordion</a><a href="#c2-timeline">Timeline</a><a href="#c2-skeleton">Skeleton Loading</a><a href="#c2-progress">Progress Bar</a><a href="#c2-divider">Divider</a><a href="#anatomy-btn">Button Anatomy</a><a href="#anatomy-input">Text Field Anatomy</a><a href="#anatomy-chip">Chip Anatomy</a><a href="#anatomy-sheet">Bottom Sheet Anatomy</a><a href="#anatomy-topbar">Top App Bar Anatomy</a><a href="#anatomy-fab">FAB Anatomy</a><a href="#p-btn">Button</a><a href="#p-input">Input</a><a href="#p-chip">Chip</a><a href="#p-search">Search</a><a href="#p-nav">Navigation</a><a href="#p-fab">FAB</a><a href="#p-badge">Badge</a><a href="#p-dialog">Dialog</a><a href="#p-toast">Toast</a><a href="#p-snackbar">Snackbar</a><a href="#p-progress">Progress</a><a href="#p-skeleton">Skeleton</a><a href="#c2-sidesheet">Side Sheet</a><a href="#c2-dropdown">Dropdown Menu</a><a href="#c2-timepicker">Time Picker</a><a href="#c2-m3navbar">M3 Navigation Bar</a><a href="#c2-spinner">Loading Spinner</a><a href="#c2-multichip">Multi-Select Chips with Remove</a><a href="#c2-supporting">Supporting Text</a><a href="#state-demos">Component State Demos</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">05 Native Components<span class="ch">▶</span></button><div class="sgi"><a href="#na-topbar">Top App Bar</a><a href="#na-fab">Floating Action Button</a><a href="#na-drawer">Navigation Drawer</a><a href="#na-rail">Navigation Rail</a><a href="#na-tabs">Tabs</a><a href="#na-segmented">Segmented Buttons</a><a href="#na-progress">Progress Indicators</a><a href="#na-slider">Slider</a><a href="#na-switch">Switch</a><a href="#na-datepicker">Date Picker</a><a href="#na-snackbar">Snackbar</a><a href="#na-otp">OTP Input</a><a href="#na-search-suggest">Search Suggestions</a><a href="#na-filter-sheet">Filter Sheet</a><a href="#na-permission">Permission Dialog</a><a href="#na-camera">Camera Picker</a><a href="#na-audio-rec">Audio Recorder</a><a href="#na-scrubber">Audio Scrubber</a><a href="#lay-android">Android App Grids</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">06 MusicLinkd Components<span class="ch">▶</span></button><div class="sgi"><a href="#cd-talent">Talent Discovery Card</a><a href="#cd-album">Ambient Album Card</a><a href="#vd-cards">Artist Grid Card</a><a href="#vd-row-card">Artist Row Card</a><a href="#vd-featured-studio">Featured Studio Card</a><a href="#vd-recent-project">Recent Project Card</a><a href="#vd-recommended">Recommended Collaborator</a><a href="#vd-track-card">Track Card</a><a href="#vd-msg">Message Bubble</a><a href="#vd-chat-list">Chat List</a><a href="#vd-typing">Typing Indicator</a><a href="#vd-attachments">Attachments</a><a href="#vd-booking">Calendar</a><a href="#vd-time-slot">Time Slots</a><a href="#vd-booking-summary">Booking Summary</a><a href="#vd-success">Success State</a><a href="#vd-reviews">Rating Breakdown</a><a href="#vd-write-review">Write Review</a><a href="#vd-notif">Notification List</a><a href="#vd-notif-toggle">Notification Toggle</a><a href="#c-audio">Audio Player & Waveform</a><a href="#mixer">Multi-Track Stem Mixer</a><a href="#vd-audio">Mini Player</a><a href="#vd-persistent-audio">Persistent Audio Player</a><a href="#vd-equalizer">Equalizer</a><a href="#pf-avatar">Avatar</a><a href="#pf-header">User Header</a><a href="#pf-stats">Profile Stats</a><a href="#pr-talent">Talent</a><a href="#pr-band">Band</a><a href="#pr-biz">Business</a><a href="#pr-venue">Venue</a><a href="#mp-req">Direct Request</a><a href="#mp-status">Request Status Tracker</a><a href="#mp-credits">Credits Engine</a><a href="#p2-credits">Credit Verification</a><a href="#ml-cards">Cards</a><a href="#ml-studio">Studio Card</a><a href="#ml-band">Band Card</a><a href="#ml-project">Project Card</a><a href="#ml-opp">Opportunity Card</a><a href="#ml-application">Application Card</a><a href="#ml-rental">Rental Card</a><a href="#ml-review">Review Card</a><a href="#ml-booking">Booking</a><a href="#ml-notif">Notification</a><a href="#ml-msg">Message</a><a href="#ml-audio">Audio</a><a href="#ml-profile">Profile</a><a href="#ml-marketplace">Marketplace</a><a href="#ml-badges">Badges</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">07 Blocks<span class="ch">▶</span></button><div class="sgi"><a href="#bl-search">Search Block</a><a href="#bl-trust">Trust Engine Card</a><a href="#bl-status">Status Components</a><a href="#bl-audio">Audio Preview Block</a><a href="#bl-stats">Statistics Block</a><a href="#lay-heroes">Heroes</a><a href="#trust">Credits Verification Loop</a><a href="#vd-blocks">Trending Block</a><a href="#vd-greeting">Greeting Block</a><a href="#vd-quick-actions">Quick Actions</a><a href="#vd-continue">Continue Working</a><a href="#vd-featured-artists">Featured Artists</a><a href="#vd-equipment">Equipment Block</a><a href="#vd-categories">Categories Block</a><a href="#sc-testimonial">Testimonial</a><a href="#sc-feed">Activity Feed</a><a href="#sc-comment">Comment</a><a href="#db-kpi">KPI Cards</a><a href="#db-charts">Charts</a><a href="#db-progress">Progress Cards</a><a href="#vd-analytics">Metric Card</a><a href="#vd-insights">Insights</a><a href="#vd-scorecard">Analytics Scorecard</a><a href="#vd-workspace">Workspace Card</a><a href="#bl-hero">Hero</a><a href="#bl-discovery">Discovery</a><a href="#bl-marketplace">Marketplace</a><a href="#bl-booking">Booking</a><a href="#bl-messaging">Messaging</a><a href="#bl-profile">Profile</a><a href="#bl-dashboard">Dashboard</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">08 Patterns<span class="ch">▶</span></button><div class="sgi"><a href="#p-disc">Discovery Feed</a><a href="#p-srch">Search Results</a><a href="#p-mkt">Marketplace</a><a href="#p-msg">Messaging</a><a href="#p-book">Booking Flow</a><a href="#p-checkout">Checkout</a><a href="#p2-grid">Discovery Grid</a><a href="#p2-swipe">Swipe Flow</a><a href="#p2-header">Profile Header</a><a href="#p2-cta">CTA Group</a><a href="#p2-filter">Filter Bar</a><a href="#p2-sticky">Sticky Actions</a><a href="#pat-auth">Authentication</a><a href="#pat-onboard">Onboarding Flow</a><a href="#pat-hiring">Hiring Flow</a><a href="#pat-studio-book">Studio Booking Flow</a><a href="#pat-project">Project Creation Flow</a><a href="#pat-reputation">Reputation Flow</a><a href="#pat-settings">Settings Flow</a><a href="#swipe">Tinder-Style Deck</a><a href="#brief">8-Step Project Brief</a><a href="#pat-messaging">Messaging</a><a href="#pat-marketplace">Marketplace</a><a href="#pat-reviews">Reviews</a><a href="#pat-booking">Studio Booking</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">11 Motion<span class="ch">▶</span></button><div class="sgi"><a href="#motion">Timing & Easing</a><a href="#f-motion-principles">Motion Principles</a><a href="#motion-spec">Timing & Easing (Spec)</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">12 Accessibility<span class="ch">▶</span></button><div class="sgi"><a href="#f-a11y">Accessibility</a><a href="#a11y">Tokens</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">13 Content<span class="ch">▶</span></button><div class="sgi"><a href="#f-voice">Voice & Tone</a><a href="#content">Guidelines</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">14 AI<span class="ch">▶</span></button><div class="sgi"><a href="#prompts">Prompt Library</a><a href="#util-ai">AI Assist Tray</a><a href="#ai-prompts-library">Google AI Studio Prompt Library</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">15 Developer Documentation<span class="ch">▶</span></button><div class="sgi"><a href="#util-flow">Flow Containers</a><a href="#util-workspace">Workspace Layouts</a><a href="#cr-drop">Stem Ingestion Dropzone</a><a href="#cr-edit">Inline Profile Editor</a><a href="#cr-settings">Settings Matrix</a><a href="#dev-docs">Architecture</a><a href="#widget-registry">Widget Registry</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">16 Android Platform<span class="ch">▶</span></button><div class="sgi"><a href="#android-platform">System Bars, Insets & Edge-to-Edge</a><a href="#gestures-native">Gestures & Native Keyboard</a><a href="#native-component-catalog">Native Component Catalog</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">17 Imagery<span class="ch">▶</span></button><div class="sgi"><a href="#imagery">Imagery & Visual Assets</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">24 Inspired<span class="ch">▶</span></button><div class="sgi"><a href="#vd-hero-gradient">Gradient Hero Cards</a><a href="#vd-avatar-stack">Avatar Stacks & Social Proof</a><a href="#vd-content-design">Content Design Patterns</a><a href="#vd-apple-music">Artist Cards & Playlist Rows</a><a href="#vd-pinterest">Masonry Card Grid</a><a href="#vd-snapchat">Full-Bleed Bold Cards</a><a href="#vd-trust-block">Trust & Verification Block</a><a href="#vd-pricing">Pricing Plans</a><a href="#vd-footer-cta">Footer CTA Block</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">25 Effects<span class="ch">▶</span></button><div class="sgi"><a href="#vd-effects">Visual Effects & Textures</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">26 Gen-Z<span class="ch">▶</span></button><div class="sgi"><a href="#vd-genz">Bold Music Brand Blocks</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">27 More<span class="ch">▶</span></button><div class="sgi"><a href="#vd-more-inspired">Interactive & Animated Components</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">More<span class="ch">▶</span></button><div class="sgi"><a href="#util-skeleton">Skeleton Loaders</a><a href="#util-error">Error Boundary</a><a href="#util-offline">Offline Banner</a><a href="#util-empty">Empty States</a><a href="#util-shimmer">Shimmer</a><a href="#util-qr">QR Share</a><a href="#util-adaptive">Adaptive Banner</a><a href="#util-persistent-audio">Persistent Audio Player</a><a href="#util-success">Animated Success</a><a href="#nav-bar">Navbar</a><a href="#nav-tabs2">Section Tabs</a><a href="#nav-switch">Segmented Switch</a><a href="#nav-breadcrumb">Breadcrumb</a><a href="#c-nav">Bottom Navigation</a><a href="#lay-nav">Sticky Nav</a><a href="#p2-metrics">Metrics Row</a><a href="#more">Uncategorized</a><a href="#pattern-swipe-deck">Swipe Deck</a><a href="#pattern-brief-wizard">Brief Wizard</a><a href="#nav-bar-alt">Navbar (Alt)</a></div></div>
+<div class="sg open"><button class="sgt" onclick="tgg(this)" aria-expanded="false">00 Product<span class="ch">▶</span></button><div class="sgi"><a href="#strategy">Marketplace Architecture</a><a href="#f-philosophy">Design Philosophy</a><a href="#f-principles">Design Principles</a><a href="#f-responsive">Responsive Behaviour</a><a href="#bl-strategy">Strategy Cards</a><a href="#product-overview">Product Overview</a><a href="#product-vision">Vision</a><a href="#product-philosophy">Design Philosophy</a><a href="#p-personas">Roles & Personas</a><a href="#p-modules">Platform Modules</a><a href="#p-journeys">User Journeys</a><a href="#p-catalog">Languages & Catalog</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">01 Brand<span class="ch">▶</span></button><div class="sgi"><a href="#brand">MusicLinkd</a><a href="#f-colors">Colors</a><a href="#f-icons-ext">Iconography Extended</a><a href="#icons">Lucide Icon Library</a><a href="#icons-gestalt">Gestalt Icon Library</a><a href="#icon-states">Icon States & Sizes</a><a href="#util-illustrations">Illustration Library</a><a href="#util-textures">Texture & Background Library</a><a href="#util-motion-assets">GIF & Lottie Library</a><a href="#brand-identity">Brand Identity</a><a href="#brand-colors">Brand Colors</a><a href="#brand-asset-library">Asset Library</a></div></div><div class="sg open"><button class="sgt" onclick="tgg(this)" aria-expanded="false">02 Foundations<span class="ch">▶</span></button><div class="sgi"><a href="#f-typo">Typography</a><a href="#f-typo-ext">Typography Extended</a><a href="#f-spacing">Spacing</a><a href="#f-sizing">Sizing Scale</a><a href="#f-radius">Radius</a><a href="#f-elevation">Elevation & Borders</a><a href="#f-elev-levels">Elevation Levels</a><a href="#f-border-tk">Border Tokens</a><a href="#f-opacity">Opacity Tokens</a><a href="#f-zindex">Z-Index</a><a href="#f-layout">Layout Rules</a><a href="#f-comp-rules">Component Rules</a><a href="#lay-shell">App Shell</a><a href="#lay-grid">Adaptive Grid — 4 Breakpoints</a><a href="#f-states">Component States</a><a href="#f-grid">Grid</a><a href="#f-breakpoints">Breakpoints</a><a href="#f-motion">Motion</a><a href="#f-semantic">Semantic Colors</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">03 Design Tokens<span class="ch">▶</span></button><div class="sgi"><a href="#tokens">Machine-Readable Tokens</a><a href="#f-motion-tk">Motion Tokens</a></div></div><div class="sg open"><button class="sgt" onclick="tgg(this)" aria-expanded="false">04 Primitives<span class="ch">▶</span></button><div class="sgi"><a href="#c-btns">Buttons</a><a href="#c-btns">Icon Button</a><a href="#c-inp">Input Fields</a><a href="#fm-select">Select</a><a href="#fm-radio">Radio</a><a href="#fm-checkbox">Checkbox</a><a href="#fm-toggle">Toggle</a><a href="#fm-upload">Upload</a><a href="#fm-textarea">Textarea</a><a href="#c-chips">Chips</a><a href="#c-chips">Tag</a><a href="#c-srch">Search Bar</a><a href="#sr-global">Global Search</a><a href="#sr-filters">Search Filters</a><a href="#sr-pills">Filter Pills</a><a href="#c-badges">Status Badges & Verification</a><a href="#c-badges">Trust Badges</a><a href="#c-badges">Badge Variants</a><a href="#c-dialogs">Dialogs & Bottom Sheet</a><a href="#c-toast">Toast Notification</a><a href="#c-empty">Empty States</a><a href="#c2-tooltip">Tooltip</a><a href="#c2-tabs">Tabs</a><a href="#c2-accordion">Accordion</a><a href="#c2-timeline">Timeline</a><a href="#c2-skeleton">Skeleton Loading</a><a href="#na-progress">Progress Bar</a><a href="#c2-divider">Divider</a><a href="#anatomy-btn">Button Anatomy</a><a href="#anatomy-input">Text Field Anatomy</a><a href="#anatomy-chip">Chip Anatomy</a><a href="#anatomy-sheet">Bottom Sheet Anatomy</a><a href="#anatomy-topbar">Top App Bar Anatomy</a><a href="#anatomy-fab">FAB Anatomy</a><a href="#c-btns">Button</a><a href="#c-inp">Input</a><a href="#c-chips">Chip</a><a href="#c-srch">Search</a><a href="#c-nav">Navigation</a><a href="#na-fab">FAB</a><a href="#c-badges">Badge</a><a href="#c-dialogs">Dialog</a><a href="#c-toast">Toast</a><a href="#na-snackbar">Snackbar</a><a href="#na-progress">Progress</a><a href="#c2-skeleton">Skeleton</a><a href="#c2-sidesheet">Side Sheet</a><a href="#c2-dropdown">Dropdown Menu</a><a href="#c2-timepicker">Time Picker</a><a href="#c2-m3navbar">M3 Navigation Bar</a><a href="#c2-spinner">Loading Spinner</a><a href="#c2-multichip">Multi-Select Chips with Remove</a><a href="#c2-supporting">Supporting Text</a><a href="#state-demos">Component State Demos</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">05 Native Components<span class="ch">▶</span></button><div class="sgi"><a href="#na-topbar">Top App Bar</a><a href="#na-fab">Floating Action Button</a><a href="#na-drawer">Navigation Drawer</a><a href="#na-rail">Navigation Rail</a><a href="#na-tabs">Tabs</a><a href="#na-segmented">Segmented Buttons</a><a href="#na-progress">Progress Indicators</a><a href="#na-slider">Slider</a><a href="#na-switch">Switch</a><a href="#na-datepicker">Date Picker</a><a href="#na-snackbar">Snackbar</a><a href="#na-otp">OTP Input</a><a href="#na-search-suggest">Search Suggestions</a><a href="#na-filter-sheet">Filter Sheet</a><a href="#na-permission">Permission Dialog</a><a href="#na-camera">Camera Picker</a><a href="#na-audio-rec">Audio Recorder</a><a href="#na-scrubber">Audio Scrubber</a><a href="#lay-android">Android App Grids</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">06 MusicLinkd Components<span class="ch">▶</span></button><div class="sgi"><a href="#cd-talent">Talent Discovery Card</a><a href="#cd-album">Ambient Album Card</a><a href="#vd-cards">Artist Grid Card</a><a href="#vd-row-card">Artist Row Card</a><a href="#vd-featured-studio">Featured Studio Card</a><a href="#vd-recent-project">Recent Project Card</a><a href="#vd-recommended">Recommended Collaborator</a><a href="#vd-track-card">Track Card</a><a href="#vd-msg">Message Bubble</a><a href="#vd-chat-list">Chat List</a><a href="#vd-typing">Typing Indicator</a><a href="#vd-attachments">Attachments</a><a href="#vd-booking">Calendar</a><a href="#vd-time-slot">Time Slots</a><a href="#vd-booking-summary">Booking Summary</a><a href="#vd-success">Success State</a><a href="#vd-reviews">Rating Breakdown</a><a href="#vd-write-review">Write Review</a><a href="#vd-notif">Notification List</a><a href="#vd-notif-toggle">Notification Toggle</a><a href="#c-audio">Audio Player & Waveform</a><a href="#mixer">Multi-Track Stem Mixer</a><a href="#vd-audio">Mini Player</a><a href="#vd-persistent-audio">Persistent Audio Player</a><a href="#vd-equalizer">Equalizer</a><a href="#pf-avatar">Avatar</a><a href="#pf-header">User Header</a><a href="#pf-stats">Profile Stats</a><a href="#pr-talent">Talent</a><a href="#pr-band">Band</a><a href="#pr-biz">Business</a><a href="#pr-venue">Venue</a><a href="#mp-req">Direct Request</a><a href="#mp-status">Request Status Tracker</a><a href="#mp-credits">Credits Engine</a><a href="#p2-credits">Credit Verification</a><a href="#ml-cards">Cards</a><a href="#ml-studio">Studio Card</a><a href="#ml-band">Band Card</a><a href="#ml-project">Project Card</a><a href="#ml-opp">Opportunity Card</a><a href="#ml-application">Application Card</a><a href="#ml-rental">Rental Card</a><a href="#ml-review">Review Card</a><a href="#ml-booking">Booking</a><a href="#ml-notif">Notification</a><a href="#ml-msg">Message</a><a href="#ml-audio">Audio</a><a href="#ml-profile">Profile</a><a href="#ml-marketplace">Marketplace</a><a href="#ml-badges">Badges</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">07 Blocks<span class="ch">▶</span></button><div class="sgi"><a href="#bl-search">Search Block</a><a href="#bl-trust">Trust Engine Card</a><a href="#bl-status">Status Components</a><a href="#bl-audio">Audio Preview Block</a><a href="#bl-stats">Statistics Block</a><a href="#lay-heroes">Heroes</a><a href="#trust">Credits Verification Loop</a><a href="#vd-blocks">Trending Block</a><a href="#vd-greeting">Greeting Block</a><a href="#vd-quick-actions">Quick Actions</a><a href="#vd-continue">Continue Working</a><a href="#vd-featured-artists">Featured Artists</a><a href="#vd-equipment">Equipment Block</a><a href="#vd-categories">Categories Block</a><a href="#sc-testimonial">Testimonial</a><a href="#sc-feed">Activity Feed</a><a href="#sc-comment">Comment</a><a href="#db-kpi">KPI Cards</a><a href="#db-charts">Charts</a><a href="#db-progress">Progress Cards</a><a href="#vd-analytics">Metric Card</a><a href="#vd-insights">Insights</a><a href="#vd-scorecard">Analytics Scorecard</a><a href="#vd-workspace">Workspace Card</a><a href="#bl-hero">Hero</a><a href="#bl-discovery">Discovery</a><a href="#bl-marketplace">Marketplace</a><a href="#bl-booking">Booking</a><a href="#bl-messaging">Messaging</a><a href="#bl-profile">Profile</a><a href="#bl-dashboard">Dashboard</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">08 Patterns<span class="ch">▶</span></button><div class="sgi"><a href="#p-disc">Discovery Feed</a><a href="#p-srch">Search Results</a><a href="#p-mkt">Marketplace</a><a href="#p-msg">Messaging</a><a href="#p-book">Booking Flow</a><a href="#p-checkout">Checkout</a><a href="#p2-grid">Discovery Grid</a><a href="#p2-swipe">Swipe Flow</a><a href="#p2-header">Profile Header</a><a href="#p2-cta">CTA Group</a><a href="#p2-filter">Filter Bar</a><a href="#p2-sticky">Sticky Actions</a><a href="#pat-auth">Authentication</a><a href="#pat-onboard">Onboarding Flow</a><a href="#pat-hiring">Hiring Flow</a><a href="#pat-studio-book">Studio Booking Flow</a><a href="#pat-project">Project Creation Flow</a><a href="#pat-reputation">Reputation Flow</a><a href="#pat-settings">Settings Flow</a><a href="#swipe">Tinder-Style Deck</a><a href="#brief">8-Step Project Brief</a><a href="#pat-messaging">Messaging</a><a href="#pat-marketplace">Marketplace</a><a href="#pat-reviews">Reviews</a><a href="#pat-booking">Studio Booking</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">11 Motion<span class="ch">▶</span></button><div class="sgi"><a href="#motion">Timing & Easing</a><a href="#f-motion-principles">Motion Principles</a><a href="#motion-spec">Timing & Easing (Spec)</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">12 Accessibility<span class="ch">▶</span></button><div class="sgi"><a href="#f-a11y">Accessibility</a><a href="#a11y">Tokens</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">13 Content<span class="ch">▶</span></button><div class="sgi"><a href="#f-voice">Voice & Tone</a><a href="#content">Guidelines</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">14 AI<span class="ch">▶</span></button><div class="sgi"><a href="#prompts">Prompt Library</a><a href="#util-ai">AI Assist Tray</a><a href="#ai-prompts-library">Google AI Studio Prompt Library</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">15 Developer Documentation<span class="ch">▶</span></button><div class="sgi"><a href="#util-flow">Flow Containers</a><a href="#util-workspace">Workspace Layouts</a><a href="#cr-drop">Stem Ingestion Dropzone</a><a href="#cr-edit">Inline Profile Editor</a><a href="#cr-settings">Settings Matrix</a><a href="#dev-docs">Architecture</a><a href="#widget-registry">Widget Registry</a><a href="#admin-panel">Admin Panel</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">16 Android Platform<span class="ch">▶</span></button><div class="sgi"><a href="#android-platform">System Bars, Insets & Edge-to-Edge</a><a href="#gestures-native">Gestures & Native Keyboard</a><a href="#native-component-catalog">Native Component Catalog</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">17 Imagery<span class="ch">▶</span></button><div class="sgi"><a href="#imagery">Imagery & Visual Assets</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">18 Not Built<span class="ch">▶</span></button><div class="sgi"><a href="#not-built">Not Built (with reasons)</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">24 Inspired<span class="ch">▶</span></button><div class="sgi"><a href="#vd-hero-gradient">Gradient Hero Cards</a><a href="#vd-avatar-stack">Avatar Stacks & Social Proof</a><a href="#vd-content-design">Content Design Patterns</a><a href="#vd-apple-music">Artist Cards & Playlist Rows</a><a href="#vd-pinterest">Masonry Card Grid</a><a href="#vd-snapchat">Full-Bleed Bold Cards</a><a href="#vd-trust-block">Trust & Verification Block</a><a href="#vd-pricing">Pricing Plans</a><a href="#vd-footer-cta">Footer CTA Block</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">25 Effects<span class="ch">▶</span></button><div class="sgi"><a href="#vd-effects">Visual Effects & Textures</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">26 Gen-Z<span class="ch">▶</span></button><div class="sgi"><a href="#vd-genz">Bold Music Brand Blocks</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">27 More<span class="ch">▶</span></button><div class="sgi"><a href="#vd-more-inspired">Interactive & Animated Components</a></div></div><div class="sg"><button class="sgt" onclick="tgg(this)" aria-expanded="false">More<span class="ch">▶</span></button><div class="sgi"><a href="#util-skeleton">Skeleton Loaders</a><a href="#util-error">Error Boundary</a><a href="#util-offline">Offline Banner</a><a href="#util-empty">Empty States</a><a href="#util-shimmer">Shimmer</a><a href="#util-qr">QR Share</a><a href="#util-adaptive">Adaptive Banner</a><a href="#util-persistent-audio">Persistent Audio Player</a><a href="#util-success">Animated Success</a><a href="#nav-bar">Navbar</a><a href="#nav-tabs2">Section Tabs</a><a href="#nav-switch">Segmented Switch</a><a href="#nav-breadcrumb">Breadcrumb</a><a href="#c-nav">Bottom Navigation</a><a href="#lay-nav">Sticky Nav</a><a href="#p2-metrics">Metrics Row</a><a href="#more">Uncategorized</a><a href="#pattern-swipe-deck">Swipe Deck</a><a href="#pattern-brief-wizard">Brief Wizard</a><a href="#nav-bar-alt">Navbar (Alt)</a></div></div>
 </nav>
 <div style="padding:10px 14px 0;border-top:1px solid var(--line);margin-top:10px;font-size:var(--type-1);color:var(--muted)">Canonical: <code>README.md</code> · <code>tokens.json</code></div>
 </aside>
@@ -1633,25 +1693,8 @@ input:checked+.slider:before{transform:translateX(20px)}
 <tr><td>Audio-First</td><td>Waveform previews on every card.</td></tr>
 <tr><td>Editorial</td><td>Generous spacing, clear hierarchy.</td></tr></table>
 </section>
-<section class="sec" id="product-philosophy">
-<button class="copy-link-btn" onclick="copyLink('product-philosophy')">🔗</button>
-<div class="eyebrow">00 Product</div>
-<h2>Design Philosophy <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--type-1);color:var(--muted);font-weight:400">v4.0</span></h2>
-<p class="desc">MusicLinkd is a professional network for music — not a social feed. Every interaction should feel like walking into a well-curated studio: warm, professional, and built for serious work.</p>
-<table class="token-table"><tr><th>Principle</th><th>Rule</th></tr>
-<tr><td>Clarity over cleverness</td><td>Plain language, obvious actions</td></tr>
-<tr><td>Audio over text</td><td>Always show waveform previews</td></tr>
-<tr><td>Verified over claimed</td><td>Credits engine, not bio claims</td></tr>
-<tr><td>Generous over cramped</td><td>64px section padding, 24px card padding</td></tr>
-<tr><td>Pink for action</td><td>var(--pink) only on CTAs and active states</td></tr></table>
-<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:16px">
-<div class="card-s hl" style="text-align:center;padding:14px"><span style="font-size:var(--type-3)">🎭</span><div style="font-size:var(--fs-10);font-weight:600;margin-top:4px">Role</div><p style="font-size:var(--fs-9);color:var(--muted)">Singer/Producer/DJ</p></div>
-<div style="display:flex;align-items:center;justify-content:center;font-size:var(--fs-h3);color:var(--muted)">→</div>
-<div class="card-s hl" style="text-align:center;padding:14px"><span style="font-size:var(--type-3)">📸</span><div style="font-size:var(--fs-10);font-weight:600;margin-top:4px">Photo</div><p style="font-size:var(--fs-9);color:var(--muted)">1:1 crop</p></div>
-<div style="display:flex;align-items:center;justify-content:center;font-size:var(--fs-h3);color:var(--muted)">→</div>
-<div class="card-s hl" style="text-align:center;padding:14px"><span style="font-size:var(--type-3)"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span><div style="font-size:var(--fs-10);font-weight:600;margin-top:4px">Genres</div><p style="font-size:var(--fs-9);color:var(--muted)">Multi-select chips</p></div>
-</div>
-</section>
+
+
 
 <!-- ============================================================
      00 PRODUCT — ROLES & PERSONAS
@@ -2281,19 +2324,7 @@ input:checked+.slider:before{transform:translateX(20px)}
 <div style="background:var(--black);color:#fff;border-radius:12px;padding:20px;text-align:center"><span style="color:var(--pink);font-size:var(--type-1);font-weight:700">Dark Feature Hero</span><br><span style="font-size:var(--type-1);color:#B8BAC7">Headline · Explanation · CTA</span></div>
 <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;font-size:var(--type-1);color:var(--muted)">80px Sticky Nav · backdrop-blur · border-b</div>
 </div>
-</section>
-<section class="sec" id="lay-grid">
-<button class="copy-link-btn" onclick="copyLink('lay-grid')">🔗</button>
-<div class="eyebrow">02 Foundations</div>
-<h2>Adaptive Grid — 4 Breakpoints <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--type-1);color:var(--muted);font-weight:400">v4.0</span></h2>
 
-<table class="token-table" style="margin-bottom:12px"><tr><th>Breakpoint</th><th>Width</th><th>Columns</th><th>Why</th></tr><tr><td>Mobile</td><td>0–767px</td><td>2-col</td><td>Primary experience · 360dp</td></tr><tr><td>Tablet</td><td>768px</td><td>4-col</td><td>iPad, foldables · 24dp gap</td></tr><tr><td>Desktop</td><td>1024px</td><td>8-col</td><td>Laptops · 32dp gutters</td></tr><tr><td>Wide</td><td>1440px</td><td>12-col</td><td>Large monitors · 40dp gutters</td></tr></table>
-<div style="display:flex;flex-direction:column;gap:10px;max-width:480px">
-<div style="display:flex;gap:8px;align-items:center"><span style="font-size:var(--fs-9);font-weight:600;width:60px">Mobile</span><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;flex:1"><div style="background:var(--pink);opacity:0.2;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.2;border-radius:4px;height:24px"></div></div></div>
-<div style="display:flex;gap:8px;align-items:center"><span style="font-size:var(--fs-9);font-weight:600;width:60px">Tablet</span><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;flex:1"><div style="background:var(--pink);opacity:0.25;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.25;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.25;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.25;border-radius:4px;height:24px"></div></div></div>
-<div style="display:flex;gap:8px;align-items:center"><span style="font-size:var(--fs-9);font-weight:600;width:60px">Desktop</span><div style="display:grid;grid-template-columns:repeat(8,1fr);gap:8px;flex:1"><div style="background:var(--pink);opacity:0.3;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.3;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.3;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.3;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.3;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.3;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.3;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.3;border-radius:4px;height:24px"></div></div></div>
-<div style="display:flex;gap:8px;align-items:center"><span style="font-size:var(--fs-9);font-weight:600;width:60px">Wide</span><div style="display:grid;grid-template-columns:repeat(12,1fr);gap:10px;flex:1"><div style="background:var(--pink);opacity:0.35;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.35;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.35;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.35;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.35;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.35;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.35;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.35;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.35;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.35;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.35;border-radius:4px;height:24px"></div><div style="background:var(--pink);opacity:0.35;border-radius:4px;height:24px"></div></div></div>
-</div>
 </section>
 <section class="sec" id="f-states">
 <button class="copy-link-btn" onclick="copyLink('f-states')">🔗</button>
@@ -3351,9 +3382,12 @@ input:checked+.slider:before{transform:translateX(20px)}
 <div class="phone-body">
 <div style="font-size:var(--type-2);font-weight:700;margin-bottom:8px">Book Studio</div>
 <div class="card-s" style="margin-bottom:8px">
-<div style="font-size:var(--type-1);font-weight:600">North Room · Andheri</div>
-<div style="font-size:var(--type-1);color:var(--muted)">Mon, 20 Aug · 2:00–6:00 PM</div>
-<div style="font-weight:700;margin-top:4px">₹7,200</div>
+<!-- Real data: dist/preview/flows/booking/booking_summary/screen.json. Was a
+     fabricated "North Room / 20 Aug / ₹7,200" placeholder. See the booking
+     provenance note at #ml-booking. -->
+<div style="font-size:var(--type-1);font-weight:600">Yash Raj Sound Studios</div>
+<div style="font-size:var(--type-1);color:var(--muted)">Wed, 12 Aug · 10:00 AM – 2:00 PM</div>
+<div style="font-weight:700;margin-top:4px">₹32,000</div>
 <div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-p btn-sm" style="flex:1">Confirm</button><button class="btn btn-s btn-sm" style="flex:1">Cancel</button></div>
 </div>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
@@ -3684,6 +3718,110 @@ Include: Track cover art, genre chip, multi-track stem breakdown (Vocals, Bass, 
 <div id="widget-registry-list"></div>
 </section>
 
+<!-- Admin-panel-perspective components — genuinely absent from this file before 2026-08-16.
+     Ported from the real Gestalt-backed versions in frontend/guide/musiclinkd-system/src/App.tsx
+     (AdminDataTableBlock / AdminSidebarBlock / AdminTopBarBlock), recreated here in this file's
+     own static HTML/CSS idiom (.card-s / .token-table / .btn) rather than React — same seed rows,
+     same nav items, same real source-of-truth relationship to admin/app/(admin)/ as the Widget
+     Registry section above. -->
+<section class="sec" id="admin-panel">
+<button class="copy-link-btn" onclick="copyLink('admin-panel')">🔗</button>
+<div class="eyebrow">15 Developer Documentation</div>
+<h2>Admin Panel <span class="badge badge-av" style="margin-left:8px">Stable</span></h2>
+<p class="desc">Data table, sidebar navigation, and top bar patterns as they appear in the admin panel itself — not the public-facing product.</p>
+
+<div class="visual-demo">
+<div class="demo-label">Data Table — sortable, selectable, paginated</div>
+<table class="token-table">
+<tr><th style="width:32px"></th><th>Name <span style="color:var(--pink)">↑</span></th><th>Role</th><th>Status</th></tr>
+<tr><td><input type="checkbox"></td><td>Ava Chen</td><td style="color:var(--muted)">Talent</td><td><span class="badge badge-av">● Active</span></td></tr>
+<tr><td><input type="checkbox"></td><td>Bloom Studio A</td><td style="color:var(--muted)">Studio</td><td><span class="badge" style="background:rgba(245,158,11,0.12);color:var(--warn)">◐ Pending</span></td></tr>
+<tr><td><input type="checkbox"></td><td>Ravi Nair</td><td style="color:var(--muted)">Talent</td><td><span class="badge badge-av">● Active</span></td></tr>
+</table>
+<div class="demo-row" style="justify-content:space-between;margin-top:4px">
+<span style="font-size:var(--type-1);color:var(--muted)">0 selected · 3 rows</span>
+<div class="demo-row" style="gap:4px">
+<button class="btn btn-g btn-sm" style="padding:4px 10px">‹</button>
+<button class="btn btn-g btn-sm" style="padding:4px 10px">›</button>
+</div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Sidebar navigation</div>
+<div class="card-s" style="max-width:220px;padding:8px">
+<div style="padding:10px 12px;border-radius:8px;background:var(--black);color:#fff;font-size:var(--type-1);font-weight:600;margin-bottom:2px">Dashboard</div>
+<div style="padding:10px 12px;font-size:var(--type-1);color:var(--muted)">Users</div>
+<div style="padding:10px 12px;font-size:var(--type-1);color:var(--muted)">Bookings</div>
+<div style="padding:6px 12px 2px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);opacity:0.7">Content</div>
+<div style="padding:10px 12px;font-size:var(--type-1);color:var(--muted)">Widgets</div>
+<div style="padding:10px 12px;font-size:var(--type-1);color:var(--muted)">Flows & Screens</div>
+<div style="padding:10px 12px;font-size:var(--type-1);color:var(--muted)">Settings</div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Top bar</div>
+<div class="demo-row" style="background:#fff;border:1px solid var(--line);border-radius:var(--r-card);padding:10px 16px;justify-content:space-between">
+<div class="demo-row" style="gap:8px">
+<span style="font-weight:800;font-family:'Inter Tight'">Admin</span>
+<span class="badge" style="background:var(--surface-2);color:var(--muted)">v5.5</span>
+</div>
+<div class="demo-row" style="gap:10px">
+<input type="text" placeholder="Search users" style="padding:6px 12px;border:1px solid var(--line);border-radius:9999px;font-size:var(--type-1);width:180px">
+<span>🔔</span>
+<span style="width:28px;height:28px;border-radius:50%;background:var(--line);display:inline-flex;align-items:center;justify-content:center;font-size:var(--type-1);font-weight:600">A</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================================== -->
+<!-- CATEGORY: 18 — NOT BUILT (honesty registry) -->
+<!-- ============================================================================== -->
+<!-- Same real, checked list as musiclinkd-system's Blocks → "Not built" sub-tab (src/App.tsx,
+     NOT_BUILT constant) — every item here was checked against a real source (Gestalt's actual
+     export list, the 27-widget admin directory, or the 124-screen dist/preview/flows/**/screen.json
+     registry) before being left out. Re-sync by hand if that list changes. -->
+<section class="sec" id="not-built">
+<button class="copy-link-btn" onclick="copyLink('not-built')">🔗</button>
+<div class="eyebrow">18 Not Built</div>
+<h2>Not Built <span class="badge" style="background:rgba(245,158,11,0.12);color:var(--warn);margin-left:8px">45 items, checked</span></h2>
+<p class="desc">Everything below was checked against a real source and left out for a specific, checked reason — this section exists so "not built" doesn't quietly mean "forgotten." Component-level exclusions (Video, Layer, Container, provider/hook internals, etc.) aren't repeated here — see the note under each relevant primitive above.</p>
+
+<div class="visual-demo">
+<div class="demo-label">Not available in Gestalt</div>
+<p class="desc" style="margin-bottom:10px">Checked directly against the real installed package's export list (<code>gestalt/packages/gestalt/src/index.ts</code>) — these components genuinely don't exist in it. Breadcrumb specifically was checked against <code>PageHeader.d.ts</code>, which has no breadcrumb prop anywhere.</p>
+<div class="demo-row">
+<span class="chip">Upload / file-dropzone</span><span class="chip">Timeline</span><span class="chip">Skeleton Loading</span><span class="chip">Progress Bar</span><span class="chip">Time Picker</span><span class="chip">Date Picker</span><span class="chip">Slider</span><span class="chip">A distinct Snackbar</span><span class="chip">Breadcrumb</span>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Different platform — Android native, out of scope</div>
+<p class="desc" style="margin-bottom:10px">Android Material 3 native widgets from the old nav's "05 Native Components" section. They belong to the real native app (<code>app/</code>, Kotlin), a separate codebase this web file doesn't cover — Gestalt is web-only and can never render these here.</p>
+<div class="demo-row">
+<span class="chip">Top App Bar</span><span class="chip">Floating Action Button</span><span class="chip">Navigation Drawer</span><span class="chip">Navigation Rail</span><span class="chip">Segmented Buttons</span><span class="chip">Progress Indicators</span><span class="chip">OTP Input</span><span class="chip">Search Suggestions</span><span class="chip">Filter Sheet</span><span class="chip">Permission Dialog</span><span class="chip">Camera Picker</span><span class="chip">Audio Recorder</span><span class="chip">Audio Scrubber</span><span class="chip">Android App Grids</span><span class="chip">M3 Navigation Bar</span>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">No real backing found</div>
+<p class="desc" style="margin-bottom:10px">Checked against both the 27-widget admin directory and all 124 real screens in <code>dist/preview/flows/**/screen.json</code> (titles, notes, dataContracts) — no screen, note, code reference, or widget entry backs any of these. Not built because there's nothing real to build from, not because they're hard.</p>
+<div class="demo-row">
+<span class="chip">Skeleton Loaders</span><span class="chip">Error Boundary</span><span class="chip">Offline Banner</span><span class="chip">Shimmer</span><span class="chip">Adaptive Banner</span><span class="chip">Navbar</span><span class="chip">Navbar (Alt)</span><span class="chip">Sticky Nav</span><span class="chip">Segmented Switch</span><span class="chip">Metrics Row</span><span class="chip">Uncategorized</span><span class="chip">Swipe Deck</span><span class="chip">Brief Wizard</span><span class="chip">Ambient Album Card</span><span class="chip">Artist Grid Card</span><span class="chip">Artist Row Card</span><span class="chip">Typing Indicator</span><span class="chip">Attachments</span><span class="chip">Notification Toggle</span><span class="chip">Multi-Track Stem Mixer</span><span class="chip">Equalizer</span><span class="chip">User Header</span><span class="chip">Talent/Band/Business/Venue as separate cards</span><span class="chip">Direct Request</span><span class="chip">Request Status Tracker</span><span class="chip">Band Card</span><span class="chip">Application Card</span><span class="chip">Rental Card</span>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Aesthetic-inspiration references, not real screens</div>
+<p class="desc" style="margin-bottom:10px">The old nav's "24 Inspired" section was explicit moodboard/inspiration material, not real MusicLinkd screens or components — treating these as real product UI would misrepresent what actually exists. (The real <code>Masonry</code> component itself IS used — see Cover art gallery in the Blocks tab of musiclinkd-system.)</p>
+<div class="demo-row">
+<span class="chip">Gradient Hero Cards</span><span class="chip">Content Design Patterns</span><span class="chip">Artist Cards & Playlist Rows (as inspiration)</span><span class="chip">Masonry Card Grid (as inspiration)</span><span class="chip">Full-Bleed Bold Cards</span>
+</div>
+</div>
+</section>
+
 <!-- ============================================================================== -->
 <!-- CATEGORY: MORE -->
 <!-- ============================================================================== -->
@@ -3849,6 +3987,127 @@ Include: Track cover art, genre chip, multi-track stem breakdown (Vocals, Bass, 
 <!-- ============================================================================== -->
 <!-- CATEGORY: 24 — INSPIRED COMPONENTS (Dribbble · Supercharge · Apple Music · Pinterest · Snapchat) -->
 <!-- ============================================================================== -->
+
+
+<section class="sec" id="vd-effects">
+<button class="copy-link-btn" onclick="copyLink('vd-effects')">🔗</button>
+<div class="eyebrow">25 Effects</div>
+<h2>Visual Effects & Textures <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">Background patterns, glassmorphism, glow effects, gradients, and animations.</p>
+
+<div class="visual-demo">
+<div class="demo-label">Background Textures</div>
+<div class="demo-grid">
+<div class="card-s hl bg-dots" style="min-height:100px;display:flex;align-items:center;justify-content:center"><span style="font-size:var(--type-1);font-weight:600">.bg-dots</span></div>
+<div class="card-s hl bg-grid" style="min-height:100px;display:flex;align-items:center;justify-content:center"><span style="font-size:var(--type-1);font-weight:600">.bg-grid</span></div>
+<div class="card-s hl texture-paper" style="min-height:100px;display:flex;align-items:center;justify-content:center"><span style="font-size:var(--type-1);font-weight:600">.texture-paper</span></div>
+<div class="card-s hl bg-noise" style="min-height:100px;display:flex;align-items:center;justify-content:center"><span style="font-size:var(--type-1);font-weight:600">.bg-noise</span></div>
+</div>
+</div>
+
+<div class="visual-demo" style="background:linear-gradient(135deg,var(--pink),var(--black));border-radius:24px;padding:32px">
+<div class="demo-label" style="color:rgba(255,255,255,0.7)">Glassmorphism Cards</div>
+<div class="demo-grid">
+<div class="glass" style="padding:20px;border-radius:16px;text-align:center">
+<div style="font-size:var(--type-3);margin-bottom:8px">🪟</div>
+<div style="font-size:var(--type-1);font-weight:700">Glass Card</div>
+<p style="font-size:var(--type-1);color:var(--muted)">backdrop-blur 16px</p>
+</div>
+<div class="glass-dark" style="padding:20px;border-radius:16px;text-align:center">
+<div style="font-size:var(--type-3);margin-bottom:8px">🌙</div>
+<div style="font-size:var(--type-1);font-weight:700;color:#fff">Dark Glass</div>
+<p style="font-size:var(--type-1);color:rgba(255,255,255,0.5)">backdrop-blur 16px</p>
+</div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Glow & Ring Effects</div>
+<div class="demo-row" style="gap:24px">
+<div class="card-s hl glow-pink" style="text-align:center;padding:20px;border-radius:16px"><div style="font-size:var(--type-2)">💖</div><div style="font-size:var(--type-1);font-weight:600;margin-top:4px">.glow-pink</div></div>
+<div class="card-s hl glow-black" style="text-align:center;padding:20px;border-radius:16px"><div style="font-size:var(--type-2)">🖤</div><div style="font-size:var(--type-1);font-weight:600;margin-top:4px">.glow-black</div></div>
+<div class="card-s hl ring-pink" style="text-align:center;padding:20px;border-radius:16px"><div style="font-size:var(--type-2)">💍</div><div style="font-size:var(--type-1);font-weight:600;margin-top:4px">.ring-pink</div></div>
+<div class="card-s hl pulse-ring" style="text-align:center;padding:20px;border-radius:16px"><div style="font-size:var(--type-2)">📡</div><div style="font-size:var(--type-1);font-weight:600;margin-top:4px">.pulse-ring</div></div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Gradient Cards</div>
+<div class="demo-grid">
+<div class="gradient-card" style="padding:24px;border-radius:16px;min-height:120px;display:flex;flex-direction:column;justify-content:flex-end"><div style="font-size:var(--type-2);font-weight:800">Pink to Black</div><p style="font-size:var(--type-1);opacity:0.8">.gradient-card</p></div>
+<div class="gradient-card-purple" style="padding:24px;border-radius:16px;min-height:120px;display:flex;flex-direction:column;justify-content:flex-end"><div style="font-size:var(--type-2);font-weight:800">Purple to Black</div><p style="font-size:var(--type-1);opacity:0.8">.gradient-card-purple</p></div>
+<div class="gradient-card-green" style="padding:24px;border-radius:16px;min-height:120px;display:flex;flex-direction:column;justify-content:flex-end"><div style="font-size:var(--type-2);font-weight:800">Green to Black</div><p style="font-size:var(--type-1);opacity:0.8">.gradient-card-green</p></div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Gradient & Shimmer Text</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 class="gradient-text" style="font-size:var(--type-4);font-weight:800">MusicLinkd Design System</h3>
+<h3 class="shimmer-text" style="font-size:var(--type-3);font-weight:800">Professional Network for Music</h3>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Float Animation</div>
+<div class="demo-row" style="gap:24px;justify-content:center">
+<div class="float" style="text-align:center"><div style="font-size:var(--type-4)">🎵</div><div style="font-size:var(--type-1);color:var(--muted);margin-top:4px">3s infinite</div></div>
+<div class="float" style="text-align:center;animation-delay:var(--duration-4)"><div style="font-size:var(--type-4)">🎸</div><div style="font-size:var(--type-1);color:var(--muted);margin-top:4px">+0.5s</div></div>
+<div class="float" style="text-align:center;animation-delay:1s"><div style="font-size:var(--type-4)">🎤</div><div style="font-size:var(--type-1);color:var(--muted);margin-top:4px">+1s</div></div>
+<div class="float" style="text-align:center;animation-delay:1.5s"><div style="font-size:var(--type-4)">🥁</div><div style="font-size:var(--type-1);color:var(--muted);margin-top:4px">+1.5s</div></div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="vd-genz">
+<button class="copy-link-btn" onclick="copyLink('vd-genz')">🔗</button>
+<div class="eyebrow">26 Gen-Z</div>
+<h2>Bold Music Brand Blocks <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">Large typography, gradient backgrounds, music-themed decorative elements.</p>
+
+<div class="visual-demo" style="background:var(--black);color:#fff;border-radius:24px;padding:48px 32px;text-align:center;position:relative;overflow:hidden">
+<div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(234,76,137,0.15),transparent 60%)"></div>
+<div style="position:relative;z-index:1">
+<div style="font-size:var(--type-1);font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--pink);margin-bottom:16px">The Professional Network for Music</div>
+<h2 style="font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.05;letter-spacing:-0.04em;color:#fff;margin-bottom:16px">Connect.<br>Collaborate.<br><span class="gradient-text">Create.</span></h2>
+<p style="font-size:var(--type-2);color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 24px">12,400+ artists, 42 cities, 10 languages. The only platform built for music professionals.</p>
+<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+<button class="btn btn-p btn-sm" style="background:var(--pink);color:#fff;font-size:var(--type-1);padding:12px 28px">Join Free</button>
+<button class="btn btn-s btn-sm" style="background:transparent;border-color:rgba(255,255,255,0.3);color:#fff;font-size:var(--type-1);padding:12px 28px">Explore</button>
+</div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Social Proof Stats Bar</div>
+<div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;text-align:center">
+<div><div style="font-size:var(--type-4);font-weight:800;font-family:'Inter Tight'" class="gradient-text">12.4k+</div><div style="font-size:var(--type-1);color:var(--muted);text-transform:uppercase;margin-top:4px">Artists</div></div>
+<div><div style="font-size:var(--type-4);font-weight:800;font-family:'Inter Tight'">42</div><div style="font-size:var(--type-1);color:var(--muted);text-transform:uppercase;margin-top:4px">Cities</div></div>
+<div><div style="font-size:var(--type-4);font-weight:800;font-family:'Inter Tight'">10</div><div style="font-size:var(--type-1);color:var(--muted);text-transform:uppercase;margin-top:4px">Languages</div></div>
+<div><div style="font-size:var(--type-4);font-weight:800;font-family:'Inter Tight'">98%</div><div style="font-size:var(--type-1);color:var(--muted);text-transform:uppercase;margin-top:4px">Response</div></div>
+</div>
+</div>
+-----------
+<div class="visual-demo">
+<div class="demo-label">Feature Highlight Grid</div>
+<div class="demo-grid">
+<div class="card-s hl" style="display:flex;align-items:flex-start;gap:12px;padding:20px"><div style="width:40px;height:40px;border-radius:12px;background:var(--black);display:flex;align-items:center;justify-content:center;color:#fff;font-size:var(--type-2);flex-shrink:0">🎤</div><div><div style="font-size:var(--type-1);font-weight:700;margin-bottom:2px">Discovery Feed</div><p style="font-size:var(--type-1);color:var(--muted)">AI-ranked artist & studio cards. Swipe to shortlist.</p></div></div>
+<div class="card-s hl" style="display:flex;align-items:flex-start;gap:12px;padding:20px"><div style="width:40px;height:40px;border-radius:12px;background:var(--pink);display:flex;align-items:center;justify-content:center;color:#fff;font-size:var(--type-2);flex-shrink:0">🎸</div><div><div style="font-size:var(--type-1);font-weight:700;margin-bottom:2px">Verified Credits</div><p style="font-size:var(--type-1);color:var(--muted)">Multi-party verification. Permanent record.</p></div></div>
+<div class="card-s hl" style="display:flex;align-items:flex-start;gap:12px;padding:20px"><div style="width:40px;height:40px;border-radius:12px;background:var(--purple);display:flex;align-items:center;justify-content:center;color:#fff;font-size:var(--type-2);flex-shrink:0">⭐</div><div><div style="font-size:var(--type-1);font-weight:700;margin-bottom:2px">Pro Upgrade</div><p style="font-size:var(--type-1);color:var(--muted)">Zero commission. Priority ranking. Unlimited.</p></div></div>
+<div class="card-s hl" style="display:flex;align-items:flex-start;gap:12px;padding:20px"><div style="width:40px;height:40px;border-radius:12px;background:var(--success);display:flex;align-items:center;justify-content:center;color:#fff;font-size:var(--type-2);flex-shrink:0">🛡️</div><div><div style="font-size:var(--type-1);font-weight:700;margin-bottom:2px">Escrow Payments</div><p style="font-size:var(--type-1);color:var(--muted)">Secure. Held until delivery. UPI + cards.</p></div></div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Testimonial Cards</div>
+<div class="demo-grid">
+<div class="card-s hl" style="padding:20px"><div style="color:var(--warn);font-size:var(--type-2);margin-bottom:8px">★★★★★</div><p style="font-size:var(--type-1);color:var(--muted);margin-bottom:12px;line-height:1.6">"MusicLinkd replaced 4 different apps for me. Discovery, booking, payments — all in one place."</p><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&q=80') center/cover"></div><div><div style="font-size:var(--type-1);font-weight:700">Ananya Sharma</div><div style="font-size:var(--type-1);color:var(--muted)">Playback Vocalist</div></div></div></div>
+<div class="card-s hl" style="padding:20px"><div style="color:var(--warn);font-size:var(--type-2);margin-bottom:8px">★★★★★</div><p style="font-size:var(--type-1);color:var(--muted);margin-bottom:12px;line-height:1.6">"The credits verification engine is a game-changer. My entire discography is now verified."</p><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=64&q=80') center/cover"></div><div><div style="font-size:var(--type-1);font-weight:700">Rahul Varma</div><div style="font-size:var(--type-1);color:var(--muted)">Mix Engineer</div></div></div></div>
+</div>
+</div>
+</section>
+---------------------------------------------------
+
 
 <!-- ===== DRIBBBLE-STYLE: HERO GRADIENT CARDS ===== -->
 <section class="sec" id="vd-hero-gradient">
@@ -4157,164 +4416,6 @@ Include: Track cover art, genre chip, multi-track stem breakdown (Vocals, Bass, 
 <div style="display:flex;gap:16px;justify-content:center;margin-top:20px;font-size:var(--type-1);color:rgba(255,255,255,0.4)">
 <span>12.4k+ Artists</span><span>·</span><span>42 Cities</span><span>·</span><span>10 Languages</span>
 </div>
-</div>
-</div>
-</section>
-<!-- ============================================================================== -->
-<!-- CATEGORY: 25 — VISUAL EFFECTS SHOWCASE -->
-<!-- ============================================================================== -->
-
-<section class="sec" id="vd-effects">
-<button class="copy-link-btn" onclick="copyLink('vd-effects')">🔗</button>
-<div class="eyebrow">25 Effects</div>
-<h2>Visual Effects & Textures <span class="badge badge-av" style="margin-left:8px">New</span></h2>
-<p class="desc">Background patterns, glassmorphism, glow effects, gradients, and animations.</p>
-
-<div class="visual-demo">
-<div class="demo-label">Background Textures</div>
-<div class="demo-grid">
-<div class="card-s hl bg-dots" style="min-height:100px;display:flex;align-items:center;justify-content:center"><span style="font-size:var(--type-1);font-weight:600">.bg-dots</span></div>
-<div class="card-s hl bg-grid" style="min-height:100px;display:flex;align-items:center;justify-content:center"><span style="font-size:var(--type-1);font-weight:600">.bg-grid</span></div>
-<div class="card-s hl texture-paper" style="min-height:100px;display:flex;align-items:center;justify-content:center"><span style="font-size:var(--type-1);font-weight:600">.texture-paper</span></div>
-<div class="card-s hl bg-noise" style="min-height:100px;display:flex;align-items:center;justify-content:center"><span style="font-size:var(--type-1);font-weight:600">.bg-noise</span></div>
-</div>
-</div>
-
-<div class="visual-demo" style="background:linear-gradient(135deg,var(--pink),var(--black));border-radius:24px;padding:32px">
-<div class="demo-label" style="color:rgba(255,255,255,0.7)">Glassmorphism Cards</div>
-<div class="demo-grid">
-<div class="glass" style="padding:20px;border-radius:16px;text-align:center">
-<div style="font-size:var(--type-3);margin-bottom:8px">🪟</div>
-<div style="font-size:var(--type-1);font-weight:700">Glass Card</div>
-<p style="font-size:var(--type-1);color:var(--muted)">backdrop-blur 16px</p>
-</div>
-<div class="glass-dark" style="padding:20px;border-radius:16px;text-align:center">
-<div style="font-size:var(--type-3);margin-bottom:8px">🌙</div>
-<div style="font-size:var(--type-1);font-weight:700;color:#fff">Dark Glass</div>
-<p style="font-size:var(--type-1);color:rgba(255,255,255,0.5)">backdrop-blur 16px</p>
-</div>
-</div>
-</div>
-
-<div class="visual-demo">
-<div class="demo-label">Glow & Ring Effects</div>
-<div class="demo-row" style="gap:24px">
-<div class="card-s hl glow-pink" style="text-align:center;padding:20px;border-radius:16px"><div style="font-size:var(--type-2)">💖</div><div style="font-size:var(--type-1);font-weight:600;margin-top:4px">.glow-pink</div></div>
-<div class="card-s hl glow-black" style="text-align:center;padding:20px;border-radius:16px"><div style="font-size:var(--type-2)">🖤</div><div style="font-size:var(--type-1);font-weight:600;margin-top:4px">.glow-black</div></div>
-<div class="card-s hl ring-pink" style="text-align:center;padding:20px;border-radius:16px"><div style="font-size:var(--type-2)">💍</div><div style="font-size:var(--type-1);font-weight:600;margin-top:4px">.ring-pink</div></div>
-<div class="card-s hl pulse-ring" style="text-align:center;padding:20px;border-radius:16px"><div style="font-size:var(--type-2)">📡</div><div style="font-size:var(--type-1);font-weight:600;margin-top:4px">.pulse-ring</div></div>
-</div>
-</div>
-
-<div class="visual-demo">
-<div class="demo-label">Gradient Cards</div>
-<div class="demo-grid">
-<div class="gradient-card" style="padding:24px;border-radius:16px;min-height:120px;display:flex;flex-direction:column;justify-content:flex-end"><div style="font-size:var(--type-2);font-weight:800">Pink to Black</div><p style="font-size:var(--type-1);opacity:0.8">.gradient-card</p></div>
-<div class="gradient-card-purple" style="padding:24px;border-radius:16px;min-height:120px;display:flex;flex-direction:column;justify-content:flex-end"><div style="font-size:var(--type-2);font-weight:800">Purple to Black</div><p style="font-size:var(--type-1);opacity:0.8">.gradient-card-purple</p></div>
-<div class="gradient-card-green" style="padding:24px;border-radius:16px;min-height:120px;display:flex;flex-direction:column;justify-content:flex-end"><div style="font-size:var(--type-2);font-weight:800">Green to Black</div><p style="font-size:var(--type-1);opacity:0.8">.gradient-card-green</p></div>
-</div>
-</div>
-
-<div class="visual-demo">
-<div class="demo-label">Gradient & Shimmer Text</div>
-<div style="display:flex;flex-direction:column;gap:12px">
-<h3 class="gradient-text" style="font-size:var(--type-4);font-weight:800">MusicLinkd Design System</h3>
-<h3 class="shimmer-text" style="font-size:var(--type-3);font-weight:800">Professional Network for Music</h3>
-</div>
-</div>
-
-<div class="visual-demo">
-<div class="demo-label">Float Animation</div>
-<div class="demo-row" style="gap:24px;justify-content:center">
-<div class="float" style="text-align:center"><div style="font-size:var(--type-4)">🎵</div><div style="font-size:var(--type-1);color:var(--muted);margin-top:4px">3s infinite</div></div>
-<div class="float" style="text-align:center;animation-delay:var(--duration-4)"><div style="font-size:var(--type-4)">🎸</div><div style="font-size:var(--type-1);color:var(--muted);margin-top:4px">+0.5s</div></div>
-<div class="float" style="text-align:center;animation-delay:1s"><div style="font-size:var(--type-4)">🎤</div><div style="font-size:var(--type-1);color:var(--muted);margin-top:4px">+1s</div></div>
-<div class="float" style="text-align:center;animation-delay:1.5s"><div style="font-size:var(--type-4)">🥁</div><div style="font-size:var(--type-1);color:var(--muted);margin-top:4px">+1.5s</div></div>
-</div>
-</div>
-</section>
-
-<section class="sec" id="vd-genz">
-<button class="copy-link-btn" onclick="copyLink('vd-genz')">🔗</button>
-<div class="eyebrow">26 Gen-Z</div>
-<h2>Bold Music Brand Blocks <span class="badge badge-av" style="margin-left:8px">New</span></h2>
-<p class="desc">Large typography, gradient backgrounds, music-themed decorative elements.</p>
-
-<div class="visual-demo" style="background:var(--black);color:#fff;border-radius:24px;padding:48px 32px;text-align:center;position:relative;overflow:hidden">
-<div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(234,76,137,0.15),transparent 60%)"></div>
-<div style="position:relative;z-index:1">
-<div style="font-size:var(--type-1);font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--pink);margin-bottom:16px">The Professional Network for Music</div>
-<h2 style="font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.05;letter-spacing:-0.04em;color:#fff;margin-bottom:16px">Connect.<br>Collaborate.<br><span class="gradient-text">Create.</span></h2>
-<p style="font-size:var(--type-2);color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 24px">12,400+ artists, 42 cities, 10 languages. The only platform built for music professionals.</p>
-<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-<button class="btn btn-p btn-sm" style="background:var(--pink);color:#fff;font-size:var(--type-1);padding:12px 28px">Join Free</button>
-<button class="btn btn-s btn-sm" style="background:transparent;border-color:rgba(255,255,255,0.3);color:#fff;font-size:var(--type-1);padding:12px 28px">Explore</button>
-</div>
-</div>
-</div>
-
-<div class="visual-demo">
-<div class="demo-label">Social Proof Stats Bar</div>
-<div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;text-align:center">
-<div><div style="font-size:var(--type-4);font-weight:800;font-family:'Inter Tight'" class="gradient-text">12.4k+</div><div style="font-size:var(--type-1);color:var(--muted);text-transform:uppercase;margin-top:4px">Artists</div></div>
-<div><div style="font-size:var(--type-4);font-weight:800;font-family:'Inter Tight'">42</div><div style="font-size:var(--type-1);color:var(--muted);text-transform:uppercase;margin-top:4px">Cities</div></div>
-<div><div style="font-size:var(--type-4);font-weight:800;font-family:'Inter Tight'">10</div><div style="font-size:var(--type-1);color:var(--muted);text-transform:uppercase;margin-top:4px">Languages</div></div>
-<div><div style="font-size:var(--type-4);font-weight:800;font-family:'Inter Tight'">98%</div><div style="font-size:var(--type-1);color:var(--muted);text-transform:uppercase;margin-top:4px">Response</div></div>
-</div>
-</div>
-
-<div class="visual-demo">
-<div class="demo-label">Feature Highlight Grid</div>
-<div class="demo-grid">
-<div class="card-s hl" style="display:flex;align-items:flex-start;gap:12px;padding:20px"><div style="width:40px;height:40px;border-radius:12px;background:var(--black);display:flex;align-items:center;justify-content:center;color:#fff;font-size:var(--type-2);flex-shrink:0">🎤</div><div><div style="font-size:var(--type-1);font-weight:700;margin-bottom:2px">Discovery Feed</div><p style="font-size:var(--type-1);color:var(--muted)">AI-ranked artist & studio cards. Swipe to shortlist.</p></div></div>
-<div class="card-s hl" style="display:flex;align-items:flex-start;gap:12px;padding:20px"><div style="width:40px;height:40px;border-radius:12px;background:var(--pink);display:flex;align-items:center;justify-content:center;color:#fff;font-size:var(--type-2);flex-shrink:0">🎸</div><div><div style="font-size:var(--type-1);font-weight:700;margin-bottom:2px">Verified Credits</div><p style="font-size:var(--type-1);color:var(--muted)">Multi-party verification. Permanent record.</p></div></div>
-<div class="card-s hl" style="display:flex;align-items:flex-start;gap:12px;padding:20px"><div style="width:40px;height:40px;border-radius:12px;background:var(--purple);display:flex;align-items:center;justify-content:center;color:#fff;font-size:var(--type-2);flex-shrink:0">⭐</div><div><div style="font-size:var(--type-1);font-weight:700;margin-bottom:2px">Pro Upgrade</div><p style="font-size:var(--type-1);color:var(--muted)">Zero commission. Priority ranking. Unlimited.</p></div></div>
-<div class="card-s hl" style="display:flex;align-items:flex-start;gap:12px;padding:20px"><div style="width:40px;height:40px;border-radius:12px;background:var(--success);display:flex;align-items:center;justify-content:center;color:#fff;font-size:var(--type-2);flex-shrink:0">🛡️</div><div><div style="font-size:var(--type-1);font-weight:700;margin-bottom:2px">Escrow Payments</div><p style="font-size:var(--type-1);color:var(--muted)">Secure. Held until delivery. UPI + cards.</p></div></div>
-</div>
-</div>
-
-<div class="visual-demo">
-<div class="demo-label">Testimonial Cards</div>
-<div class="demo-grid">
-<div class="card-s hl" style="padding:20px"><div style="color:var(--warn);font-size:var(--type-2);margin-bottom:8px">★★★★★</div><p style="font-size:var(--type-1);color:var(--muted);margin-bottom:12px;line-height:1.6">"MusicLinkd replaced 4 different apps for me. Discovery, booking, payments — all in one place."</p><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&q=80') center/cover"></div><div><div style="font-size:var(--type-1);font-weight:700">Ananya Sharma</div><div style="font-size:var(--type-1);color:var(--muted)">Playback Vocalist</div></div></div></div>
-<div class="card-s hl" style="padding:20px"><div style="color:var(--warn);font-size:var(--type-2);margin-bottom:8px">★★★★★</div><p style="font-size:var(--type-1);color:var(--muted);margin-bottom:12px;line-height:1.6">"The credits verification engine is a game-changer. My entire discography is now verified."</p><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=64&q=80') center/cover"></div><div><div style="font-size:var(--type-1);font-weight:700">Rahul Varma</div><div style="font-size:var(--type-1);color:var(--muted)">Mix Engineer</div></div></div></div>
-</div>
-</div>
-</section>
-
-<section class="sec" id="vd-more-inspired">
-<button class="copy-link-btn" onclick="copyLink('vd-more-inspired')">🔗</button>
-<div class="eyebrow">27 More</div>
-<h2>Interactive & Animated Components <span class="badge badge-av" style="margin-left:8px">New</span></h2>
-
-<div class="visual-demo">
-<div class="demo-label">Notification Stack (animated)</div>
-<div style="display:flex;flex-direction:column;gap:6px;max-width:380px">
-<div class="card-s hl" style="display:flex;gap:10px;align-items:center;padding:12px;animation:float 3s ease-in-out infinite"><div style="width:36px;height:36px;border-radius:10px;background:#FCE7F3;display:flex;align-items:center;justify-content:center;font-size:var(--type-2);flex-shrink:0">🤝</div><div style="flex:1"><div style="font-size:var(--type-1);font-weight:600">New connection</div><div style="font-size:var(--type-1);color:var(--muted)">BeatRoot Collective · 2m ago</div></div><div style="width:6px;height:6px;background:var(--pink);border-radius:50%"></div></div>
-<div class="card-s hl" style="display:flex;gap:10px;align-items:center;padding:12px;animation:float 3s ease-in-out infinite;animation-delay:var(--duration-3)"><div style="width:36px;height:36px;border-radius:10px;background:#DCFCE7;display:flex;align-items:center;justify-content:center;font-size:var(--type-2);flex-shrink:0">✓</div><div style="flex:1"><div style="font-size:var(--type-1);font-weight:600">Booking confirmed</div><div style="font-size:var(--type-1);color:var(--muted)">North Room · 1h ago</div></div></div>
-<div class="card-s hl" style="display:flex;gap:10px;align-items:center;padding:12px;animation:float 3s ease-in-out infinite;animation-delay:var(--duration-4)"><div style="width:36px;height:36px;border-radius:10px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:var(--type-2);flex-shrink:0">⭐</div><div style="flex:1"><div style="font-size:var(--type-1);font-weight:600">New review</div><div style="font-size:var(--type-1);color:var(--muted)">Priya Sharma · 3h ago</div></div></div>
-</div>
-</div>
-
-<div class="visual-demo" style="background:var(--black);border-radius:24px;padding:32px;text-align:center;overflow:hidden;position:relative">
-<div style="position:absolute;inset:0;opacity:0.05;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(234,76,137,0.3) 2px,rgba(234,76,137,0.3) 4px);background-size:100% 8px;animation:waveform-bg 4s linear infinite"></div>
-<div style="position:relative;z-index:1">
-<div style="font-size:var(--type-4);margin-bottom:12px">🎧</div>
-<h3 style="color:#fff;font-size:var(--type-3);font-weight:800;margin-bottom:8px">Audio-First Design</h3>
-<p style="color:rgba(255,255,255,0.6);font-size:var(--type-1);max-width:360px;margin:0 auto 16px">Every card has a waveform preview. Every profile has audio samples. Music comes first.</p>
-<div class="wf" style="justify-content:center;height:28px"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-</div>
-</div>
-<style>@keyframes waveform-bg{0%{background-position:0 0}100%{background-position:0 100%}}</style>
-
-<div class="visual-demo">
-<div class="demo-label">Category Discovery Row (horizontal scroll)</div>
-<div style="display:flex;gap:8px;overflow-x:auto;padding:4px 0">
-<div class="card-s hl" style="text-align:center;padding:16px 20px;min-width:100px;flex-shrink:0"><div style="font-size:var(--type-3);margin-bottom:4px">🎤</div><div style="font-size:var(--type-1);font-weight:700">Vocalists</div><div style="font-size:var(--type-1);color:var(--muted)">1.2k</div></div>
-<div class="card-s hl" style="text-align:center;padding:16px 20px;min-width:100px;flex-shrink:0"><div style="font-size:var(--type-3);margin-bottom:4px">🎸</div><div style="font-size:var(--type-1);font-weight:700">Guitarists</div><div style="font-size:var(--type-1);color:var(--muted)">840</div></div>
-<div class="card-s hl" style="text-align:center;padding:16px 20px;min-width:100px;flex-shrink:0"><div style="font-size:var(--type-3);margin-bottom:4px">🎛️</div><div style="font-size:var(--type-1);font-weight:700">Producers</div><div style="font-size:var(--type-1);color:var(--muted)">620</div></div>
-<div class="card-s hl" style="text-align:center;padding:16px 20px;min-width:100px;flex-shrink:0"><div style="font-size:var(--type-3);margin-bottom:4px">🏢</div><div style="font-size:var(--type-1);font-weight:700">Studios</div><div style="font-size:var(--type-1);color:var(--muted)">380</div></div>
-<div class="card-s hl" style="text-align:center;padding:16px 20px;min-width:100px;flex-shrink:0"><div style="font-size:var(--type-3);margin-bottom:4px">🎧</div><div style="font-size:var(--type-1);font-weight:700">DJs</div><div style="font-size:var(--type-1);color:var(--muted)">290</div></div>
 </div>
 </div>
 </section>
@@ -5152,7 +5253,7 @@ filterWidgets('');
 
 // ===== Brand asset library: real files in brand/assets/, listed directly (no manifest.txt
 // exists for this small a set, unlike the 423-file Gestalt icon dir above) =====
-const brandAssets=['1.svg','2.svg','3.svg','4.svg','5.svg','9.svg','12.svg','Group 70257.svg','Group 70260.svg','Group 70262.svg','Group 70271.svg','fav.svg'];
+const brandAssets=['logo-lockup-black.svg','logo-badge-inverse.svg','logo-watermark-stacked.svg','logo-lockup-grey.svg','logo-lockup-wide-caps.svg','mark-grey.svg','logo-dark-pill.svg','favicon-mark.svg'];
 const bag=document.getElementById('brand-asset-grid');
 if(bag){bag.innerHTML=brandAssets.map(f=>'<div class="card-s hl" style="text-align:center;padding:12px"><img src="brand/assets/'+encodeURIComponent(f)+'" alt="'+f+'" style="max-width:100%;max-height:64px;margin-bottom:6px"><div style="font-size:var(--fs-9);color:var(--muted);word-break:break-all">'+f+'</div></div>').join('')}
 
@@ -5424,102 +5525,25 @@ function mnavSet(el, hash) {
 /* ===== OVERLAY ===== */
 .ov { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 25; }
 .ov.show { display: block; }
-.main { padding: 32px 24px 80px; }
-.sidebar {
-    position: fixed;
-    left: -100%;
-    top: 0;
-    height: 100vh;
-    z-index: 100;
-  }
-.sidebar.open { left: 0; }
-.layout-wrapper { margin-top: 60px; }
-.mtBtn { display: flex; align-items: center; gap: 6px; top: 14px; }
-.chat-drawer { max-width: 100%; }
-.spec-grid { grid-template-columns: 1fr; }
-.cs { width: min(260px, 85vw); }
+/* Was: unconditional .main padding + .sidebar{position:fixed;left:-100%} + .sidebar.open{left:0} +
+   .layout-wrapper margin-top -- all unscoped, competing with the correct rules at lines ~408/450/403
+   and the correct tablet/mobile tier at ~496. At tablet width the .sidebar{width:var(--sw)} here
+   picked up the tablet media query's --sw:0px reset and collapsed the sidebar to 0 width; at
+   desktop it silently won position:sticky (from the 6573 duplicate) while left:-100% went unused
+   only by luck of sticky's cascade semantics. Removed 2026-08-13 structural fix. */
+/* .spec-grid{grid-template-columns:1fr} used to be unconditional here -- confirmed always-dead,
+   a later unconditional rule (~6448) already wins regardless -- removed outright, 2026-08-13.
+   .chat-drawer/.cs full-width-on-mobile tweaks kept but properly scoped, since they read like
+   genuine mobile intent rather than accidental duplication. */
+@media (max-width: 767px) {
+    .chat-drawer { max-width: 100%; }
+    .cs { width: min(260px, 85vw); }
+}
 /* ===== TOP NAVIGATION ===== */
-.top-nav {
-    position: fixed;
-    top: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 32px);
-    max-width: 1400px;
-    height: 48px;
-    z-index: 1000;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    border-radius: 9999px;
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-}
-.top-nav .logo-area {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-}
-.top-nav .breadcrumb {
-    font-size: 11px;
-    color: var(--muted);
-    display: flex;
-    gap: 6px;
-    align-items: center;
-}
-.top-nav .search-area {
-    flex: 1;
-    max-width: 320px;
-    position: relative;
-}
-.top-nav .search-area input {
-    width: 100%;
-    padding: 8px 14px 8px 32px;
-    background: #F8F8FB;
-    border: 1px solid var(--line);
-    border-radius: 9999px;
-    font-size: 11px;
-    outline: none;
-}
-.top-nav .search-area input:focus { border-color: var(--pink); }
-.top-nav .nav-links {
-    display: flex;
-    gap: 14px;
-    align-items: center;
-}
-.top-nav .nav-links a {
-    font-size: 11px;
-    color: var(--muted);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 150ms;
-    white-space: nowrap;
-}
-.top-nav .nav-links a:hover { color: var(--pink); }
-.top-nav .nav-controls {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    flex-shrink: 0;
-}
-.top-nav .nav-btn {
-    font-size: 10px;
-    padding: 4px 8px;
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    background: #fff;
-    cursor: pointer;
-    transition: all 150ms;
-}
-.top-nav .nav-btn:hover { border-color: var(--pink); color: var(--pink); }
-/* Mobile search icon button in nav — hidden on desktop */
-.top-nav .mob-search-btn { display: none; }
+/* A full second .top-nav definition (floating pill variant: position:fixed, border-radius:9999px,
+   height:48px, translucent blur) used to live here, unconditionally competing with the correct
+   banner-style .top-nav at line ~309. Removed 2026-08-13 -- the banner nav plus the mobile-only
+   pill (#gestures-native fix, .floating-pill-nav) already cover desktop and mobile respectively. */
 .breadcrumbs {
     display: flex;
     align-items: center;
@@ -5607,8 +5631,13 @@ function mnavSet(el, hash) {
     background: var(--pink);
     color: white;
 }
-.top-nav { padding: 0 16px; gap: 8px; }
-/* show mobile search icon */
+/* This whole cluster (top-nav padding, mobile search icon, logo flex, layout margin) was
+   unconditional -- no media query -- despite every comment here saying "mobile"/"show mobile
+   search icon". Scoped 2026-08-13 to the tablet tier (768-1023px), not <767px, since .top-nav
+   itself is display:none below 767px (#gestures-native fix) -- these compact-nav adjustments
+   only have anything to act on where the top-nav is visible-but-narrow, alongside the hamburger. */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .top-nav { padding: 0 16px; gap: 8px; }
     .top-nav .mob-search-btn {
         display: flex;
         align-items: center;
@@ -5622,19 +5651,9 @@ function mnavSet(el, hash) {
         flex-shrink: 0;
         margin-left: auto;
     }
-/* logo takes flex-1 */
     .top-nav .logo-area { flex: 1; }
-/* hide old mtBtn — hamburger now lives in sidebar overlay */
-    .mtBtn {
-        top: 10px;
-        left: 10px;
-        z-index: 1100;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-/* layout */
     .layout-wrapper { margin-top: 56px; }
+}
 /* Bottom nav — hidden on desktop, shown on mobile */
 .mobile-bottom-nav {
     display: none;
@@ -5651,7 +5670,12 @@ function mnavSet(el, hash) {
     justify-content: space-around;
     box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
 }
-.mobile-bottom-nav { display: flex; }
+/* Was an unconditional "display: flex" here (no media query) -- showed the bottom nav at
+   every viewport width, including desktop, alongside the classic top-nav. See #gestures-native
+   note: mobile-only chrome now scoped correctly under 767px, 2026-08-12. */
+@media (max-width: 767px) {
+    .mobile-bottom-nav { display: flex; }
+}
 .mobile-bottom-nav .mnav-item {
     display: flex;
     flex-direction: column;
@@ -5786,7 +5810,13 @@ function mnavSet(el, hash) {
 .ripple-host { position: relative; overflow: hidden; }
 .ripple-host::after { content: ''; position: absolute; inset: 0; background: rgba(234,76,137,0.12); border-radius: inherit; opacity: 0; transition: opacity 400ms; pointer-events: none; }
 .ripple-host:active::after { opacity: 1; transition: none; }
-.floating-pill-nav {
+.floating-pill-nav { display: none; }
+/* Both rules below were unconditional (no media query) until this fix, 2026-08-12 -- they
+   permanently hid the classic top-nav and showed the floating pill at every viewport width,
+   including desktop. Floating pill + bottom nav (#gestures-native) are the mobile-only
+   pattern; the classic top-nav (plus its own hamburger at tablet width) covers >=768px. */
+@media (max-width: 767px) {
+    .floating-pill-nav {
         position: fixed;
         top: 16px;
         left: 16px;
@@ -5806,9 +5836,9 @@ function mnavSet(el, hash) {
         cursor: pointer;
         color: var(--black);
     }
-.floating-pill-nav .logo-icon { color: var(--pink); font-size: 18px; font-weight: 800; }
-/* Hide top-nav entirely on mobile now since we use the floating pill */
     .top-nav { display: none !important; }
+}
+.floating-pill-nav .logo-icon { color: var(--pink); font-size: 18px; font-weight: 800; }
 /* 2. Hero Collage Layout */
 .fluid-hero {
     position: relative;
@@ -6557,34 +6587,13 @@ body {
 }
 h1, h2, h3, h4 { font-family: 'Inter Tight', sans-serif; letter-spacing: -0.02em; margin: 0; }
 img { max-width: 100%; height: auto; display: block; }
-/* ===== 4-TIER RESPONSIVE LAYOUT ===== */
-/* Mobile:  0–767px   (1 col, bottom nav) */
-/* Tablet:  768–1023px (2 col, sidebar hidden) */
-/* Desktop: 1024–1279px (sidebar visible) */
-/* Wide:    1280px+   (sidebar + max-width content) */
-
-.layout-wrapper {
-  display: flex;
-  margin-top: 100px;
-  min-height: calc(100vh - 100px);
-}
-/* ===== SIDEBAR ===== */
-.sidebar {
-  width: var(--sw);
-  min-width: var(--sw);
-  background: var(--white);
-  border-right: 1px solid var(--line);
-  position: sticky;
-  top: 100px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  padding: 16px 0;
-  z-index: 30;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  transition: left 250ms var(--ease);
-}
+/* This block used to document/implement a "4-tier responsive layout" (Mobile/Tablet/Desktop/Wide)
+   via unscoped .layout-wrapper and .sidebar redefinitions (position:sticky, no width tiers) --
+   it was never actually wired to real media queries for the 3 extra tiers it named, and its
+   unconditional .sidebar{width:var(--sw)} collapsed the sidebar to 0 width at tablet widths
+   (picking up the tablet media query's --sw:0px reset) and fought the correct position:fixed
+   rules at lines ~408/496. Removed 2026-08-13; the real 3-tier system (desktop/tablet/mobile)
+   already at lines ~408-517 is the only .sidebar/.layout-wrapper implementation now. */
 .side-hd { padding: 0 14px 14px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
 .side-hd .logo { font: 800 18px/1 'Inter Tight'; letter-spacing: -0.04em; color: var(--black); }
 .side-hd .logo em { color: var(--pink); font-style: normal; }
@@ -6598,13 +6607,10 @@ img { max-width: 100%; height: auto; display: block; }
 .sg.open .sgi { display: flex; }
 .sgi a { display: block; padding: 4px 10px; border-radius: 5px; font-size: 11px; color: var(--muted); text-decoration: none; transition: all 150ms; }
 .sgi a:hover, .sgi a.on { background: #FCE7F3; color: var(--pink); }
-/* ===== MAIN CONTENT ===== */
-.main {
-  flex: 1;
-  min-width: 0; /* prevents flex overflow */
-  max-width: calc(100% - var(--sw));
-  padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 56px) 120px;
-}
+/* .main redefinition removed 2026-08-13 -- unconditional, competed with the correct rule at
+   line ~450 (margin-left:var(--sw), width:calc(100% - var(--sw)), padding:40px 48px 120px).
+   The flex:1/max-width here were already inert (sidebar is position:fixed, not in flex flow);
+   the padding was the only live part and it silently replaced the canonical value. */
 .sec { padding: clamp(32px, 5vw, 64px) 0; border-bottom: 1px solid var(--line); }
 .sec:last-child { border-bottom: none; }
 .eyebrow { font-size: var(--fs-9); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pink); margin-bottom: 6px; }
@@ -6714,7 +6720,26 @@ img { max-width: 100%; height: auto; display: block; }
         <a href="#ml-calendar" class="related-chip">Calendar</a><a href="#pat-booking" class="related-chip">Booking Pattern</a>
     </div>
 </div>
-<div class="card-s hl" style="max-width:360px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><div><h4 style="font-size:var(--fs-body)">North Room · Andheri</h4><p style="font-size:var(--fs-caption);color:var(--muted)">Mon, 20 Aug · 2:00–6:00 PM</p></div><span class="badge badge-av">Confirmed</span></div><p style="font-size:var(--fs-caption);color:var(--muted)">4 hours · SSL Console Room A</p><div style="font-weight:700;margin:6px 0">₹7,200 total</div><div style="display:flex;gap:var(--sp-1)"><button class="btn btn-g btn-sm">Reschedule</button><button class="btn btn-g btn-sm" style="color:var(--err)">Cancel</button></div></div>
+<!-- ===== Booking sample data provenance (canonical note; the other booking
+     demos in this file point here) =====
+     Source: dist/preview/flows/booking/booking_summary/screen.json, collection
+     "studio_bookings" — studioId mock-studio-yash-raj-sound-studios,
+     date 2026-08-12, slotText "10:00 AM – 2:00 PM", totalAmount 32000,
+     bookedHourSlots 10:00–13:00 (4 hours), bookingStatus confirmed,
+     paymentStatus PAID, sessionType recording, durationTier half_day,
+     engineerRequested true, paymentMethod UPI.
+
+     Replaced 2026-08-16. The previous values ("North Room · Andheri",
+     "Mon, 20 Aug · 2:00–6:00 PM", "₹7,200") were fabricated and duplicated
+     across 5 places in this file WITH CONTRADICTORY VALUES — one demo said
+     20 Aug, another Oct 15; one totalled ₹7,200, the payment demo totalled
+     ₹7,560. All 5 now use the single real booking above, matching what
+     musiclinkd-system's "Booking summary" Block and the deployed webapp show.
+
+     "SSL Console Room A" is NOT in the real sample — it survives here only as
+     a room-description placeholder; screen.json has no room/console field.
+     Deliberately not invented into something that looks more official. -->
+<div class="card-s hl" style="max-width:360px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><div><h4 style="font-size:var(--fs-body)">Yash Raj Sound Studios</h4><p style="font-size:var(--fs-caption);color:var(--muted)">Wed, 12 Aug · 10:00 AM – 2:00 PM</p></div><span class="badge badge-av">Confirmed</span></div><p style="font-size:var(--fs-caption);color:var(--muted)">4 hours · Recording · Half-day · +Engineer</p><div style="font-weight:700;margin:6px 0">₹32,000 total</div><div style="display:flex;gap:var(--sp-1)"><button class="btn btn-g btn-sm">Reschedule</button><button class="btn btn-g btn-sm" style="color:var(--err)">Cancel</button></div></div>
 </section>
 <section class="sec" id="ml-notif">
 <button class="copy-link-btn" onclick="copyLink('ml-notif')">🔗</button>
@@ -7009,7 +7034,15 @@ img { max-width: 100%; height: auto; display: block; }
 <button class="copy-link-btn" onclick="copyLink('p-checkout')">🔗</button>
 <div class="eyebrow">08 Patterns</div>
 <h2>Checkout <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v4.0</span></h2>
-<div class="card-s" style="max-width:380px"><div style="display:flex;justify-content:space-between;padding:6px 0;font-size:var(--fs-caption)"><span>Studio Session · 4hr</span><span style="font-weight:700">₹7,200</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;font-size:var(--fs-caption);border-bottom:1px solid var(--line)"><span>Platform fee</span><span>₹360</span></div><div style="display:flex;justify-content:space-between;padding:8px 0;font-size:var(--fs-body);font-weight:700"><span>Total</span><span>₹7,560</span></div><div style="display:flex;gap:6px;margin-top:8px"><button class="btn btn-p btn-sm" style="flex:1">Pay Now</button><button class="btn btn-s btn-sm">Coupon</button></div></div>
+<!-- Line item is real (booking_summary/screen.json: 4hr recording session,
+     totalAmount 32000). The FEE LINE IS NOT REAL and is labelled as such on
+     screen rather than silently faked: that screen's own notes field says
+     "taxAmount/depositAmount/discountAmount/promoCode — typed this session,
+     none confirmed app-wired." There is no real platform-fee rate anywhere in
+     this build, so the old hardcoded "₹360 / ₹7,560" was pure invention. The
+     5% shown is an illustrative rate, marked inline; the grand total is
+     derived from it, not quoted as fact. -->
+<div class="card-s" style="max-width:380px"><div style="display:flex;justify-content:space-between;padding:6px 0;font-size:var(--fs-caption)"><span>Studio Session · 4hr</span><span style="font-weight:700">₹32,000</span></div><div style="display:flex;justify-content:space-between;padding:6px 0;font-size:var(--fs-caption);border-bottom:1px solid var(--line)"><span>Platform fee <em style="color:var(--muted);font-style:normal">(illustrative 5% — not app-wired)</em></span><span>₹1,600</span></div><div style="display:flex;justify-content:space-between;padding:8px 0;font-size:var(--fs-body);font-weight:700"><span>Total</span><span>₹33,600</span></div><div style="display:flex;gap:6px;margin-top:8px"><button class="btn btn-p btn-sm" style="flex:1">Pay Now</button><button class="btn btn-s btn-sm">Coupon</button></div></div>
 </section>
 <section class="sec" id="p2-grid">
 <button class="copy-link-btn" onclick="copyLink('p2-grid')">🔗</button>
@@ -7081,6 +7114,7 @@ img { max-width: 100%; height: auto; display: block; }
 <tr><td>3</td><td>Contact</td><td>Message or Direct Request</td></tr>
 <tr><td>4</td><td>Hire</td><td>Brief wizard → Send → Escrow</td></tr></table>
 </section>
+
 <section class="sec" id="pat-studio-book">
 <button class="copy-link-btn" onclick="copyLink('pat-studio-book')">🔗</button>
 <div class="eyebrow">08 Patterns</div>
@@ -7114,6 +7148,7 @@ img { max-width: 100%; height: auto; display: block; }
 <tr><td>2</td><td>Rating</td><td>5-star breakdown</td></tr>
 <tr><td>3</td><td>Reports</td><td>Flag inappropriate content</td></tr></table>
 </section>
+
 <section class="sec" id="pat-settings">
 <button class="copy-link-btn" onclick="copyLink('pat-settings')">🔗</button>
 <div class="eyebrow">08 Patterns</div>
@@ -7129,6 +7164,7 @@ img { max-width: 100%; height: auto; display: block; }
 <div class="eyebrow">08 Patterns</div>
 <h2>Tinder-Style Deck <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v4.0</span></h2>
 <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:center"><div class="cs" id="deckW"></div><div style="display:flex;gap:14px;margin-top:14px"><button onclick="swipeDo('left')" style="width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:var(--fs-body-lg);cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button><button onclick="swipeDo('right')" style="width:44px;height:44px;border-radius:50%;border:2px solid var(--pink);background:#fff;font-size:var(--fs-body-lg);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--pink)">♥</button></div></div><div style="margin-top:10px"><button class="btn btn-s btn-sm" onclick="swipeReset()">Reload Deck</button></div>
+
 </section>
 <section class="sec" id="brief">
 <button class="copy-link-btn" onclick="copyLink('brief')">🔗</button>
@@ -7663,8 +7699,46 @@ img { max-width: 100%; height: auto; display: block; }
 <button class="copy-link-btn" onclick="copyLink('vd-booking-summary')">🔗</button>
 <div class="eyebrow">06 MusicLinkd Components</div>
 <h2>Booking Summary <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--fs-9);color:var(--muted);font-weight:400">v4.0</span></h2>
-<div class="card-s" style="max-width:340px"><div style="display:flex;justify-content:space-between;padding:4px 0;font-size:var(--fs-caption)"><span>Studio</span><span style="font-weight:600">North Room</span></div><div style="display:flex;justify-content:space-between;padding:4px 0;font-size:var(--fs-caption)"><span>Date</span><span style="font-weight:600">Oct 15, 2:00 PM</span></div><div style="display:flex;justify-content:space-between;padding:4px 0;font-size:var(--fs-caption)"><span>Duration</span><span style="font-weight:600">4 hours</span></div><div style="display:flex;justify-content:space-between;padding:8px 0;font-size:var(--fs-body);font-weight:700;border-top:1px solid var(--line);margin-top:4px"><span>Total</span><span>₹7,200</span></div></div>
+<div class="card-s" style="max-width:340px"><div style="display:flex;justify-content:space-between;padding:4px 0;font-size:var(--fs-caption)"><span>Studio</span><span style="font-weight:600">Yash Raj Sound Studios</span></div><div style="display:flex;justify-content:space-between;padding:4px 0;font-size:var(--fs-caption)"><span>Date</span><span style="font-weight:600">Aug 12, 10:00 AM</span></div><div style="display:flex;justify-content:space-between;padding:4px 0;font-size:var(--fs-caption)"><span>Duration</span><span style="font-weight:600">4 hours</span></div><div style="display:flex;justify-content:space-between;padding:8px 0;font-size:var(--fs-body);font-weight:700;border-top:1px solid var(--line);margin-top:4px"><span>Total</span><span>₹32,000</span></div></div>
 </section>
+<section class="sec" id="vd-more-inspired">
+<button class="copy-link-btn" onclick="copyLink('vd-more-inspired')">🔗</button>
+<div class="eyebrow">27 More</div>
+<h2>Interactive & Animated Components <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+
+<div class="visual-demo">
+<div class="demo-label">Notification Stack (animated)</div>
+<div style="display:flex;flex-direction:column;gap:6px;max-width:380px">
+<div class="card-s hl" style="display:flex;gap:10px;align-items:center;padding:12px;animation:float 3s ease-in-out infinite"><div style="width:36px;height:36px;border-radius:10px;background:#FCE7F3;display:flex;align-items:center;justify-content:center;font-size:var(--type-2);flex-shrink:0">🤝</div><div style="flex:1"><div style="font-size:var(--type-1);font-weight:600">New connection</div><div style="font-size:var(--type-1);color:var(--muted)">BeatRoot Collective · 2m ago</div></div><div style="width:6px;height:6px;background:var(--pink);border-radius:50%"></div></div>
+<div class="card-s hl" style="display:flex;gap:10px;align-items:center;padding:12px;animation:float 3s ease-in-out infinite;animation-delay:var(--duration-3)"><div style="width:36px;height:36px;border-radius:10px;background:#DCFCE7;display:flex;align-items:center;justify-content:center;font-size:var(--type-2);flex-shrink:0">✓</div><div style="flex:1"><div style="font-size:var(--type-1);font-weight:600">Booking confirmed</div><div style="font-size:var(--type-1);color:var(--muted)">North Room · 1h ago</div></div></div>
+<div class="card-s hl" style="display:flex;gap:10px;align-items:center;padding:12px;animation:float 3s ease-in-out infinite;animation-delay:var(--duration-4)"><div style="width:36px;height:36px;border-radius:10px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:var(--type-2);flex-shrink:0">⭐</div><div style="flex:1"><div style="font-size:var(--type-1);font-weight:600">New review</div><div style="font-size:var(--type-1);color:var(--muted)">Priya Sharma · 3h ago</div></div></div>
+</div>
+</div>
+
+<div class="visual-demo" style="background:var(--black);border-radius:24px;padding:32px;text-align:center;overflow:hidden;position:relative">
+<div style="position:absolute;inset:0;opacity:0.05;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(234,76,137,0.3) 2px,rgba(234,76,137,0.3) 4px);background-size:100% 8px;animation:waveform-bg 4s linear infinite"></div>
+<div style="position:relative;z-index:1">
+<div style="font-size:var(--type-4);margin-bottom:12px">🎧</div>
+<h3 style="color:#fff;font-size:var(--type-3);font-weight:800;margin-bottom:8px">Audio-First Design</h3>
+<p style="color:rgba(255,255,255,0.6);font-size:var(--type-1);max-width:360px;margin:0 auto 16px">Every card has a waveform preview. Every profile has audio samples. Music comes first.</p>
+<div class="wf" style="justify-content:center;height:28px"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+</div>
+<style>@keyframes waveform-bg{0%{background-position:0 0}100%{background-position:0 100%}}</style>
+
+<div class="visual-demo">
+<div class="demo-label">Category Discovery Row (horizontal scroll)</div>
+<div style="display:flex;gap:8px;overflow-x:auto;padding:4px 0">
+<div class="card-s hl" style="text-align:center;padding:16px 20px;min-width:100px;flex-shrink:0"><div style="font-size:var(--type-3);margin-bottom:4px">🎤</div><div style="font-size:var(--type-1);font-weight:700">Vocalists</div><div style="font-size:var(--type-1);color:var(--muted)">1.2k</div></div>
+<div class="card-s hl" style="text-align:center;padding:16px 20px;min-width:100px;flex-shrink:0"><div style="font-size:var(--type-3);margin-bottom:4px">🎸</div><div style="font-size:var(--type-1);font-weight:700">Guitarists</div><div style="font-size:var(--type-1);color:var(--muted)">840</div></div>
+<div class="card-s hl" style="text-align:center;padding:16px 20px;min-width:100px;flex-shrink:0"><div style="font-size:var(--type-3);margin-bottom:4px">🎛️</div><div style="font-size:var(--type-1);font-weight:700">Producers</div><div style="font-size:var(--type-1);color:var(--muted)">620</div></div>
+<div class="card-s hl" style="text-align:center;padding:16px 20px;min-width:100px;flex-shrink:0"><div style="font-size:var(--type-3);margin-bottom:4px">🏢</div><div style="font-size:var(--type-1);font-weight:700">Studios</div><div style="font-size:var(--type-1);color:var(--muted)">380</div></div>
+<div class="card-s hl" style="text-align:center;padding:16px 20px;min-width:100px;flex-shrink:0"><div style="font-size:var(--type-3);margin-bottom:4px">🎧</div><div style="font-size:var(--type-1);font-weight:700">DJs</div><div style="font-size:var(--type-1);color:var(--muted)">290</div></div>
+</div>
+</div>
+</section>
+
+
 <section class="sec" id="vd-success">
 <button class="copy-link-btn" onclick="copyLink('vd-success')">🔗</button>
 <div class="eyebrow">06 MusicLinkd Components</div>

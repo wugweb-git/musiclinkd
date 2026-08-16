@@ -82,13 +82,38 @@
   // state metadata + data contract), exposes it, and renders the dev badge.
   // `?state=` in the URL previews a specific state; defaults to states[0].
   // Path comes from a per-page <meta name="screen-json-path"> (baked in by
-  // the generator, absolute — see MOUNT_BASE above for why) rather than a
-  // relative fetch, for the same trailing-slash reason. Falls back to a
-  // relative "./screen.json" for pages without that meta tag (e.g. the raw
-  // template file, opened directly rather than as a generated screen). ---
+  // the generator, absolute — see MOUNT_BASE above for why).
+  //
+  // Bug fixed 2026-08-16, then refined on re-audit the same day: this used to
+  // fall back to a relative "./screen.json" fetch on ANY page with no
+  // screen-json-path meta tag. That fallback was meant to catch one real
+  // authoring mistake — a screen copied from template/index.html that forgot
+  // to add its own meta tag — by showing "screen.json not found" as a hint.
+  // But app-shell.js is also included on /preview/index.html (the Flow/
+  // Screen Index shell page, for its own service-worker registration and
+  // keyboard-awareness features), which was never meant to have a
+  // screen.json at all — the same fallback fired there too and stamped a
+  // permanent, misleading "screen.json not found" badge onto a page that
+  // isn't a screen and never will be.
+  //
+  // First pass just skipped the loader whenever the meta tag was missing —
+  // that silently broke the original "forgot the meta tag" signal for real
+  // screens. Fixed properly here by keying off the URL instead: only pages
+  // under /flows/ are actual generated screens. A /flows/ page with no meta
+  // tag is a real authoring mistake and still gets the fallback fetch +
+  // error badge; anything outside /flows/ (the shell page, or this file
+  // opened from somewhere else entirely) is skipped outright — no fetch, no
+  // badge, no console warning. The raw template/index.html itself sits
+  // outside /flows/ too, so opening it directly is now silent rather than
+  // showing a "not found" badge — that page's own header comment already
+  // says plainly it's a template, not a screen, so the badge wasn't adding
+  // information there either. ---
   async function loadScreenContract() {
+    const metaPath = document.querySelector('meta[name="screen-json-path"]')?.content;
+    const isScreenPage = metaPath || window.location.pathname.includes("/flows/");
+    if (!isScreenPage) return; // shell page / template file opened directly — nothing to load
+    const path = metaPath ?? "./screen.json";
     const badge = document.getElementById("dev-meta-badge") ?? createBadge();
-    const path = document.querySelector('meta[name="screen-json-path"]')?.content ?? "./screen.json";
     try {
       const res = await fetch(path, { cache: "no-store" });
       if (!res.ok) throw new Error(`screen.json ${res.status}`);

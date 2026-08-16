@@ -23,7 +23,7 @@ Full detail: [`gestalt-library.md`](./gestalt-library.md).
 A separate, standalone React app (own `package.json`/`node_modules`, bundled with esbuild) that renders the *real* Gestalt components, the *real* shipped design tokens, and the *real* icon set — genuinely interactive, not a mockup. Branded "MusicLinkd System." Five tabs:
 
 - **Components (60 cards)** — every practically demoable Gestalt component, real and interactive, across 8 categories (Actions, Forms, Feedback, Data Display, **Navigation**, Overlays, Typography & Layout, Media & Gallery). The handful deliberately left out (Video, Collage/MasonryV2, search-index-specific pieces, infra-only providers/hooks, Layer, Container) are listed by name at the bottom of that tab, with why.
-- **Blocks (30 composed patterns + admin widget directory)** — two sub-tabs. "Composed patterns" now spans three provenance tiers, all honestly distinguished: (1) originally designed patterns not tied to a specific data source (navigation header, artist profile card, track row, upload form, stats row, empty state, notification stack, cover art gallery, bottom navigation bar, trust badges — sourced from `admin/components/shared/trust-badge.tsx` — hero, metrics scorecard, activity feed, search & filters, quick actions, avatar stack/social proof, testimonial, pricing plans); (2) patterns validated against the real 124-screen registry (`dist/preview/flows/**/screen.json`) — booking summary, availability calendar, chat, rating breakdown, write review, success state, QR share, credit attribution, section tabs — several using the screens' own real seed data verbatim; (3) admin-panel-perspective patterns (data table, sidebar, top bar). "Admin widget directory": a read-only mirror of the real 27-widget catalog from `admin/app/(admin)/widgets/default-widgets.ts` (backed by `admin/docs/architecture/Widget_Directory.md`), transcribed verbatim, grouped by the same 9 categories, filterable by the same search box — a reference mirror, not the source of truth; see `musiclinkd-system/src/widgets-mirror.ts` for the re-transcription note.
+- **Blocks (38 composed patterns + admin widget directory)** — two sub-tabs. "Composed patterns" now spans four provenance tiers, all honestly distinguished: (1) originally designed patterns not tied to a specific data source (navigation header, artist profile card, track row, upload form, stats row, empty state, notification stack, cover art gallery, bottom navigation bar, trust badges — sourced from `admin/components/shared/trust-badge.tsx` — hero, metrics scorecard, activity feed, search & filters, quick actions, avatar stack/social proof, testimonial, pricing plans); (2) patterns validated against the real 124-screen registry (`dist/preview/flows/**/screen.json`) — booking summary, availability calendar, chat, rating breakdown, write review, success state, QR share, credit attribution, section tabs, public profile — several using the screens' own real seed data verbatim; (3) admin-panel-perspective patterns (data table, sidebar, top bar); (4) widget-directory-backed visual cards, added seventh pass — track card, studio card, featured studio card, marketplace card, opportunity card, review card, notification card, public reputation widget. "Admin widget directory": a read-only mirror of the real 27-widget catalog from `admin/app/(admin)/widgets/default-widgets.ts` (backed by `admin/docs/architecture/Widget_Directory.md`), transcribed verbatim, grouped by the same 9 categories, filterable by the same search box — a reference mirror, not the source of truth; see `musiclinkd-system/src/widgets-mirror.ts` for the re-transcription note.
 
 ### Old styleguide.html nav audit (2026-08-16, two passes)
 
@@ -133,6 +133,146 @@ anything in this repo's own code; not fixable from here without patching a vendo
 **Still unverified in an actual browser at real device widths** — jsdom confirms the DOM renders
 and contains the right content, not that it visually looks correct at 375px; that needs a human
 looking at a real phone or resized browser window.
+
+## musiclinkd-system: real deployed screen ported in as a Block (2026-08-16, sixth pass)
+
+While the `webapp/` preview build was being debugged this session (see the real-bug fixes below —
+stray "screen.json not found" badge, clipped dev-badge text, a completely non-functional device
+selector, a stale `?screen=` fallback), one screen — `public_profile_view_venue` — went from an
+unfilled template stub to a fully designed screen using the real `screen.json` sample data, and
+was deployed live to `admin.musiclinkd.com/preview/flows/public_profile/public_profile_view_venue/`
+(confirmed live via a fresh fetch after deploy, not just trusted from the deploy log).
+
+That real, now-production screen is ported into `musiclinkd-system`'s Blocks tab as **"Public
+profile"** — a new screen-validated Block (`PublicProfileVenueBlock` in `src/App.tsx`), using the
+exact same real `screen.json` sample verbatim (Arijit Sen, the "Tum Hi Toh (Unplugged)" portfolio
+project, the T-Series A&R Team review) so the React/Gestalt version and the live deployed webapp
+screen stay the same real screen rather than two independent guesses at it. Same honest gap
+carried over from the webapp build: the screen's own `notes` field claims it renders Venue
+extension fields, but the actual sample is Talent-shaped — no Venue-specific fields exist anywhere
+in this build to render instead, so this Block shows the real sample as given, not backfilled with
+invented Venue fields. Verified: `npm run typecheck` clean, `npm run build` clean, and a headless
+render confirmed the new Block actually shows "Arijit Sen" and "Tum Hi Toh" in the rendered DOM,
+not just that the tab opens.
+
+## Pink-primary token override, 8 new widget Blocks, token grouping (2026-08-16, seventh pass)
+
+**Primary color: red → pink.** Gestalt's `Button`/`IconButton`/`Icon` `color`/`iconColor`/`bgColor`
+prop literal is still `"red"` — verified in `Button.d.ts`/`IconButton.d.ts`, there is no `"pink"`
+option in Gestalt's real API, so that prop value is unchanged. What changed is which color that
+`"red"` slot actually renders: `frontend/guide/musiclinkd-system/src/styles.css` now overrides the
+CSS custom properties Gestalt's compiled CSS reads for the primary/brand semantic slot only
+(`--color-background-primary-base/-strong/-weak`, the hardcoded `--color-background-button-primary-active`,
+`--color-icon-brand-primary`, `--color-background-brand`) to MusicLinkd's real brand pink (`#EA4C89`,
+the same `--ml-accent` already used for this app's own chrome) — verified against Gestalt's compiled
+CSS in `node_modules/gestalt/dist/*.css`. Deliberately scoped to exclude the raw
+`--color-red-pushpin-*` palette and `--color-background-error-*`/`--color-icon-error` (those also
+derive from red-pushpin) so error/danger states stay a real, distinct red rather than also turning
+pink. The weak/active shades (`#F28FB4`, `#B23A67`) have no source-of-truth swatch — they're derived
+by mixing the base with white/black, documented as derived in the CSS comment, not presented as an
+official value. This reverses a prior explicit decision in the same file's comment ("Gestalt demos
+are deliberately left untouched") — reversed on direct instruction this pass.
+
+**8 new visual widget Blocks**, added to "Composed patterns" (not the reference-only "Admin widget
+directory" tab, which already existed and already mirrors all 27+ widgets as spec text): Track card,
+Studio card, Featured studio card, Marketplace card, Opportunity card, Review card, Notification
+card, Public reputation widget. Each sourced from a real entry in
+`admin/app/(admin)/widgets/default-widgets.ts` (backed by `admin/docs/architecture/Widget_Directory.md`)
+— purpose/content-composition fields are real and checked; sample copy (names, prices, counts) is
+illustrative, same convention as the rest of this file's Blocks. Deliberately did NOT rebuild
+BookingCard (already real as "Booking summary") or duplicate the plain "Track row" — the new Track
+card adds artwork + platform badges that row format doesn't have, so it's additive, not a re-skin.
+Not built: PersistentAudioPlayer (confirmed dead — `GlobalPersistentAudioPlayerBar.kt` deleted per
+git history, already noted in the admin widget directory's own data). Verified: `npm run typecheck`
+clean, `npm run build` clean, headless smoke test shows 0 new console errors (2 pre-existing
+`fetchpriority` warnings, unrelated), and the compiled bundle was grepped to confirm the new
+components' real sample text actually made it into the output.
+
+**Token grouping.** `frontend/guide/styleguide.html`'s `:root` token block already implements almost
+all of the requested 8-category architecture (Foundation/Semantic/Layout/Component/State/
+Interaction/Responsive/Platform) — Layout/Component/State/Interaction/Responsive/Platform already
+had section header comments; only Foundation and Semantic didn't, so two header comments were added
+purely as labels (zero value changes). Breakpoint (`--bp-*`), sizing (`--sz-*`), radius (`--radius-*`
+/`--r-*`/`--g-r-*`), elevation (`--el-*`/`--g-el-*`/`--gestalt-elevation-*`), border (`--bd-*`),
+opacity (`--op-*`/`--gestalt-opacity-*`), z-index (`--z-*`), padding (`--sp-*`/`--space-*`), and
+motion easing (`--ease-std`/`--ease-spring`/`--gestalt-ease-*`) all already existed — not
+re-added, to avoid adding a 4th parallel token system on top of the 3 (core/`--gestalt-`/`--g-`)
+CLAUDE.md already flags as a known, unremediated duplication problem. The one genuine gap: no
+column/grid-count tokens existed (the real `@media` rules hardcode 1/2/3/4 columns inline) — added
+`--grid-cols-mobile/-tablet/-desktop/-wide` (values 1/2/3/4, matching what those real rules already
+use). `webapp/shared/tokens.css` was NOT re-synced this pass — it only ever mirrored the older
+space/radius/opacity/duration/type/color/shadow subset, not the newer `--gestalt-`/`--g-`/`--layout-`
+/`--comp-`/`--state-`/`--int-`/`--bp-`/`--plat-`/`--grid-cols-` additions; that gap predates this
+pass and is flagged here rather than silently left unmentioned.
+
+No Tailwind or GSAP dependency was added — this repo has zero existing Tailwind config and zero
+GSAP usage; introducing either would itself be the kind of duplicate/parallel system CLAUDE.md
+already flags. Confirmed with the user before proceeding.
+
+## styleguide.html: pre-existing diff investigated, real components ported in, fifth pass (2026-08-16)
+
+Direct request to start bringing musiclinkd-system's real components/blocks into `styleguide.html`
+itself, plus to investigate the 555-line uncommitted diff already sitting in that file before
+touching it further. Both done — findings below, not glossed over.
+
+**The uncommitted diff was real, dated, legitimate work — not corruption.** Read the entire diff
+(all 690 lines, `git diff -- frontend/guide/styleguide.html`). It's a careful CSS bug-fix + dedup
+pass, self-documented with dated inline comments (2026-08-12/13, predating this session): several
+`.sidebar`/`.top-nav`/`.main`/`.mobile-bottom-nav`/`.floating-pill-nav` rules were unconditional
+(no media query) and silently competing with the correctly-scoped versions elsewhere in the file —
+e.g. an unconditional `.sidebar{width:var(--sw)}` was picking up the tablet tier's `--sw:0px` and
+collapsing the sidebar to zero width; an unconditional second `.top-nav` (floating pill variant)
+was permanently hiding the real banner nav at every viewport, not just mobile. Each removal has a
+comment explaining exactly what it competed with and why it lost. Also deduped a genuinely
+duplicated content pair (`product-philosophy`, `lay-grid` existed twice; the `25 Effects`/`26
+Gen-Z`/`27 More` sections existed twice and were consolidated to one location), and updated the
+`brandAssets` JS array to the real logo filenames. **Verdict: safe to build on top of, not discarded.**
+
+**Found a genuinely new, much bigger bug while investigating: `.visual-demo` / `.demo-label` /
+`.demo-row` / `.demo-grid` — the containers used in ~131 places across nearly every "Live Preview"
+block in this entire file — had no real CSS definition anywhere.** `.visual-demo` had only two
+stray `min-height`/`max-height` rules left over from an unrelated responsive patch; the other three
+classes had zero rules at all. Every demo block in this file has been rendering as unstyled,
+unlaid-out plain `<div>`s — no card background/border, no grid/row layout grouping the items
+inside — this affects far more of the file than anything I set out to look for. Fixed by adding
+real definitions matching this file's own established `.card-s`/`.spec-card`/`.spec-grid` visual
+language (`src`-adjacent insertion at the same spot as `.card-s`/`.spec-card`, `styleguide.html`
+~line 583). This is the highest-value single fix made to this file this session — it benefits
+every existing demo block, not just new ones.
+
+**Two new sections added** (additive only — no existing section touched, no fabricated data used):
+
+- **Admin Panel** (`#admin-panel`, under "15 Developer Documentation", next to Widget Registry) —
+  data table, sidebar nav, and top bar, hand-ported from the real Gestalt-backed versions in
+  `musiclinkd-system/src/App.tsx` (`AdminDataTableBlock`/`AdminSidebarBlock`/`AdminTopBarBlock`)
+  into this file's own static `.card-s`/`.token-table`/`.btn` idiom — same seed rows (Ava Chen,
+  Bloom Studio A, Ravi Nair), same real nav items. This category was genuinely absent from
+  `styleguide.html` before today.
+- **Not Built** (`#not-built`, new "18 Not Built" nav group) — the same real, checked exclusion
+  list now in musiclinkd-system's Blocks → "Not built" sub-tab, ported here too so the honesty
+  registry lives in both places, not just one.
+
+**Verified, not assumed:** wrote a script checking tag balance (`<section>` 256/256 balanced,
+my 2 new sections individually balanced at div-level), both new `href="#admin-panel"` /
+`href="#not-built"` nav links resolve to real ids, and all 5 inline `<script>` blocks still pass
+`node --check` after the edits. One honest caveat carried over from the pre-existing diff, not
+introduced by this round: the whole-file `<div>` count is off by 9 (2787 open / 2796 close) and 39
+nav `href="#x"` targets across the file don't resolve to any `id="x"` (e.g. `#lay-grid`, several
+`#anatomy-*`/`#c2-*`/`#fm-*`/`#p-*` links) — both pre-exist this session's edits (confirmed neither
+figure moves when my 3 insertions are excluded from the count) and are follow-up cleanup work, not
+something silently introduced here.
+
+**What's still not done, scoped honestly:** the user's original ask was "recreate it" — hand-port
+the *rest* of musiclinkd-system's real components/blocks (not just the admin ones) into this file.
+That's a much bigger job than this pass covered: e.g. the placeholder booking data ("North Room,"
+₹7,200, Oct 15) that musiclinkd-system replaced with the real `booking_summary/screen.json` seed
+(Yash Raj Sound Studios, ₹32,000, Aug 12) is duplicated across at least 5 separate demo instances
+in `styleguide.html`, each in different surrounding context (nav preview mockup, typography
+specimen, dialog demo, notification stack, MusicLinkd Components section) — not one canonical
+section to update. Doing that properly means going through each of the ~90 combined
+components/blocks individually, verifying real backing, and updating in place rather than adding
+more duplicate sections (which would make this file's existing duplication problem worse, not
+better). Flagged as a large, multi-session follow-up, not attempted wholesale in this pass.
 
 ## Real overlap bugs from screenshots, fourth pass (2026-08-16)
 

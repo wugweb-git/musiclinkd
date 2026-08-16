@@ -1544,6 +1544,301 @@ function AdminTopBarBlock() {
 
 type Block = { name: string; description: string; render: () => React.ReactNode };
 
+// dist/preview/flows/public_profile/public_profile_view_venue/screen.json —
+// the same real dataContract sample now actually designed and deployed to
+// production at admin.musiclinkd.com/preview/flows/public_profile/
+// public_profile_view_venue/ (2026-08-16), not just cataloged. Ported here
+// verbatim rather than re-derived, so this card and the live webapp screen
+// stay the same real screen, not two independent guesses at it.
+//
+// Same honest gap carried over from that build: this screen's own notes
+// field says "profileType === VENUE — renders the Venue extension fields,"
+// but its actual dataContract sample is Talent-shaped (vocalRange,
+// sessionAvailability) — no Venue fields (capacity/address/amenities etc.)
+// exist anywhere in this build to render instead. Shown as the real sample
+// given, not backfilled with invented Venue fields.
+function PublicProfileVenueBlock() {
+  return (
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={360}>
+      <Flex justifyContent="between" alignItems="center">
+        <IconButton icon="arrow-back" accessibilityLabel="Back" size="sm" />
+        <IconButton icon="share" accessibilityLabel="Share" size="sm" />
+      </Flex>
+      <Box marginTop={2} marginBottom={3}>
+        <Flex direction="column" alignItems="center" gap={2}>
+          <Avatar name="Arijit Sen" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400" size="xl" />
+          <Flex gap={1} alignItems="center">
+            <Text weight="bold" size="400">Arijit Sen</Text>
+            <Status type="ok" title="Verified" />
+          </Flex>
+          <Text size="100" color="subtle" align="center">Singer · Composer · Mumbai, MH · Andheri</Text>
+        </Flex>
+      </Box>
+      <Box marginBottom={3}>
+        <Flex gap={1} wrap justifyContent="center">
+          <Tag text="Verified Artist" />
+          <Tag text="Rising Talent" />
+          <Tag text="Available for Collab" />
+          <Tag text="Touring" />
+        </Flex>
+      </Box>
+      <Text size="100" align="center">
+        Playback &amp; classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.
+      </Text>
+      <Box marginTop={3} marginBottom={3}>
+        <Flex gap={1} wrap justifyContent="center">
+          {["Bollywood / Filmi", "Sufi Devotional", "Acoustic / Unplugged", "Acoustic Guitar", "Hindi", "Bengali", "English"].map((t) => (
+            <Tag key={t} text={t} onRemove={() => {}} />
+          ))}
+        </Flex>
+      </Box>
+      <Box marginBottom={2}><Divider /></Box>
+      <Box marginBottom={3}>
+        <Text size="100" weight="bold" color="subtle">PORTFOLIO</Text>
+        <Box marginTop={1}>
+          <Flex justifyContent="between" alignItems="start" gap={2}>
+            <Box>
+              <Text weight="bold" size="100">Tum Hi Toh (Unplugged)</Text>
+              <Text size="100" color="subtle">Acoustic unplugged reinterpretation — 4.2M plays on Spotify.</Text>
+            </Box>
+            <Badge text="Released" type="neutral" />
+          </Flex>
+          <Box marginTop={1}><Text size="100" color="subtle">4.2K views · 610 likes · 88 shares</Text></Box>
+        </Box>
+      </Box>
+      <Box marginBottom={3}>
+        <Text size="100" weight="bold" color="subtle">REVIEWS</Text>
+        <Box marginTop={1}>
+          <Text size="200">★★★★★</Text>
+          <Text size="100">&quot;Exceptional range and control across genres.&quot;</Text>
+          <Text size="100" color="subtle">— T-Series A&amp;R Team</Text>
+        </Box>
+      </Box>
+      <Button text="Contact Arijit" color="red" fullWidth />
+    </Box>
+  );
+}
+
+// The following 8 Blocks render real entries from
+// admin/app/(admin)/widgets/default-widgets.ts (backed by
+// admin/docs/architecture/Widget_Directory.md) as actual visual Gestalt
+// components, not just the read-only spec text already shown in the
+// "Admin widget directory" tab below. Field values (labels, copy) are
+// illustrative sample data — the widget's PURPOSE and CONTENT COMPOSITION
+// fields are the real, checked source; none of these were skipped or
+// guessed past that. Deliberately not rebuilding BookingCard (already
+// real as "Booking summary" above) or a plain track row (already real as
+// "Track row" above, just missing artwork/platform badges that this
+// version of the card includes) — this is additive, not duplicative.
+
+// UnifiedTrackCard (Widget_Directory §5) — artwork + platform badges,
+// distinct form factor from the existing horizontal "Track row".
+function TrackCardBlock() {
+  return (
+    <Box borderStyle="sm" rounding={3} padding={3} maxWidth={220}>
+      <Box rounding={2} overflow="hidden" marginBottom={2}>
+        <Image alt="Track artwork" src={placeholderImg("#8B5CF6", "Track", 220, 220)} naturalWidth={220} naturalHeight={220} />
+      </Box>
+      <Text weight="bold" size="100">Neon Tide</Text>
+      <Text size="100" color="subtle">Mei Tanaka · 3:42</Text>
+      <Box marginTop={2} marginBottom={2}>
+        <Flex gap={1}>
+          <Badge text="Spotify" type="success" />
+          <Badge text="YouTube" type="error" />
+        </Flex>
+      </Box>
+      <Flex gap={1} alignItems="center">
+        <Icon icon="music-on" accessibilityLabel="" size={12} color="subtle" />
+        <Text size="100" color="subtle">482K plays</Text>
+      </Flex>
+    </Box>
+  );
+}
+
+// UnifiedStudioCard (Widget_Directory §2)
+function StudioCardBlock() {
+  return (
+    <Box borderStyle="sm" rounding={3} padding={3} maxWidth={260}>
+      <Box rounding={2} overflow="hidden" marginBottom={2}>
+        <Image alt="Studio room" src={placeholderImg("#0D0B26", "Studio", 260, 150)} naturalWidth={260} naturalHeight={150} />
+      </Box>
+      <Flex justifyContent="between" alignItems="start">
+        <Text weight="bold" size="200">Bloom Studio A</Text>
+        <Badge text="Dolby Atmos" type="info" />
+      </Flex>
+      <Flex gap={1} alignItems="center">
+        <Icon icon="location" accessibilityLabel="" size={12} color="subtle" />
+        <Text size="100" color="subtle">Bandra, Mumbai</Text>
+      </Flex>
+      <Box marginTop={2}>
+        <Flex justifyContent="between" alignItems="center">
+          <Flex gap={1} alignItems="center">
+            <Icon icon="star" accessibilityLabel="" size={12} color="warning" />
+            <Text size="100">4.8 (126)</Text>
+          </Flex>
+          <Text weight="bold" size="100">₹2,500/hr</Text>
+        </Flex>
+      </Box>
+    </Box>
+  );
+}
+
+// FeaturedStudioCard (Widget_Directory §2) — hero promotion banner variant,
+// distinct from the standard StudioCard above.
+function FeaturedStudioCardBlock() {
+  return (
+    <Box borderStyle="sm" rounding={4} overflow="hidden" maxWidth={360}>
+      <Image alt="Featured studio" src={placeholderImg("#EA4C89", "Featured Studio", 360, 180)} naturalWidth={360} naturalHeight={180} />
+      <Box padding={4}>
+        <Text weight="bold" size="300">Yash Raj Sound Studios</Text>
+        <Text size="100" color="subtle">Room B · SSL 9000J console · Dolby Atmos 7.1.4</Text>
+        <Box marginTop={3}>
+          <Flex justifyContent="between" alignItems="center">
+            <Text weight="bold">₹8,000/hr</Text>
+            <Button text="Book now" color="red" size="sm" />
+          </Flex>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+// UnifiedMarketplaceCard (Widget_Directory §3)
+function MarketplaceCardBlock() {
+  return (
+    <Box borderStyle="sm" rounding={3} padding={3} maxWidth={220}>
+      <Box rounding={2} overflow="hidden" marginBottom={2}>
+        <Image alt="Gear photo" src={placeholderImg("#F59E0B", "Gear", 220, 160)} naturalWidth={220} naturalHeight={160} />
+      </Box>
+      <Flex justifyContent="between" alignItems="start">
+        <Text weight="bold" size="100">Neumann U87 Mic</Text>
+        <Badge text="Available" type="success" />
+      </Flex>
+      <Text size="100" color="subtle">₹800/day rental</Text>
+      <Box marginTop={1}>
+        <Flex gap={1} alignItems="center">
+          <Icon icon="star" accessibilityLabel="" size={12} color="warning" />
+          <Text size="100" color="subtle">4.6 seller rating</Text>
+        </Flex>
+      </Box>
+    </Box>
+  );
+}
+
+// UnifiedOpportunityCard (Widget_Directory §3)
+function OpportunityCardBlock() {
+  return (
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={340}>
+      <Flex justifyContent="between" alignItems="start">
+        <Text weight="bold">Session vocalist for indie EP</Text>
+        <Tag text="₹15,000 budget" />
+      </Flex>
+      <Text size="100" color="subtle">Posted by Ravi Nair · Producer</Text>
+      <Box marginTop={2} marginBottom={2}>
+        <Flex gap={1} wrap>
+          <Tag text="Playback singing" />
+          <Tag text="Hindi" />
+          <Tag text="Studio session" />
+        </Flex>
+      </Box>
+      <Flex justifyContent="between" alignItems="center">
+        <Flex gap={1} alignItems="center">
+          <Icon icon="people" accessibilityLabel="" size={12} color="subtle" />
+          <Text size="100" color="subtle">12 applicants</Text>
+        </Flex>
+        <Flex gap={1} alignItems="center">
+          <Icon icon="calendar" accessibilityLabel="" size={12} color="subtle" />
+          <Text size="100" color="subtle">Deadline Aug 24</Text>
+        </Flex>
+      </Flex>
+    </Box>
+  );
+}
+
+// UnifiedReviewCard (Widget_Directory §7) — adds organization + timestamp
+// vs. the existing Testimonial block (which has role, not org, and no
+// timestamp).
+function ReviewCardBlock() {
+  return (
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={340}>
+      <Flex gap={2} alignItems="center">
+        <Avatar name="Priya Menon" size="sm" />
+        <Box>
+          <Text weight="bold" size="100">Priya Menon</Text>
+          <Text size="100" color="subtle">A&amp;R, Zee Music Company</Text>
+        </Box>
+      </Flex>
+      <Box marginTop={2} marginBottom={1}>
+        <Flex gap={1}>
+          {[0, 1, 2, 3, 4].map((i) => <Icon key={i} icon="star" accessibilityLabel={i === 4 ? "5 out of 5 stars" : ""} color="warning" size={14} />)}
+        </Flex>
+      </Box>
+      <Text size="100">&quot;Delivered mix stems ahead of schedule, communicated clearly throughout.&quot;</Text>
+      <Box marginTop={2}><Text size="100" color="subtle">3 days ago</Text></Box>
+    </Box>
+  );
+}
+
+// UnifiedNotificationCard (Widget_Directory §7) — per-item event-type icon,
+// distinct from the existing plain-text "Activity feed" block.
+function NotificationCardBlock() {
+  const items: { icon: "speech" | "calendar-check" | "people"; label: string; who: string; detail: string; time: string; unread: boolean }[] = [
+    { icon: "speech", label: "Comment", who: "Ravi Nair", detail: 'commented on "Neon Tide"', time: "2m", unread: true },
+    { icon: "calendar-check", label: "Booking", who: "Bloom Studio A", detail: "confirmed your session", time: "1h", unread: true },
+    { icon: "people", label: "Follow", who: "Ava Chen", detail: "started following you", time: "3h", unread: false },
+  ];
+  return (
+    <Flex direction="column" gap={2}>
+      {items.map((it, i) => (
+        <Box key={i} borderStyle="sm" rounding={2} padding={3} color={it.unread ? "infoWeak" : undefined}>
+          <Flex gap={2} alignItems="start">
+            <Avatar name={it.who} size="sm" />
+            <Box flex="grow">
+              <Text size="100"><Text inline weight="bold" size="100">{it.who}</Text> {it.detail}</Text>
+              <Flex gap={1} alignItems="center">
+                <Icon icon={it.icon} accessibilityLabel={it.label} size={10} color="subtle" />
+                <Text size="100" color="subtle">{it.time} ago</Text>
+              </Flex>
+            </Box>
+            {it.unread && <Status type="unstarted" title="Unread" />}
+          </Flex>
+        </Box>
+      ))}
+    </Flex>
+  );
+}
+
+// PublicReputationWidget (Widget_Directory §7) — aggregated stat card,
+// distinct from the badge-chip-row "Trust badges" block above.
+function PublicReputationWidgetBlock() {
+  return (
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={320}>
+      <Flex alignItems="center" gap={3}>
+        <Text weight="bold" size="600">4.9</Text>
+        <Box>
+          <Flex gap={1}>
+            {[0, 1, 2, 3, 4].map((i) => <Icon key={i} icon="star" accessibilityLabel="" color="warning" size={12} />)}
+          </Flex>
+          <Text size="100" color="subtle">from 214 reviews</Text>
+        </Box>
+      </Flex>
+      <Box marginTop={3}><Divider /></Box>
+      <Box marginTop={3}>
+        <Flex justifyContent="between">
+          <Box>
+            <Text weight="bold">38</Text>
+            <Text size="100" color="subtle">Verified credits</Text>
+          </Box>
+          <Box>
+            <Text weight="bold">98%</Text>
+            <Text size="100" color="subtle">Response rate</Text>
+          </Box>
+        </Flex>
+      </Box>
+    </Box>
+  );
+}
+
 const BLOCKS: Block[] = [
   { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => <NavHeaderBlock /> },
   { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => <ArtistProfileBlock /> },
@@ -1572,6 +1867,15 @@ const BLOCKS: Block[] = [
   { name: "QR share", description: "Real screen (qr_share_flow) — flowStatus \"missing\": UI exists, backend doesn't. Labeled honestly.", render: () => <QrShareBlock /> },
   { name: "Credit attribution", description: "Collaborator credits list — real screen credit_attribution.", render: () => <CreditAttributionBlock /> },
   { name: "Section tabs", description: "Real Gestalt Tabs over real section names from business-profile screens.", render: () => <SectionTabsBlock /> },
+  { name: "Public profile", description: "Real screen public_profile_view_venue — same data as the now-live webapp screen at admin.musiclinkd.com/preview.", render: () => <PublicProfileVenueBlock /> },
+  { name: "Track card", description: "UnifiedTrackCard (Widget Directory §5) — artwork, platform badges, play count.", render: () => <TrackCardBlock /> },
+  { name: "Studio card", description: "UnifiedStudioCard (Widget Directory §2) — imagery, Atmos badge, rating, hourly rate.", render: () => <StudioCardBlock /> },
+  { name: "Featured studio card", description: "FeaturedStudioCard (Widget Directory §2) — hero promotion banner variant.", render: () => <FeaturedStudioCardBlock /> },
+  { name: "Marketplace card", description: "UnifiedMarketplaceCard (Widget Directory §3) — gear rental listing.", render: () => <MarketplaceCardBlock /> },
+  { name: "Opportunity card", description: "UnifiedOpportunityCard (Widget Directory §3) — gig/job/collab posting.", render: () => <OpportunityCardBlock /> },
+  { name: "Review card", description: "UnifiedReviewCard (Widget Directory §7) — reviewer, org, stars, quote, timestamp.", render: () => <ReviewCardBlock /> },
+  { name: "Notification card", description: "UnifiedNotificationCard (Widget Directory §7) — per-item event-type icon + unread state.", render: () => <NotificationCardBlock /> },
+  { name: "Public reputation widget", description: "PublicReputationWidget (Widget Directory §7) — aggregate rating, credits, response rate.", render: () => <PublicReputationWidgetBlock /> },
   { name: "Admin data table", description: "Real Table.SortableHeaderCell + Checkbox selection + pagination controls.", render: () => <AdminDataTableBlock /> },
   { name: "Admin sidebar", description: "Real SideNavigation themed for the admin panel.", render: () => <AdminSidebarBlock /> },
   { name: "Admin top bar", description: "Real SearchField + IconButtons + Avatar, admin-panel framing.", render: () => <AdminTopBarBlock /> },

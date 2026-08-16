@@ -3,14 +3,40 @@
    file only lays out the header/nav/grid around them. */
 
 /* MusicLinkd's own real brand accent (#EA4C89, from frontend/guide/brand/
-   README.md) — used only for this app's own chrome (active-tab underline,
-   token-category nav). A dedicated variable rather than piggybacking on
-   Gestalt's --color-icon-brand-primary, because that token resolves to
-   Gestalt's Pinterest red and would never fall through to a fallback value.
-   Real Gestalt component demos (e.g. Button color="red") are untouched and
-   still show Gestalt's actual red — this only recolors MusicLinkd's own
-   wrapper UI. */
+   README.md) — used for this app's own chrome (active-tab underline,
+   token-category nav) AND, as of this pass, for Gestalt's primary/brand
+   color tokens below. Previous comment here said Gestalt's color="red"
+   demos were deliberately left untouched — reversed on explicit request
+   ("replace primary red color with pink, rest is fine"). */
 :root { --ml-accent: #EA4C89; }
+
+/* Primary → pink override, scoped to the "primary"/"brand" SEMANTIC alias
+   layer only — not the raw --color-red-pushpin-* palette and not
+   --color-background-error-*/--color-icon-error (those also derive from
+   red-pushpin and must stay a real red so error/danger states remain
+   visually distinct from the brand action color; wiring error to pink too
+   would be a real usability regression, not just a color swap).
+   Gestalt's own component prop literal is still `color="red"` /
+   `iconColor="red"` / `bgColor="red"` — that's the only real value Gestalt's
+   Button/IconButton/Icon/Pog types accept (verified in Button.d.ts /
+   IconButton.d.ts: 'gray'|'red'|'blue'|'transparent'|... — no 'pink'
+   option exists). What changes here is which color the "red" semantic
+   slot actually renders, via the CSS custom properties Gestalt's compiled
+   CSS reads for that slot (verified in node_modules/gestalt/dist/*.css).
+   Base/hover reuse this file's own real brand pink pair (#EA4C89 / the
+   --pink-hover #D93C77 already defined in tokens.css). The weak/active
+   shades have no existing brand-file source — they're derived by mixing
+   the base with white/black at the same proportion Gestalt's own
+   red-pushpin-300 (weak) and its hardcoded active hex sit relative to
+   red-pushpin-450/600, not lifted from any official MusicLinkd swatch. */
+:root {
+  --color-background-primary-base: var(--ml-accent);       /* was --color-red-pushpin-450 #e60023 */
+  --color-background-primary-strong: #D93C77;               /* was --color-red-pushpin-600 #b60000; = --pink-hover */
+  --color-background-primary-weak: #F28FB4;                  /* was --color-red-pushpin-300 #f47171; derived tint */
+  --color-background-button-primary-active: #B23A67;         /* was hardcoded #a3081a; derived shade */
+  --color-icon-brand-primary: var(--ml-accent);               /* was --color-red-pushpin-450 #e60023 */
+  --color-background-brand: var(--ml-accent);                 /* was --color-red-pushpin-450 #e60023 */
+}
 
 * { box-sizing: border-box; }
 
