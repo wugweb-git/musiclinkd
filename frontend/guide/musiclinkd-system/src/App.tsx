@@ -1839,6 +1839,233 @@ function PublicReputationWidgetBlock() {
   );
 }
 
+
+// ===== Ported from styleguide.html, 2026-08-16 =====
+// Each of these existed only as static markup in frontend/guide/styleguide.html
+// and had no equivalent in this app. Rebuilt with real Gestalt components
+// rather than copied as raw HTML, so they inherit the token/theme system and
+// the pink primary override like every other Block here. Section id from the
+// styleguide is named in each comment so the two stay traceable.
+// Sample copy is carried over verbatim from the styleguide's own demos.
+
+// styleguide #ml-band — Band Card
+function BandCardBlock() {
+  return (
+    <Box borderStyle="sm" rounding={4} padding={4} maxWidth={340}>
+      <Flex justifyContent="between" alignItems="start">
+        <Box>
+          <Text weight="bold" size="300">The Local Train</Text>
+          <Text size="100" color="subtle">Indie Rock · Delhi NCR</Text>
+        </Box>
+        <Badge text="Live Band" type="info" />
+      </Flex>
+      <Box marginTop={3} marginBottom={3}>
+        <Flex alignItems="center" gap={2}>
+          <AvatarGroup accessibilityLabel="4 band members" size="sm"
+            collaborators={[{ name: "Raman" }, { name: "Paras" }, { name: "Ramit" }, { name: "Sahil" }]} />
+          <Text size="100" color="subtle">4 Members</Text>
+        </Flex>
+      </Box>
+      <Flex gap={1} alignItems="center">
+        <Icon icon="calendar" accessibilityLabel="" size={12} color="subtle" />
+        <Text size="100" color="subtle">Upcoming: Jun 28 · Hard Rock Cafe, Mumbai</Text>
+      </Flex>
+      <Box marginTop={3}><Button text="Book Band" color="red" fullWidth /></Box>
+    </Box>
+  );
+}
+
+// styleguide #vd-greeting — Greeting Block
+function GreetingBlock() {
+  return (
+    <Box maxWidth={360}>
+      <Heading size="400">Welcome back, Ananya 👋</Heading>
+      <Box marginTop={1}><Text color="subtle">You have 3 new gig proposals</Text></Box>
+    </Box>
+  );
+}
+
+// styleguide #pf-stats — Profile Stats
+function ProfileStatsBlock() {
+  return (
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={340}>
+      <Flex justifyContent="between">
+        {[["12.4k","Followers"],["42","Credits"],["4.9 ★","Rating"]].map(([v,l]) => (
+          <Box key={l}><Text weight="bold" size="300" align="center">{v}</Text><Text size="100" color="subtle" align="center">{l}</Text></Box>
+        ))}
+      </Flex>
+    </Box>
+  );
+}
+
+// styleguide #vd-featured-artists — Featured Artists
+function FeaturedArtistsBlock() {
+  const people = [{ n: "Ananya", r: "Vocalist" }, { n: "Rahul", r: "Producer" }, { n: "Mei", r: "Mix engineer" }];
+  return (
+    <Box maxWidth={360}>
+      <Box marginBottom={2}><Text weight="bold">Featured artists</Text></Box>
+      <Flex gap={4}>
+        {people.map((p) => (
+          <Flex key={p.n} direction="column" alignItems="center" gap={1}>
+            <Avatar name={p.n} size="md" />
+            <Text size="100" weight="bold">{p.n}</Text>
+            <Text size="100" color="subtle">{p.r}</Text>
+          </Flex>
+        ))}
+      </Flex>
+    </Box>
+  );
+}
+
+// styleguide #db-kpi — KPI Cards
+function KpiCardsBlock() {
+  const kpis = [
+    { t: "Total Earnings", v: "₹84,500", d: 12 },
+    { t: "Profile Views", v: "1,240", d: 8 },
+    { t: "Response Rate", v: "98%", d: 2 },
+  ];
+  return (
+    <Flex gap={3} wrap>
+      {kpis.map((k) => (
+        <Box key={k.t} borderStyle="sm" rounding={3} padding={4} minWidth={150}>
+          <Datapoint size="md" title={k.t} value={k.v} trend={{ value: k.d, accessibilityLabel: "Trending up" }} />
+        </Box>
+      ))}
+    </Flex>
+  );
+}
+
+// styleguide #vd-insights — Insights
+function InsightsBlock() {
+  const rows: { l: string; v: string; d: "up" | "flat" }[] = [
+    { l: "Profile views", v: "1,240", d: "up" },
+    { l: "Audio plays", v: "8.2k", d: "up" },
+    { l: "Hire requests", v: "12", d: "up" },
+    { l: "Response time", v: "2.4h", d: "flat" },
+  ];
+  return (
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={320}>
+      <Box marginBottom={2}><Text weight="bold">This week</Text></Box>
+      <Flex direction="column" gap={2}>
+        {rows.map((r) => (
+          <Flex key={r.l} justifyContent="between" alignItems="center">
+            <Text size="100" color="subtle">{r.l}</Text>
+            <Flex gap={1} alignItems="center">
+              <Text size="100" weight="bold">{r.v}</Text>
+              <Icon icon={r.d === "up" ? "arrow-up-right" : "arrow-forward"} accessibilityLabel={r.d === "up" ? "up" : "flat"} size={12} color={r.d === "up" ? "success" : "subtle"} />
+            </Flex>
+          </Flex>
+        ))}
+      </Flex>
+    </Box>
+  );
+}
+
+// styleguide #vd-workspace — Workspace Card
+function WorkspaceCardBlock() {
+  const projects: { n: string; s: string; t: "info" | "success" | "neutral" }[] = [
+    { n: "Dil Ki Raah", s: "Mixing", t: "info" },
+    { n: "Neon Horizon", s: "Mastering", t: "success" },
+    { n: "Safar OST", s: "Pending", t: "neutral" },
+  ];
+  return (
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={320}>
+      <Flex justifyContent="between" alignItems="center">
+        <Text weight="bold">Active projects</Text>
+        <Badge text="3 active" type="neutral" />
+      </Flex>
+      <Box marginTop={3}>
+        <Flex direction="column" gap={2}>
+          {projects.map((pr) => (
+            <Flex key={pr.n} justifyContent="between" alignItems="center">
+              <Text size="100">{pr.n}</Text>
+              <Badge text={pr.s} type={pr.t} />
+            </Flex>
+          ))}
+        </Flex>
+      </Box>
+    </Box>
+  );
+}
+
+// styleguide #vd-footer-cta — Footer CTA Block
+function FooterCtaBlock() {
+  return (
+    <Box rounding={4} padding={6} maxWidth={420}
+      dangerouslySetInlineStyle={{ __style: { background: "linear-gradient(135deg, #EA4C89 0%, #0D0B26 100%)" } }}>
+      {/* size="600", not "500": Gestalt's Heading Size union is
+          '100'|'200'|'300'|'400'|'600'|'700' — it skips 500. Passing "500"
+          renders a literal <hundefined> tag (caught in the headless console
+          check, not visible in the UI). */}
+      <Heading size="600" color="light">Built for music professionals</Heading>
+      <Box marginTop={2} marginBottom={4}>
+        <Text color="light">Connect, collaborate, and grow your career on the only professional network designed for the music industry.</Text>
+      </Box>
+      <Flex gap={2}>
+        <Button text="Join MusicLinkd" color="white" />
+        <Button text="Learn more" color="transparentWhiteText" />
+      </Flex>
+      <Box marginTop={4}><Text size="100" color="light">12.4k+ artists already on MusicLinkd</Text></Box>
+    </Box>
+  );
+}
+
+// styleguide #pr-talent — Talent profile role variants.
+// The styleguide lists 6 variants sharing one Hero/Stats/Portfolio skeleton;
+// the 4 with concrete descriptions there are reproduced, not invented past that.
+function TalentRoleVariantsBlock() {
+  const roles = [
+    { icon: "music-on" as const, t: "Singer", d: "Vocal register · Languages" },
+    { icon: "sound" as const, t: "Instrumentalist", d: "Gear · Touring setup" },
+    { icon: "knoop" as const, t: "Producer/Engineer", d: "DAW · Outboard gear" },
+    { icon: "headset" as const, t: "DJ/Performer", d: "Deck setup · Residencies" },
+  ];
+  return (
+    <Box maxWidth={360}>
+      <Box marginBottom={2}><Text weight="bold">Talent role variants</Text></Box>
+      <Flex direction="column" gap={2}>
+        {roles.map((r) => (
+          <Box key={r.t} borderStyle="sm" rounding={2} padding={3}>
+            <Flex gap={2} alignItems="center">
+              <Icon icon={r.icon} accessibilityLabel="" size={16} />
+              <Box><Text size="100" weight="bold">{r.t}</Text><Text size="100" color="subtle">{r.d}</Text></Box>
+            </Flex>
+          </Box>
+        ))}
+      </Flex>
+      <Box marginTop={2}><Text size="100" color="subtle">All 6 variants share one Hero · Stats · Portfolio skeleton.</Text></Box>
+    </Box>
+  );
+}
+
+// styleguide #pr-venue — Venue profile flow
+function VenueProfileFlowBlock() {
+  const steps = [
+    { icon: "camera" as const, t: "Hero" },
+    { icon: "people" as const, t: "Capacity" },
+    { icon: "calendar" as const, t: "Calendar" },
+    { icon: "clipboard" as const, t: "Booking" },
+  ];
+  return (
+    <Box maxWidth={360}>
+      <Box marginBottom={2}><Text weight="bold">Venue profile flow</Text></Box>
+      <Flex gap={2} alignItems="center" wrap>
+        {steps.map((s, i) => (
+          <Flex key={s.t} gap={2} alignItems="center">
+            <Box borderStyle="sm" rounding={2} padding={2}>
+              <Flex direction="column" alignItems="center" gap={1}>
+                <Icon icon={s.icon} accessibilityLabel="" size={16} />
+                <Text size="100">{s.t}</Text>
+              </Flex>
+            </Box>
+            {i < steps.length - 1 && <Icon icon="arrow-forward" accessibilityLabel="then" size={12} color="subtle" />}
+          </Flex>
+        ))}
+      </Flex>
+    </Box>
+  );
+}
+
 const BLOCKS: Block[] = [
   { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => <NavHeaderBlock /> },
   { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => <ArtistProfileBlock /> },
@@ -1876,6 +2103,16 @@ const BLOCKS: Block[] = [
   { name: "Review card", description: "UnifiedReviewCard (Widget Directory §7) — reviewer, org, stars, quote, timestamp.", render: () => <ReviewCardBlock /> },
   { name: "Notification card", description: "UnifiedNotificationCard (Widget Directory §7) — per-item event-type icon + unread state.", render: () => <NotificationCardBlock /> },
   { name: "Public reputation widget", description: "PublicReputationWidget (Widget Directory §7) — aggregate rating, credits, response rate.", render: () => <PublicReputationWidgetBlock /> },
+  { name: "Band card", description: "Ported from styleguide #ml-band — roster, AvatarGroup, next show.", render: () => <BandCardBlock /> },
+  { name: "Greeting", description: "Ported from styleguide #vd-greeting — dashboard welcome header.", render: () => <GreetingBlock /> },
+  { name: "Profile stats", description: "Ported from styleguide #pf-stats — followers / credits / rating.", render: () => <ProfileStatsBlock /> },
+  { name: "Featured artists", description: "Ported from styleguide #vd-featured-artists.", render: () => <FeaturedArtistsBlock /> },
+  { name: "KPI cards", description: "Ported from styleguide #db-kpi — real Datapoints with trends.", render: () => <KpiCardsBlock /> },
+  { name: "Insights", description: "Ported from styleguide #vd-insights — weekly metric deltas.", render: () => <InsightsBlock /> },
+  { name: "Workspace card", description: "Ported from styleguide #vd-workspace — active projects by stage.", render: () => <WorkspaceCardBlock /> },
+  { name: "Footer CTA", description: "Ported from styleguide #vd-footer-cta — gradient conversion block.", render: () => <FooterCtaBlock /> },
+  { name: "Talent role variants", description: "Ported from styleguide #pr-talent — 6 roles, one skeleton.", render: () => <TalentRoleVariantsBlock /> },
+  { name: "Venue profile flow", description: "Ported from styleguide #pr-venue — hero to booking.", render: () => <VenueProfileFlowBlock /> },
   { name: "Admin data table", description: "Real Table.SortableHeaderCell + Checkbox selection + pagination controls.", render: () => <AdminDataTableBlock /> },
   { name: "Admin sidebar", description: "Real SideNavigation themed for the admin panel.", render: () => <AdminSidebarBlock /> },
   { name: "Admin top bar", description: "Real SearchField + IconButtons + Avatar, admin-panel framing.", render: () => <AdminTopBarBlock /> },
