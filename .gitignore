@@ -25,3 +25,10 @@ firebase-debug.*.log
 /frontend/website/assets/img/inspiration/
 /frontend/website/assets/img/editorials/
 /frontend/website/assets/img/speakers/
+
+# Machine-local Claude settings (not shared)
+.claude/settings.local.json
+
+# Build caches (were previously tracked under app/)
+.gradle/
+.next/
