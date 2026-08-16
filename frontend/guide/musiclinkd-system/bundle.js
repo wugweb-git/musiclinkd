@@ -44317,6 +44317,74 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       ] }) })
     ] });
   }
+  function SkeletonLoaderBlock() {
+    const shimmer = {
+      background: "linear-gradient(90deg,#EFEFEF 25%,#F7F7F7 50%,#EFEFEF 75%)",
+      backgroundSize: "200% 100%",
+      animation: "mlShimmer 1.4s linear infinite"
+    };
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, maxWidth: 340, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("style", { children: "@keyframes mlShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}@media (prefers-reduced-motion: reduce){[data-ml-skeleton]{animation:none!important}}" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 44, height: 44, rounding: "circle", dangerouslySetInlineStyle: { __style: shimmer } }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { flex: "grow", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            BoxWithForwardRef,
+            {
+              height: 12,
+              rounding: "pill",
+              marginBottom: 2,
+              dangerouslySetInlineStyle: { __style: { ...shimmer, width: "62%" } }
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            BoxWithForwardRef,
+            {
+              height: 10,
+              rounding: "pill",
+              dangerouslySetInlineStyle: { __style: { ...shimmer, width: "38%" } }
+            }
+          )
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 4, height: 140, rounding: 2, dangerouslySetInlineStyle: { __style: shimmer } }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginTop: 3, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { height: 10, rounding: "pill", marginBottom: 2, dangerouslySetInlineStyle: { __style: shimmer } }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { height: 10, rounding: "pill", dangerouslySetInlineStyle: { __style: { ...shimmer, width: "72%" } } })
+      ] })
+    ] });
+  }
+  function ConnectionStatesBlock() {
+    const [online, setOnline] = (0, import_react2.useState)(false);
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 340, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", gap: 3, children: [
+      !online && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        BannerSlim,
+        {
+          type: "warning",
+          iconAccessibilityLabel: "Offline",
+          message: "You are offline. Bookings you make now will send when the connection returns."
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 3, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "workflow-status-problem", accessibilityLabel: "", size: 28, color: "error" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", align: "center", children: "That upload did not finish" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", align: "center", children: "The file reached 62 percent before the connection dropped. Retrying resumes from there." }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Retry upload", color: "red", size: "sm" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Save draft", color: "gray", size: "sm" })
+        ] })
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        ButtonWithForwardRef,
+        {
+          size: "sm",
+          color: "gray",
+          text: online ? "Simulate offline" : "Simulate online",
+          onClick: () => setOnline((o) => !o)
+        }
+      )
+    ] }) });
+  }
   var BLOCKS = [
     { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NavHeaderBlock, {}) },
     { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ArtistProfileBlock, {}) },
@@ -44371,6 +44439,8 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     { name: "Stem mixer", description: "Ported from styleguide #mixer \u2014 per-stem mute with live level meters.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(StemMixerBlock, {}) },
     { name: "Brief wizard", description: "Ported from styleguide #pattern-brief-wizard \u2014 8-step casting brief, dots jump.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BriefWizardBlock, {}) },
     { name: "Textures & effects", description: "Ported from styleguide #vd-effects \u2014 real CSS backgrounds, not screenshots.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TexturesBlock, {}) },
+    { name: "Skeleton loader", description: "Shape-matched skeleton so nothing jumps when content arrives. Honours reduced motion.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SkeletonLoaderBlock, {}) },
+    { name: "Offline & error states", description: "Offline banner plus a recoverable error. Copy explains what happened and how to fix it.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ConnectionStatesBlock, {}) },
     { name: "Swipe deck", description: "Ported from styleguide #swipe \u2014 left passes, right shortlists, real deck state.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SwipeDeckBlock, {}) },
     { name: "Replay recap", description: "Apple Music Replay reference \u2014 warm wash, month scrubber, mixed-weight editorial stat.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ReplayRecapBlock, {}) },
     { name: "Ranked artists", description: "Oversized rank numeral inside the artwork, scrim for legibility.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(RankedArtistsBlock, {}) },
@@ -44462,10 +44532,6 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       title: "No real backing found",
       reason: "Checked against both the 27-widget admin directory and all 124 real screens in dist/preview/flows/**/screen.json (titles, notes, dataContracts) \u2014 no screen, note, code reference, or widget entry backs any of these. Not built because there's nothing real to build from, not because they're hard.",
       items: [
-        "Skeleton Loaders",
-        "Error Boundary",
-        "Offline Banner",
-        "Shimmer",
         "Adaptive Banner",
         "Navbar",
         "Navbar (Alt)",

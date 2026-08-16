@@ -3327,6 +3327,78 @@ function SwipeDeckBlock() {
   );
 }
 
+
+// ===== Loading / offline / error states =====
+// These were previously in the Not-built registry as "no backing in the screen
+// registry". That reasoning was wrong for this group: skeletons, offline and
+// error states are not speculative features, they are the states every screen
+// already has and simply has not drawn. A design system that only documents
+// the happy path is the reason those states get improvised later.
+// Gestalt has no Skeleton or ProgressBar component (verified against its export
+// list), so these are composed from Box + CSS.
+
+// Skeleton that matches the SHAPE of what is loading, not a generic spinner:
+// same avatar size, same line widths, so nothing jumps when content arrives.
+function SkeletonLoaderBlock() {
+  const shimmer = {
+    background: "linear-gradient(90deg,#EFEFEF 25%,#F7F7F7 50%,#EFEFEF 75%)",
+    backgroundSize: "200% 100%",
+    animation: "mlShimmer 1.4s linear infinite",
+  };
+  return (
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={340}>
+      {/* Keyframes are injected once here rather than in styles.css so this
+          block stays self-contained and copyable. */}
+      <style>{"@keyframes mlShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}@media (prefers-reduced-motion: reduce){[data-ml-skeleton]{animation:none!important}}"}</style>
+      <Flex gap={3} alignItems="center">
+        <Box width={44} height={44} rounding="circle" dangerouslySetInlineStyle={{ __style: shimmer }} />
+        <Box flex="grow">
+          <Box height={12} rounding="pill" marginBottom={2}
+            dangerouslySetInlineStyle={{ __style: { ...shimmer, width: "62%" } }} />
+          <Box height={10} rounding="pill"
+            dangerouslySetInlineStyle={{ __style: { ...shimmer, width: "38%" } }} />
+        </Box>
+      </Flex>
+      <Box marginTop={4} height={140} rounding={2} dangerouslySetInlineStyle={{ __style: shimmer }} />
+      <Box marginTop={3}>
+        <Box height={10} rounding="pill" marginBottom={2} dangerouslySetInlineStyle={{ __style: shimmer }} />
+        <Box height={10} rounding="pill" dangerouslySetInlineStyle={{ __style: { ...shimmer, width: "72%" } }} />
+      </Box>
+    </Box>
+  );
+}
+
+// Offline banner + error state. Copy follows the rule that errors explain what
+// happened and how to fix it, in the interface's voice, without apologising.
+function ConnectionStatesBlock() {
+  const [online, setOnline] = useState(false);
+  return (
+    <Box maxWidth={340}>
+      <Flex direction="column" gap={3}>
+        {!online && (
+          <BannerSlim type="warning" iconAccessibilityLabel="Offline"
+            message="You are offline. Bookings you make now will send when the connection returns." />
+        )}
+        <Box borderStyle="sm" rounding={3} padding={4}>
+          <Flex direction="column" alignItems="center" gap={3}>
+            <Icon icon="workflow-status-problem" accessibilityLabel="" size={28} color="error" />
+            <Text weight="bold" align="center">That upload did not finish</Text>
+            <Text size="100" color="subtle" align="center">
+              The file reached 62 percent before the connection dropped. Retrying resumes from there.
+            </Text>
+            <Flex gap={2}>
+              <Button text="Retry upload" color="red" size="sm" />
+              <Button text="Save draft" color="gray" size="sm" />
+            </Flex>
+          </Flex>
+        </Box>
+        <Button size="sm" color="gray" text={online ? "Simulate offline" : "Simulate online"}
+          onClick={() => setOnline((o) => !o)} />
+      </Flex>
+    </Box>
+  );
+}
+
 const BLOCKS: Block[] = [
   { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => <NavHeaderBlock /> },
   { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => <ArtistProfileBlock /> },
@@ -3381,6 +3453,8 @@ const BLOCKS: Block[] = [
   { name: "Stem mixer", description: "Ported from styleguide #mixer — per-stem mute with live level meters.", render: () => <StemMixerBlock /> },
   { name: "Brief wizard", description: "Ported from styleguide #pattern-brief-wizard — 8-step casting brief, dots jump.", render: () => <BriefWizardBlock /> },
   { name: "Textures & effects", description: "Ported from styleguide #vd-effects — real CSS backgrounds, not screenshots.", render: () => <TexturesBlock /> },
+  { name: "Skeleton loader", description: "Shape-matched skeleton so nothing jumps when content arrives. Honours reduced motion.", render: () => <SkeletonLoaderBlock /> },
+  { name: "Offline & error states", description: "Offline banner plus a recoverable error. Copy explains what happened and how to fix it.", render: () => <ConnectionStatesBlock /> },
   { name: "Swipe deck", description: "Ported from styleguide #swipe — left passes, right shortlists, real deck state.", render: () => <SwipeDeckBlock /> },
   { name: "Replay recap", description: "Apple Music Replay reference — warm wash, month scrubber, mixed-weight editorial stat.", render: () => <ReplayRecapBlock /> },
   { name: "Ranked artists", description: "Oversized rank numeral inside the artwork, scrim for legibility.", render: () => <RankedArtistsBlock /> },
@@ -3505,7 +3579,7 @@ const NOT_BUILT: NotBuiltGroup[] = [
     reason:
       "Checked against both the 27-widget admin directory and all 124 real screens in dist/preview/flows/**/screen.json (titles, notes, dataContracts) — no screen, note, code reference, or widget entry backs any of these. Not built because there's nothing real to build from, not because they're hard.",
     items: [
-      "Skeleton Loaders", "Error Boundary", "Offline Banner", "Shimmer", "Adaptive Banner", "Navbar", "Navbar (Alt)", "Sticky Nav", "Segmented Switch", "Metrics Row", "Uncategorized",
+      "Adaptive Banner", "Navbar", "Navbar (Alt)", "Sticky Nav", "Segmented Switch", "Metrics Row", "Uncategorized",
       "Ambient Album Card", "Artist Grid Card", "Artist Row Card", "Typing Indicator", "Attachments", "Notification Toggle (distinct from the real NotificationCard widget)",
       "User Header", "Business profile as a distinct card type (Talent and Venue are now built as 'Talent role variants' and 'Venue profile flow')", "Direct Request", "Request Status Tracker", "Application Card", "Rental Card",
     ],

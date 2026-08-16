@@ -23,7 +23,7 @@ Full detail: [`gestalt-library.md`](./gestalt-library.md).
 A separate, standalone React app (own `package.json`/`node_modules`, bundled with esbuild) that renders the *real* Gestalt components, the *real* shipped design tokens, and the *real* icon set — genuinely interactive, not a mockup. Branded "MusicLinkd System." Five tabs:
 
 - **Components (60 cards)** — every practically demoable Gestalt component, real and interactive, across 8 categories (Actions, Forms, Feedback, Data Display, **Navigation**, Overlays, Typography & Layout, Media & Gallery). The handful deliberately left out (Video, Collage/MasonryV2, search-index-specific pieces, infra-only providers/hooks, Layer, Container) are listed by name at the bottom of that tab, with why.
-- **Blocks (81 composed patterns + admin widget directory)** — two sub-tabs. "Composed patterns" now spans four provenance tiers, all honestly distinguished: (1) originally designed patterns not tied to a specific data source (navigation header, artist profile card, track row, upload form, stats row, empty state, notification stack, cover art gallery, bottom navigation bar, trust badges — sourced from `admin/components/shared/trust-badge.tsx` — hero, metrics scorecard, activity feed, search & filters, quick actions, avatar stack/social proof, testimonial, pricing plans); (2) patterns validated against the real 124-screen registry (`dist/preview/flows/**/screen.json`) — booking summary, availability calendar, chat, rating breakdown, write review, success state, QR share, credit attribution, section tabs, public profile — several using the screens' own real seed data verbatim; (3) admin-panel-perspective patterns (data table, sidebar, top bar); (4) widget-directory-backed visual cards, added seventh pass — track card, studio card, featured studio card, marketplace card, opportunity card, review card, notification card, public reputation widget. "Admin widget directory": a read-only mirror of the real 27-widget catalog from `admin/app/(admin)/widgets/default-widgets.ts` (backed by `admin/docs/architecture/Widget_Directory.md`), transcribed verbatim, grouped by the same 9 categories, filterable by the same search box — a reference mirror, not the source of truth; see `musiclinkd-system/src/widgets-mirror.ts` for the re-transcription note.
+- **Blocks (84 composed patterns + admin widget directory)** — two sub-tabs. "Composed patterns" now spans four provenance tiers, all honestly distinguished: (1) originally designed patterns not tied to a specific data source (navigation header, artist profile card, track row, upload form, stats row, empty state, notification stack, cover art gallery, bottom navigation bar, trust badges — sourced from `admin/components/shared/trust-badge.tsx` — hero, metrics scorecard, activity feed, search & filters, quick actions, avatar stack/social proof, testimonial, pricing plans); (2) patterns validated against the real 124-screen registry (`dist/preview/flows/**/screen.json`) — booking summary, availability calendar, chat, rating breakdown, write review, success state, QR share, credit attribution, section tabs, public profile — several using the screens' own real seed data verbatim; (3) admin-panel-perspective patterns (data table, sidebar, top bar); (4) widget-directory-backed visual cards, added seventh pass — track card, studio card, featured studio card, marketplace card, opportunity card, review card, notification card, public reputation widget. "Admin widget directory": a read-only mirror of the real 27-widget catalog from `admin/app/(admin)/widgets/default-widgets.ts` (backed by `admin/docs/architecture/Widget_Directory.md`), transcribed verbatim, grouped by the same 9 categories, filterable by the same search box — a reference mirror, not the source of truth; see `musiclinkd-system/src/widgets-mirror.ts` for the re-transcription note.
 
 > **Superseded in part.** This audit was accurate when written, but the
 > eighth and ninth passes built several things it lists as not-built —
@@ -227,6 +227,33 @@ locked at 175px each relaxed to 175/143/143/151/135). Added
 
 
 
+
+
+### Twelfth pass — swipe deck and the states nobody draws (2026-08-16)
+
+**84 Blocks.** Swipe deck ported from `#swipe` / `#p2-swipe` (left passes,
+right shortlists, real deck state and a summary when exhausted). Motion is
+transform and opacity only, and it is motivated rather than decorative: the
+card leaving in the direction you chose is the feedback that the choice
+registered.
+
+Then three states that were in the Not-built registry for a bad reason.
+They were listed as "no backing in the screen registry", but skeletons,
+offline banners and error states are not speculative features. They are
+states every screen already has and simply has not drawn. A system that
+documents only the happy path is precisely why those states get improvised
+later, inconsistently, under deadline.
+
+- **Skeleton loader** — matches the *shape* of the content it replaces (same
+  avatar size, same line widths) so nothing jumps on arrival. Collapses under
+  `prefers-reduced-motion`. Gestalt has no Skeleton component, so it is
+  composed from Box + CSS.
+- **Offline and error states** — offline banner plus a recoverable error.
+  Copy explains what happened and what to do, in the interface's voice, and
+  does not apologise: "The file reached 62 percent before the connection
+  dropped. Retrying resumes from there."
+
+**Not-built registry: 51 -> 47.**
 
 ### Eleventh pass — editorial "Replay" family (2026-08-16)
 
