@@ -2018,7 +2018,7 @@ function TalentRoleVariantsBlock() {
     { icon: "music-on" as const, t: "Singer", d: "Vocal register · Languages" },
     { icon: "sound" as const, t: "Instrumentalist", d: "Gear · Touring setup" },
     { icon: "knoop" as const, t: "Producer/Engineer", d: "DAW · Outboard gear" },
-    { icon: "headset" as const, t: "DJ/Performer", d: "Deck setup · Residencies" },
+    { icon: "audio-mix" as const, t: "DJ/Performer", d: "Deck setup · Residencies" },
   ];
   return (
     <Box maxWidth={360}>
@@ -3600,6 +3600,141 @@ function OrbitClusterBlock() {
   );
 }
 
+
+// ===== Composed primitives Gestalt does not ship =====
+// The registry lists these as "not available in Gestalt", which is true of the
+// LIBRARY but was being read as "cannot exist here". They were already built
+// by composition in styleguide.html and never ported across, so the new system
+// looked poorer than the old one. Composed from Box/Text/Icon + CSS.
+
+// Timeline — styleguide #c2-timeline
+function TimelineBlock() {
+  const rows = [
+    { t: "Request sent", d: "Aug 5", state: "done" as const },
+    { t: "Confirmed", d: "Aug 12 · Yash Raj Sound Studios", state: "current" as const },
+    { t: "Session", d: "Upcoming", state: "todo" as const },
+    { t: "Credits verified", d: "After delivery", state: "todo" as const },
+  ];
+  const dot = { done: "#22C55E", current: "var(--ml-accent)", todo: "transparent" };
+  return (
+    <Box maxWidth={320}>
+      {rows.map((r, i) => (
+        <Flex key={r.t} gap={3}>
+          <Flex direction="column" alignItems="center">
+            <Box width={12} height={12} rounding="circle"
+              dangerouslySetInlineStyle={{ __style: {
+                background: dot[r.state],
+                border: r.state === "todo" ? "2px solid #E9E9E9" : "none" } }} />
+            {i < rows.length - 1 && (
+              <Box width={2} flex="grow" dangerouslySetInlineStyle={{ __style: { background: "#E9E9E9" } }} />
+            )}
+          </Flex>
+          <Box paddingY={1} marginBottom={i < rows.length - 1 ? 3 : 0}>
+            <Text size="100" weight="bold" color={r.state === "todo" ? "subtle" : "default"}>{r.t}</Text>
+            <Text size="100" color="subtle">{r.d}</Text>
+          </Box>
+        </Flex>
+      ))}
+    </Box>
+  );
+}
+
+// Upload dropzone with real progress — styleguide #fm-upload
+function UploadDropzoneBlock() {
+  const [pct, setPct] = useState(62);
+  return (
+    <Box maxWidth={320}>
+      <Box padding={5} rounding={3}
+        dangerouslySetInlineStyle={{ __style: {
+          border: "2px dashed #E9E9E9", background: "#FAFAFB", textAlign: "center" } }}>
+        <Icon icon="arrow-up" accessibilityLabel="" size={24} color="subtle" />
+        <Box marginTop={2}><Text size="100" weight="bold">Drop stems here</Text></Box>
+        <Text size="100" color="subtle">WAV or AIFF, up to 200 MB</Text>
+        <Box marginTop={3} display="flex" justifyContent="center">
+          <Button text="Browse files" color="gray" size="sm" />
+        </Box>
+      </Box>
+      <Box marginTop={3} borderStyle="sm" rounding={2} padding={3}>
+        <Flex justifyContent="between" alignItems="center">
+          <Text size="100" weight="bold">lead_vocal.wav</Text>
+          <Text size="100" color="subtle">{pct}%</Text>
+        </Flex>
+        <Box marginTop={2}><ProgressBar pct={pct} /></Box>
+        <Box marginTop={2}>
+          <Button size="sm" color="gray" text={pct >= 100 ? "Reset" : "Advance"}
+            onClick={() => setPct((v) => (v >= 100 ? 0 : Math.min(100, v + 19)))} />
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+// Shared progress bar. Gestalt ships none, and three blocks were each
+// re-implementing it inline; this is the single definition they should use.
+function ProgressBar({ pct, tone = "accent" }: { pct: number; tone?: "accent" | "dark" }) {
+  return (
+    <Box height={8} rounding="pill" color="secondary" overflow="hidden">
+      <Box height={8} rounding="pill"
+        dangerouslySetInlineStyle={{ __style: {
+          width: `${Math.max(0, Math.min(100, pct))}%`,
+          background: tone === "accent" ? "var(--ml-accent)" : "var(--ml-black)",
+          transition: "width 240ms cubic-bezier(0.55,0,0,1)" } }} />
+    </Box>
+  );
+}
+
+function ProgressBarBlock() {
+  return (
+    <Box maxWidth={300}>
+      <Flex direction="column" gap={4}>
+        {[["Profile completeness", 78], ["Upload", 34], ["Verification", 100]].map(([l, v]) => (
+          <Box key={l as string}>
+            <Flex justifyContent="between">
+              <Text size="100" color="subtle">{l}</Text>
+              <Text size="100" weight="bold">{v}%</Text>
+            </Flex>
+            <Box marginTop={1}><ProgressBar pct={v as number} tone={v === 100 ? "dark" : "accent"} /></Box>
+          </Box>
+        ))}
+      </Flex>
+    </Box>
+  );
+}
+
+// Slider + date picker — styleguide #fm-* / #na-slider / #na-datepicker.
+// Native range and date inputs, tinted to the accent, rather than a fake.
+function SliderDatePickerBlock() {
+  const [rate, setRate] = useState(8000);
+  const [date, setDate] = useState("2026-08-12");
+  return (
+    <Box maxWidth={300}>
+      <Flex justifyContent="between">
+        <Text size="100" color="subtle">Max rate</Text>
+        <Text size="100" weight="bold">₹{rate.toLocaleString("en-IN")}/hr</Text>
+      </Flex>
+      <input type="range" min={0} max={20000} step={500} value={rate}
+        onChange={(e) => setRate(Number(e.currentTarget.value))}
+        aria-label="Maximum hourly rate"
+        style={{ width: "100%", accentColor: "var(--ml-accent)", marginTop: 8 }} />
+      <Box marginTop={4}>
+        <Text size="100" color="subtle">Session date</Text>
+        <Box marginTop={1}>
+          <input type="date" value={date} onChange={(e) => setDate(e.currentTarget.value)}
+            aria-label="Session date"
+            style={{ width: "100%", minHeight: 44, padding: "0 12px", borderRadius: 8,
+                     border: "1px solid #E9E9E9", fontSize: 14, fontFamily: "inherit",
+                     accentColor: "var(--ml-accent)" }} />
+        </Box>
+        <Box marginTop={1}>
+          <Text size="100" color="subtle">
+            Native date input: real calendar, real keyboard support, real locale formatting.
+          </Text>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
 const BLOCKS: Block[] = [
   { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => <NavHeaderBlock /> },
   { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => <ArtistProfileBlock /> },
@@ -3660,6 +3795,10 @@ const BLOCKS: Block[] = [
   { name: "Audio podcast demo", description: "Widget Directory §5 — inline dashboard demo player with live bars.", render: () => <AudioPodcastDemoBlock /> },
   { name: "WhatsApp share sheet", description: "Widget Directory §8 — share preview + prefilled message. Labelled UI-only.", render: () => <WhatsAppShareBlock /> },
   { name: "Home feature card", description: "Widget Directory §9 — hero featured slot on the main feed.", render: () => <HomeFeatureCardBlock /> },
+  { name: "Timeline", description: "Composed - Gestalt ships no Timeline. Booking lifecycle, done/current/upcoming.", render: () => <TimelineBlock /> },
+  { name: "Upload dropzone", description: "Composed - Gestalt ships no Upload. Dropzone plus live per-file progress.", render: () => <UploadDropzoneBlock /> },
+  { name: "Progress bar", description: "Composed - Gestalt ships none. Single shared definition, not re-implemented per block.", render: () => <ProgressBarBlock /> },
+  { name: "Slider & date picker", description: "Composed - Gestalt ships neither. Native inputs tinted to the accent.", render: () => <SliderDatePickerBlock /> },
   { name: "Skeleton loader", description: "Shape-matched skeleton so nothing jumps when content arrives. Honours reduced motion.", render: () => <SkeletonLoaderBlock /> },
   { name: "Offline & error states", description: "Offline banner plus a recoverable error. Copy explains what happened and how to fix it.", render: () => <ConnectionStatesBlock /> },
   { name: "Swipe deck", description: "Ported from styleguide #swipe — left passes, right shortlists, real deck state.", render: () => <SwipeDeckBlock /> },
@@ -3770,10 +3909,10 @@ function WidgetsDirectory({ query }: { query: string }) {
 type NotBuiltGroup = { title: string; reason: string; items: string[] };
 const NOT_BUILT: NotBuiltGroup[] = [
   {
-    title: "Not available in Gestalt",
+    title: "Not available in Gestalt (and not composed here either)",
     reason:
       'Checked directly against the real installed package’s export list (gestalt/packages/gestalt/src/index.ts) — these components genuinely don’t exist in it. Breadcrumb specifically was checked against PageHeader.d.ts, which has no breadcrumb prop anywhere.',
-    items: ["Upload / file-dropzone", "Timeline", "Skeleton Loading", "Progress Bar", "Time Picker", "Date Picker", "Slider", "A distinct Snackbar (Gestalt uses Toast for both)", "Breadcrumb"],
+    items: ["Time Picker", "A distinct Snackbar (Gestalt uses Toast for both)", "Breadcrumb"],
   },
   {
     title: "Different platform — Android native, out of scope",

@@ -43081,7 +43081,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       { icon: "music-on", t: "Singer", d: "Vocal register \xB7 Languages" },
       { icon: "sound", t: "Instrumentalist", d: "Gear \xB7 Touring setup" },
       { icon: "knoop", t: "Producer/Engineer", d: "DAW \xB7 Outboard gear" },
-      { icon: "headset", t: "DJ/Performer", d: "Deck setup \xB7 Residencies" }
+      { icon: "audio-mix", t: "DJ/Performer", d: "Deck setup \xB7 Residencies" }
     ];
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 360, children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Talent role variants" }) }),
@@ -44593,6 +44593,154 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       ] })
     ] });
   }
+  function TimelineBlock() {
+    const rows = [
+      { t: "Request sent", d: "Aug 5", state: "done" },
+      { t: "Confirmed", d: "Aug 12 \xB7 Yash Raj Sound Studios", state: "current" },
+      { t: "Session", d: "Upcoming", state: "todo" },
+      { t: "Credits verified", d: "After delivery", state: "todo" }
+    ];
+    const dot = { done: "#22C55E", current: "var(--ml-accent)", todo: "transparent" };
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 320, children: rows.map((r, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          BoxWithForwardRef,
+          {
+            width: 12,
+            height: 12,
+            rounding: "circle",
+            dangerouslySetInlineStyle: { __style: {
+              background: dot[r.state],
+              border: r.state === "todo" ? "2px solid #E9E9E9" : "none"
+            } }
+          }
+        ),
+        i < rows.length - 1 && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 2, flex: "grow", dangerouslySetInlineStyle: { __style: { background: "#E9E9E9" } } })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { paddingY: 1, marginBottom: i < rows.length - 1 ? 3 : 0, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", color: r.state === "todo" ? "subtle" : "default", children: r.t }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: r.d })
+      ] })
+    ] }, r.t)) });
+  }
+  function UploadDropzoneBlock() {
+    const [pct, setPct] = (0, import_react2.useState)(62);
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 320, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+        BoxWithForwardRef,
+        {
+          padding: 5,
+          rounding: 3,
+          dangerouslySetInlineStyle: { __style: {
+            border: "2px dashed #E9E9E9",
+            background: "#FAFAFB",
+            textAlign: "center"
+          } },
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "arrow-up", accessibilityLabel: "", size: 24, color: "subtle" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: "Drop stems here" }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "WAV or AIFF, up to 200 MB" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 3, display: "flex", justifyContent: "center", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Browse files", color: "gray", size: "sm" }) })
+          ]
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginTop: 3, borderStyle: "sm", rounding: 2, padding: 3, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "center", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", weight: "bold", children: "lead_vocal.wav" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", color: "subtle", children: [
+            pct,
+            "%"
+          ] })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ProgressBar, { pct }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          ButtonWithForwardRef,
+          {
+            size: "sm",
+            color: "gray",
+            text: pct >= 100 ? "Reset" : "Advance",
+            onClick: () => setPct((v) => v >= 100 ? 0 : Math.min(100, v + 19))
+          }
+        ) })
+      ] })
+    ] });
+  }
+  function ProgressBar({ pct, tone = "accent" }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { height: 8, rounding: "pill", color: "secondary", overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+      BoxWithForwardRef,
+      {
+        height: 8,
+        rounding: "pill",
+        dangerouslySetInlineStyle: { __style: {
+          width: `${Math.max(0, Math.min(100, pct))}%`,
+          background: tone === "accent" ? "var(--ml-accent)" : "var(--ml-black)",
+          transition: "width 240ms cubic-bezier(0.55,0,0,1)"
+        } }
+      }
+    ) });
+  }
+  function ProgressBarBlock() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { maxWidth: 300, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { direction: "column", gap: 4, children: [["Profile completeness", 78], ["Upload", 34], ["Verification", 100]].map(([l, v]) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: l }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", weight: "bold", children: [
+          v,
+          "%"
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ProgressBar, { pct: v, tone: v === 100 ? "dark" : "accent" }) })
+    ] }, l)) }) });
+  }
+  function SliderDatePickerBlock() {
+    const [rate, setRate] = (0, import_react2.useState)(8e3);
+    const [date2, setDate] = (0, import_react2.useState)("2026-08-12");
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 300, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Max rate" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "100", weight: "bold", children: [
+          "\u20B9",
+          rate.toLocaleString("en-IN"),
+          "/hr"
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        "input",
+        {
+          type: "range",
+          min: 0,
+          max: 2e4,
+          step: 500,
+          value: rate,
+          onChange: (e) => setRate(Number(e.currentTarget.value)),
+          "aria-label": "Maximum hourly rate",
+          style: { width: "100%", accentColor: "var(--ml-accent)", marginTop: 8 }
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginTop: 4, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Session date" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          "input",
+          {
+            type: "date",
+            value: date2,
+            onChange: (e) => setDate(e.currentTarget.value),
+            "aria-label": "Session date",
+            style: {
+              width: "100%",
+              minHeight: 44,
+              padding: "0 12px",
+              borderRadius: 8,
+              border: "1px solid #E9E9E9",
+              fontSize: 14,
+              fontFamily: "inherit",
+              accentColor: "var(--ml-accent)"
+            }
+          }
+        ) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Native date input: real calendar, real keyboard support, real locale formatting." }) })
+      ] })
+    ] });
+  }
   var BLOCKS = [
     { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NavHeaderBlock, {}) },
     { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ArtistProfileBlock, {}) },
@@ -44653,6 +44801,10 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     { name: "Audio podcast demo", description: "Widget Directory \xA75 \u2014 inline dashboard demo player with live bars.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(AudioPodcastDemoBlock, {}) },
     { name: "WhatsApp share sheet", description: "Widget Directory \xA78 \u2014 share preview + prefilled message. Labelled UI-only.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(WhatsAppShareBlock, {}) },
     { name: "Home feature card", description: "Widget Directory \xA79 \u2014 hero featured slot on the main feed.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(HomeFeatureCardBlock, {}) },
+    { name: "Timeline", description: "Composed - Gestalt ships no Timeline. Booking lifecycle, done/current/upcoming.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TimelineBlock, {}) },
+    { name: "Upload dropzone", description: "Composed - Gestalt ships no Upload. Dropzone plus live per-file progress.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(UploadDropzoneBlock, {}) },
+    { name: "Progress bar", description: "Composed - Gestalt ships none. Single shared definition, not re-implemented per block.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ProgressBarBlock, {}) },
+    { name: "Slider & date picker", description: "Composed - Gestalt ships neither. Native inputs tinted to the accent.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SliderDatePickerBlock, {}) },
     { name: "Skeleton loader", description: "Shape-matched skeleton so nothing jumps when content arrives. Honours reduced motion.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SkeletonLoaderBlock, {}) },
     { name: "Offline & error states", description: "Offline banner plus a recoverable error. Copy explains what happened and how to fix it.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ConnectionStatesBlock, {}) },
     { name: "Swipe deck", description: "Ported from styleguide #swipe \u2014 left passes, right shortlists, real deck state.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SwipeDeckBlock, {}) },
@@ -44733,9 +44885,9 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   var NOT_BUILT = [
     {
-      title: "Not available in Gestalt",
+      title: "Not available in Gestalt (and not composed here either)",
       reason: "Checked directly against the real installed package\u2019s export list (gestalt/packages/gestalt/src/index.ts) \u2014 these components genuinely don\u2019t exist in it. Breadcrumb specifically was checked against PageHeader.d.ts, which has no breadcrumb prop anywhere.",
-      items: ["Upload / file-dropzone", "Timeline", "Skeleton Loading", "Progress Bar", "Time Picker", "Date Picker", "Slider", "A distinct Snackbar (Gestalt uses Toast for both)", "Breadcrumb"]
+      items: ["Time Picker", "A distinct Snackbar (Gestalt uses Toast for both)", "Breadcrumb"]
     },
     {
       title: "Different platform \u2014 Android native, out of scope",
