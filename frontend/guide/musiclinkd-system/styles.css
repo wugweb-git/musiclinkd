@@ -12,7 +12,8 @@
 
 /* Primary → pink override, scoped to the "primary"/"brand" SEMANTIC alias
    layer only — not the raw --color-red-pushpin-* palette and not
-   --color-background-error-*/--color-icon-error (those also derive from
+   the --color-background-error- and --color-icon-error families (those also
+   derive from
    red-pushpin and must stay a real red so error/danger states remain
    visually distinct from the brand action color; wiring error to pink too
    would be a real usability regression, not just a color swap).
