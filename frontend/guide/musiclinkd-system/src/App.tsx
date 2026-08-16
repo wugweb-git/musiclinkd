@@ -1637,7 +1637,7 @@ function TrackCardBlock() {
   return (
     <Box borderStyle="sm" rounding={3} padding={3} maxWidth={220}>
       <Box rounding={2} overflow="hidden" marginBottom={2}>
-        <Image alt="Track artwork" src={placeholderImg("#8B5CF6", "Track", 220, 220)} naturalWidth={220} naturalHeight={220} />
+        <Image alt="Track artwork" src={IMG.mixing} naturalWidth={220} naturalHeight={220} />
       </Box>
       <Text weight="bold" size="100">Neon Tide</Text>
       <Text size="100" color="subtle">Mei Tanaka · 3:42</Text>
@@ -1660,7 +1660,7 @@ function StudioCardBlock() {
   return (
     <Box borderStyle="sm" rounding={3} padding={3} maxWidth={260}>
       <Box rounding={2} overflow="hidden" marginBottom={2}>
-        <Image alt="Studio room" src={placeholderImg("#0D0B26", "Studio", 260, 150)} naturalWidth={260} naturalHeight={150} />
+        <Image alt="Studio room" src={IMG.controller} naturalWidth={260} naturalHeight={150} />
       </Box>
       <Flex justifyContent="between" alignItems="start">
         <Text weight="bold" size="200">Bloom Studio A</Text>
@@ -1688,7 +1688,7 @@ function StudioCardBlock() {
 function FeaturedStudioCardBlock() {
   return (
     <Box borderStyle="sm" rounding={4} overflow="hidden" maxWidth={360}>
-      <Image alt="Featured studio" src={placeholderImg("#EA4C89", "Featured Studio", 360, 180)} naturalWidth={360} naturalHeight={180} />
+      <Image alt="Featured studio" src={IMG.dj} naturalWidth={360} naturalHeight={180} />
       <Box padding={4}>
         <Text weight="bold" size="300">Yash Raj Sound Studios</Text>
         <Text size="100" color="subtle">Room B · SSL 9000J console · Dolby Atmos 7.1.4</Text>
@@ -1708,7 +1708,7 @@ function MarketplaceCardBlock() {
   return (
     <Box borderStyle="sm" rounding={3} padding={3} maxWidth={220}>
       <Box rounding={2} overflow="hidden" marginBottom={2}>
-        <Image alt="Gear photo" src={placeholderImg("#F59E0B", "Gear", 220, 160)} naturalWidth={220} naturalHeight={160} />
+        <Image alt="Gear photo" src={IMG.mic} naturalWidth={220} naturalHeight={160} />
       </Box>
       <Flex justifyContent="between" alignItems="start">
         <Text weight="bold" size="100">Neumann U87 Mic</Text>
@@ -2067,6 +2067,21 @@ function VenueProfileFlowBlock() {
 }
 
 
+
+// Real imagery, not generated placeholders. These exact Unsplash URLs are the
+// ones already used by frontend/guide/styleguide.html (see its #imagery
+// section and the studio/DJ/mic/controller demos), so the two surfaces show
+// the same photography rather than diverging. Kept in one map so a future
+// swap to self-hosted assets is a single edit.
+const IMG = {
+  studio:     "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&q=80",
+  dj:         "https://images.unsplash.com/photo-1516280440502-86929a674483?w=600&q=80",
+  mic:        "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&q=80",
+  controller: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&q=80",
+  mixing:     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+  vocalist:   "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+} as const;
+
 // ===== Premium card + interactive blocks, 2026-08-16 =====
 // Added after review of reference UI the user supplied (image-led travel and
 // product cards, and an onboarding wizard). These are the MusicLinkd
@@ -2165,7 +2180,7 @@ function DiscoveryHeroCardBlock() {
     <Box maxWidth={300}>
       <Box position="relative" rounding={4} overflow="hidden">
         <Image alt="Yash Raj Sound Studios, Mumbai"
-          src={placeholderImg("#0D0B26", "Studio", 300, 380)}
+          src={IMG.studio}
           naturalWidth={300} naturalHeight={380} />
         {/* Gradient scrim so overlay text stays legible on any photo —
             without it, white-on-image contrast is unpredictable. */}
@@ -2203,7 +2218,7 @@ function ProductCardBlock() {
   return (
     <Box borderStyle="sm" rounding={4} overflow="hidden" maxWidth={300}>
       <Box position="relative">
-        <Image alt="Neumann U87 microphone" src={placeholderImg("#F1F5F9", "Gear", 300, 240)}
+        <Image alt="Neumann U87 microphone" src={IMG.mic}
           naturalWidth={300} naturalHeight={240} />
         <Box position="absolute" top left padding={3}>
           <Badge text="Best seller" type="darkWash" />

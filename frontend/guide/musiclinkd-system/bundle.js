@@ -42818,7 +42818,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   function TrackCardBlock() {
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, maxWidth: 220, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { rounding: 2, overflow: "hidden", marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Track artwork", src: placeholderImg("#8B5CF6", "Track", 220, 220), naturalWidth: 220, naturalHeight: 220 }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { rounding: 2, overflow: "hidden", marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Track artwork", src: IMG.mixing, naturalWidth: 220, naturalHeight: 220 }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "100", children: "Neon Tide" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Mei Tanaka \xB7 3:42" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 1, children: [
@@ -42833,7 +42833,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   function StudioCardBlock() {
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, maxWidth: 260, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { rounding: 2, overflow: "hidden", marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Studio room", src: placeholderImg("#0D0B26", "Studio", 260, 150), naturalWidth: 260, naturalHeight: 150 }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { rounding: 2, overflow: "hidden", marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Studio room", src: IMG.controller, naturalWidth: 260, naturalHeight: 150 }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "start", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "200", children: "Bloom Studio A" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "Dolby Atmos", type: "info" })
@@ -42853,7 +42853,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   function FeaturedStudioCardBlock() {
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, overflow: "hidden", maxWidth: 360, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Featured studio", src: placeholderImg("#EA4C89", "Featured Studio", 360, 180), naturalWidth: 360, naturalHeight: 180 }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Featured studio", src: IMG.dj, naturalWidth: 360, naturalHeight: 180 }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { padding: 4, children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "300", children: "Yash Raj Sound Studios" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Room B \xB7 SSL 9000J console \xB7 Dolby Atmos 7.1.4" }),
@@ -42866,7 +42866,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
   }
   function MarketplaceCardBlock() {
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 3, padding: 3, maxWidth: 220, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { rounding: 2, overflow: "hidden", marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Gear photo", src: placeholderImg("#F59E0B", "Gear", 220, 160), naturalWidth: 220, naturalHeight: 160 }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { rounding: 2, overflow: "hidden", marginBottom: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { alt: "Gear photo", src: IMG.mic, naturalWidth: 220, naturalHeight: 160 }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { justifyContent: "between", alignItems: "start", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", size: "100", children: "Neumann U87 Mic" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Badge, { text: "Available", type: "success" })
@@ -43113,6 +43113,14 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       ] }, s.t)) })
     ] });
   }
+  var IMG = {
+    studio: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&q=80",
+    dj: "https://images.unsplash.com/photo-1516280440502-86929a674483?w=600&q=80",
+    mic: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&q=80",
+    controller: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&q=80",
+    mixing: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+    vocalist: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
+  };
   function OnboardingWizardBlock() {
     const steps = [
       { title: "Primary role", hint: "What do you mainly do?", options: ["Vocalist", "Producer", "Instrumentalist", "Engineer"] },
@@ -43188,7 +43196,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
         Image,
         {
           alt: "Yash Raj Sound Studios, Mumbai",
-          src: placeholderImg("#0D0B26", "Studio", 300, 380),
+          src: IMG.studio,
           naturalWidth: 300,
           naturalHeight: 380
         }
@@ -43244,7 +43252,7 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
           Image,
           {
             alt: "Neumann U87 microphone",
-            src: placeholderImg("#F1F5F9", "Gear", 300, 240),
+            src: IMG.mic,
             naturalWidth: 300,
             naturalHeight: 240
           }
