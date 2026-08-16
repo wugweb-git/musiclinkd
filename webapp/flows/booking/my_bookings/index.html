@@ -2,127 +2,85 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<!-- viewport-fit=cover is what makes env(safe-area-inset-*) resolve to real
-     values instead of 0 on notched/gesture-bar devices — without it the
-     safe-area CSS in app-shell.css is a no-op. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0B26" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<!--
-  All resource paths below are ABSOLUTE (/preview/...), not relative. This
-  build is deployed at musiclinkd.com/preview, and Firebase Hosting's
-  cleanUrls+trailingSlash:false config means a page at .../flows/auth/splash
-  has NO trailing slash — the browser then resolves relative "./x"/"../x"
-  paths against the WRONG base (one level too shallow), silently breaking
-  screen.json/CSS/JS loads. Absolute paths sidestep that entirely. If this
-  ever moves to a different mount point, update MOUNT_BASE in
-  shared/app-shell.js and the paths below together.
--->
+<meta name="screen-json-path" content="/preview/flows/booking/my_bookings/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<meta name="screen-json-path" content="/preview/flows/booking/my_bookings/screen.json" />
 <title>MusicLinkd — Booking / My Bookings</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
-<!-- app-shell.css = native ENVIRONMENT (safe-area, viewport, keyboard).
-     tokens.css = the real MusicLinkd VISUAL design system (colors, type,
-     .btn/.field/.otp-box components) — copied verbatim from
-     frontend/guide/styleguide.html. Both compose on every screen. -->
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
-<!--
-  THIS FILE IS A TEMPLATE, NOT A DESIGNED SCREEN.
-  It exists to prove out the native-app environment (safe areas, fixed
-  viewport, keyboard awareness, bottom-sheet mechanics, offline shell,
-  standalone display mode) plus the real design tokens/components, so a
-  real screen only has to compose them — copy this file into a
-  flows/<flow>/<screen>/ folder (every real screen folder already has one,
-  generated alongside its screen.json) and replace the placeholder regions
-  below. If you copy it manually (rather than letting the generator
-  scaffold it), also add
-  <meta name="screen-json-path" content="/preview/flows/<flow>/<screen>/screen.json" />
-  next to the other meta tags — without it the dev badge falls back to a
-  relative "./screen.json" fetch, which has the same trailing-slash problem
-  described above.
-
-  ARTBOARD SIZING: .app-root fills 100dvh x 100% of whatever viewport it's
-  in, edge-to-edge — the same approach a real installed PWA/native app
-  uses (there's no fixed "canvas size" on a phone). No desktop max-width
-  cap here on purpose: for reviewing on a desktop browser inside a proper
-  phone-frame, use the workbench at /preview/index.html instead of opening
-  a screen standalone — that's where the phone-frame chrome lives, not
-  baked into every individual screen.
--->
+<style>
+  .my-tabs { display: flex; gap: var(--space-1); padding: 0 var(--space-3); border-bottom: 1px solid var(--line); }
+  .my-tabs button { flex: 1; text-align: center; padding: var(--space-2) 0; font-size: var(--type-1); font-weight: 600; color: var(--muted); background: none; border: none; border-bottom: 2px solid transparent; font-family: inherit; }
+  .my-tabs button.active { color: var(--black); border-color: var(--black); }
+  .booking-card { display: flex; gap: var(--space-2); padding: var(--space-3) 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
+  .booking-card img { width: 64px; height: 64px; border-radius: var(--radius-2); object-fit: cover; flex: none; }
+  .booking-card b { font-size: var(--type-2); display: block; }
+  .status-pill { display: inline-flex; padding: 2px 8px; border-radius: var(--radius-4); font-size: 10px; font-weight: 700; text-transform: uppercase; margin-top: 4px; }
+</style>
 </head>
 <body>
   <div class="app-root">
-
-    <!-- Fixed top region — safe-area top padding baked in via app-shell.css.
-         Real back button + screen title (filled from screen.json below),
-         not empty. When copied into flows/<flow>/<screen>/, replace this
-         whole header with the screen's actual top bar. -->
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="javascript:history.back()" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;flex:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-      <span id="tpl-title" style="font-size:var(--type-2);font-weight:600;margin-left:var(--space-2);"></span>
+    <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);height:56px;display:flex;align-items:center;">
+      <h1 style="font-size:var(--type-3);">My Bookings</h1>
     </header>
-
-    <!-- Main content — scrolls only if you add .app-content--scroll.
-         Most single-purpose screens (a form, a splash, a confirmation)
-         should NOT scroll; add the modifier only for feeds/lists/long forms.
-
-         This "not yet designed" body is what every one of the 103 screens
-         still on this raw template shows today. Real content replaces it
-         screen by screen; until then it should look like an on-brand
-         placeholder state, not a blank page with a stray dev button. -->
-    <main class="app-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 var(--space-4);gap:var(--space-3);">
-      <div style="width:64px;height:64px;border-radius:var(--radius-2);background:var(--surface-alt);display:flex;align-items:center;justify-content:center;color:var(--muted);">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
-      </div>
-      <div>
-        <div id="tpl-flowkey" style="font-size:var(--type-1);color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600;"></div>
-        <h1 id="tpl-heading" style="font-size:var(--type-3);margin:var(--space-1) 0 0;">Not designed yet</h1>
-        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);max-width:280px;">This screen is scaffolded (real flow/schema data is wired up) but hasn't had a UI pass. Read <code>window.MusicLinkd.screen</code> for its data contract.</p>
+    <nav class="my-tabs" id="tabs">
+      <button type="button" class="active" data-t="upcoming">Upcoming</button>
+      <button type="button" data-t="past">Past</button>
+      <button type="button" data-t="cancelled">Cancelled</button>
+    </nav>
+    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
+      <div id="panel-upcoming">
+        <a class="booking-card" href="/preview/flows/booking/booking_success/index.html">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300" alt="" />
+          <div>
+            <b>Yash Raj Sound Studios — Tracking Room 1</b>
+            <span style="font-size:var(--type-1);color:var(--muted);">Tue, 12 Aug 2026 · 10:00 AM – 2:00 PM</span>
+            <span class="status-pill" style="background:#DCFCE7;color:#166534;">Confirmed</span>
+          </div>
+        </a>
       </div>
 
-      <!-- Example bottom-sheet trigger — structural reference only for the
-           sheet mechanics in app-shell.css; remove once this screen is
-           actually designed and doesn't need it. -->
-      <button type="button" class="btn btn-s" data-open-sheet="example-sheet">Open example sheet</button>
+      <div id="panel-past" style="display:none;">
+        <div class="booking-card" style="border-bottom:none;">
+          <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=300" alt="" />
+          <div>
+            <b>Blue Note Recording Co.</b>
+            <span style="font-size:var(--type-1);color:var(--muted);">Fri, 18 Jul 2026 · 6:00 PM – 9:00 PM</span>
+            <span class="status-pill" style="background:var(--surface-alt);color:var(--muted);">Completed</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="panel-cancelled" style="display:none;flex-direction:column;align-items:center;text-align:center;padding-top:20vh;gap:var(--space-3);">
+        <p style="color:var(--muted);font-size:var(--type-2);">No cancelled bookings.</p>
+      </div>
     </main>
-
-    <!-- Fixed bottom region — safe-area bottom padding baked in. Auto-hides
-         when the keyboard opens (see .is-keyboard-open in app-shell.css) so
-         it never floats above the keyboard on top of your inputs. -->
-    <footer class="app-bottombar">
-      <!-- TODO: design system bottom bar / CTA goes here -->
-    </footer>
+    <footer class="app-bottombar"></footer>
   </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
   <script>
-    // Fills the topbar title + flow-key eyebrow from this screen's real
-    // screen.json once app-shell.js loads it — no hardcoded screen name in
-    // this shared template. Falls back to the raw pathname if screen.json
-    // 404s (e.g. this file opened directly, outside /flows/).
-    document.addEventListener("musiclinkd:screen-ready", (e) => {
-      const data = e.detail || {};
-      document.getElementById("tpl-title").textContent = data.screenTitle ?? "";
-      document.getElementById("tpl-heading").textContent = data.screenTitle ? `${data.screenTitle} — not designed yet` : "Not designed yet";
-      document.getElementById("tpl-flowkey").textContent = data.flowTitle ?? "";
+    document.getElementById("tabs").addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      document.querySelectorAll("#tabs button").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      ["upcoming", "past", "cancelled"].forEach((t) => {
+        const el = document.getElementById("panel-" + t);
+        el.style.display = t === btn.dataset.t ? (t === "cancelled" ? "flex" : "block") : "none";
+      });
+    });
+    document.addEventListener("musiclinkd:screen-ready", () => {
+      const state = window.MusicLinkd.currentState;
+      if (state && state !== "upcoming") document.querySelector(`#tabs button[data-t="${state}"]`)?.click();
     });
   </script>
-
-  <!-- Example bottom sheet — structural mechanics only (open/close, drag-down
-       transition, safe-area padding). Style its contents with your design system. -->
-  <div class="sheet-scrim" data-sheet-scrim-for="example-sheet"></div>
-  <div class="sheet" id="example-sheet" style="background:#fff;border-radius:24px 24px 0 0;padding:24px;">
-    <p>Example bottom sheet content.</p>
-    <button type="button" class="btn btn-p btn-block" data-close-sheet="example-sheet">Close</button>
-  </div>
-
-  <script src="/preview/shared/app-shell.js" defer></script>
 </body>
 </html>

@@ -1,5 +1,4 @@
 {
-  "_note": "Screens whose index.html is no longer the raw template. Regenerate with the snippet in webapp/README.md after designing a screen.",
   "designed": [
     "auth/email_auth",
     "auth/google_signin",
@@ -8,6 +7,17 @@
     "auth/registration_write",
     "auth/splash",
     "auth/welcome",
+    "booking/availability_calendar",
+    "booking/booking_success",
+    "booking/booking_summary",
+    "booking/configure_session",
+    "booking/equipment_screen",
+    "booking/filters",
+    "booking/my_bookings",
+    "booking/payment_screen",
+    "booking/search_results",
+    "booking/studio_discovery",
+    "booking/studio_profile",
     "communication/ai_matchmaker_tab",
     "communication/chat_conversation",
     "communication/chat_thread_list",
