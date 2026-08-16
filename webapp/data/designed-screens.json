@@ -21,6 +21,17 @@
     "onboarding/review_confirm",
     "onboarding/secondary_role",
     "onboarding/submit_publish",
+    "portfolio/add_collaborators",
+    "portfolio/choose_project_type",
+    "portfolio/credit_attribution",
+    "portfolio/media_preview",
+    "portfolio/portfolio_dashboard",
+    "portfolio/profile_project_view",
+    "portfolio/project_information",
+    "portfolio/publish_project",
+    "portfolio/select_role",
+    "portfolio/streaming_links",
+    "portfolio/success",
     "public_profile/public_profile_view_venue"
   ]
 }

@@ -2,127 +2,70 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<!-- viewport-fit=cover is what makes env(safe-area-inset-*) resolve to real
-     values instead of 0 on notched/gesture-bar devices — without it the
-     safe-area CSS in app-shell.css is a no-op. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0B26" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<!--
-  All resource paths below are ABSOLUTE (/preview/...), not relative. This
-  build is deployed at musiclinkd.com/preview, and Firebase Hosting's
-  cleanUrls+trailingSlash:false config means a page at .../flows/auth/splash
-  has NO trailing slash — the browser then resolves relative "./x"/"../x"
-  paths against the WRONG base (one level too shallow), silently breaking
-  screen.json/CSS/JS loads. Absolute paths sidestep that entirely. If this
-  ever moves to a different mount point, update MOUNT_BASE in
-  shared/app-shell.js and the paths below together.
--->
+<meta name="screen-json-path" content="/preview/flows/portfolio/profile_project_view/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<meta name="screen-json-path" content="/preview/flows/portfolio/profile_project_view/screen.json" />
-<title>MusicLinkd — Add Portfolio / Published Project — Profile View</title>
+<title>MusicLinkd — Add Portfolio / Published Project</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
-<!-- app-shell.css = native ENVIRONMENT (safe-area, viewport, keyboard).
-     tokens.css = the real MusicLinkd VISUAL design system (colors, type,
-     .btn/.field/.otp-box components) — copied verbatim from
-     frontend/guide/styleguide.html. Both compose on every screen. -->
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
-<!--
-  THIS FILE IS A TEMPLATE, NOT A DESIGNED SCREEN.
-  It exists to prove out the native-app environment (safe areas, fixed
-  viewport, keyboard awareness, bottom-sheet mechanics, offline shell,
-  standalone display mode) plus the real design tokens/components, so a
-  real screen only has to compose them — copy this file into a
-  flows/<flow>/<screen>/ folder (every real screen folder already has one,
-  generated alongside its screen.json) and replace the placeholder regions
-  below. If you copy it manually (rather than letting the generator
-  scaffold it), also add
-  <meta name="screen-json-path" content="/preview/flows/<flow>/<screen>/screen.json" />
-  next to the other meta tags — without it the dev badge falls back to a
-  relative "./screen.json" fetch, which has the same trailing-slash problem
-  described above.
-
-  ARTBOARD SIZING: .app-root fills 100dvh x 100% of whatever viewport it's
-  in, edge-to-edge — the same approach a real installed PWA/native app
-  uses (there's no fixed "canvas size" on a phone). No desktop max-width
-  cap here on purpose: for reviewing on a desktop browser inside a proper
-  phone-frame, use the workbench at /preview/index.html instead of opening
-  a screen standalone — that's where the phone-frame chrome lives, not
-  baked into every individual screen.
--->
+<style>
+  .hero-art { height: 220px; border-radius: 0 0 var(--radius-3) var(--radius-3); background: linear-gradient(135deg,#B08968,#7F5539); display: flex; align-items: flex-end; padding: var(--space-4); color: #fff; }
+  .stat-row { display: flex; gap: var(--space-4); margin: var(--space-3) 0; }
+  .stat-row .stat b { display: block; font-size: var(--type-2); }
+  .stat-row .stat span { font-size: var(--type-1); color: var(--muted); }
+  .platform-row { display: flex; gap: var(--space-2); }
+  .platform-row a { flex: 1; text-align: center; padding: var(--space-2); border: 1px solid var(--line); border-radius: var(--radius-2); font-size: var(--type-1); font-weight: 600; color: var(--black); text-decoration: none; }
+</style>
 </head>
 <body>
   <div class="app-root">
-
-    <!-- Fixed top region — safe-area top padding baked in via app-shell.css.
-         Real back button + screen title (filled from screen.json below),
-         not empty. When copied into flows/<flow>/<screen>/, replace this
-         whole header with the screen's actual top bar. -->
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="javascript:history.back()" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;flex:none;">
+    <header class="app-topbar" style="position:absolute;top:0;left:0;right:0;z-index:2;padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
+      <a href="javascript:history.back()" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.85);color:var(--black);text-decoration:none;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
-      <span id="tpl-title" style="font-size:var(--type-2);font-weight:600;margin-left:var(--space-2);"></span>
     </header>
-
-    <!-- Main content — scrolls only if you add .app-content--scroll.
-         Most single-purpose screens (a form, a splash, a confirmation)
-         should NOT scroll; add the modifier only for feeds/lists/long forms.
-
-         This "not yet designed" body is what every one of the 103 screens
-         still on this raw template shows today. Real content replaces it
-         screen by screen; until then it should look like an on-brand
-         placeholder state, not a blank page with a stray dev button. -->
-    <main class="app-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 var(--space-4);gap:var(--space-3);">
-      <div style="width:64px;height:64px;border-radius:var(--radius-2);background:var(--surface-alt);display:flex;align-items:center;justify-content:center;color:var(--muted);">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+    <main class="app-content app-content--scroll">
+      <div class="hero-art">
+        <div>
+          <span style="font-size:var(--type-1);font-weight:600;opacity:.85;">SONG · RELEASED</span>
+          <h1 style="font-size:var(--type-3);margin:2px 0 0;">Tum Hi Toh (Unplugged)</h1>
+        </div>
       </div>
-      <div>
-        <div id="tpl-flowkey" style="font-size:var(--type-1);color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600;"></div>
-        <h1 id="tpl-heading" style="font-size:var(--type-3);margin:var(--space-1) 0 0;">Not designed yet</h1>
-        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);max-width:280px;">This screen is scaffolded (real flow/schema data is wired up) but hasn't had a UI pass. Read <code>window.MusicLinkd.screen</code> for its data contract.</p>
-      </div>
+      <div style="padding:var(--space-3) var(--space-4) var(--space-4);">
+        <div style="display:flex;align-items:center;gap:var(--space-2);">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=88" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;" />
+          <span style="font-size:var(--type-1);font-weight:600;">Arijit Sen</span>
+          <span style="font-size:var(--type-1);color:var(--muted);">· Singer</span>
+        </div>
 
-      <!-- Example bottom-sheet trigger — structural reference only for the
-           sheet mechanics in app-shell.css; remove once this screen is
-           actually designed and doesn't need it. -->
-      <button type="button" class="btn btn-s" data-open-sheet="example-sheet">Open example sheet</button>
+        <p style="font-size:var(--type-2);color:var(--muted);margin-top:var(--space-3);">Acoustic unplugged reinterpretation — 4.2M plays on Spotify.</p>
+
+        <div class="stat-row">
+          <div class="stat"><b>4,200</b><span>Views</span></div>
+          <div class="stat"><b>610</b><span>Likes</span></div>
+          <div class="stat"><b>88</b><span>Shares</span></div>
+        </div>
+
+        <p style="font-size:var(--type-1);color:var(--muted);margin-bottom:var(--space-2);">Released 14 Feb 2026</p>
+
+        <div class="platform-row">
+          <a href="https://open.spotify.com/track/tumhitohunplugged-mock" target="_blank" rel="noopener">Spotify</a>
+          <a href="#" onclick="return false;" style="opacity:.4;">Apple Music</a>
+        </div>
+      </div>
     </main>
-
-    <!-- Fixed bottom region — safe-area bottom padding baked in. Auto-hides
-         when the keyboard opens (see .is-keyboard-open in app-shell.css) so
-         it never floats above the keyboard on top of your inputs. -->
-    <footer class="app-bottombar">
-      <!-- TODO: design system bottom bar / CTA goes here -->
+    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
+      <button type="button" class="btn btn-p btn-block">Like</button>
     </footer>
   </div>
-  <script>
-    // Fills the topbar title + flow-key eyebrow from this screen's real
-    // screen.json once app-shell.js loads it — no hardcoded screen name in
-    // this shared template. Falls back to the raw pathname if screen.json
-    // 404s (e.g. this file opened directly, outside /flows/).
-    document.addEventListener("musiclinkd:screen-ready", (e) => {
-      const data = e.detail || {};
-      document.getElementById("tpl-title").textContent = data.screenTitle ?? "";
-      document.getElementById("tpl-heading").textContent = data.screenTitle ? `${data.screenTitle} — not designed yet` : "Not designed yet";
-      document.getElementById("tpl-flowkey").textContent = data.flowTitle ?? "";
-    });
-  </script>
-
-  <!-- Example bottom sheet — structural mechanics only (open/close, drag-down
-       transition, safe-area padding). Style its contents with your design system. -->
-  <div class="sheet-scrim" data-sheet-scrim-for="example-sheet"></div>
-  <div class="sheet" id="example-sheet" style="background:#fff;border-radius:24px 24px 0 0;padding:24px;">
-    <p>Example bottom sheet content.</p>
-    <button type="button" class="btn btn-p btn-block" data-close-sheet="example-sheet">Close</button>
-  </div>
-
   <script src="/preview/shared/app-shell.js" defer></script>
 </body>
 </html>

@@ -163,8 +163,19 @@ body {
 .chip { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: var(--radius-4); background: #fff; border: 1px solid var(--line); font-size: var(--type-1); font-weight: 500; color: var(--muted); white-space: nowrap; }
 .chip.sel { background: var(--pink); border-color: var(--pink); color: #fff; }
 
-/* --- Phone frame (desktop preview chrome) — exact classes/values from styleguide.html --- */
+/* --- Phone frame (desktop preview chrome) — classes/values from styleguide.html,
+   with one deliberate divergence: .phone-screen's height. styleguide.html uses
+   this frame as a generic marketing mockup (720px, 360:720 = 18:9). webapp/'s
+   own shared/app-shell.css documents a real, specific target aspect for the
+   screens actually rendered inside this frame: "20:9 ... reference frame
+   390×844 / 360×800". 720px doesn't match that — every screen previewed here
+   was ~80px shorter/squatter than the ratio the app itself is designed
+   against, so content sat more cramped in the preview than on a real device.
+   Fixed to 800px to match app-shell.css's own stated standard. Not copied
+   down from styleguide.html on purpose — see CLAUDE.md, styleguide.html
+   isn't touched this session, and this is a webapp-specific accuracy fix,
+   not a shared-system value. --- */
 .phone-frame { width: 360px; background: #1a1a2e; border-radius: 36px; padding: 12px; margin: 0 auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-.phone-screen { background: var(--paper); border-radius: 24px; overflow: hidden; height: 720px; position: relative; }
+.phone-screen { background: var(--paper); border-radius: 24px; overflow: hidden; height: 800px; position: relative; }
 .phone-notch { height: 28px; background: #0D0D0D; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .phone-notch .dot { width: 8px; height: 8px; background: #2C2F3A; border-radius: 50%; }
