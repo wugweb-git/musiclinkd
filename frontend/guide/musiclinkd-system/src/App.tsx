@@ -2281,6 +2281,333 @@ function DiscoveryHeaderBlock() {
   );
 }
 
+
+// ===== Remaining Widget_Directory entries, built as visual blocks =====
+// Completes the set: every widget in admin/docs/architecture/Widget_Directory.md
+// that had only a spec-text entry in the "Admin widget directory" tab now has a
+// real rendered counterpart here. Composition follows each widget's own
+// "Content / Composition" column; sample copy is illustrative.
+// PersistentAudioPlayer is deliberately NOT built — its implementation
+// (GlobalPersistentAudioPlayerBar.kt) is confirmed deleted, and the directory
+// itself flags it. Building a demo would imply a live widget that isn't.
+
+// RecommendedCollaboratorCard — AI match card (match %, synergy reasons)
+function RecommendedCollaboratorBlock() {
+  return (
+    <Box borderStyle="sm" rounding={4} padding={4} maxWidth={320}>
+      <Flex gap={3} alignItems="start">
+        <Avatar name="Mei Tanaka" size="lg" />
+        <Box flex="grow">
+          <Flex justifyContent="between" alignItems="start">
+            <Box><Text weight="bold">Mei Tanaka</Text><Text size="100" color="subtle">Producer · Tokyo</Text></Box>
+            <Box paddingX={2} paddingY={1} rounding="pill" dangerouslySetInlineStyle={{ __style: { background: "var(--ml-accent)" } }}>
+              <Text size="100" weight="bold" color="light">92%</Text>
+            </Box>
+          </Flex>
+        </Box>
+      </Flex>
+      <Box marginTop={3} marginBottom={3}>
+        <Text size="100" color="subtle">Why you match</Text>
+        <Box marginTop={1}>
+          <Flex direction="column" gap={1}>
+            {["Both work in Sufi + electronic crossover", "Overlapping session availability", "3 mutual collaborators"].map((r) => (
+              <Flex key={r} gap={1} alignItems="center">
+                <Icon icon="check-circle" accessibilityLabel="" size={12} color="success" />
+                <Text size="100">{r}</Text>
+              </Flex>
+            ))}
+          </Flex>
+        </Box>
+      </Box>
+      <Flex gap={2}>
+        <Button text="Connect" color="red" size="sm" />
+        <Button text="View profile" color="gray" size="sm" />
+      </Flex>
+    </Box>
+  );
+}
+
+// DiscoverySearchResultCard — global search result row
+function DiscoverySearchResultBlock() {
+  const rows = [
+    { n: "Arijit Sen", c: "Talent", d: "Singer · Mumbai", m: "98% match" },
+    { n: "Yash Raj Sound Studios", c: "Studio", d: "Andheri · Atmos", m: "4.8 ★" },
+    { n: "Session vocalist for EP", c: "Opportunity", d: "₹15,000 · Mumbai", m: "12 applied" },
+  ];
+  return (
+    <Box borderStyle="sm" rounding={3} maxWidth={360} overflow="hidden">
+      {rows.map((r, i) => (
+        <Box key={r.n} padding={3} borderStyle={i > 0 ? "shadow" : "none"}>
+          <Flex gap={3} alignItems="center">
+            <Avatar name={r.n} size="sm" />
+            <Box flex="grow">
+              <Flex gap={1} alignItems="center">
+                <Text size="100" weight="bold">{r.n}</Text>
+                <Badge text={r.c} type="neutral" />
+              </Flex>
+              <Text size="100" color="subtle">{r.d}</Text>
+            </Box>
+            <Text size="100" color="subtle">{r.m}</Text>
+          </Flex>
+        </Box>
+      ))}
+    </Box>
+  );
+}
+
+// ProfilePreviewSheet — quick-look sheet before opening a full profile
+function ProfilePreviewSheetBlock() {
+  return (
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={330}
+      dangerouslySetInlineStyle={{ __style: { borderTopLeftRadius: 28, borderTopRightRadius: 28 } }}>
+      <Box marginBottom={3} display="flex" justifyContent="center">
+        <Box width={40} height={4} rounding="pill" color="secondary" />
+      </Box>
+      <Flex gap={3} alignItems="center">
+        <Avatar name="Arijit Sen" src={IMG.vocalist} size="lg" />
+        <Box><Text weight="bold">Arijit Sen</Text><Text size="100" color="subtle">Singer · Composer</Text></Box>
+      </Flex>
+      <Box marginTop={3} marginBottom={3}>
+        <Text size="100">Playback &amp; classical singer — Bollywood, Sufi, acoustic. 10+ years session work.</Text>
+      </Box>
+      <Flex gap={1} wrap>
+        <Tag text="Bollywood" /><Tag text="Sufi" /><Tag text="Hindi" />
+      </Flex>
+      <Box marginTop={4}><Button text="View full profile" color="red" fullWidth /></Box>
+    </Box>
+  );
+}
+
+// NetworkingFeed — social activity feed with media + engagement
+function NetworkingFeedBlock() {
+  const [liked, setLiked] = useState(false);
+  return (
+    <Box borderStyle="sm" rounding={4} maxWidth={340} overflow="hidden">
+      <Box padding={3}>
+        <Flex gap={2} alignItems="center">
+          <Avatar name="Ravi Nair" size="sm" />
+          <Box flex="grow"><Text size="100" weight="bold">Ravi Nair</Text><Text size="100" color="subtle">Producer · 2h ago</Text></Box>
+          <IconButton icon="ellipsis" accessibilityLabel="More" size="sm" />
+        </Flex>
+        <Box marginTop={2}><Text size="100">Final mix of "Neon Tide" is done. Stems going out tonight.</Text></Box>
+      </Box>
+      <Image alt="Studio session" src={IMG.mixing} naturalWidth={340} naturalHeight={190} />
+      <Box padding={3}>
+        <Flex gap={4} alignItems="center">
+          <TapArea onTap={() => setLiked((l) => !l)}>
+            <Flex gap={1} alignItems="center">
+              <Icon icon={liked ? "heart" : "heart-outline"} accessibilityLabel="Like" size={14} color={liked ? "error" : "subtle"} />
+              <Text size="100" color="subtle">{liked ? 25 : 24}</Text>
+            </Flex>
+          </TapArea>
+          <Flex gap={1} alignItems="center"><Icon icon="speech" accessibilityLabel="Comments" size={14} color="subtle" /><Text size="100" color="subtle">6</Text></Flex>
+          <Flex gap={1} alignItems="center"><Icon icon="share" accessibilityLabel="Share" size={14} color="subtle" /><Text size="100" color="subtle">3</Text></Flex>
+        </Flex>
+      </Box>
+    </Box>
+  );
+}
+
+// BandMembersWidget — roster with instrument roles and lead designation
+function BandMembersBlock() {
+  const members = [
+    { n: "Raman Negi", r: "Vocals", lead: true },
+    { n: "Paras Thakur", r: "Guitar", lead: false },
+    { n: "Ramit Mehra", r: "Bass", lead: false },
+    { n: "Sahil Sarin", r: "Drums", lead: false },
+  ];
+  return (
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={320}>
+      <Box marginBottom={3}><Text weight="bold">Band members</Text></Box>
+      <Flex direction="column" gap={3}>
+        {members.map((m) => (
+          <Flex key={m.n} gap={2} alignItems="center">
+            <Avatar name={m.n} size="sm" />
+            <Box flex="grow"><Text size="100" weight="bold">{m.n}</Text><Text size="100" color="subtle">{m.r}</Text></Box>
+            {m.lead && <Badge text="Lead" type="info" />}
+          </Flex>
+        ))}
+      </Flex>
+    </Box>
+  );
+}
+
+// StudioVenueListItem — compact directory row
+function StudioVenueListItemBlock() {
+  const rows = [
+    { n: "Yash Raj Sound Studios", l: "Andheri, Mumbai", r: "4.8", p: "₹8,000/hr", atmos: true },
+    { n: "Bloom Studio A", l: "Bandra, Mumbai", r: "4.6", p: "₹2,500/hr", atmos: false },
+  ];
+  return (
+    <Box maxWidth={360}>
+      <Flex direction="column" gap={2}>
+        {rows.map((s) => (
+          <Box key={s.n} borderStyle="sm" rounding={2} padding={2}>
+            <Flex gap={3} alignItems="center">
+              <Box width={56} height={56} rounding={2} overflow="hidden">
+                <Image alt={s.n} src={IMG.studio} naturalWidth={56} naturalHeight={56} />
+              </Box>
+              <Box flex="grow">
+                <Flex gap={1} alignItems="center">
+                  <Text size="100" weight="bold">{s.n}</Text>
+                  {s.atmos && <Badge text="Atmos" type="info" />}
+                </Flex>
+                <Text size="100" color="subtle">{s.l}</Text>
+                <Flex gap={1} alignItems="center">
+                  <Icon icon="star" accessibilityLabel="" size={10} color="warning" />
+                  <Text size="100" color="subtle">{s.r}</Text>
+                </Flex>
+              </Box>
+              <Text size="100" weight="bold">{s.p}</Text>
+            </Flex>
+          </Box>
+        ))}
+      </Flex>
+    </Box>
+  );
+}
+
+// StudioSpecWidget — technical inventory
+function StudioSpecBlock() {
+  const specs = [
+    ["Console", "SSL 9000J"],
+    ["Monitors", "Genelec 1032C · Yamaha NS-10"],
+    ["Mics", "Neumann U87 · AKG C414 · Shure SM7B"],
+    ["Outboard", "LA-2A · 1176 · Lexicon 480L"],
+    ["Format", "Dolby Atmos 7.1.4"],
+  ];
+  return (
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={340}>
+      <Box marginBottom={3}><Text weight="bold">Technical specification</Text></Box>
+      <Flex direction="column" gap={2}>
+        {specs.map(([k, v]) => (
+          <Flex key={k} justifyContent="between" gap={3}>
+            <Text size="100" color="subtle">{k}</Text>
+            <Box><Text size="100" align="end">{v}</Text></Box>
+          </Flex>
+        ))}
+      </Flex>
+    </Box>
+  );
+}
+
+// RecentProjectCard — compact dashboard portfolio row with edit action
+function RecentProjectBlock() {
+  return (
+    <Box borderStyle="sm" rounding={3} padding={3} maxWidth={340}>
+      <Flex gap={3} alignItems="center">
+        <Box width={52} height={52} rounding={2} overflow="hidden">
+          <Image alt="Artwork" src={IMG.mixing} naturalWidth={52} naturalHeight={52} />
+        </Box>
+        <Box flex="grow">
+          <Text size="100" weight="bold">Tum Hi Toh (Unplugged)</Text>
+          <Text size="100" color="subtle">Lead vocals · 2025</Text>
+          <Box marginTop={1}>
+            <Flex gap={1}><Badge text="Spotify" type="success" /><Badge text="YouTube" type="error" /></Flex>
+          </Box>
+        </Box>
+        <IconButton icon="edit" accessibilityLabel="Edit project" size="sm" />
+      </Flex>
+    </Box>
+  );
+}
+
+// AudioPlayerWidget / WaveformAudioPlayer — waveform, transport, timeline.
+// Bars are a deterministic pattern, not random, so the demo renders
+// identically on every load rather than flickering between paints.
+function WaveformPlayerBlock() {
+  const [playing, setPlaying] = useState(false);
+  const [pos, setPos] = useState(38);
+  const bars = Array.from({ length: 44 }, (_, i) => 12 + Math.round(22 * Math.abs(Math.sin(i * 0.7))));
+  return (
+    <Box borderStyle="sm" rounding={3} padding={4} maxWidth={340}>
+      <Flex gap={3} alignItems="center">
+        <IconButton icon={playing ? "pause" : "play"} accessibilityLabel={playing ? "Pause" : "Play"}
+          bgColor="red" iconColor="white" size="lg" onClick={() => setPlaying((p) => !p)} />
+        <Box flex="grow">
+          <Text size="100" weight="bold">Neon Tide — rough mix</Text>
+          <Text size="100" color="subtle">{playing ? "Playing" : "Paused"} · 1:24 / 3:42</Text>
+        </Box>
+      </Flex>
+      <Box marginTop={3}>
+        <TapArea onTap={() => setPos((v) => (v >= 90 ? 10 : v + 12))}>
+          <Flex gap={1} alignItems="center">
+            {bars.map((bh, i) => (
+              <Box key={i} width={4} height={bh} rounding="pill"
+                dangerouslySetInlineStyle={{ __style: {
+                  background: (i / bars.length) * 100 <= pos ? "var(--ml-accent)" : "#E9E9E9" } }} />
+            ))}
+          </Flex>
+        </TapArea>
+      </Box>
+    </Box>
+  );
+}
+
+// HireContactModal — hiring enquiry form
+function HireContactBlock() {
+  const [scope, setScope] = useState("session");
+  const [budget, setBudget] = useState("");
+  return (
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={340}>
+      <Heading size="400">Hire Arijit Sen</Heading>
+      <Box marginTop={3}>
+        <Flex direction="column" gap={3}>
+          <SelectList id="hire-scope" name="scope" label="Project scope" value={scope} onChange={({ value }) => setScope(value)}>
+            <SelectList.Option label="Single session" value="session" />
+            <SelectList.Option label="Full EP" value="ep" />
+            <SelectList.Option label="Live tour" value="tour" />
+          </SelectList>
+          <TextField id="hire-budget" label="Budget (₹)" placeholder="e.g. 25,000" value={budget} onChange={({ value }) => setBudget(value)} />
+          <TextArea id="hire-brief" label="Brief" placeholder="What do you need?" />
+        </Flex>
+      </Box>
+      <Box marginTop={4}><Button text="Send enquiry" color="red" fullWidth disabled={!budget} /></Box>
+    </Box>
+  );
+}
+
+// AdvancedFiltersBottomSheet — the real filter sheet. Note: the widget
+// directory records this as filtering 100% mock data in the live app; this is
+// the UI shape only, not a claim that filtering is wired.
+function AdvancedFiltersBlock() {
+  const [atmos, setAtmos] = useState(true);
+  const [budget, setBudget] = useState(8000);
+  const [cats, setCats] = useState<string[]>(["Studios"]);
+  const toggle = (c: string) => setCats((p) => (p.includes(c) ? p.filter((x) => x !== c) : [...p, c]));
+  return (
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={330}>
+      <Flex justifyContent="between" alignItems="center">
+        <Text weight="bold">Filters</Text>
+        <Button text="Reset" color="transparent" size="sm" />
+      </Flex>
+      <Box marginTop={4} marginBottom={2}><Text size="100" color="subtle">Category</Text></Box>
+      <Flex gap={1} wrap>
+        {["Talent", "Studios", "Gear", "Gigs"].map((c) => (
+          <TapArea key={c} onTap={() => toggle(c)} rounding="pill">
+            <Box paddingX={3} paddingY={2} rounding="pill" borderStyle="sm" color={cats.includes(c) ? "selected" : "default"}>
+              <Text size="100" weight="bold" color={cats.includes(c) ? "inverse" : "default"}>{c}</Text>
+            </Box>
+          </TapArea>
+        ))}
+      </Flex>
+      <Box marginTop={4} marginBottom={2}>
+        <Flex justifyContent="between"><Text size="100" color="subtle">Max rate</Text><Text size="100" weight="bold">₹{budget.toLocaleString("en-IN")}/hr</Text></Flex>
+      </Box>
+      <input type="range" min={0} max={20000} step={500} value={budget}
+        onChange={(e) => setBudget(Number(e.currentTarget.value))}
+        style={{ width: "100%", accentColor: "var(--ml-accent)" }} aria-label="Maximum hourly rate" />
+      <Box marginTop={4} marginBottom={4}>
+        <Flex justifyContent="between" alignItems="center">
+          <Text size="100">Dolby Atmos only</Text>
+          <Switch id="filter-atmos" switched={atmos} onChange={({ value }) => setAtmos(value)} />
+        </Flex>
+      </Box>
+      <Button text="Apply filters" color="red" fullWidth />
+    </Box>
+  );
+}
+
 const BLOCKS: Block[] = [
   { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => <NavHeaderBlock /> },
   { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => <ArtistProfileBlock /> },
@@ -2318,6 +2645,17 @@ const BLOCKS: Block[] = [
   { name: "Review card", description: "UnifiedReviewCard (Widget Directory §7) — reviewer, org, stars, quote, timestamp.", render: () => <ReviewCardBlock /> },
   { name: "Notification card", description: "UnifiedNotificationCard (Widget Directory §7) — per-item event-type icon + unread state.", render: () => <NotificationCardBlock /> },
   { name: "Public reputation widget", description: "PublicReputationWidget (Widget Directory §7) — aggregate rating, credits, response rate.", render: () => <PublicReputationWidgetBlock /> },
+  { name: "Recommended collaborator", description: "Widget Directory §1 — AI match card with match % and synergy reasons.", render: () => <RecommendedCollaboratorBlock /> },
+  { name: "Discovery search results", description: "Widget Directory §1 — mixed-entity global search rows.", render: () => <DiscoverySearchResultBlock /> },
+  { name: "Profile preview sheet", description: "Widget Directory §1 — quick-look sheet before the full profile.", render: () => <ProfilePreviewSheetBlock /> },
+  { name: "Networking feed", description: "Widget Directory §1 — feed post with media and live like toggle.", render: () => <NetworkingFeedBlock /> },
+  { name: "Band members", description: "Widget Directory §1 — roster with instrument roles and lead.", render: () => <BandMembersBlock /> },
+  { name: "Studio/venue list item", description: "Widget Directory §2 — compact directory rows.", render: () => <StudioVenueListItemBlock /> },
+  { name: "Studio spec", description: "Widget Directory §2 — console, monitors, mics, outboard.", render: () => <StudioSpecBlock /> },
+  { name: "Recent project", description: "Widget Directory §4 — dashboard portfolio row with edit action.", render: () => <RecentProjectBlock /> },
+  { name: "Waveform audio player", description: "Widget Directory §5 — transport + scrubbable waveform, live state.", render: () => <WaveformPlayerBlock /> },
+  { name: "Hire contact", description: "Widget Directory §6 — enquiry form, CTA gated on budget.", render: () => <HireContactBlock /> },
+  { name: "Advanced filters", description: "Widget Directory §8 — chips, range slider, Atmos switch. UI only; filtering is mock in the real app.", render: () => <AdvancedFiltersBlock /> },
   { name: "Onboarding wizard", description: "Multi-step with live progress bar, selectable chips, and a review step.", render: () => <OnboardingWizardBlock /> },
   { name: "Discovery hero card", description: "Image-led card with gradient scrim, live favourite toggle, rating.", render: () => <DiscoveryHeroCardBlock /> },
   { name: "Product card", description: "Marketplace rental card — media, copy stack, price + CTA row.", render: () => <ProductCardBlock /> },

@@ -155,6 +155,80 @@ invented Venue fields. Verified: `npm run typecheck` clean, `npm run build` clea
 render confirmed the new Block actually shows "Arijit Sen" and "Tum Hi Toh" in the rendered DOM,
 not just that the tab opens.
 
+## Eighth pass — widget build-out, colour-role correction, styleguide port (2026-08-16)
+
+**Colour roles corrected.** Primary action is **black** (`#0D0D0D`); pink
+(`#EA4C89`) is the **secondary / brand accent** — active states, brand marks,
+highlights. An earlier commit this same day mapped primary to pink; that was
+wrong and is reversed. Greys are left entirely to Gestalt's roboflow neutral
+ramp rather than overridden. Gestalt's prop literal stays `color="red"`
+because its type union has no black or pink option — what changed is which
+colour that semantic slot resolves to, via CSS custom properties.
+
+**Blocks: 30 -> 64.** Three groups:
+1. *Widget Directory build-out (19)* — every entry in
+   `admin/docs/architecture/Widget_Directory.md` that previously existed only
+   as spec text in the "Admin widget directory" tab now has a rendered
+   counterpart: Track, Studio, Featured studio, Marketplace, Opportunity,
+   Review, Notification, Public reputation, Recommended collaborator,
+   Discovery search results, Profile preview sheet, Networking feed, Band
+   members, Studio/venue list item, Studio spec, Recent project, Waveform
+   audio player, Hire contact, Advanced filters.
+   **PersistentAudioPlayer is deliberately not built** — its implementation
+   (`GlobalPersistentAudioPlayerBar.kt`) is confirmed deleted, and a demo
+   would imply a live widget that does not exist.
+2. *Ported from styleguide.html (10)* — Band card, Greeting, Profile stats,
+   Featured artists, KPI cards, Insights, Workspace card, Footer CTA, Talent
+   role variants, Venue profile flow. Rebuilt with real Gestalt components
+   rather than copied as markup, each carrying its source section id.
+3. *New interactive (4)* — Onboarding wizard (real multi-step state, live
+   progress bar, review step), Discovery hero card, Product card, Discovery
+   header.
+
+**Imagery.** Card blocks use the same Unsplash assets `styleguide.html`
+already uses, collected in one `IMG` map so a move to self-hosted assets is a
+single edit.
+
+**Bugs found and fixed this pass, all mine:**
+- A stray `*/` inside a CSS comment closed it early; `styles.css` parsed into
+  **1 rule instead of 36**, silently killing every layout rule and the token
+  override. Found by reading `document.styleSheets` in a real browser.
+- `Heading size="500"` rendered a literal `<hundefined>` tag — Gestalt's
+  Heading size union skips 500 (`100|200|300|400|600|700`).
+- `musiclinkd-system/index.html` used **relative** asset paths. With Firebase
+  `cleanUrls:true` + `trailingSlash:false` the deployed URL has no trailing
+  slash, so `bundle.js` resolved to `/guide/bundle.js` and 404'd — the app
+  loaded **no JavaScript at all** on the live site while `dist/` was correct.
+  Fixed with absolute paths, same remedy as `webapp/shared/app-shell.js`.
+- `firebase.json` served unhashed `bundle.js` / `styles.css` as
+  `immutable, max-age=31536000` — a one-year cache on files whose names never
+  change. Now `must-revalidate` for those paths only.
+
+**Layout.** Grid children use `align-self: start` so cards hug their content
+instead of stretching to the tallest in the row (verified in-browser: a row
+locked at 175px each relaxed to 175/143/143/151/135). Added
+`scroll-margin-top: 76px` so anchor jumps clear the 61px sticky nav.
+
+## styleguide.html — seventh pass (2026-08-16)
+
+Real booking data replaced the fabricated "North Room / 20 Aug / Rs 7,200"
+placeholder in **all 12 rendered occurrences**, sourced from
+`dist/preview/flows/booking/booking_summary/screen.json` (Yash Raj Sound
+Studios, 2026-08-12, 10:00 AM - 2:00 PM, Rs 32,000). The old values
+contradicted each other across demos — two different dates (20 Aug, Oct 15)
+and two different totals (Rs 7,200, Rs 7,560). The payment fee line is now
+labelled *illustrative, not app-wired* on screen rather than faked, because
+that screen's own notes say those fields are not wired.
+
+**Dead nav links: 40 -> 5.** 17 links were repointed to sections that already
+existed under different ids; 12 genuinely-missing primitive sections were
+built (Select, Radio, Checkbox, Toggle, Textarea, Upload, Accordion, Divider,
+Timeline, Global Search, Search Filters, Filter Pills) reusing existing
+classes and tokens so no new CSS was introduced; 5 structural links were
+repointed to category entry points. The 5 remaining are the `anatomy-*`
+series, deliberately skipped as documentation rather than a component gap.
+Verified: 0 element ids removed, all tag balances unchanged.
+
 ## Pink-primary token override, 8 new widget Blocks, token grouping (2026-08-16, seventh pass)
 
 **Primary color: red → pink.** Gestalt's `Button`/`IconButton`/`Icon` `color`/`iconColor`/`bgColor`
