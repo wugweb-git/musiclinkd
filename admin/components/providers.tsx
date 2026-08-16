@@ -1,8 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-import ColorSchemeProvider from "gestalt/dist/contexts/ColorSchemeProvider";
-import DefaultLabelProvider from "gestalt/dist/contexts/DefaultLabelProvider";
+// Imported from the package root, NOT "gestalt/dist/contexts/<Name>".
+// Those deep paths resolve only at type-check time: dist/contexts/ ships
+// .d.ts declaration files with no matching .js — the real implementations
+// are all bundled into the single dist/gestalt.js. So tsc was happy while
+// Turbopack failed with "Module not found" at build time. Both are real
+// named exports of the root entry (verified in dist/index.d.ts), which
+// resolves for both. Keep them here; don't "tidy" them back to deep paths.
+import { ColorSchemeProvider, DefaultLabelProvider } from "gestalt";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/contexts/auth-context";
 import { ModuleRegistryProvider } from "@/contexts/module-registry-context";
