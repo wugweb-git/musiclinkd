@@ -1,6 +1,0 @@
-{
-  "name": "MusicLinkd",
-  "description": "MusicLinkd - India's professional network and operating system for the music industry.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
