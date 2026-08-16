@@ -226,6 +226,32 @@ locked at 175px each relaxed to 175/143/143/151/135). Added
 `scroll-margin-top: 76px` so anchor jumps clear the 61px sticky nav.
 
 
+
+### Tenth pass — auth blocks and brand artwork (2026-08-16)
+
+Five more Blocks, taking the total to **75**. The auth flow is one of only two
+fully-designed flows in the preview build (auth + onboarding = 21 of 124
+screens), so every state below is the **real** state list from each
+`dist/preview/flows/auth/*/screen.json`, not invented:
+
+- **Splash artwork** (`auth/splash`) — black field, brand mark, wordmark with
+  the `d` in pink; both real states (`loading`, `resuming_local_session`).
+- **App icon & logo** — the real MusicLinkd mark (four equaliser bars on a
+  rounded black tile, bars 2 and 4 in pink) transcribed as an inline SVG from
+  `styleguide.html`, shown at 512/192/96/48 ship sizes plus pink-field and
+  monochrome variants. Monochrome matters: it is what masking and print need.
+- **Auth welcome** (`auth/welcome` + `auth/google_signin`) — real Gestalt
+  `ButtonSocial` rather than a hand-rolled Google button.
+- **OTP verification** (`auth/otp_verification`) — all four real states
+  (`entering`, `verifying`, `error`, `success`), switchable in the demo.
+  Gestalt has no OTP component (already in the Not-built registry), so the
+  boxes are composed from primitives.
+- **Email auth** (`auth/email_auth`) — signup/signin toggle with live
+  validation; the CTA stays disabled until the form is actually valid.
+
+The logo is drawn as inline SVG rather than linked as an asset so the brand
+mark cannot silently 404 the way the bundle did.
+
 ### Ninth pass — music-first cards, textures, interactive audio (2026-08-16)
 
 Six more Blocks ported from `styleguide.html`, taking the total to **70**.

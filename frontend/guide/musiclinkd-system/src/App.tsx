@@ -2830,6 +2830,192 @@ function TexturesBlock() {
   );
 }
 
+
+// ===== Auth blocks + brand artwork =====
+// The auth flow is one of only two fully-designed flows in the preview build
+// (auth + onboarding, 21 of 124 screens). States below are the REAL states
+// from each screen.json in dist/preview/flows/auth/*, not invented:
+//   splash: loading | resuming_local_session
+//   mobile_auth: default | error
+//   otp_verification: entering | verifying | error | success
+//   email_auth: signup | signin | loading | error
+//   google_signin: account_picker | success | fallback_fake
+
+// The real MusicLinkd mark, transcribed from the SVG in styleguide.html:
+// four equaliser bars on a rounded black tile, bars 2 and 4 in brand pink.
+function LogoMark({ size = 64 }: { size?: number }) {
+  return (
+    <svg viewBox="0 0 64 64" width={size} height={size} role="img" aria-label="MusicLinkd logo">
+      <rect width="64" height="64" rx="16" fill="#0D0D0D" />
+      <rect x="16" y="26" width="5" height="20" rx="2.5" fill="#FFFFFF" />
+      <rect x="25.5" y="16" width="5" height="32" rx="2.5" fill="#EA4C89" />
+      <rect x="35" y="22" width="5" height="24" rx="2.5" fill="#FFFFFF" />
+      <rect x="44.5" y="30" width="5" height="16" rx="2.5" fill="#EA4C89" />
+    </svg>
+  );
+}
+
+// Splash artwork — real screen auth/splash. Black field, centred mark,
+// wordmark with the "d" in brand pink, and the real loading/resuming states.
+function SplashBlock() {
+  const [state, setState] = useState<"loading" | "resuming_local_session">("loading");
+  return (
+    <Box maxWidth={300}>
+      <Box rounding={4} overflow="hidden" height={400} position="relative"
+        dangerouslySetInlineStyle={{ __style: { background: "#0D0D0D" } }}>
+        <Box position="absolute" top left right bottom display="flex"
+          alignItems="center" justifyContent="center">
+          <Flex direction="column" alignItems="center" gap={4}>
+            <LogoMark size={72} />
+            <Box>
+              <Text size="600" weight="bold" color="light" align="center">
+                MusicLink<Text inline size="600" weight="bold" color="error">d</Text>
+              </Text>
+            </Box>
+            <Text size="100" color="light" align="center">
+              {state === "loading" ? "Loading…" : "Resuming your session…"}
+            </Text>
+            <Spinner show accessibilityLabel="Loading" color="white" />
+          </Flex>
+        </Box>
+      </Box>
+      <Box marginTop={2}>
+        <SegmentedControl size="sm"
+          items={["loading", "resuming"]}
+          selectedItemIndex={state === "loading" ? 0 : 1}
+          onChange={({ activeIndex }) => setState(activeIndex === 0 ? "loading" : "resuming_local_session")} />
+      </Box>
+    </Box>
+  );
+}
+
+// App icon set — the real mark at the sizes Android/iOS actually ship,
+// plus the monochrome and pink-field variants.
+function AppIconSetBlock() {
+  const sizes = [{ s: 96, l: "512 / store" }, { s: 64, l: "192 / launcher" }, { s: 44, l: "96 / notification" }, { s: 28, l: "48 / favicon" }];
+  return (
+    <Box maxWidth={340}>
+      <Box marginBottom={3}><Text weight="bold">App icon</Text></Box>
+      <Flex gap={4} alignItems="end" wrap>
+        {sizes.map((z) => (
+          <Flex key={z.l} direction="column" alignItems="center" gap={1}>
+            <LogoMark size={z.s} />
+            <Text size="100" color="subtle">{z.l}</Text>
+          </Flex>
+        ))}
+      </Flex>
+      <Box marginTop={5} marginBottom={3}><Text weight="bold">Variants</Text></Box>
+      <Flex gap={3} alignItems="center">
+        <Box rounding={3} overflow="hidden"><LogoMark size={56} /></Box>
+        {/* Pink field: mark inverted onto the brand accent for light surfaces. */}
+        <Box width={56} height={56} rounding={3} display="flex" alignItems="center" justifyContent="center"
+          dangerouslySetInlineStyle={{ __style: { background: "var(--ml-accent)" } }}>
+          <svg viewBox="0 0 64 64" width={34} height={34} aria-hidden="true">
+            <rect x="16" y="26" width="5" height="20" rx="2.5" fill="#FFFFFF" />
+            <rect x="25.5" y="16" width="5" height="32" rx="2.5" fill="#FFFFFF" />
+            <rect x="35" y="22" width="5" height="24" rx="2.5" fill="#FFFFFF" />
+            <rect x="44.5" y="30" width="5" height="16" rx="2.5" fill="#FFFFFF" />
+          </svg>
+        </Box>
+        {/* Monochrome: required wherever the icon prints or masks. */}
+        <Box width={56} height={56} rounding={3} display="flex" alignItems="center" justifyContent="center" color="secondary">
+          <svg viewBox="0 0 64 64" width={34} height={34} aria-hidden="true">
+            <rect x="16" y="26" width="5" height="20" rx="2.5" fill="#0D0D0D" />
+            <rect x="25.5" y="16" width="5" height="32" rx="2.5" fill="#0D0D0D" />
+            <rect x="35" y="22" width="5" height="24" rx="2.5" fill="#0D0D0D" />
+            <rect x="44.5" y="30" width="5" height="16" rx="2.5" fill="#0D0D0D" />
+          </svg>
+        </Box>
+      </Flex>
+    </Box>
+  );
+}
+
+// Welcome / sign-in entry — real screen auth/welcome + google_signin.
+function AuthWelcomeBlock() {
+  return (
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={320}>
+      <Flex direction="column" alignItems="center" gap={3}>
+        <LogoMark size={56} />
+        <Heading size="400">Welcome to MusicLinkd</Heading>
+        <Text size="100" color="subtle" align="center">The network behind the sound.</Text>
+      </Flex>
+      <Box marginTop={5}>
+        <Flex direction="column" gap={2}>
+          <ButtonSocial service="google" type="continue" />
+          <Button text="Continue with phone" color="red" fullWidth />
+          <Button text="Use email instead" color="transparent" fullWidth />
+        </Flex>
+      </Box>
+      <Box marginTop={4}>
+        <Text size="100" color="subtle" align="center">
+          By continuing you agree to the Terms and Privacy Policy.
+        </Text>
+      </Box>
+    </Box>
+  );
+}
+
+// OTP verification — real screen auth/otp_verification with its four real
+// states. Gestalt has no OTP component (recorded in the Not built registry),
+// so the boxes are composed from Box + TextField-style inputs.
+function OtpVerificationBlock() {
+  const [state, setState] = useState<"entering" | "verifying" | "error" | "success">("entering");
+  const digits = state === "entering" ? ["4", "8", "2", "", "", ""] : ["4", "8", "2", "9", "1", "7"];
+  const border = state === "error" ? "#DC2626" : state === "success" ? "#22C55E" : "#ECECF1";
+  return (
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={320}>
+      <Heading size="400">Verify your number</Heading>
+      <Box marginTop={1} marginBottom={4}><Text size="100" color="subtle">Code sent to +91 98••• ••210</Text></Box>
+      <Flex gap={2} justifyContent="center">
+        {digits.map((d, i) => (
+          <Box key={i} width={40} height={48} rounding={2} display="flex" alignItems="center" justifyContent="center"
+            dangerouslySetInlineStyle={{ __style: { border: `2px solid ${border}`, background: "#fff" } }}>
+            <Text size="400" weight="bold">{d}</Text>
+          </Box>
+        ))}
+      </Flex>
+      <Box marginTop={4}>
+        {state === "verifying" && <Flex gap={2} alignItems="center" justifyContent="center"><Spinner show accessibilityLabel="Verifying" size="sm" /><Text size="100" color="subtle">Verifying…</Text></Flex>}
+        {state === "error" && <Text size="100" color="error" align="center">That code didn&apos;t match. Try again.</Text>}
+        {state === "success" && <Flex gap={1} alignItems="center" justifyContent="center"><Icon icon="check-circle-fill" accessibilityLabel="" color="success" size={14} /><Text size="100" color="success">Verified</Text></Flex>}
+        {state === "entering" && <Text size="100" color="subtle" align="center">Resend in 0:24</Text>}
+      </Box>
+      <Box marginTop={4}>
+        <SegmentedControl size="sm" items={["entering", "verifying", "error", "success"]}
+          selectedItemIndex={["entering", "verifying", "error", "success"].indexOf(state)}
+          onChange={({ activeIndex }) => setState((["entering", "verifying", "error", "success"] as const)[activeIndex])} />
+      </Box>
+    </Box>
+  );
+}
+
+// Email auth — real screen auth/email_auth, real signup/signin/loading/error.
+function EmailAuthBlock() {
+  const [mode, setMode] = useState<"signup" | "signin">("signup");
+  const [email, setEmail] = useState("");
+  const [pw, setPw] = useState("");
+  const bad = email.length > 0 && !email.includes("@");
+  return (
+    <Box borderStyle="sm" rounding={4} padding={5} maxWidth={320}>
+      <SegmentedControl items={["Sign up", "Sign in"]} selectedItemIndex={mode === "signup" ? 0 : 1}
+        onChange={({ activeIndex }) => setMode(activeIndex === 0 ? "signup" : "signin")} />
+      <Box marginTop={4}>
+        <Flex direction="column" gap={3}>
+          <TextField id="auth-email" label="Email" type="email" value={email}
+            onChange={({ value }) => setEmail(value)}
+            errorMessage={bad ? "Enter a valid email address" : undefined} />
+          <TextField id="auth-pw" label="Password" type="password" value={pw} onChange={({ value }) => setPw(value)} />
+        </Flex>
+      </Box>
+      <Box marginTop={4}>
+        <Button color="red" fullWidth disabled={!email || !pw || bad}
+          text={mode === "signup" ? "Create account" : "Sign in"} />
+      </Box>
+    </Box>
+  );
+}
+
 const BLOCKS: Block[] = [
   { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => <NavHeaderBlock /> },
   { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => <ArtistProfileBlock /> },
@@ -2884,6 +3070,11 @@ const BLOCKS: Block[] = [
   { name: "Stem mixer", description: "Ported from styleguide #mixer — per-stem mute with live level meters.", render: () => <StemMixerBlock /> },
   { name: "Brief wizard", description: "Ported from styleguide #pattern-brief-wizard — 8-step casting brief, dots jump.", render: () => <BriefWizardBlock /> },
   { name: "Textures & effects", description: "Ported from styleguide #vd-effects — real CSS backgrounds, not screenshots.", render: () => <TexturesBlock /> },
+  { name: "Splash artwork", description: "Real screen auth/splash — brand mark, wordmark, both real states.", render: () => <SplashBlock /> },
+  { name: "App icon & logo", description: "Real MusicLinkd mark at ship sizes, plus pink-field and monochrome variants.", render: () => <AppIconSetBlock /> },
+  { name: "Auth welcome", description: "Real screens auth/welcome + google_signin — real ButtonSocial.", render: () => <AuthWelcomeBlock /> },
+  { name: "OTP verification", description: "Real screen auth/otp_verification — all four real states, switchable.", render: () => <OtpVerificationBlock /> },
+  { name: "Email auth", description: "Real screen auth/email_auth — signup/signin, live validation.", render: () => <EmailAuthBlock /> },
   { name: "Onboarding wizard", description: "Multi-step with live progress bar, selectable chips, and a review step.", render: () => <OnboardingWizardBlock /> },
   { name: "Discovery hero card", description: "Image-led card with gradient scrim, live favourite toggle, rating.", render: () => <DiscoveryHeroCardBlock /> },
   { name: "Product card", description: "Marketplace rental card — media, copy stack, price + CTA row.", render: () => <ProductCardBlock /> },

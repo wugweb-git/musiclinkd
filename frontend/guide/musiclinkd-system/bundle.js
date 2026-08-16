@@ -43786,6 +43786,197 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", align: "center", children: f.n }) })
     ] }, f.n)) }) });
   }
+  function LogoMark({ size = 64 }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("svg", { viewBox: "0 0 64 64", width: size, height: size, role: "img", "aria-label": "MusicLinkd logo", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { width: "64", height: "64", rx: "16", fill: "#0D0D0D" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "16", y: "26", width: "5", height: "20", rx: "2.5", fill: "#FFFFFF" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "25.5", y: "16", width: "5", height: "32", rx: "2.5", fill: "#EA4C89" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "35", y: "22", width: "5", height: "24", rx: "2.5", fill: "#FFFFFF" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "44.5", y: "30", width: "5", height: "16", rx: "2.5", fill: "#EA4C89" })
+    ] });
+  }
+  function SplashBlock() {
+    const [state, setState] = (0, import_react2.useState)("loading");
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 300, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        BoxWithForwardRef,
+        {
+          rounding: 4,
+          overflow: "hidden",
+          height: 400,
+          position: "relative",
+          dangerouslySetInlineStyle: { __style: { background: "#0D0D0D" } },
+          children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            BoxWithForwardRef,
+            {
+              position: "absolute",
+              top: true,
+              left: true,
+              right: true,
+              bottom: true,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 4, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(LogoMark, { size: 72 }),
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(TextWithForwardRef, { size: "600", weight: "bold", color: "light", align: "center", children: [
+                  "MusicLink",
+                  /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { inline: true, size: "600", weight: "bold", color: "error", children: "d" })
+                ] }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "light", align: "center", children: state === "loading" ? "Loading\u2026" : "Resuming your session\u2026" }),
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Spinner, { show: true, accessibilityLabel: "Loading", color: "white" })
+              ] })
+            }
+          )
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 2, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        SegmentedControl,
+        {
+          size: "sm",
+          items: ["loading", "resuming"],
+          selectedItemIndex: state === "loading" ? 0 : 1,
+          onChange: ({ activeIndex }) => setState(activeIndex === 0 ? "loading" : "resuming_local_session")
+        }
+      ) })
+    ] });
+  }
+  function AppIconSetBlock() {
+    const sizes2 = [{ s: 96, l: "512 / store" }, { s: 64, l: "192 / launcher" }, { s: 44, l: "96 / notification" }, { s: 28, l: "48 / favicon" }];
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { maxWidth: 340, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "App icon" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 4, alignItems: "end", wrap: true, children: sizes2.map((z) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 1, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(LogoMark, { size: z.s }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: z.l })
+      ] }, z.l)) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 5, marginBottom: 3, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { weight: "bold", children: "Variants" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 3, alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { rounding: 3, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(LogoMark, { size: 56 }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          BoxWithForwardRef,
+          {
+            width: 56,
+            height: 56,
+            rounding: 3,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            dangerouslySetInlineStyle: { __style: { background: "var(--ml-accent)" } },
+            children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("svg", { viewBox: "0 0 64 64", width: 34, height: 34, "aria-hidden": "true", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "16", y: "26", width: "5", height: "20", rx: "2.5", fill: "#FFFFFF" }),
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "25.5", y: "16", width: "5", height: "32", rx: "2.5", fill: "#FFFFFF" }),
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "35", y: "22", width: "5", height: "24", rx: "2.5", fill: "#FFFFFF" }),
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "44.5", y: "30", width: "5", height: "16", rx: "2.5", fill: "#FFFFFF" })
+            ] })
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { width: 56, height: 56, rounding: 3, display: "flex", alignItems: "center", justifyContent: "center", color: "secondary", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("svg", { viewBox: "0 0 64 64", width: 34, height: 34, "aria-hidden": "true", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "16", y: "26", width: "5", height: "20", rx: "2.5", fill: "#0D0D0D" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "25.5", y: "16", width: "5", height: "32", rx: "2.5", fill: "#0D0D0D" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "35", y: "22", width: "5", height: "24", rx: "2.5", fill: "#0D0D0D" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("rect", { x: "44.5", y: "30", width: "5", height: "16", rx: "2.5", fill: "#0D0D0D" })
+        ] }) })
+      ] })
+    ] });
+  }
+  function AuthWelcomeBlock() {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 320, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", alignItems: "center", gap: 3, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(LogoMark, { size: 56 }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: "Welcome to MusicLinkd" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", align: "center", children: "The network behind the sound." })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 5, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", gap: 2, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonSocialWithForwardRef, { service: "google", type: "continue" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Continue with phone", color: "red", fullWidth: true }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ButtonWithForwardRef, { text: "Use email instead", color: "transparent", fullWidth: true })
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", align: "center", children: "By continuing you agree to the Terms and Privacy Policy." }) })
+    ] });
+  }
+  function OtpVerificationBlock() {
+    const [state, setState] = (0, import_react2.useState)("entering");
+    const digits = state === "entering" ? ["4", "8", "2", "", "", ""] : ["4", "8", "2", "9", "1", "7"];
+    const border2 = state === "error" ? "#DC2626" : state === "success" ? "#22C55E" : "#ECECF1";
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 320, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Heading, { size: "400", children: "Verify your number" }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 1, marginBottom: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Code sent to +91 98\u2022\u2022\u2022 \u2022\u2022210" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(FlexWithForwardRef, { gap: 2, justifyContent: "center", children: digits.map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        BoxWithForwardRef,
+        {
+          width: 40,
+          height: 48,
+          rounding: 2,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          dangerouslySetInlineStyle: { __style: { border: `2px solid ${border2}`, background: "#fff" } },
+          children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "400", weight: "bold", children: d })
+        },
+        i
+      )) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { marginTop: 4, children: [
+        state === "verifying" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 2, alignItems: "center", justifyContent: "center", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Spinner, { show: true, accessibilityLabel: "Verifying", size: "sm" }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", children: "Verifying\u2026" })
+        ] }),
+        state === "error" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "error", align: "center", children: "That code didn't match. Try again." }),
+        state === "success" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { gap: 1, alignItems: "center", justifyContent: "center", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Icon, { icon: "check-circle-fill", accessibilityLabel: "", color: "success", size: 14 }),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "success", children: "Verified" })
+        ] }),
+        state === "entering" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextWithForwardRef, { size: "100", color: "subtle", align: "center", children: "Resend in 0:24" })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        SegmentedControl,
+        {
+          size: "sm",
+          items: ["entering", "verifying", "error", "success"],
+          selectedItemIndex: ["entering", "verifying", "error", "success"].indexOf(state),
+          onChange: ({ activeIndex }) => setState(["entering", "verifying", "error", "success"][activeIndex])
+        }
+      ) })
+    ] });
+  }
+  function EmailAuthBlock() {
+    const [mode, setMode] = (0, import_react2.useState)("signup");
+    const [email, setEmail] = (0, import_react2.useState)("");
+    const [pw, setPw] = (0, import_react2.useState)("");
+    const bad = email.length > 0 && !email.includes("@");
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(BoxWithForwardRef, { borderStyle: "sm", rounding: 4, padding: 5, maxWidth: 320, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        SegmentedControl,
+        {
+          items: ["Sign up", "Sign in"],
+          selectedItemIndex: mode === "signup" ? 0 : 1,
+          onChange: ({ activeIndex }) => setMode(activeIndex === 0 ? "signup" : "signin")
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(FlexWithForwardRef, { direction: "column", gap: 3, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          TextFieldWithForwardRef,
+          {
+            id: "auth-email",
+            label: "Email",
+            type: "email",
+            value: email,
+            onChange: ({ value }) => setEmail(value),
+            errorMessage: bad ? "Enter a valid email address" : void 0
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TextFieldWithForwardRef, { id: "auth-pw", label: "Password", type: "password", value: pw, onChange: ({ value }) => setPw(value) })
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BoxWithForwardRef, { marginTop: 4, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+        ButtonWithForwardRef,
+        {
+          color: "red",
+          fullWidth: true,
+          disabled: !email || !pw || bad,
+          text: mode === "signup" ? "Create account" : "Sign in"
+        }
+      ) })
+    ] });
+  }
   var BLOCKS = [
     { name: "Navigation header", description: "Brand + real SearchField + notifications + avatar.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(NavHeaderBlock, {}) },
     { name: "Artist profile card", description: "Avatar, tags, and a real toggling Follow button.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ArtistProfileBlock, {}) },
@@ -43840,6 +44031,11 @@ ${useThemeToStyles({ languageMode, forceTheme })} }`
     { name: "Stem mixer", description: "Ported from styleguide #mixer \u2014 per-stem mute with live level meters.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(StemMixerBlock, {}) },
     { name: "Brief wizard", description: "Ported from styleguide #pattern-brief-wizard \u2014 8-step casting brief, dots jump.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(BriefWizardBlock, {}) },
     { name: "Textures & effects", description: "Ported from styleguide #vd-effects \u2014 real CSS backgrounds, not screenshots.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TexturesBlock, {}) },
+    { name: "Splash artwork", description: "Real screen auth/splash \u2014 brand mark, wordmark, both real states.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SplashBlock, {}) },
+    { name: "App icon & logo", description: "Real MusicLinkd mark at ship sizes, plus pink-field and monochrome variants.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(AppIconSetBlock, {}) },
+    { name: "Auth welcome", description: "Real screens auth/welcome + google_signin \u2014 real ButtonSocial.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(AuthWelcomeBlock, {}) },
+    { name: "OTP verification", description: "Real screen auth/otp_verification \u2014 all four real states, switchable.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(OtpVerificationBlock, {}) },
+    { name: "Email auth", description: "Real screen auth/email_auth \u2014 signup/signin, live validation.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(EmailAuthBlock, {}) },
     { name: "Onboarding wizard", description: "Multi-step with live progress bar, selectable chips, and a review step.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(OnboardingWizardBlock, {}) },
     { name: "Discovery hero card", description: "Image-led card with gradient scrim, live favourite toggle, rating.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(DiscoveryHeroCardBlock, {}) },
     { name: "Product card", description: "Marketplace rental card \u2014 media, copy stack, price + CTA row.", render: () => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ProductCardBlock, {}) },
