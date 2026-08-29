@@ -96,6 +96,16 @@
         "source": "/guide/musiclinkd-system/**",
         "destination": "/guide",
         "type": 301
+      },
+      {
+        "source": "/guide/brandkit",
+        "destination": "/guide#brand",
+        "type": 301
+      },
+      {
+        "source": "/guide/brandkit/**",
+        "destination": "/guide#brand",
+        "type": 301
       }
     ]
   },

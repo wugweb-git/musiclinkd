@@ -701,6 +701,35 @@ const html = `<!doctype html>
     </figure>`).join("")}
   </div>
 
+  <h3 style="margin-top:var(--space-4)">Logo usage</h3>
+  <ul class="ml-lede" style="max-width:64ch">
+    ${tokens.brand.logoRules.map((r) => `<li>${esc(r)}</li>`).join("")}
+  </ul>
+
+  <h3 style="margin-top:var(--space-4)">Voice</h3>
+  <p class="ml-lede" style="max-width:64ch"><b>${esc(tokens.brand.voice)}</b></p>
+
+  <h3 style="margin-top:var(--space-4)">Typeface &amp; weights</h3>
+  <div class="g-demo">
+    ${Object.entries(tokens.brand.type).map(([role, t]) => `<div style="margin-bottom:var(--space-4)">
+      <div class="ml-row__meta"><code>--font-${role}</code> · ${esc(t.family)} · ${esc(t.use)}</div>
+      <div style="font-family:'${t.family}',sans-serif;font-size:28px;line-height:1.15;margin-top:var(--space-2)">
+        ${t.weights.map((w) => `<div style="font-weight:${w}">${w} — MusicLinkd, the professional network for music</div>`).join("")}
+      </div></div>`).join("")}
+  </div>
+
+  <h3 style="margin-top:var(--space-4)">Brand expression palette</h3>
+  <p class="ml-lede" style="max-width:64ch">
+    <b>Marketing only — not the UI palette.</b> The colours under Foundations are
+    what the product renders; these five are what the brand looks like in a
+    campaign. Kept apart on purpose: two pinks and two blacks in one palette
+    guarantees the wrong one gets picked, so a screen never reaches for these
+    and a poster never reaches for the UI palette.
+  </p>
+  <div class="g-swatches">${Object.entries(f.brandColor).filter(([k]) => !k.startsWith("$"))
+    .map(([k, v]) => swatch("brand-" + k.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase(),
+      v.$value, (v.$description || "").split(".")[0])).join("")}</div>
+
   <h2 class="g-h" id="foundations">Foundations</h2>
   <p class="ml-lede" style="max-width:64ch">${esc(tokens.meta.palette.$description.split(".")[1])}.</p>
 

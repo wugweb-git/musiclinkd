@@ -72,6 +72,11 @@ rsync -a --exclude='index.html' --exclude='index.txt' --exclude='404.html' admin
 echo "==> Copying frontend/guide/ design-system reference into dist/guide/"
 # rsync with excludes, not cp -r: a blanket copy shipped 180MB to Hosting.
 #
+# brandkit/ is excluded as of 2026-08-30: its content — the two brand colours,
+# the Inter Tight / Inter weights, the logo inventory and the voice line — is
+# now generated into /guide#brand from brand/README.md and brand/assets/, so
+# the standalone page was a second place the brand was defined. Its URL 301s.
+#
 # Also excluded, all of it reachable by nobody:
 #   _Music Genres…Apple Music_files  a saved Apple Music web page, 5.8MB of
 #                                    someone else's JS and fonts, referenced by
@@ -95,6 +100,7 @@ rsync -a \
   --exclude='node_modules/' \
   --exclude='gestalt/' \
   --exclude='musiclinkd-system/' \
+  --exclude='brandkit/' \
   --exclude='_Music*' \
   --exclude='icons/' \
   --exclude='testdir.tmp/' \

@@ -105,6 +105,14 @@ for (const [key, tok] of Object.entries(f.color)) {
   emit(`color-${kebab(key)}`, tok.$value, short(tok.$description));
 }
 
+const productColourCount = names.size;   // colours emitted so far
+section("Brand expression — marketing only, NOT the UI palette");
+for (const [key, tok] of Object.entries(f.brandColor)) {
+  if (key.startsWith("$")) continue;
+  emit(`brand-${kebab(key)}`, tok.$value, short(tok.$description));
+}
+const brandColourCount = names.size - productColourCount;
+
 section("Spacing — 4-step exponential (r=2)");
 for (const k of scale(f.space, "space")) emit(`space-${k}`, f.space[k].$web);
 
@@ -253,7 +261,8 @@ if (CHECK) {
     writeFileSync(out, css);
     console.log(`build-tokens: ${String(names.size).padStart(3)} tokens -> ${out.replace(ROOT + "/", "")}`);
   }
-  console.log(`build-tokens: ceiling ${CEILING}`);
+  console.log(`build-tokens: ${names.size} tokens (ceiling ${CEILING}) — ` +
+    `${productColourCount} product colours, ${brandColourCount} brand-expression colours`);
 }
 
 /* ── util ──────────────────────────────────────────────────────────────── */

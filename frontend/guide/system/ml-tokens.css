@@ -4,7 +4,7 @@
  * Source:    frontend/guide/tokens/tokens.json  (v9.0.0)
  * Regenerate: node scripts/build-tokens.mjs
  *
- * 56 tokens, ceiling 60. The previous hand-maintained system
+ * 61 tokens, ceiling 66. The previous hand-maintained system
  * had reached 248 custom properties in a single :root, of which every value
  * past the 4-step core was an exact duplicate under a second name.
  *
@@ -27,6 +27,13 @@
   --color-success: #22C55E;
   --color-warning: #F59E0B;
   --color-error: #DC2626;
+
+  /* Brand expression — marketing only, NOT the UI palette */
+  --brand-warm-pink: #FF005C; /* Brand pink */
+  --brand-black: #141621; /* Brand black, faintly blue */
+  --brand-white: #FFFFFF;
+  --brand-dark-gray: #4F5059;
+  --brand-light-gray: #C4C5C8;
 
   /* Spacing — 4-step exponential (r=2) */
   --space-1: 4px;
