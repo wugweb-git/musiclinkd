@@ -80,7 +80,7 @@
 <nav class="g-nav" aria-label="Sections"><ul>
   <li><a href="#foundations">Foundations</a></li>
   <li><a href="#core">Core · 37</a></li>
-  <li><a href="#widgets">Widgets · 33</a></li>
+  <li><a href="#widgets">Widgets · 46</a></li>
   <li><a href="#motion">Motion</a></li>
   <li><a href="#patterns">Patterns · 52</a></li>
   <li><a href="#icons">Icons · 423</a></li>
@@ -100,8 +100,8 @@
     </p>
     <div class="g-row" style="margin-top:var(--space-3)">
       <span class="ml-badge">56 tokens</span>
-      <span class="ml-badge">70 sections</span>
-      <span class="ml-badge">288 selectors</span>
+      <span class="ml-badge">83 sections</span>
+      <span class="ml-badge">346 selectors</span>
       <span class="ml-badge">423 icons</span>
       <span class="ml-badge ml-badge--accent">Light only</span>
     </div>
@@ -657,7 +657,7 @@
       <code>.ml-btn-group</code></details>
   </section>
 
-  <h2 class="g-h" id="widgets">Widgets · 33</h2>
+  <h2 class="g-h" id="widgets">Widgets · 46</h2>
   <section class="g-comp" id="c-app-shell">
     <div class="g-comp__head">
       <h3>app shell</h3>
@@ -1140,6 +1140,228 @@
     <details class="g-sel"><summary>9 selectors</summary>
       <code>.ml-post</code> <code>.ml-post__head</code> <code>.ml-post__who</code> <code>.ml-post__name</code> <code>.ml-post__meta</code> <code>.ml-post__body</code> <code>.ml-post__media</code> <code>.ml-post__actions</code> <code>.ml-post__action</code></details>
   </section>
+<section class="g-comp" id="c-opportunity-card">
+    <div class="g-comp__head">
+      <h3>opportunity card</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    <p class="ml-lede">Widget_Directory: OpportunityCard · opportunities flow + Discover</p>
+    <div class="g-demo"><a class="ml-opportunity-card" href="#c-opportunity-card" style="max-width:340px">
+    <span class="ml-opportunity-card__head"><span><span class="ml-opportunity-card__title">Bassist for a 5-track indie EP</span>
+    <span class="ml-opportunity-card__by">Monsoon Sessions · Mumbai</span></span>
+    <span class="ml-status ml-status--success">Paid</span></span>
+    <p class="ml-opportunity-card__body">Studio dates in March. Fretless preferred, not required.</p>
+    <span class="ml-opportunity-card__foot"><span class="ml-opportunity-card__closes is-soon">Closes in 3 days</span>
+    <span class="ml-opportunity-card__budget">₹40,000</span></span></a></div>
+    <details class="g-sel"><summary>8 selectors</summary>
+      <code>.ml-opportunity-card</code> <code>.ml-opportunity-card__head</code> <code>.ml-opportunity-card__title</code> <code>.ml-opportunity-card__by</code> <code>.ml-opportunity-card__body</code> <code>.ml-opportunity-card__foot</code> <code>.ml-opportunity-card__budget</code> <code>.ml-opportunity-card__closes</code></details>
+  </section>
+<section class="g-comp" id="c-application-card">
+    <div class="g-comp__head">
+      <h3>application card</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    <p class="ml-lede">The applicant's side of an opportunity: what you sent and where it stands.</p>
+    <div class="g-demo"><a class="ml-application-card" href="#c-application-card" style="max-width:340px">
+    <img class="ml-avatar" src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" />
+    <span class="ml-application-card__body"><span class="ml-application-card__title">Bassist — Monsoon Sessions</span>
+    <span class="ml-application-card__meta">Applied 12 Aug · portfolio sent</span>
+    <span class="ml-application-card__foot"><span class="ml-status ml-status--warning">Shortlisted</span>
+    <span class="ml-row__meta">2 of 14</span></span></span></a></div>
+    <details class="g-sel"><summary>5 selectors</summary>
+      <code>.ml-application-card</code> <code>.ml-application-card__body</code> <code>.ml-application-card__title</code> <code>.ml-application-card__meta</code> <code>.ml-application-card__foot</code></details>
+  </section>
+<section class="g-comp" id="c-band-card">
+    <div class="g-comp__head">
+      <h3>band card</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    <p class="ml-lede">A band is a group, so the facepile is the identity — not one avatar.</p>
+    <div class="g-demo"><a class="ml-band-card" href="#c-band-card"><div class="ml-band-card__media"><img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" /></div>
+    <div class="ml-band-card__body"><div class="ml-band-card__name">The Local Train</div>
+    <div class="ml-band-card__meta">Indie Rock · Delhi NCR · 4 members</div>
+    <div class="ml-facepile"><img src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" /><img src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" /><img src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" /></div></div></a></div>
+    <details class="g-sel"><summary>5 selectors</summary>
+      <code>.ml-band-card</code> <code>.ml-band-card__media</code> <code>.ml-band-card__body</code> <code>.ml-band-card__name</code> <code>.ml-band-card__meta</code></details>
+  </section>
+<section class="g-comp" id="c-rating">
+    <div class="g-comp__head">
+      <h3>rating</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    <p class="ml-lede">Used on nearly every card. A number first, stars second: the number is what people compare, and it survives greyscale and a screen reader.</p>
+    <div class="g-demo"><div class="g-row"><span class="ml-rating"><span class="ml-rating__score">4.9</span>
+    <span class="ml-rating__stars">★★★★★</span><span class="ml-rating__count">(128)</span></span>
+    <span class="ml-rating"><span class="ml-rating__score">4.4</span>
+    <span class="ml-rating__stars">★★★★☆</span><span class="ml-rating__count">(52)</span></span></div></div>
+    <details class="g-sel"><summary>4 selectors</summary>
+      <code>.ml-rating</code> <code>.ml-rating__score</code> <code>.ml-rating__stars</code> <code>.ml-rating__count</code></details>
+  </section>
+<section class="g-comp" id="c-credit-row">
+    <div class="g-comp__head">
+      <h3>credit row</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    <p class="ml-lede">A verified credit: who did what on a release, and whether it is confirmed. The confirmation state is the whole point of the Credits Trust Engine.</p>
+    <div class="g-demo"><div style="max-width:340px"><div class="ml-credit"><img class="ml-avatar ml-avatar--sm" src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" />
+    <span class="ml-credit__body"><span class="ml-credit__who">Rahul Iyer</span>
+    <span class="ml-credit__role">Mix Engineer</span></span>
+    <span class="ml-status ml-status--success">Verified</span></div>
+    <div class="ml-credit"><img class="ml-avatar ml-avatar--sm" src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" />
+    <span class="ml-credit__body"><span class="ml-credit__who">Mehek Kapoor</span>
+    <span class="ml-credit__role">Composer</span></span>
+    <span class="ml-status ml-status--neutral">Pending</span></div></div></div>
+    <details class="g-sel"><summary>4 selectors</summary>
+      <code>.ml-credit</code> <code>.ml-credit__body</code> <code>.ml-credit__who</code> <code>.ml-credit__role</code></details>
+  </section>
+<section class="g-comp" id="c-order-summary">
+    <div class="g-comp__head">
+      <h3>order summary</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    <p class="ml-lede">Line items with a total. Promised in the Flow 7 plan and never built; the booking flow needs it too. The total is separated by a rule and set in the display face, because it is the number people actually read.</p>
+    <div class="g-demo"><div class="ml-summary" style="max-width:340px">
+    <div class="ml-summary__row"><span>Studio A · 3 hrs</span><span>₹9,600</span></div>
+    <div class="ml-summary__row"><span>Engineer</span><span>₹3,000</span></div>
+    <div class="ml-summary__row"><span>Platform fee</span><span>₹640</span></div>
+    <div class="ml-summary__row ml-summary__row--total"><span>Total</span><span>₹13,240</span></div>
+    <p class="ml-summary__note">Estimate — payment is not collected in this preview.</p></div></div>
+    <details class="g-sel"><summary>4 selectors</summary>
+      <code>.ml-summary</code> <code>.ml-summary__row</code> <code>.ml-summary__row--total</code> <code>.ml-summary__note</code></details>
+  </section>
+<section class="g-comp" id="c-swipe-deck">
+    <div class="g-comp__head">
+      <h3>swipe deck</h3>
+      <span class="g-file">ml-widgets.css</span>
+      <span class="ml-badge">Compose · a Box with draggable + animateTo</span>
+    </div>
+    <p class="ml-lede">Tinder-style discovery. Stacked cards with the next two peeking, so the deck reads as a deck rather than a single card. Drag distance is bound to --gesture-swipe-threshold rather than a literal, which is what the old SwipeDeckBlock hardcoded in App.tsx.</p>
+    <div class="g-demo"><div><div class="ml-deck">
+    <div class="ml-deck__card"><img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" /></div>
+    <div class="ml-deck__card"><img src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" />
+      <div class="ml-deck__body"><div class="ml-deck__name">Ananya Sharma</div>
+      <div class="ml-deck__meta">Playback Vocalist · Mumbai</div></div></div></div>
+    <div class="ml-deck__actions">
+      <button class="ml-deck__btn" aria-label="Skip"><svg width="20" height="20" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m15.18 12 7.16-7.16a2.25 2.25 0 1 0-3.18-3.18L12 8.82 4.84 1.66a2.25 2.25 0 1 0-3.18 3.18L8.82 12l-7.16 7.16a2.25 2.25 0 1 0 3.18 3.18L12 15.18l7.16 7.16a2.24 2.24 0 0 0 3.18 0c.88-.88.88-2.3 0-3.18z"/></svg></button>
+      <button class="ml-deck__btn ml-deck__btn--yes" aria-label="Connect"><svg width="20" height="20" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></button></div></div></div>
+    <details class="g-sel"><summary>8 selectors</summary>
+      <code>.ml-deck</code> <code>.ml-deck__card</code> <code>.ml-deck__body</code> <code>.ml-deck__name</code> <code>.ml-deck__meta</code> <code>.ml-deck__actions</code> <code>.ml-deck__btn</code> <code>.ml-deck__btn--yes</code></details>
+  </section>
+<section class="g-comp" id="c-time-picker">
+    <div class="g-comp__head">
+      <h3>time picker</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    <p class="ml-lede">Booking picks a slot, not an arbitrary clock time — so this is a list of real availability, not a dial. A dial would imply any time is bookable.</p>
+    <div class="g-demo"><div class="ml-slots" style="max-width:340px">
+    <button class="ml-slot">09:00</button><button class="ml-slot">10:00</button><button class="ml-slot" aria-pressed="true">11:00</button><button class="ml-slot">12:00</button><button class="ml-slot" disabled>14:00</button><button class="ml-slot">15:00</button><button class="ml-slot">16:00</button><button class="ml-slot">17:00</button></div></div>
+    <details class="g-sel"><summary>2 selectors</summary>
+      <code>.ml-slots</code> <code>.ml-slot</code></details>
+  </section>
+<section class="g-comp" id="c-drawer">
+    <div class="g-comp__head">
+      <h3>drawer</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    <p class="ml-lede">Side panel. Distinct from .ml-sheet: a sheet is a decision about the current screen, a drawer is navigation away from it.</p>
+    <div class="g-demo"><div class="g-frame" style="position:relative;height:220px;overflow:hidden">
+    <div class="ml-drawer is-open" style="position:absolute;padding-top:0">
+      <div class="ml-drawer__body"><div class="ml-eyebrow">MusicLinkd</div>
+      <a class="ml-row" href="#c-drawer"><span class="ml-row__body"><span class="ml-row__title">Your profile</span></span></a>
+      <a class="ml-row" href="#c-drawer"><span class="ml-row__body"><span class="ml-row__title">Settings</span></span></a>
+      <a class="ml-row" href="#c-drawer"><span class="ml-row__body"><span class="ml-row__title">Help</span></span></a></div></div></div></div>
+    <details class="g-sel"><summary>2 selectors</summary>
+      <code>.ml-drawer</code> <code>.ml-drawer__body</code></details>
+  </section>
+<section class="g-comp" id="c-video">
+    <div class="g-comp__head">
+      <h3>video</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    
+    <div class="g-demo"><div class="ml-video" style="max-width:340px"><img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" />
+    <button class="ml-video__play" aria-label="Play"><svg width="20" height="20" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22.62 9.48 8.63.48A3 3 0 0 0 4 3v18a3 3 0 0 0 4.63 2.52l14-9a3 3 0 0 0 0-5.04"/></svg></button>
+    <span class="ml-video__time">2:14</span></div></div>
+    <details class="g-sel"><summary>3 selectors</summary>
+      <code>.ml-video</code> <code>.ml-video__play</code> <code>.ml-video__time</code></details>
+  </section>
+<section class="g-comp" id="c-stem-mixer">
+    <div class="g-comp__head">
+      <h3>stem mixer</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    <p class="ml-lede">Per-track level and mute for a multi-stem preview. Genuinely music-specific and the reason a generic component library cannot cover this product.</p>
+    <div class="g-demo"><div class="ml-mixer" style="max-width:340px">
+    <div class="ml-mixer__track">
+      <span class="ml-mixer__name">Vocals</span>
+      <input class="ml-slider ml-mixer__level" type="range" min="0" max="100" value="78" aria-label="Vocals level" />
+      <button class="ml-mixer__mute" aria-label="Mute Vocals"><svg width="14" height="14" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2 7.94h.85L12 17.09V23l-7-6.1v.04H2a2 2 0 0 1-2-2v-5c0-1.1.9-2 2-2M24 12c0 1.97-.47 3.86-1.36 5.55l-1.88-1.87a9.5 9.5 0 0 0-2.05-10.4 1.25 1.25 0 0 1 1.77-1.77A12 12 0 0 1 24 12m-2.45 7.3c.61.6.6 1.6-.03 2.22-.62.63-1.62.64-2.23.03L2.45 4.71c-.61-.61-.6-1.6.03-2.23a1.6 1.6 0 0 1 2.23-.03zM19 12q0 .87-.2 1.7l-2.34-2.33a4.5 4.5 0 0 0-1.28-2.55 1.25 1.25 0 0 1 1.77-1.77A7 7 0 0 1 19 12M12 1v5.91L9.04 3.95z"/></svg></button>
+    </div><div class="ml-mixer__track">
+      <span class="ml-mixer__name">Guitar</span>
+      <input class="ml-slider ml-mixer__level" type="range" min="0" max="100" value="62" aria-label="Guitar level" />
+      <button class="ml-mixer__mute" aria-label="Mute Guitar"><svg width="14" height="14" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2 7.94h.85L12 17.09V23l-7-6.1v.04H2a2 2 0 0 1-2-2v-5c0-1.1.9-2 2-2M24 12c0 1.97-.47 3.86-1.36 5.55l-1.88-1.87a9.5 9.5 0 0 0-2.05-10.4 1.25 1.25 0 0 1 1.77-1.77A12 12 0 0 1 24 12m-2.45 7.3c.61.6.6 1.6-.03 2.22-.62.63-1.62.64-2.23.03L2.45 4.71c-.61-.61-.6-1.6.03-2.23a1.6 1.6 0 0 1 2.23-.03zM19 12q0 .87-.2 1.7l-2.34-2.33a4.5 4.5 0 0 0-1.28-2.55 1.25 1.25 0 0 1 1.77-1.77A7 7 0 0 1 19 12M12 1v5.91L9.04 3.95z"/></svg></button>
+    </div><div class="ml-mixer__track">
+      <span class="ml-mixer__name">Bass</span>
+      <input class="ml-slider ml-mixer__level" type="range" min="0" max="100" value="55" aria-label="Bass level" />
+      <button class="ml-mixer__mute" aria-label="Mute Bass" aria-pressed="true"><svg width="14" height="14" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2 7.94h.85L12 17.09V23l-7-6.1v.04H2a2 2 0 0 1-2-2v-5c0-1.1.9-2 2-2M24 12c0 1.97-.47 3.86-1.36 5.55l-1.88-1.87a9.5 9.5 0 0 0-2.05-10.4 1.25 1.25 0 0 1 1.77-1.77A12 12 0 0 1 24 12m-2.45 7.3c.61.6.6 1.6-.03 2.22-.62.63-1.62.64-2.23.03L2.45 4.71c-.61-.61-.6-1.6.03-2.23a1.6 1.6 0 0 1 2.23-.03zM19 12q0 .87-.2 1.7l-2.34-2.33a4.5 4.5 0 0 0-1.28-2.55 1.25 1.25 0 0 1 1.77-1.77A7 7 0 0 1 19 12M12 1v5.91L9.04 3.95z"/></svg></button>
+    </div><div class="ml-mixer__track">
+      <span class="ml-mixer__name">Drums</span>
+      <input class="ml-slider ml-mixer__level" type="range" min="0" max="100" value="70" aria-label="Drums level" />
+      <button class="ml-mixer__mute" aria-label="Mute Drums"><svg width="14" height="14" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2 7.94h.85L12 17.09V23l-7-6.1v.04H2a2 2 0 0 1-2-2v-5c0-1.1.9-2 2-2M24 12c0 1.97-.47 3.86-1.36 5.55l-1.88-1.87a9.5 9.5 0 0 0-2.05-10.4 1.25 1.25 0 0 1 1.77-1.77A12 12 0 0 1 24 12m-2.45 7.3c.61.6.6 1.6-.03 2.22-.62.63-1.62.64-2.23.03L2.45 4.71c-.61-.61-.6-1.6.03-2.23a1.6 1.6 0 0 1 2.23-.03zM19 12q0 .87-.2 1.7l-2.34-2.33a4.5 4.5 0 0 0-1.28-2.55 1.25 1.25 0 0 1 1.77-1.77A7 7 0 0 1 19 12M12 1v5.91L9.04 3.95z"/></svg></button>
+    </div></div></div>
+    <details class="g-sel"><summary>5 selectors</summary>
+      <code>.ml-mixer</code> <code>.ml-mixer__track</code> <code>.ml-mixer__name</code> <code>.ml-mixer__level</code> <code>.ml-mixer__mute</code></details>
+  </section>
+<section class="g-comp" id="c-editorial-layouts">
+    <div class="g-comp__head">
+      <h3>editorial layouts</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    <p class="ml-lede">Masonry, bento and split. Named because the styleguide had all three and they are genuinely different shapes, not one grid with options.</p>
+    <div class="g-demo"><div style="max-width:360px">
+    <div class="ml-row__meta">bento</div>
+    <div class="ml-bento" style="margin-bottom:var(--space-3)">
+      <div class="ml-card ml-card--padded"><b>Featured</b></div>
+      <div class="ml-card ml-card--padded"><b>Trending</b></div>
+      <div class="ml-card ml-card--padded"><b>Nearby</b></div></div>
+    <div class="ml-row__meta">masonry</div>
+    <div class="ml-masonry">
+      <div class="ml-card"><img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" style="width:100%;display:block" /></div>
+      <div class="ml-card ml-card--padded"><b>A note</b></div>
+      <div class="ml-card"><img src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" style="width:100%;display:block" /></div>
+      <div class="ml-card ml-card--padded"><b>Another</b></div></div></div></div>
+    <details class="g-sel"><summary>4 selectors</summary>
+      <code>.ml-masonry</code> <code>.ml-bento</code> <code>.ml-bento--dark</code> <code>.ml-split</code></details>
+  </section>
+<section class="g-comp" id="c-surface-effects">
+    <div class="g-comp__head">
+      <h3>surface effects</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    <p class="ml-lede">Restrained on purpose. The palette rule says the chrome is monochrome and the media carries the colour, so these adjust SURFACE, never hue: a frosted panel over media, a soft lift, and a paper grain. No coloured glows.</p>
+    <div class="g-demo"><div style="max-width:360px">
+    <div class="ml-media ml-media--wide" style="border-radius:var(--radius-2);position:relative">
+      <img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" />
+      <div class="ml-glass" style="position:absolute;left:var(--space-2);right:var(--space-2);bottom:var(--space-2);padding:var(--space-2);border-radius:var(--radius-1)">
+        <b>.ml-glass</b> — frosted panel over media</div></div>
+    <div class="ml-card ml-card--padded ml-grain ml-lift" style="margin-top:var(--space-2)">
+      <b>.ml-grain + .ml-lift</b>
+      <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Surface only — no coloured glows, because the chrome stays monochrome.</p></div></div></div>
+    <details class="g-sel"><summary>4 selectors</summary>
+      <code>.ml-glass</code> <code>.ml-glass--dark</code> <code>.ml-lift</code> <code>.ml-grain</code></details>
+  </section>
 
   <h2 class="g-h" id="motion">Motion</h2>
   <p class="ml-lede" style="max-width:64ch">
@@ -1448,10 +1670,10 @@
     hand-maintained and went stale; this one cannot.
   </p>
   <div class="g-demo">
-    <h3 style="margin:0 0 var(--space-2)">Widgets named but not built · 15 of 27</h3>
+    <h3 style="margin:0 0 var(--space-2)">Widgets named but not built · 14 of 27</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
       Named in <code>Widget_Directory.md</code> with no matching component in the system.</p>
-    <div class="ml-chip-wrap"><span class="ml-chip">RecommendedCollaboratorCard</span><span class="ml-chip">DiscoverySearchResultCard</span><span class="ml-chip">NetworkingFeed</span><span class="ml-chip">BandMembersWidget</span><span class="ml-chip">CollaboratorMatchWidget</span><span class="ml-chip">StudioVenueListItem</span><span class="ml-chip">FeaturedStudioCard</span><span class="ml-chip">StudioSpecWidget</span><span class="ml-chip">OpportunityCard</span><span class="ml-chip">ProjectCard</span><span class="ml-chip">RecentProjectCard</span><span class="ml-chip">TrackCard</span><span class="ml-chip">AudioPodcastDemoWidget</span><span class="ml-chip">HireContactModal</span><span class="ml-chip">WhatsAppShareSheet</span></div>
+    <div class="ml-chip-wrap"><span class="ml-chip">RecommendedCollaboratorCard</span><span class="ml-chip">DiscoverySearchResultCard</span><span class="ml-chip">NetworkingFeed</span><span class="ml-chip">BandMembersWidget</span><span class="ml-chip">CollaboratorMatchWidget</span><span class="ml-chip">StudioVenueListItem</span><span class="ml-chip">FeaturedStudioCard</span><span class="ml-chip">StudioSpecWidget</span><span class="ml-chip">ProjectCard</span><span class="ml-chip">RecentProjectCard</span><span class="ml-chip">TrackCard</span><span class="ml-chip">AudioPodcastDemoWidget</span><span class="ml-chip">HireContactModal</span><span class="ml-chip">WhatsAppShareSheet</span></div>
 
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Screens not yet on the system · 103</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0">

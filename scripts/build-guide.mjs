@@ -305,6 +305,87 @@ const DEMOS = {
       <button class="ml-post__action">${ic("speech", 16)} 7</button>
       <button class="ml-post__action">${ic("share", 16)} Share</button></div>
   </article></div>`,
+  "opportunity card": `<a class="ml-opportunity-card" href="#c-opportunity-card" style="max-width:340px">
+    <span class="ml-opportunity-card__head"><span><span class="ml-opportunity-card__title">Bassist for a 5-track indie EP</span>
+    <span class="ml-opportunity-card__by">Monsoon Sessions · Mumbai</span></span>
+    <span class="ml-status ml-status--success">Paid</span></span>
+    <p class="ml-opportunity-card__body">Studio dates in March. Fretless preferred, not required.</p>
+    <span class="ml-opportunity-card__foot"><span class="ml-opportunity-card__closes is-soon">Closes in 3 days</span>
+    <span class="ml-opportunity-card__budget">₹40,000</span></span></a>`,
+  "application card": `<a class="ml-application-card" href="#c-application-card" style="max-width:340px">
+    <img class="ml-avatar" src="${FACE}" alt="" />
+    <span class="ml-application-card__body"><span class="ml-application-card__title">Bassist — Monsoon Sessions</span>
+    <span class="ml-application-card__meta">Applied 12 Aug · portfolio sent</span>
+    <span class="ml-application-card__foot"><span class="ml-status ml-status--warning">Shortlisted</span>
+    <span class="ml-row__meta">2 of 14</span></span></span></a>`,
+  "band card": `<a class="ml-band-card" href="#c-band-card"><div class="ml-band-card__media"><img src="${PHOTO}" alt="" /></div>
+    <div class="ml-band-card__body"><div class="ml-band-card__name">The Local Train</div>
+    <div class="ml-band-card__meta">Indie Rock · Delhi NCR · 4 members</div>
+    <div class="ml-facepile"><img src="${FACE}" alt="" /><img src="${FACE}" alt="" /><img src="${FACE}" alt="" /></div></div></a>`,
+  "rating": `<div class="g-row"><span class="ml-rating"><span class="ml-rating__score">4.9</span>
+    <span class="ml-rating__stars">★★★★★</span><span class="ml-rating__count">(128)</span></span>
+    <span class="ml-rating"><span class="ml-rating__score">4.4</span>
+    <span class="ml-rating__stars">★★★★☆</span><span class="ml-rating__count">(52)</span></span></div>`,
+  "credit row": `<div style="max-width:340px"><div class="ml-credit"><img class="ml-avatar ml-avatar--sm" src="${FACE}" alt="" />
+    <span class="ml-credit__body"><span class="ml-credit__who">Rahul Iyer</span>
+    <span class="ml-credit__role">Mix Engineer</span></span>
+    <span class="ml-status ml-status--success">Verified</span></div>
+    <div class="ml-credit"><img class="ml-avatar ml-avatar--sm" src="${FACE}" alt="" />
+    <span class="ml-credit__body"><span class="ml-credit__who">Mehek Kapoor</span>
+    <span class="ml-credit__role">Composer</span></span>
+    <span class="ml-status ml-status--neutral">Pending</span></div></div>`,
+  "order summary": `<div class="ml-summary" style="max-width:340px">
+    <div class="ml-summary__row"><span>Studio A · 3 hrs</span><span>₹9,600</span></div>
+    <div class="ml-summary__row"><span>Engineer</span><span>₹3,000</span></div>
+    <div class="ml-summary__row"><span>Platform fee</span><span>₹640</span></div>
+    <div class="ml-summary__row ml-summary__row--total"><span>Total</span><span>₹13,240</span></div>
+    <p class="ml-summary__note">Estimate — payment is not collected in this preview.</p></div>`,
+  "swipe deck": `<div><div class="ml-deck">
+    <div class="ml-deck__card"><img src="${PHOTO}" alt="" /></div>
+    <div class="ml-deck__card"><img src="${FACE}" alt="" />
+      <div class="ml-deck__body"><div class="ml-deck__name">Ananya Sharma</div>
+      <div class="ml-deck__meta">Playback Vocalist · Mumbai</div></div></div></div>
+    <div class="ml-deck__actions">
+      <button class="ml-deck__btn" aria-label="Skip">${ic("cancel", 20)}</button>
+      <button class="ml-deck__btn ml-deck__btn--yes" aria-label="Connect">${ic("check", 20)}</button></div></div>`,
+  "time picker": `<div class="ml-slots" style="max-width:340px">
+    ${["09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00"]
+      .map((t, i) => `<button class="ml-slot"${i === 2 ? ' aria-pressed="true"' : ""}${i === 4 ? " disabled" : ""}>${t}</button>`).join("")}</div>`,
+  "drawer": `<div class="g-frame" style="position:relative;height:220px;overflow:hidden">
+    <div class="ml-drawer is-open" style="position:absolute;padding-top:0">
+      <div class="ml-drawer__body"><div class="ml-eyebrow">MusicLinkd</div>
+      <a class="ml-row" href="#c-drawer"><span class="ml-row__body"><span class="ml-row__title">Your profile</span></span></a>
+      <a class="ml-row" href="#c-drawer"><span class="ml-row__body"><span class="ml-row__title">Settings</span></span></a>
+      <a class="ml-row" href="#c-drawer"><span class="ml-row__body"><span class="ml-row__title">Help</span></span></a></div></div></div>`,
+  "video": `<div class="ml-video" style="max-width:340px"><img src="${PHOTO}" alt="" />
+    <button class="ml-video__play" aria-label="Play">${ic("play", 20)}</button>
+    <span class="ml-video__time">2:14</span></div>`,
+  "stem mixer": `<div class="ml-mixer" style="max-width:340px">
+    ${[["Vocals", 78], ["Guitar", 62], ["Bass", 55], ["Drums", 70]].map(([n, v], i) => `<div class="ml-mixer__track">
+      <span class="ml-mixer__name">${n}</span>
+      <input class="ml-slider ml-mixer__level" type="range" min="0" max="100" value="${v}" aria-label="${n} level" />
+      <button class="ml-mixer__mute" aria-label="Mute ${n}"${i === 2 ? ' aria-pressed="true"' : ""}>${ic("sound-slash", 14)}</button>
+    </div>`).join("")}</div>`,
+  "editorial layouts": `<div style="max-width:360px">
+    <div class="ml-row__meta">bento</div>
+    <div class="ml-bento" style="margin-bottom:var(--space-3)">
+      <div class="ml-card ml-card--padded"><b>Featured</b></div>
+      <div class="ml-card ml-card--padded"><b>Trending</b></div>
+      <div class="ml-card ml-card--padded"><b>Nearby</b></div></div>
+    <div class="ml-row__meta">masonry</div>
+    <div class="ml-masonry">
+      <div class="ml-card"><img src="${PHOTO}" alt="" style="width:100%;display:block" /></div>
+      <div class="ml-card ml-card--padded"><b>A note</b></div>
+      <div class="ml-card"><img src="${FACE}" alt="" style="width:100%;display:block" /></div>
+      <div class="ml-card ml-card--padded"><b>Another</b></div></div></div>`,
+  "surface effects": `<div style="max-width:360px">
+    <div class="ml-media ml-media--wide" style="border-radius:var(--radius-2);position:relative">
+      <img src="${PHOTO}" alt="" />
+      <div class="ml-glass" style="position:absolute;left:var(--space-2);right:var(--space-2);bottom:var(--space-2);padding:var(--space-2);border-radius:var(--radius-1)">
+        <b>.ml-glass</b> — frosted panel over media</div></div>
+    <div class="ml-card ml-card--padded ml-grain ml-lift" style="margin-top:var(--space-2)">
+      <b>.ml-grain + .ml-lift</b>
+      <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Surface only — no coloured glows, because the chrome stays monochrome.</p></div></div>`,
   "phone entry": `<div class="ml-field" style="max-width:340px"><label for="d-p">Mobile number</label>
     <div class="ml-phone"><span class="ml-phone__prefix">🇮🇳 +91</span>
     <input id="d-p" type="tel" placeholder="98765 43210" /></div></div>`,
