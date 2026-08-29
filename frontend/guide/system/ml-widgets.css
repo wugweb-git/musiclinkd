@@ -359,18 +359,21 @@
 /* it blocks Portfolio, Marketplace Create Listing, and Media Gallery.       */
 
 .ml-upload-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
-.ml-upload-grid__item { position: relative; aspect-ratio: 1/1; border-radius: var(--radius-1); overflow: hidden; background: var(--color-surface); }
-.ml-upload-grid__item img { width: 100%; height: 100%; object-fit: cover; }
-/* A DOCUMENTED EXCEPTION to the 48dp rule, and the only one in the system.
-   An expanded tap band does not work here: the parent .ml-upload-grid__item
-   sets overflow:hidden, which clips hit-testing as well as painting, so a
-   48dp band on a control pinned to the thumbnail's corner is cut off. Nor is
-   the geometry available — a 3-column grid on a 360dp screen gives ~104dp
-   thumbnails, and a 48dp control in each corner would cover most of the
-   image it is meant to let you see.
-   Mitigation: 32dp rather than 24dp, high contrast against the artwork, and
-   generous separation from other controls. Deleting a photo is also
-   recoverable, which is the case where a smaller target is defensible. */
+/* No overflow:hidden here. It would round the thumbnail, but it also clips
+   HIT-TESTING, which cut off the remove control's 48dp tap band and made that
+   control the one thing in the system that could not meet the target rule.
+   The image rounds itself instead, which achieves the same visual with no
+   clipping context. */
+.ml-upload-grid__item { position: relative; aspect-ratio: 1/1; border-radius: var(--radius-1); background: var(--color-surface); }
+.ml-upload-grid__item img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-1); display: block; }
+/* 32dp visual so three thumbnails still fit a 360dp row, with a 48dp tap band.
+   This was the system's last target failure: the band was being clipped by the
+   parent's overflow:hidden, which is now gone. Nothing in the system is
+   exempt from the 48dp rule. */
+.ml-upload-grid__remove::after {
+  content: ""; position: absolute; inset: 50% 50% auto auto;
+  width: var(--size-3); height: var(--size-3); transform: translate(50%, -50%);
+}
 .ml-upload-grid__remove {
   position: absolute; top: var(--space-1); right: var(--space-1);
   width: var(--size-1); height: var(--size-1); border: 0; border-radius: var(--radius-4);
