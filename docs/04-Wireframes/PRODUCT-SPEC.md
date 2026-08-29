@@ -42,7 +42,7 @@ Kept current, chronologically, so this file never overstates what's real.
 
 **2026-08-16 — brainstorming round:** Services-for-Talent (§5 Q2) — investigated the actual type and found `UserDoc.serviceOfferings` was never technically Business-only (flat interface, no enforced restriction) — recommended sharing the one field rather than duplicating it; still needs your final yes, not auto-applied. `opportunityType` taxonomy (D.6) — drafted a full 23-value flat list with `metadata.group` for the brief's 6 categories, following the existing sub-area/metadata convention rather than inventing a 3rd Firestore level; flagged a deliberate value-string overlap with `engineer_specialties`/`studio_services`. Part E (new) — audited the real Widget Directory against everything proposed in B/C/D: most needs already have a matching real widget (`MarketplaceCard`, `OpportunityCard`, `DiscoverySearchResultCard`, and the real Gestalt `DateRange` picker for rental dates); 5 genuine gaps proposed (`MediaUploadGrid`, `OfferThreadCard`, `TransactionStatusCard`, `ConversationContextHeader`, `ApplicationStatusCard`), kept out of the real `Widget_Directory.md`/`default-widgets.ts` deliberately since those files are verbatim-audited-from-Kotlin and these aren't. `MediaUploadGrid` is flagged as already blocking Portfolio today, independent of anything new here.
 
-**Proposed screen-number reservation, to keep this doc internally consistent:** Part A actually landed in code through `124`. Part B proposed (not yet implemented) `125`–`129`. Parts C and D below continue from `130` — reserved on paper only, not written to `default-screens.ts` yet.
+**2026-08-29 — Notion audit, doc cleanup, no schema/screen changes.** Diffed the live Notion mirror against this file and the actual code (`default-screens.ts`, `firestore.rules`, `taxonomy-seed.ts`). Confirmed 135 screens registered, all 5 new rule blocks (`blocks`/`profile_analytics`/`offers`/`marketplace_orders`/`opportunity_applications`) live in `firestore.rules` source, `opportunity_types` present in the seed file — matches this doc's claims, no drift. Found and fixed two real gaps in the Notion copy: §D.3 (Rules note) had been dropped during condensing, and §E.2's table had lost its `Category`/`Composition` columns. Also removed the paragraph that used to sit here — it said screens `125`–`135` were "reserved on paper only," which the Implementation Log two entries above it already contradicts (they were written to `default-screens.ts` days ago). **Still true and unchanged:** none of `121`–`135` are seeded into the live `flows/{flowId}/screens` Firestore collection yet — that's a manual admin-panel step, deliberately left for you to do yourself, not blocked on anything from this end.
 
 ---
 
@@ -159,7 +159,9 @@ Per the brief's own section 56 format.
 
 ## 7. Notion
 
-Not wired up — `plugin:design:notion` needs authorization in your claude.ai connector settings before I can push this there. Once connected, I can mirror this file into a Notion page directly; for now it's file-only.
+Live since 2026-08-16 — mirrored to a Notion page ("🎵 MusicLinkd — Product Spec") in Wugweb's Workspace, `https://app.notion.com/p/3cbbb710b9ab819b8d66dc0a90258a39`. This repo file is the source of truth for *this* document; the Notion page is a manually re-synced copy, last aligned 2026-08-29.
+
+**Companion doc (2026-08-29):** `docs/04-Wireframes/MASTER-REGISTRY.md`, mirrored to a separate Notion page, `https://app.notion.com/p/3cbbb710b9ab814293efca1d2d1ea8f0`. That's the full raw registry — all 24 flows, all 135 screens, all 34 schema types, all 27 widgets, all 29 taxonomy categories — where this file only narrates 4 flows in depth. **Sync direction is reversed for that doc, per your explicit instruction:** the Notion page is primary, the repo file is the mirror. Don't assume this file's repo-primary convention applies there too.
 
 ---
 
