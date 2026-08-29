@@ -18,10 +18,15 @@ firebase-debug.*.log
 # the live site (confirmed: not marketing photography, not referenced by any
 # page). Keeping this out of git history on purpose; remove this rule if you
 # actually want it versioned.
-/frontend/website/assets/img/behance/
-/frontend/website/assets/img/spotify/
-/frontend/website/assets/img/shazam/
-/frontend/website/assets/img/tinder/
+# NOTE 2026-08-29: the four rules here used to read behance/ spotify/ shazam/
+# tinder/ — folder names that do not exist on disk. scripts/build-hosting.sh
+# renames them on the way into dist/, so the source folders are numbered.
+# The rules therefore matched nothing and 279MB across 441 files sat untracked
+# AND unignored, one `git add -A` away from entering history.
+/frontend/website/assets/img/1/
+/frontend/website/assets/img/4/
+/frontend/website/assets/img/5/
+/frontend/website/assets/img/6/
 /frontend/website/assets/img/inspiration/
 # editorials/ and speakers/ are NO LONGER ignored: Flow 4's screens reference
 # them by path, so leaving them untracked meant Discover rendered correctly on
