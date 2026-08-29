@@ -110,6 +110,25 @@ function readGaps(sectionNames, patterns) {
   return gaps;
 }
 
+/** Brand marks, read from the folder. Each is placed on the ground it was
+ *  drawn for: a mark filled white or near-white needs ink behind it, one
+ *  filled dark needs paper. Detected from the file rather than a hand-kept
+ *  list, so dropping a new variant in the folder is enough to document it. */
+function readBrand() {
+  const dir = join(ROOT, "frontend/guide/brand/assets");
+  let files = [];
+  try { files = readdirSync(dir).filter((f) => f.endsWith(".svg")).sort(); } catch { return []; }
+  return files.map((f) => {
+    const svg = readFileSync(join(dir, f), "utf8");
+    const fills = [...svg.matchAll(/fill="(#[0-9A-Fa-f]{3,8}|white|black)"/g)].map((m) => m[1].toLowerCase());
+    const light = fills.filter((c) => c === "white" || /^#(f|e)/.test(c)).length;
+    const dark  = fills.filter((c) => c === "black" || /^#(0|1|2|3)/.test(c)).length;
+    return { file: f, name: f.replace(".svg", "").replace(/-/g, " "),
+             onDark: light > dark, bytes: svg.length };
+  });
+}
+
+const brand = readBrand();
 const patterns = readPatterns();
 const taxonomy = readTaxonomy();
 
@@ -612,6 +631,15 @@ const html = `<!doctype html>
             border: 1px solid var(--color-line); border-radius: var(--radius-1); font-size: 10px;
             color: var(--color-muted); text-align: center; overflow: hidden; }
   .g-icon svg { color: var(--color-ink); }
+  .g-brand { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-2); }
+  .g-mark { margin: 0; border: 1px solid var(--color-line); border-radius: var(--radius-2); overflow: hidden; }
+  .g-mark > img { display: block; width: 100%; height: 132px; object-fit: contain;
+                  padding: var(--space-3); background: var(--color-paper); box-sizing: border-box; }
+  .g-mark--dark > img { background: var(--color-ink); }
+  .g-mark figcaption { padding: var(--space-2); border-top: 1px solid var(--color-line);
+                       font-size: var(--type-1); }
+  .g-mark figcaption code { display: block; background: none; padding: 0; }
+  .g-mark figcaption span { color: var(--color-muted); }
   .g-track { position: relative; height: 40px; margin: var(--space-1) 0; border-radius: var(--radius-4);
              background: var(--color-surface); overflow: hidden; }
   .g-dot { position: absolute; top: 50%; left: 4px; width: 32px; height: 32px; margin-top: -16px;
@@ -629,6 +657,7 @@ const html = `<!doctype html>
 </head>
 <body>
 <nav class="g-nav" aria-label="Sections"><ul>
+  <li><a href="#brand">Brand</a></li>
   <li><a href="#foundations">Foundations</a></li>
   <li><a href="#core">Core · ${core.length}</a></li>
   <li><a href="#widgets">Widgets · ${widg.length}</a></li>
@@ -657,6 +686,20 @@ const html = `<!doctype html>
       <span class="ml-badge ml-badge--accent">Light only</span>
     </div>
   </header>
+
+  <h2 class="g-h" id="brand">Brand · ${brand.length}</h2>
+  <p class="ml-lede" style="max-width:64ch">
+    Every mark in <code>frontend/guide/brand/assets/</code>, each shown on the
+    ground it was drawn for — detected from the file's own fills, so dropping a
+    new variant into the folder documents it. The wordmark set in Inter Tight
+    (<code>.ml-wordmark</code>) is the type treatment; these are the artwork.
+  </p>
+  <div class="g-brand">
+    ${brand.map((b) => `<figure class="g-mark${b.onDark ? " g-mark--dark" : ""}">
+      <img src="/guide/brand/assets/${b.file}" alt="${esc(b.name)}" />
+      <figcaption><code>${b.file}</code><span>${b.onDark ? "on ink" : "on paper"} · ${Math.round(b.bytes / 1024)}KB</span></figcaption>
+    </figure>`).join("")}
+  </div>
 
   <h2 class="g-h" id="foundations">Foundations</h2>
   <p class="ml-lede" style="max-width:64ch">${esc(tokens.meta.palette.$description.split(".")[1])}.</p>

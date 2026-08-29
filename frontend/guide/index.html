@@ -61,6 +61,15 @@
             border: 1px solid var(--color-line); border-radius: var(--radius-1); font-size: 10px;
             color: var(--color-muted); text-align: center; overflow: hidden; }
   .g-icon svg { color: var(--color-ink); }
+  .g-brand { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-2); }
+  .g-mark { margin: 0; border: 1px solid var(--color-line); border-radius: var(--radius-2); overflow: hidden; }
+  .g-mark > img { display: block; width: 100%; height: 132px; object-fit: contain;
+                  padding: var(--space-3); background: var(--color-paper); box-sizing: border-box; }
+  .g-mark--dark > img { background: var(--color-ink); }
+  .g-mark figcaption { padding: var(--space-2); border-top: 1px solid var(--color-line);
+                       font-size: var(--type-1); }
+  .g-mark figcaption code { display: block; background: none; padding: 0; }
+  .g-mark figcaption span { color: var(--color-muted); }
   .g-track { position: relative; height: 40px; margin: var(--space-1) 0; border-radius: var(--radius-4);
              background: var(--color-surface); overflow: hidden; }
   .g-dot { position: absolute; top: 50%; left: 4px; width: 32px; height: 32px; margin-top: -16px;
@@ -78,6 +87,7 @@
 </head>
 <body>
 <nav class="g-nav" aria-label="Sections"><ul>
+  <li><a href="#brand">Brand</a></li>
   <li><a href="#foundations">Foundations</a></li>
   <li><a href="#core">Core · 37</a></li>
   <li><a href="#widgets">Widgets · 46</a></li>
@@ -106,6 +116,44 @@
       <span class="ml-badge ml-badge--accent">Light only</span>
     </div>
   </header>
+
+  <h2 class="g-h" id="brand">Brand · 9</h2>
+  <p class="ml-lede" style="max-width:64ch">
+    Every mark in <code>frontend/guide/brand/assets/</code>, each shown on the
+    ground it was drawn for — detected from the file's own fills, so dropping a
+    new variant into the folder documents it. The wordmark set in Inter Tight
+    (<code>.ml-wordmark</code>) is the type treatment; these are the artwork.
+  </p>
+  <div class="g-brand">
+    <figure class="g-mark g-mark--dark">
+      <img src="/guide/brand/assets/favicon-mark.svg" alt="favicon mark" />
+      <figcaption><code>favicon-mark.svg</code><span>on ink · 2KB</span></figcaption>
+    </figure><figure class="g-mark g-mark--dark">
+      <img src="/guide/brand/assets/logo-badge-inverse.svg" alt="logo badge inverse" />
+      <figcaption><code>logo-badge-inverse.svg</code><span>on ink · 22KB</span></figcaption>
+    </figure><figure class="g-mark g-mark--dark">
+      <img src="/guide/brand/assets/logo-dark-pill.svg" alt="logo dark pill" />
+      <figcaption><code>logo-dark-pill.svg</code><span>on ink · 11KB</span></figcaption>
+    </figure><figure class="g-mark g-mark--dark">
+      <img src="/guide/brand/assets/logo-lockup-black.svg" alt="logo lockup black" />
+      <figcaption><code>logo-lockup-black.svg</code><span>on ink · 8KB</span></figcaption>
+    </figure><figure class="g-mark g-mark--dark">
+      <img src="/guide/brand/assets/logo-lockup-grey.svg" alt="logo lockup grey" />
+      <figcaption><code>logo-lockup-grey.svg</code><span>on ink · 8KB</span></figcaption>
+    </figure><figure class="g-mark g-mark--dark">
+      <img src="/guide/brand/assets/logo-lockup-white.svg" alt="logo lockup white" />
+      <figcaption><code>logo-lockup-white.svg</code><span>on ink · 9KB</span></figcaption>
+    </figure><figure class="g-mark g-mark--dark">
+      <img src="/guide/brand/assets/logo-lockup-wide-caps.svg" alt="logo lockup wide caps" />
+      <figcaption><code>logo-lockup-wide-caps.svg</code><span>on ink · 7KB</span></figcaption>
+    </figure><figure class="g-mark g-mark--dark">
+      <img src="/guide/brand/assets/logo-watermark-stacked.svg" alt="logo watermark stacked" />
+      <figcaption><code>logo-watermark-stacked.svg</code><span>on ink · 12KB</span></figcaption>
+    </figure><figure class="g-mark">
+      <img src="/guide/brand/assets/mark-grey.svg" alt="mark grey" />
+      <figcaption><code>mark-grey.svg</code><span>on paper · 2KB</span></figcaption>
+    </figure>
+  </div>
 
   <h2 class="g-h" id="foundations">Foundations</h2>
   <p class="ml-lede" style="max-width:64ch"> Black, grey and white build every surface and control.</p>
