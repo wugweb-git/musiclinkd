@@ -28,6 +28,10 @@ firebase-debug.*.log
 /frontend/website/assets/img/5/
 /frontend/website/assets/img/6/
 /frontend/website/assets/img/inspiration/
+# A ~300MB local archive of the image folder above, referenced by no page and
+# not a web asset. It was untracked AND unignored, so `git add -A` would have
+# put 300MB into history permanently.
+/frontend/website/assets/img.zip
 # editorials/ and speakers/ are NO LONGER ignored: Flow 4's screens reference
 # them by path, so leaving them untracked meant Discover rendered correctly on
 # the machine that deployed it and showed broken images on every other clone.

@@ -42,10 +42,28 @@ mkdir -p dist
 # assets/img/{1,4,5,6} are 448 Behance CDN captures, Spotify/Shazam/Tinder
 # UI screenshots and app-store chrome kept as design reference. Nothing in the
 # deployed tree references them and they were 279MB of a 326MB deploy, served
-# publicly. editorials/, speakers/ and inspiration/ ARE referenced and ship.
+# publicly. assets/img.zip is a 300MB local archive of that same image folder,
+# referenced by no page — it was being served as a web asset.
+#
+# inspiration/ is 185 files / 15MB of which styleguide.html references exactly
+# FOUR, ~104KB, as gear thumbnails. Rather than ship 15MB for 104KB, the four
+# are derived from the markup here so the list cannot drift: add a fifth
+# reference to the styleguide and it ships automatically.
+INSPIRATION_KEEP=$(grep -ohE 'assets/img/inspiration/[a-zA-Z0-9]+\.(jpg|jpeg|png|webp)' \
+  frontend/guide/styleguide.html frontend/website/*.html 2>/dev/null | sort -u)
+INSPIRATION_RULES=()
+if [ -n "$INSPIRATION_KEEP" ]; then
+  INSPIRATION_RULES+=(--include='assets/img/inspiration/')
+  while IFS= read -r f; do INSPIRATION_RULES+=(--include="$f"); done <<< "$INSPIRATION_KEEP"
+fi
+INSPIRATION_RULES+=(--exclude='assets/img/inspiration/*')
+echo "    keeping $(printf '%s\n' "$INSPIRATION_KEEP" | grep -c . ) of $(ls frontend/website/assets/img/inspiration | wc -l | tr -d ' ') inspiration images"
+
 rsync -a \
   --exclude='assets/img/1/' --exclude='assets/img/4/' \
   --exclude='assets/img/5/' --exclude='assets/img/6/' \
+  "${INSPIRATION_RULES[@]}" \
+  --exclude='*.zip' \
   --exclude='.DS_Store' \
   frontend/website/ dist/
 rm -f dist/README.md "dist/index copy.html"

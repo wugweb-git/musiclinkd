@@ -1452,7 +1452,10 @@ input:checked+.slider:before{transform:translateX(20px)}
 <title>MusicLinkd Design System — Consolidated Master Reference</title>
 <!-- Chart.js for spec charts -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- Tailwind CDN removed 2026-08-29. It was loading a full runtime CSS
+     framework on a page that defines its own token system, and nothing used
+     it: the only Tailwind-shaped class names in this file are spec-grid,
+     demo-grid and doc-grid, which are ours. Zero utility classes present. -->
 <!-- Lucide Icons — matches production app -->
 <script src="https://unpkg.com/lucide@latest" defer></script>
 <!-- Google Fonts — identical to musiclinkd.com -->

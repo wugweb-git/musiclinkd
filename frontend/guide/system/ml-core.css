@@ -755,3 +755,13 @@ a.ml-row:active { background: var(--color-surface); }
   background: var(--color-pink);
   color: var(--color-white);
 }
+
+/* ── inline link ───────────────────────────────────────────────────────── */
+/* Pink text link. Uses --color-pink-pressed, not --color-pink: the brand pink
+   measures 3.48:1 on paper and fails AA as text. See the pink-text rule in
+   tokens.json. Replaces the pre-v9 .link-text. */
+.ml-link {
+  color: var(--color-pink-pressed);
+  font-weight: 600;
+  text-decoration: none;
+}
