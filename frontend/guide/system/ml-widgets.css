@@ -128,7 +128,12 @@
   border-radius: var(--radius-4);
   transition: background-color var(--duration-2) var(--ease-standard);
 }
-.ml-tabbar__item[aria-current="page"] { color: var(--color-pink); }
+/* Pink TEXT must be --color-pink-pressed, never --color-pink: the brand pink
+   measures 3.56:1 on the bar's near-white ground and fails AA, while pressed
+   measures 5.24. This is the rule stated on the token itself; this line used
+   to break it. The ICON pill below still uses the bright pink, correctly —
+   it is a fill, not text. */
+.ml-tabbar__item[aria-current="page"] { color: var(--color-pink-pressed); }
 .ml-tabbar__item[aria-current="page"] .ml-tabbar__icon { background: var(--color-pink-container); }
 .ml-tabbar__item:active .ml-tabbar__icon { transform: scale(0.9); }
 
@@ -345,7 +350,10 @@
   background: var(--color-pink-container);
 }
 .ml-progress__title { font-size: var(--type-2); font-weight: 700; }
-.ml-progress__meta  { font-size: var(--type-1); color: var(--color-muted); }
+/* --color-muted was verified against paper (5.01) and surface (4.73) but not
+   against a TINTED ground: on --color-pink-container it is 4.26 and fails.
+   Secondary text on a tint takes ink at reduced weight instead. */
+.ml-progress__meta  { font-size: var(--type-1); color: var(--color-ink); opacity: 0.72; }
 .ml-progress__track {
   height: 6px; margin: var(--space-2) 0;
   border-radius: var(--radius-4);
@@ -686,7 +694,9 @@
   transform: translateX(6px);
   padding: 0 4px;
   border-radius: var(--radius-4);
-  background: var(--color-pink);
+  /* 9px reversed text is the hardest contrast case in the system: white on
+     --color-pink is 3.56:1. --color-pink-pressed takes it to 6.4:1. */
+  background: var(--color-pink-pressed);
   color: var(--color-white);
   font-size: 9px;
   font-weight: 700;
@@ -1097,7 +1107,11 @@
 
 .ml-rating { display: inline-flex; align-items: center; gap: var(--space-1); font-size: var(--type-1); }
 .ml-rating__score { font-weight: 700; color: var(--color-ink); font-variant-numeric: tabular-nums; }
-.ml-rating__stars { color: var(--color-warning); letter-spacing: -1px; }
+/* --color-warning is a FILL colour (#F59E0B, 2.15:1 on paper) and was being
+   used here as text, below even the 3:1 non-text floor. The score beside it
+   already carries the meaning, so the stars can take the ink colour and stay
+   decorative — which is also why they are aria-hidden in the markup. */
+.ml-rating__stars { color: var(--color-ink); letter-spacing: -1px; }
 .ml-rating__count { color: var(--color-muted); }
 
 /* ── credit row ────────────────────────────────────────────────────────── */
@@ -1240,19 +1254,123 @@
 /* Masonry, bento and split. Named because the styleguide had all three and
    they are genuinely different shapes, not one grid with options. */
 
+/* These were three one-line rules and the source they came from is much more
+   specific. Rebuilt against styleguide.html's own values, mapped to tokens:
+   .pin-masonry column-gap 32px -> --space-4, .pin-masonry-item radius 16px ->
+   --radius-2; .sc-bento-card radius 32px/padding 32px -> --radius-3/--space-4,
+   .sc-bento-img height 180px object-fit cover; .sc-split-section gap 32px with
+   a hairline rule beneath. */
+
+/* ── masonry ───────────────────────────────────────────────────────────── */
+/* Compose: LazyVerticalStaggeredGrid                                        */
+/* A real mosaic: unequal tile heights in balanced columns. Uses CSS columns,
+   not grid, because the tiles are different heights and their order does not
+   matter — which is exactly the case grid handles badly. 2 up on a phone,
+   3 at 600dp, 4 at 840dp, following the Material window size classes. */
+
 .ml-masonry { columns: 2; column-gap: var(--space-2); }
-.ml-masonry > * { break-inside: avoid; margin-bottom: var(--space-2); }
-@media (min-width: 600px) { .ml-masonry { columns: 3; } }
+.ml-masonry > * { break-inside: avoid; margin-bottom: var(--space-2); display: block; }
+@media (min-width: 600px) { .ml-masonry { columns: 3; column-gap: var(--space-3); } }
+@media (min-width: 840px) { .ml-masonry { columns: 4; column-gap: var(--space-4); } }
+.ml-masonry--roomy { column-gap: var(--space-4); }
+.ml-masonry--roomy > * { margin-bottom: var(--space-4); }
+
+.ml-mosaic-tile { position: relative; border-radius: var(--radius-2); overflow: hidden; }
+.ml-mosaic-tile img { width: 100%; height: auto; display: block; }
+/* The caption sits ON the image, so it needs its own ground: a scrim, not a
+   colour. Same rule as .ml-media--scrim — the media carries the colour. */
+.ml-mosaic-tile__cap {
+  position: absolute; inset: auto 0 0 0;
+  padding: var(--space-4) var(--space-3) var(--space-3);
+  color: var(--color-white);
+  background: linear-gradient(to top, rgba(13,13,13,0.78), transparent);
+  font-size: var(--type-1); font-weight: 600;
+}
+.ml-mosaic-tile__pin {
+  position: absolute; top: var(--space-2); right: var(--space-2);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: var(--size-1); height: var(--size-1);
+  border-radius: var(--radius-4);
+  background: color-mix(in srgb, var(--color-white) 88%, transparent);
+  color: var(--color-ink); border: 0; cursor: pointer;
+}
+
+/* ── bento ─────────────────────────────────────────────────────────────── */
+/* Compose: custom Grid with spans                                           */
+/* Source .sc-bento-grid is 3 columns at 32px with 32px-radius cards. The
+   asymmetry is the point: tile 1 spans two columns and tile 4 spans two rows,
+   so the eye is given a route through the grid instead of a checkerboard. */
 
 .ml-bento { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
-/* the first tile spans both columns — that asymmetry is what makes it a bento
-   rather than a grid */
+@media (min-width: 600px) {
+  .ml-bento { grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+  .ml-bento > :first-child { grid-column: span 2; }
+  .ml-bento > :nth-child(4) { grid-row: span 2; }
+}
 .ml-bento > :first-child { grid-column: 1 / -1; }
+.ml-bento__card {
+  display: flex; flex-direction: column; gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-3);
+  background: var(--color-white);
+  transition: transform var(--duration-3) var(--ease-standard);
+}
+.ml-bento__card:hover { transform: translateY(-2px); }
+.ml-bento__img {
+  width: 100%; height: 180px; object-fit: cover;
+  border-radius: var(--radius-2); background: var(--color-paper);
+}
+.ml-bento__title { font-family: var(--font-display); font-size: var(--type-2); font-weight: 700; }
+.ml-bento__body { font-size: var(--type-1); color: var(--color-muted); }
+/* Dark bento: source uses rgba white 5% on 10% — translucent, so it works over
+   whatever the section ground is instead of assuming black. */
 .ml-bento--dark { color: var(--color-white); }
-.ml-bento--dark > * { background: var(--color-ink); border-color: var(--color-ink); }
+.ml-bento--dark .ml-bento__card {
+  background: color-mix(in srgb, var(--color-white) 5%, transparent);
+  border-color: color-mix(in srgb, var(--color-white) 12%, transparent);
+}
+.ml-bento--dark .ml-bento__body { color: color-mix(in srgb, var(--color-white) 72%, transparent); }
 
-.ml-split { display: grid; gap: var(--space-3); }
-@media (min-width: 600px) { .ml-split { grid-template-columns: 1fr 1fr; align-items: center; } }
+/* ── split editorial ───────────────────────────────────────────────────── */
+/* Compose: Row with weight(1f) each                                         */
+/* Source .sc-split-section: two equal columns, centred, with a hairline rule
+   under each band so a run of them reads as an article, not a slideshow. */
+
+.ml-split {
+  display: grid; gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-line);
+}
+.ml-split:last-child { border-bottom: 0; }
+@media (min-width: 600px) {
+  .ml-split { grid-template-columns: 1fr 1fr; gap: var(--space-4); align-items: center; }
+  .ml-split--flip > :first-child { order: 2; }
+}
+.ml-split__media { border-radius: var(--radius-3); overflow: hidden; }
+.ml-split__media img, .ml-split__media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* The editorial pull-quote. Source sets Inter Tight 800 at clamp(32,4vw,48),
+   which is --type-4 to within a pixel. */
+.ml-quote {
+  font-family: var(--font-display);
+  font-size: var(--type-4); font-weight: 800;
+  line-height: 1.1; letter-spacing: -0.02em;
+  margin: 0;
+}
+.ml-quote__cite { display: block; margin-top: var(--space-3); font-size: var(--type-1); font-weight: 600; color: var(--color-muted); }
+
+/* ── article grid ──────────────────────────────────────────────────────── */
+/* Compose: LazyVerticalGrid(Adaptive(300.dp))                               */
+/* Source .adv-article-grid: auto-fill minmax(300px, 1fr) at 32px. Kept as
+   auto-fill so it reflows by available width rather than by breakpoint. */
+
+.ml-articles { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-4); }
+.ml-article { display: flex; flex-direction: column; gap: var(--space-3); text-decoration: none; color: inherit; }
+.ml-article__media { border-radius: var(--radius-2); overflow: hidden; aspect-ratio: 3 / 2; }
+.ml-article__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ml-article__tag { font-size: var(--type-1); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-pink-pressed); }
+.ml-article__title { font-family: var(--font-display); font-size: var(--type-2); font-weight: 700; line-height: 1.25; }
+.ml-article__meta { font-size: var(--type-1); color: var(--color-muted); }
 
 /* ── surface effects ───────────────────────────────────────────────────── */
 /* Restrained on purpose. The palette rule says the chrome is monochrome and
@@ -1280,3 +1398,454 @@
   background-image: radial-gradient(currentColor 0.5px, transparent 0.5px);
   background-size: 3px 3px;
 }
+
+/* ══ MIGRATION BACKFILL ════════════════════════════════════════════════════
+   Everything below was present in styleguide.html or the Gestalt catalogue
+   and had no counterpart here. Found on 2026-08-30 by matching SELECTORS
+   rather than heading text — the earlier heading-text check passed because
+   the words appeared in prose, which proved nothing.
+
+   Gestalt imports with no counterpart: ComboBox, Popover, PopoverMessage,
+   PopoverEducational, Tooltip, HelpButton, Collage, ButtonSocial.
+   styleguide classes with no counterpart: tooltip-*, dropdown-*, g-combobox-*,
+   g-popover-*, breadcrumb*, p-tier/p-price/p-feat, trends-table/trend-*.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── tooltip ───────────────────────────────────────────────────────────── */
+/* Compose: PlainTooltip (Material3)                                        */
+/* A tooltip is a DESKTOP affordance: it needs hover, and a touch screen has
+   none. It is here because the catalogue and the admin console are viewed on
+   desktop, and because Gestalt shipped one. On a phone the same text belongs
+   in .ml-field__help or a .ml-popover opened by an explicit tap — which is
+   what .ml-help below is for. Driven by [data-tip] so there is no second
+   element to keep in sync, and hidden from AT because the accessible name
+   must live on the control itself, not in a decorative bubble. */
+
+.ml-tip { position: relative; display: inline-flex; }
+.ml-tip::after {
+  content: attr(data-tip);
+  position: absolute; bottom: calc(100% + var(--space-2)); left: 50%;
+  transform: translateX(-50%) translateY(2px);
+  z-index: var(--z-3);
+  max-width: 220px; width: max-content;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-1);
+  background: var(--color-ink); color: var(--color-white);
+  font-size: var(--type-1); line-height: 1.35; text-align: center;
+  white-space: normal;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--duration-1) var(--ease-standard),
+              transform var(--duration-1) var(--ease-standard);
+}
+.ml-tip::before {
+  content: ""; position: absolute; bottom: calc(100% + 2px); left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent; border-top-color: var(--color-ink);
+  opacity: 0; pointer-events: none; z-index: var(--z-3);
+  transition: opacity var(--duration-1) var(--ease-standard);
+}
+.ml-tip:hover::after, .ml-tip:focus-within::after {
+  opacity: 1; transform: translateX(-50%) translateY(0);
+}
+.ml-tip:hover::before, .ml-tip:focus-within::before { opacity: 1; }
+.ml-tip--below::after { bottom: auto; top: calc(100% + var(--space-2)); }
+.ml-tip--below::before {
+  bottom: auto; top: calc(100% + 2px);
+  border-top-color: transparent; border-bottom-color: var(--color-ink);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ml-tip::after, .ml-tip::before { transition: none; }
+}
+
+/* radius: source said 12px, which the 8/16/32 scale does not carry.
+   --radius-2 chosen over --radius-1 so overlays match .ml-card beside them. */
+/* ── popover ───────────────────────────────────────────────────────────── */
+/* Compose: DropdownMenu / ExposedDropdownMenu                              */
+/* Covers four Gestalt components — Popover, PopoverMessage, PopoverEducational
+   and Dropdown's menu — because they differ only in what goes inside. Anchored
+   to a positioned parent and toggled by [hidden], so the same ?state= plumbing
+   that drives every other overlay drives this one too.
+
+   On a phone this should usually be a .ml-sheet instead: a bottom sheet is
+   reachable by thumb and a popover pinned to a top-right control is not. */
+
+.ml-pop-anchor { position: relative; display: inline-flex; }
+.ml-pop {
+  position: absolute; top: calc(100% + var(--space-1)); right: 0;
+  z-index: var(--z-3);
+  min-width: 200px; max-width: 280px;
+  padding: var(--space-1);
+  border-radius: var(--radius-2);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--elevation-2);
+}
+.ml-pop--left { right: auto; left: 0; }
+.ml-pop__item {
+  display: flex; align-items: center; gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2);
+  border: 0; background: none;
+  border-radius: var(--radius-1);
+  font: inherit; font-size: var(--type-2); color: var(--color-ink);
+  text-align: left; cursor: pointer;
+  min-height: var(--size-3);
+}
+.ml-pop__item:hover { background: var(--color-surface); }
+.ml-pop__item[aria-checked="true"] { font-weight: 600; }
+.ml-pop__item--danger { color: var(--color-error); }
+.ml-pop__sep { height: 1px; margin: var(--space-1) 0; background: var(--color-line); }
+/* PopoverMessage / PopoverEducational: prose, not a menu. */
+.ml-pop__msg { padding: var(--space-3); font-size: var(--type-2); line-height: 1.5; }
+.ml-pop__msg-title { font-weight: 700; margin-bottom: var(--space-1); }
+
+/* ── help button ───────────────────────────────────────────────────────── */
+/* Compose: IconButton + DropdownMenu                                       */
+/* Gestalt's HelpButton. The touch-safe answer to the tooltip problem above:
+   an explicit control that opens a .ml-pop, so the explanation is reachable
+   without hover and is announced as a real button. */
+
+.ml-help {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; padding: 0;
+  border: 0; border-radius: var(--radius-4);
+  background: var(--color-surface); color: var(--color-muted);
+  font-size: var(--type-1); font-weight: 700; cursor: pointer;
+}
+.ml-help::after {                      /* expand to 48dp without moving layout */
+  content: ""; position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: var(--size-3); height: var(--size-3);
+}
+.ml-help:hover { background: var(--color-line); color: var(--color-ink); }
+
+/* ── combobox ──────────────────────────────────────────────────────────── */
+/* Compose: ExposedDropdownMenuBox                                          */
+/* Gestalt's ComboBox, and the only one of these that is genuinely mobile:
+   type-to-filter over a long list — instruments, genres, cities — where a
+   native <select> would be a 400-row scroll. Built on .ml-field so the input
+   inherits every focus and error state already defined there. */
+
+.ml-combo { position: relative; }
+.ml-combo__list {
+  position: absolute; top: calc(100% + var(--space-1)); left: 0; right: 0;
+  z-index: var(--z-3);
+  max-height: 240px; overflow-y: auto;
+  padding: var(--space-1);
+  border-radius: var(--radius-2);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--elevation-2);
+}
+/* Markup contract: an icon may be the first child, but the label must be a
+   SINGLE element. Loose text beside an inline <mark> becomes a second flex
+   item and the gap opens a hole inside the word. */
+.ml-combo__opt {
+  display: flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-2);
+  border-radius: var(--radius-1);
+  font-size: var(--type-2); cursor: pointer;
+  min-height: var(--size-3);
+}
+.ml-combo__opt[aria-selected="true"] { background: var(--color-pink-container); font-weight: 600; }
+.ml-combo__opt:hover { background: var(--color-surface); }
+.ml-combo__opt mark { background: none; color: var(--color-pink-pressed); font-weight: 700; }
+.ml-combo__empty { padding: var(--space-3); font-size: var(--type-1); color: var(--color-muted); text-align: center; }
+.ml-combo__clear {
+  position: absolute; top: 50%; right: var(--space-2); transform: translateY(-50%);
+  display: flex; border: 0; background: none; color: var(--color-muted); cursor: pointer;
+}
+
+/* ── breadcrumb ────────────────────────────────────────────────────────── */
+/* Compose: BreadcrumbRow (custom)                                          */
+/* Admin and marketplace category depth only. A phone screen uses the app bar
+   back affordance instead — two ways back on one screen is one too many, so
+   this is scoped to wide viewports on purpose. Separators are generated, not
+   typed, so they never end up in the accessible name. */
+
+.ml-crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1); font-size: var(--type-1); }
+.ml-crumbs__item {
+  position: relative; color: var(--color-muted); text-decoration: none;
+  display: inline-flex; align-items: center; min-height: var(--size-1);
+}
+/* Text-sized links are 19px tall. The band restores a 44px target without
+   changing the line box, the same technique .ml-chip uses. */
+.ml-crumbs__item::after {
+  content: ""; position: absolute; left: 0; right: 0;
+  top: 50%; transform: translateY(-50%); height: var(--size-3);
+}
+.ml-crumbs__item:hover { color: var(--color-ink); text-decoration: underline; }
+.ml-crumbs__item[aria-current="page"] { color: var(--color-ink); font-weight: 600; }
+.ml-crumbs__item + .ml-crumbs__item::before {
+  content: "/"; margin-right: var(--space-1); color: var(--color-muted);
+}
+
+/* ── pricing tiers ─────────────────────────────────────────────────────── */
+/* Compose: PlanCard (custom)                                               */
+/* Subscription plans. One tier is marked recommended and it is marked with a
+   BORDER and a label, never with colour alone — the palette has one accent and
+   spending it here would make the page shout. Scrolls horizontally on a phone
+   rather than stacking, so the tiers stay comparable side by side. */
+
+.ml-tiers { display: grid; gap: var(--space-3); grid-template-columns: 1fr; }
+@media (min-width: 600px) { .ml-tiers { grid-template-columns: repeat(3, 1fr); } }
+.ml-tier {
+  position: relative;
+  display: flex; flex-direction: column; gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-2);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+}
+.ml-tier--featured { border: 2px solid var(--color-ink); }
+.ml-tier__flag {
+  position: absolute; top: calc(var(--space-2) * -1); left: var(--space-4);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-4);
+  background: var(--color-ink); color: var(--color-white);
+  font-size: var(--type-1); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+}
+.ml-tier__name { font-size: var(--type-2); font-weight: 700; }
+.ml-tier__price { font-size: var(--type-4); font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.ml-tier__unit { font-size: var(--type-1); color: var(--color-muted); }
+.ml-tier__feats { display: flex; flex-direction: column; gap: var(--space-1); margin: var(--space-2) 0; padding: 0; list-style: none; }
+.ml-tier__feat { display: flex; align-items: flex-start; gap: var(--space-2); font-size: var(--type-1); }
+/* 1.4.11: an icon needs 3:1 and raw --color-success is 2.28 on white. */
+.ml-tier__feat svg { flex: none; margin-top: 2px; color: color-mix(in srgb, var(--color-success) 58%, black); }
+.ml-tier__feat--off { color: var(--color-muted); }
+.ml-tier__feat--off svg { color: var(--color-line); }
+
+/* ── trends table ──────────────────────────────────────────────────────── */
+/* Compose: TrendRow in a LazyColumn                                        */
+/* MusicLinkd Trends, Gear & Studio trends, Top searches this week — one
+   component, three data sets. Rank is rendered as text rather than an ordered
+   list marker so it can be tabular-aligned. Direction is carried by an arrow
+   AND a sign, never by red/green alone. */
+
+.ml-trends {
+  display: flex; flex-direction: column;
+  padding: 0 var(--space-3);
+  background: var(--color-white);
+  border-radius: var(--radius-2);
+  box-shadow: var(--elevation-1);
+}
+.ml-trends__head {
+  display: grid; grid-template-columns: 3ch 1fr auto;
+  gap: var(--space-3); padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-line);
+  font-size: var(--type-1); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-muted);
+}
+.ml-trends__row {
+  display: grid; grid-template-columns: 3ch 1fr auto;
+  gap: var(--space-3); align-items: center;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-line);
+  text-decoration: none; color: inherit;
+  min-height: var(--size-3);
+}
+.ml-trends__row:hover { background: var(--color-surface); }
+.ml-trends__rank { font-size: var(--type-2); font-weight: 700; color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.ml-trends__term { display: flex; align-items: center; gap: var(--space-2); min-width: 0; }
+.ml-trends__thumb { width: var(--size-1); height: var(--size-1); flex: none; border-radius: var(--radius-1); object-fit: cover; background: var(--color-surface); }
+.ml-trends__label { font-size: var(--type-2); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ml-trends__sub { font-size: var(--type-1); color: var(--color-muted); }
+.ml-trends__delta { display: flex; align-items: center; gap: 2px; font-size: var(--type-1); font-weight: 700; font-variant-numeric: tabular-nums; }
+.ml-trends__delta--up { color: color-mix(in srgb, var(--color-success) 58%, black); }
+.ml-trends__delta--down { color: color-mix(in srgb, var(--color-error) 72%, black); }
+.ml-trends__delta--flat { color: var(--color-muted); }
+
+/* ── collage ───────────────────────────────────────────────────────────── */
+/* Compose: CollageGrid (custom)                                            */
+/* Gestalt's Collage. One hero image with satellites — the shape behind band
+   photo sets and studio galleries, where a uniform grid would flatten the one
+   image that matters. Fixed slots, not a masonry flow: the count is known. */
+
+.ml-collage {
+  display: grid; gap: var(--space-1);
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  border-radius: var(--radius-2); overflow: hidden;
+  aspect-ratio: 3 / 2;
+}
+.ml-collage > * { min-width: 0; min-height: 0; }
+.ml-collage img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ml-collage__hero { grid-row: span 2; }
+.ml-collage__more {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  background: var(--color-ink); color: var(--color-white);
+  font-size: var(--type-2); font-weight: 700;
+}
+
+/* ── social sign-in button ─────────────────────────────────────────────── */
+/* Compose: SocialSignInButton (custom)                                     */
+/* Gestalt's ButtonSocial. The provider marks are the ONE documented exception
+   to the palette rule: Google's four brand colours and Apple's black are
+   fixed by each provider's brand terms and cannot be re-tinted. The button
+   itself stays on our palette; only the glyph is foreign. */
+
+.ml-btn--social {
+  justify-content: center; gap: var(--space-2);
+  background: var(--color-white); color: var(--color-ink);
+  border: 1px solid var(--color-line);
+}
+.ml-btn--social:hover { background: var(--color-surface); }
+.ml-btn--social svg { flex: none; width: 18px; height: 18px; }
+
+/* ── native keyboard & IME ─────────────────────────────────────────────── */
+/* Compose: WindowInsets.ime + KeyboardOptions                              */
+/* Not a widget — a set of rules for the one piece of UI we do not draw. The
+   keyboard covers up to 45% of a phone screen, so anything the user is typing
+   into must stay visible above it.
+
+   .ml-ime-pad is the web stand-in for WindowInsets.ime: on Android the value
+   comes from the framework, here from the visual viewport. .ml-ime-bar is the
+   accessory strip that must ride ON TOP of the keyboard — a Done control, or
+   the send button in the composer.
+
+   The inputmode/enterkeyhint attributes are the other half and belong in the
+   markup: inputmode="numeric" for OTP and price, "email" for sign-in, "tel"
+   for phone; enterkeyhint="search" | "send" | "next" | "done" so the return
+   key says what it will actually do. */
+
+.ml-ime-pad { padding-bottom: env(keyboard-inset-height, 0px); transition: padding-bottom var(--duration-2) var(--ease-standard); }
+.ml-ime-bar {
+  position: sticky; bottom: 0; z-index: var(--z-2);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-white);
+  border-top: 1px solid var(--color-line);
+  padding-bottom: calc(var(--space-2) + env(safe-area-inset-bottom, 0px));
+}
+.ml-ime-bar__done { margin-left: auto; }
+@media (prefers-reduced-motion: reduce) { .ml-ime-pad { transition: none; } }
+
+/* ══ BLOCKS BACKFILL ═══════════════════════════════════════════════════════
+   Blocks present in styleguide.html or the Gestalt catalogue that the system
+   had no counterpart for. Source values mapped to tokens, not re-invented:
+   .adv-feature-grid auto-fit minmax(280px) gap 40px, .t-card, .pain-card,
+   .aac-img-wrapper radius 24px aspect 16/10 with a centred overlay control,
+   .collage-sticker rotated pink pill, .adv-masonry-wrapper 80vh black panel
+   with a rotated 30%-opacity mosaic behind a centred card.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* ── feature grid ──────────────────────────────────────────────────────── */
+/* Compose: LazyVerticalGrid(Adaptive(280.dp))                               */
+/* Three-up marketing grid. auto-fit, so it collapses to one column on a
+   phone without a breakpoint. The icon sits in a tinted disc — the one place
+   --color-pink-container is allowed to carry a shape rather than a state. */
+
+.ml-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-4); }
+.ml-feature { display: flex; flex-direction: column; gap: var(--space-2); }
+.ml-feature__icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: var(--size-3); height: var(--size-3);
+  border-radius: var(--radius-2);
+  background: var(--color-pink-container);
+  color: var(--color-pink-pressed);
+}
+.ml-feature__title { font-family: var(--font-display); font-size: var(--type-2); font-weight: 700; }
+.ml-feature__body { font-size: var(--type-1); color: var(--color-muted); line-height: 1.55; }
+/* The problem-statement variant: same shape, neutral disc, because a pain
+   point is not an accent. */
+.ml-feature--problem .ml-feature__icon { background: var(--color-surface); color: var(--color-ink); }
+
+/* ── testimonial ───────────────────────────────────────────────────────── */
+/* Compose: TestimonialCard (custom)                                         */
+/* The quote leads and the attribution follows, never the reverse — a card
+   that opens with a face and a name reads as a profile, not a recommendation.
+   Stats are optional and render as numbers, not badges. */
+
+.ml-testimonial {
+  display: flex; flex-direction: column; gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-3);
+  background: var(--color-white);
+}
+.ml-testimonial__quote { font-size: var(--type-2); line-height: 1.5; margin: 0; }
+.ml-testimonial__user { display: flex; align-items: center; gap: var(--space-2); }
+.ml-testimonial__name { font-size: var(--type-1); font-weight: 700; }
+.ml-testimonial__role { font-size: var(--type-1); color: var(--color-muted); }
+.ml-testimonial__stats { display: flex; gap: var(--space-4); padding-top: var(--space-3); border-top: 1px solid var(--color-line); }
+.ml-testimonial__stat b { display: block; font-family: var(--font-display); font-size: var(--type-3); font-weight: 800; font-variant-numeric: tabular-nums; }
+.ml-testimonial__stat span { font-size: var(--type-1); color: var(--color-muted); }
+
+/* ── ambient album card ────────────────────────────────────────────────── */
+/* Compose: AlbumCard (custom)                                               */
+/* Cover art with a play control floated over its centre. The art is the whole
+   card — no title bar over the image, because album art is designed to be
+   read whole. Metadata sits BELOW the frame, which is what keeps it ambient. */
+
+.ml-album { display: flex; flex-direction: column; gap: var(--space-2); text-decoration: none; color: inherit; }
+.ml-album__frame { position: relative; border-radius: var(--radius-2); overflow: hidden; aspect-ratio: 16 / 10; background: var(--color-surface); }
+.ml-album__frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ml-album__play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: var(--size-3); height: var(--size-3); padding: 0;
+  border: 0; border-radius: var(--radius-2);
+  background: var(--color-white); color: var(--color-ink);
+  box-shadow: var(--elevation-2); cursor: pointer;
+  transition: transform var(--duration-2) var(--ease-spring);
+}
+.ml-album:hover .ml-album__play { transform: translate(-50%, -50%) scale(1.06); }
+.ml-album__play:active { transform: translate(-50%, -50%) scale(0.94); }
+.ml-album__title { font-size: var(--type-2); font-weight: 700; }
+.ml-album__meta { font-size: var(--type-1); color: var(--color-muted); }
+
+/* ── trust & verification ──────────────────────────────────────────────── */
+/* Compose: TrustRow (custom)                                                */
+/* The Credits Trust Engine surfaced as a block. Every claim carries WHO
+   verified it — a tick with no source is decoration, and this system already
+   refuses those elsewhere. */
+
+.ml-trust { display: grid; gap: var(--space-3); padding: var(--space-4); border: 1px solid var(--color-line); border-radius: var(--radius-3); background: var(--color-white); }
+.ml-trust__row { display: flex; align-items: flex-start; gap: var(--space-3); }
+.ml-trust__mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: none; width: var(--size-1); height: var(--size-1);
+  border-radius: var(--radius-4);
+  background: color-mix(in srgb, var(--color-success) 14%, var(--color-white));
+  color: color-mix(in srgb, var(--color-success) 58%, black);
+}
+.ml-trust__what { font-size: var(--type-2); font-weight: 600; }
+.ml-trust__who  { font-size: var(--type-1); color: var(--color-muted); }
+.ml-trust__stats { display: flex; gap: var(--space-4); padding-top: var(--space-3); border-top: 1px solid var(--color-line); }
+
+/* ── sticker ───────────────────────────────────────────────────────────── */
+/* Compose: overlay Text with rotation                                       */
+/* Source .collage-sticker: a rotated pink pill dropped on top of artwork.
+   The one place brand pink appears as a FILL over media — it is a stamp, and
+   a stamp that matched the photography would not read as one. */
+
+.ml-sticker {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-4deg);
+  z-index: 2;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-4);
+  /* White TEXT on --color-pink is 3.56:1 and fails. My own line, and the same
+     mistake the tab bar had. Pressed pink keeps the stamp loud and passes. */
+  background: var(--color-pink-pressed);
+  color: var(--color-white);
+  font-family: var(--font-display); font-weight: 800; font-size: var(--type-1);
+  box-shadow: var(--elevation-2);
+  white-space: nowrap;
+}
+
+/* ── ambient mosaic panel ──────────────────────────────────────────────── */
+/* Compose: Box with a blurred image wall behind                             */
+/* Source .adv-masonry-wrapper / .adv-masonry-bg: a dark panel with a rotated
+   wall of covers at 30% behind a centred card. The wall is decorative and is
+   marked aria-hidden; the card carries all the meaning. Motion is opt-in and
+   respects prefers-reduced-motion. */
+
+.ml-wall { position: relative; overflow: hidden; border-radius: var(--radius-3); background: var(--color-ink); display: grid; place-items: center; padding: var(--space-4); min-height: 320px; }
+.ml-wall__bg { position: absolute; inset: -20%; display: flex; gap: var(--space-3); opacity: 0.3; transform: rotate(5deg) scale(1.2); pointer-events: none; }
+.ml-wall__col { display: flex; flex-direction: column; gap: var(--space-3); width: 160px; flex: none; }
+.ml-wall__col img { width: 100%; border-radius: var(--radius-2); display: block; }
+.ml-wall__col--drift { animation: ml-wall-drift 40s linear infinite; }
+.ml-wall__card { position: relative; z-index: 1; max-width: 380px; padding: var(--space-4); border-radius: var(--radius-3); background: var(--color-white); box-shadow: var(--elevation-2); text-align: center; }
+@keyframes ml-wall-drift { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ml-wall__col--drift { animation: none; } }

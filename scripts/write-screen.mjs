@@ -107,9 +107,16 @@ export function icon(name, { size = 20, cls = "" } = {}) {
     if (!existsSync(file)) {
       throw new Error(`icon "${name}" is not in the library — check frontend/guide/musiclinkd-system/icons/`);
     }
-    iconCache.set(name, readFileSync(file, "utf8")
+    /* Source icons have width/height but no viewBox, and are 24x24 or 16x16.
+       Resizing without a viewBox crops rather than scales, so the viewBox is
+       derived from each file's own dimensions before they are stripped. */
+    const raw = readFileSync(file, "utf8");
+    const nw = (raw.match(/width="(\d+)"/) || [, "24"])[1];
+    const nh = (raw.match(/height="(\d+)"/) || [, nw])[1];
+    const vb = /viewBox=/.test(raw) ? "" : ` viewBox="0 0 ${nw} ${nh}"`;
+    iconCache.set(name, raw
       .replace(/\s*width="\d+"|\s*height="\d+"/g, "")
-      .replace(/<svg /, '<svg fill="currentColor" ')
+      .replace(/<svg /, `<svg${vb} fill="currentColor" `)
       .trim());
   }
   return iconCache.get(name)

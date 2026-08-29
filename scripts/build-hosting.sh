@@ -45,24 +45,27 @@ mkdir -p dist
 # publicly. assets/img.zip is a 300MB local archive of that same image folder,
 # referenced by no page — it was being served as a web asset.
 #
-# inspiration/ is 185 files / 15MB of which styleguide.html references exactly
-# FOUR, ~104KB, as gear thumbnails. Rather than ship 15MB for 104KB, the four
-# are derived from the markup here so the list cannot drift: add a fifth
-# reference to the styleguide and it ships automatically.
-INSPIRATION_KEEP=$(grep -ohE 'assets/img/inspiration/[a-zA-Z0-9]+\.(jpg|jpeg|png|webp)' \
-  frontend/guide/styleguide.html frontend/website/*.html 2>/dev/null | sort -u)
-INSPIRATION_RULES=()
-if [ -n "$INSPIRATION_KEEP" ]; then
-  INSPIRATION_RULES+=(--include='assets/img/inspiration/')
-  while IFS= read -r f; do INSPIRATION_RULES+=(--include="$f"); done <<< "$INSPIRATION_KEEP"
-fi
-INSPIRATION_RULES+=(--exclude='assets/img/inspiration/*')
-echo "    keeping $(printf '%s\n' "$INSPIRATION_KEEP" | grep -c . ) of $(ls frontend/website/assets/img/inspiration | wc -l | tr -d ' ') inspiration images"
+# The guide and the website reference photography from assets/img/{4,5,6,
+# inspiration}. Those folders together are ~290MB and the pages use a small
+# fraction, so the ship-list is DERIVED from the generated markup rather than
+# maintained by hand — add a reference anywhere and it ships on the next build,
+# remove one and it stops. This replaced a hand-kept list that had already
+# drifted once.
+MEDIA_SRC=(frontend/guide/index.html frontend/guide/styleguide.html frontend/website/*.html)
+MEDIA_KEEP=$(grep -ohE 'assets/img/(1|4|5|6|inspiration)/[^"'"'"')? ]+\.(jpg|jpeg|png|webp|gif|mp4|webm)' \
+  "${MEDIA_SRC[@]}" 2>/dev/null | sort -u)
+MEDIA_RULES=()
+for d in 1 4 5 6 inspiration; do MEDIA_RULES+=(--include="assets/img/$d/"); done
+while IFS= read -r f; do [ -n "$f" ] && MEDIA_RULES+=(--include="$f"); done <<< "$MEDIA_KEEP"
+for d in 1 4 5 6 inspiration; do MEDIA_RULES+=(--exclude="assets/img/$d/*"); done
+KEEP_N=$(printf '%s\n' "$MEDIA_KEEP" | grep -c . || true)
+KEEP_BYTES=$(printf '%s\n' "$MEDIA_KEEP" | while IFS= read -r f; do
+  [ -n "$f" ] && [ -f "frontend/website/$f" ] && stat -f%z "frontend/website/$f" 2>/dev/null || true
+done | awk '{t+=$1} END {printf "%.1f", t/1048576}')
+echo "    keeping $KEEP_N referenced media files (${KEEP_BYTES}MB) of $(find frontend/website/assets/img/{1,4,5,6,inspiration} -type f 2>/dev/null | wc -l | tr -d ' ')"
 
 rsync -a \
-  --exclude='assets/img/1/' --exclude='assets/img/4/' \
-  --exclude='assets/img/5/' --exclude='assets/img/6/' \
-  "${INSPIRATION_RULES[@]}" \
+  "${MEDIA_RULES[@]}" \
   --exclude='*.zip' \
   --exclude='.DS_Store' \
   frontend/website/ dist/

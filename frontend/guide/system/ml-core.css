@@ -228,7 +228,24 @@ body {
   height: var(--size-3);
   transform: translateY(-50%);
 }
-.ml-chip:active { transform: scale(0.96); }
+.ml-chip:active {
+  transform: scale(0.96);
+  /* Accent on press. The chip is a FILTER — pressing it is an intent, not yet
+     a commitment, so the press reads pink and the committed state reads ink.
+     Two different colours for two different meanings. */
+  border-color: var(--color-pink);
+  color: var(--color-pink-pressed);
+  background: var(--color-pink-container);
+}
+/* A chip may carry a leading icon or a trailing dismiss. The icon inherits
+   currentColor so it follows the chip through rest / press / selected without
+   a second rule per state. */
+.ml-chip svg { width: 16px; height: 16px; flex: none; }
+.ml-chip__icon { margin-left: calc(var(--space-1) * -1); }
+.ml-chip__dismiss {
+  display: inline-flex; margin-right: calc(var(--space-1) * -1);
+  border: 0; padding: 0; background: none; color: inherit; cursor: pointer;
+}
 .ml-chip[aria-pressed="true"],
 .ml-chip.is-selected {
   background: var(--color-ink);
@@ -500,7 +517,24 @@ a.ml-row:active { background: var(--color-surface); }
 @keyframes ml-spin { to { transform: rotate(360deg); } }
 
 /* ── brand ─────────────────────────────────────────────────────────────── */
+/* This section used to SET the brand in type — Inter Tight 800 with a pink
+   "d" — which is not the logo. The logo is drawn artwork and lives in
+   brand/assets as nine variants. A typographic stand-in beside a real mark
+   guarantees the two drift, so the mark is now an <img> of the real file and
+   the type is only the fallback for places that cannot load one.
+   The variant is chosen by GROUND, not by taste: white lockup on ink, black
+   lockup on paper. Picking the wrong one is the only way to misuse this. */
 
+.ml-logo { display: inline-flex; align-items: center; }
+.ml-logo img, .ml-logo svg { display: block; height: var(--size-1); width: auto; }
+.ml-logo--sm img, .ml-logo--sm svg { height: 20px; }
+.ml-logo--lg img, .ml-logo--lg svg { height: var(--size-3); }
+/* Clear space: the lockup keeps one cap-height of air on every side. Stated
+   as padding so it cannot be forgotten at a call site. */
+.ml-logo--clear { padding: var(--space-2); }
+
+/* Type fallback only — favicons, plain-text contexts, and anywhere the SVG
+   cannot be fetched. Never place this next to the real mark. */
 .ml-wordmark {
   font-family: var(--font-display);
   font-weight: 800;
@@ -544,6 +578,11 @@ a.ml-row:active { background: var(--color-surface); }
 
 .ml-app__footer {
   flex: none;
+  position: sticky; bottom: 0; z-index: var(--z-2);
+  /* It is called a sticky footer and it was neither sticky nor stacked: with
+     no position and no z-index it sat in flow and scrolling content rode over
+     it. The shell gives it a row, sticky pins it, z-index puts it above the
+     content it is meant to float over. */
   padding: var(--space-3);
   padding-bottom: calc(var(--space-3) + var(--safe-bottom));
   background: var(--color-paper);
@@ -649,7 +688,9 @@ a.ml-row:active { background: var(--color-surface); }
   width: 64px; height: 64px; margin-inline: auto;
   border-radius: var(--radius-4);
   background: color-mix(in srgb, var(--color-success) 14%, var(--color-white));
-  color: var(--color-success);
+  /* The raw green on its own 14% tint is 2.02:1, under the 3:1 floor for a
+     graphic (1.4.11). Same darkening the status pills already use. */
+  color: color-mix(in srgb, var(--color-success) 58%, black);
 }
 
 /* ── step progress ─────────────────────────────────────────────────────── */
@@ -676,7 +717,7 @@ a.ml-row:active { background: var(--color-surface); }
   display: flex; align-items: center; gap: var(--space-3);
   width: 100%;
   min-height: var(--size-4);
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-3);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-2);
   background: var(--color-white);
@@ -752,7 +793,10 @@ a.ml-row:active { background: var(--color-surface); }
   display: inline-flex; align-items: center; justify-content: center;
   width: 15px; height: 15px; flex: none;
   border-radius: var(--radius-4);
-  background: var(--color-pink);
+  /* White on --color-pink is 3.56:1. It scrapes the 3:1 graphic floor but
+     breaks the rule this system states on the token itself, and a verified
+     mark is the last thing that should be borderline. Pressed is 5.37. */
+  background: var(--color-pink-pressed);
   color: var(--color-white);
 }
 
@@ -856,8 +900,8 @@ a.ml-row:active { background: var(--color-surface); }
 }
 .ml-select select {
   width: 100%;
-  min-height: var(--size-3);
-  padding: 0 var(--size-3) 0 var(--space-3);
+  min-height: var(--size-4);
+  padding: var(--space-3) var(--size-3) var(--space-3) var(--space-3);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-4);
   background: var(--color-white);

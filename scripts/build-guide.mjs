@@ -29,11 +29,18 @@
  *
  * Usage: node scripts/build-guide.mjs
  */
-import { readFileSync, writeFileSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, statSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+/* Gestalt ships two optical grids: 398 icons drawn on 24 units and 25 "compact"
+   ones drawn on 16. Rendering both at one size makes the compact set read
+   heavier, because its strokes were cut for a smaller box. */
+const nativeIs16 = (n) => {
+  try { return /width="16"/.test(readFileSync(join(ROOT, "frontend/guide/musiclinkd-system/icons", `${n}.svg`), "utf8")); }
+  catch { return false; }
+};
 const SYS = join(ROOT, "frontend/guide/system");
 const OUT = join(ROOT, "frontend/guide/index.html");
 
@@ -159,13 +166,71 @@ const sections = [...parseSections("ml-core.css"), ...parseSections("ml-widgets.
 /* Authored once, keyed by section name. A section with no entry here is not
    dropped — it is reported in the coverage ledger. */
 
+/* The icon files carry width/height but NO viewBox, and they are not all the
+   same size: 398 are 24x24 and 25 are 16x16. Swapping width/height for a
+   smaller number without a viewBox therefore CROPS the path to the top-left
+   corner instead of scaling it — which is what every ic() call at a size other
+   than the icon's native one was silently doing. Found 2026-08-30 because the
+   pricing tick marks rendered as slivers. The viewBox has to come from the
+   file's own dimensions, not a constant. */
 const ic = (n, s = 18) => {
-  const svg = readFileSync(join(ROOT, "frontend/guide/musiclinkd-system/icons", `${n}.svg`), "utf8")
-    .replace(/\s*width="\d+"|\s*height="\d+"/g, "").replace(/<svg /, '<svg fill="currentColor" ');
-  return svg.replace(/<svg /, `<svg width="${s}" height="${s}" aria-hidden="true" `);
+  const raw = readFileSync(join(ROOT, "frontend/guide/musiclinkd-system/icons", `${n}.svg`), "utf8");
+  const nw = (raw.match(/width="(\d+)"/) || [, "24"])[1];
+  const nh = (raw.match(/height="(\d+)"/) || [, nw])[1];
+  const vb = /viewBox=/.test(raw) ? "" : ` viewBox="0 0 ${nw} ${nh}"`;
+  return raw.replace(/\s*width="\d+"|\s*height="\d+"/g, "")
+    .replace(/<svg /, `<svg width="${s}" height="${s}"${vb} fill="currentColor" aria-hidden="true" `);
 };
+/* ── media ─────────────────────────────────────────────────────────────
+   Photography is READ FROM DISK at build time, never hardcoded. Six pools,
+   each with a different job, because the folders genuinely differ in kind:
+
+     stage      img/6   live performance — artists, crowds, stage light
+     editorial  img/4   lifestyle editorial — people, headphones, desks
+     object     img/5   3D object renders on transparent ground
+     pins       img/inspiration  portrait crops, mixed aspect — mosaic fodder
+     faces      img/editorials   portraits already in use across the system
+     gear       img/speakers     monitors, hardware, design objects
+     video      img/4 *.mp4      real motion, for the video component
+     motion     img/6 *.gif      short loops
+
+   Sorted, so a build is reproducible; size-filtered, so thumbnails and 1x1
+   trackers never surface. Adding a file to a folder makes it available with
+   no edit here, and build-hosting derives its ship-list from the markup this
+   produces, so the two cannot drift. */
+const IMGROOT = join(ROOT, "frontend/website/assets/img");
+const poolOf = (dir, minBytes, re = /\.(jpe?g|png|webp)$/i, maxBytes = Infinity) => {
+  let files = [];
+  try { files = readdirSync(join(IMGROOT, dir)); } catch { return []; }
+  return files.filter((f) => re.test(f))
+    .filter((f) => { try { const b = statSync(join(IMGROOT, dir, f)).size; return b >= minBytes && b <= maxBytes; } catch { return false; } })
+    .sort().map((f) => `/assets/img/${dir}/${f}`);
+};
+const MEDIA = {
+  stage:     poolOf("6", 150_000),
+  editorial: poolOf("4", 120_000),
+  object:    poolOf("5", 60_000),
+  pins:      poolOf("inspiration", 14_000),
+  faces:     poolOf("editorials", 0),
+  gear:      poolOf("speakers", 0),
+  video:     poolOf("4", 200_000, /\.mp4$/i, 7_000_000),
+  motion:    poolOf("6", 200_000, /\.gif$/i),
+};
+for (const [k, v] of Object.entries(MEDIA)) {
+  if (!v.length) throw new Error(`media pool "${k}" is empty — the guide would render placeholder-less`);
+}
+/* Deterministic pick. Index wraps, so a demo asking for 12 tiles from an
+   8-file pool repeats rather than crashing. */
+const m = (pool, i = 0) => MEDIA[pool][i % MEDIA[pool].length];
+/* Videos are chosen by NAME, not index: the two used here are the songwriting
+   session and the banner loop, and an index would silently point at a trainer
+   advert the day someone adds a file. Falls back to the first clip. */
+const vid = (needle) => MEDIA.video.find((v) => v.toLowerCase().includes(needle.toLowerCase())) || MEDIA.video[0];
+
 const PHOTO = "/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg";
 const FACE = "/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg";
+const GEAR = "/assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg";
+const GEAR2 = "/assets/img/speakers/39fdf43f680420b44f547c6cb535900b.jpg";
 
 const DEMOS = {
   "button": `<div class="g-row">
@@ -185,8 +250,13 @@ const DEMOS = {
   "search": `<div class="ml-search" style="max-width:340px"><span class="ml-search__icon">${ic("search", 18)}</span>
     <input placeholder="Search talent, studios…" aria-label="Search" /><span class="ml-search__divider"></span>
     <button class="ml-icon-btn ml-icon-btn--bare" aria-label="Voice">${ic("microphone", 20)}</button></div>`,
-  "chip": `<div class="ml-chip-wrap"><button class="ml-chip" aria-pressed="true">Selected</button>
-    <button class="ml-chip">Bollywood</button><button class="ml-chip">Sufi</button></div>`,
+  "chip": `<div class="ml-chip-wrap">
+    <button class="ml-chip" aria-pressed="true">${ic("check", 16)}Selected</button>
+    <button class="ml-chip">${ic("music-on", 16)}Bollywood</button>
+    <button class="ml-chip">Sufi</button>
+    <button class="ml-chip">Mumbai<span class="ml-chip__dismiss" aria-hidden="true">${ic("cancel", 14)}</span></button>
+    <button class="ml-chip">${ic("filter", 16)}Filters</button></div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Press one — pressed is pink (intent), selected is ink (commitment).</p>`,
   "status": `<div class="g-row"><span class="ml-status ml-status--success">Available</span>
     <span class="ml-status ml-status--warning">Selective</span><span class="ml-status ml-status--error">Rejected</span>
     <span class="ml-status ml-status--accent">Live band</span><span class="ml-status ml-status--neutral">Draft</span></div>`,
@@ -208,14 +278,25 @@ const DEMOS = {
   "loading": `<div class="g-row" style="align-items:flex-start"><div class="ml-spinner"></div>
     <div style="flex:1;max-width:240px"><div class="ml-skeleton" style="height:12px;margin-bottom:8px"></div>
     <div class="ml-skeleton" style="height:12px;width:70%"></div></div></div>`,
-  "brand": `<div><div class="ml-wordmark">MusicLink<em>d</em></div>
-    <div class="ml-eyebrow" style="margin-top:var(--space-2)">Eyebrow label</div></div>`,
+  "brand": `<div class="g-row" style="align-items:center;gap:var(--space-4)">
+    <span class="ml-logo ml-logo--lg"><img src="/guide/brand/assets/logo-lockup-black.svg" alt="MusicLinkd" /></span>
+    <span class="ml-logo" style="background:var(--color-ink);border-radius:var(--radius-1);padding:var(--space-2) var(--space-3)">
+      <img src="/guide/brand/assets/logo-lockup-white.svg" alt="MusicLinkd" /></span>
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-3) 0 var(--space-1)">Type fallback — never beside the real mark.</p>
+  <div class="ml-wordmark">MusicLink<em>d</em></div>
+  <div class="ml-eyebrow" style="margin-top:var(--space-2)">Eyebrow label</div>`,
   "nav app bar": `<div class="g-frame"><header class="ml-navbar" style="padding-top:var(--space-2)">
     <button class="ml-icon-btn ml-icon-btn--bare" aria-label="Back">${ic("arrow-back", 20)}</button>
     <h3 class="ml-navbar__title">Screen title</h3><span class="ml-navbar__spacer"></span>
     <button class="ml-icon-btn" aria-label="Filters">${ic("filter", 20)}</button></header></div>`,
-  "sticky footer": `<div class="g-frame"><footer class="ml-app__footer" style="padding-bottom:var(--space-3)">
-    <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="#c-sticky-footer">Continue</a></footer></div>`,
+  "sticky footer": `<div class="g-frame" style="height:220px;overflow-y:auto;display:flex;flex-direction:column">
+    <div style="flex:1;padding:var(--space-3)">
+      <p class="ml-type-2" style="margin:0 0 var(--space-3)">Scroll this panel. The footer stays put and the content passes beneath it.</p>
+      ${Array.from({length:6},(_,i)=>`<p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-3)">Paragraph ${i+1} of the scrolling body copy.</p>`).join("")}
+    </div>
+    <footer class="ml-app__footer" style="padding-bottom:var(--space-3)">
+      <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="#c-sticky-footer">Continue</a></footer></div>`,
   "segmented control": `<div class="ml-segmented" style="max-width:320px" role="tablist">
     <button class="ml-segmented__btn" role="tab" aria-selected="true">Beginner</button>
     <button class="ml-segmented__btn" role="tab" aria-selected="false">Intermediate</button>
@@ -376,9 +457,21 @@ const DEMOS = {
       <a class="ml-row" href="#c-drawer"><span class="ml-row__body"><span class="ml-row__title">Your profile</span></span></a>
       <a class="ml-row" href="#c-drawer"><span class="ml-row__body"><span class="ml-row__title">Settings</span></span></a>
       <a class="ml-row" href="#c-drawer"><span class="ml-row__body"><span class="ml-row__title">Help</span></span></a></div></div></div>`,
-  "video": `<div class="ml-video" style="max-width:340px"><img src="${PHOTO}" alt="" />
-    <button class="ml-video__play" aria-label="Play">${ic("play", 20)}</button>
-    <span class="ml-video__time">2:14</span></div>`,
+  "video": `<div class="g-row" style="align-items:flex-start">
+    <div>
+      <div class="ml-video" style="max-width:300px">
+        <video src="${vid("Songwriting")}" poster="${m("stage",11)}" controls playsinline preload="metadata"
+               style="width:100%;display:block" aria-label="Session reel"></video></div>
+      <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">With controls — the default. ${MEDIA.video.length} clips in the pool.</p>
+    </div>
+    <div>
+      <div class="ml-video" style="max-width:300px">
+        <video src="${vid("banner")}" muted loop playsinline autoplay
+               style="width:100%;display:block" aria-label="Ambient loop"></video>
+        <span class="ml-video__time">0:08</span></div>
+      <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Muted autoplay loop — decorative only, never for content that carries meaning.</p>
+    </div>
+  </div>`,
   "stem mixer": `<div class="ml-mixer" style="max-width:340px">
     ${[["Vocals", 78], ["Guitar", 62], ["Bass", 55], ["Drums", 70]].map(([n, v], i) => `<div class="ml-mixer__track">
       <span class="ml-mixer__name">${n}</span>
@@ -534,6 +627,218 @@ const DEMOS = {
     <div class="ml-inset__sub">Seasoned tun wood</div>
     <div class="ml-inset__foot"><span class="ml-value">₹64,000</span>
     <span class="ml-btn ml-btn--primary ml-btn--arrow">Enquire<span class="ml-btn__arrow">${ic("arrow-forward", 14)}</span></span></div></div></a>`,
+  /* ── migration backfill: present in styleguide.html / Gestalt, absent here
+        until 2026-08-30. ─────────────────────────────────────────────── */
+  "tooltip": `<div class="g-row">
+    <span class="ml-tip" data-tip="Verified by a label or a release credit"><button class="ml-btn ml-btn--secondary">Hover me</button></span>
+    <span class="ml-tip ml-tip--below" data-tip="Opens below instead"><button class="ml-btn ml-btn--ghost">Below</button></span>
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Desktop only — a touch screen has no hover. On a phone use Help or a sheet.</p>`,
+  "popover": `<div class="ml-pop-anchor">
+    <button class="ml-icon-btn" aria-label="More" aria-expanded="true">${ic("ellipsis", 20)}</button>
+    <div class="ml-pop" role="menu">
+      <button class="ml-pop__item" role="menuitem" aria-checked="true">${ic("check", 16)} Share profile</button>
+      <button class="ml-pop__item" role="menuitem">Copy link</button>
+      <div class="ml-pop__sep"></div>
+      <button class="ml-pop__item ml-pop__item--danger" role="menuitem">Report</button>
+    </div></div>
+  <div style="height:150px"></div>`,
+  "help button": `<div class="g-row" style="align-items:center">
+    <span class="ml-type-2">Industry verified</span>
+    <span class="ml-pop-anchor"><button class="ml-help" aria-label="What does industry verified mean?" style="position:relative">?</button></span>
+  </div>`,
+  "combobox": `<div class="ml-combo" style="max-width:340px">
+    <div class="ml-field"><label for="d-cb">Primary instrument</label>
+      <input id="d-cb" role="combobox" aria-expanded="true" aria-controls="d-cbl"
+        aria-autocomplete="list" aria-activedescendant="d-cbo1" value="tab" /></div>
+    <span class="ml-visually-hidden" role="status">3 results</span>
+    <div class="ml-combo__list" id="d-cbl" role="listbox">
+      <div class="ml-combo__opt" role="option" id="d-cbo1" aria-selected="true"><span><mark>Tab</mark>la</span></div>
+      <div class="ml-combo__opt" role="option" id="d-cbo2" aria-selected="false"><span><mark>Tab</mark>or</span></div>
+      <div class="ml-combo__opt" role="option" id="d-cbo3" aria-selected="false"><span>Guitar (<mark>tab</mark>bed)</span></div>
+    </div></div>
+  <div style="height:120px"></div>`,
+  "breadcrumb": `<nav class="ml-crumbs" aria-label="Breadcrumb">
+    <a class="ml-crumbs__item" href="#c-breadcrumb">Market</a>
+    <a class="ml-crumbs__item" href="#c-breadcrumb">Audio gear</a>
+    <a class="ml-crumbs__item" href="#c-breadcrumb" aria-current="page">Microphones</a></nav>`,
+  "pricing tiers": `<div class="ml-tiers" style="max-width:760px">
+    <div class="ml-tier"><div class="ml-tier__name">Free</div>
+      <div><span class="ml-tier__price">₹0</span> <span class="ml-tier__unit">/month</span></div>
+      <ul class="ml-tier__feats">
+        <li class="ml-tier__feat">${ic("check", 14)} Profile and portfolio</li>
+        <li class="ml-tier__feat">${ic("check", 14)} 3 applications a month</li>
+        <li class="ml-tier__feat ml-tier__feat--off">${ic("cancel", 14)} Verified badge</li></ul>
+      <button class="ml-btn ml-btn--secondary ml-btn--block">Current plan</button></div>
+    <div class="ml-tier ml-tier--featured"><span class="ml-tier__flag">Recommended</span>
+      <div class="ml-tier__name">Pro</div>
+      <div><span class="ml-tier__price">₹499</span> <span class="ml-tier__unit">/month</span></div>
+      <ul class="ml-tier__feats">
+        <li class="ml-tier__feat">${ic("check", 14)} Everything in Free</li>
+        <li class="ml-tier__feat">${ic("check", 14)} Unlimited applications</li>
+        <li class="ml-tier__feat">${ic("check", 14)} Verified badge</li></ul>
+      <button class="ml-btn ml-btn--primary ml-btn--block">Upgrade</button></div>
+    <div class="ml-tier"><div class="ml-tier__name">Studio</div>
+      <div><span class="ml-tier__price">₹1,999</span> <span class="ml-tier__unit">/month</span></div>
+      <ul class="ml-tier__feats">
+        <li class="ml-tier__feat">${ic("check", 14)} Everything in Pro</li>
+        <li class="ml-tier__feat">${ic("check", 14)} Team seats and booking</li></ul>
+      <button class="ml-btn ml-btn--secondary ml-btn--block">Talk to us</button></div></div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">The recommended tier is marked by border and label, not by colour alone.</p>`,
+  "trends table": `<div class="ml-trends" style="max-width:420px">
+    <div class="ml-trends__head"><span>#</span><span>Top searches this week</span><span>Change</span></div>
+    <a class="ml-trends__row" href="#c-trends-table"><span class="ml-trends__rank">1</span>
+      <span class="ml-trends__term"><img class="ml-trends__thumb" src="${PHOTO}" alt="" />
+        <span><span class="ml-trends__label">Session tabla players</span><br><span class="ml-trends__sub">Mumbai · 2,410 searches</span></span></span>
+      <span class="ml-trends__delta ml-trends__delta--up">${ic("arrow-up", 12)} +18%</span></a>
+    <a class="ml-trends__row" href="#c-trends-table"><span class="ml-trends__rank">2</span>
+      <span class="ml-trends__term"><img class="ml-trends__thumb" src="${GEAR}" alt="" />
+        <span><span class="ml-trends__label">Neumann U87</span><br><span class="ml-trends__sub">Gear · 1,905 searches</span></span></span>
+      <span class="ml-trends__delta ml-trends__delta--down">${ic("arrow-down", 12)} −4%</span></a>
+    <a class="ml-trends__row" href="#c-trends-table"><span class="ml-trends__rank">3</span>
+      <span class="ml-trends__term"><img class="ml-trends__thumb" src="${PHOTO}" alt="" />
+        <span><span class="ml-trends__label">Mixing &amp; mastering</span><br><span class="ml-trends__sub">Services · 1,740 searches</span></span></span>
+      <span class="ml-trends__delta ml-trends__delta--flat">±0%</span></a></div>`,
+  "collage": `<div class="ml-collage" style="max-width:400px">
+    <div class="ml-collage__hero"><img src="${PHOTO}" alt="" /></div>
+    <img src="${GEAR}" alt="" /><img src="${FACE}" alt="" />
+    <img src="${GEAR2}" alt="" /><div class="ml-collage__more">+7</div></div>`,
+  "social sign-in button": `<div style="max-width:340px;display:grid;gap:var(--space-2)">
+    <button class="ml-btn ml-btn--social ml-btn--block">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><path fill="#4285F4" d="M17.6 9.2c0-.6-.1-1.2-.2-1.8H9v3.4h4.8a4.1 4.1 0 0 1-1.8 2.7v2.2h2.9c1.7-1.6 2.7-3.9 2.7-6.5z"/><path fill="#34A853" d="M9 18c2.4 0 4.5-.8 6-2.2l-2.9-2.2c-.8.5-1.8.9-3.1.9-2.4 0-4.4-1.6-5.1-3.8H.9v2.3A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.9 10.7a5.4 5.4 0 0 1 0-3.4V5H.9a9 9 0 0 0 0 8l3-2.3z"/><path fill="#EA4335" d="M9 3.6c1.3 0 2.5.5 3.4 1.3l2.6-2.6A9 9 0 0 0 .9 5l3 2.3C4.6 5.2 6.6 3.6 9 3.6z"/></svg>
+      Continue with Google</button>
+    <button class="ml-btn ml-btn--social ml-btn--block">
+      <svg viewBox="0 0 18 18" aria-hidden="true"><path fill="#000" d="M12.5 9.6c0-2 1.6-2.9 1.7-3-.9-1.4-2.4-1.5-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-1.4 2.4-.4 6 1 8 .7 1 1.5 2 2.5 2 1 0 1.4-.6 2.6-.6s1.5.6 2.6.6c1.1 0 1.8-1 2.4-1.9.8-1.1 1.1-2.2 1.1-2.2s-2.1-.8-2.1-3.3zM10.8 3.7c.5-.7.9-1.6.8-2.6-.8 0-1.8.5-2.4 1.2-.5.6-1 1.6-.8 2.5.9.1 1.8-.4 2.4-1.1z"/></svg>
+      Continue with Apple</button></div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Provider marks are the one documented palette exception — their brand terms fix the colours.</p>`,
+  "native keyboard & IME": `<div class="g-frame" style="max-width:300px">
+    <div style="padding:var(--space-3)"><div class="ml-field"><label for="d-ime">Message</label>
+      <input id="d-ime" inputmode="text" enterkeyhint="send" placeholder="Type a message…" /></div></div>
+    <div class="ml-ime-bar"><span class="ml-type-1" style="color:var(--color-muted)">enterkeyhint="send"</span>
+      <button class="ml-btn ml-btn--primary ml-btn--sm ml-ime-bar__done">Send</button></div>
+    <div style="background:var(--color-surface);border-top:1px solid var(--color-line);padding:var(--space-4) var(--space-2);text-align:center">
+      <span class="ml-type-1" style="color:var(--color-muted)">System keyboard — 45% of the screen</span></div></div>`,
+  "masonry": '<div class="ml-masonry">' +
+    Array.from({length:9},(_,i)=>
+      `<figure class="ml-mosaic-tile" style="margin:0 0 var(--space-2)">
+         <img src="${m("pins", i*7)}" alt="" loading="lazy" />
+         <button class="ml-mosaic-tile__pin" aria-label="Save">${ic("heart", 16)}</button>
+         ${i%3===0?`<figcaption class="ml-mosaic-tile__cap">Saved to Moodboard</figcaption>`:""}
+       </figure>`).join("") + '</div>' +
+    `<p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-3)">Nine tiles of unequal height, ${MEDIA.pins.length} in the pool. Columns: 2 / 3 at 600dp / 4 at 840dp.</p>`,
+
+  "bento": `<div class="ml-bento">
+    <article class="ml-bento__card"><img class="ml-bento__img" src="${m("stage",3)}" alt="" loading="lazy" />
+      <div><div class="ml-bento__title">Live sessions</div>
+        <p class="ml-bento__body" style="margin:var(--space-1) 0 0">The wide tile leads. Everything after it is a beat in the same bar.</p></div></article>
+    <article class="ml-bento__card"><img class="ml-bento__img" src="${m("object",1)}" alt="" loading="lazy" />
+      <div class="ml-bento__title">Gear</div></article>
+    <article class="ml-bento__card"><img class="ml-bento__img" src="${m("gear",2)}" alt="" loading="lazy" />
+      <div class="ml-bento__title">Studios</div></article>
+    <article class="ml-bento__card"><img class="ml-bento__img" src="${m("stage",17)}" alt="" style="height:auto;flex:1" loading="lazy" />
+      <div class="ml-bento__title">Tall tile</div>
+      <p class="ml-bento__body">Spans two rows at 600dp and up.</p></article>
+    <article class="ml-bento__card"><img class="ml-bento__img" src="${m("editorial",4)}" alt="" loading="lazy" />
+      <div class="ml-bento__title">Collaborators</div></article>
+  </div>
+  <div class="ml-bento ml-bento--dark" style="background:var(--color-ink);padding:var(--space-3);border-radius:var(--radius-3);margin-top:var(--space-4)">
+    <article class="ml-bento__card"><div class="ml-bento__title">Dark bento</div>
+      <p class="ml-bento__body" style="margin:0">Tiles are translucent white, not a second black — so the same markup works over ink or over media.</p></article>
+    <article class="ml-bento__card"><div class="ml-bento__title">5% white</div></article>
+    <article class="ml-bento__card"><div class="ml-bento__title">12% border</div></article>
+  </div>`,
+
+  "split editorial": `<div class="ml-split">
+    <div class="ml-split__media" style="aspect-ratio:4/3"><img src="${m("editorial",0)}" alt="" loading="lazy" /></div>
+    <div><span class="ml-article__tag">The brief</span>
+      <blockquote class="ml-quote" style="margin-top:var(--space-2)">Find the room, not just the engineer.</blockquote>
+      <cite class="ml-quote__cite">Ananya Sharma · Playback vocalist, Mumbai</cite></div>
+  </div>
+  <div class="ml-split ml-split--flip" style="margin-top:var(--space-4)">
+    <div class="ml-split__media" style="aspect-ratio:4/3"><video src="${m("video",2)}" muted loop playsinline autoplay aria-label="Studio session"></video></div>
+    <div><span class="ml-article__tag">Motion</span>
+      <blockquote class="ml-quote" style="margin-top:var(--space-2)">The flipped band puts the media second.</blockquote>
+      <cite class="ml-quote__cite">Alternating sides is what stops a run of these reading as a slideshow</cite></div>
+  </div>`,
+
+  "article grid": '<div class="ml-articles">' +
+    [["Recording","Ten rooms worth booking in Mumbai","6 min read"],
+     ["Gear","What a U87 actually costs to run","4 min read"],
+     ["Craft","Session players on getting the first call","8 min read"]]
+    .map(([tag,title,meta],i)=>
+      `<a class="ml-article" href="#c-article-grid">
+         <div class="ml-article__media"><img src="${m("stage", i*29+5)}" alt="" loading="lazy" /></div>
+         <div><span class="ml-article__tag">${tag}</span>
+           <h4 class="ml-article__title" style="margin:var(--space-1) 0">${title}</h4>
+           <span class="ml-article__meta">${meta}</span></div></a>`).join("") + '</div>',
+
+  "feature grid": `<div class="ml-features">
+    ${[["sparkle","Matched, not searched","Briefs go to the twelve people who actually fit, not the twelve hundred who might."],
+       ["globe-checked","Credits that hold up","Every credit is confirmed by a second party before it counts."],
+       ["briefcase","Paid on delivery","Escrow releases when the stems land, not when someone remembers."]]
+      .map(([i,t,b])=>`<article class="ml-feature">
+        <span class="ml-feature__icon">${ic(i,20)}</span>
+        <h4 class="ml-feature__title">${t}</h4>
+        <p class="ml-feature__body" style="margin:0">${b}</p></article>`).join("")}
+  </div>
+  <div class="ml-features" style="margin-top:var(--space-4)">
+    ${[["lock","Unverified credits","Anyone can claim a session. Nothing proves it."],
+       ["people","Cold outreach","The same fifty DMs to the same fifty inboxes."]]
+      .map(([i,t,b])=>`<article class="ml-feature ml-feature--problem">
+        <span class="ml-feature__icon">${ic(i,20)}</span>
+        <h4 class="ml-feature__title">${t}</h4>
+        <p class="ml-feature__body" style="margin:0">${b}</p></article>`).join("")}
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Accent disc for capability, neutral disc for problem — a pain point is not an accent.</p>`,
+
+  "testimonial": `<div class="ml-testimonial" style="max-width:420px">
+    <blockquote class="ml-testimonial__quote">Three confirmed credits in a fortnight, and every one of them from someone who found me rather than the other way round.</blockquote>
+    <div class="ml-testimonial__user">
+      <img class="ml-avatar ml-avatar--sm" src="${m("faces",4)}" alt="" />
+      <div><div class="ml-testimonial__name">Ananya Sharma</div>
+        <div class="ml-testimonial__role">Playback vocalist · Mumbai</div></div></div>
+    <div class="ml-testimonial__stats">
+      <div class="ml-testimonial__stat"><b>3</b><span>Credits</span></div>
+      <div class="ml-testimonial__stat"><b>14</b><span>Days</span></div>
+      <div class="ml-testimonial__stat"><b>4.9</b><span>Rating</span></div></div>
+  </div>`,
+
+  "ambient album card": `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--space-3);max-width:640px">
+    ${[["Dil Ki Raah","Arijit Sen · 2026"],["Limelight","Shubh · Single"],["Night Bus","The Local Train · EP"]]
+      .map(([t,mt],i)=>`<a class="ml-album" href="#c-ambient-album-card">
+        <div class="ml-album__frame"><img src="${m("pins", i*13+2)}" alt="" loading="lazy" />
+          <button class="ml-album__play" aria-label="Play ${t}">${ic("play",20)}</button></div>
+        <div><div class="ml-album__title">${t}</div><div class="ml-album__meta">${mt}</div></div></a>`).join("")}
+  </div>`,
+
+  "trust & verification": `<div class="ml-trust" style="max-width:420px">
+    ${[["Identity","Verified by Aadhaar eKYC · Mar 2026"],
+       ["Credit · Dil Ki Raah","Confirmed by Yash Raj Sound Studios"],
+       ["Payout account","Verified by penny-drop · Feb 2026"]]
+      .map(([w,who])=>`<div class="ml-trust__row"><span class="ml-trust__mark">${ic("check",14)}</span>
+        <div><div class="ml-trust__what">${w}</div><div class="ml-trust__who">${who}</div></div></div>`).join("")}
+    <div class="ml-trust__stats">
+      <div class="ml-testimonial__stat"><b>98%</b><span>Response</span></div>
+      <div class="ml-testimonial__stat"><b>6 yrs</b><span>On MusicLinkd</span></div></div>
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Every tick names its source. A tick with no source is decoration.</p>`,
+
+  "sticker": `<div style="position:relative;max-width:300px;border-radius:var(--radius-2);overflow:hidden">
+    <img src="${m("stage",41)}" alt="" style="width:100%;display:block" loading="lazy" />
+    <span class="ml-sticker">Now booking</span></div>`,
+
+  "ambient mosaic panel": `<div class="ml-wall">
+    <div class="ml-wall__bg" aria-hidden="true">
+      ${[0,1,2,3].map(c=>`<div class="ml-wall__col ${c%2?"ml-wall__col--drift":""}">
+        ${[0,1,2,3].map(r=>`<img src="${m("pins", c*17+r*5)}" alt="" loading="lazy" />`).join("")}</div>`).join("")}
+    </div>
+    <div class="ml-wall__card">
+      <div class="ml-wordmark" style="font-size:var(--type-2)">MusicLink<em>d</em></div>
+      <p class="ml-type-2" style="margin:var(--space-2) 0 var(--space-3)">72,000 verified music professionals.</p>
+      <button class="ml-btn ml-btn--primary ml-btn--block">Create your profile</button></div>
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">The wall is decorative and aria-hidden; the card carries the meaning. Drift respects prefers-reduced-motion.</p>`,
+
 };
 
 /* ── page ──────────────────────────────────────────────────────────────── */
@@ -766,6 +1071,26 @@ const html = `<!doctype html>
     <div class="ml-type-1" style="margin-top:var(--space-2)">Caption — metadata, labels and badges</div>
   </div>
 
+  <h3 style="margin-top:var(--space-4)">Icon sizes</h3>
+  <p class="ml-lede">One glyph at every size the system uses. 16 and 24 are the two drawn grids;
+  the rest are scaled, which is why every icon carries a <code>viewBox</code> — without one,
+  resizing crops the path instead of scaling it.</p>
+  <div class="g-demo"><div class="g-row" style="align-items:flex-end;gap:var(--space-4)">
+    ${[12, 14, 16, 18, 20, 22, 24, 32].map((n) => `<div style="text-align:center">
+      ${ic("search", n)}<div class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-1)">${n}</div></div>`).join("")}
+  </div></div>
+
+  <h3 style="margin-top:var(--space-4)">App icon set</h3>
+  <p class="ml-lede">The launcher mark at the sizes Android and iOS ask for, each on the ground it
+  is drawn for. Picking the variant by ground rather than by taste is the whole rule.</p>
+  <div class="g-demo"><div class="g-row" style="align-items:center;gap:var(--space-4)">
+    ${[["favicon-mark", "paper", 32], ["favicon-mark", "paper", 48], ["logo-badge-inverse", "ink", 48], ["logo-badge-inverse", "ink", 64]]
+      .map(([f, ground, n]) => `<div style="text-align:center">
+        <span style="display:inline-flex;padding:var(--space-2);border-radius:var(--radius-2);background:var(${ground === "ink" ? "--color-ink" : "--color-white"});border:1px solid var(--color-line)">
+          <img src="/guide/brand/assets/${f}.svg" alt="" style="width:${n}px;height:${n}px;display:block" /></span>
+        <div class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-1)">${n}px · ${ground}</div></div>`).join("")}
+  </div></div>
+
   <h2 class="g-h" id="core">Core · ${core.length}</h2>
   ${core.map(componentSection).join("\n")}
 
@@ -824,7 +1149,15 @@ const html = `<!doctype html>
     time via <code>icon()</code>, which fails the run on an unknown name rather
     than rendering an empty box.
   </p>
-  <div class="g-icons">${iconNames.map((n) => `<div class="g-icon">${ic(n, 22)}<span>${n}</span></div>`).join("")}</div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+    Two optical grids. ${iconNames.filter(nativeIs16).length} "compact" icons are drawn on a 16-unit
+    box and ${iconNames.length - iconNames.filter(nativeIs16).length} standard icons on 24. Rendering a
+    16-unit glyph at 22px inflates its strokes about 1.4x against a 24-unit one beside it — which is
+    what made the set look unstable. Each is now shown at its own native size.</p>
+  <div class="g-icons">${iconNames.map((n) => {
+    const s = nativeIs16(n) ? 16 : 22;
+    return `<div class="g-icon">${ic(n, s)}<span>${n}</span></div>`;
+  }).join("")}</div>
 
   <h2 class="g-h" id="taxonomy">Taxonomy · ${taxonomy.length}</h2>
   <p class="ml-lede" style="max-width:64ch">
