@@ -209,6 +209,90 @@ const DEMOS = {
     <span class="ml-dimension__label">People<span class="ml-dimension__count">12,400 artists</span></span></a>
     <a class="ml-dimension" href="#c-what-are-you-looking-for-grid"><img src="${FACE}" alt="" />
     <span class="ml-dimension__label">Spaces<span class="ml-dimension__count">860 studios</span></span></a></div>`,
+  "switch": `<div style="max-width:340px">
+    <label class="ml-row"><span class="ml-row__body"><span class="ml-row__title">Push notifications</span>
+    <span class="ml-row__meta">New offers and messages</span></span>
+    <button class="ml-switch" role="switch" aria-checked="true" aria-label="Push notifications"></button></label>
+    <label class="ml-row"><span class="ml-row__body"><span class="ml-row__title">Email digest</span></span>
+    <button class="ml-switch" role="switch" aria-checked="false" aria-label="Email digest"></button></label></div>`,
+  "checkbox / radio": `<div style="display:flex;flex-direction:column;gap:var(--space-2);max-width:340px">
+    <label class="ml-check-row"><span class="ml-check-ctl" role="checkbox" aria-checked="true">${ic("check", 14)}</span>
+      <span>Available for session work</span></label>
+    <label class="ml-check-row"><span class="ml-check-ctl" role="checkbox" aria-checked="false">${ic("check", 14)}</span>
+      <span>Open to remote projects</span></label>
+    <label class="ml-check-row"><span class="ml-check-ctl ml-check-ctl--radio" role="radio" aria-checked="true"></span>
+      <span>Pickup</span></label>
+    <label class="ml-check-row"><span class="ml-check-ctl ml-check-ctl--radio" role="radio" aria-checked="false"></span>
+      <span>Delivery</span></label></div>`,
+  "select": `<div class="ml-field" style="max-width:340px"><label for="d-sel">City</label>
+    <span class="ml-select"><select id="d-sel"><option>Mumbai</option><option>Delhi NCR</option>
+    <option>Pune</option><option>Kochi</option></select></span></div>`,
+  "slider": `<div class="ml-field" style="max-width:340px"><label for="d-sl">Within 10 km</label>
+    <input class="ml-slider" id="d-sl" type="range" min="1" max="50" value="10" /></div>`,
+  "accordion": `<div style="max-width:360px">
+    <details class="ml-accordion"><summary>How do payouts work?</summary>
+    <div class="ml-accordion__body">Payouts settle to your registered account after the booking completes.</div></details>
+    <details class="ml-accordion"><summary>Can I cancel a booking?</summary>
+    <div class="ml-accordion__body">Yes, up to 24 hours before the session starts.</div></details></div>`,
+  "dialog": `<div class="ml-dialog" style="position:static;display:block;box-shadow:none;border:1px solid var(--color-line)">
+    <h4 class="ml-dialog__title">Delete this listing?</h4>
+    <p class="ml-dialog__body">It will be removed from Market immediately. Enquiries already received are kept.</p>
+    <div class="ml-dialog__actions"><button class="ml-btn ml-btn--secondary ml-btn--block">Keep listing</button>
+    <button class="ml-btn ml-btn--primary ml-btn--block">Delete</button></div></div>`,
+  "floating action button": `<div class="g-frame" style="position:relative;height:120px">
+    <button class="ml-fab" style="position:absolute;bottom:var(--space-3)">${ic("add", 20)}List gear</button></div>`,
+  "button group": `<div class="ml-btn-group" style="max-width:340px">
+    <button class="ml-btn ml-btn--primary">Message</button>
+    <button class="ml-btn ml-btn--secondary">Follow</button>
+    <button class="ml-btn ml-btn--secondary">Hire</button></div>`,
+  "calendar": `<div class="ml-calendar" style="max-width:340px">
+    <div class="ml-calendar__head"><span class="ml-calendar__month">March 2026</span>
+      <span style="display:flex;gap:var(--space-1)">
+      <button class="ml-icon-btn" aria-label="Previous month">${ic("arrow-back", 18)}</button>
+      <button class="ml-icon-btn" aria-label="Next month">${ic("arrow-forward", 18)}</button></span></div>
+    <div class="ml-calendar__dow"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+    <div class="ml-calendar__grid">${Array.from({ length: 31 }, (_, i) => {
+      const d = i + 1;
+      const cls = d === 11 ? " is-range-start" : d === 14 ? " is-range-end"
+        : d > 11 && d < 14 ? " is-in-range" : [5, 6, 20, 21].includes(d) ? " is-blocked"
+        : d === 3 ? " is-today" : "";
+      return `<button class="ml-calendar__day${cls}"${cls === " is-blocked" ? " disabled" : ""}>${d}</button>`;
+    }).join("")}</div>
+    <div class="ml-calendar__legend">
+      <span><i class="ml-calendar__key ml-calendar__key--sel"></i>Selected</span>
+      <span><i class="ml-calendar__key"></i>In range</span>
+      <span><i class="ml-calendar__key ml-calendar__key--blocked"></i>Unavailable</span></div></div>`,
+  "chat": `<div style="max-width:340px"><div class="ml-chat">
+    <span class="ml-chat__day">Today</span>
+    <div class="ml-bubble ml-bubble--in">Is the SM7B still available?<span class="ml-bubble__meta">11:04</span></div>
+    <div class="ml-bubble ml-bubble--out">It is — shockmount and cable included.<span class="ml-bubble__meta">11:06 · Read</span></div>
+    <div class="ml-bubble ml-bubble--in">Would you take ₹26,000?<span class="ml-bubble__meta">11:07</span></div></div>
+    <div class="ml-composer" style="margin-top:var(--space-2);padding-bottom:var(--space-2);border:1px solid var(--color-line);border-radius:var(--radius-2)">
+    <textarea rows="1" placeholder="Message…" aria-label="Message"></textarea>
+    <button class="ml-icon-btn" aria-label="Send">${ic("arrow-up", 20)}</button></div></div>`,
+  "attachment": `<a class="ml-attachment" href="#c-attachment" style="max-width:340px">
+    <span class="ml-attachment__icon">${ic("music-on", 20)}</span>
+    <span class="ml-attachment__body"><span class="ml-attachment__name">rough-mix-v3.wav</span>
+    <span class="ml-attachment__meta">42.1 MB · 3:48</span></span>
+    ${ic("arrow-down", 18)}</a>`,
+  "timeline": `<ol class="ml-timeline" style="max-width:340px">
+    <li class="ml-timeline__item is-done"><div class="ml-timeline__title">Offer accepted</div>
+      <div class="ml-timeline__meta">16 Aug · ₹38,000</div></li>
+    <li class="ml-timeline__item is-current"><div class="ml-timeline__title">Awaiting handover</div>
+      <div class="ml-timeline__meta">Arrange a time with the seller</div></li>
+    <li class="ml-timeline__item"><div class="ml-timeline__title">Completed</div>
+      <div class="ml-timeline__meta">Review unlocks after handover</div></li></ol>`,
+  "metrics": `<div style="max-width:340px">
+    <div class="ml-kpi"><span class="ml-kpi__num">4,210</span><span class="ml-kpi__delta ml-kpi__delta--up">+18%</span></div>
+    <div class="ml-row__meta">Listing views · last 7 days</div>
+    <div class="ml-bars" style="margin-top:var(--space-3)">${[38, 52, 44, 71, 63, 96, 80]
+      .map((h) => `<span class="ml-bars__bar${h === 96 ? " is-peak" : ""}" style="height:${h}%"></span>`).join("")}</div>
+    <div class="ml-bars__labels"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+    <div class="ml-spark" style="margin-top:var(--space-3)">${[30, 45, 38, 60, 52, 74, 68, 90]
+      .map((h, i, a) => `<span class="ml-spark__bar${i === a.length - 1 ? " is-last" : ""}" style="height:${h}%"></span>`).join("")}</div></div>`,
+  "equalizer": `<div class="ml-row" style="max-width:340px"><span class="ml-eq"><span></span><span></span><span></span><span></span></span>
+    <span class="ml-row__body"><span class="ml-row__title">Tum Hi Toh (Unplugged)</span>
+    <span class="ml-row__meta">Now playing</span></span></div>`,
   "phone entry": `<div class="ml-field" style="max-width:340px"><label for="d-p">Mobile number</label>
     <div class="ml-phone"><span class="ml-phone__prefix">🇮🇳 +91</span>
     <input id="d-p" type="tel" placeholder="98765 43210" /></div></div>`,

@@ -79,8 +79,8 @@
 <body>
 <nav class="g-nav" aria-label="Sections"><ul>
   <li><a href="#foundations">Foundations</a></li>
-  <li><a href="#core">Core · 29</a></li>
-  <li><a href="#widgets">Widgets · 26</a></li>
+  <li><a href="#core">Core · 37</a></li>
+  <li><a href="#widgets">Widgets · 32</a></li>
   <li><a href="#motion">Motion</a></li>
   <li><a href="#patterns">Patterns · 52</a></li>
   <li><a href="#icons">Icons · 423</a></li>
@@ -100,8 +100,8 @@
     </p>
     <div class="g-row" style="margin-top:var(--space-3)">
       <span class="ml-badge">56 tokens</span>
-      <span class="ml-badge">55 sections</span>
-      <span class="ml-badge">226 selectors</span>
+      <span class="ml-badge">69 sections</span>
+      <span class="ml-badge">279 selectors</span>
       <span class="ml-badge">423 icons</span>
       <span class="ml-badge ml-badge--accent">Light only</span>
     </div>
@@ -167,7 +167,7 @@
     <div class="ml-type-1" style="margin-top:var(--space-2)">Caption — metadata, labels and badges</div>
   </div>
 
-  <h2 class="g-h" id="core">Core · 29</h2>
+  <h2 class="g-h" id="core">Core · 37</h2>
   <section class="g-comp" id="c-base">
     <div class="g-comp__head">
       <h3>base</h3>
@@ -540,8 +540,124 @@
     <details class="g-sel"><summary>1 selector</summary>
       <code>.ml-link</code></details>
   </section>
+<section class="g-comp" id="c-switch">
+    <div class="g-comp__head">
+      <h3>switch</h3>
+      <span class="g-file">ml-core.css</span>
+      <span class="ml-badge">Compose · Switch</span>
+    </div>
+    <p class="ml-lede">The single most-needed missing control: user_settings is 13 screens of preferences with nothing to render them. The track is the target — 48dp tall even though it looks 28dp — and the state is carried by aria-checked so a screen reader gets it without a parallel class.</p>
+    <div class="g-demo"><div style="max-width:340px">
+    <label class="ml-row"><span class="ml-row__body"><span class="ml-row__title">Push notifications</span>
+    <span class="ml-row__meta">New offers and messages</span></span>
+    <button class="ml-switch" role="switch" aria-checked="true" aria-label="Push notifications"></button></label>
+    <label class="ml-row"><span class="ml-row__body"><span class="ml-row__title">Email digest</span></span>
+    <button class="ml-switch" role="switch" aria-checked="false" aria-label="Email digest"></button></label></div></div>
+    <details class="g-sel"><summary>1 selector</summary>
+      <code>.ml-switch</code></details>
+  </section>
+<section class="g-comp" id="c-checkbox-radio">
+    <div class="g-comp__head">
+      <h3>checkbox / radio</h3>
+      <span class="g-file">ml-core.css</span>
+      <span class="ml-badge">Compose · Checkbox · RadioButton</span>
+    </div>
+    <p class="ml-lede">Standalone controls. .ml-choice covers the whole-row pattern; these are for a control that sits beside other content — a filter list, a consent line.</p>
+    <div class="g-demo"><div style="display:flex;flex-direction:column;gap:var(--space-2);max-width:340px">
+    <label class="ml-check-row"><span class="ml-check-ctl" role="checkbox" aria-checked="true"><svg width="14" height="14" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span>
+      <span>Available for session work</span></label>
+    <label class="ml-check-row"><span class="ml-check-ctl" role="checkbox" aria-checked="false"><svg width="14" height="14" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span>
+      <span>Open to remote projects</span></label>
+    <label class="ml-check-row"><span class="ml-check-ctl ml-check-ctl--radio" role="radio" aria-checked="true"></span>
+      <span>Pickup</span></label>
+    <label class="ml-check-row"><span class="ml-check-ctl ml-check-ctl--radio" role="radio" aria-checked="false"></span>
+      <span>Delivery</span></label></div></div>
+    <details class="g-sel"><summary>3 selectors</summary>
+      <code>.ml-check-ctl</code> <code>.ml-check-ctl--radio</code> <code>.ml-check-row</code></details>
+  </section>
+<section class="g-comp" id="c-select">
+    <div class="g-comp__head">
+      <h3>select</h3>
+      <span class="g-file">ml-core.css</span>
+      <span class="ml-badge">Compose · ExposedDropdownMenuBox</span>
+    </div>
+    <p class="ml-lede">A native &lt;select> styled to match .ml-field. Deliberately native rather than a custom dropdown: the OS picker is better on a phone than anything we would draw, and it is accessible for free.</p>
+    <div class="g-demo"><div class="ml-field" style="max-width:340px"><label for="d-sel">City</label>
+    <span class="ml-select"><select id="d-sel"><option>Mumbai</option><option>Delhi NCR</option>
+    <option>Pune</option><option>Kochi</option></select></span></div></div>
+    <details class="g-sel"><summary>1 selector</summary>
+      <code>.ml-select</code></details>
+  </section>
+<section class="g-comp" id="c-slider">
+    <div class="g-comp__head">
+      <h3>slider</h3>
+      <span class="g-file">ml-core.css</span>
+      <span class="ml-badge">Compose · Slider · RangeSlider</span>
+    </div>
+    <p class="ml-lede">Range input, restyled. Both vendor thumb pseudo-elements are needed — there is no shared selector, and omitting one leaves that browser unstyled.</p>
+    <div class="g-demo"><div class="ml-field" style="max-width:340px"><label for="d-sl">Within 10 km</label>
+    <input class="ml-slider" id="d-sl" type="range" min="1" max="50" value="10" /></div></div>
+    <details class="g-sel"><summary>1 selector</summary>
+      <code>.ml-slider</code></details>
+  </section>
+<section class="g-comp" id="c-accordion">
+    <div class="g-comp__head">
+      <h3>accordion</h3>
+      <span class="g-file">ml-core.css</span>
+      <span class="ml-badge">Compose · ExpandableCard</span>
+    </div>
+    <p class="ml-lede">Built on &lt;details>/&lt;summary> so it works with no JavaScript and is keyboard-accessible for free. FAQ and settings screens need it.</p>
+    <div class="g-demo"><div style="max-width:360px">
+    <details class="ml-accordion"><summary>How do payouts work?</summary>
+    <div class="ml-accordion__body">Payouts settle to your registered account after the booking completes.</div></details>
+    <details class="ml-accordion"><summary>Can I cancel a booking?</summary>
+    <div class="ml-accordion__body">Yes, up to 24 hours before the session starts.</div></details></div></div>
+    <details class="g-sel"><summary>2 selectors</summary>
+      <code>.ml-accordion</code> <code>.ml-accordion__body</code></details>
+  </section>
+<section class="g-comp" id="c-dialog">
+    <div class="g-comp__head">
+      <h3>dialog</h3>
+      <span class="g-file">ml-core.css</span>
+      <span class="ml-badge">Compose · AlertDialog</span>
+    </div>
+    <p class="ml-lede">Centre-screen decision. Distinct from .ml-sheet, which is for choosing among options; a dialog is for confirming or refusing one. Uses &lt;dialog> so focus trapping and Esc are the platform's job, not ours.</p>
+    <div class="g-demo"><div class="ml-dialog" style="position:static;display:block;box-shadow:none;border:1px solid var(--color-line)">
+    <h4 class="ml-dialog__title">Delete this listing?</h4>
+    <p class="ml-dialog__body">It will be removed from Market immediately. Enquiries already received are kept.</p>
+    <div class="ml-dialog__actions"><button class="ml-btn ml-btn--secondary ml-btn--block">Keep listing</button>
+    <button class="ml-btn ml-btn--primary ml-btn--block">Delete</button></div></div></div>
+    <details class="g-sel"><summary>5 selectors</summary>
+      <code>.ml-dialog</code> <code>.ml-dialog__title</code> <code>.ml-dialog__body</code> <code>.ml-dialog__actions</code> <code>.ml-dialog--danger</code></details>
+  </section>
+<section class="g-comp" id="c-floating-action-button">
+    <div class="g-comp__head">
+      <h3>floating action button</h3>
+      <span class="g-file">ml-core.css</span>
+      <span class="ml-badge">Compose · FloatingActionButton</span>
+    </div>
+    
+    <div class="g-demo"><div class="g-frame" style="position:relative;height:120px">
+    <button class="ml-fab" style="position:absolute;bottom:var(--space-3)"><svg width="20" height="20" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22 10h-8V2a2 2 0 0 0-4 0v8H2a2 2 0 0 0 0 4h8v8a2 2 0 0 0 4 0v-8h8a2 2 0 0 0 0-4"/></svg>List gear</button></div></div>
+    <details class="g-sel"><summary>2 selectors</summary>
+      <code>.ml-fab</code> <code>.ml-fab--accent</code></details>
+  </section>
+<section class="g-comp" id="c-button-group">
+    <div class="g-comp__head">
+      <h3>button group</h3>
+      <span class="g-file">ml-core.css</span>
+      
+    </div>
+    <p class="ml-lede">Two or three actions of equal weight on one row. Not a segmented control — these fire actions, they do not select a mode.</p>
+    <div class="g-demo"><div class="ml-btn-group" style="max-width:340px">
+    <button class="ml-btn ml-btn--primary">Message</button>
+    <button class="ml-btn ml-btn--secondary">Follow</button>
+    <button class="ml-btn ml-btn--secondary">Hire</button></div></div>
+    <details class="g-sel"><summary>1 selector</summary>
+      <code>.ml-btn-group</code></details>
+  </section>
 
-  <h2 class="g-h" id="widgets">Widgets · 26</h2>
+  <h2 class="g-h" id="widgets">Widgets · 32</h2>
   <section class="g-comp" id="c-app-shell">
     <div class="g-comp__head">
       <h3>app shell</h3>
@@ -901,6 +1017,106 @@
     <div class="g-demo"><p class="ml-lede" style="max-width:360px">Grey carries the sentence, <b>ink carries the words that matter</b> — cheaper than colour, and it works on a monochrome page.</p></div>
     <details class="g-sel"><summary>1 selector</summary>
       <code>.ml-lede</code></details>
+  </section>
+<section class="g-comp" id="c-calendar">
+    <div class="g-comp__head">
+      <h3>calendar</h3>
+      <span class="g-file">ml-widgets.css</span>
+      <span class="ml-badge">Compose · a DatePicker / DateRangePicker built on this grid</span>
+    </div>
+    <p class="ml-lede">One month grid, four cell states. Needed twice over — booking's studio slots and Market's rental availability — which is why it lives in the system rather than in either flow. Bound to MarketplaceItemDoc.blockedDates for rentals; to the studio's own slots for booking.</p>
+    <div class="g-demo"><div class="ml-calendar" style="max-width:340px">
+    <div class="ml-calendar__head"><span class="ml-calendar__month">March 2026</span>
+      <span style="display:flex;gap:var(--space-1)">
+      <button class="ml-icon-btn" aria-label="Previous month"><svg width="18" height="18" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M15.78 24a2.2 2.2 0 0 1-1.58-.66L3 12 14.2.66a2.2 2.2 0 0 1 3.15 0c.87.88.87 2.3 0 3.18L9.29 12l8.06 8.16c.87.88.87 2.3 0 3.18-.44.44-1 .66-1.57.66"/></svg></button>
+      <button class="ml-icon-btn" aria-label="Next month"><svg width="18" height="18" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg></button></span></div>
+    <div class="ml-calendar__dow"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+    <div class="ml-calendar__grid"><button class="ml-calendar__day">1</button><button class="ml-calendar__day">2</button><button class="ml-calendar__day is-today">3</button><button class="ml-calendar__day">4</button><button class="ml-calendar__day is-blocked" disabled>5</button><button class="ml-calendar__day is-blocked" disabled>6</button><button class="ml-calendar__day">7</button><button class="ml-calendar__day">8</button><button class="ml-calendar__day">9</button><button class="ml-calendar__day">10</button><button class="ml-calendar__day is-range-start">11</button><button class="ml-calendar__day is-in-range">12</button><button class="ml-calendar__day is-in-range">13</button><button class="ml-calendar__day is-range-end">14</button><button class="ml-calendar__day">15</button><button class="ml-calendar__day">16</button><button class="ml-calendar__day">17</button><button class="ml-calendar__day">18</button><button class="ml-calendar__day">19</button><button class="ml-calendar__day is-blocked" disabled>20</button><button class="ml-calendar__day is-blocked" disabled>21</button><button class="ml-calendar__day">22</button><button class="ml-calendar__day">23</button><button class="ml-calendar__day">24</button><button class="ml-calendar__day">25</button><button class="ml-calendar__day">26</button><button class="ml-calendar__day">27</button><button class="ml-calendar__day">28</button><button class="ml-calendar__day">29</button><button class="ml-calendar__day">30</button><button class="ml-calendar__day">31</button></div>
+    <div class="ml-calendar__legend">
+      <span><i class="ml-calendar__key ml-calendar__key--sel"></i>Selected</span>
+      <span><i class="ml-calendar__key"></i>In range</span>
+      <span><i class="ml-calendar__key ml-calendar__key--blocked"></i>Unavailable</span></div></div></div>
+    <details class="g-sel"><summary>10 selectors</summary>
+      <code>.ml-calendar</code> <code>.ml-calendar__head</code> <code>.ml-calendar__month</code> <code>.ml-calendar__dow</code> <code>.ml-calendar__grid</code> <code>.ml-calendar__day</code> <code>.ml-calendar__legend</code> <code>.ml-calendar__key</code> <code>.ml-calendar__key--sel</code> <code>.ml-calendar__key--blocked</code></details>
+  </section>
+<section class="g-comp" id="c-chat">
+    <div class="g-comp__head">
+      <h3>chat</h3>
+      <span class="g-file">ml-widgets.css</span>
+      <span class="ml-badge">Compose · MessageBubble</span>
+    </div>
+    <p class="ml-lede">The communication flow is 7 screens with no message component. Outgoing is ink, incoming is surface — never colour alone: the two also differ in alignment and corner shape, which survives a greyscale screenshot.</p>
+    <div class="g-demo"><div style="max-width:340px"><div class="ml-chat">
+    <span class="ml-chat__day">Today</span>
+    <div class="ml-bubble ml-bubble--in">Is the SM7B still available?<span class="ml-bubble__meta">11:04</span></div>
+    <div class="ml-bubble ml-bubble--out">It is — shockmount and cable included.<span class="ml-bubble__meta">11:06 · Read</span></div>
+    <div class="ml-bubble ml-bubble--in">Would you take ₹26,000?<span class="ml-bubble__meta">11:07</span></div></div>
+    <div class="ml-composer" style="margin-top:var(--space-2);padding-bottom:var(--space-2);border:1px solid var(--color-line);border-radius:var(--radius-2)">
+    <textarea rows="1" placeholder="Message…" aria-label="Message"></textarea>
+    <button class="ml-icon-btn" aria-label="Send"><svg width="20" height="20" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M.66 14.2a2.2 2.2 0 0 0 0 3.15c.88.87 2.3.87 3.18 0L12 9.29l8.16 8.06c.88.87 2.3.87 3.18 0a2.2 2.2 0 0 0 0-3.15L12 3z"/></svg></button></div></div></div>
+    <details class="g-sel"><summary>7 selectors</summary>
+      <code>.ml-chat</code> <code>.ml-bubble</code> <code>.ml-bubble--in</code> <code>.ml-bubble--out</code> <code>.ml-bubble__meta</code> <code>.ml-chat__day</code> <code>.ml-composer</code></details>
+  </section>
+<section class="g-comp" id="c-attachment">
+    <div class="g-comp__head">
+      <h3>attachment</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    
+    <div class="g-demo"><a class="ml-attachment" href="#c-attachment" style="max-width:340px">
+    <span class="ml-attachment__icon"><svg width="20" height="20" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10.18 18.9V4.56c0-.6.49-1.1 1.1-1.1h8.36c.6 0 1.09.5 1.09 1.1v7.78a5.08 5.08 0 0 0-6.91 4.76 5.1 5.1 0 0 0 10.13.73H24V4.36A4.36 4.36 0 0 0 19.64 0h-8.37a4.36 4.36 0 0 0-4.36 4.36v9.8A5.07 5.07 0 0 0 0 18.9a5.1 5.1 0 0 0 10.18 0"/></svg></span>
+    <span class="ml-attachment__body"><span class="ml-attachment__name">rough-mix-v3.wav</span>
+    <span class="ml-attachment__meta">42.1 MB · 3:48</span></span>
+    <svg width="18" height="18" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.16 6.65 12 14.71 3.84 6.65a2.27 2.27 0 0 0-3.18 0 2.2 2.2 0 0 0 0 3.15L12 21 23.34 9.8a2.2 2.2 0 0 0 0-3.15 2.26 2.26 0 0 0-3.18 0"/></svg></a></div>
+    <details class="g-sel"><summary>5 selectors</summary>
+      <code>.ml-attachment</code> <code>.ml-attachment__icon</code> <code>.ml-attachment__body</code> <code>.ml-attachment__name</code> <code>.ml-attachment__meta</code></details>
+  </section>
+<section class="g-comp" id="c-timeline">
+    <div class="g-comp__head">
+      <h3>timeline</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    <p class="ml-lede">Ordered events with state: a booking's progress, a transaction's stages. The rail is drawn with a border on the item so it cannot desync from the dots.</p>
+    <div class="g-demo"><ol class="ml-timeline" style="max-width:340px">
+    <li class="ml-timeline__item is-done"><div class="ml-timeline__title">Offer accepted</div>
+      <div class="ml-timeline__meta">16 Aug · ₹38,000</div></li>
+    <li class="ml-timeline__item is-current"><div class="ml-timeline__title">Awaiting handover</div>
+      <div class="ml-timeline__meta">Arrange a time with the seller</div></li>
+    <li class="ml-timeline__item"><div class="ml-timeline__title">Completed</div>
+      <div class="ml-timeline__meta">Review unlocks after handover</div></li></ol></div>
+    <details class="g-sel"><summary>4 selectors</summary>
+      <code>.ml-timeline</code> <code>.ml-timeline__item</code> <code>.ml-timeline__title</code> <code>.ml-timeline__meta</code></details>
+  </section>
+<section class="g-comp" id="c-metrics">
+    <div class="g-comp__head">
+      <h3>metrics</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    <p class="ml-lede">Deliberately not a charting library. Insights screens need a trend and a comparison, and both are cheaper as CSS than as a 90KB dependency. Bars are labelled and the sparkline carries its values in the markup, so neither communicates by shape alone.</p>
+    <div class="g-demo"><div style="max-width:340px">
+    <div class="ml-kpi"><span class="ml-kpi__num">4,210</span><span class="ml-kpi__delta ml-kpi__delta--up">+18%</span></div>
+    <div class="ml-row__meta">Listing views · last 7 days</div>
+    <div class="ml-bars" style="margin-top:var(--space-3)"><span class="ml-bars__bar" style="height:38%"></span><span class="ml-bars__bar" style="height:52%"></span><span class="ml-bars__bar" style="height:44%"></span><span class="ml-bars__bar" style="height:71%"></span><span class="ml-bars__bar" style="height:63%"></span><span class="ml-bars__bar is-peak" style="height:96%"></span><span class="ml-bars__bar" style="height:80%"></span></div>
+    <div class="ml-bars__labels"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+    <div class="ml-spark" style="margin-top:var(--space-3)"><span class="ml-spark__bar" style="height:30%"></span><span class="ml-spark__bar" style="height:45%"></span><span class="ml-spark__bar" style="height:38%"></span><span class="ml-spark__bar" style="height:60%"></span><span class="ml-spark__bar" style="height:52%"></span><span class="ml-spark__bar" style="height:74%"></span><span class="ml-spark__bar" style="height:68%"></span><span class="ml-spark__bar is-last" style="height:90%"></span></div></div></div>
+    <details class="g-sel"><summary>10 selectors</summary>
+      <code>.ml-kpi</code> <code>.ml-kpi__num</code> <code>.ml-kpi__delta</code> <code>.ml-kpi__delta--up</code> <code>.ml-kpi__delta--down</code> <code>.ml-bars</code> <code>.ml-bars__bar</code> <code>.ml-bars__labels</code> <code>.ml-spark</code> <code>.ml-spark__bar</code></details>
+  </section>
+<section class="g-comp" id="c-equalizer">
+    <div class="g-comp__head">
+      <h3>equalizer</h3>
+      <span class="g-file">ml-widgets.css</span>
+      
+    </div>
+    <p class="ml-lede">A playing indicator, not a control — it says "audio is running here" on a track row. Animated, and stopped entirely under reduced motion by the global guard in ml-core.css.</p>
+    <div class="g-demo"><div class="ml-row" style="max-width:340px"><span class="ml-eq"><span></span><span></span><span></span><span></span></span>
+    <span class="ml-row__body"><span class="ml-row__title">Tum Hi Toh (Unplugged)</span>
+    <span class="ml-row__meta">Now playing</span></span></div></div>
+    <details class="g-sel"><summary>1 selector</summary>
+      <code>.ml-eq</code></details>
   </section>
 
   <h2 class="g-h" id="motion">Motion</h2>

@@ -278,6 +278,12 @@
   border: 0; cursor: pointer;
 }
 .ml-market-card__save[aria-pressed="true"] { color: var(--color-pink); }
+/* 32dp visual so it does not crowd the artwork, 48dp band so it can be hit.
+   It was failing the target rule on every marketplace screen, not just here. */
+.ml-market-card__save::after {
+  content: ""; position: absolute; inset: 50% 50% auto auto;
+  width: var(--size-3); height: var(--size-3); transform: translate(50%, -50%);
+}
 .ml-market-card__body  { padding: var(--space-2); }
 .ml-market-card__price { font-family: var(--font-display); font-size: var(--type-3); font-weight: 800; line-height: 1.1; }
 .ml-market-card__title { font-size: var(--type-1); font-weight: 600; margin-top: 2px; }
@@ -355,9 +361,19 @@
 .ml-upload-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
 .ml-upload-grid__item { position: relative; aspect-ratio: 1/1; border-radius: var(--radius-1); overflow: hidden; background: var(--color-surface); }
 .ml-upload-grid__item img { width: 100%; height: 100%; object-fit: cover; }
+/* A DOCUMENTED EXCEPTION to the 48dp rule, and the only one in the system.
+   An expanded tap band does not work here: the parent .ml-upload-grid__item
+   sets overflow:hidden, which clips hit-testing as well as painting, so a
+   48dp band on a control pinned to the thumbnail's corner is cut off. Nor is
+   the geometry available — a 3-column grid on a 360dp screen gives ~104dp
+   thumbnails, and a 48dp control in each corner would cover most of the
+   image it is meant to let you see.
+   Mitigation: 32dp rather than 24dp, high contrast against the artwork, and
+   generous separation from other controls. Deleting a photo is also
+   recoverable, which is the case where a smaller target is defensible. */
 .ml-upload-grid__remove {
-  position: absolute; top: 4px; right: 4px;
-  width: 24px; height: 24px; border: 0; border-radius: var(--radius-4);
+  position: absolute; top: var(--space-1); right: var(--space-1);
+  width: var(--size-1); height: var(--size-1); border: 0; border-radius: var(--radius-4);
   background: color-mix(in srgb, var(--color-ink) 70%, transparent);
   color: var(--color-white); cursor: pointer; line-height: 1;
 }
@@ -796,3 +812,181 @@
    works on a monochrome page. */
 .ml-lede { font-size: var(--type-2); color: var(--color-muted); line-height: 1.45; }
 .ml-lede b, .ml-lede strong { color: var(--color-ink); font-weight: 700; }
+
+/* ── calendar ──────────────────────────────────────────────────────────── */
+/* One month grid, four cell states. Needed twice over — booking's studio slots
+   and Market's rental availability — which is why it lives in the system
+   rather than in either flow. Bound to MarketplaceItemDoc.blockedDates for
+   rentals; to the studio's own slots for booking. */
+/* Compose: a DatePicker / DateRangePicker built on this grid                 */
+
+/* 48dp, not 40 with an expanded band: a 40dp cell on a 2px gap gives a
+   42dp pitch, so 48dp bands on adjacent rows overlap and a tap near the
+   boundary picks the wrong day. Seven 48dp columns is 336dp, which fits
+   the 360dp screen, so the cell can simply be the target. */
+.ml-calendar { --ml-cal-cell: var(--size-3); }
+.ml-calendar__head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-2); margin-bottom: var(--space-2);
+}
+.ml-calendar__month { font-family: var(--font-display); font-size: var(--type-3);
+  font-weight: 700; letter-spacing: -0.01em; }
+.ml-calendar__dow {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  font-size: var(--type-1); color: var(--color-muted); font-weight: 600; text-align: center;
+}
+.ml-calendar__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.ml-calendar__day {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  height: var(--ml-cal-cell);
+  border: 0; border-radius: var(--radius-1);
+  background: none; color: var(--color-ink);
+  font-family: var(--font-body); font-size: var(--type-2); font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.ml-calendar__day:disabled,
+.ml-calendar__day.is-blocked {
+  color: var(--color-muted); opacity: var(--opacity-3);
+  cursor: not-allowed; pointer-events: none;
+  text-decoration: line-through;
+}
+.ml-calendar__day.is-today { font-weight: 700; box-shadow: inset 0 0 0 1px var(--color-line); }
+.ml-calendar__day.is-selected { background: var(--color-ink); color: var(--color-white); font-weight: 700; }
+/* a range reads as one continuous band, so the ends round and the middle does not */
+.ml-calendar__day.is-in-range { background: var(--color-surface); border-radius: 0; }
+.ml-calendar__day.is-range-start { background: var(--color-ink); color: var(--color-white);
+  border-radius: var(--radius-1) 0 0 var(--radius-1); }
+.ml-calendar__day.is-range-end { background: var(--color-ink); color: var(--color-white);
+  border-radius: 0 var(--radius-1) var(--radius-1) 0; }
+.ml-calendar__legend { display: flex; flex-wrap: wrap; gap: var(--space-3);
+  margin-top: var(--space-3); font-size: var(--type-1); color: var(--color-muted); }
+.ml-calendar__legend span { display: inline-flex; align-items: center; gap: var(--space-1); }
+.ml-calendar__key { width: 12px; height: 12px; border-radius: 3px; background: var(--color-surface); }
+.ml-calendar__key--sel { background: var(--color-ink); }
+.ml-calendar__key--blocked { background: var(--color-line); }
+
+/* ── chat ──────────────────────────────────────────────────────────────── */
+/* The communication flow is 7 screens with no message component. Outgoing is
+   ink, incoming is surface — never colour alone: the two also differ in
+   alignment and corner shape, which survives a greyscale screenshot. */
+/* Compose: MessageBubble                                                     */
+
+.ml-chat { display: flex; flex-direction: column; gap: var(--space-2); }
+.ml-bubble {
+  max-width: 78%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-2);
+  font-size: var(--type-2);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.ml-bubble--in  { align-self: flex-start; background: var(--color-surface); color: var(--color-ink);
+                  border-bottom-left-radius: var(--radius-1); }
+.ml-bubble--out { align-self: flex-end; background: var(--color-ink); color: var(--color-white);
+                  border-bottom-right-radius: var(--radius-1); }
+.ml-bubble__meta { display: block; margin-top: 2px; font-size: var(--type-1); opacity: 0.7; }
+.ml-chat__day {
+  align-self: center;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-4);
+  background: var(--color-surface);
+  font-size: var(--type-1); color: var(--color-muted); font-weight: 600;
+}
+/* composer */
+.ml-composer {
+  display: flex; align-items: flex-end; gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  padding-bottom: calc(var(--space-2) + var(--safe-bottom));
+  border-top: 1px solid var(--color-line);
+  background: var(--color-white);
+}
+.ml-composer textarea {
+  flex: 1; min-height: var(--size-3); max-height: 120px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-line); border-radius: var(--radius-2);
+  background: var(--color-white); color: var(--color-ink);
+  font-family: var(--font-body); font-size: var(--type-2); resize: none;
+}
+
+/* ── attachment ────────────────────────────────────────────────────────── */
+
+.ml-attachment {
+  display: flex; align-items: center; gap: var(--space-3);
+  min-height: var(--size-4);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-line); border-radius: var(--radius-2);
+  background: var(--color-white); color: inherit; text-decoration: none;
+}
+.ml-attachment__icon {
+  display: flex; align-items: center; justify-content: center;
+  width: var(--size-2); height: var(--size-2); flex: none;
+  border-radius: var(--radius-1);
+  background: var(--color-surface); color: var(--color-muted);
+}
+.ml-attachment__body { flex: 1; min-width: 0; }
+.ml-attachment__name { display: block; font-size: var(--type-2); font-weight: 600;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ml-attachment__meta { display: block; font-size: var(--type-1); color: var(--color-muted); }
+
+/* ── timeline ──────────────────────────────────────────────────────────── */
+/* Ordered events with state: a booking's progress, a transaction's stages. The
+   rail is drawn with a border on the item so it cannot desync from the dots. */
+
+.ml-timeline { list-style: none; margin: 0; padding: 0; }
+.ml-timeline__item {
+  position: relative;
+  padding: 0 0 var(--space-4) var(--space-4);
+  border-left: 2px solid var(--color-line);
+}
+.ml-timeline__item:last-child { border-left-color: transparent; padding-bottom: 0; }
+.ml-timeline__item::before {
+  content: ""; position: absolute; left: -7px; top: 2px;
+  width: 12px; height: 12px; border-radius: var(--radius-4);
+  background: var(--color-white); box-shadow: inset 0 0 0 2px var(--color-line);
+}
+.ml-timeline__item.is-done::before { background: var(--color-ink); box-shadow: inset 0 0 0 2px var(--color-ink); }
+.ml-timeline__item.is-current::before { background: var(--color-pink); box-shadow: inset 0 0 0 2px var(--color-pink); }
+.ml-timeline__title { font-size: var(--type-2); font-weight: 600; }
+.ml-timeline__meta { font-size: var(--type-1); color: var(--color-muted); }
+
+/* ── metrics ───────────────────────────────────────────────────────────── */
+/* Deliberately not a charting library. Insights screens need a trend and a
+   comparison, and both are cheaper as CSS than as a 90KB dependency. Bars are
+   labelled and the sparkline carries its values in the markup, so neither
+   communicates by shape alone. */
+
+.ml-kpi { display: flex; align-items: baseline; gap: var(--space-2); }
+.ml-kpi__num { font-family: var(--font-display); font-size: var(--type-4);
+  font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
+.ml-kpi__delta { font-size: var(--type-1); font-weight: 700; }
+.ml-kpi__delta--up   { color: color-mix(in srgb, var(--color-success) 58%, black); }
+.ml-kpi__delta--down { color: color-mix(in srgb, var(--color-error) 72%, black); }
+
+.ml-bars { display: flex; align-items: flex-end; gap: var(--space-1); height: 72px; }
+.ml-bars__bar { flex: 1; min-width: 6px; border-radius: var(--radius-1) var(--radius-1) 0 0;
+  background: var(--color-line); }
+.ml-bars__bar.is-peak { background: var(--color-ink); }
+.ml-bars__labels { display: flex; gap: var(--space-1); margin-top: var(--space-1);
+  font-size: var(--type-1); color: var(--color-muted); }
+.ml-bars__labels span { flex: 1; min-width: 6px; text-align: center; }
+
+.ml-spark { display: flex; align-items: flex-end; gap: 2px; height: 32px; }
+.ml-spark__bar { flex: 1; border-radius: 1px; background: var(--color-pink); opacity: 0.35; }
+.ml-spark__bar.is-last { opacity: 1; }
+
+/* ── equalizer ─────────────────────────────────────────────────────────── */
+/* A playing indicator, not a control — it says "audio is running here" on a
+   track row. Animated, and stopped entirely under reduced motion by the
+   global guard in ml-core.css. */
+
+.ml-eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; }
+.ml-eq span {
+  width: 3px; border-radius: 1px; background: var(--color-pink);
+  animation: ml-eq-bounce 900ms var(--ease-standard) infinite alternate;
+}
+.ml-eq span:nth-child(1) { height: 40%; animation-delay: 0ms; }
+.ml-eq span:nth-child(2) { height: 90%; animation-delay: 150ms; }
+.ml-eq span:nth-child(3) { height: 60%; animation-delay: 300ms; }
+.ml-eq span:nth-child(4) { height: 100%; animation-delay: 450ms; }
+@keyframes ml-eq-bounce { from { transform: scaleY(0.35); } to { transform: scaleY(1); } }

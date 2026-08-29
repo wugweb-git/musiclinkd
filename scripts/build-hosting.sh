@@ -72,6 +72,18 @@ rsync -a --exclude='index.html' --exclude='index.txt' --exclude='404.html' admin
 echo "==> Copying frontend/guide/ design-system reference into dist/guide/"
 # rsync with excludes, not cp -r: a blanket copy shipped 180MB to Hosting.
 #
+# Also excluded, all of it reachable by nobody:
+#   _Music Genres…Apple Music_files  a saved Apple Music web page, 5.8MB of
+#                                    someone else's JS and fonts, referenced by
+#                                    nothing and served publicly
+#   icons/                           401 files duplicating musiclinkd-system/
+#                                    icons/ (423), which is the set the build
+#                                    actually inlines from
+#   testdir.tmp/, widgets/           empty
+#   skills/, docs/, *.md             markdown; belongs in the repo, not on a CDN
+#   styleguide.html                  660KB, and /guide/styleguide 301s away from
+#                                    it, so it could never be fetched
+#
 # musiclinkd-system/ is excluded ENTIRELY as of 2026-08-29. It was the React +
 # Gestalt catalogue — 4.6MB shipped, including a 2.6MB Gestalt bundle and 524
 # Pinterest tokens — and /guide/index.html now replaces it. Its 423 icons are
@@ -83,6 +95,14 @@ rsync -a \
   --exclude='node_modules/' \
   --exclude='gestalt/' \
   --exclude='musiclinkd-system/' \
+  --exclude='_Music*' \
+  --exclude='icons/' \
+  --exclude='testdir.tmp/' \
+  --exclude='widgets/' \
+  --exclude='skills/' \
+  --exclude='docs/' \
+  --exclude='*.md' \
+  --exclude='styleguide.html' \
   --exclude='*.map' \
   --exclude='.DS_Store' \
   frontend/guide/ dist/guide/
