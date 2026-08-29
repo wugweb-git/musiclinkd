@@ -179,3 +179,57 @@ body {
 .phone-screen { background: var(--paper); border-radius: 24px; overflow: hidden; height: 800px; position: relative; }
 .phone-notch { height: 28px; background: #0D0D0D; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .phone-notch .dot { width: 8px; height: 8px; background: #2C2F3A; border-radius: 50%; }
+
+/* --- Added 2026-08-16: reusable visual-polish primitives, modeled after a
+   presentability review (compared against a third-party reference build).
+   Not new brand direction — --action stays black for primary CTAs per the
+   corrected color-roles note above; these use --pink the way it was always
+   scoped to be used: accents, status, selection, highlights. --- */
+
+/* Stat card — 2-up/4-up grid of big-number metrics (dashboard, profile stats) */
+.stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
+.stat-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-2); padding: var(--space-3); }
+.stat-card .num { font: 800 var(--type-3)/1 'Inter Tight', sans-serif; display: block; }
+.stat-card .label { font-size: var(--type-1); color: var(--muted); font-weight: 500; margin-top: 2px; display: block; }
+.stat-card .sub { font-size: var(--type-1); color: var(--pink); font-weight: 600; }
+
+/* Category tile — icon-in-circle + label(+count), for browse/category grids */
+.cat-tile { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); text-decoration: none; color: inherit; flex: none; width: 76px; }
+.cat-tile .icon-circle { width: 52px; height: 52px; border-radius: 50%; background: var(--pink-container); display: flex; align-items: center; justify-content: center; color: var(--pink); }
+.cat-tile .icon-circle svg { width: 22px; height: 22px; }
+.cat-tile b { font-size: var(--type-1); font-weight: 600; text-align: center; }
+.cat-tile span.count { font-size: 10px; color: var(--muted); }
+
+/* Status pill — semantic colored pill for availability/selection state,
+   distinct from .chip (which is a selectable filter control). */
+.status-pill { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; padding: 3px 9px; border-radius: var(--radius-4); }
+.status-pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.status-pill.st-available { background: rgba(34,197,94,0.12); color: #166534; }
+.status-pill.st-selected { background: #FEF3C7; color: #92400E; }
+.status-pill.st-live { background: var(--pink-container); color: var(--pink-hover); }
+.status-pill.st-gold { background: #FEF3C7; color: #92400E; }
+.status-pill.st-gold::before { display: none; }
+
+/* Hero overlay — full-bleed photo with gradient + stat row, for profile heroes */
+.hero-photo { position: relative; height: 260px; overflow: hidden; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.75) 100%); }
+.hero-photo .hero-content { position: absolute; left: var(--space-4); right: var(--space-4); bottom: var(--space-3); color: #fff; z-index: 1; }
+.hero-photo .hero-content h1 { font: 800 var(--type-3)/1.15 'Inter Tight', sans-serif; margin: 0 0 2px; }
+.hero-photo .hero-content p { font-size: var(--type-1); color: rgba(255,255,255,0.85); margin: 0 0 var(--space-2); }
+.hero-stats { display: flex; gap: var(--space-3); font-size: var(--type-1); }
+.hero-stats b { font-weight: 700; }
+
+/* Pill CTA row — Message/Hire/Follow style action row under a hero */
+.pill-cta-row { display: flex; gap: var(--space-2); padding: var(--space-3) var(--space-4); }
+.pill-cta { flex: 1; min-height: 44px; border-radius: var(--radius-4); font: 600 var(--type-1)/1 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); background: #fff; color: var(--black); text-decoration: none; }
+.pill-cta.is-primary { background: var(--black); color: #fff; border-color: var(--black); }
+.pill-cta.is-accent { background: var(--pink); color: #fff; border-color: var(--pink); }
+
+/* Progress task card — "continue where you left off" pattern */
+.progress-card { background: var(--pink-container); border-radius: var(--radius-2); padding: var(--space-3); margin-bottom: var(--space-2); }
+.progress-card b { font-size: var(--type-2); display: block; margin-bottom: 2px; }
+.progress-card .meta { font-size: var(--type-1); color: var(--muted); }
+.progress-track { height: 6px; background: rgba(234,76,137,0.18); border-radius: 3px; margin: var(--space-2) 0; overflow: hidden; }
+.progress-track .fill { height: 100%; background: var(--pink); border-radius: 3px; }
+.progress-card a.cta { font-size: var(--type-1); color: var(--pink-hover); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 2px; }

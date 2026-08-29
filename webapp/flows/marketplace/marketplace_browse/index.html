@@ -17,11 +17,13 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .cat-scroll { display: flex; gap: var(--space-2); overflow-x: auto; padding: var(--space-2) var(--space-3); }
-  .cat-scroll .chip { flex: none; cursor: pointer; }
+  .cat-scroll { display: flex; gap: var(--space-3); overflow-x: auto; padding: var(--space-2) var(--space-3) var(--space-1); }
+  .chip-scroll { display: flex; gap: var(--space-2); overflow-x: auto; padding: 0 var(--space-3) var(--space-2); }
+  .chip-scroll .chip { flex: none; cursor: pointer; }
   .item-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
-  .item-card { border: 1px solid var(--line); border-radius: var(--radius-2); overflow: hidden; text-decoration: none; color: inherit; background: #fff; }
+  .item-card { position: relative; border: 1px solid var(--line); border-radius: var(--radius-2); overflow: hidden; text-decoration: none; color: inherit; background: #fff; box-shadow: var(--shadow-1); }
   .item-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+  .item-card .status-pill { position: absolute; top: var(--space-1); left: var(--space-1); }
   .item-card .meta { padding: var(--space-2); }
   .item-card b { font-size: var(--type-1); display: block; }
   .item-card .price { font-size: var(--type-2); font-weight: 700; margin-top: 2px; }
@@ -33,7 +35,7 @@
     <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);height:56px;display:flex;align-items:center;">
       <h1 style="font-size:var(--type-3);">Marketplace</h1>
     </header>
-    <nav class="cat-scroll" id="cat-scroll">
+    <nav class="chip-scroll" id="cat-scroll">
       <button type="button" class="chip sel" data-cat="default" style="background:var(--black);border-color:var(--black);color:#fff;">All</button>
       <button type="button" class="chip" data-cat="sale">Gear Sale</button>
       <button type="button" class="chip" data-cat="rental">Gear Rental</button>
@@ -42,14 +44,38 @@
       <button type="button" class="chip" data-cat="services">Creative Services</button>
     </nav>
     <main class="app-content app-content--scroll" style="padding:var(--space-1) var(--space-3) var(--space-4);">
+      <div class="cat-scroll">
+        <a class="cat-tile" href="#" data-jump="sale">
+          <span class="icon-circle"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+          <b>Gear Sale</b>
+        </a>
+        <a class="cat-tile" href="#" data-jump="rental">
+          <span class="icon-circle"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2M3 8l2 10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2l2-10M3 8h18"/></svg></span>
+          <b>Rentals</b>
+        </a>
+        <a class="cat-tile" href="#" data-jump="beats">
+          <span class="icon-circle"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="9" cy="9" r="1.5"/><circle cx="15" cy="9" r="1.5"/><circle cx="9" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/></svg></span>
+          <b>Beats</b>
+        </a>
+        <a class="cat-tile" href="#" data-jump="mixing">
+          <span class="icon-circle"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V10M4 6V3M12 21v-6M12 11V3M20 21v-3M20 14V3"/><path d="M1 10h6M9 6h6M17 14h6"/></svg></span>
+          <b>Mixing</b>
+        </a>
+        <a class="cat-tile" href="#" data-jump="services">
+          <span class="icon-circle"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20l9-5-9-5-9 5 9 5z"/><path d="M12 10L3 5l9-5 9 5-9 5z"/></svg></span>
+          <b>Services</b>
+        </a>
+      </div>
 
       <div id="panel-items">
         <div class="item-grid">
           <a class="item-card" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
+            <span class="status-pill st-gold">Like new</span>
             <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=400" alt="" />
             <div class="meta"><b>Shure SM7B Microphone</b><span class="price">₹28,500</span><span class="tier">Gear Sale · Mumbai</span></div>
           </a>
           <a class="item-card" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
+            <span class="status-pill st-available">Available</span>
             <img src="https://images.unsplash.com/photo-1558379850-91c8b6693258?w=400" alt="" />
             <div class="meta"><b>Focusrite Scarlett 2i2</b><span class="price">₹800/day</span><span class="tier">Gear Rental · Mumbai</span></div>
           </a>
@@ -111,11 +137,25 @@
         });
       }
     });
+    function selectCategory(cat) {
+      document.querySelectorAll("#cat-scroll .chip").forEach((c) => {
+        const on = c.dataset.cat === cat;
+        c.classList.toggle("sel", on);
+        c.style.background = on ? "var(--black)" : "";
+        c.style.borderColor = on ? "var(--black)" : "";
+        c.style.color = on ? "#fff" : "";
+      });
+    }
     document.getElementById("cat-scroll").addEventListener("click", (e) => {
       const btn = e.target.closest(".chip");
       if (!btn) return;
-      document.querySelectorAll("#cat-scroll .chip").forEach((c) => { c.classList.remove("sel"); c.style.background = ""; c.style.borderColor = ""; c.style.color = ""; });
-      btn.classList.add("sel"); btn.style.background = "var(--black)"; btn.style.borderColor = "var(--black)"; btn.style.color = "#fff";
+      selectCategory(btn.dataset.cat);
+    });
+    document.querySelectorAll(".cat-tile[data-jump]").forEach((tile) => {
+      tile.addEventListener("click", (e) => {
+        e.preventDefault();
+        selectCategory(tile.dataset.jump);
+      });
     });
   </script>
 </body>

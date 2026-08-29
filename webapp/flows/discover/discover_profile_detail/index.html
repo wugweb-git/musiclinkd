@@ -17,11 +17,7 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .hero { height: 140px; background: linear-gradient(135deg,#7F5539,#B08968); }
-  .avatar-lift { width: 88px; height: 88px; border-radius: 50%; border: 4px solid #fff; object-fit: cover; margin-top: -44px; margin-left: var(--space-4); }
   .genre-row { display: flex; gap: var(--space-2); flex-wrap: wrap; }
-  .action-row { display: flex; gap: var(--space-2); }
-  .action-row .btn { flex: 1; }
 </style>
 </head>
 <body>
@@ -32,19 +28,28 @@
       </a>
     </header>
     <main class="app-content app-content--scroll">
-      <div class="hero"></div>
-      <img class="avatar-lift" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400" alt="" />
-      <div style="padding:var(--space-2) var(--space-4) var(--space-4);">
-        <h1 style="font-size:var(--type-3);display:flex;align-items:center;gap:6px;">Arijit Sen
-          <span style="width:16px;height:16px;border-radius:50%;background:var(--success);color:#fff;display:inline-flex;align-items:center;justify-content:center;"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></span>
-        </h1>
-        <p style="color:var(--muted);font-size:var(--type-2);">Singer · Composer · Mumbai, MH · Andheri</p>
-
-        <div class="action-row" style="margin:var(--space-3) 0;">
-          <button type="button" class="btn btn-p">Connect</button>
-          <button type="button" class="btn btn-s">Message</button>
+      <div class="hero-photo">
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800" alt="" />
+        <div class="hero-content">
+          <h1 style="display:flex;align-items:center;gap:6px;">Arijit Sen
+            <span style="width:16px;height:16px;border-radius:50%;background:var(--success);color:#fff;display:inline-flex;align-items:center;justify-content:center;flex:none;"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></span>
+          </h1>
+          <p>Singer · Composer · Andheri, Mumbai</p>
+          <div class="hero-stats">
+            <span><b>3</b> genres</span>
+            <span><b>3</b> languages</span>
+            <span><b>1</b> project</span>
+          </div>
         </div>
-
+      </div>
+      <div class="pill-cta-row">
+        <a href="#" class="pill-cta is-primary">Connect</a>
+        <a href="#" class="pill-cta">Message</a>
+        <a href="#" class="pill-cta" aria-label="Share" style="flex:0 0 44px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 0 6h.17M6 15a3 3 0 1 0 2.83 4H9a3 3 0 0 0 0-6h-.17M8.6 13.5l6.8-3.9M8.6 10.5l6.8 3.9"/></svg>
+        </a>
+      </div>
+      <div style="padding:0 var(--space-4) var(--space-4);">
         <p style="font-size:var(--type-2);color:var(--black);">Playback &amp; classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.</p>
 
         <div style="margin-top:var(--space-3);">
