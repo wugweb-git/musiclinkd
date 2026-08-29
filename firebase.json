@@ -3,49 +3,99 @@
     "public": "dist",
     "cleanUrls": true,
     "trailingSlash": false,
-    "ignore": ["**/.*", "**/node_modules/**", "**/README.md"],
+    "ignore": [
+      "**/.*",
+      "**/node_modules/**",
+      "**/README.md"
+    ],
     "headers": [
       {
         "source": "**/musiclinkd-system/**.@(js|css|map)",
         "headers": [
-          { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=0, must-revalidate"
+          }
         ]
       },
       {
         "source": "/preview/**.@(js|css)",
         "headers": [
-          { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=0, must-revalidate"
+          }
         ]
       },
       {
         "source": "**/*.@(js|css|svg|png|jpg|jpeg|gif|webp|avif|woff|woff2|ico)",
         "headers": [
-          { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
         ]
       },
       {
         "source": "_next/static/**",
         "headers": [
-          { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
         ]
       },
       {
         "source": "**/*.html",
         "headers": [
-          { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=0, must-revalidate"
+          }
         ]
       },
       {
         "source": "**",
         "headers": [
-          { "key": "X-Content-Type-Options", "value": "nosniff" },
-          { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-          { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "X-Frame-Options",
+            "value": "SAMEORIGIN"
+          },
+          {
+            "key": "Referrer-Policy",
+            "value": "strict-origin-when-cross-origin"
+          },
           {
             "key": "Strict-Transport-Security",
             "value": "max-age=31536000; includeSubDomains"
           }
         ]
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/guide/styleguide",
+        "destination": "/guide",
+        "type": 301
+      },
+      {
+        "source": "/guide/styleguide.html",
+        "destination": "/guide",
+        "type": 301
+      },
+      {
+        "source": "/guide/musiclinkd-system",
+        "destination": "/guide",
+        "type": 301
+      },
+      {
+        "source": "/guide/musiclinkd-system/**",
+        "destination": "/guide",
+        "type": 301
       }
     ]
   },
@@ -63,7 +113,12 @@
     {
       "source": "backend/functions",
       "codebase": "default",
-      "ignore": ["node_modules", ".git", "firebase-debug.log", "*.local"]
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "*.local"
+      ]
     }
   ]
 }

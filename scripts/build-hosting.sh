@@ -70,18 +70,19 @@ rm -f dist/README.md "dist/index copy.html"
 rsync -a --exclude='index.html' --exclude='index.txt' --exclude='404.html' admin/out/ dist/
 
 echo "==> Copying frontend/guide/ design-system reference into dist/guide/"
-# rsync with excludes, not cp -r: a blanket copy shipped 180MB to Hosting, of
-# which 159MB was musiclinkd-system/node_modules (126MB) and the vendored
-# pinterest/gestalt clone (33MB). Neither is reachable from any URL — the
-# guide runs from the pre-built bundle.js. src/ and the 4.5MB sourcemap go
-# too; they are build inputs, not deployed assets.
+# rsync with excludes, not cp -r: a blanket copy shipped 180MB to Hosting.
+#
+# musiclinkd-system/ is excluded ENTIRELY as of 2026-08-29. It was the React +
+# Gestalt catalogue — 4.6MB shipped, including a 2.6MB Gestalt bundle and 524
+# Pinterest tokens — and /guide/index.html now replaces it. Its 423 icons are
+# still the icon library, but they are inlined at BUILD time by build-guide.mjs
+# and the screen generators, so nothing needs them at runtime. The source stays
+# in the repo; it just stops being deployed. Its URL 301s to /guide.
 mkdir -p dist/guide
 rsync -a \
   --exclude='node_modules/' \
   --exclude='gestalt/' \
-  --exclude='musiclinkd-system/src/' \
-  --exclude='musiclinkd-system/scripts/' \
-  --exclude='musiclinkd-system/public/' \
+  --exclude='musiclinkd-system/' \
   --exclude='*.map' \
   --exclude='.DS_Store' \
   frontend/guide/ dist/guide/
