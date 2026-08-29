@@ -293,6 +293,18 @@ const DEMOS = {
   "equalizer": `<div class="ml-row" style="max-width:340px"><span class="ml-eq"><span></span><span></span><span></span><span></span></span>
     <span class="ml-row__body"><span class="ml-row__title">Tum Hi Toh (Unplugged)</span>
     <span class="ml-row__meta">Now playing</span></span></div>`,
+  "feed post": `<div style="max-width:360px"><article class="ml-post">
+    <div class="ml-post__head"><img src="${FACE}" alt="" />
+      <span class="ml-post__who"><span class="ml-post__name">Mehek Kapoor</span>
+      <span class="ml-post__meta">Composer · Delhi NCR · 2h</span></span>
+      <button class="ml-icon-btn ml-icon-btn--bare" aria-label="More">${ic("ellipsis", 18)}</button></div>
+    <p class="ml-post__body">Finished tracking the Monsoon Sessions EP today. Still looking for a bassist for two of the five tracks.</p>
+    <div class="ml-post__media"><img src="${PHOTO}" alt="" /></div>
+    <div class="ml-post__actions">
+      <button class="ml-post__action" aria-pressed="true">${ic("heart", 16)} 42</button>
+      <button class="ml-post__action">${ic("speech", 16)} 7</button>
+      <button class="ml-post__action">${ic("share", 16)} Share</button></div>
+  </article></div>`,
   "phone entry": `<div class="ml-field" style="max-width:340px"><label for="d-p">Mobile number</label>
     <div class="ml-phone"><span class="ml-phone__prefix">🇮🇳 +91</span>
     <input id="d-p" type="tel" placeholder="98765 43210" /></div></div>`,

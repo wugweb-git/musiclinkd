@@ -990,3 +990,39 @@
 .ml-eq span:nth-child(3) { height: 60%; animation-delay: 300ms; }
 .ml-eq span:nth-child(4) { height: 100%; animation-delay: 450ms; }
 @keyframes ml-eq-bounce { from { transform: scaleY(0.35); } to { transform: scaleY(1); } }
+
+/* ── feed post ─────────────────────────────────────────────────────────── */
+/* The one component the audit found genuinely missing after the 16-component
+   pass: communication's networking feed defines .post-card / .post-head /
+   .post-body / .post-actions locally and nothing in the system expresses it.
+   Everything else those screens define maps onto .ml-row, .ml-rail, .ml-card
+   or .ml-status.
+   Separated by a hairline rather than boxed — a feed reads as one column, and
+   a card per post turns it into a grid of unrelated objects. */
+/* Compose: FeedPostCard                                                     */
+
+.ml-post { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-line); }
+.ml-post__head { display: flex; align-items: center; gap: var(--space-2); }
+.ml-post__head img { width: var(--size-2); height: var(--size-2); border-radius: var(--radius-4); object-fit: cover; flex: none; }
+.ml-post__who { flex: 1; min-width: 0; }
+.ml-post__name { display: block; font-size: var(--type-2); font-weight: 700; line-height: 1.2; }
+.ml-post__meta { display: block; font-size: var(--type-1); color: var(--color-muted); }
+.ml-post__body { margin: var(--space-2) 0 0; font-size: var(--type-2); line-height: 1.5; }
+.ml-post__media { margin-top: var(--space-2); border-radius: var(--radius-2); overflow: hidden; }
+.ml-post__media img { display: block; width: 100%; }
+/* actions are text+icon, not filled buttons — a filled button per post would
+   compete with the post itself for attention */
+/* space-3, not space-4: each action carries a 48dp min-width below, so the
+   larger gap is no longer needed to keep them apart and would only push the
+   row wide. */
+.ml-post__actions { display: flex; gap: var(--space-3); margin-top: var(--space-2); }
+.ml-post__action {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1);
+  /* both axes: a heart plus a count is only ~27dp wide, which fails the target
+     rule horizontally even at 48dp tall */
+  min-height: var(--size-3); min-width: var(--size-3);
+  border: 0; background: none; padding: 0;
+  color: var(--color-muted); font-family: var(--font-body);
+  font-size: var(--type-1); font-weight: 600; cursor: pointer;
+}
+.ml-post__action[aria-pressed="true"] { color: var(--color-pink-pressed); }
