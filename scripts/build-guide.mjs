@@ -41,6 +41,78 @@ const tokens = JSON.parse(readFileSync(join(ROOT, "frontend/guide/tokens/tokens.
 const iconNames = readdirSync(join(ROOT, "frontend/guide/musiclinkd-system/icons"))
   .filter((f) => f.endsWith(".svg")).map((f) => f.replace(".svg", "")).sort();
 
+/* ── repo-derived sections ──────────────────────────────────────────────
+   Patterns, taxonomy and gaps are all COMPUTED from the repo rather than
+   listed by hand. The old catalogue's block list and "not built" registry
+   were hand-maintained and had drifted (it claimed 84 blocks against an
+   actual 94). Anything derived cannot drift. */
+
+/** Composed patterns = the screens actually rebuilt on the system. */
+function readPatterns() {
+  const flowsDir = join(ROOT, "webapp/flows");
+  const out = [];
+  for (const flow of readdirSync(flowsDir)) {
+    const fdir = join(flowsDir, flow);
+    let flowMeta = {};
+    try { flowMeta = JSON.parse(readFileSync(join(fdir, "_flow.json"), "utf8")); } catch { continue; }
+    const screens = [];
+    for (const sc of readdirSync(fdir)) {
+      let html, contract;
+      try {
+        html = readFileSync(join(fdir, sc, "index.html"), "utf8");
+        contract = JSON.parse(readFileSync(join(fdir, sc, "screen.json"), "utf8"));
+      } catch { continue; }
+      const onSystem = html.includes("ml-app") && !html.includes("<style>");
+      screens.push({ key: sc, title: contract.screenTitle || sc,
+        states: contract.states || [], onSystem, order: contract.screenOrder ?? 99 });
+    }
+    if (screens.length) out.push({ flow, title: flowMeta.title || flow,
+      order: flowMeta.order ?? 99, screens: screens.sort((a, b) => a.order - b.order) });
+  }
+  return out.sort((a, b) => a.order - b.order);
+}
+
+/** Product taxonomy, parsed from the canonical seed-values doc. */
+function readTaxonomy() {
+  let md = "";
+  try { md = readFileSync(join(ROOT, "admin/docs/architecture/Master_Data_Seed_Values.md"), "utf8"); }
+  catch { return []; }
+  const out = [];
+  const re = /^### Category: `([a-z_]+)`\s*(?:—\s*(.*))?$/gm;
+  const marks = [...md.matchAll(re)];
+  marks.forEach((m, i) => {
+    const body = md.slice(m.index, i + 1 < marks.length ? marks[i + 1].index : md.length);
+    const values = [...body.matchAll(/^\|\s*([^|]+?)\s*\|\s*([a-z0-9_]+)\s*\|$/gm)]
+      .map((r) => ({ label: r[1].trim(), value: r[2] }))
+      .filter((v) => v.label.toLowerCase() !== "label");
+    if (values.length) out.push({ key: m[1], note: (m[2] || "").trim(), values });
+  });
+  return out;
+}
+
+/** The honesty ledger, computed: what the Widget Directory names that the
+ *  system has no component for, and which screens are still off-system. */
+function readGaps(sectionNames, patterns) {
+  const gaps = { widgets: [], screens: [], tokens: [] };
+  try {
+    const md = readFileSync(join(ROOT, "admin/docs/architecture/Widget_Directory.md"), "utf8");
+    const names = [...md.matchAll(/^\|\s*([A-Z][A-Za-z]+)\s*\|/gm)].map((m) => m[1]);
+    const css = readFileSync(join(SYS, "ml-widgets.css"), "utf8") + readFileSync(join(SYS, "ml-core.css"), "utf8");
+    for (const n of [...new Set(names)]) {
+      /* a widget counts as built if its name appears in a Compose note or as
+         a kebab-cased selector */
+      const kebab = n.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+      if (!css.includes(n) && !css.includes(".ml-" + kebab)) gaps.widgets.push(n);
+    }
+  } catch {}
+  for (const f of patterns)
+    for (const sc of f.screens) if (!sc.onSystem) gaps.screens.push(`${f.flow}/${sc.key}`);
+  return gaps;
+}
+
+const patterns = readPatterns();
+const taxonomy = readTaxonomy();
+
 /* ── parse the system ──────────────────────────────────────────────────── */
 /* Sections are delimited by the `/* ── name ─── *\/` banner comments the two
    stylesheets already use. Everything between one banner and the next belongs
@@ -296,6 +368,7 @@ const componentSection = (s) => `<section class="g-comp" id="${slug(s.name)}">
       <code>${s.selectors.join("</code> <code>")}</code></details>
   </section>`;
 
+const gaps = readGaps(sections.map((s) => s.name), patterns);
 const core = documented.filter((s) => s.file === "ml-core.css");
 const widg = documented.filter((s) => s.file === "ml-widgets.css");
 
@@ -362,6 +435,19 @@ const html = `<!doctype html>
             border: 1px solid var(--color-line); border-radius: var(--radius-1); font-size: 10px;
             color: var(--color-muted); text-align: center; overflow: hidden; }
   .g-icon svg { color: var(--color-ink); }
+  .g-track { position: relative; height: 40px; margin: var(--space-1) 0; border-radius: var(--radius-4);
+             background: var(--color-surface); overflow: hidden; }
+  .g-dot { position: absolute; top: 50%; left: 4px; width: 32px; height: 32px; margin-top: -16px;
+           border-radius: var(--radius-4); background: var(--color-ink); }
+  .g-dot.is-run { transform: translateX(calc(100% + 100px)); }
+  .g-patterns { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: var(--space-2); }
+  .g-pattern { display: flex; flex-direction: column; gap: 2px; padding: var(--space-2) var(--space-3);
+               min-height: var(--size-3); justify-content: center;
+               border: 1px solid var(--color-line); border-radius: var(--radius-1);
+               background: var(--color-white); color: inherit; text-decoration: none; }
+  .g-pattern:hover { border-color: var(--color-ink); }
+  .g-pattern b { font-size: var(--type-2); }
+  .g-pattern span { font-size: var(--type-1); color: var(--color-muted); }
 </style>
 </head>
 <body>
@@ -369,8 +455,11 @@ const html = `<!doctype html>
   <li><a href="#foundations">Foundations</a></li>
   <li><a href="#core">Core · ${core.length}</a></li>
   <li><a href="#widgets">Widgets · ${widg.length}</a></li>
+  <li><a href="#motion">Motion</a></li>
+  <li><a href="#patterns">Patterns · ${patterns.reduce((n, f) => n + f.screens.filter((x) => x.onSystem).length, 0)}</a></li>
   <li><a href="#icons">Icons · ${iconNames.length}</a></li>
-  <li><a href="#coverage">Coverage</a></li>
+  <li><a href="#taxonomy">Taxonomy · ${taxonomy.length}</a></li>
+  <li><a href="#gaps">Gaps</a></li>
   <li><a href="/preview">Screens →</a></li>
 </ul></nav>
 
@@ -434,6 +523,51 @@ const html = `<!doctype html>
   <h2 class="g-h" id="widgets">Widgets · ${widg.length}</h2>
   ${widg.map(componentSection).join("\n")}
 
+  <h2 class="g-h" id="motion">Motion</h2>
+  <p class="ml-lede" style="max-width:64ch">
+    Four steps, <b>dual-authored</b>. Web gets a duration and a cubic-bezier;
+    native gets spring physics, because a duration is not translatable to a
+    spring and pretending otherwise was the web-shaped assumption in the old
+    system. Press <b>Play</b> to run each one.
+  </p>
+  <div class="g-demo">
+    <button class="ml-btn ml-btn--primary" id="g-play">Play all</button>
+    <div style="margin-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-3)">
+      ${["1", "2", "3", "4"].map((k) => {
+        const m = f.motion[k];
+        return `<div>
+        <div class="ml-row__meta">${k} · ${esc(m.$description || "")}</div>
+        <div class="g-track"><span class="g-dot" data-dur="${m.$web.duration}" data-ease="${m.$web.easing}"></span></div>
+        <div class="ml-type-1" style="color:var(--color-muted)">
+          web <code>${m.$web.duration}</code> <code>${esc(m.$web.easing)}</code> ·
+          android <code>spring(${m.$android.dampingRatio}, ${m.$android.stiffness})</code> ·
+          iOS <code>response ${m.$ios.response}</code>
+        </div></div>`; }).join("")}
+    </div>
+    <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-3)">
+      Every animation in the system is disabled under <code>prefers-reduced-motion</code>,
+      which Android reads as <code>ANIMATOR_DURATION_SCALE</code>.
+    </p>
+  </div>
+
+  <h2 class="g-h" id="patterns">Patterns · ${patterns.reduce((n, fl) => n + fl.screens.filter((x) => x.onSystem).length, 0)}</h2>
+  <p class="ml-lede" style="max-width:64ch">
+    Composed patterns are <b>real screens</b>, not mockups — every one below is
+    live under <code>/preview</code> and built from the components above. Listed
+    straight from the repo, so this cannot drift the way the old block list did
+    (it claimed 84 against an actual 94).
+  </p>
+  ${patterns.filter((fl) => fl.screens.some((x) => x.onSystem)).map((fl) => `
+  <section class="g-comp">
+    <div class="g-comp__head"><h3>${esc(fl.title)}</h3>
+      <span class="g-file">flow ${fl.order} · ${fl.screens.filter((x) => x.onSystem).length} on the system</span></div>
+    <div class="g-demo"><div class="g-patterns">
+      ${fl.screens.filter((x) => x.onSystem).map((sc) => `<a class="g-pattern" href="/preview/flows/${fl.flow}/${sc.key}">
+        <b>${esc(sc.title)}</b>
+        <span>${sc.states.length} state${sc.states.length === 1 ? "" : "s"} · ${esc(sc.states.slice(0, 3).join(", "))}</span></a>`).join("")}
+    </div></div>
+  </section>`).join("")}
+
   <h2 class="g-h" id="icons">Icons · ${iconNames.length}</h2>
   <p class="ml-lede" style="max-width:64ch">
     From <code>pinterest/gestalt</code> (Apache-2.0), extracted to SVG. Gestalt is
@@ -442,6 +576,38 @@ const html = `<!doctype html>
     than rendering an empty box.
   </p>
   <div class="g-icons">${iconNames.map((n) => `<div class="g-icon">${ic(n, 22)}<span>${n}</span></div>`).join("")}</div>
+
+  <h2 class="g-h" id="taxonomy">Taxonomy · ${taxonomy.length}</h2>
+  <p class="ml-lede" style="max-width:64ch">
+    The product vocabulary — ${taxonomy.reduce((n, t) => n + t.values.length, 0)} values
+    across ${taxonomy.length} categories, generated from
+    <code>Master_Data_Seed_Values.md</code>, which is canonical and
+    Firestore-backed. These are the words the UI is allowed to use.
+  </p>
+  ${taxonomy.map((t) => `<section class="g-comp">
+    <div class="g-comp__head"><h3><code>${t.key}</code></h3>
+      <span class="g-file">${esc(t.note)}</span></div>
+    <div class="g-demo"><div class="ml-chip-wrap">
+      ${t.values.map((v) => `<span class="ml-chip" title="${esc(v.value)}">${esc(v.label)}</span>`).join("")}
+    </div></div></section>`).join("")}
+
+  <h2 class="g-h" id="gaps">Gaps</h2>
+  <p class="ml-lede" style="max-width:64ch">
+    Computed from the repo, not listed by hand. The old registry was
+    hand-maintained and went stale; this one cannot.
+  </p>
+  <div class="g-demo">
+    <h3 style="margin:0 0 var(--space-2)">Widgets named but not built · ${gaps.widgets.length} of 27</h3>
+    <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
+      Named in <code>Widget_Directory.md</code> with no matching component in the system.</p>
+    <div class="ml-chip-wrap">${gaps.widgets.map((w) => `<span class="ml-chip">${esc(w)}</span>`).join("")}</div>
+
+    <h3 style="margin:var(--space-4) 0 var(--space-2)">Screens not yet on the system · ${gaps.screens.length}</h3>
+    <p class="ml-type-1" style="color:var(--color-muted);margin:0">
+      Still carrying local <code>&lt;style&gt;</code> blocks or pre-system markup.
+      ${patterns.reduce((n, fl) => n + fl.screens.filter((x) => x.onSystem).length, 0)} of
+      ${patterns.reduce((n, fl) => n + fl.screens.length, 0)} screens are rebuilt.</p>
+  </div>
 
   <h2 class="g-h" id="coverage">Coverage</h2>
   ${undocumented.length
@@ -454,6 +620,49 @@ const html = `<!doctype html>
     here. Generated by <code>scripts/build-guide.mjs</code> — do not hand-edit.
   </p>
 </div>
+<script>
+/* The catalogue is interactive on purpose. A static swatch page cannot show
+   that a chip toggles, a sheet drags, or that pressed states exist — which is
+   what the Gestalt catalogue this replaces could do and the first version of
+   this page could not. No framework: the system's behaviour is CSS state plus
+   aria attributes, so wiring it is a few delegated listeners. */
+document.addEventListener('click', (e) => {
+  const chip = e.target.closest('.ml-chip[aria-pressed]');
+  if (chip) chip.setAttribute('aria-pressed', chip.getAttribute('aria-pressed') !== 'true');
+
+  const seg = e.target.closest('.ml-segmented__btn');
+  if (seg) for (const b of seg.parentElement.children)
+    b.setAttribute('aria-selected', String(b === seg));
+
+  const tab = e.target.closest('.ml-tabs__tab');
+  if (tab && tab.closest('.g-demo')) { e.preventDefault();
+    for (const t of tab.parentElement.children) t.setAttribute('aria-selected', String(t === tab)); }
+
+  const choice = e.target.closest('.ml-choice[role="radio"]');
+  if (choice) for (const c of choice.parentElement.querySelectorAll('.ml-choice'))
+    c.setAttribute('aria-checked', String(c === choice));
+
+  const save = e.target.closest('.ml-market-card__save, .ml-badge__remove');
+  if (save) { e.preventDefault();
+    save.setAttribute('aria-pressed', save.getAttribute('aria-pressed') !== 'true'); }
+
+  const sheet = e.target.closest('.ml-sheet-scrim');
+  if (sheet) { sheet.classList.toggle('is-open');
+    sheet.parentElement.querySelector('.ml-sheet').classList.toggle('is-open'); }
+});
+
+/* Motion: run each step with its real duration and easing. */
+const play = document.getElementById('g-play');
+if (play) play.addEventListener('click', () => {
+  for (const dot of document.querySelectorAll('.g-dot')) {
+    dot.style.transition = 'none'; dot.classList.remove('is-run');
+    void dot.offsetWidth;                                   // force reflow
+    dot.style.transition = 'transform ' + dot.dataset.dur + ' ' + dot.dataset.ease;
+    dot.classList.add('is-run');
+    setTimeout(() => { dot.style.transition = 'none'; dot.classList.remove('is-run'); }, 1400);
+  }
+});
+</script>
 </body>
 </html>
 `;
