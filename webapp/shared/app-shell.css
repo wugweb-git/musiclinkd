@@ -161,30 +161,4 @@ body {
 /* --- Dev-only overlay: flow/screen/state identifiers. Deliberately styled
    minimally and neutrally (not part of the app's visual design) — strip
    this whole block, or the element it targets, before a real design pass. --- */
-.dev-meta-badge {
-  position: fixed;
-  top: calc(var(--app-safe-top) + 8px);
-  right: calc(var(--app-safe-right) + 8px);
-  z-index: 9999;
-  font: 10px/1.4 ui-monospace, "SF Mono", Menlo, monospace;
-  background: rgba(13, 11, 38, 0.82);
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 6px;
-  pointer-events: none;
-  white-space: nowrap;
-  /* Bug fixed 2026-08-16: this is right-anchored with no width limit, and
-     the badge text ("flowKey / screenKey · state") can run long — e.g.
-     "public_profile / public_profile_view_venue · default". Inside a
-     narrow phone-frame iframe (the workbench at /preview/index.html embeds
-     every screen at real phone width), position:fixed is relative to the
-     iframe's own viewport, so long text grows past the iframe's LEFT edge
-     and gets silently clipped there — invisible, no ellipsis, no
-     indication anything is cut off. What's left visible reads as a
-     different (wrong-looking) string, e.g. "public_profile" appearing to
-     read as "c_profile". max-width + ellipsis makes truncation visible
-     and keeps the badge from ever exceeding its own frame. */
-  max-width: calc(100% - var(--app-safe-right, 0px) - 16px);
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+

@@ -3,84 +3,70 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/portfolio/add_collaborators/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Add Portfolio / Add Collaborators</title>
+<title>MusicLinkd — Add Collaborators</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .result-row { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border-radius: var(--radius-2); }
-  .result-row img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex: none; }
-  .result-row .meta { flex: 1; min-width: 0; }
-  .result-row .meta b { display: flex; align-items: center; gap: 4px; font-size: var(--type-2); }
-  .result-row .meta span { font-size: var(--type-1); color: var(--muted); }
-  .verified-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--success); color: #fff; display: inline-flex; align-items: center; justify-content: center; flex: none; }
-  .selected-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 4px 4px 10px; border-radius: var(--radius-4); background: var(--surface-alt); font-size: var(--type-1); font-weight: 600; }
-  .selected-chip button { width: 20px; height: 20px; border-radius: 50%; border: none; background: var(--line); color: var(--black); cursor: pointer; }
-  .step-dots { display: flex; gap: 4px; margin-bottom: var(--space-3); }
-  .step-dots span { width: 20px; height: 3px; border-radius: 2px; background: var(--line); }
-  .step-dots span.done { background: var(--black); }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/portfolio/select_role/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-    </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);">
-      <div class="step-dots"><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span></span><span></span><span></span></div>
+
+  <div class="ml-app">
+    <header class="ml-navbar"><a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/portfolio/select_role/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a><span class="ml-navbar__spacer"></span><div class="ml-steps">
+        <span class="ml-steps__label">5/9</span>
+        <span class="ml-steps__track"><span class="ml-steps__fill" style="width:56%"></span></span>
+      </div></header>
+    <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3)">
       <div>
-        <h1 style="font-size:var(--type-3);">Add collaborators</h1>
-        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);">Optional — who else worked on this with you?</p>
+        <h1 class="ml-type-3" style="margin:0">Add collaborators</h1>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Optional — who else worked on this with you?</p>
       </div>
 
-      <div class="field"><input type="search" placeholder="Search by name" value="Arijit" /></div>
-
-      <div id="panel-searching">
-        <a class="result-row" href="#" id="add-arijit" style="text-decoration:none;color:inherit;">
-          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=88" alt="" />
-          <div class="meta">
-            <b>Arijit Sen <span class="verified-dot"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></span></b>
-            <span>Singer · Composer · Mumbai, MH</span>
-          </div>
-          <span style="font-size:var(--type-1);font-weight:600;color:var(--pink);">Add</span>
-        </a>
+      <div class="ml-search">
+        <svg class="ml-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" placeholder="Search musicians by name" aria-label="Search collaborators" />
       </div>
 
-      <div id="panel-selected" style="display:none;">
-        <p style="font-size:var(--type-1);color:var(--muted);margin-bottom:var(--space-1);">Added</p>
-        <span class="selected-chip">Arijit Sen <button type="button" aria-label="Remove">×</button></span>
+      <div class="ml-chip-wrap" data-state="selected">
+        <span class="ml-badge ml-badge--accent ml-badge--removable">Arijit Sen<button class="ml-badge__remove" aria-label="Remove Arijit Sen">×</button></span>
       </div>
+      <p class="ml-type-1" style="color:var(--color-muted)" data-state="searching">Start typing to find collaborators already on MusicLinkd.</p>
 
-      <a class="btn btn-p btn-block" href="/preview/flows/portfolio/credit_attribution/index.html" style="text-decoration:none;margin-top:var(--space-2);">Continue</a>
-      <a class="btn btn-s btn-block" href="/preview/flows/portfolio/credit_attribution/index.html" style="text-decoration:none;">Skip — solo project</a>
+      <div>
+        <button class="ml-choice" aria-checked="true" role="checkbox">
+          <img class="ml-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120" alt="" />
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Arijit Sen</span>
+            <span class="ml-choice__meta">Singer · Composer · Mumbai, MH</span>
+          </span>
+          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+        </button>
+        <button class="ml-choice" aria-checked="false" role="checkbox">
+          <img class="ml-avatar" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=120" alt="" />
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Mehek Kapoor</span>
+            <span class="ml-choice__meta">Session Guitarist · Pune, MH</span>
+          </span>
+          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+        </button>
+      </div>
     </main>
-    <footer class="app-bottombar"></footer>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--ghost ml-btn--block" href="/preview/flows/portfolio/media_preview/index.html" style="margin-bottom:var(--space-2)">Skip — solo project</a><a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/portfolio/credit_attribution/index.html">Continue</a>
+    </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    // states: searching (default) | selected — see screen.json
-    document.addEventListener("musiclinkd:screen-ready", () => {
-      if (window.MusicLinkd.currentState === "selected") {
-        document.getElementById("panel-searching").style.display = "none";
-        document.getElementById("panel-selected").style.display = "block";
-      }
-    });
-    document.getElementById("add-arijit").addEventListener("click", (e) => {
-      e.preventDefault();
-      document.getElementById("panel-searching").style.display = "none";
-      document.getElementById("panel-selected").style.display = "block";
-    });
-  </script>
 </body>
 </html>

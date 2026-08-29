@@ -3,79 +3,68 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/portfolio/portfolio_dashboard/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Add Portfolio / Portfolio Dashboard</title>
+<title>MusicLinkd — Portfolio Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .stat-row { display: flex; gap: var(--space-4); margin-top: var(--space-2); }
-  .stat-row .stat b { display: block; font-size: var(--type-2); }
-  .stat-row .stat span { font-size: var(--type-1); color: var(--muted); }
-  .fab { position: absolute; right: var(--space-3); bottom: var(--space-3); width: 56px; height: 56px; border-radius: 50%; background: var(--black); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-3); text-decoration: none; }
-  .status-pill { display: inline-flex; padding: 3px 10px; border-radius: var(--radius-4); font-size: var(--type-1); font-weight: 600; background: rgba(34,197,94,0.12); color: #166534; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);display:flex;align-items:center;justify-content:space-between;height:56px;">
-      <h1 style="font-size:var(--type-3);">My Portfolio</h1>
-    </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-3) var(--space-4);position:relative;min-height:100%;">
 
-      <div id="panel-populated">
-        <a class="card-s" href="/preview/flows/portfolio/profile_project_view/index.html" style="display:block;text-decoration:none;color:inherit;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-2);">
-            <div>
-              <h2 style="font-size:var(--type-2);margin:0;">Tum Hi Toh (Unplugged)</h2>
-              <p style="color:var(--muted);font-size:var(--type-1);margin-top:2px;">Song · Released 14 Feb 2026</p>
-            </div>
-            <span class="status-pill">Released</span>
-          </div>
-          <p style="font-size:var(--type-1);color:var(--muted);margin-top:var(--space-2);">Acoustic unplugged reinterpretation — 4.2M plays on Spotify.</p>
-          <div class="stat-row">
-            <div class="stat"><b>4,200</b><span>Views</span></div>
-            <div class="stat"><b>610</b><span>Likes</span></div>
-            <div class="stat"><b>88</b><span>Shares</span></div>
-          </div>
+  <div class="ml-app">
+    <header class="ml-appbar">
+      <div class="ml-appbar__titles">
+        <div class="ml-eyebrow">Portfolio</div>
+        <h1 class="ml-appbar__title">Your work</h1>
+      </div>
+      <div class="ml-appbar__actions">
+        <a class="ml-icon-btn" href="/preview/flows/portfolio/choose_project_type/index.html" aria-label="Add project">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
         </a>
       </div>
+    </header>
+    <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3)">
 
-      <div id="panel-empty" style="display:none;flex-direction:column;align-items:center;text-align:center;padding-top:15vh;gap:var(--space-3);">
-        <div style="width:64px;height:64px;border-radius:var(--radius-2);background:var(--surface-alt);display:flex;align-items:center;justify-content:center;color:var(--muted);">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+      <a class="ml-card" href="/preview/flows/portfolio/profile_project_view/index.html" data-state="populated">
+        <div class="ml-media ml-media--wide ml-media--scrim">
+          <img src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=600" alt="" />
+          <span class="ml-media__tag"><span class="ml-status ml-status--success">Released</span></span>
         </div>
-        <div>
-          <h2 style="font-size:var(--type-3);margin:0;">No projects yet</h2>
-          <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);max-width:260px;">Add a song, album, or performance to start building your public portfolio.</p>
+        <div style="padding:var(--space-3)">
+          <div class="ml-type-3" style="font-weight:700">Tum Hi Toh (Unplugged)</div>
+          <div class="ml-type-1" style="color:var(--color-muted)">Song · Released 14 Feb 2026</div>
+          <p class="ml-type-2" style="margin:var(--space-2) 0 var(--space-3)">Acoustic unplugged reinterpretation — 4.2M plays on Spotify.</p>
+          <div class="ml-stat-grid" style="grid-template-columns:repeat(3,1fr)">
+            <div class="ml-stat"><span class="ml-stat__num">4,200</span><span class="ml-stat__label">Views</span></div>
+            <div class="ml-stat"><span class="ml-stat__num">610</span><span class="ml-stat__label">Likes</span></div>
+            <div class="ml-stat"><span class="ml-stat__num">88</span><span class="ml-stat__label">Shares</span></div>
+          </div>
         </div>
-        <a class="btn btn-p" href="/preview/flows/portfolio/choose_project_type/index.html" style="text-decoration:none;">Add your first project</a>
-      </div>
-
-      <a class="fab" id="fab-add" href="/preview/flows/portfolio/choose_project_type/index.html" aria-label="Add project">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
       </a>
+
+      <!-- state: empty -->
+      <div class="ml-empty" data-state="empty">
+        <h2 class="ml-empty__title">No projects yet</h2>
+        <p class="ml-empty__body">Add a song, album, or performance to start building your public portfolio.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/portfolio/choose_project_type/index.html">Add your first project</a>
+      </div>
     </main>
-    <footer class="app-bottombar"></footer>
+    <!-- the empty state carries its own CTA, so the footer would otherwise be
+         an empty bordered strip in that state -->
+    <footer class="ml-app__footer" data-state="populated">
+      <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/portfolio/choose_project_type/index.html">Add a project</a>
+    </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    // states: empty | populated (default) — see screen.json
-    document.addEventListener("musiclinkd:screen-ready", () => {
-      if (window.MusicLinkd.currentState === "empty") {
-        document.getElementById("panel-populated").style.display = "none";
-        document.getElementById("fab-add").style.display = "none";
-        document.getElementById("panel-empty").style.display = "flex";
-      }
-    });
-  </script>
 </body>
 </html>

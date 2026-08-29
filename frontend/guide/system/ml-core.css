@@ -1,0 +1,757 @@
+/**
+ * ml-core.css — MusicLinkd primitives.
+ *
+ * Requires ml-tokens.css (generated). Every value here is a token; there are
+ * no literal colours, sizes or durations below except where a comment says why.
+ *
+ * Built to native standards, not web defaults:
+ *   · every interactive element is >= var(--size-3) (48dp) in both axes
+ *   · :active is the real feedback state; :hover is decoration and never the
+ *     only signal, because a touch device has no persistent hover
+ *   · focus-visible only, so a tap never leaves a ring behind
+ *   · no tooltips, no right-click, no mouse-only affordance
+ *
+ * Each block carries a /* Compose: */ note naming its Android counterpart, so
+ * this file doubles as the handoff spec.
+ *
+ * Palette rule: the chrome is monochrome, the media carries the colour.
+ */
+
+/* ── base ──────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* [hidden] must win. The UA stylesheet's `[hidden] { display: none }` has the
+   lowest possible specificity, so ANY author display rule beats it — and this
+   system sets display on nearly every component (.ml-btn is inline-flex,
+   .ml-otp is flex). Without this, app-shell.js's state switching sets the
+   attribute correctly and every state still renders at once, which is exactly
+   what happened on first run. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--type-2);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;   /* we draw our own pressed state */
+}
+
+/* One focus treatment for the whole system. Pink, because a black ring on
+   black text is invisible — the same reasoning tokens.json records. */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-pink);
+  outline-offset: 2px;
+}
+
+/* Honour the OS setting. Android exposes this as ANIMATOR_DURATION_SCALE and
+   Compose reads it the same way — a pattern with no reduced-motion path is
+   not shippable. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── button ────────────────────────────────────────────────────────────── */
+/* Compose: Button / FilledTonalButton / OutlinedButton, MLSize.s3 minHeight  */
+
+.ml-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--size-3);          /* 48dp — the accessibility floor */
+  padding: 0 var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius-4);
+  font-family: var(--font-body);
+  font-size: var(--type-2);
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--duration-1) var(--ease-standard),
+              transform var(--duration-1) var(--ease-standard);
+}
+/* Scale-on-press rather than a colour flash: it reads as physical, survives
+   on any background, and is what Compose's tapScaleAnimation does. */
+.ml-btn:active { transform: scale(0.97); }
+.ml-btn:disabled,
+.ml-btn[aria-disabled="true"] {
+  opacity: var(--opacity-3);
+  pointer-events: none;
+}
+
+/* PRIMARY IS BLACK. Pink is the accent and is never the default CTA —
+   corrected 2026-08-16 by the brand owner, re-confirmed 2026-08-29. */
+.ml-btn--primary  { background: var(--color-ink); color: var(--color-white); }
+.ml-btn--primary:active { background: var(--color-ink-pressed); }
+
+.ml-btn--secondary { background: var(--color-white); color: var(--color-ink); border-color: var(--color-line); }
+.ml-btn--secondary:active { background: var(--color-surface); }
+
+/* Reserved for high-intent commerce moments, not general actions. */
+.ml-btn--accent  { background: var(--color-pink); color: var(--color-ink); }
+.ml-btn--accent:active { background: var(--color-pink-pressed); }
+
+.ml-btn--ghost   { background: transparent; color: var(--color-ink); }
+.ml-btn--ghost:active { background: var(--color-surface); }
+
+.ml-btn--block   { display: flex; width: 100%; }
+.ml-btn--lg      { min-height: var(--size-4); font-size: var(--type-2); }
+
+/* ── icon button ───────────────────────────────────────────────────────── */
+/* Compose: IconButton — note the 48dp box around a 20dp glyph               */
+
+.ml-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* The box is the touch target; the icon inside is visually smaller. This is
+     the single most common native a11y failure and the reason the old
+     .icon-btn (44px) failed the audit. */
+  min-width: var(--size-3);
+  min-height: var(--size-3);
+  padding: 0;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-4);
+  background: var(--color-white);
+  color: var(--color-ink);            /* was inheriting link blue — a real bug */
+  cursor: pointer;
+  transition: background-color var(--duration-1) var(--ease-standard),
+              transform var(--duration-1) var(--ease-standard);
+}
+.ml-icon-btn:active { transform: scale(0.94); background: var(--color-surface); }
+.ml-icon-btn--bare  { border-color: transparent; background: transparent; }
+.ml-icon-btn svg    { width: 20px; height: 20px; display: block; }
+
+/* ── field ─────────────────────────────────────────────────────────────── */
+/* Compose: OutlinedTextField                                                */
+
+.ml-field { display: flex; flex-direction: column; gap: var(--space-1); text-align: left; }
+.ml-field > label {
+  font-size: var(--type-1);
+  font-weight: 600;
+  color: var(--color-muted);
+}
+.ml-field input,
+.ml-field textarea,
+.ml-field select {
+  width: 100%;
+  min-height: var(--size-3);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-4);
+  background: var(--color-white);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--type-2);
+  transition: border-color var(--duration-1) var(--ease-standard);
+}
+.ml-field textarea { padding: var(--space-2) var(--space-3); min-height: calc(var(--size-4) * 2); border-radius: var(--radius-2); resize: vertical; }
+.ml-field input::placeholder, .ml-field textarea::placeholder { color: var(--color-muted); }
+.ml-field input:focus, .ml-field textarea:focus { border-color: var(--color-pink); outline: none; }
+.ml-field .ml-field__error { font-size: var(--type-1); color: var(--color-error); }
+.ml-field.is-invalid input,
+.ml-field.is-invalid textarea { border-color: var(--color-error); }
+
+/* ── search ────────────────────────────────────────────────────────────── */
+/* Pill, leading glyph, optional trailing voice affordance.                  */
+/* Compose: SearchBar                                                        */
+
+.ml-search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--size-3);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-4);
+  background: var(--color-surface);
+}
+.ml-search__icon { flex: none; width: 18px; height: 18px; color: var(--color-muted); }
+.ml-search input {
+  flex: 1;
+  min-width: 0;
+  height: var(--size-3);
+  border: 0;
+  background: none;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--type-2);
+}
+.ml-search input:focus { outline: none; }
+.ml-search__divider { width: 1px; align-self: stretch; margin: var(--space-2) 0; background: var(--color-line); }
+
+/* ── chip ──────────────────────────────────────────────────────────────── */
+/* A chip is a CONTROL (filter, selection). For a read-only state label use
+   .ml-status below — conflating the two is why screens grew both a .chip and
+   a .status-pill that looked alike but behaved differently. */
+/* Compose: FilterChip                                                       */
+
+.ml-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--size-1);          /* 32dp visual… */
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-4);
+  background: var(--color-white);
+  color: var(--color-muted);
+  font-size: var(--type-1);
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  /* REQUIRED: the ::after tap band below is position:absolute, so without a
+     positioned ancestor here it resolves against a far-up container and the
+     band lands nowhere near the chip. */
+  position: relative;
+  transition: background-color var(--duration-1) var(--ease-standard),
+              transform var(--duration-1) var(--ease-standard);
+}
+/* …with the tap target expanded to 48dp without changing the visual size.
+   A pseudo-element hit-tests as part of its parent, so a tap 8dp above or
+   below the 32dp chip still activates it — verified with elementFromPoint,
+   not assumed. This is why a chip can look small and still be reachable. */
+.ml-chip::after {
+  content: "";
+  position: absolute;
+  inset: 50% 0 auto;
+  height: var(--size-3);
+  transform: translateY(-50%);
+}
+.ml-chip:active { transform: scale(0.96); }
+.ml-chip[aria-pressed="true"],
+.ml-chip.is-selected {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-white);
+}
+
+/* ── status ────────────────────────────────────────────────────────────── */
+/* Read-only state label. The container and text colours are DERIVED from the
+   three status tokens with color-mix, so adding "available / pending / live"
+   costs zero new tokens — screens were hardcoding #DCFCE7/#166534 pairs
+   (89 off-palette hex values across the app) purely because these did not
+   exist. */
+/* Compose: AssistChip(enabled=false) / Badge                                */
+
+.ml-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 3px 9px;
+  border-radius: var(--radius-4);
+  font-size: var(--type-1);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.ml-status::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: var(--radius-4);
+  background: currentColor;
+}
+.ml-status--neutral { background: var(--color-surface); color: var(--color-muted); }
+.ml-status--neutral::before { display: none; }
+
+.ml-status--success { background: color-mix(in srgb, var(--color-success) 14%, var(--color-white));
+                      color:      color-mix(in srgb, var(--color-success) 58%, black); }
+.ml-status--warning { background: color-mix(in srgb, var(--color-warning) 18%, var(--color-white));
+                      color:      color-mix(in srgb, var(--color-warning) 50%, black); }
+.ml-status--error   { background: color-mix(in srgb, var(--color-error)   12%, var(--color-white));
+                      color:      color-mix(in srgb, var(--color-error)   72%, black); }
+.ml-status--accent  { background: var(--color-pink-container); color: var(--color-pink-pressed); }
+
+/* ── badge ─────────────────────────────────────────────────────────────── */
+
+.ml-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-4);
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: var(--type-1);
+  font-weight: 600;
+}
+.ml-badge--accent { background: var(--color-pink-container); color: var(--color-pink-pressed); }
+
+/* Removable badge (a chosen collaborator, an applied filter). The × is a real
+   control, so it carries its own expanded target rather than being a 24dp
+   tap-and-miss. */
+.ml-badge--removable { padding-right: var(--space-1); }
+.ml-badge__remove {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; margin-left: var(--space-1);
+  border: 0; border-radius: var(--radius-4);
+  background: var(--color-white);
+  color: inherit; font-size: var(--type-1); line-height: 1; cursor: pointer;
+}
+.ml-badge__remove::after {
+  content: "";
+  position: absolute;
+  inset: 50% 50% auto auto;
+  width: var(--size-3); height: var(--size-3);
+  transform: translate(50%, -50%);
+}
+
+/* ── card ──────────────────────────────────────────────────────────────── */
+/* A hairline border is the default separator. Elevation is opt-in, because a
+   flat monochrome system separates by contrast, not by stacked shadows —
+   which is why the elevation scale is 2 levels rather than 4. */
+/* Compose: Card(border = BorderStroke(1.dp, MLColor.line))                  */
+
+.ml-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-2);
+  overflow: hidden;
+}
+.ml-card--lg      { border-radius: var(--radius-3); }
+.ml-card--padded  { padding: var(--space-3); }
+.ml-card--raised  { box-shadow: var(--elevation-1); }
+.ml-card--flat    { border-color: transparent; background: var(--color-surface); }
+
+/* Tappable card — the whole surface is the target. */
+a.ml-card, button.ml-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--duration-1) var(--ease-standard);
+}
+a.ml-card:active, button.ml-card:active { transform: scale(0.98); }
+
+/* ── media ─────────────────────────────────────────────────────────────── */
+/* The one element allowed to carry saturation. Any text laid over artwork
+   MUST sit on the scrim, never on raw imagery. */
+/* Compose: AsyncImage + Brush.verticalGradient(MLColor.scrim)               */
+
+.ml-media { position: relative; overflow: hidden; background: var(--color-surface); }
+.ml-media > img,
+.ml-media > video {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.ml-media--square { aspect-ratio: var(--media-aspect-square); }
+.ml-media--wide   { aspect-ratio: var(--media-aspect-wide); }
+.ml-media--scrim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--media-scrim);
+  pointer-events: none;
+}
+/* Content laid over the scrim. */
+.ml-media__overlay {
+  position: absolute;
+  z-index: 1;
+  left: var(--space-3);
+  right: var(--space-3);
+  bottom: var(--space-3);
+  color: var(--color-white);
+}
+/* Top-corner slot for a status label or a save control. */
+.ml-media__tag { position: absolute; z-index: 1; top: var(--space-2); left: var(--space-2); }
+.ml-media__act { position: absolute; z-index: 1; top: var(--space-2); right: var(--space-2); }
+
+/* ── avatar ────────────────────────────────────────────────────────────── */
+/* Replaces the 14 broken var(--r-avatar) references: an avatar is radius-4.  */
+
+.ml-avatar {
+  display: block;
+  width: var(--size-2); height: var(--size-2);
+  border-radius: var(--radius-4);
+  object-fit: cover;
+  background: var(--color-surface);
+  flex: none;
+}
+.ml-avatar--sm { width: var(--size-1); height: var(--size-1); }
+.ml-avatar--lg { width: var(--size-4); height: var(--size-4); }
+
+/* An avatar is often the tap target for "your profile". At --size-2 (40dp)
+   it fails the 48dp rule on its own, so a tappable avatar gets a wrapper
+   that supplies the target without changing how big the image looks. */
+.ml-avatar-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: var(--size-3); min-height: var(--size-3);
+  border: 0; padding: 0; background: none; cursor: pointer;
+  border-radius: var(--radius-4);
+}
+.ml-avatar-btn:active { transform: scale(0.94); }
+
+/* ── section header + rail ─────────────────────────────────────────────── */
+/* "Featured talent … See all" + a horizontally scrolling row. The single most
+   repeated layout in the app and in the reference build. */
+
+.ml-section {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: var(--space-4) 0 var(--space-2);
+}
+.ml-section > h2, .ml-section > h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--type-3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.ml-section__link {
+  flex: none;
+  /* A 48dp target needs BOTH axes — this measured 48x32 and failed the audit
+     until the inline padding was added. Negative margin keeps the link
+     optically flush with the content edge despite the larger hit area. */
+  display: inline-flex; align-items: center; justify-content: flex-end;
+  min-height: var(--size-3);
+  min-width: var(--size-3);
+  padding-inline: var(--space-2);
+  margin-inline-end: calc(var(--space-2) * -1);
+  color: var(--color-pink-pressed);   /* pink TEXT rule — see tokens.json */
+  font-size: var(--type-1);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.ml-rail {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  /* bleed to the screen edge, then re-pad — a rail that stops at the gutter
+     looks clipped on a phone */
+  margin-inline: calc(var(--space-3) * -1);
+  padding-inline: var(--space-3);
+  padding-bottom: var(--space-1);
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+.ml-rail::-webkit-scrollbar { display: none; }
+.ml-rail > * { flex: none; scroll-snap-align: start; }
+
+/* ── list row ──────────────────────────────────────────────────────────── */
+/* Compose: ListItem                                                         */
+
+.ml-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--size-3);
+  padding: var(--space-2) 0;
+  color: inherit;
+  text-decoration: none;
+}
+.ml-row__body  { flex: 1; min-width: 0; }
+.ml-row__title { display: block; font-size: var(--type-2); font-weight: 600; }
+.ml-row__meta  { display: block; font-size: var(--type-1); color: var(--color-muted); }
+.ml-row + .ml-row { border-top: 1px solid var(--color-line); }
+a.ml-row:active { background: var(--color-surface); }
+
+/* ── divider ───────────────────────────────────────────────────────────── */
+
+.ml-divider { height: 1px; border: 0; margin: var(--space-3) 0; background: var(--color-line); }
+.ml-divider--labelled {
+  display: flex; align-items: center; gap: var(--space-2);
+  height: auto; background: none;
+  color: var(--color-muted); font-size: var(--type-1);
+}
+.ml-divider--labelled::before,
+.ml-divider--labelled::after { content: ""; flex: 1; height: 1px; background: var(--color-line); }
+
+/* ── loading ───────────────────────────────────────────────────────────── */
+/* Skeletons, not spinners, for content — a spinner tells the user nothing
+   about what is arriving. tokens.json v8 recorded state.loading as
+   "no dedicated token"; this is that gap closed. */
+
+.ml-skeleton {
+  background: linear-gradient(90deg,
+    var(--color-surface) 25%,
+    var(--color-line) 37%,
+    var(--color-surface) 63%);
+  background-size: 400% 100%;
+  animation: ml-shimmer 1.4s ease infinite;
+  border-radius: var(--radius-1);
+}
+@keyframes ml-shimmer { from { background-position: 100% 0; } to { background-position: 0 0; } }
+
+.ml-spinner {
+  width: 24px; height: 24px;
+  border: 3px solid var(--color-line);
+  border-top-color: var(--color-pink);
+  border-radius: var(--radius-4);
+  animation: ml-spin var(--duration-4) linear infinite;
+}
+@keyframes ml-spin { to { transform: rotate(360deg); } }
+
+/* ── brand ─────────────────────────────────────────────────────────────── */
+
+.ml-wordmark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--type-3);
+  letter-spacing: -0.04em;
+  color: var(--color-ink);
+}
+.ml-wordmark em { font-style: normal; color: var(--color-pink); }
+.ml-wordmark--on-media { color: var(--color-white); }
+
+/* Small tracked uppercase label above a screen title. */
+.ml-eyebrow {
+  font-size: var(--type-1);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* ── nav app bar ───────────────────────────────────────────────────────── */
+/* Back-arrow bar for anything inside a flow. Separate from .ml-appbar,
+   which is the tab-root large-title bar. */
+/* Compose: TopAppBar(navigationIcon = ...)                                  */
+
+.ml-navbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--size-4);
+  padding: var(--space-2) var(--space-2);
+  padding-top: calc(var(--space-2) + var(--safe-top));
+  flex: none;
+}
+/* an <h1> on flow screens, so the UA margin has to go */
+.ml-navbar__title { margin: 0; font-size: var(--type-2); font-weight: 700; }
+.ml-navbar__spacer { flex: 1; }
+
+/* ── sticky footer ─────────────────────────────────────────────────────── */
+/* Primary action parked at the thumb. Every flow screen that commits to
+   something uses this rather than letting the CTA scroll away. */
+
+.ml-app__footer {
+  flex: none;
+  padding: var(--space-3);
+  padding-bottom: calc(var(--space-3) + var(--safe-bottom));
+  background: var(--color-paper);
+  border-top: 1px solid var(--color-line);
+}
+.ml-app__footer--bare { border-top: 0; background: none; }
+
+/* ── segmented control ─────────────────────────────────────────────────── */
+/* Compose: SingleChoiceSegmentedButtonRow                                   */
+
+.ml-segmented {
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border-radius: var(--radius-4);
+  background: var(--color-surface);
+}
+.ml-segmented__btn {
+  position: relative;
+  flex: 1;
+  min-height: var(--size-2);
+  border: 0;
+  border-radius: var(--radius-4);
+  background: none;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: var(--type-1);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--duration-1) var(--ease-standard);
+}
+.ml-segmented__btn[aria-selected="true"] {
+  background: var(--color-white);
+  color: var(--color-ink);
+  box-shadow: var(--elevation-1);
+}
+/* Visual height stays 40dp (Material's segmented-button height); the tap
+   target is expanded to 48dp by an overlay box. Pseudo-elements hit-test as
+   part of their parent, so the tap still lands on the button — verified in
+   the browser with elementFromPoint, not assumed. */
+.ml-segmented__btn::after {
+  content: "";
+  position: absolute;
+  inset: 50% 0 auto;
+  height: var(--size-3);
+  transform: translateY(-50%);
+}
+
+/* ── OTP ───────────────────────────────────────────────────────────────── */
+/* One box per digit. The row is a single logical input for a screen reader. */
+
+.ml-otp { display: flex; gap: var(--space-2); justify-content: center; }
+.ml-otp__box {
+  width: var(--size-3);
+  height: 64px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-2);
+  background: var(--color-white);
+  color: var(--color-muted);
+  font-size: var(--type-3);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.ml-otp__box.is-filled { border-color: var(--color-pink); border-width: 2px; color: var(--color-ink); }
+.ml-otp__box.is-invalid { border-color: var(--color-error); color: var(--color-error);
+  background: color-mix(in srgb, var(--color-error) 6%, var(--color-white)); }
+
+/* ── phone entry ───────────────────────────────────────────────────────── */
+
+.ml-phone { display: flex; gap: var(--space-2); }
+.ml-phone__prefix {
+  display: flex; align-items: center; gap: var(--space-1);
+  min-height: var(--size-3);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-4);
+  background: var(--color-white);
+  font-size: var(--type-2); font-weight: 600;
+  flex: none;
+}
+.ml-phone input { flex: 1; min-width: 0; }
+
+/* ── banner ────────────────────────────────────────────────────────────── */
+/* Inline, in-flow message. Not a toast — this one stays until resolved. */
+
+.ml-banner {
+  display: flex; align-items: flex-start; gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-2);
+  font-size: var(--type-1);
+}
+.ml-banner--error   { background: color-mix(in srgb, var(--color-error) 8%, var(--color-white));
+                      color: color-mix(in srgb, var(--color-error) 78%, black); }
+.ml-banner--info    { background: var(--color-surface); color: var(--color-muted); }
+.ml-banner--success { background: color-mix(in srgb, var(--color-success) 12%, var(--color-white));
+                      color: color-mix(in srgb, var(--color-success) 58%, black); }
+
+/* ── confirmation mark ─────────────────────────────────────────────────── */
+
+.ml-check {
+  display: flex; align-items: center; justify-content: center;
+  width: 64px; height: 64px; margin-inline: auto;
+  border-radius: var(--radius-4);
+  background: color-mix(in srgb, var(--color-success) 14%, var(--color-white));
+  color: var(--color-success);
+}
+
+/* ── step progress ─────────────────────────────────────────────────────── */
+/* Onboarding is 13 screens; without a visible position people abandon it.
+   .onb-progress / .onb-step / .step-dots were redefined in 12, 12 and 7
+   screens respectively before this existed. */
+
+.ml-steps { display: flex; align-items: center; gap: var(--space-2); }
+.ml-steps__track { flex: 1; height: 4px; border-radius: var(--radius-4); background: var(--color-line); overflow: hidden; }
+.ml-steps__fill  { height: 100%; border-radius: var(--radius-4); background: var(--color-ink);
+                   transition: width var(--duration-3) var(--ease-enter); }
+.ml-steps__label { font-size: var(--type-1); color: var(--color-muted); font-weight: 600; flex: none;
+                   font-variant-numeric: tabular-nums; }
+
+.ml-dots { display: flex; gap: var(--space-1); justify-content: center; }
+.ml-dots__dot { width: 6px; height: 6px; border-radius: var(--radius-4); background: var(--color-line); }
+.ml-dots__dot.is-active { background: var(--color-ink); width: 18px; }
+
+/* ── choice list ───────────────────────────────────────────────────────── */
+/* Single- or multi-select rows. The whole row is the target, not the box. */
+/* Compose: ListItem + RadioButton / Checkbox                                */
+
+.ml-choice {
+  display: flex; align-items: center; gap: var(--space-3);
+  width: 100%;
+  min-height: var(--size-4);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-2);
+  background: var(--color-white);
+  color: inherit; text-align: left; text-decoration: none;
+  font-family: var(--font-body); font-size: var(--type-2);
+  cursor: pointer;
+  transition: border-color var(--duration-1) var(--ease-standard);
+}
+.ml-choice + .ml-choice { margin-top: var(--space-2); }
+.ml-choice:active { background: var(--color-surface); }
+.ml-choice[aria-checked="true"], .ml-choice.is-selected {
+  border-color: var(--color-ink); border-width: 2px;
+}
+.ml-choice__body { flex: 1; min-width: 0; }
+/* display:block is required, not cosmetic: these are <span> (an <a>/<button>
+   cannot legally contain a <div>), so without it the meta line runs on inline
+   after the title instead of sitting under it. */
+.ml-choice__title { display: block; font-weight: 600; }
+.ml-choice__meta  { display: block; font-size: var(--type-1); color: var(--color-muted); }
+.ml-choice__mark {
+  width: 22px; height: 22px; flex: none;
+  border: 2px solid var(--color-line);
+  border-radius: var(--radius-4);
+  display: flex; align-items: center; justify-content: center;
+  color: transparent;
+}
+.ml-choice[aria-checked="true"] .ml-choice__mark {
+  background: var(--color-ink); border-color: var(--color-ink); color: var(--color-white);
+}
+
+/* Wrapping group of chips — genres, instruments, languages.
+   ROW gap is --space-3 (16dp), not --space-2, and that is load-bearing: a
+   chip is 32dp tall with its tap band expanded to 48dp, so rows must sit at
+   least 48dp apart or adjacent rows' bands overlap and a tap near the
+   boundary activates the wrong chip. 32 + 16 = 48. Column gap stays 8dp
+   because horizontal neighbours do not expand sideways. */
+.ml-chip-wrap { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-2); }
+
+/* ── emoji glyph ───────────────────────────────────────────────────────── */
+/* Emoji appear as CONTENT on role/instrument/category choices — the same call
+   the approved mobile reference makes on its category tiles. They are sized
+   here rather than with an inline font-size so 21 screens stop hardcoding
+   22px. Not typography: this is an icon slot that happens to hold an emoji,
+   so it does not use a --type-* step. */
+.ml-emoji {
+  flex: none;
+  width: 24px;
+  font-size: 22px;
+  line-height: 1;
+  text-align: center;
+}
+
+/* ── visually hidden ───────────────────────────────────────────────────── */
+/* Available to assistive tech, absent from the visual layout. For the cases
+   where a screen genuinely needs a heading for structure but showing one
+   would duplicate what the UI already says — a search screen whose subject
+   IS the focused search field, for instance. Not for hiding real content. */
+.ml-visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── verified mark ─────────────────────────────────────────────────────── */
+/* The icon library's check-circle is a solid glyph: tinted pink at 14px it
+   reads as a featureless blob. A disc with the check knocked out in white
+   stays legible at the size this actually renders. */
+.ml-verified {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 15px; height: 15px; flex: none;
+  border-radius: var(--radius-4);
+  background: var(--color-pink);
+  color: var(--color-white);
+}

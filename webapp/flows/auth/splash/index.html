@@ -10,24 +10,26 @@
 <meta name="screen-json-path" content="/preview/flows/auth/splash/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — User Auth / Splash</title>
+<title>MusicLinkd — Splash</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
 </head>
 <body>
-  <div class="app-root" style="background:var(--black);">
-    <header class="app-topbar"></header>
-    <main class="app-content" style="display:flex;align-items:center;justify-content:center;">
-      <div style="text-align:center;">
-        <div class="brand-wordmark on-dark" style="font-size:var(--type-4);">MusicLink<em>d</em></div>
-        <div style="color:var(--muted);font-size:var(--type-1);margin-top:var(--space-2);">Your professional music network</div>
-        <div class="spinner-circular" style="margin-top:var(--space-4);"></div>
+
+  <div class="ml-app" style="background:var(--color-ink)">
+    <main class="ml-app__body" style="display:flex;align-items:center;justify-content:center;text-align:center">
+      <div>
+        <h1 class="ml-wordmark ml-wordmark--on-media" style="font-size:var(--type-4);margin:0">MusicLink<em>d</em></h1>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)" data-state="loading">Your professional music network</p>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)" data-state="resuming_local_session">Restoring your session…</p>
+        <div class="ml-spinner" style="margin:var(--space-4) auto 0"></div>
       </div>
     </main>
-    <footer class="app-bottombar"></footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
 </body>

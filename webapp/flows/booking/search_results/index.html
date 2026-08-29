@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -17,11 +17,11 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .result-card { display: flex; gap: var(--space-2); padding: var(--space-2) 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
+  .result-card { display: flex; gap: var(--space-2); padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); text-decoration: none; color: inherit; }
   .result-card img { width: 96px; height: 96px; border-radius: var(--radius-2); object-fit: cover; flex: none; }
   .result-card .body { flex: 1; min-width: 0; }
   .result-card b { font-size: var(--type-2); display: block; }
-  .result-card .loc { font-size: var(--type-1); color: var(--muted); }
+  .result-card .loc { font-size: var(--type-1); color: var(--color-muted); }
   .result-card .meta-row { display: flex; justify-content: space-between; align-items: center; margin-top: var(--space-1); }
   .gold-badge { display: inline-flex; align-items: center; gap: 3px; background: #FEF3C7; color: #92400E; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: var(--radius-4); }
 </style>
@@ -29,16 +29,16 @@
 <body>
   <div class="app-root">
     <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;gap:var(--space-2);height:56px;">
-      <a href="/preview/flows/booking/studio_discovery/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;flex:none;">
+      <a href="/preview/flows/booking/studio_discovery/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;flex:none;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
-      <input type="search" value="Andheri West, Mumbai" style="flex:1;min-height:40px;border-radius:var(--radius-4);border:1px solid var(--line);padding:0 var(--space-3);font:var(--type-2) 'Inter',sans-serif;" />
-      <a href="/preview/flows/booking/filters/index.html" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--line);flex:none;color:var(--black);">
+      <input type="search" value="Andheri West, Mumbai" style="flex:1;min-height:40px;border-radius:var(--radius-4);border:1px solid var(--color-line);padding:0 var(--space-3);font:var(--type-2) 'Inter',sans-serif;" />
+      <a href="/preview/flows/booking/filters/index.html" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-line);flex:none;color:var(--color-ink);">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
       </a>
     </header>
     <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <p style="font-size:var(--type-1);color:var(--muted);margin:var(--space-2) 0;">6 studios near you</p>
+      <p style="font-size:var(--type-1);color:var(--color-muted);margin:var(--space-2) 0;">6 studios near you</p>
 
       <div id="panel-default">
         <a class="result-card" href="/preview/flows/booking/studio_profile/index.html">
@@ -76,7 +76,7 @@
       </div>
 
       <div id="panel-empty" style="display:none;flex-direction:column;align-items:center;text-align:center;padding-top:20vh;gap:var(--space-3);">
-        <p style="color:var(--muted);font-size:var(--type-2);">No studios match these filters.</p>
+        <p style="color:var(--color-muted);font-size:var(--type-2);">No studios match these filters.</p>
         <a class="btn btn-p" href="/preview/flows/booking/filters/index.html" style="text-decoration:none;">Adjust filters</a>
       </div>
     </main>

@@ -23,8 +23,12 @@ firebase-debug.*.log
 /frontend/website/assets/img/shazam/
 /frontend/website/assets/img/tinder/
 /frontend/website/assets/img/inspiration/
-/frontend/website/assets/img/editorials/
-/frontend/website/assets/img/speakers/
+# editorials/ and speakers/ are NO LONGER ignored: Flow 4's screens reference
+# them by path, so leaving them untracked meant Discover rendered correctly on
+# the machine that deployed it and showed broken images on every other clone.
+# The remaining folders above stay ignored — they are Behance CDN captures,
+# app-store chrome screenshots and scraped gig posters kept as design
+# reference, and nothing in the product references them.
 
 # Machine-local Claude settings (not shared)
 .claude/settings.local.json

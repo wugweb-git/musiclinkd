@@ -3,109 +3,213 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/discover/discover_feed/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Discover / Discover Feed</title>
+<title>MusicLinkd — Discover Home</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .search-row { display: flex; gap: var(--space-2); align-items: center; }
-  .search-row .field { flex: 1; margin: 0; }
-  .filter-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: #fff; display: flex; align-items: center; justify-content: center; color: var(--black); flex: none; }
-  .tab-scroll { display: flex; gap: var(--space-2); overflow-x: auto; padding: var(--space-1) 0; }
-  .tab-scroll .chip { flex: none; }
-  .cat-scroll { display: flex; gap: var(--space-3); overflow-x: auto; padding: var(--space-2) 0 var(--space-1); }
-  .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
-  .p-card { position: relative; border: 1px solid var(--line); border-radius: var(--radius-2); overflow: hidden; text-decoration: none; color: inherit; background: #fff; box-shadow: var(--shadow-1); }
-  .p-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-  .p-card .status-pill { position: absolute; top: var(--space-1); left: var(--space-1); }
-  .p-card .meta { padding: var(--space-2); }
-  .p-card b { font-size: var(--type-1); display: flex; align-items: center; gap: 4px; }
-  .p-card span { font-size: var(--type-1); color: var(--muted); display: block; margin-top: 2px; }
-  .v-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--success); color: #fff; display: inline-flex; align-items: center; justify-content: center; flex: none; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding:0 var(--space-3);display:flex;flex-direction:column;gap:var(--space-2);padding-top:calc(var(--app-safe-top) + var(--space-2));padding-bottom:var(--space-2);">
-      <div class="search-row">
-        <div class="field" style="margin:0;"><input type="search" placeholder="Search musicians, studios, projects…" /></div>
-        <a class="filter-btn" href="/preview/flows/discover/advanced_filters/index.html" aria-label="Filters">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
-        </a>
+
+  <div class="ml-app">
+    <header class="ml-appbar">
+      <div class="ml-appbar__titles">
+        <h1 class="ml-appbar__title">Discover</h1>
+        <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 0">Connect with India's music grid</p>
       </div>
-      <div class="tab-scroll">
-        <button type="button" class="chip sel" style="background:var(--black);border-color:var(--black);color:#fff;">People</button>
-        <button type="button" class="chip">Businesses</button>
-        <button type="button" class="chip">Spaces</button>
-        <button type="button" class="chip">Music</button>
-        <button type="button" class="chip">Services</button>
+      <div class="ml-appbar__actions">
+        <a class="ml-icon-btn" href="/preview/flows/discover/saved_profiles/index.html" aria-label="Saved">
+          <svg width="20" height="20" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M18 14a6 6 0 0 0-2.75-5.04V2.37A2.5 2.5 0 0 0 17 0H7a2.5 2.5 0 0 0 1.75 2.37v6.6A6 6 0 0 0 6 14h5v7.56c0 .95.38 1.8 1 2.44.62-.63 1-1.5 1-2.44V14z"/></svg>
+        </a>
+        <a class="ml-icon-btn" href="/preview/flows/discover/nearby/index.html" aria-label="Nearby">
+          <svg width="20" height="20" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a8 8 0 0 1 6.92 12L12 24 5.08 12a7.95 7.95 0 0 1 1.26-9.66A8 8 0 0 1 12 0m0 10.75a2.75 2.75 0 1 0 0-5.5 2.75 2.75 0 0 0 0 5.5"/></svg>
+        </a>
       </div>
     </header>
-    <main class="app-content app-content--scroll" style="padding:var(--space-1) var(--space-3) var(--space-4);">
-      <div class="cat-scroll">
-        <a class="cat-tile" href="/preview/flows/discover/discover_feed/index.html">
-          <span class="icon-circle"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-          <b>People</b><span class="count">8 near you</span>
+
+    <main class="ml-app__body">
+      <a class="ml-search" href="/preview/flows/discover/global_search/index.html" style="text-decoration:none;color:inherit">
+        <span class="ml-search__icon"><svg width="18" height="18" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg></span>
+        <span style="flex:1;color:var(--color-muted);font-size:var(--type-2)">Search talent, studios, projects…</span>
+        <span class="ml-search__divider"></span>
+        <span class="ml-icon-btn ml-icon-btn--bare" aria-hidden="true" style="min-width:24px;min-height:24px;border:0">
+          <svg width="20" height="20" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a5 5 0 0 0-5 5v6a5 5 0 0 0 10 0V5a5 5 0 0 0-5-5M5.5 11.5a1.5 1.5 0 0 0-3 0 9 9 0 0 0 8 8.94v2.06a1.5 1.5 0 1 0 3 0v-2.06a9 9 0 0 0 8-8.94 1.5 1.5 0 0 0-3 0 6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6"/></svg>
+        </span>
+      </a>
+
+      <div class="ml-section"><h2>What are you looking for?</h2></div>
+      <div class="ml-dimension-grid">
+        <a class="ml-dimension" href="/preview/flows/discover/people_talent/index.html">
+          <img src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" />
+          <span class="ml-dimension__label">People<span class="ml-dimension__count">12,400 artists</span></span>
         </a>
-        <a class="cat-tile" href="/preview/flows/discover/discover_feed/index.html">
-          <span class="icon-circle"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
-          <b>Music</b><span class="count">Projects</span>
+        <a class="ml-dimension" href="/preview/flows/discover/studios_spaces/index.html">
+          <img src="/assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg" alt="" />
+          <span class="ml-dimension__label">Spaces<span class="ml-dimension__count">860 studios</span></span>
         </a>
-        <a class="cat-tile" href="/preview/flows/booking/studio_discovery/index.html">
-          <span class="icon-circle"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M5 21V7l8-4v18M13 9h6v12"/></svg></span>
-          <b>Studios</b><span class="count">Book a room</span>
+        <a class="ml-dimension" href="/preview/flows/discover/projects/index.html">
+          <img src="/assets/img/editorials/f651ac8b73ceb8d2b7ca4967a18179f2.jpg" alt="" />
+          <span class="ml-dimension__label">Projects<span class="ml-dimension__count">3,100 live</span></span>
         </a>
-        <a class="cat-tile" href="/preview/flows/opportunities/opportunities_home/index.html">
-          <span class="icon-circle"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6h-4V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2z"/></svg></span>
-          <b>Opportunities</b><span class="count">6 open</span>
+        <a class="ml-dimension" href="/preview/flows/discover/services/index.html">
+          <img src="/assets/img/speakers/20400c2337df4ff17c3b0e72deefa4ad.jpg" alt="" />
+          <span class="ml-dimension__label">Services<span class="ml-dimension__count">Mix · Master · Session</span></span>
+        </a>
+        <a class="ml-dimension" href="/preview/flows/discover/businesses/index.html">
+          <img src="/assets/img/speakers/5e4c5a1598e10dfe9c213609ce2ab5fb.jpg" alt="" />
+          <span class="ml-dimension__label">Businesses<span class="ml-dimension__count">Labels · Agencies</span></span>
+        </a>
+        <a class="ml-dimension" href="/preview/flows/discover/communities/index.html">
+          <img src="/assets/img/editorials/cd40cd552cf7b95f8d1383a8ecb57b34.jpg" alt="" />
+          <span class="ml-dimension__label">Communities<span class="ml-dimension__count">By genre &amp; city</span></span>
         </a>
       </div>
-      <div class="profile-grid">
-        <a class="p-card" href="/preview/flows/discover/discover_profile_detail/index.html">
-          <span class="status-pill st-available">Available</span>
-          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400" alt="" />
-          <div class="meta"><b>Arijit Sen <span class="v-dot"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="5"><path d="M20 6L9 17l-5-5"/></svg></span></b><span>Singer · Mumbai</span></div>
+
+      <div class="ml-section">
+        <h2>For you</h2>
+        <a class="ml-section__link" href="/preview/flows/discover/people_talent/index.html">See all</a>
+      </div>
+      <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">Matched to your role, genres and city.</p>
+      <div>
+        <a class="ml-result" href="/preview/flows/discover/discover_profile_detail/index.html">
+          <img class="ml-result__thumb" src="/assets/img/editorials/324eae250c23aafe52ea0ef9caab5d5f.jpg" alt="" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">Rahul Iyer<span class="ml-verified" aria-label="Verified"><svg width="10" height="10" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span></span>
+            <span class="ml-result__meta">Producer · Mix Engineer · Mumbai</span>
+          </span>
+          <span class="ml-result__trail"><span class="ml-match">
+            <span class="ml-match__pct">94%</span>
+            <span class="ml-match__track"><span class="ml-match__fill" style="width:94%"></span></span>
+            <span class="ml-match__label">match</span>
+          </span></span>
         </a>
-        <a class="p-card" href="/preview/flows/discover/discover_profile_detail/index.html">
-          <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400" alt="" />
-          <div class="meta"><b>Vedanshu Beats <span class="v-dot"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="5"><path d="M20 6L9 17l-5-5"/></svg></span></b><span>Producer · Mumbai</span></div>
+        <a class="ml-result" href="/preview/flows/discover/discover_profile_detail/index.html">
+          <img class="ml-result__thumb" src="/assets/img/editorials/a023f0e015a6ddc1ca4135942479a715.jpg" alt="" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">Priya Nair</span>
+            <span class="ml-result__meta">Session Guitarist · Pune</span>
+          </span>
+          <span class="ml-result__trail"><span class="ml-match">
+            <span class="ml-match__pct">88%</span>
+            <span class="ml-match__track"><span class="ml-match__fill" style="width:88%"></span></span>
+            <span class="ml-match__label">match</span>
+          </span></span>
         </a>
-        <a class="p-card" href="/preview/flows/discover/discover_profile_detail/index.html">
-          <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400" alt="" />
-          <div class="meta"><b>Karan Saxena <span class="v-dot"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="5"><path d="M20 6L9 17l-5-5"/></svg></span></b><span>Guitarist · New Delhi</span></div>
+        <a class="ml-result" href="/preview/flows/discover/discover_profile_detail/index.html">
+          <img class="ml-result__thumb" src="/assets/img/editorials/4dcf33e3aa19ee077f4e95c2b66ae43a.jpg" alt="" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">Mehek Kapoor</span>
+            <span class="ml-result__meta">Composer · Delhi NCR</span>
+          </span>
+          <span class="ml-result__trail"><span class="ml-match">
+            <span class="ml-match__pct">81%</span>
+            <span class="ml-match__track"><span class="ml-match__fill" style="width:81%"></span></span>
+            <span class="ml-match__label">match</span>
+          </span></span>
         </a>
-        <a class="p-card" href="/preview/flows/discover/discover_profile_detail/index.html">
-          <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=400" alt="" />
-          <div class="meta"><b>DJ Rish</b><span>DJ · Goa</span></div>
+      </div>
+
+      <div class="ml-section">
+        <h2>Trending projects</h2>
+        <a class="ml-section__link" href="/preview/flows/discover/projects/index.html">See all</a>
+      </div>
+      <div class="ml-rail">
+        <a class="ml-media-card" href="/preview/flows/discover/project_detail/index.html">
+          <img src="/assets/img/editorials/cd40cd552cf7b95f8d1383a8ecb57b34.jpg" alt="" />
+          <span class="ml-media-card__tag"><span class="ml-status ml-status--accent">Open roles</span></span>
+          <div class="ml-media-card__body">
+            <div class="ml-media-card__title">Monsoon Sessions</div>
+            <div class="ml-media-card__sub">Indie EP · needs a bassist</div>
+          </div>
         </a>
-        <a class="p-card" href="/preview/flows/discover/discover_profile_detail/index.html">
-          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400" alt="" />
-          <div class="meta"><b>Rohit Malhotra <span class="v-dot"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="5"><path d="M20 6L9 17l-5-5"/></svg></span></b><span>Composer · Mumbai</span></div>
+        <a class="ml-media-card" href="/preview/flows/discover/project_detail/index.html">
+          <img src="/assets/img/editorials/f9c72888832942ada70666cc17bac058.png" alt="" />
+          <span class="ml-media-card__tag"><span class="ml-status ml-status--accent">Live band</span></span>
+          <div class="ml-media-card__body">
+            <div class="ml-media-card__title">The Local Train</div>
+            <div class="ml-media-card__sub">Indie Rock · Delhi NCR</div>
+          </div>
         </a>
-        <a class="p-card" href="/preview/flows/discover/discover_profile_detail/index.html">
-          <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400" alt="" />
-          <div class="meta"><b>Siddharth Swar <span class="v-dot"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="5"><path d="M20 6L9 17l-5-5"/></svg></span></b><span>Mixing Engineer · Chennai</span></div>
+      </div>
+
+      <div class="ml-section">
+        <h2>Studios near you</h2>
+        <a class="ml-section__link" href="/preview/flows/discover/studios_spaces/index.html">See all</a>
+      </div>
+      <div class="ml-rail">
+        <a class="ml-studio-card" href="/preview/flows/discover/studio_profile_discover/index.html">
+          <div class="ml-studio-card__media"><img src="/assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg" alt="" /></div>
+          <div class="ml-studio-card__body">
+            <div class="ml-studio-card__name">Andheri Live Room</div>
+            <div class="ml-studio-card__loc">Andheri East · 1.4 km</div>
+            <div class="ml-studio-card__meta"><span>★ 4.4 (52)</span><span class="ml-studio-card__price">Jam room</span></div>
+          </div>
         </a>
-        <a class="p-card" href="/preview/flows/discover/discover_profile_detail/index.html">
-          <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400" alt="" />
-          <div class="meta"><b>Aarav Mehta <span class="v-dot"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="5"><path d="M20 6L9 17l-5-5"/></svg></span></b><span>Synth Producer · Mumbai</span></div>
+        <a class="ml-studio-card" href="/preview/flows/discover/studio_profile_discover/index.html">
+          <div class="ml-studio-card__media"><img src="/assets/img/speakers/39fdf43f680420b44f547c6cb535900b.jpg" alt="" /></div>
+          <div class="ml-studio-card__body">
+            <div class="ml-studio-card__name">Blue Note Recording Co.</div>
+            <div class="ml-studio-card__loc">Bandra · 3.2 km</div>
+            <div class="ml-studio-card__meta"><span>★ 4.6 (94)</span><span class="ml-studio-card__price">Recording</span></div>
+          </div>
         </a>
-        <a class="p-card" href="/preview/flows/discover/discover_profile_detail/index.html">
-          <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=400" alt="" />
-          <div class="meta"><b>Aditi Sen <span class="v-dot"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="5"><path d="M20 6L9 17l-5-5"/></svg></span></b><span>Vocalist · Bengaluru</span></div>
+      </div>
+
+      <div class="ml-section">
+        <h2>New &amp; rising</h2>
+        <a class="ml-section__link" href="/preview/flows/discover/trending_recommended_sections/index.html">See all</a>
+      </div>
+      <div>
+        <a class="ml-result" href="/preview/flows/discover/discover_profile_detail/index.html">
+          <img class="ml-result__thumb" src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">Ananya Sharma<span class="ml-verified" aria-label="Verified"><svg width="10" height="10" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span></span>
+            <span class="ml-result__meta">Playback Vocalist · joined 3 weeks ago</span>
+          </span>
+          <span class="ml-result__trail"><span class="ml-status ml-status--success">Available</span></span>
+        </a>
+        <a class="ml-result" href="/preview/flows/discover/discover_profile_detail/index.html">
+          <img class="ml-result__thumb" src="/assets/img/editorials/8f517fcabb27d88bec943d192068c756.jpg" alt="" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">Arjun Menon</span>
+            <span class="ml-result__meta">Tabla · Fusion · Kochi</span>
+          </span>
+          <span class="ml-result__trail"><span class="ml-status ml-status--success">Available</span></span>
         </a>
       </div>
     </main>
-    <footer class="app-bottombar"></footer>
+    <nav class="ml-tabbar" aria-label="Primary">
+      <a class="ml-tabbar__item" href="/preview/flows/discover/trending_recommended_sections/index.html">
+        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0 1 10v14h8v-7a3 3 0 1 1 6 0v7h8V10z"/></svg></span>
+        Home
+      </a>
+      <span class="ml-tabbar__item" aria-current="page">
+        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.87 12.9a1.25 1.25 0 1 0-.89.37q.52-.01.89-.37m2.27 1.13A2 2 0 0 1 14 15.16l-8.38 3.22L8.84 10a2 2 0 0 1 1.13-1.13l8.61-3.45zm5.35-10.52A12 12 0 1 0 3.52 20.48 12 12 0 0 0 20.49 3.52z"/></svg></span>
+        Discover
+      </span>
+      <a class="ml-tabbar__item" href="/preview/flows/communication/networking_feed/index.html">
+        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a11 11 0 0 0-8.52 17.95l-1.46 5.43a.5.5 0 0 0 .73.55l5.08-2.75A10.98 10.98 0 0 0 23 11 11 11 0 0 0 12 0"/></svg></span>
+        Connections
+      </a>
+      <a class="ml-tabbar__item" href="/preview/flows/marketplace/marketplace_browse/index.html">
+        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.25.25a6 6 0 0 0-6 6V7H2.5L1.01 17.13A6 6 0 0 0 6.95 24h10.1A6 6 0 0 0 23 17.13L21.5 7h-3.25v-.75a6 6 0 0 0-6-6M9.75 7v-.75a2.5 2.5 0 1 1 5 0V7z"/></svg></span>
+        Market<span class="ml-tabbar__beta">Beta</span>
+      </a>
+      <a class="ml-tabbar__item" href="/preview/flows/profile_management/profile_overview/index.html">
+        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.5 5.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0M2 22a10 10 0 1 1 20 0v2H2z"/></svg></span>
+        Profile
+      </a>
+    </nav>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
 </body>

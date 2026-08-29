@@ -3,53 +3,56 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/portfolio/streaming_links/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Add Portfolio / Add Streaming Links</title>
+<title>MusicLinkd — Add Streaming Links</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .link-row { display: flex; align-items: center; gap: var(--space-2); }
-  .link-row .platform-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--surface-alt); display: flex; align-items: center; justify-content: center; flex: none; font-size: var(--type-2); }
-  .link-row .field { flex: 1; }
-  .step-dots { display: flex; gap: 4px; margin-bottom: var(--space-3); }
-  .step-dots span { width: 20px; height: 3px; border-radius: 2px; background: var(--line); }
-  .step-dots span.done { background: var(--black); }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/portfolio/project_information/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-    </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);">
-      <div class="step-dots"><span class="done"></span><span class="done"></span><span class="done"></span><span></span><span></span><span></span><span></span><span></span></div>
+
+  <div class="ml-app">
+    <header class="ml-navbar"><a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/portfolio/project_information/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a><span class="ml-navbar__spacer"></span><div class="ml-steps">
+        <span class="ml-steps__label">3/9</span>
+        <span class="ml-steps__track"><span class="ml-steps__fill" style="width:33%"></span></span>
+      </div></header>
+    <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3)">
       <div>
-        <h1 style="font-size:var(--type-3);">Add streaming links</h1>
-        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);">Optional — link this project to where people can listen.</p>
+        <h1 class="ml-type-3" style="margin:0">Add streaming links</h1>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Optional — link this project to where people can listen.</p>
       </div>
-
-      <div class="link-row"><div class="platform-icon">🎧</div><div class="field"><input type="url" placeholder="Spotify URL" value="https://open.spotify.com/track/tumhitohunplugged-mock" /></div></div>
-      <div class="link-row"><div class="platform-icon">🎵</div><div class="field"><input type="url" placeholder="Apple Music URL" /></div></div>
-      <div class="link-row"><div class="platform-icon">▶️</div><div class="field"><input type="url" placeholder="YouTube URL" /></div></div>
-      <div class="link-row"><div class="platform-icon">☁️</div><div class="field"><input type="url" placeholder="SoundCloud URL" /></div></div>
-      <div class="link-row"><div class="platform-icon">🎼</div><div class="field"><input type="url" placeholder="JioSaavn URL" /></div></div>
-      <div class="link-row"><div class="platform-icon">📸</div><div class="field"><input type="url" placeholder="Instagram Reel URL" /></div></div>
-
-      <a class="btn btn-p btn-block" href="/preview/flows/portfolio/select_role/index.html" style="text-decoration:none;margin-top:var(--space-2);">Continue</a>
-      <a class="btn btn-s btn-block" href="/preview/flows/portfolio/select_role/index.html" style="text-decoration:none;">Skip for now</a>
+      <div class="ml-field">
+        <label for="sp">Spotify</label>
+        <input id="sp" type="url" inputmode="url" placeholder="open.spotify.com/track/…" />
+      </div>
+      <div class="ml-field">
+        <label for="am">Apple Music</label>
+        <input id="am" type="url" inputmode="url" placeholder="music.apple.com/…" />
+      </div>
+      <div class="ml-field">
+        <label for="yt">YouTube</label>
+        <input id="yt" type="url" inputmode="url" placeholder="youtube.com/watch?v=…" />
+      </div>
+      <div class="ml-field">
+        <label for="sc">SoundCloud</label>
+        <input id="sc" type="url" inputmode="url" placeholder="soundcloud.com/…" />
+      </div>
     </main>
-    <footer class="app-bottombar"></footer>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--ghost ml-btn--block" href="/preview/flows/portfolio/select_role/index.html" style="margin-bottom:var(--space-2)">Skip for now</a><a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/portfolio/select_role/index.html">Continue</a>
+    </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
 </body>

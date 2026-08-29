@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -17,23 +17,23 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .method-row { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-3); border: 1px solid var(--line); border-radius: var(--radius-2); margin-bottom: var(--space-2); }
-  .method-row.sel { border-color: var(--black); border-width: 2px; }
-  .method-row .radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--line); flex: none; }
-  .method-row.sel .radio { border-color: var(--black); background: radial-gradient(var(--black) 0 40%, transparent 42%); }
+  .method-row { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-3); border: 1px solid var(--color-line); border-radius: var(--radius-2); margin-bottom: var(--space-2); }
+  .method-row.sel { border-color: var(--color-ink); border-width: 2px; }
+  .method-row .radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--color-line); flex: none; }
+  .method-row.sel .radio { border-color: var(--color-ink); background: radial-gradient(var(--color-ink) 0 40%, transparent 42%); }
 </style>
 </head>
 <body>
   <div class="app-root">
     <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/booking/booking_summary/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
+      <a href="/preview/flows/booking/booking_summary/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
     </header>
     <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
       <div id="panel-default">
         <h1 style="font-size:var(--type-3);margin:var(--space-2) 0 4px;">Pay deposit</h1>
-        <p style="color:var(--muted);font-size:var(--type-1);margin-bottom:var(--space-3);">₹5,000 due now · Yash Raj Sound Studios</p>
+        <p style="color:var(--color-muted);font-size:var(--type-1);margin-bottom:var(--space-3);">₹5,000 due now · Yash Raj Sound Studios</p>
 
         <div class="method-row sel"><div class="radio"></div><b style="font-size:var(--type-2);font-weight:500;">UPI</b></div>
         <div class="method-row"><div class="radio"></div><b style="font-size:var(--type-2);font-weight:500;">Credit / Debit Card</b></div>
@@ -44,16 +44,16 @@
 
       <div id="panel-processing" style="display:none;text-align:center;padding-top:20vh;">
         <span class="spinner-circular"></span>
-        <p style="color:var(--muted);margin-top:var(--space-3);">Processing payment…</p>
+        <p style="color:var(--color-muted);margin-top:var(--space-3);">Processing payment…</p>
       </div>
 
       <div id="panel-error" style="display:none;text-align:center;padding-top:15vh;">
-        <p style="color:var(--err);font-weight:600;">Payment failed.</p>
-        <p style="color:var(--muted);font-size:var(--type-1);margin-top:var(--space-1);">Your card wasn't charged. Try another method.</p>
+        <p style="color:var(--color-error);font-weight:600;">Payment failed.</p>
+        <p style="color:var(--color-muted);font-size:var(--type-1);margin-top:var(--space-1);">Your card wasn't charged. Try another method.</p>
       </div>
 
       <div id="panel-success" style="display:none;text-align:center;padding-top:15vh;">
-        <p style="color:var(--success);font-weight:600;">Payment successful</p>
+        <p style="color:var(--color-success);font-weight:600;">Payment successful</p>
       </div>
     </main>
     <footer class="app-bottombar"></footer>

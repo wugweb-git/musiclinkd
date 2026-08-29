@@ -3,68 +3,87 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/portfolio/profile_project_view/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Add Portfolio / Published Project</title>
+<title>MusicLinkd — Published Project — Profile View</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .hero-art { height: 220px; border-radius: 0 0 var(--radius-3) var(--radius-3); background: linear-gradient(135deg,#B08968,#7F5539); display: flex; align-items: flex-end; padding: var(--space-4); color: #fff; }
-  .stat-row { display: flex; gap: var(--space-4); margin: var(--space-3) 0; }
-  .stat-row .stat b { display: block; font-size: var(--type-2); }
-  .stat-row .stat span { font-size: var(--type-1); color: var(--muted); }
-  .platform-row { display: flex; gap: var(--space-2); }
-  .platform-row a { flex: 1; text-align: center; padding: var(--space-2); border: 1px solid var(--line); border-radius: var(--radius-2); font-size: var(--type-1); font-weight: 600; color: var(--black); text-decoration: none; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="position:absolute;top:0;left:0;right:0;z-index:2;padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="javascript:history.back()" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.85);color:var(--black);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-    </header>
-    <main class="app-content app-content--scroll">
-      <div class="hero-art">
-        <div>
-          <span style="font-size:var(--type-1);font-weight:600;opacity:.85;">SONG · RELEASED</span>
-          <h1 style="font-size:var(--type-3);margin:2px 0 0;">Tum Hi Toh (Unplugged)</h1>
+
+  <div class="ml-app">
+    <main class="ml-app__body" style="padding-inline:0">
+      <div class="ml-hero" style="aspect-ratio:1/1">
+        <img src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800" alt="" />
+        <div style="position:absolute;z-index:1;top:calc(var(--space-2) + var(--safe-top));left:var(--space-2);right:var(--space-2);display:flex;justify-content:space-between">
+          <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/portfolio/portfolio_dashboard/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+          <button class="ml-icon-btn" aria-label="Share this project">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M8 7l4-4 4 4"/><path d="M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>
+          </button>
+        </div>
+        <div class="ml-hero__body">
+          <span class="ml-status ml-status--accent">Song · Released</span>
+          <h1 class="ml-hero__name" style="margin-top:var(--space-2)">Tum Hi Toh (Unplugged)</h1>
+          <div class="ml-hero__sub">Arijit Sen · Singer</div>
         </div>
       </div>
-      <div style="padding:var(--space-3) var(--space-4) var(--space-4);">
-        <div style="display:flex;align-items:center;gap:var(--space-2);">
-          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=88" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;" />
-          <span style="font-size:var(--type-1);font-weight:600;">Arijit Sen</span>
-          <span style="font-size:var(--type-1);color:var(--muted);">· Singer</span>
+
+      <div style="padding:var(--space-3)">
+        <p class="ml-type-2" style="margin:0 0 var(--space-3)">Acoustic unplugged reinterpretation — 4.2M plays on Spotify.</p>
+
+        <div class="ml-player ml-card" style="padding:var(--space-2) var(--space-3)">
+          <button class="ml-player__btn" aria-label="Play">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="ml-player__wave" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="34" tabindex="0">
+            <span class="ml-player__bar is-played" style="height:20%"></span><span class="ml-player__bar is-played" style="height:57%"></span><span class="ml-player__bar is-played" style="height:34%"></span><span class="ml-player__bar is-played" style="height:71%"></span><span class="ml-player__bar is-played" style="height:48%"></span><span class="ml-player__bar is-played" style="height:25%"></span><span class="ml-player__bar is-played" style="height:62%"></span><span class="ml-player__bar is-played" style="height:39%"></span><span class="ml-player__bar is-played" style="height:76%"></span><span class="ml-player__bar is-played" style="height:53%"></span><span class="ml-player__bar is-played" style="height:30%"></span><span class="ml-player__bar is-played" style="height:67%"></span><span class="ml-player__bar is-played" style="height:44%"></span><span class="ml-player__bar is-played" style="height:21%"></span><span class="ml-player__bar" style="height:58%"></span><span class="ml-player__bar" style="height:35%"></span><span class="ml-player__bar" style="height:72%"></span><span class="ml-player__bar" style="height:49%"></span><span class="ml-player__bar" style="height:26%"></span><span class="ml-player__bar" style="height:63%"></span><span class="ml-player__bar" style="height:40%"></span><span class="ml-player__bar" style="height:77%"></span><span class="ml-player__bar" style="height:54%"></span><span class="ml-player__bar" style="height:31%"></span><span class="ml-player__bar" style="height:68%"></span><span class="ml-player__bar" style="height:45%"></span><span class="ml-player__bar" style="height:22%"></span><span class="ml-player__bar" style="height:59%"></span><span class="ml-player__bar" style="height:36%"></span><span class="ml-player__bar" style="height:73%"></span><span class="ml-player__bar" style="height:50%"></span><span class="ml-player__bar" style="height:27%"></span><span class="ml-player__bar" style="height:64%"></span><span class="ml-player__bar" style="height:41%"></span><span class="ml-player__bar" style="height:78%"></span><span class="ml-player__bar" style="height:55%"></span><span class="ml-player__bar" style="height:32%"></span><span class="ml-player__bar" style="height:69%"></span><span class="ml-player__bar" style="height:46%"></span><span class="ml-player__bar" style="height:23%"></span>
+          </div>
+          <span class="ml-player__time">1:12</span>
         </div>
 
-        <p style="font-size:var(--type-2);color:var(--muted);margin-top:var(--space-3);">Acoustic unplugged reinterpretation — 4.2M plays on Spotify.</p>
-
-        <div class="stat-row">
-          <div class="stat"><b>4,200</b><span>Views</span></div>
-          <div class="stat"><b>610</b><span>Likes</span></div>
-          <div class="stat"><b>88</b><span>Shares</span></div>
+        <div class="ml-stat-grid" style="grid-template-columns:repeat(3,1fr);margin-top:var(--space-3)">
+          <div class="ml-stat"><span class="ml-stat__num">4,200</span><span class="ml-stat__label">Views</span></div>
+          <div class="ml-stat"><span class="ml-stat__num">610</span><span class="ml-stat__label">Likes</span></div>
+          <div class="ml-stat"><span class="ml-stat__num">88</span><span class="ml-stat__label">Shares</span></div>
         </div>
 
-        <p style="font-size:var(--type-1);color:var(--muted);margin-bottom:var(--space-2);">Released 14 Feb 2026</p>
-
-        <div class="platform-row">
-          <a href="https://open.spotify.com/track/tumhitohunplugged-mock" target="_blank" rel="noopener">Spotify</a>
-          <a href="#" onclick="return false;" style="opacity:.4;">Apple Music</a>
+        <div class="ml-section"><h2>Credits</h2></div>
+        <div class="ml-card ml-card--padded">
+          <div class="ml-row">
+            <img class="ml-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120" alt="" />
+            <span class="ml-row__body"><span class="ml-row__title">Arijit Sen</span><span class="ml-row__meta">Singer</span></span>
+          </div>
+          <div class="ml-row">
+            <img class="ml-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120" alt="" />
+            <span class="ml-row__body"><span class="ml-row__title">Arijit Sen</span><span class="ml-row__meta">Mix Engineer</span></span>
+          </div>
         </div>
+
+        <div class="ml-section"><h2>Listen</h2></div>
+        <!-- These are <button>, not <a>: the streaming URLs come from the
+             project document at runtime and there is no destination in the
+             prototype. They were links pointing at this same screen, which is
+             a dead affordance — a control that looks tappable and goes
+             nowhere reads as a bug in review. -->
+        <div class="ml-action-row" style="padding-top:0">
+          <button class="ml-btn ml-btn--secondary">Spotify</button>
+          <button class="ml-btn ml-btn--secondary">Apple Music</button>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted)">Released 14 Feb 2026</p>
       </div>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
-      <button type="button" class="btn btn-p btn-block">Like</button>
-    </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
 </body>

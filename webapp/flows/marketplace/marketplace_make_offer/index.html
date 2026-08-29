@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
   .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#92400E; background:#FEF3C7; padding:3px 8px; border-radius:999px; margin-left:auto; }
-  .listing-mini { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--line); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
+  .listing-mini { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-line); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
   .listing-mini img { width: 48px; height: 48px; border-radius: var(--radius-1); object-fit: cover; }
   .status-banner { padding: var(--space-3); border-radius: var(--radius-2); text-align: center; font-weight: 600; margin-bottom: var(--space-3); }
 </style>
@@ -26,7 +26,7 @@
 <body>
   <div class="app-root">
     <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/marketplace/marketplace_item_detail/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
+      <a href="/preview/flows/marketplace/marketplace_item_detail/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
       <!-- Phase 2, not MVP: needs the new offers collection (schema landed 2026-08-16, not yet built into the app). -->
@@ -35,7 +35,7 @@
     <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
       <div class="listing-mini">
         <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200" alt="" />
-        <div><b style="display:block;font-size:var(--type-2);">Yamaha HS8 Studio Monitors</b><span style="font-size:var(--type-1);color:var(--muted);">Asking ₹42,000</span></div>
+        <div><b style="display:block;font-size:var(--type-2);">Yamaha HS8 Studio Monitors</b><span style="font-size:var(--type-1);color:var(--color-muted);">Asking ₹42,000</span></div>
       </div>
 
       <div id="panel-default">
@@ -59,7 +59,7 @@
       </div>
 
       <div id="panel-expired" style="display:none;">
-        <div class="status-banner" style="background:var(--surface-alt);color:var(--muted);">This offer has expired</div>
+        <div class="status-banner" style="background:var(--color-surface);color:var(--color-muted);">This offer has expired</div>
       </div>
     </main>
     <footer class="app-bottombar"></footer>

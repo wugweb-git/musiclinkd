@@ -8,7 +8,7 @@
   "display_override": ["standalone", "fullscreen"],
   "orientation": "portrait",
   "background_color": "#FCFCFD",
-  "theme_color": "#0D0B26",
+  "theme_color": "#0D0D0D",
   "icons": [
     { "src": "./shared/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
     { "src": "./shared/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }

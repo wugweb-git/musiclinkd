@@ -3,38 +3,38 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/portfolio/success/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Add Portfolio / Success</title>
+<title>MusicLinkd — Success State</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .success-check { width: 64px; height: 64px; border-radius: 50%; background: var(--success); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="height:56px;"></header>
-    <main class="app-content" style="padding:0 var(--space-4);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:var(--space-3);">
-      <div class="success-check">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+
+  <div class="ml-app">
+    <main class="ml-app__body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-3);text-align:center">
+      <div class="ml-check">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
       </div>
       <div>
-        <h1 style="font-size:var(--type-3);">Project published</h1>
-        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);max-width:280px;">"Tum Hi Toh (Unplugged)" is now live on your public portfolio.</p>
+        <h1 class="ml-type-3" style="margin:0">Project published</h1>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">"Tum Hi Toh (Unplugged)" is now live on your public portfolio.</p>
       </div>
-      <a class="btn btn-p btn-block" href="/preview/flows/portfolio/profile_project_view/index.html" style="text-decoration:none;max-width:320px;">View project</a>
-      <a class="btn btn-s btn-block" href="/preview/flows/portfolio/portfolio_dashboard/index.html" style="text-decoration:none;max-width:320px;">Back to portfolio</a>
     </main>
-    <footer class="app-bottombar"></footer>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/portfolio/profile_project_view/index.html">View project</a>
+      <a class="ml-btn ml-btn--ghost ml-btn--block" href="/preview/flows/portfolio/portfolio_dashboard/index.html" style="margin-top:var(--space-2)">Back to portfolio</a>
+    </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
 </body>

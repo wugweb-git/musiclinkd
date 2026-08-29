@@ -3,62 +3,55 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/onboarding/location/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — User Onboarding / Location</title>
+<title>MusicLinkd — Location (country/state/city/area)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .onb-step { font-size: var(--type-1); color: var(--muted); font-weight: 600; letter-spacing: 0.02em; }
-  .onb-progress { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
-  .onb-progress > span { display: block; height: 100%; background: var(--pink); border-radius: 2px; }
-  .field select { min-height: 48px; padding: 0 var(--space-3); border-radius: var(--radius-4); border: 1px solid var(--line); background: #fff; color: var(--black); font: var(--type-2) 'Inter', sans-serif; outline: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237D7D8E' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right var(--space-3) center; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/onboarding/instrument_proficiency/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-      <div class="onb-step" style="margin-left:var(--space-2);">Step 7 of 13</div>
-    </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);">
-      <div class="onb-progress"><span style="width:54%"></span></div>
-      <div>
-        <h1 style="font-size:var(--type-3);">Where are you based?</h1>
-        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);">Helps local discovery and booking. You can hide this on your public profile.</p>
-      </div>
 
-      <div style="display:flex;flex-direction:column;gap:var(--space-3);">
-        <div class="field">
-          <label for="country">Country</label>
-          <select id="country"><option selected>India</option><option>UAE</option><option>United Kingdom</option><option>United States</option></select>
-        </div>
-        <div class="field">
-          <label for="state">State / Region</label>
-          <select id="state"><option selected>Maharashtra</option><option>Delhi</option><option>Karnataka</option><option>Punjab</option><option>Tamil Nadu</option><option>Telangana</option><option>West Bengal</option></select>
-        </div>
-        <div class="field">
-          <label for="city">City</label>
-          <select id="city"><option selected>Mumbai</option><option>Pune</option><option>Navi Mumbai</option><option>Thane</option></select>
-        </div>
-        <div class="field">
-          <label for="area">Area / Locality</label>
-          <input id="area" type="text" placeholder="e.g. Andheri West" autocomplete="address-level2" />
-        </div>
+  <div class="ml-app">
+    <header class="ml-navbar"><a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/onboarding/instrument_proficiency/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a><span class="ml-navbar__spacer"></span><div class="ml-steps">
+        <span class="ml-steps__label">7/13</span>
+        <span class="ml-steps__track"><span class="ml-steps__fill" style="width:54%"></span></span>
+      </div></header>
+    <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3)">
+      <div>
+        <h1 class="ml-type-3" style="margin:0">Where are you based?</h1>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Helps local discovery and booking. You can hide this on your public profile.</p>
+      </div>
+      <div class="ml-field">
+        <label for="country">Country</label>
+        <select id="country"><option>India</option><option>UAE</option><option>United Kingdom</option><option>United States</option></select>
+      </div>
+      <div class="ml-field">
+        <label for="state">State / Region</label>
+        <select id="state"><option>Maharashtra</option><option>Delhi</option><option>Karnataka</option><option>Punjab</option><option>Tamil Nadu</option><option>Telangana</option><option>West Bengal</option></select>
+      </div>
+      <div class="ml-field">
+        <label for="city">City</label>
+        <select id="city"><option>Mumbai</option><option>Pune</option><option>Navi Mumbai</option><option>Thane</option></select>
+      </div>
+      <div class="ml-field">
+        <label for="area">Area / Locality</label>
+        <input id="area" type="text" placeholder="Andheri West" autocomplete="address-level3" />
       </div>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
-      <a class="btn btn-p btn-block" href="/preview/flows/onboarding/profile_creation/index.html" style="text-decoration:none;">Continue</a>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/onboarding/profile_creation/index.html">Continue</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

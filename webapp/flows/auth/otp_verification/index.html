@@ -3,90 +3,67 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/auth/otp_verification/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — User Auth / OTP Verification</title>
+<title>MusicLinkd — OTP Verification</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .success-check { width: 56px; height: 56px; border-radius: 50%; background: var(--success); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/auth/mobile_auth/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-    </header>
-    <main class="app-content" style="padding:0 var(--space-4);display:flex;flex-direction:column;align-items:center;gap:var(--space-3);text-align:center;">
 
-      <div id="panel-default">
-        <h1 style="font-size:var(--type-3);">Enter verification code</h1>
-        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);">Sent to +91 98765 43210</p>
+  <div class="ml-app">
+    <header class="ml-navbar"><a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/auth/mobile_auth/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a></header>
+    <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3);text-align:center">
+      <div>
+        <h1 class="ml-type-3" style="margin:0">Enter verification code</h1>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Sent to +91 98765 43210</p>
       </div>
 
-      <div id="panel-success" style="display:none;">
-        <div class="success-check">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-        </div>
-        <h1 style="font-size:var(--type-3);margin-top:var(--space-3);">Verified</h1>
-        <p style="color:var(--muted);">Taking you in…</p>
+      <div class="ml-otp" role="group" aria-label="6-digit verification code" data-state="entering verifying">
+        <span class="ml-otp__box is-filled">4</span>
+        <span class="ml-otp__box is-filled">8</span>
+        <span class="ml-otp__box is-filled">2</span>
+        <span class="ml-otp__box"></span>
+        <span class="ml-otp__box"></span>
+        <span class="ml-otp__box"></span>
+      </div>
+      <div class="ml-otp" role="group" aria-label="6-digit verification code" data-state="error">
+        <span class="ml-otp__box is-invalid">4</span><span class="ml-otp__box is-invalid">8</span><span class="ml-otp__box is-invalid">2</span><span class="ml-otp__box is-invalid">6</span>
+        <span class="ml-otp__box is-invalid">1</span>
+        <span class="ml-otp__box is-invalid">9</span>
       </div>
 
-      <div class="otp-row" id="otp-row">
-        <div class="otp-box filled">4</div>
-        <div class="otp-box filled">2</div>
-        <div class="otp-box" id="box-3">7</div>
-        <div class="otp-box">_</div>
-        <div class="otp-box">_</div>
-        <div class="otp-box">_</div>
+      <div data-state="success">
+        <div class="ml-check">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+        <p class="ml-type-2" style="margin-top:var(--space-2)">Number verified</p>
       </div>
 
-      <p id="error-text" style="display:none;color:var(--err);font-size:var(--type-1);">That code didn't match. Check the SMS and try again.</p>
-      <p id="verifying-text" style="display:none;color:var(--muted);font-size:var(--type-1);">Verifying…</p>
+      <div class="ml-banner ml-banner--error" role="alert" data-state="error">
+        That code isn't right. You have 2 attempts left.
+      </div>
 
-      <button class="btn btn-p btn-block" id="verify-btn" style="max-width:340px;">Verify</button>
-      <p style="font-size:var(--type-1);color:var(--muted);">Didn't get it? <a href="#" class="link-text">Resend in 0:28</a></p>
+      <p class="ml-type-1" style="color:var(--color-muted)" data-state="entering error">Didn't get it? Resend in 0:24</p>
+      <div class="ml-spinner" style="margin:0 auto" data-state="verifying"></div>
     </main>
-    <footer class="app-bottombar"></footer>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/auth/registration_write/index.html" data-state="entering error success">Verify</a>
+      <span class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" aria-disabled="true" data-state="verifying">Verifying…</span>
+    </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    // Presentation-only state switching via ?state= — real backend is
-    // 100% fake app-side (see this screen's screen.json notes); this exists
-    // to show what each state should look like, not to simulate real OTP.
-    document.addEventListener("musiclinkd:screen-ready", () => {
-      const state = window.MusicLinkd.currentState;
-      const otpRow = document.getElementById("otp-row");
-      const errorText = document.getElementById("error-text");
-      const verifyingText = document.getElementById("verifying-text");
-      const verifyBtn = document.getElementById("verify-btn");
-      const box3 = document.getElementById("box-3");
-
-      if (state === "error") {
-        box3.classList.add("error");
-        box3.textContent = "9";
-        errorText.style.display = "block";
-      } else if (state === "verifying") {
-        verifyingText.style.display = "block";
-        verifyBtn.disabled = true;
-        verifyBtn.textContent = "Verifying…";
-      } else if (state === "success") {
-        document.getElementById("panel-default").style.display = "none";
-        document.getElementById("panel-success").style.display = "block";
-        otpRow.style.display = "none";
-        verifyBtn.style.display = "none";
-      }
-    });
-  </script>
 </body>
 </html>

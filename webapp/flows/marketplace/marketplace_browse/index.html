@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -21,13 +21,13 @@
   .chip-scroll { display: flex; gap: var(--space-2); overflow-x: auto; padding: 0 var(--space-3) var(--space-2); }
   .chip-scroll .chip { flex: none; cursor: pointer; }
   .item-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
-  .item-card { position: relative; border: 1px solid var(--line); border-radius: var(--radius-2); overflow: hidden; text-decoration: none; color: inherit; background: #fff; box-shadow: var(--shadow-1); }
+  .item-card { position: relative; border: 1px solid var(--color-line); border-radius: var(--radius-2); overflow: hidden; text-decoration: none; color: inherit; background: #fff; box-shadow: var(--elevation-1); }
   .item-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
   .item-card .status-pill { position: absolute; top: var(--space-1); left: var(--space-1); }
   .item-card .meta { padding: var(--space-2); }
   .item-card b { font-size: var(--type-1); display: block; }
   .item-card .price { font-size: var(--type-2); font-weight: 700; margin-top: 2px; }
-  .item-card .tier { font-size: var(--type-1); color: var(--muted); }
+  .item-card .tier { font-size: var(--type-1); color: var(--color-muted); }
 </style>
 </head>
 <body>
@@ -36,7 +36,7 @@
       <h1 style="font-size:var(--type-3);">Marketplace</h1>
     </header>
     <nav class="chip-scroll" id="cat-scroll">
-      <button type="button" class="chip sel" data-cat="default" style="background:var(--black);border-color:var(--black);color:#fff;">All</button>
+      <button type="button" class="chip sel" data-cat="default" style="background:var(--color-ink);border-color:var(--color-ink);color:#fff;">All</button>
       <button type="button" class="chip" data-cat="sale">Gear Sale</button>
       <button type="button" class="chip" data-cat="rental">Gear Rental</button>
       <button type="button" class="chip" data-cat="beats">Beats Licensing</button>
@@ -99,12 +99,12 @@
       </div>
 
       <div id="panel-empty" style="display:none;flex-direction:column;align-items:center;text-align:center;padding-top:20vh;gap:var(--space-3);">
-        <div style="width:64px;height:64px;border-radius:var(--radius-2);background:var(--surface-alt);display:flex;align-items:center;justify-content:center;color:var(--muted);">
+        <div style="width:64px;height:64px;border-radius:var(--radius-2);background:var(--color-surface);display:flex;align-items:center;justify-content:center;color:var(--color-muted);">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2l1.5 4M18 2l-1.5 4M2 6h20l-2 12H4L2 6z"/></svg>
         </div>
         <div>
           <h2 style="font-size:var(--type-3);margin:0;">Nothing listed here yet</h2>
-          <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);max-width:260px;">Be the first to list gear, beats, or services in this category.</p>
+          <p style="color:var(--color-muted);font-size:var(--type-2);margin-top:var(--space-1);max-width:260px;">Be the first to list gear, beats, or services in this category.</p>
         </div>
       </div>
     </main>
@@ -131,8 +131,8 @@
         document.querySelectorAll("#cat-scroll .chip").forEach((c) => {
           const on = c.dataset.cat === state;
           c.classList.toggle("sel", on);
-          c.style.background = on ? "var(--black)" : "";
-          c.style.borderColor = on ? "var(--black)" : "";
+          c.style.background = on ? "var(--color-ink)" : "";
+          c.style.borderColor = on ? "var(--color-ink)" : "";
           c.style.color = on ? "#fff" : "";
         });
       }
@@ -141,8 +141,8 @@
       document.querySelectorAll("#cat-scroll .chip").forEach((c) => {
         const on = c.dataset.cat === cat;
         c.classList.toggle("sel", on);
-        c.style.background = on ? "var(--black)" : "";
-        c.style.borderColor = on ? "var(--black)" : "";
+        c.style.background = on ? "var(--color-ink)" : "";
+        c.style.borderColor = on ? "var(--color-ink)" : "";
         c.style.color = on ? "#fff" : "";
       });
     }

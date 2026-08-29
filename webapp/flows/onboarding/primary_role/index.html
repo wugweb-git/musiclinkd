@@ -3,119 +3,84 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/onboarding/primary_role/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — User Onboarding / Choose your role</title>
+<title>MusicLinkd — Primary Role Selection</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  /* Onboarding shared components — token-driven, matches styleguide's
-     scr-onboard patterns (step eyebrow, 3px progress bar, .card-s rows). */
-  .onb-step { font-size: var(--type-1); color: var(--muted); font-weight: 600; letter-spacing: 0.02em; }
-  .onb-progress { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
-  .onb-progress > span { display: block; height: 100%; background: var(--pink); border-radius: 2px; }
-
-  .card-s {
-    background: #fff; border: 1px solid var(--line); border-radius: var(--radius-2);
-    padding: var(--space-2) var(--space-3); display: flex; align-items: center; gap: var(--space-3);
-    cursor: pointer; width: 100%; text-align: left; font-family: inherit;
-    transition: border-color var(--duration-1) ease, background var(--duration-1) ease;
-  }
-  .card-s:hover { background: var(--surface-alt); }
-  .card-s.selected { border: 2px solid var(--pink); padding: calc(var(--space-2) - 1px) calc(var(--space-3) - 1px); background: var(--pink-container); }
-  .card-s .icon-circle {
-    width: 40px; height: 40px; border-radius: 50%; background: var(--pink-container); color: var(--pink);
-    display: flex; align-items: center; justify-content: center; font-size: var(--type-2); font-weight: 700;
-    flex-shrink: 0;
-  }
-  .card-s.selected .icon-circle { background: #fff; }
-  .card-s .radio-dot {
-    width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--line); margin-left: auto; flex-shrink: 0;
-  }
-  .card-s.selected .radio-dot { border-color: var(--pink); background: var(--pink); box-shadow: inset 0 0 0 4px #fff; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/auth/registration_write/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-      <div class="onb-step" style="margin-left:var(--space-2);">Step 1 of 13</div>
-    </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);">
-      <div class="onb-progress"><span style="width:8%"></span></div>
+
+  <div class="ml-app">
+    <header class="ml-navbar"><a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/auth/registration_write/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a><span class="ml-navbar__spacer"></span><div class="ml-steps">
+        <span class="ml-steps__label">1/13</span>
+        <span class="ml-steps__track"><span class="ml-steps__fill" style="width:8%"></span></span>
+      </div></header>
+    <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3)">
       <div>
-        <h1 style="font-size:var(--type-3);">What's your primary role?</h1>
-        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);">This is how you'll show up on MusicLinkd. You can add a secondary role next.</p>
+        <h1 class="ml-type-3" style="margin:0">What's your primary role?</h1>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">This is how you'll show up on MusicLinkd. You can add a secondary role next.</p>
       </div>
-
-      <div style="display:flex;flex-direction:column;gap:var(--space-2);">
-        <button class="card-s selected" type="button">
-          <div class="icon-circle">🎤</div>
-          <div>
-            <div style="font-weight:600;">Singer / Vocalist</div>
-            <div style="font-size:var(--type-1);color:var(--muted);">Lead or backing vocals</div>
-          </div>
-          <div class="radio-dot"></div>
+      <div role="radiogroup" aria-label="Primary role">
+        <button class="ml-choice" role="radio" aria-checked="true">
+          <span class="ml-emoji" aria-hidden="true">🎤</span>
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Singer / Vocalist</span>
+            <span class="ml-choice__meta">Lead or backing vocals</span>
+          </span>
+          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         </button>
-        <button class="card-s" type="button">
-          <div class="icon-circle">🎙️</div>
-          <div>
-            <div style="font-weight:600;">Rapper / MC</div>
-            <div style="font-size:var(--type-1);color:var(--muted);">Hip-hop, rap, spoken word</div>
-          </div>
-          <div class="radio-dot"></div>
+        <button class="ml-choice" role="radio" aria-checked="false">
+          <span class="ml-emoji" aria-hidden="true">🎙️</span>
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Rapper / MC</span>
+            <span class="ml-choice__meta">Hip-hop, rap, spoken word</span>
+          </span>
+          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         </button>
-        <button class="card-s" type="button">
-          <div class="icon-circle">🧑‍🎤</div>
-          <div>
-            <div style="font-weight:600;">Folk Vocalist</div>
-            <div style="font-size:var(--type-1);color:var(--muted);">Traditional & folk performance</div>
-          </div>
-          <div class="radio-dot"></div>
+        <button class="ml-choice" role="radio" aria-checked="false">
+          <span class="ml-emoji" aria-hidden="true">🧑‍🎤</span>
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Folk Vocalist</span>
+            <span class="ml-choice__meta">Traditional &amp; folk performance</span>
+          </span>
+          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         </button>
-        <button class="card-s" type="button">
-          <div class="icon-circle">🎸</div>
-          <div>
-            <div style="font-weight:600;">Guitarist</div>
-            <div style="font-size:var(--type-1);color:var(--muted);">Acoustic, electric, bass</div>
-          </div>
-          <div class="radio-dot"></div>
+        <button class="ml-choice" role="radio" aria-checked="false">
+          <span class="ml-emoji" aria-hidden="true">🎸</span>
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Guitarist</span>
+            <span class="ml-choice__meta">Acoustic, electric, bass</span>
+          </span>
+          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         </button>
-        <button class="card-s" type="button">
-          <div class="icon-circle">🎹</div>
-          <div>
-            <div style="font-weight:600;">Keyboardist / Pianist</div>
-            <div style="font-size:var(--type-1);color:var(--muted);">Keys, piano, synthesis</div>
-          </div>
-          <div class="radio-dot"></div>
+        <button class="ml-choice" role="radio" aria-checked="false">
+          <span class="ml-emoji" aria-hidden="true">🎹</span>
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Keyboardist / Pianist</span>
+            <span class="ml-choice__meta">Keys, piano, synthesis</span>
+          </span>
+          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         </button>
       </div>
-
-      <p style="font-size:var(--type-1);color:var(--muted);text-align:center;">Your role is sourced from the platform taxonomy and shown on your public profile.</p>
+      <p class="ml-type-1" style="color:var(--color-muted)">Your role is sourced from the platform's 18 person types.</p>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
-      <a class="btn btn-p btn-block" href="/preview/flows/onboarding/secondary_role/index.html" style="text-decoration:none;">Continue</a>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/onboarding/secondary_role/index.html">Continue</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    // Presentation-only single-select — no real persistence (see screen.json).
-    document.querySelectorAll(".card-s").forEach((card) => {
-      card.addEventListener("click", () => {
-        document.querySelectorAll(".card-s").forEach((c) => c.classList.remove("selected"));
-        card.classList.add("selected");
-      });
-    });
-  </script>
 </body>
 </html>

@@ -3,78 +3,98 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/discover/saved_profiles/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Discover / Saved Profiles</title>
+<title>MusicLinkd — Saved / Following</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .saved-row { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) 0; border-bottom: 1px solid var(--line); }
-  .saved-row img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex: none; }
-  .saved-row .meta { flex: 1; min-width: 0; }
-  .saved-row .meta b { font-size: var(--type-2); }
-  .saved-row .meta span { display: block; font-size: var(--type-1); color: var(--muted); }
-  .unsave-btn { width: 32px; height: 32px; border-radius: 50%; border: none; background: var(--surface-alt); color: var(--pink); display: flex; align-items: center; justify-content: center; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <h1 style="font-size:var(--type-3);">Saved</h1>
-    </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
 
-      <div id="panel-populated">
-        <a class="saved-row" href="/preview/flows/discover/discover_profile_detail/index.html" style="text-decoration:none;color:inherit;">
-          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400" alt="" />
-          <div class="meta"><b>Arijit Sen</b><span>Singer · Mumbai</span></div>
-          <button type="button" class="unsave-btn" aria-label="Remove from saved" onclick="event.preventDefault()"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-6.7-4.35-9.3-8.1C.9 10.1 1.7 6.6 4.6 5.2c2.2-1.1 4.6-.3 5.9 1.4l1.5 1.9 1.5-1.9c1.3-1.7 3.7-2.5 5.9-1.4 2.9 1.4 3.7 4.9 1.9 7.7C18.7 16.65 12 21 12 21z"/></svg></button>
+  <div class="ml-app">
+    <header class="ml-navbar">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/discover/discover_feed/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
         </a>
-        <a class="saved-row" href="/preview/flows/discover/discover_profile_detail/index.html" style="text-decoration:none;color:inherit;">
-          <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400" alt="" />
-          <div class="meta"><b>Karan Saxena</b><span>Guitarist · New Delhi</span></div>
-          <button type="button" class="unsave-btn" aria-label="Remove from saved" onclick="event.preventDefault()"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-6.7-4.35-9.3-8.1C.9 10.1 1.7 6.6 4.6 5.2c2.2-1.1 4.6-.3 5.9 1.4l1.5 1.9 1.5-1.9c1.3-1.7 3.7-2.5 5.9-1.4 2.9 1.4 3.7 4.9 1.9 7.7C18.7 16.65 12 21 12 21z"/></svg></button>
+      <h1 class="ml-navbar__title">Saved</h1>
+      <span class="ml-navbar__spacer"></span>
+      
+    </header>
+    <main class="ml-app__body">
+      <div data-state="populated">
+        <nav class="ml-tabs" aria-label="Saved type" style="margin-top:0">
+          <button class="ml-tabs__tab" aria-selected="true">People</button>
+          <button class="ml-tabs__tab" aria-selected="false">Spaces</button>
+          <button class="ml-tabs__tab" aria-selected="false">Projects</button>
+          <button class="ml-tabs__tab" aria-selected="false">Communities</button>
+        </nav>
+        <div style="margin-top:var(--space-3)">
+          <a class="ml-result" href="/preview/flows/discover/discover_profile_detail/index.html">
+          <img class="ml-result__thumb" src="/assets/img/editorials/324eae250c23aafe52ea0ef9caab5d5f.jpg" alt="" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">Rahul Iyer<span class="ml-verified" aria-label="Verified"><svg width="10" height="10" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span></span>
+            <span class="ml-result__meta">Producer · Mix Engineer · Mumbai</span>
+          </span>
+          <span class="ml-result__trail"><span class="ml-status ml-status--success">Available</span></span>
         </a>
-        <a class="saved-row" href="/preview/flows/discover/discover_profile_detail/index.html" style="text-decoration:none;color:inherit;border-bottom:none;">
-          <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400" alt="" />
-          <div class="meta"><b>Siddharth Swar</b><span>Mixing Engineer · Chennai</span></div>
-          <button type="button" class="unsave-btn" aria-label="Remove from saved" onclick="event.preventDefault()"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-6.7-4.35-9.3-8.1C.9 10.1 1.7 6.6 4.6 5.2c2.2-1.1 4.6-.3 5.9 1.4l1.5 1.9 1.5-1.9c1.3-1.7 3.7-2.5 5.9-1.4 2.9 1.4 3.7 4.9 1.9 7.7C18.7 16.65 12 21 12 21z"/></svg></button>
+          <a class="ml-result" href="/preview/flows/discover/discover_profile_detail/index.html">
+          <img class="ml-result__thumb" src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">Ananya Sharma<span class="ml-verified" aria-label="Verified"><svg width="10" height="10" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span></span>
+            <span class="ml-result__meta">Playback Vocalist · Mumbai</span>
+          </span>
+          <span class="ml-result__trail"><span class="ml-status ml-status--warning">Selective</span></span>
         </a>
+          <a class="ml-result" href="/preview/flows/discover/discover_profile_detail/index.html">
+          <img class="ml-result__thumb" src="/assets/img/editorials/a023f0e015a6ddc1ca4135942479a715.jpg" alt="" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">Priya Nair</span>
+            <span class="ml-result__meta">Session Guitarist · Pune</span>
+          </span>
+          <span class="ml-result__trail"><span class="ml-status ml-status--success">Available</span></span>
+        </a>
+        </div>
       </div>
 
-      <div id="panel-empty" style="display:none;flex-direction:column;align-items:center;text-align:center;padding-top:20vh;gap:var(--space-3);">
-        <div style="width:64px;height:64px;border-radius:var(--radius-2);background:var(--surface-alt);display:flex;align-items:center;justify-content:center;color:var(--muted);">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-6.7-4.35-9.3-8.1C.9 10.1 1.7 6.6 4.6 5.2c2.2-1.1 4.6-.3 5.9 1.4l1.5 1.9 1.5-1.9c1.3-1.7 3.7-2.5 5.9-1.4 2.9 1.4 3.7 4.9 1.9 7.7C18.7 16.65 12 21 12 21z"/></svg>
-        </div>
-        <div>
-          <h2 style="font-size:var(--type-3);margin:0;">Nothing saved yet</h2>
-          <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);max-width:260px;">Save profiles from Discover to find them again quickly.</p>
-        </div>
-        <a class="btn btn-p" href="/preview/flows/discover/discover_feed/index.html" style="text-decoration:none;">Go to Discover</a>
+      <div class="ml-empty" data-state="empty">
+        <h2 class="ml-empty__title">Nothing saved yet</h2>
+        <p class="ml-empty__body">Tap the bookmark on any profile, studio or project to keep it here.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/discover/discover_feed/index.html">Start discovering</a>
       </div>
     </main>
-    <footer class="app-bottombar"></footer>
+    <nav class="ml-tabbar" aria-label="Primary">
+      <a class="ml-tabbar__item" href="/preview/flows/discover/trending_recommended_sections/index.html">
+        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0 1 10v14h8v-7a3 3 0 1 1 6 0v7h8V10z"/></svg></span>
+        Home
+      </a>
+      <span class="ml-tabbar__item" aria-current="page">
+        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.87 12.9a1.25 1.25 0 1 0-.89.37q.52-.01.89-.37m2.27 1.13A2 2 0 0 1 14 15.16l-8.38 3.22L8.84 10a2 2 0 0 1 1.13-1.13l8.61-3.45zm5.35-10.52A12 12 0 1 0 3.52 20.48 12 12 0 0 0 20.49 3.52z"/></svg></span>
+        Discover
+      </span>
+      <a class="ml-tabbar__item" href="/preview/flows/communication/networking_feed/index.html">
+        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a11 11 0 0 0-8.52 17.95l-1.46 5.43a.5.5 0 0 0 .73.55l5.08-2.75A10.98 10.98 0 0 0 23 11 11 11 0 0 0 12 0"/></svg></span>
+        Connections
+      </a>
+      <a class="ml-tabbar__item" href="/preview/flows/marketplace/marketplace_browse/index.html">
+        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.25.25a6 6 0 0 0-6 6V7H2.5L1.01 17.13A6 6 0 0 0 6.95 24h10.1A6 6 0 0 0 23 17.13L21.5 7h-3.25v-.75a6 6 0 0 0-6-6M9.75 7v-.75a2.5 2.5 0 1 1 5 0V7z"/></svg></span>
+        Market<span class="ml-tabbar__beta">Beta</span>
+      </a>
+      <a class="ml-tabbar__item" href="/preview/flows/profile_management/profile_overview/index.html">
+        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.5 5.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0M2 22a10 10 0 1 1 20 0v2H2z"/></svg></span>
+        Profile
+      </a>
+    </nav>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    // states: empty | populated (default) — see screen.json. This screen is
-    // real UI reading a real, rules-ready `user_bookmarks` collection - but
-    // per its own screen.json note, the connection isn't wired up in the
-    // app yet. This preview shows what the wired-up version looks like.
-    document.addEventListener("musiclinkd:screen-ready", () => {
-      if (window.MusicLinkd.currentState === "empty") {
-        document.getElementById("panel-populated").style.display = "none";
-        document.getElementById("panel-empty").style.display = "flex";
-      }
-    });
-  </script>
 </body>
 </html>

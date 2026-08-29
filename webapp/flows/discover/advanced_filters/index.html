@@ -3,112 +3,68 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/discover/advanced_filters/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Discover / Advanced Filters</title>
+<title>MusicLinkd — Filters</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .filter-section { margin-bottom: var(--space-3); }
-  .filter-section h3 { font-size: var(--type-1); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 0 0 var(--space-2); }
-  .chip-wrap { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-  .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--line); }
-  .switch { width: 40px; height: 24px; border-radius: 12px; background: var(--line); position: relative; flex: none; cursor: pointer; }
-  .switch::after { content: ""; position: absolute; width: 18px; height: 18px; border-radius: 50%; background: #fff; top: 3px; left: 3px; transition: transform var(--duration-1); box-shadow: var(--shadow-1); }
-  .switch.on { background: var(--black); }
-  .switch.on::after { transform: translateX(16px); }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;justify-content:space-between;height:56px;">
-      <a href="/preview/flows/discover/discover_feed/index.html" aria-label="Close" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </a>
-      <span style="font-size:var(--type-2);font-weight:600;">Filters</span>
-      <button type="button" style="background:none;border:none;color:var(--pink);font-weight:600;font-size:var(--type-1);cursor:pointer;">Reset</button>
+
+  <div class="ml-app">
+    <header class="ml-navbar">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/discover/search_results/index.html" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-navbar__title">Filters</h1>
+      <span class="ml-navbar__spacer"></span>
+      <a class="ml-btn ml-btn--ghost" href="/preview/flows/discover/advanced_filters/index.html?state=default">Reset</a>
     </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4);">
-      <div class="filter-section">
-        <h3>Sort by</h3>
-        <div class="chip-wrap">
-          <button type="button" class="chip sel" style="background:var(--black);border-color:var(--black);color:#fff;">Relevance</button>
-          <button type="button" class="chip">Nearest</button>
-          <button type="button" class="chip">Rating</button>
-          <button type="button" class="chip">Recently active</button>
-        </div>
+    <main class="ml-app__body">
+      <div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Discovery type</h2></div>
+        <div class="ml-chip-wrap"><button class="ml-chip" aria-pressed="true">People</button><button class="ml-chip" aria-pressed="false">Businesses</button><button class="ml-chip" aria-pressed="false">Spaces</button><button class="ml-chip" aria-pressed="false">Music</button><button class="ml-chip" aria-pressed="false">Services</button><button class="ml-chip" aria-pressed="false">Communities</button></div>
       </div>
-      <div class="filter-section">
-        <h3>City</h3>
-        <div class="chip-wrap">
-          <button type="button" class="chip sel" style="background:var(--black);border-color:var(--black);color:#fff;">Mumbai</button>
-          <button type="button" class="chip">New Delhi</button>
-          <button type="button" class="chip">Bengaluru</button>
-          <button type="button" class="chip">Chennai</button>
-          <button type="button" class="chip">Goa</button>
-          <button type="button" class="chip">Pune</button>
-        </div>
+      <div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Role</h2></div>
+        <div class="ml-chip-wrap"><button class="ml-chip" aria-pressed="false">Singer</button><button class="ml-chip" aria-pressed="false">Musician</button><button class="ml-chip" aria-pressed="true">Producer</button><button class="ml-chip" aria-pressed="false">Composer</button><button class="ml-chip" aria-pressed="true">Engineer</button><button class="ml-chip" aria-pressed="false">DJ</button></div>
       </div>
-      <div class="filter-section">
-        <h3>Genre</h3>
-        <div class="chip-wrap">
-          <button type="button" class="chip">Bollywood / Filmi</button>
-          <button type="button" class="chip">Indie Pop</button>
-          <button type="button" class="chip">Hindustani Classical</button>
-          <button type="button" class="chip">Sufi Devotional</button>
-          <button type="button" class="chip">Punjabi Folk / Bhangra</button>
-        </div>
+      <div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Genre</h2></div>
+        <div class="ml-chip-wrap"><button class="ml-chip" aria-pressed="true">Bollywood / Filmi</button><button class="ml-chip" aria-pressed="false">Indie Pop</button><button class="ml-chip" aria-pressed="false">Hindustani Classical</button><button class="ml-chip" aria-pressed="false">Carnatic</button><button class="ml-chip" aria-pressed="false">Punjabi Folk</button><button class="ml-chip" aria-pressed="false">Sufi</button><button class="ml-chip" aria-pressed="false">Electronic</button></div>
       </div>
-      <div class="filter-section">
-        <h3>Language</h3>
-        <div class="chip-wrap">
-          <button type="button" class="chip">English</button>
-          <button type="button" class="chip">Hindi (हिंदी)</button>
-          <button type="button" class="chip">Punjabi (ਪੰਜਾਬੀ)</button>
-          <button type="button" class="chip">Tamil (தமிழ்)</button>
-        </div>
+      <div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Language</h2></div>
+        <div class="ml-chip-wrap"><button class="ml-chip" aria-pressed="true">Hindi</button><button class="ml-chip" aria-pressed="true">English</button><button class="ml-chip" aria-pressed="false">Punjabi</button><button class="ml-chip" aria-pressed="false">Tamil</button><button class="ml-chip" aria-pressed="false">Telugu</button><button class="ml-chip" aria-pressed="false">Bengali</button><button class="ml-chip" aria-pressed="false">Marathi</button></div>
       </div>
-      <div class="filter-section">
-        <h3>Experience level</h3>
-        <div class="chip-wrap">
-          <button type="button" class="chip">Beginner</button>
-          <button type="button" class="chip">Intermediate</button>
-          <button type="button" class="chip sel" style="background:var(--black);border-color:var(--black);color:#fff;">Professional</button>
-        </div>
+      <div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Availability</h2></div>
+        <div class="ml-chip-wrap"><button class="ml-chip" aria-pressed="true">Available now</button><button class="ml-chip" aria-pressed="false">Selective</button><button class="ml-chip" aria-pressed="false">Open to collab</button><button class="ml-chip" aria-pressed="false">Remote OK</button></div>
       </div>
-      <div class="filter-section">
-        <div class="toggle-row"><span style="font-size:var(--type-2);">Verified only</span><div class="switch on" role="switch" aria-checked="true"></div></div>
-        <div class="toggle-row"><span style="font-size:var(--type-2);">Open to remote work</span><div class="switch" role="switch" aria-checked="false"></div></div>
-        <div class="toggle-row" style="border-bottom:none;"><span style="font-size:var(--type-2);">Available for session work</span><div class="switch" role="switch" aria-checked="false"></div></div>
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Distance</h2></div>
+      <div class="ml-field">
+        <label for="dist">Within 10 km of Andheri West</label>
+        <input id="dist" type="range" min="1" max="50" value="10" style="min-height:var(--size-3);padding:0" />
       </div>
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Rating</h2></div>
+      <div class="ml-chip-wrap"><button class="ml-chip" aria-pressed="true">Any</button><button class="ml-chip" aria-pressed="false">★ 4.0+</button><button class="ml-chip" aria-pressed="false">★ 4.5+</button><button class="ml-chip" aria-pressed="false">Verified only</button></div>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
-      <a class="btn btn-p btn-block" href="/preview/flows/discover/discover_feed/index.html" style="text-decoration:none;">Show results</a>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/discover/search_results/index.html">Show 28 results</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    document.querySelectorAll(".switch").forEach((s) => s.addEventListener("click", () => {
-      s.classList.toggle("on");
-      s.setAttribute("aria-checked", s.classList.contains("on"));
-    }));
-    document.querySelectorAll(".filter-section .chip-wrap").forEach((wrap) => {
-      wrap.addEventListener("click", (e) => {
-        const btn = e.target.closest(".chip");
-        if (!btn) return;
-        btn.classList.toggle("sel");
-        if (btn.classList.contains("sel")) { btn.style.background = "var(--black)"; btn.style.borderColor = "var(--black)"; btn.style.color = "#fff"; }
-        else { btn.style.background = ""; btn.style.borderColor = ""; btn.style.color = ""; }
-      });
-    });
-  </script>
 </body>
 </html>

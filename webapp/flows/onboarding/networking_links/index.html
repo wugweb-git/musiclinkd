@@ -3,78 +3,43 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/onboarding/networking_links/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — User Onboarding / Networking links</title>
+<title>MusicLinkd — Networking Links (Spotify/YouTube/SoundCloud/LinkedIn)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .onb-step { font-size: var(--type-1); color: var(--muted); font-weight: 600; letter-spacing: 0.02em; }
-  .onb-progress { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
-  .onb-progress > span { display: block; height: 100%; background: var(--pink); border-radius: 2px; }
-  .link-row { display: grid; grid-template-columns: 40px 1fr; gap: var(--space-2); align-items: center; }
-  .link-icon {
-    width: 40px; height: 40px; border-radius: var(--radius-2); background: var(--surface-2);
-    display: flex; align-items: center; justify-content: center; color: var(--muted); font-weight: 700; font-size: var(--type-1);
-  }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/onboarding/profile_creation/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-      <div class="onb-step" style="margin-left:var(--space-2);">Step 9 of 13</div>
-    </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);">
-      <div class="onb-progress"><span style="width:69%"></span></div>
-      <div>
-        <h1 style="font-size:var(--type-3);">Add your links</h1>
-        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);">Optional — share your music and socials so collaborators can hear your work.</p>
-      </div>
 
-      <div style="display:flex;flex-direction:column;gap:var(--space-3);">
-        <div class="field">
-          <label for="spotify">Spotify</label>
-          <div class="link-row">
-            <div class="link-icon">♪</div>
-            <input id="spotify" type="url" inputmode="url" placeholder="https://open.spotify.com/artist/..." />
-          </div>
-        </div>
-        <div class="field">
-          <label for="youtube">YouTube</label>
-          <div class="link-row">
-            <div class="link-icon">▶</div>
-            <input id="youtube" type="url" inputmode="url" placeholder="https://youtube.com/@..." />
-          </div>
-        </div>
-        <div class="field">
-          <label for="soundcloud">SoundCloud</label>
-          <div class="link-row">
-            <div class="link-icon">☁</div>
-            <input id="soundcloud" type="url" inputmode="url" placeholder="https://soundcloud.com/..." />
-          </div>
-        </div>
-        <div class="field">
-          <label for="linkedin">LinkedIn</label>
-          <div class="link-row">
-            <div class="link-icon">in</div>
-            <input id="linkedin" type="url" inputmode="url" placeholder="https://linkedin.com/in/..." />
-          </div>
-        </div>
+  <div class="ml-app">
+    <header class="ml-navbar"><a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/onboarding/profile_creation/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a><span class="ml-navbar__spacer"></span><div class="ml-steps">
+        <span class="ml-steps__label">9/13</span>
+        <span class="ml-steps__track"><span class="ml-steps__fill" style="width:69%"></span></span>
+      </div></header>
+    <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3)">
+      <div>
+        <h1 class="ml-type-3" style="margin:0">Add your links</h1>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Optional — share your music and socials so collaborators can hear your work.</p>
       </div>
+      <div class="ml-field"><label for="spotify">Spotify</label><input id="spotify" type="url" inputmode="url" placeholder="open.spotify.com/artist/…" /></div>
+      <div class="ml-field"><label for="youtube">YouTube</label><input id="youtube" type="url" inputmode="url" placeholder="youtube.com/@yourchannel" /></div>
+      <div class="ml-field"><label for="soundcloud">SoundCloud</label><input id="soundcloud" type="url" inputmode="url" placeholder="soundcloud.com/you" /></div>
+      <div class="ml-field"><label for="linkedin">LinkedIn</label><input id="linkedin" type="url" inputmode="url" placeholder="linkedin.com/in/you" /></div>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
-      <a class="btn btn-p btn-block" href="/preview/flows/onboarding/persona_badges/index.html" style="text-decoration:none;">Continue</a>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--ghost ml-btn--block" href="/preview/flows/onboarding/persona_badges/index.html" style="margin-bottom:var(--space-2)">Skip for now</a><a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/onboarding/persona_badges/index.html">Continue</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

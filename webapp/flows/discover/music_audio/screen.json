@@ -1,0 +1,17 @@
+{
+  "flowKey": "discover",
+  "flowTitle": "Discover",
+  "flowStatus": "app-mocked",
+  "flowOrder": 4,
+  "screenKey": "music_audio",
+  "screenNumber": 147,
+  "screenTitle": "Music / Audio",
+  "screenOrder": 9,
+  "states": [
+    "default",
+    "playing"
+  ],
+  "collectionsTouched": [],
+  "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent \u2014 the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+  "dataContract": []
+}

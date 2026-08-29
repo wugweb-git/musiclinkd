@@ -3,63 +3,57 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/portfolio/media_preview/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Add Portfolio / Project Media Preview</title>
+<title>MusicLinkd — Project Media Preview</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .theme-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--space-2); }
-  .theme-swatch { aspect-ratio: 1; border-radius: var(--radius-2); border: 3px solid transparent; display: flex; align-items: flex-end; padding: var(--space-1); color: #fff; font-size: var(--type-1); font-weight: 700; cursor: pointer; }
-  .theme-swatch.sel { border-color: var(--black); }
-  .step-dots { display: flex; gap: 4px; margin-bottom: var(--space-3); }
-  .step-dots span { width: 20px; height: 3px; border-radius: 2px; background: var(--line); }
-  .step-dots span.done { background: var(--black); }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/portfolio/credit_attribution/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-    </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);">
-      <div class="step-dots"><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span></span></div>
+
+  <div class="ml-app">
+    <header class="ml-navbar"><a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/portfolio/credit_attribution/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a><span class="ml-navbar__spacer"></span><div class="ml-steps">
+        <span class="ml-steps__label">7/9</span>
+        <span class="ml-steps__track"><span class="ml-steps__fill" style="width:78%"></span></span>
+      </div></header>
+    <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3)">
       <div>
-        <h1 style="font-size:var(--type-3);">Choose an artwork theme</h1>
-        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);">This picks a palette for your project card — not a photo upload. There's no real image-upload flow in the app yet, so this is a theme keyword (<code>artworkTheme</code>), not artwork.</p>
+        <h1 class="ml-type-3" style="margin:0">Choose an artwork theme</h1>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">This picks a palette for your project card.</p>
+      </div>
+      <div class="ml-banner ml-banner--info">
+        Theme only — image upload isn't available in the app yet, so this saves a keyword rather than artwork.
+      </div>
+      <div class="ml-chip-wrap">
+        <button class="ml-chip" aria-pressed="true">Acoustic</button><button class="ml-chip" aria-pressed="false">Electronic</button><button class="ml-chip" aria-pressed="false">Live</button>
+        <button class="ml-chip" aria-pressed="false">Cinematic</button><button class="ml-chip" aria-pressed="false">Minimal</button><button class="ml-chip" aria-pressed="false">Devotional</button>
       </div>
 
-      <div class="theme-grid" id="theme-grid">
-        <div class="theme-swatch sel" data-theme="Acoustic" style="background:linear-gradient(135deg,#B08968,#7F5539);">Acoustic</div>
-        <div class="theme-swatch" data-theme="Electronic" style="background:linear-gradient(135deg,#7C3AED,#2563EB);">Electronic</div>
-        <div class="theme-swatch" data-theme="Live" style="background:linear-gradient(135deg,#DC2626,#EA4C89);">Live</div>
-        <div class="theme-swatch" data-theme="Cinematic" style="background:linear-gradient(135deg,#0D0B26,#3730A3);">Cinematic</div>
-        <div class="theme-swatch" data-theme="Minimal" style="background:linear-gradient(135deg,#7D7D8E,#0D0D0D);">Minimal</div>
-        <div class="theme-swatch" data-theme="Devotional" style="background:linear-gradient(135deg,#F59E0B,#B45309);">Devotional</div>
+      <div class="ml-section"><h2>Preview</h2></div>
+      <div class="ml-media ml-media--wide ml-media--scrim" style="border-radius:var(--radius-2)">
+        <img src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=600" alt="" />
+        <div class="ml-media__overlay">
+          <div class="ml-media-card__title">Tum Hi Toh (Unplugged)</div>
+          <div class="ml-media-card__sub">Song · Arijit Sen</div>
+        </div>
       </div>
-
-      <a class="btn btn-p btn-block" href="/preview/flows/portfolio/publish_project/index.html" style="text-decoration:none;margin-top:var(--space-2);">Continue</a>
     </main>
-    <footer class="app-bottombar"></footer>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/portfolio/publish_project/index.html">Continue</a>
+    </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    document.getElementById("theme-grid").addEventListener("click", (e) => {
-      const el = e.target.closest(".theme-swatch");
-      if (!el) return;
-      document.querySelectorAll(".theme-swatch.sel").forEach((s) => s.classList.remove("sel"));
-      el.classList.add("sel");
-    });
-  </script>
 </body>
 </html>

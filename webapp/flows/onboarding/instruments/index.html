@@ -3,97 +3,92 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/onboarding/instruments/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — User Onboarding / Instruments</title>
+<title>MusicLinkd — Instruments</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .onb-step { font-size: var(--type-1); color: var(--muted); font-weight: 600; letter-spacing: 0.02em; }
-  .onb-progress { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
-  .onb-progress > span { display: block; height: 100%; background: var(--pink); border-radius: 2px; }
-
-  .instr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
-  .instr-tile {
-    background: #fff; border: 1px solid var(--line); border-radius: var(--radius-2);
-    padding: var(--space-3); display: flex; flex-direction: column; align-items: center; gap: var(--space-2);
-    cursor: pointer; text-align: center; font-family: inherit;
-    transition: border-color var(--duration-1) ease, background var(--duration-1) ease;
-  }
-  .instr-tile:hover { background: var(--surface-alt); }
-  .instr-tile.selected { border: 2px solid var(--pink); background: var(--pink-container); padding: calc(var(--space-3) - 1px); }
-  .instr-tile .instr-icon {
-    width: 48px; height: 48px; border-radius: var(--radius-2); background: var(--surface-2);
-    display: flex; align-items: center; justify-content: center; font-size: var(--type-3);
-  }
-  .instr-tile.selected .instr-icon { background: #fff; }
-  .instr-tile span { font-size: var(--type-1); font-weight: 600; }
-  .instr-tile.selected span { color: var(--pink); }
-  .skip-link { color: var(--muted); font-weight: 600; text-decoration: none; text-align: center; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/onboarding/languages/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-      <div class="onb-step" style="margin-left:var(--space-2);">Step 5 of 13</div>
-    </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);">
-      <div class="onb-progress"><span style="width:38%"></span></div>
+
+  <div class="ml-app">
+    <header class="ml-navbar"><a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/onboarding/languages/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a><span class="ml-navbar__spacer"></span><div class="ml-steps">
+        <span class="ml-steps__label">5/13</span>
+        <span class="ml-steps__track"><span class="ml-steps__fill" style="width:38%"></span></span>
+      </div></header>
+    <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3)">
       <div>
-        <h1 style="font-size:var(--type-3);">Which instruments do you play?</h1>
-        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);">Select all that apply. Skilled musicians can be discovered for more work.</p>
+        <h1 class="ml-type-3" style="margin:0">Which instruments do you play?</h1>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Select all that apply. Skilled musicians can be discovered for more work.</p>
       </div>
-
-      <div class="instr-grid" role="group" aria-label="Instruments">
-        <button class="instr-tile" type="button">
-          <div class="instr-icon">🎸</div>
-          <span>Acoustic Guitar</span>
+      <div class="ml-banner ml-banner--info" data-state="skipped_for_non_musician">Skipped — instruments and proficiency won't appear on your profile.</div>
+      <div data-state="default">
+        <button class="ml-choice" role="radio" aria-checked="true">
+          <span class="ml-emoji" aria-hidden="true">🎸</span>
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Acoustic Guitar</span>
+            
+          </span>
+          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         </button>
-        <button class="instr-tile" type="button">
-          <div class="instr-icon">⚡</div>
-          <span>Electric Guitar</span>
+        <button class="ml-choice" role="radio" aria-checked="false">
+          <span class="ml-emoji" aria-hidden="true">⚡</span>
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Electric Guitar</span>
+            
+          </span>
+          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         </button>
-        <button class="instr-tile selected" type="button">
-          <div class="instr-icon">🎸</div>
-          <span>Bass Guitar</span>
+        <button class="ml-choice" role="radio" aria-checked="true">
+          <span class="ml-emoji" aria-hidden="true">🎸</span>
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Bass Guitar</span>
+            
+          </span>
+          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         </button>
-        <button class="instr-tile" type="button">
-          <div class="instr-icon">🎹</div>
-          <span>Keyboard / Synthesizer</span>
+        <button class="ml-choice" role="radio" aria-checked="false">
+          <span class="ml-emoji" aria-hidden="true">🎹</span>
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Keyboard / Synthesizer</span>
+            
+          </span>
+          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         </button>
-        <button class="instr-tile" type="button">
-          <div class="instr-icon">🎹</div>
-          <span>Piano</span>
+        <button class="ml-choice" role="radio" aria-checked="false">
+          <span class="ml-emoji" aria-hidden="true">🎹</span>
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Piano</span>
+            
+          </span>
+          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         </button>
-        <button class="instr-tile" type="button">
-          <div class="instr-icon">🥁</div>
-          <span>Drums</span>
+        <button class="ml-choice" role="radio" aria-checked="false">
+          <span class="ml-emoji" aria-hidden="true">🥁</span>
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Drums</span>
+            
+          </span>
+          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         </button>
       </div>
-
-      <a class="skip-link" href="/preview/flows/onboarding/instrument_proficiency/index.html">Not a musician — skip instruments</a>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
-      <a class="btn btn-p btn-block" href="/preview/flows/onboarding/instrument_proficiency/index.html" style="text-decoration:none;">Continue</a>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--ghost ml-btn--block" href="/preview/flows/onboarding/location/index.html" style="margin-bottom:var(--space-2)">Not a musician — skip instruments</a><a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/onboarding/instrument_proficiency/index.html">Continue</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    // Presentation-only multi-select.
-    document.querySelectorAll(".instr-tile").forEach((tile) => {
-      tile.addEventListener("click", () => tile.classList.toggle("selected"));
-    });
-  </script>
 </body>
 </html>

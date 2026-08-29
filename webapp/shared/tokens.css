@@ -1,72 +1,27 @@
 /**
- * MusicLinkd design tokens + primitives — copied verbatim from the source
- * of truth, frontend/guide/styleguide.html (class names match exactly:
- * .btn/.btn-p/.btn-s, .phone-frame/.phone-screen/.phone-notch/.phone-status/
- * .phone-body, OTP box dimensions, brand wordmark markup). Not reinvented;
- * if the real system changes, update styleguide.html first and copy the
- * diff down into this file, not the other way around.
+ * tokens.css — MusicLinkd component primitives for the webapp preview.
  *
- * This is the VISUAL layer — color, type, spacing, shadow, components.
+ * The token VALUES are no longer defined here. They are generated into
+ * ml-tokens.css from frontend/guide/tokens/tokens.json
+ * (run: node scripts/build-tokens.mjs) and imported below, so this file can
+ * no longer drift from the source of truth. That drift was real and shipped:
+ * this file was a hand-copy of styleguide.html's :root, and the two had
+ * already diverged on phone-frame height, on the pink->black primary
+ * correction, and on which grey --surface-* actually meant.
+ *
+ * What remains here is the COMPONENT layer — buttons, fields, cards, chips
+ * and the visual-polish primitives. Phase 3 lifts these into
+ * frontend/guide/system/ml-core.css and ml-widgets.css, after which this
+ * file becomes a thin re-export.
+ *
  * shared/app-shell.css stays the ENVIRONMENT layer (safe-area, viewport,
- * keyboard-awareness) and intentionally has none of this; both compose on
- * every screen (see template/index.html's <head>).
+ * keyboard-awareness) and deliberately holds no brand values.
  */
-:root {
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 32px;
-  --radius-1: 8px;
-  --radius-2: 16px;
-  --radius-3: 32px;
-  --radius-4: 9999px;
-  --opacity-1: 0.08;
-  --opacity-2: 0.16;
-  --opacity-3: 0.32;
-  --opacity-4: 0.64;
-  --duration-1: 125ms;
-  --duration-2: 200ms;
-  --duration-3: 320ms;
-  --duration-4: 500ms;
-  --type-1: clamp(10px, calc(10px + 2 * (100vw - 360px) / 1080), 12px);
-  --type-2: clamp(14px, calc(14px + 4 * (100vw - 360px) / 1080), 18px);
-  --type-3: clamp(20px, calc(20px + 8 * (100vw - 360px) / 1080), 28px);
-  --type-4: clamp(28px, calc(28px + 16 * (100vw - 360px) / 1080), 44px);
-
-  /* Colour ROLES, corrected 2026-08-16 per the brand owner: the primary
-     action colour is BLACK; pink is the brand ACCENT (focus, selection,
-     highlights, brand marks), not the main CTA. --pink itself is unchanged
-     so nothing that already references it breaks; these two names make the
-     role explicit so new screens stop reaching for --pink for buttons.
-     Mirrors frontend/guide/musiclinkd-system/src/styles.css. */
-  --action: #0D0D0D;          /* primary CTA */
-  --action-hover: #000000;
-  --action-pressed: #2B2B2B;
-  --accent: #EA4C89;          /* brand accent = --pink */
-  --pink: #EA4C89;
-  --pink-hover: #D93C77;
-  --black: #0D0D0D;
-  --navy: #0D0B26;
-  --paper: #FCFCFD;
-  --white: #FFFFFF;
-  --line: #ECECF1;
-  --muted: #7D7D8E;
-  --success: #22C55E;
-  --warn: #F59E0B;
-  --err: #DC2626;
-  --surface-2: #F1F5F9;
-  --surface-alt: #F8F8FB;
-  --pink-container: #FCE7F3;
-
-  --shadow-1: 0 1px 3px rgba(13,11,38,0.08);
-  --shadow-2: 0 4px 12px rgba(13,11,38,0.05);
-  --shadow-3: 0 8px 24px rgba(13,11,38,0.08);
-  --shadow-4: 0 12px 32px rgba(13,11,38,0.12);
-}
+@import url("./ml-tokens.css");
 
 body {
-  background: var(--paper);
-  color: var(--black);
+  background: var(--color-paper);
+  color: var(--color-ink);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: var(--type-2);
   -webkit-font-smoothing: antialiased;
@@ -76,10 +31,10 @@ body {
   font-family: 'Inter Tight', sans-serif;
   font-weight: 800;
   font-size: var(--type-3);
-  color: var(--black);
+  color: var(--color-ink);
   letter-spacing: -0.04em;
 }
-.brand-wordmark em { color: var(--pink); font-style: normal; }
+.brand-wordmark em { color: var(--color-pink); font-style: normal; }
 .brand-wordmark.on-dark { color: #fff; }
 
 /* --- Buttons — exact classes from styleguide.html's .btn system --- */
@@ -96,61 +51,61 @@ body {
   border: 1px solid transparent;
   min-height: 48px;
 }
-.btn-p { background: var(--black); color: #fff; }
+.btn-p { background: var(--color-ink); color: #fff; }
 .btn-p:active { background: #262626; transform: scale(0.98); }
-.btn-s { background: #fff; color: var(--black); border-color: var(--line); }
+.btn-s { background: #fff; color: var(--color-ink); border-color: var(--color-line); }
 .btn-s:active { transform: scale(0.98); }
 .btn:disabled { opacity: var(--opacity-3); cursor: not-allowed; pointer-events: none; }
 .btn-block { width: 100%; }
 
 /* --- Text fields --- */
 .field { display: flex; flex-direction: column; gap: var(--space-1); text-align: left; }
-.field label { font-size: var(--type-1); font-weight: 600; color: var(--muted); }
+.field label { font-size: var(--type-1); font-weight: 600; color: var(--color-muted); }
 .field input {
   min-height: 48px;
   padding: 0 var(--space-3);
   border-radius: var(--radius-4);
-  border: 1px solid var(--line);
+  border: 1px solid var(--color-line);
   background: #fff;
-  color: var(--black);
+  color: var(--color-ink);
   font: var(--type-2) 'Inter', sans-serif;
   outline: none;
   transition: border-color var(--duration-1) ease;
 }
-.field input:focus { border-color: var(--pink); }
-.field .error-text { color: var(--err); font-size: var(--type-1); }
-.field.has-error input { border-color: var(--err); }
+.field input:focus { border-color: var(--color-pink); }
+.field .error-text { color: var(--color-error); font-size: var(--type-1); }
+.field.has-error input { border-color: var(--color-error); }
 
 /* --- OTP boxes — exact spec: 48x72dp, pink focus border, 12px radius --- */
 .otp-row { display: flex; gap: var(--space-2); justify-content: center; }
 .otp-box {
   width: 48px;
   height: 72px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--color-line);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--type-2);
   font-weight: 700;
-  color: var(--muted);
+  color: var(--color-muted);
   background: #fff;
 }
-.otp-box.filled { border-color: var(--pink); color: var(--black); border-width: 2px; }
-.otp-box.error { border-color: var(--err); background: #FEF2F2; color: var(--err); }
+.otp-box.filled { border-color: var(--color-pink); color: var(--color-ink); border-width: 2px; }
+.otp-box.error { border-color: var(--color-error); background: #FEF2F2; color: var(--color-error); }
 
-.divider-row { display: flex; align-items: center; gap: var(--space-2); color: var(--muted); font-size: var(--type-1); }
-.divider-row::before, .divider-row::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.divider-row { display: flex; align-items: center; gap: var(--space-2); color: var(--color-muted); font-size: var(--type-1); }
+.divider-row::before, .divider-row::after { content: ""; flex: 1; height: 1px; background: var(--color-line); }
 
 .spinner-circular {
   width: 28px; height: 28px; border-radius: 50%;
-  border: 3px solid var(--line); border-top-color: var(--pink);
+  border: 3px solid var(--color-line); border-top-color: var(--color-pink);
   animation: spin var(--duration-4) linear infinite;
   display: inline-block;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.link-text { color: var(--pink); font-weight: 600; text-decoration: none; }
+.link-text { color: var(--color-pink); font-weight: 600; text-decoration: none; }
 
 .badge { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-1) var(--space-2); border-radius: var(--radius-4); font-size: var(--type-1); font-weight: 600; }
 .badge-av { background: rgba(34,197,94,0.12); color: #166534; }
@@ -159,9 +114,9 @@ body {
    .card-s / .chip (same source-of-truth rule as this file's header
    comment). Needed once screens beyond Auth/OTP started getting built —
    profile/card-shaped screens have nothing to compose with otherwise. --- */
-.card-s { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-3); padding: var(--space-4); box-shadow: var(--shadow-1); margin-bottom: var(--space-4); }
-.chip { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: var(--radius-4); background: #fff; border: 1px solid var(--line); font-size: var(--type-1); font-weight: 500; color: var(--muted); white-space: nowrap; }
-.chip.sel { background: var(--pink); border-color: var(--pink); color: #fff; }
+.card-s { background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius-3); padding: var(--space-4); box-shadow: var(--elevation-1); margin-bottom: var(--space-4); }
+.chip { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: var(--radius-4); background: #fff; border: 1px solid var(--color-line); font-size: var(--type-1); font-weight: 500; color: var(--color-muted); white-space: nowrap; }
+.chip.sel { background: var(--color-pink); border-color: var(--color-pink); color: #fff; }
 
 /* --- Phone frame (desktop preview chrome) — classes/values from styleguide.html,
    with one deliberate divergence: .phone-screen's height. styleguide.html uses
@@ -176,7 +131,7 @@ body {
    isn't touched this session, and this is a webapp-specific accuracy fix,
    not a shared-system value. --- */
 .phone-frame { width: 360px; background: #1a1a2e; border-radius: 36px; padding: 12px; margin: 0 auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-.phone-screen { background: var(--paper); border-radius: 24px; overflow: hidden; height: 800px; position: relative; }
+.phone-screen { background: var(--color-paper); border-radius: 24px; overflow: hidden; height: 800px; position: relative; }
 .phone-notch { height: 28px; background: #0D0D0D; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .phone-notch .dot { width: 8px; height: 8px; background: #2C2F3A; border-radius: 50%; }
 
@@ -188,17 +143,17 @@ body {
 
 /* Stat card — 2-up/4-up grid of big-number metrics (dashboard, profile stats) */
 .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
-.stat-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-2); padding: var(--space-3); }
+.stat-card { background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius-2); padding: var(--space-3); }
 .stat-card .num { font: 800 var(--type-3)/1 'Inter Tight', sans-serif; display: block; }
-.stat-card .label { font-size: var(--type-1); color: var(--muted); font-weight: 500; margin-top: 2px; display: block; }
-.stat-card .sub { font-size: var(--type-1); color: var(--pink); font-weight: 600; }
+.stat-card .label { font-size: var(--type-1); color: var(--color-muted); font-weight: 500; margin-top: 2px; display: block; }
+.stat-card .sub { font-size: var(--type-1); color: var(--color-pink); font-weight: 600; }
 
 /* Category tile — icon-in-circle + label(+count), for browse/category grids */
 .cat-tile { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); text-decoration: none; color: inherit; flex: none; width: 76px; }
-.cat-tile .icon-circle { width: 52px; height: 52px; border-radius: 50%; background: var(--pink-container); display: flex; align-items: center; justify-content: center; color: var(--pink); }
+.cat-tile .icon-circle { width: 52px; height: 52px; border-radius: 50%; background: var(--color-pink-container); display: flex; align-items: center; justify-content: center; color: var(--color-pink); }
 .cat-tile .icon-circle svg { width: 22px; height: 22px; }
 .cat-tile b { font-size: var(--type-1); font-weight: 600; text-align: center; }
-.cat-tile span.count { font-size: 10px; color: var(--muted); }
+.cat-tile span.count { font-size: 10px; color: var(--color-muted); }
 
 /* Status pill — semantic colored pill for availability/selection state,
    distinct from .chip (which is a selectable filter control). */
@@ -206,7 +161,7 @@ body {
 .status-pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 .status-pill.st-available { background: rgba(34,197,94,0.12); color: #166534; }
 .status-pill.st-selected { background: #FEF3C7; color: #92400E; }
-.status-pill.st-live { background: var(--pink-container); color: var(--pink-hover); }
+.status-pill.st-live { background: var(--color-pink-container); color: var(--color-pink-pressed); }
 .status-pill.st-gold { background: #FEF3C7; color: #92400E; }
 .status-pill.st-gold::before { display: none; }
 
@@ -222,14 +177,14 @@ body {
 
 /* Pill CTA row — Message/Hire/Follow style action row under a hero */
 .pill-cta-row { display: flex; gap: var(--space-2); padding: var(--space-3) var(--space-4); }
-.pill-cta { flex: 1; min-height: 44px; border-radius: var(--radius-4); font: 600 var(--type-1)/1 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); background: #fff; color: var(--black); text-decoration: none; }
-.pill-cta.is-primary { background: var(--black); color: #fff; border-color: var(--black); }
-.pill-cta.is-accent { background: var(--pink); color: #fff; border-color: var(--pink); }
+.pill-cta { flex: 1; min-height: 44px; border-radius: var(--radius-4); font: 600 var(--type-1)/1 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; border: 1px solid var(--color-line); background: #fff; color: var(--color-ink); text-decoration: none; }
+.pill-cta.is-primary { background: var(--color-ink); color: #fff; border-color: var(--color-ink); }
+.pill-cta.is-accent { background: var(--color-pink); color: #fff; border-color: var(--color-pink); }
 
 /* Progress task card — "continue where you left off" pattern */
-.progress-card { background: var(--pink-container); border-radius: var(--radius-2); padding: var(--space-3); margin-bottom: var(--space-2); }
+.progress-card { background: var(--color-pink-container); border-radius: var(--radius-2); padding: var(--space-3); margin-bottom: var(--space-2); }
 .progress-card b { font-size: var(--type-2); display: block; margin-bottom: 2px; }
-.progress-card .meta { font-size: var(--type-1); color: var(--muted); }
+.progress-card .meta { font-size: var(--type-1); color: var(--color-muted); }
 .progress-track { height: 6px; background: rgba(234,76,137,0.18); border-radius: 3px; margin: var(--space-2) 0; overflow: hidden; }
-.progress-track .fill { height: 100%; background: var(--pink); border-radius: 3px; }
-.progress-card a.cta { font-size: var(--type-1); color: var(--pink-hover); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 2px; }
+.progress-track .fill { height: 100%; background: var(--color-pink); border-radius: 3px; }
+.progress-card a.cta { font-size: var(--type-1); color: var(--color-pink-pressed); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 2px; }

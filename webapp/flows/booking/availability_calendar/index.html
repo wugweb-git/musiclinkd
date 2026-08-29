@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -17,33 +17,33 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .view-toggle { display: flex; border: 1px solid var(--line); border-radius: var(--radius-4); overflow: hidden; margin: var(--space-2) 0 var(--space-3); }
-  .view-toggle button { flex: 1; padding: var(--space-1) 0; background: #fff; border: none; font: 600 var(--type-1)/1 'Inter', sans-serif; color: var(--muted); }
-  .view-toggle button.sel { background: var(--black); color: #fff; }
+  .view-toggle { display: flex; border: 1px solid var(--color-line); border-radius: var(--radius-4); overflow: hidden; margin: var(--space-2) 0 var(--space-3); }
+  .view-toggle button { flex: 1; padding: var(--space-1) 0; background: #fff; border: none; font: 600 var(--type-1)/1 'Inter', sans-serif; color: var(--color-muted); }
+  .view-toggle button.sel { background: var(--color-ink); color: #fff; }
   .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
-  .cal-grid .dow { font-size: 10px; color: var(--muted); font-weight: 600; padding-bottom: 4px; }
+  .cal-grid .dow { font-size: 10px; color: var(--color-muted); font-weight: 600; padding-bottom: 4px; }
   .cal-grid .day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: var(--type-1); }
-  .cal-grid .day.sel { background: var(--black); color: #fff; font-weight: 700; }
-  .cal-grid .day.today { border: 1px solid var(--black); }
-  .cal-grid .day.past { color: var(--line); }
+  .cal-grid .day.sel { background: var(--color-ink); color: #fff; font-weight: 700; }
+  .cal-grid .day.today { border: 1px solid var(--color-ink); }
+  .cal-grid .day.past { color: var(--color-line); }
   .slot-list { margin-top: var(--space-4); }
-  .slot-row { display: flex; justify-content: space-between; align-items: center; padding: var(--space-2) 0; border-bottom: 1px solid var(--line); }
+  .slot-row { display: flex; justify-content: space-between; align-items: center; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); }
   .slot-row .status { font-size: var(--type-1); font-weight: 600; }
   .slot-row.available .status { color: #166534; }
-  .slot-row.booked .status { color: var(--muted); }
+  .slot-row.booked .status { color: var(--color-muted); }
   .slot-row.pending .status { color: #92400E; }
 </style>
 </head>
 <body>
   <div class="app-root">
     <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/booking/studio_profile/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
+      <a href="/preview/flows/booking/studio_profile/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
     </header>
     <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
       <h1 style="font-size:var(--type-3);margin:var(--space-2) 0 4px;">Check availability</h1>
-      <p style="color:var(--muted);font-size:var(--type-1);margin-bottom:var(--space-2);">Tracking Room 1 · ₹8,000/hr</p>
+      <p style="color:var(--color-muted);font-size:var(--type-1);margin-bottom:var(--space-2);">Tracking Room 1 · ₹8,000/hr</p>
 
       <div class="view-toggle" id="view-toggle">
         <button type="button" class="sel" data-v="monthly">Month</button>
@@ -69,7 +69,7 @@
       </div>
 
       <div id="panel-timeline" style="display:none;">
-        <p style="font-size:var(--type-1);color:var(--muted);">12 Aug 2026 — hourly timeline</p>
+        <p style="font-size:var(--type-1);color:var(--color-muted);">12 Aug 2026 — hourly timeline</p>
       </div>
 
       <div class="slot-list">

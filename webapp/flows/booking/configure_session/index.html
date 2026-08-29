@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -20,20 +20,20 @@
   .opt-section { margin-bottom: var(--space-3); }
   .opt-section h3 { font-size: var(--type-2); margin: 0 0 var(--space-2); }
   .chip-wrap { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-  .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: var(--space-2) 0; border-top: 1px solid var(--line); }
-  .switch { position: relative; width: 40px; height: 24px; background: var(--line); border-radius: 12px; flex: none; border: none; }
-  .switch.on { background: var(--black); }
+  .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: var(--space-2) 0; border-top: 1px solid var(--color-line); }
+  .switch { position: relative; width: 40px; height: 24px; background: var(--color-line); border-radius: 12px; flex: none; border: none; }
+  .switch.on { background: var(--color-ink); }
   .switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; background: #fff; border-radius: 50%; transition: transform .15s; }
   .switch.on::after { transform: translateX(16px); }
-  .addon-row { display: flex; justify-content: space-between; align-items: center; padding: var(--space-2) 0; border-bottom: 1px solid var(--line); }
+  .addon-row { display: flex; justify-content: space-between; align-items: center; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); }
   .addon-row b { font-size: var(--type-2); font-weight: 500; display: block; }
-  .addon-row .price { font-size: var(--type-1); color: var(--muted); }
+  .addon-row .price { font-size: var(--type-1); color: var(--color-muted); }
 </style>
 </head>
 <body>
   <div class="app-root">
     <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/booking/availability_calendar/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
+      <a href="/preview/flows/booking/availability_calendar/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
     </header>
@@ -43,7 +43,7 @@
       <div class="opt-section">
         <h3>Session type</h3>
         <div class="chip-wrap" id="session-type">
-          <button type="button" class="chip sel" style="background:var(--black);border-color:var(--black);color:#fff;">Recording</button>
+          <button type="button" class="chip sel" style="background:var(--color-ink);border-color:var(--color-ink);color:#fff;">Recording</button>
           <button type="button" class="chip">Mixing</button>
           <button type="button" class="chip">Mastering</button>
         </div>
@@ -53,14 +53,14 @@
         <h3>Duration</h3>
         <div class="chip-wrap" id="duration">
           <button type="button" class="chip">Hourly</button>
-          <button type="button" class="chip sel" style="background:var(--black);border-color:var(--black);color:#fff;">Half Day (4 hrs)</button>
+          <button type="button" class="chip sel" style="background:var(--color-ink);border-color:var(--color-ink);color:#fff;">Half Day (4 hrs)</button>
           <button type="button" class="chip">Full Day (8 hrs)</button>
         </div>
       </div>
 
       <div class="opt-section">
         <div class="toggle-row" style="border-top:none;">
-          <div><b style="font-size:var(--type-2);display:block;">Resident engineer</b><span style="font-size:var(--type-1);color:var(--muted);">₹1,500 for the session</span></div>
+          <div><b style="font-size:var(--type-2);display:block;">Resident engineer</b><span style="font-size:var(--type-1);color:var(--color-muted);">₹1,500 for the session</span></div>
           <button type="button" class="switch on" id="engineer-switch" aria-label="Request engineer"></button>
         </div>
       </div>
@@ -83,7 +83,7 @@
         if (!btn) return;
         wrap.querySelectorAll(".chip").forEach((b) => { b.classList.remove("sel"); b.style.background = ""; b.style.borderColor = ""; b.style.color = ""; });
         btn.classList.add("sel");
-        btn.style.background = "var(--black)"; btn.style.borderColor = "var(--black)"; btn.style.color = "#fff";
+        btn.style.background = "var(--color-ink)"; btn.style.borderColor = "var(--color-ink)"; btn.style.color = "#fff";
       });
     });
     document.getElementById("engineer-switch").addEventListener("click", (e) => e.target.classList.toggle("on"));

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0D0D" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/discover/global_search/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Global Search</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+
+  <div class="ml-app">
+    <header class="ml-navbar">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/discover/discover_feed/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <div class="ml-search" style="flex:1">
+        <span class="ml-search__icon"><svg width="18" height="18" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg></span>
+        <input type="search" placeholder="Search talent, studios, projects…" aria-label="Search MusicLinkd" autofocus />
+      </div>
+    </header>
+
+    <main class="ml-app__body">
+      <!-- The search field is the page's subject, so the heading is visually
+           redundant — but a screen still needs one h1 for structure. -->
+      <h1 class="ml-visually-hidden">Search MusicLinkd</h1>
+
+      <!-- idle: recent + suggested -->
+      <div data-state="idle">
+        <div class="ml-section"><h2>Recent</h2></div>
+        <a class="ml-suggest" href="/preview/flows/discover/search_results/index.html">
+          <svg width="18" height="18" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.06 17.06a1.5 1.5 0 0 1-2.12 0l-4.44-4.44V6a1.5 1.5 0 0 1 3 0v5.38l3.56 3.56a1.5 1.5 0 0 1 0 2.12M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24"/></svg>
+          <span class="ml-suggest__body">mix engineer mumbai</span>
+        </a>
+        <a class="ml-suggest" href="/preview/flows/discover/search_results/index.html">
+          <svg width="18" height="18" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.06 17.06a1.5 1.5 0 0 1-2.12 0l-4.44-4.44V6a1.5 1.5 0 0 1 3 0v5.38l3.56 3.56a1.5 1.5 0 0 1 0 2.12M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24"/></svg>
+          <span class="ml-suggest__body">jam room andheri</span>
+        </a>
+
+        <div class="ml-section"><h2>Try searching for</h2></div>
+        <div class="ml-chip-wrap">
+          <button class="ml-chip" aria-pressed="false">Playback vocalists</button><button class="ml-chip" aria-pressed="false">Tabla players</button><button class="ml-chip" aria-pressed="false">Dolby Atmos studios</button>
+          <button class="ml-chip" aria-pressed="false">Punjabi lyricists</button><button class="ml-chip" aria-pressed="false">Mastering</button><button class="ml-chip" aria-pressed="false">Bands in Pune</button>
+        </div>
+      </div>
+
+      <!-- typing: live suggestions across dimensions -->
+      <div data-state="typing">
+        <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-2) 0">Results for "mix"</p>
+        <a class="ml-suggest" href="/preview/flows/discover/search_results/index.html">
+          <svg width="18" height="18" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg>
+          <span class="ml-suggest__body">mix engineer<span class="ml-suggest__kind">in People</span></span>
+        </a>
+        <a class="ml-suggest" href="/preview/flows/discover/services/index.html">
+          <svg width="18" height="18" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg>
+          <span class="ml-suggest__body">mixing &amp; mastering<span class="ml-suggest__kind">in Services</span></span>
+        </a>
+        <a class="ml-suggest" href="/preview/flows/discover/discover_profile_detail/index.html">
+          <img class="ml-avatar ml-avatar--sm" src="/assets/img/editorials/324eae250c23aafe52ea0ef9caab5d5f.jpg" alt="" />
+          <span class="ml-suggest__body">Rahul Iyer<span class="ml-suggest__kind">Producer · Mix Engineer</span></span>
+        </a>
+      </div>
+
+      <!-- no_results -->
+      <div class="ml-empty" data-state="no_results">
+        <h2 class="ml-empty__title">Nothing found</h2>
+        <p class="ml-empty__body">Try a different spelling, or browse by category instead.</p>
+        <a class="ml-btn ml-btn--secondary" href="/preview/flows/discover/discover_feed/index.html">Browse Discover</a>
+      </div>
+    </main>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>

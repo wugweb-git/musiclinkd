@@ -4,14 +4,29 @@
     {
       "name": "admin",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "admin", "run", "dev"],
+      "runtimeArgs": [
+        "--prefix",
+        "admin",
+        "run",
+        "dev"
+      ],
       "port": 3000
     },
     {
       "name": "website",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["scripts/dev-static-server.py"],
+      "runtimeArgs": [
+        "scripts/dev-static-server.py"
+      ],
       "port": 5500
+    },
+    {
+      "name": "preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "/Users/abcom/Documents/GitHub/musiclinkd/scripts/dev-preview-server.py"
+      ],
+      "port": 5501
     }
   ]
 }

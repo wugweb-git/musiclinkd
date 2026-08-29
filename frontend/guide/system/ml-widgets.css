@@ -1,0 +1,798 @@
+/**
+ * ml-widgets.css — the MusicLinkd widget layer.
+ *
+ * Requires ml-tokens.css + ml-core.css.
+ *
+ * Every class here is named after its entry in
+ * admin/docs/architecture/Widget_Directory.md so the mapping to the Android
+ * codebase is 1:1 and needs no translation table. The Kotlin class each one
+ * corresponds to is named in its comment.
+ *
+ * These were not authored from nothing: they are the shapes already built
+ * across 66 per-screen <style> blocks in webapp/flows/**, promoted into one
+ * place. 138 distinct classes were defined locally across those screens, with
+ * .field redefined in 6 screens and .status-pill in 4 — each redefinition a
+ * chance to drift.
+ *
+ * Layout proportions (screen column, control heights, tab-bar geometry,
+ * rail rhythm) follow the approved mobile reference build. Colour, radius,
+ * spacing and type come only from tokens.json.
+ */
+
+/* ── app shell ─────────────────────────────────────────────────────────── */
+/* The phone column. 430dp is the widest current phone (iPhone Pro Max); the
+   app is designed at 360-430 and centred beyond that rather than stretched,
+   because a stretched phone layout is the classic tell of a web app. */
+
+.ml-app {
+  width: 100%;
+  max-width: 430px;
+  margin-inline: auto;
+  /* HEIGHT, not min-height: the shell must be BOUNDED by the viewport so the
+     body below is the only thing that scrolls. With min-height the shell grew
+     to its content (1225px in an 812px viewport) and nothing scrolled at all —
+     content below the fold was simply unreachable. */
+  height: 100dvh;
+  background: var(--color-paper);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.ml-app__body {
+  flex: 1;
+  /* A flex item's default min-height is auto, which lets it grow past its
+     container and defeats overflow-y. This one line is what makes the scroll
+     work; it is the single most common app-shell bug. */
+  min-height: 0;
+  padding-inline: var(--space-3);
+  /* clear the fixed tab bar plus the home indicator */
+  padding-bottom: calc(var(--size-4) + var(--space-4) + var(--safe-bottom));
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  /* A phone has no visible scrollbar; showing one is an instant tell that
+     this is a web page. Content stays reachable by touch, wheel and keyboard. */
+  scrollbar-width: none;
+}
+.ml-app__body::-webkit-scrollbar { display: none; }
+
+/* ── top app bar ───────────────────────────────────────────────────────── */
+/* Compose: TopAppBar / LargeTopAppBar                                       */
+
+.ml-appbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-3) var(--space-2);
+  padding-top: calc(var(--space-3) + var(--safe-top));
+}
+.ml-appbar__titles { min-width: 0; }
+/* The screen title uses type-4, not type-3: at phone width the fluid clamp
+   sits at its minimum, and type-3 there renders ~20px — too small to read as
+   a screen title. type-4 lands at ~28px, which matches the reference. */
+.ml-appbar__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--type-4);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.ml-appbar__actions { display: flex; align-items: center; gap: var(--space-2); flex: none; }
+
+/* ── bottom tab bar ────────────────────────────────────────────────────── */
+/* Compose: NavigationBar + NavigationBarItem                                */
+/* There is currently NO shared bottom navigation anywhere in the app —      */
+/* 0 of 139 screens use one. This is that component.                         */
+
+.ml-tabbar {
+  /* sticky inside the bounded shell, not fixed to the viewport: it then
+     inherits the shell's max-width and centring for free, and stays correct
+     when the shell is rendered inside a phone frame in the workbench */
+  position: sticky;
+  bottom: 0;
+  z-index: var(--z-1);
+  width: 100%;
+  flex: none;
+  display: flex;
+  align-items: stretch;
+  border-top: 1px solid var(--color-line);
+  /* translucent so content scrolling under it stays legible, like the OS bars */
+  background: color-mix(in srgb, var(--color-white) 94%, transparent);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  padding-bottom: var(--safe-bottom);
+}
+.ml-tabbar__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-height: var(--size-4);          /* 56dp — comfortable, exceeds the floor */
+  padding: var(--space-2) 0;
+  color: var(--color-muted);
+  font-size: var(--type-1);
+  font-weight: 600;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.ml-tabbar__item svg { width: 22px; height: 22px; }
+/* The active state is a tinted pill behind the glyph plus a colour change —
+   colour alone is not an accessible state signal. */
+.ml-tabbar__icon {
+  display: flex; align-items: center; justify-content: center;
+  width: var(--size-2); height: var(--size-1);
+  border-radius: var(--radius-4);
+  transition: background-color var(--duration-2) var(--ease-standard);
+}
+.ml-tabbar__item[aria-current="page"] { color: var(--color-pink); }
+.ml-tabbar__item[aria-current="page"] .ml-tabbar__icon { background: var(--color-pink-container); }
+.ml-tabbar__item:active .ml-tabbar__icon { transform: scale(0.9); }
+
+/* ── category tile ─────────────────────────────────────────────────────── */
+/* Compose: FilterChip in a LazyRow, or a custom CategoryTile               */
+
+.ml-cat-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 86px;
+  min-height: var(--size-4);
+  padding: var(--space-2);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-2);
+  background: var(--color-white);
+  color: inherit;
+  text-decoration: none;
+  transition: transform var(--duration-1) var(--ease-standard);
+}
+.ml-cat-tile:active { transform: scale(0.96); }
+.ml-cat-tile__icon {
+  display: flex; align-items: center; justify-content: center;
+  width: var(--size-2); height: var(--size-2);
+  border-radius: var(--radius-4);
+  background: var(--color-pink-container);
+  color: var(--color-pink);
+}
+.ml-cat-tile__icon svg { width: 20px; height: 20px; }
+.ml-cat-tile__label { font-size: var(--type-1); font-weight: 600; text-align: center; }
+
+/* ── artist card ───────────────────────────────────────────────────────── */
+/* Widget_Directory: ArtistCard  ·  Compose: UnifiedArtistCard              */
+
+.ml-artist-card {
+  width: 168px;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-2);
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  transition: transform var(--duration-1) var(--ease-standard);
+}
+.ml-artist-card:active { transform: scale(0.98); }
+.ml-artist-card__media { position: relative; aspect-ratio: 1/1; background: var(--color-surface); }
+.ml-artist-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ml-artist-card__body { padding: var(--space-2); }
+.ml-artist-card__name {
+  display: flex; align-items: center; gap: var(--space-1);
+  font-size: var(--type-2); font-weight: 700; line-height: 1.2;
+}
+.ml-artist-card__name svg { width: 14px; height: 14px; color: var(--color-pink); flex: none; }
+.ml-artist-card__role {
+  font-size: var(--type-1); color: var(--color-muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ml-artist-card__meta {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: var(--space-1); font-size: var(--type-1);
+}
+.ml-artist-card__rating { font-weight: 700; color: var(--color-ink); }
+.ml-artist-card__count  { color: var(--color-muted); }
+
+/* ── studio card ───────────────────────────────────────────────────────── */
+/* Widget_Directory: StudioCard  ·  Compose: UnifiedStudioCard              */
+/* Promoted from webapp/flows/booking/studio_discovery's local .studio-card */
+
+.ml-studio-card {
+  width: 220px;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-2);
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  transition: transform var(--duration-1) var(--ease-standard);
+}
+.ml-studio-card:active { transform: scale(0.98); }
+.ml-studio-card__media { position: relative; aspect-ratio: var(--media-aspect-wide); background: var(--color-surface); }
+.ml-studio-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ml-studio-card__body { padding: var(--space-2); }
+.ml-studio-card__name { font-size: var(--type-2); font-weight: 700; line-height: 1.2; }
+.ml-studio-card__loc  { font-size: var(--type-1); color: var(--color-muted); }
+.ml-studio-card__meta {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: var(--space-1); font-size: var(--type-1);
+}
+.ml-studio-card__price { color: var(--color-muted); }
+
+/* ── media card ────────────────────────────────────────────────────────── */
+/* Full-bleed artwork with the title ON the scrim — the Trending pattern.
+   This is the palette rule at its purest: the card has no colour of its own. */
+/* Widget_Directory: HomeFeatureCard  ·  Compose: HomeFeatureCard            */
+
+.ml-media-card {
+  position: relative;
+  display: block;
+  width: 260px;
+  aspect-ratio: 4/3;
+  border-radius: var(--radius-2);
+  overflow: hidden;
+  background: var(--color-surface);
+  color: var(--color-white);
+  text-decoration: none;
+  transition: transform var(--duration-1) var(--ease-standard);
+}
+.ml-media-card:active { transform: scale(0.98); }
+.ml-media-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ml-media-card::after {
+  content: ""; position: absolute; inset: 0;
+  background: var(--media-scrim); pointer-events: none;
+}
+.ml-media-card__tag { position: absolute; z-index: 1; top: var(--space-2); left: var(--space-2); }
+.ml-media-card__body { position: absolute; z-index: 1; left: var(--space-3); right: var(--space-3); bottom: var(--space-3); }
+.ml-media-card__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; }
+.ml-media-card__sub   { font-size: var(--type-1); color: color-mix(in srgb, var(--color-white) 85%, transparent); }
+
+/* ── marketplace card ──────────────────────────────────────────────────── */
+/* Widget_Directory: MarketplaceCard                                        */
+
+.ml-market-card {
+  width: 168px;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-2);
+  overflow: hidden;
+  color: inherit; text-decoration: none; display: block;
+  transition: transform var(--duration-1) var(--ease-standard);
+}
+.ml-market-card:active { transform: scale(0.98); }
+.ml-market-card__media { position: relative; aspect-ratio: 1/1; background: var(--color-surface); }
+.ml-market-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Save control sits on the media, so it needs its own solid ground */
+.ml-market-card__save {
+  position: absolute; top: var(--space-2); right: var(--space-2);
+  display: flex; align-items: center; justify-content: center;
+  width: var(--size-1); height: var(--size-1);
+  border-radius: var(--radius-4);
+  background: color-mix(in srgb, var(--color-white) 90%, transparent);
+  backdrop-filter: blur(8px);
+  color: var(--color-ink);
+  border: 0; cursor: pointer;
+}
+.ml-market-card__save[aria-pressed="true"] { color: var(--color-pink); }
+.ml-market-card__body  { padding: var(--space-2); }
+.ml-market-card__price { font-family: var(--font-display); font-size: var(--type-3); font-weight: 800; line-height: 1.1; }
+.ml-market-card__title { font-size: var(--type-1); font-weight: 600; margin-top: 2px; }
+.ml-market-card__meta  { font-size: var(--type-1); color: var(--color-muted); }
+
+/* ── booking / review / notification rows ──────────────────────────────── */
+/* Widget_Directory: BookingCard, ReviewCard, NotificationCard              */
+
+.ml-booking-card { display: flex; gap: var(--space-3); padding: var(--space-3); }
+.ml-booking-card__thumb { width: var(--size-4); height: var(--size-4); border-radius: var(--radius-1); object-fit: cover; flex: none; background: var(--color-surface); }
+.ml-booking-card__body  { flex: 1; min-width: 0; }
+.ml-booking-card__title { font-size: var(--type-2); font-weight: 700; }
+.ml-booking-card__meta  { font-size: var(--type-1); color: var(--color-muted); }
+
+.ml-review-card { padding: var(--space-3); }
+.ml-review-card__head { display: flex; align-items: center; gap: var(--space-2); }
+.ml-review-card__stars { color: var(--color-warning); font-size: var(--type-1); }
+.ml-review-card__body  { margin-top: var(--space-2); font-size: var(--type-2); }
+
+.ml-notification { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-3) 0; }
+.ml-notification--unread { background: var(--color-pink-container); border-radius: var(--radius-2); padding-inline: var(--space-3); }
+
+/* ── stat grid ─────────────────────────────────────────────────────────── */
+/* Widget_Directory: PublicReputationWidget                                 */
+
+.ml-stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
+.ml-stat {
+  padding: var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-2);
+  background: var(--color-white);
+}
+.ml-stat__num   { display: block; font-family: var(--font-display); font-size: var(--type-3); font-weight: 800; line-height: 1; }
+.ml-stat__label { display: block; margin-top: 2px; font-size: var(--type-1); color: var(--color-muted); font-weight: 500; }
+.ml-stat__delta { font-size: var(--type-1); font-weight: 600; color: var(--color-pink); }
+
+/* ── profile hero ──────────────────────────────────────────────────────── */
+/* Widget_Directory: ProfilePreviewSheet header                             */
+
+.ml-hero { position: relative; aspect-ratio: var(--media-aspect-wide); overflow: hidden; background: var(--color-surface); }
+.ml-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ml-hero::after { content: ""; position: absolute; inset: 0; background: var(--media-scrim); }
+.ml-hero__body { position: absolute; z-index: 1; left: var(--space-3); right: var(--space-3); bottom: var(--space-3); color: var(--color-white); }
+.ml-hero__name { margin: 0; font-family: var(--font-display); font-size: var(--type-4); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; }
+.ml-hero__sub  { font-size: var(--type-1); color: color-mix(in srgb, var(--color-white) 85%, transparent); }
+.ml-hero__stats { display: flex; gap: var(--space-3); margin-top: var(--space-2); font-size: var(--type-1); }
+.ml-hero__stats b { font-weight: 700; }
+
+/* Action row under a hero — equal-width pills. */
+.ml-action-row { display: flex; gap: var(--space-2); padding: var(--space-3) 0; }
+.ml-action-row > * { flex: 1; }
+
+/* ── progress card ─────────────────────────────────────────────────────── */
+/* Widget_Directory: ProfileCompletionMeter (proposed, PRODUCT-SPEC §3)     */
+
+.ml-progress {
+  padding: var(--space-3);
+  border-radius: var(--radius-2);
+  background: var(--color-pink-container);
+}
+.ml-progress__title { font-size: var(--type-2); font-weight: 700; }
+.ml-progress__meta  { font-size: var(--type-1); color: var(--color-muted); }
+.ml-progress__track {
+  height: 6px; margin: var(--space-2) 0;
+  border-radius: var(--radius-4);
+  background: color-mix(in srgb, var(--color-pink) 18%, transparent);
+  overflow: hidden;
+}
+.ml-progress__fill { height: 100%; background: var(--color-pink); border-radius: var(--radius-4); }
+
+/* ── media upload grid ─────────────────────────────────────────────────── */
+/* PRODUCT-SPEC Part E flags this as the highest-priority missing widget —   */
+/* it blocks Portfolio, Marketplace Create Listing, and Media Gallery.       */
+
+.ml-upload-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+.ml-upload-grid__item { position: relative; aspect-ratio: 1/1; border-radius: var(--radius-1); overflow: hidden; background: var(--color-surface); }
+.ml-upload-grid__item img { width: 100%; height: 100%; object-fit: cover; }
+.ml-upload-grid__remove {
+  position: absolute; top: 4px; right: 4px;
+  width: 24px; height: 24px; border: 0; border-radius: var(--radius-4);
+  background: color-mix(in srgb, var(--color-ink) 70%, transparent);
+  color: var(--color-white); cursor: pointer; line-height: 1;
+}
+.ml-upload-grid__add {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--space-1);
+  aspect-ratio: 1/1;
+  border: 1px dashed var(--color-line);
+  border-radius: var(--radius-1);
+  background: var(--color-white);
+  color: var(--color-muted);
+  font-size: var(--type-1); font-weight: 600;
+  cursor: pointer;
+}
+.ml-upload-grid__add:active { background: var(--color-surface); }
+
+/* ── audio player ──────────────────────────────────────────────────────── */
+/* Widget_Directory: AudioPlayerWidget · Compose: WaveformAudioPlayer       */
+/* The waveform IS the scrub control, not a decoration.                     */
+
+.ml-player { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); }
+.ml-player__btn {
+  display: flex; align-items: center; justify-content: center;
+  width: var(--size-3); height: var(--size-3); flex: none;
+  border: 0; border-radius: var(--radius-4);
+  background: var(--color-ink); color: var(--color-white);
+  cursor: pointer;
+}
+.ml-player__btn:active { background: var(--color-ink-pressed); transform: scale(0.94); }
+.ml-player__wave {
+  flex: 1; display: flex; align-items: center; gap: 2px;
+  height: var(--size-1);
+  /* the whole strip is the hit area, well past the 48dp rule vertically */
+  padding-block: var(--space-2);
+  cursor: pointer; touch-action: none;
+}
+.ml-player__bar { flex: 1; min-width: 2px; border-radius: var(--radius-4); background: var(--color-line); }
+.ml-player__bar.is-played { background: var(--color-pink); }
+.ml-player__time { font-size: var(--type-1); color: var(--color-muted); font-variant-numeric: tabular-nums; flex: none; }
+
+/* Persistent mini-player — sits directly above the tab bar. */
+/* Widget_Directory: PersistentAudioPlayer · GlobalPersistentAudioPlayerBar */
+.ml-miniplayer {
+  position: fixed;
+  left: 50%; transform: translateX(-50%);
+  bottom: calc(var(--size-4) + var(--safe-bottom));
+  z-index: var(--z-2);
+  width: 100%; max-width: 430px;
+  display: flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-top: 1px solid var(--color-line);
+  background: color-mix(in srgb, var(--color-white) 94%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.ml-miniplayer__art { width: var(--size-1); height: var(--size-1); border-radius: var(--radius-1); object-fit: cover; flex: none; }
+.ml-miniplayer__body { flex: 1; min-width: 0; }
+.ml-miniplayer__title { font-size: var(--type-1); font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ml-miniplayer__sub   { font-size: var(--type-1); color: var(--color-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ── bottom sheet ──────────────────────────────────────────────────────── */
+/* Widget_Directory: AdvancedFiltersBottomSheet · Compose: ModalBottomSheet */
+/* Behaviour (drag, detents, dismiss threshold) lives in ml.js and is bound  */
+/* to --gesture-swipe-threshold rather than a hardcoded number.              */
+
+.ml-sheet-scrim {
+  position: fixed; inset: 0; z-index: var(--z-3);
+  background: color-mix(in srgb, var(--color-ink) 64%, transparent);
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--duration-2) var(--ease-standard);
+}
+.ml-sheet-scrim.is-open { opacity: 1; pointer-events: auto; }
+.ml-sheet {
+  position: fixed; left: 50%; bottom: 0;
+  z-index: calc(var(--z-3) + 1);
+  width: 100%; max-width: 430px;
+  max-height: 88dvh;
+  display: flex; flex-direction: column;
+  border-radius: var(--radius-3) var(--radius-3) 0 0;
+  background: var(--color-white);
+  box-shadow: var(--elevation-2);
+  transform: translate(-50%, 100%);
+  transition: transform var(--duration-3) var(--ease-enter);
+  padding-bottom: var(--safe-bottom);
+}
+.ml-sheet.is-open { transform: translate(-50%, 0); }
+/* Grab handle — the affordance that says "this drags". */
+.ml-sheet__handle {
+  width: 36px; height: 4px; margin: var(--space-2) auto;
+  border-radius: var(--radius-4);
+  background: var(--color-line);
+  flex: none;
+}
+.ml-sheet__body { overflow-y: auto; padding: 0 var(--space-3) var(--space-3); overscroll-behavior: contain; }
+
+/* ── toast ─────────────────────────────────────────────────────────────── */
+
+.ml-toast {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: calc(var(--size-4) + var(--space-4) + var(--safe-bottom));
+  z-index: var(--z-4);
+  max-width: calc(430px - var(--space-4));
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-2);
+  background: var(--color-ink);
+  color: var(--color-white);
+  font-size: var(--type-1);
+  box-shadow: var(--elevation-2);
+}
+
+/* ── empty state ───────────────────────────────────────────────────────── */
+
+.ml-empty { text-align: center; padding: var(--space-4) var(--space-3); }
+.ml-empty__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: 700; margin: 0 0 var(--space-1); }
+.ml-empty__body  { font-size: var(--type-2); color: var(--color-muted); margin: 0 0 var(--space-3); }
+
+/* ══ FLOW 4 — DISCOVER ═════════════════════════════════════════════════════
+   Discover is "find someone or something inside the ecosystem". Market is
+   "buy, sell or rent". The two must not converge, so nothing below carries a
+   price as its primary line — that treatment belongs to .ml-market-card.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── scrollable category tabs ──────────────────────────────────────────── */
+/* The dimension switcher: People / Businesses / Music / Services / Spaces /
+   Communities. Too many to fit a segmented control, so it scrolls. */
+/* Compose: ScrollableTabRow                                                 */
+
+.ml-tabs {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  margin-inline: calc(var(--space-3) * -1);
+  padding-inline: var(--space-3);
+  border-bottom: 1px solid var(--color-line);
+  scrollbar-width: none;
+}
+.ml-tabs::-webkit-scrollbar { display: none; }
+.ml-tabs__tab {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--size-3);
+  padding: 0 2px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: var(--type-2);
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* The active tab is the one place the brand pink appears as a rule rather
+   than an accent — it is the primary wayfinding signal on every results
+   screen, and the underline carries it without tinting a surface. */
+.ml-tabs__tab[aria-selected="true"] {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-pink);
+}
+
+/* ── result row ────────────────────────────────────────────────────────── */
+/* The single densest unit in Discover: avatar/thumb, name, qualifier, a
+   trailing signal (match, distance, rating) and one connect affordance. */
+
+.ml-result {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  min-height: var(--size-4);
+  color: inherit;
+  text-decoration: none;
+}
+.ml-result + .ml-result { border-top: 1px solid var(--color-line); }
+.ml-result__thumb {
+  width: var(--size-4); height: var(--size-4);
+  border-radius: var(--radius-4);
+  object-fit: cover; flex: none;
+  background: var(--color-surface);
+}
+.ml-result__thumb--square { border-radius: var(--radius-1); }
+.ml-result__body { flex: 1; min-width: 0; }
+.ml-result__name {
+  display: flex; align-items: center; gap: var(--space-1);
+  font-size: var(--type-2); font-weight: 700; line-height: 1.2;
+}
+.ml-result__name svg { width: 14px; height: 14px; color: var(--color-pink); flex: none; }
+.ml-result__meta {
+  display: block; font-size: var(--type-1); color: var(--color-muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ml-result__trail { flex: none; text-align: right; }
+
+/* ── match score ───────────────────────────────────────────────────────── */
+/* AI recommendation strength. A number plus a bar, never colour alone. */
+
+.ml-match { display: inline-flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+.ml-match__pct {
+  font-family: var(--font-display);
+  font-size: var(--type-2); font-weight: 800; line-height: 1;
+  color: var(--color-pink-pressed);
+  font-variant-numeric: tabular-nums;
+}
+.ml-match__label { font-size: var(--type-1); color: var(--color-muted); }
+.ml-match__track {
+  width: 44px; height: 4px; border-radius: var(--radius-4);
+  background: var(--color-line); overflow: hidden;
+}
+.ml-match__fill { height: 100%; background: var(--color-pink); border-radius: var(--radius-4); }
+
+/* ── community card ────────────────────────────────────────────────────── */
+
+.ml-community {
+  display: block; width: 260px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-2);
+  overflow: hidden;
+  background: var(--color-white);
+  color: inherit; text-decoration: none;
+  transition: transform var(--duration-1) var(--ease-standard);
+}
+.ml-community:active { transform: scale(0.98); }
+.ml-community__media { position: relative; aspect-ratio: var(--media-aspect-wide); background: var(--color-surface); }
+.ml-community__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ml-community__body { padding: var(--space-2); }
+.ml-community__name { font-size: var(--type-2); font-weight: 700; }
+.ml-community__meta { font-size: var(--type-1); color: var(--color-muted); }
+/* stacked member avatars */
+.ml-facepile { display: flex; margin-top: var(--space-2); }
+.ml-facepile img {
+  width: 24px; height: 24px; border-radius: var(--radius-4);
+  object-fit: cover; border: 2px solid var(--color-white);
+}
+.ml-facepile img + img { margin-left: -8px; }
+
+/* ── service card ──────────────────────────────────────────────────────── */
+/* A service is offered BY someone — the provider is the subject, the rate is
+   a qualifier. Inverting that would make it a Market listing. */
+
+.ml-service {
+  display: flex; flex-direction: column; gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-2);
+  background: var(--color-white);
+  color: inherit; text-decoration: none;
+}
+.ml-service__head { display: flex; align-items: center; gap: var(--space-2); }
+.ml-service__title { font-size: var(--type-2); font-weight: 700; }
+.ml-service__by { font-size: var(--type-1); color: var(--color-muted); }
+.ml-service__foot {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: var(--type-1);
+}
+.ml-service__rate { font-weight: 700; }
+
+/* ── "what are you looking for?" grid ──────────────────────────────────── */
+/* The Discover Home entry point. Six dimensions, two columns, media-led. */
+
+.ml-dimension-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
+.ml-dimension {
+  position: relative;
+  display: block;
+  aspect-ratio: 3/2;
+  border-radius: var(--radius-2);
+  overflow: hidden;
+  background: var(--color-surface);
+  color: var(--color-white);
+  text-decoration: none;
+}
+.ml-dimension img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ml-dimension::after {
+  content: ""; position: absolute; inset: 0;
+  background: var(--media-scrim); pointer-events: none;
+}
+.ml-dimension:active { transform: scale(0.98); }
+.ml-dimension__label {
+  position: absolute; z-index: 1; left: var(--space-2); bottom: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--type-3); font-weight: 800; letter-spacing: -0.01em;
+}
+.ml-dimension__count { display: block; font-family: var(--font-body); font-size: var(--type-1); font-weight: 500; opacity: 0.85; }
+
+/* ── recent / suggested search rows ────────────────────────────────────── */
+
+.ml-suggest {
+  display: flex; align-items: center; gap: var(--space-3);
+  min-height: var(--size-3);
+  padding: var(--space-1) 0;
+  color: inherit; text-decoration: none;
+  font-size: var(--type-2);
+}
+.ml-suggest svg { width: 18px; height: 18px; color: var(--color-muted); flex: none; }
+.ml-suggest__body { flex: 1; min-width: 0; }
+.ml-suggest__kind { font-size: var(--type-1); color: var(--color-muted); }
+
+/* ── tab-bar beta marker ───────────────────────────────────────────────── */
+/* Market is Beta. Labelling it in the nav is the honest thing to do and it
+   stops the tab reading as a finished surface. */
+
+.ml-tabbar__item { position: relative; }
+.ml-tabbar__beta {
+  position: absolute;
+  top: 2px; left: 50%;
+  transform: translateX(6px);
+  padding: 0 4px;
+  border-radius: var(--radius-4);
+  background: var(--color-pink);
+  color: var(--color-white);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 14px;
+}
+
+/* ══ INSET CARD ════════════════════════════════════════════════════════════
+   From the supplied visual references. The pattern across all of them:
+
+     · the card is PADDED and the media sits INSET with its own radius, so
+       the card reads as an object holding a picture rather than a picture
+       with text stuck underneath
+     · a pill overlays the media top-left, a circular control top-right
+     · bold title, then a grey line directly under it at the same size
+     · a footer row: the value in a light pill on the left, the action as a
+       dark pill with a circular arrow on the right
+
+   It suits the palette rule exactly — the card, the pills and the button are
+   all monochrome, and the inset photo is the only colour on screen.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.ml-inset {
+  display: block;
+  padding: var(--space-2);
+  border-radius: var(--radius-3);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  color: inherit;
+  text-decoration: none;
+}
+.ml-inset--raised { border-color: transparent; box-shadow: var(--elevation-2); }
+.ml-inset--dark {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-white);
+}
+
+.ml-inset__media {
+  position: relative;
+  border-radius: var(--radius-2);
+  overflow: hidden;
+  background: var(--color-surface);
+  aspect-ratio: var(--media-aspect-wide);
+}
+.ml-inset__media--square { aspect-ratio: var(--media-aspect-square); }
+.ml-inset__media > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* overlay slots on the media */
+.ml-inset__tag  { position: absolute; z-index: 1; top: var(--space-2); left: var(--space-2); }
+.ml-inset__act  { position: absolute; z-index: 1; top: var(--space-2); right: var(--space-2); }
+/* A pill that sits ON a photo needs its own ground — the photo underneath is
+   arbitrary, so a translucent ink chip is the only thing that stays legible. */
+.ml-chip--on-media {
+  border: 0;
+  background: color-mix(in srgb, var(--color-ink) 62%, transparent);
+  color: var(--color-white);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.ml-icon-btn--on-media {
+  border: 0;
+  background: color-mix(in srgb, var(--color-white) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  min-width: var(--size-1); min-height: var(--size-1);
+}
+
+/* carousel position dots */
+.ml-dots--on-media {
+  position: absolute; z-index: 1;
+  left: 0; right: 0; bottom: var(--space-2);
+}
+.ml-dots--on-media .ml-dots__dot { background: color-mix(in srgb, var(--color-white) 55%, transparent); }
+.ml-dots--on-media .ml-dots__dot.is-active { background: var(--color-white); width: 6px; }
+
+.ml-inset__body { padding: var(--space-3) var(--space-2) var(--space-2); }
+.ml-inset__title {
+  font-family: var(--font-display);
+  font-size: var(--type-3);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+/* the grey line directly under the title, same size — a subtitle, not a caption */
+.ml-inset__sub { font-size: var(--type-3); font-weight: 500; color: var(--color-muted); line-height: 1.15; }
+.ml-inset__body p { margin: var(--space-2) 0 0; color: var(--color-muted); }
+.ml-inset--dark .ml-inset__sub,
+.ml-inset--dark .ml-inset__body p { color: color-mix(in srgb, var(--color-white) 62%, transparent); }
+
+/* footer: value on the left, action on the right */
+.ml-inset__foot {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3) 0 0;
+}
+.ml-value {
+  display: inline-flex; align-items: center;
+  min-height: var(--size-3);
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-4);
+  background: var(--color-surface);
+  font-family: var(--font-display);
+  font-size: var(--type-3);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.ml-inset--dark .ml-value { background: color-mix(in srgb, var(--color-white) 12%, transparent); color: var(--color-white); }
+
+/* dark pill CTA with the circular arrow badge from the reference */
+.ml-btn--arrow { padding-inline: var(--space-3) var(--space-1); gap: var(--space-3); }
+.ml-btn__arrow {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: var(--size-1); height: var(--size-1);
+  border-radius: var(--radius-4);
+  background: var(--color-white);
+  color: var(--color-ink);
+  flex: none;
+}
+.ml-btn--accent .ml-btn__arrow { background: var(--color-ink); color: var(--color-white); }
+
+/* ── lede ──────────────────────────────────────────────────────────────── */
+/* Mixed weight inside one sentence, as in the reference: grey carries the
+   sentence, ink carries the words that matter. Cheaper than colour and it
+   works on a monochrome page. */
+.ml-lede { font-size: var(--type-2); color: var(--color-muted); line-height: 1.45; }
+.ml-lede b, .ml-lede strong { color: var(--color-ink); font-weight: 700; }

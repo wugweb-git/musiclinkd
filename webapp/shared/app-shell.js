@@ -102,8 +102,15 @@
   // under /flows/ are actual generated screens. A /flows/ page with no meta
   // tag is a real authoring mistake and still gets the fallback fetch +
   // error badge; anything outside /flows/ (the shell page, or this file
-  // opened from somewhere else entirely) is skipped outright — no fetch, no
-  // badge, no console warning. The raw template/index.html itself sits
+  // opened from somewhere else entirely) is skipped outright — no fetch and
+  // no console warning.
+  //
+  // The floating "flow / screen · state" chip this used to paint over the
+  // top-right of every screen was removed 2026-08-29: it sat on top of real
+  // UI (the app bar actions on discover_feed) and made every screenshot
+  // unusable for design review. The same information is still on <html> as
+  // data-flow / data-screen / data-state, which is where the workbench and
+  // any automated check read it from anyway. The raw template/index.html itself sits
   // outside /flows/ too, so opening it directly is now silent rather than
   // showing a "not found" badge — that page's own header comment already
   // says plainly it's a template, not a screen, so the badge wasn't adding
@@ -113,7 +120,6 @@
     const isScreenPage = metaPath || window.location.pathname.includes("/flows/");
     if (!isScreenPage) return; // shell page / template file opened directly — nothing to load
     const path = metaPath ?? "./screen.json";
-    const badge = document.getElementById("dev-meta-badge") ?? createBadge();
     try {
       const res = await fetch(path, { cache: "no-store" });
       if (!res.ok) throw new Error(`screen.json ${res.status}`);
@@ -127,21 +133,31 @@
       document.documentElement.dataset.screen = data.screenKey ?? "";
       document.documentElement.dataset.state = state;
 
-      badge.textContent = `${data.flowKey ?? "?"} / ${data.screenKey ?? "?"} · ${state}`;
+      applyState(state);
       document.dispatchEvent(new CustomEvent("musiclinkd:screen-ready", { detail: data }));
     } catch (err) {
-      badge.textContent = "screen.json not found";
       console.warn("[MusicLinkd] could not load screen.json for this screen:", err);
     }
   }
 
-  function createBadge() {
-    const el = document.createElement("div");
-    el.id = "dev-meta-badge";
-    el.className = "dev-meta-badge";
-    document.body.appendChild(el);
-    return el;
+  // --- State switching. Every screen.json declares the states that screen can
+  // be in (e.g. otp_verification: entering / verifying / error / success) and
+  // the workbench deep-links them with ?state=. Until 2026-08-29 nothing
+  // consumed that: the attribute landed on <html> and no markup responded, so
+  // ?state=error rendered exactly the same screen as ?state=success and the
+  // states contract was decorative.
+  //
+  // The rule is deliberately simple so screens stay readable: an element
+  // carrying data-state is shown ONLY in the states it lists (space-separated),
+  // and hidden otherwise. Elements without data-state are always shown, so a
+  // screen only has to mark up what actually varies.
+  function applyState(state) {
+    for (const el of document.querySelectorAll("[data-state]")) {
+      const states = el.getAttribute("data-state").split(/\s+/).filter(Boolean);
+      el.hidden = !states.includes(state);
+    }
   }
+  MusicLinkd.applyState = applyState;
 
   document.addEventListener("DOMContentLoaded", () => {
     bindKeyboardAwareness();

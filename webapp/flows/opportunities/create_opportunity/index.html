@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -18,13 +18,13 @@
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
   .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#3730A3; background:#E0E7FF; padding:3px 8px; border-radius:999px; margin-left:auto; }
-  .field textarea { min-height: 88px; padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); border: 1px solid var(--line); background: #fff; font: var(--type-2) 'Inter', sans-serif; resize: none; }
+  .field textarea { min-height: 88px; padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); border: 1px solid var(--color-line); background: #fff; font: var(--type-2) 'Inter', sans-serif; resize: none; }
 </style>
 </head>
 <body>
   <div class="app-root">
     <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/opportunities/opportunities_home/index.html" aria-label="Close" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
+      <a href="/preview/flows/opportunities/opportunities_home/index.html" aria-label="Close" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </a>
       <!-- MVP, shipped minimal: title, description, role, budget, location, publish. Richer fields (skills/languages/deadline/opportunity type) are Phase 2. -->
@@ -43,12 +43,12 @@
 
       <div id="panel-publishing" style="display:none;text-align:center;padding-top:20vh;">
         <span class="spinner-circular"></span>
-        <p style="color:var(--muted);margin-top:var(--space-3);">Publishing…</p>
+        <p style="color:var(--color-muted);margin-top:var(--space-3);">Publishing…</p>
       </div>
 
       <div id="panel-error" style="display:none;text-align:center;padding-top:15vh;">
-        <p style="color:var(--err);font-weight:600;">Couldn't publish this opportunity.</p>
-        <p style="color:var(--muted);font-size:var(--type-1);margin-top:var(--space-1);">Check your connection and try again.</p>
+        <p style="color:var(--color-error);font-weight:600;">Couldn't publish this opportunity.</p>
+        <p style="color:var(--color-muted);font-size:var(--type-1);margin-top:var(--space-1);">Check your connection and try again.</p>
       </div>
     </main>
     <footer class="app-bottombar"></footer>

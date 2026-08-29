@@ -3,89 +3,77 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D0B26" />
+<meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="screen-json-path" content="/preview/flows/onboarding/instrument_proficiency/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — User Onboarding / Proficiency</title>
+<title>MusicLinkd — Instrument Proficiency (per-instrument years/level)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .onb-step { font-size: var(--type-1); color: var(--muted); font-weight: 600; letter-spacing: 0.02em; }
-  .onb-progress { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
-  .onb-progress > span { display: block; height: 100%; background: var(--pink); border-radius: 2px; }
-
-  .prof-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-2); padding: var(--space-3); }
-  .seg { display: flex; background: var(--surface-2); border-radius: var(--radius-4); padding: 4px; gap: 4px; }
-  .seg button { flex: 1; text-align: center; padding: var(--space-2) 0; border-radius: var(--radius-4); font-size: var(--type-1); font-weight: 600; color: var(--muted); cursor: pointer; border: none; background: transparent; font-family: inherit; }
-  .seg button.on { background: #fff; color: var(--black); box-shadow: var(--shadow-1); }
-  .stepper { display: flex; align-items: center; gap: var(--space-3); justify-content: center; }
-  .stepper button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: #fff; color: var(--black); font-size: var(--type-3); font-weight: 600; cursor: pointer; line-height: 1; }
-  .stepper .years { font-size: var(--type-2); font-weight: 700; min-width: 48px; text-align: center; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/onboarding/instruments/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--black);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-      <div class="onb-step" style="margin-left:var(--space-2);">Step 6 of 13</div>
-    </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);">
-      <div class="onb-progress"><span style="width:46%"></span></div>
+
+  <div class="ml-app">
+    <header class="ml-navbar"><a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/onboarding/instruments/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a><span class="ml-navbar__spacer"></span><div class="ml-steps">
+        <span class="ml-steps__label">6/13</span>
+        <span class="ml-steps__track"><span class="ml-steps__fill" style="width:46%"></span></span>
+      </div></header>
+    <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3)">
       <div>
-        <h1 style="font-size:var(--type-3);">Tell us your skill level</h1>
-        <p style="color:var(--muted);font-size:var(--type-2);margin-top:var(--space-1);">For each instrument, roughly how many years and your experience level.</p>
+        <h1 class="ml-type-3" style="margin:0">Tell us your skill level</h1>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">For each instrument, roughly how many years and your experience level.</p>
       </div>
 
-      <div class="prof-card" style="display:flex;flex-direction:column;gap:var(--space-3);">
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <div style="display:flex;align-items:center;gap:var(--space-2);">
-            <div class="instr-dot" style="width:32px;height:32px;border-radius:50%;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:var(--type-2);">🎸</div>
-            <span style="font-weight:600;">Bass Guitar</span>
-          </div>
-          <div class="seg" style="width:168px;">
-            <button type="button" class="on">Beginner</button>
-            <button type="button">Pro</button>
-          </div>
+      <div class="ml-card ml-card--padded">
+        <div class="ml-row" style="padding-top:0">
+          <span class="ml-emoji" aria-hidden="true">🎸</span>
+          <span class="ml-row__body"><span class="ml-row__title">Acoustic Guitar</span></span>
         </div>
-        <div class="stepper">
-          <button type="button" aria-label="Decrease years">−</button>
-          <span class="years">6 yrs</span>
-          <button type="button" aria-label="Increase years">+</button>
+        <div class="ml-segmented" role="tablist" style="margin-bottom:var(--space-3)">
+          <button class="ml-segmented__btn" role="tab" aria-selected="false">Beginner</button>
+          <button class="ml-segmented__btn" role="tab" aria-selected="true">Intermediate</button>
+          <button class="ml-segmented__btn" role="tab" aria-selected="false">Pro</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--space-3)">
+          <button class="ml-icon-btn" aria-label="Fewer years">−</button>
+          <span class="ml-type-3" style="flex:1;text-align:center">6 yrs</span>
+          <button class="ml-icon-btn" aria-label="More years">+</button>
         </div>
       </div>
 
-      <p style="font-size:var(--type-1);color:var(--muted);">You can always update this later in Profile settings.</p>
+      <div class="ml-card ml-card--padded">
+        <div class="ml-row" style="padding-top:0">
+          <span class="ml-emoji" aria-hidden="true">🎸</span>
+          <span class="ml-row__body"><span class="ml-row__title">Bass Guitar</span></span>
+        </div>
+        <div class="ml-segmented" role="tablist" style="margin-bottom:var(--space-3)">
+          <button class="ml-segmented__btn" role="tab" aria-selected="true">Beginner</button>
+          <button class="ml-segmented__btn" role="tab" aria-selected="false">Intermediate</button>
+          <button class="ml-segmented__btn" role="tab" aria-selected="false">Pro</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--space-3)">
+          <button class="ml-icon-btn" aria-label="Fewer years">−</button>
+          <span class="ml-type-3" style="flex:1;text-align:center">2 yrs</span>
+          <button class="ml-icon-btn" aria-label="More years">+</button>
+        </div>
+      </div>
+
+      <p class="ml-type-1" style="color:var(--color-muted)">You can always update this later in Profile settings.</p>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
-      <a class="btn btn-p btn-block" href="/preview/flows/onboarding/location/index.html" style="text-decoration:none;">Continue</a>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/onboarding/location/index.html">Continue</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    // Presentation-only stepper & segmented control.
-    document.querySelectorAll(".seg").forEach((seg) => {
-      seg.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => {
-        seg.querySelectorAll("button").forEach((x) => x.classList.remove("on"));
-        b.classList.add("on");
-      }));
-    });
-    document.querySelectorAll(".stepper").forEach((st) => {
-      const yearsEl = st.querySelector(".years");
-      const btnMinus = st.querySelectorAll("button")[0];
-      const btnPlus = st.querySelectorAll("button")[1];
-      function val() { return parseInt(yearsEl.textContent, 10); }
-      btnMinus.addEventListener("click", () => { if (val() > 0) yearsEl.textContent = (val() - 1) + " yrs"; });
-      btnPlus.addEventListener("click", () => { if (val() < 40) yearsEl.textContent = (val() + 1) + " yrs"; });
-    });
-  </script>
 </body>
 </html>
