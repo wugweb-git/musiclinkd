@@ -121,7 +121,7 @@ const IMG = {
   studio2: "/assets/img/speakers/39fdf43f680420b44f547c6cb535900b.jpg",
   studio3: "/assets/img/speakers/5e4c5a1598e10dfe9c213609ce2ab5fb.jpg",
   mic: "/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg",
-  crowd: "/assets/img/editorials/cd40cd552cf7b95f8d1383a8ecb57b34.jpg",
+  crowd: "/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg",
   guitar: "/assets/img/editorials/f651ac8b73ceb8d2b7ca4967a18179f2.jpg",
   piano: "/assets/img/editorials/41f63164364f0757ddb2a20693f4b144.jpg",
   desk: "/assets/img/speakers/20400c2337df4ff17c3b0e72deefa4ad.jpg",

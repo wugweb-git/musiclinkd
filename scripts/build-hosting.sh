@@ -39,13 +39,34 @@ node scripts/generate-changelog.mjs
 echo "==> Merging frontend/website/ + admin/out/ into dist/"
 rm -rf dist
 mkdir -p dist
-cp -r frontend/website/. dist/
+# assets/img/{1,4,5,6} are 448 Behance CDN captures, Spotify/Shazam/Tinder
+# UI screenshots and app-store chrome kept as design reference. Nothing in the
+# deployed tree references them and they were 279MB of a 326MB deploy, served
+# publicly. editorials/, speakers/ and inspiration/ ARE referenced and ship.
+rsync -a \
+  --exclude='assets/img/1/' --exclude='assets/img/4/' \
+  --exclude='assets/img/5/' --exclude='assets/img/6/' \
+  --exclude='.DS_Store' \
+  frontend/website/ dist/
 rm -f dist/README.md "dist/index copy.html"
 rsync -a --exclude='index.html' --exclude='index.txt' --exclude='404.html' admin/out/ dist/
 
 echo "==> Copying frontend/guide/ design-system reference into dist/guide/"
+# rsync with excludes, not cp -r: a blanket copy shipped 180MB to Hosting, of
+# which 159MB was musiclinkd-system/node_modules (126MB) and the vendored
+# pinterest/gestalt clone (33MB). Neither is reachable from any URL — the
+# guide runs from the pre-built bundle.js. src/ and the 4.5MB sourcemap go
+# too; they are build inputs, not deployed assets.
 mkdir -p dist/guide
-cp -r frontend/guide/. dist/guide/
+rsync -a \
+  --exclude='node_modules/' \
+  --exclude='gestalt/' \
+  --exclude='musiclinkd-system/src/' \
+  --exclude='musiclinkd-system/scripts/' \
+  --exclude='musiclinkd-system/public/' \
+  --exclude='*.map' \
+  --exclude='.DS_Store' \
+  frontend/guide/ dist/guide/
 
 echo "==> Copying webapp/ PWA product-reference build into dist/preview/"
 mkdir -p dist/preview
