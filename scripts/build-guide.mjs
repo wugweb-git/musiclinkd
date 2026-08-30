@@ -48,6 +48,15 @@ const tokens = JSON.parse(readFileSync(join(ROOT, "frontend/guide/tokens/tokens.
 const iconNames = readdirSync(join(ROOT, "frontend/guide/musiclinkd-system/icons"))
   .filter((f) => f.endsWith(".svg")).map((f) => f.replace(".svg", "")).sort();
 
+/** Real token count, counted from the emitted CSS rather than guessed from
+ *  one JSON category plus a fudge factor. The header badge previously read
+ *  "foundation.color keys + 43", a stale hardcode that undercounted by 32
+ *  tokens (found 2026-08-30) — this recounts every build, so it can't drift
+ *  again the same way. */
+const cssTokenCount = new Set(
+  [...readFileSync(join(SYS, "ml-tokens.css"), "utf8").matchAll(/^\s*(--[a-z0-9-]+):/gm)].map((m) => m[1])
+).size;
+
 /* ── repo-derived sections ──────────────────────────────────────────────
    Patterns, taxonomy and gaps are all COMPUTED from the repo rather than
    listed by hand. The old catalogue's block list and "not built" registry
@@ -1140,7 +1149,7 @@ const html = `<!doctype html>
       with those same files — <b>if a component breaks, this page breaks</b>.
     </p>
     <div class="g-row" style="margin-top:var(--space-3)">
-      <span class="ml-badge">${Object.keys(f.color).filter((k) => !k.startsWith("$")).length + 43} tokens</span>
+      <span class="ml-badge">${cssTokenCount} tokens</span>
       <span class="ml-badge">${sections.length} sections</span>
       <span class="ml-badge">${[...new Set(sections.flatMap((s) => s.selectors))].length} selectors</span>
       <span class="ml-badge">${iconNames.length} icons</span>
@@ -1179,24 +1188,25 @@ const html = `<!doctype html>
       </div></div>`).join("")}
   </div>
 
-  <h3 style="margin-top:var(--space-4)">Brand expression palette</h3>
   <p class="ml-lede" style="max-width:64ch">
-    <b>Marketing only — not the UI palette.</b> These live in the SAME colour book
-    as everything else as of 2026-08-30: there is one place to look, and the
-    separation is carried by the name rather than by a second group. A screen
-    never reaches for a <code>brand*</code> colour and a poster never reaches for
-    the UI palette — two pinks and two blacks in one book is exactly why that
-    rule has to be written down.
+    Colour moved into one book on 2026-08-30 — see Foundations → Colour below.
+    The <code>brand-*</code> tokens there are marketing-only, never a screen
+    colour; everything else is UI. Merged 2026-08-30: previously these lived
+    in a separate section up here, which is exactly the "two colour books"
+    problem the merge fixes.
   </p>
-  <div class="g-swatches">${Object.entries(f.color).filter(([k]) => k.startsWith("brand"))
-    .map(([k, v]) => swatch("color-" + k.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase(),
-      v.$value, (v.$description || "").split(".")[0])).join("")}</div>
 
   <h2 class="g-h" id="foundations">Foundations</h2>
   <p class="ml-lede" style="max-width:64ch">${esc(tokens.meta.palette.$description.split(".")[1])}.</p>
 
   <h3 style="margin-top:var(--space-4)">Colour</h3>
-  <div class="g-swatches">${Object.entries(f.color).filter(([k]) => !k.startsWith("$") && !k.startsWith("brand"))
+  <p class="ml-lede" style="max-width:64ch">
+    One book. <code>brand-*</code> entries are <b>marketing only, not the UI
+    palette</b> — a screen never reaches for a <code>brand*</code> colour and a
+    poster never reaches for the UI palette; the separation is carried by the
+    name, not by a second group.
+  </p>
+  <div class="g-swatches">${Object.entries(f.color).filter(([k]) => !k.startsWith("$"))
     .map(([k, v]) => swatch(k.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase(), v.$value,
       (v.$description || "").split(".")[0])).join("")}</div>
 
@@ -1244,7 +1254,6 @@ const html = `<!doctype html>
       return `<tr><th>${k}</th><td class="ml-tabular">${esc(steps)}</td><td colspan="2">${esc(v.slice(steps.length + 3))}</td></tr>`;
     }).join("")}
   </tbody></table>
-  <p class="ml-lede ml-measure" style="margin-top:var(--space-2)"><b>Verdict.</b> ${esc(tokens.meta.scaleAudit.verdict)}</p>
 
   <h3 style="margin-top:var(--space-4)">Typography spec</h3>
   <p class="ml-lede ml-measure">Every axis of every step, and the Compose <code>TextStyle</code> it
@@ -1328,11 +1337,12 @@ const html = `<!doctype html>
   </tbody></table>
 
   <h3 style="margin-top:var(--space-4)">Icon sizes</h3>
-  <p class="ml-lede">One glyph at every size the system uses. 16 and 24 are the two drawn grids;
-  the rest are scaled, which is why every icon carries a <code>viewBox</code> — without one,
-  resizing crops the path instead of scaling it.</p>
+  <p class="ml-lede">The four real icon tokens. 16 and 24 are the two drawn grids;
+  20 and 32 are scaled, which is why every icon carries a <code>viewBox</code> — without one,
+  resizing crops the path instead of scaling it. (Intermediate sizes like 14/18/22 showed here
+  until 2026-08-30 — they weren't tokens, just components that hadn't been snapped to the scale yet.)</p>
   <div class="g-demo"><div class="g-row" style="align-items:flex-end;gap:var(--space-4)">
-    ${[12, 14, 16, 18, 20, 22, 24, 32].map((n) => `<div style="text-align:center">
+    ${[16, 20, 24, 32].map((n) => `<div style="text-align:center">
       ${ic("search", n)}<div class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-1)">${n}</div></div>`).join("")}
   </div></div>
 
@@ -1453,9 +1463,10 @@ const html = `<!doctype html>
        <ul>${undocumented.map((s) => `<li><code>${esc(s.name)}</code> — ${s.file}, ${s.selectors.length} selectors</li>`).join("")}</ul>`
     : `<div class="ml-banner ml-banner--success">Every section in <code>ml-core.css</code> and <code>ml-widgets.css</code> is documented above.</div>`}
   <p class="ml-lede" style="margin-top:var(--space-3)">
-    Replaces <code>/guide/styleguide</code> (213 tokens) and
-    <code>/guide/musiclinkd-system</code> (524 Gestalt tokens). Both now redirect
-    here. Generated by <code>scripts/build-guide.mjs</code> — do not hand-edit.
+    Supersedes <code>/guide/styleguide</code> (213 tokens) and
+    <code>/guide/musiclinkd-system</code> (524 Gestalt tokens) as the source of
+    truth — <b>neither redirects here yet</b>, both are still live, separate
+    pages. Generated by <code>scripts/build-guide.mjs</code> — do not hand-edit.
   </p>
 </div>
 <script>

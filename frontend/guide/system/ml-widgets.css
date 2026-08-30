@@ -719,8 +719,8 @@
   line-height: 14px;
 }
 
-/* ══ INSET CARD ════════════════════════════════════════════════════════════
-   From the supplied visual references. The pattern across all of them:
+/* ── inset card ───────────────────────────────────────────────────────── */
+/* From the supplied visual references. The pattern across all of them:
 
      · the card is PADDED and the media sits INSET with its own radius, so
        the card reads as an object holding a picture rather than a picture
@@ -731,8 +731,7 @@
        dark pill with a circular arrow on the right
 
    It suits the palette rule exactly — the card, the pills and the button are
-   all monochrome, and the inset photo is the only colour on screen.
-   ═══════════════════════════════════════════════════════════════════════ */
+   all monochrome, and the inset photo is the only colour on screen. */
 
 .ml-inset {
   display: block;
@@ -1527,6 +1526,7 @@
    without hover and is announced as a real button. */
 
 .ml-help {
+  position: relative;                 /* anchors ::after's 48dp expansion below */
   display: inline-flex; align-items: center; justify-content: center;
   width: 18px; height: 18px; padding: 0;
   border: 0; border-radius: var(--radius-4);
