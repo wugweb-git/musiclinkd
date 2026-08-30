@@ -1169,7 +1169,7 @@ const html = `<!doctype html>
   <p class="ml-lede" style="max-width:64ch">
     Every mark in <code>frontend/guide/brand/assets/</code>, each shown on the
     ground it was drawn for — detected from the file's own fills, so dropping a
-    new variant into the folder documents it. The wordmark set in Inter Tight
+    new variant into the folder documents it. The wordmark set in Unica One
     (<code>.ml-wordmark</code>) is the type treatment; these are the artwork.
   </p>
   <div class="g-brand">
