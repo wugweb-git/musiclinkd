@@ -52,7 +52,15 @@ for (const flow of FLOWS) {
 
     /* ── contract: are declared states represented? ─────────────────── */
     const declared = contract.states || [];
-    const present = new Set([...body.matchAll(/data-state="([^"]+)"/g)].map((m) => m[1]));
+    // data-state carries a SPACE-SEPARATED list — an element visible in more
+    // than one state (a market card shown under "default", a search result and
+    // its own category) lists them all, and app-shell.js splits on whitespace
+    // to match. This used to compare against the whole attribute value as one
+    // string, so every multi-state element counted as implementing nothing and
+    // the warnings pointed at screens that were in fact complete.
+    const present = new Set(
+      [...body.matchAll(/data-state="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/).filter(Boolean)),
+    );
     const nonDefault = declared.filter((d) => !/^(default|populated|ready|entering|signup|loading|submitting|searching|account_picker)$/.test(d));
     for (const st of nonDefault) {
       if (!present.has(st)) add("WARN", flow, s, "contract", `state "${st}" is declared in screen.json but has no data-state="${st}" element`);

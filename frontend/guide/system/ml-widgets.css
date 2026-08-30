@@ -299,6 +299,12 @@
 .ml-market-card__price { font-family: var(--font-display); font-size: var(--type-3); font-weight: 800; line-height: 1.1; }
 .ml-market-card__title { font-size: var(--type-1); font-weight: 600; margin-top: 2px; }
 .ml-market-card__meta  { font-size: var(--type-1); color: var(--color-muted); }
+/* Two-up browse grid. The card's own 168px width is for horizontal rails;
+   in a grid it fills its column instead. Added when marketplace_browse was
+   found doing this with a local .item-grid/.item-card pair that duplicated
+   .ml-market-card almost line for line. */
+.ml-market-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
+.ml-market-grid > .ml-market-card { width: auto; }
 
 /* ── booking / review / notification rows ──────────────────────────────── */
 /* Widget_Directory: BookingCard, ReviewCard, NotificationCard              */

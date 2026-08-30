@@ -153,8 +153,27 @@
   // screen only has to mark up what actually varies.
   function applyState(state) {
     for (const el of document.querySelectorAll("[data-state]")) {
+      // Skip <html>: the current state is published there as data-state for
+      // the workbench and CSS to read, which means this very selector matches
+      // the root element. Setting hidden on it blanks the entire document —
+      // survivable today only because loadScreenContract() happens to assign
+      // the attribute before calling this, so the root always lists the state
+      // it is being switched to. Any other call order (a state switch driven
+      // from the workbench, a test, a future caller) would black out the page.
+      if (el === document.documentElement) continue;
       const states = el.getAttribute("data-state").split(/\s+/).filter(Boolean);
       el.hidden = !states.includes(state);
+    }
+    // A control carrying data-chip is a STATE SELECTOR — a category chip, a
+    // tab. Its pressed state is derived here rather than by a per-screen
+    // handler: marketplace_browse shipped one that queried ".chip" while its
+    // markup wrote ".ml-chip", so it silently matched nothing and every
+    // category looked the same. aria-pressed is also what .ml-chip already
+    // styles and what a screen reader announces, so this is one line instead
+    // of inline background/border/colour rewrites.
+    for (const el of document.querySelectorAll("[data-chip]")) {
+      const owns = el.getAttribute("data-chip").split(/\s+/).filter(Boolean);
+      el.setAttribute("aria-pressed", String(owns.includes(state)));
     }
   }
   MusicLinkd.applyState = applyState;

@@ -14,7 +14,7 @@
  *
  * Import and call writeScreen(); see scripts/screens/*.mjs for callers.
  */
-import { writeFileSync, existsSync, readFileSync } from "node:fs";
+import { writeFileSync, existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -28,6 +28,49 @@ export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
  *  check therefore records links as it goes and verifies them once the whole
  *  run has finished — call finish() at the end of a generator. */
 const pending = [];
+
+/* ── brand media ────────────────────────────────────────────────────────
+   Photography is READ FROM DISK at build time, never hardcoded and never
+   fetched from a stock host. Screens were pulling images.unsplash.com URLs,
+   which is wrong twice: the brand's own library is the point of reference,
+   and a remote URL breaks offline and can 404 without warning (one already
+   did on marketplace_browse).
+
+   Mirrors the pools in build-guide.mjs and reads the same tree, so the guide
+   and the app draw from one library. /assets/img/... resolves in dev (see
+   dev-preview-server.py) and in production, so the path needs no rewriting.
+
+     gear       img/speakers     monitors, hardware — marketplace listings
+     object     img/5            object renders on transparent ground
+     editorial  img/4            lifestyle editorial — people, desks
+     stage      img/6            live performance
+     faces      img/editorials   portraits
+
+   Sorted for reproducible builds; size-filtered so thumbnails never surface. */
+const IMGROOT = join(ROOT, "frontend/website/assets/img");
+const poolOf = (dir, minBytes = 0, re = /\.(jpe?g|png|webp)$/i) => {
+  let files = [];
+  try { files = readdirSync(join(IMGROOT, dir)); } catch { return []; }
+  return files.filter((f) => re.test(f))
+    .filter((f) => { try { return statSync(join(IMGROOT, dir, f)).size >= minBytes; } catch { return false; } })
+    .sort().map((f) => `/assets/img/${dir}/${f}`);
+};
+const MEDIA = {
+  gear:      poolOf("speakers"),
+  object:    poolOf("5", 60_000),
+  editorial: poolOf("4", 120_000),
+  stage:     poolOf("6", 150_000),
+  faces:     poolOf("editorials"),
+};
+/** Deterministic pick; the index wraps so a screen may ask for more tiles
+    than the pool holds without crashing. Throws on an empty pool rather than
+    emitting a broken <img>. */
+export function media(pool, i = 0) {
+  const p = MEDIA[pool];
+  if (!p) throw new Error(`unknown media pool "${pool}" (have: ${Object.keys(MEDIA).join(", ")})`);
+  if (!p.length) throw new Error(`media pool "${pool}" is empty — screen would ship a broken image`);
+  return p[i % p.length];
+}
 
 export function checkLinks(html, label) {
   for (const m of html.matchAll(/(?:href|src)="(\/preview\/[^"#?]+)"/g)) pending.push([label, m[1]]);

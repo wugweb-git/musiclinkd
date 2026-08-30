@@ -78,6 +78,8 @@ body {
   text-decoration: none;
   cursor: pointer;
   transition: background-color var(--duration-1) var(--ease-standard),
+              border-color var(--duration-1) var(--ease-standard),
+              color var(--duration-1) var(--ease-standard),
               transform var(--duration-1) var(--ease-standard);
 }
 /* Scale-on-press rather than a colour flash: it reads as physical, survives
@@ -136,6 +138,8 @@ body {
   color: var(--color-ink);            /* was inheriting link blue — a real bug */
   cursor: pointer;
   transition: background-color var(--duration-1) var(--ease-standard),
+              border-color var(--duration-1) var(--ease-standard),
+              color var(--duration-1) var(--ease-standard),
               transform var(--duration-1) var(--ease-standard);
 }
 .ml-icon-btn:active { transform: scale(0.94); background: var(--color-surface); }
@@ -234,11 +238,25 @@ body {
   font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
+  /* A chip may be an <a> — state-selector chips are links so they work with
+     no JavaScript and can be deep-linked. Without this they inherit the
+     underline from .ml-* link styling and every filter row reads as body
+     copy. */
+  text-decoration: none;
   /* REQUIRED: the ::after tap band below is position:absolute, so without a
      positioned ancestor here it resolves against a far-up container and the
      band lands nowhere near the chip. */
   position: relative;
+  /* colour and border-color ride WITH background-color. Transitioning the
+     background alone means a control that changes both snaps its label to the
+     new colour instantly while the new background eases in over 125ms — on
+     .ml-chip that made a newly selected chip white-on-white, an invisible
+     label, for the whole transition (seen on marketplace_browse, where the
+     "All" chip rendered as an empty pill). Same shape on .ml-btn/.ml-icon-btn
+     variants that swap fill and text together. */
   transition: background-color var(--duration-1) var(--ease-standard),
+              border-color var(--duration-1) var(--ease-standard),
+              color var(--duration-1) var(--ease-standard),
               transform var(--duration-1) var(--ease-standard);
 }
 /* …with the tap target expanded to 48dp without changing the visual size.
@@ -284,6 +302,13 @@ body {
   border-color: var(--color-ink);
   color: var(--color-white);
 }
+/* A chip carrying data-chip="<state> [<state>…]" is a STATE SELECTOR: the
+   shared shell sets its aria-pressed from the current state, so the rule
+   above styles it with nothing screen-specific. Screens used to each ship a
+   click handler that rewrote inline background/border/colour instead — and
+   marketplace_browse's queried ".chip" while its markup said ".ml-chip", so
+   it matched nothing and every category rendered identically. See
+   applyState() in shared/app-shell.js. */
 
 /* ── status ────────────────────────────────────────────────────────────── */
 /* Read-only state label. The container and text colours are DERIVED from the
