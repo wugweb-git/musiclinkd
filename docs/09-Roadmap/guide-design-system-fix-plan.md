@@ -198,11 +198,89 @@ named-but-missing widgets and however many of the 103 stub screens you want
 prioritized. This is real component-design work, not a bug-fix pass, and
 deserves its own plan and priority order rather than being bundled in here.
 
-**Open decisions needing your call before I touch anything:**
-1. Redirect `/guide/styleguide` and `/guide/musiclinkd-system` to `/guide`
-   for real, or just fix the false claim to describe reality?
-2. Fix the drifted color numbers in `styleguide.html` and `brand/README.md`
-   too, or leave those files alone since they're outside the live page?
-3. Move Brand section after Foundations, or leave its position as-is and
-   just fix the color-book duplication in place?
-4. Phase 2 (missing widgets/screens) — want it scoped now or later?
+**Open decisions — answered 2026-08-30:**
+1. Redirect claim: moot — `firebase.json` already has real 301 redirects for
+   both old pages, confirmed by reading it directly. The guide's original
+   "both now redirect here" text was correct; a mid-pass edit of mine
+   wrongly changed it, and that was reverted. No further action.
+2. Drifted colors in `styleguide.html` / `brand/README.md`: **left alone**,
+   per your answer. Both still disagree with the live token values (see
+   Tier 3 note above) — flagging again here so it doesn't get lost, but not
+   touching either file.
+3. Brand section position: **left as-is** (first in nav), per your answer.
+   Only the color-book duplication itself was fixed (colors now live in
+   Foundations); Brand's place in the page order is untouched.
+4. Phase 2 scope: below.
+
+---
+
+## Phase 2 scope — missing widgets & stub screens
+
+You said scope now, build later ("I will do it in the end") — this is the
+backlog and priority order, not an implementation.
+
+### 14 missing widgets
+
+All are CSS/markup work, no backend needed (confirmed against
+`admin/docs/architecture/Widget_Directory.md` — they're documented capabilities
+with no matching `.ml-*` component yet, not missing data):
+RecommendedCollaboratorCard, DiscoverySearchResultCard, NetworkingFeed,
+BandMembersWidget, CollaboratorMatchWidget, StudioVenueListItem,
+FeaturedStudioCard, StudioSpecWidget, ProjectCard, RecentProjectCard,
+TrackCard, AudioPodcastDemoWidget, HireContactModal, WhatsAppShareSheet.
+
+Suggested build order, grouped by which flows are already otherwise
+complete and would go from partial to fully covered fastest: Discover-
+adjacent first (DiscoverySearchResultCard, NetworkingFeed, StudioVenueListItem,
+FeaturedStudioCard, StudioSpecWidget — Discover is the single biggest stub
+flow below, so these overlap with that work); then Opportunities/Portfolio
+finishing touches (CollaboratorMatchWidget, RecommendedCollaboratorCard,
+ProjectCard, RecentProjectCard, TrackCard, BandMembersWidget); then the two
+standalone ones (HireContactModal, WhatsAppShareSheet, AudioPodcastDemoWidget)
+last since nothing else depends on them.
+
+### Stub screens — real counts, corrected
+
+Re-counted directly from `webapp/flows/**` against
+`webapp/data/designed-screens.json` (this is a different, more current metric
+than the guide's own "52 of 155" Gaps line, which checks a different signal
+— `html.includes("ml-app")` — and is now stale against this count; worth
+reconciling later, not blocking Phase 2 scoping):
+
+**69 designed / 86 stub / 155 total.** Fully done, zero stubs: `auth` (7),
+`booking` (11), `communication` (7), `marketplace` (8), `onboarding` (13),
+`opportunities` (6), `portfolio` (11) — 63 screens, don't touch.
+
+Stub flows, worst first:
+
+| Flow | Total | Stub | % stub |
+|---|---|---|---|
+| discover | 21 | 16 | 76% |
+| user_settings | 13 | 13 | 100% |
+| reviews | 11 | 11 | 100% |
+| profile_management | 10 | 10 | 100% |
+| public_profile | 9 | 8 | 89% |
+| business_profiles | 7 | 7 | 100% |
+| cms_pages | 5 | 5 | 100% |
+| services_availability | 5 | 5 | 100% |
+| notifications | 4 | 4 | 100% |
+| band | 3 | 3 | 100% |
+| qr_share | 1 | 1 | 100% |
+| saved_favorites | 1 | 1 | 100% |
+| search | 1 | 1 | 100% |
+| verifications | 1 | 1 | 100% |
+
+Recommended order: **discover** first — largest single flow (21 screens),
+already 5 designed so the pattern's established, and it's the flow the new
+widgets above mostly plug into, so building it next reuses that work instead
+of doing it twice. Then the five 100%-stub flows with the most screens
+(user_settings, reviews, profile_management, business_profiles — 41 screens
+combined) before the four 1-screen flows (qr_share, saved_favorites, search,
+verifications — quick wins, but low-impact individually, fine to do
+whenever there's a small gap to fill).
+
+Not scoping `recommendation_engine` or `subscription` — both show 0 screens
+in `webapp/flows/`, meaning no screen folders exist for them yet at all, not
+that they're stubs. That's a "does this flow have a screen registry entry
+yet" question, one level before "is it designed" — flag for you to confirm
+whether they're in scope at all before anyone scopes screens for them.

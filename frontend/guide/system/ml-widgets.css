@@ -912,6 +912,27 @@
 .ml-bubble--out { align-self: flex-end; background: var(--color-ink); color: var(--color-white);
                   border-bottom-right-radius: var(--radius-1); }
 .ml-bubble__meta { display: block; margin-top: 2px; font-size: var(--type-1); opacity: 0.7; }
+
+/* Two states the 2-bubble demo didn't cover, added 2026-08-30: the other
+   party composing, and a send that didn't reach the server. Both reuse
+   .ml-bubble so they inherit its shape/alignment rules rather than
+   duplicating them. */
+.ml-bubble--typing { display: inline-flex; align-items: center; gap: 4px; padding: var(--space-2) 14px; }
+.ml-bubble--typing span {
+  width: 6px; height: 6px; border-radius: var(--radius-4);
+  background: var(--color-muted); opacity: 0.5;
+  animation: ml-typing var(--duration-4) ease-in-out infinite;
+}
+.ml-bubble--typing span:nth-child(2) { animation-delay: 0.15s; }
+.ml-bubble--typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes ml-typing { 0%, 60%, 100% { opacity: 0.5; transform: translateY(0); }
+                        30% { opacity: 1; transform: translateY(-3px); } }
+.ml-bubble--failed { background: color-mix(in srgb, var(--color-error) 8%, var(--color-white));
+                      color: var(--color-ink); border: 1px solid color-mix(in srgb, var(--color-error) 32%, transparent); }
+.ml-bubble__error {
+  display: flex; align-items: center; gap: 4px; margin-top: 4px;
+  font-size: var(--type-1); color: color-mix(in srgb, var(--color-error) 72%, black);
+}
 .ml-chat__day {
   align-self: center;
   padding: 2px var(--space-2);
@@ -973,6 +994,10 @@
 }
 .ml-timeline__item.is-done::before { background: var(--color-ink); box-shadow: inset 0 0 0 2px var(--color-ink); }
 .ml-timeline__item.is-current::before { background: var(--color-pink); box-shadow: inset 0 0 0 2px var(--color-pink); }
+/* Added 2026-08-30: a booking or transaction stage can fail, not just
+   complete — the two states above couldn't represent that. */
+.ml-timeline__item.is-failed::before { background: var(--color-error); box-shadow: inset 0 0 0 2px var(--color-error); }
+.ml-timeline__item.is-failed .ml-timeline__title { color: color-mix(in srgb, var(--color-error) 72%, black); }
 .ml-timeline__title { font-size: var(--type-2); font-weight: 600; }
 .ml-timeline__meta { font-size: var(--type-1); color: var(--color-muted); }
 
