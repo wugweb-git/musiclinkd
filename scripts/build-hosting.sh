@@ -62,7 +62,14 @@ mkdir -p dist
 # maintained by hand — add a reference anywhere and it ships on the next build,
 # remove one and it stops. This replaced a hand-kept list that had already
 # drifted once.
-MEDIA_SRC=(frontend/guide/index.html frontend/guide/styleguide.html frontend/website/*.html)
+# webapp/ screens are scanned too: they ship to dist/preview and reference the
+# same library through /assets/img/... . Leaving them out meant a screen could
+# pass every audit, look right in dev (where the server maps /assets straight
+# at the source tree) and then 404 in production because the ship-list never
+# saw the reference. Caught on marketplace_browse, where 3 of 9 photos and 6
+# of the preview's 23 distinct images were being dropped from the deploy.
+MEDIA_SRC=(frontend/guide/index.html frontend/guide/styleguide.html frontend/website/*.html
+           webapp/index.html webapp/flows/*/*/index.html)
 MEDIA_KEEP=$(grep -ohE 'assets/img/(1|4|5|6|inspiration)/[^"'"'"')? ]+\.(jpg|jpeg|png|webp|gif|mp4|webm)' \
   "${MEDIA_SRC[@]}" 2>/dev/null | sort -u)
 MEDIA_RULES=()
