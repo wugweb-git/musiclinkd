@@ -297,7 +297,7 @@ const DEMOS = {
     paper gets the mark and ink gets the lockups. Putting a white lockup on paper is not a
     styling slip — the wordmark simply disappears, which is what this demo used to do.</p>
   <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-3) 0 var(--space-1)">Type fallback — never beside the real mark.</p>
-  <div class="ml-wordmark">MusicLink<em>d</em></div>
+  <div class="ml-wordmark">MUSIC<em>LINKD</em></div>
   <div class="ml-eyebrow" style="margin-top:var(--space-2)">Eyebrow label</div>`,
   "nav app bar": `<div class="g-frame"><header class="ml-navbar" style="padding-top:var(--space-2)">
     <button class="ml-icon-btn ml-icon-btn--bare" aria-label="Back">${ic("arrow-back", 20)}</button>
@@ -852,7 +852,7 @@ const DEMOS = {
         ${[0,1,2,3].map(r=>`<img src="${m("pins", c*17+r*5)}" alt="" loading="lazy" />`).join("")}</div>`).join("")}
     </div>
     <div class="ml-wall__card">
-      <div class="ml-wordmark" style="font-size:var(--type-2)">MusicLink<em>d</em></div>
+      <div class="ml-wordmark" style="font-size:var(--type-2)">MUSIC<em>LINKD</em></div>
       <p class="ml-type-2" style="margin:var(--space-2) 0 var(--space-3)">72,000 verified music professionals.</p>
       <button class="ml-btn ml-btn--primary ml-btn--block">Create your profile</button></div>
   </div>
@@ -1121,7 +1121,7 @@ const html = `<!doctype html>
 
 <div class="g-wrap">
   <header class="g-head">
-    <div class="ml-wordmark" style="font-size:var(--type-4)">MusicLink<em>d</em></div>
+    <div class="ml-wordmark" style="font-size:var(--type-4)">MUSIC<em>LINKD</em></div>
     <p class="ml-lede" style="margin-top:var(--space-2);max-width:60ch">
       The design system, <b>generated from itself</b>. Tokens come from
       <code>tokens.json</code>; components are parsed out of

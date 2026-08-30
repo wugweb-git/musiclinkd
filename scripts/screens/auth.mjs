@@ -22,7 +22,7 @@ done.push(writeScreen({ flow: "auth", screen: "splash", body: `
   <div class="ml-app" style="background:var(--color-ink)">
     <main class="ml-app__body" style="display:flex;align-items:center;justify-content:center;text-align:center">
       <div>
-        <h1 class="ml-wordmark ml-wordmark--on-media" style="font-size:var(--type-4);margin:0">MusicLink<em>d</em></h1>
+        <h1 class="ml-wordmark ml-wordmark--on-media" style="font-size:var(--type-4);margin:0">MUSIC<em>LINKD</em></h1>
         <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)" data-state="loading">Your professional music network</p>
         <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)" data-state="resuming_local_session">Restoring your session…</p>
         <div class="ml-spinner" style="margin:var(--space-4) auto 0"></div>
@@ -35,7 +35,7 @@ done.push(writeScreen({ flow: "auth", screen: "welcome", body: `
   <div class="ml-app">
     <main class="ml-app__body" style="display:flex;flex-direction:column;justify-content:center;gap:var(--space-4)">
       <div style="text-align:center">
-        <h1 class="ml-wordmark" style="font-size:var(--type-4);margin:0">MusicLink<em>d</em></h1>
+        <h1 class="ml-wordmark" style="font-size:var(--type-4);margin:0">MUSIC<em>LINKD</em></h1>
         <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">Discover, collaborate, and get booked — India's network for musicians, studios, and bands.</p>
       </div>
       <div style="display:flex;flex-direction:column;gap:var(--space-2)">

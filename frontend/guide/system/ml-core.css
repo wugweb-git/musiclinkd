@@ -559,17 +559,37 @@ a.ml-row:active { background: var(--color-surface); }
 .ml-logo--clear { padding: var(--space-2); }
 
 /* Type fallback only — favicons, plain-text contexts, and anywhere the SVG
-   cannot be fetched. Never place this next to the real mark. */
+   cannot be fetched. Never place this next to the real mark.
+
+   Set by the brand owner 2026-08-30: Unica One, UPPERCASE, -2% tracking,
+   weight 500, MUSIC in brand black and LINKD in brand warm pink. This is the
+   one place the EXPRESSION palette appears in the stylesheet, and correctly
+   so — a wordmark IS brand expression rather than product chrome, which is
+   exactly the boundary --color-brand-* was separated out to mark.
+
+   Weight 500 against a single-weight (400) family is safe and deliberate:
+   CSS font matching resolves a requested 500 DOWN to 400 when no 500 face
+   exists, so the real face renders and nothing is synthesised. Only 600+
+   would trigger a fake bold on this family.
+
+   The split is MUSIC | LINKD, so <em> now wraps LINKD — not the trailing "d"
+   it used to wrap. Every call site was updated with it.
+
+   Contrast: MUSIC #141621 is 18.0:1 on paper. LINKD #FF005C is 3.88:1 on
+   paper and 5.0:1 on ink. Both are exempt under WCAG 1.4.3, which carves out
+   text that is part of a brand name — and the pink is only ever the second
+   half of a logotype, never a label the user has to read to operate anything. */
 .ml-wordmark {
-  font-family: var(--font-display);
-  font-weight: 800;
+  font-family: var(--font-eyebrow);
+  font-weight: 500;
   font-size: var(--type-3);
-  letter-spacing: -0.04em;
-  color: var(--color-ink);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-brand-black);
 }
-/* --color-pink as TEXT is 3.56:1 on white and fails — the same rule this
-   token states on itself. Pressed is 5.37 and is what pink text always uses. */
-.ml-wordmark em { font-style: normal; color: var(--color-pink-pressed); }
+.ml-wordmark em { font-style: normal; color: var(--color-brand-warm-pink); }
+/* On media or ink, MUSIC takes white; LINKD keeps the brand pink, which reads
+   stronger on ink (5.0:1) than it does on paper. */
 .ml-wordmark--on-media { color: var(--color-white); }
 
 /* Small tracked uppercase label above a screen title. Set in Unica One as of

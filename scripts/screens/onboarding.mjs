@@ -356,7 +356,7 @@ done.push(writeScreen({ flow: "onboarding", screen: "dashboard_handoff", body: `
   <div class="ml-app">
     <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3);padding-top:var(--space-4)">
       <div style="text-align:center">
-        <h1 class="ml-wordmark" style="font-size:var(--type-4);margin:0">Welcome to MusicLink<em>d</em></h1>
+        <h1 class="ml-wordmark" style="font-size:var(--type-4);margin:0">Welcome to MUSIC<em>LINKD</em></h1>
         <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-2) 0 0">Your profile is live. Here's where to go from here.</p>
       </div>
       <div>
