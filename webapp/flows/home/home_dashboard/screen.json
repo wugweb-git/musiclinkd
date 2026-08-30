@@ -1,0 +1,17 @@
+{
+  "flowKey": "home",
+  "flowTitle": "Home",
+  "flowStatus": "app-mocked",
+  "flowOrder": 0,
+  "screenKey": "home_dashboard",
+  "screenNumber": 1,
+  "screenTitle": "Home",
+  "screenOrder": 1,
+  "route": "/home",
+  "states": ["default", "loading", "empty", "offline", "error"],
+  "collectionsTouched": ["users", "connections", "opportunities", "studioBookings", "feedPosts"],
+  "entities": ["user", "connectionDoc", "opportunityApplicationDoc", "studioBookingDoc"],
+  "actions": ["viewActivity", "continueTask", "openRecommendation", "viewNotifications", "search"],
+  "notes": "Demotes the old feature-card grid (Professional Profile Active, Collab Availability, Premium Studio Spaces, Friends Already on MusicLinkd, Add Track/EP) to secondary status per the brand owner's IA. Uses seeded/mock data only — no backend exists to query real activity counts.",
+  "dataContract": []
+}

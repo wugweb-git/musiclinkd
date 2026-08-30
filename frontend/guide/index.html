@@ -92,7 +92,7 @@
   <li><a href="#core">Core · 39</a></li>
   <li><a href="#widgets">Widgets · 80</a></li>
   <li><a href="#motion">Motion</a></li>
-  <li><a href="#patterns">Patterns · 52</a></li>
+  <li><a href="#patterns">Patterns · 53</a></li>
   <li><a href="#icons">Icons · 423</a></li>
   <li><a href="#taxonomy">Taxonomy · 18</a></li>
   <li><a href="#gaps">Gaps</a></li>
@@ -111,7 +111,7 @@
     <div class="g-row" style="margin-top:var(--space-3)">
       <span class="ml-badge">103 tokens</span>
       <span class="ml-badge">119 sections</span>
-      <span class="ml-badge">513 selectors</span>
+      <span class="ml-badge">514 selectors</span>
       <span class="ml-badge">423 icons</span>
       <span class="ml-badge ml-badge--accent">Light only</span>
     </div>
@@ -507,10 +507,10 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede ml-measure">Removable badge (a chosen collaborator, an applied filter). The × is a real control, so it carries its own expanded target rather than being a 24dp tap-and-miss.</p>
+    <p class="ml-lede ml-measure">Notification count, pinned to the corner of an icon button. Added when the Home dashboard needed one and there was no overlay badge in the system — the base .ml-badge is an inline pill, not something positioned absolutely over a sibling. Sized from --icon-1 (16px, already on the scale) rather than an invented…</p>
     <div class="g-demo"><div class="g-row"><span class="ml-badge">★ 4.9</span><span class="ml-badge ml-badge--accent">Gold</span></div></div>
-    <details class="g-sel"><summary>4 selectors</summary>
-      <code>.ml-badge</code> <code>.ml-badge--accent</code> <code>.ml-badge--removable</code> <code>.ml-badge__remove</code></details>
+    <details class="g-sel"><summary>5 selectors</summary>
+      <code>.ml-badge</code> <code>.ml-badge--accent</code> <code>.ml-badge--overlay</code> <code>.ml-badge--removable</code> <code>.ml-badge__remove</code></details>
   </section>
 <section class="g-comp" id="c-card">
     <div class="g-comp__head">
@@ -2421,7 +2421,7 @@
     </p>
   </div>
 
-  <h2 class="g-h" id="patterns">Patterns · 52</h2>
+  <h2 class="g-h" id="patterns">Patterns · 53</h2>
   <p class="ml-lede" style="max-width:64ch">
     Composed patterns are <b>real screens</b>, not mockups — every one below is
     live under <code>/preview</code> and built from the components above. Listed
@@ -2429,6 +2429,15 @@
     (it claimed 84 against an actual 94).
   </p>
   
+  <section class="g-comp">
+    <div class="g-comp__head"><h3>Home</h3>
+      <span class="g-file">flow 0 · 1 on the system</span></div>
+    <div class="g-demo"><div class="g-patterns">
+      <a class="g-pattern" href="/preview/flows/home/home_dashboard">
+        <b>Home</b>
+        <span>5 states · default, loading, empty</span></a>
+    </div></div>
+  </section>
   <section class="g-comp">
     <div class="g-comp__head"><h3>User Auth</h3>
       <span class="g-file">flow 1 · 7 on the system</span></div>
@@ -2695,8 +2704,8 @@
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Screens not yet on the system · 103</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0">
       Still carrying local <code>&lt;style&gt;</code> blocks or pre-system markup.
-      52 of
-      155 screens are rebuilt.</p>
+      53 of
+      156 screens are rebuilt.</p>
 
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Token-level gaps</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">

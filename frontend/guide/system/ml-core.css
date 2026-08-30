@@ -343,6 +343,23 @@ body {
 }
 .ml-badge--accent { background: var(--color-pink-container); color: var(--color-pink-pressed); }
 
+/* Notification count, pinned to the corner of an icon button. Added when the
+   Home dashboard needed one and there was no overlay badge in the system —
+   the base .ml-badge is an inline pill, not something positioned absolutely
+   over a sibling. Sized from --icon-1 (16px, already on the scale) rather
+   than an invented dimension; the parent icon button must set
+   position:relative for this to anchor correctly, same requirement as
+   .ml-chip and .ml-tabbar__beta. */
+.ml-badge--overlay {
+  position: absolute;
+  top: var(--space-1); right: var(--space-1);
+  min-width: var(--icon-1); height: var(--icon-1);
+  padding: 0 3px;
+  font-size: 10px;                    /* below --type-1 on purpose: this is a
+                                          digit inside a 16px circle, not body
+                                          text, and --type-1 would overflow it */
+}
+
 /* Removable badge (a chosen collaborator, an applied filter). The × is a real
    control, so it carries its own expanded target rather than being a 24dp
    tap-and-miss. */
