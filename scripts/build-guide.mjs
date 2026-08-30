@@ -1337,13 +1337,6 @@ const html = `<!doctype html>
     <tr><th>Scrim</th><td><code>--color-scrim</code></td><td>Backdrop behind drawers, sheets, modals</td></tr>
   </tbody></table>
 
-  <h3 style="margin-top:var(--space-4)">Known gaps</h3>
-  <p class="ml-lede ml-measure">Recorded rather than quietly skipped.</p>
-  <table class="g-t"><thead><tr><th>Item</th><th>Why</th></tr></thead><tbody>
-    ${Object.entries(tokens.meta.knownGaps).filter(([k]) => !k.startsWith("$"))
-      .map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join("")}
-  </tbody></table>
-
   <h3 style="margin-top:var(--space-4)">Icon sizes</h3>
   <p class="ml-lede">The four real icon tokens. 16 and 24 are the two drawn grids;
   20 and 32 are scaled, which is why every icon carries a <code>viewBox</code> — without one,
@@ -1463,6 +1456,17 @@ const html = `<!doctype html>
       Still carrying local <code>&lt;style&gt;</code> blocks or pre-system markup.
       ${patterns.reduce((n, fl) => n + fl.screens.filter((x) => x.onSystem).length, 0)} of
       ${patterns.reduce((n, fl) => n + fl.screens.length, 0)} screens are rebuilt.</p>
+
+    <h3 style="margin:var(--space-4) 0 var(--space-2)">Token-level gaps</h3>
+    <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
+      One table, merged 2026-08-30 — this used to be a second "Gaps" section
+      under Foundations. Each row is a spec item that was considered and either
+      resolved, deferred with a reason, or moved out of CSS entirely — not
+      silently dropped.</p>
+    <table class="g-t"><thead><tr><th>Item</th><th>Why</th></tr></thead><tbody>
+      ${Object.entries(tokens.meta.knownGaps).filter(([k]) => !k.startsWith("$"))
+        .map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join("")}
+    </tbody></table>
   </div>
 
   <h2 class="g-h" id="coverage">Coverage</h2>

@@ -118,8 +118,14 @@
   font-weight: 600;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
+  /* REQUIRED, not decorative. .ml-tabbar__beta below is position:absolute, so
+     without a positioned ancestor here it resolves against a far-up container
+     and the Beta pill lands nowhere near its tab. This used to be declared a
+     second time further down the file, which read as a stray duplicate; it is
+     merged here so it cannot be "cleaned up" by mistake. */
+  position: relative;
 }
-.ml-tabbar__item svg { width: 22px; height: 22px; }
+.ml-tabbar__item svg { width: var(--icon-3); height: var(--icon-3); }
 /* The active state is a tinted pill behind the glyph plus a colour change —
    colour alone is not an accessible state signal. */
 .ml-tabbar__icon {
@@ -189,7 +195,7 @@
   display: flex; align-items: center; gap: var(--space-1);
   font-size: var(--type-2); font-weight: 700; line-height: 1.2;
 }
-.ml-artist-card__name svg { width: 14px; height: 14px; color: var(--color-pink); flex: none; }
+.ml-artist-card__name svg { width: var(--icon-1); height: var(--icon-1); color: var(--color-pink); flex: none; }
 .ml-artist-card__role {
   font-size: var(--type-1); color: var(--color-muted);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
@@ -237,7 +243,7 @@
   position: relative;
   display: block;
   width: 260px;
-  aspect-ratio: 4/3;
+  aspect-ratio: var(--media-aspect-card);
   border-radius: var(--radius-2);
   overflow: hidden;
   background: var(--color-surface);
@@ -587,7 +593,7 @@
   display: flex; align-items: center; gap: var(--space-1);
   font-size: var(--type-2); font-weight: 700; line-height: 1.2;
 }
-.ml-result__name svg { width: 14px; height: 14px; color: var(--color-pink); flex: none; }
+.ml-result__name svg { width: var(--icon-1); height: var(--icon-1); color: var(--color-pink); flex: none; }
 .ml-result__meta {
   display: block; font-size: var(--type-1); color: var(--color-muted);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
@@ -693,7 +699,7 @@
   color: inherit; text-decoration: none;
   font-size: var(--type-2);
 }
-.ml-suggest svg { width: 18px; height: 18px; color: var(--color-muted); flex: none; }
+.ml-suggest svg { width: var(--icon-2); height: var(--icon-2); color: var(--color-muted); flex: none; }
 .ml-suggest__body { flex: 1; min-width: 0; }
 .ml-suggest__kind { font-size: var(--type-1); color: var(--color-muted); }
 
@@ -701,7 +707,6 @@
 /* Market is Beta. Labelling it in the nav is the honest thing to do and it
    stops the tab reading as a finished surface. */
 
-.ml-tabbar__item { position: relative; }
 .ml-tabbar__beta {
   position: absolute;
   top: 2px; left: 50%;
@@ -927,11 +932,11 @@
 .ml-bubble--typing span:nth-child(3) { animation-delay: 0.3s; }
 @keyframes ml-typing { 0%, 60%, 100% { opacity: 0.5; transform: translateY(0); }
                         30% { opacity: 1; transform: translateY(-3px); } }
-.ml-bubble--failed { background: color-mix(in srgb, var(--color-error) 8%, var(--color-white));
+.ml-bubble--failed { background: var(--status-error-bg);
                       color: var(--color-ink); border: 1px solid color-mix(in srgb, var(--color-error) 32%, transparent); }
 .ml-bubble__error {
   display: flex; align-items: center; gap: 4px; margin-top: 4px;
-  font-size: var(--type-1); color: color-mix(in srgb, var(--color-error) 72%, black);
+  font-size: var(--type-1); color: var(--status-error-text);
 }
 .ml-chat__day {
   align-self: center;
@@ -997,7 +1002,7 @@
 /* Added 2026-08-30: a booking or transaction stage can fail, not just
    complete — the two states above couldn't represent that. */
 .ml-timeline__item.is-failed::before { background: var(--color-error); box-shadow: inset 0 0 0 2px var(--color-error); }
-.ml-timeline__item.is-failed .ml-timeline__title { color: color-mix(in srgb, var(--color-error) 72%, black); }
+.ml-timeline__item.is-failed .ml-timeline__title { color: var(--status-error-text); }
 .ml-timeline__title { font-size: var(--type-2); font-weight: 600; }
 .ml-timeline__meta { font-size: var(--type-1); color: var(--color-muted); }
 
@@ -1011,8 +1016,8 @@
 .ml-kpi__num { font-family: var(--font-display); font-size: var(--type-4);
   font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
 .ml-kpi__delta { font-size: var(--type-1); font-weight: 700; }
-.ml-kpi__delta--up   { color: color-mix(in srgb, var(--color-success) 58%, black); }
-.ml-kpi__delta--down { color: color-mix(in srgb, var(--color-error) 72%, black); }
+.ml-kpi__delta--up   { color: var(--status-success-text); }
+.ml-kpi__delta--down { color: var(--status-error-text); }
 
 .ml-bars { display: flex; align-items: flex-end; gap: var(--space-1); height: 72px; }
 .ml-bars__bar { flex: 1; min-width: 6px; border-radius: var(--radius-1) var(--radius-1) 0 0;
@@ -1108,7 +1113,7 @@
 .ml-opportunity-card__budget { font-weight: 700; font-size: var(--type-2); }
 /* a deadline is the one thing that changes urgency, so it gets a colour rule */
 .ml-opportunity-card__closes { color: var(--color-muted); }
-.ml-opportunity-card__closes.is-soon { color: color-mix(in srgb, var(--color-warning) 62%, black); font-weight: 700; }
+.ml-opportunity-card__closes.is-soon { color: var(--status-warning-text); font-weight: 700; }
 
 /* ── application card ──────────────────────────────────────────────────── */
 /* The applicant's side of an opportunity: what you sent and where it stands. */
@@ -1553,7 +1558,7 @@
 .ml-help {
   position: relative;                 /* anchors ::after's 48dp expansion below */
   display: inline-flex; align-items: center; justify-content: center;
-  width: 18px; height: 18px; padding: 0;
+  width: var(--icon-2); height: var(--icon-2); padding: 0;
   border: 0; border-radius: var(--radius-4);
   background: var(--color-surface); color: var(--color-muted);
   font-size: var(--type-1); font-weight: 700; cursor: pointer;
@@ -1657,7 +1662,7 @@
 .ml-tier__feats { display: flex; flex-direction: column; gap: var(--space-1); margin: var(--space-2) 0; padding: 0; list-style: none; }
 .ml-tier__feat { display: flex; align-items: flex-start; gap: var(--space-2); font-size: var(--type-1); }
 /* 1.4.11: an icon needs 3:1 and raw --color-success is 2.28 on white. */
-.ml-tier__feat svg { flex: none; margin-top: 2px; color: color-mix(in srgb, var(--color-success) 58%, black); }
+.ml-tier__feat svg { flex: none; margin-top: 2px; color: var(--status-success-text); }
 .ml-tier__feat--off { color: var(--color-muted); }
 .ml-tier__feat--off svg { color: var(--color-line); }
 
@@ -1697,8 +1702,8 @@
 .ml-trends__label { font-size: var(--type-2); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ml-trends__sub { font-size: var(--type-1); color: var(--color-muted); }
 .ml-trends__delta { display: flex; align-items: center; gap: 2px; font-size: var(--type-1); font-weight: 700; font-variant-numeric: tabular-nums; }
-.ml-trends__delta--up { color: color-mix(in srgb, var(--color-success) 58%, black); }
-.ml-trends__delta--down { color: color-mix(in srgb, var(--color-error) 72%, black); }
+.ml-trends__delta--up { color: var(--status-success-text); }
+.ml-trends__delta--down { color: var(--status-error-text); }
 .ml-trends__delta--flat { color: var(--color-muted); }
 
 /* ── collage ───────────────────────────────────────────────────────────── */
@@ -1736,7 +1741,7 @@
   border: 1px solid var(--color-line);
 }
 .ml-btn--social:hover { background: var(--color-surface); }
-.ml-btn--social svg { flex: none; width: 18px; height: 18px; }
+.ml-btn--social svg { flex: none; width: var(--icon-2); height: var(--icon-2); }
 
 /* ── native keyboard & IME ─────────────────────────────────────────────── */
 /* Compose: WindowInsets.ime + KeyboardOptions                              */
@@ -1852,8 +1857,8 @@
   display: inline-flex; align-items: center; justify-content: center;
   flex: none; width: var(--size-1); height: var(--size-1);
   border-radius: var(--radius-4);
-  background: color-mix(in srgb, var(--color-success) 14%, var(--color-white));
-  color: color-mix(in srgb, var(--color-success) 58%, black);
+  background: var(--status-success-bg);
+  color: var(--status-success-text);
 }
 .ml-trust__what { font-size: var(--type-2); font-weight: 600; }
 .ml-trust__who  { font-size: var(--type-1); color: var(--color-muted); }
@@ -2007,8 +2012,8 @@
   display: inline-flex; align-items: center; justify-content: center;
   width: var(--size-4); height: var(--size-4);
   border-radius: var(--radius-4);
-  background: color-mix(in srgb, var(--color-error) 12%, var(--color-white));
-  color: color-mix(in srgb, var(--color-error) 72%, black);
+  background: var(--status-error-bg);
+  color: var(--status-error-text);
 }
 .ml-error__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: 700; margin: 0; }
 .ml-error__body { font-size: var(--type-2); color: var(--color-muted); margin: 0; max-width: 40ch; }
@@ -2051,8 +2056,8 @@
 
 .ml-success { display: grid; gap: var(--space-3); place-items: center; text-align: center; padding: var(--space-4); }
 .ml-success__mark { position: relative; width: var(--size-4); height: var(--size-4); }
-.ml-success__ring { position: absolute; inset: 0; border-radius: var(--radius-4); background: color-mix(in srgb, var(--color-success) 14%, var(--color-white)); animation: ml-pop var(--duration-3) var(--ease-spring) both; }
-.ml-success__tick { position: absolute; inset: 0; display: grid; place-items: center; color: color-mix(in srgb, var(--color-success) 58%, black); animation: ml-pop var(--duration-3) var(--ease-spring) var(--duration-1) both; }
+.ml-success__ring { position: absolute; inset: 0; border-radius: var(--radius-4); background: var(--status-success-bg); animation: ml-pop var(--duration-3) var(--ease-spring) both; }
+.ml-success__tick { position: absolute; inset: 0; display: grid; place-items: center; color: var(--status-success-text); animation: ml-pop var(--duration-3) var(--ease-spring) var(--duration-1) both; }
 @keyframes ml-pop { from { transform: scale(0.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
   .ml-success__ring, .ml-success__tick { animation: none; }

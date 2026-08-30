@@ -4,7 +4,7 @@
  * Source:    frontend/guide/tokens/tokens.json  (v9.0.0)
  * Regenerate: node scripts/build-tokens.mjs
  *
- * 96 tokens, ceiling 104. The previous hand-maintained system
+ * 103 tokens, ceiling 104. The previous hand-maintained system
  * had reached 248 custom properties in a single :root, of which every value
  * past the 4-step core was an exact duplicate under a second name.
  *
@@ -135,6 +135,15 @@
   --media-scrim: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.75) 100%);
   --media-aspect-square: 1/1;
   --media-aspect-wide: 16/9;
+  --media-aspect-card: 4/3;
+
+  /* Status — derived pairs, named once instead of mixed inline */
+  --status-error-bg: color-mix(in srgb, var(--color-error) 12%, var(--color-white)); /* Rejected, failed, destructive — container fill */
+  --status-error-text: color-mix(in srgb, var(--color-error) 72%, black); /* Rejected, failed, destructive — text/icon on that fill */
+  --status-success-bg: color-mix(in srgb, var(--color-success) 14%, var(--color-white)); /* Confirmed, available, complete — container fill */
+  --status-success-text: color-mix(in srgb, var(--color-success) 58%, black); /* Confirmed, available, complete — text/icon on that fill */
+  --status-warning-bg: color-mix(in srgb, var(--color-warning) 18%, var(--color-white)); /* Pending, caution — container fill */
+  --status-warning-text: color-mix(in srgb, var(--color-warning) 50%, black); /* Pending, caution — text/icon on that fill */
 
   /* Safe area — edge-to-edge is mandatory, not optional */
   --safe-top: env(safe-area-inset-top, 24px);

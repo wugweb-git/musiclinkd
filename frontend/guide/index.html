@@ -109,7 +109,7 @@
       with those same files — <b>if a component breaks, this page breaks</b>.
     </p>
     <div class="g-row" style="margin-top:var(--space-3)">
-      <span class="ml-badge">96 tokens</span>
+      <span class="ml-badge">103 tokens</span>
       <span class="ml-badge">119 sections</span>
       <span class="ml-badge">513 selectors</span>
       <span class="ml-badge">423 icons</span>
@@ -366,12 +366,6 @@
     <tr><th>Info</th><td><code>--color-info</code></td><td>On Tour, remote available</td></tr>
     <tr><th>Disabled</th><td><code>--color-disabled</code></td><td>Inactive elements</td></tr>
     <tr><th>Scrim</th><td><code>--color-scrim</code></td><td>Backdrop behind drawers, sheets, modals</td></tr>
-  </tbody></table>
-
-  <h3 style="margin-top:var(--space-4)">Known gaps</h3>
-  <p class="ml-lede ml-measure">Recorded rather than quietly skipped.</p>
-  <table class="g-t"><thead><tr><th>Item</th><th>Why</th></tr></thead><tbody>
-    <tr><th>aspect 4/3</th><td>The spec lists a card aspect of 4/3. It is hardcoded once, in .ml-media-card. Not tokenised because only one component uses it; if a second one needs it, it becomes --media-aspect-card.</td></tr><tr><th>breakpoints 767/1023/1440</th><td>The spec's four breakpoints are NOT adopted. platform.windowSize keeps Material's 600/840 WindowSizeClass values because those are what Compose actually branches on, and the app is Android-first. Shipping web breakpoints that disagree with the native ones is the exact drift v9 removed. --layout-max 1440 is kept as a max-width, which is what the 1440 figure really was.</td></tr><tr><th>density modes</th><td>Not implemented, as the spec itself notes.</td></tr><tr><th>Snackbar 4s/10s</th><td>Durations are behaviour, not design tokens — they belong to the toast controller, not the stylesheet. Documented in the toast section's prose instead.</td></tr>
   </tbody></table>
 
   <h3 style="margin-top:var(--space-4)">Icon sizes</h3>
@@ -1295,8 +1289,8 @@
     <p class="ml-lede ml-measure">Market is Beta. Labelling it in the nav is the honest thing to do and it stops the tab reading as a finished surface.</p>
     <div class="g-demo"><p class="ml-type-2" style="color:var(--color-muted);margin:0">
     Shown on the Market tab in the bottom-tab-bar demo above.</p></div>
-    <details class="g-sel"><summary>2 selectors</summary>
-      <code>.ml-tabbar__item</code> <code>.ml-tabbar__beta</code></details>
+    <details class="g-sel"><summary>1 selector</summary>
+      <code>.ml-tabbar__beta</code></details>
   </section>
 <section class="g-comp" id="c-inset-card">
     <div class="g-comp__head">
@@ -2703,6 +2697,16 @@
       Still carrying local <code>&lt;style&gt;</code> blocks or pre-system markup.
       52 of
       155 screens are rebuilt.</p>
+
+    <h3 style="margin:var(--space-4) 0 var(--space-2)">Token-level gaps</h3>
+    <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
+      One table, merged 2026-08-30 — this used to be a second "Gaps" section
+      under Foundations. Each row is a spec item that was considered and either
+      resolved, deferred with a reason, or moved out of CSS entirely — not
+      silently dropped.</p>
+    <table class="g-t"><thead><tr><th>Item</th><th>Why</th></tr></thead><tbody>
+      <tr><th>breakpoints 767/1023/1440 — decision, not a gap</th><td>The spec's four breakpoints were considered and NOT adopted, not overlooked. platform.windowSize keeps Material's 600/840 WindowSizeClass values because those are what Compose actually branches on, and the app is Android-first. Shipping web breakpoints that disagree with the native ones is the exact drift v9 removed. --layout-max 1440 is kept as a max-width, which is what the spec's 1440 figure really was.</td></tr><tr><th>density modes</th><td>Not implemented, as the spec itself notes.</td></tr><tr><th>Snackbar 4s/10s</th><td>Durations are behaviour, not design tokens — they belong to the toast controller, not the stylesheet. Documented in the toast section's prose instead.</td></tr>
+    </tbody></table>
   </div>
 
   <h2 class="g-h" id="coverage">Coverage</h2>

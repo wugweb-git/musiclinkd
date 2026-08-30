@@ -218,6 +218,17 @@ section("Media — the palette rule, made operational");
 emit("media-scrim", T.semantic.media.scrim.$value);
 emit("media-aspect-square", T.semantic.media.aspectSquare.$value);
 emit("media-aspect-wide", T.semantic.media.aspectWide.$value);
+emit("media-aspect-card", T.semantic.media.aspectCard.$value, short(T.semantic.media.aspectCard.$description));
+
+/* Derived status pairs. These DO emit, unlike semantic.action/surface/text
+   above, because they are not 1:1 aliases — each is a color-mix that was
+   repeated inline across the stylesheets (26 calls in total). Naming the
+   derivation once is the opposite of alias sprawl. */
+section("Status — derived pairs, named once instead of mixed inline");
+for (const [key, tok] of Object.entries(T.semantic.status)) {
+  if (key.startsWith("$")) continue;
+  emit(`status-${kebab(key)}`, tok.$value, short(tok.$description));
+}
 
 section("Safe area — edge-to-edge is mandatory, not optional");
 for (const [key, tok] of Object.entries(T.platform.safeArea)) {

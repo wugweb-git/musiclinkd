@@ -193,7 +193,7 @@ body {
   border-radius: var(--radius-4);
   background: var(--color-surface);
 }
-.ml-search__icon { flex: none; width: 18px; height: 18px; color: var(--color-muted); }
+.ml-search__icon { flex: none; width: var(--icon-2); height: var(--icon-2); color: var(--color-muted); }
 .ml-search input {
   flex: 1;
   min-width: 0;
@@ -314,12 +314,12 @@ body {
 .ml-status--neutral { background: var(--color-surface); color: var(--color-muted); }
 .ml-status--neutral::before { display: none; }
 
-.ml-status--success { background: color-mix(in srgb, var(--color-success) 14%, var(--color-white));
-                      color:      color-mix(in srgb, var(--color-success) 58%, black); }
-.ml-status--warning { background: color-mix(in srgb, var(--color-warning) 18%, var(--color-white));
-                      color:      color-mix(in srgb, var(--color-warning) 50%, black); }
-.ml-status--error   { background: color-mix(in srgb, var(--color-error)   12%, var(--color-white));
-                      color:      color-mix(in srgb, var(--color-error)   72%, black); }
+.ml-status--success { background: var(--status-success-bg);
+                      color:      var(--status-success-text); }
+.ml-status--warning { background: var(--status-warning-bg);
+                      color:      var(--status-warning-text); }
+.ml-status--error   { background: var(--status-error-bg);
+                      color:      var(--status-error-text); }
 .ml-status--accent  { background: var(--color-pink-container); color: var(--color-pink-pressed); }
 /* Added 2026-08-30 to absorb the two hand-rolled blue pills the screens grew
    because no info variant existed: #E0E7FF/#3730A3 (indigo, 11 uses) and
@@ -734,7 +734,7 @@ a.ml-row:active { background: var(--color-surface); }
 }
 .ml-otp__box.is-filled { border-color: var(--color-pink); border-width: 2px; color: var(--color-ink); }
 .ml-otp__box.is-invalid { border-color: var(--color-error); color: var(--color-error);
-  background: color-mix(in srgb, var(--color-error) 6%, var(--color-white)); }
+  background: var(--status-error-bg); }
 
 /* ── phone entry ───────────────────────────────────────────────────────── */
 
@@ -760,18 +760,18 @@ a.ml-row:active { background: var(--color-surface); }
   border-radius: var(--radius-2);
   font-size: var(--type-1);
 }
-.ml-banner--error   { background: color-mix(in srgb, var(--color-error) 8%, var(--color-white));
-                      color: color-mix(in srgb, var(--color-error) 78%, black); }
+.ml-banner--error   { background: var(--status-error-bg);
+                      color: var(--status-error-text); }
 .ml-banner--info    { background: var(--color-surface); color: var(--color-muted); }
-.ml-banner--success { background: color-mix(in srgb, var(--color-success) 12%, var(--color-white));
-                      color: color-mix(in srgb, var(--color-success) 58%, black); }
+.ml-banner--success { background: var(--status-success-bg);
+                      color: var(--status-success-text); }
 /* Added 2026-08-30. The marketplace offer flow had a hand-rolled amber banner
    because this variant did not exist, which is how #FEF3C7/#92400E reached
    three screens. --info above is deliberately NEUTRAL rather than blue: an
    informational banner is not a status, and painting it blue competes with
    .ml-status--info, which IS one. */
-.ml-banner--warning { background: color-mix(in srgb, var(--color-warning) 18%, var(--color-white));
-                      color: color-mix(in srgb, var(--color-warning) 50%, black); }
+.ml-banner--warning { background: var(--status-warning-bg);
+                      color: var(--status-warning-text); }
 
 /* ── confirmation mark ─────────────────────────────────────────────────── */
 
@@ -779,10 +779,10 @@ a.ml-row:active { background: var(--color-surface); }
   display: flex; align-items: center; justify-content: center;
   width: 64px; height: 64px; margin-inline: auto;
   border-radius: var(--radius-4);
-  background: color-mix(in srgb, var(--color-success) 14%, var(--color-white));
+  background: var(--status-success-bg);
   /* The raw green on its own 14% tint is 2.02:1, under the 3:1 floor for a
      graphic (1.4.11). Same darkening the status pills already use. */
-  color: color-mix(in srgb, var(--color-success) 58%, black);
+  color: var(--status-success-text);
 }
 
 /* ── step progress ─────────────────────────────────────────────────────── */
@@ -830,7 +830,7 @@ a.ml-row:active { background: var(--color-surface); }
 .ml-choice__title { display: block; font-weight: 600; }
 .ml-choice__meta  { display: block; font-size: var(--type-1); color: var(--color-muted); }
 .ml-choice__mark {
-  width: 22px; height: 22px; flex: none;
+  width: var(--icon-3); height: var(--icon-3); flex: none;
   border: 2px solid var(--color-line);
   border-radius: var(--radius-4);
   display: flex; align-items: center; justify-content: center;
@@ -954,7 +954,7 @@ a.ml-row:active { background: var(--color-surface); }
   position: relative;
   display: inline-flex; align-items: center; justify-content: center;
   flex: none;
-  width: 22px; height: 22px;
+  width: var(--icon-3); height: var(--icon-3);
   border: 2px solid var(--color-line);
   border-radius: var(--radius-1);
   background: var(--color-white);
@@ -1035,13 +1035,16 @@ a.ml-row:active { background: var(--color-surface); }
 }
 .ml-slider::-webkit-slider-thumb {
   appearance: none;
-  width: 22px; height: 22px; margin-top: -9px;
+  width: var(--icon-3); height: var(--icon-3);
+  /* Centres the thumb on the 4px track. Derived, so changing --icon-3
+     cannot silently un-centre it — the old -9px was tied to a 22px thumb. */
+  margin-top: calc((var(--icon-3) - 4px) / -2);
   border: 0; border-radius: var(--radius-4);
   background: var(--color-ink);
   box-shadow: var(--elevation-1);
 }
 .ml-slider::-moz-range-thumb {
-  width: 22px; height: 22px;
+  width: var(--icon-3); height: var(--icon-3);
   border: 0; border-radius: var(--radius-4);
   background: var(--color-ink);
   box-shadow: var(--elevation-1);
