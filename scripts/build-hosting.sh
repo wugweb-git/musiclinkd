@@ -33,6 +33,17 @@ cd "$(dirname "$0")/.."
 echo "==> Building admin/"
 (cd admin && npm run build)
 
+# Fail the deploy if any generated artefact is stale against tokens.json.
+# All three of these are generated from the same source and a deploy is the
+# last moment they can be caught disagreeing — ml-tokens.css ships to the
+# browser, MusicLinkdTokens.kt ships to the Android repo, and index.html is
+# the page that documents both. Checking rather than regenerating is
+# deliberate: a silent regenerate during deploy would ship a change nobody
+# reviewed.
+echo "==> Verifying generated artefacts are current"
+node scripts/build-tokens.mjs --check
+node scripts/build-handoff.mjs --check
+
 echo "==> Generating changelog page from CHANGELOG.md"
 node scripts/generate-changelog.mjs
 
