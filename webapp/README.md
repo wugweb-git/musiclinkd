@@ -10,7 +10,17 @@ generated from the same source files the schema and admin panel use.
 ## What's here vs. what's yours to design
 
 **Environment (this, generated/scaffolded):**
-- `manifest.json`, `service-worker.js` — installable, standalone display, offline shell
+- `manifest.json`, `service-worker.js` — installable, standalone display, offline shell.
+  The worker is **network-first**: the network copy always wins and refreshes the
+  cache, which exists as an offline fallback rather than the default source. Its
+  `CACHE_NAME` is stamped by `build-hosting.sh` from a hash of `shared/*` +
+  `manifest.json`, so a changed shell lands in a new cache and older ones are
+  dropped on activate. Both of those replaced a cache-first worker with a
+  hand-bumped `v1` name (2026-08-30): it was never bumped, so every browser that
+  had loaded the site kept serving the original `app-shell.js` forever and every
+  deploy looked like a no-op — a screen would render with months-old behaviour
+  while the freshly deployed markup sat in the same response. If you ever make
+  the worker cache-first again, derive the name; don't hand-maintain it.
 - `shared/app-shell.css` + `shared/app-shell.js` — safe-area handling, 100dvh fixed viewport, no page-level scroll unless a screen opts in, keyboard-aware layout (bottom bar hides when the OS keyboard opens), a bottom-sheet primitive (open/close/transition), service worker registration. **Deliberately zero color/type/spacing/brand tokens** — this project has its own design system (`frontend/guide/tokens/`); layer that on top of this shell per screen.
 - `template/index.html` — the structural pattern every screen follows (topbar/content/bottombar regions, one example bottom sheet). Copy this pattern, don't fight it. As of 2026-08-16 this is a real on-brand placeholder shell (back button, screen title read live from `screen.json`, a centered "not designed yet" state using the actual design tokens) instead of a blank page with a stray dev button — it was rendering as an effectively invisible screen in the Flow/Screen Index preview, which is what prompted the fix. All 103 stub screens that existed at the time were regenerated in place to pick up the new shell (see git history) — the scaffolder in `generate.ts` only writes `template/index.html`'s content into screens that don't have an `index.html` yet, so this one-time regeneration was a separate manual pass, not something the normal regenerate step does for you retroactively.
 - `webapp/flows/<flow>/<screen>/screen.json` — for every real screen in every flow: flow name, screen name, screen number, states, which Firestore collections it touches, and a **real sample document** for each (pulled straight from the same seed data already loaded into `musiclinkd-7ae30`, not fabricated separately).

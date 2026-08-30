@@ -138,4 +138,17 @@ echo "==> Copying webapp/ PWA product-reference build into dist/preview/"
 mkdir -p dist/preview
 cp -r webapp/. dist/preview/
 
+# Stamp the service worker's cache name with a hash of the shell it caches.
+# It used to carry a hand-bumped "v1" whose own comment said to bump it when
+# shared/* changed; nobody ever did, so returning visitors were served the
+# original app-shell.js forever and every deploy looked like a no-op. Deriving
+# it removes the step there was to forget: change the shell and the cache name
+# changes with it, so old caches are dropped on activate.
+SW_ID=$(cat dist/preview/shared/app-shell.js dist/preview/shared/app-shell.css \
+        dist/preview/manifest.json 2>/dev/null | shasum -a 256 | cut -c1-12)
+sed -i '' "s/__BUILD_ID__/$SW_ID/" dist/preview/service-worker.js
+grep -q "__BUILD_ID__" dist/preview/service-worker.js && \
+  { echo "    ERROR: service-worker.js BUILD_ID not stamped"; exit 1; }
+echo "    service worker cache: musiclinkd-shell-$SW_ID"
+
 echo "==> dist/ ready ($(find dist -type f | wc -l | tr -d ' ') files)"
