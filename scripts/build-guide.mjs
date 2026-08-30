@@ -152,8 +152,15 @@ function parseSections(file) {
     const body = css.slice(m.end, i + 1 < marks.length ? marks[i + 1].at : css.length);
     const selectors = [...body.matchAll(/^(\.[a-zA-Z][\w-]*)/gm)].map((s) => s[1]);
     const compose = (body.match(/\/\*\s*Compose:\s*([^*]+?)\s*\*\//) || [])[1];
-    /* the first comment block after the banner is the section's rationale */
-    const prose = (body.match(/\/\*([\s\S]*?)\*\//) || [, ""])[1]
+    /* The first comment block after the banner is the section's rationale —
+       EXCEPT a heavy "══" divider (FLOW N —, MIGRATION BACKFILL, etc.), which
+       introduces the NEXT group, not this one. A section with no prose of its
+       own before its rules would otherwise inherit that divider as its own
+       description: "empty state" showed "══ FLOW 4 — DISCOVER ══…" as its
+       prose on 2026-08-30, with the unbroken ═ line overflowing the page. */
+    const comments = [...body.matchAll(/\/\*([\s\S]*?)\*\//g)].map((c) => c[1]);
+    const proseSrc = comments.find((c) => !/^\s*═/.test(c)) || "";
+    const prose = proseSrc
       .split("\n").map((l) => l.replace(/^\s*\*?\s?/, "").trim())
       .filter((l) => l && !/^Compose:/.test(l)).join(" ").trim();
     return { name: m.name, file, selectors: [...new Set(selectors)], compose, prose };
@@ -838,6 +845,109 @@ const DEMOS = {
       <button class="ml-btn ml-btn--primary ml-btn--block">Create your profile</button></div>
   </div>
   <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">The wall is decorative and aria-hidden; the card carries the meaning. Drift respects prefers-reduced-motion.</p>`,
+
+  "permission dialog": `<div class="ml-permission" style="max-width:320px">
+    <span class="ml-permission__icon">${ic("microphone",24)}</span>
+    <h4 class="ml-permission__title">Allow microphone access?</h4>
+    <p class="ml-permission__why">Needed to record scratch takes for a brief. Nothing is recorded until you tap Record.</p>
+    <div class="ml-permission__acts">
+      <button class="ml-btn ml-btn--primary ml-btn--block">Continue</button>
+      <button class="ml-btn ml-btn--secondary ml-btn--block">Not now</button></div>
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Earns the OS prompt before firing it — Android remembers "don't ask again" after two refusals.</p>`,
+
+  "camera picker": `<div class="ml-capture" style="max-width:300px;border:1px solid var(--color-line);border-radius:var(--radius-2)">
+    <button class="ml-capture__opt">${ic("camera",20)}Take photo</button>
+    <div style="height:1px;background:var(--color-line)"></div>
+    <button class="ml-capture__opt">${ic("camera-roll",20)}Choose from library</button>
+    <div style="height:1px;background:var(--color-line)"></div>
+    <button class="ml-capture__opt">${ic("folder",20)}Browse files</button>
+  </div>`,
+
+  "audio recorder": `<div class="ml-rec is-live" style="max-width:320px">
+    <div class="ml-rec__head"><span class="ml-rec__dot"></span>
+      <span class="ml-type-1" style="font-weight:700">Recording</span>
+      <span class="ml-rec__time">00:14</span></div>
+    <div class="ml-rec__meter">${Array.from({length:24},(_,i)=>`<span class="ml-rec__bar" style="height:${8+((i*37)%28)}px"></span>`).join("")}</div>
+    <div class="ml-rec__acts">
+      <button class="ml-btn ml-btn--secondary ml-btn--block">Cancel</button>
+      <button class="ml-btn ml-btn--primary ml-btn--block">Stop</button></div>
+  </div>`,
+
+  "stem dropzone": `<div class="g-row" style="align-items:flex-start">
+    <div class="ml-dropzone" style="width:220px">
+      ${ic("upload-feed",28)}
+      <span class="ml-dropzone__hint">Drop stems here</span>
+      <span class="ml-dropzone__formats">WAV, AIFF up to 200MB</span></div>
+    <div class="ml-dropzone is-over" style="width:220px">
+      ${ic("upload-feed",28)}
+      <span class="ml-dropzone__hint">Release to upload</span></div>
+  </div>`,
+
+  "inline editor": `<div style="max-width:320px">
+    <button class="ml-inline"><span>Playback Vocalist · Mumbai</span>
+      <span class="ml-inline__pencil">${ic("compact-chevron-right-compact",14)}</span></button>
+    <div class="ml-inline is-editing" style="margin-top:var(--space-2)">
+      <input value="Playback Vocalist · Mumbai" style="border:0;outline:0;background:none;font:inherit;width:100%;padding:0;min-height:var(--size-3)" />
+    </div>
+    <div class="ml-inline__acts"><button class="ml-btn ml-btn--primary ml-btn--sm">Save</button><button class="ml-btn ml-btn--secondary ml-btn--sm">Cancel</button></div>
+  </div>`,
+
+  "error boundary": `<div class="ml-error" style="max-width:320px">
+    <span class="ml-error__mark">${ic("cancel",24)}</span>
+    <h4 class="ml-error__title">Something broke on our end</h4>
+    <p class="ml-error__body">The page didn't load. Your data is safe — try again in a moment.</p>
+    <button class="ml-btn ml-btn--primary">Retry</button>
+    <span class="ml-error__ref">Ref · 8F2C-91A</span>
+  </div>`,
+
+  "offline & adaptive banners": `<div style="display:grid;gap:var(--space-2);max-width:400px">
+    <div class="ml-banner ml-banner--offline"><span>${ic("wifi-no",18)}</span>
+      <span class="ml-banner__body">You're offline — changes will sync when you're back.</span></div>
+    <div class="ml-banner ml-banner--promo"><span>${ic("download",18)}</span>
+      <span class="ml-banner__body">Install MusicLinkd for faster access and offline briefs.</span>
+      <button class="ml-banner__dismiss" aria-label="Dismiss">${ic("cancel",16)}</button></div>
+  </div>`,
+
+  "QR share": `<div class="ml-qr" style="max-width:260px">
+    <div class="ml-qr__code">${ic("qr-code",120)}</div>
+    <div class="ml-qr__handle">@arijitsen</div>
+    <div class="ml-qr__hint">Scan to view profile</div>
+  </div>`,
+
+  "animated success": `<div class="ml-success" style="max-width:280px">
+    <span class="ml-success__mark"><span class="ml-success__ring"></span><span class="ml-success__tick">${ic("check",28)}</span></span>
+    <h4 style="margin:0;font-family:var(--font-display);font-size:var(--type-3);font-weight:700">Booking confirmed</h4>
+    <p class="ml-type-2" style="color:var(--color-muted);margin:0">Yash Raj Sound Studios · Sat, 4 PM</p>
+  </div>`,
+
+  "footer CTA": `<div class="ml-footer-cta" style="max-width:480px">
+    <h3 class="ml-footer-cta__title">Ready to collaborate?</h3>
+    <p class="ml-footer-cta__sub">Join 72,000+ verified music professionals.</p>
+    <button class="ml-btn ml-btn--primary ml-btn--lg" style="margin:0 auto">Create your profile</button>
+    <div class="ml-footer-cta__links">
+      <a href="#c-footer-cta">About</a><a href="#c-footer-cta">Careers</a><a href="#c-footer-cta">Privacy</a><a href="#c-footer-cta">Terms</a>
+    </div>
+  </div>`,
+
+  "what's new": `<div class="ml-whatsnew" style="max-width:380px">
+    <span class="ml-whatsnew__ver">Version 4.2 · Aug 2026</span>
+    ${[["New","Rental marketplace","Rent gear and studio time from verified owners."],
+       ["Fixed","Booking calendar","Blocked dates now sync correctly across time zones."],
+       ["Improved","Credit verification","Second-party confirmation now takes under 48 hours."]]
+      .map(([k,t,d])=>`<div class="ml-whatsnew__item"><span class="ml-whatsnew__kind">${k}</span>
+        <div><div class="ml-whatsnew__what">${t}</div><div class="ml-whatsnew__why">${d}</div></div></div>`).join("")}
+  </div>`,
+
+  "android app grid": `<div class="ml-appgrid">
+    ${[["circle","Circle mask"],["squircle","Squircle mask"],["rounded","Rounded square"]]
+      .map(([v,l])=>`<div class="ml-appgrid__cell">
+        <div class="ml-appgrid__canvas ml-appgrid__canvas--${v}">
+          <img src="/guide/brand/assets/logo-badge-inverse.svg" alt="" style="width:56%;height:56%" />
+          <div class="ml-appgrid__safe"></div></div>
+        <span class="ml-appgrid__label">${l}</span></div>`).join("")}
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Dashed line marks the 66.6% safe zone — OEM masks vary and only the centre is guaranteed visible.</p>`,
 
 };
 

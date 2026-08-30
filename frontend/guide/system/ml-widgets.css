@@ -1294,6 +1294,13 @@
   background: color-mix(in srgb, var(--color-white) 88%, transparent);
   color: var(--color-ink); border: 0; cursor: pointer;
 }
+/* 32px visual, 48px effective — same expand-without-resizing technique as
+   .ml-chip and .ml-crumbs__item. */
+.ml-mosaic-tile__pin::after {
+  content: ""; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--size-3); height: var(--size-3);
+}
 
 /* ── bento ─────────────────────────────────────────────────────────────── */
 /* Compose: custom Grid with spans                                           */
@@ -1849,3 +1856,207 @@
 .ml-wall__card { position: relative; z-index: 1; max-width: 380px; padding: var(--space-4); border-radius: var(--radius-3); background: var(--color-white); box-shadow: var(--elevation-2); text-align: center; }
 @keyframes ml-wall-drift { from { transform: translateY(0); } to { transform: translateY(-50%); } }
 @media (prefers-reduced-motion: reduce) { .ml-wall__col--drift { animation: none; } }
+
+/* ══ STYLEGUIDE PARITY ═════════════════════════════════════════════════════
+   The last 13 components from styleguide.html with no counterpart here,
+   found 2026-08-30 by comparing all 262 of its h2 headings rather than its
+   section names. Everything else in that file resolves: 81 match by name,
+   116 under a different name, 42 are prose, 4 are scaffolds it marks
+   "no files yet", 5 are marketing copy.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* ── permission dialog ─────────────────────────────────────────────────── */
+/* Compose: rememberPermissionState + AlertDialog                            */
+/* Android asks once and remembers "don't ask again", so the pre-prompt has to
+   earn the system prompt BEFORE it fires. States why, then hands over. The
+   dismissive action is never styled as the quiet one — refusing must be as
+   easy as accepting or the prompt is coercive. */
+
+.ml-permission { display: grid; gap: var(--space-3); padding: var(--space-4); text-align: center; }
+.ml-permission__icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: var(--size-4); height: var(--size-4); margin-inline: auto;
+  border-radius: var(--radius-4);
+  background: var(--color-pink-container); color: var(--color-pink-pressed);
+}
+.ml-permission__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: 700; margin: 0; }
+.ml-permission__why { font-size: var(--type-2); color: var(--color-muted); margin: 0; }
+.ml-permission__acts { display: grid; gap: var(--space-2); }
+
+/* ── camera picker ─────────────────────────────────────────────────────── */
+/* Compose: ActivityResultContracts.TakePicture / PickVisualMedia            */
+/* The choice sheet, not the camera. Android has two separate contracts and
+   the user picks between them here, so the sheet is the component and the
+   capture surface belongs to the OS. */
+
+.ml-capture { display: grid; gap: var(--space-1); }
+.ml-capture__opt {
+  display: flex; align-items: center; gap: var(--space-3);
+  width: 100%; min-height: var(--size-4);
+  padding: var(--space-3);
+  border: 0; border-radius: var(--radius-2);
+  background: none; color: inherit; text-align: left;
+  font: inherit; font-size: var(--type-2); cursor: pointer;
+}
+.ml-capture__opt:hover { background: var(--color-surface); }
+.ml-capture__opt svg { flex: none; color: var(--color-muted); }
+
+/* ── audio recorder ────────────────────────────────────────────────────── */
+/* Compose: MediaRecorder + AudioAmplitude                                   */
+/* Recording needs three things visible at once: that it IS recording, for how
+   long, and that sound is arriving. The dot pulses, the timer counts, the
+   meter moves — drop any one and the user cannot tell a dead mic from silence. */
+
+.ml-rec { display: grid; gap: var(--space-3); padding: var(--space-4); border: 1px solid var(--color-line); border-radius: var(--radius-3); background: var(--color-white); }
+.ml-rec__head { display: flex; align-items: center; gap: var(--space-2); }
+.ml-rec__dot { width: 10px; height: 10px; border-radius: var(--radius-4); background: var(--color-error); flex: none; }
+.ml-rec.is-live .ml-rec__dot { animation: ml-rec-pulse 1.4s ease-in-out infinite; }
+.ml-rec__time { font-family: var(--font-display); font-size: var(--type-3); font-weight: 800; font-variant-numeric: tabular-nums; margin-left: auto; }
+.ml-rec__meter { display: flex; align-items: flex-end; gap: 2px; height: var(--size-2); }
+.ml-rec__bar { flex: 1; background: var(--color-ink); border-radius: 1px; min-height: 3px; }
+.ml-rec__acts { display: flex; gap: var(--space-2); }
+@keyframes ml-rec-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+@media (prefers-reduced-motion: reduce) { .ml-rec.is-live .ml-rec__dot { animation: none; } }
+
+/* ── stem dropzone ─────────────────────────────────────────────────────── */
+/* Compose: dragAndDropTarget                                                */
+/* Distinct from .ml-upload-grid, which shows what is ALREADY uploaded. This
+   is the target: idle, hovered, and busy, because a dropzone with no hover
+   state gives no signal that the drop will land. */
+
+.ml-dropzone {
+  display: grid; place-items: center; gap: var(--space-2);
+  padding: var(--space-4);
+  border: 2px dashed var(--color-line);
+  border-radius: var(--radius-3);
+  background: var(--color-white);
+  text-align: center;
+  transition: border-color var(--duration-2) var(--ease-standard),
+              background-color var(--duration-2) var(--ease-standard);
+}
+.ml-dropzone.is-over { border-color: var(--color-pink); background: var(--color-pink-container); }
+.ml-dropzone.is-busy { border-style: solid; }
+/* --color-muted is 5.01 on paper but 4.26 on --color-pink-container (is-over
+   state) — the same "muted on a tint" failure .ml-progress__meta had. Ink at
+   reduced opacity replaces it there, same fix here. */
+.ml-dropzone__hint { font-size: var(--type-1); color: var(--color-muted); }
+.ml-dropzone.is-over .ml-dropzone__hint { color: var(--color-ink); opacity: 0.72; }
+.ml-dropzone__formats { font-size: var(--type-1); color: var(--color-muted); }
+
+/* ── inline editor ─────────────────────────────────────────────────────── */
+/* Compose: editable Text with a focus affordance                            */
+/* Edit in place rather than pushing a form screen. The pencil is a hint, not
+   the control — the whole row is the button, because a 16px pencil is not a
+   target. Saving is explicit: silent autosave on a profile is how people
+   publish half a sentence. */
+
+.ml-inline { display: flex; align-items: center; gap: var(--space-2); width: 100%; min-height: var(--size-3); padding: var(--space-2); border: 1px solid transparent; border-radius: var(--radius-1); background: none; font: inherit; text-align: left; cursor: text; }
+.ml-inline:hover { border-color: var(--color-line); background: var(--color-white); }
+.ml-inline__pencil { margin-left: auto; color: var(--color-muted); flex: none; opacity: 0; }
+.ml-inline:hover .ml-inline__pencil, .ml-inline:focus-within .ml-inline__pencil { opacity: 1; }
+.ml-inline.is-editing { border-color: var(--color-ink); background: var(--color-white); cursor: text; }
+.ml-inline__acts { display: flex; gap: var(--space-2); margin-top: var(--space-2); }
+
+/* ── error boundary ────────────────────────────────────────────────────── */
+/* Compose: ErrorScreen                                                      */
+/* What renders when a surface fails. It says what broke, offers the one
+   action that helps, and carries a reference — an error with no reference is
+   unreportable, which is how bugs stay unfixed. */
+
+.ml-error { display: grid; gap: var(--space-3); place-items: center; padding: var(--space-4); text-align: center; }
+.ml-error__mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: var(--size-4); height: var(--size-4);
+  border-radius: var(--radius-4);
+  background: color-mix(in srgb, var(--color-error) 12%, var(--color-white));
+  color: color-mix(in srgb, var(--color-error) 72%, black);
+}
+.ml-error__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: 700; margin: 0; }
+.ml-error__body { font-size: var(--type-2); color: var(--color-muted); margin: 0; max-width: 40ch; }
+.ml-error__ref { font-size: var(--type-1); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+
+/* ── offline & adaptive banners ────────────────────────────────────────── */
+/* Compose: ConnectivityBanner / InstallPromptBanner                          */
+/* Two more .ml-banner variants. Offline is NEUTRAL, not an error: losing
+   signal in a lift is not a fault, and painting it red trains people to
+   ignore red. The adaptive banner is the install/upgrade prompt and is the
+   only banner that may be dismissed. */
+
+.ml-banner--offline { background: var(--color-ink); color: var(--color-white); }
+.ml-banner--offline .ml-banner__body { color: color-mix(in srgb, var(--color-white) 78%, transparent); }
+.ml-banner--promo { background: var(--color-surface); border: 1px solid var(--color-line); }
+.ml-banner__dismiss { position: relative; margin-left: auto; border: 0; background: none; color: inherit; padding: var(--space-1); cursor: pointer; display: inline-flex; }
+.ml-banner__dismiss::after {
+  content: ""; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--size-3); height: var(--size-3);
+}
+
+/* ── QR share ──────────────────────────────────────────────────────────── */
+/* Compose: QrBitmap + ShareSheet                                            */
+/* A profile handed over in person. The code needs a quiet zone and a light
+   ground to scan — it is one of the few places the system fixes white
+   regardless of surface, because scanners require the contrast. */
+
+.ml-qr { display: grid; gap: var(--space-3); justify-items: center; padding: var(--space-4); border: 1px solid var(--color-line); border-radius: var(--radius-3); background: var(--color-white); text-align: center; }
+.ml-qr__code { padding: var(--space-3); background: var(--color-white); border-radius: var(--radius-2); line-height: 0; }
+.ml-qr__handle { font-family: var(--font-display); font-size: var(--type-2); font-weight: 700; }
+.ml-qr__hint { font-size: var(--type-1); color: var(--color-muted); }
+
+/* ── animated success ──────────────────────────────────────────────────── */
+/* Compose: AnimatedVisibility + scaleIn                                     */
+/* .ml-check is the static mark; this is the arrival. The ring draws, then the
+   tick. Both are decorative — the heading carries the message — so the whole
+   thing is aria-hidden and disappears under reduced motion rather than
+   snapping. */
+
+.ml-success { display: grid; gap: var(--space-3); place-items: center; text-align: center; padding: var(--space-4); }
+.ml-success__mark { position: relative; width: var(--size-4); height: var(--size-4); }
+.ml-success__ring { position: absolute; inset: 0; border-radius: var(--radius-4); background: color-mix(in srgb, var(--color-success) 14%, var(--color-white)); animation: ml-pop var(--duration-3) var(--ease-spring) both; }
+.ml-success__tick { position: absolute; inset: 0; display: grid; place-items: center; color: color-mix(in srgb, var(--color-success) 58%, black); animation: ml-pop var(--duration-3) var(--ease-spring) var(--duration-1) both; }
+@keyframes ml-pop { from { transform: scale(0.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .ml-success__ring, .ml-success__tick { animation: none; }
+}
+
+/* ── footer CTA ────────────────────────────────────────────────────────── */
+/* Compose: FooterCta (custom)                                               */
+/* The end-of-page ask. Ink ground so it closes the page, and the ONE place a
+   full-bleed dark block is allowed outside media. Links below are secondary
+   and set at 78% white so they do not compete with the action. */
+
+.ml-footer-cta { display: grid; gap: var(--space-3); padding: var(--space-4); border-radius: var(--radius-3); background: var(--color-ink); color: var(--color-white); text-align: center; }
+.ml-footer-cta__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: 800; line-height: 1.15; margin: 0; }
+.ml-footer-cta__sub { font-size: var(--type-2); color: color-mix(in srgb, var(--color-white) 78%, transparent); margin: 0; }
+.ml-footer-cta__links { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); padding-top: var(--space-3); border-top: 1px solid color-mix(in srgb, var(--color-white) 16%, transparent); }
+.ml-footer-cta__links a { color: color-mix(in srgb, var(--color-white) 78%, transparent); text-decoration: none; font-size: var(--type-1); }
+.ml-footer-cta__links a:hover { color: var(--color-white); text-decoration: underline; }
+
+/* ── what's new ────────────────────────────────────────────────────────── */
+/* Compose: ReleaseNotesSheet                                                */
+/* Release notes, shown once per version. Each entry is tagged by KIND rather
+   than coloured, so the list survives greyscale and a screen reader. */
+
+.ml-whatsnew { display: grid; gap: var(--space-3); }
+.ml-whatsnew__ver { font-size: var(--type-1); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.ml-whatsnew__item { display: grid; grid-template-columns: auto 1fr; gap: var(--space-3); align-items: start; }
+.ml-whatsnew__kind { font-size: var(--type-1); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px var(--space-2); border-radius: var(--radius-4); background: var(--color-surface); color: var(--color-ink); white-space: nowrap; }
+.ml-whatsnew__what { font-size: var(--type-2); }
+.ml-whatsnew__why { font-size: var(--type-1); color: var(--color-muted); }
+
+/* ── android app grid ──────────────────────────────────────────────────── */
+/* Compose: adaptive-icon layers                                             */
+/* Android's adaptive icon: a 108dp canvas of which only the centre 72dp is
+   guaranteed visible, because OEM masks vary. The overlay shows the safe zone
+   against the mask so a mark is never approved on the full square. */
+
+.ml-appgrid { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+.ml-appgrid__cell { display: grid; gap: var(--space-2); justify-items: center; }
+/* 96px mirrors Android's real 108dp adaptive-icon canvas at typical mdpi
+   preview scale — a platform constant, not a design-scale value. */
+.ml-appgrid__canvas { position: relative; width: 96px; height: 96px; display: grid; place-items: center; background: var(--color-surface); border: 1px solid var(--color-line); }
+.ml-appgrid__canvas--circle { border-radius: var(--radius-4); }
+.ml-appgrid__canvas--squircle { border-radius: 28px; } /* approximates the OEM squircle mask at this canvas size */
+.ml-appgrid__canvas--rounded { border-radius: var(--radius-2); }
+.ml-appgrid__safe { position: absolute; width: 66.6%; height: 66.6%; border: 1px dashed var(--color-pink); border-radius: var(--radius-4); pointer-events: none; }
+.ml-appgrid__label { font-size: var(--type-1); color: var(--color-muted); }

@@ -542,7 +542,9 @@ a.ml-row:active { background: var(--color-surface); }
   letter-spacing: -0.04em;
   color: var(--color-ink);
 }
-.ml-wordmark em { font-style: normal; color: var(--color-pink); }
+/* --color-pink as TEXT is 3.56:1 on white and fails — the same rule this
+   token states on itself. Pressed is 5.37 and is what pink text always uses. */
+.ml-wordmark em { font-style: normal; color: var(--color-pink-pressed); }
 .ml-wordmark--on-media { color: var(--color-white); }
 
 /* Small tracked uppercase label above a screen title. */
