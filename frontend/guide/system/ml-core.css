@@ -314,6 +314,12 @@ body {
 .ml-status--error   { background: color-mix(in srgb, var(--color-error)   12%, var(--color-white));
                       color:      color-mix(in srgb, var(--color-error)   72%, black); }
 .ml-status--accent  { background: var(--color-pink-container); color: var(--color-pink-pressed); }
+/* Added 2026-08-30 to absorb the two hand-rolled blue pills the screens grew
+   because no info variant existed: #E0E7FF/#3730A3 (indigo, 11 uses) and
+   #DBEAFE/#1E40AF (blue, 2). Indigo is not in the palette at all and was not
+   derivable from it, which is exactly why those screens hardcoded a hex. */
+.ml-status--info    { background: color-mix(in srgb, var(--color-info) 12%, var(--color-white));
+                      color:      color-mix(in srgb, var(--color-info) 72%, black); }
 
 /* ── badge ─────────────────────────────────────────────────────────────── */
 
@@ -752,6 +758,13 @@ a.ml-row:active { background: var(--color-surface); }
 .ml-banner--info    { background: var(--color-surface); color: var(--color-muted); }
 .ml-banner--success { background: color-mix(in srgb, var(--color-success) 12%, var(--color-white));
                       color: color-mix(in srgb, var(--color-success) 58%, black); }
+/* Added 2026-08-30. The marketplace offer flow had a hand-rolled amber banner
+   because this variant did not exist, which is how #FEF3C7/#92400E reached
+   three screens. --info above is deliberately NEUTRAL rather than blue: an
+   informational banner is not a status, and painting it blue competes with
+   .ml-status--info, which IS one. */
+.ml-banner--warning { background: color-mix(in srgb, var(--color-warning) 18%, var(--color-white));
+                      color: color-mix(in srgb, var(--color-warning) 50%, black); }
 
 /* ── confirmation mark ─────────────────────────────────────────────────── */
 

@@ -17,10 +17,9 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#92400E; background:#FEF3C7; padding:3px 8px; border-radius:999px; margin-left:auto; }
-  .listing-mini { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-line); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
+.listing-mini { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-line); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
   .listing-mini img { width: 48px; height: 48px; border-radius: var(--radius-1); object-fit: cover; }
-  .status-banner { padding: var(--space-3); border-radius: var(--radius-2); text-align: center; font-weight: 600; margin-bottom: var(--space-3); }
+  .status-banner { justify-content: center; text-align: center; font-weight: 600; margin-bottom: var(--space-3); }
 </style>
 </head>
 <body>
@@ -30,7 +29,7 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
       <!-- Phase 2, not MVP: needs the new offers collection (schema landed 2026-08-16, not yet built into the app). -->
-      <span class="status-tag">Phase 2</span>
+      <span class="ml-status ml-status--warning" style="margin-left:auto">Phase 2</span>
     </header>
     <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
       <div class="listing-mini">
@@ -45,21 +44,21 @@
       </div>
 
       <div id="panel-countered" style="display:none;">
-        <div class="status-banner" style="background:#FEF3C7;color:#92400E;">Seller countered: ₹40,000</div>
+        <div class="status-banner ml-banner ml-banner--warning">Seller countered: ₹40,000</div>
         <div style="display:flex;gap:var(--space-2);"><button type="button" class="ml-btn ml-btn--primary" style="flex:1;">Accept</button><button type="button" class="ml-btn ml-btn--secondary" style="flex:1;">Counter again</button></div>
       </div>
 
       <div id="panel-accepted" style="display:none;">
-        <div class="status-banner" style="background:#DCFCE7;color:#166534;">Offer accepted — ₹38,000</div>
+        <div class="status-banner ml-banner ml-banner--success">Offer accepted — ₹38,000</div>
         <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/marketplace/marketplace_order_status/index.html" style="text-decoration:none;">Continue to order</a>
       </div>
 
       <div id="panel-declined" style="display:none;">
-        <div class="status-banner" style="background:#FEE2E2;color:#991B1B;">Offer declined</div>
+        <div class="status-banner ml-banner ml-banner--error">Offer declined</div>
       </div>
 
       <div id="panel-expired" style="display:none;">
-        <div class="status-banner" style="background:var(--color-surface);color:var(--color-muted);">This offer has expired</div>
+        <div class="status-banner ml-banner ml-banner--info">This offer has expired</div>
       </div>
     </main>
     <footer class="app-bottombar"></footer>

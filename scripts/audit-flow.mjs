@@ -98,7 +98,13 @@ for (const flow of FLOWS) {
     if (!headings.length) add("WARN", flow, s, "a11y", `screen has no heading element`);
 
     /* ── system: raw values in markup ────────────────────────────────── */
-    for (const m of body.matchAll(/#[0-9A-Fa-f]{6}\b/g)) {
+    /* Strip HTML comments first. A comment that EXPLAINS why a hex was
+       removed still contains that hex, so scanning raw markup flags the
+       explanation as the violation — which is what happened to
+       public_profile_view_venue on 2026-08-30 after its hardcoded amber was
+       replaced by a color-mix and the note about it was left in place. */
+    const paintable = body.replace(/<!--[\s\S]*?-->/g, "");
+    for (const m of paintable.matchAll(/#[0-9A-Fa-f]{6}\b/g)) {
       const hex = m[0].toUpperCase();
       if (!PALETTE.has(hex) && !BRAND_EXEMPT.has(hex))
         add("ERROR", flow, s, "palette", `off-palette colour ${hex} hardcoded in markup`);

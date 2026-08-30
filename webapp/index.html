@@ -83,9 +83,16 @@
   .flow-group summary::before { content: "▸"; color: var(--color-muted); transition: transform var(--duration-2); font-size: var(--type-1); }
   .flow-group[open] summary::before { transform: rotate(90deg); }
   .flow-status { font-size: var(--type-1); padding: 2px var(--space-2); border-radius: var(--radius-4); margin-left: auto; }
-  .status-partial { background: #FEF3C7; color: #92400E; }
-  .status-app-mocked { background: #DBEAFE; color: #1E40AF; }
-  .status-missing { background: #FEE2E2; color: #991B1B; }
+  /* These three label a screen's build status and ARE product UI, so they
+     derive from tokens like every other status in the system — the same
+     color-mix .ml-status--warning / --info / --error use. They were the last
+     hand-rolled status pairs in the tree. */
+  .status-partial    { background: color-mix(in srgb, var(--color-warning) 18%, var(--color-white));
+                       color:      color-mix(in srgb, var(--color-warning) 50%, black); }
+  .status-app-mocked { background: color-mix(in srgb, var(--color-info) 12%, var(--color-white));
+                       color:      color-mix(in srgb, var(--color-info) 72%, black); }
+  .status-missing    { background: color-mix(in srgb, var(--color-error) 12%, var(--color-white));
+                       color:      color-mix(in srgb, var(--color-error) 72%, black); }
   .screen-list { list-style: none; margin: 4px 0 0; padding: 0 0 0 var(--space-3); }
   .screen-list li a { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-1) var(--space-2); text-decoration: none; color: var(--color-ink); font-size: var(--type-2); border-radius: var(--radius-1); }
   .screen-list li a:hover, .screen-list li a.active { background: var(--color-pink-container); color: var(--color-pink); }
@@ -172,6 +179,12 @@
       width: 100%;
       max-width: 360px; /* Pixel 7 baseline; other devices scale via aspect-ratio */
       aspect-ratio: 9 / 20; /* 20:9 — 360×800 base; iPhone 14 Pro → 390×844 via scale */
+      /* HARDWARE, not product UI. This is the phone bezel; #2C2F3A below is
+         the camera lens and #FFD60A is iOS's low-power battery yellow. They
+         depict the device the app runs ON. Putting them on MusicLinkd's
+         palette would make the workbench look like a MusicLinkd screen
+         rather than like a phone, which is the opposite of the point, so
+         they are exempt in audit-screens deliberately — not overlooked. */
       background: #1a1a2e;
       border-radius: 36px;
       margin: 0 auto;

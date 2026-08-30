@@ -25,13 +25,19 @@
   .cal-grid .day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: var(--type-1); }
   .cal-grid .day.sel { background: var(--color-ink); color: #fff; font-weight: 700; }
   .cal-grid .day.today { border: 1px solid var(--color-ink); }
-  .cal-grid .day.past { color: var(--color-line); }
+  /* --color-line is the HAIRLINE token and was painting text here: past
+     dates measured 1.15:1, effectively invisible. --color-disabled is the
+     token for inactive content and is deliberately sub-AA, which is only
+     legitimate if the element is genuinely inert — so these also carry
+     aria-disabled, which they should have had anyway: a past date is not
+     selectable and a screen reader had no way to know that. */
+  .cal-grid .day.past { color: var(--color-disabled); }
   .slot-list { margin-top: var(--space-4); }
   .slot-row { display: flex; justify-content: space-between; align-items: center; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); }
   .slot-row .status { font-size: var(--type-1); font-weight: 600; }
-  .slot-row.available .status { color: #166534; }
+  .slot-row.available .status { color: color-mix(in srgb, var(--color-success) 58%, black); }
   .slot-row.booked .status { color: var(--color-muted); }
-  .slot-row.pending .status { color: #92400E; }
+  .slot-row.pending .status { color: color-mix(in srgb, var(--color-warning) 50%, black); }
 </style>
 </head>
 <body>
@@ -54,7 +60,7 @@
       <div id="panel-monthly">
         <div class="cal-grid">
           <div class="dow">S</div><div class="dow">M</div><div class="dow">T</div><div class="dow">W</div><div class="dow">T</div><div class="dow">F</div><div class="dow">S</div>
-          <div class="day past">27</div><div class="day past">28</div><div class="day past">29</div><div class="day past">30</div><div class="day past">31</div><div class="day">1</div><div class="day">2</div>
+          <div class="day past" aria-disabled="true">27</div><div class="day past" aria-disabled="true">28</div><div class="day past" aria-disabled="true">29</div><div class="day past" aria-disabled="true">30</div><div class="day past" aria-disabled="true">31</div><div class="day">1</div><div class="day">2</div>
           <div class="day">3</div><div class="day">4</div><div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div>
           <div class="day">10</div><div class="day">11</div><div class="day sel">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div>
           <div class="day">17</div><div class="day">18</div><div class="day today">19</div><div class="day">20</div><div class="day">21</div><div class="day">22</div><div class="day">23</div>

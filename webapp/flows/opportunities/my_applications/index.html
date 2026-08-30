@@ -17,8 +17,7 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#92400E; background:#FEF3C7; padding:3px 8px; border-radius:999px; margin-left:auto; }
-  .app-row { padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); }
+.app-row { padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); }
   .app-row b { font-size: var(--type-2); display: block; }
   .app-row span { font-size: var(--type-1); color: var(--color-muted); }
   .status-pill { display: inline-flex; padding: 3px 10px; border-radius: var(--radius-4); font-size: var(--type-1); font-weight: 600; margin-top: var(--space-1); }
@@ -29,14 +28,14 @@
     <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);height:56px;display:flex;align-items:center;">
       <h1 style="font-size:var(--type-3);">My Applications</h1>
       <!-- Phase 2, not MVP. Shown as designed. -->
-      <span class="status-tag">Phase 2</span>
+      <span class="ml-status ml-status--warning" style="margin-left:auto">Phase 2</span>
     </header>
     <main class="app-content app-content--scroll" style="padding:var(--space-2) var(--space-4) var(--space-4);">
 
       <div id="panel-list">
         <div class="app-row" data-state-row="submitted"><b>Indie Rock Vocalist Wanted</b><span>The Sound Attic · Applied 2 days ago</span><br /><span class="ml-status" style="background:var(--color-surface);color:var(--color-muted);">Submitted</span></div>
-        <div class="app-row" data-state-row="shortlisted"><b>Session Guitarist for EP</b><span>Karan Saxena · Applied 5 days ago</span><br /><span class="ml-status" style="background:#FEF3C7;color:#92400E;">Shortlisted</span></div>
-        <div class="app-row" style="border-bottom:none;" data-state-row="accepted"><b>Mix Engineer for Live EP</b><span>Aditi Sen · Applied 1 week ago</span><br /><span class="ml-status" style="background:#DCFCE7;color:#166534;">Accepted</span></div>
+        <div class="app-row" data-state-row="shortlisted"><b>Session Guitarist for EP</b><span>Karan Saxena · Applied 5 days ago</span><br /><span class="ml-status ml-status--warning">Shortlisted</span></div>
+        <div class="app-row" style="border-bottom:none;" data-state-row="accepted"><b>Mix Engineer for Live EP</b><span>Aditi Sen · Applied 1 week ago</span><br /><span class="ml-status ml-status--success">Accepted</span></div>
       </div>
 
       <div id="panel-empty" style="display:none;flex-direction:column;align-items:center;text-align:center;padding-top:20vh;gap:var(--space-3);">

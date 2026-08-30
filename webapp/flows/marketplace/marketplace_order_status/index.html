@@ -17,9 +17,7 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#92400E; background:#FEF3C7; padding:3px 8px; border-radius:999px; margin-left:auto; }
-  .status-pill { display: inline-flex; padding: 4px 12px; border-radius: var(--radius-4); font-size: var(--type-1); font-weight: 700; }
-  .timeline { margin-top: var(--space-4); }
+.timeline { margin-top: var(--space-4); }
   .t-row { display: flex; gap: var(--space-2); }
   .t-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--color-line); margin-top: 4px; flex: none; }
   .t-dot.done { background: var(--color-ink); }
@@ -34,12 +32,12 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       </a>
       <!-- Phase 2, not MVP: needs marketplace_orders collection. One screen covers both Buy and Rent lifecycles per the 2026-08-16 "rent stays merged" decision. -->
-      <span class="status-tag">Phase 2</span>
+      <span class="ml-status ml-status--warning" style="margin-left:auto">Phase 2</span>
     </header>
     <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
       <h1 style="font-size:var(--type-3);margin:var(--space-3) 0 4px;">Yamaha HS8 Studio Monitors</h1>
       <p style="color:var(--color-muted);font-size:var(--type-1);margin-bottom:var(--space-3);">Order #MK-58201 · ₹38,000</p>
-      <span class="ml-status" id="status-pill" style="background:#FEF3C7;color:#92400E;">Pending payment</span>
+      <span class="ml-status ml-status--warning" id="status-pill">Pending payment</span>
 
       <div class="timeline" id="timeline">
         <div class="t-row"><div><div class="t-dot done"></div><div class="t-line"></div></div><div style="padding-bottom:var(--space-3);"><b style="font-size:var(--type-2);">Offer accepted</b><p style="font-size:var(--type-1);color:var(--color-muted);margin:2px 0 0;">16 Aug 2026</p></div></div>
@@ -53,22 +51,29 @@
   <script src="/preview/shared/app-shell.js" defer></script>
   <script>
     // states: pending | paid | active | returned | completed | cancelled
+    /* Carries the MODIFIER, not a colour pair. Setting pill.style.background
+       from JS meant six hardcoded hexes that no token could reach and that
+       silently outranked any stylesheet fix — the palette purge could not
+       have touched them. The variant classes derive their colours from
+       --color-success / --color-warning / --color-error / --color-info with
+       color-mix, so a token change now reaches this screen too. */
     const CONFIG = {
-      pending: { label: "Pending payment", bg: "#FEF3C7", fg: "#92400E", dots: [] },
-      paid: { label: "Paid", bg: "#DBEAFE", fg: "#1E40AF", dots: ["paid"] },
-      active: { label: "Active", bg: "#DCFCE7", fg: "#166534", dots: ["paid", "active"] },
-      returned: { label: "Returned", bg: "var(--color-surface)", fg: "var(--color-muted)", dots: ["paid", "active"] },
-      completed: { label: "Completed", bg: "#DCFCE7", fg: "#166534", dots: ["paid", "active", "completed"] },
-      cancelled: { label: "Cancelled", bg: "#FEE2E2", fg: "#991B1B", dots: [] },
+      pending:   { label: "Pending payment", mod: "warning", dots: [] },
+      paid:      { label: "Paid",      mod: "info",    dots: ["paid"] },
+      active:    { label: "Active",    mod: "success", dots: ["paid", "active"] },
+      returned:  { label: "Returned",  mod: "neutral", dots: ["paid", "active"] },
+      completed: { label: "Completed", mod: "success", dots: ["paid", "active", "completed"] },
+      cancelled: { label: "Cancelled", mod: "error",   dots: [] },
     };
+    const MODS = ["warning", "info", "success", "neutral", "error"];
     document.addEventListener("musiclinkd:screen-ready", () => {
       const state = window.MusicLinkd.currentState;
       const cfg = CONFIG[state];
       if (!cfg) return;
       const pill = document.getElementById("status-pill");
       pill.textContent = cfg.label;
-      pill.style.background = cfg.bg;
-      pill.style.color = cfg.fg;
+      MODS.forEach((m) => pill.classList.remove("ml-status--" + m));
+      pill.classList.add("ml-status--" + cfg.mod);
       cfg.dots.forEach((d) => document.getElementById("dot-" + d)?.classList.add("done"));
     });
   </script>

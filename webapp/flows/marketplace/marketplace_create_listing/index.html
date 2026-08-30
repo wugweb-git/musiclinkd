@@ -17,8 +17,7 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .status-tag { display:inline-flex; align-items:center; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#3730A3; background:#E0E7FF; padding:3px 8px; border-radius:999px; margin-left:auto; }
-  .type-toggle { display: flex; border: 1px solid var(--color-line); border-radius: var(--radius-4); overflow: hidden; }
+.type-toggle { display: flex; border: 1px solid var(--color-line); border-radius: var(--radius-4); overflow: hidden; }
   .type-toggle button { flex: 1; padding: var(--space-2); background: #fff; border: none; font: 600 var(--type-2)/1 'Inter', sans-serif; color: var(--color-muted); }
   .type-toggle button.sel { background: var(--color-ink); color: #fff; }
   .photo-add { width: 88px; height: 88px; border: 2px dashed var(--color-line); border-radius: var(--radius-2); display: flex; align-items: center; justify-content: center; color: var(--color-muted); }
@@ -32,7 +31,7 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </a>
       <!-- MVP, shipped minimal (decided 2026-08-16): title, category, condition, price, one photo, description, publish. Full 8-step flow (gallery, location picker, preview) is Phase 2. -->
-      <span class="status-tag">MVP scope</span>
+      <span class="ml-status ml-status--info" style="margin-left:auto">MVP scope</span>
     </header>
     <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
       <div id="panel-default" style="display:flex;flex-direction:column;gap:var(--space-3);">

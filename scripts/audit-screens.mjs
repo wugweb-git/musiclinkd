@@ -49,6 +49,18 @@ const PALETTE = new Set(
    inside a gradient token, which is the media scrim */
 for (const c of ["#FFFFFF", "#000000", "#FFF", "#000"]) PALETTE.add(c);
 
+/* The four Google brand colours on the sign-in button. Fixed by Google's
+   brand terms and not ours to re-tint — the same exemption audit-flow makes,
+   duplicated here so the two checks agree. */
+const BRAND_EXEMPT = new Set(["#4285F4", "#34A853", "#FBBC05", "#EA4335"]);
+
+/* webapp/index.html draws a phone around each preview. These four colours
+   depict HARDWARE and iOS chrome — bezel, camera lens, low-power battery
+   yellow, and the desk surface the phone sits on — not MusicLinkd UI. Putting
+   them on the palette would make the workbench look like a MusicLinkd screen
+   rather than like a phone, which defeats the purpose of a device frame. */
+const DEVICE_CHROME = new Set(["#1A1A2E", "#2C2F3A", "#FFD60A", "#EFEFF3"]);
+
 function walk(dir, out = []) {
   for (const e of readdirSync(dir, { withFileTypes: true })) {
     const p = join(dir, e.name);
@@ -72,12 +84,25 @@ for (const f of files) {
   for (const m of s.matchAll(/var\(\s*(--[a-zA-Z0-9-]+)\s*(,)?/g))
     if (!defined.has(m[1]) && !m[2]) unresolved.add(m[1]);
 
-  /* hex colours written directly into markup or a local <style> */
+  /* Hex colours written directly into markup or a local <style>.
+     Three exclusions, all of which this check used to count as violations and
+     which made it disagree with audit-flow (0 vs 19) once the real ones were
+     cleared:
+       - HTML comments. A note explaining why a hex was REMOVED still contains
+         that hex; flagging the explanation as the violation is backwards.
+       - <meta name="theme-color">. A meta attribute cannot take a var(), so a
+         literal there is the only thing that works — one per screen, 155 in
+         total, none of them fixable.
+       - The four Google brand colours on the sign-in button, which are fixed
+         by Google's brand terms and cannot be re-tinted. */
+  const paintable = s
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<meta[^>]*name="theme-color"[^>]*>/gi, "");
   const offPalette = new Set();
-  for (const m of s.matchAll(/#[0-9A-Fa-f]{3,8}\b/g)) {
+  for (const m of paintable.matchAll(/#[0-9A-Fa-f]{3,8}\b/g)) {
     const hex = m[0].toUpperCase();
     if (hex.length !== 7) continue;               // skip #rgb / #rrggbbaa noise
-    if (!PALETTE.has(hex)) offPalette.add(hex);
+    if (!PALETTE.has(hex) && !BRAND_EXEMPT.has(hex) && !DEVICE_CHROME.has(hex)) offPalette.add(hex);
   }
 
   /* internal navigation: /preview/x -> webapp/x must exist on disk */
