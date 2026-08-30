@@ -17,10 +17,8 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .my-tabs { display: flex; gap: var(--space-1); padding: 0 var(--space-3); border-bottom: 1px solid var(--color-line); }
-  .my-tabs button { flex: 1; text-align: center; padding: var(--space-2) 0; font-size: var(--type-1); font-weight: 600; color: var(--color-muted); background: none; border: none; border-bottom: 2px solid transparent; font-family: inherit; }
-  .my-tabs button.active { color: var(--color-ink); border-color: var(--color-ink); }
-  .booking-card { display: flex; gap: var(--space-2); padding: var(--space-3) 0; border-bottom: 1px solid var(--color-line); text-decoration: none; color: inherit; }
+.my-tabs button { flex: 1; text-align: center; padding: var(--space-2) 0; font-size: var(--type-1); font-weight: 600; color: var(--color-muted); background: none; border: none; border-bottom: 2px solid transparent; font-family: inherit; }
+.booking-card { display: flex; gap: var(--space-2); padding: var(--space-3) 0; border-bottom: 1px solid var(--color-line); text-decoration: none; color: inherit; }
   .booking-card img { width: 64px; height: 64px; border-radius: var(--radius-2); object-fit: cover; flex: none; }
   .booking-card b { font-size: var(--type-2); display: block; }
   .status-pill { display: inline-flex; padding: 2px 8px; border-radius: var(--radius-4); font-size: 10px; font-weight: 700; text-transform: uppercase; margin-top: 4px; }
@@ -31,10 +29,10 @@
     <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);height:56px;display:flex;align-items:center;">
       <h1 style="font-size:var(--type-3);">My Bookings</h1>
     </header>
-    <nav class="my-tabs" id="tabs">
-      <button type="button" class="active" data-t="upcoming">Upcoming</button>
-      <button type="button" data-t="past">Past</button>
-      <button type="button" data-t="cancelled">Cancelled</button>
+    <nav class="ml-tabs ml-tabs--fill" role="tablist" id="tabs">
+      <button class="ml-tabs__tab" role="tab" type="button" data-t="upcoming" aria-selected="true">Upcoming</button>
+      <button class="ml-tabs__tab" role="tab" type="button" data-t="past" aria-selected="false">Past</button>
+      <button class="ml-tabs__tab" role="tab" type="button" data-t="cancelled" aria-selected="false">Cancelled</button>
     </nav>
     <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
       <div id="panel-upcoming">
@@ -70,8 +68,11 @@
     document.getElementById("tabs").addEventListener("click", (e) => {
       const btn = e.target.closest("button");
       if (!btn) return;
-      document.querySelectorAll("#tabs button").forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
+      /* aria-selected, not a class. The system styles the active tab off the
+         attribute, and a tablist that carries no aria-selected is announced
+         as three unrelated buttons. */
+      document.querySelectorAll("#tabs button").forEach((b) => b.setAttribute("aria-selected", "false"));
+      btn.setAttribute("aria-selected", "true");
       ["upcoming", "past", "cancelled"].forEach((t) => {
         const el = document.getElementById("panel-" + t);
         el.style.display = t === btn.dataset.t ? (t === "cancelled" ? "flex" : "block") : "none";

@@ -546,6 +546,20 @@
   color: var(--color-ink);
   border-bottom-color: var(--color-pink);
 }
+/* Equal-width variant. Six screens across communication, marketplace and
+   opportunities had grown this as .net-tabs and .my-tabs — two names, one
+   byte-identical rule, neither of them in the system. The difference from the
+   scrollable default is only that the tabs share the width instead of sizing
+   to their content, so it is a modifier rather than a second component.
+   Use it when the tab count is fixed and small (2-4); past that the labels
+   truncate and the scrolling default is the right one. */
+.ml-tabs--fill { overflow-x: visible; gap: var(--space-1); margin-inline: 0; }
+.ml-tabs--fill .ml-tabs__tab {
+  flex: 1;
+  justify-content: center;
+  padding: var(--space-2) 0;
+  font-size: var(--type-1);
+}
 
 /* ── result row ────────────────────────────────────────────────────────── */
 /* The single densest unit in Discover: avatar/thumb, name, qualifier, a
@@ -2060,3 +2074,45 @@
 .ml-appgrid__canvas--rounded { border-radius: var(--radius-2); }
 .ml-appgrid__safe { position: absolute; width: 66.6%; height: 66.6%; border: 1px dashed var(--color-pink); border-radius: var(--radius-4); pointer-events: none; }
 .ml-appgrid__label { font-size: var(--type-1); color: var(--color-muted); }
+
+/* ── person row ────────────────────────────────────────────────────────── */
+/* Compose: ListItem with leadingContent = Avatar                            */
+/* Avatar, name, one line of context, and an optional trailing control. This
+   existed FOUR times under four names — .thread-row, .collab-row, .req-row
+   and .applicant-row across communication and opportunities — with
+   byte-identical inner rules and one accidental difference: the applicant
+   variant sized its avatar 44px where the other three used 48. That was drift,
+   not a decision, so all four are 48 (--avatar-3) here.
+
+   The inner selectors are scoped element/class matches rather than BEM
+   because the markup already writes .meta / b / span / p and rewriting five
+   screens' inner structure to rename them would be churn with no benefit.
+   Scoping them under .ml-person-row keeps a name as generic as .meta safe. */
+
+.ml-person-row {
+  display: flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-line);
+  text-decoration: none; color: inherit;
+  min-height: var(--size-3);
+}
+.ml-person-row:last-child { border-bottom: 0; }
+.ml-person-row > img {
+  width: var(--avatar-3); height: var(--avatar-3);
+  border-radius: var(--radius-4); object-fit: cover; flex: none;
+}
+/* flex:1 with min-width:0 is what lets the long subtitle ellipsis instead of
+   pushing the trailing control off the row — without min-width a flex item
+   refuses to shrink below its content. */
+.ml-person-row .meta { flex: 1; min-width: 0; }
+.ml-person-row .meta b { font-size: var(--type-2); }
+/* DIRECT children only. The unbounded descendant version caught the unread
+   dot nested inside <b> and gave it display:block, which pushed it onto its
+   own line under the name — visible immediately on chat_thread_list. */
+.ml-person-row .meta > span,
+.ml-person-row .meta > p {
+  display: block; margin: 2px 0 0;
+  font-size: var(--type-1); color: var(--color-muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ml-person-row .time { font-size: var(--type-1); color: var(--color-muted); flex: none; }

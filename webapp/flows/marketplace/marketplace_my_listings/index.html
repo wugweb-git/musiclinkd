@@ -17,10 +17,8 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-.my-tabs { display: flex; gap: var(--space-1); padding: 0 var(--space-3); border-bottom: 1px solid var(--color-line); }
-  .my-tabs a { flex: 1; text-align: center; padding: var(--space-2) 0; font-size: var(--type-1); font-weight: 600; color: var(--color-muted); text-decoration: none; border-bottom: 2px solid transparent; }
-  .my-tabs a.active { color: var(--color-ink); border-color: var(--color-ink); }
-  .item-row { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); text-decoration: none; color: inherit; }
+.my-tabs a { flex: 1; text-align: center; padding: var(--space-2) 0; font-size: var(--type-1); font-weight: 600; color: var(--color-muted); text-decoration: none; border-bottom: 2px solid transparent; }
+.item-row { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); text-decoration: none; color: inherit; }
   .item-row img { width: 56px; height: 56px; border-radius: var(--radius-1); object-fit: cover; flex: none; }
 </style>
 </head>
@@ -31,10 +29,10 @@
       <!-- Phase 2, not MVP. Shown as designed. -->
       <span class="ml-status ml-status--warning" style="margin-left:auto">Phase 2</span>
     </header>
-    <nav class="my-tabs">
-      <a href="#" class="active">Listings</a>
-      <a href="#">Purchases</a>
-      <a href="#">Rentals</a>
+    <nav class="ml-tabs ml-tabs--fill" role="tablist">
+      <a class="ml-tabs__tab" role="tab" href="#" aria-selected="true">Listings</a>
+      <a class="ml-tabs__tab" role="tab" href="#" aria-selected="false">Purchases</a>
+      <a class="ml-tabs__tab" role="tab" href="#" aria-selected="false">Rentals</a>
     </nav>
     <main class="app-content app-content--scroll" style="padding:var(--space-2) var(--space-4) var(--space-4);">
       <div id="panel-listings">
@@ -62,8 +60,13 @@
         document.getElementById("panel-listings").style.display = "none";
         document.getElementById("panel-empty").style.display = "flex";
       } else if (state === "purchases" || state === "rentals") {
-        document.querySelectorAll(".my-tabs a").forEach((a) => a.classList.remove("active"));
-        document.querySelectorAll(".my-tabs a")[state === "purchases" ? 1 : 2].classList.add("active");
+        /* Was querying .my-tabs, which no longer exists after the tab bar moved
+           onto .ml-tabs — the selector matched nothing and the active tab
+           silently stopped following the state. Now targets the system class
+           and sets aria-selected, which is what the styling keys off. */
+        const tabs = document.querySelectorAll(".ml-tabs__tab");
+        tabs.forEach((a) => a.setAttribute("aria-selected", "false"));
+        tabs[state === "purchases" ? 1 : 2].setAttribute("aria-selected", "true");
       }
     });
   </script>

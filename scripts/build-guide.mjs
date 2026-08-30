@@ -973,6 +973,17 @@ const DEMOS = {
 
   "readable measure": `<p class="ml-measure ml-type-2" style="margin:0">A line of prose past roughly seventy-five characters starts to lose its return sweep — the eye has to hunt for the start of the next line. This paragraph is capped at <code>--layout-measure</code>, which is 64ch, and the cap is expressed in ch so it tracks the font rather than the viewport.</p>`,
 
+  "person row": `<div style="max-width:360px">
+    ${[["Vedanshu Beats","Producer · connected 12 May 2026","2h"],
+       ["Karan Saxena","Guitarist · connected 3 Apr 2026","1d"],
+       ["Siddharth Swar","Mixing Engineer · applied 2 days ago","3d"]]
+      .map(([n,sub,t],i)=>`<a class="ml-person-row" href="#c-person-row">
+        <img src="${m("faces", i*3+1)}" alt="" />
+        <div class="meta"><b>${n}</b><span>${sub}</span></div>
+        <span class="time">${t}</span></a>`).join("")}
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">One component, four former names — .thread-row, .collab-row, .req-row and .applicant-row.</p>`,
+
 };
 
 /* ── page ──────────────────────────────────────────────────────────────── */

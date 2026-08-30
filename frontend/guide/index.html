@@ -90,7 +90,7 @@
   <li><a href="#brand">Brand</a></li>
   <li><a href="#foundations">Foundations</a></li>
   <li><a href="#core">Core · 39</a></li>
-  <li><a href="#widgets">Widgets · 78</a></li>
+  <li><a href="#widgets">Widgets · 79</a></li>
   <li><a href="#motion">Motion</a></li>
   <li><a href="#patterns">Patterns · 52</a></li>
   <li><a href="#icons">Icons · 423</a></li>
@@ -110,8 +110,8 @@
     </p>
     <div class="g-row" style="margin-top:var(--space-3)">
       <span class="ml-badge">64 tokens</span>
-      <span class="ml-badge">117 sections</span>
-      <span class="ml-badge">506 selectors</span>
+      <span class="ml-badge">118 sections</span>
+      <span class="ml-badge">510 selectors</span>
       <span class="ml-badge">423 icons</span>
       <span class="ml-badge ml-badge--accent">Light only</span>
     </div>
@@ -449,8 +449,8 @@
     <button class="ml-icon-btn" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg></button>
     <button class="ml-icon-btn ml-icon-btn--bare" aria-label="Share"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M7.44 5.44a1.5 1.5 0 1 0 2.12 2.12l.94-.94v6.88a1.5 1.5 0 0 0 3 0V6.62l.94.94a1.5 1.5 0 0 0 2.12-2.12l-3.5-3.5a1.5 1.5 0 0 0-2.12 0zM5 13.5a1.5 1.5 0 0 0-3 0v5A3.5 3.5 0 0 0 5.5 22h13a3.5 3.5 0 0 0 3.5-3.5v-5a1.5 1.5 0 0 0-3 0v5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5z"/></svg></button>
   </div></div>
-    <details class="g-sel"><summary>2 selectors</summary>
-      <code>.ml-icon-btn</code> <code>.ml-icon-btn--bare</code></details>
+    <details class="g-sel"><summary>4 selectors</summary>
+      <code>.ml-icon-btn</code> <code>.ml-icon-btn--bare</code> <code>.ml-icon-btn--primary</code> <code>.ml-icon-btn--muted</code></details>
   </section>
 <section class="g-comp" id="c-field">
     <div class="g-comp__head">
@@ -949,7 +949,7 @@
       <code>.ml-btn-group</code></details>
   </section>
 
-  <h2 class="g-h" id="widgets">Widgets · 78</h2>
+  <h2 class="g-h" id="widgets">Widgets · 79</h2>
   <section class="g-comp" id="c-app-shell">
     <div class="g-comp__head">
       <h3>app shell</h3>
@@ -1197,8 +1197,8 @@
     <div class="g-demo"><nav class="ml-tabs" style="max-width:360px">
     <span class="ml-tabs__tab" aria-selected="true">People</span><a class="ml-tabs__tab" href="#c-scrollable-category-tabs" aria-selected="false">Businesses</a>
     <a class="ml-tabs__tab" href="#c-scrollable-category-tabs" aria-selected="false">Spaces</a><a class="ml-tabs__tab" href="#c-scrollable-category-tabs" aria-selected="false">Music</a></nav></div>
-    <details class="g-sel"><summary>2 selectors</summary>
-      <code>.ml-tabs</code> <code>.ml-tabs__tab</code></details>
+    <details class="g-sel"><summary>3 selectors</summary>
+      <code>.ml-tabs</code> <code>.ml-tabs__tab</code> <code>.ml-tabs--fill</code></details>
   </section>
 <section class="g-comp" id="c-result-row">
     <div class="g-comp__head">
@@ -2331,6 +2331,29 @@
   <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Dashed line marks the 66.6% safe zone — OEM masks vary and only the centre is guaranteed visible.</p></div>
     <details class="g-sel"><summary>8 selectors</summary>
       <code>.ml-appgrid</code> <code>.ml-appgrid__cell</code> <code>.ml-appgrid__canvas</code> <code>.ml-appgrid__canvas--circle</code> <code>.ml-appgrid__canvas--squircle</code> <code>.ml-appgrid__canvas--rounded</code> <code>.ml-appgrid__safe</code> <code>.ml-appgrid__label</code></details>
+  </section>
+<section class="g-comp" id="c-person-row">
+    <div class="g-comp__head">
+      <h3>person row</h3>
+      <span class="g-file">ml-widgets.css</span>
+      <span class="ml-badge">Compose · ListItem with leadingContent = Avatar</span>
+    </div>
+    
+    <div class="g-demo"><div style="max-width:360px">
+    <a class="ml-person-row" href="#c-person-row">
+        <img src="/assets/img/editorials/0e7b75cc331c13fd482936dd133a8363.jpg" alt="" />
+        <div class="meta"><b>Vedanshu Beats</b><span>Producer · connected 12 May 2026</span></div>
+        <span class="time">2h</span></a><a class="ml-person-row" href="#c-person-row">
+        <img src="/assets/img/editorials/3dee9cb6252a4c8f8a149c9fd40d4a9e.jpg" alt="" />
+        <div class="meta"><b>Karan Saxena</b><span>Guitarist · connected 3 Apr 2026</span></div>
+        <span class="time">1d</span></a><a class="ml-person-row" href="#c-person-row">
+        <img src="/assets/img/editorials/4dcf33e3aa19ee077f4e95c2b66ae43a.jpg" alt="" />
+        <div class="meta"><b>Siddharth Swar</b><span>Mixing Engineer · applied 2 days ago</span></div>
+        <span class="time">3d</span></a>
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">One component, four former names — .thread-row, .collab-row, .req-row and .applicant-row.</p></div>
+    <details class="g-sel"><summary>1 selector</summary>
+      <code>.ml-person-row</code></details>
   </section>
 
   <h2 class="g-h" id="motion">Motion</h2>

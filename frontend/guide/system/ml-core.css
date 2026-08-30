@@ -140,6 +140,13 @@ body {
 }
 .ml-icon-btn:active { transform: scale(0.94); background: var(--color-surface); }
 .ml-icon-btn--bare  { border-color: transparent; background: transparent; }
+/* Filled variants. Communication and opportunities had grown these locally as
+   .icon-btn.accept / .icon-btn.decline at 32-36px — below the 48dp minimum,
+   which is the exact failure .ml-icon-btn was built to end. Promoting them
+   here rather than repeating the fix per screen. */
+.ml-icon-btn--primary { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-white); }
+.ml-icon-btn--primary:active { background: var(--color-ink-pressed); }
+.ml-icon-btn--muted   { background: var(--color-surface); border-color: transparent; color: var(--color-muted); }
 .ml-icon-btn svg    { width: 20px; height: 20px; display: block; }
 
 /* ── field ─────────────────────────────────────────────────────────────── */

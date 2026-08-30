@@ -17,18 +17,8 @@
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  .net-tabs { display: flex; gap: var(--space-1); padding: 0 var(--space-3); border-bottom: 1px solid var(--color-line); }
-  .net-tabs a { flex: 1; text-align: center; padding: var(--space-2) 0; font-size: var(--type-1); font-weight: 600; color: var(--color-muted); text-decoration: none; border-bottom: 2px solid transparent; }
-  .net-tabs a.active { color: var(--color-ink); border-color: var(--color-ink); }
-  .req-row { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); }
-  .req-row img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex: none; }
-  .req-row .meta { flex: 1; min-width: 0; }
-  .req-row .meta b { font-size: var(--type-2); }
-  .req-row .meta span { display: block; font-size: var(--type-1); color: var(--color-muted); }
-  .req-actions { display: flex; gap: 6px; flex: none; }
-  .icon-btn { width: 36px; height: 36px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; }
-  .icon-btn.accept { background: var(--color-ink); color: #fff; }
-  .icon-btn.decline { background: var(--color-surface); color: var(--color-muted); }
+.net-tabs a { flex: 1; text-align: center; padding: var(--space-2) 0; font-size: var(--type-1); font-weight: 600; color: var(--color-muted); text-decoration: none; border-bottom: 2px solid transparent; }
+.req-actions { display: flex; gap: 6px; flex: none; }
 </style>
 </head>
 <body>
@@ -36,26 +26,26 @@
     <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);height:56px;display:flex;align-items:center;">
       <h1 style="font-size:var(--type-3);">Network</h1>
     </header>
-    <nav class="net-tabs">
-      <a href="/preview/flows/communication/connection_requests_tab/index.html" class="active">Requests</a>
-      <a href="/preview/flows/communication/collaborators_tab/index.html">Collaborators</a>
-      <a href="/preview/flows/communication/ai_matchmaker_tab/index.html">AI Match</a>
+    <nav class="ml-tabs ml-tabs--fill" role="tablist">
+      <a class="ml-tabs__tab" role="tab" href="/preview/flows/communication/connection_requests_tab/index.html" aria-selected="true">Requests</a>
+      <a class="ml-tabs__tab" role="tab" href="/preview/flows/communication/collaborators_tab/index.html" aria-selected="false">Collaborators</a>
+      <a class="ml-tabs__tab" role="tab" href="/preview/flows/communication/ai_matchmaker_tab/index.html" aria-selected="false">AI Match</a>
     </nav>
     <main class="app-content app-content--scroll" style="padding:var(--space-2) var(--space-4) var(--space-4);">
-      <div class="req-row">
+      <div class="ml-person-row">
         <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=200" alt="" />
         <div class="meta"><b>Kabir Sethi</b><span>Indie singer-songwriter · wants to connect</span></div>
         <div class="req-actions">
-          <button type="button" class="icon-btn accept" aria-label="Accept"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></button>
-          <button type="button" class="icon-btn decline" aria-label="Decline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+          <button type="button" class="ml-icon-btn ml-icon-btn--primary" aria-label="Accept"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></button>
+          <button type="button" class="ml-icon-btn ml-icon-btn--muted" aria-label="Decline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
         </div>
       </div>
-      <div class="req-row" style="border-bottom:none;">
+      <div class="ml-person-row" style="border-bottom:none;">
         <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200" alt="" />
         <div class="meta"><b>Aanya Malhotra</b><span>Alternative vocalist · wants to connect</span></div>
         <div class="req-actions">
-          <button type="button" class="icon-btn accept" aria-label="Accept"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></button>
-          <button type="button" class="icon-btn decline" aria-label="Decline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+          <button type="button" class="ml-icon-btn ml-icon-btn--primary" aria-label="Accept"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></button>
+          <button type="button" class="ml-icon-btn ml-icon-btn--muted" aria-label="Decline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
         </div>
       </div>
     </main>
