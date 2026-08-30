@@ -3,6 +3,6 @@
   "title": "Discover",
   "order": 4,
   "status": "app-mocked",
-  "description": "Find people, projects, studios, services, music and communities inside the MusicLinkd ecosystem. Distinct from Market (flow 7), which is buy/sell/rent. Backend is 100% mocked: DiscoverViewModel has zero Firestore references and filters a hardcoded 12-profile list.",
+  "description": "100% mock data — DiscoverViewModel has zero Firestore references, filters a hardcoded 12-profile list. Every filterable field (experienceLevel, availabilityStatus, rating, etc.) would need to be sourced from real users/studios documents to go live.",
   "screenCount": 21
 }

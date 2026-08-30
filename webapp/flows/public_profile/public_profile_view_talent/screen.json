@@ -7,8 +7,7 @@
   "screenTitle": "Public Profile — Talent template",
   "screenOrder": 2,
   "states": [
-    "default",
-    "owner"
+    "default"
   ],
   "collectionsTouched": [
     "users",
@@ -99,21 +98,5 @@
         "createdAt": "2026-06-10T09:00:00.000Z"
       }
     }
-  ],
-  "route": "/profile/:username",
-  "entities": [
-    "user",
-    "portfolioProjectDoc",
-    "reviewDoc",
-    "connectionDoc"
-  ],
-  "actions": [
-    "connect",
-    "message",
-    "follow",
-    "share",
-    "viewPortfolio",
-    "editProfile",
-    "viewAsPublic"
   ]
 }

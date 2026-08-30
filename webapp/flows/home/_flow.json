@@ -3,6 +3,6 @@
   "title": "Home",
   "order": 0,
   "status": "app-mocked",
-  "description": "The returning-user dashboard — genuinely missing before this pass. 12 other screens' bottom-nav 'Home' item pointed at discover/trending_recommended_sections as a stand-in; this is the real destination. IA is greeting -> activity counts -> Continue -> For you -> Recent activity -> secondary actions, per the brand owner's explicit wireframe: 'Home ≠ Dashboard... the returning-user home should say: here is what is happening in your MusicLinkd world, and here is the best next thing for you to do.'",
+  "description": "The returning-user dashboard. Added 2026-08-30: no Home screen existed at all, and 12 other screens' bottom-nav \"Home\" item pointed at discover/trending_recommended_sections as a stand-in. Information architecture is activity-first (greeting, activity counts, Continue, For you, recent activity) rather than a feature-card grid. No Firestore wiring — counts and activity are seeded sample values.",
   "screenCount": 1
 }

@@ -5,12 +5,12 @@
   "flowOrder": 4,
   "screenKey": "advanced_filters",
   "screenNumber": 86,
-  "screenTitle": "Filters",
-  "screenOrder": 13,
+  "screenTitle": "Advanced Filters (bottom sheet)",
+  "screenOrder": 2,
   "states": [
     "default"
   ],
   "collectionsTouched": [],
-  "notes": "Sort/city/area/language/genre/experience-seniority/verified/remote/session-work \u2014 all filter mock data, not real fields.",
+  "notes": "Sort/city/area/language/genre/experience-seniority/verified/remote/session-work — all filter mock data, not real fields.",
   "dataContract": []
 }

@@ -5,8 +5,8 @@
   "flowOrder": 4,
   "screenKey": "discover_profile_detail",
   "screenNumber": 87,
-  "screenTitle": "Person Profile",
-  "screenOrder": 14,
+  "screenTitle": "Profile Detail View",
+  "screenOrder": 3,
   "states": [
     "default"
   ],

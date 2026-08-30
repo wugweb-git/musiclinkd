@@ -10,6 +10,14 @@ import type { FlowDoc } from "@/types/firestore";
  */
 export const DEFAULT_FLOWS: Omit<FlowDoc, "createdAt" | "updatedAt">[] = [
   {
+    key: "home",
+    order: 0,
+    title: "Home",
+    status: "app-mocked",
+    description:
+      "The returning-user dashboard. Added 2026-08-30: no Home screen existed at all, and 12 other screens' bottom-nav \"Home\" item pointed at discover/trending_recommended_sections as a stand-in. Information architecture is activity-first (greeting, activity counts, Continue, For you, recent activity) rather than a feature-card grid. No Firestore wiring — counts and activity are seeded sample values.",
+  },
+  {
     key: "auth",
     order: 1,
     title: "User Auth",

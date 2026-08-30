@@ -1,6 +1,14 @@
 {
-  "generatedAt": "2026-08-16T17:35:24.944Z",
+  "generatedAt": "2026-08-30T12:12:52.840Z",
   "flows": [
+    {
+      "key": "home",
+      "title": "Home",
+      "order": 0,
+      "status": "app-mocked",
+      "description": "The returning-user dashboard. Added 2026-08-30: no Home screen existed at all, and 12 other screens' bottom-nav \"Home\" item pointed at discover/trending_recommended_sections as a stand-in. Information architecture is activity-first (greeting, activity counts, Continue, For you, recent activity) rather than a feature-card grid. No Firestore wiring — counts and activity are seeded sample values.",
+      "screenCount": 1
+    },
     {
       "key": "auth",
       "title": "User Auth",
@@ -31,7 +39,7 @@
       "order": 4,
       "status": "app-mocked",
       "description": "100% mock data — DiscoverViewModel has zero Firestore references, filters a hardcoded 12-profile list. Every filterable field (experienceLevel, availabilityStatus, rating, etc.) would need to be sourced from real users/studios documents to go live.",
-      "screenCount": 5
+      "screenCount": 21
     },
     {
       "key": "opportunities",
@@ -187,6 +195,103 @@
     }
   ],
   "screens": [
+    {
+      "flowKey": "home",
+      "flowTitle": "Home",
+      "flowStatus": "app-mocked",
+      "flowOrder": 0,
+      "screenKey": "home_dashboard",
+      "screenNumber": 1,
+      "screenTitle": "Home",
+      "screenOrder": 1,
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "offline",
+        "error"
+      ],
+      "collectionsTouched": [
+        "users",
+        "connections",
+        "opportunities",
+        "studioBookings",
+        "feedPosts"
+      ],
+      "notes": "Returning-user dashboard. Every count and activity row is seeded sample data — there is no backend query behind them yet.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        },
+        {
+          "collection": "connections",
+          "sample": {
+            "senderUid": "mock-talent-kabir-sethi",
+            "targetUserId": "mock-talent-vedanshu-beats-mock",
+            "status": "PENDING"
+          }
+        },
+        {
+          "collection": "opportunities",
+          "sample": null,
+          "note": "No seed sample available for this collection in this build."
+        },
+        {
+          "collection": "studioBookings",
+          "sample": null,
+          "note": "No seed sample available for this collection in this build."
+        },
+        {
+          "collection": "feedPosts",
+          "sample": null,
+          "note": "No seed sample available for this collection in this build."
+        }
+      ]
+    },
     {
       "flowKey": "auth",
       "flowTitle": "User Auth",
@@ -1517,6 +1622,268 @@
       ],
       "collectionsTouched": [],
       "notes": "Composable functions still exist in source but their call sites are commented out — confirmed hidden, not deleted.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "global_search",
+      "screenNumber": 140,
+      "screenTitle": "Global Search",
+      "screenOrder": 6,
+      "states": [
+        "idle",
+        "typing",
+        "no_results"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "search_results",
+      "screenNumber": 141,
+      "screenTitle": "Search Results",
+      "screenOrder": 7,
+      "states": [
+        "default",
+        "no_results"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "people_talent",
+      "screenNumber": 142,
+      "screenTitle": "People / Talent",
+      "screenOrder": 8,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "businesses",
+      "screenNumber": 143,
+      "screenTitle": "Businesses",
+      "screenOrder": 9,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "business_profile",
+      "screenNumber": 151,
+      "screenTitle": "Business Profile",
+      "screenOrder": 10,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "studios_spaces",
+      "screenNumber": 144,
+      "screenTitle": "Studios & Spaces",
+      "screenOrder": 11,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "studio_profile_discover",
+      "screenNumber": 152,
+      "screenTitle": "Studio Profile",
+      "screenOrder": 12,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "services",
+      "screenNumber": 145,
+      "screenTitle": "Services",
+      "screenOrder": 13,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "service_detail",
+      "screenNumber": 154,
+      "screenTitle": "Service Detail",
+      "screenOrder": 14,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "projects",
+      "screenNumber": 146,
+      "screenTitle": "Projects / Portfolio",
+      "screenOrder": 15,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "project_detail",
+      "screenNumber": 153,
+      "screenTitle": "Project Detail",
+      "screenOrder": 16,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "music_audio",
+      "screenNumber": 147,
+      "screenTitle": "Music / Audio",
+      "screenOrder": 17,
+      "states": [
+        "default",
+        "playing"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "communities",
+      "screenNumber": 148,
+      "screenTitle": "Communities",
+      "screenOrder": 18,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "community_detail",
+      "screenNumber": 155,
+      "screenTitle": "Community Detail",
+      "screenOrder": 19,
+      "states": [
+        "default",
+        "joined"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "nearby",
+      "screenNumber": 150,
+      "screenTitle": "Nearby",
+      "screenOrder": 20,
+      "states": [
+        "default",
+        "permission_denied"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "discover",
+      "flowTitle": "Discover",
+      "flowStatus": "app-mocked",
+      "flowOrder": 4,
+      "screenKey": "discover_opportunities",
+      "screenNumber": 149,
+      "screenTitle": "Opportunities",
+      "screenOrder": 21,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "Designed 2026-08-29 against the Flow 4 Discover spec. Discover is find-someone/something inside the ecosystem; Market (flow 7) is buy/sell/rent — the two must not converge. No backend: DiscoverViewModel has zero Firestore references today.",
       "dataContract": []
     },
     {

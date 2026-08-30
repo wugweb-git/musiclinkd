@@ -5,12 +5,12 @@
   "flowOrder": 4,
   "screenKey": "discover_feed",
   "screenNumber": 85,
-  "screenTitle": "Discover Home",
+  "screenTitle": "Discover Feed / Home",
   "screenOrder": 1,
   "states": [
     "default"
   ],
   "collectionsTouched": [],
-  "notes": "100% mocked \u2014 DiscoverViewModel has zero Firestore references, filters a hardcoded 12-profile list.",
+  "notes": "100% mocked — DiscoverViewModel has zero Firestore references, filters a hardcoded 12-profile list.",
   "dataContract": []
 }

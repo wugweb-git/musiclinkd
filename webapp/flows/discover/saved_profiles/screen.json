@@ -5,8 +5,8 @@
   "flowOrder": 4,
   "screenKey": "saved_profiles",
   "screenNumber": 88,
-  "screenTitle": "Saved / Following",
-  "screenOrder": 20,
+  "screenTitle": "Saved Profiles",
+  "screenOrder": 4,
   "states": [
     "empty",
     "populated"

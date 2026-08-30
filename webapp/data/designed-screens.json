@@ -1,4 +1,5 @@
 {
+  "_note": "Regenerate with the snippet in webapp/README.md.",
   "designed": [
     "auth/email_auth",
     "auth/google_signin",
@@ -26,10 +27,27 @@
     "communication/networking_feed",
     "communication/networking_feed_artist_profile",
     "discover/advanced_filters",
+    "discover/business_profile",
+    "discover/businesses",
+    "discover/communities",
+    "discover/community_detail",
     "discover/discover_feed",
+    "discover/discover_opportunities",
     "discover/discover_profile_detail",
+    "discover/global_search",
+    "discover/music_audio",
+    "discover/nearby",
+    "discover/people_talent",
+    "discover/project_detail",
+    "discover/projects",
     "discover/saved_profiles",
+    "discover/search_results",
+    "discover/service_detail",
+    "discover/services",
+    "discover/studio_profile_discover",
+    "discover/studios_spaces",
     "discover/trending_recommended_sections",
+    "home/home_dashboard",
     "marketplace/marketplace_browse",
     "marketplace/marketplace_create_listing",
     "marketplace/marketplace_item_detail",
@@ -68,6 +86,7 @@
     "portfolio/select_role",
     "portfolio/streaming_links",
     "portfolio/success",
+    "public_profile/public_profile_view_talent",
     "public_profile/public_profile_view_venue"
   ]
 }
