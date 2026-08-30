@@ -8,7 +8,7 @@
 <link rel="icon" href="/assets/img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
 <!-- The catalogue is styled with the system it documents. There is no second
      stylesheet: a broken component breaks this page. -->
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
@@ -89,7 +89,7 @@
 <nav class="g-nav" aria-label="Sections"><ul>
   <li><a href="#brand">Brand</a></li>
   <li><a href="#foundations">Foundations</a></li>
-  <li><a href="#core">Core · 37</a></li>
+  <li><a href="#core">Core · 39</a></li>
   <li><a href="#widgets">Widgets · 78</a></li>
   <li><a href="#motion">Motion</a></li>
   <li><a href="#patterns">Patterns · 52</a></li>
@@ -109,9 +109,9 @@
       with those same files — <b>if a component breaks, this page breaks</b>.
     </p>
     <div class="g-row" style="margin-top:var(--space-3)">
-      <span class="ml-badge">56 tokens</span>
-      <span class="ml-badge">115 sections</span>
-      <span class="ml-badge">500 selectors</span>
+      <span class="ml-badge">64 tokens</span>
+      <span class="ml-badge">117 sections</span>
+      <span class="ml-badge">504 selectors</span>
       <span class="ml-badge">423 icons</span>
       <span class="ml-badge ml-badge--accent">Light only</span>
     </div>
@@ -178,23 +178,24 @@
 
   <h3 style="margin-top:var(--space-4)">Brand expression palette</h3>
   <p class="ml-lede" style="max-width:64ch">
-    <b>Marketing only — not the UI palette.</b> The colours under Foundations are
-    what the product renders; these five are what the brand looks like in a
-    campaign. Kept apart on purpose: two pinks and two blacks in one palette
-    guarantees the wrong one gets picked, so a screen never reaches for these
-    and a poster never reaches for the UI palette.
+    <b>Marketing only — not the UI palette.</b> These live in the SAME colour book
+    as everything else as of 2026-08-30: there is one place to look, and the
+    separation is carried by the name rather than by a second group. A screen
+    never reaches for a <code>brand*</code> colour and a poster never reaches for
+    the UI palette — two pinks and two blacks in one book is exactly why that
+    rule has to be written down.
   </p>
   <div class="g-swatches"><div class="g-swatch">
       <span class="g-chipcol" style="background:#FF005C"></span>
-      <code>--color-brand-warm-pink</code><b>#FF005C</b><span>Brand pink</span></div><div class="g-swatch">
+      <code>--color-color-brand-warm-pink</code><b>#FF005C</b><span>Brand pink</span></div><div class="g-swatch">
       <span class="g-chipcol" style="background:#141621"></span>
-      <code>--color-brand-black</code><b>#141621</b><span>Brand black, faintly blue</span></div><div class="g-swatch">
+      <code>--color-color-brand-black</code><b>#141621</b><span>Brand black, faintly blue</span></div><div class="g-swatch">
       <span class="g-chipcol" style="background:#FFFFFF"></span>
-      <code>--color-brand-white</code><b>#FFFFFF</b><span>The supplied swatch labelled White carried HEX #000000 against RGB 255 255 255 — contradictory</span></div><div class="g-swatch">
+      <code>--color-color-brand-white</code><b>#FFFFFF</b><span>The supplied swatch labelled White carried HEX #000000 against RGB 255 255 255 — contradictory</span></div><div class="g-swatch">
       <span class="g-chipcol" style="background:#4F5059"></span>
-      <code>--color-brand-dark-gray</code><b>#4F5059</b></div><div class="g-swatch">
+      <code>--color-color-brand-dark-gray</code><b>#4F5059</b><span>EXPRESSION ONLY — never on a product screen</span></div><div class="g-swatch">
       <span class="g-chipcol" style="background:#C4C5C8"></span>
-      <code>--color-brand-light-gray</code><b>#C4C5C8</b></div></div>
+      <code>--color-color-brand-light-gray</code><b>#C4C5C8</b><span>EXPRESSION ONLY — never on a product screen</span></div></div>
 
   <h2 class="g-h" id="foundations">Foundations</h2>
   <p class="ml-lede" style="max-width:64ch"> Black, grey and white build every surface and control.</p>
@@ -226,7 +227,13 @@
       <span class="g-chipcol" style="background:#F59E0B"></span>
       <code>--color-warning</code><b>#F59E0B</b></div><div class="g-swatch">
       <span class="g-chipcol" style="background:#DC2626"></span>
-      <code>--color-error</code><b>#DC2626</b></div></div>
+      <code>--color-error</code><b>#DC2626</b></div><div class="g-swatch">
+      <span class="g-chipcol" style="background:#2563EB"></span>
+      <code>--color-info</code><b>#2563EB</b><span>Informational badge — 'On Tour', 'Remote available'</span></div><div class="g-swatch">
+      <span class="g-chipcol" style="background:#9CA3AF"></span>
+      <code>--color-disabled</code><b>#9CA3AF</b><span>Inactive control borders and text</span></div><div class="g-swatch">
+      <span class="g-chipcol" style="background:rgba(13,13,13,0.32)"></span>
+      <code>--color-scrim</code><b>rgba(13,13,13,0.32)</b><span>Backdrop behind drawers, sheets and modals</span></div></div>
 
   <h3 style="margin-top:var(--space-4)">Scales</h3>
   <p class="ml-lede">Four steps each, exponential. Every step is visibly different from its neighbour — that is the point, and why there is no fifth.</p>
@@ -234,6 +241,9 @@
     <tr><th>space</th><td><code>4px</code></td><td><code>8px</code></td><td><code>16px</code></td><td><code>32px</code></td></tr>
     <tr><th>radius</th><td><code>8px</code></td><td><code>16px</code></td><td><code>32px</code></td><td><code>9999px</code></td></tr>
     <tr><th>size</th><td><code>32px</code></td><td><code>40px</code></td><td><code>48px</code></td><td><code>56px</code></td></tr>
+    <tr><th>icon</th><td><code>16px</code></td><td><code>20px</code></td><td><code>24px</code></td><td><code>32px</code></td></tr>
+    <tr><th>avatar</th><td><code>24px</code></td><td><code>32px</code></td><td><code>48px</code></td><td><code>64px</code></td></tr>
+    <tr><th>elevation</th><td><code>1.dp</code></td><td><code>3.dp</code></td><td><code>8.dp</code></td><td><code>12.dp</code></td></tr>
     <tr><th>opacity</th><td><code>0.08</code></td><td><code>0.16</code></td><td><code>0.32</code></td><td><code>0.64</code></td></tr>
     <tr><th>type · web</th><td><code>12px–13px</code></td><td><code>16px–18px</code></td><td><code>22px–28px</code></td><td><code>32px–44px</code></td></tr>
     <tr><th>type · android</th><td><code>12sp</code></td><td><code>16sp</code></td><td><code>22sp</code></td><td><code>32sp</code></td></tr>
@@ -255,6 +265,112 @@
     <div class="ml-type-2" style="margin-top:var(--space-2)">Body — default UI copy and list items</div>
     <div class="ml-type-1" style="margin-top:var(--space-2)">Caption — metadata, labels and badges</div>
   </div>
+
+  <h3 style="margin-top:var(--space-4)">Scale audit</h3>
+  <p class="ml-lede ml-measure">Measured, not asserted. A step passes if each neighbour differs by
+  at least 1.5&times; — roughly where a difference stops being arguable at a glance.</p>
+  <table class="g-t"><thead><tr><th>Scale</th><th>Steps</th><th>Ratios</th><th>Verdict</th></tr></thead><tbody>
+    <tr><th>space</th><td class="ml-tabular">4/8/16/32</td><td class="ml-tabular">2.0x, 2.0x, 2.0x. 8x spread.</td><td><span class="ml-status ml-status--success">Pass</span></td></tr><tr><th>radius</th><td class="ml-tabular">8/16/32</td><td class="ml-tabular">2.0x, 2.0x. Step 4 (9999) is functional, not a scale step.</td><td><span class="ml-status ml-status--success">Pass</span></td></tr><tr><th>opacity</th><td class="ml-tabular">0.08/0.16/0.32/0.64</td><td class="ml-tabular">2.0x, 2.0x, 2.0x. 8x spread.</td><td><span class="ml-status ml-status--success">Pass</span></td></tr><tr><th>motion</th><td class="ml-tabular">125/200/320/500ms</td><td class="ml-tabular">1.6x, 1.6x, 1.56x. 4x spread.</td><td><span class="ml-status ml-status--success">Pass</span></td></tr><tr><th>zIndex</th><td class="ml-tabular">100/200/400/800</td><td class="ml-tabular">2.0x, 2.0x, 2.0x.</td><td><span class="ml-status ml-status--success">Pass</span></td></tr><tr><th>elevation</th><td class="ml-tabular">blur 3/12/24/32</td><td class="ml-tabular">clearly separable at every step.</td><td><span class="ml-status ml-status--success">Pass</span></td></tr>
+    <tr><th>size</th><td class="ml-tabular">32/40/48/56</td><td colspan="2">1.25x, 1.2x, 1.17x. Only 1.8x total spread. This FAILS the contrast test and CANNOT be fixed: 48 is the Material touch-target minimum and 44pt the iOS HIG minimum, so an exponential ramp (16/32/64/128) would put two of four steps below the accessibility floor and the fourth at an absurd 128px control. size is therefore a CONSTANT SET, not a scale, and is renamed as such in its own description. Keeping it at four entries is still correct — the restriction was never the problem here.</td></tr><tr><th>type</th><td class="ml-tabular">12/16/22/32</td><td colspan="2">1.33x, 1.38x, 1.45x. Fails a strict 1.5x test but is DELIBERATE: 1.33 is the perfect fourth, the standard modular ratio for text. A 2x type ramp is 12/24/48/96, which has no usable body size between caption and headline. The measured ratios climb 1.33 -> 1.45 across the scale, which is the correct shape — tighter at the small end where legibility is scarce, looser at the display end where impact is the job.</td></tr>
+  </tbody></table>
+  <p class="ml-lede ml-measure" style="margin-top:var(--space-2)"><b>Verdict.</b> 5 of 7 scales pass outright, elevation now passes after being restored to 4 levels. The 2 that fail are both constrained by something outside taste — an accessibility floor and a typographic convention — and both are documented rather than silently left looking like oversights. No scale exceeds 4 steps; the restriction holds.</p>
+
+  <h3 style="margin-top:var(--space-4)">Typography spec</h3>
+  <p class="ml-lede ml-measure">Every axis of every step, and the Compose <code>TextStyle</code> it
+  becomes. Generated from the same source the CSS is, so the app and this page cannot disagree.</p>
+  <div style="overflow-x:auto">
+  <table class="g-t"><thead><tr><th>Token</th><th>Fluid value (web)</th><th>Weight</th><th>Compose TextStyle</th><th>Usage</th></tr></thead><tbody>
+    <tr><th>--type-1</th>
+        <td class="ml-tabular">12px → 13px</td>
+        <td class="ml-tabular">600</td>
+        <td><code>TextStyle(fontFamily = Inter, fontSize = 12sp, lineHeight = 16sp, fontWeight = FontWeight.W600)</code></td>
+        <td>Micro labels, captions, badges, metadata, timestamps</td></tr><tr><th>--type-2</th>
+        <td class="ml-tabular">16px → 18px</td>
+        <td class="ml-tabular">400</td>
+        <td><code>TextStyle(fontFamily = Inter, fontSize = 16sp, lineHeight = 24sp, fontWeight = FontWeight.W400)</code></td>
+        <td>Body copy, default UI text, list item titles</td></tr><tr><th>--type-3</th>
+        <td class="ml-tabular">22px → 28px</td>
+        <td class="ml-tabular">700</td>
+        <td><code>TextStyle(fontFamily = InterTight, fontSize = 22sp, lineHeight = 28sp, fontWeight = FontWeight.W700)</code></td>
+        <td>Section headings, card titles, screen titles</td></tr><tr><th>--type-4</th>
+        <td class="ml-tabular">32px → 44px</td>
+        <td class="ml-tabular">800</td>
+        <td><code>TextStyle(fontFamily = InterTight, fontSize = 32sp, lineHeight = 40sp, fontWeight = FontWeight.W800)</code></td>
+        <td>Display — hero headlines, now-playing track title, the one big number on a screen</td></tr>
+  </tbody></table></div>
+  <table class="g-t" style="margin-top:var(--space-3)"><thead><tr><th>Property</th><th>Value</th><th>Usage</th></tr></thead><tbody>
+    <tr><th>Paragraph spacing</th><td class="ml-tabular">var(--space-3) · 16px</td><td>Between paragraphs</td></tr>
+    <tr><th>Max line width</th><td class="ml-tabular">var(--layout-measure) · 64ch</td><td>Readable prose width — <code>.ml-measure</code></td></tr>
+    <tr><th>Font fallback</th><td><code>-apple-system, BlinkMacSystemFont, sans-serif</code></td><td>Declared inside each --font-* value</td></tr>
+    <tr><th>Number style</th><td>Tabular</td><td>Stats, tables, timers — <code>.ml-tabular</code></td></tr>
+  </tbody></table>
+
+  <h3 style="margin-top:var(--space-4)">Sizing map</h3>
+  <p class="ml-lede ml-measure">Component dimensions from the spec. Where a value already lands on a
+  scale it is <b>mapped, not duplicated</b> — emitting it again would be a second name for the same
+  number, which is how the previous system reached 248 tokens.</p>
+  <table class="g-t"><thead><tr><th>Component</th><th>Resolves to</th><th>Value</th></tr></thead><tbody>
+    <tr><th><code>--comp-btn-h-sm / -md / -lg</code></th><td colspan="2">--size-1 / --size-2 / --size-3  (32 / 40 / 48)</td></tr><tr><th><code>--comp-input-h</code></th><td colspan="2">--size-2  (40)</td></tr><tr><th><code>--comp-chip-h</code></th><td colspan="2">--size-1  (32)</td></tr><tr><th><code>FAB small / regular</code></th><td colspan="2">--size-2 / --size-4  (40 / 56)</td></tr><tr><th><code>Touch target min / comfortable</code></th><td colspan="2">--size-3 / --size-4  (48 / 56)</td></tr><tr><th><code>Nav height</code></th><td colspan="2">--size-3  (48)</td></tr><tr><th><code>Switch track height</code></th><td colspan="2">--size-1  (32); width is --component-switch-track (52)</td></tr><tr><th><code>--comp-card-padding / -radius</code></th><td colspan="2">--space-3 / --radius-3  (16 / 32)</td></tr><tr><th><code>--layout-gutter-mobile / -tablet / -desktop</code></th><td colspan="2">--space-3 / --space-4 / --space-4  (16 / 32 / 32)</td></tr><tr><th><code>--layout-gap-sm / -md / -lg</code></th><td colspan="2">--space-2 / --space-3 / --space-4  (8 / 16 / 32)</td></tr><tr><th><code>--layout-aspect-card / -hero / -avatar</code></th><td colspan="2">4/3 has no token (see meta.knownGaps); --media-aspect-wide 16/9; --media-aspect-square 1/1</td></tr><tr><th><code>--state-disabled-opacity</code></th><td colspan="2">--opacity-3  (0.32)</td></tr><tr><th><code>--state-hover-bg</code></th><td colspan="2">--color-ink at --opacity-1</td></tr><tr><th><code>--state-pressed-bg</code></th><td colspan="2">--color-ink at --opacity-2</td></tr><tr><th><code>--state-selected-bg</code></th><td colspan="2">--color-pink-container</td></tr><tr><th><code>--state-focus-ring</code></th><td colspan="2">2px --color-pink at 2px offset — one definition, in ml-core.css :focus-visible</td></tr><tr><th><code>--int-app-touch-target-min / -comfortable</code></th><td colspan="2">--size-3 / --size-4</td></tr><tr><th><code>--int-web-hover-transition</code></th><td colspan="2">--duration-2 (200ms), aliased as --gesture-hover-transition because the spec names it</td></tr><tr><th><code>--sp-xs / -sm / -md / -lg / -xl / -2xl</code></th><td colspan="2">--space-1 / -2 / -3 / -4; 24 and 48 have NO token by design — they are the midpoints an exponential scale deliberately omits</td></tr><tr><th><code>--r-card / -media / -pill / -avatar</code></th><td colspan="2">--radius-3 (32, spec said 24 — changed to match the scale) / --radius-2 / --radius-4 / --radius-4</td></tr><tr><th><code>Paragraph spacing</code></th><td colspan="2">--space-3 (16)</td></tr><tr><th><code>Font fallback</code></th><td colspan="2">declared inside each --font-* value, not a separate token</td></tr><tr><th><code>Tabular numbers</code></th><td colspan="2">a utility class .ml-tabular, not a token — it is a font-feature-settings switch, not a value</td></tr>
+  </tbody></table>
+
+  <h3 style="margin-top:var(--space-4)">Elevation &amp; borders</h3>
+  <table class="g-t"><thead><tr><th>Token</th><th>Shadow</th><th>Usage</th></tr></thead><tbody>
+    <tr><th>--elevation-1</th>
+      <td><span style="display:inline-block;width:56px;height:28px;border-radius:var(--radius-1);background:var(--color-white);box-shadow:var(--elevation-1)"></span>
+      <code style="margin-left:var(--space-2)">0 1px 3px rgba(13,11,38,0.08)</code></td>
+      <td>Cards, chips, resting surfaces. Prefer a --color-line border before reaching for this.</td></tr><tr><th>--elevation-2</th>
+      <td><span style="display:inline-block;width:56px;height:28px;border-radius:var(--radius-1);background:var(--color-white);box-shadow:var(--elevation-2)"></span>
+      <code style="margin-left:var(--space-2)">0 4px 12px rgba(13,11,38,0.05)</code></td>
+      <td>Hover cards, dropdowns, popovers</td></tr><tr><th>--elevation-3</th>
+      <td><span style="display:inline-block;width:56px;height:28px;border-radius:var(--radius-1);background:var(--color-white);box-shadow:var(--elevation-3)"></span>
+      <code style="margin-left:var(--space-2)">0 8px 24px rgba(13,11,38,0.08)</code></td>
+      <td>FAB, side sheet, bottom sheet, mini-player</td></tr><tr><th>--elevation-4</th>
+      <td><span style="display:inline-block;width:56px;height:28px;border-radius:var(--radius-1);background:var(--color-white);box-shadow:var(--elevation-4)"></span>
+      <code style="margin-left:var(--space-2)">0 12px 32px rgba(13,11,38,0.12)</code></td>
+      <td>Modals, dialogs, full-screen overlays</td></tr>
+    <tr><th>--border-1</th><td class="ml-tabular">1px solid var(--color-line)</td><td>Divider, card border, input rest</td></tr>
+    <tr><th>--border-2</th><td class="ml-tabular">2px solid var(--color-pink)</td><td>Focus ring, selected card or chip</td></tr>
+    <tr><th>disabled border</th><td class="ml-tabular">1px solid var(--color-disabled)</td><td>Inactive controls</td></tr>
+  </tbody></table>
+
+  <h3 style="margin-top:var(--space-4)">Component states</h3>
+  <table class="g-t"><thead><tr><th>State</th><th>Trigger</th><th>Visual</th></tr></thead><tbody>
+    <tr><th>Default</th><td>Rest</td><td>Base style</td></tr>
+    <tr><th>Hover</th><td>Pointer enter</td><td>--elevation-2, translateY(-2px). Pointer only — no hover on touch.</td></tr>
+    <tr><th>Focused</th><td>Keyboard / Tab</td><td>2px var(--color-pink) outline at 2px offset</td></tr>
+    <tr><th>Pressed</th><td>Pointer down</td><td>scale(0.96–0.97), var(--duration-1)</td></tr>
+    <tr><th>Selected</th><td>Tap / click</td><td>var(--color-ink) fill for commitment; var(--color-pink-container) for intent</td></tr>
+    <tr><th>Disabled</th><td>Inactive</td><td>opacity var(--opacity-3) · 0.32, pointer-events none</td></tr>
+    <tr><th>Loading</th><td>Async</td><td><code>.ml-skeleton</code> shimmer</td></tr>
+    <tr><th>Error</th><td>Validation fail</td><td>var(--color-error) border and message</td></tr>
+    <tr><th>Empty</th><td>No data</td><td><code>.ml-empty</code> — icon, message, CTA</td></tr>
+  </tbody></table>
+
+  <h3 style="margin-top:var(--space-4)">Semantic roles</h3>
+  <p class="ml-lede ml-measure">Which foundation colour fills which role. These emit <b>no</b> CSS of
+  their own — on web you use the foundation token directly, because a role alias would be a second
+  name for the same value. The role names exist for the Compose and SwiftUI exports.</p>
+  <table class="g-t"><thead><tr><th>Role</th><th>Token</th><th>Usage</th></tr></thead><tbody>
+    <tr><th>Primary</th><td><code>--color-ink</code></td><td>CTAs. Black, not pink — set by the brand owner.</td></tr>
+    <tr><th>Accent</th><td><code>--color-pink</code></td><td>Focus, selection, active tab, brand mark. Never a CTA fill.</td></tr>
+    <tr><th>Primary container</th><td><code>--color-pink-container</code></td><td>Badge and tag ground</td></tr>
+    <tr><th>Surface</th><td><code>--color-white</code></td><td>Card and sheet fill</td></tr>
+    <tr><th>Surface variant</th><td><code>--color-surface</code></td><td>Search bars, inactive segments, skeletons</td></tr>
+    <tr><th>Background</th><td><code>--color-paper</code></td><td>App canvas</td></tr>
+    <tr><th>Outline</th><td><code>--color-line</code></td><td>Hairlines and dividers</td></tr>
+    <tr><th>Success</th><td><code>--color-success</code></td><td>Confirmed, available, verified</td></tr>
+    <tr><th>Warning</th><td><code>--color-warning</code></td><td>Pending, caution</td></tr>
+    <tr><th>Error</th><td><code>--color-error</code></td><td>Rejected, critical, destructive</td></tr>
+    <tr><th>Info</th><td><code>--color-info</code></td><td>On Tour, remote available</td></tr>
+    <tr><th>Disabled</th><td><code>--color-disabled</code></td><td>Inactive elements</td></tr>
+    <tr><th>Scrim</th><td><code>--color-scrim</code></td><td>Backdrop behind drawers, sheets, modals</td></tr>
+  </tbody></table>
+
+  <h3 style="margin-top:var(--space-4)">Known gaps</h3>
+  <p class="ml-lede ml-measure">Recorded rather than quietly skipped.</p>
+  <table class="g-t"><thead><tr><th>Item</th><th>Why</th></tr></thead><tbody>
+    <tr><th>aspect 4/3</th><td>The spec lists a card aspect of 4/3. It is hardcoded once, in .ml-media-card. Not tokenised because only one component uses it; if a second one needs it, it becomes --media-aspect-card.</td></tr><tr><th>breakpoints 767/1023/1440</th><td>The spec's four breakpoints are NOT adopted. platform.windowSize keeps Material's 600/840 WindowSizeClass values because those are what Compose actually branches on, and the app is Android-first. Shipping web breakpoints that disagree with the native ones is the exact drift v9 removed. --layout-max 1440 is kept as a max-width, which is what the 1440 figure really was.</td></tr><tr><th>density modes</th><td>Not implemented, as the spec itself notes.</td></tr><tr><th>Snackbar 4s/10s</th><td>Durations are behaviour, not design tokens — they belong to the toast controller, not the stylesheet. Documented in the toast section's prose instead.</td></tr>
+  </tbody></table>
 
   <h3 style="margin-top:var(--space-4)">Icon sizes</h3>
   <p class="ml-lede">One glyph at every size the system uses. 16 and 24 are the two drawn grids;
@@ -291,14 +407,14 @@
         <div class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-1)">64px · ink</div></div>
   </div></div>
 
-  <h2 class="g-h" id="core">Core · 37</h2>
+  <h2 class="g-h" id="core">Core · 39</h2>
   <section class="g-comp" id="c-base">
     <div class="g-comp__head">
       <h3>base</h3>
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">[hidden] must win. The UA stylesheet's `[hidden] { display: none }` has the lowest possible specificity, so ANY author display rule beats it — and this system sets display on nearly every component (.ml-btn is inline-flex, .ml-otp is flex). Without this, app-shell.js's state switching sets the attribute correctly and e</p>
+    <p class="ml-lede ml-measure">[hidden] must win. The UA stylesheet's `[hidden] { display: none }` has the lowest possible specificity, so ANY author display rule beats it — and this system sets display on nearly every component (.ml-btn is inline-flex, .ml-otp is flex). Without this, app-shell.js's state switching sets the attribute correctly and…</p>
     <div class="g-demo"><p class="ml-type-2" style="color:var(--color-muted);margin:0">
     Document defaults, the focus ring, the reduced-motion guard and the
     <code>[hidden]</code> override. Not a component — no demo.</p></div>
@@ -355,7 +471,7 @@
       <span class="g-file">ml-core.css</span>
       <span class="ml-badge">Compose · SearchBar</span>
     </div>
-    <p class="ml-lede">Pill, leading glyph, optional trailing voice affordance.</p>
+    <p class="ml-lede ml-measure">Pill, leading glyph, optional trailing voice affordance.</p>
     <div class="g-demo"><div class="ml-search" style="max-width:340px"><span class="ml-search__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg></span>
     <input placeholder="Search talent, studios…" aria-label="Search" /><span class="ml-search__divider"></span>
     <button class="ml-icon-btn ml-icon-btn--bare" aria-label="Voice"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a5 5 0 0 0-5 5v6a5 5 0 0 0 10 0V5a5 5 0 0 0-5-5M5.5 11.5a1.5 1.5 0 0 0-3 0 9 9 0 0 0 8 8.94v2.06a1.5 1.5 0 1 0 3 0v-2.06a9 9 0 0 0 8-8.94 1.5 1.5 0 0 0-3 0 6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6"/></svg></button></div></div>
@@ -368,7 +484,7 @@
       <span class="g-file">ml-core.css</span>
       <span class="ml-badge">Compose · FilterChip</span>
     </div>
-    <p class="ml-lede">A chip is a CONTROL (filter, selection). For a read-only state label use .ml-status below — conflating the two is why screens grew both a .chip and a .status-pill that looked alike but behaved differently.</p>
+    <p class="ml-lede ml-measure">A chip is a CONTROL (filter, selection). For a read-only state label use .ml-status below — conflating the two is why screens grew both a .chip and a .status-pill that looked alike but behaved differently.</p>
     <div class="g-demo"><div class="ml-chip-wrap">
     <button class="ml-chip" aria-pressed="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg>Selected</button>
     <button class="ml-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M10.18 18.9V4.56c0-.6.49-1.1 1.1-1.1h8.36c.6 0 1.09.5 1.09 1.1v7.78a5.08 5.08 0 0 0-6.91 4.76 5.1 5.1 0 0 0 10.13.73H24V4.36A4.36 4.36 0 0 0 19.64 0h-8.37a4.36 4.36 0 0 0-4.36 4.36v9.8A5.07 5.07 0 0 0 0 18.9a5.1 5.1 0 0 0 10.18 0"/></svg>Bollywood</button>
@@ -385,7 +501,7 @@
       <span class="g-file">ml-core.css</span>
       <span class="ml-badge">Compose · AssistChip(enabled=false) / Badge</span>
     </div>
-    <p class="ml-lede">Read-only state label. The container and text colours are DERIVED from the three status tokens with color-mix, so adding "available / pending / live" costs zero new tokens — screens were hardcoding #DCFCE7/#166534 pairs (89 off-palette hex values across the app) purely because these did not exist.</p>
+    <p class="ml-lede ml-measure">Read-only state label. The container and text colours are DERIVED from the three status tokens with color-mix, so adding "available / pending / live" costs zero new tokens — screens were hardcoding #DCFCE7/#166534 pairs (89 off-palette hex values across the app) purely because these did not exist.</p>
     <div class="g-demo"><div class="g-row"><span class="ml-status ml-status--success">Available</span>
     <span class="ml-status ml-status--warning">Selective</span><span class="ml-status ml-status--error">Rejected</span>
     <span class="ml-status ml-status--accent">Live band</span><span class="ml-status ml-status--neutral">Draft</span></div></div>
@@ -398,7 +514,7 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">Removable badge (a chosen collaborator, an applied filter). The × is a real control, so it carries its own expanded target rather than being a 24dp tap-and-miss.</p>
+    <p class="ml-lede ml-measure">Removable badge (a chosen collaborator, an applied filter). The × is a real control, so it carries its own expanded target rather than being a 24dp tap-and-miss.</p>
     <div class="g-demo"><div class="g-row"><span class="ml-badge">★ 4.9</span><span class="ml-badge ml-badge--accent">Gold</span></div></div>
     <details class="g-sel"><summary>4 selectors</summary>
       <code>.ml-badge</code> <code>.ml-badge--accent</code> <code>.ml-badge--removable</code> <code>.ml-badge__remove</code></details>
@@ -409,7 +525,7 @@
       <span class="g-file">ml-core.css</span>
       <span class="ml-badge">Compose · Card(border = BorderStroke(1.dp, MLColor.line))</span>
     </div>
-    <p class="ml-lede">A hairline border is the default separator. Elevation is opt-in, because a flat monochrome system separates by contrast, not by stacked shadows — which is why the elevation scale is 2 levels rather than 4.</p>
+    <p class="ml-lede ml-measure">A hairline border is the default separator. Elevation is opt-in, because a flat monochrome system separates by contrast, not by stacked shadows — which is why the elevation scale is 2 levels rather than 4.</p>
     <div class="g-demo"><div class="ml-card ml-card--padded" style="max-width:320px"><b>Card</b>
     <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Hairline border by default; elevation is opt-in.</p></div></div>
     <details class="g-sel"><summary>5 selectors</summary>
@@ -421,7 +537,7 @@
       <span class="g-file">ml-core.css</span>
       <span class="ml-badge">Compose · AsyncImage + Brush.verticalGradient(MLColor.scrim)</span>
     </div>
-    <p class="ml-lede">The one element allowed to carry saturation. Any text laid over artwork MUST sit on the scrim, never on raw imagery.</p>
+    <p class="ml-lede ml-measure">The one element allowed to carry saturation. Any text laid over artwork MUST sit on the scrim, never on raw imagery.</p>
     <div class="g-demo"><div class="ml-media ml-media--wide ml-media--scrim" style="max-width:320px;border-radius:var(--radius-2)">
     <img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" /><div class="ml-media__overlay"><b>Text on the scrim</b></div></div></div>
     <details class="g-sel"><summary>7 selectors</summary>
@@ -433,7 +549,7 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">Replaces the 14 broken var(--r-avatar) references: an avatar is radius-4.</p>
+    <p class="ml-lede ml-measure">Replaces the 14 broken var(--r-avatar) references: an avatar is radius-4.</p>
     <div class="g-demo"><div class="g-row"><img class="ml-avatar ml-avatar--sm" src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" />
     <img class="ml-avatar" src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" /><img class="ml-avatar ml-avatar--lg" src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" /></div></div>
     <details class="g-sel"><summary>4 selectors</summary>
@@ -445,7 +561,7 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">"Featured talent … See all" + a horizontally scrolling row. The single most repeated layout in the app and in the reference build.</p>
+    <p class="ml-lede ml-measure">"Featured talent … See all" + a horizontally scrolling row. The single most repeated layout in the app and in the reference build.</p>
     <div class="g-demo"><div style="max-width:360px"><div class="ml-section"><h2>Featured</h2>
     <a class="ml-section__link" href="#c-section-header-rail">See all</a></div>
     <div class="ml-rail"><span class="ml-chip">One</span><span class="ml-chip">Two</span><span class="ml-chip">Three</span></div></div></div>
@@ -483,7 +599,7 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">Skeletons, not spinners, for content — a spinner tells the user nothing about what is arriving. tokens.json v8 recorded state.loading as "no dedicated token"; this is that gap closed.</p>
+    <p class="ml-lede ml-measure">Skeletons, not spinners, for content — a spinner tells the user nothing about what is arriving. tokens.json v8 recorded state.loading as "no dedicated token"; this is that gap closed.</p>
     <div class="g-demo"><div class="g-row" style="align-items:flex-start"><div class="ml-spinner"></div>
     <div style="flex:1;max-width:240px"><div class="ml-skeleton" style="height:12px;margin-bottom:8px"></div>
     <div class="ml-skeleton" style="height:12px;width:70%"></div></div></div></div>
@@ -496,17 +612,53 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">This section used to SET the brand in type — Inter Tight 800 with a pink "d" — which is not the logo. The logo is drawn artwork and lives in brand/assets as nine variants. A typographic stand-in beside a real mark guarantees the two drift, so the mark is now an &lt;img> of the real file and the type is only the fallbac</p>
+    <p class="ml-lede ml-measure">This section used to SET the brand in type — Inter Tight 800 with a pink "d" — which is not the logo. The logo is drawn artwork and lives in brand/assets as nine variants. A typographic stand-in beside a real mark guarantees the two drift, so the mark is now an &lt;img> of the real file and the type is only the fallback…</p>
     <div class="g-demo"><div class="g-row" style="align-items:center;gap:var(--space-4)">
-    <span class="ml-logo ml-logo--lg"><img src="/guide/brand/assets/logo-lockup-black.svg" alt="MusicLinkd" /></span>
-    <span class="ml-logo" style="background:var(--color-ink);border-radius:var(--radius-1);padding:var(--space-2) var(--space-3)">
+    <span class="ml-logo ml-logo--lg ml-logo--clear"><img src="/guide/brand/assets/mark-grey.svg" alt="MusicLinkd" /></span>
+    <span class="ml-logo ml-logo--lg ml-logo--clear" style="background:var(--color-ink);border-radius:var(--radius-2)">
       <img src="/guide/brand/assets/logo-lockup-white.svg" alt="MusicLinkd" /></span>
+    <span class="ml-logo ml-logo--lg ml-logo--clear" style="background:var(--color-ink);border-radius:var(--radius-2)">
+      <img src="/guide/brand/assets/logo-lockup-wide-caps.svg" alt="MusicLinkd" /></span>
   </div>
+  <p class="ml-type-1 ml-measure" style="color:var(--color-muted);margin-top:var(--space-2)">
+    Eight of the nine files are white artwork and only <code>mark-grey</code> is drawn dark, so
+    paper gets the mark and ink gets the lockups. Putting a white lockup on paper is not a
+    styling slip — the wordmark simply disappears, which is what this demo used to do.</p>
   <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-3) 0 var(--space-1)">Type fallback — never beside the real mark.</p>
   <div class="ml-wordmark">MusicLink<em>d</em></div>
   <div class="ml-eyebrow" style="margin-top:var(--space-2)">Eyebrow label</div></div>
-    <details class="g-sel"><summary>7 selectors</summary>
-      <code>.ml-logo</code> <code>.ml-logo--sm</code> <code>.ml-logo--lg</code> <code>.ml-logo--clear</code> <code>.ml-wordmark</code> <code>.ml-wordmark--on-media</code> <code>.ml-eyebrow</code></details>
+    <details class="g-sel"><summary>9 selectors</summary>
+      <code>.ml-logo</code> <code>.ml-logo--sm</code> <code>.ml-logo--lg</code> <code>.ml-logo--clear</code> <code>.ml-wordmark</code> <code>.ml-wordmark--on-media</code> <code>.ml-eyebrow</code> <code>.ml-eyebrow--on-media</code> <code>.ml-eyebrow--accent</code></details>
+  </section>
+<section class="g-comp" id="c-tabular-numbers">
+    <div class="g-comp__head">
+      <h3>tabular numbers</h3>
+      <span class="g-file">ml-core.css</span>
+      <span class="ml-badge">Compose · TextStyle(fontFeatureSettings = "tnum")</span>
+    </div>
+    
+    <div class="g-demo"><div class="g-row" style="gap:var(--space-4)">
+    <div><div class="ml-eyebrow">Proportional</div>
+      <div style="font-size:var(--type-3);font-weight:700;line-height:1.6">
+        <div>1,204</div><div>8,891</div><div>11,073</div></div></div>
+    <div><div class="ml-eyebrow">Tabular</div>
+      <div class="ml-tabular" style="font-size:var(--type-3);font-weight:700;line-height:1.6">
+        <div>1,204</div><div>8,891</div><div>11,073</div></div></div>
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Digits share one advance width, so columns align and a changing number does not shift the text beside it.</p></div>
+    <details class="g-sel"><summary>1 selector</summary>
+      <code>.ml-tabular</code></details>
+  </section>
+<section class="g-comp" id="c-readable-measure">
+    <div class="g-comp__head">
+      <h3>readable measure</h3>
+      <span class="g-file">ml-core.css</span>
+      
+    </div>
+    <p class="ml-lede ml-measure">The spec's "Max Line Width". Prose past ~75 characters loses the return sweep; --layout-measure is 64ch, which lands mid-range for Inter.</p>
+    <div class="g-demo"><p class="ml-measure ml-type-2" style="margin:0">A line of prose past roughly seventy-five characters starts to lose its return sweep — the eye has to hunt for the start of the next line. This paragraph is capped at <code>--layout-measure</code>, which is 64ch, and the cap is expressed in ch so it tracks the font rather than the viewport.</p></div>
+    <details class="g-sel"><summary>1 selector</summary>
+      <code>.ml-measure</code></details>
   </section>
 <section class="g-comp" id="c-nav-app-bar">
     <div class="g-comp__head">
@@ -514,7 +666,7 @@
       <span class="g-file">ml-core.css</span>
       <span class="ml-badge">Compose · TopAppBar(navigationIcon = ...)</span>
     </div>
-    <p class="ml-lede">Back-arrow bar for anything inside a flow. Separate from .ml-appbar, which is the tab-root large-title bar.</p>
+    <p class="ml-lede ml-measure">Back-arrow bar for anything inside a flow. Separate from .ml-appbar, which is the tab-root large-title bar.</p>
     <div class="g-demo"><div class="g-frame"><header class="ml-navbar" style="padding-top:var(--space-2)">
     <button class="ml-icon-btn ml-icon-btn--bare" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M15.78 24a2.2 2.2 0 0 1-1.58-.66L3 12 14.2.66a2.2 2.2 0 0 1 3.15 0c.87.88.87 2.3 0 3.18L9.29 12l8.06 8.16c.87.88.87 2.3 0 3.18-.44.44-1 .66-1.57.66"/></svg></button>
     <h3 class="ml-navbar__title">Screen title</h3><span class="ml-navbar__spacer"></span>
@@ -528,7 +680,7 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">Primary action parked at the thumb. Every flow screen that commits to something uses this rather than letting the CTA scroll away.</p>
+    <p class="ml-lede ml-measure">Primary action parked at the thumb. Every flow screen that commits to something uses this rather than letting the CTA scroll away.</p>
     <div class="g-demo"><div class="g-frame" style="height:220px;overflow-y:auto;display:flex;flex-direction:column">
     <div style="flex:1;padding:var(--space-3)">
       <p class="ml-type-2" style="margin:0 0 var(--space-3)">Scroll this panel. The footer stays put and the content passes beneath it.</p>
@@ -559,7 +711,7 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">One box per digit. The row is a single logical input for a screen reader.</p>
+    <p class="ml-lede ml-measure">One box per digit. The row is a single logical input for a screen reader.</p>
     <div class="g-demo"><div class="ml-otp"><span class="ml-otp__box is-filled">4</span><span class="ml-otp__box is-filled">8</span>
     <span class="ml-otp__box is-filled">2</span><span class="ml-otp__box"></span><span class="ml-otp__box"></span>
     <span class="ml-otp__box"></span></div></div>
@@ -585,7 +737,7 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">Inline, in-flow message. Not a toast — this one stays until resolved.</p>
+    <p class="ml-lede ml-measure">Inline, in-flow message. Not a toast — this one stays until resolved.</p>
     <div class="g-demo"><div style="max-width:360px;display:flex;flex-direction:column;gap:var(--space-2)">
     <div class="ml-banner ml-banner--info">Informational</div>
     <div class="ml-banner ml-banner--success">Saved</div>
@@ -599,7 +751,7 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">The raw green on its own 14% tint is 2.02:1, under the 3:1 floor for a graphic (1.4.11). Same darkening the status pills already use.</p>
+    <p class="ml-lede ml-measure">The raw green on its own 14% tint is 2.02:1, under the 3:1 floor for a graphic (1.4.11). Same darkening the status pills already use.</p>
     <div class="g-demo"><div class="ml-check"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></div></div>
     <details class="g-sel"><summary>1 selector</summary>
       <code>.ml-check</code></details>
@@ -610,7 +762,7 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">Onboarding is 13 screens; without a visible position people abandon it. .onb-progress / .onb-step / .step-dots were redefined in 12, 12 and 7 screens respectively before this existed.</p>
+    <p class="ml-lede ml-measure">Onboarding is 13 screens; without a visible position people abandon it. .onb-progress / .onb-step / .step-dots were redefined in 12, 12 and 7 screens respectively before this existed.</p>
     <div class="g-demo"><div style="max-width:320px;display:flex;flex-direction:column;gap:var(--space-3)">
     <div class="ml-steps"><span class="ml-steps__label">3/9</span>
     <span class="ml-steps__track"><span class="ml-steps__fill" style="width:33%"></span></span></div>
@@ -624,7 +776,7 @@
       <span class="g-file">ml-core.css</span>
       <span class="ml-badge">Compose · ListItem + RadioButton / Checkbox</span>
     </div>
-    <p class="ml-lede">Single- or multi-select rows. The whole row is the target, not the box.</p>
+    <p class="ml-lede ml-measure">Single- or multi-select rows. The whole row is the target, not the box.</p>
     <div class="g-demo"><div style="max-width:340px"><button class="ml-choice" role="radio" aria-checked="true">
     <span class="ml-emoji">🎤</span><span class="ml-choice__body"><span class="ml-choice__title">Singer</span>
     <span class="ml-choice__meta">Lead or backing vocals</span></span><span class="ml-choice__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span></button>
@@ -640,7 +792,7 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">Emoji appear as CONTENT on role/instrument/category choices — the same call the approved mobile reference makes on its category tiles. They are sized here rather than with an inline font-size so 21 screens stop hardcoding 22px. Not typography: this is an icon slot that happens to hold an emoji, so it does not use a --t</p>
+    <p class="ml-lede ml-measure">Emoji appear as CONTENT on role/instrument/category choices — the same call the approved mobile reference makes on its category tiles. They are sized here rather than with an inline font-size so 21 screens stop hardcoding 22px. Not typography: this is an icon slot that happens to hold an emoji, so it does not use a…</p>
     <div class="g-demo"><div class="g-row"><span class="ml-emoji">🎤</span><span class="ml-emoji">🎸</span><span class="ml-emoji">🥁</span></div></div>
     <details class="g-sel"><summary>1 selector</summary>
       <code>.ml-emoji</code></details>
@@ -651,7 +803,7 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">Available to assistive tech, absent from the visual layout. For the cases where a screen genuinely needs a heading for structure but showing one would duplicate what the UI already says — a search screen whose subject IS the focused search field, for instance. Not for hiding real content.</p>
+    <p class="ml-lede ml-measure">Available to assistive tech, absent from the visual layout. For the cases where a screen genuinely needs a heading for structure but showing one would duplicate what the UI already says — a search screen whose subject IS the focused search field, for instance. Not for hiding real content.</p>
     <div class="g-demo"><p class="ml-type-2" style="color:var(--color-muted);margin:0">
     <code>.ml-visually-hidden</code> — present for assistive tech, absent visually. Nothing renders here by design.</p></div>
     <details class="g-sel"><summary>1 selector</summary>
@@ -663,7 +815,7 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">The icon library's check-circle is a solid glyph: tinted pink at 14px it reads as a featureless blob. A disc with the check knocked out in white stays legible at the size this actually renders.</p>
+    <p class="ml-lede ml-measure">The icon library's check-circle is a solid glyph: tinted pink at 14px it reads as a featureless blob. A disc with the check knocked out in white stays legible at the size this actually renders.</p>
     <div class="g-demo"><span style="display:inline-flex;align-items:center;gap:var(--space-1);font-weight:700">Ananya Sharma
     <span class="ml-verified"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span></span></div>
     <details class="g-sel"><summary>1 selector</summary>
@@ -675,7 +827,7 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">Pink text link. Uses --color-pink-pressed, not --color-pink: the brand pink measures 3.48:1 on paper and fails AA as text. See the pink-text rule in tokens.json. Replaces the pre-v9 .link-text.</p>
+    <p class="ml-lede ml-measure">Pink text link. Uses --color-pink-pressed, not --color-pink: the brand pink measures 3.48:1 on paper and fails AA as text. See the pink-text rule in tokens.json. Replaces the pre-v9 .link-text.</p>
     <div class="g-demo"><a class="ml-link" href="#c-inline-link">Forgot your password?</a></div>
     <details class="g-sel"><summary>1 selector</summary>
       <code>.ml-link</code></details>
@@ -686,7 +838,7 @@
       <span class="g-file">ml-core.css</span>
       <span class="ml-badge">Compose · Switch</span>
     </div>
-    <p class="ml-lede">The single most-needed missing control: user_settings is 13 screens of preferences with nothing to render them. The track is the target — 48dp tall even though it looks 28dp — and the state is carried by aria-checked so a screen reader gets it without a parallel class.</p>
+    <p class="ml-lede ml-measure">The single most-needed missing control: user_settings is 13 screens of preferences with nothing to render them. The track is the target — 48dp tall even though it looks 28dp — and the state is carried by aria-checked so a screen reader gets it without a parallel class.</p>
     <div class="g-demo"><div style="max-width:340px">
     <label class="ml-row"><span class="ml-row__body"><span class="ml-row__title">Push notifications</span>
     <span class="ml-row__meta">New offers and messages</span></span>
@@ -702,7 +854,7 @@
       <span class="g-file">ml-core.css</span>
       <span class="ml-badge">Compose · Checkbox · RadioButton</span>
     </div>
-    <p class="ml-lede">Standalone controls. .ml-choice covers the whole-row pattern; these are for a control that sits beside other content — a filter list, a consent line.</p>
+    <p class="ml-lede ml-measure">Standalone controls. .ml-choice covers the whole-row pattern; these are for a control that sits beside other content — a filter list, a consent line.</p>
     <div class="g-demo"><div style="display:flex;flex-direction:column;gap:var(--space-2);max-width:340px">
     <label class="ml-check-row"><span class="ml-check-ctl" role="checkbox" aria-checked="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span>
       <span>Available for session work</span></label>
@@ -721,7 +873,7 @@
       <span class="g-file">ml-core.css</span>
       <span class="ml-badge">Compose · ExposedDropdownMenuBox</span>
     </div>
-    <p class="ml-lede">A native &lt;select> styled to match .ml-field. Deliberately native rather than a custom dropdown: the OS picker is better on a phone than anything we would draw, and it is accessible for free.</p>
+    <p class="ml-lede ml-measure">A native &lt;select> styled to match .ml-field. Deliberately native rather than a custom dropdown: the OS picker is better on a phone than anything we would draw, and it is accessible for free.</p>
     <div class="g-demo"><div class="ml-field" style="max-width:340px"><label for="d-sel">City</label>
     <span class="ml-select"><select id="d-sel"><option>Mumbai</option><option>Delhi NCR</option>
     <option>Pune</option><option>Kochi</option></select></span></div></div>
@@ -734,7 +886,7 @@
       <span class="g-file">ml-core.css</span>
       <span class="ml-badge">Compose · Slider · RangeSlider</span>
     </div>
-    <p class="ml-lede">Range input, restyled. Both vendor thumb pseudo-elements are needed — there is no shared selector, and omitting one leaves that browser unstyled.</p>
+    <p class="ml-lede ml-measure">Range input, restyled. Both vendor thumb pseudo-elements are needed — there is no shared selector, and omitting one leaves that browser unstyled.</p>
     <div class="g-demo"><div class="ml-field" style="max-width:340px"><label for="d-sl">Within 10 km</label>
     <input class="ml-slider" id="d-sl" type="range" min="1" max="50" value="10" /></div></div>
     <details class="g-sel"><summary>1 selector</summary>
@@ -746,7 +898,7 @@
       <span class="g-file">ml-core.css</span>
       <span class="ml-badge">Compose · ExpandableCard</span>
     </div>
-    <p class="ml-lede">Built on &lt;details>/&lt;summary> so it works with no JavaScript and is keyboard-accessible for free. FAQ and settings screens need it.</p>
+    <p class="ml-lede ml-measure">Built on &lt;details>/&lt;summary> so it works with no JavaScript and is keyboard-accessible for free. FAQ and settings screens need it.</p>
     <div class="g-demo"><div style="max-width:360px">
     <details class="ml-accordion"><summary>How do payouts work?</summary>
     <div class="ml-accordion__body">Payouts settle to your registered account after the booking completes.</div></details>
@@ -761,7 +913,7 @@
       <span class="g-file">ml-core.css</span>
       <span class="ml-badge">Compose · AlertDialog</span>
     </div>
-    <p class="ml-lede">Centre-screen decision. Distinct from .ml-sheet, which is for choosing among options; a dialog is for confirming or refusing one. Uses &lt;dialog> so focus trapping and Esc are the platform's job, not ours.</p>
+    <p class="ml-lede ml-measure">Centre-screen decision. Distinct from .ml-sheet, which is for choosing among options; a dialog is for confirming or refusing one. Uses &lt;dialog> so focus trapping and Esc are the platform's job, not ours.</p>
     <div class="g-demo"><div class="ml-dialog" style="position:static;display:block;box-shadow:none;border:1px solid var(--color-line)">
     <h4 class="ml-dialog__title">Delete this listing?</h4>
     <p class="ml-dialog__body">It will be removed from Market immediately. Enquiries already received are kept.</p>
@@ -788,7 +940,7 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede">Two or three actions of equal weight on one row. Not a segmented control — these fire actions, they do not select a mode.</p>
+    <p class="ml-lede ml-measure">Two or three actions of equal weight on one row. Not a segmented control — these fire actions, they do not select a mode.</p>
     <div class="g-demo"><div class="ml-btn-group" style="max-width:340px">
     <button class="ml-btn ml-btn--primary">Message</button>
     <button class="ml-btn ml-btn--secondary">Follow</button>
@@ -804,7 +956,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">The phone column. 430dp is the widest current phone (iPhone Pro Max); the app is designed at 360-430 and centred beyond that rather than stretched, because a stretched phone layout is the classic tell of a web app.</p>
+    <p class="ml-lede ml-measure">The phone column. 430dp is the widest current phone (iPhone Pro Max); the app is designed at 360-430 and centred beyond that rather than stretched, because a stretched phone layout is the classic tell of a web app.</p>
     <div class="g-demo"><p class="ml-type-2" style="color:var(--color-muted);margin:0">
     <code>.ml-app</code> bounds the viewport at 430dp and <code>.ml-app__body</code>
     is the only thing that scrolls. Every screen in the preview uses it — see any
@@ -863,7 +1015,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Widget_Directory: ArtistCard  ·  Compose: UnifiedArtistCard</p>
+    <p class="ml-lede ml-measure">Widget_Directory: ArtistCard  ·  Compose: UnifiedArtistCard</p>
     <div class="g-demo"><a class="ml-artist-card" href="#c-artist-card"><div class="ml-artist-card__media">
     <img src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" /><span class="ml-media__tag"><span class="ml-status ml-status--success">Available</span></span></div>
     <div class="ml-artist-card__body"><div class="ml-artist-card__name">Ananya Sharma</div>
@@ -878,7 +1030,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Widget_Directory: StudioCard  ·  Compose: UnifiedStudioCard</p>
+    <p class="ml-lede ml-measure">Widget_Directory: StudioCard  ·  Compose: UnifiedStudioCard</p>
     <div class="g-demo"><a class="ml-studio-card" href="#c-studio-card"><div class="ml-studio-card__media"><img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" /></div>
     <div class="ml-studio-card__body"><div class="ml-studio-card__name">Andheri Live Room</div>
     <div class="ml-studio-card__loc">Andheri East · 1.4 km</div>
@@ -892,7 +1044,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Full-bleed artwork with the title ON the scrim — the Trending pattern. This is the palette rule at its purest: the card has no colour of its own.</p>
+    <p class="ml-lede ml-measure">Full-bleed artwork with the title ON the scrim — the Trending pattern. This is the palette rule at its purest: the card has no colour of its own.</p>
     <div class="g-demo"><a class="ml-media-card" href="#c-media-card"><img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" />
     <span class="ml-media-card__tag"><span class="ml-status ml-status--accent">Live band</span></span>
     <div class="ml-media-card__body"><div class="ml-media-card__title">The Local Train</div>
@@ -906,7 +1058,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Widget_Directory: MarketplaceCard</p>
+    <p class="ml-lede ml-measure">Widget_Directory: MarketplaceCard</p>
     <div class="g-demo"><a class="ml-market-card" href="#c-marketplace-card"><div class="ml-market-card__media">
     <img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" /><button class="ml-market-card__save" aria-label="Save"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M5.94 6c.92 0 1.83.37 2.49 1.02l1.48 1.44L12 10.5l2.09-2.04 1.48-1.44A3.6 3.6 0 0 1 18.06 6c.49 0 1.2.11 1.85.63a2.8 2.8 0 0 1 .23 4.23l-.07.07-.07.08c-.06.07-5.59 6.22-8 8.75-2.41-2.54-7.94-8.69-8-8.75l-.06-.08-.08-.07A2.8 2.8 0 0 1 3 8.71 2.9 2.9 0 0 1 5.94 6m12.12-3a6.6 6.6 0 0 0-4.58 1.87L12 6.31l-1.48-1.44A6.6 6.6 0 0 0 5.94 3c-1.33 0-2.65.42-3.73 1.29a5.8 5.8 0 0 0-.44 8.72s6.29 7.01 8.48 9.26c.47.49 1.11.73 1.75.73s1.28-.24 1.75-.73c2.19-2.25 8.48-9.26 8.48-9.26a5.8 5.8 0 0 0-.44-8.72A6 6 0 0 0 18.06 3"/></svg></button></div>
     <div class="ml-market-card__body"><div class="ml-market-card__price">₹64,000</div>
@@ -920,7 +1072,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Widget_Directory: BookingCard, ReviewCard, NotificationCard</p>
+    <p class="ml-lede ml-measure">Widget_Directory: BookingCard, ReviewCard, NotificationCard</p>
     <div class="g-demo"><div class="ml-card" style="max-width:340px"><div class="ml-booking-card">
     <img class="ml-booking-card__thumb" src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" /><div class="ml-booking-card__body">
     <div class="ml-booking-card__title">Andheri Live Room</div>
@@ -934,7 +1086,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Widget_Directory: PublicReputationWidget</p>
+    <p class="ml-lede ml-measure">Widget_Directory: PublicReputationWidget</p>
     <div class="g-demo"><div class="ml-stat-grid" style="max-width:340px;grid-template-columns:repeat(3,1fr)">
     <div class="ml-stat"><span class="ml-stat__num">4,200</span><span class="ml-stat__label">Views</span></div>
     <div class="ml-stat"><span class="ml-stat__num">610</span><span class="ml-stat__label">Likes</span></div>
@@ -948,7 +1100,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Widget_Directory: ProfilePreviewSheet header</p>
+    <p class="ml-lede ml-measure">Widget_Directory: ProfilePreviewSheet header</p>
     <div class="g-demo"><div class="ml-hero" style="max-width:360px;border-radius:var(--radius-2)"><img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" />
     <div class="ml-hero__body"><span class="ml-status ml-status--success">Available</span>
     <h3 class="ml-hero__name" style="margin-top:var(--space-2)">Rahul Iyer</h3>
@@ -963,7 +1115,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Widget_Directory: ProfileCompletionMeter (proposed, PRODUCT-SPEC §3)</p>
+    <p class="ml-lede ml-measure">Widget_Directory: ProfileCompletionMeter (proposed, PRODUCT-SPEC §3)</p>
     <div class="g-demo"><div class="ml-progress" style="max-width:340px"><div class="ml-progress__title">Profile 80% complete</div>
     <div class="ml-progress__meta">Add streaming links to finish</div>
     <div class="ml-progress__track"><span class="ml-progress__fill" style="width:80%"></span></div></div></div>
@@ -976,7 +1128,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">PRODUCT-SPEC Part E flags this as the highest-priority missing widget —</p>
+    <p class="ml-lede ml-measure">PRODUCT-SPEC Part E flags this as the highest-priority missing widget —</p>
     <div class="g-demo"><div class="ml-upload-grid" style="max-width:340px">
     <div class="ml-upload-grid__item"><img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" /><button class="ml-upload-grid__remove" aria-label="Remove">×</button></div>
     <button class="ml-upload-grid__add"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M22 10h-8V2a2 2 0 0 0-4 0v8H2a2 2 0 0 0 0 4h8v8a2 2 0 0 0 4 0v-8h8a2 2 0 0 0 0-4"/></svg>Add</button><button class="ml-upload-grid__add"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M22 10h-8V2a2 2 0 0 0-4 0v8H2a2 2 0 0 0 0 4h8v8a2 2 0 0 0 4 0v-8h8a2 2 0 0 0 0-4"/></svg>Add</button></div></div>
@@ -989,7 +1141,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Widget_Directory: AudioPlayerWidget · Compose: WaveformAudioPlayer</p>
+    <p class="ml-lede ml-measure">Widget_Directory: AudioPlayerWidget · Compose: WaveformAudioPlayer</p>
     <div class="g-demo"><div class="ml-player ml-card" style="max-width:340px"><button class="ml-player__btn" aria-label="Play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M22.62 9.48 8.63.48A3 3 0 0 0 4 3v18a3 3 0 0 0 4.63 2.52l14-9a3 3 0 0 0 0-5.04"/></svg></button>
     <div class="ml-player__wave" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="34" tabindex="0">
     <span class="ml-player__bar is-played" style="height:20%"></span><span class="ml-player__bar is-played" style="height:57%"></span><span class="ml-player__bar is-played" style="height:34%"></span><span class="ml-player__bar is-played" style="height:71%"></span><span class="ml-player__bar is-played" style="height:48%"></span><span class="ml-player__bar is-played" style="height:25%"></span><span class="ml-player__bar is-played" style="height:62%"></span><span class="ml-player__bar is-played" style="height:39%"></span><span class="ml-player__bar is-played" style="height:76%"></span><span class="ml-player__bar is-played" style="height:53%"></span><span class="ml-player__bar is-played" style="height:30%"></span><span class="ml-player__bar is-played" style="height:67%"></span><span class="ml-player__bar" style="height:44%"></span><span class="ml-player__bar" style="height:21%"></span><span class="ml-player__bar" style="height:58%"></span><span class="ml-player__bar" style="height:35%"></span><span class="ml-player__bar" style="height:72%"></span><span class="ml-player__bar" style="height:49%"></span><span class="ml-player__bar" style="height:26%"></span><span class="ml-player__bar" style="height:63%"></span><span class="ml-player__bar" style="height:40%"></span><span class="ml-player__bar" style="height:77%"></span><span class="ml-player__bar" style="height:54%"></span><span class="ml-player__bar" style="height:31%"></span><span class="ml-player__bar" style="height:68%"></span><span class="ml-player__bar" style="height:45%"></span><span class="ml-player__bar" style="height:22%"></span><span class="ml-player__bar" style="height:59%"></span><span class="ml-player__bar" style="height:36%"></span><span class="ml-player__bar" style="height:73%"></span><span class="ml-player__bar" style="height:50%"></span><span class="ml-player__bar" style="height:27%"></span><span class="ml-player__bar" style="height:64%"></span><span class="ml-player__bar" style="height:41%"></span>
@@ -1003,7 +1155,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Widget_Directory: AdvancedFiltersBottomSheet · Compose: ModalBottomSheet</p>
+    <p class="ml-lede ml-measure">Widget_Directory: AdvancedFiltersBottomSheet · Compose: ModalBottomSheet</p>
     <div class="g-demo"><div class="g-frame" style="height:200px;position:relative;overflow:hidden">
     <div class="ml-sheet-scrim is-open" style="position:absolute"></div>
     <div class="ml-sheet is-open" style="position:absolute;max-width:100%"><span class="ml-sheet__handle"></span>
@@ -1041,7 +1193,7 @@
       <span class="g-file">ml-widgets.css</span>
       <span class="ml-badge">Compose · ScrollableTabRow</span>
     </div>
-    <p class="ml-lede">The dimension switcher: People / Businesses / Music / Services / Spaces / Communities. Too many to fit a segmented control, so it scrolls.</p>
+    <p class="ml-lede ml-measure">The dimension switcher: People / Businesses / Music / Services / Spaces / Communities. Too many to fit a segmented control, so it scrolls.</p>
     <div class="g-demo"><nav class="ml-tabs" style="max-width:360px">
     <span class="ml-tabs__tab" aria-selected="true">People</span><a class="ml-tabs__tab" href="#c-scrollable-category-tabs" aria-selected="false">Businesses</a>
     <a class="ml-tabs__tab" href="#c-scrollable-category-tabs" aria-selected="false">Spaces</a><a class="ml-tabs__tab" href="#c-scrollable-category-tabs" aria-selected="false">Music</a></nav></div>
@@ -1054,7 +1206,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">The single densest unit in Discover: avatar/thumb, name, qualifier, a trailing signal (match, distance, rating) and one connect affordance.</p>
+    <p class="ml-lede ml-measure">The single densest unit in Discover: avatar/thumb, name, qualifier, a trailing signal (match, distance, rating) and one connect affordance.</p>
     <div class="g-demo"><div style="max-width:360px"><a class="ml-result" href="#c-result-row"><img class="ml-result__thumb" src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" />
     <span class="ml-result__body"><span class="ml-result__name">Rahul Iyer</span>
     <span class="ml-result__meta">Producer · Mix Engineer · Mumbai</span></span>
@@ -1070,7 +1222,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">AI recommendation strength. A number plus a bar, never colour alone.</p>
+    <p class="ml-lede ml-measure">AI recommendation strength. A number plus a bar, never colour alone.</p>
     <div class="g-demo"><span class="ml-match"><span class="ml-match__pct">88%</span>
     <span class="ml-match__track"><span class="ml-match__fill" style="width:88%"></span></span>
     <span class="ml-match__label">match</span></span></div>
@@ -1083,7 +1235,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">stacked member avatars</p>
+    <p class="ml-lede ml-measure">stacked member avatars</p>
     <div class="g-demo"><a class="ml-community" href="#c-community-card"><div class="ml-community__media"><img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" /></div>
     <div class="ml-community__body"><div class="ml-community__name">Indie India</div>
     <div class="ml-community__meta">4,200 members</div>
@@ -1097,7 +1249,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">A service is offered BY someone — the provider is the subject, the rate is a qualifier. Inverting that would make it a Market listing.</p>
+    <p class="ml-lede ml-measure">A service is offered BY someone — the provider is the subject, the rate is a qualifier. Inverting that would make it a Market listing.</p>
     <div class="g-demo"><a class="ml-service" href="#c-service-card" style="max-width:340px"><span class="ml-service__head">
     <img class="ml-avatar ml-avatar--sm" src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" /><span><span class="ml-service__title">Mixing &amp; mastering</span>
     <span class="ml-service__by">by Rahul Iyer</span></span></span>
@@ -1112,7 +1264,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">The Discover Home entry point. Six dimensions, two columns, media-led.</p>
+    <p class="ml-lede ml-measure">The Discover Home entry point. Six dimensions, two columns, media-led.</p>
     <div class="g-demo"><div class="ml-dimension-grid" style="max-width:360px">
     <a class="ml-dimension" href="#c-what-are-you-looking-for-grid"><img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" />
     <span class="ml-dimension__label">People<span class="ml-dimension__count">12,400 artists</span></span></a>
@@ -1141,7 +1293,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Market is Beta. Labelling it in the nav is the honest thing to do and it stops the tab reading as a finished surface.</p>
+    <p class="ml-lede ml-measure">Market is Beta. Labelling it in the nav is the honest thing to do and it stops the tab reading as a finished surface.</p>
     <div class="g-demo"><p class="ml-type-2" style="color:var(--color-muted);margin:0">
     Shown on the Market tab in the bottom-tab-bar demo above.</p></div>
     <details class="g-sel"><summary>20 selectors</summary>
@@ -1153,7 +1305,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Mixed weight inside one sentence, as in the reference: grey carries the sentence, ink carries the words that matter. Cheaper than colour and it works on a monochrome page.</p>
+    <p class="ml-lede ml-measure">Mixed weight inside one sentence, as in the reference: grey carries the sentence, ink carries the words that matter. Cheaper than colour and it works on a monochrome page.</p>
     <div class="g-demo"><p class="ml-lede" style="max-width:360px">Grey carries the sentence, <b>ink carries the words that matter</b> — cheaper than colour, and it works on a monochrome page.</p></div>
     <details class="g-sel"><summary>1 selector</summary>
       <code>.ml-lede</code></details>
@@ -1164,7 +1316,7 @@
       <span class="g-file">ml-widgets.css</span>
       <span class="ml-badge">Compose · a DatePicker / DateRangePicker built on this grid</span>
     </div>
-    <p class="ml-lede">One month grid, four cell states. Needed twice over — booking's studio slots and Market's rental availability — which is why it lives in the system rather than in either flow. Bound to MarketplaceItemDoc.blockedDates for rentals; to the studio's own slots for booking.</p>
+    <p class="ml-lede ml-measure">One month grid, four cell states. Needed twice over — booking's studio slots and Market's rental availability — which is why it lives in the system rather than in either flow. Bound to MarketplaceItemDoc.blockedDates for rentals; to the studio's own slots for booking.</p>
     <div class="g-demo"><div class="ml-calendar" style="max-width:340px">
     <div class="ml-calendar__head"><span class="ml-calendar__month">March 2026</span>
       <span style="display:flex;gap:var(--space-1)">
@@ -1185,7 +1337,7 @@
       <span class="g-file">ml-widgets.css</span>
       <span class="ml-badge">Compose · MessageBubble</span>
     </div>
-    <p class="ml-lede">The communication flow is 7 screens with no message component. Outgoing is ink, incoming is surface — never colour alone: the two also differ in alignment and corner shape, which survives a greyscale screenshot.</p>
+    <p class="ml-lede ml-measure">The communication flow is 7 screens with no message component. Outgoing is ink, incoming is surface — never colour alone: the two also differ in alignment and corner shape, which survives a greyscale screenshot.</p>
     <div class="g-demo"><div style="max-width:340px"><div class="ml-chat">
     <span class="ml-chat__day">Today</span>
     <div class="ml-bubble ml-bubble--in">Is the SM7B still available?<span class="ml-bubble__meta">11:04</span></div>
@@ -1218,7 +1370,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Ordered events with state: a booking's progress, a transaction's stages. The rail is drawn with a border on the item so it cannot desync from the dots.</p>
+    <p class="ml-lede ml-measure">Ordered events with state: a booking's progress, a transaction's stages. The rail is drawn with a border on the item so it cannot desync from the dots.</p>
     <div class="g-demo"><ol class="ml-timeline" style="max-width:340px">
     <li class="ml-timeline__item is-done"><div class="ml-timeline__title">Offer accepted</div>
       <div class="ml-timeline__meta">16 Aug · ₹38,000</div></li>
@@ -1235,7 +1387,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Deliberately not a charting library. Insights screens need a trend and a comparison, and both are cheaper as CSS than as a 90KB dependency. Bars are labelled and the sparkline carries its values in the markup, so neither communicates by shape alone.</p>
+    <p class="ml-lede ml-measure">Deliberately not a charting library. Insights screens need a trend and a comparison, and both are cheaper as CSS than as a 90KB dependency. Bars are labelled and the sparkline carries its values in the markup, so neither communicates by shape alone.</p>
     <div class="g-demo"><div style="max-width:340px">
     <div class="ml-kpi"><span class="ml-kpi__num">4,210</span><span class="ml-kpi__delta ml-kpi__delta--up">+18%</span></div>
     <div class="ml-row__meta">Listing views · last 7 days</div>
@@ -1251,7 +1403,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">A playing indicator, not a control — it says "audio is running here" on a track row. Animated, and stopped entirely under reduced motion by the global guard in ml-core.css.</p>
+    <p class="ml-lede ml-measure">A playing indicator, not a control — it says "audio is running here" on a track row. Animated, and stopped entirely under reduced motion by the global guard in ml-core.css.</p>
     <div class="g-demo"><div class="ml-row" style="max-width:340px"><span class="ml-eq"><span></span><span></span><span></span><span></span></span>
     <span class="ml-row__body"><span class="ml-row__title">Tum Hi Toh (Unplugged)</span>
     <span class="ml-row__meta">Now playing</span></span></div></div>
@@ -1264,7 +1416,7 @@
       <span class="g-file">ml-widgets.css</span>
       <span class="ml-badge">Compose · FeedPostCard</span>
     </div>
-    <p class="ml-lede">The one component the audit found genuinely missing after the 16-component pass: communication's networking feed defines .post-card / .post-head / .post-body / .post-actions locally and nothing in the system expresses it. Everything else those screens define maps onto .ml-row, .ml-rail, .ml-card or .ml-status. Separate</p>
+    <p class="ml-lede ml-measure">The one component the audit found genuinely missing after the 16-component pass: communication's networking feed defines .post-card / .post-head / .post-body / .post-actions locally and nothing in the system expresses it. Everything else those screens define maps onto .ml-row, .ml-rail, .ml-card or .ml-status…</p>
     <div class="g-demo"><div style="max-width:360px"><article class="ml-post">
     <div class="ml-post__head"><img src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" />
       <span class="ml-post__who"><span class="ml-post__name">Mehek Kapoor</span>
@@ -1286,7 +1438,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Widget_Directory: OpportunityCard · opportunities flow + Discover</p>
+    <p class="ml-lede ml-measure">Widget_Directory: OpportunityCard · opportunities flow + Discover</p>
     <div class="g-demo"><a class="ml-opportunity-card" href="#c-opportunity-card" style="max-width:340px">
     <span class="ml-opportunity-card__head"><span><span class="ml-opportunity-card__title">Bassist for a 5-track indie EP</span>
     <span class="ml-opportunity-card__by">Monsoon Sessions · Mumbai</span></span>
@@ -1303,7 +1455,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">The applicant's side of an opportunity: what you sent and where it stands.</p>
+    <p class="ml-lede ml-measure">The applicant's side of an opportunity: what you sent and where it stands.</p>
     <div class="g-demo"><a class="ml-application-card" href="#c-application-card" style="max-width:340px">
     <img class="ml-avatar" src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" />
     <span class="ml-application-card__body"><span class="ml-application-card__title">Bassist — Monsoon Sessions</span>
@@ -1319,7 +1471,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">A band is a group, so the facepile is the identity — not one avatar.</p>
+    <p class="ml-lede ml-measure">A band is a group, so the facepile is the identity — not one avatar.</p>
     <div class="g-demo"><a class="ml-band-card" href="#c-band-card"><div class="ml-band-card__media"><img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" /></div>
     <div class="ml-band-card__body"><div class="ml-band-card__name">The Local Train</div>
     <div class="ml-band-card__meta">Indie Rock · Delhi NCR · 4 members</div>
@@ -1333,7 +1485,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Used on nearly every card. A number first, stars second: the number is what people compare, and it survives greyscale and a screen reader.</p>
+    <p class="ml-lede ml-measure">Used on nearly every card. A number first, stars second: the number is what people compare, and it survives greyscale and a screen reader.</p>
     <div class="g-demo"><div class="g-row"><span class="ml-rating"><span class="ml-rating__score">4.9</span>
     <span class="ml-rating__stars">★★★★★</span><span class="ml-rating__count">(128)</span></span>
     <span class="ml-rating"><span class="ml-rating__score">4.4</span>
@@ -1347,7 +1499,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">A verified credit: who did what on a release, and whether it is confirmed. The confirmation state is the whole point of the Credits Trust Engine.</p>
+    <p class="ml-lede ml-measure">A verified credit: who did what on a release, and whether it is confirmed. The confirmation state is the whole point of the Credits Trust Engine.</p>
     <div class="g-demo"><div style="max-width:340px"><div class="ml-credit"><img class="ml-avatar ml-avatar--sm" src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" />
     <span class="ml-credit__body"><span class="ml-credit__who">Rahul Iyer</span>
     <span class="ml-credit__role">Mix Engineer</span></span>
@@ -1365,7 +1517,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Line items with a total. Promised in the Flow 7 plan and never built; the booking flow needs it too. The total is separated by a rule and set in the display face, because it is the number people actually read.</p>
+    <p class="ml-lede ml-measure">Line items with a total. Promised in the Flow 7 plan and never built; the booking flow needs it too. The total is separated by a rule and set in the display face, because it is the number people actually read.</p>
     <div class="g-demo"><div class="ml-summary" style="max-width:340px">
     <div class="ml-summary__row"><span>Studio A · 3 hrs</span><span>₹9,600</span></div>
     <div class="ml-summary__row"><span>Engineer</span><span>₹3,000</span></div>
@@ -1381,7 +1533,7 @@
       <span class="g-file">ml-widgets.css</span>
       <span class="ml-badge">Compose · a Box with draggable + animateTo</span>
     </div>
-    <p class="ml-lede">Tinder-style discovery. Stacked cards with the next two peeking, so the deck reads as a deck rather than a single card. Drag distance is bound to --gesture-swipe-threshold rather than a literal, which is what the old SwipeDeckBlock hardcoded in App.tsx.</p>
+    <p class="ml-lede ml-measure">Tinder-style discovery. Stacked cards with the next two peeking, so the deck reads as a deck rather than a single card. Drag distance is bound to --gesture-swipe-threshold rather than a literal, which is what the old SwipeDeckBlock hardcoded in App.tsx.</p>
     <div class="g-demo"><div><div class="ml-deck">
     <div class="ml-deck__card"><img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" /></div>
     <div class="ml-deck__card"><img src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" />
@@ -1399,7 +1551,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Booking picks a slot, not an arbitrary clock time — so this is a list of real availability, not a dial. A dial would imply any time is bookable.</p>
+    <p class="ml-lede ml-measure">Booking picks a slot, not an arbitrary clock time — so this is a list of real availability, not a dial. A dial would imply any time is bookable.</p>
     <div class="g-demo"><div class="ml-slots" style="max-width:340px">
     <button class="ml-slot">09:00</button><button class="ml-slot">10:00</button><button class="ml-slot" aria-pressed="true">11:00</button><button class="ml-slot">12:00</button><button class="ml-slot" disabled>14:00</button><button class="ml-slot">15:00</button><button class="ml-slot">16:00</button><button class="ml-slot">17:00</button></div></div>
     <details class="g-sel"><summary>2 selectors</summary>
@@ -1411,7 +1563,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Side panel. Distinct from .ml-sheet: a sheet is a decision about the current screen, a drawer is navigation away from it.</p>
+    <p class="ml-lede ml-measure">Side panel. Distinct from .ml-sheet: a sheet is a decision about the current screen, a drawer is navigation away from it.</p>
     <div class="g-demo"><div class="g-frame" style="position:relative;height:220px;overflow:hidden">
     <div class="ml-drawer is-open" style="position:absolute;padding-top:0">
       <div class="ml-drawer__body"><div class="ml-eyebrow">MusicLinkd</div>
@@ -1452,7 +1604,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Per-track level and mute for a multi-stem preview. Genuinely music-specific and the reason a generic component library cannot cover this product.</p>
+    <p class="ml-lede ml-measure">Per-track level and mute for a multi-stem preview. Genuinely music-specific and the reason a generic component library cannot cover this product.</p>
     <div class="g-demo"><div class="ml-mixer" style="max-width:340px">
     <div class="ml-mixer__track">
       <span class="ml-mixer__name">Vocals</span>
@@ -1480,7 +1632,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Masonry, bento and split. Named because the styleguide had all three and they are genuinely different shapes, not one grid with options.</p>
+    <p class="ml-lede ml-measure">Masonry, bento and split. Named because the styleguide had all three and they are genuinely different shapes, not one grid with options.</p>
     <div class="g-demo"><div style="max-width:360px">
     <div class="ml-row__meta">bento</div>
     <div class="ml-bento" style="margin-bottom:var(--space-3)">
@@ -1565,11 +1717,17 @@
       <div class="ml-bento__title">Collaborators</div></article>
   </div>
   <div class="ml-bento ml-bento--dark" style="background:var(--color-ink);padding:var(--space-3);border-radius:var(--radius-3);margin-top:var(--space-4)">
-    <article class="ml-bento__card"><div class="ml-bento__title">Dark bento</div>
-      <p class="ml-bento__body" style="margin:0">Tiles are translucent white, not a second black — so the same markup works over ink or over media.</p></article>
-    <article class="ml-bento__card"><div class="ml-bento__title">5% white</div></article>
-    <article class="ml-bento__card"><div class="ml-bento__title">12% border</div></article>
-  </div></div>
+    <article class="ml-bento__card"><img class="ml-bento__img" src="/assets/img/6/3ff315159820693.63a64ad705a7c.png" alt="" loading="lazy" />
+      <div><div class="ml-bento__title">Dark bento</div>
+      <p class="ml-bento__body" style="margin:var(--space-1) 0 0">Tiles are translucent white, not a second black — so the same markup works over ink or over media.</p></div></article>
+    <article class="ml-bento__card"><img class="ml-bento__img" src="/assets/img/6/5a334c176002181.64bdb619e73b5.png" alt="" loading="lazy" />
+      <div class="ml-bento__title">Live rooms</div>
+      <p class="ml-bento__body" style="margin:0">5% white fill</p></article>
+    <article class="ml-bento__card"><img class="ml-bento__img" src="/assets/img/6/47ff4e166535133.641ae4294e1a1.gif" alt="" loading="lazy" />
+      <div class="ml-bento__title">Motion</div>
+      <p class="ml-bento__body" style="margin:0">12% white border</p></article>
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Both variants carry media in every tile — a bento with empty cells reads as a broken grid, not a considered one.</p></div>
     <details class="g-sel"><summary>6 selectors</summary>
       <code>.ml-bento</code> <code>.ml-bento__card</code> <code>.ml-bento__img</code> <code>.ml-bento__title</code> <code>.ml-bento__body</code> <code>.ml-bento--dark</code></details>
   </section>
@@ -1624,7 +1782,7 @@
       <span class="g-file">ml-widgets.css</span>
       
     </div>
-    <p class="ml-lede">Restrained on purpose. The palette rule says the chrome is monochrome and the media carries the colour, so these adjust SURFACE, never hue: a frosted panel over media, a soft lift, and a paper grain. No coloured glows.</p>
+    <p class="ml-lede ml-measure">Restrained on purpose. The palette rule says the chrome is monochrome and the media carries the colour, so these adjust SURFACE, never hue: a frosted panel over media, a soft lift, and a paper grain. No coloured glows.</p>
     <div class="g-demo"><div style="max-width:360px">
     <div class="ml-media ml-media--wide" style="border-radius:var(--radius-2);position:relative">
       <img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" />

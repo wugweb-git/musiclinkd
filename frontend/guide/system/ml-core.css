@@ -98,8 +98,18 @@ body {
 .ml-btn--secondary:active { background: var(--color-surface); }
 
 /* Reserved for high-intent commerce moments, not general actions. */
-.ml-btn--accent  { background: var(--color-pink); color: var(--color-ink); }
-.ml-btn--accent:active { background: var(--color-pink-pressed); }
+/* RULE, set by the brand owner 2026-08-30: when a button is pink, the label
+   is WHITE. Always. It used to be ink-on-pink, which passed contrast but made
+   the accent button read as a third neutral rather than as the brand.
+
+   Honouring that costs one change of pink. White on --color-pink #EA4C89 is
+   3.56:1 and fails AA at button-label size; white on --color-pink-pressed
+   #C7295F is 5.37:1 and passes. So the accent BUTTON fills with the pressed
+   pink and presses to a deeper mix. --color-pink itself is unchanged and
+   still fills chips, marks and waveforms where nothing is reversed out of it.
+   The rule is now "pink button = white label" with no exception to remember. */
+.ml-btn--accent  { background: var(--color-pink-pressed); color: var(--color-white); }
+.ml-btn--accent:active { background: color-mix(in srgb, var(--color-pink-pressed) 84%, black); }
 
 .ml-btn--ghost   { background: transparent; color: var(--color-ink); }
 .ml-btn--ghost:active { background: var(--color-surface); }
@@ -199,7 +209,14 @@ body {
 .ml-chip {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
+  /* Icon-to-text balance, corrected 2026-08-30. Was gap --space-1 (4px) with
+     a flat --space-3 (16px) padding on both sides, which reads unbalanced two
+     ways: 4px is too tight for a 16px glyph beside 12px text, and a leading
+     icon then sits 16px from the edge while the text it labels sits 36px in,
+     so the chip looks left-heavy. Now 8px between glyph and label, and the
+     padding is pulled in on whichever side carries an icon (see the
+     :has() rules below) so optical weight is even. */
+  gap: var(--space-2);
   min-height: var(--size-1);          /* 32dp visual… */
   padding: 0 var(--space-3);
   border: 1px solid var(--color-line);
@@ -240,12 +257,20 @@ body {
 /* A chip may carry a leading icon or a trailing dismiss. The icon inherits
    currentColor so it follows the chip through rest / press / selected without
    a second rule per state. */
-.ml-chip svg { width: 16px; height: 16px; flex: none; }
-.ml-chip__icon { margin-left: calc(var(--space-1) * -1); }
+.ml-chip svg { width: var(--icon-1); height: var(--icon-1); flex: none; }
+/* A glyph is optically lighter than a run of text, so the side carrying one
+   takes less padding — 8px against the text side's 16px. :has() does this
+   without asking the author to add a modifier class they will forget. */
+.ml-chip:has(> svg:first-child)          { padding-left: var(--space-2); }
+.ml-chip:has(> .ml-chip__icon)           { padding-left: var(--space-2); }
+.ml-chip:has(> .ml-chip__dismiss)        { padding-right: var(--space-2); }
+.ml-chip__icon { display: inline-flex; }
 .ml-chip__dismiss {
-  display: inline-flex; margin-right: calc(var(--space-1) * -1);
+  display: inline-flex;
   border: 0; padding: 0; background: none; color: inherit; cursor: pointer;
+  opacity: 0.6;
 }
+.ml-chip__dismiss:hover { opacity: 1; }
 .ml-chip[aria-pressed="true"],
 .ml-chip.is-selected {
   background: var(--color-ink);
@@ -547,14 +572,39 @@ a.ml-row:active { background: var(--color-surface); }
 .ml-wordmark em { font-style: normal; color: var(--color-pink-pressed); }
 .ml-wordmark--on-media { color: var(--color-white); }
 
-/* Small tracked uppercase label above a screen title. */
+/* Small tracked uppercase label above a screen title. Set in Unica One as of
+   2026-08-30 — the third family, brought in for eyebrows, kickers and branded
+   labels. Unica One ships ONE weight (400), so no font-weight is declared
+   here: asking for 700 would make the browser synthesise a fake bold, which
+   on a face with strokes this fine reads as a rendering fault. The size floor
+   is --type-1; Unica One's tall narrow caps become unreadable below it. */
 .ml-eyebrow {
+  font-family: var(--font-eyebrow);
   font-size: var(--type-1);
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-muted);
 }
+/* On a dark or media ground the eyebrow carries the brand rather than the
+   metadata role, so it takes full contrast instead of muted. */
+.ml-eyebrow--on-media { color: var(--color-white); }
+.ml-eyebrow--accent   { color: var(--color-pink-pressed); }
+
+/* ── tabular numbers ───────────────────────────────────────────────────── */
+/* Compose: TextStyle(fontFeatureSettings = "tnum")                           */
+/* The spec lists "Number Style: Tabular" and "Tabular Numbers: Metrics,
+   counts" as tokens. They are not values — they are a font-feature switch, so
+   they ship as a class. Use it anywhere numbers are compared down a column or
+   change in place: stats, tables, timers, counters, prices. Without it,
+   proportional digits make a ticking timer jitter horizontally. */
+
+.ml-tabular { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
+/* ── readable measure ──────────────────────────────────────────────────── */
+/* The spec's "Max Line Width". Prose past ~75 characters loses the return
+   sweep; --layout-measure is 64ch, which lands mid-range for Inter. */
+
+.ml-measure { max-width: var(--layout-measure); }
 
 /* ── nav app bar ───────────────────────────────────────────────────────── */
 /* Back-arrow bar for anything inside a flow. Separate from .ml-appbar,

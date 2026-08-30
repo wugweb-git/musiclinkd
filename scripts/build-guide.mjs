@@ -286,10 +286,16 @@ const DEMOS = {
     <div style="flex:1;max-width:240px"><div class="ml-skeleton" style="height:12px;margin-bottom:8px"></div>
     <div class="ml-skeleton" style="height:12px;width:70%"></div></div></div>`,
   "brand": `<div class="g-row" style="align-items:center;gap:var(--space-4)">
-    <span class="ml-logo ml-logo--lg"><img src="/guide/brand/assets/logo-lockup-black.svg" alt="MusicLinkd" /></span>
-    <span class="ml-logo" style="background:var(--color-ink);border-radius:var(--radius-1);padding:var(--space-2) var(--space-3)">
+    <span class="ml-logo ml-logo--lg ml-logo--clear"><img src="/guide/brand/assets/mark-grey.svg" alt="MusicLinkd" /></span>
+    <span class="ml-logo ml-logo--lg ml-logo--clear" style="background:var(--color-ink);border-radius:var(--radius-2)">
       <img src="/guide/brand/assets/logo-lockup-white.svg" alt="MusicLinkd" /></span>
+    <span class="ml-logo ml-logo--lg ml-logo--clear" style="background:var(--color-ink);border-radius:var(--radius-2)">
+      <img src="/guide/brand/assets/logo-lockup-wide-caps.svg" alt="MusicLinkd" /></span>
   </div>
+  <p class="ml-type-1 ml-measure" style="color:var(--color-muted);margin-top:var(--space-2)">
+    Eight of the nine files are white artwork and only <code>mark-grey</code> is drawn dark, so
+    paper gets the mark and ink gets the lockups. Putting a white lockup on paper is not a
+    styling slip — the wordmark simply disappears, which is what this demo used to do.</p>
   <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-3) 0 var(--space-1)">Type fallback — never beside the real mark.</p>
   <div class="ml-wordmark">MusicLink<em>d</em></div>
   <div class="ml-eyebrow" style="margin-top:var(--space-2)">Eyebrow label</div>`,
@@ -749,11 +755,17 @@ const DEMOS = {
       <div class="ml-bento__title">Collaborators</div></article>
   </div>
   <div class="ml-bento ml-bento--dark" style="background:var(--color-ink);padding:var(--space-3);border-radius:var(--radius-3);margin-top:var(--space-4)">
-    <article class="ml-bento__card"><div class="ml-bento__title">Dark bento</div>
-      <p class="ml-bento__body" style="margin:0">Tiles are translucent white, not a second black — so the same markup works over ink or over media.</p></article>
-    <article class="ml-bento__card"><div class="ml-bento__title">5% white</div></article>
-    <article class="ml-bento__card"><div class="ml-bento__title">12% border</div></article>
-  </div>`,
+    <article class="ml-bento__card"><img class="ml-bento__img" src="${m("stage",63)}" alt="" loading="lazy" />
+      <div><div class="ml-bento__title">Dark bento</div>
+      <p class="ml-bento__body" style="margin:var(--space-1) 0 0">Tiles are translucent white, not a second black — so the same markup works over ink or over media.</p></div></article>
+    <article class="ml-bento__card"><img class="ml-bento__img" src="${m("stage",88)}" alt="" loading="lazy" />
+      <div class="ml-bento__title">Live rooms</div>
+      <p class="ml-bento__body" style="margin:0">5% white fill</p></article>
+    <article class="ml-bento__card"><img class="ml-bento__img" src="${m("motion",0)}" alt="" loading="lazy" />
+      <div class="ml-bento__title">Motion</div>
+      <p class="ml-bento__body" style="margin:0">12% white border</p></article>
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Both variants carry media in every tile — a bento with empty cells reads as a broken grid, not a considered one.</p>`,
 
   "split editorial": `<div class="ml-split">
     <div class="ml-split__media" style="aspect-ratio:4/3"><img src="${m("editorial",0)}" alt="" loading="lazy" /></div>
@@ -949,6 +961,18 @@ const DEMOS = {
   </div>
   <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Dashed line marks the 66.6% safe zone — OEM masks vary and only the centre is guaranteed visible.</p>`,
 
+  "tabular numbers": `<div class="g-row" style="gap:var(--space-4)">
+    <div><div class="ml-eyebrow">Proportional</div>
+      <div style="font-size:var(--type-3);font-weight:700;line-height:1.6">
+        <div>1,204</div><div>8,891</div><div>11,073</div></div></div>
+    <div><div class="ml-eyebrow">Tabular</div>
+      <div class="ml-tabular" style="font-size:var(--type-3);font-weight:700;line-height:1.6">
+        <div>1,204</div><div>8,891</div><div>11,073</div></div></div>
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Digits share one advance width, so columns align and a changing number does not shift the text beside it.</p>`,
+
+  "readable measure": `<p class="ml-measure ml-type-2" style="margin:0">A line of prose past roughly seventy-five characters starts to lose its return sweep — the eye has to hunt for the start of the next line. This paragraph is capped at <code>--layout-measure</code>, which is 64ch, and the cap is expressed in ch so it tracks the font rather than the viewport.</p>`,
+
 };
 
 /* ── page ──────────────────────────────────────────────────────────────── */
@@ -964,6 +988,17 @@ const swatch = (name, value, note) => `<div class="g-swatch">
       <span class="g-chipcol" style="background:${value}"></span>
       <code>--color-${name}</code><b>${value}</b>${note ? `<span>${esc(note)}</span>` : ""}</div>`;
 
+/* Truncate prose for the card blurb. Two things the previous one-liner got
+   wrong: it sliced at exactly 320 chars, which cut words in half ("the type
+   is only the fallbac"), and it sliced AFTER esc(), so a cut landing inside
+   "&amp;" emitted a broken entity. Cut on a word boundary, before escaping. */
+function clamp(text, max) {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const at = cut.lastIndexOf(" ");
+  return (at > max * 0.6 ? cut.slice(0, at) : cut).replace(/[,;:.\s]+$/, "") + "…";
+}
+
 const scaleRow = (label, group, fmt) => `<tr><th>${label}</th>${["1", "2", "3", "4"]
   .map((k) => group[k] ? `<td><code>${fmt(group[k], k)}</code></td>` : "<td>—</td>").join("")}</tr>`;
 
@@ -973,7 +1008,7 @@ const componentSection = (s) => `<section class="g-comp" id="${slug(s.name)}">
       <span class="g-file">${s.file}</span>
       ${s.compose ? `<span class="ml-badge">Compose · ${esc(s.compose)}</span>` : ""}
     </div>
-    ${s.prose ? `<p class="ml-lede">${esc(s.prose).slice(0, 320)}</p>` : ""}
+    ${s.prose ? `<p class="ml-lede ml-measure">${esc(clamp(s.prose, 320))}</p>` : ""}
     <div class="g-demo">${DEMOS[s.name]}</div>
     <details class="g-sel"><summary>${s.selectors.length} selector${s.selectors.length === 1 ? "" : "s"}</summary>
       <code>${s.selectors.join("</code> <code>")}</code></details>
@@ -993,7 +1028,7 @@ const html = `<!doctype html>
 <link rel="icon" href="/assets/img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
 <!-- The catalogue is styled with the system it documents. There is no second
      stylesheet: a broken component breaks this page. -->
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
@@ -1135,21 +1170,22 @@ const html = `<!doctype html>
 
   <h3 style="margin-top:var(--space-4)">Brand expression palette</h3>
   <p class="ml-lede" style="max-width:64ch">
-    <b>Marketing only — not the UI palette.</b> The colours under Foundations are
-    what the product renders; these five are what the brand looks like in a
-    campaign. Kept apart on purpose: two pinks and two blacks in one palette
-    guarantees the wrong one gets picked, so a screen never reaches for these
-    and a poster never reaches for the UI palette.
+    <b>Marketing only — not the UI palette.</b> These live in the SAME colour book
+    as everything else as of 2026-08-30: there is one place to look, and the
+    separation is carried by the name rather than by a second group. A screen
+    never reaches for a <code>brand*</code> colour and a poster never reaches for
+    the UI palette — two pinks and two blacks in one book is exactly why that
+    rule has to be written down.
   </p>
-  <div class="g-swatches">${Object.entries(f.brandColor).filter(([k]) => !k.startsWith("$"))
-    .map(([k, v]) => swatch("brand-" + k.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase(),
+  <div class="g-swatches">${Object.entries(f.color).filter(([k]) => k.startsWith("brand"))
+    .map(([k, v]) => swatch("color-" + k.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase(),
       v.$value, (v.$description || "").split(".")[0])).join("")}</div>
 
   <h2 class="g-h" id="foundations">Foundations</h2>
   <p class="ml-lede" style="max-width:64ch">${esc(tokens.meta.palette.$description.split(".")[1])}.</p>
 
   <h3 style="margin-top:var(--space-4)">Colour</h3>
-  <div class="g-swatches">${Object.entries(f.color).filter(([k]) => !k.startsWith("$"))
+  <div class="g-swatches">${Object.entries(f.color).filter(([k]) => !k.startsWith("$") && !k.startsWith("brand"))
     .map(([k, v]) => swatch(k.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase(), v.$value,
       (v.$description || "").split(".")[0])).join("")}</div>
 
@@ -1159,6 +1195,9 @@ const html = `<!doctype html>
     ${scaleRow("space", f.space, (t) => t.$web)}
     ${scaleRow("radius", f.radius, (t) => t.$web)}
     ${scaleRow("size", f.size, (t) => t.$web)}
+    ${scaleRow("icon", f.icon, (t) => t.$web)}
+    ${scaleRow("avatar", f.avatar, (t) => t.$web)}
+    ${scaleRow("elevation", f.elevation, (t) => t.$android)}
     ${scaleRow("opacity", f.opacity, (t) => t.$value)}
     ${scaleRow("type · web", f.type, (t) => `${t.$web.min}–${t.$web.max}`)}
     ${scaleRow("type · android", f.type, (t) => t.$android.size)}
@@ -1180,6 +1219,102 @@ const html = `<!doctype html>
     <div class="ml-type-2" style="margin-top:var(--space-2)">Body — default UI copy and list items</div>
     <div class="ml-type-1" style="margin-top:var(--space-2)">Caption — metadata, labels and badges</div>
   </div>
+
+  <h3 style="margin-top:var(--space-4)">Scale audit</h3>
+  <p class="ml-lede ml-measure">Measured, not asserted. A step passes if each neighbour differs by
+  at least 1.5&times; — roughly where a difference stops being arguable at a glance.</p>
+  <table class="g-t"><thead><tr><th>Scale</th><th>Steps</th><th>Ratios</th><th>Verdict</th></tr></thead><tbody>
+    ${Object.entries(tokens.meta.scaleAudit.pass).map(([k, v]) => {
+      const [steps, rest] = v.split(" — ");
+      return `<tr><th>${k}</th><td class="ml-tabular">${esc(steps)}</td><td class="ml-tabular">${esc(rest || "")}</td><td><span class="ml-status ml-status--success">Pass</span></td></tr>`;
+    }).join("")}
+    ${Object.entries(tokens.meta.scaleAudit.fail).map(([k, v]) => {
+      const [steps] = v.split(" — ");
+      return `<tr><th>${k}</th><td class="ml-tabular">${esc(steps)}</td><td colspan="2">${esc(v.slice(steps.length + 3))}</td></tr>`;
+    }).join("")}
+  </tbody></table>
+  <p class="ml-lede ml-measure" style="margin-top:var(--space-2)"><b>Verdict.</b> ${esc(tokens.meta.scaleAudit.verdict)}</p>
+
+  <h3 style="margin-top:var(--space-4)">Typography spec</h3>
+  <p class="ml-lede ml-measure">Every axis of every step, and the Compose <code>TextStyle</code> it
+  becomes. Generated from the same source the CSS is, so the app and this page cannot disagree.</p>
+  <div style="overflow-x:auto">
+  <table class="g-t"><thead><tr><th>Token</th><th>Fluid value (web)</th><th>Weight</th><th>Compose TextStyle</th><th>Usage</th></tr></thead><tbody>
+    ${["1","2","3","4"].map((k) => {
+      const t = f.type[k], w = t.$web, a = t.$android;
+      return `<tr><th>--type-${k}</th>
+        <td class="ml-tabular">${w.min} → ${w.max}</td>
+        <td class="ml-tabular">${w.weight}</td>
+        <td><code>TextStyle(fontFamily = ${a.family}, fontSize = ${a.size}, lineHeight = ${a.lineHeight}, fontWeight = FontWeight.W${a.weight})</code></td>
+        <td>${esc(t.$description)}</td></tr>`;
+    }).join("")}
+  </tbody></table></div>
+  <table class="g-t" style="margin-top:var(--space-3)"><thead><tr><th>Property</th><th>Value</th><th>Usage</th></tr></thead><tbody>
+    <tr><th>Paragraph spacing</th><td class="ml-tabular">var(--space-3) · 16px</td><td>Between paragraphs</td></tr>
+    <tr><th>Max line width</th><td class="ml-tabular">var(--layout-measure) · 64ch</td><td>Readable prose width — <code>.ml-measure</code></td></tr>
+    <tr><th>Font fallback</th><td><code>-apple-system, BlinkMacSystemFont, sans-serif</code></td><td>Declared inside each --font-* value</td></tr>
+    <tr><th>Number style</th><td>Tabular</td><td>Stats, tables, timers — <code>.ml-tabular</code></td></tr>
+  </tbody></table>
+
+  <h3 style="margin-top:var(--space-4)">Sizing map</h3>
+  <p class="ml-lede ml-measure">Component dimensions from the spec. Where a value already lands on a
+  scale it is <b>mapped, not duplicated</b> — emitting it again would be a second name for the same
+  number, which is how the previous system reached 248 tokens.</p>
+  <table class="g-t"><thead><tr><th>Component</th><th>Resolves to</th><th>Value</th></tr></thead><tbody>
+    ${Object.entries(tokens.meta.tokenMap).filter(([k]) => !k.startsWith("$"))
+      .map(([k, v]) => `<tr><th><code>${esc(k)}</code></th><td colspan="2">${esc(v)}</td></tr>`).join("")}
+  </tbody></table>
+
+  <h3 style="margin-top:var(--space-4)">Elevation &amp; borders</h3>
+  <table class="g-t"><thead><tr><th>Token</th><th>Shadow</th><th>Usage</th></tr></thead><tbody>
+    ${["1","2","3","4"].map((k) => `<tr><th>--elevation-${k}</th>
+      <td><span style="display:inline-block;width:56px;height:28px;border-radius:var(--radius-1);background:var(--color-white);box-shadow:var(--elevation-${k})"></span>
+      <code style="margin-left:var(--space-2)">${esc(f.elevation[k].$value)}</code></td>
+      <td>${esc(f.elevation[k].$description)}</td></tr>`).join("")}
+    <tr><th>--border-1</th><td class="ml-tabular">1px solid var(--color-line)</td><td>Divider, card border, input rest</td></tr>
+    <tr><th>--border-2</th><td class="ml-tabular">2px solid var(--color-pink)</td><td>Focus ring, selected card or chip</td></tr>
+    <tr><th>disabled border</th><td class="ml-tabular">1px solid var(--color-disabled)</td><td>Inactive controls</td></tr>
+  </tbody></table>
+
+  <h3 style="margin-top:var(--space-4)">Component states</h3>
+  <table class="g-t"><thead><tr><th>State</th><th>Trigger</th><th>Visual</th></tr></thead><tbody>
+    <tr><th>Default</th><td>Rest</td><td>Base style</td></tr>
+    <tr><th>Hover</th><td>Pointer enter</td><td>--elevation-2, translateY(-2px). Pointer only — no hover on touch.</td></tr>
+    <tr><th>Focused</th><td>Keyboard / Tab</td><td>2px var(--color-pink) outline at 2px offset</td></tr>
+    <tr><th>Pressed</th><td>Pointer down</td><td>scale(0.96–0.97), var(--duration-1)</td></tr>
+    <tr><th>Selected</th><td>Tap / click</td><td>var(--color-ink) fill for commitment; var(--color-pink-container) for intent</td></tr>
+    <tr><th>Disabled</th><td>Inactive</td><td>opacity var(--opacity-3) · 0.32, pointer-events none</td></tr>
+    <tr><th>Loading</th><td>Async</td><td><code>.ml-skeleton</code> shimmer</td></tr>
+    <tr><th>Error</th><td>Validation fail</td><td>var(--color-error) border and message</td></tr>
+    <tr><th>Empty</th><td>No data</td><td><code>.ml-empty</code> — icon, message, CTA</td></tr>
+  </tbody></table>
+
+  <h3 style="margin-top:var(--space-4)">Semantic roles</h3>
+  <p class="ml-lede ml-measure">Which foundation colour fills which role. These emit <b>no</b> CSS of
+  their own — on web you use the foundation token directly, because a role alias would be a second
+  name for the same value. The role names exist for the Compose and SwiftUI exports.</p>
+  <table class="g-t"><thead><tr><th>Role</th><th>Token</th><th>Usage</th></tr></thead><tbody>
+    <tr><th>Primary</th><td><code>--color-ink</code></td><td>CTAs. Black, not pink — set by the brand owner.</td></tr>
+    <tr><th>Accent</th><td><code>--color-pink</code></td><td>Focus, selection, active tab, brand mark. Never a CTA fill.</td></tr>
+    <tr><th>Primary container</th><td><code>--color-pink-container</code></td><td>Badge and tag ground</td></tr>
+    <tr><th>Surface</th><td><code>--color-white</code></td><td>Card and sheet fill</td></tr>
+    <tr><th>Surface variant</th><td><code>--color-surface</code></td><td>Search bars, inactive segments, skeletons</td></tr>
+    <tr><th>Background</th><td><code>--color-paper</code></td><td>App canvas</td></tr>
+    <tr><th>Outline</th><td><code>--color-line</code></td><td>Hairlines and dividers</td></tr>
+    <tr><th>Success</th><td><code>--color-success</code></td><td>Confirmed, available, verified</td></tr>
+    <tr><th>Warning</th><td><code>--color-warning</code></td><td>Pending, caution</td></tr>
+    <tr><th>Error</th><td><code>--color-error</code></td><td>Rejected, critical, destructive</td></tr>
+    <tr><th>Info</th><td><code>--color-info</code></td><td>On Tour, remote available</td></tr>
+    <tr><th>Disabled</th><td><code>--color-disabled</code></td><td>Inactive elements</td></tr>
+    <tr><th>Scrim</th><td><code>--color-scrim</code></td><td>Backdrop behind drawers, sheets, modals</td></tr>
+  </tbody></table>
+
+  <h3 style="margin-top:var(--space-4)">Known gaps</h3>
+  <p class="ml-lede ml-measure">Recorded rather than quietly skipped.</p>
+  <table class="g-t"><thead><tr><th>Item</th><th>Why</th></tr></thead><tbody>
+    ${Object.entries(tokens.meta.knownGaps).filter(([k]) => !k.startsWith("$"))
+      .map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join("")}
+  </tbody></table>
 
   <h3 style="margin-top:var(--space-4)">Icon sizes</h3>
   <p class="ml-lede">One glyph at every size the system uses. 16 and 24 are the two drawn grids;

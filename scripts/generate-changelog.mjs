@@ -129,7 +129,7 @@ const FOOTER = `<footer class="footer" role="contentinfo">
   <div class="container">
     <div class="footer__grid">
       <div class="footer__brand">
-        <a href="/" style="font-family:var(--font-display);font-weight:800;font-size:22px;letter-spacing:-0.05em;text-decoration:none;color:var(--text-primary);display:inline-flex;align-items:center;gap:10px">MusicLink<em style="color:var(--brand-pink);font-style:normal">d</em></a>
+        <a href="/" style="font-family:var(--font-display);font-weight:800;font-size:22px;letter-spacing:-0.05em;text-decoration:none;color:var(--text-primary);display:inline-flex;align-items:center;gap:10px">MusicLink<em style="color:var(--color-pink-pressed);font-style:normal">d</em></a>
         <p>India's professional music ecosystem. Connecting artists, studios, engineers, labels, venues and music businesses through one unified platform.</p>
       </div>
       <div class="footer__col">

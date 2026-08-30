@@ -105,13 +105,13 @@ for (const [key, tok] of Object.entries(f.color)) {
   emit(`color-${kebab(key)}`, tok.$value, short(tok.$description));
 }
 
-const productColourCount = names.size;   // colours emitted so far
-section("Brand expression — marketing only, NOT the UI palette");
-for (const [key, tok] of Object.entries(f.brandColor)) {
-  if (key.startsWith("$")) continue;
-  emit(`brand-${kebab(key)}`, tok.$value, short(tok.$description));
-}
-const brandColourCount = names.size - productColourCount;
+// ONE colour book as of 2026-08-30. The brand-expression swatches used to be
+// a second group (foundation.brandColor) emitting --brand-*; they now live in
+// foundation.color under brand* keys, so there is a single place to look and
+// the separation is carried by the name. Counted here only so the build can
+// still report the split.
+const brandColourCount = Object.keys(f.color).filter((k) => k.startsWith("brand")).length;
+const productColourCount = Object.keys(f.color).filter((k) => !k.startsWith("$") && !k.startsWith("brand")).length;
 
 section("Spacing — 4-step exponential (r=2)");
 for (const k of scale(f.space, "space")) emit(`space-${k}`, f.space[k].$web);
@@ -121,6 +121,15 @@ for (const k of scale(f.radius, "radius")) emit(`radius-${k}`, f.radius[k].$web)
 
 section("Size — control heights; 3 = 48dp touch minimum, 4 = 56dp comfortable");
 for (const k of scale(f.size, "size")) emit(`size-${k}`, f.size[k].$web);
+
+section("Icon — 4 optical sizes; 16 and 24 are the library's drawn grids");
+for (const k of scale(f.icon, "icon")) emit(`icon-${k}`, f.icon[k].$web, short(f.icon[k].$description));
+
+section("Avatar — 4 sizes; NOT --size-*, an avatar is not a control");
+for (const k of scale(f.avatar, "avatar")) emit(`avatar-${k}`, f.avatar[k].$web, short(f.avatar[k].$description));
+
+section("Border width — 0/1/2dp; zero needs no token");
+for (const k of scale(f.border, "border")) emit(`border-${k}`, f.border[k].$web, short(f.border[k].$description));
 
 section("Opacity");
 for (const k of scale(f.opacity, "opacity")) emit(`opacity-${k}`, f.opacity[k].$value);
@@ -175,10 +184,26 @@ for (const k of scale(f.motion, "motion")) {
 section("Z-index — web only");
 for (const k of scale(f.zIndex, "zIndex")) emit(`z-${k}`, f.zIndex[k].$value);
 
-section("Gesture thresholds");
+section("Layout — page constraints; gutters and gaps map onto --space-*");
+for (const [key, tok] of Object.entries(f.layout)) {
+  if (key.startsWith("$")) continue;
+  emit(`layout-${kebab(key)}`, tok.$web, short(tok.$description));
+}
+
+section("Component — dimensions fixed by a platform contract, not by us");
+for (const [key, tok] of Object.entries(f.component)) {
+  if (key.startsWith("$")) continue;
+  emit(`component-${kebab(key)}`, tok.$web, short(tok.$description));
+}
+
+section("Gesture and interaction thresholds");
 for (const [key, tok] of Object.entries(T.interaction)) {
   if (key.startsWith("$")) continue;
-  emit(`gesture-${kebab(key)}`, tok.$web);
+  // Web-only and app-only entries both live in this group; "—" means the
+  // platform has no equivalent, and emitting a dash as a CSS value would be
+  // a silently broken token rather than an absent one.
+  if (tok.$web === "—") continue;
+  emit(`gesture-${kebab(key)}`, tok.$web, short(tok.$description));
 }
 
 // T.semantic.action/surface/text intentionally emit NOTHING — see the
@@ -198,6 +223,18 @@ section("Safe area — edge-to-edge is mandatory, not optional");
 for (const [key, tok] of Object.entries(T.platform.safeArea)) {
   if (key.startsWith("$")) continue;
   emit(`safe-${key}`, tok.$web);
+}
+
+section("System chrome — space we reserve but do not draw");
+for (const [key, tok] of Object.entries(T.platform.chrome)) {
+  if (key.startsWith("$")) continue;
+  emit(`chrome-${kebab(key)}`, tok.$web, short(tok.$description));
+}
+
+section("Window size classes — Material WindowSizeClass, what Compose branches on");
+for (const [key, tok] of Object.entries(T.platform.windowSize)) {
+  if (key.startsWith("$")) continue;
+  emit(`bp-${kebab(key)}`, tok.$web, short(tok.$description));
 }
 
 /* ── enforce ───────────────────────────────────────────────────────────── */
