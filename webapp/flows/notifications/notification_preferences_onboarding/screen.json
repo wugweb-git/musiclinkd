@@ -8,7 +8,9 @@
   "screenTitle": "Notification Preferences (onboarding step)",
   "screenOrder": 3,
   "states": [
-    "default"
+    "default",
+    "asking",
+    "denied"
   ],
   "collectionsTouched": [],
   "notes": "A separate, unconnected screen from notification_settings above, reached during profile onboarding. Its \"test notification\" action does exercise the real Android OS notification-channel API (device-level, not Firestore) — the only genuinely functional piece across all three preference surfaces.",

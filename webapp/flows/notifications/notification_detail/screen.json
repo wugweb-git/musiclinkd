@@ -1,0 +1,38 @@
+{
+  "flowKey": "notifications",
+  "flowTitle": "Notifications",
+  "flowStatus": "app-mocked",
+  "flowOrder": 13,
+  "screenKey": "notification_detail",
+  "screenNumber": 169,
+  "screenTitle": "Notification",
+  "screenOrder": 5,
+  "states": [
+    "booking",
+    "collaboration",
+    "opportunity",
+    "marketplace",
+    "payment",
+    "expired",
+    "entity_deleted",
+    "permission_denied"
+  ],
+  "collectionsTouched": [
+    "notifications"
+  ],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-13 brief. Most notifications go straight to the flow that owns them and need no detail screen. This one exists for the handful that carry a DECISION — a booking request, a collaboration invitation — where accepting or declining from the list would be too easy to do by accident. It shows the context and hands off; it deliberately does not reproduce the booking page.",
+  "dataContract": [
+    {
+      "collection": "notifications",
+      "sample": {
+        "userId": "mock-talent-vedanshu-beats-mock",
+        "title": "Studio Booking Approved",
+        "body": "Your booking at Blue Room Mixing Suite, Mumbai on July 12, 14:00–18:00 has been confirmed.",
+        "type": "BOOKING_UPDATE",
+        "isRead": false,
+        "targetUrl": "/bookings",
+        "createdAt": "2026-07-10T09:00:00.000Z"
+      }
+    }
+  ]
+}

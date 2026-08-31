@@ -1,0 +1,21 @@
+{
+  "flowKey": "notifications",
+  "flowTitle": "Notifications",
+  "flowStatus": "app-mocked",
+  "flowOrder": 13,
+  "screenKey": "notification_categories",
+  "screenNumber": 170,
+  "screenTitle": "Notification categories",
+  "screenOrder": 6,
+  "states": [
+    "default",
+    "messages",
+    "bookings",
+    "marketplace",
+    "opportunities",
+    "system"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-13 brief's SCREEN 26. Per-category control (which events, and on which channel) as one screen whose state is the category being configured — the brief's own list of categories, not one screen each.",
+  "dataContract": []
+}

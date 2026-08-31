@@ -2433,3 +2433,47 @@
 }
 .ml-share__msg { font-size: var(--type-2); }
 .ml-share__channels { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+/* ── touch targets ─────────────────────────────────────────────────────────
+   Measured on the rendered catalogue 2026-08-31: 49 controls sat under the
+   48dp floor this system's own header claims for "every interactive element",
+   eleven of them under even WCAG 2.2's looser 24x24. The contradiction was
+   real — meta.tokenMap deliberately sets chip height to --size-1 (32), so the
+   claim and the tokens disagreed.
+
+   Resolved the way iOS and Material both resolve it: the control keeps its
+   VISUAL size and gains an invisible 48dp TARGET. Growing the boxes instead
+   would break the 32dp chip on purpose-built dense surfaces.
+
+   ::before, not ::after — every one of these controls already uses ::after for
+   its ripple, tick or dismiss glyph, and a blanket ::after rule would have
+   silently replaced them. .ml-check-ctl is the exception: its ::before is the
+   checkmark, so it takes ::after.
+
+   The expander is absolutely positioned and centred, so it overhangs without
+   affecting layout, and sits at z-index 0 so it never covers the control's own
+   content. */
+.ml-mosaic-tile__pin,
+.ml-mixer__mute,
+.ml-banner__dismiss,
+.ml-market-card__save,
+.ml-upload-grid__remove,
+.ml-upload-grid__add { position: relative; }
+.ml-mosaic-tile__pin::before,
+.ml-mixer__mute::before,
+.ml-banner__dismiss::before,
+.ml-market-card__save::before,
+.ml-upload-grid__remove::before,
+.ml-upload-grid__add::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  translate: -50% -50%;
+  min-width: var(--size-3);
+  min-height: var(--size-3);
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: none;
+  pointer-events: auto;
+}

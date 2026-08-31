@@ -56,6 +56,37 @@ body {
 :where(b, strong) { font-weight: var(--weight-3); }
 :where(h1, h2, h3, h4, h5, h6) { font-weight: var(--weight-3); }
 
+/* Hit-area expander. Resolves a contradiction this system shipped with:
+   the header above claims "every interactive element is >= var(--size-3)
+   (48dp) in both axes", while meta.tokenMap in tokens.json sets chip height to
+   --size-1 (32). Both cannot be true, and measuring the rendered catalogue on
+   2026-08-31 found 49 controls under the floor — .ml-help at 20x20, four
+   .ml-check-ctl at 28x28, nine .ml-mosaic-tile__pin and four .ml-mixer__mute
+   at 32x32. Eleven were under even WCAG 2.2's looser 24x24 minimum.
+
+   The fix is the one iOS and Material both use: the control keeps its VISUAL
+   size and grows an invisible TARGET to 48dp. Growing the visual size instead
+   would break the 32dp chip the token map deliberately specifies, and would
+   change the look of every dense surface in the app.
+
+   Applied via a pseudo-element so it costs no layout: the expander is
+   position:absolute and centred, so it overhangs without pushing neighbours.
+   The control must be positioned for it to anchor — hence the position rule.
+   Pointer-events stay on the expander, not the parent, so overlapping targets
+   in a dense row still resolve to the nearest control. */
+.ml-hit { position: relative; }
+.ml-hit::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  translate: -50% -50%;
+  min-width: var(--size-3);
+  min-height: var(--size-3);
+  width: 100%; height: 100%;
+  /* purely a target — never draws, never intercepts hover styling */
+  background: none;
+}
+
 /* One focus treatment for the whole system. Pink, because a black ring on
    black text is invisible — the same reasoning tokens.json records. */
 :where(a, button, input, textarea, select, [tabindex]):focus-visible {
@@ -1211,3 +1242,45 @@ a.ml-row:active { background: var(--color-surface); }
 
 .ml-btn-group { display: flex; gap: var(--space-2); }
 .ml-btn-group > * { flex: 1; }
+
+/* ── touch targets ─────────────────────────────────────────────────────────
+   Measured on the rendered catalogue 2026-08-31: 49 controls sat under the
+   48dp floor this system's own header claims for "every interactive element",
+   eleven of them under even WCAG 2.2's looser 24x24. The contradiction was
+   real — meta.tokenMap deliberately sets chip height to --size-1 (32), so the
+   claim and the tokens disagreed.
+
+   Resolved the way iOS and Material both resolve it: the control keeps its
+   VISUAL size and gains an invisible 48dp TARGET. Growing the boxes instead
+   would break the 32dp chip on purpose-built dense surfaces.
+
+   ::before, not ::after — every one of these controls already uses ::after for
+   its ripple, tick or dismiss glyph, and a blanket ::after rule would have
+   silently replaced them. .ml-check-ctl is the exception: its ::before is the
+   checkmark, so it takes ::after.
+
+   The expander is absolutely positioned and centred, so it overhangs without
+   affecting layout, and sits at z-index 0 so it never covers the control's own
+   content. */
+.ml-help,
+.ml-check-ctl,
+.ml-chip,
+.ml-crumbs__item,
+.ml-segmented__btn { position: relative; }
+.ml-help::before,
+.ml-check-ctl::after,
+.ml-chip::before,
+.ml-crumbs__item::before,
+.ml-segmented__btn::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  translate: -50% -50%;
+  min-width: var(--size-3);
+  min-height: var(--size-3);
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: none;
+  pointer-events: auto;
+}

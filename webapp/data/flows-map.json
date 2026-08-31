@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T04:30:33.028Z",
+  "generatedAt": "2026-08-31T04:37:35.780Z",
   "flows": [
     {
       "key": "home",
@@ -103,7 +103,7 @@
       "order": 13,
       "status": "app-mocked",
       "description": "notifications/{notificationId} typed and rules-ready this session. SCREEN-MAPPED 2026-08-12 (grounded Explore audit, upgraded from \"missing\" to \"app-mocked\" — a real reader screen does exist): NotificationsCenterScreen is a genuinely reachable, feature-rich screen (search/category filters, swipe-to-dismiss, pull-to-refresh) but 100% local mock state — zero `.collection(\"notifications\")` calls anywhere, despite UI copy that falsely claims \"Firestore Real-Time Sync.\" Three separate, mutually-inconsistent preferences surfaces also exist (Notifications Center settings, an onboarding notification-permissions step, and a general Settings \"Notification Feeds\" panel) — none persist anywhere beyond local state.",
-      "screenCount": 4
+      "screenCount": 6
     },
     {
       "key": "public_profile",
@@ -4956,10 +4956,74 @@
         "populated",
         "search_filtered",
         "category_filtered",
-        "muted_banner"
+        "muted_banner",
+        "high_priority",
+        "grouped",
+        "push_denied",
+        "offline",
+        "error"
       ],
       "collectionsTouched": [],
       "notes": "Reachable, feature-rich screen (swipe-to-dismiss, mark read/unread, pull-to-refresh) but 100% local mock state seeded with 5 hardcoded items — zero `.collection(\"notifications\")` calls, despite UI copy claiming \"Firestore Real-Time Sync\" (a commented-out banner, dead code). No tap-through/detail screen; no `targetUrl` navigation.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "notifications",
+      "flowTitle": "Notifications",
+      "flowStatus": "app-mocked",
+      "flowOrder": 13,
+      "screenKey": "notification_detail",
+      "screenNumber": 169,
+      "screenTitle": "Notification",
+      "screenOrder": 5,
+      "states": [
+        "booking",
+        "collaboration",
+        "opportunity",
+        "marketplace",
+        "payment",
+        "expired",
+        "entity_deleted",
+        "permission_denied"
+      ],
+      "collectionsTouched": [
+        "notifications"
+      ],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-13 brief. Most notifications go straight to the flow that owns them and need no detail screen. This one exists for the handful that carry a DECISION — a booking request, a collaboration invitation — where accepting or declining from the list would be too easy to do by accident. It shows the context and hands off; it deliberately does not reproduce the booking page.",
+      "dataContract": [
+        {
+          "collection": "notifications",
+          "sample": {
+            "userId": "mock-talent-vedanshu-beats-mock",
+            "title": "Studio Booking Approved",
+            "body": "Your booking at Blue Room Mixing Suite, Mumbai on July 12, 14:00–18:00 has been confirmed.",
+            "type": "BOOKING_UPDATE",
+            "isRead": false,
+            "targetUrl": "/bookings",
+            "createdAt": "2026-07-10T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "notifications",
+      "flowTitle": "Notifications",
+      "flowStatus": "app-mocked",
+      "flowOrder": 13,
+      "screenKey": "notification_categories",
+      "screenNumber": 170,
+      "screenTitle": "Notification categories",
+      "screenOrder": 6,
+      "states": [
+        "default",
+        "messages",
+        "bookings",
+        "marketplace",
+        "opportunities",
+        "system"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-13 brief's SCREEN 26. Per-category control (which events, and on which channel) as one screen whose state is the category being configured — the brief's own list of categories, not one screen each.",
       "dataContract": []
     },
     {
@@ -4988,7 +5052,9 @@
       "screenTitle": "Notification Preferences (onboarding step)",
       "screenOrder": 3,
       "states": [
-        "default"
+        "default",
+        "asking",
+        "denied"
       ],
       "collectionsTouched": [],
       "notes": "A separate, unconnected screen from notification_settings above, reached during profile onboarding. Its \"test notification\" action does exercise the real Android OS notification-channel API (device-level, not Firestore) — the only genuinely functional piece across all three preference surfaces.",

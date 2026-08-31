@@ -4,5 +4,5 @@
   "order": 13,
   "status": "app-mocked",
   "description": "notifications/{notificationId} typed and rules-ready this session. SCREEN-MAPPED 2026-08-12 (grounded Explore audit, upgraded from \"missing\" to \"app-mocked\" — a real reader screen does exist): NotificationsCenterScreen is a genuinely reachable, feature-rich screen (search/category filters, swipe-to-dismiss, pull-to-refresh) but 100% local mock state — zero `.collection(\"notifications\")` calls anywhere, despite UI copy that falsely claims \"Firestore Real-Time Sync.\" Three separate, mutually-inconsistent preferences surfaces also exist (Notifications Center settings, an onboarding notification-permissions step, and a general Settings \"Notification Feeds\" panel) — none persist anywhere beyond local state.",
-  "screenCount": 4
+  "screenCount": 6
 }

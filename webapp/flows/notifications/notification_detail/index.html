@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0D0D" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/notifications/notification_detail/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Notifications — Detail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/notifications/notifications_center/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Notification</h1>
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div data-state="booking">
+        <div class="ml-person-row">
+          <img src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
+          <span class="meta"><b>Ishita Rao</b><p>Booking request</p></span>
+        </div>
+        <h2 class="ml-type-3" style="margin:var(--space-3) 0 var(--space-1)">Tracking Room 1 — Wed 12 August</h2>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0">10:00–14:00 · 4 hours · ₹7,200</p>
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>Room</span><span>Tracking Room 1</span></div>
+          <div class="ml-summary__row"><span>When</span><span>Wed 12 Aug, 10:00–14:00</span></div>
+          <div class="ml-summary__row"><span>Rate</span><span>₹1,800/hr</span></div>
+          <div class="ml-summary__row"><span>Deposit</span><span>₹5,000 on confirmation</span></div>
+        </div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
+          <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/notifications/notifications_center/index.html">Decline</a>
+          <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/booking/my_bookings/index.html">Accept request</a>
+        </div>
+      </div>
+      <div data-state="collaboration">
+        <div class="ml-person-row">
+          <img src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
+          <span class="meta"><b>Kabir Sheth</b><p>Collaboration invitation</p></span>
+        </div>
+        <h2 class="ml-type-3" style="margin:var(--space-3) 0 var(--space-1)">Neon Monsoon</h2>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0">Lead vocal · credited · delivery by 20 Sept</p>
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>Your role</span><span>Lead vocal</span></div>
+          <div class="ml-summary__row"><span>Credit</span><span>Yes, on release</span></div>
+          <div class="ml-summary__row"><span>Deadline</span><span>20 September</span></div>
+          <div class="ml-summary__row"><span>Fee</span><span>₹15,000</span></div>
+        </div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
+          <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/notifications/notifications_center/index.html">Decline</a>
+          <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/portfolio/portfolio_dashboard/index.html">Accept</a>
+        </div>
+      </div>
+      <div data-state="opportunity">
+        <div class="ml-person-row">
+          <img src="/assets/img/editorials/41f63164364f0757ddb2a20693f4b144.jpg" alt="" loading="lazy" />
+          <span class="meta"><b>Octave Sound Labs</b><p>Application shortlisted</p></span>
+        </div>
+        <h2 class="ml-type-3" style="margin:var(--space-3) 0 var(--space-1)">Session vocalist — Hindi pop EP</h2>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0">You're on the shortlist. They may message you next.</p>
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>Rate</span><span>₹12,000/day</span></div>
+          <div class="ml-summary__row"><span>Duration</span><span>2 days</span></div>
+          <div class="ml-summary__row"><span>Where</span><span>Andheri West, Mumbai</span></div>
+        </div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
+          <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/opportunities/my_applications/index.html">My applications</a>
+          <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/opportunities/opportunity_detail/index.html">View opportunity</a>
+        </div>
+      </div>
+      <div data-state="marketplace">
+        <div class="ml-person-row">
+          <img src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
+          <span class="meta"><b>Aarav Menon</b><p>Counter offer</p></span>
+        </div>
+        <h2 class="ml-type-3" style="margin:var(--space-3) 0 var(--space-1)">Shure SM7B Microphone</h2>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0">You offered ₹24,000. They countered at ₹26,000.</p>
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>Asking</span><span>₹28,500</span></div>
+          <div class="ml-summary__row"><span>Your offer</span><span>₹24,000</span></div>
+          <div class="ml-summary__row"><span>Their counter</span><span>₹26,000</span></div>
+          <div class="ml-summary__row"><span>Expires</span><span>In 41 hours</span></div>
+        </div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
+          <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/marketplace/marketplace_make_offer/index.html">Counter again</a>
+          <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/marketplace/marketplace_order_status/index.html">Accept ₹26,000</a>
+        </div>
+      </div>
+      <div data-state="payment">
+        <div class="ml-person-row">
+          <img src="/assets/img/editorials/0e7b75cc331c13fd482936dd133a8363.jpg" alt="" loading="lazy" />
+          <span class="meta"><b>MusicLinkd</b><p>Payment failed</p></span>
+        </div>
+        <h2 class="ml-type-3" style="margin:var(--space-3) 0 var(--space-1)">₹5,000 deposit could not be taken</h2>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0">Your card was not charged. The booking is held for 24 hours.</p>
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>Booking</span><span>Yash Raj, Wed 12 Aug</span></div>
+          <div class="ml-summary__row"><span>Amount</span><span>₹5,000</span></div>
+          <div class="ml-summary__row"><span>Held until</span><span>Tomorrow, 09:00</span></div>
+        </div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
+          <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/booking/my_bookings/index.html">View booking</a>
+          <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/booking/payment_screen/index.html">Try another method</a>
+        </div>
+      </div>
+
+      <div class="ml-empty" data-state="expired">
+        <h2 class="ml-empty__title">This is no longer available</h2>
+        <p class="ml-empty__body">The opportunity closed, or the offer expired, before you got to it.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/notifications/notifications_center/index.html">Back to notifications</a>
+      </div>
+
+      <div class="ml-empty" data-state="entity_deleted">
+        <h2 class="ml-empty__title">This content is no longer available</h2>
+        <p class="ml-empty__body">It may have been deleted by whoever posted it.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/notifications/notifications_center/index.html">Back to notifications</a>
+      </div>
+
+      <div class="ml-empty" data-state="permission_denied">
+        <h2 class="ml-empty__title">You don't have access to this</h2>
+        <p class="ml-empty__body">Its visibility changed after you were notified.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/notifications/notifications_center/index.html">Back to notifications</a>
+      </div>
+    </main>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>

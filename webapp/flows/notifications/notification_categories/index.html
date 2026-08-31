@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0D0D" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/notifications/notification_categories/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Notifications — Categories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/notifications/notification_settings/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">By category</h1>
+    </header>
+    <nav class="ml-tabs" role="tablist" aria-label="Category" style="margin:0 var(--space-4)">
+      <a class="ml-tabs__tab" role="tab" data-chip="messages" href="?state=messages">Messages</a><a class="ml-tabs__tab" role="tab" data-chip="bookings" href="?state=bookings">Bookings</a><a class="ml-tabs__tab" role="tab" data-chip="marketplace" href="?state=marketplace">Market</a><a class="ml-tabs__tab" role="tab" data-chip="opportunities" href="?state=opportunities">Opportunities</a><a class="ml-tabs__tab" role="tab" data-chip="system" href="?state=system">System</a>
+    </nav>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div data-state="default">
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          Choose what you're told about, and how. Anything switched off here still appears
+          in your notification list — it just doesn't reach your phone or inbox.
+        </p>
+        <a class="ml-action-row" href="?state=messages">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Messages</span>
+          <span class="ml-choice__meta">2 of 3 on</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+        <a class="ml-action-row" href="?state=bookings">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Bookings</span>
+          <span class="ml-choice__meta">5 of 5 on</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+        <a class="ml-action-row" href="?state=marketplace">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Market</span>
+          <span class="ml-choice__meta">3 of 4 on</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+        <a class="ml-action-row" href="?state=opportunities">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Opportunities</span>
+          <span class="ml-choice__meta">3 of 4 on</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+        <a class="ml-action-row" href="?state=system">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">System</span>
+          <span class="ml-choice__meta">2 of 4 on</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+      </div>
+
+      <div data-state="messages">
+        <div class="ml-section"><h2>Messages</h2></div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">A new message</span>
+            <span class="ml-choice__meta">Push</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="A new message"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">A message request</span>
+            <span class="ml-choice__meta">Push</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="A message request"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Read receipts</span>
+            <span class="ml-choice__meta">In the app only</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Read receipts"></button>
+        </div>
+        
+      </div>
+      <div data-state="bookings">
+        <div class="ml-section"><h2>Bookings</h2></div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Request received</span>
+            <span class="ml-choice__meta">Push and email</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Request received"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Confirmed or declined</span>
+            <span class="ml-choice__meta">Push and email</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Confirmed or declined"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Rescheduled or cancelled</span>
+            <span class="ml-choice__meta">Push and email</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Rescheduled or cancelled"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Reminder 24 hours before</span>
+            <span class="ml-choice__meta">Push</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Reminder 24 hours before"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Payment problems</span>
+            <span class="ml-choice__meta">Push and email</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Payment problems"></button>
+        </div>
+        
+      </div>
+      <div data-state="marketplace">
+        <div class="ml-section"><h2>Market</h2></div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Someone offers on my listing</span>
+            <span class="ml-choice__meta">Push</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Someone offers on my listing"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">My offer is answered</span>
+            <span class="ml-choice__meta">Push</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="My offer is answered"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Listing sold or rented</span>
+            <span class="ml-choice__meta">Email</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Listing sold or rented"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Price drops on saved items</span>
+            <span class="ml-choice__meta">In the app only</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Price drops on saved items"></button>
+        </div>
+        
+      </div>
+      <div data-state="opportunities">
+        <div class="ml-section"><h2>Opportunities</h2></div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">An opportunity matches my roles</span>
+            <span class="ml-choice__meta">Push</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="An opportunity matches my roles"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">My application is viewed</span>
+            <span class="ml-choice__meta">In the app only</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="My application is viewed"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Shortlisted or accepted</span>
+            <span class="ml-choice__meta">Push and email</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Shortlisted or accepted"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Deadline approaching</span>
+            <span class="ml-choice__meta">Push</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Deadline approaching"></button>
+        </div>
+        
+      </div>
+      <div data-state="system">
+        <div class="ml-section"><h2>System</h2></div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Security and sign-ins</span>
+            <span class="ml-choice__meta">Push and email</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Security and sign-ins"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Account and policy changes</span>
+            <span class="ml-choice__meta">Email</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Account and policy changes"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Product updates</span>
+            <span class="ml-choice__meta">In the app only</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Product updates"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Offers and promotions</span>
+            <span class="ml-choice__meta">In the app only</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Offers and promotions"></button>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
+          Security notifications can't be turned off entirely — you'll always be told about a new sign-in.
+        </p>
+      </div>
+    </main>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>

@@ -1399,10 +1399,41 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 1,
       screenNumber: 102,
       title: "Notifications Center",
-      states: ["loading", "empty", "populated", "search_filtered", "category_filtered", "muted_banner"],
+      states: [
+        "loading", "empty", "populated", "search_filtered", "category_filtered", "muted_banner",
+        // FLOW-13 brief, 2026-08-31. SCREEN 06-16 are eleven notification
+        // TYPES — message, collaboration, opportunity, marketplace, booking,
+        // payment, service, business, follow, portfolio, system. They are one
+        // list filtered by category, so they are states. Priority is a state
+        // too: "high" is the same list showing only what cannot wait.
+        "high_priority", "grouped", "push_denied", "offline", "error",
+      ],
       collectionsTouched: [],
       notes:
         "Reachable, feature-rich screen (swipe-to-dismiss, mark read/unread, pull-to-refresh) but 100% local mock state seeded with 5 hardcoded items — zero `.collection(\"notifications\")` calls, despite UI copy claiming \"Firestore Real-Time Sync\" (a commented-out banner, dead code). No tap-through/detail screen; no `targetUrl` navigation.",
+    },
+    {
+      key: "notification_detail",
+      order: 5,
+      screenNumber: 169,
+      title: "Notification",
+      states: [
+        "booking", "collaboration", "opportunity", "marketplace", "payment",
+        "expired", "entity_deleted", "permission_denied",
+      ],
+      collectionsTouched: ["notifications"],
+      notes:
+        "PROPOSED 2026-08-31 from the FLOW-13 brief. Most notifications go straight to the flow that owns them and need no detail screen. This one exists for the handful that carry a DECISION — a booking request, a collaboration invitation — where accepting or declining from the list would be too easy to do by accident. It shows the context and hands off; it deliberately does not reproduce the booking page.",
+    },
+    {
+      key: "notification_categories",
+      order: 6,
+      screenNumber: 170,
+      title: "Notification categories",
+      states: ["default", "messages", "bookings", "marketplace", "opportunities", "system"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from the FLOW-13 brief's SCREEN 26. Per-category control (which events, and on which channel) as one screen whose state is the category being configured — the brief's own list of categories, not one screen each.",
     },
     {
       key: "notification_settings",
@@ -1419,7 +1450,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 3,
       screenNumber: 104,
       title: "Notification Preferences (onboarding step)",
-      states: ["default"],
+      states: ["default", "asking", "denied"],
       collectionsTouched: [],
       notes:
         "A separate, unconnected screen from notification_settings above, reached during profile onboarding. Its \"test notification\" action does exercise the real Android OS notification-channel API (device-level, not Firestore) — the only genuinely functional piece across all three preference surfaces.",
