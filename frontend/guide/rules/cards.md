@@ -19,7 +19,7 @@ padding      --space-3    (16px)
 touch target --size-3     (48dp minimum)
 ```
 
-*Was "RoundedCornerShape(24dp) / 1dp #ECECF1 / #FFFFFF / 16–20dp". The colour
+*Was “RoundedCornerShape(24dp) / 1dp #ECECF1 / #FFFFFF / 16–20dp”. The colour
 was right (#ECECF1 is `--color-line`); 24dp and the 16–20dp range are not steps
 on any scale, so no card could have been built from tokens and matched them.*
 
@@ -28,11 +28,19 @@ on any scale, so no card could have been built from tokens and matched them.*
 - One anatomy specification per type — reuse, do not fork.
 - **Use the local photography library** under `/assets/img`, bound to a
   component. Never stock.
-  *Was "use real photography from Unsplash". The guide carried 94 stock
+  *Was “use real photography from Unsplash”. The guide carried 94 stock
   references and now carries zero; they were removed deliberately.*
 - Each card has one primary CTA (hire, book, inquire, apply).
 - Approved tokens only — see `tokens/tokens.json`.
-- Zero shadow noise. Rely on the hairline border for definition.
+- **A card lifts off the ground with `--elevation-2` and `--radius-3`.** The
+  border is a fallback for cards sitting on white, where a shadow reads as dirt.
+  *Was "zero shadow noise, rely on the hairline border for definition". That
+  rule produced a flat page, and once `--color-line` drifted to the same hex as
+  `--color-paper` it produced cards with no visible edge at all. Every reference
+  the palette rule names (Apple Music, Shazam, Tinder, Airbnb, Pinterest) uses
+  radius plus a soft shadow and draws no border.*
+- **Inset the media** with `.ml-card--inset` so artwork rests inside the card
+  rather than bleeding to its edge. Full-bleed remains valid for hero cards.
 
 ## Canonical card types
 

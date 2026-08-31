@@ -472,12 +472,37 @@ body {
    which is why the elevation scale is 2 levels rather than 4. */
 /* Compose: Card(border = BorderStroke(1.dp, MLColor.line))                  */
 
+/* A card is a SURFACE ON A GROUND, not a boxed rectangle.
+
+   Rewritten 2026-08-31 against the references the palette rule already names —
+   Apple Music, Shazam, Tinder, Airbnb, Pinterest. Every one of them separates
+   a card from the canvas with radius plus a soft wide shadow, and none of them
+   draws a border around it. This system did the opposite: a hairline border,
+   no elevation, and radius-2. rules/cards.md even said "zero shadow noise,
+   rely on the hairline border" — a rule that produced a flat page and, once
+   --color-line collided with --color-paper, a card with no visible edge at all.
+
+   The border stays as a fallback for surfaces that sit ON white (a card inside
+   a sheet has no ground to lift off), but elevation is what does the work. */
 .ml-card {
   background: var(--color-white);
-  border: var(--border-1) solid var(--color-line);
-  border-radius: var(--radius-2);
+  border-radius: var(--radius-3);
+  box-shadow: var(--elevation-2);
   overflow: hidden;
 }
+/* Media INSET inside the card, with its own radius, rather than bleeding to
+   the card edge. This is the move that makes the Nike and Apple-style cards
+   read as physical: the artwork is an object resting in the card, not a
+   texture painted onto its top half. Opt-in, because a full-bleed hero card
+   is a legitimate different thing. */
+.ml-card--inset { padding: var(--space-2); }
+.ml-card--inset > .ml-media,
+.ml-card--inset > img {
+  border-radius: calc(var(--radius-3) - var(--space-2));
+  overflow: hidden;
+}
+/* On white, elevation reads as dirt. Fall back to the hairline. */
+.ml-card--flat { box-shadow: none; }
 .ml-card--lg      { border-radius: var(--radius-3); }
 .ml-card--padded  { padding: var(--space-3); }
 .ml-card--raised  { box-shadow: var(--elevation-1); }
@@ -563,12 +588,18 @@ a.ml-card:active, button.ml-card:active { transform: scale(0.98); }
   gap: var(--space-3);
   margin: var(--space-4) 0 var(--space-2);
 }
+/* A section heading is a signpost inside a screen, not the screen's subject,
+   so it sits one step BELOW the title. It was type-3 while 123 of the screen
+   titles were type-2, which inverted the hierarchy outright: the label for a
+   part of the screen was larger than the name of the screen. Same size as body
+   copy now, separated by weight and tracking rather than by scale. */
 .ml-section > h2, .ml-section > h3 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: var(--type-3);
+  font-size: var(--type-2);
   font-weight: var(--weight-3);
   letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 .ml-section__link {
   flex: none;

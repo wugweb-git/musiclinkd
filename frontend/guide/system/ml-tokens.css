@@ -15,11 +15,11 @@
 
   /* Colour — monochrome chrome; media carries all saturation */
   --color-ink: #0D0D0D; /* Primary action AND primary text */
-  --color-paper: #FCFCFD; /* App canvas / page background */
+  --color-paper: #ECECF1; /* App canvas / page background */
   --color-white: #FFFFFF; /* Card and sheet fill */
   --color-surface: #F8F8FB; /* Subtle raised/sunken fill — search bars, inactive segments, skeletons */
-  --color-line: #ECECF1; /* Hairline borders, dividers, list separators */
-  --color-muted: #6E6E7D; /* Secondary text, metadata, placeholder */
+  --color-line: #D5D5DE; /* Hairline borders, dividers, list separators */
+  --color-muted: #66666F; /* Secondary text, metadata, placeholder */
   --color-pink: #EA4C89;
   --color-pink-pressed: #C7295F; /* Two jobs, one token */
   --color-pink-container: #FCE7F3; /* The one permitted tinted surface — accent chips, progress tracks */

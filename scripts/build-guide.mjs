@@ -34,7 +34,7 @@ import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-/* Gestalt ships two optical grids: 398 icons drawn on 24 units and 25 "compact"
+/* Gestalt ships two optical grids: 398 icons drawn on 24 units and 25 “compact”
    ones drawn on 16. Rendering both at one size makes the compact set read
    heavier, because its strokes were cut for a smaller box. */
 const nativeIs16 = (n) => {
@@ -54,7 +54,7 @@ const lucideNames = readdirSync(join(ROOT, "frontend/guide/icons-lucide"))
 
 /** Real token count, counted from the emitted CSS rather than guessed from
  *  one JSON category plus a fudge factor. The header badge previously read
- *  "foundation.color keys + 43", a stale hardcode that undercounted by 32
+ *  “foundation.color keys + 43”, a stale hardcode that undercounted by 32
  *  tokens (found 2026-08-30) — this recounts every build, so it can't drift
  *  again the same way. */
 const cssTokenCount = new Set(
@@ -428,7 +428,7 @@ function readStateGaps() {
         contract = JSON.parse(readFileSync(join(flowsDir, flow, sc, "screen.json"), "utf8"));
         html = readFileSync(join(flowsDir, flow, sc, "index.html"), "utf8");
       } catch { continue; }
-      /* Match the STATE, not the substring. /load/i also matches "uploading",
+      /* Match the STATE, not the substring. /load/i also matches “uploading”,
          "upload_error", "govt_id_upload" and "gst_upload" — which reported
          collaboration_files and verification_screen as missing a loading state
          neither of them ever declared, inflating this gap from 3 to 5. */
@@ -785,7 +785,7 @@ const DEMOS = {
     </div>
     <div>
       <div class="ml-video" style="max-width:300px">
-        <video src="${vid("banner")}" muted loop playsinline autoplay
+        <video src="${vid("banner")}" muted loop playsinline autoplay controls preload="metadata"
                style="width:100%;display:block" aria-label="Ambient loop"></video>
         <span class="ml-video__time">0:08</span></div>
       <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Muted autoplay loop — decorative only, never for content that carries meaning.</p>
@@ -1080,7 +1080,7 @@ const DEMOS = {
       <cite class="ml-quote__cite">Ananya Sharma · Playback vocalist, Mumbai</cite></div>
   </div>
   <div class="ml-split ml-split--flip" style="margin-top:var(--space-4)">
-    <div class="ml-split__media" style="aspect-ratio:4/3"><video src="${m("video",2)}" muted loop playsinline autoplay aria-label="Studio session"></video></div>
+    <div class="ml-split__media" style="aspect-ratio:4/3"><video src="${m("video",2)}" muted loop playsinline autoplay controls preload="metadata" aria-label="Studio session"></video></div>
     <div><span class="ml-article__tag">Motion</span>
       <blockquote class="ml-quote" style="margin-top:var(--space-2)">The flipped band puts the media second.</blockquote>
       <cite class="ml-quote__cite">Alternating sides is what stops a run of these reading as a slideshow</cite></div>
@@ -1551,24 +1551,82 @@ const html = `<!doctype html>
      styling lives here; that would be a second source of truth, which is the
      exact failure this catalogue replaces. */
   body { background: var(--color-paper); }
-  .g-wrap { max-width: 1080px; margin-inline: auto; padding: var(--space-4) var(--space-3) 96px; }
+  .g-wrap { max-width: 1080px; margin-inline: auto; padding: var(--space-4) var(--space-3) 96px; min-width: 0; }
   .g-head { border-bottom: 1px solid var(--color-line); padding-bottom: var(--space-4); margin-bottom: var(--space-4); }
-  .g-nav { position: sticky; top: 0; z-index: var(--z-1); background: color-mix(in srgb, var(--color-paper) 92%, transparent);
-           backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-line); }
-  .g-nav ul { display: flex; gap: var(--space-3); list-style: none; margin: 0;
-              padding: var(--space-2) var(--space-3); overflow-x: auto; max-width: 1080px; margin-inline: auto; scrollbar-width: none; }
-  .g-nav ul::-webkit-scrollbar { display: none; }
-  .g-nav a { display: inline-flex; align-items: center; min-height: var(--size-3); white-space: nowrap;
-             color: var(--color-muted); font-size: var(--type-2); font-weight:var(--weight-3); text-decoration: none; }
-  .g-nav a:hover { color: var(--color-ink); }
+  /* ── shell ────────────────────────────────────────────────────────────
+     A persistent index beside the content, instead of ten anchors above
+     95,000px of single column. Grid rather than fixed positioning so the
+     sidebar scrolls independently and the content keeps its own measure. */
+  .g-skip { position: absolute; left: -9999px; }
+  .g-skip:focus { left: var(--space-3); top: var(--space-3); z-index: var(--z-4);
+                  padding: var(--space-2) var(--space-3); background: var(--color-ink);
+                  color: var(--color-white); border-radius: var(--radius-1); }
+  .g-shell { display: grid; grid-template-columns: 1fr; }
+  @media (min-width: 840px) {                       /* --bp-expanded */
+    .g-shell { grid-template-columns: 300px minmax(0, 1fr); }
+    .g-side { position: sticky; top: 0; height: 100dvh; overflow-y: auto;
+              border-right: var(--border-1) solid var(--color-line); }
+    .g-wrap { padding-inline: var(--space-4); }
+  }
+  .g-side { padding: var(--space-3); background: var(--color-paper);
+            scrollbar-width: thin; }
+  .g-side__brand { display: block; padding: var(--space-2) 0 var(--space-3);
+                   text-decoration: none; color: inherit; }
+  .g-side__search { width: 100%; }
+  .g-side__count { margin: var(--space-1) 0 0; font-size: var(--type-1);
+                   color: var(--color-muted); min-height: 1.2em; }
+  .g-side__nav { display: grid; margin-top: var(--space-3); }
+  .g-side__link, .g-side__item {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--space-2);
+    min-height: var(--size-3); padding: 0 var(--space-2);
+    border-radius: var(--radius-1); color: var(--color-ink);
+    font-size: var(--type-2); text-decoration: none;
+  }
+  .g-side__link { font-weight: var(--weight-3); }
+  .g-side__item { color: var(--color-muted); font-size: var(--type-1);
+                  text-transform: capitalize; min-height: var(--size-2);
+                  padding-left: var(--space-3); }
+  .g-side__link:hover, .g-side__item:hover { background: var(--color-surface); }
+  /* The section you are reading, marked in the index. Driven by an observer
+     below rather than :target, because :target only updates when a link is
+     clicked and not when you scroll past a heading. */
+  .g-side__item.is-current, .g-side__link.is-current {
+    background: var(--color-pink-container); color: var(--color-pink-pressed); }
+  .g-side__link span, .g-side__item span,
+  .g-side__group summary span { color: var(--color-muted); font-size: var(--type-1);
+                                font-variant-numeric: tabular-nums; }
+  .g-side__group summary {
+    display: flex; align-items: center; justify-content: space-between;
+    min-height: var(--size-3); padding: 0 var(--space-2); cursor: pointer;
+    border-radius: var(--radius-1);
+    font-size: var(--type-2); font-weight: var(--weight-3);
+  }
+  .g-side__group summary:hover { background: var(--color-surface); }
+  .g-side__group[hidden], .g-side__item[hidden], .g-side__link[hidden] { display: none; }
   h2.g-h { font-family: var(--font-display); font-size: var(--type-4); font-weight:var(--weight-4);
-           letter-spacing: -0.03em; margin: var(--space-4) 0 var(--space-2); }
-  .g-comp { padding: var(--space-4) 0; border-top: 1px solid var(--color-line); }
+           letter-spacing: -0.03em; margin: var(--space-4) 0 var(--space-2); text-wrap: balance; }
+  .g-comp__head h3, .g-rules__h { text-wrap: balance; }
+  /* Every component anchor scrolled to a heading sitting under the sticky
+     chrome. 133 broken landings, one property. --size-4 clears the tallest
+     sticky element with a step of breathing room above it. */
+  .g-comp, h2.g-h, .g-side__group summary { scroll-margin-top: calc(var(--size-4) + var(--space-3)); }
+  .g-comp { padding: var(--space-4) 0; border-top: var(--border-1) solid var(--color-line); }
   .g-comp__head { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
   .g-comp__head h3 { font-family: var(--font-display); font-size: var(--type-3); font-weight:var(--weight-3);
                      letter-spacing: -0.01em; margin: 0; text-transform: capitalize; }
   .g-file { font-size: var(--type-1); color: var(--color-muted); }
-  .g-demo { margin-top: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-line);
+  /* NO blanket aspect-ratio on demo images, deliberately.
+
+     The Vercel guideline "every <img> needs explicit width and height" is
+     written for frameworks where CSS may not size the image. Here it does:
+     .ml-facepile, .ml-person-row, .ml-roster__member, .ml-avatar and the rest
+     all set width and height in ml-widgets.css, so the box is reserved before
+     the image decodes and there is no shift to prevent.
+
+     A blanket aspect-ratio on .g-demo img was tried and reverted: it
+     would have squashed nine circular avatars into ovals. The finding was a
+     false positive from reading markup instead of the stylesheets. */
+  .g-demo { margin-top: var(--space-3); padding: var(--space-3); border: var(--border-1) solid var(--color-line);
             border-radius: var(--radius-2); background: var(--color-white); overflow-x: auto; }
   .g-row { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
   .g-frame { max-width: 360px; border: 1px solid var(--color-line); border-radius: var(--radius-2);
@@ -1590,7 +1648,7 @@ const html = `<!doctype html>
   .g-rules { margin: var(--space-2) 0 0; padding-left: var(--space-3);
              max-width: var(--layout-measure); font-size: var(--type-2); }
   .g-rules li { margin-bottom: var(--space-1); }
-  /* An inline "Was …" clause is a reconciliation note living inside a rule,
+  /* An inline “Was …” clause is a reconciliation note living inside a rule,
      not part of it. It has to read as subordinate or the superseded value looks
      like current policy — which is how "use Unsplash" and "Lucide only" would
      otherwise still appear to be the rule on this page. */
@@ -1671,21 +1729,47 @@ const html = `<!doctype html>
 </style>
 </head>
 <body>
-<nav class="g-nav" aria-label="Sections"><ul>
-  <li><a href="#brand">Brand</a></li>
-  <li><a href="#imagery">Imagery</a></li>
-  <li><a href="#foundations">Foundations</a></li>
-  <li><a href="#core">Core · ${core.length}</a></li>
-  <li><a href="#widgets">Widgets · ${widg.length}</a></li>
-  <li><a href="#motion">Motion</a></li>
-  <li><a href="#patterns">Patterns · ${patterns.reduce((n, f) => n + f.screens.filter((x) => x.onSystem).length, 0)}</a></li>
-  <li><a href="#icons">Icons · ${iconNames.length}</a></li>
-  <li><a href="#taxonomy">Taxonomy · ${taxonomy.length}</a></li>
-  <li><a href="#gaps">Gaps</a></li>
-  <li><a href="/preview">Screens →</a></li>
-</ul></nav>
+<a class="g-skip" href="#content">Skip to content</a>
 
-<div class="g-wrap">
+<!-- Two panes. The flat ten-anchor strip this replaces meant finding one of
+     133 components was a scroll or a Ctrl+F down a 95,000px page. The index is
+     now persistent, grouped and filterable. Below --bp-expanded it becomes a
+     disclosure so the phone layout stays one column. -->
+<div class="g-shell">
+<aside class="g-side" id="index">
+  <a class="g-side__brand" href="#top">
+    <span class="ml-wordmark">MUSIC<em>LINKD</em></span>
+  </a>
+
+  <!-- The system's own search component, not a bespoke one. If .ml-search
+       cannot serve the catalogue's own filter, that is a finding about the
+       component rather than a reason to hand-roll a second input. -->
+  <label class="ml-search g-side__search">
+    ${ic("search", 18)}
+    <input type="search" id="g-filter" placeholder="Filter ${sections.length} components…"
+           autocomplete="off" aria-controls="index" aria-describedby="g-filter-count" />
+  </label>
+  <p class="g-side__count" id="g-filter-count" role="status" aria-live="polite"></p>
+
+  <nav class="g-side__nav" aria-label="Catalogue">
+    ${[["brand", "Brand", brand.length], ["imagery", "Imagery", ""],
+       ["foundations", "Foundations", ""], ["motion", "Motion", ""],
+       ["patterns", "Patterns", patterns.reduce((n, f) => n + f.screens.filter((x) => x.onSystem).length, 0)],
+       ["icons", "Icons", iconNames.length + lucideNames.length],
+       ["taxonomy", "Taxonomy", taxonomy.length], ["gaps", "Gaps", ""]]
+      .map(([id, label, n]) => `<a class="g-side__link" href="#${id}" data-g-top>${label}${n === "" ? "" : `<span>${n}</span>`}</a>`).join("")}
+
+    ${[["Core", core], ["Widgets", widg]].map(([label, list]) => `
+      <details class="g-side__group" open>
+        <summary>${label}<span>${list.length}</span></summary>
+        ${list.map((x) => `<a class="g-side__item" href="#${slug(x.name)}" data-g-name="${esc(x.name).toLowerCase()}">${esc(x.name)}</a>`).join("")}
+      </details>`).join("")}
+
+    <a class="g-side__link" href="/preview" data-g-top>Screens →</a>
+  </nav>
+</aside>
+
+<div class="g-wrap" id="content">
   <header class="g-head">
     <div class="ml-wordmark" style="font-size:var(--type-4)">MUSIC<em>LINKD</em></div>
     <p class="ml-lede" style="margin-top:var(--space-2);max-width:60ch">
@@ -1841,7 +1925,7 @@ const html = `<!doctype html>
       <figcaption class="ml-type-1" style="margin-top:var(--space-1);color:var(--color-muted)">motion</figcaption></figure>
     <figure style="margin:0;max-width:220px">
       <div class="ml-media" style="aspect-ratio:var(--media-aspect-card);border-radius:var(--radius-2)">
-        <video src="${m("video", 2)}" muted loop playsinline autoplay aria-label="Studio session"></video></div>
+        <video src="${m("video", 2)}" muted loop playsinline autoplay controls preload="metadata" aria-label="Studio session"></video></div>
       <figcaption class="ml-type-1" style="margin-top:var(--space-1);color:var(--color-muted)">video</figcaption></figure>
   </div>
   <p class="ml-type-1" style="color:var(--color-muted);max-width:var(--layout-measure);margin-top:var(--space-2)">
@@ -2241,6 +2325,82 @@ const html = `<!doctype html>
    what the Gestalt catalogue this replaces could do and the first version of
    this page could not. No framework: the system's behaviour is CSS state plus
    aria attributes, so wiring it is a few delegated listeners. */
+/* ── index filter ──────────────────────────────────────────────────────
+   133 components with no search meant Ctrl+F or scrolling. Filters the index
+   in place: matching items stay, empty groups collapse, and the count is
+   announced so a screen-reader user learns the result without hunting for it.
+   Plain substring on the component name — no fuzzy matching, because a
+   catalogue filter that guesses is worse than one that does not. */
+(() => {
+  const box = document.getElementById('g-filter');
+  if (!box) return;
+  const items = [...document.querySelectorAll('.g-side__item')];
+  const groups = [...document.querySelectorAll('.g-side__group')];
+  const tops = [...document.querySelectorAll('[data-g-top]')];
+  const count = document.getElementById('g-filter-count');
+  const apply = () => {
+    const q = box.value.trim().toLowerCase();
+    let n = 0;
+    for (const it of items) {
+      const hit = !q || it.dataset.gName.includes(q);
+      it.hidden = !hit;
+      if (hit) n++;
+    }
+    /* A group with nothing left is noise; a group with hits opens itself so a
+       match is never buried behind a closed disclosure. */
+    for (const g of groups) {
+      const any = [...g.querySelectorAll('.g-side__item')].some((i) => !i.hidden);
+      g.hidden = !any;
+      if (q && any) g.open = true;
+    }
+    /* Section links are not components — hide them while filtering so the
+       result set is only what was searched. */
+    for (const t of tops) t.hidden = !!q;
+    count.textContent = q ? n + ' of ' + items.length : '';
+  };
+  box.addEventListener('input', apply);
+  box.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { box.value = ''; apply(); }
+    /* Enter jumps to the single remaining match — the common case after
+       typing three or four characters. */
+    if (e.key === 'Enter') {
+      const first = items.find((i) => !i.hidden);
+      if (first) { first.click(); box.blur(); }
+    }
+  });
+  /* “/” focuses the filter, the convention every docs site shares. Ignored
+     while typing in a field so it never eats a literal slash. */
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) {
+      e.preventDefault(); box.focus(); box.select();
+    }
+  });
+})();
+
+/* Mark the section being read. :target only fires on click, so scrolling past
+   a heading left the index pointing at wherever you last clicked. */
+(() => {
+  const links = new Map();
+  for (const a of document.querySelectorAll('.g-side__item, .g-side__link'))
+    if (a.getAttribute('href')?.startsWith('#')) links.set(a.getAttribute('href').slice(1), a);
+  const targets = [...links.keys()].map((id) => document.getElementById(id)).filter(Boolean);
+  if (!targets.length || !('IntersectionObserver' in window)) return;
+  let current = null;
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      const a = links.get(e.target.id);
+      if (!a || a === current) continue;
+      current?.classList.remove('is-current');
+      a.classList.add('is-current');
+      current = a;
+      /* Keep the marked entry in view without yanking the page. */
+      if (a.offsetParent) a.scrollIntoView({ block: 'nearest' });
+    }
+  }, { rootMargin: '-10% 0px -80% 0px' });
+  for (const t of targets) io.observe(t);
+})();
+
 document.addEventListener('click', (e) => {
   const chip = e.target.closest('.ml-chip[aria-pressed]');
   if (chip) chip.setAttribute('aria-pressed', chip.getAttribute('aria-pressed') !== 'true');

@@ -29,7 +29,7 @@ Compose and SwiftUI from the same source.
 
 - **Three easings, not one:** `--ease-standard` for most motion,
   `--ease-enter` for arrivals, `--ease-spring` for overshoot.
-  *Was "use one easing curve for all motion". A single curve cannot express
+  *Was “use one easing curve for all motion”. A single curve cannot express
   arrival and departure, and native uses springs regardless.*
 - Pressed state: `scale(0.97)`. *(unchanged — matches `.ml-btn:active`)*
 - Hover: lift 2–4px with minimal shadow. Pointer only; never the sole signal.

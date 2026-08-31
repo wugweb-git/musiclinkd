@@ -1,3 +1,13 @@
+/* ── card elevation pass, 2026-08-31 ──────────────────────────────────────
+   Eleven product cards were radius-2 with no shadow, sitting on a ground whose
+   hairline had drifted to the ground's own colour. They had no edge.
+
+   The palette rule in tokens.json names Apple Music, Shazam, Tinder, Airbnb and
+   Pinterest as its source. Every one of those separates a card from the canvas
+   with generous radius and a soft wide shadow, and none draws a border. This
+   pass brings the cards to --radius-3 and --elevation-2 to match the reference
+   set the system already claimed to follow. */
+
 /**
  * ml-widgets.css — the MusicLinkd widget layer.
  *
@@ -93,16 +103,24 @@
   position: sticky;
   bottom: 0;
   z-index: var(--z-1);
-  width: 100%;
   flex: none;
   display: flex;
   align-items: stretch;
-  border-top: var(--border-1) solid var(--color-line);
+  /* Floating, not welded to the bottom edge. Every app in the reference set
+     (Airbnb, Tinder, Apple Music) lifts its bottom chrome off the edge so the
+     content reads as continuing underneath it. The safe-area inset moves from
+     padding to margin, so the bar CLEARS the home indicator instead of growing
+     a dead band into it. */
+  margin-inline: var(--space-3);
+  width: auto;
+  border-radius: var(--radius-3);
+  box-shadow: var(--elevation-3);
+  overflow: hidden;
   /* translucent so content scrolling under it stays legible, like the OS bars */
   background: color-mix(in srgb, var(--color-white) 94%, transparent);
   backdrop-filter: saturate(180%) blur(16px);
   -webkit-backdrop-filter: saturate(180%) blur(16px);
-  padding-bottom: var(--safe-bottom);
+  margin-bottom: calc(var(--space-3) + var(--safe-bottom));
 }
 .ml-tabbar__item {
   flex: 1;
@@ -180,7 +198,8 @@
   width: 168px;
   background: var(--color-white);
   border: var(--border-1) solid var(--color-line);
-  border-radius: var(--radius-2);
+  border-radius: var(--radius-3);
+  box-shadow: var(--elevation-2);
   overflow: hidden;
   color: inherit;
   text-decoration: none;
@@ -215,7 +234,8 @@
   width: 220px;
   background: var(--color-white);
   border: var(--border-1) solid var(--color-line);
-  border-radius: var(--radius-2);
+  border-radius: var(--radius-3);
+  box-shadow: var(--elevation-2);
   overflow: hidden;
   color: inherit;
   text-decoration: none;
@@ -244,7 +264,8 @@
   display: block;
   width: 260px;
   aspect-ratio: var(--media-aspect-card);
-  border-radius: var(--radius-2);
+  border-radius: var(--radius-3);
+  box-shadow: var(--elevation-2);
   overflow: hidden;
   background: var(--color-surface);
   color: var(--color-white);
@@ -268,14 +289,19 @@
 .ml-market-card {
   width: 168px;
   background: var(--color-white);
-  border: var(--border-1) solid var(--color-line);
-  border-radius: var(--radius-2);
+  /* No outline. Every reference this is measured against - Airbnb, Pinterest,
+     Apple Music - separates a card from its ground with fill, radius and a
+     soft lift, never with a drawn border. A 1px line at 1.18:1 was doing the
+     job of all three and doing none of them. */
+  box-shadow: var(--elevation-2);
+  border-radius: var(--radius-3);
   overflow: hidden;
   color: inherit; text-decoration: none; display: block;
   transition: transform var(--duration-1) var(--ease-standard);
 }
 .ml-market-card:active { transform: scale(0.98); }
-.ml-market-card__media { position: relative; aspect-ratio: 1/1; background: var(--color-surface); }
+/* 4:5 rather than 1:1: the photograph should dominate the card. */
+.ml-market-card__media { position: relative; aspect-ratio: 4/5; background: var(--color-surface); }
 .ml-market-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 /* Save control sits on the media, so it needs its own solid ground */
 .ml-market-card__save {
@@ -295,7 +321,7 @@
   content: ""; position: absolute; inset: 50% 50% auto auto;
   width: var(--size-3); height: var(--size-3); transform: translate(50%, -50%);
 }
-.ml-market-card__body  { padding: var(--space-2); }
+.ml-market-card__body  { padding: var(--space-3) var(--space-2) var(--space-2); }
 .ml-market-card__price { font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-4); line-height: 1.1; }
 .ml-market-card__title { font-size: var(--type-1); font-weight: var(--weight-3); margin-top: 2px; }
 .ml-market-card__meta  { font-size: var(--type-1); color: var(--color-muted); }
@@ -309,7 +335,14 @@
 /* ── booking / review / notification rows ──────────────────────────────── */
 /* Widget_Directory: BookingCard, ReviewCard, NotificationCard              */
 
-.ml-booking-card { display: flex; gap: var(--space-3); padding: var(--space-3); }
+.ml-booking-card {
+  display: flex; gap: var(--space-3); padding: var(--space-3);
+  /* It is named a card and was drawn as bare text: no fill, no radius. That
+     read as "fine" only because the page behind it was also near-white. */
+  background: var(--color-white);
+  border-radius: var(--radius-2);
+}
+.ml-booking-card + .ml-booking-card { margin-top: var(--space-2); }
 .ml-booking-card__thumb { width: var(--size-4); height: var(--size-4); border-radius: var(--radius-1); object-fit: cover; flex: none; background: var(--color-surface); }
 .ml-booking-card__body  { flex: 1; min-width: 0; }
 .ml-booking-card__title { font-size: var(--type-2); font-weight: var(--weight-3); }
@@ -355,6 +388,37 @@
 /* Action row under a hero — equal-width pills. */
 .ml-action-row { display: flex; gap: var(--space-2); padding: var(--space-3) 0; }
 .ml-action-row > * { flex: 1; }
+
+/* .ml-action-row began as a BUTTON GROUP: a flex row whose children each take
+   an equal share. It is now used 163 times as a TAPPABLE ROW as well -
+   <a class="ml-action-row"> wrapping a label block and a chevron - and that is
+   a different component with different needs.
+
+   Two things were wrong with every one of those 163 rows. This system resets
+   link styling per component rather than globally, and the anchor form never
+   got a reset, so all of them rendered browser-default blue and underlined.
+   And `> * { flex: 1 }` gave the chevron an equal share of the width, so the
+   label was squeezed into half the row.
+
+   Specialised here rather than renamed across 49 generators: the markup is
+   the right shape, only the rule was missing. */
+a.ml-action-row {
+  align-items: center;
+  min-height: var(--size-3);
+  color: inherit;
+  text-decoration: none;
+}
+a.ml-action-row > * { flex: none; }
+a.ml-action-row > .ml-choice__body { flex: 1; min-width: 0; }
+a.ml-action-row:active { background: var(--color-surface); }
+
+/* Same missing reset, five more components. Each is used as an <a> somewhere
+   and none of them declared a colour or a text-decoration, so each rendered as
+   a raw browser link. */
+a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
+  color: inherit;
+  text-decoration: none;
+}
 
 /* ── progress card ─────────────────────────────────────────────────────── */
 /* Widget_Directory: ProfileCompletionMeter (proposed, PRODUCT-SPEC §3)     */
@@ -631,7 +695,8 @@
 .ml-community {
   display: block; width: 260px;
   border: var(--border-1) solid var(--color-line);
-  border-radius: var(--radius-2);
+  border-radius: var(--radius-3);
+  box-shadow: var(--elevation-2);
   overflow: hidden;
   background: var(--color-white);
   color: inherit; text-decoration: none;
@@ -1107,7 +1172,8 @@
   display: block;
   padding: var(--space-3);
   border: var(--border-1) solid var(--color-line);
-  border-radius: var(--radius-2);
+  border-radius: var(--radius-3);
+  box-shadow: var(--elevation-2);
   background: var(--color-white);
   color: inherit; text-decoration: none;
 }
@@ -1130,7 +1196,8 @@
 .ml-application-card {
   display: flex; gap: var(--space-3);
   padding: var(--space-3);
-  border: var(--border-1) solid var(--color-line); border-radius: var(--radius-2);
+  border: var(--border-1) solid var(--color-line); border-radius: var(--radius-3);
+  box-shadow: var(--elevation-2);
   background: var(--color-white); color: inherit; text-decoration: none;
 }
 .ml-application-card__body { flex: 1; min-width: 0; }
@@ -1143,7 +1210,8 @@
 
 .ml-band-card {
   display: block; width: 260px;
-  border: var(--border-1) solid var(--color-line); border-radius: var(--radius-2);
+  border: var(--border-1) solid var(--color-line); border-radius: var(--radius-3);
+  box-shadow: var(--elevation-2);
   overflow: hidden; background: var(--color-white);
   color: inherit; text-decoration: none;
 }
@@ -1181,7 +1249,7 @@
    booking flow needs it too. The total is separated by a rule and set in the
    display face, because it is the number people actually read. */
 
-.ml-summary { border: var(--border-1) solid var(--color-line); border-radius: var(--radius-2); padding: var(--space-3); background: var(--color-white); }
+.ml-summary { border-radius: var(--radius-2); padding: var(--space-3); background: var(--color-white); box-shadow: var(--elevation-1); }
 .ml-summary__row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); padding: var(--space-1) 0; font-size: var(--type-2); }
 .ml-summary__row span:first-child { color: var(--color-muted); }
 .ml-summary__row--total {
@@ -2204,7 +2272,8 @@
   display: grid; gap: var(--space-2);
   padding: var(--space-3);
   border: var(--border-1) solid var(--color-line);
-  border-radius: var(--radius-2);
+  border-radius: var(--radius-3);
+  box-shadow: var(--elevation-2);
   background: var(--color-white);
   color: inherit; text-decoration: none;
 }
@@ -2345,7 +2414,8 @@
 .ml-project-card {
   display: grid; gap: var(--space-2);
   border: var(--border-1) solid var(--color-line);
-  border-radius: var(--radius-2);
+  border-radius: var(--radius-3);
+  box-shadow: var(--elevation-2);
   background: var(--color-white);
   overflow: hidden; color: inherit; text-decoration: none;
 }

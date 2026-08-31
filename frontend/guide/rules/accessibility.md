@@ -19,7 +19,7 @@ colour alone.
 | Contrast, large text | 3:1 |
 | Focus ring | 2px `--color-pink` at 2px offset, `:focus-visible` only |
 
-*Was "keep targets at least 44px" without qualification. 44 is the Apple floor;
+*Was “keep targets at least 44px” without qualification. 44 is the Apple floor;
 web and Android are 48. Both now ship, per platform, from one token source.*
 
 ## Standing rules
