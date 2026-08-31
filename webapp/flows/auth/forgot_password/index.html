@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0D0D" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/auth/forgot_password/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Auth — Forgot password</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/auth/email_auth/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Forgot password</h1>
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+
+      <div data-state="default">
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          Give us the address on your account and we'll send a link to set a new password.
+        </p>
+        <div class="ml-field">
+          <label for="fp-email">Email</label>
+          <input id="fp-email" type="email" placeholder="you@example.com" />
+        </div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=sent">Send reset link</a>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="/preview/flows/auth/email_auth/index.html">Back to sign in</a>
+      </div>
+
+      <!-- Deliberately identical whether or not the address is registered. A
+           form that says "no such account" tells anyone who asks which email
+           addresses have accounts here. -->
+      <div class="ml-empty" data-state="sent">
+        <h2 class="ml-empty__title">Check your email</h2>
+        <p class="ml-empty__body">
+          If that address is registered, a reset link is on its way. It's valid for one hour.
+        </p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/auth/email_auth/index.html">Back to sign in</a>
+        <!-- In the real app you arrive at the reset screen from the email. In
+             this preview the flow has to be walkable, so the link is here. -->
+        <a class="ml-btn ml-btn--ghost" style="margin-top:var(--space-2)" href="/preview/flows/auth/reset_password/index.html">Preview: open the reset screen</a>
+      </div>
+
+      <div data-state="error">
+        <div class="ml-banner ml-banner--error">
+          <span class="ml-banner__body">We couldn't send that. Try again in a moment.</span>
+        </div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Retry</a>
+      </div>
+    </main>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "flowKey": "services_availability",
+  "flowTitle": "Services, Availability",
+  "flowStatus": "partial",
+  "flowOrder": 11,
+  "screenKey": "my_services",
+  "screenNumber": 196,
+  "screenTitle": "My services",
+  "screenOrder": 90,
+  "states": [
+    "default",
+    "paused",
+    "empty"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. A provider's own list with publication state. service_offerings_editor edits one; this lists them all.",
+  "dataContract": []
+}

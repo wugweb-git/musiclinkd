@@ -1,0 +1,17 @@
+{
+  "flowKey": "marketplace",
+  "flowTitle": "Marketplace — Buy/Sell/Rent",
+  "flowStatus": "app-mocked",
+  "flowOrder": 7,
+  "screenKey": "marketplace_seller_profile",
+  "screenNumber": 191,
+  "screenTitle": "Seller",
+  "screenOrder": 93,
+  "states": [
+    "default",
+    "business"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. A seller's marketplace-facing view: what they have listed, their rating, response time. Distinct from FLOW 14's public profile, which is the person; this is the trading identity.",
+  "dataContract": []
+}

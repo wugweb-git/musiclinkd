@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T05:18:34.088Z",
+  "generatedAt": "2026-08-31T05:38:43.311Z",
   "flows": [
     {
       "key": "home",
@@ -15,7 +15,7 @@
       "order": 1,
       "status": "partial",
       "description": "Email/password calls the real Firebase Auth SDK but fails server-side (fabricated API key). OTP is 100% fake — verifyOtp()'s check is effectively \"any 6-digit string passes.\" Google Sign-In's native flow reliably fails (fabricated OAuth client) and falls back to a fully hardcoded fake profile. Most real registrations land under a local_uid_${email.hashCode()} fallback with no corresponding Firebase Auth account.",
-      "screenCount": 7
+      "screenCount": 10
     },
     {
       "key": "onboarding",
@@ -23,7 +23,7 @@
       "order": 2,
       "status": "partial",
       "description": "13-screen real NavHost-driven flow, writes to users/{uid} on completion. instrumentProficiency, roleExperience, networkingLinks, profilePicturePath, and coverPicturePath are all collected but silently dropped from the final Firestore write.",
-      "screenCount": 13
+      "screenCount": 16
     },
     {
       "key": "portfolio",
@@ -31,7 +31,7 @@
       "order": 3,
       "status": "app-mocked",
       "description": "11-screen publish flow for a piece of finished creative work (song/album/EP/etc.) — distinct from the separate \"Opportunities\" flow's projects collection (gig/collaboration postings). Schema (portfolio_projects) corrected this session to match it exactly — ownerUid, 6 named streaming links, ownerRoles, collaborators/credits, status/visibility, artworkTheme. Zero confirmed app-side writer — PortfolioViewModel.publishProject() is still 100% in-memory with a hardcoded author name.",
-      "screenCount": 11
+      "screenCount": 12
     },
     {
       "key": "discover",
@@ -47,7 +47,7 @@
       "order": 5,
       "status": "missing",
       "description": "Maps to the existing projects collection (gig/collaboration postings — someone looking for a collaborator), per the round-2 reconciliation — folded in rather than a separate gig_opportunities collection. Distinct from the \"Add Portfolio\" flow (finished creative work someone already made). CONFIRMED 2026-08-12 (grounded Explore audit): 100% missing, not just unconfirmed. Zero `.collection(\"projects\")` calls anywhere in the app; `ProjectSchema` (BackendSchemas.kt:112) is defined but never instantiated. The only browse/apply UI (SuccessAndDashboardScreens.kt:2174-2435) is commented-out or unreachable dead code whose own copy admits \"Opportunities are coming soon.\" `UnifiedOpportunityCard` is defined but never called. A \"Live Opportunities Feed\" nav item exists but routes to an unrelated business-storefront screen. `ChatContext.OPPORTUNITY` is just a messaging-inbox filter tab around one hardcoded demo message, not a posting/browsing flow.",
-      "screenCount": 6
+      "screenCount": 7
     },
     {
       "key": "communication",
@@ -63,7 +63,7 @@
       "order": 7,
       "status": "app-mocked",
       "description": "100% mocked, not wired to Firestore — reconciled: MarketplaceItemDoc.category is now taxonomy-backed (marketplace_categories), matching the app's real sale/rental/mixing/beats/services split. SCREEN-MAPPED 2026-08-12 (grounded Explore audit): one real, dashboard-wired browse screen (MarketplaceBetaScreen) with 6 category tabs including \"Gear Rentals\", an in-dialog item detail (not a separate screen), and a Saved/Favorites bookmarks tab — all backed by hardcoded lists, zero `marketplace_items` references anywhere. No create-listing, cart, checkout, or seller-messaging screens exist at all — confirmed absent by exhaustive grep, not just unaudited. MERGED 2026-08-13 (user call): the standalone \"Equipment Rental\" flow entry was folded in here rather than kept separate — rental was never anything more than one of this screen's own category tabs; see the equipment_rental key's former slot (order 9, now retired, not reassigned) for the original grounded finding this merge is based on.",
-      "screenCount": 8
+      "screenCount": 12
     },
     {
       "key": "booking",
@@ -71,7 +71,7 @@
       "order": 8,
       "status": "partial",
       "description": "Currently studio-only (StudioBookingDoc) — not conceptually limited to studios long-term, the primary bookable entity type today is just Studio. Real writer exists but uses the wrong field names (artistUserId/totalCostAmount/statusKey instead of the schema's userId/totalAmount/bookingStatus) — confirmed still broken as of this session's last verification pass, despite two rounds of AI Studio claiming it was fixed.",
-      "screenCount": 11
+      "screenCount": 14
     },
     {
       "key": "profile_management",
@@ -87,7 +87,7 @@
       "order": 11,
       "status": "partial",
       "description": "sessionAvailability (Talent), StudioDoc.services (taxonomy tags), and serviceOfferings (priced menu, Business) now modeled. No single unified \"availability\" concept spans all profile types yet — Talent/Band/Business/Venue each have their own shape.",
-      "screenCount": 5
+      "screenCount": 6
     },
     {
       "key": "business_profiles",
@@ -95,7 +95,7 @@
       "order": 12,
       "status": "partial",
       "description": "UserDoc Business extension (businessName/Type/tagline/hours/GSTIN/services/equipment/teamMembers/serviceOfferings/gallery) modeled this session, matching BusinessProfileScreens.kt's mock \"Octave Sound Labs\" tabs. businessType only covers 4 of the PRD's ~8 sub-types (Studio/Label/School/Dealer — missing Production House/Booking Agency/Artist Manager/Rental Company).",
-      "screenCount": 9
+      "screenCount": 10
     },
     {
       "key": "notifications",
@@ -297,6 +297,63 @@
       "flowTitle": "User Auth",
       "flowStatus": "partial",
       "flowOrder": 1,
+      "screenKey": "email_verification",
+      "screenNumber": 198,
+      "screenTitle": "Verify your email",
+      "screenOrder": 90,
+      "states": [
+        "sent",
+        "verifying",
+        "verified",
+        "expired",
+        "error"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. The approved plan's Auth +3. A link was sent and nothing has changed until it is followed — the copy must not claim otherwise.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "auth",
+      "flowTitle": "User Auth",
+      "flowStatus": "partial",
+      "flowOrder": 1,
+      "screenKey": "forgot_password",
+      "screenNumber": 199,
+      "screenTitle": "Forgot password",
+      "screenOrder": 91,
+      "states": [
+        "default",
+        "sent",
+        "error"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. Ask for a reset. Deliberately says the same thing whether or not the address exists, so it cannot be used to discover accounts.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "auth",
+      "flowTitle": "User Auth",
+      "flowStatus": "partial",
+      "flowOrder": 1,
+      "screenKey": "reset_password",
+      "screenNumber": 200,
+      "screenTitle": "Set a new password",
+      "screenOrder": 92,
+      "states": [
+        "default",
+        "weak",
+        "saved",
+        "expired"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. Reached from the emailed link. An expired link is a state with a way to ask for a new one.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "auth",
+      "flowTitle": "User Auth",
+      "flowStatus": "partial",
+      "flowOrder": 1,
       "screenKey": "splash",
       "screenNumber": 1,
       "screenTitle": "Splash",
@@ -463,6 +520,59 @@
           }
         }
       ]
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "specialisation",
+      "screenNumber": 201,
+      "screenTitle": "Your specialisation",
+      "screenOrder": 90,
+      "states": [
+        "singer",
+        "musician",
+        "producer",
+        "composer",
+        "engineer",
+        "dj"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. The approved plan's Onboarding +3, and the clearest recycling case in that column: SIX role-specific screens are six states of ONE, each asking what that role actually needs. Backed by seeded taxonomy — vocal_range, daw_tools, engineer_specialties, dj_types, composition_styles.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "work_preferences",
+      "screenNumber": 202,
+      "screenTitle": "How you work",
+      "screenOrder": 91,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. Remote or in person, travel, typical notice. PROPOSED fields workMode and lookingFor are marked as such in UserDoc rather than invented.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "onboarding",
+      "flowTitle": "User Onboarding",
+      "flowStatus": "partial",
+      "flowOrder": 2,
+      "screenKey": "privacy_preferences",
+      "screenNumber": 203,
+      "screenTitle": "Privacy to start with",
+      "screenOrder": 92,
+      "states": [
+        "default"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. The privacy decisions worth making before a profile goes live, mirroring FLOW 21's controls rather than duplicating them.",
+      "dataContract": []
     },
     {
       "flowKey": "onboarding",
@@ -1101,6 +1211,24 @@
         "default"
       ],
       "collectionsTouched": [],
+      "dataContract": []
+    },
+    {
+      "flowKey": "portfolio",
+      "flowTitle": "Add Portfolio",
+      "flowStatus": "app-mocked",
+      "flowOrder": 3,
+      "screenKey": "portfolio_settings",
+      "screenNumber": 204,
+      "screenTitle": "Portfolio settings",
+      "screenOrder": 90,
+      "states": [
+        "default",
+        "reorder",
+        "archived"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. Ordering, visibility and archiving for the portfolio as a whole. The eleven existing screens publish ONE piece; this governs the set.",
       "dataContract": []
     },
     {
@@ -1891,6 +2019,25 @@
       "flowTitle": "Opportunities",
       "flowStatus": "missing",
       "flowOrder": 5,
+      "screenKey": "my_opportunities",
+      "screenNumber": 195,
+      "screenTitle": "My opportunities",
+      "screenOrder": 90,
+      "states": [
+        "posted",
+        "drafts",
+        "closed",
+        "empty"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. The poster's side: what you have posted, drafted and closed. Tabs are states. Distinct from my_applications, which is the applicant's side.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "opportunities",
+      "flowTitle": "Opportunities",
+      "flowStatus": "missing",
+      "flowOrder": 5,
       "screenKey": "opportunities_home",
       "screenNumber": 130,
       "screenTitle": "Opportunities Home / Search / Categories / Results / Filters",
@@ -2340,6 +2487,76 @@
       "flowTitle": "Marketplace — Buy/Sell/Rent",
       "flowStatus": "app-mocked",
       "flowOrder": 7,
+      "screenKey": "marketplace_nearby",
+      "screenNumber": 188,
+      "screenTitle": "Nearby listings",
+      "screenOrder": 90,
+      "states": [
+        "default",
+        "empty",
+        "permission_denied"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. From the approved plan's Market +4. Distance-sorted listings around the city on your profile. Location permission is a state, and the copy must not imply the app can override the OS.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "marketplace",
+      "flowTitle": "Marketplace — Buy/Sell/Rent",
+      "flowStatus": "app-mocked",
+      "flowOrder": 7,
+      "screenKey": "marketplace_availability",
+      "screenNumber": 189,
+      "screenTitle": "Rental availability",
+      "screenOrder": 91,
+      "states": [
+        "default",
+        "unavailable"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. Rental availability for one item, reusing .ml-calendar — the same component booking uses, which is why it lives in the system rather than in either flow.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "marketplace",
+      "flowTitle": "Marketplace — Buy/Sell/Rent",
+      "flowStatus": "app-mocked",
+      "flowOrder": 7,
+      "screenKey": "marketplace_rental_summary",
+      "screenNumber": 190,
+      "screenTitle": "Rental summary",
+      "screenOrder": 92,
+      "states": [
+        "default",
+        "returned",
+        "overdue"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. Dates, daily rate, deposit and what happens on return. Overdue is a state, not a separate screen.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "marketplace",
+      "flowTitle": "Marketplace — Buy/Sell/Rent",
+      "flowStatus": "app-mocked",
+      "flowOrder": 7,
+      "screenKey": "marketplace_seller_profile",
+      "screenNumber": 191,
+      "screenTitle": "Seller",
+      "screenOrder": 93,
+      "states": [
+        "default",
+        "business"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. A seller's marketplace-facing view: what they have listed, their rating, response time. Distinct from FLOW 14's public profile, which is the person; this is the trading identity.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "marketplace",
+      "flowTitle": "Marketplace — Buy/Sell/Rent",
+      "flowStatus": "app-mocked",
+      "flowOrder": 7,
       "screenKey": "marketplace_browse",
       "screenNumber": 99,
       "screenTitle": "Creator Marketplace (browse)",
@@ -2556,6 +2773,60 @@
           "note": "No seed sample available for this collection in this build."
         }
       ]
+    },
+    {
+      "flowKey": "booking",
+      "flowTitle": "Booking",
+      "flowStatus": "partial",
+      "flowOrder": 8,
+      "screenKey": "provider_dashboard",
+      "screenNumber": 192,
+      "screenTitle": "Provider dashboard",
+      "screenOrder": 90,
+      "states": [
+        "default",
+        "quiet"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. The approved plan's Booking +3, provider side. What needs answering today, then the rooms. Deliberately not an analytics page.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "booking",
+      "flowTitle": "Booking",
+      "flowStatus": "partial",
+      "flowOrder": 8,
+      "screenKey": "provider_requests",
+      "screenNumber": 193,
+      "screenTitle": "Booking requests",
+      "screenOrder": 91,
+      "states": [
+        "pending",
+        "accepted",
+        "declined",
+        "empty"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. Incoming requests with the four outcomes as states of one list.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "booking",
+      "flowTitle": "Booking",
+      "flowStatus": "partial",
+      "flowOrder": 8,
+      "screenKey": "provider_availability",
+      "screenNumber": 194,
+      "screenTitle": "Manage availability",
+      "screenOrder": 92,
+      "states": [
+        "default",
+        "blocked",
+        "hours"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. The provider's own calendar. Reuses .ml-calendar and hands off to FLOW 11 for rates, which owns them.",
+      "dataContract": []
     },
     {
       "flowKey": "booking",
@@ -4050,6 +4321,24 @@
       "flowTitle": "Services, Availability",
       "flowStatus": "partial",
       "flowOrder": 11,
+      "screenKey": "my_services",
+      "screenNumber": 196,
+      "screenTitle": "My services",
+      "screenOrder": 90,
+      "states": [
+        "default",
+        "paused",
+        "empty"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. A provider's own list with publication state. service_offerings_editor edits one; this lists them all.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "services_availability",
+      "flowTitle": "Services, Availability",
+      "flowStatus": "partial",
+      "flowOrder": 11,
       "screenKey": "availability_toggle",
       "screenNumber": 42,
       "screenTitle": "Availability Toggle (Talent)",
@@ -4586,6 +4875,23 @@
           }
         }
       ]
+    },
+    {
+      "flowKey": "business_profiles",
+      "flowTitle": "Business Profiles (Studios, Labels)",
+      "flowStatus": "partial",
+      "flowOrder": 12,
+      "screenKey": "business_gallery",
+      "screenNumber": 197,
+      "screenTitle": "Business gallery",
+      "screenOrder": 90,
+      "states": [
+        "default",
+        "empty"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31. The room and equipment photography as its own route, so it can be linked and shared. The tab shows a sample; this is all of it.",
+      "dataContract": []
     },
     {
       "flowKey": "business_profiles",

@@ -1087,8 +1087,13 @@ done.push(writeScreen({ flow: "discover", screen: "saved_profiles", title: "Save
 
 /* ── 21 · Trending & Recommended (also the Home destination) ───────────── */
 
+/* The declared state is "hidden": a registry note that these composables still
+   exist in the Android source but their call sites are commented out —
+   confirmed hidden, not deleted. It is a fact about the app, not a state this
+   screen enters, so it is marked on the content rather than renamed away.
+   Same treatment as band/upcoming_shows' "hardcoded". */
 done.push(writeScreen({ flow: "discover", screen: "trending_recommended_sections", title: "Trending & Recommended", body: `
-  <div class="ml-app">
+  <div class="ml-app" data-state="hidden">
     <header class="ml-appbar">
       <div class="ml-appbar__titles">
         <div class="ml-eyebrow">MusicLinkd</div>

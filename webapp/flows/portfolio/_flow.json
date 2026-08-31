@@ -4,5 +4,5 @@
   "order": 3,
   "status": "app-mocked",
   "description": "11-screen publish flow for a piece of finished creative work (song/album/EP/etc.) — distinct from the separate \"Opportunities\" flow's projects collection (gig/collaboration postings). Schema (portfolio_projects) corrected this session to match it exactly — ownerUid, 6 named streaming links, ownerRoles, collaborators/credits, status/visibility, artworkTheme. Zero confirmed app-side writer — PortfolioViewModel.publishProject() is still 100% in-memory with a hardcoded author name.",
-  "screenCount": 11
+  "screenCount": 12
 }

@@ -1,0 +1,17 @@
+{
+  "flowKey": "marketplace",
+  "flowTitle": "Marketplace — Buy/Sell/Rent",
+  "flowStatus": "app-mocked",
+  "flowOrder": 7,
+  "screenKey": "marketplace_availability",
+  "screenNumber": 189,
+  "screenTitle": "Rental availability",
+  "screenOrder": 91,
+  "states": [
+    "default",
+    "unavailable"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. Rental availability for one item, reusing .ml-calendar — the same component booking uses, which is why it lives in the system rather than in either flow.",
+  "dataContract": []
+}

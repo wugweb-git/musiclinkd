@@ -4,5 +4,5 @@
   "order": 5,
   "status": "missing",
   "description": "Maps to the existing projects collection (gig/collaboration postings — someone looking for a collaborator), per the round-2 reconciliation — folded in rather than a separate gig_opportunities collection. Distinct from the \"Add Portfolio\" flow (finished creative work someone already made). CONFIRMED 2026-08-12 (grounded Explore audit): 100% missing, not just unconfirmed. Zero `.collection(\"projects\")` calls anywhere in the app; `ProjectSchema` (BackendSchemas.kt:112) is defined but never instantiated. The only browse/apply UI (SuccessAndDashboardScreens.kt:2174-2435) is commented-out or unreachable dead code whose own copy admits \"Opportunities are coming soon.\" `UnifiedOpportunityCard` is defined but never called. A \"Live Opportunities Feed\" nav item exists but routes to an unrelated business-storefront screen. `ChatContext.OPPORTUNITY` is just a messaging-inbox filter tab around one hardcoded demo message, not a posting/browsing flow.",
-  "screenCount": 6
+  "screenCount": 7
 }

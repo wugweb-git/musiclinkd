@@ -1,0 +1,19 @@
+{
+  "flowKey": "booking",
+  "flowTitle": "Booking",
+  "flowStatus": "partial",
+  "flowOrder": 8,
+  "screenKey": "provider_requests",
+  "screenNumber": 193,
+  "screenTitle": "Booking requests",
+  "screenOrder": 91,
+  "states": [
+    "pending",
+    "accepted",
+    "declined",
+    "empty"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. Incoming requests with the four outcomes as states of one list.",
+  "dataContract": []
+}

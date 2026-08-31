@@ -1,0 +1,18 @@
+{
+  "flowKey": "booking",
+  "flowTitle": "Booking",
+  "flowStatus": "partial",
+  "flowOrder": 8,
+  "screenKey": "provider_availability",
+  "screenNumber": 194,
+  "screenTitle": "Manage availability",
+  "screenOrder": 92,
+  "states": [
+    "default",
+    "blocked",
+    "hours"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. The provider's own calendar. Reuses .ml-calendar and hands off to FLOW 11 for rates, which owns them.",
+  "dataContract": []
+}

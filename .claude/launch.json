@@ -22,9 +22,9 @@
     },
     {
       "name": "preview",
-      "runtimeExecutable": "python3",
+      "runtimeExecutable": "node",
       "runtimeArgs": [
-        "/Users/abcom/Documents/GitHub/musiclinkd/scripts/dev-preview-server.py"
+        "scripts/dev-preview-server.mjs"
       ],
       "port": 5501
     }

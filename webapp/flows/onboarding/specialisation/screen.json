@@ -1,0 +1,21 @@
+{
+  "flowKey": "onboarding",
+  "flowTitle": "User Onboarding",
+  "flowStatus": "partial",
+  "flowOrder": 2,
+  "screenKey": "specialisation",
+  "screenNumber": 201,
+  "screenTitle": "Your specialisation",
+  "screenOrder": 90,
+  "states": [
+    "singer",
+    "musician",
+    "producer",
+    "composer",
+    "engineer",
+    "dj"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. The approved plan's Onboarding +3, and the clearest recycling case in that column: SIX role-specific screens are six states of ONE, each asking what that role actually needs. Backed by seeded taxonomy — vocal_range, daw_tools, engineer_specialties, dj_types, composition_styles.",
+  "dataContract": []
+}

@@ -54,6 +54,36 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
 
   auth: [
     {
+      key: "email_verification",
+      order: 90,
+      screenNumber: 198,
+      title: "Verify your email",
+      states: ["sent", "verifying", "verified", "expired", "error"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. The approved plan's Auth +3. A link was sent and nothing has changed until it is followed — the copy must not claim otherwise.",
+    },
+    {
+      key: "forgot_password",
+      order: 91,
+      screenNumber: 199,
+      title: "Forgot password",
+      states: ["default", "sent", "error"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. Ask for a reset. Deliberately says the same thing whether or not the address exists, so it cannot be used to discover accounts.",
+    },
+    {
+      key: "reset_password",
+      order: 92,
+      screenNumber: 200,
+      title: "Set a new password",
+      states: ["default", "weak", "saved", "expired"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. Reached from the emailed link. An expired link is a state with a way to ask for a new one.",
+    },
+    {
       key: "splash",
       order: 1,
       screenNumber: 1,
@@ -121,6 +151,36 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     },
   ],
   onboarding: [
+    {
+      key: "specialisation",
+      order: 90,
+      screenNumber: 201,
+      title: "Your specialisation",
+      states: ["singer", "musician", "producer", "composer", "engineer", "dj"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. The approved plan's Onboarding +3, and the clearest recycling case in that column: SIX role-specific screens are six states of ONE, each asking what that role actually needs. Backed by seeded taxonomy — vocal_range, daw_tools, engineer_specialties, dj_types, composition_styles.",
+    },
+    {
+      key: "work_preferences",
+      order: 91,
+      screenNumber: 202,
+      title: "How you work",
+      states: ["default"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. Remote or in person, travel, typical notice. PROPOSED fields workMode and lookingFor are marked as such in UserDoc rather than invented.",
+    },
+    {
+      key: "privacy_preferences",
+      order: 92,
+      screenNumber: 203,
+      title: "Privacy to start with",
+      states: ["default"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. The privacy decisions worth making before a profile goes live, mirroring FLOW 21's controls rather than duplicating them.",
+    },
     {
       key: "primary_role",
       order: 1,
@@ -234,6 +294,16 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     },
   ],
   portfolio: [
+    {
+      key: "portfolio_settings",
+      order: 90,
+      screenNumber: 204,
+      title: "Portfolio settings",
+      states: ["default", "reorder", "archived"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. Ordering, visibility and archiving for the portfolio as a whole. The eleven existing screens publish ONE piece; this governs the set.",
+    },
     {
       key: "portfolio_dashboard",
       order: 1,
@@ -415,6 +485,16 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     },
   ],
   services_availability: [
+    {
+      key: "my_services",
+      order: 90,
+      screenNumber: 196,
+      title: "My services",
+      states: ["default", "paused", "empty"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. A provider's own list with publication state. service_offerings_editor edits one; this lists them all.",
+    },
     {
       key: "availability_toggle",
       order: 1,
@@ -645,6 +725,36 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
   ],
   booking: [
     {
+      key: "provider_dashboard",
+      order: 90,
+      screenNumber: 192,
+      title: "Provider dashboard",
+      states: ["default", "quiet"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. The approved plan's Booking +3, provider side. What needs answering today, then the rooms. Deliberately not an analytics page.",
+    },
+    {
+      key: "provider_requests",
+      order: 91,
+      screenNumber: 193,
+      title: "Booking requests",
+      states: ["pending", "accepted", "declined", "empty"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. Incoming requests with the four outcomes as states of one list.",
+    },
+    {
+      key: "provider_availability",
+      order: 92,
+      screenNumber: 194,
+      title: "Manage availability",
+      states: ["default", "blocked", "hours"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. The provider's own calendar. Reuses .ml-calendar and hands off to FLOW 11 for rates, which owns them.",
+    },
+    {
       key: "studio_discovery",
       order: 1,
       screenNumber: 60,
@@ -744,6 +854,16 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     },
   ],
   business_profiles: [
+    {
+      key: "business_gallery",
+      order: 90,
+      screenNumber: 197,
+      title: "Business gallery",
+      states: ["default", "empty"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. The room and equipment photography as its own route, so it can be linked and shared. The tab shows a sample; this is all of it.",
+    },
     {
       key: "business_overview",
       order: 1,
@@ -1355,6 +1475,46 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
   // would misrepresent absence as presence.
   marketplace: [
     {
+      key: "marketplace_nearby",
+      order: 90,
+      screenNumber: 188,
+      title: "Nearby listings",
+      states: ["default", "empty", "permission_denied"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. From the approved plan's Market +4. Distance-sorted listings around the city on your profile. Location permission is a state, and the copy must not imply the app can override the OS.",
+    },
+    {
+      key: "marketplace_availability",
+      order: 91,
+      screenNumber: 189,
+      title: "Rental availability",
+      states: ["default", "unavailable"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. Rental availability for one item, reusing .ml-calendar — the same component booking uses, which is why it lives in the system rather than in either flow.",
+    },
+    {
+      key: "marketplace_rental_summary",
+      order: 92,
+      screenNumber: 190,
+      title: "Rental summary",
+      states: ["default", "returned", "overdue"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. Dates, daily rate, deposit and what happens on return. Overdue is a state, not a separate screen.",
+    },
+    {
+      key: "marketplace_seller_profile",
+      order: 93,
+      screenNumber: 191,
+      title: "Seller",
+      states: ["default", "business"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. A seller's marketplace-facing view: what they have listed, their rating, response time. Distinct from FLOW 14's public profile, which is the person; this is the trading identity.",
+    },
+    {
       key: "marketplace_browse",
       order: 1,
       screenNumber: 99,
@@ -1439,6 +1599,16 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
     },
   ],
   opportunities: [
+    {
+      key: "my_opportunities",
+      order: 90,
+      screenNumber: 195,
+      title: "My opportunities",
+      states: ["posted", "drafts", "closed", "empty"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31. The poster's side: what you have posted, drafted and closed. Tabs are states. Distinct from my_applications, which is the applicant's side.",
+    },
     // --- 2026-08-16: Flow 5 was previously deliberately left unpopulated
     // (see this file's header) — confirmed zero real UI exists in the app
     // (webapp/flows/opportunities/_flow.json: "100% missing... commented-out

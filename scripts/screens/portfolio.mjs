@@ -50,6 +50,9 @@ done.push(writeScreen({ flow: "portfolio", screen: "portfolio_dashboard", body: 
         <h1 class="ml-appbar__title">Your work</h1>
       </div>
       <div class="ml-appbar__actions">
+        <a class="ml-icon-btn" href="/preview/flows/portfolio/portfolio_settings/index.html" aria-label="Portfolio settings">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+        </a>
         <a class="ml-icon-btn" href="${P}choose_project_type/index.html" aria-label="Add project">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
         </a>
@@ -372,3 +375,118 @@ done.push(writeScreen({ flow: "portfolio", screen: "profile_project_view", body:
 
 const linkCount = finish("portfolio: ");
 console.log("portfolio: wrote " + done.length + " screens, " + linkCount + " links verified");
+
+/* ══ the approved plan's Portfolio +1 ══════════════════════════════════════
+   The eleven existing screens publish ONE piece. This governs the set:
+   ordering, visibility, archiving. It owns a route because it is reached from
+   the dashboard and from profile completion, and because reorder is a mode you
+   enter and leave. ═══════════════════════════════════════════════════════ */
+
+const PF = "/preview/flows/portfolio/";
+
+const WORKS = [
+  ["Neon Monsoon", "Single · 2026 · lead vocal", "Public"],
+  ["Kolaba Sessions EP", "EP · 2025 · vocals, topline", "Public"],
+  ["Aftertaste", "Single · 2025 · topline", "Public"],
+  ["Untitled film cue", "Score · 2024 · composer", "Only me"],
+];
+
+writeScreen({
+  flow: "portfolio", screen: "portfolio_settings", title: "Portfolio — Settings",
+  body: `
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      ${backArrow(`${PF}portfolio_dashboard/index.html`, "Back")}
+      <h1 class="ml-type-2" style="margin:0;flex:1">Portfolio settings</h1>
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+
+      <div data-state="default">
+        <div class="ml-section"><h2>Who can see your work</h2></div>
+        <div role="radiogroup" aria-label="Portfolio visibility">
+          ${[["Everyone", "Your work appears on your public profile and in Discover.", true],
+             ["MusicLinkd members", "Signed-in people only.", false],
+             ["Only me", "Nothing is shown. Useful while you're still building it.", false]]
+            .map(([t, m, on]) => `<div class="ml-choice" role="radio" aria-checked="${on}" tabindex="${on ? 0 : -1}">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">${t}</span>
+              <span class="ml-choice__meta">${m}</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>`).join("\n          ")}
+        </div>
+
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Defaults for new work</h2></div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Show collaborators</span>
+            <span class="ml-choice__meta">Credits everyone who confirmed they worked on it</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Show collaborators"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Show the year</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Show the year"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Allow sharing</span>
+            <span class="ml-choice__meta">People can share a link to a piece</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Allow sharing"></button>
+        </div>
+
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Your work</h2>
+          <a class="ml-section__link" href="?state=reorder">Reorder</a></div>
+        ${WORKS.map(([t, m, vis]) => `<div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">${t}</span>
+            <span class="ml-choice__meta">${m}</span>
+          </span>
+          <span class="ml-status ml-status--${vis === "Public" ? "success" : "neutral"}">${vis}</span>
+        </div>`).join("\n        ")}
+        <a class="ml-action-row" href="?state=archived" style="margin-top:var(--space-2)">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Archived work</span>
+            <span class="ml-choice__meta">2 pieces, hidden but not deleted</span>
+          </span>
+        </a>
+      </div>
+
+      <!-- Reorder is a MODE, not a screen: the same list, draggable, with a
+           way out. -->
+      <div data-state="reorder">
+        <div class="ml-banner ml-banner--info">
+          <span class="ml-banner__body">Drag to reorder. The first piece is the one people see first.</span>
+        </div>
+        ${WORKS.map(([t, m]) => `<div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">${t}</span>
+            <span class="ml-choice__meta">${m}</span>
+          </span>
+          <span class="ml-status ml-status--neutral">Drag</span>
+        </div>`).join("\n        ")}
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Done</a>
+      </div>
+
+      <div data-state="archived">
+        <div class="ml-section"><h2>Archived</h2></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          Hidden from your profile and from Discover. Nothing is deleted, and credits you gave
+          other people stay on their profiles.
+        </p>
+        ${[["Early demos 2023", "3 tracks"], ["Wedding set — 2022", "Live"]]
+          .map(([t, m]) => `<div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">${t}</span>
+            <span class="ml-choice__meta">${m}</span>
+          </span>
+          <button class="ml-btn ml-btn--secondary" type="button">Restore</button>
+        </div>`).join("\n        ")}
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Back to settings</a>
+      </div>
+    </main>
+  </div>`,
+});

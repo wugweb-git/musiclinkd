@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0D0D" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/onboarding/work_preferences/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Onboarding — How you work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/onboarding/specialisation/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0;flex:1">How you work</h1>
+      <div class="ml-steps">
+        <span class="ml-steps__label">5/8</span>
+        <span class="ml-steps__track"><span class="ml-steps__fill" style="width:63%"></span></span>
+      </div>
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        So we only show you work you'd actually take.
+      </p>
+
+      <div class="ml-section"><h3>Where</h3></div>
+      <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">In person</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Remote</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Either</button>
+      </div>
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>How far you'll travel</h3></div>
+      <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">My city</button>
+        <button type="button" class="ml-chip" aria-pressed="true">My state</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Anywhere in India</button>
+        <button type="button" class="ml-chip" aria-pressed="false">International</button>
+      </div>
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>What you're looking for</h3></div>
+      <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Session work</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Long projects</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Live shows</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Teaching</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Collaboration</button>
+      </div>
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Notice you need</h3></div>
+      <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Same day</button>
+        <button type="button" class="ml-chip" aria-pressed="true">A few days</button>
+        <button type="button" class="ml-chip" aria-pressed="false">A week</button>
+        <button type="button" class="ml-chip" aria-pressed="false">More</button>
+      </div>
+
+      <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-3)">
+        None of this is public. It only affects what gets suggested to you.
+      </p>
+    </main>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/onboarding/privacy_preferences/index.html">Continue</a>
+    </footer>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>

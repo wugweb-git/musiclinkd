@@ -1,0 +1,18 @@
+{
+  "flowKey": "auth",
+  "flowTitle": "User Auth",
+  "flowStatus": "partial",
+  "flowOrder": 1,
+  "screenKey": "forgot_password",
+  "screenNumber": 199,
+  "screenTitle": "Forgot password",
+  "screenOrder": 91,
+  "states": [
+    "default",
+    "sent",
+    "error"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. Ask for a reset. Deliberately says the same thing whether or not the address exists, so it cannot be used to discover accounts.",
+  "dataContract": []
+}

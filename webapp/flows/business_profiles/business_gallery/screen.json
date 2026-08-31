@@ -1,0 +1,17 @@
+{
+  "flowKey": "business_profiles",
+  "flowTitle": "Business Profiles (Studios, Labels)",
+  "flowStatus": "partial",
+  "flowOrder": 12,
+  "screenKey": "business_gallery",
+  "screenNumber": 197,
+  "screenTitle": "Business gallery",
+  "screenOrder": 90,
+  "states": [
+    "default",
+    "empty"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. The room and equipment photography as its own route, so it can be linked and shared. The tab shows a sample; this is all of it.",
+  "dataContract": []
+}

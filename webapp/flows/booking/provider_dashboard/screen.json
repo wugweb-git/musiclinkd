@@ -1,0 +1,17 @@
+{
+  "flowKey": "booking",
+  "flowTitle": "Booking",
+  "flowStatus": "partial",
+  "flowOrder": 8,
+  "screenKey": "provider_dashboard",
+  "screenNumber": 192,
+  "screenTitle": "Provider dashboard",
+  "screenOrder": 90,
+  "states": [
+    "default",
+    "quiet"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. The approved plan's Booking +3, provider side. What needs answering today, then the rooms. Deliberately not an analytics page.",
+  "dataContract": []
+}

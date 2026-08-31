@@ -1,0 +1,19 @@
+{
+  "flowKey": "opportunities",
+  "flowTitle": "Opportunities",
+  "flowStatus": "missing",
+  "flowOrder": 5,
+  "screenKey": "my_opportunities",
+  "screenNumber": 195,
+  "screenTitle": "My opportunities",
+  "screenOrder": 90,
+  "states": [
+    "posted",
+    "drafts",
+    "closed",
+    "empty"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. The poster's side: what you have posted, drafted and closed. Tabs are states. Distinct from my_applications, which is the applicant's side.",
+  "dataContract": []
+}

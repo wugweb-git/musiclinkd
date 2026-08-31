@@ -4,5 +4,5 @@
   "order": 1,
   "status": "partial",
   "description": "Email/password calls the real Firebase Auth SDK but fails server-side (fabricated API key). OTP is 100% fake — verifyOtp()'s check is effectively \"any 6-digit string passes.\" Google Sign-In's native flow reliably fails (fabricated OAuth client) and falls back to a fully hardcoded fake profile. Most real registrations land under a local_uid_${email.hashCode()} fallback with no corresponding Firebase Auth account.",
-  "screenCount": 7
+  "screenCount": 10
 }

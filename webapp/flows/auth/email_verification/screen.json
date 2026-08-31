@@ -1,0 +1,20 @@
+{
+  "flowKey": "auth",
+  "flowTitle": "User Auth",
+  "flowStatus": "partial",
+  "flowOrder": 1,
+  "screenKey": "email_verification",
+  "screenNumber": 198,
+  "screenTitle": "Verify your email",
+  "screenOrder": 90,
+  "states": [
+    "sent",
+    "verifying",
+    "verified",
+    "expired",
+    "error"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. The approved plan's Auth +3. A link was sent and nothing has changed until it is followed — the copy must not claim otherwise.",
+  "dataContract": []
+}

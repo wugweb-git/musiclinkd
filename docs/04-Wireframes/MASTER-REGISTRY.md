@@ -2,7 +2,7 @@
 
 **Notion is the source of truth for this document, per your instruction on 2026-08-29.** This repo file is a mirror — edit Notion first, then re-sync here, not the other way around. (This is the opposite direction from `PRODUCT-SPEC.md`, which stays repo-primary — see that file's own §7 for why the two docs have different sync directions.)
 
-This is the full inventory of what's registered in the app's admin backend — every flow, every screen, every schema type, every widget, every taxonomy category — pulled directly from the source files on 2026-08-29. It is **not** the same document as `PRODUCT-SPEC.md`. That file is a narrative product spec covering 4 of the app's 24 flows in depth (decisions, open questions, phasing). This file is the raw registry: all 24 flows, all 135 screens, all 34 schema types, all 27 widgets, all taxonomy categories — real and audited, proposed and unbuilt, side by side, clearly marked which is which.
+This is the full inventory of what's registered in the app's admin backend — every flow, every screen, every schema type, every widget, every taxonomy category — pulled directly from the source files on 2026-08-29. It is **not** the same document as `PRODUCT-SPEC.md`. That file is a narrative product spec covering 4 of the app's 24 flows in depth (decisions, open questions, phasing). This file is the raw registry: all 24 flows, 188 screens, all 34 schema types, all 27 widgets, all taxonomy categories — real and audited, proposed and unbuilt, side by side, clearly marked which is which.
 
 **Correction on the way in:** an earlier audit this session stated there were "11 taxonomy categories." That was wrong — it came from a grep pattern that only matched `##`-level category headers and missed the `###`-level ones. The real count, verified by reading the full file, is **29 categories** (11 original + 18 added across later passes), plus one referenced-but-not-yet-seeded (`studio_addons`). Corrected here, flagged plainly rather than quietly fixed.
 
@@ -22,6 +22,45 @@ Sources, exactly as they exist in the repo on 2026-08-29:
 None of this is a proposal layer — where something is proposed/unbuilt rather than audited from the real Kotlin app, the source file says so explicitly and this doc repeats that flag rather than smoothing it over.
 
 ---
+
+---
+
+## Currency — read this before trusting a number
+
+**Updated 2026-08-31.** This file is a mirror, and mirrors go stale. Two things
+keep it honest:
+
+- The live count is whatever `node scripts/audit-screens.mjs` prints. If it
+  disagrees with this file, the audit is right and this file is behind.
+- The screen list below was written when there were 135 screens. There are now
+  **188**, across the same 24 flows. Screens 136–188 were added on 2026-08-31
+  and are **not** individually listed here yet — they are all in
+  `admin/app/(admin)/flows/screens/default-screens.ts`, which is the source
+  this file mirrors, and each carries a `notes` field explaining what it is and
+  which brief it came from.
+
+### What changed on 2026-08-31
+
+Thirteen flows were designed or rebuilt against the briefs now recorded in
+[`FLOW-SPECS.md`](FLOW-SPECS.md). The registry grew 135 → 188 screens and
+286 → 563 declared states.
+
+Two flows had **no screens at all** before that date and now do:
+`subscription` (4) and `recommendation_engine` (2). Both were previously
+described in §1 as "missing" / "not modelled at all", and that is still true of
+the SCHEMA — designing a flow does not model it. Every screen in them says
+Beta.
+
+Seven flows are marked **BETA** in the UI, meaning the design exists and the
+backend does not: `band`, `verifications`, `reviews`, `subscription`,
+`recommendation_engine`, `cms_pages`, and the collaboration half of
+`communication`.
+
+`communication` gained four collaboration screens rather than a new flow being
+registered, since this file already names it "Communication & Collaboration".
+
+Flow 9 remains deliberately unassigned. Flow 18's schema is still unmodelled.
+
 
 ## 1. Flows (24)
 
@@ -56,7 +95,7 @@ None of this is a proposal layer — where something is proposed/unbuilt rather 
 
 ---
 
-## 2. Screens (135)
+## 2. Screens (188)
 
 Grouped by flow, in flow order. Screen numbers are globally unique and sequential across the whole app (1–135, no gaps, no duplicates — verified). Screens `121`–`135` are the one exception: proposed by `PRODUCT-SPEC.md`, not audited from Kotlin source like every other entry in this section — each says so in its own notes.
 

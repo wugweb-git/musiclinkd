@@ -1,0 +1,19 @@
+{
+  "flowKey": "auth",
+  "flowTitle": "User Auth",
+  "flowStatus": "partial",
+  "flowOrder": 1,
+  "screenKey": "reset_password",
+  "screenNumber": 200,
+  "screenTitle": "Set a new password",
+  "screenOrder": 92,
+  "states": [
+    "default",
+    "weak",
+    "saved",
+    "expired"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. Reached from the emailed link. An expired link is a state with a way to ask for a new one.",
+  "dataContract": []
+}

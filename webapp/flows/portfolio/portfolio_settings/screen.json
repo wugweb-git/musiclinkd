@@ -1,0 +1,18 @@
+{
+  "flowKey": "portfolio",
+  "flowTitle": "Add Portfolio",
+  "flowStatus": "app-mocked",
+  "flowOrder": 3,
+  "screenKey": "portfolio_settings",
+  "screenNumber": 204,
+  "screenTitle": "Portfolio settings",
+  "screenOrder": 90,
+  "states": [
+    "default",
+    "reorder",
+    "archived"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. Ordering, visibility and archiving for the portfolio as a whole. The eleven existing screens publish ONE piece; this governs the set.",
+  "dataContract": []
+}

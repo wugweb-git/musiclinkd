@@ -1,0 +1,18 @@
+{
+  "flowKey": "marketplace",
+  "flowTitle": "Marketplace — Buy/Sell/Rent",
+  "flowStatus": "app-mocked",
+  "flowOrder": 7,
+  "screenKey": "marketplace_nearby",
+  "screenNumber": 188,
+  "screenTitle": "Nearby listings",
+  "screenOrder": 90,
+  "states": [
+    "default",
+    "empty",
+    "permission_denied"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. From the approved plan's Market +4. Distance-sorted listings around the city on your profile. Location permission is a state, and the copy must not imply the app can override the OS.",
+  "dataContract": []
+}

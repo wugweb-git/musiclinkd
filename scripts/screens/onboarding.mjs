@@ -372,3 +372,163 @@ done.push(writeScreen({ flow: "onboarding", screen: "dashboard_handoff", body: `
 
 const linkCount = finish("onboarding: ");
 console.log("onboarding: wrote " + done.length + " screens, " + linkCount + " links verified");
+
+/* ══ the approved plan's Onboarding +3 ═════════════════════════════════════
+   specialisation is the clearest recycling case in that whole column. The
+   brief wanted a role-specific question set for singers, musicians,
+   producers, composers, engineers and DJs. That is SIX screens if you read it
+   literally, and one screen with six states if you notice they ask the same
+   shape of question about different things.
+
+   Every option below comes from seeded taxonomy — vocal_range, singing_styles,
+   daw_tools, engineer_specialties, dj_types, composition_styles — rather than
+   being invented here. Where a field does not exist in UserDoc yet
+   (workMode, lookingFor, contactPreference) it is marked PROPOSED in the
+   schema rather than quietly assumed. ═══════════════════════════════════ */
+
+const O = "/preview/flows/onboarding/";
+
+const obBar = (title, backTo, n, total) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      ${backArrow(backTo, "Back")}
+      <h1 class="ml-type-2" style="margin:0;flex:1">${title}</h1>
+      ${steps(n, total)}
+    </header>`;
+
+const chips = (items) => `<div class="ml-chip-wrap">
+        ${items.map((t, i) => `<button type="button" class="ml-chip" aria-pressed="${i < 2 ? "true" : "false"}">${t}</button>`).join("\n        ")}
+      </div>`;
+
+/* role → the questions that role actually needs. Same shape, different nouns. */
+const SPECIALISATION = [
+  ["singer", "Singing", [
+    ["Vocal range", ["Soprano", "Mezzo", "Alto", "Tenor", "Baritone", "Bass"]],
+    ["Styles", ["Playback", "Pop", "Classical", "Ghazal", "Jazz", "Folk"]],
+    ["Languages you sing in", ["Hindi", "English", "Marathi", "Tamil", "Punjabi", "Bengali"]],
+  ]],
+  ["musician", "Your instrument", [
+    ["Main instrument", ["Guitar", "Bass", "Keys", "Drums", "Tabla", "Violin"]],
+    ["Also play", ["Percussion", "Sitar", "Flute", "Synth"]],
+    ["Reading", ["By ear", "Charts", "Full notation"]],
+  ]],
+  ["producer", "Production", [
+    ["Your DAW", ["Ableton", "Logic", "FL Studio", "Pro Tools", "Cubase", "Reaper"]],
+    ["What you make", ["Beats", "Full production", "Arrangement", "Sound design"]],
+    ["Genres", ["Hip-hop", "Pop", "Electronic", "Indie", "Film"]],
+  ]],
+  ["composer", "Composition", [
+    ["What you write", ["Songs", "Score", "Advertising", "Themes", "Arrangements"]],
+    ["For", ["Film", "Series", "Games", "Ads", "Independent artists"]],
+    ["Notation", ["Western", "Hindustani", "Carnatic"]],
+  ]],
+  ["engineer", "Engineering", [
+    ["You do", ["Tracking", "Mixing", "Mastering", "Live sound", "Post"]],
+    ["Work from", ["My own room", "Client studios", "Either"]],
+    ["Formats", ["Stereo", "Stems", "Atmos"]],
+  ]],
+  ["dj", "DJing", [
+    ["Type", ["Club", "Wedding", "Festival", "Radio", "Private"]],
+    ["Genres", ["House", "Techno", "Bollywood", "Hip-hop", "Commercial"]],
+    ["You bring", ["Controller", "CDJs", "Full rig", "Nothing — house gear"]],
+  ]],
+];
+
+writeScreen({
+  flow: "onboarding", screen: "specialisation", title: "Onboarding — Specialisation",
+  body: `
+  <div class="ml-app">
+    ${obBar("What you do", `${O}primary_role/index.html`, 4, 8)}
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      ${SPECIALISATION.map(([role, heading, groups]) => `<div data-state="${role}">
+        <h2 class="ml-type-3" style="margin:0 0 var(--space-1)">${heading}</h2>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          This decides what people can find you for. You can change any of it later.
+        </p>
+        ${groups.map(([label, opts]) => `<div class="ml-section" style="margin-top:var(--space-3)"><h3>${label}</h3></div>
+        ${chips(opts)}`).join("\n        ")}
+      </div>`).join("\n      ")}
+    </main>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="${O}work_preferences/index.html">Continue</a>
+    </footer>
+  </div>`,
+});
+
+writeScreen({
+  flow: "onboarding", screen: "work_preferences", title: "Onboarding — How you work",
+  body: `
+  <div class="ml-app">
+    ${obBar("How you work", `${O}specialisation/index.html`, 5, 8)}
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        So we only show you work you'd actually take.
+      </p>
+
+      <div class="ml-section"><h3>Where</h3></div>
+      ${chips(["In person", "Remote", "Either"])}
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>How far you'll travel</h3></div>
+      ${chips(["My city", "My state", "Anywhere in India", "International"])}
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>What you're looking for</h3></div>
+      ${chips(["Session work", "Long projects", "Live shows", "Teaching", "Collaboration"])}
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Notice you need</h3></div>
+      ${chips(["Same day", "A few days", "A week", "More"])}
+
+      <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-3)">
+        None of this is public. It only affects what gets suggested to you.
+      </p>
+    </main>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="${O}privacy_preferences/index.html">Continue</a>
+    </footer>
+  </div>`,
+});
+
+writeScreen({
+  flow: "onboarding", screen: "privacy_preferences", title: "Onboarding — Privacy",
+  body: `
+  <div class="ml-app">
+    ${obBar("Privacy", `${O}work_preferences/index.html`, 6, 8)}
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        Two decisions worth making before your profile goes live. Both are in Settings afterwards.
+      </p>
+
+      <div class="ml-section"><h3>Who can find you</h3></div>
+      <div role="radiogroup" aria-label="Who can find you">
+        ${[["Anyone", "You appear in Discover and in search engines. Most people want this.", true],
+           ["MusicLinkd members", "Signed-in people only.", false],
+           ["Only people I share my link with", "You won't be discovered at all.", false]]
+          .map(([t, m, on]) => `<div class="ml-choice" role="radio" aria-checked="${on}" tabindex="${on ? 0 : -1}">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">${t}</span>
+            <span class="ml-choice__meta">${m}</span>
+          </span>
+          <span class="ml-choice__mark"></span>
+        </div>`).join("\n        ")}
+      </div>
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Who can message you</h3></div>
+      <div role="radiogroup" aria-label="Who can message you">
+        ${[["Anyone", "Work often arrives from someone you don't know yet.", true],
+           ["Connections only", "Quieter, and you'll miss cold enquiries.", false]]
+          .map(([t, m, on]) => `<div class="ml-choice" role="radio" aria-checked="${on}" tabindex="${on ? 0 : -1}">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">${t}</span>
+            <span class="ml-choice__meta">${m}</span>
+          </span>
+          <span class="ml-choice__mark"></span>
+        </div>`).join("\n        ")}
+      </div>
+
+      <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-3)">
+        Your exact address is never shown — only your city. Your phone and email stay private
+        unless you choose otherwise.
+      </p>
+    </main>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="${O}dashboard_handoff/index.html">Finish setup</a>
+    </footer>
+  </div>`,
+});

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0D0D" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/onboarding/privacy_preferences/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Onboarding — Privacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/onboarding/work_preferences/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0;flex:1">Privacy</h1>
+      <div class="ml-steps">
+        <span class="ml-steps__label">6/8</span>
+        <span class="ml-steps__track"><span class="ml-steps__fill" style="width:75%"></span></span>
+      </div>
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        Two decisions worth making before your profile goes live. Both are in Settings afterwards.
+      </p>
+
+      <div class="ml-section"><h3>Who can find you</h3></div>
+      <div role="radiogroup" aria-label="Who can find you">
+        <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Anyone</span>
+            <span class="ml-choice__meta">You appear in Discover and in search engines. Most people want this.</span>
+          </span>
+          <span class="ml-choice__mark"></span>
+        </div>
+        <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">MusicLinkd members</span>
+            <span class="ml-choice__meta">Signed-in people only.</span>
+          </span>
+          <span class="ml-choice__mark"></span>
+        </div>
+        <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Only people I share my link with</span>
+            <span class="ml-choice__meta">You won't be discovered at all.</span>
+          </span>
+          <span class="ml-choice__mark"></span>
+        </div>
+      </div>
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Who can message you</h3></div>
+      <div role="radiogroup" aria-label="Who can message you">
+        <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Anyone</span>
+            <span class="ml-choice__meta">Work often arrives from someone you don't know yet.</span>
+          </span>
+          <span class="ml-choice__mark"></span>
+        </div>
+        <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Connections only</span>
+            <span class="ml-choice__meta">Quieter, and you'll miss cold enquiries.</span>
+          </span>
+          <span class="ml-choice__mark"></span>
+        </div>
+      </div>
+
+      <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-3)">
+        Your exact address is never shown — only your city. Your phone and email stay private
+        unless you choose otherwise.
+      </p>
+    </main>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/onboarding/dashboard_handoff/index.html">Finish setup</a>
+    </footer>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>

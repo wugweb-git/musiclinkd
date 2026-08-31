@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0D0D" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/onboarding/specialisation/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Onboarding — Specialisation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/onboarding/primary_role/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0;flex:1">What you do</h1>
+      <div class="ml-steps">
+        <span class="ml-steps__label">4/8</span>
+        <span class="ml-steps__track"><span class="ml-steps__fill" style="width:50%"></span></span>
+      </div>
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div data-state="singer">
+        <h2 class="ml-type-3" style="margin:0 0 var(--space-1)">Singing</h2>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          This decides what people can find you for. You can change any of it later.
+        </p>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Vocal range</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Soprano</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Mezzo</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Alto</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Tenor</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Baritone</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Bass</button>
+      </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Styles</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Playback</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Pop</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Classical</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Ghazal</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Jazz</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Folk</button>
+      </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Languages you sing in</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Hindi</button>
+        <button type="button" class="ml-chip" aria-pressed="true">English</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Marathi</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Tamil</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Punjabi</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Bengali</button>
+      </div>
+      </div>
+      <div data-state="musician">
+        <h2 class="ml-type-3" style="margin:0 0 var(--space-1)">Your instrument</h2>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          This decides what people can find you for. You can change any of it later.
+        </p>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Main instrument</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Guitar</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Bass</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Keys</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Drums</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Tabla</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Violin</button>
+      </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Also play</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Percussion</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Sitar</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Flute</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Synth</button>
+      </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Reading</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">By ear</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Charts</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Full notation</button>
+      </div>
+      </div>
+      <div data-state="producer">
+        <h2 class="ml-type-3" style="margin:0 0 var(--space-1)">Production</h2>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          This decides what people can find you for. You can change any of it later.
+        </p>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Your DAW</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Ableton</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Logic</button>
+        <button type="button" class="ml-chip" aria-pressed="false">FL Studio</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Pro Tools</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Cubase</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Reaper</button>
+      </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>What you make</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Beats</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Full production</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Arrangement</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Sound design</button>
+      </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Genres</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Hip-hop</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Pop</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Electronic</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Indie</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Film</button>
+      </div>
+      </div>
+      <div data-state="composer">
+        <h2 class="ml-type-3" style="margin:0 0 var(--space-1)">Composition</h2>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          This decides what people can find you for. You can change any of it later.
+        </p>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>What you write</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Songs</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Score</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Advertising</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Themes</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Arrangements</button>
+      </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>For</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Film</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Series</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Games</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Ads</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Independent artists</button>
+      </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Notation</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Western</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Hindustani</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Carnatic</button>
+      </div>
+      </div>
+      <div data-state="engineer">
+        <h2 class="ml-type-3" style="margin:0 0 var(--space-1)">Engineering</h2>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          This decides what people can find you for. You can change any of it later.
+        </p>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>You do</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Tracking</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Mixing</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Mastering</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Live sound</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Post</button>
+      </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Work from</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">My own room</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Client studios</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Either</button>
+      </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Formats</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Stereo</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Stems</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Atmos</button>
+      </div>
+      </div>
+      <div data-state="dj">
+        <h2 class="ml-type-3" style="margin:0 0 var(--space-1)">DJing</h2>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          This decides what people can find you for. You can change any of it later.
+        </p>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Type</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Club</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Wedding</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Festival</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Radio</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Private</button>
+      </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Genres</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">House</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Techno</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Bollywood</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Hip-hop</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Commercial</button>
+      </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>You bring</h3></div>
+        <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Controller</button>
+        <button type="button" class="ml-chip" aria-pressed="true">CDJs</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Full rig</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Nothing — house gear</button>
+      </div>
+      </div>
+    </main>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/onboarding/work_preferences/index.html">Continue</a>
+    </footer>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>

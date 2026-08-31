@@ -1,0 +1,18 @@
+{
+  "flowKey": "marketplace",
+  "flowTitle": "Marketplace — Buy/Sell/Rent",
+  "flowStatus": "app-mocked",
+  "flowOrder": 7,
+  "screenKey": "marketplace_rental_summary",
+  "screenNumber": 190,
+  "screenTitle": "Rental summary",
+  "screenOrder": 92,
+  "states": [
+    "default",
+    "returned",
+    "overdue"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. Dates, daily rate, deposit and what happens on return. Overdue is a state, not a separate screen.",
+  "dataContract": []
+}

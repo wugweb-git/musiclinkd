@@ -1,0 +1,16 @@
+{
+  "flowKey": "onboarding",
+  "flowTitle": "User Onboarding",
+  "flowStatus": "partial",
+  "flowOrder": 2,
+  "screenKey": "privacy_preferences",
+  "screenNumber": 203,
+  "screenTitle": "Privacy to start with",
+  "screenOrder": 92,
+  "states": [
+    "default"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31. The privacy decisions worth making before a profile goes live, mirroring FLOW 21's controls rather than duplicating them.",
+  "dataContract": []
+}

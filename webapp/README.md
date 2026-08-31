@@ -29,6 +29,69 @@ generated from the same source files the schema and admin panel use.
 
 **Design (yours):** everything visual — color, type, layout inside each `.app-content`, components, animation choices beyond the shell's own transitions.
 
+## Where this build stands (2026-08-31)
+
+188 screens across 24 flows, 563 declared states. Run
+`node scripts/audit-screens.mjs` for the live numbers — if they disagree with
+this paragraph, the audit is right.
+
+Zero screens carry a local `<style>` block, a per-screen `<script>`, an
+undefined `.ml-*` class, an unresolved `var()` or a dead `/preview` link. That
+is enforced rather than aspirational: `audit-screens.mjs` reports each.
+
+**Screens are generated, never hand-edited**, and each lives in exactly one
+`scripts/screens/<flow>.mjs`. That is a rule with teeth: two generators writing
+one screen means whichever runs last wins, which silently reverted three
+screens on 2026-08-31 while every audit stayed green. To check for it:
+
+```bash
+MARK=/tmp/genmark; touch $MARK; sleep 1
+for g in scripts/screens/*.mjs; do node "$g" >/dev/null; done
+# any designed screen whose index.html is older than $MARK has no generator
+```
+
+Grepping for a literal `flow:/screen:` pair does NOT work — most screens come
+from composers (`settingsScreen`, `businessScreen`, `reviewForm`), so that
+approach reports dozens of false positives and misses the real gaps.
+
+Seven flows are marked **Beta** in their app bar, meaning the design exists and
+the backend does not: band, verifications, reviews, subscription,
+recommendation_engine, cms_pages, and the collaboration screens inside
+communication. The badge is `.ml-status--accent` carrying the word "Beta", so
+the meaning is not left to colour.
+
+## Adding a screen, or a state
+
+Never by hand. Add an entry to
+`admin/app/(admin)/flows/screens/default-screens.ts`, then:
+
+```bash
+cd admin && npx tsx scripts/webapp-map/generate.ts
+```
+
+It creates the directory and `screen.json` and **never** overwrites an existing
+`index.html`. The same file is how you add STATES to a screen that already
+exists, which is usually the right answer: a variant is a state, a confirmation
+is a dialog, a selection is a sheet, and only a genuinely new route is a screen.
+
+## Local preview
+
+`.claude/launch.json`'s `preview` entry runs `scripts/dev-preview-server.mjs`,
+which serves `/preview`, `/guide` and `/assets` at the same paths Firebase does
+and emulates `cleanUrls`, so a local URL means what the deployed one means.
+
+**It cannot currently be launched from the Browser pane on this machine.** That
+launcher gets a filesystem view in which `~/Documents` does not exist — a probe
+run there reports `existsSync` false and `ENOENT`, not a permission error — so
+no dev server can serve this repo from it, in any language. The Node port
+exists because it removes the *other* blocker: the Python server dies on
+`os.getcwd()` before serving anything, while Node needs no cwd at all. It is
+verified working when run normally. Getting the pane to launch it needs a
+Files-and-Folders grant for the Claude app, or the repo moved out of
+`~/Documents`. Until then, verify against the deployed site — and re-fetch
+stylesheets past the browser cache, because `immutable` entries predating the
+2026-08-31 header fix are honoured for a year.
+
 ## Regenerating
 
 ```bash
