@@ -15,7 +15,7 @@
 
   /* Colour — monochrome chrome; media carries all saturation */
   --color-ink: #0D0D0D; /* Primary action AND primary text */
-  --color-paper: #ECECF1; /* App canvas / page background */
+  --color-paper: #FCFCFD; /* App canvas / page background */
   --color-white: #FFFFFF; /* Card and sheet fill */
   --color-surface: #F8F8FB; /* Subtle raised/sunken fill — search bars, inactive segments, skeletons */
   --color-line: #D5D5DE; /* Hairline borders, dividers, list separators */

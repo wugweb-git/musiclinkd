@@ -42,9 +42,9 @@ object MLColor {
     /** Subtle raised/sunken fill — search bars, inactive segments, skeletons */
     val Surface = Color(0xFFF8F8FB)
     /** Hairline borders, dividers, list separators */
-    val Line = Color(0xFFECECF1)
+    val Line = Color(0xFFD5D5DE)
     /** Secondary text, metadata, placeholder */
-    val Muted = Color(0xFF6E6E7D)
+    val Muted = Color(0xFF66666F)
     /** Brand accent — focus ring, selection, active tab, brand mark, waveform progress */
     val Pink = Color(0xFFEA4C89)
     /** Two jobs, one token */

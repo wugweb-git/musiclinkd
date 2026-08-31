@@ -29,9 +29,9 @@ public enum MLColor {
     /// Subtle raised/sunken fill — search bars, inactive segments, skeletons
     public static let surface = Color(red: 0.9725, green: 0.9725, blue: 0.9843)
     /// Hairline borders, dividers, list separators
-    public static let line = Color(red: 0.9255, green: 0.9255, blue: 0.9451)
+    public static let line = Color(red: 0.8353, green: 0.8353, blue: 0.8706)
     /// Secondary text, metadata, placeholder
-    public static let muted = Color(red: 0.4314, green: 0.4314, blue: 0.4902)
+    public static let muted = Color(red: 0.4000, green: 0.4000, blue: 0.4353)
     /// Brand accent — focus ring, selection, active tab, brand mark, waveform progress
     public static let pink = Color(red: 0.9176, green: 0.2980, blue: 0.5373)
     /// Two jobs, one token

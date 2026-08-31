@@ -2533,10 +2533,14 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
    The expander is absolutely positioned and centred, so it overhangs without
    affecting layout, and sits at z-index 0 so it never covers the control's own
    content. */
+/* .ml-market-card__save is deliberately NOT in this list. It sets
+   position:absolute to sit on the artwork, and this rule was overriding that
+   back to relative, which dropped the save control out of the image and into
+   the card body below it. An absolutely-positioned element is already a
+   containing block for its own ::before, so it never needed this. */
 .ml-mosaic-tile__pin,
 .ml-mixer__mute,
 .ml-banner__dismiss,
-.ml-market-card__save,
 .ml-upload-grid__remove,
 .ml-upload-grid__add { position: relative; }
 .ml-mosaic-tile__pin::before,
