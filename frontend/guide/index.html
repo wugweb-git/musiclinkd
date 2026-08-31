@@ -61,6 +61,14 @@
   .g-rules { margin: var(--space-2) 0 0; padding-left: var(--space-3);
              max-width: var(--layout-measure); font-size: var(--type-2); }
   .g-rules li { margin-bottom: var(--space-1); }
+  /* An inline "Was …" clause is a reconciliation note living inside a rule,
+     not part of it. It has to read as subordinate or the superseded value looks
+     like current policy — which is how "use Unsplash" and "Lucide only" would
+     otherwise still appear to be the rule on this page. */
+  .g-rules li i { display: block; margin-top: 2px; color: var(--color-muted);
+                  font-size: var(--type-1); font-style: normal;
+                  padding-left: var(--space-2);
+                  border-left: var(--border-2) solid var(--color-line); }
   .g-rules__h { margin: var(--space-3) 0 var(--space-1); font-family: var(--font-display);
                 font-size: var(--type-2); font-weight: var(--weight-3); }
   /* A reconciliation note — why a value here differs from what the file said
