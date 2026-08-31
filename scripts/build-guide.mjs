@@ -547,7 +547,7 @@ const DEMOS = {
     <span class="ml-choice__body"><span class="ml-choice__title">Guitarist</span></span>
     <span class="ml-choice__mark">${ic("check", 14)}</span></button></div>`,
   "emoji glyph": `<div class="g-row"><span class="ml-emoji">🎤</span><span class="ml-emoji">🎸</span><span class="ml-emoji">🥁</span></div>`,
-  "verified mark": `<span style="display:inline-flex;align-items:center;gap:var(--space-1);font-weight:700">Ananya Sharma
+  "verified mark": `<span style="display:inline-flex;align-items:center;gap:var(--space-1);font-weight:var(--weight-3)">Ananya Sharma
     <span class="ml-verified">${ic("check", 10)}</span></span>`,
   "inline link": `<a class="ml-link" href="#c-inline-link">Forgot your password?</a>`,
   "visually hidden": `<p class="ml-type-2" style="color:var(--color-muted);margin:0">
@@ -895,7 +895,7 @@ const DEMOS = {
 
   "audio recorder": `<div class="ml-rec is-live" style="max-width:320px">
     <div class="ml-rec__head"><span class="ml-rec__dot"></span>
-      <span class="ml-type-1" style="font-weight:700">Recording</span>
+      <span class="ml-type-1" style="font-weight:var(--weight-3)">Recording</span>
       <span class="ml-rec__time">00:14</span></div>
     <div class="ml-rec__meter">${Array.from({length:24},(_,i)=>`<span class="ml-rec__bar" style="height:${8+((i*37)%28)}px"></span>`).join("")}</div>
     <div class="ml-rec__acts">
@@ -946,7 +946,7 @@ const DEMOS = {
 
   "animated success": `<div class="ml-success" style="max-width:280px">
     <span class="ml-success__mark"><span class="ml-success__ring"></span><span class="ml-success__tick">${ic("check",28)}</span></span>
-    <h4 style="margin:0;font-family:var(--font-display);font-size:var(--type-3);font-weight:700">Booking confirmed</h4>
+    <h4 style="margin:0;font-family:var(--font-display);font-size:var(--type-3);font-weight:var(--weight-3)">Booking confirmed</h4>
     <p class="ml-type-2" style="color:var(--color-muted);margin:0">Yash Raj Sound Studios · Sat, 4 PM</p>
   </div>`,
 
@@ -980,10 +980,10 @@ const DEMOS = {
 
   "tabular numbers": `<div class="g-row" style="gap:var(--space-4)">
     <div><div class="ml-eyebrow">Proportional</div>
-      <div style="font-size:var(--type-3);font-weight:700;line-height:1.6">
+      <div style="font-size:var(--type-3);font-weight:var(--weight-3);line-height:1.6">
         <div>1,204</div><div>8,891</div><div>11,073</div></div></div>
     <div><div class="ml-eyebrow">Tabular</div>
-      <div class="ml-tabular" style="font-size:var(--type-3);font-weight:700;line-height:1.6">
+      <div class="ml-tabular" style="font-size:var(--type-3);font-weight:var(--weight-3);line-height:1.6">
         <div>1,204</div><div>8,891</div><div>11,073</div></div></div>
   </div>
   <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Digits share one advance width, so columns align and a changing number does not shift the text beside it.</p>`,
@@ -1075,13 +1075,13 @@ const html = `<!doctype html>
               padding: var(--space-2) var(--space-3); overflow-x: auto; max-width: 1080px; margin-inline: auto; scrollbar-width: none; }
   .g-nav ul::-webkit-scrollbar { display: none; }
   .g-nav a { display: inline-flex; align-items: center; min-height: var(--size-3); white-space: nowrap;
-             color: var(--color-muted); font-size: var(--type-2); font-weight: 600; text-decoration: none; }
+             color: var(--color-muted); font-size: var(--type-2); font-weight:var(--weight-3); text-decoration: none; }
   .g-nav a:hover { color: var(--color-ink); }
-  h2.g-h { font-family: var(--font-display); font-size: var(--type-4); font-weight: 800;
+  h2.g-h { font-family: var(--font-display); font-size: var(--type-4); font-weight:var(--weight-4);
            letter-spacing: -0.03em; margin: var(--space-4) 0 var(--space-2); }
   .g-comp { padding: var(--space-4) 0; border-top: 1px solid var(--color-line); }
   .g-comp__head { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
-  .g-comp__head h3 { font-family: var(--font-display); font-size: var(--type-3); font-weight: 700;
+  .g-comp__head h3 { font-family: var(--font-display); font-size: var(--type-3); font-weight:var(--weight-3);
                      letter-spacing: -0.01em; margin: 0; text-transform: capitalize; }
   .g-file { font-size: var(--type-1); color: var(--color-muted); }
   .g-demo { margin-top: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-line);
@@ -1096,7 +1096,7 @@ const html = `<!doctype html>
          background: var(--color-surface); padding: 1px 5px; border-radius: var(--radius-1); }
   table.g-t { width: 100%; border-collapse: collapse; font-size: var(--type-2); }
   table.g-t th, table.g-t td { text-align: left; padding: var(--space-2); border-bottom: 1px solid var(--color-line); }
-  table.g-t th { color: var(--color-muted); font-weight: 600; white-space: nowrap; }
+  table.g-t th { color: var(--color-muted); font-weight:var(--weight-3); white-space: nowrap; }
   .g-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: var(--space-2); }
   .g-swatch { display: grid; grid-template-columns: 36px 1fr; grid-template-rows: auto auto auto; gap: 2px var(--space-2);
               align-items: center; padding: var(--space-2); border: 1px solid var(--color-line); border-radius: var(--radius-1); }

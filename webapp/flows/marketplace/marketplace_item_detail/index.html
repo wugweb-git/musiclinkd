@@ -10,67 +10,51 @@
 <meta name="screen-json-path" content="/preview/flows/marketplace/marketplace_item_detail/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Marketplace / Listing Detail</title>
+<title>MusicLinkd — Market — Item detail</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .hero-img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-  .seller-row { display: flex; align-items: center; gap: var(--space-2); }
-  .seller-row img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="position:absolute;top:0;left:0;right:0;z-index:2;padding-left:var(--space-3);height:56px;display:flex;align-items:center;">
-      <a href="/preview/flows/marketplace/marketplace_browse/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.85);color:var(--color-ink);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/marketplace/marketplace_browse/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Listing</h1>
     </header>
-    <main class="app-content app-content--scroll">
-      <img class="hero-img" src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=800" alt="" />
-      <div style="padding:var(--space-3) var(--space-4) var(--space-4);">
-        <span class="ml-chip" style="margin-bottom:var(--space-2);display:inline-flex;">Gear Sale</span>
-        <h1 style="font-size:var(--type-3);margin:0 0 4px;">Shure SM7B Microphone</h1>
-        <p style="font-size:var(--type-3);font-weight:700;">₹28,500</p>
-
-        <div class="seller-row" style="margin:var(--space-3) 0;">
-          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200" alt="" />
-          <div><b style="font-size:var(--type-2);display:block;">Arijit Sen</b><span style="font-size:var(--type-1);color:var(--color-muted);">Mumbai, MH · 12 listings</span></div>
+    <main class="ml-app__body app-content--scroll" style="padding:0 0 var(--space-4)">
+      <img src="/assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg" alt="Shure SM7B microphone" loading="lazy"
+           style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
+      <div style="padding:var(--space-3) var(--space-4)">
+        <div class="ml-market-card__price" style="font-size:var(--type-4)">₹28,500</div>
+        <h2 class="ml-type-3" style="margin:var(--space-1) 0">Shure SM7B Microphone</h2>
+        <span class="ml-status ml-status--warning">Like new</span>
+        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">
+          Cardioid dynamic, used on two album sessions. Original box, shock mount and cable included.
+          Collection in Andheri or courier at cost.
+        </p>
+        <div class="ml-person-row" style="margin-top:var(--space-3)">
+          <img src="/assets/img/editorials/324eae250c23aafe52ea0ef9caab5d5f.jpg" alt="" loading="lazy" />
+          <span class="meta"><b>Aarav Menon</b><p>Seller · 12 listings · joined 2024</p></span>
         </div>
-
-        <p style="font-size:var(--type-2);color:var(--color-ink);">Lightly used, studio-kept. Comes with original shockmount and cable. Selling to fund a new interface.</p>
-
-        <div style="margin-top:var(--space-3);">
-          <div class="summary-row" style="display:flex;justify-content:space-between;padding:var(--space-2) 0;border-bottom:1px solid var(--color-line);font-size:var(--type-1);"><span style="color:var(--color-muted);">Condition</span><span>Like New</span></div>
-          <div class="summary-row" style="display:flex;justify-content:space-between;padding:var(--space-2) 0;border-bottom:1px solid var(--color-line);font-size:var(--type-1);"><span style="color:var(--color-muted);">Category</span><span>Microphones</span></div>
-          <div class="summary-row" style="display:flex;justify-content:space-between;padding:var(--space-2) 0;font-size:var(--type-1);"><span style="color:var(--color-muted);">Location</span><span>Mumbai, MH</span></div>
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>Asking price</span><span>₹28,500</span></div>
+          <div class="ml-summary__row"><span>Delivery</span><span>At cost</span></div>
+          <div class="ml-summary__row ml-summary__row--total"><span>Total</span><span>₹28,500</span></div>
         </div>
       </div>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);position:relative;">
-      <p id="contact-toast" style="display:none;font-size:var(--type-1);color:var(--color-muted);text-align:center;margin:0 0 var(--space-2);">Would open a real chat with the seller once Marketplace is Firestore-wired — not wired yet.</p>
-      <div style="display:flex;gap:var(--space-2);">
-        <button type="button" class="ml-btn ml-btn--secondary" style="flex:1;">Make offer</button>
-        <button type="button" class="ml-btn ml-btn--primary" style="flex:1;" id="contact-btn">Contact seller</button>
-      </div>
+    <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
+      <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/marketplace/marketplace_make_offer/index.html">Make offer</a>
+      <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/marketplace/marketplace_order_status/index.html">Buy now</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    // Real note from this screen's screen.json: in the actual app this
-    // renders as an AlertDialog inside the browse screen (not a navigable
-    // screen at all), and "Contact Seller" only sets a fabricated local
-    // success string - no real network/DB call. Rebuilt here as the real
-    // navigable screen the product spec calls for (Part B.2). The original
-    // version of this used a blocking window.alert() here, which is bad
-    // UX in a preview meant to be clicked through quickly - swapped for an
-    // inline, non-blocking note instead.
-    document.getElementById("contact-btn").addEventListener("click", () => {
-      document.getElementById("contact-toast").style.display = "block";
-    });
-  </script>
 </body>
 </html>

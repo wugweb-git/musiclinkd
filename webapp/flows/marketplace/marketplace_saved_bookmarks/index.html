@@ -10,94 +10,96 @@
 <meta name="screen-json-path" content="/preview/flows/marketplace/marketplace_saved_bookmarks/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Marketplace / Saved</title>
+<title>MusicLinkd — Market — Saved</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .view-toggle { display: flex; gap: 4px; }
-  .view-toggle button { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--color-line); background: #fff; display: flex; align-items: center; justify-content: center; color: var(--color-muted); }
-  .view-toggle button.active { background: var(--color-ink); border-color: var(--color-ink); color: #fff; }
-  .item-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
-  .item-card { border: 1px solid var(--color-line); border-radius: var(--radius-2); overflow: hidden; text-decoration: none; color: inherit; background: #fff; }
-  .item-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-  .item-card .meta { padding: var(--space-2); }
-  .item-card b { font-size: var(--type-1); display: block; }
-  .item-card .price { font-size: var(--type-2); font-weight: 700; margin-top: 2px; }
-  .list-row { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); text-decoration: none; color: inherit; }
-  .list-row img { width: 56px; height: 56px; border-radius: var(--radius-1); object-fit: cover; flex: none; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);height:56px;display:flex;align-items:center;justify-content:space-between;">
-      <h1 style="font-size:var(--type-3);">Saved · Marketplace</h1>
-      <div class="view-toggle">
-        <button type="button" class="active" id="grid-btn" aria-label="Grid view"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></button>
-        <button type="button" id="list-btn" aria-label="List view"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-      </div>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
+      <h1 class="ml-type-3" style="margin:0">Saved</h1>
     </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-3) var(--space-4);">
-
-      <div id="panel-grid" class="item-grid">
-        <a class="item-card" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
-          <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=400" alt="" />
-          <div class="meta"><b>Shure SM7B Microphone</b><span class="price">₹28,500</span></div>
+    <nav class="ml-tabs ml-tabs--fill" role="tablist" aria-label="View" style="margin:0 var(--space-4)">
+      <a class="ml-tabs__tab" role="tab" data-chip="grid" href="?state=grid">Grid</a><a class="ml-tabs__tab" role="tab" data-chip="list" href="?state=list">List</a>
+    </nav>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div class="ml-market-grid" data-state="grid">
+        <a class="ml-market-card" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
+          <div class="ml-market-card__media"><img src="/assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg" alt="" loading="lazy" /></div>
+          <div class="ml-market-card__body">
+            <div class="ml-market-card__price">₹28,500</div>
+            <div class="ml-market-card__title">Shure SM7B Microphone</div>
+          </div>
         </a>
-        <a class="item-card" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
-          <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=400" alt="" />
-          <div class="meta"><b>KRK Rokit 5 Monitors</b><span class="price">₹15,000</span></div>
+        <a class="ml-market-card" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
+          <div class="ml-market-card__media"><img src="/assets/img/speakers/2ca39961ae931d2d4b515b2bc889e025.jpg" alt="" loading="lazy" /></div>
+          <div class="ml-market-card__body">
+            <div class="ml-market-card__price">₹800/day</div>
+            <div class="ml-market-card__title">Focusrite Scarlett 2i2</div>
+          </div>
+        </a>
+        <a class="ml-market-card" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
+          <div class="ml-market-card__media"><img src="/assets/img/6/04182c58798961.5d48bcac8dd8f.png" alt="" loading="lazy" /></div>
+          <div class="ml-market-card__body">
+            <div class="ml-market-card__price">₹3,500</div>
+            <div class="ml-market-card__title">Lo-fi Beat Pack — 10 Beats</div>
+          </div>
+        </a>
+        <a class="ml-market-card" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
+          <div class="ml-market-card__media"><img src="/assets/img/4/5c45943974eb98266d0fc97e34e568e5.png" alt="" loading="lazy" /></div>
+          <div class="ml-market-card__body">
+            <div class="ml-market-card__price">₹6,000</div>
+            <div class="ml-market-card__title">Full Track Mix & Master</div>
+          </div>
         </a>
       </div>
 
-      <div id="panel-list" style="display:none;">
-        <a class="list-row" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
-          <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=200" alt="" />
-          <div style="flex:1;"><b style="display:block;font-size:var(--type-2);">Shure SM7B Microphone</b><span style="font-size:var(--type-1);color:var(--color-muted);">₹28,500 · Gear Sale</span></div>
-        </a>
-        <a class="list-row" href="/preview/flows/marketplace/marketplace_item_detail/index.html" style="border-bottom:none;">
-          <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=200" alt="" />
-          <div style="flex:1;"><b style="display:block;font-size:var(--type-2);">KRK Rokit 5 Monitors</b><span style="font-size:var(--type-1);color:var(--color-muted);">₹15,000 · Gear Sale</span></div>
-        </a>
-      </div>
+      <a class="ml-result" data-state="list" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
+        <img class="ml-result__thumb" src="/assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Shure SM7B Microphone</span>
+          <span class="ml-result__meta">Gear Sale · Mumbai</span>
+        </span>
+        <span class="ml-result__trail">₹28,500</span>
+      </a>
+      <a class="ml-result" data-state="list" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
+        <img class="ml-result__thumb" src="/assets/img/speakers/2ca39961ae931d2d4b515b2bc889e025.jpg" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Focusrite Scarlett 2i2</span>
+          <span class="ml-result__meta">Gear Rental · Mumbai</span>
+        </span>
+        <span class="ml-result__trail">₹800/day</span>
+      </a>
+      <a class="ml-result" data-state="list" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
+        <img class="ml-result__thumb" src="/assets/img/6/04182c58798961.5d48bcac8dd8f.png" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Lo-fi Beat Pack — 10 Beats</span>
+          <span class="ml-result__meta">Beats Licensing</span>
+        </span>
+        <span class="ml-result__trail">₹3,500</span>
+      </a>
+      <a class="ml-result" data-state="list" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
+        <img class="ml-result__thumb" src="/assets/img/4/5c45943974eb98266d0fc97e34e568e5.png" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Full Track Mix & Master</span>
+          <span class="ml-result__meta">Mixing & Mastering</span>
+        </span>
+        <span class="ml-result__trail">₹6,000</span>
+      </a>
 
-      <div id="panel-empty" style="display:none;flex-direction:column;align-items:center;text-align:center;padding-top:20vh;gap:var(--space-3);">
-        <div style="width:64px;height:64px;border-radius:var(--radius-2);background:var(--color-surface);display:flex;align-items:center;justify-content:center;color:var(--color-muted);">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-6.7-4.35-9.3-8.1C.9 10.1 1.7 6.6 4.6 5.2c2.2-1.1 4.6-.3 5.9 1.4l1.5 1.9 1.5-1.9c1.3-1.7 3.7-2.5 5.9-1.4 2.9 1.4 3.7 4.9 1.9 7.7C18.7 16.65 12 21 12 21z"/></svg>
-        </div>
-        <div>
-          <h2 style="font-size:var(--type-3);margin:0;">Nothing saved</h2>
-          <p style="color:var(--color-muted);font-size:var(--type-2);margin-top:var(--space-1);max-width:260px;">Save listings from Marketplace to find them again quickly.</p>
-        </div>
+      <div class="ml-empty" data-state="empty">
+        <h3 class="ml-empty__title">Nothing saved yet</h3>
+        <p class="ml-empty__body">Tap the heart on any listing to keep it here.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/marketplace/marketplace_browse/index.html">Browse the market</a>
       </div>
     </main>
-    <footer class="app-bottombar"></footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    // states: grid (default) | list | empty — see screen.json. Note: this
-    // screen is a thin wrapper that routes to the shared Saved/Favorites
-    // hub's Marketplace sub-tab in the real app, not its own feature -
-    // built here as that sub-tab's content.
-    document.addEventListener("musiclinkd:screen-ready", () => {
-      const state = window.MusicLinkd.currentState;
-      if (state === "empty") {
-        document.getElementById("panel-grid").style.display = "none";
-        document.getElementById("panel-empty").style.display = "flex";
-      } else if (state === "list") {
-        setView("list");
-      }
-    });
-    function setView(v) {
-      document.getElementById("panel-grid").style.display = v === "grid" ? "grid" : "none";
-      document.getElementById("panel-list").style.display = v === "list" ? "block" : "none";
-      document.getElementById("grid-btn").classList.toggle("active", v === "grid");
-      document.getElementById("list-btn").classList.toggle("active", v === "list");
-    }
-    document.getElementById("grid-btn").addEventListener("click", () => setView("grid"));
-    document.getElementById("list-btn").addEventListener("click", () => setView("list"));
-  </script>
 </body>
 </html>

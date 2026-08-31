@@ -10,72 +10,156 @@
 <meta name="screen-json-path" content="/preview/flows/marketplace/marketplace_order_status/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Marketplace / Order Status</title>
+<title>MusicLinkd — Market — Order status</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-.timeline { margin-top: var(--space-4); }
-  .t-row { display: flex; gap: var(--space-2); }
-  .t-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--color-line); margin-top: 4px; flex: none; }
-  .t-dot.done { background: var(--color-ink); }
-  .t-line { width: 1px; flex: 1; background: var(--color-line); margin: 2px 0; }
-  .t-row.last .t-line { display: none; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/marketplace/marketplace_my_listings/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-      <!-- Phase 2, not MVP: needs marketplace_orders collection. One screen covers both Buy and Rent lifecycles per the 2026-08-16 "rent stays merged" decision. -->
-      <span class="ml-status ml-status--warning" style="margin-left:auto">Phase 2</span>
-    </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <h1 style="font-size:var(--type-3);margin:var(--space-3) 0 4px;">Yamaha HS8 Studio Monitors</h1>
-      <p style="color:var(--color-muted);font-size:var(--type-1);margin-bottom:var(--space-3);">Order #MK-58201 · ₹38,000</p>
-      <span class="ml-status ml-status--warning" id="status-pill">Pending payment</span>
 
-      <div class="timeline" id="timeline">
-        <div class="t-row"><div><div class="t-dot done"></div><div class="t-line"></div></div><div style="padding-bottom:var(--space-3);"><b style="font-size:var(--type-2);">Offer accepted</b><p style="font-size:var(--type-1);color:var(--color-muted);margin:2px 0 0;">16 Aug 2026</p></div></div>
-        <div class="t-row"><div><div class="t-dot" id="dot-paid"></div><div class="t-line"></div></div><div style="padding-bottom:var(--space-3);"><b style="font-size:var(--type-2);">Payment</b><p style="font-size:var(--type-1);color:var(--color-muted);margin:2px 0 0;">Awaiting payment</p></div></div>
-        <div class="t-row"><div><div class="t-dot" id="dot-active"></div><div class="t-line"></div></div><div style="padding-bottom:var(--space-3);"><b style="font-size:var(--type-2);">Handover</b><p style="font-size:var(--type-1);color:var(--color-muted);margin:2px 0 0;">Not started</p></div></div>
-        <div class="t-row last"><div><div class="t-dot" id="dot-completed"></div></div><div><b style="font-size:var(--type-2);">Completed</b><p style="font-size:var(--type-1);color:var(--color-muted);margin:2px 0 0;">—</p></div></div>
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/marketplace/marketplace_my_listings/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Order</h1>
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <a class="ml-result" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
+        <img class="ml-result__thumb" src="/assets/img/speakers/2ca39961ae931d2d4b515b2bc889e025.jpg" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Focusrite Scarlett 2i2</span>
+          <span class="ml-result__meta">Order #ML-4471 · Gear Rental</span>
+        </span>
+        <span class="ml-result__trail">₹800/day</span>
+      </a>
+
+      <div data-state="pending" style="margin-top:var(--space-3)">
+        <div class="ml-banner ml-banner--warning"><span class="ml-banner__body">Awaiting payment</span></div>
+        <ol class="ml-timeline" style="margin-top:var(--space-3)">
+          <li class="ml-timeline__item is-current">
+            <span class="ml-timeline__title">Ordered</span>
+          </li>
+          <li class="ml-timeline__item">
+            <span class="ml-timeline__title">Paid</span>
+          </li>
+          <li class="ml-timeline__item">
+            <span class="ml-timeline__title">In progress</span>
+          </li>
+          <li class="ml-timeline__item">
+            <span class="ml-timeline__title">Returned</span>
+          </li>
+          <li class="ml-timeline__item">
+            <span class="ml-timeline__title">Completed</span>
+          </li>
+        </ol>
+      </div>
+      <div data-state="paid" style="margin-top:var(--space-3)">
+        <div class="ml-banner ml-banner--success"><span class="ml-banner__body">Payment received</span></div>
+        <ol class="ml-timeline" style="margin-top:var(--space-3)">
+          <li class="ml-timeline__item is-done">
+            <span class="ml-timeline__title">Ordered</span>
+          </li>
+          <li class="ml-timeline__item is-current">
+            <span class="ml-timeline__title">Paid</span>
+          </li>
+          <li class="ml-timeline__item">
+            <span class="ml-timeline__title">In progress</span>
+          </li>
+          <li class="ml-timeline__item">
+            <span class="ml-timeline__title">Returned</span>
+          </li>
+          <li class="ml-timeline__item">
+            <span class="ml-timeline__title">Completed</span>
+          </li>
+        </ol>
+      </div>
+      <div data-state="active" style="margin-top:var(--space-3)">
+        <div class="ml-banner ml-banner--info"><span class="ml-banner__body">With the buyer</span></div>
+        <ol class="ml-timeline" style="margin-top:var(--space-3)">
+          <li class="ml-timeline__item is-done">
+            <span class="ml-timeline__title">Ordered</span>
+          </li>
+          <li class="ml-timeline__item is-done">
+            <span class="ml-timeline__title">Paid</span>
+          </li>
+          <li class="ml-timeline__item is-current">
+            <span class="ml-timeline__title">In progress</span>
+          </li>
+          <li class="ml-timeline__item">
+            <span class="ml-timeline__title">Returned</span>
+          </li>
+          <li class="ml-timeline__item">
+            <span class="ml-timeline__title">Completed</span>
+          </li>
+        </ol>
+      </div>
+      <div data-state="returned" style="margin-top:var(--space-3)">
+        <div class="ml-banner ml-banner--info"><span class="ml-banner__body">Returned, awaiting check</span></div>
+        <ol class="ml-timeline" style="margin-top:var(--space-3)">
+          <li class="ml-timeline__item is-done">
+            <span class="ml-timeline__title">Ordered</span>
+          </li>
+          <li class="ml-timeline__item is-done">
+            <span class="ml-timeline__title">Paid</span>
+          </li>
+          <li class="ml-timeline__item is-done">
+            <span class="ml-timeline__title">In progress</span>
+          </li>
+          <li class="ml-timeline__item is-current">
+            <span class="ml-timeline__title">Returned</span>
+          </li>
+          <li class="ml-timeline__item">
+            <span class="ml-timeline__title">Completed</span>
+          </li>
+        </ol>
+      </div>
+      <div data-state="completed" style="margin-top:var(--space-3)">
+        <div class="ml-banner ml-banner--success"><span class="ml-banner__body">Completed</span></div>
+        <ol class="ml-timeline" style="margin-top:var(--space-3)">
+          <li class="ml-timeline__item is-done">
+            <span class="ml-timeline__title">Ordered</span>
+          </li>
+          <li class="ml-timeline__item is-done">
+            <span class="ml-timeline__title">Paid</span>
+          </li>
+          <li class="ml-timeline__item is-done">
+            <span class="ml-timeline__title">In progress</span>
+          </li>
+          <li class="ml-timeline__item is-done">
+            <span class="ml-timeline__title">Returned</span>
+          </li>
+          <li class="ml-timeline__item is-current">
+            <span class="ml-timeline__title">Completed</span>
+          </li>
+        </ol>
+      </div>
+      <div data-state="cancelled" style="margin-top:var(--space-3)">
+        <div class="ml-banner ml-banner--error"><span class="ml-banner__body">Cancelled — refunded in full</span></div>
+        <ol class="ml-timeline" style="margin-top:var(--space-3)">
+          <li class="ml-timeline__item is-current">
+            <span class="ml-timeline__title">Ordered</span>
+          </li>
+          <li class="ml-timeline__item">
+            <span class="ml-timeline__title">Paid</span>
+          </li>
+          <li class="ml-timeline__item">
+            <span class="ml-timeline__title">In progress</span>
+          </li>
+          <li class="ml-timeline__item">
+            <span class="ml-timeline__title">Returned</span>
+          </li>
+          <li class="ml-timeline__item">
+            <span class="ml-timeline__title">Completed</span>
+          </li>
+        </ol>
       </div>
     </main>
-    <footer class="app-bottombar"></footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    // states: pending | paid | active | returned | completed | cancelled
-    /* Carries the MODIFIER, not a colour pair. Setting pill.style.background
-       from JS meant six hardcoded hexes that no token could reach and that
-       silently outranked any stylesheet fix — the palette purge could not
-       have touched them. The variant classes derive their colours from
-       --color-success / --color-warning / --color-error / --color-info with
-       color-mix, so a token change now reaches this screen too. */
-    const CONFIG = {
-      pending:   { label: "Pending payment", mod: "warning", dots: [] },
-      paid:      { label: "Paid",      mod: "info",    dots: ["paid"] },
-      active:    { label: "Active",    mod: "success", dots: ["paid", "active"] },
-      returned:  { label: "Returned",  mod: "neutral", dots: ["paid", "active"] },
-      completed: { label: "Completed", mod: "success", dots: ["paid", "active", "completed"] },
-      cancelled: { label: "Cancelled", mod: "error",   dots: [] },
-    };
-    const MODS = ["warning", "info", "success", "neutral", "error"];
-    document.addEventListener("musiclinkd:screen-ready", () => {
-      const state = window.MusicLinkd.currentState;
-      const cfg = CONFIG[state];
-      if (!cfg) return;
-      const pill = document.getElementById("status-pill");
-      pill.textContent = cfg.label;
-      MODS.forEach((m) => pill.classList.remove("ml-status--" + m));
-      pill.classList.add("ml-status--" + cfg.mod);
-      cfg.dots.forEach((d) => document.getElementById("dot-" + d)?.classList.add("done"));
-    });
-  </script>
 </body>
 </html>

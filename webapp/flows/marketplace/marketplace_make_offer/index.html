@@ -10,69 +10,65 @@
 <meta name="screen-json-path" content="/preview/flows/marketplace/marketplace_make_offer/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Marketplace / Make Offer</title>
+<title>MusicLinkd — Market — Make an offer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-.listing-mini { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-line); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
-  .listing-mini img { width: 48px; height: 48px; border-radius: var(--radius-1); object-fit: cover; }
-  .status-banner { justify-content: center; text-align: center; font-weight: 600; margin-bottom: var(--space-3); }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/marketplace/marketplace_item_detail/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-      <!-- Phase 2, not MVP: needs the new offers collection (schema landed 2026-08-16, not yet built into the app). -->
-      <span class="ml-status ml-status--warning" style="margin-left:auto">Phase 2</span>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/marketplace/marketplace_item_detail/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Make an offer</h1>
     </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <div class="listing-mini">
-        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200" alt="" />
-        <div><b style="display:block;font-size:var(--type-2);">Yamaha HS8 Studio Monitors</b><span style="font-size:var(--type-1);color:var(--color-muted);">Asking ₹42,000</span></div>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <a class="ml-result" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
+        <img class="ml-result__thumb" src="/assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Shure SM7B Microphone</span>
+          <span class="ml-result__meta">Gear Sale · Mumbai</span>
+        </span>
+        <span class="ml-result__trail">₹28,500</span>
+      </a>
+
+      <div data-state="countered" style="margin-top:var(--space-3)">
+        <div class="ml-banner ml-banner--info"><span class="ml-banner__body">Seller countered at ₹26,000.</span></div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Respond or accept</a>
+      </div>
+      <div data-state="accepted" style="margin-top:var(--space-3)">
+        <div class="ml-banner ml-banner--success"><span class="ml-banner__body">Offer accepted at ₹24,000.</span></div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Continue to payment</a>
+      </div>
+      <div data-state="declined" style="margin-top:var(--space-3)">
+        <div class="ml-banner ml-banner--error"><span class="ml-banner__body">Offer declined.</span></div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Make another offer</a>
+      </div>
+      <div data-state="expired" style="margin-top:var(--space-3)">
+        <div class="ml-banner ml-banner--warning"><span class="ml-banner__body">Offer expired after 48 hours.</span></div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Make another offer</a>
       </div>
 
-      <div id="panel-default">
-        <div class="ml-field"><label for="offer">Your offer</label><input id="offer" type="text" value="₹38,000" /></div>
-        <div class="ml-field" style="margin-top:var(--space-2);"><label for="msg">Message (optional)</label><input id="msg" type="text" placeholder="Add a note for the seller" /></div>
-        <button type="button" class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3);">Send offer</button>
-      </div>
-
-      <div id="panel-countered" style="display:none;">
-        <div class="status-banner ml-banner ml-banner--warning">Seller countered: ₹40,000</div>
-        <div style="display:flex;gap:var(--space-2);"><button type="button" class="ml-btn ml-btn--primary" style="flex:1;">Accept</button><button type="button" class="ml-btn ml-btn--secondary" style="flex:1;">Counter again</button></div>
-      </div>
-
-      <div id="panel-accepted" style="display:none;">
-        <div class="status-banner ml-banner ml-banner--success">Offer accepted — ₹38,000</div>
-        <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/marketplace/marketplace_order_status/index.html" style="text-decoration:none;">Continue to order</a>
-      </div>
-
-      <div id="panel-declined" style="display:none;">
-        <div class="status-banner ml-banner ml-banner--error">Offer declined</div>
-      </div>
-
-      <div id="panel-expired" style="display:none;">
-        <div class="status-banner ml-banner ml-banner--info">This offer has expired</div>
+      <div data-state="default">
+        <div class="ml-field" style="margin-top:var(--space-3)">
+          <label for="o-amt">Your offer (₹)</label>
+          <input id="o-amt" type="text" inputmode="numeric" value="24000" />
+        </div>
+        <div class="ml-field">
+          <label for="o-note">Note to seller (optional)</label>
+          <textarea id="o-note" rows="3" placeholder="Collection this weekend if that suits."></textarea>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted)">Offers expire after 48 hours.</p>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-2)" href="?state=countered">Send offer</a>
       </div>
     </main>
-    <footer class="app-bottombar"></footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    document.addEventListener("musiclinkd:screen-ready", () => {
-      const state = window.MusicLinkd.currentState;
-      if (state && state !== "default") {
-        document.getElementById("panel-default").style.display = "none";
-        const el = document.getElementById("panel-" + state);
-        if (el) el.style.display = "block";
-      }
-    });
-  </script>
 </body>
 </html>

@@ -73,7 +73,7 @@ body {
   border-radius: var(--radius-4);
   font-family: var(--font-body);
   font-size: var(--type-2);
-  font-weight: 600;
+  font-weight: var(--weight-3);
   line-height: 1;
   text-decoration: none;
   cursor: pointer;
@@ -159,7 +159,7 @@ body {
 .ml-field { display: flex; flex-direction: column; gap: var(--space-1); text-align: left; }
 .ml-field > label {
   font-size: var(--type-1);
-  font-weight: 600;
+  font-weight: var(--weight-3);
   color: var(--color-muted);
 }
 .ml-field input,
@@ -235,7 +235,7 @@ body {
   background: var(--color-white);
   color: var(--color-muted);
   font-size: var(--type-1);
-  font-weight: 600;
+  font-weight: var(--weight-3);
   white-space: nowrap;
   cursor: pointer;
   /* A chip may be an <a> — state-selector chips are links so they work with
@@ -325,7 +325,7 @@ body {
   padding: 3px 9px;
   border-radius: var(--radius-4);
   font-size: var(--type-1);
-  font-weight: 700;
+  font-weight: var(--weight-3);
   letter-spacing: 0.02em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -364,7 +364,7 @@ body {
   background: var(--color-surface);
   color: var(--color-muted);
   font-size: var(--type-1);
-  font-weight: 600;
+  font-weight: var(--weight-3);
 }
 .ml-badge--accent { background: var(--color-pink-container); color: var(--color-pink-pressed); }
 
@@ -506,7 +506,7 @@ a.ml-card:active, button.ml-card:active { transform: scale(0.98); }
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--type-3);
-  font-weight: 700;
+  font-weight: var(--weight-3);
   letter-spacing: -0.01em;
 }
 .ml-section__link {
@@ -521,7 +521,7 @@ a.ml-card:active, button.ml-card:active { transform: scale(0.98); }
   margin-inline-end: calc(var(--space-2) * -1);
   color: var(--color-pink-pressed);   /* pink TEXT rule — see tokens.json */
   font-size: var(--type-1);
-  font-weight: 600;
+  font-weight: var(--weight-3);
   text-decoration: none;
 }
 
@@ -555,7 +555,7 @@ a.ml-card:active, button.ml-card:active { transform: scale(0.98); }
   text-decoration: none;
 }
 .ml-row__body  { flex: 1; min-width: 0; }
-.ml-row__title { display: block; font-size: var(--type-2); font-weight: 600; }
+.ml-row__title { display: block; font-size: var(--type-2); font-weight: var(--weight-3); }
 .ml-row__meta  { display: block; font-size: var(--type-1); color: var(--color-muted); }
 .ml-row + .ml-row { border-top: 1px solid var(--color-line); }
 a.ml-row:active { background: var(--color-surface); }
@@ -636,7 +636,7 @@ a.ml-row:active { background: var(--color-surface); }
    half of a logotype, never a label the user has to read to operate anything. */
 .ml-wordmark {
   font-family: var(--font-eyebrow);
-  font-weight: 500;
+  font-weight: var(--weight-2);
   font-size: var(--type-3);
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -696,7 +696,7 @@ a.ml-row:active { background: var(--color-surface); }
   flex: none;
 }
 /* an <h1> on flow screens, so the UA margin has to go */
-.ml-navbar__title { margin: 0; font-size: var(--type-2); font-weight: 700; }
+.ml-navbar__title { margin: 0; font-size: var(--type-2); font-weight: var(--weight-3); }
 .ml-navbar__spacer { flex: 1; }
 
 /* ── sticky footer ─────────────────────────────────────────────────────── */
@@ -737,7 +737,7 @@ a.ml-row:active { background: var(--color-surface); }
   color: var(--color-muted);
   font-family: var(--font-body);
   font-size: var(--type-1);
-  font-weight: 600;
+  font-weight: var(--weight-3);
   cursor: pointer;
   transition: background-color var(--duration-1) var(--ease-standard);
 }
@@ -771,7 +771,7 @@ a.ml-row:active { background: var(--color-surface); }
   background: var(--color-white);
   color: var(--color-muted);
   font-size: var(--type-3);
-  font-weight: 700;
+  font-weight: var(--weight-3);
   font-variant-numeric: tabular-nums;
 }
 .ml-otp__box.is-filled { border-color: var(--color-pink); border-width: 2px; color: var(--color-ink); }
@@ -788,7 +788,7 @@ a.ml-row:active { background: var(--color-surface); }
   border: 1px solid var(--color-line);
   border-radius: var(--radius-4);
   background: var(--color-white);
-  font-size: var(--type-2); font-weight: 600;
+  font-size: var(--type-2); font-weight: var(--weight-3);
   flex: none;
 }
 .ml-phone input { flex: 1; min-width: 0; }
@@ -836,7 +836,7 @@ a.ml-row:active { background: var(--color-surface); }
 .ml-steps__track { flex: 1; height: 4px; border-radius: var(--radius-4); background: var(--color-line); overflow: hidden; }
 .ml-steps__fill  { height: 100%; border-radius: var(--radius-4); background: var(--color-ink);
                    transition: width var(--duration-3) var(--ease-enter); }
-.ml-steps__label { font-size: var(--type-1); color: var(--color-muted); font-weight: 600; flex: none;
+.ml-steps__label { font-size: var(--type-1); color: var(--color-muted); font-weight: var(--weight-3); flex: none;
                    font-variant-numeric: tabular-nums; }
 
 .ml-dots { display: flex; gap: var(--space-1); justify-content: center; }
@@ -869,7 +869,7 @@ a.ml-row:active { background: var(--color-surface); }
 /* display:block is required, not cosmetic: these are <span> (an <a>/<button>
    cannot legally contain a <div>), so without it the meta line runs on inline
    after the title instead of sitting under it. */
-.ml-choice__title { display: block; font-weight: 600; }
+.ml-choice__title { display: block; font-weight: var(--weight-3); }
 .ml-choice__meta  { display: block; font-size: var(--type-1); color: var(--color-muted); }
 .ml-choice__mark {
   width: var(--icon-3); height: var(--icon-3); flex: none;
@@ -947,7 +947,7 @@ a.ml-row:active { background: var(--color-surface); }
   min-height: var(--size-3);
   vertical-align: middle;
   color: var(--color-pink-pressed);
-  font-weight: 600;
+  font-weight: var(--weight-3);
   text-decoration: none;
 }
 
@@ -1103,7 +1103,7 @@ a.ml-row:active { background: var(--color-surface); }
   display: flex; align-items: center; gap: var(--space-3);
   min-height: var(--size-4);
   padding: var(--space-2) 0;
-  font-size: var(--type-2); font-weight: 600;
+  font-size: var(--type-2); font-weight: var(--weight-3);
   cursor: pointer; list-style: none;
 }
 .ml-accordion > summary::-webkit-details-marker { display: none; }
@@ -1135,7 +1135,7 @@ a.ml-row:active { background: var(--color-surface); }
 }
 .ml-dialog::backdrop { background: color-mix(in srgb, var(--color-ink) 64%, transparent); }
 .ml-dialog__title { margin: 0 0 var(--space-2); font-family: var(--font-display);
-  font-size: var(--type-3); font-weight: 700; letter-spacing: -0.01em; }
+  font-size: var(--type-3); font-weight: var(--weight-3); letter-spacing: -0.01em; }
 .ml-dialog__body { margin: 0; color: var(--color-muted); font-size: var(--type-2); }
 .ml-dialog__actions { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
 /* destructive confirmations put the safe choice first */
@@ -1155,7 +1155,7 @@ a.ml-row:active { background: var(--color-surface); }
   border: 0; border-radius: var(--radius-4);
   background: var(--color-ink); color: var(--color-white);
   box-shadow: var(--elevation-2);
-  font-family: var(--font-body); font-size: var(--type-2); font-weight: 600;
+  font-family: var(--font-body); font-size: var(--type-2); font-weight: var(--weight-3);
   cursor: pointer;
   transition: transform var(--duration-1) var(--ease-standard);
 }

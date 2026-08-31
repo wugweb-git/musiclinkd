@@ -139,6 +139,11 @@ writeScreen({
 /* Three views of ONE dataset, not three screens: the month grid, the same
    week as bookable slots, and the day as a running order. */
 const DAYS = Array.from({ length: 31 }, (_, i) => i + 1);
+/* Leading blanks so day 1 lands in its real column. August 2026 opens on a
+   Saturday; without the offset the grid started it under Monday, which any
+   designer spots instantly. Monday-first, so Sunday is index 6. */
+const MONTH_START = new Date(2026, 7, 1);          // 7 = August
+const LEAD = (MONTH_START.getDay() + 6) % 7;
 const BLOCKED = new Set([3, 4, 11, 17, 18, 24, 25]);
 const TODAY = 12;
 
@@ -173,6 +178,7 @@ writeScreen({
           ${["M", "T", "W", "T", "F", "S", "S"].map((d) => `<span>${d}</span>`).join("")}
         </div>
         <div class="ml-calendar__grid">
+          ${Array.from({ length: LEAD }, () => `<span></span>`).join("")}
           ${DAYS.map((d) => {
             const cls = ["ml-calendar__day"];
             if (BLOCKED.has(d)) cls.push("is-blocked");

@@ -134,6 +134,27 @@ for (const k of scale(f.border, "border")) emit(`border-${k}`, f.border[k].$web,
 section("Opacity");
 for (const k of scale(f.opacity, "opacity")) emit(`opacity-${k}`, f.opacity[k].$value);
 
+section("Font weight — 400/500/600/800; there is deliberately no 700 step");
+// Weight was the one typographic axis with no token, so `font-weight: 700`
+// was typed as a literal in 67 places and could not be changed centrally.
+// WEIGHT_BY_VALUE lets the type utilities below reference the token rather
+// than restate the number, so the two can never disagree.
+const WEIGHT_BY_VALUE = new Map();
+for (const k of scale(f.weight, "weight")) {
+  emit(`weight-${k}`, f.weight[k].$value, short(f.weight[k].$description));
+  WEIGHT_BY_VALUE.set(f.weight[k].$value, `weight-${k}`);
+}
+
+/** A type step's weight must be one of the four weight tokens, never a stray value. */
+function weightToken(value, where) {
+  const tok = WEIGHT_BY_VALUE.get(value);
+  if (!tok) {
+    errors.push(`${where} uses font-weight ${value}, which is not a --weight-* step`);
+    return "weight-1";
+  }
+  return tok;
+}
+
 section("Type — fluid clamp() on web; native uses the sp/Dynamic Type ramp in tokens.json");
 const typeClasses = [];
 for (const k of scale(f.type, "type")) {
@@ -152,7 +173,7 @@ for (const k of scale(f.type, "type")) {
     `.ml-type-${k} {\n` +
       `  font-family: var(--font-${w.family});\n` +
       `  font-size: var(--type-${k});\n` +
-      `  font-weight: ${w.weight};\n` +
+      `  font-weight: var(--${weightToken(w.weight, `type.${k}`)});\n` +
       `  line-height: ${w.lineHeight};\n` +
       `  letter-spacing: ${w.letterSpacing === "0" ? "0" : w.letterSpacing};\n` +
       `}`

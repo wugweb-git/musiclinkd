@@ -4,7 +4,7 @@
  * Source:    frontend/guide/tokens/tokens.json  (v9.0.0)
  * Regenerate: node scripts/build-tokens.mjs
  *
- * 103 tokens, ceiling 104. The previous hand-maintained system
+ * 107 tokens, ceiling 108. The previous hand-maintained system
  * had reached 248 custom properties in a single :root, of which every value
  * past the 4-step core was an exact duplicate under a second name.
  *
@@ -75,6 +75,12 @@
   --opacity-2: 0.16;
   --opacity-3: 0.32;
   --opacity-4: 0.64;
+
+  /* Font weight — 400/500/600/800; there is deliberately no 700 step */
+  --weight-1: 400; /* Body copy, running text */
+  --weight-2: 500; /* Medium — list titles, secondary labels */
+  --weight-3: 600; /* Semibold — the system's emphasis weight */
+  --weight-4: 800; /* Display only — hero headlines and the one big number on a screen */
 
   /* Type — fluid clamp() on web; native uses the sp/Dynamic Type ramp in tokens.json */
   --type-1: clamp(12px, calc(12px + 1 * (100vw - 360px) / 1080), 13px);
@@ -162,28 +168,28 @@
 .ml-type-1 {
   font-family: var(--font-body);
   font-size: var(--type-1);
-  font-weight: 600;
+  font-weight: var(--weight-3);
   line-height: 1.4;
   letter-spacing: 0.01em;
 }
 .ml-type-2 {
   font-family: var(--font-body);
   font-size: var(--type-2);
-  font-weight: 400;
+  font-weight: var(--weight-1);
   line-height: 1.5;
   letter-spacing: 0;
 }
 .ml-type-3 {
   font-family: var(--font-display);
   font-size: var(--type-3);
-  font-weight: 700;
+  font-weight: var(--weight-3);
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
 .ml-type-4 {
   font-family: var(--font-display);
   font-size: var(--type-4);
-  font-weight: 800;
+  font-weight: var(--weight-4);
   line-height: 1.1;
   letter-spacing: -0.03em;
 }

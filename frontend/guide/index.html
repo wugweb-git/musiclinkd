@@ -27,13 +27,13 @@
               padding: var(--space-2) var(--space-3); overflow-x: auto; max-width: 1080px; margin-inline: auto; scrollbar-width: none; }
   .g-nav ul::-webkit-scrollbar { display: none; }
   .g-nav a { display: inline-flex; align-items: center; min-height: var(--size-3); white-space: nowrap;
-             color: var(--color-muted); font-size: var(--type-2); font-weight: 600; text-decoration: none; }
+             color: var(--color-muted); font-size: var(--type-2); font-weight:var(--weight-3); text-decoration: none; }
   .g-nav a:hover { color: var(--color-ink); }
-  h2.g-h { font-family: var(--font-display); font-size: var(--type-4); font-weight: 800;
+  h2.g-h { font-family: var(--font-display); font-size: var(--type-4); font-weight:var(--weight-4);
            letter-spacing: -0.03em; margin: var(--space-4) 0 var(--space-2); }
   .g-comp { padding: var(--space-4) 0; border-top: 1px solid var(--color-line); }
   .g-comp__head { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
-  .g-comp__head h3 { font-family: var(--font-display); font-size: var(--type-3); font-weight: 700;
+  .g-comp__head h3 { font-family: var(--font-display); font-size: var(--type-3); font-weight:var(--weight-3);
                      letter-spacing: -0.01em; margin: 0; text-transform: capitalize; }
   .g-file { font-size: var(--type-1); color: var(--color-muted); }
   .g-demo { margin-top: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-line);
@@ -48,7 +48,7 @@
          background: var(--color-surface); padding: 1px 5px; border-radius: var(--radius-1); }
   table.g-t { width: 100%; border-collapse: collapse; font-size: var(--type-2); }
   table.g-t th, table.g-t td { text-align: left; padding: var(--space-2); border-bottom: 1px solid var(--color-line); }
-  table.g-t th { color: var(--color-muted); font-weight: 600; white-space: nowrap; }
+  table.g-t th { color: var(--color-muted); font-weight:var(--weight-3); white-space: nowrap; }
   .g-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: var(--space-2); }
   .g-swatch { display: grid; grid-template-columns: 36px 1fr; grid-template-rows: auto auto auto; gap: 2px var(--space-2);
               align-items: center; padding: var(--space-2); border: 1px solid var(--color-line); border-radius: var(--radius-1); }
@@ -92,7 +92,7 @@
   <li><a href="#core">Core · 39</a></li>
   <li><a href="#widgets">Widgets · 80</a></li>
   <li><a href="#motion">Motion</a></li>
-  <li><a href="#patterns">Patterns · 55</a></li>
+  <li><a href="#patterns">Patterns · 66</a></li>
   <li><a href="#icons">Icons · 423</a></li>
   <li><a href="#taxonomy">Taxonomy · 18</a></li>
   <li><a href="#gaps">Gaps</a></li>
@@ -109,7 +109,7 @@
       with those same files — <b>if a component breaks, this page breaks</b>.
     </p>
     <div class="g-row" style="margin-top:var(--space-3)">
-      <span class="ml-badge">103 tokens</span>
+      <span class="ml-badge">107 tokens</span>
       <span class="ml-badge">119 sections</span>
       <span class="ml-badge">515 selectors</span>
       <span class="ml-badge">423 icons</span>
@@ -292,8 +292,8 @@
         <td><code>TextStyle(fontFamily = Inter, fontSize = 16sp, lineHeight = 24sp, fontWeight = FontWeight.W400)</code></td>
         <td>Body copy, default UI text, list item titles</td></tr><tr><th>--type-3</th>
         <td class="ml-tabular">22px → 28px</td>
-        <td class="ml-tabular">700</td>
-        <td><code>TextStyle(fontFamily = InterTight, fontSize = 22sp, lineHeight = 28sp, fontWeight = FontWeight.W700)</code></td>
+        <td class="ml-tabular">600</td>
+        <td><code>TextStyle(fontFamily = InterTight, fontSize = 22sp, lineHeight = 28sp, fontWeight = FontWeight.W600)</code></td>
         <td>Section headings, card titles, screen titles</td></tr><tr><th>--type-4</th>
         <td class="ml-tabular">32px → 44px</td>
         <td class="ml-tabular">800</td>
@@ -632,10 +632,10 @@
     
     <div class="g-demo"><div class="g-row" style="gap:var(--space-4)">
     <div><div class="ml-eyebrow">Proportional</div>
-      <div style="font-size:var(--type-3);font-weight:700;line-height:1.6">
+      <div style="font-size:var(--type-3);font-weight:var(--weight-3);line-height:1.6">
         <div>1,204</div><div>8,891</div><div>11,073</div></div></div>
     <div><div class="ml-eyebrow">Tabular</div>
-      <div class="ml-tabular" style="font-size:var(--type-3);font-weight:700;line-height:1.6">
+      <div class="ml-tabular" style="font-size:var(--type-3);font-weight:var(--weight-3);line-height:1.6">
         <div>1,204</div><div>8,891</div><div>11,073</div></div></div>
   </div>
   <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Digits share one advance width, so columns align and a changing number does not shift the text beside it.</p></div>
@@ -809,7 +809,7 @@
       
     </div>
     <p class="ml-lede ml-measure">The icon library's check-circle is a solid glyph: tinted pink at 14px it reads as a featureless blob. A disc with the check knocked out in white stays legible at the size this actually renders.</p>
-    <div class="g-demo"><span style="display:inline-flex;align-items:center;gap:var(--space-1);font-weight:700">Ananya Sharma
+    <div class="g-demo"><span style="display:inline-flex;align-items:center;gap:var(--space-1);font-weight:var(--weight-3)">Ananya Sharma
     <span class="ml-verified"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span></span></div>
     <details class="g-sel"><summary>1 selector</summary>
       <code>.ml-verified</code></details>
@@ -2179,7 +2179,7 @@
     
     <div class="g-demo"><div class="ml-rec is-live" style="max-width:320px">
     <div class="ml-rec__head"><span class="ml-rec__dot"></span>
-      <span class="ml-type-1" style="font-weight:700">Recording</span>
+      <span class="ml-type-1" style="font-weight:var(--weight-3)">Recording</span>
       <span class="ml-rec__time">00:14</span></div>
     <div class="ml-rec__meter"><span class="ml-rec__bar" style="height:8px"></span><span class="ml-rec__bar" style="height:17px"></span><span class="ml-rec__bar" style="height:26px"></span><span class="ml-rec__bar" style="height:35px"></span><span class="ml-rec__bar" style="height:16px"></span><span class="ml-rec__bar" style="height:25px"></span><span class="ml-rec__bar" style="height:34px"></span><span class="ml-rec__bar" style="height:15px"></span><span class="ml-rec__bar" style="height:24px"></span><span class="ml-rec__bar" style="height:33px"></span><span class="ml-rec__bar" style="height:14px"></span><span class="ml-rec__bar" style="height:23px"></span><span class="ml-rec__bar" style="height:32px"></span><span class="ml-rec__bar" style="height:13px"></span><span class="ml-rec__bar" style="height:22px"></span><span class="ml-rec__bar" style="height:31px"></span><span class="ml-rec__bar" style="height:12px"></span><span class="ml-rec__bar" style="height:21px"></span><span class="ml-rec__bar" style="height:30px"></span><span class="ml-rec__bar" style="height:11px"></span><span class="ml-rec__bar" style="height:20px"></span><span class="ml-rec__bar" style="height:29px"></span><span class="ml-rec__bar" style="height:10px"></span><span class="ml-rec__bar" style="height:19px"></span></div>
     <div class="ml-rec__acts">
@@ -2284,7 +2284,7 @@
     
     <div class="g-demo"><div class="ml-success" style="max-width:280px">
     <span class="ml-success__mark"><span class="ml-success__ring"></span><span class="ml-success__tick"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span></span>
-    <h4 style="margin:0;font-family:var(--font-display);font-size:var(--type-3);font-weight:700">Booking confirmed</h4>
+    <h4 style="margin:0;font-family:var(--font-display);font-size:var(--type-3);font-weight:var(--weight-3)">Booking confirmed</h4>
     <p class="ml-type-2" style="color:var(--color-muted);margin:0">Yash Raj Sound Studios · Sat, 4 PM</p>
   </div></div>
     <details class="g-sel"><summary>4 selectors</summary>
@@ -2421,7 +2421,7 @@
     </p>
   </div>
 
-  <h2 class="g-h" id="patterns">Patterns · 55</h2>
+  <h2 class="g-h" id="patterns">Patterns · 66</h2>
   <p class="ml-lede" style="max-width:64ch">
     Composed patterns are <b>real screens</b>, not mockups — every one below is
     live under <code>/preview</code> and built from the components above. Listed
@@ -2572,11 +2572,40 @@
   </section>
   <section class="g-comp">
     <div class="g-comp__head"><h3>Marketplace — Buy/Sell/Rent</h3>
-      <span class="g-file">flow 7 · 1 on the system</span></div>
+      <span class="g-file">flow 7 · 8 on the system</span></div>
     <div class="g-demo"><div class="g-patterns">
       <a class="g-pattern" href="/preview/flows/marketplace/marketplace_browse">
         <b>Creator Marketplace (browse)</b>
-        <span>8 states · default, empty, sale</span></a>
+        <span>8 states · default, empty, sale</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_item_detail">
+        <b>Listing Detail</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_saved_bookmarks">
+        <b>Saved &amp; Favorites — Marketplace tab</b>
+        <span>3 states · grid, list, empty</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_search_filters">
+        <b>Market Search / Category / Filters / Sort</b>
+        <span>2 states · default, empty</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_make_offer">
+        <b>Make Offer / Negotiate</b>
+        <span>5 states · default, countered, accepted</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_order_status">
+        <b>Transaction / Order Status (covers both Buy and Rent lifecycles)</b>
+        <span>6 states · pending, paid, active</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_create_listing">
+        <b>Create Listing (Sell + Rent Out, shared, listingType param)</b>
+        <span>3 states · default, publishing, error</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_my_listings">
+        <b>My Listings / My Purchases / My Rentals</b>
+        <span>4 states · listings, purchases, rentals</span></a>
+    </div></div>
+  </section>
+  <section class="g-comp">
+    <div class="g-comp__head"><h3>Booking</h3>
+      <span class="g-file">flow 8 · 4 on the system</span></div>
+    <div class="g-demo"><div class="g-patterns">
+      <a class="g-pattern" href="/preview/flows/booking/search_results">
+        <b>Search Results</b>
+        <span>2 states · default, empty</span></a><a class="g-pattern" href="/preview/flows/booking/availability_calendar">
+        <b>Availability Calendar</b>
+        <span>3 states · monthly, weekly, timeline</span></a><a class="g-pattern" href="/preview/flows/booking/payment_screen">
+        <b>Payment</b>
+        <span>4 states · default, processing, error</span></a><a class="g-pattern" href="/preview/flows/booking/my_bookings">
+        <b>My Bookings</b>
+        <span>3 states · upcoming, past, cancelled</span></a>
     </div></div>
   </section>
   <section class="g-comp">
@@ -2719,10 +2748,10 @@
       Named in <code>Widget_Directory.md</code> with no matching component in the system.</p>
     <div class="ml-chip-wrap"><span class="ml-chip">RecommendedCollaboratorCard</span><span class="ml-chip">DiscoverySearchResultCard</span><span class="ml-chip">NetworkingFeed</span><span class="ml-chip">BandMembersWidget</span><span class="ml-chip">CollaboratorMatchWidget</span><span class="ml-chip">StudioVenueListItem</span><span class="ml-chip">FeaturedStudioCard</span><span class="ml-chip">StudioSpecWidget</span><span class="ml-chip">ProjectCard</span><span class="ml-chip">RecentProjectCard</span><span class="ml-chip">TrackCard</span><span class="ml-chip">AudioPodcastDemoWidget</span><span class="ml-chip">HireContactModal</span><span class="ml-chip">WhatsAppShareSheet</span></div>
 
-    <h3 style="margin:var(--space-4) 0 var(--space-2)">Screens not yet on the system · 101</h3>
+    <h3 style="margin:var(--space-4) 0 var(--space-2)">Screens not yet on the system · 90</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0">
       Still carrying local <code>&lt;style&gt;</code> blocks or pre-system markup.
-      55 of
+      66 of
       156 screens are rebuilt.</p>
 
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Token-level gaps</h3>

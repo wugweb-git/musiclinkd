@@ -182,6 +182,10 @@
       // too. Both are driven from the same data-chip declaration.
       const isTab = el.getAttribute("role") === "tab" || el.classList.contains("ml-tabs__tab");
       el.setAttribute(isTab ? "aria-selected" : "aria-pressed", on);
+      // Remove the other one. A control that carries both aria-selected and a
+      // stale aria-pressed is contradictory to a screen reader, and it can
+      // happen for real whenever an element changes role between renders.
+      el.removeAttribute(isTab ? "aria-pressed" : "aria-selected");
     }
   }
   MusicLinkd.applyState = applyState;

@@ -10,90 +10,75 @@
 <meta name="screen-json-path" content="/preview/flows/marketplace/marketplace_create_listing/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Marketplace / Create Listing</title>
+<title>MusicLinkd — Market — Create listing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-.type-toggle { display: flex; border: 1px solid var(--color-line); border-radius: var(--radius-4); overflow: hidden; }
-  .type-toggle button { flex: 1; padding: var(--space-2); background: #fff; border: none; font: 600 var(--type-2)/1 'Inter', sans-serif; color: var(--color-muted); }
-  .type-toggle button.sel { background: var(--color-ink); color: #fff; }
-  .photo-add { width: 88px; height: 88px; border: 2px dashed var(--color-line); border-radius: var(--radius-2); display: flex; align-items: center; justify-content: center; color: var(--color-muted); }
-  .field textarea { min-height: 72px; padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); border: 1px solid var(--color-line); background: #fff; font: var(--type-2) 'Inter', sans-serif; resize: none; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/marketplace/marketplace_browse/index.html" aria-label="Close" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </a>
-      <!-- MVP, shipped minimal (decided 2026-08-16): title, category, condition, price, one photo, description, publish. Full 8-step flow (gallery, location picker, preview) is Phase 2. -->
-      <span class="ml-status ml-status--info" style="margin-left:auto">MVP scope</span>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/marketplace/marketplace_my_listings/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">New listing</h1>
     </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <div id="panel-default" style="display:flex;flex-direction:column;gap:var(--space-3);">
-        <h1 style="font-size:var(--type-3);margin:0;">Create a listing</h1>
-
-        <div class="type-toggle" id="listing-type">
-          <button type="button" class="sel" data-type="sale">Sell</button>
-          <button type="button" data-type="rental">Rent Out</button>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div data-state="default">
+        <!-- Images upload; audio and video are links only. Per the media
+             decision, so no audio/video dropzone is drawn here. -->
+        <div class="ml-upload-grid">
+          <div class="ml-upload-grid__item">
+            <img src="/assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg" alt="" loading="lazy" />
+            <button class="ml-upload-grid__remove" type="button" aria-label="Remove photo"></button>
+          </div>
+          <div class="ml-upload-grid__item">
+            <img src="/assets/img/speakers/39d58e826bc4879e514030beb7c7e972.jpg" alt="" loading="lazy" />
+            <button class="ml-upload-grid__remove" type="button" aria-label="Remove photo"></button>
+          </div>
+          <div class="ml-upload-grid__item">
+            <img src="/assets/img/speakers/5d80bc64883cb1f3ea6a1296c0e459f7.jpg" alt="" loading="lazy" />
+            <button class="ml-upload-grid__remove" type="button" aria-label="Remove photo"></button>
+          </div>
+          <button class="ml-upload-grid__add" type="button" aria-label="Add photo"></button>
         </div>
-
-        <div class="photo-add"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-
-        <div class="ml-field"><label for="title">Title</label><input id="title" type="text" value="Yamaha HS8 Active Studio Monitors (Pair)" /></div>
-        <div class="ml-field"><label for="cat">Category</label>
-          <select id="cat" style="min-height:48px;border-radius:var(--radius-4);border:1px solid var(--color-line);padding:0 var(--space-3);font:var(--type-2) 'Inter',sans-serif;background:#fff;">
-            <option>Gear Sale</option><option>Gear Rental</option><option>Beats Licensing</option><option>Stems</option><option>Mixing &amp; Mastering</option><option>Creative Services</option>
-          </select>
+        <div class="ml-field" style="margin-top:var(--space-3)">
+          <label for="l-title">Title</label>
+          <input id="l-title" type="text" value="Shure SM7B Microphone" />
         </div>
-        <div class="ml-field"><label for="cond">Condition</label>
-          <select id="cond" style="min-height:48px;border-radius:var(--radius-4);border:1px solid var(--color-line);padding:0 var(--space-3);font:var(--type-2) 'Inter',sans-serif;background:#fff;">
-            <option>New</option><option selected>Like New</option><option>Good</option><option>Fair</option>
-          </select>
+        <div class="ml-field">
+          <label for="l-cat">Category</label>
+          <select id="l-cat"><option>Gear Sale</option><option>Gear Rental</option><option>Beats Licensing</option><option>Mixing & Mastering</option><option>Creative Services</option></select>
         </div>
-        <div class="ml-field"><label for="price">Price</label><input id="price" type="text" value="₹42,000" /></div>
-        <div class="ml-field"><label for="desc">Description</label><textarea id="desc">Lightly used, studio-kept. Selling to fund a room upgrade.</textarea></div>
-
-        <button type="button" class="ml-btn ml-btn--primary ml-btn--block" id="publish-btn">Publish listing</button>
+        <div class="ml-field">
+          <label for="l-price">Price (₹)</label>
+          <input id="l-price" type="text" inputmode="numeric" value="28500" />
+        </div>
+        <div class="ml-field">
+          <label for="l-desc">Description</label>
+          <textarea id="l-desc" rows="4">Cardioid dynamic, used on two album sessions.</textarea>
+        </div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=publishing">Publish listing</a>
       </div>
 
-      <div id="panel-publishing" style="display:none;text-align:center;padding-top:20vh;">
-        <span class="ml-spinner"></span>
-        <p style="color:var(--color-muted);margin-top:var(--space-3);">Publishing…</p>
+      <div class="ml-empty" data-state="publishing">
+        <span class="ml-spinner" role="status" aria-label="Publishing"></span>
+        <p class="ml-empty__body" style="margin-top:var(--space-3)">Publishing your listing…</p>
       </div>
 
-      <div id="panel-error" style="display:none;text-align:center;padding-top:15vh;">
-        <p style="color:var(--color-error);font-weight:600;">Couldn't publish this listing.</p>
-        <p style="color:var(--color-muted);font-size:var(--type-1);margin-top:var(--space-1);">Check your connection and try again.</p>
+      <div data-state="error">
+        <div class="ml-banner ml-banner--error">
+          <span class="ml-banner__body">Couldn't publish — the price field must be a whole number.</span>
+        </div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Back to the form</a>
       </div>
     </main>
-    <footer class="app-bottombar"></footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    document.getElementById("listing-type").addEventListener("click", (e) => {
-      const btn = e.target.closest("button");
-      if (!btn) return;
-      document.querySelectorAll("#listing-type button").forEach((b) => b.classList.remove("sel"));
-      btn.classList.add("sel");
-    });
-    document.addEventListener("musiclinkd:screen-ready", () => {
-      const state = window.MusicLinkd.currentState;
-      if (state === "publishing") {
-        document.getElementById("panel-default").style.display = "none";
-        document.getElementById("panel-publishing").style.display = "block";
-      } else if (state === "error") {
-        document.getElementById("panel-default").style.display = "none";
-        document.getElementById("panel-error").style.display = "block";
-      }
-    });
-    document.getElementById("publish-btn")?.addEventListener("click", () => {
-      window.location.href = "/preview/flows/marketplace/marketplace_browse/index.html";
-    });
-  </script>
 </body>
 </html>
