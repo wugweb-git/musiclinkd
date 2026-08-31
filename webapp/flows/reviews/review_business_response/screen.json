@@ -8,7 +8,8 @@
   "screenTitle": "Business Response to Review",
   "screenOrder": 9,
   "states": [
-    "default"
+    "default",
+    "posted"
   ],
   "collectionsTouched": [],
   "notes": "Business owner replies to a review. Writes to the same local Room table as write_review, not Firestore.",

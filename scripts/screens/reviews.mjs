@@ -24,14 +24,15 @@
  * No new CSS: .ml-rating, .ml-review-card, .ml-progress, .ml-kpi,
  * .ml-stat-grid, .ml-field, .ml-choice and .ml-empty already exist.
  */
-import { writeScreen, backArrow, icon, assertIcons, finish, media } from "../write-screen.mjs";
+import { writeScreen, backArrow, icon, assertIcons, beta, finish, media } from "../write-screen.mjs";
 
 const P = "/preview/flows/reviews/";
 assertIcons(["star", "arrow-forward"]);
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-2" style="margin:0">${title}</h1>
+      <h1 class="ml-type-2" style="margin:0;flex:1">${title}</h1>
+      ${beta}
     </header>`;
 
 /* A star row that is an INPUT, not a readout: five buttons carrying
@@ -168,6 +169,44 @@ writeScreen({
         <p class="ml-empty__body">Reviews appear here once you've finished a session, a project or an order together.</p>
         <a class="ml-btn ml-btn--primary" href="${P}write_review/index.html">Write a review</a>
       </div>
+
+      <!-- A review is tied to a real interaction, so the REQUEST is tied to one
+           too: it names the session it is about. The brief forbids a generic
+           social rating system, and this is where that starts. -->
+      <div data-state="request">
+        <div class="ml-inset ml-inset--raised" style="padding:var(--space-3)">
+          <h2 class="ml-type-3" style="margin:0 0 var(--space-1)">How was your session?</h2>
+          <p class="ml-type-2" style="color:var(--color-muted);margin:0">
+            Yash Raj Sound Studios, Tracking Room 1 — Wednesday 12 August.
+          </p>
+          <div style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
+            <a class="ml-btn ml-btn--secondary" style="flex:1" href="?state=default">Not now</a>
+            <a class="ml-btn ml-btn--primary" style="flex:1" href="${P}studio_facility_review/index.html">Leave a review</a>
+          </div>
+        </div>
+      </div>
+
+      <div data-state="reminder">
+        <div class="ml-banner ml-banner--info">
+          <span class="ml-banner__body">
+            One review still to leave, from your session on 12 August.
+            <a class="ml-link" href="${P}studio_facility_review/index.html">Write it</a>
+          </span>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
+          We ask once, and once more a week later. After that we stop.
+        </p>
+      </div>
+
+      <div data-state="pending_moderation">
+        <div class="ml-banner ml-banner--warning">
+          <span class="ml-banner__body">Your review is being checked before it appears.</span>
+        </div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+          This happens when a review is reported, or when it mentions a payment dispute.
+          It usually takes a day. Nobody else can see it in the meantime.
+        </p>
+      </div>
     </main>
   </div>`,
 });
@@ -302,6 +341,49 @@ writeScreen({
         <span class="ml-choice__meta">If it breaks the guidelines</span></span>
         ${icon("arrow-forward", { size: 18 })}
       </a>
+      <a class="ml-action-row" href="?state=edit">
+        <span class="ml-choice__body"><span class="ml-choice__title">Edit your review</span>
+        <span class="ml-choice__meta">Within 48 hours of posting</span></span>
+        ${icon("arrow-forward", { size: 18 })}
+      </a>
+
+      <!-- Editing is time-boxed and the edit is disclosed, so a review cannot
+           be quietly rewritten after the fact. -->
+      <div data-state="edit">
+        <div class="ml-section"><h2>Edit your review</h2></div>
+        <div class="ml-field">
+          <label for="e-body">Your review</label>
+          <textarea id="e-body" rows="4">Quiet live room and a patient engineer. Got three vocal takes done inside a morning.</textarea>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
+          Edited reviews are marked "edited" with the date. You can edit for 48 hours after posting.
+        </p>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Save changes</a>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=delete">Delete this review instead</a>
+      </div>
+
+      <div data-state="delete">
+        <div class="ml-banner ml-banner--error">
+          <span class="ml-banner__body">Delete your review?</span>
+        </div>
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>The studio's rating</span><span>Recalculated without it</span></div>
+          <div class="ml-summary__row"><span>Their reply</span><span>Deleted with it</span></div>
+          <div class="ml-summary__row"><span>Writing another</span><span>Not possible for this session</span></div>
+        </div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="${P}review_list/index.html">Delete review</a>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=default">Keep it</a>
+      </div>
+
+      <div data-state="reported">
+        <div class="ml-banner ml-banner--warning">
+          <span class="ml-banner__body">This review has been reported and is being checked.</span>
+        </div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+          It stays visible while we look at it. A review is only removed if it breaks the
+          guidelines — not because it is critical.
+        </p>
+      </div>
     </main>
   </div>`,
 });
@@ -320,7 +402,13 @@ writeScreen({
       <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
         One reply per review, shown publicly under it. It can't be edited once posted.
       </p>
-      <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="${P}review_detail/index.html">Post reply</a>
+      <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=posted">Post reply</a>
+
+      <div class="ml-empty" data-state="posted">
+        <h2 class="ml-empty__title" style="color:var(--color-success)">Reply posted</h2>
+        <p class="ml-empty__body">It appears under the review, on your public profile. It can't be edited.</p>
+        <a class="ml-btn ml-btn--primary" href="${P}reputation_dashboard/index.html">Back to reputation</a>
+      </div>
     </main>
   </div>`,
 });
@@ -347,7 +435,16 @@ writeScreen({
         <label for="rr-body">Anything else?</label>
         <textarea id="rr-body" rows="4" placeholder="Optional."></textarea>
       </div>
-      <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="${P}review_detail/index.html">Report review</a>
+      <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=submitted">Report review</a>
+
+      <div class="ml-empty" data-state="submitted">
+        <h2 class="ml-empty__title">Report received</h2>
+        <p class="ml-empty__body">
+          We'll check it against the guidelines. The review stays visible while we do,
+          and the reviewer is not told who reported it.
+        </p>
+        <a class="ml-btn ml-btn--primary" href="${P}review_detail/index.html">Back to the review</a>
+      </div>
     </main>
   </div>`,
 });

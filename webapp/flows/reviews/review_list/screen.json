@@ -9,7 +9,10 @@
   "screenOrder": 2,
   "states": [
     "default",
-    "empty"
+    "empty",
+    "pending_moderation",
+    "request",
+    "reminder"
   ],
   "collectionsTouched": [],
   "notes": "ReputationSubScreen.REVIEW_LIST. Reads whatever the module's local Room table holds (the same store write_review/etc. write to below) — not the real `reviews` Firestore collection the admin ReviewDoc schema targets.",

@@ -8,7 +8,10 @@
   "screenTitle": "Review Detail",
   "screenOrder": 3,
   "states": [
-    "default"
+    "default",
+    "edit",
+    "delete",
+    "reported"
   ],
   "collectionsTouched": [],
   "notes": "ReputationSubScreen.REVIEW_DETAIL. Single-review expanded view within the same local-Room-backed module.",

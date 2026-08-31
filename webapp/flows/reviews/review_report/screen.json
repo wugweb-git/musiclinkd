@@ -8,7 +8,8 @@
   "screenTitle": "Report Review",
   "screenOrder": 10,
   "states": [
-    "default"
+    "default",
+    "submitted"
   ],
   "collectionsTouched": [],
   "notes": "Dispute/report a review. Fully no-op UI, no persistence.",

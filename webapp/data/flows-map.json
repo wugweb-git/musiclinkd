@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T04:57:08.490Z",
+  "generatedAt": "2026-08-31T05:14:27.439Z",
   "flows": [
     {
       "key": "home",
@@ -6272,7 +6272,10 @@
       "screenOrder": 2,
       "states": [
         "default",
-        "empty"
+        "empty",
+        "pending_moderation",
+        "request",
+        "reminder"
       ],
       "collectionsTouched": [],
       "notes": "ReputationSubScreen.REVIEW_LIST. Reads whatever the module's local Room table holds (the same store write_review/etc. write to below) — not the real `reviews` Firestore collection the admin ReviewDoc schema targets.",
@@ -6288,7 +6291,10 @@
       "screenTitle": "Review Detail",
       "screenOrder": 3,
       "states": [
-        "default"
+        "default",
+        "edit",
+        "delete",
+        "reported"
       ],
       "collectionsTouched": [],
       "notes": "ReputationSubScreen.REVIEW_DETAIL. Single-review expanded view within the same local-Room-backed module.",
@@ -6391,7 +6397,8 @@
       "screenTitle": "Business Response to Review",
       "screenOrder": 9,
       "states": [
-        "default"
+        "default",
+        "posted"
       ],
       "collectionsTouched": [],
       "notes": "Business owner replies to a review. Writes to the same local Room table as write_review, not Firestore.",
@@ -6407,7 +6414,8 @@
       "screenTitle": "Report Review",
       "screenOrder": 10,
       "states": [
-        "default"
+        "default",
+        "submitted"
       ],
       "collectionsTouched": [],
       "notes": "Dispute/report a review. Fully no-op UI, no persistence.",

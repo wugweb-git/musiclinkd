@@ -26,7 +26,8 @@
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/reviews/review_detail/index.html" aria-label="Back">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
         </a>
-      <h1 class="ml-type-2" style="margin:0">Reply publicly</h1>
+      <h1 class="ml-type-2" style="margin:0;flex:1">Reply publicly</h1>
+      <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <article class="ml-review-card">
@@ -44,7 +45,13 @@
       <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
         One reply per review, shown publicly under it. It can't be edited once posted.
       </p>
-      <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/reviews/review_detail/index.html">Post reply</a>
+      <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=posted">Post reply</a>
+
+      <div class="ml-empty" data-state="posted">
+        <h2 class="ml-empty__title" style="color:var(--color-success)">Reply posted</h2>
+        <p class="ml-empty__body">It appears under the review, on your public profile. It can't be edited.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/reviews/reputation_dashboard/index.html">Back to reputation</a>
+      </div>
     </main>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

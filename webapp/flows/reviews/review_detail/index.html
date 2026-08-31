@@ -26,7 +26,8 @@
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/reviews/review_list/index.html" aria-label="Back">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
         </a>
-      <h1 class="ml-type-2" style="margin:0">Review</h1>
+      <h1 class="ml-type-2" style="margin:0;flex:1">Review</h1>
+      <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <article class="ml-review-card">
@@ -55,6 +56,49 @@
         <span class="ml-choice__meta">If it breaks the guidelines</span></span>
         <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
       </a>
+      <a class="ml-action-row" href="?state=edit">
+        <span class="ml-choice__body"><span class="ml-choice__title">Edit your review</span>
+        <span class="ml-choice__meta">Within 48 hours of posting</span></span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+
+      <!-- Editing is time-boxed and the edit is disclosed, so a review cannot
+           be quietly rewritten after the fact. -->
+      <div data-state="edit">
+        <div class="ml-section"><h2>Edit your review</h2></div>
+        <div class="ml-field">
+          <label for="e-body">Your review</label>
+          <textarea id="e-body" rows="4">Quiet live room and a patient engineer. Got three vocal takes done inside a morning.</textarea>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
+          Edited reviews are marked "edited" with the date. You can edit for 48 hours after posting.
+        </p>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Save changes</a>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=delete">Delete this review instead</a>
+      </div>
+
+      <div data-state="delete">
+        <div class="ml-banner ml-banner--error">
+          <span class="ml-banner__body">Delete your review?</span>
+        </div>
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>The studio's rating</span><span>Recalculated without it</span></div>
+          <div class="ml-summary__row"><span>Their reply</span><span>Deleted with it</span></div>
+          <div class="ml-summary__row"><span>Writing another</span><span>Not possible for this session</span></div>
+        </div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/reviews/review_list/index.html">Delete review</a>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=default">Keep it</a>
+      </div>
+
+      <div data-state="reported">
+        <div class="ml-banner ml-banner--warning">
+          <span class="ml-banner__body">This review has been reported and is being checked.</span>
+        </div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+          It stays visible while we look at it. A review is only removed if it breaks the
+          guidelines — not because it is critical.
+        </p>
+      </div>
     </main>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
