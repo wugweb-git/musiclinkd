@@ -2,127 +2,64 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<!-- viewport-fit=cover is what makes env(safe-area-inset-*) resolve to real
-     values instead of 0 on notched/gesture-bar devices — without it the
-     safe-area CSS in app-shell.css is a no-op. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<!--
-  All resource paths below are ABSOLUTE (/preview/...), not relative. This
-  build is deployed at musiclinkd.com/preview, and Firebase Hosting's
-  cleanUrls+trailingSlash:false config means a page at .../flows/auth/splash
-  has NO trailing slash — the browser then resolves relative "./x"/"../x"
-  paths against the WRONG base (one level too shallow), silently breaking
-  screen.json/CSS/JS loads. Absolute paths sidestep that entirely. If this
-  ever moves to a different mount point, update MOUNT_BASE in
-  shared/app-shell.js and the paths below together.
--->
+<meta name="screen-json-path" content="/preview/flows/band/ensemble_lineup/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<meta name="screen-json-path" content="/preview/flows/band/ensemble_lineup/screen.json" />
-<title>MusicLinkd — Band / Ensemble Lineup Display</title>
+<title>MusicLinkd — Band — Line-up</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
-<!-- app-shell.css = native ENVIRONMENT (safe-area, viewport, keyboard).
-     tokens.css = the real MusicLinkd VISUAL design system (colors, type,
-     .btn/.field/.otp-box components) — copied verbatim from
-     frontend/guide/styleguide.html. Both compose on every screen. -->
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<!--
-  THIS FILE IS A TEMPLATE, NOT A DESIGNED SCREEN.
-  It exists to prove out the native-app environment (safe areas, fixed
-  viewport, keyboard awareness, bottom-sheet mechanics, offline shell,
-  standalone display mode) plus the real design tokens/components, so a
-  real screen only has to compose them — copy this file into a
-  flows/<flow>/<screen>/ folder (every real screen folder already has one,
-  generated alongside its screen.json) and replace the placeholder regions
-  below. If you copy it manually (rather than letting the generator
-  scaffold it), also add
-  <meta name="screen-json-path" content="/preview/flows/<flow>/<screen>/screen.json" />
-  next to the other meta tags — without it the dev badge falls back to a
-  relative "./screen.json" fetch, which has the same trailing-slash problem
-  described above.
-
-  ARTBOARD SIZING: .app-root fills 100dvh x 100% of whatever viewport it's
-  in, edge-to-edge — the same approach a real installed PWA/native app
-  uses (there's no fixed "canvas size" on a phone). No desktop max-width
-  cap here on purpose: for reviewing on a desktop browser inside a proper
-  phone-frame, use the workbench at /preview/index.html instead of opening
-  a screen standalone — that's where the phone-frame chrome lives, not
-  baked into every individual screen.
--->
 </head>
 <body>
-  <div class="app-root">
 
-    <!-- Fixed top region — safe-area top padding baked in via app-shell.css.
-         Real back button + screen title (filled from screen.json below),
-         not empty. When copied into flows/<flow>/<screen>/, replace this
-         whole header with the screen's actual top bar. -->
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="javascript:history.back()" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;flex:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-      <span id="tpl-title" style="font-size:var(--type-2);font-weight:600;margin-left:var(--space-2);"></span>
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/band/band_profile_layout/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Line-up</h1>
     </header>
-
-    <!-- Main content — scrolls only if you add .app-content--scroll.
-         Most single-purpose screens (a form, a splash, a confirmation)
-         should NOT scroll; add the modifier only for feeds/lists/long forms.
-
-         This "not yet designed" body is what every one of the 103 screens
-         still on this raw template shows today. Real content replaces it
-         screen by screen; until then it should look like an on-brand
-         placeholder state, not a blank page with a stray dev button. -->
-    <main class="app-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 var(--space-4);gap:var(--space-3);">
-      <div style="width:64px;height:64px;border-radius:var(--radius-2);background:var(--color-surface);display:flex;align-items:center;justify-content:center;color:var(--color-muted);">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div class="ml-person-row">
+        <img src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
+        <span class="meta"><b>Ishita Rao</b><p>Vocals</p></span>
+        <button class="ml-icon-btn ml-icon-btn--muted" type="button" aria-label="Remove Ishita Rao"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m15.18 12 7.16-7.16a2.25 2.25 0 1 0-3.18-3.18L12 8.82 4.84 1.66a2.25 2.25 0 1 0-3.18 3.18L8.82 12l-7.16 7.16a2.25 2.25 0 1 0 3.18 3.18L12 15.18l7.16 7.16a2.24 2.24 0 0 0 3.18 0c.88-.88.88-2.3 0-3.18z"/></svg></button>
       </div>
-      <div>
-        <div id="tpl-flowkey" style="font-size:var(--type-1);color:var(--color-muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600;"></div>
-        <h1 id="tpl-heading" style="font-size:var(--type-3);margin:var(--space-1) 0 0;">Not designed yet</h1>
-        <p style="color:var(--color-muted);font-size:var(--type-2);margin-top:var(--space-1);max-width:280px;">This screen is scaffolded (real flow/schema data is wired up) but hasn't had a UI pass. Read <code>window.MusicLinkd.screen</code> for its data contract.</p>
+      <div class="ml-person-row">
+        <img src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
+        <span class="meta"><b>Kabir Sheth</b><p>Guitar</p></span>
+        <button class="ml-icon-btn ml-icon-btn--muted" type="button" aria-label="Remove Kabir Sheth"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m15.18 12 7.16-7.16a2.25 2.25 0 1 0-3.18-3.18L12 8.82 4.84 1.66a2.25 2.25 0 1 0-3.18 3.18L8.82 12l-7.16 7.16a2.25 2.25 0 1 0 3.18 3.18L12 15.18l7.16 7.16a2.24 2.24 0 0 0 3.18 0c.88-.88.88-2.3 0-3.18z"/></svg></button>
+      </div>
+      <div class="ml-person-row">
+        <img src="/assets/img/editorials/3dee9cb6252a4c8f8a149c9fd40d4a9e.jpg" alt="" loading="lazy" />
+        <span class="meta"><b>Meera Nair</b><p>Bass</p></span>
+        <button class="ml-icon-btn ml-icon-btn--muted" type="button" aria-label="Remove Meera Nair"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m15.18 12 7.16-7.16a2.25 2.25 0 1 0-3.18-3.18L12 8.82 4.84 1.66a2.25 2.25 0 1 0-3.18 3.18L8.82 12l-7.16 7.16a2.25 2.25 0 1 0 3.18 3.18L12 15.18l7.16 7.16a2.24 2.24 0 0 0 3.18 0c.88-.88.88-2.3 0-3.18z"/></svg></button>
+      </div>
+      <div class="ml-person-row">
+        <img src="/assets/img/editorials/4b18ab6b2f209a6f51a9d38de6d3f07f.jpg" alt="" loading="lazy" />
+        <span class="meta"><b>Rohan D'Souza</b><p>Drums</p></span>
+        <button class="ml-icon-btn ml-icon-btn--muted" type="button" aria-label="Remove Rohan D'Souza"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m15.18 12 7.16-7.16a2.25 2.25 0 1 0-3.18-3.18L12 8.82 4.84 1.66a2.25 2.25 0 1 0-3.18 3.18L8.82 12l-7.16 7.16a2.25 2.25 0 1 0 3.18 3.18L12 15.18l7.16 7.16a2.24 2.24 0 0 0 3.18 0c.88-.88.88-2.3 0-3.18z"/></svg></button>
       </div>
 
-      <!-- Example bottom-sheet trigger — structural reference only for the
-           sheet mechanics in app-shell.css; remove once this screen is
-           actually designed and doesn't need it. -->
-      <button type="button" class="ml-btn ml-btn--secondary" data-open-sheet="example-sheet">Open example sheet</button>
+      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Depping</h2></div>
+      <div class="ml-person-row">
+        <img src="/assets/img/editorials/59aa1e490d7f7be8bd6b98e8b9645d31.jpg" alt="" loading="lazy" />
+        <span class="meta"><b>Priya Iyer</b><p>Keys · covers 18 Aug</p></span>
+      </div>
     </main>
-
-    <!-- Fixed bottom region — safe-area bottom padding baked in. Auto-hides
-         when the keyboard opens (see .is-keyboard-open in app-shell.css) so
-         it never floats above the keyboard on top of your inputs. -->
-    <footer class="app-bottombar">
-      <!-- TODO: design system bottom bar / CTA goes here -->
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/communication/collaborators_tab/index.html">Add a member</a>
     </footer>
   </div>
-  <script>
-    // Fills the topbar title + flow-key eyebrow from this screen's real
-    // screen.json once app-shell.js loads it — no hardcoded screen name in
-    // this shared template. Falls back to the raw pathname if screen.json
-    // 404s (e.g. this file opened directly, outside /flows/).
-    document.addEventListener("musiclinkd:screen-ready", (e) => {
-      const data = e.detail || {};
-      document.getElementById("tpl-title").textContent = data.screenTitle ?? "";
-      document.getElementById("tpl-heading").textContent = data.screenTitle ? `${data.screenTitle} — not designed yet` : "Not designed yet";
-      document.getElementById("tpl-flowkey").textContent = data.flowTitle ?? "";
-    });
-  </script>
-
-  <!-- Example bottom sheet — structural mechanics only (open/close, drag-down
-       transition, safe-area padding). Style its contents with your design system. -->
-  <div class="sheet-scrim" data-sheet-scrim-for="example-sheet"></div>
-  <div class="sheet" id="example-sheet" style="background:var(--color-white);border-radius:var(--radius-3) var(--radius-3) 0 0;padding:var(--space-4);">
-    <p>Example bottom sheet content.</p>
-    <button type="button" class="ml-btn ml-btn--primary ml-btn--block" data-close-sheet="example-sheet">Close</button>
-  </div>
-
   <script src="/preview/shared/app-shell.js" defer></script>
 </body>
 </html>

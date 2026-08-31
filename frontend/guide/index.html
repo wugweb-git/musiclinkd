@@ -112,7 +112,7 @@
   <li><a href="#core">Core · 39</a></li>
   <li><a href="#widgets">Widgets · 94</a></li>
   <li><a href="#motion">Motion</a></li>
-  <li><a href="#patterns">Patterns · 128</a></li>
+  <li><a href="#patterns">Patterns · 156</a></li>
   <li><a href="#icons">Icons · 423</a></li>
   <li><a href="#taxonomy">Taxonomy · 18</a></li>
   <li><a href="#gaps">Gaps</a></li>
@@ -175,6 +175,10 @@
     </figure>
   </div>
 
+  <h3 style="margin-top:var(--space-4)">Positioning</h3>
+  <p class="ml-type-3" style="max-width:var(--layout-measure);font-family:var(--font-display);font-weight:var(--weight-3)">
+    Where talent meets opportunity.</p>
+
   <h3 style="margin-top:var(--space-4)">Logo usage</h3>
   <ul class="ml-lede" style="max-width:64ch">
     <li>Use real artist and business photography rather than initials, emoji, or illustrated avatars.</li><li>Keep source assets and exported delivery assets clearly named.</li><li>Place a mark on the ground it was drawn for — the on-dark lockups lose their counters on paper.</li><li>The wordmark set in Inter Tight (.ml-wordmark) is a type treatment, not a substitute for the artwork.</li>
@@ -182,6 +186,26 @@
 
   <h3 style="margin-top:var(--space-4)">Voice</h3>
   <p class="ml-lede" style="max-width:64ch"><b>Clear, confident, creative, and professional. Avoid hype and generic marketplace language.</b></p>
+
+  <h3 style="margin-top:var(--space-4)">Colour roles</h3>
+  <p class="ml-lede ml-measure">Which colour means what. A value alone does not
+    say whether it is allowed on a primary button — this does, and it is the
+    rule the old catalogue carried that the rebuild had not.</p>
+  <table class="g-t"><thead><tr><th>Role</th><th>Token</th><th>Use</th></tr></thead><tbody>
+    <tr>
+      <th><span class="g-chipcol" style="background:var(--color-pink);vertical-align:middle"></span> Brand</th>
+      <td><code>--color-pink</code></td><td>The brand signal. Intent, selection-in-progress, the one accent on a screen.</td></tr><tr>
+      <th><span class="g-chipcol" style="background:var(--color-ink);vertical-align:middle"></span> Primary</th>
+      <td><code>--color-ink</code></td><td>Every primary action and committed state. Black is the primary button, not pink.</td></tr><tr>
+      <th><span class="g-chipcol" style="background:var(--color-paper);vertical-align:middle"></span> Ground</th>
+      <td><code>--color-paper</code></td><td>Page ground. Chrome stays monochrome so media carries all saturation.</td></tr>
+  </tbody></table>
+  <p class="ml-type-1" style="color:var(--color-muted);max-width:var(--layout-measure);margin-top:var(--space-2)">
+    The v4 rule also read <b>“Purple = badges only.”</b> There is no purple in
+    the palette and no component uses one, so that rule named a colour the
+    system does not have; badges use the status colours or
+    <code>--color-ink</code>. Recorded rather than dropped silently — a rule
+    that vanishes with no reason is how two colour books happened.</p>
 
   <h3 style="margin-top:var(--space-4)">Typeface &amp; weights</h3>
   <div class="g-demo">
@@ -3132,7 +3156,7 @@
     </p>
   </div>
 
-  <h2 class="g-h" id="patterns">Patterns · 128</h2>
+  <h2 class="g-h" id="patterns">Patterns · 156</h2>
   <p class="ml-lede" style="max-width:64ch">
     Composed patterns are <b>real screens</b>, not mockups — every one below is
     live under <code>/preview</code> and built from the components above. Listed
@@ -3401,6 +3425,59 @@
     </div></div>
   </section>
   <section class="g-comp">
+    <div class="g-comp__head"><h3>Services, Availability</h3>
+      <span class="g-file">flow 11 · 5 on the system</span></div>
+    <div class="g-demo"><div class="g-patterns">
+      <a class="g-pattern" href="/preview/flows/services_availability/availability_toggle">
+        <b>Availability Toggle (Talent)</b>
+        <span>5 states · available_now, open_for_gigs, booked_soon</span></a><a class="g-pattern" href="/preview/flows/services_availability/service_offerings_editor">
+        <b>Service Offerings Editor (Business)</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/services_availability/studio_services_amenities">
+        <b>Studio Services &amp; Amenities</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/services_availability/rate_pricing_editor">
+        <b>Rate / Pricing Editor</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/services_availability/session_configuration">
+        <b>Session Configuration (booking-side service selection)</b>
+        <span>1 state · default</span></a>
+    </div></div>
+  </section>
+  <section class="g-comp">
+    <div class="g-comp__head"><h3>Business Profiles (Studios, Labels)</h3>
+      <span class="g-file">flow 12 · 7 on the system</span></div>
+    <div class="g-demo"><div class="g-patterns">
+      <a class="g-pattern" href="/preview/flows/business_profiles/business_overview">
+        <b>Overview</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_services_tab">
+        <b>Services Tab</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_equipment_tab">
+        <b>Equipment Tab</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_team_tab">
+        <b>Team &amp; Works Tab</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_reviews_gallery_tab">
+        <b>Reviews &amp; Gallery Tab</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_book_now">
+        <b>Book Now (CTA)</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_owner_insights">
+        <b>Owner Mode / Business Insights</b>
+        <span>1 state · visible_if_owner</span></a>
+    </div></div>
+  </section>
+  <section class="g-comp">
+    <div class="g-comp__head"><h3>Notifications</h3>
+      <span class="g-file">flow 13 · 4 on the system</span></div>
+    <div class="g-demo"><div class="g-patterns">
+      <a class="g-pattern" href="/preview/flows/notifications/notifications_center">
+        <b>Notifications Center</b>
+        <span>6 states · loading, empty, populated</span></a><a class="g-pattern" href="/preview/flows/notifications/notification_settings">
+        <b>Notification Settings (in Notifications Center)</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/notifications/notification_preferences_onboarding">
+        <b>Notification Preferences (onboarding step)</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/notifications/notification_feeds_settings">
+        <b>Notification Feeds (general Settings tab)</b>
+        <span>1 state · default</span></a>
+    </div></div>
+  </section>
+  <section class="g-comp">
     <div class="g-comp__head"><h3>Public Profile</h3>
       <span class="g-file">flow 14 · 9 on the system</span></div>
     <div class="g-demo"><div class="g-patterns">
@@ -3423,6 +3500,28 @@
         <span>2 states · default, empty</span></a><a class="g-pattern" href="/preview/flows/public_profile/talent_services_view">
         <b>Services (public view, Talent/Band)</b>
         <span>2 states · default, empty</span></a>
+    </div></div>
+  </section>
+  <section class="g-comp">
+    <div class="g-comp__head"><h3>Band</h3>
+      <span class="g-file">flow 15 · 3 on the system</span></div>
+    <div class="g-demo"><div class="g-patterns">
+      <a class="g-pattern" href="/preview/flows/band/band_profile_layout">
+        <b>Band Profile (public view)</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/band/ensemble_lineup">
+        <b>Ensemble Lineup Display</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/band/upcoming_shows">
+        <b>Upcoming Shows List</b>
+        <span>1 state · hardcoded</span></a>
+    </div></div>
+  </section>
+  <section class="g-comp">
+    <div class="g-comp__head"><h3>Verifications</h3>
+      <span class="g-file">flow 16 · 1 on the system</span></div>
+    <div class="g-demo"><div class="g-patterns">
+      <a class="g-pattern" href="/preview/flows/verifications/verification_screen">
+        <b>Verify Professional Status</b>
+        <span>4 states · id_type_selector, govt_id_upload, gst_upload</span></a>
     </div></div>
   </section>
   <section class="g-comp">
@@ -3452,6 +3551,15 @@
         <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/reviews/public_reputation">
         <b>Public Reputation (cross-reference)</b>
         <span>1 state · default</span></a>
+    </div></div>
+  </section>
+  <section class="g-comp">
+    <div class="g-comp__head"><h3>Search</h3>
+      <span class="g-file">flow 19 · 1 on the system</span></div>
+    <div class="g-demo"><div class="g-patterns">
+      <a class="g-pattern" href="/preview/flows/search/universal_search">
+        <b>Universal Search</b>
+        <span>4 states · home, live_typing, results</span></a>
     </div></div>
   </section>
   <section class="g-comp">
@@ -3485,6 +3593,41 @@
         <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/user_settings/app_version">
         <b>App Version / About</b>
         <span>1 state · default</span></a>
+    </div></div>
+  </section>
+  <section class="g-comp">
+    <div class="g-comp__head"><h3>CMS Pages</h3>
+      <span class="g-file">flow 22 · 5 on the system</span></div>
+    <div class="g-demo"><div class="g-patterns">
+      <a class="g-pattern" href="/preview/flows/cms_pages/marketing_homepage">
+        <b>Marketing Homepage</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/cms_pages/about_pricing_careers">
+        <b>About / Pricing / Careers</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/cms_pages/legal_pages_site">
+        <b>Legal Pages (site)</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/cms_pages/blog_changelog">
+        <b>Blog / Changelog</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/cms_pages/admin_pages_editor">
+        <b>Admin Pages Editor</b>
+        <span>1 state · default</span></a>
+    </div></div>
+  </section>
+  <section class="g-comp">
+    <div class="g-comp__head"><h3>QR Code &amp; Profile Sharing</h3>
+      <span class="g-file">flow 23 · 1 on the system</span></div>
+    <div class="g-demo"><div class="g-patterns">
+      <a class="g-pattern" href="/preview/flows/qr_share/qr_share_flow">
+        <b>QR Code &amp; Comp Card Sharing</b>
+        <span>3 states · home, options, preview</span></a>
+    </div></div>
+  </section>
+  <section class="g-comp">
+    <div class="g-comp__head"><h3>Saved &amp; Favorites</h3>
+      <span class="g-file">flow 24 · 1 on the system</span></div>
+    <div class="g-demo"><div class="g-patterns">
+      <a class="g-pattern" href="/preview/flows/saved_favorites/saved_favorites_hub">
+        <b>Saved &amp; Favorites Hub</b>
+        <span>7 states · artists, bands, studios</span></a>
     </div></div>
   </section>
 
@@ -3618,10 +3761,10 @@
       Named in <code>Widget_Directory.md</code> with no matching component in the system.</p>
     <div class="ml-chip-wrap"></div>
 
-    <h3 style="margin:var(--space-4) 0 var(--space-2)">Screens not yet on the system · 28</h3>
+    <h3 style="margin:var(--space-4) 0 var(--space-2)">Screens not yet on the system · 0</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0">
       Still carrying local <code>&lt;style&gt;</code> blocks or pre-system markup.
-      128 of
+      156 of
       156 screens are rebuilt.</p>
 
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Token-level gaps</h3>

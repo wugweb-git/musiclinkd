@@ -1455,6 +1455,10 @@ const html = `<!doctype html>
     </figure>`).join("")}
   </div>
 
+  <h3 style="margin-top:var(--space-4)">Positioning</h3>
+  <p class="ml-type-3" style="max-width:var(--layout-measure);font-family:var(--font-display);font-weight:var(--weight-3)">
+    ${esc(tokens.brand.positioning)}</p>
+
   <h3 style="margin-top:var(--space-4)">Logo usage</h3>
   <ul class="ml-lede" style="max-width:64ch">
     ${tokens.brand.logoRules.map((r) => `<li>${esc(r)}</li>`).join("")}
@@ -1462,6 +1466,22 @@ const html = `<!doctype html>
 
   <h3 style="margin-top:var(--space-4)">Voice</h3>
   <p class="ml-lede" style="max-width:64ch"><b>${esc(tokens.brand.voice)}</b></p>
+
+  <h3 style="margin-top:var(--space-4)">Colour roles</h3>
+  <p class="ml-lede ml-measure">Which colour means what. A value alone does not
+    say whether it is allowed on a primary button — this does, and it is the
+    rule the old catalogue carried that the rebuild had not.</p>
+  <table class="g-t"><thead><tr><th>Role</th><th>Token</th><th>Use</th></tr></thead><tbody>
+    ${tokens.brand.colourRoles.map((r) => `<tr>
+      <th><span class="g-chipcol" style="background:var(${r.token});vertical-align:middle"></span> ${esc(r.role)}</th>
+      <td><code>${r.token}</code></td><td>${esc(r.use)}</td></tr>`).join("")}
+  </tbody></table>
+  <p class="ml-type-1" style="color:var(--color-muted);max-width:var(--layout-measure);margin-top:var(--space-2)">
+    The v4 rule also read <b>“Purple = badges only.”</b> There is no purple in
+    the palette and no component uses one, so that rule named a colour the
+    system does not have; badges use the status colours or
+    <code>--color-ink</code>. Recorded rather than dropped silently — a rule
+    that vanishes with no reason is how two colour books happened.</p>
 
   <h3 style="margin-top:var(--space-4)">Typeface &amp; weights</h3>
   <div class="g-demo">

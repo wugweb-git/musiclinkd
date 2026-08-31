@@ -2,127 +2,120 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<!-- viewport-fit=cover is what makes env(safe-area-inset-*) resolve to real
-     values instead of 0 on notched/gesture-bar devices — without it the
-     safe-area CSS in app-shell.css is a no-op. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<!--
-  All resource paths below are ABSOLUTE (/preview/...), not relative. This
-  build is deployed at musiclinkd.com/preview, and Firebase Hosting's
-  cleanUrls+trailingSlash:false config means a page at .../flows/auth/splash
-  has NO trailing slash — the browser then resolves relative "./x"/"../x"
-  paths against the WRONG base (one level too shallow), silently breaking
-  screen.json/CSS/JS loads. Absolute paths sidestep that entirely. If this
-  ever moves to a different mount point, update MOUNT_BASE in
-  shared/app-shell.js and the paths below together.
--->
+<meta name="screen-json-path" content="/preview/flows/saved_favorites/saved_favorites_hub/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<meta name="screen-json-path" content="/preview/flows/saved_favorites/saved_favorites_hub/screen.json" />
-<title>MusicLinkd — Saved & Favorites / Saved & Favorites Hub</title>
+<title>MusicLinkd — Saved</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
-<!-- app-shell.css = native ENVIRONMENT (safe-area, viewport, keyboard).
-     tokens.css = the real MusicLinkd VISUAL design system (colors, type,
-     .btn/.field/.otp-box components) — copied verbatim from
-     frontend/guide/styleguide.html. Both compose on every screen. -->
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<!--
-  THIS FILE IS A TEMPLATE, NOT A DESIGNED SCREEN.
-  It exists to prove out the native-app environment (safe areas, fixed
-  viewport, keyboard awareness, bottom-sheet mechanics, offline shell,
-  standalone display mode) plus the real design tokens/components, so a
-  real screen only has to compose them — copy this file into a
-  flows/<flow>/<screen>/ folder (every real screen folder already has one,
-  generated alongside its screen.json) and replace the placeholder regions
-  below. If you copy it manually (rather than letting the generator
-  scaffold it), also add
-  <meta name="screen-json-path" content="/preview/flows/<flow>/<screen>/screen.json" />
-  next to the other meta tags — without it the dev badge falls back to a
-  relative "./screen.json" fetch, which has the same trailing-slash problem
-  described above.
-
-  ARTBOARD SIZING: .app-root fills 100dvh x 100% of whatever viewport it's
-  in, edge-to-edge — the same approach a real installed PWA/native app
-  uses (there's no fixed "canvas size" on a phone). No desktop max-width
-  cap here on purpose: for reviewing on a desktop browser inside a proper
-  phone-frame, use the workbench at /preview/index.html instead of opening
-  a screen standalone — that's where the phone-frame chrome lives, not
-  baked into every individual screen.
--->
 </head>
 <body>
-  <div class="app-root">
 
-    <!-- Fixed top region — safe-area top padding baked in via app-shell.css.
-         Real back button + screen title (filled from screen.json below),
-         not empty. When copied into flows/<flow>/<screen>/, replace this
-         whole header with the screen's actual top bar. -->
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="javascript:history.back()" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;flex:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-      <span id="tpl-title" style="font-size:var(--type-2);font-weight:600;margin-left:var(--space-2);"></span>
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
+      <h1 class="ml-type-3" style="margin:0">Saved</h1>
+      <span class="ml-appbar__actions">
+        <a class="ml-icon-btn ml-icon-btn--bare" data-chip="grid_view" href="?state=grid_view" aria-label="Grid view"><svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22 10h-8V2a2 2 0 0 0-4 0v8H2a2 2 0 0 0 0 4h8v8a2 2 0 0 0 4 0v-8h8a2 2 0 0 0 0-4"/></svg></a>
+        <a class="ml-icon-btn ml-icon-btn--bare" data-chip="list_view" href="?state=list_view" aria-label="List view"><svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></a>
+      </span>
     </header>
+    <nav class="ml-tabs" role="tablist" aria-label="Saved" style="margin:0 var(--space-4)">
+      <a class="ml-tabs__tab" role="tab" data-chip="artists" href="?state=artists">Artists</a><a class="ml-tabs__tab" role="tab" data-chip="bands" href="?state=bands">Bands</a><a class="ml-tabs__tab" role="tab" data-chip="studios" href="?state=studios">Studios</a><a class="ml-tabs__tab" role="tab" data-chip="marketplace" href="?state=marketplace">Market</a>
+    </nav>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <!-- Rows carry both their category AND the two view modes, so switching
+           view is a state rather than a second screen. -->
+      <a class="ml-result" data-state="artists list_view" href="/preview/flows/public_profile/public_profile_view/index.html">
+        <img class="ml-result__thumb" src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Ishita Rao</span>
+          <span class="ml-result__meta">Session vocalist · Mumbai</span>
+        </span>
+      </a>
+      <a class="ml-result" data-state="artists list_view" href="/preview/flows/public_profile/public_profile_view/index.html">
+        <img class="ml-result__thumb" src="/assets/img/editorials/3dee9cb6252a4c8f8a149c9fd40d4a9e.jpg" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Meera Nair</span>
+          <span class="ml-result__meta">Playback vocalist · Kochi</span>
+        </span>
+      </a>
+      <a class="ml-result" data-state="bands list_view" href="/preview/flows/public_profile/public_profile_view/index.html">
+        <img class="ml-result__thumb" src="/assets/img/6/05c010236455615.68ecac46e6ab2.png" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">The Kolaba Sessions</span>
+          <span class="ml-result__meta">Indie rock · Mumbai</span>
+        </span>
+      </a>
+      <a class="ml-result" data-state="studios list_view" href="/preview/flows/public_profile/public_profile_view/index.html">
+        <img class="ml-result__thumb" src="/assets/img/6/01e26955706919.598fd42d42f34.png" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Yash Raj Sound Studios</span>
+          <span class="ml-result__meta">Andheri West · ₹1,800/hr</span>
+        </span>
+      </a>
+      <a class="ml-result" data-state="marketplace list_view" href="/preview/flows/public_profile/public_profile_view/index.html">
+        <img class="ml-result__thumb" src="/assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Shure SM7B Microphone</span>
+          <span class="ml-result__meta">Gear Sale · ₹28,500</span>
+        </span>
+      </a>
 
-    <!-- Main content — scrolls only if you add .app-content--scroll.
-         Most single-purpose screens (a form, a splash, a confirmation)
-         should NOT scroll; add the modifier only for feeds/lists/long forms.
-
-         This "not yet designed" body is what every one of the 103 screens
-         still on this raw template shows today. Real content replaces it
-         screen by screen; until then it should look like an on-brand
-         placeholder state, not a blank page with a stray dev button. -->
-    <main class="app-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 var(--space-4);gap:var(--space-3);">
-      <div style="width:64px;height:64px;border-radius:var(--radius-2);background:var(--color-surface);display:flex;align-items:center;justify-content:center;color:var(--color-muted);">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      <div class="ml-market-grid" data-state="grid_view">
+        <a class="ml-market-card" href="/preview/flows/public_profile/public_profile_view/index.html">
+          <div class="ml-market-card__media"><img src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" /></div>
+          <div class="ml-market-card__body">
+            <div class="ml-market-card__title">Ishita Rao</div>
+            <div class="ml-market-card__meta">Session vocalist · Mumbai</div>
+          </div>
+        </a>
+        <a class="ml-market-card" href="/preview/flows/public_profile/public_profile_view/index.html">
+          <div class="ml-market-card__media"><img src="/assets/img/editorials/3dee9cb6252a4c8f8a149c9fd40d4a9e.jpg" alt="" loading="lazy" /></div>
+          <div class="ml-market-card__body">
+            <div class="ml-market-card__title">Meera Nair</div>
+            <div class="ml-market-card__meta">Playback vocalist · Kochi</div>
+          </div>
+        </a>
+        <a class="ml-market-card" href="/preview/flows/public_profile/public_profile_view/index.html">
+          <div class="ml-market-card__media"><img src="/assets/img/6/05c010236455615.68ecac46e6ab2.png" alt="" loading="lazy" /></div>
+          <div class="ml-market-card__body">
+            <div class="ml-market-card__title">The Kolaba Sessions</div>
+            <div class="ml-market-card__meta">Indie rock · Mumbai</div>
+          </div>
+        </a>
+        <a class="ml-market-card" href="/preview/flows/public_profile/public_profile_view/index.html">
+          <div class="ml-market-card__media"><img src="/assets/img/6/01e26955706919.598fd42d42f34.png" alt="" loading="lazy" /></div>
+          <div class="ml-market-card__body">
+            <div class="ml-market-card__title">Yash Raj Sound Studios</div>
+            <div class="ml-market-card__meta">Andheri West · ₹1,800/hr</div>
+          </div>
+        </a>
+        <a class="ml-market-card" href="/preview/flows/public_profile/public_profile_view/index.html">
+          <div class="ml-market-card__media"><img src="/assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg" alt="" loading="lazy" /></div>
+          <div class="ml-market-card__body">
+            <div class="ml-market-card__title">Shure SM7B Microphone</div>
+            <div class="ml-market-card__meta">Gear Sale · ₹28,500</div>
+          </div>
+        </a>
       </div>
-      <div>
-        <div id="tpl-flowkey" style="font-size:var(--type-1);color:var(--color-muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600;"></div>
-        <h1 id="tpl-heading" style="font-size:var(--type-3);margin:var(--space-1) 0 0;">Not designed yet</h1>
-        <p style="color:var(--color-muted);font-size:var(--type-2);margin-top:var(--space-1);max-width:280px;">This screen is scaffolded (real flow/schema data is wired up) but hasn't had a UI pass. Read <code>window.MusicLinkd.screen</code> for its data contract.</p>
-      </div>
 
-      <!-- Example bottom-sheet trigger — structural reference only for the
-           sheet mechanics in app-shell.css; remove once this screen is
-           actually designed and doesn't need it. -->
-      <button type="button" class="ml-btn ml-btn--secondary" data-open-sheet="example-sheet">Open example sheet</button>
+      <div class="ml-empty" data-state="empty">
+        <h2 class="ml-empty__title">Nothing saved yet</h2>
+        <p class="ml-empty__body">Tap the heart on a profile, a studio or a listing to keep it here.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/discover/discover_feed/index.html">Go to Discover</a>
+      </div>
     </main>
-
-    <!-- Fixed bottom region — safe-area bottom padding baked in. Auto-hides
-         when the keyboard opens (see .is-keyboard-open in app-shell.css) so
-         it never floats above the keyboard on top of your inputs. -->
-    <footer class="app-bottombar">
-      <!-- TODO: design system bottom bar / CTA goes here -->
-    </footer>
   </div>
-  <script>
-    // Fills the topbar title + flow-key eyebrow from this screen's real
-    // screen.json once app-shell.js loads it — no hardcoded screen name in
-    // this shared template. Falls back to the raw pathname if screen.json
-    // 404s (e.g. this file opened directly, outside /flows/).
-    document.addEventListener("musiclinkd:screen-ready", (e) => {
-      const data = e.detail || {};
-      document.getElementById("tpl-title").textContent = data.screenTitle ?? "";
-      document.getElementById("tpl-heading").textContent = data.screenTitle ? `${data.screenTitle} — not designed yet` : "Not designed yet";
-      document.getElementById("tpl-flowkey").textContent = data.flowTitle ?? "";
-    });
-  </script>
-
-  <!-- Example bottom sheet — structural mechanics only (open/close, drag-down
-       transition, safe-area padding). Style its contents with your design system. -->
-  <div class="sheet-scrim" data-sheet-scrim-for="example-sheet"></div>
-  <div class="sheet" id="example-sheet" style="background:var(--color-white);border-radius:var(--radius-3) var(--radius-3) 0 0;padding:var(--space-4);">
-    <p>Example bottom sheet content.</p>
-    <button type="button" class="ml-btn ml-btn--primary ml-btn--block" data-close-sheet="example-sheet">Close</button>
-  </div>
-
   <script src="/preview/shared/app-shell.js" defer></script>
 </body>
 </html>

@@ -94,15 +94,21 @@ Repository-level Firebase configuration includes:
 - `remoteconfig.template.json`
 - `.firebaserc`
 
-The canonical Firestore schema documentation is [`app/docs/firestore/Firestore_Schema_Index_Rules.md`](app/docs/firestore/Firestore_Schema_Index_Rules.md). Environment and build configuration is documented in [`app/docs/environment/Build_And_Environment_Guide.md`](app/docs/environment/Build_And_Environment_Guide.md).
+The Firestore rules and indexes in this repository are the deployed ones
+(`firestore.rules`, `firestore.indexes.json`). The prose schema and
+build/environment guides that used to be linked here lived under `app/docs/`
+and left with the Android application in `1620e46`; they are not in this
+repository and the links to them were dead. For the schema as this repository
+uses it, read the rules file and
+[`admin/docs/architecture/`](admin/docs/architecture/).
 
 ## Documentation
 
 Start with:
 
 - [`docs/`](docs/) — product, business, and engineering documentation.
-- [`app/docs/`](app/docs/) — mobile application architecture, flows, environment, and Firestore documentation.
-- [`admin/docs/`](admin/docs/) — admin architecture, seed data, widgets, and operational documentation.
+- [`admin/docs/`](admin/docs/) — admin architecture, seed data, widgets, and operational documentation. `architecture/Widget_Directory.md` and `architecture/Master_Data_Seed_Values.md` are read directly by the guide build, so edits there change the published catalogue.
+- [`docs/handoff/`](docs/handoff/) — the generated Compose token file the native apps consume.
 - [`CHANGELOG.md`](CHANGELOG.md) — recent repository changes.
 - [`AGENTS.md`](AGENTS.md) — repository-level engineering guidance.
 
