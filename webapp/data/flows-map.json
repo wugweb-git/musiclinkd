@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T04:03:03.973Z",
+  "generatedAt": "2026-08-31T04:19:48.868Z",
   "flows": [
     {
       "key": "home",
@@ -183,7 +183,7 @@
       "order": 23,
       "status": "missing",
       "description": "ADDED 2026-08-13 (direct source read, previously completely absent from this registry). `QrAndShareFlow` (SupportingScreens.kt:655, reached from the dashboard's QRShare shortcut) — 3-state screen (Home/Options/Preview, plain string state, not an enum) generating a shareable \"Premium Comp Card\" with a simulated PDF download (fake progress bar via `delay(150)` loop, no real file generation). No schema modeled for this at all — no shareable-link record, no QR payload, no download/share analytics. `DynamicLinkManager.kt` constructs outbound share links elsewhere in the app but this screen doesn't call it — confirmed no cross-wiring.",
-      "screenCount": 1
+      "screenCount": 4
     },
     {
       "key": "saved_favorites",
@@ -6889,10 +6889,131 @@
       "states": [
         "home",
         "options",
-        "preview"
+        "preview",
+        "business",
+        "share_card",
+        "print_card",
+        "print_poster",
+        "share_error"
       ],
       "collectionsTouched": [],
       "notes": "QrAndShareFlow (SupportingScreens.kt:655), reached from the dashboard's QRShare shortcut. State is a plain string, not an enum. \"Preview\" generates a \"Premium Comp Card\" with a simulated PDF download (fake progress via a delay(150) loop, no real file, no real QR payload). No schema exists for this anywhere — no shareable-link record, no download/share analytics. Does not call DynamicLinkManager.kt, despite that existing elsewhere in the app for outbound share links.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "qr_share",
+      "flowTitle": "QR Code & Profile Sharing",
+      "flowStatus": "missing",
+      "flowOrder": 23,
+      "screenKey": "qr_scanner",
+      "screenNumber": 165,
+      "screenTitle": "Scan QR",
+      "screenOrder": 2,
+      "states": [
+        "scanning",
+        "resolved_profile",
+        "resolved_business",
+        "resolved_service",
+        "resolved_listing",
+        "resolved_portfolio",
+        "invalid",
+        "expired",
+        "private",
+        "deleted",
+        "deactivated",
+        "no_camera",
+        "camera_denied",
+        "image_scan",
+        "offline"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-23 brief. A screen, not a state, because it owns the camera and a route. Every scan outcome is a state of it: five resolved entity types and six failure modes. The failure copy must not reveal private information and must not imply the app can override an OS camera permission.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "qr_share",
+      "flowTitle": "QR Code & Profile Sharing",
+      "flowStatus": "missing",
+      "flowOrder": 23,
+      "screenKey": "digital_business_card",
+      "screenNumber": 166,
+      "screenTitle": "Digital business card",
+      "screenOrder": 3,
+      "states": [
+        "default",
+        "save_contact",
+        "restricted"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-23 brief. Shows only the fields the owner has made public — the restricted state is what a card looks like when phone and email are private. Save Contact previews exactly what would be written and never includes a hidden field.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "qr_share",
+      "flowTitle": "QR Code & Profile Sharing",
+      "flowStatus": "missing",
+      "flowOrder": 23,
+      "screenKey": "qr_settings",
+      "screenNumber": 167,
+      "screenTitle": "QR settings",
+      "screenOrder": 4,
+      "states": [
+        "default",
+        "disabled",
+        "analytics"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-23 brief. Enable/disable, destination, and scan analytics. The brief is explicit that changing a profile must NOT require reprinting a QR — the code resolves through the canonical route, so there is deliberately no regenerate action for ordinary edits.",
       "dataContract": []
     },
     {

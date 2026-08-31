@@ -1,0 +1,18 @@
+{
+  "flowKey": "qr_share",
+  "flowTitle": "QR Code & Profile Sharing",
+  "flowStatus": "missing",
+  "flowOrder": 23,
+  "screenKey": "qr_settings",
+  "screenNumber": 167,
+  "screenTitle": "QR settings",
+  "screenOrder": 4,
+  "states": [
+    "default",
+    "disabled",
+    "analytics"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-23 brief. Enable/disable, destination, and scan analytics. The brief is explicit that changing a profile must NOT require reprinting a QR — the code resolves through the canonical route, so there is deliberately no regenerate action for ordinary edits.",
+  "dataContract": []
+}

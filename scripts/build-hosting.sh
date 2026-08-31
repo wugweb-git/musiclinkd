@@ -104,11 +104,23 @@ echo "==> Copying frontend/guide/ design-system reference into dist/guide/"
 #                                    nothing and served publicly
 #   icons/                           401 files duplicating musiclinkd-system/
 #                                    icons/ (423), which is the set the build
-#                                    actually inlines from
+#                                    actually inlines from. NOTE this exclude
+#                                    is the directory named exactly "icons" —
+#                                    icons-lucide/ is NOT matched and DOES ship,
+#                                    which is required: see below.
 #   testdir.tmp/, widgets/           empty
 #   skills/, docs/, *.md             markdown; belongs in the repo, not on a CDN
 #   styleguide.html                  660KB, and /guide/styleguide 301s away from
 #                                    it, so it could never be fetched
+#
+#   _to_delete/, *.pptx,             added 2026-08-31. The guide folder is copied
+#   *.tgz, *.zip                     wholesale, so anything dropped into it is
+#                                    published. A 20MB internal deck
+#                                    (MusicLinkd.pptx) and _to_delete/
+#                                    preview_bundle.tgz were both live and
+#                                    publicly downloadable at musiclinkd.com
+#                                    before this exclude. Source files stay in
+#                                    the repo; they just stop being a CDN asset.
 #
 # musiclinkd-system/ is excluded ENTIRELY as of 2026-08-29. It was the React +
 # Gestalt catalogue — 4.6MB shipped, including a 2.6MB Gestalt bundle and 524
@@ -116,6 +128,14 @@ echo "==> Copying frontend/guide/ design-system reference into dist/guide/"
 # still the icon library, but they are inlined at BUILD time by build-guide.mjs
 # and the screen generators, so nothing needs them at runtime. The source stays
 # in the repo; it just stops being deployed. Its URL 301s to /guide.
+#
+# icons-lucide/ IS deployed, and is the one icon directory that must be — added
+# 2026-08-31 as the system's second icon set. Unlike the Gestalt glyphs it is
+# NOT inlined: /guide renders 2006 of them through CSS mask urls, because
+# inlining that many would add ~680KB to a page that is already ~930KB. So the
+# .svg files are fetched at runtime and the deploy would 404 every one of them
+# if this directory were excluded. Its LICENSE (ISC) ships with it deliberately;
+# the README.md is dropped by the *.md exclude, like every other markdown here.
 mkdir -p dist/guide
 rsync -a \
   --exclude='node_modules/' \
@@ -130,6 +150,10 @@ rsync -a \
   --exclude='docs/' \
   --exclude='*.md' \
   --exclude='styleguide.html' \
+  --exclude='_to_delete/' \
+  --exclude='*.pptx' \
+  --exclude='*.tgz' \
+  --exclude='*.zip' \
   --exclude='*.map' \
   --exclude='.DS_Store' \
   frontend/guide/ dist/guide/

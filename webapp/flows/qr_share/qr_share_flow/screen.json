@@ -10,7 +10,12 @@
   "states": [
     "home",
     "options",
-    "preview"
+    "preview",
+    "business",
+    "share_card",
+    "print_card",
+    "print_poster",
+    "share_error"
   ],
   "collectionsTouched": [],
   "notes": "QrAndShareFlow (SupportingScreens.kt:655), reached from the dashboard's QRShare shortcut. State is a plain string, not an enum. \"Preview\" generates a \"Premium Comp Card\" with a simulated PDF download (fake progress via a delay(150) loop, no real file, no real QR payload). No schema exists for this anywhere — no shareable-link record, no download/share analytics. Does not call DynamicLinkManager.kt, despite that existing elsewhere in the app for outbound share links.",

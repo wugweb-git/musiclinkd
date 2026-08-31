@@ -47,6 +47,10 @@ const OUT = join(ROOT, "frontend/guide/index.html");
 const tokens = JSON.parse(readFileSync(join(ROOT, "frontend/guide/tokens/tokens.json"), "utf8"));
 const iconNames = readdirSync(join(ROOT, "frontend/guide/musiclinkd-system/icons"))
   .filter((f) => f.endsWith(".svg")).map((f) => f.replace(".svg", "")).sort();
+/* The second icon set. Vendored by scripts/build-icons-lucide.mjs; read from
+   disk so the count in the heading can never disagree with what is rendered. */
+const lucideNames = readdirSync(join(ROOT, "frontend/guide/icons-lucide"))
+  .filter((f) => f.endsWith(".svg")).map((f) => f.replace(".svg", "")).sort();
 
 /** Real token count, counted from the emitted CSS rather than guessed from
  *  one JSON category plus a fudge factor. The header badge previously read
@@ -1362,6 +1366,11 @@ const html = `<!doctype html>
      them to the stylesheet instead of to a new screen file. */
   .g-states { display: flex; flex-wrap: wrap; gap: var(--space-1); align-items: center;
               margin-top: var(--space-2); }
+  /* Lucide renders through a CSS mask, not inline SVG: 2006 inline glyphs would
+     add ~680KB to this page. background:currentColor keeps the mask honest —
+     the glyph still inherits colour, which an <img> of an external SVG cannot. */
+  .g-lu { display: block; width: 22px; height: 22px; background: currentColor;
+          -webkit-mask: var(--lu) center / contain no-repeat; mask: var(--lu) center / contain no-repeat; }
   .g-states__lbl { font-size: var(--type-1); color: var(--color-muted); margin-right: var(--space-1); }
   .g-states .ml-badge--off { background: none; border: 1px dashed var(--color-line);
                              color: var(--color-muted); text-decoration: line-through; }
@@ -1850,10 +1859,32 @@ const html = `<!doctype html>
     box and ${iconNames.length - iconNames.filter(nativeIs16).length} standard icons on 24. Rendering a
     16-unit glyph at 22px inflates its strokes about 1.4x against a 24-unit one beside it — which is
     what made the set look unstable. Each is now shown at its own native size.</p>
+  <h3 style="margin-top:var(--space-4)">Gestalt · ${iconNames.length} — the product set</h3>
   <div class="g-icons">${iconNames.map((n) => {
     const s = nativeIs16(n) ? 16 : 22;
     return `<div class="g-icon">${ic(n, s)}<span>${n}</span></div>`;
   }).join("")}</div>
+
+  <h3 style="margin-top:var(--space-4)">Lucide · ${lucideNames.length} — the breadth set</h3>
+  <p class="ml-lede ml-measure">Restored 2026-08-31 on the brand owner's
+    instruction. styleguide.html had specified “Lucide icons, 1.75px stroke”
+    and the v9 rebuild replaced it wholesale with Gestalt; both now ship.
+    Vendored from <code>lucide-react@1.28.0</code> (ISC) — the package was
+    already an admin dependency, so this is extracted from the installed copy
+    rather than fetched, and the build fails if any icon does not parse.</p>
+  <p class="ml-type-1" style="color:var(--color-muted);max-width:var(--layout-measure);margin:0 0 var(--space-3)">
+    <b>Never mix the two inside one control or one toolbar.</b> Gestalt is
+    filled, Lucide is a 2px stroked outline; at the same size a filled glyph
+    beside a stroked one reads as two different weights — the same instability
+    the 16-vs-24 grid fix removed. Choose a set per surface. Gestalt stays the
+    product set because screens inline it at build time; reach for Lucide when
+    the product set has no glyph for something.
+    These render via CSS <code>mask</code> rather than inline SVG, so the grid
+    costs ~4KB of markup instead of 680KB and each glyph still takes its colour
+    from <code>currentColor</code>.</p>
+  <div class="g-icons">${lucideNames.map((n) =>
+    `<div class="g-icon"><i class="g-lu" style="--lu:url(/guide/icons-lucide/${n}.svg)" aria-hidden="true"></i><span>${n}</span></div>`
+  ).join("")}</div>
 
   <h2 class="g-h" id="taxonomy">Taxonomy · ${taxonomy.length}</h2>
   <p class="ml-lede" style="max-width:64ch">
@@ -1988,5 +2019,5 @@ if (play) play.addEventListener('click', () => {
 
 writeFileSync(OUT, html);
 console.log(`build-guide: ${sections.length} sections (${documented.length} documented, ${undocumented.length} not), ` +
-  `${[...new Set(sections.flatMap((s) => s.selectors))].length} selectors, ${iconNames.length} icons`);
+  `${[...new Set(sections.flatMap((s) => s.selectors))].length} selectors, ${iconNames.length} gestalt + ${lucideNames.length} lucide icons`);
 if (undocumented.length) console.log("  undocumented: " + undocumented.map((s) => s.name).join(", "));

@@ -71,7 +71,11 @@ function parseIconNode(src, resolve, depth = 0) {
     const target = resolve(alias[1]);
     return target ? parseIconNode(target, resolve, depth + 1) : null;
   }
-  const m = src.match(/const __iconNode = \[([\s\S]*?)\n\];/);
+  /* Three shapes, not two. A single-primitive icon fits on ONE line —
+     `const __iconNode = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];`
+     — so requiring a "\n];" terminator missed exactly the eighteen most
+     common glyphs in the set: check, chevron-*, circle, dot, bluetooth. */
+  const m = src.match(/const __iconNode = \[([\s\S]*?)\]\s*;/);
   if (!m) return null;
   const nodes = [];
   for (const entry of m[1].matchAll(/\[\s*"(\w+)"\s*,\s*\{([\s\S]*?)\}\s*\]/g)) {
@@ -97,7 +101,9 @@ const version = JSON.parse(
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 
-const files = readdirSync(SRC).filter((f) => f.endsWith(".mjs") && !f.endsWith(".mjs.map"));
+/* index.mjs is the package barrel — it re-exports every icon and is not one. */
+const files = readdirSync(SRC)
+  .filter((f) => f.endsWith(".mjs") && !f.endsWith(".mjs.map") && f !== "index.mjs");
 let written = 0;
 const skipped = [];
 

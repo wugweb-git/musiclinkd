@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0D0D" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/qr_share/qr_scanner/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Scan a MusicLinkd code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/qr_share/qr_share_flow/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0;flex:1">Scan</h1>
+      
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+
+      <!-- The viewfinder. A dark plate with a cut-out frame stands in for the
+           camera; the instruction is text, not an icon, so it is readable. -->
+      <div class="ml-inset ml-inset--dark" data-state="scanning" style="aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative">
+        <span style="width:60%;aspect-ratio:1;border:2px solid var(--color-white);border-radius:var(--radius-2)"></span>
+      </div>
+      <p class="ml-type-2" data-state="scanning" style="color:var(--color-muted);text-align:center;margin-top:var(--space-3)">
+        Point your camera at a MusicLinkd QR code.
+      </p>
+      <div data-state="scanning" style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
+        <a class="ml-btn ml-btn--secondary" style="flex:1" href="?state=image_scan">Choose from gallery</a>
+        <button class="ml-btn ml-btn--secondary" type="button" style="flex:1">Flash</button>
+      </div>
+
+      <div data-state="resolved_profile">
+        <div class="ml-result" style="border:0;padding:0">
+          <img class="ml-result__thumb" src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">Ishita Rao</span>
+            <span class="ml-result__meta">Session vocalist · Mumbai</span>
+          </span>
+        </div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
+          <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/communication/chat_conversation/index.html">Message</a>
+          <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/public_profile/public_profile_view/index.html">View profile</a>
+        </div>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=scanning">Scan another</a>
+      </div>
+      <div data-state="resolved_business">
+        <div class="ml-result" style="border:0;padding:0">
+          <img class="ml-result__thumb" src="/assets/img/6/01e26955706919.598fd42d42f34.png" alt="" loading="lazy" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">Yash Raj Sound Studios</span>
+            <span class="ml-result__meta">Recording studio · Andheri West</span>
+          </span>
+        </div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
+          <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/booking/availability_calendar/index.html">Book</a>
+          <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/business_profiles/business_overview/index.html">View business</a>
+        </div>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=scanning">Scan another</a>
+      </div>
+      <div data-state="resolved_service">
+        <div class="ml-result" style="border:0;padding:0">
+          <img class="ml-result__thumb" src="/assets/img/speakers/48dcea90c715465b4dcd2ff760bfcf65.jpg" alt="" loading="lazy" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">Full Track Mix & Master</span>
+            <span class="ml-result__meta">Blue Note Recording Co. · ₹6,000</span>
+          </span>
+        </div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
+          <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/communication/chat_conversation/index.html">Enquire</a>
+          <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/public_profile/talent_services_view/index.html">View service</a>
+        </div>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=scanning">Scan another</a>
+      </div>
+      <div data-state="resolved_listing">
+        <div class="ml-result" style="border:0;padding:0">
+          <img class="ml-result__thumb" src="/assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg" alt="" loading="lazy" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">Shure SM7B Microphone</span>
+            <span class="ml-result__meta">Gear Sale · ₹28,500 · Like new</span>
+          </span>
+        </div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
+          <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/communication/chat_conversation/index.html">Message seller</a>
+          <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/marketplace/marketplace_item_detail/index.html">View listing</a>
+        </div>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=scanning">Scan another</a>
+      </div>
+      <div data-state="resolved_portfolio">
+        <div class="ml-result" style="border:0;padding:0">
+          <img class="ml-result__thumb" src="/assets/img/6/02d124205931695.66c4331e162d1.jpg" alt="" loading="lazy" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">Neon Monsoon</span>
+            <span class="ml-result__meta">Single · 2026 · Ishita Rao</span>
+          </span>
+        </div>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
+          <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/saved_favorites/saved_favorites_hub/index.html">Save</a>
+          <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/portfolio/profile_project_view/index.html">View work</a>
+        </div>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=scanning">Scan another</a>
+      </div>
+
+      <div class="ml-empty" data-state="invalid">
+        <h2 class="ml-empty__title">That isn't a MusicLinkd code</h2>
+        <p class="ml-empty__body">It may be a code for something else entirely. Point the camera at a MusicLinkd QR.</p>
+        <a class="ml-btn ml-btn--primary" href="?state=scanning">Scan again</a>
+      </div>
+      <div class="ml-empty" data-state="expired">
+        <h2 class="ml-empty__title">This link is no longer available</h2>
+        <p class="ml-empty__body">The page it pointed to has moved on.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/discover/discover_feed/index.html">Go to MusicLinkd</a>
+      </div>
+      <div class="ml-empty" data-state="private">
+        <h2 class="ml-empty__title">This content isn't public</h2>
+        <p class="ml-empty__body">Whoever shared it has restricted who can see it.</p>
+        <a class="ml-btn ml-btn--primary" href="?state=scanning">Scan again</a>
+      </div>
+      <div class="ml-empty" data-state="deleted">
+        <h2 class="ml-empty__title">This profile is no longer available</h2>
+        <p class="ml-empty__body">It may have been deleted or closed.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/discover/discover_feed/index.html">Discover on MusicLinkd</a>
+      </div>
+      <div class="ml-empty" data-state="deactivated">
+        <h2 class="ml-empty__title">This code is no longer active</h2>
+        <p class="ml-empty__body">Its owner has turned it off.</p>
+        <a class="ml-btn ml-btn--primary" href="?state=scanning">Scan again</a>
+      </div>
+      <div class="ml-empty" data-state="offline">
+        <h2 class="ml-empty__title">You're offline</h2>
+        <p class="ml-empty__body">Connect to the internet to open this MusicLinkd profile. The code was read, but we can't look it up yet.</p>
+        <a class="ml-btn ml-btn--primary" href="?state=scanning">Retry</a>
+      </div>
+
+      <div class="ml-empty" data-state="no_camera">
+        <h2 class="ml-empty__title">Camera access is needed to scan</h2>
+        <p class="ml-empty__body">We only use the camera while this screen is open, and nothing is recorded.</p>
+        <a class="ml-btn ml-btn--primary" href="?state=scanning">Allow camera</a>
+        <a class="ml-btn ml-btn--secondary" style="margin-top:var(--space-2)" href="?state=image_scan">Use a photo instead</a>
+      </div>
+
+      <!-- Denied: the app cannot grant this, and the copy must not pretend it
+           can. It points at device settings and offers the real fallback. -->
+      <div class="ml-empty" data-state="camera_denied">
+        <h2 class="ml-empty__title">Camera access is turned off</h2>
+        <p class="ml-empty__body">
+          You can turn it back on in your device settings, under Apps → MusicLinkd → Permissions.
+          We can't change it from here.
+        </p>
+        <a class="ml-btn ml-btn--primary" href="?state=image_scan">Use a photo instead</a>
+        <a class="ml-btn ml-btn--ghost" style="margin-top:var(--space-2)" href="/preview/flows/qr_share/qr_share_flow/index.html">Cancel</a>
+      </div>
+
+      <div data-state="image_scan">
+        <div class="ml-dropzone">
+          <span class="ml-dropzone__hint">Choose a photo containing a QR code</span>
+          <span class="ml-dropzone__formats">JPG or PNG</span>
+        </div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=resolved_profile">Scan the photo</a>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=scanning">Use the camera</a>
+      </div>
+    </main>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>

@@ -1572,10 +1572,51 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 1,
       screenNumber: 119,
       title: "QR Code & Comp Card Sharing",
-      states: ["home", "options", "preview"],
+      states: [
+        "home", "options", "preview",
+        // FLOW-23 brief, 2026-08-31: the identity card is the same card for a
+        // person and a business, and print formats are previews of it, so they
+        // are states of this screen rather than five more screens.
+        "business", "share_card", "print_card", "print_poster", "share_error",
+      ],
       collectionsTouched: [],
       notes:
         "QrAndShareFlow (SupportingScreens.kt:655), reached from the dashboard's QRShare shortcut. State is a plain string, not an enum. \"Preview\" generates a \"Premium Comp Card\" with a simulated PDF download (fake progress via a delay(150) loop, no real file, no real QR payload). No schema exists for this anywhere — no shareable-link record, no download/share analytics. Does not call DynamicLinkManager.kt, despite that existing elsewhere in the app for outbound share links.",
+    },
+    {
+      key: "qr_scanner",
+      order: 2,
+      screenNumber: 165,
+      title: "Scan QR",
+      states: [
+        "scanning", "resolved_profile", "resolved_business", "resolved_service",
+        "resolved_listing", "resolved_portfolio",
+        "invalid", "expired", "private", "deleted", "deactivated",
+        "no_camera", "camera_denied", "image_scan", "offline",
+      ],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from the FLOW-23 brief. A screen, not a state, because it owns the camera and a route. Every scan outcome is a state of it: five resolved entity types and six failure modes. The failure copy must not reveal private information and must not imply the app can override an OS camera permission.",
+    },
+    {
+      key: "digital_business_card",
+      order: 3,
+      screenNumber: 166,
+      title: "Digital business card",
+      states: ["default", "save_contact", "restricted"],
+      collectionsTouched: ["users"],
+      notes:
+        "PROPOSED 2026-08-31 from the FLOW-23 brief. Shows only the fields the owner has made public — the restricted state is what a card looks like when phone and email are private. Save Contact previews exactly what would be written and never includes a hidden field.",
+    },
+    {
+      key: "qr_settings",
+      order: 4,
+      screenNumber: 167,
+      title: "QR settings",
+      states: ["default", "disabled", "analytics"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from the FLOW-23 brief. Enable/disable, destination, and scan analytics. The brief is explicit that changing a profile must NOT require reprinting a QR — the code resolves through the canonical route, so there is deliberately no regenerate action for ordinary edits.",
     },
   ],
   saved_favorites: [

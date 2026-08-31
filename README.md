@@ -40,6 +40,9 @@ The design-system catalogue is generated from the repository rather than maintai
 | `node scripts/build-tokens.mjs` | `frontend/guide/system/ml-tokens.css` and `webapp/shared/ml-tokens.css` from `tokens.json`. Fails over the token-count ceiling or a scale past 4 steps. |
 | `node scripts/build-guide.mjs` | `frontend/guide/index.html`. |
 | `node scripts/build-handoff.mjs` | `docs/handoff/MusicLinkdTokens.kt` for the native apps. |
+| `node scripts/build-icons-lucide.mjs` | `frontend/guide/icons-lucide/` — 2006 SVGs extracted from the installed `lucide-react` (ISC). Fails if any icon does not parse, so a partial set can't ship looking complete. |
+
+The system ships **two icon sets**: 423 filled Gestalt glyphs (the product set, inlined into screens at build time) and 2006 stroked Lucide outlines (the breadth set). They must not be mixed inside one control — see [frontend/guide/README.md](frontend/guide/README.md).
 
 ### Audits
 

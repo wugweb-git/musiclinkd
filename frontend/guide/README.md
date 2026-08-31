@@ -43,7 +43,22 @@ MusicLinkd's component and interaction patterns are informed by [Gestalt](https:
 
 ## Boundaries
 
-Do not introduce Material-design layouts, purple brand tokens, glassmorphism, neumorphism, heavy gradients, or competing design-system files. Do not adopt Gestalt's Pinterest-red/pink brand hues or its `gestalt` npm package as a runtime dependency — it is a reference only. `styleguide.html` is the interactive reference; this README and `tokens/tokens.json` govern new work.
+Do not introduce Material-design layouts, glassmorphism, neumorphism, heavy gradients, or competing design-system files. Do not adopt Gestalt's Pinterest-red/pink brand hues or its `gestalt` npm package as a runtime dependency — it is a reference only.
+
+**Purple** — amended 2026-08-31 on the brand owner's instruction. This section previously read "no purple brand tokens", and `meta.palette.removed.purple` in tokens.json cites that line as the reason `#8B5CF6` was deleted in v9. Purple is now permitted in exactly one place: `--status-category-bg` / `--status-category-text`, consumed only by `.ml-badge--category`. It restores styleguide.html v4's rule *"Pink = Brand. Black = Primary. Purple = Badges only."* It is **not** a brand token — it never paints a button, link, border or surface, and it carries no state meaning. It marks a badge as a *category* (genre, service, role) rather than a state, which is the one job no existing colour did. Anything beyond that single modifier is still forbidden.
+
+`/guide` (generated from `index.html`) is the live reference. `styleguide.html` is the superseded v4 catalogue, kept for recovery only and 301-redirected to `/guide`. This README and `tokens/tokens.json` govern new work.
+
+## Icon sets
+
+Two, and they are not interchangeable.
+
+| Set | Count | Form | Role |
+|---|---|---|---|
+| Gestalt (`musiclinkd-system/icons/`) | 423 | Filled paths, 16- and 24-unit grids | **Product set.** Screens inline these at build time via `icon()`, which fails the build on an unknown name. |
+| Lucide (`icons-lucide/`) | 2006 | Stroked outlines, 24 grid, 2px round caps | **Breadth set.** Reach for it when the product set has no glyph. Vendored from `lucide-react` (ISC) by `scripts/build-icons-lucide.mjs`. |
+
+Never mix them inside one control or one toolbar: at the same size a filled glyph beside a stroked one reads as two different weights. Choose a set per surface.
 
 ## Directory ownership
 

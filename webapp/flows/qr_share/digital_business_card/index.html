@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0D0D" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/qr_share/digital_business_card/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Digital business card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/qr_share/qr_share_flow/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0;flex:1">Business card</h1>
+      
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div class="ml-inset ml-inset--raised" style="padding:var(--space-4);text-align:center">
+        <img class="ml-avatar ml-avatar--lg" src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" style="margin:0 auto" />
+        <h2 class="ml-type-3" style="margin:var(--space-2) 0 0">Ishita Rao</h2>
+        <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 0">Session vocalist · Mumbai</p>
+        <span class="ml-status ml-status--accent" style="margin-top:var(--space-2);display:inline-flex">Verified</span>
+        <div class="ml-qr" style="margin:var(--space-3) auto 0" aria-label="QR code linking to Ishita Rao's MusicLinkd profile"></div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">musiclinkd.com/ishitarao</p>
+      </div>
+
+      <!-- What the card carries is decided by the owner's privacy settings.
+           The "restricted" state is what the same card looks like when phone
+           and email are private — the fields are absent, not blanked out. -->
+      <div class="ml-summary" style="margin-top:var(--space-3)" data-state="default save_contact">
+        <div class="ml-summary__row"><span>Name</span><span>Ishita Rao</span></div>
+        <div class="ml-summary__row"><span>Role</span><span>Session vocalist</span></div>
+        <div class="ml-summary__row"><span>Phone</span><span>+91 98••• ••432</span></div>
+        <div class="ml-summary__row"><span>Email</span><span>ishita@example.com</span></div>
+        <div class="ml-summary__row"><span>Website</span><span>ishitarao.in</span></div>
+        <div class="ml-summary__row"><span>MusicLinkd</span><span>musiclinkd.com/ishitarao</span></div>
+      </div>
+
+      <div data-state="restricted">
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>Name</span><span>Ishita Rao</span></div>
+          <div class="ml-summary__row"><span>Role</span><span>Session vocalist</span></div>
+          <div class="ml-summary__row"><span>MusicLinkd</span><span>musiclinkd.com/ishitarao</span></div>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
+          This person keeps their phone and email private. Message them through MusicLinkd instead.
+        </p>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-2)" href="/preview/flows/communication/chat_conversation/index.html">Send a message</a>
+      </div>
+
+      <div class="ml-empty" data-state="save_contact">
+        <h2 class="ml-empty__title">Save to contacts</h2>
+        <p class="ml-empty__body">Only the fields above will be saved. Nothing this person keeps private is included.</p>
+        <a class="ml-btn ml-btn--primary" href="?state=default">Save contact</a>
+      </div>
+    </main>
+    <footer class="ml-app__footer" data-state="default" style="display:flex;gap:var(--space-2)">
+      <a class="ml-btn ml-btn--secondary" style="flex:1" href="?state=save_contact">Save contact</a>
+      <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/qr_share/qr_share_flow/index.html?state=options">Share</a>
+    </footer>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>

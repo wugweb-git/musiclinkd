@@ -1,0 +1,30 @@
+{
+  "flowKey": "qr_share",
+  "flowTitle": "QR Code & Profile Sharing",
+  "flowStatus": "missing",
+  "flowOrder": 23,
+  "screenKey": "qr_scanner",
+  "screenNumber": 165,
+  "screenTitle": "Scan QR",
+  "screenOrder": 2,
+  "states": [
+    "scanning",
+    "resolved_profile",
+    "resolved_business",
+    "resolved_service",
+    "resolved_listing",
+    "resolved_portfolio",
+    "invalid",
+    "expired",
+    "private",
+    "deleted",
+    "deactivated",
+    "no_camera",
+    "camera_denied",
+    "image_scan",
+    "offline"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-23 brief. A screen, not a state, because it owns the camera and a route. Every scan outcome is a state of it: five resolved entity types and six failure modes. The failure copy must not reveal private information and must not imply the app can override an OS camera permission.",
+  "dataContract": []
+}

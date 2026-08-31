@@ -10,7 +10,7 @@
 <meta name="screen-json-path" content="/preview/flows/qr_share/qr_share_flow/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Share profile</title>
+<title>MusicLinkd — Your MusicLinkd ID</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
@@ -26,16 +26,48 @@
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/profile_management/profile_overview/index.html" aria-label="Back">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
         </a>
-      <h1 class="ml-type-2" style="margin:0">Share</h1>
+      <h1 class="ml-type-2" style="margin:0;flex:1">MusicLinkd ID</h1>
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/qr_share/qr_settings/index.html" aria-label="QR settings"><svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></a>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div data-state="home">
-        <div class="ml-empty" style="padding-block:var(--space-3)">
-          <div class="ml-qr" aria-label="QR code for Ishita Rao's profile"></div>
-          <h2 class="ml-empty__title">Ishita Rao</h2>
-          <p class="ml-empty__body">musiclinkd.com/ishitarao</p>
-        </div>
+
+      <!-- Personal card. The code sits on plain white with its quiet zone
+           intact and nothing drawn inside it. -->
+      <div class="ml-empty" data-state="home preview share_card print_card print_poster" style="padding-block:var(--space-3)">
+        <div class="ml-qr" aria-label="QR code linking to Ishita Rao's MusicLinkd profile"></div>
+        <h2 class="ml-type-3" style="margin:var(--space-2) 0 0">Ishita Rao</h2>
+        <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 0">Session vocalist · Mumbai</p>
+        <span class="ml-status ml-status--accent" style="margin-top:var(--space-2);display:inline-flex">Verified</span>
+        <p class="ml-empty__body">musiclinkd.com/ishitarao</p>
+      </div>
+
+      <!-- Business card is the SAME card with a different subject. -->
+      <div class="ml-empty" data-state="business" style="padding-block:var(--space-3)">
+        <div class="ml-qr" aria-label="QR code linking to Yash Raj Sound Studios on MusicLinkd"></div>
+        <h2 class="ml-type-3" style="margin:var(--space-2) 0 0">Yash Raj Sound Studios</h2>
+        <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 0">Recording studio · Andheri West</p>
+        <span class="ml-status ml-status--accent" style="margin-top:var(--space-2);display:inline-flex">Verified</span>
+        <p class="ml-empty__body">musiclinkd.com/yashrajsound</p>
+      </div>
+
+      <div data-state="home business">
         <a class="ml-btn ml-btn--primary ml-btn--block" href="?state=options">Share or export</a>
+        <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-2)" href="/preview/flows/qr_share/qr_scanner/index.html">Scan a code</a>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Also available as</h2></div>
+        <a class="ml-action-row" href="?state=business">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Business QR</span>
+          <span class="ml-choice__meta">For Yash Raj Sound Studios</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+        <a class="ml-action-row" href="/preview/flows/qr_share/digital_business_card/index.html">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Digital business card</span>
+          <span class="ml-choice__meta">Name, role, and the contact details you've made public</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
       </div>
 
       <div data-state="options">
@@ -54,32 +86,64 @@
         </span>
         <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
       </a>
+        <a class="ml-action-row" href="?state=home">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Share elsewhere</span>
+          <span class="ml-choice__meta">Uses your device's share sheet</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+
         <div class="ml-section" style="margin-top:var(--space-3)"><h2>Export</h2></div>
-        <a class="ml-action-row" href="?state=preview">
+        <a class="ml-action-row" href="?state=share_card">
         <span class="ml-choice__body">
-          <span class="ml-choice__title">Comp card</span>
-          <span class="ml-choice__meta">A one-page PDF with your photo, roles and rates</span>
+          <span class="ml-choice__title">Share card</span>
+          <span class="ml-choice__meta">Photo, name, role and code — for a post or a bio</span>
         </span>
         <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
       </a>
-        <a class="ml-action-row" href="?state=preview">
+        <a class="ml-action-row" href="?state=print_card">
         <span class="ml-choice__body">
-          <span class="ml-choice__title">QR poster</span>
-          <span class="ml-choice__meta">A3, for a green room wall</span>
+          <span class="ml-choice__title">Business card</span>
+          <span class="ml-choice__meta">85 × 55 mm, print-ready</span>
         </span>
         <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
       </a>
+        <a class="ml-action-row" href="?state=print_poster">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Poster</span>
+          <span class="ml-choice__meta">A3, for a studio wall or a green room</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Style</h2></div>
+        <div class="ml-chip-wrap">
+          <button type="button" class="ml-chip" aria-pressed="true">Light</button>
+          <button type="button" class="ml-chip" aria-pressed="false">Dark</button>
+          <button type="button" class="ml-chip" aria-pressed="false">MusicLinkd</button>
+          <button type="button" class="ml-chip" aria-pressed="false">Minimal</button>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
+          Style changes the card around the code. The code itself stays plain black on white so it always scans.
+        </p>
       </div>
 
-      <div data-state="preview">
-        <div class="ml-section"><h2>Comp card</h2></div>
-        <img src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="Comp card preview" loading="lazy"
-             style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover;border-radius:var(--radius-2)" />
-        <div class="ml-summary" style="margin-top:var(--space-2)">
-          <div class="ml-summary__row"><span>Includes</span><span>Photo, roles, rates, QR</span></div>
-          <div class="ml-summary__row"><span>Format</span><span>PDF · A5</span></div>
+      <div data-state="preview share_card print_card print_poster">
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>Includes</span><span>Photo, name, role, code</span></div>
+          <div class="ml-summary__row" data-state="print_card"><span>Size</span><span>85 × 55 mm</span></div>
+          <div class="ml-summary__row" data-state="print_poster"><span>Size</span><span>A3, 297 × 420 mm</span></div>
+          <div class="ml-summary__row" data-state="share_card"><span>Size</span><span>1080 × 1350 px</span></div>
+          <div class="ml-summary__row"><span>Contact details</span><span>Only what's public</span></div>
         </div>
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=home">Download</a>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=options">Back to options</a>
+      </div>
+
+      <div data-state="share_error">
+        <div class="ml-banner ml-banner--error"><span class="ml-banner__body">We couldn't create the share card.</span></div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=options">Retry</a>
       </div>
     </main>
   </div>
