@@ -283,6 +283,14 @@ writeScreen({
 
    Rebuilding them here takes the flow to zero local CSS. ═════════════════ */
 
+/* Rooms WITHIN this studio — not other studios. The rail was reusing the
+   STUDIOS list, so "Yash Raj Sound Studios" appeared as a room inside itself. */
+const ROOMS = [
+  { name: "Tracking Room 1", loc: "42 m² · live room",      meta: "₹1,800/hr · Neve 1073", img: media("stage", 1), gold: true },
+  { name: "Mix Suite",       loc: "18 m² · treated",        meta: "₹1,200/hr · ATC SCM25", img: media("gear", 7) },
+  { name: "Booth B",         loc: "6 m² · vocal booth",     meta: "₹700/hr · U87",         img: media("gear", 12) },
+];
+
 const STUDIOS = [
   { name: "Yash Raj Sound Studios", loc: "Andheri West · 2.4 km", meta: "₹1,800/hr · Tracking, Mixing", img: media("stage", 1), gold: true },
   { name: "Blue Note Recording Co.", loc: "Bandra · 4.1 km",      meta: "₹2,400/hr · Tracking",          img: media("gear", 7) },
@@ -359,7 +367,7 @@ writeScreen({
              cards all pointing at the screen you are on is a dead affordance. -->
         <div class="ml-section" style="margin-top:var(--space-3)"><h3>Rooms</h3></div>
         <div class="ml-rail">
-          ${STUDIOS.map((st) => studioCard(st, `${P}availability_calendar/index.html`)).join("\n          ")}
+          ${ROOMS.map((r) => studioCard(r, `${P}availability_calendar/index.html`)).join("\n          ")}
         </div>
 
         <div class="ml-section" style="margin-top:var(--space-3)"><h3>The room</h3></div>

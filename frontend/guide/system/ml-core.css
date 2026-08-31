@@ -69,7 +69,7 @@ body {
   gap: var(--space-2);
   min-height: var(--size-3);          /* 48dp — the accessibility floor */
   padding: 0 var(--space-4);
-  border: 1px solid transparent;
+  border: var(--border-1) solid transparent;
   border-radius: var(--radius-4);
   font-family: var(--font-body);
   font-size: var(--type-2);
@@ -132,7 +132,7 @@ body {
   min-width: var(--size-3);
   min-height: var(--size-3);
   padding: 0;
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-4);
   background: var(--color-white);
   color: var(--color-ink);            /* was inheriting link blue — a real bug */
@@ -151,7 +151,7 @@ body {
 .ml-icon-btn--primary { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-white); }
 .ml-icon-btn--primary:active { background: var(--color-ink-pressed); }
 .ml-icon-btn--muted   { background: var(--color-surface); border-color: transparent; color: var(--color-muted); }
-.ml-icon-btn svg    { width: 20px; height: 20px; display: block; }
+.ml-icon-btn svg    { width: var(--icon-2); height: var(--icon-2); display: block; }
 
 /* ── field ─────────────────────────────────────────────────────────────── */
 /* Compose: OutlinedTextField                                                */
@@ -168,7 +168,7 @@ body {
   width: 100%;
   min-height: var(--size-3);
   padding: 0 var(--space-3);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-4);
   background: var(--color-white);
   color: var(--color-ink);
@@ -193,7 +193,7 @@ body {
   gap: var(--space-2);
   min-height: var(--size-3);
   padding: 0 var(--space-3);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-4);
   background: var(--color-surface);
 }
@@ -230,7 +230,7 @@ body {
   gap: var(--space-2);
   min-height: var(--size-1);          /* 32dp visual… */
   padding: 0 var(--space-3);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-4);
   background: var(--color-white);
   color: var(--color-muted);
@@ -413,7 +413,7 @@ body {
 
 .ml-card {
   background: var(--color-white);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-2);
   overflow: hidden;
 }
@@ -557,7 +557,7 @@ a.ml-card:active, button.ml-card:active { transform: scale(0.98); }
 .ml-row__body  { flex: 1; min-width: 0; }
 .ml-row__title { display: block; font-size: var(--type-2); font-weight: var(--weight-3); }
 .ml-row__meta  { display: block; font-size: var(--type-1); color: var(--color-muted); }
-.ml-row + .ml-row { border-top: 1px solid var(--color-line); }
+.ml-row + .ml-row { border-top: var(--border-1) solid var(--color-line); }
 a.ml-row:active { background: var(--color-surface); }
 
 /* ── divider ───────────────────────────────────────────────────────────── */
@@ -713,7 +713,7 @@ a.ml-row:active { background: var(--color-surface); }
   padding: var(--space-3);
   padding-bottom: calc(var(--space-3) + var(--safe-bottom));
   background: var(--color-paper);
-  border-top: 1px solid var(--color-line);
+  border-top: var(--border-1) solid var(--color-line);
 }
 .ml-app__footer--bare { border-top: 0; background: none; }
 
@@ -766,7 +766,7 @@ a.ml-row:active { background: var(--color-surface); }
   width: var(--size-3);
   height: 64px;
   display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-2);
   background: var(--color-white);
   color: var(--color-muted);
@@ -774,7 +774,7 @@ a.ml-row:active { background: var(--color-surface); }
   font-weight: var(--weight-3);
   font-variant-numeric: tabular-nums;
 }
-.ml-otp__box.is-filled { border-color: var(--color-pink); border-width: 2px; color: var(--color-ink); }
+.ml-otp__box.is-filled { border-color: var(--color-pink); border-width: var(--border-2); color: var(--color-ink); }
 .ml-otp__box.is-invalid { border-color: var(--color-error); color: var(--color-error);
   background: var(--status-error-bg); }
 
@@ -785,7 +785,7 @@ a.ml-row:active { background: var(--color-surface); }
   display: flex; align-items: center; gap: var(--space-1);
   min-height: var(--size-3);
   padding: 0 var(--space-3);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-4);
   background: var(--color-white);
   font-size: var(--type-2); font-weight: var(--weight-3);
@@ -852,7 +852,7 @@ a.ml-row:active { background: var(--color-surface); }
   width: 100%;
   min-height: var(--size-4);
   padding: var(--space-3);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-2);
   background: var(--color-white);
   color: inherit; text-align: left; text-decoration: none;
@@ -863,7 +863,7 @@ a.ml-row:active { background: var(--color-surface); }
 .ml-choice + .ml-choice { margin-top: var(--space-2); }
 .ml-choice:active { background: var(--color-surface); }
 .ml-choice[aria-checked="true"], .ml-choice.is-selected {
-  border-color: var(--color-ink); border-width: 2px;
+  border-color: var(--color-ink); border-width: var(--border-2);
 }
 .ml-choice__body { flex: 1; min-width: 0; }
 /* display:block is required, not cosmetic: these are <span> (an <a>/<button>
@@ -873,7 +873,7 @@ a.ml-row:active { background: var(--color-surface); }
 .ml-choice__meta  { display: block; font-size: var(--type-1); color: var(--color-muted); }
 .ml-choice__mark {
   width: var(--icon-3); height: var(--icon-3); flex: none;
-  border: 2px solid var(--color-line);
+  border: var(--border-2) solid var(--color-line);
   border-radius: var(--radius-4);
   display: flex; align-items: center; justify-content: center;
   color: transparent;
@@ -997,7 +997,7 @@ a.ml-row:active { background: var(--color-surface); }
   display: inline-flex; align-items: center; justify-content: center;
   flex: none;
   width: var(--icon-3); height: var(--icon-3);
-  border: 2px solid var(--color-line);
+  border: var(--border-2) solid var(--color-line);
   border-radius: var(--radius-1);
   background: var(--color-white);
   color: transparent;
@@ -1036,7 +1036,7 @@ a.ml-row:active { background: var(--color-surface); }
   width: 100%;
   min-height: var(--size-4);
   padding: var(--space-3) var(--size-3) var(--space-3) var(--space-3);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-4);
   background: var(--color-white);
   color: var(--color-ink);
@@ -1051,8 +1051,8 @@ a.ml-row:active { background: var(--color-surface); }
   right: var(--space-3); top: 50%;
   width: 8px; height: 8px;
   margin-top: -6px;
-  border-right: 2px solid var(--color-muted);
-  border-bottom: 2px solid var(--color-muted);
+  border-right: var(--border-2) solid var(--color-muted);
+  border-bottom: var(--border-2) solid var(--color-muted);
   transform: rotate(45deg);
   pointer-events: none;
 }
@@ -1097,8 +1097,8 @@ a.ml-row:active { background: var(--color-surface); }
    keyboard-accessible for free. FAQ and settings screens need it. */
 /* Compose: ExpandableCard                                                    */
 
-.ml-accordion { border-top: 1px solid var(--color-line); }
-.ml-accordion:last-of-type { border-bottom: 1px solid var(--color-line); }
+.ml-accordion { border-top: var(--border-1) solid var(--color-line); }
+.ml-accordion:last-of-type { border-bottom: var(--border-1) solid var(--color-line); }
 .ml-accordion > summary {
   display: flex; align-items: center; gap: var(--space-3);
   min-height: var(--size-4);
@@ -1110,8 +1110,8 @@ a.ml-row:active { background: var(--color-surface); }
 .ml-accordion > summary::after {
   content: ""; flex: none; margin-left: auto;
   width: 8px; height: 8px;
-  border-right: 2px solid var(--color-muted);
-  border-bottom: 2px solid var(--color-muted);
+  border-right: var(--border-2) solid var(--color-muted);
+  border-bottom: var(--border-2) solid var(--color-muted);
   transform: rotate(45deg) translate(-2px, -2px);
   transition: transform var(--duration-2) var(--ease-standard);
 }

@@ -97,7 +97,7 @@
   flex: none;
   display: flex;
   align-items: stretch;
-  border-top: 1px solid var(--color-line);
+  border-top: var(--border-1) solid var(--color-line);
   /* translucent so content scrolling under it stays legible, like the OS bars */
   background: color-mix(in srgb, var(--color-white) 94%, transparent);
   backdrop-filter: saturate(180%) blur(16px);
@@ -155,7 +155,7 @@
   width: 86px;
   min-height: var(--size-4);
   padding: var(--space-2);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-2);
   background: var(--color-white);
   color: inherit;
@@ -170,7 +170,7 @@
   background: var(--color-pink-container);
   color: var(--color-pink);
 }
-.ml-cat-tile__icon svg { width: 20px; height: 20px; }
+.ml-cat-tile__icon svg { width: var(--icon-2); height: var(--icon-2); }
 .ml-cat-tile__label { font-size: var(--type-1); font-weight: var(--weight-3); text-align: center; }
 
 /* ── artist card ───────────────────────────────────────────────────────── */
@@ -179,7 +179,7 @@
 .ml-artist-card {
   width: 168px;
   background: var(--color-white);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-2);
   overflow: hidden;
   color: inherit;
@@ -214,7 +214,7 @@
 .ml-studio-card {
   width: 220px;
   background: var(--color-white);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-2);
   overflow: hidden;
   color: inherit;
@@ -268,7 +268,7 @@
 .ml-market-card {
   width: 168px;
   background: var(--color-white);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-2);
   overflow: hidden;
   color: inherit; text-decoration: none; display: block;
@@ -332,7 +332,7 @@
 .ml-stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
 .ml-stat {
   padding: var(--space-3);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-2);
   background: var(--color-white);
 }
@@ -407,7 +407,7 @@
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: var(--space-1);
   aspect-ratio: 1/1;
-  border: 1px dashed var(--color-line);
+  border: var(--border-1) dashed var(--color-line);
   border-radius: var(--radius-1);
   background: var(--color-white);
   color: var(--color-muted);
@@ -450,7 +450,7 @@
   width: 100%; max-width: 430px;
   display: flex; align-items: center; gap: var(--space-2);
   padding: var(--space-2) var(--space-3);
-  border-top: 1px solid var(--color-line);
+  border-top: var(--border-1) solid var(--color-line);
   background: color-mix(in srgb, var(--color-white) 94%, transparent);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -533,7 +533,7 @@
   overflow-x: auto;
   margin-inline: calc(var(--space-3) * -1);
   padding-inline: var(--space-3);
-  border-bottom: 1px solid var(--color-line);
+  border-bottom: var(--border-1) solid var(--color-line);
   scrollbar-width: none;
 }
 .ml-tabs::-webkit-scrollbar { display: none; }
@@ -544,7 +544,7 @@
   min-height: var(--size-3);
   padding: 0 2px;
   border: 0;
-  border-bottom: 2px solid transparent;
+  border-bottom: var(--border-2) solid transparent;
   background: none;
   color: var(--color-muted);
   font-family: var(--font-body);
@@ -589,7 +589,7 @@
   color: inherit;
   text-decoration: none;
 }
-.ml-result + .ml-result { border-top: 1px solid var(--color-line); }
+.ml-result + .ml-result { border-top: var(--border-1) solid var(--color-line); }
 .ml-result__thumb {
   width: var(--size-4); height: var(--size-4);
   border-radius: var(--radius-4);
@@ -630,7 +630,7 @@
 
 .ml-community {
   display: block; width: 260px;
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-2);
   overflow: hidden;
   background: var(--color-white);
@@ -647,7 +647,7 @@
 .ml-facepile { display: flex; margin-top: var(--space-2); }
 .ml-facepile img {
   width: 24px; height: 24px; border-radius: var(--radius-4);
-  object-fit: cover; border: 2px solid var(--color-white);
+  object-fit: cover; border: var(--border-2) solid var(--color-white);
 }
 .ml-facepile img + img { margin-left: -8px; }
 
@@ -658,7 +658,7 @@
 .ml-service {
   display: flex; flex-direction: column; gap: var(--space-2);
   padding: var(--space-3);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-2);
   background: var(--color-white);
   color: inherit; text-decoration: none;
@@ -752,7 +752,7 @@
   padding: var(--space-2);
   border-radius: var(--radius-3);
   background: var(--color-white);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   color: inherit;
   text-decoration: none;
 }
@@ -942,7 +942,7 @@
 @keyframes ml-typing { 0%, 60%, 100% { opacity: 0.5; transform: translateY(0); }
                         30% { opacity: 1; transform: translateY(-3px); } }
 .ml-bubble--failed { background: var(--status-error-bg);
-                      color: var(--color-ink); border: 1px solid color-mix(in srgb, var(--color-error) 32%, transparent); }
+                      color: var(--color-ink); border: var(--border-1) solid color-mix(in srgb, var(--color-error) 32%, transparent); }
 .ml-bubble__error {
   display: flex; align-items: center; gap: 4px; margin-top: 4px;
   font-size: var(--type-1); color: var(--status-error-text);
@@ -959,13 +959,13 @@
   display: flex; align-items: flex-end; gap: var(--space-2);
   padding: var(--space-2) var(--space-3);
   padding-bottom: calc(var(--space-2) + var(--safe-bottom));
-  border-top: 1px solid var(--color-line);
+  border-top: var(--border-1) solid var(--color-line);
   background: var(--color-white);
 }
 .ml-composer textarea {
   flex: 1; min-height: var(--size-3); max-height: 120px;
   padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-line); border-radius: var(--radius-2);
+  border: var(--border-1) solid var(--color-line); border-radius: var(--radius-2);
   background: var(--color-white); color: var(--color-ink);
   font-family: var(--font-body); font-size: var(--type-2); resize: none;
 }
@@ -976,7 +976,7 @@
   display: flex; align-items: center; gap: var(--space-3);
   min-height: var(--size-4);
   padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-line); border-radius: var(--radius-2);
+  border: var(--border-1) solid var(--color-line); border-radius: var(--radius-2);
   background: var(--color-white); color: inherit; text-decoration: none;
 }
 .ml-attachment__icon {
@@ -998,7 +998,7 @@
 .ml-timeline__item {
   position: relative;
   padding: 0 0 var(--space-4) var(--space-4);
-  border-left: 2px solid var(--color-line);
+  border-left: var(--border-2) solid var(--color-line);
 }
 .ml-timeline__item:last-child { border-left-color: transparent; padding-bottom: 0; }
 .ml-timeline__item::before {
@@ -1066,7 +1066,7 @@
    a card per post turns it into a grid of unrelated objects. */
 /* Compose: FeedPostCard                                                     */
 
-.ml-post { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-line); }
+.ml-post { padding: var(--space-3) 0; border-bottom: var(--border-1) solid var(--color-line); }
 .ml-post__head { display: flex; align-items: center; gap: var(--space-2); }
 .ml-post__head img { width: var(--size-2); height: var(--size-2); border-radius: var(--radius-4); object-fit: cover; flex: none; }
 .ml-post__who { flex: 1; min-width: 0; }
@@ -1106,7 +1106,7 @@
 .ml-opportunity-card {
   display: block;
   padding: var(--space-3);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-2);
   background: var(--color-white);
   color: inherit; text-decoration: none;
@@ -1130,7 +1130,7 @@
 .ml-application-card {
   display: flex; gap: var(--space-3);
   padding: var(--space-3);
-  border: 1px solid var(--color-line); border-radius: var(--radius-2);
+  border: var(--border-1) solid var(--color-line); border-radius: var(--radius-2);
   background: var(--color-white); color: inherit; text-decoration: none;
 }
 .ml-application-card__body { flex: 1; min-width: 0; }
@@ -1143,7 +1143,7 @@
 
 .ml-band-card {
   display: block; width: 260px;
-  border: 1px solid var(--color-line); border-radius: var(--radius-2);
+  border: var(--border-1) solid var(--color-line); border-radius: var(--radius-2);
   overflow: hidden; background: var(--color-white);
   color: inherit; text-decoration: none;
 }
@@ -1171,7 +1171,7 @@
    The confirmation state is the whole point of the Credits Trust Engine. */
 
 .ml-credit { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) 0; }
-.ml-credit + .ml-credit { border-top: 1px solid var(--color-line); }
+.ml-credit + .ml-credit { border-top: var(--border-1) solid var(--color-line); }
 .ml-credit__body { flex: 1; min-width: 0; }
 .ml-credit__who { font-size: var(--type-2); font-weight: var(--weight-3); }
 .ml-credit__role { display: block; font-size: var(--type-1); color: var(--color-muted); }
@@ -1181,12 +1181,12 @@
    booking flow needs it too. The total is separated by a rule and set in the
    display face, because it is the number people actually read. */
 
-.ml-summary { border: 1px solid var(--color-line); border-radius: var(--radius-2); padding: var(--space-3); background: var(--color-white); }
+.ml-summary { border: var(--border-1) solid var(--color-line); border-radius: var(--radius-2); padding: var(--space-3); background: var(--color-white); }
 .ml-summary__row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); padding: var(--space-1) 0; font-size: var(--type-2); }
 .ml-summary__row span:first-child { color: var(--color-muted); }
 .ml-summary__row--total {
   margin-top: var(--space-2); padding-top: var(--space-3);
-  border-top: 1px solid var(--color-line);
+  border-top: var(--border-1) solid var(--color-line);
   font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-4); letter-spacing: -0.01em;
 }
 .ml-summary__row--total span:first-child { color: var(--color-ink); }
@@ -1221,7 +1221,7 @@
 .ml-deck__btn {
   display: inline-flex; align-items: center; justify-content: center;
   width: var(--size-4); height: var(--size-4);
-  border: 1px solid var(--color-line); border-radius: var(--radius-4);
+  border: var(--border-1) solid var(--color-line); border-radius: var(--radius-4);
   background: var(--color-white); cursor: pointer;
 }
 .ml-deck__btn--yes { background: var(--color-ink); color: var(--color-white); border-color: var(--color-ink); }
@@ -1235,7 +1235,7 @@
 .ml-slot {
   display: flex; align-items: center; justify-content: center;
   min-height: var(--size-3);
-  border: 1px solid var(--color-line); border-radius: var(--radius-4);
+  border: var(--border-1) solid var(--color-line); border-radius: var(--radius-4);
   background: var(--color-white); color: var(--color-ink);
   font-family: var(--font-body); font-size: var(--type-2); font-weight: var(--weight-3);
   font-variant-numeric: tabular-nums; cursor: pointer;
@@ -1297,7 +1297,7 @@
   position: relative;
   display: inline-flex; align-items: center; justify-content: center;
   width: var(--size-1); height: var(--size-1); flex: none;
-  border: 1px solid var(--color-line); border-radius: var(--radius-4);
+  border: var(--border-1) solid var(--color-line); border-radius: var(--radius-4);
   background: var(--color-white); color: var(--color-muted); cursor: pointer;
 }
 .ml-mixer__mute[aria-pressed="true"] { background: var(--color-ink); color: var(--color-white); border-color: var(--color-ink); }
@@ -1370,7 +1370,7 @@
 .ml-bento__card {
   display: flex; flex-direction: column; gap: var(--space-3);
   padding: var(--space-4);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-3);
   background: var(--color-white);
   transition: transform var(--duration-3) var(--ease-standard);
@@ -1399,7 +1399,7 @@
 .ml-split {
   display: grid; gap: var(--space-3);
   padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--color-line);
+  border-bottom: var(--border-1) solid var(--color-line);
 }
 .ml-split:last-child { border-bottom: 0; }
 @media (min-width: 600px) {
@@ -1440,7 +1440,7 @@
   background: color-mix(in srgb, var(--color-white) 72%, transparent);
   backdrop-filter: saturate(180%) blur(16px);
   -webkit-backdrop-filter: saturate(180%) blur(16px);
-  border: 1px solid color-mix(in srgb, var(--color-white) 40%, transparent);
+  border: var(--border-1) solid color-mix(in srgb, var(--color-white) 40%, transparent);
 }
 .ml-glass--dark {
   background: color-mix(in srgb, var(--color-ink) 62%, transparent);
@@ -1536,7 +1536,7 @@
   padding: var(--space-1);
   border-radius: var(--radius-2);
   background: var(--color-white);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   box-shadow: var(--elevation-2);
 }
 .ml-pop--left { right: auto; left: 0; }
@@ -1594,7 +1594,7 @@
   padding: var(--space-1);
   border-radius: var(--radius-2);
   background: var(--color-white);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   box-shadow: var(--elevation-2);
 }
 /* Markup contract: an icon may be the first child, but the label must be a
@@ -1655,9 +1655,9 @@
   padding: var(--space-4);
   border-radius: var(--radius-2);
   background: var(--color-white);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
 }
-.ml-tier--featured { border: 2px solid var(--color-ink); }
+.ml-tier--featured { border: var(--border-2) solid var(--color-ink); }
 .ml-tier__flag {
   position: absolute; top: calc(var(--space-2) * -1); left: var(--space-4);
   padding: var(--space-1) var(--space-2);
@@ -1692,7 +1692,7 @@
 .ml-trends__head {
   display: grid; grid-template-columns: 3ch 1fr auto;
   gap: var(--space-3); padding: var(--space-2) 0;
-  border-bottom: 1px solid var(--color-line);
+  border-bottom: var(--border-1) solid var(--color-line);
   font-size: var(--type-1); font-weight: var(--weight-3);
   text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-muted);
 }
@@ -1700,7 +1700,7 @@
   display: grid; grid-template-columns: 3ch 1fr auto;
   gap: var(--space-3); align-items: center;
   padding: var(--space-3) 0;
-  border-bottom: 1px solid var(--color-line);
+  border-bottom: var(--border-1) solid var(--color-line);
   text-decoration: none; color: inherit;
   min-height: var(--size-3);
 }
@@ -1747,7 +1747,7 @@
 .ml-btn--social {
   justify-content: center; gap: var(--space-2);
   background: var(--color-white); color: var(--color-ink);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
 }
 .ml-btn--social:hover { background: var(--color-surface); }
 .ml-btn--social svg { flex: none; width: var(--icon-2); height: var(--icon-2); }
@@ -1774,7 +1774,7 @@
   display: flex; align-items: center; justify-content: space-between; gap: var(--space-2);
   padding: var(--space-2) var(--space-3);
   background: var(--color-white);
-  border-top: 1px solid var(--color-line);
+  border-top: var(--border-1) solid var(--color-line);
   padding-bottom: calc(var(--space-2) + env(safe-area-inset-bottom, 0px));
 }
 .ml-ime-bar__done { margin-left: auto; }
@@ -1819,7 +1819,7 @@
 .ml-testimonial {
   display: flex; flex-direction: column; gap: var(--space-3);
   padding: var(--space-4);
-  border: 1px solid var(--color-line);
+  border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-3);
   background: var(--color-white);
 }
@@ -1827,7 +1827,7 @@
 .ml-testimonial__user { display: flex; align-items: center; gap: var(--space-2); }
 .ml-testimonial__name { font-size: var(--type-1); font-weight: var(--weight-3); }
 .ml-testimonial__role { font-size: var(--type-1); color: var(--color-muted); }
-.ml-testimonial__stats { display: flex; gap: var(--space-4); padding-top: var(--space-3); border-top: 1px solid var(--color-line); }
+.ml-testimonial__stats { display: flex; gap: var(--space-4); padding-top: var(--space-3); border-top: var(--border-1) solid var(--color-line); }
 .ml-testimonial__stat b { display: block; font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-4); font-variant-numeric: tabular-nums; }
 .ml-testimonial__stat span { font-size: var(--type-1); color: var(--color-muted); }
 
@@ -1860,7 +1860,7 @@
    verified it — a tick with no source is decoration, and this system already
    refuses those elsewhere. */
 
-.ml-trust { display: grid; gap: var(--space-3); padding: var(--space-4); border: 1px solid var(--color-line); border-radius: var(--radius-3); background: var(--color-white); }
+.ml-trust { display: grid; gap: var(--space-3); padding: var(--space-4); border: var(--border-1) solid var(--color-line); border-radius: var(--radius-3); background: var(--color-white); }
 .ml-trust__row { display: flex; align-items: flex-start; gap: var(--space-3); }
 .ml-trust__mark {
   display: inline-flex; align-items: center; justify-content: center;
@@ -1871,7 +1871,7 @@
 }
 .ml-trust__what { font-size: var(--type-2); font-weight: var(--weight-3); }
 .ml-trust__who  { font-size: var(--type-1); color: var(--color-muted); }
-.ml-trust__stats { display: flex; gap: var(--space-4); padding-top: var(--space-3); border-top: 1px solid var(--color-line); }
+.ml-trust__stats { display: flex; gap: var(--space-4); padding-top: var(--space-3); border-top: var(--border-1) solid var(--color-line); }
 
 /* ── sticker ───────────────────────────────────────────────────────────── */
 /* Compose: overlay Text with rotation                                       */
@@ -1960,7 +1960,7 @@
    long, and that sound is arriving. The dot pulses, the timer counts, the
    meter moves — drop any one and the user cannot tell a dead mic from silence. */
 
-.ml-rec { display: grid; gap: var(--space-3); padding: var(--space-4); border: 1px solid var(--color-line); border-radius: var(--radius-3); background: var(--color-white); }
+.ml-rec { display: grid; gap: var(--space-3); padding: var(--space-4); border: var(--border-1) solid var(--color-line); border-radius: var(--radius-3); background: var(--color-white); }
 .ml-rec__head { display: flex; align-items: center; gap: var(--space-2); }
 .ml-rec__dot { width: 10px; height: 10px; border-radius: var(--radius-4); background: var(--color-error); flex: none; }
 .ml-rec.is-live .ml-rec__dot { animation: ml-rec-pulse 1.4s ease-in-out infinite; }
@@ -1980,7 +1980,7 @@
 .ml-dropzone {
   display: grid; place-items: center; gap: var(--space-2);
   padding: var(--space-4);
-  border: 2px dashed var(--color-line);
+  border: var(--border-2) dashed var(--color-line);
   border-radius: var(--radius-3);
   background: var(--color-white);
   text-align: center;
@@ -2003,7 +2003,7 @@
    target. Saving is explicit: silent autosave on a profile is how people
    publish half a sentence. */
 
-.ml-inline { display: flex; align-items: center; gap: var(--space-2); width: 100%; min-height: var(--size-3); padding: var(--space-2); border: 1px solid transparent; border-radius: var(--radius-1); background: none; font: inherit; text-align: left; cursor: text; }
+.ml-inline { display: flex; align-items: center; gap: var(--space-2); width: 100%; min-height: var(--size-3); padding: var(--space-2); border: var(--border-1) solid transparent; border-radius: var(--radius-1); background: none; font: inherit; text-align: left; cursor: text; }
 .ml-inline:hover { border-color: var(--color-line); background: var(--color-white); }
 .ml-inline__pencil { margin-left: auto; color: var(--color-muted); flex: none; opacity: 0; }
 .ml-inline:hover .ml-inline__pencil, .ml-inline:focus-within .ml-inline__pencil { opacity: 1; }
@@ -2037,7 +2037,7 @@
 
 .ml-banner--offline { background: var(--color-ink); color: var(--color-white); }
 .ml-banner--offline .ml-banner__body { color: color-mix(in srgb, var(--color-white) 78%, transparent); }
-.ml-banner--promo { background: var(--color-surface); border: 1px solid var(--color-line); }
+.ml-banner--promo { background: var(--color-surface); border: var(--border-1) solid var(--color-line); }
 .ml-banner__dismiss { position: relative; margin-left: auto; border: 0; background: none; color: inherit; padding: var(--space-1); cursor: pointer; display: inline-flex; }
 .ml-banner__dismiss::after {
   content: ""; position: absolute; top: 50%; left: 50%;
@@ -2051,7 +2051,7 @@
    ground to scan — it is one of the few places the system fixes white
    regardless of surface, because scanners require the contrast. */
 
-.ml-qr { display: grid; gap: var(--space-3); justify-items: center; padding: var(--space-4); border: 1px solid var(--color-line); border-radius: var(--radius-3); background: var(--color-white); text-align: center; }
+.ml-qr { display: grid; gap: var(--space-3); justify-items: center; padding: var(--space-4); border: var(--border-1) solid var(--color-line); border-radius: var(--radius-3); background: var(--color-white); text-align: center; }
 .ml-qr__code { padding: var(--space-3); background: var(--color-white); border-radius: var(--radius-2); line-height: 0; }
 .ml-qr__handle { font-family: var(--font-display); font-size: var(--type-2); font-weight: var(--weight-3); }
 .ml-qr__hint { font-size: var(--type-1); color: var(--color-muted); }
@@ -2081,7 +2081,7 @@
 .ml-footer-cta { display: grid; gap: var(--space-3); padding: var(--space-4); border-radius: var(--radius-3); background: var(--color-ink); color: var(--color-white); text-align: center; }
 .ml-footer-cta__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-4); line-height: 1.15; margin: 0; }
 .ml-footer-cta__sub { font-size: var(--type-2); color: color-mix(in srgb, var(--color-white) 78%, transparent); margin: 0; }
-.ml-footer-cta__links { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); padding-top: var(--space-3); border-top: 1px solid color-mix(in srgb, var(--color-white) 16%, transparent); }
+.ml-footer-cta__links { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); padding-top: var(--space-3); border-top: var(--border-1) solid color-mix(in srgb, var(--color-white) 16%, transparent); }
 .ml-footer-cta__links a { color: color-mix(in srgb, var(--color-white) 78%, transparent); text-decoration: none; font-size: var(--type-1); }
 .ml-footer-cta__links a:hover { color: var(--color-white); text-decoration: underline; }
 
@@ -2107,11 +2107,11 @@
 .ml-appgrid__cell { display: grid; gap: var(--space-2); justify-items: center; }
 /* 96px mirrors Android's real 108dp adaptive-icon canvas at typical mdpi
    preview scale — a platform constant, not a design-scale value. */
-.ml-appgrid__canvas { position: relative; width: 96px; height: 96px; display: grid; place-items: center; background: var(--color-surface); border: 1px solid var(--color-line); }
+.ml-appgrid__canvas { position: relative; width: 96px; height: 96px; display: grid; place-items: center; background: var(--color-surface); border: var(--border-1) solid var(--color-line); }
 .ml-appgrid__canvas--circle { border-radius: var(--radius-4); }
 .ml-appgrid__canvas--squircle { border-radius: 28px; } /* approximates the OEM squircle mask at this canvas size */
 .ml-appgrid__canvas--rounded { border-radius: var(--radius-2); }
-.ml-appgrid__safe { position: absolute; width: 66.6%; height: 66.6%; border: 1px dashed var(--color-pink); border-radius: var(--radius-4); pointer-events: none; }
+.ml-appgrid__safe { position: absolute; width: 66.6%; height: 66.6%; border: var(--border-1) dashed var(--color-pink); border-radius: var(--radius-4); pointer-events: none; }
 .ml-appgrid__label { font-size: var(--type-1); color: var(--color-muted); }
 
 /* ── person row ────────────────────────────────────────────────────────── */
@@ -2131,7 +2131,7 @@
 .ml-person-row {
   display: flex; align-items: center; gap: var(--space-2);
   padding: var(--space-2) 0;
-  border-bottom: 1px solid var(--color-line);
+  border-bottom: var(--border-1) solid var(--color-line);
   text-decoration: none; color: inherit;
   min-height: var(--size-3);
 }
