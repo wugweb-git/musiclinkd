@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T06:31:01.811Z",
+  "generatedAt": "2026-08-31T06:39:12.969Z",
   "flows": [
     {
       "key": "home",
@@ -5684,7 +5684,8 @@
       "screenTitle": "Public Profile — Talent template",
       "screenOrder": 2,
       "states": [
-        "default"
+        "default",
+        "owner"
       ],
       "collectionsTouched": [
         "users",

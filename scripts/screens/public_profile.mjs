@@ -16,15 +16,24 @@
 import { writeScreen, backArrow, icon, assertIcons, finish, media } from "../write-screen.mjs";
 
 const P = "/preview/flows/public_profile/";
-assertIcons(["arrow-forward", "send", "heart", "star"]);
+assertIcons(["arrow-forward", "send", "heart", "star", "check-circle-fill", "edit", "graph-bar"]);
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
       <h1 class="ml-type-2" style="margin:0">${title}</h1>
     </header>`;
 
-/* ── one public profile, three subjects ─────────────────────────────────── */
-const profileView = ({ screen, name, tagline, cover, face, stat, about, sections, cta }) =>
+/* ── one public profile, five subjects ──────────────────────────────────
+   Everything past `sections` is optional, and only the talent template asks
+   for all of it. That template carries the flow's one real dataContract
+   (Arijit Sen — users, portfolio_projects, reviews), and it used to be
+   written twice: a second generator authored a richer version of this exact
+   screen and lost the race to this one, so its verified mark, trust block,
+   music identity and owner view never reached the site. Folded in here as
+   parameters, so the richer content is served BY the composer rather than
+   against it. */
+const profileView = ({ screen, name, tagline, cover, face, stat, about, sections, cta,
+                       verified = false, availability, trust, identity, work, owner = false }) =>
   writeScreen({
     flow: "public_profile", screen, title: `Profile — ${name}`,
     body: `
@@ -36,14 +45,53 @@ const profileView = ({ screen, name, tagline, cover, face, stat, about, sections
       <div style="padding:0 var(--space-4)">
         <img class="ml-avatar ml-avatar--lg ml-lift" src="${face}" alt="" loading="lazy"
              style="margin-top:calc(var(--size-3) * -1)" />
-        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">${name}</h2>
+        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">${name}${verified ? ` ${icon("check-circle-fill", { size: 18 })}` : ""}</h2>
         <p class="ml-type-1" style="color:var(--color-muted);margin:0">${tagline}</p>
         <div class="ml-rating" style="margin-top:var(--space-2)">
           <span class="ml-rating__score">${stat[0]}</span>
           <span class="ml-rating__count">· ${stat[1]}</span>
         </div>
+        ${availability ? `<p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-2) 0 0;display:flex;align-items:center;gap:var(--space-1)"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;flex:none"></span>${availability}</p>` : ""}
+
+        ${owner ? `<!-- Public and owner are one screen with two states, not two
+             profiles: "It is the same profile with owner controls." The owner
+             actions replace the public ones in the same slot rather than
+             sitting beside them. -->
+        <div class="ml-action-row" data-state="owner">
+          <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/profile_management/edit_identity/index.html">${icon("edit", { size: 16 })} Edit profile</a>
+          <a class="ml-btn ml-btn--secondary" href="${P}profile_analytics/index.html" aria-label="Analytics">${icon("graph-bar", { size: 16 })}</a>
+        </div>
+        <a class="ml-link" data-state="owner" href="?state=default" style="display:block;text-align:center;font-size:var(--type-1);margin-top:var(--space-2)">View as public</a>` : ""}
 
         <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">${about}</p>
+
+        ${trust ? `<!-- Trust as numbers with their source, not a wall of badges. -->
+        <div class="ml-trust" style="margin-top:var(--space-3)">
+          <div class="ml-trust__row">
+            <span class="ml-trust__mark">${icon("check-circle-fill", { size: 14 })}</span>
+            <div><div class="ml-trust__what">${trust.what}</div><div class="ml-trust__who">${trust.who}</div></div>
+          </div>
+          <div class="ml-trust__stats">
+            ${trust.stats.map(([n, l]) => `<div class="ml-testimonial__stat"><b>${n}</b><span>${l}</span></div>`).join("\n            ")}
+          </div>
+        </div>` : ""}
+
+        ${identity ? `<div class="ml-section" style="margin-top:var(--space-3)"><h3>Music identity</h3></div>
+        ${identity.map(([label, chips]) => `<div class="ml-type-1" style="color:var(--color-muted);margin-bottom:var(--space-1)">${label}</div>
+        <div class="ml-chip-wrap" style="margin-bottom:var(--space-3)">
+          ${chips.map((c) => `<span class="ml-chip">${c}</span>`).join("")}
+        </div>`).join("\n        ")}` : ""}
+
+        ${work ? `<div class="ml-section" style="margin-top:var(--space-3)"><h3>Featured work</h3></div>
+        <div class="ml-rail">
+          ${work.map(([img, t, sub, href]) => `<a class="ml-media-card" href="${href}">
+            <img src="${img}" alt="" loading="lazy" />
+            <div class="ml-media-card__body">
+              <div class="ml-media-card__title">${t}</div>
+              <div class="ml-media-card__sub">${sub}</div>
+            </div>
+          </a>`).join("\n          ")}
+        </div>` : ""}
 
         ${sections}
 
@@ -59,7 +107,7 @@ const profileView = ({ screen, name, tagline, cover, face, stat, about, sections
         </article>
       </div>
     </main>
-    <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
+    <footer class="ml-app__footer"${owner ? ` data-state="default"` : ""} style="display:flex;gap:var(--space-2)">
       <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/communication/chat_conversation/index.html">Message</a>
       <a class="ml-btn ml-btn--primary" style="flex:1" href="${cta[1]}">${cta[0]}</a>
     </footer>
@@ -153,18 +201,29 @@ profileView({
 
 /* public_profile_view_talent and _venue already existed but were authored
    separately: venue had no heading at all, no way out, and two hardcoded 2px
-   values. Running them through the same composer is the point of having one. */
-profileView({
-  screen: "public_profile_view_talent", name: "Meera Nair", tagline: "Playback vocalist · Kochi",
-  cover: media("stage", 11), face: media("faces", 4), stat: ["5.0", "24 sessions"],
-  about: "Playback and session vocals in Malayalam, Tamil and Hindi. Trained Carnatic, comfortable across film and independent work.",
-  cta: ["Book a session", "/preview/flows/booking/studio_discovery/index.html"],
-  sections: `<div class="ml-section" style="margin-top:var(--space-3)"><h3>Works with</h3></div>
-        <div class="ml-chip-wrap">
-          ${["Film", "Carnatic", "Malayalam", "Tamil", "Hindi"].map((g) => `<span class="ml-chip">${g}</span>`).join("\n          ")}
-        </div>
+   values. Running them through the same composer is the point of having one.
 
-        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Services</h3>
+   Talent is the flow's one screen with a real seeded dataContract, so its
+   content is that contract rather than invented: Arijit Sen, singer and
+   composer, Mumbai; the three genres, three languages and one instrument
+   from users; the released project from portfolio_projects; the five-star
+   T-Series review from reviews. The avatarUrl in the seed is a stock URL and
+   is deliberately not used — brand photography only. */
+profileView({
+  screen: "public_profile_view_talent", name: "Arijit Sen", tagline: "Singer · Composer · Mumbai, MH",
+  cover: media("stage", 11), face: media("faces", 4), stat: ["5.0", "24 sessions"],
+  verified: true, owner: true,
+  availability: "Available for collaboration · Touring",
+  about: "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+  trust: { what: "Verified Artist", who: "Identity confirmed on MusicLinkd",
+           stats: [["5.0", "Rating"], ["10+ yrs", "Touring &amp; session work"]] },
+  identity: [["Genres", ["Bollywood / Filmi", "Sufi Devotional", "Acoustic / Unplugged"]],
+             ["Languages", ["Hindi", "Bengali", "English"]],
+             ["Instruments", ["Acoustic Guitar"]]],
+  work: [[media("stage", 3), "Tum Hi Toh (Unplugged)", "4.2M plays · Released Feb 2026",
+          "/preview/flows/portfolio/profile_project_view/index.html"]],
+  cta: ["Book a session", "/preview/flows/booking/studio_discovery/index.html"],
+  sections: `<div class="ml-section" style="margin-top:var(--space-3)"><h3>Services</h3>
           <a class="ml-section__link" href="${P}talent_services_view/index.html">See rates</a></div>
         <div class="ml-summary">
           <div class="ml-summary__row"><span>Playback session</span><span>₹18,000/day</span></div>

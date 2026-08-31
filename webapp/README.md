@@ -42,7 +42,12 @@ is enforced rather than aspirational: `audit-screens.mjs` reports each.
 **Screens are generated, never hand-edited**, and each lives in exactly one
 `scripts/screens/<flow>.mjs`. That is a rule with teeth: two generators writing
 one screen means whichever runs last wins, which silently reverted three
-screens on 2026-08-31 while every audit stayed green. To check for it:
+screens on 2026-08-31 while every audit stayed green. It bit a
+second time the same week: `public_profile_view_talent` was written by both
+`profile.mjs` and `public_profile.mjs`, and the loser held the screen's
+richer, dataContract-backed content, which therefore never shipped. That
+content now lives in `public_profile.mjs`'s composer and `profile.mjs` is
+gone. To check for it:
 
 ```bash
 MARK=/tmp/genmark; touch $MARK; sleep 1

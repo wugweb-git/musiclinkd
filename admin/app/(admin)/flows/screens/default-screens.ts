@@ -1392,6 +1392,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       variantOf: 98,
       variantLabel: "Talent template",
       title: "Public Profile — Talent template",
+      states: ["default", "owner"],
       collectionsTouched: ["users", "portfolio_projects", "reviews"],
       notes: "profileType === \"TALENT\" — renders base UserDoc fields (no extension block).",
     },
