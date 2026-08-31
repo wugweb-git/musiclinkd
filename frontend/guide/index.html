@@ -8,7 +8,10 @@
 <link rel="icon" href="/assets/img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<!-- Axes requested here must match foundation.weight in tokens.json exactly.
+     700 was dropped on 2026-08-31: fetching a weight the system cannot name
+     is how a stray 700 gets to render correctly and go unnoticed. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@600;800&family=Unica+One&display=swap" rel="stylesheet">
 <!-- The catalogue is styled with the system it documents. There is no second
      stylesheet: a broken component breaks this page. -->
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
@@ -168,11 +171,11 @@
     <div style="margin-bottom:var(--space-4)">
       <div class="ml-row__meta"><code>--font-display</code> · Inter Tight · Screen titles, hero headlines, numbers that matter</div>
       <div style="font-family:'Inter Tight',sans-serif;font-size:28px;line-height:1.15;margin-top:var(--space-2)">
-        <div style="font-weight:600">600 — MusicLinkd, the professional network for music</div><div style="font-weight:700">700 — MusicLinkd, the professional network for music</div><div style="font-weight:800">800 — MusicLinkd, the professional network for music</div>
+        <div style="font-weight:var(--weight-3)">600 <span class="ml-row__meta">--weight-3</span> — MusicLinkd, the professional network for music</div><div style="font-weight:var(--weight-4)">800 <span class="ml-row__meta">--weight-4</span> — MusicLinkd, the professional network for music</div>
       </div></div><div style="margin-bottom:var(--space-4)">
       <div class="ml-row__meta"><code>--font-body</code> · Inter · Everything else</div>
       <div style="font-family:'Inter',sans-serif;font-size:28px;line-height:1.15;margin-top:var(--space-2)">
-        <div style="font-weight:400">400 — MusicLinkd, the professional network for music</div><div style="font-weight:500">500 — MusicLinkd, the professional network for music</div><div style="font-weight:600">600 — MusicLinkd, the professional network for music</div><div style="font-weight:700">700 — MusicLinkd, the professional network for music</div>
+        <div style="font-weight:var(--weight-1)">400 <span class="ml-row__meta">--weight-1</span> — MusicLinkd, the professional network for music</div><div style="font-weight:var(--weight-2)">500 <span class="ml-row__meta">--weight-2</span> — MusicLinkd, the professional network for music</div><div style="font-weight:var(--weight-3)">600 <span class="ml-row__meta">--weight-3</span> — MusicLinkd, the professional network for music</div>
       </div></div>
   </div>
 

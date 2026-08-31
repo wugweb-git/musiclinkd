@@ -57,6 +57,28 @@ const cssTokenCount = new Set(
   [...readFileSync(join(SYS, "ml-tokens.css"), "utf8").matchAll(/^\s*(--[a-z0-9-]+):/gm)].map((m) => m[1])
 ).size;
 
+/** brand.type.weights are the specimen the guide renders; foundation.weight is
+ *  what the system can actually express. They were two hand-kept lists, and the
+ *  brand one still advertised 700 after the scale dropped it. Resolving the
+ *  specimen THROUGH the scale means the guide cannot show a weight no component
+ *  can use — the build fails instead. */
+const WEIGHT_TOKEN_BY_VALUE = new Map(
+  Object.entries(tokens.foundation.weight)
+    .filter(([k]) => /^\d+$/.test(k))
+    .map(([k, t]) => [t.$value, `weight-${k}`])
+);
+function weightTokenName(value) {
+  const tok = WEIGHT_TOKEN_BY_VALUE.get(value);
+  if (!tok) {
+    throw new Error(
+      `brand.type advertises font-weight ${value}, which is not a step in ` +
+        `foundation.weight (${[...WEIGHT_TOKEN_BY_VALUE.keys()].join(", ")}). ` +
+        `Add the step or drop the weight — do not render an unnameable weight.`
+    );
+  }
+  return tok;
+}
+
 /* ── repo-derived sections ──────────────────────────────────────────────
    Patterns, taxonomy and gaps are all COMPUTED from the repo rather than
    listed by hand. The old catalogue's block list and "not built" registry
@@ -1056,7 +1078,10 @@ const html = `<!doctype html>
 <link rel="icon" href="/assets/img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<!-- Axes requested here must match foundation.weight in tokens.json exactly.
+     700 was dropped on 2026-08-31: fetching a weight the system cannot name
+     is how a stray 700 gets to render correctly and go unnoticed. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@600;800&family=Unica+One&display=swap" rel="stylesheet">
 <!-- The catalogue is styled with the system it documents. There is no second
      stylesheet: a broken component breaks this page. -->
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
@@ -1192,7 +1217,7 @@ const html = `<!doctype html>
     ${Object.entries(tokens.brand.type).map(([role, t]) => `<div style="margin-bottom:var(--space-4)">
       <div class="ml-row__meta"><code>--font-${role}</code> · ${esc(t.family)} · ${esc(t.use)}</div>
       <div style="font-family:'${t.family}',sans-serif;font-size:28px;line-height:1.15;margin-top:var(--space-2)">
-        ${t.weights.map((w) => `<div style="font-weight:${w}">${w} — MusicLinkd, the professional network for music</div>`).join("")}
+        ${t.weights.map((w) => `<div style="font-weight:var(--${weightTokenName(w)})">${w} <span class="ml-row__meta">--${weightTokenName(w)}</span> — MusicLinkd, the professional network for music</div>`).join("")}
       </div></div>`).join("")}
   </div>
 

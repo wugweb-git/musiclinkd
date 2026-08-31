@@ -162,7 +162,7 @@ object MLType {
         fontFamily = InterTight,
         fontSize = 22.sp,
         lineHeight = 28.sp,
-        fontWeight = FontWeight(700),
+        fontWeight = FontWeight(600),
         letterSpacing = -0.22.sp,
     )
     /** Display — hero headlines, now-playing track title, the one big number on a screen — Material displaySmall */
