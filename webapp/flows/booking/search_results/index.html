@@ -10,86 +10,68 @@
 <meta name="screen-json-path" content="/preview/flows/booking/search_results/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Booking / Search Results</title>
+<title>MusicLinkd — Booking — Search results</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .result-card { display: flex; gap: var(--space-2); padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); text-decoration: none; color: inherit; }
-  .result-card img { width: 96px; height: 96px; border-radius: var(--radius-2); object-fit: cover; flex: none; }
-  .result-card .body { flex: 1; min-width: 0; }
-  .result-card b { font-size: var(--type-2); display: block; }
-  .result-card .loc { font-size: var(--type-1); color: var(--color-muted); }
-  .result-card .meta-row { display: flex; justify-content: space-between; align-items: center; margin-top: var(--space-1); }
-  .gold-badge { display: inline-flex; align-items: center; gap: 3px; background: color-mix(in srgb, var(--color-warning) 18%, var(--color-white)); color: color-mix(in srgb, var(--color-warning) 50%, black); font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: var(--radius-4); }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;gap:var(--space-2);height:56px;">
-      <a href="/preview/flows/booking/studio_discovery/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;flex:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-      <input type="search" value="Andheri West, Mumbai" aria-label="Search location" style="flex:1;min-height:40px;border-radius:var(--radius-4);border:1px solid var(--color-line);padding:0 var(--space-3);font:var(--type-2) 'Inter',sans-serif;" />
-      <a aria-label="Back" href="/preview/flows/booking/filters/index.html" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--color-line);flex:none;color:var(--color-ink);">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
-      </a>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/booking/studio_discovery/index.html" aria-label="Back to discovery">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Studios near you</h1>
     </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <p style="font-size:var(--type-1);color:var(--color-muted);margin:var(--space-2) 0;">6 studios near you</p>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <p class="ml-type-1" data-state="default" style="color:var(--color-muted);margin:0 0 var(--space-2)">
+        4 studios · sorted by distance
+      </p>
+      <a class="ml-result" data-state="default" href="/preview/flows/booking/studio_profile/index.html">
+        <img class="ml-result__thumb" src="/assets/img/6/01e26955706919.598fd42d42f34.png" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Yash Raj Sound Studios</span>
+          <span class="ml-result__meta">Andheri West · 2.4 km</span>
+        </span>
+        <span class="ml-result__trail">₹1,800/hr</span>
+      </a>
+      <a class="ml-result" data-state="default" href="/preview/flows/booking/studio_profile/index.html">
+        <img class="ml-result__thumb" src="/assets/img/speakers/48dcea90c715465b4dcd2ff760bfcf65.jpg" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Blue Note Recording Co.</span>
+          <span class="ml-result__meta">Bandra · 4.1 km</span>
+        </span>
+        <span class="ml-result__trail">₹2,400/hr</span>
+      </a>
+      <a class="ml-result" data-state="default" href="/preview/flows/booking/studio_profile/index.html">
+        <img class="ml-result__thumb" src="/assets/img/6/05c010236455615.68ecac46e6ab2.png" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Soundbox Rehearsal Rooms</span>
+          <span class="ml-result__meta">Lower Parel · 6.8 km</span>
+        </span>
+        <span class="ml-result__trail">₹900/hr</span>
+      </a>
+      <a class="ml-result" data-state="default" href="/preview/flows/booking/studio_profile/index.html">
+        <img class="ml-result__thumb" src="/assets/img/4/Header_Recaps.png" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Third Wave Audio</span>
+          <span class="ml-result__meta">Powai · 11.2 km</span>
+        </span>
+        <span class="ml-result__trail">₹1,500/hr</span>
+      </a>
 
-      <div id="panel-default">
-        <a class="result-card" href="/preview/flows/booking/studio_profile/index.html">
-          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400" alt="" />
-          <div class="body">
-            <b>Yash Raj Sound Studios — Sound Lab</b>
-            <span class="loc">Andheri West, Mumbai</span>
-            <div class="meta-row"><span style="font-size:var(--type-1);">★ 4.9 (188) · ₹8,000/hr</span><span class="gold-badge">Gold</span></div>
-          </div>
-        </a>
-        <a class="result-card" href="/preview/flows/booking/studio_profile/index.html">
-          <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=400" alt="" />
-          <div class="body">
-            <b>Blue Note Recording Co.</b>
-            <span class="loc">Bandra, Mumbai</span>
-            <div class="meta-row"><span style="font-size:var(--type-1);">★ 4.6 (94) · ₹5,500/hr</span></div>
-          </div>
-        </a>
-        <a class="result-card" href="/preview/flows/booking/studio_profile/index.html">
-          <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=400" alt="" />
-          <div class="body">
-            <b>Andheri Live Room</b>
-            <span class="loc">Andheri East, Mumbai</span>
-            <div class="meta-row"><span style="font-size:var(--type-1);">★ 4.4 (52) · ₹3,200/hr</span></div>
-          </div>
-        </a>
-        <a class="result-card" href="/preview/flows/booking/studio_profile/index.html" style="border-bottom:none;">
-          <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=400" alt="" />
-          <div class="body">
-            <b>Powai Sound Works</b>
-            <span class="loc">Powai, Mumbai</span>
-            <div class="meta-row"><span style="font-size:var(--type-1);">★ 4.7 (66) · ₹4,800/hr</span></div>
-          </div>
-        </a>
-      </div>
-
-      <div id="panel-empty" style="display:none;flex-direction:column;align-items:center;text-align:center;padding-top:20vh;gap:var(--space-3);">
-        <p style="color:var(--color-muted);font-size:var(--type-2);">No studios match these filters.</p>
-        <a class="ml-btn ml-btn--primary" href="/preview/flows/booking/filters/index.html" style="text-decoration:none;">Adjust filters</a>
+      <div class="ml-empty" data-state="empty">
+        <h3 class="ml-empty__title">No studios match those filters</h3>
+        <p class="ml-empty__body">Try widening the distance, or clearing the price ceiling.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/booking/filters/index.html">Adjust filters</a>
       </div>
     </main>
-    <footer class="app-bottombar"></footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    document.addEventListener("musiclinkd:screen-ready", () => {
-      if (window.MusicLinkd.currentState === "empty") {
-        document.getElementById("panel-default").style.display = "none";
-        document.getElementById("panel-empty").style.display = "flex";
-      }
-    });
-  </script>
 </body>
 </html>

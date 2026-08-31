@@ -173,7 +173,15 @@
     // of inline background/border/colour rewrites.
     for (const el of document.querySelectorAll("[data-chip]")) {
       const owns = el.getAttribute("data-chip").split(/\s+/).filter(Boolean);
-      el.setAttribute("aria-pressed", String(owns.includes(state)));
+      const on = String(owns.includes(state));
+      // A tab announces selection as aria-selected and a chip/toggle as
+      // aria-pressed; they are not interchangeable. A tablist whose tabs carry
+      // aria-pressed is announced as unrelated toggle buttons rather than a
+      // set of tabs, and .ml-tabs__tab styles the active tab off
+      // aria-selected, so using the wrong one leaves the tab visually dead
+      // too. Both are driven from the same data-chip declaration.
+      const isTab = el.getAttribute("role") === "tab" || el.classList.contains("ml-tabs__tab");
+      el.setAttribute(isTab ? "aria-selected" : "aria-pressed", on);
     }
   }
   MusicLinkd.applyState = applyState;

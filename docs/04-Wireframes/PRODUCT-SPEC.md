@@ -1,5 +1,9 @@
 # MusicLinkd — Product Spec
 
+> The verbatim briefs this spec was written against are in
+> [`FLOW-SPECS.md`](FLOW-SPECS.md) — recovered from chat transcripts on
+> 2026-08-31, where they had been the only copy.
+
 *(Renamed 2026-08-16 from "Person Profile & Marketplace" — scope grew to cover four flows, name no longer fit.)*
 
 Written against the real repo (`admin/types/firestore.ts`, `firestore.rules`, `webapp/flows/*`, `admin/app/(admin)/flows/`, `frontend/guide/`), not against either brief in isolation. Where a brief and the repo disagree, the repo wins and the disagreement is flagged below — per your own CLAUDE.md rule: don't propagate a doc's claims without checking the filesystem.

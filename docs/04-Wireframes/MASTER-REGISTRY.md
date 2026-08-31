@@ -6,6 +6,12 @@ This is the full inventory of what's registered in the app's admin backend — e
 
 **Correction on the way in:** an earlier audit this session stated there were "11 taxonomy categories." That was wrong — it came from a grep pattern that only matched `##`-level category headers and missed the `###`-level ones. The real count, verified by reading the full file, is **29 categories** (11 original + 18 added across later passes), plus one referenced-but-not-yet-seeded (`studio_addons`). Corrected here, flagged plainly rather than quietly fixed.
 
+- `FLOW-SPECS.md` — the **verbatim product briefs** for Flows 1–24, the
+  Home/Dashboard IA and the Person Profile, as handed over in chat. Recovered
+  from session transcripts and committed on 2026-08-31: until then they existed
+  only in `~/.claude/projects/` and were repeatedly lost to context compaction.
+  That file is the brief; this file is what got built against it.
+
 Sources, exactly as they exist in the repo on 2026-08-29:
 - Flows: `admin/app/(admin)/flows/default-flows.ts`
 - Screens: `admin/app/(admin)/flows/screens/default-screens.ts`

@@ -70,8 +70,21 @@ function walk(dir, out = []) {
   return out;
 }
 
+/* Every .ml-* class the design system actually defines. A screen naming one
+   that does not exist renders as unstyled markup that still reads as plausible
+   in source — the failure is silent. Added after a rebuild of
+   availability_calendar emitted .ml-timeline__time/__body when the component's
+   real contract is __title/__meta: the markup was well-formed, every existing
+   check was green, and the timeline simply had no styling. */
+const systemCss = ["frontend/guide/system/ml-core.css",
+                   "frontend/guide/system/ml-widgets.css",
+                   "frontend/guide/system/ml-tokens.css",
+                   "webapp/shared/app-shell.css"]
+  .map((f) => readFileSync(join(ROOT, f), "utf8")).join("\n");
+const definedClasses = new Set([...systemCss.matchAll(/\.(ml-[a-z0-9_-]+)/g)].map((m) => m[1]));
+
 const files = walk(join(ROOT, "webapp"));
-let nUnresolved = 0, nOffPalette = 0, nLocalStyle = 0, nScreens = 0, nDead = 0;
+let nUnresolved = 0, nOffPalette = 0, nLocalStyle = 0, nScreens = 0, nDead = 0, nUndefClass = 0;
 const report = [];
 
 for (const f of files) {
@@ -79,6 +92,17 @@ for (const f of files) {
   const s = readFileSync(f, "utf8");
   const isScreen = /webapp\/flows\//.test(rel);
   if (isScreen) nScreens++;
+
+  /* A class defined in this screen's own <style> block counts as defined —
+     that is a separate finding (nLocalStyle), not a broken reference. */
+  const localClasses = new Set(
+    [...(s.match(/<style[^>]*>[\s\S]*?<\/style>/g) || []).join("\n").matchAll(/\.(ml-[a-z0-9_-]+)/g)].map((m) => m[1]),
+  );
+  const undefinedClasses = new Set();
+  for (const m of s.matchAll(/class="([^"]+)"/g))
+    for (const c of m[1].split(/\s+/))
+      if (c.startsWith("ml-") && !definedClasses.has(c) && !localClasses.has(c)) undefinedClasses.add(c);
+  nUndefClass += undefinedClasses.size;
 
   const unresolved = new Set();
   for (const m of s.matchAll(/var\(\s*(--[a-zA-Z0-9-]+)\s*(,)?/g))
@@ -120,7 +144,7 @@ for (const f of files) {
   nDead += deadLinks.size;
 
   if (unresolved.size || deadLinks.size) {
-    report.push({ rel, unresolved: [...unresolved], deadLinks: [...deadLinks] });
+    report.push({ rel, unresolved: [...unresolved], deadLinks: [...deadLinks], undefinedClasses: [...undefinedClasses] });
   }
 }
 
@@ -129,12 +153,14 @@ console.log(`  palette          ${PALETTE.size - 4} tokenised colours`);
 console.log(`  unresolved var() ${nUnresolved}`);
 console.log(`  dead /preview links ${nDead}`);
 console.log(`  off-palette hex  ${nOffPalette}`);
+console.log(`  undefined ml-* class ${nUndefClass}`);
 console.log(`  local <style>    ${nLocalStyle} blocks across screens  (Phase 3 target: 0)\n`);
 
 for (const r of report.slice(0, 25)) {
   console.log(`  ${r.rel}`);
   if (r.unresolved.length) console.log(`      unresolved: ${r.unresolved.join(", ")}`);
   if (r.deadLinks.length) console.log(`      dead links: ${r.deadLinks.join(", ")}`);
+  if (r.undefinedClasses.length) console.log(`      undefined classes: ${r.undefinedClasses.join(", ")}`);
 }
 if (report.length > 25) console.log(`  ... and ${report.length - 25} more files`);
 

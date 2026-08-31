@@ -10,97 +10,120 @@
 <meta name="screen-json-path" content="/preview/flows/booking/availability_calendar/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Booking / Availability</title>
+<title>MusicLinkd — Booking — Availability</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .view-toggle { display: flex; border: 1px solid var(--color-line); border-radius: var(--radius-4); overflow: hidden; margin: var(--space-2) 0 var(--space-3); }
-  .view-toggle button { flex: 1; padding: var(--space-1) 0; background: #fff; border: none; font: 600 var(--type-1)/1 'Inter', sans-serif; color: var(--color-muted); }
-  .view-toggle button.sel { background: var(--color-ink); color: #fff; }
-  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
-  .cal-grid .dow { font-size: 10px; color: var(--color-muted); font-weight: 600; padding-bottom: 4px; }
-  .cal-grid .day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: var(--type-1); }
-  .cal-grid .day.sel { background: var(--color-ink); color: #fff; font-weight: 700; }
-  .cal-grid .day.today { border: 1px solid var(--color-ink); }
-  /* --color-line is the HAIRLINE token and was painting text here: past
-     dates measured 1.15:1, effectively invisible. --color-disabled is the
-     token for inactive content and is deliberately sub-AA, which is only
-     legitimate if the element is genuinely inert — so these also carry
-     aria-disabled, which they should have had anyway: a past date is not
-     selectable and a screen reader had no way to know that. */
-  .cal-grid .day.past { color: var(--color-disabled); }
-  .slot-list { margin-top: var(--space-4); }
-  .slot-row { display: flex; justify-content: space-between; align-items: center; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); }
-  .slot-row .status { font-size: var(--type-1); font-weight: 600; }
-  .slot-row.available .status { color: color-mix(in srgb, var(--color-success) 58%, black); }
-  .slot-row.booked .status { color: var(--color-muted); }
-  .slot-row.pending .status { color: color-mix(in srgb, var(--color-warning) 50%, black); }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/booking/studio_profile/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/booking/studio_profile/index.html" aria-label="Back to studio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Availability</h1>
     </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <h1 style="font-size:var(--type-3);margin:var(--space-2) 0 4px;">Check availability</h1>
-      <p style="color:var(--color-muted);font-size:var(--type-1);margin-bottom:var(--space-2);">Tracking Room 1 · ₹8,000/hr</p>
+    <nav class="ml-tabs ml-tabs--fill" role="tablist" aria-label="Calendar view" style="margin:0 var(--space-4)">
+      <a class="ml-tabs__tab" role="tab" data-chip="monthly" href="?state=monthly">Month</a>
+      <a class="ml-tabs__tab" role="tab" data-chip="weekly" href="?state=weekly">Week</a>
+      <a class="ml-tabs__tab" role="tab" data-chip="timeline" href="?state=timeline">Day</a>
+    </nav>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
-      <div class="view-toggle" id="view-toggle">
-        <button type="button" class="sel" data-v="monthly">Month</button>
-        <button type="button" data-v="weekly">Week</button>
-        <button type="button" data-v="timeline">Timeline</button>
-      </div>
-
-      <div id="panel-monthly">
-        <div class="cal-grid">
-          <div class="dow">S</div><div class="dow">M</div><div class="dow">T</div><div class="dow">W</div><div class="dow">T</div><div class="dow">F</div><div class="dow">S</div>
-          <div class="day past" aria-disabled="true">27</div><div class="day past" aria-disabled="true">28</div><div class="day past" aria-disabled="true">29</div><div class="day past" aria-disabled="true">30</div><div class="day past" aria-disabled="true">31</div><div class="day">1</div><div class="day">2</div>
-          <div class="day">3</div><div class="day">4</div><div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div>
-          <div class="day">10</div><div class="day">11</div><div class="day sel">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div>
-          <div class="day">17</div><div class="day">18</div><div class="day today">19</div><div class="day">20</div><div class="day">21</div><div class="day">22</div><div class="day">23</div>
+      <div class="ml-calendar" data-state="monthly">
+        <div class="ml-calendar__head">
+          <span class="ml-calendar__month">August 2026</span>
+        </div>
+        <div class="ml-calendar__dow">
+          <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+        </div>
+        <div class="ml-calendar__grid">
+          <button type="button" class="ml-calendar__day">1</button>
+          <button type="button" class="ml-calendar__day">2</button>
+          <button type="button" class="ml-calendar__day is-blocked" disabled aria-label="3 August, unavailable">3</button>
+          <button type="button" class="ml-calendar__day is-blocked" disabled aria-label="4 August, unavailable">4</button>
+          <button type="button" class="ml-calendar__day">5</button>
+          <button type="button" class="ml-calendar__day">6</button>
+          <button type="button" class="ml-calendar__day">7</button>
+          <button type="button" class="ml-calendar__day">8</button>
+          <button type="button" class="ml-calendar__day">9</button>
+          <button type="button" class="ml-calendar__day">10</button>
+          <button type="button" class="ml-calendar__day is-blocked" disabled aria-label="11 August, unavailable">11</button>
+          <button type="button" class="ml-calendar__day is-today">12</button>
+          <button type="button" class="ml-calendar__day">13</button>
+          <button type="button" class="ml-calendar__day">14</button>
+          <button type="button" class="ml-calendar__day">15</button>
+          <button type="button" class="ml-calendar__day">16</button>
+          <button type="button" class="ml-calendar__day is-blocked" disabled aria-label="17 August, unavailable">17</button>
+          <button type="button" class="ml-calendar__day is-blocked" disabled aria-label="18 August, unavailable">18</button>
+          <button type="button" class="ml-calendar__day">19</button>
+          <button type="button" class="ml-calendar__day">20</button>
+          <button type="button" class="ml-calendar__day">21</button>
+          <button type="button" class="ml-calendar__day">22</button>
+          <button type="button" class="ml-calendar__day">23</button>
+          <button type="button" class="ml-calendar__day is-blocked" disabled aria-label="24 August, unavailable">24</button>
+          <button type="button" class="ml-calendar__day is-blocked" disabled aria-label="25 August, unavailable">25</button>
+          <button type="button" class="ml-calendar__day">26</button>
+          <button type="button" class="ml-calendar__day">27</button>
+          <button type="button" class="ml-calendar__day">28</button>
+          <button type="button" class="ml-calendar__day">29</button>
+          <button type="button" class="ml-calendar__day">30</button>
+          <button type="button" class="ml-calendar__day">31</button>
+        </div>
+        <div class="ml-calendar__legend">
+          <span><i class="ml-calendar__key ml-calendar__key--sel"></i>Available</span>
+          <span><i class="ml-calendar__key ml-calendar__key--blocked"></i>Booked</span>
         </div>
       </div>
 
-      <div id="panel-weekly" style="display:none;">
-        <div class="cal-grid" style="grid-template-columns:repeat(7,1fr);">
-          <div class="dow">Sun 10</div><div class="dow">Mon 11</div><div class="dow">Tue 12</div><div class="dow">Wed 13</div><div class="dow">Thu 14</div><div class="dow">Fri 15</div><div class="dow">Sat 16</div>
-          <div class="day">·</div><div class="day">·</div><div class="day sel">·</div><div class="day">·</div><div class="day">·</div><div class="day">·</div><div class="day">·</div>
+      <div data-state="weekly">
+        <h2 class="ml-type-2" style="margin:0 0 var(--space-2)">Wed 12 August</h2>
+        <div class="ml-slots">
+          <button type="button" class="ml-slot">09:00 – 11:00</button>
+          <button type="button" class="ml-slot" disabled>11:00 – 13:00</button>
+          <button type="button" class="ml-slot">13:00 – 15:00</button>
+          <button type="button" class="ml-slot">15:00 – 17:00</button>
+          <button type="button" class="ml-slot" disabled>17:00 – 19:00</button>
+          <button type="button" class="ml-slot">19:00 – 21:00</button>
         </div>
       </div>
 
-      <div id="panel-timeline" style="display:none;">
-        <p style="font-size:var(--type-1);color:var(--color-muted);">12 Aug 2026 — hourly timeline</p>
-      </div>
-
-      <div class="slot-list">
-        <p style="font-size:var(--type-2);font-weight:600;margin:0 0 var(--space-2);">Tue, 12 Aug</p>
-        <div class="slot-row booked"><span>10:00 AM – 2:00 PM</span><span class="status">Booked</span></div>
-        <div class="slot-row available"><span>2:00 PM – 6:00 PM</span><span class="status">Available</span></div>
-        <div class="slot-row pending"><span>6:00 PM – 9:00 PM</span><span class="status">Pending</span></div>
-        <div class="slot-row available" style="border-bottom:none;"><span>9:00 PM – 11:00 PM</span><span class="status">Available</span></div>
-      </div>
+      <!-- .ml-timeline's contract is __title/__meta with .is-done/.is-current
+           on the item; a booked slot is the "done" marker, the next open one
+           is "current". -->
+      <ol class="ml-timeline" data-state="timeline">
+        <li class="ml-timeline__item is-current">
+          <span class="ml-timeline__title">Open</span>
+          <span class="ml-timeline__meta">09:00 – 11:00</span>
+        </li>
+        <li class="ml-timeline__item is-done">
+          <span class="ml-timeline__title">Booked — Tracking Room 1</span>
+          <span class="ml-timeline__meta">11:00 – 13:00</span>
+        </li>
+        <li class="ml-timeline__item">
+          <span class="ml-timeline__title">Open</span>
+          <span class="ml-timeline__meta">13:00 – 15:00</span>
+        </li>
+        <li class="ml-timeline__item">
+          <span class="ml-timeline__title">Open</span>
+          <span class="ml-timeline__meta">15:00 – 17:00</span>
+        </li>
+        <li class="ml-timeline__item is-done">
+          <span class="ml-timeline__title">Booked — Tracking Room 1</span>
+          <span class="ml-timeline__meta">17:00 – 19:00</span>
+        </li>
+        <li class="ml-timeline__item">
+          <span class="ml-timeline__title">Open</span>
+          <span class="ml-timeline__meta">19:00 – 21:00</span>
+        </li>
+      </ol>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
-      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/booking/configure_session/index.html" style="text-decoration:none;">Continue — 2:00 PM – 6:00 PM</a>
-    </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    document.getElementById("view-toggle").addEventListener("click", (e) => {
-      const btn = e.target.closest("button");
-      if (!btn) return;
-      document.querySelectorAll("#view-toggle button").forEach((b) => b.classList.remove("sel"));
-      btn.classList.add("sel");
-      ["monthly", "weekly", "timeline"].forEach((v) => {
-        document.getElementById("panel-" + v).style.display = v === btn.dataset.v ? "block" : "none";
-      });
-    });
-  </script>
 </body>
 </html>
