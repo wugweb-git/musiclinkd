@@ -81,7 +81,7 @@ done.push(writeScreen({ flow: "auth", screen: "email_auth", body: `
         <label for="password">Password</label>
         <input id="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" />
         <span class="ml-type-1" style="color:var(--color-muted)" data-state="signup loading error">Use 8+ characters with a number.</span>
-        <a class="ml-type-1" style="color:var(--color-pink-pressed);font-weight:600;text-decoration:none;display:inline-flex;align-items:center;min-height:var(--size-3);align-self:flex-start" href="?state=signin" data-state="signin">Forgot your password?</a>
+        <a class="ml-link ml-type-1" style="font-weight:600;display:inline-flex;align-items:center;min-height:var(--size-3);align-self:flex-start" href="?state=signin" data-state="signin">Forgot your password?</a>
       </div>
       <!-- Signing up sends a verification email, so that is where signup goes. -->
       <a class="ml-btn ml-btn--ghost ml-btn--block" data-state="signup" href="/preview/flows/auth/email_verification/index.html">Continue</a>
@@ -238,7 +238,7 @@ const A = "/preview/flows/auth/";
 
 const authBar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-2" style="margin:0">${title}</h1>
+      <h1 class="ml-type-3" style="margin:0">${title}</h1>
     </header>`;
 
 writeScreen({

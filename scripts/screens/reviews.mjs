@@ -31,7 +31,7 @@ assertIcons(["star", "arrow-forward"]);
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-2" style="margin:0;flex:1">${title}</h1>
+      <h1 class="ml-type-3" style="margin:0;flex:1">${title}</h1>
       ${beta}
     </header>`;
 

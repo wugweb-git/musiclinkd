@@ -30,7 +30,7 @@ assertIcons(["heart", "search", "add", "check", "cancel", "arrow-forward", "filt
 
 const bar = (title, backTo, actions = "") => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-2" style="margin:0;flex:1">${title}</h1>
+      <h1 class="ml-type-3" style="margin:0;flex:1">${title}</h1>
       ${actions}
     </header>`;
 
@@ -313,7 +313,7 @@ writeScreen({
 
       <div data-state="default alerts_on editing">
         ${SEARCHES.map(([q, f, alerts]) => `<div class="ml-check-row">
-          <a class="ml-choice__body" href="/preview/flows/search/universal_search/index.html?state=results" style="text-decoration:none;color:inherit">
+          <a class="ml-row ml-choice__body" href="/preview/flows/search/universal_search/index.html?state=results">
             <span class="ml-choice__title">${q}</span>
             <span class="ml-choice__meta">${f}</span>
           </a>

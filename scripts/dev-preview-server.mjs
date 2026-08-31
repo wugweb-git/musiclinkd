@@ -40,7 +40,11 @@ import { join, resolve, extname, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const PORT = 5501;
+/* The launcher assigns a port via PORT and expects the server to take it.
+   Hardcoding 5501 meant a stale instance from an earlier session held the
+   port and every later start failed; nothing here needs a fixed port —
+   there are no OAuth callbacks, webhooks or CORS origins pointing at it. */
+const PORT = Number(process.env.PORT) || 5501;
 
 /* Longest prefix first, so /preview wins before /. */
 const MOUNTS = [

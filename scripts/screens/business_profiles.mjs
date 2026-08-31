@@ -43,7 +43,7 @@ const businessScreen = ({ screen, tab, body, state, bodyStates, extra = "" }) =>
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow("/preview/flows/discover/discover_feed/index.html", "Back")}
-      <h1 class="ml-type-2" style="margin:0">Yash Raj Sound Studios</h1>
+      <h1 class="ml-type-3" style="margin:0">Yash Raj Sound Studios</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:0 0 var(--space-4)">
       <img src="${media("stage", 1)}" alt="" loading="lazy"
@@ -282,7 +282,7 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(`${P}business_overview/index.html`, "Back to profile")}
-      <h1 class="ml-type-2" style="margin:0">Book</h1>
+      <h1 class="ml-type-3" style="margin:0">Book</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
@@ -310,7 +310,7 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(`${P}business_overview/index.html`, "Back to profile")}
-      <h1 class="ml-type-2" style="margin:0">Insights</h1>
+      <h1 class="ml-type-3" style="margin:0">Insights</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <!-- "visible_if_owner" is a note that this is the owner variant of the
@@ -394,7 +394,7 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(`${P}business_overview/index.html`, "Back")}
-      <h1 class="ml-type-2" style="margin:0">Create a business</h1>
+      <h1 class="ml-type-3" style="margin:0">Create a business</h1>
     </header>
     ${stepBar()}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
@@ -591,7 +591,7 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(`${P}business_reviews_gallery_tab/index.html`, "Back")}
-      <h1 class="ml-type-2" style="margin:0;flex:1">Gallery</h1>
+      <h1 class="ml-type-3" style="margin:0;flex:1">Gallery</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div data-state="default">

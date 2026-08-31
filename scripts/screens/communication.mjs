@@ -53,7 +53,7 @@ const netStrip = (current) => `<nav class="ml-tabs" role="tablist" aria-label="N
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-2" style="margin:0">${title}</h1>
+      <h1 class="ml-type-3" style="margin:0">${title}</h1>
     </header>`;
 
 /* ── networking_feed — default / posting ────────────────────────────────── */
@@ -261,7 +261,7 @@ writeScreen({
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(`${P}chat_thread_list/index.html`, "Back to messages")}
       <img class="ml-avatar" src="${media("faces", 2)}" alt="" loading="lazy" />
-      <h1 class="ml-type-2" style="margin:0">Ishita Rao</h1>
+      <h1 class="ml-type-3" style="margin:0">Ishita Rao</h1>
     </header>
     <main class="ml-app__body app-content--scroll ml-chat" style="padding:var(--space-3) var(--space-4)">
       <div class="ml-chat__day">Today</div>

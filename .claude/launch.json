@@ -2,31 +2,11 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "admin",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "--prefix",
-        "admin",
-        "run",
-        "dev"
-      ],
-      "port": 3000
-    },
-    {
-      "name": "website",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": [
-        "scripts/dev-static-server.py"
-      ],
-      "port": 5500
-    },
-    {
       "name": "preview",
       "runtimeExecutable": "node",
-      "runtimeArgs": [
-        "scripts/dev-preview-server.mjs"
-      ],
-      "port": 5501
+      "runtimeArgs": ["scripts/dev-preview-server.mjs"],
+      "port": 5501,
+      "autoPort": true
     }
   ]
 }

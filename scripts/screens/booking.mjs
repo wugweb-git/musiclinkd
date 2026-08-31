@@ -34,7 +34,7 @@ const back = (href, label) => backArrow(href, label);
    is its name, and a screen reader's heading list should start at the top. */
 const titleBar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-2" style="margin:0">${title}</h1>
+      <h1 class="ml-type-3" style="margin:0">${title}</h1>
     </header>`;
 
 /* A row that leads somewhere. booking.mjs did not have one, since its earlier
@@ -196,7 +196,7 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${back(`${P}studio_profile/index.html`, "Back to studio")}
-      <h1 class="ml-type-2" style="margin:0">Availability</h1>
+      <h1 class="ml-type-3" style="margin:0">Availability</h1>
     </header>
     <nav class="ml-tabs ml-tabs--fill" role="tablist" aria-label="Calendar view" style="margin:0 var(--space-4)">
       ${tab("monthly", "Month")}
@@ -258,7 +258,7 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${back(`${P}studio_discovery/index.html`, "Back to discovery")}
-      <h1 class="ml-type-2" style="margin:0">Studios near you</h1>
+      <h1 class="ml-type-3" style="margin:0">Studios near you</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <p class="ml-type-1" data-state="default" style="color:var(--color-muted);margin:0 0 var(--space-2)">

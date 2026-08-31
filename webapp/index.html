@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -13,289 +13,470 @@
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="icon" href="/preview/shared/icon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Flow / Screen Index</title>
+<title>MusicLinkd — Screen workbench</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 <link rel="stylesheet" href="/preview/shared/tokens.css" />
 <style>
-  /* Workbench layout: sidebar (flow/screen list) + main (phone-frame preview
-     iframe), split on desktop. Below 800px there's no room for a split —
-     the sidebar becomes a full-width overlay drawer instead of a column. */
-  html, body { overflow: visible; } /* app-shell.css sets overflow:hidden for single-screen pages; this is a two-pane workbench, not one */
-  .workbench { display: flex; height: 100dvh; }
+  /* ═══════════════════════════════════════════════════════════════════════
+     THE WORKBENCH IS NOT A MUSICLINKD SCREEN.
 
-  .wb-sidebar {
-    width: 340px;
-    flex-shrink: 0;
-    border-right: 1px solid var(--color-line);
-    overflow-y: auto;
-    background: #fff;
-    padding: var(--space-3);
+     It is the tool you look at the screens IN, so it deliberately does not
+     look like one: a dark shell, so that a white phone screen sitting in the
+     middle of it reads as the subject and the tooling recedes. That is the
+     same reasoning the device bezel already had, applied to the whole chrome.
+
+     Every colour here is still derived from the product palette through
+     color-mix rather than hand-picked, so the workbench cannot drift into
+     colours the design system does not contain — and audit-screens'
+     off-palette check needs no new exemptions for it. Only the phone
+     hardware keeps literal hexes, and those are declared in DEVICE_CHROME.
+     ═══════════════════════════════════════════════════════════════════════ */
+  :root {
+    --wb-bg:     var(--color-ink);
+    --wb-panel:  color-mix(in srgb, var(--color-ink) 93%, #FFFFFF);
+    --wb-raised: color-mix(in srgb, var(--color-ink) 86%, #FFFFFF);
+    --wb-stage:  color-mix(in srgb, var(--color-ink) 89%, #FFFFFF);
+    --wb-line:   color-mix(in srgb, var(--color-ink) 82%, #FFFFFF);
+    --wb-text:   #FFFFFF;
+    --wb-muted:  color-mix(in srgb, #FFFFFF 58%, var(--color-ink));
+    --wb-dim:    color-mix(in srgb, #FFFFFF 38%, var(--color-ink));
+  }
+
+  html, body {
+    /* app-shell.css sets overflow:hidden for single-screen pages. This is a
+       two-pane workbench, not one screen. */
+    overflow: visible;
+    background: var(--wb-bg);
+    color: var(--wb-text);
+    font-family: var(--font-body);
+  }
+
+  .wb { display: flex; height: 100dvh; background: var(--wb-bg); }
+
+  /* ── the index ────────────────────────────────────────────────────────── */
+  .wb-nav {
+    width: 320px; flex: none;
+    display: flex; flex-direction: column; min-height: 0;
+    background: var(--wb-panel);
+    border-right: 1px solid var(--wb-line);
     transition: transform var(--duration-3) cubic-bezier(0.32,0.72,0,1);
   }
-  .wb-sidebar-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-2); }
-  .wb-hint { font-size: var(--type-1); color: var(--color-muted); margin: 0 0 var(--space-3); }
+  /* Head and search stay put; only the list scrolls. Scrolling the filters
+     off the top of a 205-row list is the thing that made this unusable. */
+  .wb-nav__head { flex: none; padding: var(--space-3) var(--space-3) var(--space-2); }
+  .wb-nav__list { flex: 1; min-height: 0; overflow-y: auto; padding: 0 var(--space-2) var(--space-4); }
 
-  .wb-main {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #EFEFF3;
-    overflow: auto;
-    padding: var(--space-4);
-    position: relative;
-  }
-  .wb-main .phone-frame { flex-shrink: 0; }
-  .wb-empty { color: var(--color-muted); text-align: center; font-size: var(--type-2); }
-
-  .wb-toolbar { display: none; }   /* desktop: sidebar is always visible, nothing to open */
-  .wb-menu-btn { display: none; }
-  /* Scrim uses the system's own backdrop token rather than a hand-picked
-     rgba — --color-scrim is exactly this, at the documented opacity. */
-  .wb-scrim { display: none; position: fixed; inset: 0; background: var(--color-scrim); z-index: 39; }
-
-  @media (max-width: 800px) {
-    .wb-sidebar {
-      position: fixed;
-      inset: 0 auto 0 0;
-      z-index: 40;
-      width: min(340px, 88vw);
-      transform: translateX(-100%);
-      box-shadow: var(--elevation-2);
-    }
-    .wb-sidebar.is-open { transform: translateX(0); }
-    .wb-sidebar.is-open ~ .wb-scrim { display: block; }
-    /* The phone frame is a COLUMN under the toolbar, not the whole viewport.
-       It used to be height:100dvh with the menu button position:fixed on top
-       of it at z-index 41 — so the workbench's own burger sat over the
-       previewed screen's back button and app bar, and the two were
-       indistinguishable. The toolbar now occupies its own row and the frame
-       takes the remaining height, so nothing overlaps anything. */
-    .wb-main { padding: 0; flex-direction: column; align-items: stretch; justify-content: flex-start; }
-    .wb-toolbar {
-      display: flex; align-items: center; gap: var(--space-2);
-      flex: 0 0 auto;
-      padding: calc(var(--space-2) + env(safe-area-inset-top,0px)) var(--space-2) var(--space-2);
-      background: var(--color-white);
-      border-bottom: 1px solid var(--color-line);
-    }
-    .wb-main .phone-frame { width: 100%; max-width: 100%; flex: 1; min-height: 0; height: auto; border-radius: 0; padding: 0; background: transparent; box-shadow: none; }
-    .wb-main .phone-screen { height: 100%; border-radius: 0; }
-    .wb-menu-btn {
-      display: flex; align-items: center; justify-content: center;
-      width: var(--size-3); height: var(--size-3); border-radius: var(--radius-4);
-      background: var(--color-surface); color: var(--color-ink);
-      border: none; cursor: pointer; flex: none;
-    }
-    .wb-toolbar__title { font-size: var(--type-1); color: var(--color-muted); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .wb-brand { display: flex; align-items: center; gap: var(--space-2); color: var(--wb-text); }
+  .wb-brand .ml-wordmark { font-size: var(--type-2); }
+  .wb-kicker {
+    font: var(--weight-3) var(--type-1)/1.4 var(--font-body);
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--wb-dim); margin: var(--space-3) 0 var(--space-1);
   }
 
-  h1 { font: 700 var(--type-3)/1.3 'Inter Tight', sans-serif; margin: var(--space-2) 0 0; }
-  .flow-group { margin-bottom: var(--space-3); }
-  .flow-group summary { font: 600 var(--type-2)/1.4 'Inter', sans-serif; cursor: pointer; padding: var(--space-2) 0; list-style: none; display: flex; align-items: center; gap: var(--space-1); }
-  .flow-group summary::-webkit-details-marker { display: none; }
-  .flow-group summary::before { content: "▸"; color: var(--color-muted); transition: transform var(--duration-2); font-size: var(--type-1); }
-  .flow-group[open] summary::before { transform: rotate(90deg); }
-  .flow-status { font-size: var(--type-1); padding: 2px var(--space-2); border-radius: var(--radius-4); margin-left: auto; }
-  /* These three label a screen's build status and ARE product UI, so they
-     derive from tokens like every other status in the system — the same
-     color-mix .ml-status--warning / --info / --error use. They were the last
-     hand-rolled status pairs in the tree. */
-  .status-partial    { background: color-mix(in srgb, var(--color-warning) 18%, var(--color-white));
-                       color:      color-mix(in srgb, var(--color-warning) 50%, black); }
-  .status-app-mocked { background: color-mix(in srgb, var(--color-info) 12%, var(--color-white));
-                       color:      color-mix(in srgb, var(--color-info) 72%, black); }
-  .status-missing    { background: color-mix(in srgb, var(--color-error) 12%, var(--color-white));
-                       color:      color-mix(in srgb, var(--color-error) 72%, black); }
-  .screen-list { list-style: none; margin: 4px 0 0; padding: 0 0 0 var(--space-3); }
-  .screen-list li a { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-1) var(--space-2); text-decoration: none; color: var(--color-ink); font-size: var(--type-2); border-radius: var(--radius-1); }
-  .screen-list li a:hover, .screen-list li a.active { background: var(--color-pink-container); color: var(--color-pink); }
-  .screen-num { color: var(--color-muted); font-variant-numeric: tabular-nums; font-size: var(--type-1); min-width: 20px; }
-  .empty-flow { font-size: var(--type-1); color: var(--color-muted); padding: var(--space-1) var(--space-2); }
+  /* Progress: 205 screens is a number nobody can hold. How much of it is
+     designed is the question the index is actually asked. */
+  .wb-progress { display: flex; align-items: baseline; gap: var(--space-2); margin-bottom: var(--space-2); }
+  .wb-progress__num { font: var(--weight-4) var(--type-3)/1 var(--font-display); color: var(--wb-text); font-variant-numeric: tabular-nums; }
+  .wb-progress__of { font-size: var(--type-1); color: var(--wb-muted); }
+  /* display:block is load-bearing: this is a <span>, and an inline box takes
+     no height, so its block-level fill child escaped the track entirely and
+     painted a pink slab across the index. */
+  .wb-track { display: block; height: 4px; border-radius: var(--radius-4); background: var(--wb-raised); overflow: hidden; margin-bottom: var(--space-3); }
+  .wb-track__fill { display: block; height: 100%; background: var(--color-pink); border-radius: inherit; transition: width var(--duration-3); }
 
-  /* Designed vs stub. 103 of 124 screens are still unfilled templates, and
-     without this you cannot tell which is which until you click one -- the
-     single most confusing thing about this workbench. */
-  .screen-state { margin-left: auto; font-size: var(--type-1); flex-shrink: 0; }
-  .screen-state.is-stub { color: var(--color-muted); }
-  .screen-state.is-designed { color: var(--color-ink, #0D0D0D); font-weight: 700; }
-  .screen-list li a.is-stub { color: var(--color-muted); }
-  .wb-filter { display: flex; gap: 6px; margin-bottom: var(--space-2); }
-  .wb-filter button {
-    flex: 1; padding: 6px 8px; font-size: var(--type-1); font-family: var(--font-body);
-    border: 1px solid var(--color-line); border-radius: var(--radius-4); background: #fff;
-    cursor: pointer; color: var(--color-muted);
-  }
-  .wb-filter button.active { background: var(--color-ink, #0D0D0D); border-color: var(--color-ink, #0D0D0D); color: #fff; font-weight: 600; }
   .wb-search {
-    width: 100%; min-height: 38px; padding: 0 var(--space-3); margin-bottom: var(--space-2);
-    border: 1px solid var(--color-line); border-radius: var(--radius-4);
+    width: 100%; min-height: 40px; padding: 0 var(--space-3);
+    background: var(--wb-raised); color: var(--wb-text);
+    border: 1px solid var(--wb-line); border-radius: var(--radius-4);
     font-size: var(--type-2); font-family: var(--font-body);
   }
-  .wb-count { font-size: var(--type-1); color: var(--color-muted); margin-bottom: var(--space-2); }
+  .wb-search::placeholder { color: var(--wb-dim); }
+  .wb-search:focus-visible { outline: 2px solid var(--color-pink); outline-offset: 1px; }
+
+  .wb-filter { display: flex; gap: 4px; margin-top: var(--space-2); padding: 3px; background: var(--wb-raised); border-radius: var(--radius-4); }
+  .wb-filter button {
+    flex: 1; min-height: 32px; padding: 0 var(--space-2);
+    font: var(--weight-2) var(--type-1)/1 var(--font-body);
+    border: 0; border-radius: calc(var(--radius-4) - 3px); background: transparent;
+    color: var(--wb-muted); cursor: pointer;
+  }
+  .wb-filter button[aria-pressed="true"] { background: var(--wb-text); color: var(--color-ink); font-weight: var(--weight-3); }
+
+  .wb-count { font-size: var(--type-1); color: var(--wb-dim); margin-top: var(--space-2); }
+
+  /* ── flow groups ──────────────────────────────────────────────────────── */
+  .flow-group { margin-bottom: 2px; }
+  .flow-group summary {
+    display: flex; align-items: center; gap: var(--space-2);
+    padding: var(--space-2); border-radius: var(--radius-2);
+    font: var(--weight-3) var(--type-2)/1.3 var(--font-body);
+    color: var(--wb-text); cursor: pointer; list-style: none;
+  }
+  .flow-group summary::-webkit-details-marker { display: none; }
+  .flow-group summary:hover { background: var(--wb-raised); }
+  .flow-group summary::before {
+    content: "›"; flex: none; width: 12px; color: var(--wb-dim);
+    font-size: var(--type-2); transition: transform var(--duration-2);
+  }
+  .flow-group[open] > summary::before { transform: rotate(90deg); }
+  .flow-group__title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* A ratio says more than a status word: 4/9 designed is the fact you want. */
+  .flow-group__ratio { flex: none; font-size: var(--type-1); color: var(--wb-dim); font-variant-numeric: tabular-nums; }
+  .flow-group__ratio.is-done { color: var(--color-pink); }
+
+  .screen-list { list-style: none; margin: 0 0 var(--space-2); padding: 0 0 0 var(--space-3); }
+  .screen-list a {
+    display: flex; align-items: center; gap: var(--space-2);
+    padding: var(--space-2); border-radius: var(--radius-2);
+    text-decoration: none; color: var(--wb-muted); font-size: var(--type-2);
+  }
+  .screen-list a:hover { background: var(--wb-raised); color: var(--wb-text); }
+  .screen-list a.active { background: var(--color-pink); color: #FFFFFF; }
+  .screen-list a.active .screen-num,
+  .screen-list a.active .screen-dot { color: #FFFFFF; opacity: .85; }
+  .screen-num { flex: none; min-width: 22px; font-size: var(--type-1); color: var(--wb-dim); font-variant-numeric: tabular-nums; }
+  .screen-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Designed vs stub was a text chip on every one of 205 rows, which is 205
+     repetitions of a word to convey one bit. A filled dot carries the same
+     bit; the word stays in the aria-label for anyone who cannot see it. */
+  .screen-dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .screen-list a[data-state="stub"] { color: var(--wb-dim); }
+  .screen-list a[data-state="stub"] .screen-dot { background: transparent; box-shadow: inset 0 0 0 1px currentColor; }
+  .empty-flow { font-size: var(--type-1); color: var(--wb-dim); padding: 0 var(--space-2) var(--space-2) var(--space-3); }
+
+  .wb-scrim { display: none; position: fixed; inset: 0; background: var(--color-scrim); z-index: 39; }
+
+  /* ── the stage ────────────────────────────────────────────────────────── */
+  .wb-view { flex: 1; min-width: 0; display: flex; flex-direction: column; background: var(--wb-stage); }
+
+  .wb-bar {
+    flex: none; display: flex; align-items: center; gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: var(--wb-panel); border-bottom: 1px solid var(--wb-line);
+  }
+  .wb-bar__id { min-width: 0; flex: 1; }
+  .wb-bar__title { font: var(--weight-3) var(--type-2)/1.3 var(--font-body); color: var(--wb-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .wb-bar__route {
+    display: block; font-size: var(--type-1); color: var(--wb-dim);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .wb-bar__actions { flex: none; display: flex; align-items: center; gap: var(--space-1); }
+
+  .wb-btn {
+    display: flex; align-items: center; justify-content: center; gap: var(--space-1);
+    min-width: 36px; height: 36px; padding: 0 var(--space-2);
+    background: transparent; color: var(--wb-muted);
+    border: 1px solid var(--wb-line); border-radius: var(--radius-2);
+    font: var(--weight-2) var(--type-1)/1 var(--font-body); cursor: pointer;
+    text-decoration: none;
+  }
+  .wb-btn:hover { background: var(--wb-raised); color: var(--wb-text); }
+  .wb-btn:focus-visible { outline: 2px solid var(--color-pink); outline-offset: 1px; }
+  .wb-menu-btn { display: none; }
+
+  /* Width picker. The old device selector was removed in 2026-08 because it
+     had never been wired up at all; this one is three widths and four lines
+     of JS, and it exists because "does this survive a 320px phone" is a
+     question you cannot answer by resizing the whole browser. */
+  .wb-sizes { display: flex; gap: 2px; padding: 3px; background: var(--wb-raised); border-radius: var(--radius-2); }
+  .wb-sizes button {
+    min-width: 34px; height: 30px; padding: 0 var(--space-1);
+    border: 0; border-radius: calc(var(--radius-2) - 2px); background: transparent;
+    color: var(--wb-muted); font: var(--weight-2) var(--type-1)/1 var(--font-body);
+    font-variant-numeric: tabular-nums; cursor: pointer;
+  }
+  .wb-sizes button[aria-pressed="true"] { background: var(--wb-text); color: var(--color-ink); }
+
+  /* States, straight off the registry. Every screen declares them and until
+     now the only way to see one was to type ?state= by hand. */
+  .wb-states {
+    flex: none; display: flex; gap: var(--space-1); align-items: center;
+    padding: var(--space-2) var(--space-3);
+    background: var(--wb-panel); border-bottom: 1px solid var(--wb-line);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .wb-states::-webkit-scrollbar { display: none; }
+  .wb-states[hidden] { display: none; }
+  .wb-states__label { flex: none; font-size: var(--type-1); color: var(--wb-dim); margin-right: var(--space-1); }
+  .wb-state {
+    flex: none; min-height: 28px; padding: 0 var(--space-2);
+    display: inline-flex; align-items: center;
+    background: transparent; color: var(--wb-muted);
+    border: 1px solid var(--wb-line); border-radius: var(--radius-4);
+    font: var(--weight-2) var(--type-1)/1 var(--font-body); cursor: pointer; white-space: nowrap;
+  }
+  .wb-state:hover { color: var(--wb-text); }
+  .wb-state[aria-pressed="true"] { background: var(--color-pink); border-color: var(--color-pink); color: #FFFFFF; }
+
+  .wb-stage {
+    flex: 1; min-width: 0; min-height: 0;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+
+  /* The sizer exists because a transform does not change layout.
+     A scaled .device still occupies its FULL 360x800 footprint, so the stage
+     was centring an 800px box inside a 611px track, the box aligned to the
+     top, and the phone hung 150px low and off the bottom edge.
+     This wrapper is the size the phone ACTUALLY appears — width x fit — so
+     ordinary centring puts it where it looks like it should be, and nothing
+     overflows. The phone scales from its top-left corner into this box. */
+  .device-fit {
+    position: relative;
+    width:  calc(var(--device-w, 360px) * var(--fit, 1));
+    height: calc(var(--device-w, 360px) * 20 / 9 * var(--fit, 1));
+    flex: none;
+  }
+
+  /* ── the device ───────────────────────────────────────────────────────── */
+  /* HARDWARE, not product UI: the bezel and the camera lens depict the phone
+     the app runs ON. They are declared in audit-screens' DEVICE_CHROME.
+
+     The frame is sized from its WIDTH with the height derived, and clamped by
+     max-height. It used to be `width:100%; max-width:360px` with a fixed
+     aspect-ratio inside a centred flex parent, which meant that on any
+     viewport shorter than ~880px the 800px-tall frame simply overflowed and
+     the app's own tab bar was cut off the bottom of the screen. */
+  .device {
+    /* THE ASPECT RATIO IS NOT NEGOTIABLE. 360x800 is the Android baseline
+       every screen here is designed against, and a preview that distorts it
+       makes correct layouts look broken and broken ones look fine.
+
+       Both dimensions are set from ONE number, so the ratio is arithmetic:
+       height is always width x 20/9. Nothing clamps, nothing scales, nothing
+       observes a resize. If the stage is smaller than the phone, the stage
+       scrolls — which is boring, and boring is the point. An earlier version
+       of this fitted the frame with max-height, which clamps the height while
+       leaving the definite width alone: that is exactly how a preview ends up
+       squat, and it is why there is no max-* on this box. */
+    width: var(--device-w, 360px);
+    height: calc(var(--device-w, 360px) * 20 / 9);
+    flex: none;
+    /* Fitting is done by SCALING, never by resizing.
+
+       The frame keeps its true CSS pixel size, so the screen inside really is
+       laid out at 360px and the "360" button states a fact. --fit then shrinks
+       the whole assembly to whatever the pane can show. A uniform scale cannot
+       change an aspect ratio, and it cannot change the width the app thinks it
+       has — which is why this, and not max-height or a percentage fill, is the
+       one correct way to make a 800px-tall phone fit a 600px-tall pane. */
+    position: absolute; top: 0; left: 0;
+    transform: scale(var(--fit, 1));
+    transform-origin: top left;
+    background: #1A1A2E;
+    border-radius: 36px;
+    box-shadow: 0 24px 70px rgba(0,0,0,.55);
+    overflow: hidden;
+  }
+  .device__notch {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 36px; height: 22px; background: #1A1A2E; border-radius: 0 0 12px 12px;
+    display: flex; align-items: center; justify-content: center; z-index: 2; pointer-events: none;
+  }
+  .device__lens { width: 6px; height: 6px; border-radius: 50%; background: #2C2F3A; }
+  .device__status {
+    position: absolute; top: 0; left: 0; right: 0; height: 22px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 14px; font-size: 10px; font-weight: 600;
+    color: #FFFFFF; z-index: 1; pointer-events: none;
+  }
+  .device__frame {
+    position: absolute; inset: 22px 0 0; width: 100%; height: calc(100% - 22px);
+    border: 0; display: block; background: var(--color-paper);
+    border-radius: 0 0 34px 34px;
+  }
+
+  /* ── narrow: the index becomes a drawer and the phone stops pretending ── */
+  @media (max-width: 760px) {
+    .wb-nav {
+      position: fixed; inset: 0 auto 0 0; z-index: 40;
+      width: min(320px, 88vw); transform: translateX(-100%);
+      box-shadow: var(--elevation-2);
+    }
+    .wb-nav.is-open { transform: translateX(0); }
+    .wb-nav.is-open ~ .wb-scrim { display: block; }
+    .wb-menu-btn { display: flex; }
+    /* Touch targets on a phone, not 36px mouse targets. */
+    .wb-btn { min-width: 44px; height: 44px; }
+    .wb-sizes { display: none; }         /* the viewport IS the width here */
+    /* The device is NOT touched here.
+
+       This block used to make the frame fill the viewport — width:100%,
+       height:100%, aspect-ratio:auto — on the theory that on a phone the
+       frame IS the phone. That theory produced an 884x514 "phone" the moment
+       the breakpoint caught a laptop-sized window, because filling a stage
+       means taking the stage's ratio, not the device's.
+
+       There is now exactly one device rule for every viewport: 360x800, or
+       412 wide if you pick it. A window too small to show it scrolls. One
+       behaviour, no breakpoint that can silently reshape the prototype. */
+    .wb-stage { padding: var(--space-3); }
+  }
 </style>
 </head>
 <body>
-<div class="workbench">
-  <aside class="wb-sidebar" id="sidebar">
-    <div class="wb-sidebar-header">
-      <!-- Real mark (frontend/guide/brand/assets/favicon-mark.svg), not typography-only
-           as before. currentColor so it inherits --black from the surrounding text color. -->
-      <div style="display:flex;align-items:center;gap:8px;">
-        <svg width="20" height="20" viewBox="0 0 641 550" style="display:block;color:var(--color-ink);flex:none;" aria-hidden="true">
+<div class="wb">
+  <aside class="wb-nav" id="sidebar" aria-label="Screen index">
+    <div class="wb-nav__head">
+      <div class="wb-brand">
+        <!-- Real mark (frontend/guide/brand/assets/favicon-mark.svg), not
+             typography-only. currentColor so it inherits the shell's text. -->
+        <svg width="20" height="20" viewBox="0 0 641 550" style="display:block;flex:none" aria-hidden="true">
           <path fill="currentColor" d="M625 0C633.837 0 641 7.16344 641 16V534C641 542.837 633.837 550 625 550H16C7.16344 550 5.83896e-08 542.837 0 534V16C0 7.16344 7.16344 2.01329e-09 16 0H625ZM485.763 136.924C479.896 127.395 459.413 118.285 448.231 120.276C426.532 124.141 413.82 138.417 408.354 158.445C396.505 201.869 386.374 245.765 374.362 289.141C371.237 300.425 365.536 312.063 357.874 320.766C347.066 333.042 333.299 341.456 314.788 337.963C290.774 333.431 276.661 317.963 270.636 296.337C258.921 254.287 248.645 211.796 239.122 169.186C231.106 133.317 199.722 111.036 171.475 125.983C160.301 131.896 151.246 146.384 146.553 158.958C139.054 179.05 136.444 200.921 130.956 221.826C124.368 246.92 117.51 271.974 109.669 296.696C103.655 315.657 91.4896 329.477 72.1992 337.056C66.5382 339.28 59.413 345.445 58.5059 350.753C55.0657 370.885 53.5303 391.379 52.0723 411.795C51.5155 419.591 54.0668 427.373 63.8135 427.801C79.5225 428.491 94.9065 427.207 107.599 414.577C108.171 414.008 108.654 413.352 109.06 412.654C113.744 404.589 118.453 397.453 121.527 389.672C140.346 342.045 204.397 319.918 244.057 368.228C251.637 377.461 255.597 389.706 263.311 398.789C272.122 409.164 281.791 420.89 293.683 426.155C323.212 439.229 361.834 424.595 379.11 397.195C389.817 380.215 396.839 361.185 417.142 350.783C448.747 334.591 489.962 342.632 509.545 372.291C516.951 383.508 522.417 396.007 529.793 407.247C539.995 422.794 555.596 428.233 573.311 425.545C577.651 424.886 583.685 418.737 584.478 414.312C587.342 398.312 588.763 382.001 589.858 365.748C590.981 349.096 585.515 342.559 570.019 336.941C563.686 334.646 557.077 331.088 552.504 326.282C522.062 294.291 520.275 251.124 510.223 211.594C503.711 185.988 499.895 159.878 485.763 136.924Z"/>
         </svg>
-        <div class="ml-wordmark" style="font-size:var(--type-2);">MUSIC<em>LINKD</em></div>
+        <div class="ml-wordmark">MUSIC<em>LINKD</em></div>
       </div>
+
+      <p class="wb-kicker">Screen workbench</p>
+      <div class="wb-progress">
+        <span class="wb-progress__num" id="wb-designed">—</span>
+        <span class="wb-progress__of" id="wb-total">screens designed</span>
+      </div>
+      <span class="wb-track"><span class="wb-track__fill" id="wb-fill" style="width:0"></span></span>
+
+      <input type="search" id="wb-search" class="wb-search" placeholder="Search screens and flows" aria-label="Search screens and flows" />
+      <div class="wb-filter" role="group" aria-label="Filter by build state">
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="designed" aria-pressed="false">Designed</button>
+        <button type="button" data-filter="stub" aria-pressed="false">Stubs</button>
+      </div>
+      <p class="wb-count" id="wb-count"></p>
     </div>
-    <h1 style="font-size:var(--type-2);">Flow / Screen Index</h1>
-    <p class="wb-hint">Generated from the live flow/schema registry. Tap a screen to preview it on the right.</p>
-    <input type="search" id="wb-search" class="wb-search" placeholder="Filter screens..." aria-label="Filter screens" />
-    <div class="wb-filter" role="group" aria-label="Filter by build state">
-      <button type="button" data-filter="all" class="active">All</button>
-      <button type="button" data-filter="designed">Designed</button>
-      <button type="button" data-filter="stub">Stubs</button>
-    </div>
-    <div class="wb-count" id="wb-count"></div>
-    <div id="flow-list"></div>
+    <div class="wb-nav__list" id="flow-list"></div>
   </aside>
   <div class="wb-scrim" id="scrim"></div>
 
-  <main class="wb-main" id="main">
-    <!-- Workbench toolbar. Only rendered below 800px, where the sidebar
-         collapses into a drawer; on desktop the sidebar is always visible so
-         there is nothing to open and the whole row is display:none. -->
-    <div class="wb-toolbar">
-      <button class="wb-menu-btn" id="menu-btn" aria-label="Open screen list">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  <main class="wb-view">
+    <header class="wb-bar">
+      <button class="wb-btn wb-menu-btn" id="menu-btn" aria-label="Open screen index">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
       </button>
-      <span class="wb-toolbar__title" id="wb-toolbar-title">Screen preview</span>
-    </div>
-    <!-- 20:9 phone-frame mockup. A device selector (Pixel 7/iPhone 14 Pro/
-         Galaxy S23) used to sit here — removed 2026-08-16 rather than
-         fixed: it was found completely non-functional on re-audit (no
-         click handler ever existed, .phone-frame never got the
-         data-device attribute the CSS keyed off), and a single real,
-         standard 360×800 frame is a reasonable fixed baseline rather than
-         reintroducing three sizes' worth of surface area to maintain. -->
-  <div class="phone-frame" id="phone-frame">
-    <div class="phone-notch">
-      <div class="dot"></div>
-    </div>
-    <div class="phone-status">
-      <div class="carrier">MusicLinkd</div>
-      <div class="battery">100%</div>
-    </div>
-    <iframe id="preview-frame" title="Screen preview" src="about:blank"></iframe>
-  </div>
+      <span class="wb-bar__id">
+        <span class="wb-bar__title" id="wb-title">Screen preview</span>
+        <span class="wb-bar__route" id="wb-route">—</span>
+      </span>
+      <span class="wb-bar__actions">
+        <span class="wb-sizes" role="group" aria-label="Preview width">
+          <button type="button" data-w="360" aria-pressed="true">360</button>
+          <button type="button" data-w="412" aria-pressed="false">412</button>
+        </span>
+        <button class="wb-btn" id="wb-reload" aria-label="Reload this screen" title="Reload">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+        </button>
+        <a class="wb-btn" id="wb-open" href="#" target="_blank" rel="noopener" aria-label="Open this screen in a new tab" title="Open in a new tab">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+        </a>
+      </span>
+    </header>
 
-  <style>
-    /* 20:9 device frame — standardized across all supported phones.
-       The aspect-ratio + safe-area insets are driven by CSS vars set by
-       the device-selector JS below. All phones share the same visual
-       language: black border, pill-shaped notch, centered carrier/battery. */
-    .phone-frame {
-      position: relative;
-      width: 100%;
-      max-width: 360px; /* Pixel 7 baseline; other devices scale via aspect-ratio */
-      aspect-ratio: 9 / 20; /* 20:9 — 360×800 base; iPhone 14 Pro → 390×844 via scale */
-      /* HARDWARE, not product UI. This is the phone bezel; #2C2F3A below is
-         the camera lens and #FFD60A is iOS's low-power battery yellow. They
-         depict the device the app runs ON. Putting them on MusicLinkd's
-         palette would make the workbench look like a MusicLinkd screen
-         rather than like a phone, which is the opposite of the point, so
-         they are exempt in audit-screens deliberately — not overlooked. */
-      background: #1a1a2e;
-      border-radius: 36px;
-      margin: 0 auto;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      overflow: hidden;
-    }
-    .phone-frame::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: linear-gradient(rgba(0,0,0,0.3) 0%, transparent 100%);
-      pointer-events: none;
-    }
-    /* Notch — fixed shape/position for the single supported 360×800 frame. */
-    .phone-notch {
-      position: absolute;
-      top: 0; left: 50%; transform: translateX(-50%);
-      width: 36px; height: 24px;
-      background: #0D0D0D;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      gap: 6px; pointer-events: none;
-    }
-    .phone-notch .dot {
-      width: 6px; height: 6px;
-      background: #2C2F3A; border-radius: 50%;
-      pointer-events: none;
-    }
-    /* Status bar — carrier + battery, fixed for the single supported frame. */
-    .phone-status {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      padding: 0 14px; height: 24px;
-      display: flex; justify-content: space-between;
-      align-items: center; font-size: 10px; font-weight: 600;
-      color: #fff; pointer-events: none;
-    }
-    .phone-status .carrier { color: #888; }
-    .phone-status .battery { display: flex; align-items: center; gap: 2px; }
-    .phone-status .battery div {
-      width: 16px; height: 8px;
-      background: #FFD60A; border-radius: 2px;
-    }
-    /* Screen content lives in this iframe. It used to be an unstyled bare
-       child of .phone-frame with no width/height rule reaching it at all
-       (the old CSS targeted ".phone-screen iframe", a class that doesn't
-       exist anywhere in this markup) — so it rendered at the browser's
-       default replaced-element size (~300×150px) and every preview showed
-       as a small clipped box in the top-left of the frame instead of
-       filling the device outline. Positioned + sized explicitly here,
-       starting below the status bar and filling the rest of the frame. */
-    #preview-frame {
-      position: absolute;
-      inset: 24px 0 0 0;
-      width: 100%;
-      height: calc(100% - 24px);
-      border: 0;
-      display: block;
-      background: var(--color-paper, #fff);
-      border-radius: 0 0 34px 34px;
-    }
-  </style>
+    <div class="wb-states" id="wb-states" hidden>
+      <span class="wb-states__label">States</span>
+    </div>
+
+    <div class="wb-stage">
+      <div class="device-fit" id="device-fit" style="--device-w:360px">
+        <div class="device" id="device">
+        <div class="device__notch"><span class="device__lens"></span></div>
+        <div class="device__status"><span>MusicLinkd</span><span>100%</span></div>
+          <iframe class="device__frame" id="preview-frame" title="Screen preview" src="about:blank"></iframe>
+        </div>
+      </div>
+    </div>
   </main>
 </div>
 
 <script src="/preview/shared/app-shell.js" defer></script>
 <script>
-  const sidebar = document.getElementById("sidebar");
-  const scrim = document.getElementById("scrim");
-  const menuBtn = document.getElementById("menu-btn");
-  const frame = document.getElementById("preview-frame");
+  const sidebar  = document.getElementById("sidebar");
+  const scrim    = document.getElementById("scrim");
+  const menuBtn  = document.getElementById("menu-btn");
+  const frame    = document.getElementById("preview-frame");
+  const device   = document.getElementById("device");
+  const deviceFit = document.getElementById("device-fit");
+  const titleEl  = document.getElementById("wb-title");
+  const routeEl  = document.getElementById("wb-route");
+  const statesEl = document.getElementById("wb-states");
+  const openEl   = document.getElementById("wb-open");
 
-  function openSidebar() { sidebar.classList.add("is-open"); }
-  function closeSidebar() { sidebar.classList.remove("is-open"); }
+  const openSidebar  = () => sidebar.classList.add("is-open");
+  const closeSidebar = () => sidebar.classList.remove("is-open");
   menuBtn.addEventListener("click", openSidebar);
   scrim.addEventListener("click", closeSidebar);
+  addEventListener("keydown", (e) => { if (e.key === "Escape") closeSidebar(); });
 
-  function selectScreen(url, linkEl) {
-    frame.src = url;
+  /* What is currently on the stage. Kept in one place so the reload button,
+     the state chips and the open-in-a-new-tab link cannot disagree about it. */
+  let current = { url: null, state: null, link: null };
+
+  function show({ url, state, link }) {
+    current = { url, state: state ?? null, link: link ?? current.link };
+    const src = state ? `${url}?state=${encodeURIComponent(state)}` : url;
+    frame.src = src;
+    openEl.href = src;
+
     document.querySelectorAll(".screen-list a.active").forEach((a) => a.classList.remove("active"));
-    if (linkEl) linkEl.classList.add("active");
-    // Name the screen in the mobile toolbar. Without it the toolbar is a bare
-    // burger with no indication of what is being previewed.
-    const title = document.getElementById("wb-toolbar-title");
-    if (title) title.textContent = linkEl?.dataset.title || "Screen preview";
-    closeSidebar();
-    history.replaceState(null, "", "/preview/?screen=" + encodeURIComponent(url));
+    if (current.link) {
+      current.link.classList.add("active");
+      titleEl.textContent = current.link.dataset.title || "Screen preview";
+    }
+    routeEl.textContent = src.replace("/preview", "");
+    renderStates();
+    history.replaceState(null, "", `/preview/?screen=${encodeURIComponent(url)}${state ? `&state=${encodeURIComponent(state)}` : ""}`);
+  }
+
+  /* A screen's declared states come straight off the registry, so the chips
+     cannot claim a state the screen does not have. A screen with only
+     "default" gets no chip row — one chip that cannot be turned off is
+     furniture, not a control. */
+  function renderStates() {
+    const declared = JSON.parse(current.link?.dataset.states || "[]");
+    statesEl.querySelectorAll(".wb-state").forEach((b) => b.remove());
+    if (declared.length < 2) { statesEl.hidden = true; return; }
+    statesEl.hidden = false;
+    const active = current.state ?? declared[0];
+    for (const st of declared) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "wb-state";
+      b.textContent = st;
+      b.setAttribute("aria-pressed", String(st === active));
+      b.addEventListener("click", () => show({ url: current.url, state: st === declared[0] ? null : st }));
+      statesEl.appendChild(b);
+    }
+  }
+
+  document.getElementById("wb-reload").addEventListener("click", () => {
+    /* Re-assigning the same src is a no-op in some browsers; going through
+       about:blank forces the document to be built again. */
+    const src = frame.src;
+    frame.src = "about:blank";
+    requestAnimationFrame(() => { frame.src = src; });
+  });
+
+  /* Shrink-to-fit only — never magnify. Blowing a 360px design up to 500px
+     would misrepresent it as badly as squashing it would. */
+  const stage = document.querySelector(".wb-stage");
+  function fitDevice() {
+    const w = parseFloat(getComputedStyle(deviceFit).getPropertyValue("--device-w")) || 360;
+    const h = w * 20 / 9;
+    const room = 24;   // so the bezel never touches the edge of the pane
+    const fit = Math.min(1, (stage.clientWidth - room) / w, (stage.clientHeight - room) / h);
+    deviceFit.style.setProperty("--fit", String(Math.max(fit, 0.25)));
+  }
+  new ResizeObserver(fitDevice).observe(stage);
+
+  for (const b of document.querySelectorAll(".wb-sizes button")) {
+    b.addEventListener("click", () => {
+      document.querySelectorAll(".wb-sizes button").forEach((x) => x.setAttribute("aria-pressed", "false"));
+      b.setAttribute("aria-pressed", "true");
+      deviceFit.style.setProperty("--device-w", `${b.dataset.w}px`);
+      fitDevice();
+    });
   }
 
   // Which screens are real designs vs untouched templates. Generated by the
@@ -315,22 +496,28 @@
       for (const s of data.screens) (byFlow[s.flowKey] ??= []).push(s);
 
       const sorted = [...data.flows].sort((a, b) => a.order - b.order);
-      let firstUrl = null;
-
-      const params = new URLSearchParams(window.location.search);
+      const params = new URLSearchParams(location.search);
       const preselect = params.get("screen");
+      const preselectState = params.get("state");
+      let firstLink = null, wanted = null;
 
       for (const flow of sorted) {
+        const screens = (byFlow[flow.key] ?? []).sort((a, b) => a.screenOrder - b.screenOrder);
+        const done = screens.filter((s) => DESIGNED.has(`${s.flowKey}/${s.screenKey}`)).length;
+
         const details = document.createElement("details");
         details.className = "flow-group";
-        const screens = (byFlow[flow.key] ?? []).sort((a, b) => a.screenOrder - b.screenOrder);
         details.open = screens.length > 0 && screens.length <= 15;
 
         const summary = document.createElement("summary");
-        summary.innerHTML = `${flow.order}. ${flow.title} <span class="flow-status status-${flow.status}">${flow.status}</span>`;
+        summary.innerHTML =
+          `<span class="flow-group__title">${flow.order}. ${flow.title}</span>` +
+          (screens.length
+            ? `<span class="flow-group__ratio${done === screens.length ? " is-done" : ""}">${done}/${screens.length}</span>`
+            : "");
         details.appendChild(summary);
 
-        if (screens.length === 0) {
+        if (!screens.length) {
           const p = document.createElement("p");
           p.className = "empty-flow";
           p.textContent = flow.description;
@@ -340,29 +527,31 @@
           ul.className = "screen-list";
           for (const screen of screens) {
             const url = `/preview/flows/${screen.flowKey}/${screen.screenKey}/index.html`;
-            if (!firstUrl) firstUrl = url;
+            const isDesigned = DESIGNED.has(`${screen.flowKey}/${screen.screenKey}`);
             const li = document.createElement("li");
             const a = document.createElement("a");
             a.href = url;
-            const isDesigned = DESIGNED.has(`${screen.flowKey}/${screen.screenKey}`);
-            if (!isDesigned) a.classList.add("is-stub");
             a.dataset.state = isDesigned ? "designed" : "stub";
             a.dataset.search = `${screen.screenTitle} ${screen.screenKey} ${flow.title}`.toLowerCase();
-            // Stored so the mobile toolbar can name the screen without
-            // scraping the link's rendered text, which concatenates the
-            // number and the Designed/Stub chip into "1HomeStub".
+            a.dataset.states = JSON.stringify(screen.states ?? []);
+            // Stored so the bar can name the screen without scraping the
+            // rendered text, which concatenates the number into "1Home".
             a.dataset.title = flow.title === screen.screenTitle
               ? screen.screenTitle
               : `${flow.title} · ${screen.screenTitle}`;
-            a.innerHTML = `<span class="screen-num">${screen.screenNumber ?? "-"}</span>` +
-              `<span>${screen.screenTitle}</span>` +
-              `<span class="screen-state ${isDesigned ?"is-designed" : "is-stub"}">` +
-              `${isDesigned ? "Designed" : "Stub"}</span>`;
+            a.innerHTML =
+              `<span class="screen-num">${screen.screenNumber ?? "–"}</span>` +
+              `<span class="screen-name">${screen.screenTitle}</span>` +
+              `<span class="screen-dot" aria-hidden="true"></span>`;
+            // The dot carries "designed" visually; this carries it otherwise.
+            a.setAttribute("aria-label", `${a.dataset.title} — ${isDesigned ? "designed" : "stub"}`);
             a.addEventListener("click", (e) => {
               e.preventDefault();
-              selectScreen(url, a);
+              show({ url, state: null, link: a });
+              closeSidebar();
             });
-            if (preselect === url) { firstUrl = url; selectScreen(url, a); }
+            firstLink ??= a;
+            if (preselect === url) wanted = a;
             li.appendChild(a);
             ul.appendChild(li);
           }
@@ -371,25 +560,24 @@
         container.appendChild(details);
       }
 
-      // Minor edge case fixed on the same re-audit: this used to load
-      // `preselect` unconditionally whenever the loop above never matched
-      // it (e.g. a stale/hand-edited ?screen= pointing at a screen that no
-      // longer exists) — silently showing a broken iframe instead of
-      // falling back to the first real screen the way a truly-empty
-      // ?screen= already does.
       // --- search + designed/stub filter -------------------------------
-      const searchEl = document.getElementById("wb-search");
-      const countEl = document.getElementById("wb-count");
+      const searchEl  = document.getElementById("wb-search");
+      const countEl   = document.getElementById("wb-count");
       const filterBtns = [...document.querySelectorAll(".wb-filter button")];
+      const links = [...document.querySelectorAll(".screen-list a")];
+      const designedCount = links.filter((a) => a.dataset.state === "designed").length;
       let mode = "all";
+
+      document.getElementById("wb-designed").textContent = designedCount;
+      document.getElementById("wb-total").textContent = `of ${links.length} screens designed`;
+      document.getElementById("wb-fill").style.width = `${Math.round((designedCount / links.length) * 100)}%`;
 
       function applyFilter() {
         const q = (searchEl.value || "").trim().toLowerCase();
         let shown = 0;
-        for (const a of document.querySelectorAll(".screen-list a")) {
-          const okMode = mode === "all" || a.dataset.state === mode;
-          const okText = !q || (a.dataset.search || "").includes(q);
-          const show = okMode && okText;
+        for (const a of links) {
+          const show = (mode === "all" || a.dataset.state === mode) &&
+                       (!q || (a.dataset.search || "").includes(q));
           a.parentElement.hidden = !show;
           if (show) shown++;
         }
@@ -400,32 +588,31 @@
           grp.hidden = grp.querySelector(".screen-list") ? !any : false;
           if (any && (q || mode !== "all")) grp.open = true;
         }
-        const total = document.querySelectorAll(".screen-list a").length;
-        const designed = document.querySelectorAll('.screen-list a[data-state="designed"]').length;
-        countEl.textContent = `${shown} of ${total} screens · ${designed} designed, ${total - designed} stubs`;
+        countEl.textContent = q || mode !== "all"
+          ? `${shown} matching`
+          : `${links.length} screens across ${sorted.length} flows`;
       }
 
       searchEl.addEventListener("input", applyFilter);
-      filterBtns.forEach((b) =>
+      for (const b of filterBtns) {
         b.addEventListener("click", () => {
-          filterBtns.forEach((x) => x.classList.remove("active"));
-          b.classList.add("active");
+          filterBtns.forEach((x) => x.setAttribute("aria-pressed", "false"));
+          b.setAttribute("aria-pressed", "true");
           mode = b.dataset.filter;
           applyFilter();
-        })
-      );
+        });
+      }
       applyFilter();
 
-      if (!frame.src || frame.src === "about:blank") {
-        if (preselect && sorted.some((f) => (byFlow[f.key] ?? []).some((s) => `/preview/flows/${s.flowKey}/${s.screenKey}/index.html` === preselect))) {
-          frame.src = preselect;
-        } else if (firstUrl) {
-          frame.src = firstUrl;
-        }
-      }
+      // A stale or hand-edited ?screen= pointing at a screen that no longer
+      // exists falls back to the first real one rather than showing a broken
+      // iframe — the same thing an empty ?screen= already did.
+      const start = wanted ?? firstLink;
+      if (start) show({ url: start.href.replace(location.origin, ""), state: preselectState, link: start });
     })
     .catch((err) => {
-      document.getElementById("flow-list").textContent = "Could not load the flow/screen registry — run the generator first.";
+      document.getElementById("flow-list").textContent =
+        "Could not load the flow/screen registry — run the generator first.";
       console.error(err);
     });
 </script>

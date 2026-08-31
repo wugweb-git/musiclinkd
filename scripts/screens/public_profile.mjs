@@ -20,7 +20,7 @@ assertIcons(["arrow-forward", "send", "heart", "star", "check-circle-fill", "edi
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-2" style="margin:0">${title}</h1>
+      <h1 class="ml-type-3" style="margin:0">${title}</h1>
     </header>`;
 
 /* ── one public profile, five subjects ──────────────────────────────────
