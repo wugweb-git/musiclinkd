@@ -65,6 +65,8 @@ object MLColor {
     val Disabled = Color(0xFF9CA3AF)
     /** Backdrop behind drawers, sheets and modals */
     val Scrim = Color(0x520D0D0D)
+    /** BADGES ONLY */
+    val Purple = Color(0xFF8B5CF6)
 }
 
 /** Spacing — 4-step exponential (r=2). */

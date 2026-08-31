@@ -40,9 +40,15 @@ const TOKENS = new Map(
    that. Auditing web files alone reported 36 dead tokens when most were doing
    their job in MusicLinkdTokens.kt; splitting the buckets is the difference
    between "delete this" and "this is native-only, as designed". */
+/* The GENERATED page counts as a consumer, not just the generator. Several
+   references are built from a template variable — the colour book paints each
+   chip with `var(--color-${name})` — so they exist as a literal only in
+   index.html. Reading the source alone reported the brand-expression colours
+   as dead while the shipped page referenced every one of them. */
 const WEB_CONSUMERS = ["frontend/guide/system/ml-core.css",
                        "frontend/guide/system/ml-widgets.css",
-                       "scripts/build-guide.mjs"];
+                       "scripts/build-guide.mjs",
+                       "frontend/guide/index.html"];
 const NATIVE_CONSUMERS = ["docs/handoff/MusicLinkdTokens.kt"];
 
 const read = (f) => { try { return readFileSync(join(ROOT, f), "utf8"); } catch { return ""; } };

@@ -1,0 +1,21 @@
+{
+  "flowKey": "user_settings",
+  "flowTitle": "Settings & Support",
+  "flowStatus": "missing",
+  "flowOrder": 21,
+  "screenKey": "data_privacy",
+  "screenNumber": 163,
+  "screenTitle": "Data & privacy",
+  "screenOrder": 18,
+  "states": [
+    "default",
+    "export_requested",
+    "export_processing",
+    "export_ready",
+    "export_expired",
+    "personalisation"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-21 brief. The export lifecycle is four states of one screen rather than four screens, and the copy never claims immediate availability. Personalisation (personalised / limited / off) is a state here and must not imply that turning it off disables core search.",
+  "dataContract": []
+}

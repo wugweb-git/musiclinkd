@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T03:57:06.652Z",
+  "generatedAt": "2026-08-31T04:03:03.973Z",
   "flows": [
     {
       "key": "home",
@@ -167,7 +167,7 @@
       "order": 21,
       "status": "missing",
       "description": "App-level settings (notifications/privacy/security/appearance), Help & Support (FAQ, raise a ticket, report user/listing, feedback), legal pages, and app version — explicitly distinct from Flow 1 Auth (password change lives there, not here) and Flow 10 Profile Management (identity/public-profile fields, not app preferences). user_settings/{userId} and support_tickets/moderation_flags are typed and rules-ready, but SettingsFlow and HelpAndSupportFlow app-side have zero real persistence anywhere — confirmed this session. Founded, ready-to-wire gaps, not speculative.",
-      "screenCount": 13
+      "screenCount": 19
     },
     {
       "key": "cms_pages",
@@ -6166,7 +6166,11 @@
       "screenTitle": "Account Settings",
       "screenOrder": 1,
       "states": [
-        "default"
+        "default",
+        "editing",
+        "saving",
+        "saved",
+        "error"
       ],
       "collectionsTouched": [
         "users"
@@ -6256,7 +6260,11 @@
       "screenTitle": "Privacy Settings",
       "screenOrder": 3,
       "states": [
-        "default"
+        "default",
+        "profile_visibility",
+        "contact_privacy",
+        "online_status",
+        "search_visibility"
       ],
       "collectionsTouched": [
         "user_settings"
@@ -6281,7 +6289,10 @@
       "screenOrder": 4,
       "states": [
         "default",
-        "two_factor_setup"
+        "two_factor_setup",
+        "two_factor_on",
+        "connected_accounts",
+        "security_alert"
       ],
       "collectionsTouched": [],
       "notes": "Two-factor toggle + a \"Reset Access Password\" button live here in the real app today — conceptually that action belongs to Flow 1 (Auth), per this flow's scope note. Flag to AI Studio if you want it physically moved, not just re-labeled.",
@@ -6297,7 +6308,9 @@
       "screenTitle": "Appearance Settings",
       "screenOrder": 5,
       "states": [
-        "default"
+        "default",
+        "language",
+        "accessibility"
       ],
       "collectionsTouched": [
         "user_settings"
@@ -6321,7 +6334,9 @@
       "screenTitle": "Help Center",
       "screenOrder": 6,
       "states": [
-        "default"
+        "default",
+        "searching",
+        "no_results"
       ],
       "collectionsTouched": [],
       "notes": "Landing/menu screen for the sub-flows below.",
@@ -6502,6 +6517,270 @@
       "collectionsTouched": [],
       "notes": "Static build info (version name/code) — no Firestore involvement expected.",
       "dataContract": []
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "username",
+      "screenNumber": 159,
+      "screenTitle": "Username",
+      "screenOrder": 14,
+      "states": [
+        "default",
+        "checking",
+        "taken",
+        "saved"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-21 brief. Owns the handle and the musiclinkd.com/<username> preview. Availability checking is a state, not a screen. Must never expose an internal document id.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "change_email_phone",
+      "screenNumber": 160,
+      "screenTitle": "Change email or phone",
+      "screenOrder": 15,
+      "states": [
+        "email",
+        "phone",
+        "verifying",
+        "verified",
+        "error"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-21 brief, which is explicit that the change must not be claimed as done before verification succeeds. Email and phone are two states of one screen: same shape, same verification step. OTP UI only — no authentication logic.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "active_sessions",
+      "screenNumber": 161,
+      "screenTitle": "Signed-in devices",
+      "screenOrder": 16,
+      "states": [
+        "default",
+        "current_only"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-21 brief. Device, platform, approximate location, last active, and which one you are on. Deliberately does not show precise location or full device fingerprints — the brief says not to expose excessive device data.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "blocked_accounts",
+      "screenNumber": 162,
+      "screenTitle": "Blocked accounts",
+      "screenOrder": 17,
+      "states": [
+        "default",
+        "empty"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-21 brief. Blocked people and businesses in one list, with unblock. Blocking is immediate and separate from reporting, which the copy states.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "data_privacy",
+      "screenNumber": 163,
+      "screenTitle": "Data & privacy",
+      "screenOrder": 18,
+      "states": [
+        "default",
+        "export_requested",
+        "export_processing",
+        "export_ready",
+        "export_expired",
+        "personalisation"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-21 brief. The export lifecycle is four states of one screen rather than four screens, and the copy never claims immediate availability. Personalisation (personalised / limited / off) is a state here and must not imply that turning it off disables core search.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "user_settings",
+      "flowTitle": "Settings & Support",
+      "flowStatus": "missing",
+      "flowOrder": 21,
+      "screenKey": "delete_account",
+      "screenNumber": 164,
+      "screenTitle": "Deactivate or delete",
+      "screenOrder": 19,
+      "states": [
+        "choose",
+        "deactivate_confirm",
+        "delete_consequences",
+        "delete_confirm",
+        "processing"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-21 brief. Deactivate and delete share one danger screen and progress through states, so a destructive action is never one tap: consequences are shown before the confirmation, and the confirmation needs a typed phrase. Deletion is described as requested-and-processing, not instant.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
     },
     {
       "flowKey": "cms_pages",

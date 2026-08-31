@@ -391,6 +391,12 @@ body {
   font-weight: var(--weight-3);
 }
 .ml-badge--accent { background: var(--color-pink-container); color: var(--color-pink-pressed); }
+/* CATEGORY, not state. Purple is scoped to this one modifier by the palette
+   rule "Pink=Brand. Black=Primary. Purple=Badges only" — reinstated 2026-08-31.
+   A category badge says what KIND of thing this is (genre, service, role); the
+   status colours say how it is GOING. Those were being conflated, which is why
+   genre labels were rendering in accent pink and reading as selected. */
+.ml-badge--category { background: var(--status-category-bg); color: var(--status-category-text); }
 
 /* Notification count, pinned to the corner of an icon button. Added when the
    Home dashboard needed one and there was no overlay badge in the system —
@@ -704,6 +710,19 @@ a.ml-row:active { background: var(--color-surface); }
    sweep; --layout-measure is 64ch, which lands mid-range for Inter. */
 
 .ml-measure { max-width: var(--layout-measure); }
+
+/* The page container. --layout-max and --chrome-scrollbar both existed as
+   tokens with no consumer: the Gaps table claimed --layout-max was "kept as a
+   max-width" while nothing on web applied it, and the scrollbar width was a
+   number with nowhere to go. The system had .ml-measure for line length and
+   nothing for page width, so every full-width layout capped itself by hand.
+   Subtracting the scrollbar keeps the cap honest on desktop, where a visible
+   scrollbar means 100vw is wider than the space actually available. */
+.ml-page {
+  width: 100%;
+  max-width: min(var(--layout-max), 100vw - var(--chrome-scrollbar));
+  margin-inline: auto;
+}
 
 /* ── nav app bar ───────────────────────────────────────────────────────── */
 /* Back-arrow bar for anything inside a flow. Separate from .ml-appbar,

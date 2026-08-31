@@ -224,6 +224,11 @@ for (const [key, tok] of Object.entries(T.interaction)) {
   // platform has no equivalent, and emitting a dash as a CSS value would be
   // a silently broken token rather than an absent one.
   if (tok.$web === "—") continue;
+  // $noEmit marks a value the spec names but that already has a token. It stays
+  // in tokens.json so "is it missing?" is answerable, and stops emitting so the
+  // same value never ships under two names — the exact sprawl the ceiling exists
+  // to prevent, which this file's semantic block already applies to colour.
+  if (tok.$noEmit) continue;
   emit(`gesture-${kebab(key)}`, tok.$web, short(tok.$description));
 }
 
@@ -260,6 +265,7 @@ for (const [key, tok] of Object.entries(T.platform.safeArea)) {
 section("System chrome — space we reserve but do not draw");
 for (const [key, tok] of Object.entries(T.platform.chrome)) {
   if (key.startsWith("$")) continue;
+  if (tok.$noEmit) continue;   // see $noEmit note above
   emit(`chrome-${kebab(key)}`, tok.$web, short(tok.$description));
 }
 

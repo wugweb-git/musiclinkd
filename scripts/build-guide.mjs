@@ -365,7 +365,9 @@ const DEMOS = {
   "status": `<div class="g-row"><span class="ml-status ml-status--success">Available</span>
     <span class="ml-status ml-status--warning">Selective</span><span class="ml-status ml-status--error">Rejected</span>
     <span class="ml-status ml-status--accent">Live band</span><span class="ml-status ml-status--neutral">Draft</span></div>`,
-  "badge": `<div class="g-row"><span class="ml-badge">★ 4.9</span><span class="ml-badge ml-badge--accent">Gold</span></div>`,
+  "badge": `<div class="g-row"><span class="ml-badge">★ 4.9</span><span class="ml-badge ml-badge--accent">Gold</span>
+    <span class="ml-badge ml-badge--category">Sufi</span><span class="ml-badge ml-badge--category">Mixing</span></div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Purple is <b>category</b>, never state — a genre or service kind, not how something is going. It is scoped to this one modifier and appears nowhere else in the system.</p>`,
   "card": `<div class="ml-card ml-card--padded" style="max-width:320px"><b>Card</b>
     <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Hairline border by default; elevation is opt-in.</p></div>`,
   "media": `<div class="ml-media ml-media--wide ml-media--scrim" style="max-width:320px;border-radius:var(--radius-2)">

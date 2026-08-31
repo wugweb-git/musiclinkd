@@ -29,25 +29,58 @@
       <h1 class="ml-type-2" style="margin:0">Security</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div class="ml-section"><h2>Sign-in</h2></div>
-      <div class="ml-summary__row"><span>Password</span><span>Last changed 4 months ago</span></div>
-      <div class="ml-check-row">
+      <div data-state="default two_factor_setup">
+        <div class="ml-section"><h2>Sign-in</h2></div>
+        <div class="ml-summary__row"><span>Password</span><span>Last changed 4 months ago</span></div>
+        <div class="ml-check-row">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Two-factor authentication</span>
           <span class="ml-choice__meta">A code by SMS each time you sign in on a new device</span>
         </span>
         <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Two-factor authentication"></button>
       </div>
-      <a class="ml-action-row" href="/preview/flows/user_settings/app_version/index.html">
+        <a class="ml-action-row" href="/preview/flows/user_settings/active_sessions/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Signed-in devices</span>
           <span class="ml-choice__meta">3 devices</span>
         </span>
         <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
       </a>
+      </div>
 
-      <div class="ml-section"><h2>Set up two-factor</h2></div>
-      <div data-state="two_factor_setup">
+      <div data-state="two_factor_on">
+        <div class="ml-banner ml-banner--success"><span class="ml-banner__body">Two-factor is on. You'll be asked for a code on new devices.</span></div>
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>Method</span><span>SMS to +91 98••• ••432</span></div>
+          <div class="ml-summary__row"><span>Recovery codes</span><span>8 unused</span></div>
+        </div>
+      </div>
+      <div data-state="connected_accounts">
+        <div class="ml-section"><h2>Connected accounts</h2></div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body"><span class="ml-choice__title">Google</span>
+          <span class="ml-choice__meta">ishita@example.com</span></span>
+          <button class="ml-btn ml-btn--secondary" type="button">Disconnect</button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body"><span class="ml-choice__title">Apple</span>
+          <span class="ml-choice__meta">Not connected</span></span>
+          <button class="ml-btn ml-btn--secondary" type="button">Connect</button>
+        </div>
+      </div>
+      <div data-state="security_alert">
+        <div class="ml-banner ml-banner--warning"><span class="ml-banner__body">New sign-in detected.</span></div>
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>Device</span><span>Chrome on Windows</span></div>
+          <div class="ml-summary__row"><span>When</span><span>Today, 09:14</span></div>
+          <div class="ml-summary__row"><span>Where</span><span>Pune, approximately</span></div>
+        </div>
+        <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/user_settings/active_sessions/index.html">Review devices</a>
+      </div>
+
+      <div data-state="default two_factor_setup">
+        <div class="ml-section"><h2>Set up two-factor</h2></div>
+        <div data-state="two_factor_setup">
         <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-2)">
           We'll send a six-digit code to +91 98••• ••432 whenever you sign in on a device we don't recognise.
         </p>
@@ -56,6 +89,7 @@
           <input id="tf-phone" type="tel" value="+91 98••• ••432" />
         </div>
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Send code</a>
+      </div>
       </div>
     </main>
   </div>

@@ -8,7 +8,11 @@
   "screenTitle": "Account Settings",
   "screenOrder": 1,
   "states": [
-    "default"
+    "default",
+    "editing",
+    "saving",
+    "saved",
+    "error"
   ],
   "collectionsTouched": [
     "users"

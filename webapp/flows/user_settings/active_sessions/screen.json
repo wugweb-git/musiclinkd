@@ -1,0 +1,17 @@
+{
+  "flowKey": "user_settings",
+  "flowTitle": "Settings & Support",
+  "flowStatus": "missing",
+  "flowOrder": 21,
+  "screenKey": "active_sessions",
+  "screenNumber": 161,
+  "screenTitle": "Signed-in devices",
+  "screenOrder": 16,
+  "states": [
+    "default",
+    "current_only"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-21 brief. Device, platform, approximate location, last active, and which one you are on. Deliberately does not show precise location or full device fingerprints — the brief says not to expose excessive device data.",
+  "dataContract": []
+}

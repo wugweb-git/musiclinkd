@@ -4,7 +4,7 @@
  * Source:    frontend/guide/tokens/tokens.json  (v9.0.0)
  * Regenerate: node scripts/build-tokens.mjs
  *
- * 107 tokens, ceiling 108. The previous hand-maintained system
+ * 108 tokens, ceiling 108. The previous hand-maintained system
  * had reached 248 custom properties in a single :root, of which every value
  * past the 4-step core was an exact duplicate under a second name.
  *
@@ -35,6 +35,7 @@
   --color-info: #2563EB; /* Informational badge — 'On Tour', 'Remote available' */
   --color-disabled: #9CA3AF; /* Inactive control borders and text */
   --color-scrim: rgba(13,13,13,0.32); /* Backdrop behind drawers, sheets and modals */
+  --color-purple: #8B5CF6; /* BADGES ONLY */
 
   /* Spacing — 4-step exponential (r=2) */
   --space-1: 4px;
@@ -135,7 +136,6 @@
   --gesture-pinch-min: 0.5; /* Minimum pinch-zoom scale — artwork and waveform detail views */
   --gesture-pinch-max: 3; /* Maximum pinch-zoom scale */
   --gesture-tooltip-delay: 400ms; /* Hover dwell before a tooltip opens */
-  --gesture-hover-transition: 200ms; /* Hover state transition */
 
   /* Media — the palette rule, made operational */
   --media-scrim: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.75) 100%);
@@ -150,6 +150,8 @@
   --status-success-text: color-mix(in srgb, var(--color-success) 58%, black); /* Confirmed, available, complete — text/icon on that fill */
   --status-warning-bg: color-mix(in srgb, var(--color-warning) 18%, var(--color-white)); /* Pending, caution — container fill */
   --status-warning-text: color-mix(in srgb, var(--color-warning) 50%, black); /* Pending, caution — text/icon on that fill */
+  --status-category-bg: color-mix(in srgb, var(--color-purple) 12%, var(--color-white)); /* CATEGORY badge container — purple */
+  --status-category-text: color-mix(in srgb, var(--color-purple) 72%, black); /* Category badge text/icon on that fill */
 
   /* Safe area — edge-to-edge is mandatory, not optional */
   --safe-top: env(safe-area-inset-top, var(--chrome-status-bar));
@@ -157,7 +159,6 @@
 
   /* System chrome — space we reserve but do not draw */
   --chrome-status-bar: 24px; /* Status bar height fallback */
-  --chrome-nav-bar: 48px; /* System navigation bar height fallback */
   --chrome-scrollbar: 12px; /* Desktop scrollbar width */
 
   /* Window size classes — Material WindowSizeClass, what Compose branches on */

@@ -29,32 +29,91 @@
       <h1 class="ml-type-2" style="margin:0">Appearance</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div class="ml-section"><h2>Display</h2></div>
-      <div class="ml-check-row">
+      <div data-state="default">
+        <div class="ml-section"><h2>Display</h2></div>
+        <div class="ml-check-row">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Larger text</span>
           <span class="ml-choice__meta">Follows your device text size</span>
         </span>
         <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Larger text"></button>
       </div>
-      <div class="ml-check-row">
+        <div class="ml-check-row">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Reduce motion</span>
           <span class="ml-choice__meta">Fewer transitions and no autoplaying loops</span>
         </span>
         <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Reduce motion"></button>
       </div>
-      <div class="ml-check-row">
+        <div class="ml-check-row">
         <span class="ml-choice__body">
           <span class="ml-choice__title">High contrast</span>
           <span class="ml-choice__meta">Stronger separators and heavier text</span>
         </span>
         <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="High contrast"></button>
       </div>
+      </div>
 
-      <div class="ml-section"><h2>Language</h2></div>
-      <div class="ml-summary__row"><span>App language</span><span>English (India)</span></div>
-      <div class="ml-summary__row"><span>Content languages</span><span>Hindi, English</span></div>
+      <div data-state="default">
+        <div class="ml-section"><h2>Language</h2></div>
+        <div class="ml-summary__row"><span>App language</span><span>English (India)</span></div>
+        <div class="ml-summary__row"><span>Content languages</span><span>Hindi, English</span></div>
+      </div>
+
+      <div data-state="language">
+        <div class="ml-section"><h2>App language</h2></div>
+        <div role="radiogroup" aria-label="App language">
+          <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">English (India)</span>
+              
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">हिन्दी</span>
+              <span class="ml-choice__meta">Partial — some screens stay in English.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">मराठी</span>
+              <span class="ml-choice__meta">Partial — some screens stay in English.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Only languages we have actually translated are listed.</p>
+      </div>
+      <div data-state="accessibility">
+        <div class="ml-section"><h2>Accessibility</h2></div>
+        <div role="radiogroup" aria-label="Accessibility">
+          <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Follow my device</span>
+              <span class="ml-choice__meta">Text size, contrast and motion come from Android settings.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Larger text in the app only</span>
+              
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Reduce motion in the app only</span>
+              
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">MusicLinkd cannot change your device settings — these apply inside the app.</p>
+      </div>
     </main>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

@@ -8,7 +8,11 @@
   "screenTitle": "Privacy Settings",
   "screenOrder": 3,
   "states": [
-    "default"
+    "default",
+    "profile_visibility",
+    "contact_privacy",
+    "online_status",
+    "search_visibility"
   ],
   "collectionsTouched": [
     "user_settings"

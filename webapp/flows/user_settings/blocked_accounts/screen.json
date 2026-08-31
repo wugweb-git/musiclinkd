@@ -1,0 +1,17 @@
+{
+  "flowKey": "user_settings",
+  "flowTitle": "Settings & Support",
+  "flowStatus": "missing",
+  "flowOrder": 21,
+  "screenKey": "blocked_accounts",
+  "screenNumber": 162,
+  "screenTitle": "Blocked accounts",
+  "screenOrder": 17,
+  "states": [
+    "default",
+    "empty"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-21 brief. Blocked people and businesses in one list, with unblock. Blocking is immediate and separate from reporting, which the copy states.",
+  "dataContract": []
+}

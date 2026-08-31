@@ -29,53 +29,168 @@
       <h1 class="ml-type-2" style="margin:0">Privacy</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div class="ml-section"><h2>Who can see you</h2></div>
-      <div class="ml-check-row">
+      <div data-state="default">
+        <div class="ml-section"><h2>Who can see you</h2></div>
+        <div class="ml-check-row">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Show profile in Discover</span>
           <span class="ml-choice__meta">Off means only people with your link can find you</span>
         </span>
         <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Show profile in Discover"></button>
       </div>
-      <div class="ml-check-row">
+        <div class="ml-check-row">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Show my location</span>
           <span class="ml-choice__meta">City only — never a precise address</span>
         </span>
         <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Show my location"></button>
       </div>
-      <div class="ml-check-row">
+        <div class="ml-check-row">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Show my rates publicly</span>
           
         </span>
         <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Show my rates publicly"></button>
       </div>
+      </div>
 
-      <div class="ml-section"><h2>Who can reach you</h2></div>
-      <div class="ml-check-row">
+      <div data-state="default">
+        <div class="ml-section"><h2>Who can reach you</h2></div>
+        <div class="ml-check-row">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Allow messages from anyone</span>
           <span class="ml-choice__meta">Off means connections only</span>
         </span>
         <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Allow messages from anyone"></button>
       </div>
-      <div class="ml-check-row">
+        <div class="ml-check-row">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Allow booking requests</span>
           
         </span>
         <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Allow booking requests"></button>
       </div>
+      </div>
 
-      <div class="ml-section"><h2>Blocking</h2></div>
-      <a class="ml-action-row" href="/preview/flows/user_settings/report_user/index.html">
+      <div data-state="default">
+        <div class="ml-section"><h2>Blocking</h2></div>
+        <a class="ml-action-row" href="/preview/flows/user_settings/blocked_accounts/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Blocked accounts</span>
           <span class="ml-choice__meta">2 accounts</span>
         </span>
         <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
       </a>
+      </div>
+
+      <div data-state="profile_visibility">
+        <div class="ml-section"><h2>Who can see your profile</h2></div>
+        <div role="radiogroup" aria-label="Who can see your profile">
+          <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Public</span>
+              <span class="ml-choice__meta">Anyone, including people not on MusicLinkd. Your profile can be found by search engines.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">MusicLinkd members</span>
+              <span class="ml-choice__meta">Only people signed in to MusicLinkd.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Private</span>
+              <span class="ml-choice__meta">Only people you have connected with.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Making your profile private does not remove links people have already shared.</p>
+      </div>
+      <div data-state="contact_privacy">
+        <div class="ml-section"><h2>Who can see your contact details</h2></div>
+        <div role="radiogroup" aria-label="Who can see your contact details">
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Everyone</span>
+              <span class="ml-choice__meta">Phone, email and website on your public profile.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Members</span>
+              <span class="ml-choice__meta">Signed-in people only.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Connections</span>
+              <span class="ml-choice__meta">People you have connected with.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Only me</span>
+              <span class="ml-choice__meta">Nobody. People message you through MusicLinkd.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+        </div>
+        
+      </div>
+      <div data-state="online_status">
+        <div class="ml-section"><h2>Online status</h2></div>
+        <div role="radiogroup" aria-label="Online status">
+          <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Show when I'm active</span>
+              <span class="ml-choice__meta">Others may see roughly when you were last here.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Hide it</span>
+              <span class="ml-choice__meta">Nobody sees your activity. You also stop seeing theirs.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Activity is approximate, not live to the second.</p>
+      </div>
+      <div data-state="search_visibility">
+        <div class="ml-section"><h2>Where you appear</h2></div>
+        <div role="radiogroup" aria-label="Where you appear">
+          <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Search, Discover and matches</span>
+              <span class="ml-choice__meta">The default. You can be found and suggested.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Search only</span>
+              <span class="ml-choice__meta">Findable if someone looks for you, but not suggested.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Nowhere</span>
+              <span class="ml-choice__meta">Only people with your link can reach you.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Hiding from search does not delete a public profile URL you have already shared.</p>
+      </div>
     </main>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

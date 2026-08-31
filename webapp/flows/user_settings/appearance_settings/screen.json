@@ -8,7 +8,9 @@
   "screenTitle": "Appearance Settings",
   "screenOrder": 5,
   "states": [
-    "default"
+    "default",
+    "language",
+    "accessibility"
   ],
   "collectionsTouched": [
     "user_settings"

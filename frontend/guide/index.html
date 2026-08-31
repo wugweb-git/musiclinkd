@@ -113,7 +113,7 @@
   <li><a href="#core">Core · 39</a></li>
   <li><a href="#widgets">Widgets · 94</a></li>
   <li><a href="#motion">Motion</a></li>
-  <li><a href="#patterns">Patterns · 159</a></li>
+  <li><a href="#patterns">Patterns · 165</a></li>
   <li><a href="#icons">Icons · 423</a></li>
   <li><a href="#taxonomy">Taxonomy · 18</a></li>
   <li><a href="#gaps">Gaps</a></li>
@@ -130,9 +130,9 @@
       with those same files — <b>if a component breaks, this page breaks</b>.
     </p>
     <div class="g-row" style="margin-top:var(--space-3)">
-      <span class="ml-badge">107 tokens</span>
+      <span class="ml-badge">108 tokens</span>
       <span class="ml-badge">133 sections</span>
-      <span class="ml-badge">569 selectors</span>
+      <span class="ml-badge">571 selectors</span>
       <span class="ml-badge">423 icons</span>
       <span class="ml-badge ml-badge--accent">Light only</span>
     </div>
@@ -390,7 +390,9 @@
       <span class="g-chipcol" style="background:var(--color-disabled)"></span>
       <code>--color-disabled</code><b>#9CA3AF</b><span>Inactive control borders and text</span></div><div class="g-swatch">
       <span class="g-chipcol" style="background:var(--color-scrim)"></span>
-      <code>--color-scrim</code><b>rgba(13,13,13,0.32)</b><span>Backdrop behind drawers, sheets and modals</span></div></div>
+      <code>--color-scrim</code><b>rgba(13,13,13,0.32)</b><span>Backdrop behind drawers, sheets and modals</span></div><div class="g-swatch">
+      <span class="g-chipcol" style="background:var(--color-purple)"></span>
+      <code>--color-purple</code><b>#8B5CF6</b><span>BADGES ONLY</span></div></div>
 
   <h3 style="margin-top:var(--space-4)">Scales</h3>
   <p class="ml-lede">Four steps each, exponential. Every step is visibly different from its neighbour — that is the point, and why there is no fifth.</p>
@@ -708,13 +710,15 @@
       <span class="g-file">ml-core.css</span>
       
     </div>
-    <p class="ml-lede ml-measure">Notification count, pinned to the corner of an icon button. Added when the Home dashboard needed one and there was no overlay badge in the system — the base .ml-badge is an inline pill, not something positioned absolutely over a sibling. Sized from --icon-1 (16px, already on the scale) rather than an invented…</p>
-    <div class="g-demo"><div class="g-row"><span class="ml-badge">★ 4.9</span><span class="ml-badge ml-badge--accent">Gold</span></div></div>
+    <p class="ml-lede ml-measure">CATEGORY, not state. Purple is scoped to this one modifier by the palette rule "Pink=Brand. Black=Primary. Purple=Badges only" — reinstated 2026-08-31. A category badge says what KIND of thing this is (genre, service, role); the status colours say how it is GOING. Those were being conflated, which is why genre labels…</p>
+    <div class="g-demo"><div class="g-row"><span class="ml-badge">★ 4.9</span><span class="ml-badge ml-badge--accent">Gold</span>
+    <span class="ml-badge ml-badge--category">Sufi</span><span class="ml-badge ml-badge--category">Mixing</span></div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Purple is <b>category</b>, never state — a genre or service kind, not how something is going. It is scoped to this one modifier and appears nowhere else in the system.</p></div>
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <details class="g-sel"><summary>5 selectors</summary>
-      <code>.ml-badge</code> <code>.ml-badge--accent</code> <code>.ml-badge--overlay</code> <code>.ml-badge--removable</code> <code>.ml-badge__remove</code></details>
+    <details class="g-sel"><summary>6 selectors</summary>
+      <code>.ml-badge</code> <code>.ml-badge--accent</code> <code>.ml-badge--category</code> <code>.ml-badge--overlay</code> <code>.ml-badge--removable</code> <code>.ml-badge__remove</code></details>
   </section>
 <section class="g-comp" id="c-card">
     <div class="g-comp__head">
@@ -884,8 +888,8 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <details class="g-sel"><summary>1 selector</summary>
-      <code>.ml-measure</code></details>
+    <details class="g-sel"><summary>2 selectors</summary>
+      <code>.ml-measure</code> <code>.ml-page</code></details>
   </section>
 <section class="g-comp" id="c-nav-app-bar">
     <div class="g-comp__head">
@@ -3292,7 +3296,7 @@
     </p>
   </div>
 
-  <h2 class="g-h" id="patterns">Patterns · 159</h2>
+  <h2 class="g-h" id="patterns">Patterns · 165</h2>
   <p class="ml-lede" style="max-width:64ch">
     Composed patterns are <b>real screens</b>, not mockups — every one below is
     live under <code>/preview</code> and built from the components above. Listed
@@ -3700,21 +3704,21 @@
   </section>
   <section class="g-comp">
     <div class="g-comp__head"><h3>Settings &amp; Support</h3>
-      <span class="g-file">flow 21 · 13 on the system</span></div>
+      <span class="g-file">flow 21 · 19 on the system</span></div>
     <div class="g-demo"><div class="g-patterns">
       <a class="g-pattern" href="/preview/flows/user_settings/account_settings">
         <b>Account Settings</b>
-        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/user_settings/notification_settings">
+        <span>5 states · default, editing, saving</span></a><a class="g-pattern" href="/preview/flows/user_settings/notification_settings">
         <b>Notification Settings</b>
         <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/user_settings/privacy_settings">
         <b>Privacy Settings</b>
-        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/user_settings/security_settings">
+        <span>5 states · default, profile_visibility, contact_privacy</span></a><a class="g-pattern" href="/preview/flows/user_settings/security_settings">
         <b>Security Settings</b>
-        <span>2 states · default, two_factor_setup</span></a><a class="g-pattern" href="/preview/flows/user_settings/appearance_settings">
+        <span>5 states · default, two_factor_setup, two_factor_on</span></a><a class="g-pattern" href="/preview/flows/user_settings/appearance_settings">
         <b>Appearance Settings</b>
-        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/user_settings/help_center">
+        <span>3 states · default, language, accessibility</span></a><a class="g-pattern" href="/preview/flows/user_settings/help_center">
         <b>Help Center</b>
-        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/user_settings/faq">
+        <span>3 states · default, searching, no_results</span></a><a class="g-pattern" href="/preview/flows/user_settings/faq">
         <b>FAQ</b>
         <span>2 states · default, searching</span></a><a class="g-pattern" href="/preview/flows/user_settings/raise_ticket">
         <b>Contact Support / Raise Ticket</b>
@@ -3728,7 +3732,19 @@
         <b>Legal Pages (Privacy Policy, Terms)</b>
         <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/user_settings/app_version">
         <b>App Version / About</b>
-        <span>1 state · default</span></a>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/user_settings/username">
+        <b>Username</b>
+        <span>4 states · default, checking, taken</span></a><a class="g-pattern" href="/preview/flows/user_settings/change_email_phone">
+        <b>Change email or phone</b>
+        <span>5 states · email, phone, verifying</span></a><a class="g-pattern" href="/preview/flows/user_settings/active_sessions">
+        <b>Signed-in devices</b>
+        <span>2 states · default, current_only</span></a><a class="g-pattern" href="/preview/flows/user_settings/blocked_accounts">
+        <b>Blocked accounts</b>
+        <span>2 states · default, empty</span></a><a class="g-pattern" href="/preview/flows/user_settings/data_privacy">
+        <b>Data &amp; privacy</b>
+        <span>6 states · default, export_requested, export_processing</span></a><a class="g-pattern" href="/preview/flows/user_settings/delete_account">
+        <b>Deactivate or delete</b>
+        <span>5 states · choose, deactivate_confirm, delete_consequences</span></a>
     </div></div>
   </section>
   <section class="g-comp">
@@ -3906,8 +3922,8 @@
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Screens not yet on the system · 0</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0">
       Still carrying local <code>&lt;style&gt;</code> blocks or pre-system markup.
-      159 of
-      159 screens are rebuilt.</p>
+      165 of
+      165 screens are rebuilt.</p>
 
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Token-level gaps</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">

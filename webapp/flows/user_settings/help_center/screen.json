@@ -8,7 +8,9 @@
   "screenTitle": "Help Center",
   "screenOrder": 6,
   "states": [
-    "default"
+    "default",
+    "searching",
+    "no_results"
   ],
   "collectionsTouched": [],
   "notes": "Landing/menu screen for the sub-flows below.",

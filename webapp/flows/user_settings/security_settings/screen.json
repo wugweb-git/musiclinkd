@@ -9,7 +9,10 @@
   "screenOrder": 4,
   "states": [
     "default",
-    "two_factor_setup"
+    "two_factor_setup",
+    "two_factor_on",
+    "connected_accounts",
+    "security_alert"
   ],
   "collectionsTouched": [],
   "notes": "Two-factor toggle + a \"Reset Access Password\" button live here in the real app today — conceptually that action belongs to Flow 1 (Auth), per this flow's scope note. Flag to AI Studio if you want it physically moved, not just re-labeled.",
