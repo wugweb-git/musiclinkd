@@ -10,55 +10,49 @@
 <meta name="screen-json-path" content="/preview/flows/booking/booking_summary/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Booking / Summary</title>
+<title>MusicLinkd — Booking — Summary</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .mini-card { display: flex; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-line); border-radius: var(--radius-2); margin-bottom: var(--space-3); }
-  .mini-card img { width: 56px; height: 56px; border-radius: var(--radius-1); object-fit: cover; flex: none; }
-  .cost-row { display: flex; justify-content: space-between; padding: var(--space-1) 0; font-size: var(--type-2); }
-  .cost-row.muted { color: var(--color-muted); font-size: var(--type-1); }
-  .cost-row.total { border-top: 1px solid var(--color-line); margin-top: var(--space-2); padding-top: var(--space-2); font-weight: 700; font-size: var(--type-3); }
-  .promo-row { display: flex; gap: var(--space-2); margin: var(--space-3) 0; }
-  .promo-row input { flex: 1; min-height: 40px; border-radius: var(--radius-4); border: 1px solid var(--color-line); padding: 0 var(--space-3); font: var(--type-2) 'Inter', sans-serif; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/booking/configure_session/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-    </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <h1 style="font-size:var(--type-3);margin:var(--space-2) 0 var(--space-3);">Booking summary</h1>
 
-      <div class="mini-card">
-        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300" alt="" />
-        <div>
-          <b style="font-size:var(--type-2);display:block;">Yash Raj Sound Studios — Tracking Room 1</b>
-          <span style="font-size:var(--type-1);color:var(--color-muted);">Tue, 12 Aug 2026 · 10:00 AM – 2:00 PM · Recording</span>
-        </div>
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/booking/configure_session/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Review booking</h1>
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <a class="ml-result" href="/preview/flows/booking/studio_profile/index.html">
+        <img class="ml-result__thumb" src="/assets/img/6/01e26955706919.598fd42d42f34.png" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Yash Raj Sound Studios</span>
+          <span class="ml-result__meta">Tracking Room 1 · Wed 12 Aug, 10:00–14:00</span>
+        </span>
+      </a>
+
+      <div class="ml-summary" style="margin-top:var(--space-3)">
+        <div class="ml-summary__row"><span>Room · 4 hrs</span><span>₹7,200</span></div>
+        <div class="ml-summary__row"><span>Engineer · 4 hrs</span><span>₹3,200</span></div>
+        <div class="ml-summary__row"><span>Drum kit</span><span>₹1,200</span></div>
+        <div class="ml-summary__row"><span>Promo code MONSOON</span><span>−₹1,600</span></div>
+        <div class="ml-summary__row ml-summary__row--total"><span>Total</span><span>₹10,000</span></div>
+        <p class="ml-summary__note">₹5,000 deposit due now, the balance on the day.</p>
       </div>
 
-      <div class="cost-row"><span>Room (4 hrs × ₹8,000)</span><span>₹32,000</span></div>
-      <div class="cost-row"><span>Resident engineer</span><span>₹1,500</span></div>
-      <div class="cost-row"><span>Same-day stems export</span><span>₹1,200</span></div>
-      <div class="cost-row muted"><span>Taxes (GST 18%)</span><span>₹6,246</span></div>
-      <div class="cost-row muted" style="color:color-mix(in srgb, var(--color-success) 58%, black);"><span>Promo WELCOME10</span><span>−₹3,000</span></div>
-      <div class="cost-row total"><span>Total</span><span>₹37,946</span></div>
-      <p style="font-size:var(--type-1);color:var(--color-muted);margin-top:4px;">₹5,000 deposit due now, balance due on session day.</p>
-
-      <div class="promo-row">
-        <input type="text" placeholder="Promo code" value="WELCOME10" aria-label="Promo code" />
-        <button type="button" class="ml-btn ml-btn--secondary">Apply</button>
+      <div class="ml-field" style="margin-top:var(--space-3)">
+        <label for="promo">Promo code</label>
+        <input id="promo" type="text" value="MONSOON" />
       </div>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
-      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/booking/payment_screen/index.html" style="text-decoration:none;">Pay ₹5,000 deposit</a>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/booking/payment_screen/index.html">Pay deposit</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

@@ -10,46 +10,53 @@
 <meta name="screen-json-path" content="/preview/flows/communication/connection_requests_tab/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Communication / Connection Requests</title>
+<title>MusicLinkd — Network — Requests</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-.net-tabs a { flex: 1; text-align: center; padding: var(--space-2) 0; font-size: var(--type-1); font-weight: 600; color: var(--color-muted); text-decoration: none; border-bottom: 2px solid transparent; }
-.req-actions { display: flex; gap: 6px; flex: none; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);height:56px;display:flex;align-items:center;">
-      <h1 style="font-size:var(--type-3);">Network</h1>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;padding:var(--space-3) var(--space-4)">
+      <h1 class="ml-type-3" style="margin:0">Network</h1>
     </header>
-    <nav class="ml-tabs ml-tabs--fill" role="tablist">
-      <a tabindex="0" aria-current="page" class="ml-tabs__tab" role="tab" aria-selected="true">Requests</a>
-      <a class="ml-tabs__tab" role="tab" href="/preview/flows/communication/collaborators_tab/index.html" aria-selected="false">Collaborators</a>
-      <a class="ml-tabs__tab" role="tab" href="/preview/flows/communication/ai_matchmaker_tab/index.html" aria-selected="false">AI Match</a>
+    <nav class="ml-tabs" role="tablist" aria-label="Network" style="margin:0 var(--space-4)">
+      <a class="ml-tabs__tab" role="tab" aria-selected="false" href="/preview/flows/communication/networking_feed/index.html">Feed</a>
+      <a class="ml-tabs__tab" role="tab" aria-selected="false" href="/preview/flows/communication/collaborators_tab/index.html">Collaborators</a>
+      <span class="ml-tabs__tab" role="tab" aria-selected="true" aria-current="page">Requests</span>
+      <a class="ml-tabs__tab" role="tab" aria-selected="false" href="/preview/flows/communication/ai_matchmaker_tab/index.html">Matches</a>
     </nav>
-    <main class="app-content app-content--scroll" style="padding:var(--space-2) var(--space-4) var(--space-4);">
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div class="ml-person-row">
-        <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=200" alt="" />
-        <div class="meta"><b>Kabir Sethi</b><span>Indie singer-songwriter · wants to connect</span></div>
-        <div class="req-actions">
-          <button type="button" class="ml-icon-btn ml-icon-btn--primary" aria-label="Accept"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></button>
-          <button type="button" class="ml-icon-btn ml-icon-btn--muted" aria-label="Decline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-        </div>
+        <img src="/assets/img/editorials/0e7b75cc331c13fd482936dd133a8363.jpg" alt="" loading="lazy" />
+        <span class="meta"><b>Aarav Menon</b><p>Mixing engineer · 3 mutual</p></span>
+        <span class="ml-appbar__actions">
+          <button class="ml-icon-btn ml-icon-btn--muted" type="button" aria-label="Ignore Aarav Menon"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m15.18 12 7.16-7.16a2.25 2.25 0 1 0-3.18-3.18L12 8.82 4.84 1.66a2.25 2.25 0 1 0-3.18 3.18L8.82 12l-7.16 7.16a2.25 2.25 0 1 0 3.18 3.18L12 15.18l7.16 7.16a2.24 2.24 0 0 0 3.18 0c.88-.88.88-2.3 0-3.18z"/></svg></button>
+          <button class="ml-icon-btn ml-icon-btn--primary" type="button" aria-label="Accept Aarav Menon"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></button>
+        </span>
       </div>
-      <div class="ml-person-row" style="border-bottom:none;">
-        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200" alt="" />
-        <div class="meta"><b>Aanya Malhotra</b><span>Alternative vocalist · wants to connect</span></div>
-        <div class="req-actions">
-          <button type="button" class="ml-icon-btn ml-icon-btn--primary" aria-label="Accept"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></button>
-          <button type="button" class="ml-icon-btn ml-icon-btn--muted" aria-label="Decline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-        </div>
+      <div class="ml-person-row">
+        <img src="/assets/img/editorials/41f63164364f0757ddb2a20693f4b144.jpg" alt="" loading="lazy" />
+        <span class="meta"><b>Wavelength Artists</b><p>Booking agency · 8 mutual</p></span>
+        <span class="ml-appbar__actions">
+          <button class="ml-icon-btn ml-icon-btn--muted" type="button" aria-label="Ignore Wavelength Artists"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m15.18 12 7.16-7.16a2.25 2.25 0 1 0-3.18-3.18L12 8.82 4.84 1.66a2.25 2.25 0 1 0-3.18 3.18L8.82 12l-7.16 7.16a2.25 2.25 0 1 0 3.18 3.18L12 15.18l7.16 7.16a2.24 2.24 0 0 0 3.18 0c.88-.88.88-2.3 0-3.18z"/></svg></button>
+          <button class="ml-icon-btn ml-icon-btn--primary" type="button" aria-label="Accept Wavelength Artists"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></button>
+        </span>
+      </div>
+      <div class="ml-person-row">
+        <img src="/assets/img/editorials/59aa1e490d7f7be8bd6b98e8b9645d31.jpg" alt="" loading="lazy" />
+        <span class="meta"><b>Priya Iyer</b><p>Composer · 1 mutual</p></span>
+        <span class="ml-appbar__actions">
+          <button class="ml-icon-btn ml-icon-btn--muted" type="button" aria-label="Ignore Priya Iyer"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m15.18 12 7.16-7.16a2.25 2.25 0 1 0-3.18-3.18L12 8.82 4.84 1.66a2.25 2.25 0 1 0-3.18 3.18L8.82 12l-7.16 7.16a2.25 2.25 0 1 0 3.18 3.18L12 15.18l7.16 7.16a2.24 2.24 0 0 0 3.18 0c.88-.88.88-2.3 0-3.18z"/></svg></button>
+          <button class="ml-icon-btn ml-icon-btn--primary" type="button" aria-label="Accept Priya Iyer"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></button>
+        </span>
       </div>
     </main>
-    <footer class="app-bottombar"></footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
 </body>

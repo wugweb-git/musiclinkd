@@ -175,6 +175,72 @@ const taxonomy = readTaxonomy();
    stylesheets already use. Everything between one banner and the next belongs
    to that section: its prose, its Compose note and its selectors. */
 
+/* ── state mapping ──────────────────────────────────────────────────────
+   #foundations defines nine states once, in a table. Until now that table was
+   the ONLY place states appeared: no component said which of the nine it
+   actually implements. That omission is the direct cause of the flows growing
+   a separate screen per state — if the catalogue never says "a chip has
+   selected and disabled", a screen author has nowhere to look and builds a
+   second screen instead.
+
+   These are DERIVED from each section's own CSS, not listed by hand, for the
+   same reason patterns and gaps are: a hand-kept state list is a list that
+   goes stale. If a selector for a state is not in the stylesheet, the system
+   does not have that state, and the guide must not claim it does.
+
+   `key` matches the state names in the #foundations table verbatim, so the two
+   cannot describe different vocabularies.
+
+   A state reaches a component three different ways, and collapsing them into
+   a yes/no is how a map like this starts lying. The first version of this did
+   exactly that and reported "Focused: 5 of 119" — untrue, because ml-core.css
+   line 45 gives EVERY focusable element a ring via :where(a, button, input,
+   textarea, select, [tabindex]):focus-visible. It also reported "Loading: 1",
+   untrue for the same reason in reverse: .ml-skeleton is a component you
+   compose, not a rule each card restates.
+
+     own       the section's own rules implement it
+     global    a base rule in ml-core.css already covers it
+     composed  another component supplies it (.ml-skeleton, .ml-empty)
+     absent    genuinely not available — the only one that is a gap */
+const STATE_PROBES = [
+  { key: "hover",    label: "Hover",    re: /:hover\b/ },
+  { key: "focused",  label: "Focused",  re: /:focus(-visible|-within)?\b/, global: true },
+  { key: "pressed",  label: "Pressed",  re: /:active\b/ },
+  { key: "selected", label: "Selected", re: /\[aria-(pressed|selected|checked|current)[^\]]*\]|\.is-(selected|active)\b/ },
+  { key: "disabled", label: "Disabled", re: /:disabled\b|\[aria-disabled|\.is-disabled\b|\.ml-[\w-]*--disabled\b/ },
+  { key: "loading",  label: "Loading",  re: /\.is-loading\b|\[aria-busy/, composedBy: ".ml-skeleton" },
+  { key: "error",    label: "Error",    re: /\[aria-invalid|\.is-(error|invalid)\b|--error\b|\.ml-[\w-]*--error\b/ },
+  { key: "empty",    label: "Empty",    re: /\.is-empty\b/, composedBy: ".ml-empty" },
+  /* Open/expanded is a tenth state the system genuinely has (sheets, drawers,
+     accordions, popovers). It was missing from the foundations table, which
+     listed nine — so sheets had no documented state at all. */
+  { key: "open",     label: "Open",     re: /\.is-open\b|\[aria-expanded[^\]]*\]|\[open\]|::backdrop/ },
+];
+
+/* The base layer, read once. ml-core.css's global rules are not in a preamble
+   above the first banner — they are INSIDE its first section, which is itself
+   called "base". Slicing at the first banner therefore captured 804 bytes of
+   file header and found no :focus-visible at all, which is what made the first
+   run of this map report focus as absent on 114 of 119 components. The base
+   layer is the "base" section plus anything above it. */
+const CORE_BASE = (() => {
+  const css = readFileSync(join(SYS, "ml-core.css"), "utf8");
+  const banners = [...css.matchAll(/\/\*\s*──\s*([^─]+?)\s*─+\s*\*\//g)];
+  const base = banners.find((b) => b[1].trim() === "base");
+  if (!base) return css.slice(0, banners[0]?.index ?? css.length);
+  const next = banners[banners.indexOf(base) + 1];
+  return css.slice(0, next ? next.index : css.length);
+})();
+const GLOBAL_STATES = new Set(
+  STATE_PROBES.filter((p) => p.global && p.re.test(CORE_BASE)).map((p) => p.key)
+);
+
+/** Which of the ten states this section's own CSS actually implements. */
+function statesIn(body) {
+  return STATE_PROBES.filter((p) => p.re.test(body)).map((p) => p.key);
+}
+
 function parseSections(file) {
   const css = readFileSync(join(SYS, file), "utf8");
   const banner = /\/\*\s*──\s*([^─]+?)\s*─+\s*\*\//g;
@@ -194,7 +260,8 @@ function parseSections(file) {
     const prose = proseSrc
       .split("\n").map((l) => l.replace(/^\s*\*?\s?/, "").trim())
       .filter((l) => l && !/^Compose:/.test(l)).join(" ").trim();
-    return { name: m.name, file, selectors: [...new Set(selectors)], compose, prose };
+    return { name: m.name, file, selectors: [...new Set(selectors)], compose, prose,
+             states: statesIn(body) };
   });
 }
 
@@ -1060,9 +1127,32 @@ const componentSection = (s) => `<section class="g-comp" id="${slug(s.name)}">
     </div>
     ${s.prose ? `<p class="ml-lede ml-measure">${esc(clamp(s.prose, 320))}</p>` : ""}
     <div class="g-demo">${DEMOS[s.name]}</div>
+    ${stateMap(s)}
     <details class="g-sel"><summary>${s.selectors.length} selector${s.selectors.length === 1 ? "" : "s"}</summary>
       <code>${s.selectors.join("</code> <code>")}</code></details>
   </section>`;
+
+/* Every state the component implements, plus every one it does NOT — the
+   absences are the useful half. A screen author who can see that a card has no
+   "loading" is told to reach for .ml-skeleton rather than invent a second
+   screen, which is exactly the decision that went wrong across the flows. */
+const stateMap = (s) => {
+  const has = new Set(s.states);
+  /* Focus is only inherited by something focusable. The demo markup is the
+     honest test — a card that is an <a> gets the ring, a <div> does not. */
+  const focusable = /<(a|button|input|textarea|select)\b|tabindex=/.test(DEMOS[s.name] || "");
+  const cell = (p) => {
+    if (has.has(p.key)) return `<span class="ml-badge" title="${s.file}">${p.label}</span>`;
+    if (p.global && GLOBAL_STATES.has(p.key) && focusable)
+      return `<span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">${p.label}</span>`;
+    if (p.composedBy)
+      return `<span class="ml-badge ml-badge--compose" title="Compose ${p.composedBy}">${p.label}</span>`;
+    return `<span class="ml-badge ml-badge--off" title="Not available — building it belongs in ${s.file}">${p.label}</span>`;
+  };
+  return `<div class="g-states">
+    <span class="g-states__lbl">States</span>${STATE_PROBES.map(cell).join("")}
+  </div>`;
+};
 
 const gaps = readGaps(sections.map((s) => s.name), patterns);
 const core = documented.filter((s) => s.file === "ml-core.css");
@@ -1114,6 +1204,23 @@ const html = `<!doctype html>
   .g-row { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
   .g-frame { max-width: 360px; border: 1px solid var(--color-line); border-radius: var(--radius-2);
              overflow: hidden; background: var(--color-paper); }
+  /* State map. An implemented state is a normal badge; an absent one is
+     outlined and struck, because "this component has no loading state" is the
+     half a screen author needs to read fastest — it is the fact that sends
+     them to the stylesheet instead of to a new screen file. */
+  .g-states { display: flex; flex-wrap: wrap; gap: var(--space-1); align-items: center;
+              margin-top: var(--space-2); }
+  .g-states__lbl { font-size: var(--type-1); color: var(--color-muted); margin-right: var(--space-1); }
+  .g-states .ml-badge--off { background: none; border: 1px dashed var(--color-line);
+                             color: var(--color-muted); text-decoration: line-through; }
+  /* Inherited and composed are real coverage, so neither is struck — but both
+     read quieter than a state the component owns outright. */
+  .g-states .ml-badge--inherit { background: none; border: 1px solid var(--color-line);
+                                 color: var(--color-muted); }
+  .g-states .ml-badge--compose { background: none; border: 1px solid var(--color-line);
+                                 color: var(--color-muted); font-style: italic; }
+  .g-legend { font-size: var(--type-1); color: var(--color-muted); max-width: var(--layout-measure);
+              margin-top: var(--space-2); }
   .g-sel { margin-top: var(--space-2); font-size: var(--type-1); color: var(--color-muted); }
   .g-sel summary { cursor: pointer; min-height: var(--size-3); display: flex; align-items: center; }
   .g-sel code { display: inline-block; margin: 2px 4px 2px 0; }

@@ -10,45 +10,49 @@
 <meta name="screen-json-path" content="/preview/flows/communication/collaborators_tab/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Communication / Collaborators</title>
+<title>MusicLinkd — Network — Collaborators</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-.net-tabs a { flex: 1; text-align: center; padding: var(--space-2) 0; font-size: var(--type-1); font-weight: 600; color: var(--color-muted); text-decoration: none; border-bottom: 2px solid transparent; }
-.msg-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--color-surface); color: var(--color-ink); display: flex; align-items: center; justify-content: center; flex: none; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);height:56px;display:flex;align-items:center;">
-      <h1 style="font-size:var(--type-3);">Network</h1>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;padding:var(--space-3) var(--space-4)">
+      <h1 class="ml-type-3" style="margin:0">Network</h1>
     </header>
-    <nav class="ml-tabs ml-tabs--fill" role="tablist">
-      <a class="ml-tabs__tab" role="tab" href="/preview/flows/communication/connection_requests_tab/index.html" aria-selected="false">Requests</a>
-      <a tabindex="0" aria-current="page" class="ml-tabs__tab" role="tab" aria-selected="true">Collaborators</a>
-      <a class="ml-tabs__tab" role="tab" href="/preview/flows/communication/ai_matchmaker_tab/index.html" aria-selected="false">AI Match</a>
+    <nav class="ml-tabs" role="tablist" aria-label="Network" style="margin:0 var(--space-4)">
+      <a class="ml-tabs__tab" role="tab" aria-selected="false" href="/preview/flows/communication/networking_feed/index.html">Feed</a>
+      <span class="ml-tabs__tab" role="tab" aria-selected="true" aria-current="page">Collaborators</span>
+      <a class="ml-tabs__tab" role="tab" aria-selected="false" href="/preview/flows/communication/connection_requests_tab/index.html">Requests</a>
+      <a class="ml-tabs__tab" role="tab" aria-selected="false" href="/preview/flows/communication/ai_matchmaker_tab/index.html">Matches</a>
     </nav>
-    <main class="app-content app-content--scroll" style="padding:var(--space-2) var(--space-4) var(--space-4);">
-      <a class="ml-person-row" href="/preview/flows/discover/discover_profile_detail/index.html">
-        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200" alt="" />
-        <div class="meta"><b>Vedanshu Beats</b><span>Producer · connected 12 May 2026</span></div>
-        <span class="msg-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-      </a>
-      <a class="ml-person-row" href="/preview/flows/discover/discover_profile_detail/index.html">
-        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=200" alt="" />
-        <div class="meta"><b>Karan Saxena</b><span>Guitarist · connected 3 Apr 2026</span></div>
-        <span class="msg-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-      </a>
-      <a class="ml-person-row" href="/preview/flows/discover/discover_profile_detail/index.html" style="border-bottom:none;">
-        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200" alt="" />
-        <div class="meta"><b>Siddharth Swar</b><span>Mixing Engineer · connected 28 Feb 2026</span></div>
-        <span class="msg-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-      </a>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div class="ml-person-row">
+        <img src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
+        <span class="meta"><b>Ishita Rao</b><p>Session vocalist · Mumbai</p></span>
+        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_conversation/index.html" aria-label="Message Ishita Rao"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg></a>
+      </div>
+      <div class="ml-person-row">
+        <img src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
+        <span class="meta"><b>Kabir Sheth</b><p>Producer · Pune</p></span>
+        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_conversation/index.html" aria-label="Message Kabir Sheth"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg></a>
+      </div>
+      <div class="ml-person-row">
+        <img src="/assets/img/editorials/3dee9cb6252a4c8f8a149c9fd40d4a9e.jpg" alt="" loading="lazy" />
+        <span class="meta"><b>Meera Nair</b><p>Playback vocalist · Kochi</p></span>
+        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_conversation/index.html" aria-label="Message Meera Nair"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg></a>
+      </div>
+      <div class="ml-person-row">
+        <img src="/assets/img/editorials/4b18ab6b2f209a6f51a9d38de6d3f07f.jpg" alt="" loading="lazy" />
+        <span class="meta"><b>Rohan D'Souza</b><p>Mixing engineer · Bengaluru</p></span>
+        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_conversation/index.html" aria-label="Message Rohan D'Souza"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg></a>
+      </div>
     </main>
-    <footer class="app-bottombar"></footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
 </body>

@@ -10,42 +10,36 @@
 <meta name="screen-json-path" content="/preview/flows/booking/booking_success/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Booking / Success</title>
+<title>MusicLinkd — Booking — Confirmed</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-.check-circle { width: 72px; height: 72px; border-radius: 50%; background: color-mix(in srgb, var(--color-success) 14%, var(--color-white)); color: color-mix(in srgb, var(--color-success) 58%, black); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-3); }
-  .detail-row { display: flex; justify-content: space-between; padding: var(--space-1) 0; font-size: var(--type-1); }
-  .detail-row span:first-child { color: var(--color-muted); }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding:0 var(--space-3);height:56px;display:flex;align-items:center;">
-      <!-- Real bug, confirmed on last verification pass: the write here still uses artistUserId/totalCostAmount/statusKey instead of the schema's userId/totalAmount/bookingStatus. Screen shown as designed; write path needs a fix, not just this UI. -->
-      <span class="ml-status ml-status--error">Known write bug</span>
-    </header>
-    <main class="app-content" style="display:flex;flex-direction:column;justify-content:center;padding:0 var(--space-4);">
-      <div class="check-circle">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-      </div>
-      <h1 style="font-size:var(--type-3);text-align:center;margin:0 0 4px;">Booking confirmed</h1>
-      <p style="color:var(--color-muted);text-align:center;font-size:var(--type-2);margin-bottom:var(--space-4);">Yash Raj Sound Studios — Tracking Room 1</p>
 
-      <div style="border:1px solid var(--color-line);border-radius:var(--radius-2);padding:var(--space-3);">
-        <div class="detail-row"><span>Date</span><span>Tue, 12 Aug 2026</span></div>
-        <div class="detail-row"><span>Time</span><span>10:00 AM – 2:00 PM</span></div>
-        <div class="detail-row"><span>Amount paid</span><span>₹5,000 deposit</span></div>
-        <div class="detail-row"><span>Payment method</span><span>UPI</span></div>
-        <div class="detail-row"><span>Status</span><span style="color:color-mix(in srgb, var(--color-success) 58%, black);font-weight:600;">Confirmed</span></div>
+  <div class="ml-app">
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-4)">
+      <div class="ml-empty">
+        <div class="ml-check">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+        <h1 class="ml-empty__title">Booking confirmed</h1>
+        <p class="ml-empty__body">Yash Raj Sound Studios, Tracking Room 1 — Wednesday 12 August, 10:00–14:00.</p>
+      </div>
+
+      <div class="ml-summary" style="margin-top:var(--space-3)">
+        <div class="ml-summary__row"><span>Reference</span><span>ML-4471</span></div>
+        <div class="ml-summary__row"><span>Deposit paid</span><span>₹5,000</span></div>
+        <div class="ml-summary__row"><span>Balance on the day</span><span>₹5,000</span></div>
       </div>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);display:flex;flex-direction:column;gap:var(--space-2);">
-      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/booking/my_bookings/index.html" style="text-decoration:none;">View my bookings</a>
-      <a class="ml-btn ml-btn--secondary ml-btn--block" href="/preview/flows/booking/studio_discovery/index.html" style="text-decoration:none;">Back to studios</a>
+    <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
+      <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/booking/studio_discovery/index.html">Book another</a>
+      <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/booking/my_bookings/index.html">My bookings</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

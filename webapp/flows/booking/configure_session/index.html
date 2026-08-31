@@ -10,83 +10,54 @@
 <meta name="screen-json-path" content="/preview/flows/booking/configure_session/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Booking / Configure Session</title>
+<title>MusicLinkd — Booking — Configure</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .opt-section { margin-bottom: var(--space-3); }
-  .opt-section h3 { font-size: var(--type-2); margin: 0 0 var(--space-2); }
-  .chip-wrap { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-  .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: var(--space-2) 0; border-top: 1px solid var(--color-line); }
-  .switch { position: relative; width: 40px; height: 24px; background: var(--color-line); border-radius: 12px; flex: none; border: none; }
-  .switch.on { background: var(--color-ink); }
-  .switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; background: #fff; border-radius: 50%; transition: transform .15s; }
-  .switch.on::after { transform: translateX(16px); }
-  .addon-row { display: flex; justify-content: space-between; align-items: center; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); }
-  .addon-row b { font-size: var(--type-2); font-weight: 500; display: block; }
-  .addon-row .price { font-size: var(--type-1); color: var(--color-muted); }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/booking/availability_calendar/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/booking/availability_calendar/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Session</h1>
     </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <h1 style="font-size:var(--type-3);margin:var(--space-2) 0 var(--space-3);">Configure session</h1>
-
-      <div class="opt-section">
-        <h3>Session type</h3>
-        <div class="chip-wrap" id="session-type">
-          <button type="button" class="ml-chip sel" style="background:var(--color-ink);border-color:var(--color-ink);color:#fff;">Recording</button>
-          <button type="button" class="ml-chip">Mixing</button>
-          <button type="button" class="ml-chip">Mastering</button>
-        </div>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div class="ml-section"><h3>Session type</h3></div>
+      <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Tracking</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Mixing</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Rehearsal</button>
       </div>
 
-      <div class="opt-section">
-        <h3>Duration</h3>
-        <div class="chip-wrap" id="duration">
-          <button type="button" class="ml-chip">Hourly</button>
-          <button type="button" class="ml-chip sel" style="background:var(--color-ink);border-color:var(--color-ink);color:#fff;">Half Day (4 hrs)</button>
-          <button type="button" class="ml-chip">Full Day (8 hrs)</button>
-        </div>
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Add-ons</h3></div>
+      <div class="ml-check-row">
+        <span class="ml-choice__body"><span class="ml-choice__title">Engineer</span><span class="ml-choice__meta">₹800/hr</span></span>
+        <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Engineer"></button>
+      </div>
+      <div class="ml-check-row">
+        <span class="ml-choice__body"><span class="ml-choice__title">Assistant</span><span class="ml-choice__meta">₹400/hr</span></span>
+        <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Assistant"></button>
+      </div>
+      <div class="ml-check-row">
+        <span class="ml-choice__body"><span class="ml-choice__title">Recorded video</span><span class="ml-choice__meta">₹3,500</span></span>
+        <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Recorded video"></button>
       </div>
 
-      <div class="opt-section">
-        <div class="toggle-row" style="border-top:none;">
-          <div><b style="font-size:var(--type-2);display:block;">Resident engineer</b><span style="font-size:var(--type-1);color:var(--color-muted);">₹1,500 for the session</span></div>
-          <button type="button" class="switch on" id="engineer-switch" aria-label="Request engineer"></button>
-        </div>
-      </div>
-
-      <div class="opt-section">
-        <h3>Add-ons</h3>
-        <div class="addon-row"><div><b>Extra isolation booth</b><span class="price">₹800/hr</span></div><input type="checkbox" aria-label="Add extra isolation booth, ₹800 per hour" /></div>
-        <div class="addon-row" style="border-bottom:none;"><div><b>Same-day stems export</b><span class="price">₹1,200</span></div><input type="checkbox" checked aria-label="Add same-day stems export, ₹1,200" /></div>
-      </div>
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Equipment</h3>
+        <a class="ml-section__link" href="/preview/flows/booking/equipment_screen/index.html">Choose</a></div>
+      <p class="ml-type-1" style="color:var(--color-muted);margin:0">Neumann U87 and Neve 1073 are included.</p>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
-      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/booking/booking_summary/index.html" style="text-decoration:none;">Review booking</a>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/booking/booking_summary/index.html">Review booking</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    document.querySelectorAll("#session-type, #duration").forEach((wrap) => {
-      wrap.addEventListener("click", (e) => {
-        const btn = e.target.closest(".chip");
-        if (!btn) return;
-        wrap.querySelectorAll(".chip").forEach((b) => { b.classList.remove("sel"); b.style.background = ""; b.style.borderColor = ""; b.style.color = ""; });
-        btn.classList.add("sel");
-        btn.style.background = "var(--color-ink)"; btn.style.borderColor = "var(--color-ink)"; btn.style.color = "#fff";
-      });
-    });
-    document.getElementById("engineer-switch").addEventListener("click", (e) => e.target.classList.toggle("on"));
-  </script>
 </body>
 </html>

@@ -10,61 +10,51 @@
 <meta name="screen-json-path" content="/preview/flows/communication/chat_thread_list/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Communication / Chat Thread List</title>
+<title>MusicLinkd — Messages</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-.unread-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-pink); display: inline-block; margin-left: 4px; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);height:56px;display:flex;align-items:center;">
-      <h1 style="font-size:var(--type-3);">Messages</h1>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;padding:var(--space-3) var(--space-4)">
+      <h1 class="ml-type-3" style="margin:0">Messages</h1>
     </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-
-      <div id="panel-default">
-        <a class="ml-person-row" href="/preview/flows/communication/chat_conversation/index.html">
-          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200" alt="" />
-          <div class="meta"><b>Vedanshu Beats <span class="unread-dot"></span></b><p>Sent you the mix — check the second verse</p></div>
-          <span class="time">2m</span>
-        </a>
-        <a class="ml-person-row" href="/preview/flows/communication/chat_conversation/index.html">
-          <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=200" alt="" />
-          <div class="meta"><b>Kabir Sethi</b><p>Sounds good, let's lock the date</p></div>
-          <span class="time">1h</span>
-        </a>
-        <a class="ml-person-row" href="/preview/flows/communication/chat_conversation/index.html" style="border-bottom:none;">
-          <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200" alt="" />
-          <div class="meta"><b>Karan Saxena</b><p>You: Sharing the reference tracks now</p></div>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <a class="ml-notification ml-notification--unread" data-state="default" href="/preview/flows/communication/chat_conversation/index.html">
+        <div class="ml-person-row" style="border:0;padding:0">
+          <img src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
+          <span class="meta"><b>Ishita Rao</b><p>Sounds good — Tuesday works.</p></span>
+          <span class="time">4h</span>
+        </div>
+      </a>
+      <a class="ml-notification" data-state="default" href="/preview/flows/communication/chat_conversation/index.html">
+        <div class="ml-person-row" style="border:0;padding:0">
+          <img src="/assets/img/editorials/41f63164364f0757ddb2a20693f4b144.jpg" alt="" loading="lazy" />
+          <span class="meta"><b>Blue Note Recording Co.</b><p>Room B is yours from 6.</p></span>
           <span class="time">Yesterday</span>
-        </a>
-      </div>
+        </div>
+      </a>
+      <a class="ml-notification" data-state="default" href="/preview/flows/communication/chat_conversation/index.html">
+        <div class="ml-person-row" style="border:0;padding:0">
+          <img src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
+          <span class="meta"><b>Kabir Sheth</b><p>Sent the charts over.</p></span>
+          <span class="time">2d</span>
+        </div>
+      </a>
 
-      <div id="panel-empty" style="display:none;flex-direction:column;align-items:center;text-align:center;padding-top:20vh;gap:var(--space-3);">
-        <div style="width:64px;height:64px;border-radius:var(--radius-2);background:var(--color-surface);display:flex;align-items:center;justify-content:center;color:var(--color-muted);">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
-        <div>
-          <h2 style="font-size:var(--type-3);margin:0;">No messages yet</h2>
-          <p style="color:var(--color-muted);font-size:var(--type-2);margin-top:var(--space-1);max-width:260px;">Connect with someone from Discover to start a conversation.</p>
-        </div>
+      <div class="ml-empty" data-state="empty">
+        <h3 class="ml-empty__title">No messages yet</h3>
+        <p class="ml-empty__body">Message someone from their profile, or accept a connection request to start a thread.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/communication/collaborators_tab/index.html">See collaborators</a>
       </div>
     </main>
-    <footer class="app-bottombar"></footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    document.addEventListener("musiclinkd:screen-ready", () => {
-      if (window.MusicLinkd.currentState === "empty") {
-        document.getElementById("panel-default").style.display = "none";
-        document.getElementById("panel-empty").style.display = "flex";
-      }
-    });
-  </script>
 </body>
 </html>

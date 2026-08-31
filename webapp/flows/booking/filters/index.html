@@ -10,74 +10,49 @@
 <meta name="screen-json-path" content="/preview/flows/booking/filters/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Booking / Filters</title>
+<title>MusicLinkd — Booking — Filters</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .sheet-handle { width: 36px; height: 4px; background: var(--color-line); border-radius: 2px; margin: var(--space-2) auto; }
-  .filter-section { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-line); }
-  .filter-section h3 { font-size: var(--type-2); margin: 0 0 var(--space-2); }
-  .chip-wrap { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-  .range-row { display: flex; align-items: center; gap: var(--space-2); }
-  .range-row input[type="range"] { flex: 1; }
-  .range-val { font-size: var(--type-1); color: var(--color-muted); min-width: 64px; text-align: right; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <div class="sheet-handle"></div>
-    <header class="app-topbar" style="padding:0 var(--space-4);height:48px;display:flex;align-items:center;justify-content:space-between;">
-      <h1 style="font-size:var(--type-3);">Filters</h1>
-      <a href="/preview/flows/booking/search_results/index.html" style="font-size:var(--type-1);color:var(--color-muted);text-decoration:none;">Reset</a>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/booking/studio_discovery/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Filters</h1>
     </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <div class="filter-section">
-        <h3>Price per hour</h3>
-        <div class="range-row"><input type="range" min="1000" max="10000" value="6000" aria-label="Maximum price per hour in rupees" /><span class="range-val">Up to ₹6,000</span></div>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div class="ml-section"><h3>Service</h3></div>
+      <div class="ml-chip-wrap">
+        <button type="button" class="ml-chip" aria-pressed="true">Tracking</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Mixing</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Mastering</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Rehearsal</button>
+        <button type="button" class="ml-chip" aria-pressed="true">Andheri</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Bandra</button>
+        <button type="button" class="ml-chip" aria-pressed="false">Lower Parel</button>
       </div>
-      <div class="filter-section">
-        <h3>Distance</h3>
-        <div class="range-row"><input type="range" min="1" max="25" value="8" aria-label="Maximum distance in kilometres" /><span class="range-val">8 km</span></div>
-      </div>
-      <div class="filter-section">
-        <h3>Amenities</h3>
-        <div class="chip-wrap">
-          <button type="button" class="ml-chip sel" style="background:var(--color-ink);border-color:var(--color-ink);color:#fff;">Dolby Atmos</button>
-          <button type="button" class="ml-chip">Live Room</button>
-          <button type="button" class="ml-chip">Resident Engineers</button>
-          <button type="button" class="ml-chip">Valet Parking</button>
-          <button type="button" class="ml-chip">Isolation Booth</button>
-        </div>
-      </div>
-      <div class="filter-section" style="border-bottom:none;">
-        <h3>Services</h3>
-        <div class="chip-wrap">
-          <button type="button" class="ml-chip sel" style="background:var(--color-ink);border-color:var(--color-ink);color:#fff;">Recording</button>
-          <button type="button" class="ml-chip">Mixing</button>
-          <button type="button" class="ml-chip">Mastering</button>
-        </div>
-      </div>
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Hourly rate</h3>
+        <span class="ml-section__link">up to ₹2,500</span></div>
+      <input class="ml-slider" type="range" min="500" max="5000" step="100" value="2500" aria-label="Maximum hourly rate" />
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Distance</h3>
+        <span class="ml-section__link">within 8 km</span></div>
+      <input class="ml-slider" type="range" min="1" max="25" value="8" aria-label="Maximum distance in kilometres" />
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);display:flex;gap:var(--space-2);">
-      <button type="button" class="ml-btn ml-btn--secondary" style="flex:1;">Reset</button>
-      <a class="ml-btn ml-btn--primary" style="flex:1;text-decoration:none;text-align:center;" href="/preview/flows/booking/search_results/index.html">Show 6 studios</a>
+    <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
+      <button class="ml-btn ml-btn--secondary" type="reset" style="flex:1">Reset</button>
+      <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/booking/search_results/index.html">Show studios</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    document.querySelectorAll(".chip-wrap").forEach((wrap) => {
-      wrap.addEventListener("click", (e) => {
-        const btn = e.target.closest(".chip");
-        if (!btn) return;
-        const sel = btn.classList.toggle("sel");
-        btn.style.background = sel ? "var(--color-ink)" : "";
-        btn.style.borderColor = sel ? "var(--color-ink)" : "";
-        btn.style.color = sel ? "#fff" : "";
-      });
-    });
-  </script>
 </body>
 </html>

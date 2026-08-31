@@ -19,13 +19,23 @@
  * blocks, and it makes the tab rows real tablists driven by the shared
  * data-chip mechanism instead of hand-managed aria.
  */
-import { writeScreen, backArrow, finish, media } from "../write-screen.mjs";
+import { writeScreen, backArrow, icon, assertIcons, checkMark, finish, media } from "../write-screen.mjs";
+
+assertIcons(["calendar", "filter"]);
 
 const P = "/preview/flows/booking/";
 
 /* backArrow is the shared one from write-screen.mjs — these screens each had
    their own hand-inlined chevron <svg> with slightly different sizes. */
 const back = (href, label) => backArrow(href, label);
+
+/* A titled bar. Four of these screens opened with a section <h3> and had no
+   <h1> at all, which audit-flow's a11y check flags: a screen's first heading
+   is its name, and a screen reader's heading list should start at the top. */
+const titleBar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      ${backArrow(backTo, "Back")}
+      <h1 class="ml-type-2" style="margin:0">${title}</h1>
+    </header>`;
 
 /* A tab whose selected state is derived from the screen state. role=tab +
    data-chip is all the shell needs; see applyState() in app-shell.js. */
@@ -249,6 +259,275 @@ writeScreen({
         <a class="ml-btn ml-btn--primary" href="${P}filters/index.html">Adjust filters</a>
       </div>
     </main>
+  </div>`,
+});
+
+/* ══ the seven single-state screens ════════════════════════════════════════
+   These declare only "default", so they owed no data-state — but each still
+   carried a local <style> block redrawing something the system ships:
+
+     .studio-card / .room-card  → .ml-studio-card
+     .review-card               → .ml-review-card
+     .check-circle              → .ml-check
+     .detail-row / .cost-row    → .ml-summary__row
+     .chip-wrap                 → .ml-chip-wrap
+     .switch / .toggle-row      → .ml-switch
+     .eq-row / .addon-row       → .ml-check-row + .ml-check-ctl
+     .range-row                 → .ml-slider
+     .sheet-handle              → .ml-sheet__handle
+     .studio-rail               → .ml-rail
+     .gold-badge / .included-pill → .ml-status--*
+     .amenity-row               → .ml-summary__row
+     .mini-card                 → .ml-result
+     .search-row / .promo-row / .field → .ml-field
+
+   Rebuilding them here takes the flow to zero local CSS. ═════════════════ */
+
+const STUDIOS = [
+  { name: "Yash Raj Sound Studios", loc: "Andheri West · 2.4 km", meta: "₹1,800/hr · Tracking, Mixing", img: media("stage", 1), gold: true },
+  { name: "Blue Note Recording Co.", loc: "Bandra · 4.1 km",      meta: "₹2,400/hr · Tracking",          img: media("gear", 7) },
+  { name: "Soundbox Rehearsal Rooms", loc: "Lower Parel · 6.8 km", meta: "₹900/hr · Rehearsal",          img: media("stage", 6) },
+];
+
+const studioCard = (st, href = `${P}studio_profile/index.html`) => `<a class="ml-studio-card" href="${href}">
+        <div class="ml-studio-card__media"><img src="${st.img}" alt="" loading="lazy" /></div>
+        <div class="ml-studio-card__body">
+          <span class="ml-studio-card__name">${st.name}</span>
+          <span class="ml-studio-card__loc">${st.loc}</span>
+          <span class="ml-studio-card__meta">${st.meta}</span>
+          ${st.gold ? `<span class="ml-status ml-status--accent">Verified</span>` : ""}
+        </div>
+      </a>`;
+
+/* ── studio_discovery ───────────────────────────────────────────────────── */
+writeScreen({
+  flow: "booking", screen: "studio_discovery", title: "Booking — Studios",
+  body: `
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
+      <h1 class="ml-type-3" style="margin:0">Studios</h1>
+      <span class="ml-appbar__actions">
+        <a class="ml-icon-btn ml-icon-btn--bare" href="${P}my_bookings/index.html" aria-label="My bookings">${icon("calendar", { size: 20 })}</a>
+        <a class="ml-icon-btn ml-icon-btn--bare" href="${P}filters/index.html" aria-label="Filters">${icon("filter", { size: 20 })}</a>
+      </span>
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div class="ml-field">
+        <label for="s-q">Find a studio</label>
+        <input id="s-q" type="search" placeholder="Room, area, or service" />
+      </div>
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Near you</h2>
+        <a class="ml-section__link" href="${P}search_results/index.html">See all</a></div>
+      <div class="ml-rail">
+        ${STUDIOS.map(studioCard).join("\n        ")}
+      </div>
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Open this week</h2></div>
+      ${STUDIOS.slice(0, 2).map((st) => `<a class="ml-result" href="${P}studio_profile/index.html">
+        <img class="ml-result__thumb" src="${st.img}" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">${st.name}</span>
+          <span class="ml-result__meta">${st.loc}</span>
+        </span>
+        <span class="ml-result__trail">${st.meta.split(" · ")[0]}</span>
+      </a>`).join("\n      ")}
+    </main>
+  </div>`,
+});
+
+/* ── studio_profile ─────────────────────────────────────────────────────── */
+const AMENITIES = [["Live room", "42 m²"], ["Control room", "Neve sidecar"], ["Backline", "Included"],
+                   ["Parking", "2 cars"], ["Engineer", "₹800/hr extra"]];
+writeScreen({
+  flow: "booking", screen: "studio_profile", title: "Booking — Studio",
+  body: `
+  <div class="ml-app">
+    ${titleBar("Studio", `${P}studio_discovery/index.html`)}
+    <main class="ml-app__body app-content--scroll" style="padding:0 0 var(--space-4)">
+      <img src="${media("stage", 1)}" alt="" loading="lazy"
+           style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
+      <div style="padding:var(--space-3) var(--space-4)">
+        <h2 class="ml-type-3" style="margin:0">Yash Raj Sound Studios</h2>
+        <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 0">Andheri West, Mumbai</p>
+        <div class="ml-rating" style="margin-top:var(--space-2)">
+          <span class="ml-rating__score">4.8</span>
+          <span class="ml-rating__count">· 62 sessions</span>
+        </div>
+
+        <!-- A room links to ITS availability, not back to this page: three
+             cards all pointing at the screen you are on is a dead affordance. -->
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Rooms</h3></div>
+        <div class="ml-rail">
+          ${STUDIOS.map((st) => studioCard(st, `${P}availability_calendar/index.html`)).join("\n          ")}
+        </div>
+
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>The room</h3></div>
+        <div class="ml-summary">
+          ${AMENITIES.map(([k, v]) => `<div class="ml-summary__row"><span>${k}</span><span>${v}</span></div>`).join("\n          ")}
+        </div>
+
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Reviews</h3></div>
+        <div class="ml-review-card">
+          <div class="ml-review-card__head">
+            <img class="ml-avatar ml-avatar--sm" src="${media("faces", 2)}" alt="" loading="lazy" />
+            <b>Ishita Rao</b>
+            <span class="ml-review-card__stars">★★★★★</span>
+          </div>
+          <p class="ml-review-card__body">Quiet live room and a patient engineer. Got three vocal takes done inside a morning.</p>
+        </div>
+      </div>
+    </main>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="${P}availability_calendar/index.html">Check availability</a>
+    </footer>
+  </div>`,
+});
+
+/* ── filters ────────────────────────────────────────────────────────────── */
+const FILTER_CHIPS = [["Tracking", 1], ["Mixing", 0], ["Mastering", 0], ["Rehearsal", 0],
+                      ["Andheri", 1], ["Bandra", 0], ["Lower Parel", 0]];
+writeScreen({
+  flow: "booking", screen: "filters", title: "Booking — Filters",
+  body: `
+  <div class="ml-app">
+    ${titleBar("Filters", `${P}studio_discovery/index.html`)}
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div class="ml-section"><h3>Service</h3></div>
+      <div class="ml-chip-wrap">
+        ${FILTER_CHIPS.map(([f, on]) => `<button type="button" class="ml-chip" aria-pressed="${on ? "true" : "false"}">${f}</button>`).join("\n        ")}
+      </div>
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Hourly rate</h3>
+        <span class="ml-section__link">up to ₹2,500</span></div>
+      <input class="ml-slider" type="range" min="500" max="5000" step="100" value="2500" aria-label="Maximum hourly rate" />
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Distance</h3>
+        <span class="ml-section__link">within 8 km</span></div>
+      <input class="ml-slider" type="range" min="1" max="25" value="8" aria-label="Maximum distance in kilometres" />
+    </main>
+    <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
+      <button class="ml-btn ml-btn--secondary" type="reset" style="flex:1">Reset</button>
+      <a class="ml-btn ml-btn--primary" style="flex:1" href="${P}search_results/index.html">Show studios</a>
+    </footer>
+  </div>`,
+});
+
+/* ── equipment_screen ───────────────────────────────────────────────────── */
+const GEAR = [["Neumann U87", "Included", true], ["Neve 1073 preamp", "Included", true],
+              ["Drum kit (Yamaha)", "₹1,200/session", false], ["Guitar amp (Fender)", "₹600/session", false],
+              ["Grand piano", "₹2,000/session", false]];
+writeScreen({
+  flow: "booking", screen: "equipment_screen", title: "Booking — Equipment",
+  body: `
+  <div class="ml-app">
+    ${titleBar("Equipment", `${P}configure_session/index.html`)}
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div class="ml-section"><h3>Included with the room</h3></div>
+      ${GEAR.filter((g) => g[2]).map(([n, p]) => `<label class="ml-check-row">
+        <span class="ml-check-ctl" role="checkbox" aria-checked="true" aria-disabled="true"></span>
+        <span class="ml-choice__body"><span class="ml-choice__title">${n}</span><span class="ml-choice__meta">${p}</span></span>
+      </label>`).join("\n      ")}
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Add to the session</h3></div>
+      ${GEAR.filter((g) => !g[2]).map(([n, p]) => `<label class="ml-check-row">
+        <span class="ml-check-ctl" role="checkbox" aria-checked="false"></span>
+        <span class="ml-choice__body"><span class="ml-choice__title">${n}</span><span class="ml-choice__meta">${p}</span></span>
+      </label>`).join("\n      ")}
+    </main>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="${P}booking_summary/index.html">Continue</a>
+    </footer>
+  </div>`,
+});
+
+/* ── configure_session ──────────────────────────────────────────────────── */
+const ADDONS = [["Engineer", "₹800/hr", true], ["Assistant", "₹400/hr", false], ["Recorded video", "₹3,500", false]];
+writeScreen({
+  flow: "booking", screen: "configure_session", title: "Booking — Configure",
+  body: `
+  <div class="ml-app">
+    ${titleBar("Session", `${P}availability_calendar/index.html`)}
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div class="ml-section"><h3>Session type</h3></div>
+      <div class="ml-chip-wrap">
+        ${[["Tracking", 1], ["Mixing", 0], ["Rehearsal", 0]].map(([t, on]) =>
+          `<button type="button" class="ml-chip" aria-pressed="${on ? "true" : "false"}">${t}</button>`).join("\n        ")}
+      </div>
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Add-ons</h3></div>
+      ${ADDONS.map(([n, p, on]) => `<div class="ml-check-row">
+        <span class="ml-choice__body"><span class="ml-choice__title">${n}</span><span class="ml-choice__meta">${p}</span></span>
+        <button class="ml-switch" type="button" role="switch" aria-checked="${on}" aria-label="${n}"></button>
+      </div>`).join("\n      ")}
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Equipment</h3>
+        <a class="ml-section__link" href="${P}equipment_screen/index.html">Choose</a></div>
+      <p class="ml-type-1" style="color:var(--color-muted);margin:0">Neumann U87 and Neve 1073 are included.</p>
+    </main>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="${P}booking_summary/index.html">Review booking</a>
+    </footer>
+  </div>`,
+});
+
+/* ── booking_summary ────────────────────────────────────────────────────── */
+writeScreen({
+  flow: "booking", screen: "booking_summary", title: "Booking — Summary",
+  body: `
+  <div class="ml-app">
+    ${titleBar("Review booking", `${P}configure_session/index.html`)}
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <a class="ml-result" href="${P}studio_profile/index.html">
+        <img class="ml-result__thumb" src="${media("stage", 1)}" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Yash Raj Sound Studios</span>
+          <span class="ml-result__meta">Tracking Room 1 · Wed 12 Aug, 10:00–14:00</span>
+        </span>
+      </a>
+
+      <div class="ml-summary" style="margin-top:var(--space-3)">
+        <div class="ml-summary__row"><span>Room · 4 hrs</span><span>₹7,200</span></div>
+        <div class="ml-summary__row"><span>Engineer · 4 hrs</span><span>₹3,200</span></div>
+        <div class="ml-summary__row"><span>Drum kit</span><span>₹1,200</span></div>
+        <div class="ml-summary__row"><span>Promo code MONSOON</span><span>−₹1,600</span></div>
+        <div class="ml-summary__row ml-summary__row--total"><span>Total</span><span>₹10,000</span></div>
+        <p class="ml-summary__note">₹5,000 deposit due now, the balance on the day.</p>
+      </div>
+
+      <div class="ml-field" style="margin-top:var(--space-3)">
+        <label for="promo">Promo code</label>
+        <input id="promo" type="text" value="MONSOON" />
+      </div>
+    </main>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="${P}payment_screen/index.html">Pay deposit</a>
+    </footer>
+  </div>`,
+});
+
+/* ── booking_success ────────────────────────────────────────────────────── */
+writeScreen({
+  flow: "booking", screen: "booking_success", title: "Booking — Confirmed",
+  body: `
+  <div class="ml-app">
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-4)">
+      <div class="ml-empty">
+        ${checkMark}
+        <h1 class="ml-empty__title">Booking confirmed</h1>
+        <p class="ml-empty__body">Yash Raj Sound Studios, Tracking Room 1 — Wednesday 12 August, 10:00–14:00.</p>
+      </div>
+
+      <div class="ml-summary" style="margin-top:var(--space-3)">
+        <div class="ml-summary__row"><span>Reference</span><span>ML-4471</span></div>
+        <div class="ml-summary__row"><span>Deposit paid</span><span>₹5,000</span></div>
+        <div class="ml-summary__row"><span>Balance on the day</span><span>₹5,000</span></div>
+      </div>
+    </main>
+    <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
+      <a class="ml-btn ml-btn--secondary" style="flex:1" href="${P}studio_discovery/index.html">Book another</a>
+      <a class="ml-btn ml-btn--primary" style="flex:1" href="${P}my_bookings/index.html">My bookings</a>
+    </footer>
   </div>`,
 });
 

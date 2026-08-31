@@ -10,40 +10,43 @@
 <meta name="screen-json-path" content="/preview/flows/communication/networking_feed_artist_profile/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Communication / Artist Profile (from Feed)</title>
+<title>MusicLinkd — Network — Artist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .hero { height: 120px; background: linear-gradient(135deg, var(--color-ink), var(--color-pink-pressed)); }
-  .avatar-lift { width: 80px; height: 80px; border-radius: 50%; border: 4px solid #fff; object-fit: cover; margin-top: -40px; margin-left: var(--space-4); }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="position:absolute;top:0;left:0;right:0;z-index:2;padding-left:var(--space-3);height:56px;display:flex;align-items:center;">
-      <a href="/preview/flows/communication/networking_feed/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.85);color:var(--color-ink);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-      <!-- Separate profile screen reached only by tapping a Feed post — a different implementation than Discover's profile detail, confirmed via a direct source read, not merged into one screen here. -->
-      <span class="ml-status ml-status--info">Feed variant</span>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/networking_feed/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Ishita Rao</h1>
     </header>
-    <main class="app-content app-content--scroll">
-      <div class="hero"></div>
-      <img class="avatar-lift" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400" alt="" />
-      <div style="padding:var(--space-2) var(--space-4) var(--space-4);">
-        <h1 style="font-size:var(--type-3);">Vedanshu Beats</h1>
-        <p style="color:var(--color-muted);font-size:var(--type-2);">Music Producer · Sound Designer · Mumbai</p>
-        <div style="display:flex;gap:var(--space-2);margin:var(--space-3) 0;">
-          <button type="button" class="ml-btn ml-btn--primary" style="flex:1;">Connect</button>
-          <button type="button" class="ml-btn ml-btn--secondary" style="flex:1;">Message</button>
+    <main class="ml-app__body app-content--scroll" style="padding:0 0 var(--space-4)">
+      <img src="/assets/img/6/06b1b644260799.580db89c27acd.jpg" alt="" loading="lazy"
+           style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
+      <div style="padding:0 var(--space-4)">
+        <!-- .ml-avatar--lg, not a hand-sized box: the size scale stops at
+             --size-4 and I had reached for a --size-6 that does not exist. -->
+        <img class="ml-avatar ml-avatar--lg ml-lift" src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy"
+             style="margin-top:calc(var(--size-3) * -1)" />
+        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">Ishita Rao</h2>
+        <p class="ml-type-1" style="color:var(--color-muted);margin:0">Session vocalist · Mumbai · 4.9 ★</p>
+        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+          Hindi and English pop, light belt and soft head voice. Twelve EPs and two features since 2021.
+        </p>
+        <div style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
+          <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/communication/chat_conversation/index.html">Message</a>
+          <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/communication/collaborators_tab/index.html">Connect</a>
         </div>
-        <p style="font-size:var(--type-2);">Music Producer, Sound Designer &amp; Dolby Atmos Mastering Engineer. Based out of Mumbai/Chandigarh — 8 years working with national artists, labels, and film crews, specialized in spatial sound processing and electronic fusion.</p>
       </div>
     </main>
-    <footer class="app-bottombar"></footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
 </body>

@@ -10,75 +10,82 @@
 <meta name="screen-json-path" content="/preview/flows/communication/networking_feed/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Communication / Networking Feed</title>
+<title>MusicLinkd — Network — Feed</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .post-card { border-bottom: 1px solid var(--color-line); padding: var(--space-3) 0; }
-  .post-head { display: flex; align-items: center; gap: var(--space-2); }
-  .post-head img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
-  .post-head b { font-size: var(--type-2); display: block; }
-  .post-head span { font-size: var(--type-1); color: var(--color-muted); }
-  .post-body { font-size: var(--type-2); margin: var(--space-2) 0; }
-  .post-actions { display: flex; gap: var(--space-4); color: var(--color-muted); font-size: var(--type-1); }
-  .post-actions span { display: flex; align-items: center; gap: 4px; }
-  .posting-banner { background: var(--color-surface); color: var(--color-muted); font-size: var(--type-1); padding: var(--space-2); border-radius: var(--radius-2); text-align: center; margin-bottom: var(--space-3); }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);height:56px;display:flex;align-items:center;justify-content:space-between;">
-      <h1 style="font-size:var(--type-3);">Feed</h1>
-      <button type="button" style="width:36px;height:36px;border-radius:50%;background:var(--color-ink);color:#fff;border:none;display:flex;align-items:center;justify-content:center;" aria-label="New post">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      </button>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
+      <h1 class="ml-type-3" style="margin:0">Network</h1>
+      <span class="ml-appbar__actions">
+        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_thread_list/index.html" aria-label="Messages"><svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg></a>
+      </span>
     </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <p id="posting-banner" class="posting-banner" style="display:none;">Posting…</p>
-
-      <div class="post-card">
-        <a href="/preview/flows/communication/networking_feed_artist_profile/index.html" class="post-head" style="text-decoration:none;color:inherit;">
-          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200" alt="" />
-          <div><b>Vedanshu Beats</b><span>2h ago · Mumbai</span></div>
-        </a>
-        <p class="post-body">Wrapped mastering on a Dolby Atmos remix this week — spatial mixes are a different kind of puzzle. Loving it.</p>
-        <div class="post-actions"><span>♥ 124</span><span>💬 18</span><span>↗ Share</span></div>
+    <nav class="ml-tabs" role="tablist" aria-label="Network" style="margin:0 var(--space-4)">
+      <span class="ml-tabs__tab" role="tab" aria-selected="true" aria-current="page">Feed</span>
+      <a class="ml-tabs__tab" role="tab" aria-selected="false" href="/preview/flows/communication/collaborators_tab/index.html">Collaborators</a>
+      <a class="ml-tabs__tab" role="tab" aria-selected="false" href="/preview/flows/communication/connection_requests_tab/index.html">Requests</a>
+      <a class="ml-tabs__tab" role="tab" aria-selected="false" href="/preview/flows/communication/ai_matchmaker_tab/index.html">Matches</a>
+    </nav>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div class="ml-banner ml-banner--info" data-state="posting">
+        <span class="ml-banner__body">Posting…</span>
       </div>
 
-      <div class="post-card">
-        <a href="/preview/flows/communication/networking_feed_artist_profile/index.html" class="post-head" style="text-decoration:none;color:inherit;">
-          <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=200" alt="" />
-          <div><b>Kabir Sethi</b><span>5h ago · Mumbai</span></div>
-        </a>
-        <p class="post-body">Looking for a violinist for a two-song session next weekend. DM if you're around and free.</p>
-        <div class="post-actions"><span>♥ 41</span><span>💬 9</span><span>↗ Share</span></div>
-      </div>
-
-      <div class="post-card" style="border-bottom:none;">
-        <a href="/preview/flows/communication/networking_feed_artist_profile/index.html" class="post-head" style="text-decoration:none;color:inherit;">
-          <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200" alt="" />
-          <div><b>Karan Saxena</b><span>1d ago · New Delhi</span></div>
-        </a>
-        <p class="post-body">New reference tracks up for the fusion set — feedback welcome before I lock the arrangement.</p>
-        <div class="post-actions"><span>♥ 76</span><span>💬 12</span><span>↗ Share</span></div>
-      </div>
+      <article class="ml-post">
+        <div class="ml-post__head">
+          <img src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
+          <span class="ml-post__who">
+            <span class="ml-post__name">Ishita Rao</span>
+            <span class="ml-post__meta">Session vocalist · 4h</span>
+          </span>
+        </div>
+        <p class="ml-post__body">Wrapped two days on a Hindi pop EP at Octave. Three tracks, all live takes — the room did most of the work.</p>
+        <div class="ml-post__media"><img src="/assets/img/6/02d124205931695.66c4331e162d1.jpg" alt="" loading="lazy" /></div>
+        <div class="ml-post__actions">
+          <button class="ml-post__action" type="button" aria-pressed="false"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m22.18 13.58-9.13 9a1.5 1.5 0 0 1-2.1 0l-9.13-9a6.2 6.2 0 0 1 0-8.77 6.3 6.3 0 0 1 8.84 0L12 6.15l1.34-1.34a6.3 6.3 0 0 1 8.84 0 6.2 6.2 0 0 1 0 8.77"/></svg> 42</button>
+          <button class="ml-post__action" type="button"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg> 7</button>
+        </div>
+      </article>
+      <article class="ml-post">
+        <div class="ml-post__head">
+          <img src="/assets/img/editorials/41f63164364f0757ddb2a20693f4b144.jpg" alt="" loading="lazy" />
+          <span class="ml-post__who">
+            <span class="ml-post__name">Blue Note Recording Co.</span>
+            <span class="ml-post__meta">Studio · Yesterday</span>
+          </span>
+        </div>
+        <p class="ml-post__body">New Neve sidecar in Room B from Monday. Existing bookings keep their rate for the month.</p>
+        <div class="ml-post__media"><img src="/assets/img/speakers/40a9560dcb1289e6d450c5259060ea79.jpg" alt="" loading="lazy" /></div>
+        <div class="ml-post__actions">
+          <button class="ml-post__action" type="button" aria-pressed="false"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m22.18 13.58-9.13 9a1.5 1.5 0 0 1-2.1 0l-9.13-9a6.2 6.2 0 0 1 0-8.77 6.3 6.3 0 0 1 8.84 0L12 6.15l1.34-1.34a6.3 6.3 0 0 1 8.84 0 6.2 6.2 0 0 1 0 8.77"/></svg> 118</button>
+          <button class="ml-post__action" type="button"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg> 23</button>
+        </div>
+      </article>
+      <article class="ml-post">
+        <div class="ml-post__head">
+          <img src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
+          <span class="ml-post__who">
+            <span class="ml-post__name">Kabir Sheth</span>
+            <span class="ml-post__meta">Producer · 2d</span>
+          </span>
+        </div>
+        <p class="ml-post__body">Looking for a bassist who can read charts for a jazz-adjacent session next week in Bandra. Paid, half day.</p>
+        
+        <div class="ml-post__actions">
+          <button class="ml-post__action" type="button" aria-pressed="false"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m22.18 13.58-9.13 9a1.5 1.5 0 0 1-2.1 0l-9.13-9a6.2 6.2 0 0 1 0-8.77 6.3 6.3 0 0 1 8.84 0L12 6.15l1.34-1.34a6.3 6.3 0 0 1 8.84 0 6.2 6.2 0 0 1 0 8.77"/></svg> 15</button>
+          <button class="ml-post__action" type="button"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg> 11</button>
+        </div>
+      </article>
     </main>
-    <footer class="app-bottombar"></footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    // states: default | posting — screen.json note: real write, but
-    // currently writes "content" instead of the admin schema's "text",
-    // flagged as a real migration-aware bug, not represented here since
-    // this preview shows the intended UI, not the field-name mismatch.
-    document.addEventListener("musiclinkd:screen-ready", () => {
-      if (window.MusicLinkd.currentState === "posting") {
-        document.getElementById("posting-banner").style.display = "block";
-      }
-    });
-  </script>
 </body>
 </html>

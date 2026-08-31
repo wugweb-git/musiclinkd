@@ -10,79 +10,90 @@
 <meta name="screen-json-path" content="/preview/flows/booking/studio_profile/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Booking / Studio Profile</title>
+<title>MusicLinkd — Booking — Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .hero { height: 200px; object-fit: cover; width: 100%; display: block; }
-  .gold-badge { display: inline-flex; align-items: center; gap: 3px; background: color-mix(in srgb, var(--color-warning) 18%, var(--color-white)); color: color-mix(in srgb, var(--color-warning) 50%, black); font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: var(--radius-4); }
-  .amenity-row { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: var(--space-2) 0; }
-  .room-card { border: 1px solid var(--color-line); border-radius: var(--radius-2); padding: var(--space-2) var(--space-3); margin-bottom: var(--space-2); }
-  .room-card b { font-size: var(--type-2); display: block; }
-  .room-card .meta { font-size: var(--type-1); color: var(--color-muted); }
-  .review-card { border-top: 1px solid var(--color-line); padding: var(--space-2) 0; }
-  .review-card .stars { color: var(--color-ink); font-size: var(--type-1); }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="position:absolute;top:0;left:0;right:0;z-index:2;padding:0 var(--space-3);height:56px;display:flex;align-items:center;justify-content:space-between;">
-      <a href="/preview/flows/booking/search_results/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.85);color:var(--color-ink);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
-      <button type="button" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.85);border:none;color:var(--color-ink);" aria-label="Save studio">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
-      </button>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/booking/studio_discovery/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Studio</h1>
     </header>
-    <main class="app-content app-content--scroll">
-      <img class="hero" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900" alt="" />
-      <div style="padding:var(--space-3) var(--space-4) var(--space-4);">
-        <div style="display:flex;align-items:center;gap:var(--space-2);">
-          <h1 style="font-size:var(--type-3);margin:0;">Yash Raj Sound Studios — Sound Lab</h1>
-          <span class="gold-badge">Gold Verified</span>
-        </div>
-        <p style="color:var(--color-muted);font-size:var(--type-1);margin:2px 0 0;">Andheri West, Mumbai · ★ 4.9 (188 reviews)</p>
-        <p style="font-size:var(--type-2);margin-top:var(--space-2);">Two double-height tracking rooms and a certified Dolby Atmos HE mixing suite. Mixed Pathaan and Coke Studio India here.</p>
-
-        <div class="amenity-row">
-          <span class="ml-chip">Dolby Atmos</span>
-          <span class="ml-chip">Live Room</span>
-          <span class="ml-chip">Resident Engineers</span>
-          <span class="ml-chip">Valet Parking</span>
+    <main class="ml-app__body app-content--scroll" style="padding:0 0 var(--space-4)">
+      <img src="/assets/img/6/01e26955706919.598fd42d42f34.png" alt="" loading="lazy"
+           style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
+      <div style="padding:var(--space-3) var(--space-4)">
+        <h2 class="ml-type-3" style="margin:0">Yash Raj Sound Studios</h2>
+        <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 0">Andheri West, Mumbai</p>
+        <div class="ml-rating" style="margin-top:var(--space-2)">
+          <span class="ml-rating__score">4.8</span>
+          <span class="ml-rating__count">· 62 sessions</span>
         </div>
 
-        <h2 style="font-size:var(--type-2);margin:var(--space-3) 0 var(--space-2);">Rooms</h2>
-        <div class="room-card">
-          <b>Tracking Room 1</b>
-          <span class="meta">Capacity 12 · ₹8,000/hr · Live Room, Resident Engineers</span>
+        <!-- A room links to ITS availability, not back to this page: three
+             cards all pointing at the screen you are on is a dead affordance. -->
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Rooms</h3></div>
+        <div class="ml-rail">
+          <a class="ml-studio-card" href="/preview/flows/booking/availability_calendar/index.html">
+        <div class="ml-studio-card__media"><img src="/assets/img/6/01e26955706919.598fd42d42f34.png" alt="" loading="lazy" /></div>
+        <div class="ml-studio-card__body">
+          <span class="ml-studio-card__name">Yash Raj Sound Studios</span>
+          <span class="ml-studio-card__loc">Andheri West · 2.4 km</span>
+          <span class="ml-studio-card__meta">₹1,800/hr · Tracking, Mixing</span>
+          <span class="ml-status ml-status--accent">Verified</span>
         </div>
-        <div class="room-card" style="margin-bottom:0;">
-          <b>Dolby Atmos Mixing Suite</b>
-          <span class="meta">Capacity 4 · ₹6,500/hr · Dolby Atmos</span>
+      </a>
+          <a class="ml-studio-card" href="/preview/flows/booking/availability_calendar/index.html">
+        <div class="ml-studio-card__media"><img src="/assets/img/speakers/48dcea90c715465b4dcd2ff760bfcf65.jpg" alt="" loading="lazy" /></div>
+        <div class="ml-studio-card__body">
+          <span class="ml-studio-card__name">Blue Note Recording Co.</span>
+          <span class="ml-studio-card__loc">Bandra · 4.1 km</span>
+          <span class="ml-studio-card__meta">₹2,400/hr · Tracking</span>
+          
+        </div>
+      </a>
+          <a class="ml-studio-card" href="/preview/flows/booking/availability_calendar/index.html">
+        <div class="ml-studio-card__media"><img src="/assets/img/6/05c010236455615.68ecac46e6ab2.png" alt="" loading="lazy" /></div>
+        <div class="ml-studio-card__body">
+          <span class="ml-studio-card__name">Soundbox Rehearsal Rooms</span>
+          <span class="ml-studio-card__loc">Lower Parel · 6.8 km</span>
+          <span class="ml-studio-card__meta">₹900/hr · Rehearsal</span>
+          
+        </div>
+      </a>
         </div>
 
-        <h2 style="font-size:var(--type-2);margin:var(--space-3) 0 var(--space-2);">Console &amp; equipment</h2>
-        <p style="font-size:var(--type-1);color:var(--color-muted);">SSL 9000J 72-Channel Console</p>
-        <a href="/preview/flows/booking/equipment_screen/index.html" style="font-size:var(--type-1);color:var(--color-pink);font-weight:600;text-decoration:none;">See full equipment list →</a>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>The room</h3></div>
+        <div class="ml-summary">
+          <div class="ml-summary__row"><span>Live room</span><span>42 m²</span></div>
+          <div class="ml-summary__row"><span>Control room</span><span>Neve sidecar</span></div>
+          <div class="ml-summary__row"><span>Backline</span><span>Included</span></div>
+          <div class="ml-summary__row"><span>Parking</span><span>2 cars</span></div>
+          <div class="ml-summary__row"><span>Engineer</span><span>₹800/hr extra</span></div>
+        </div>
 
-        <h2 style="font-size:var(--type-2);margin:var(--space-3) 0 0;">Hours &amp; policy</h2>
-        <p style="font-size:var(--type-1);color:var(--color-muted);margin:4px 0;">09:00 AM – 11:00 PM (Mon–Sat)</p>
-        <p style="font-size:var(--type-1);color:var(--color-muted);margin:0;">Minimum 2-hour booking; cancellations require 24h notice.</p>
-
-        <h2 style="font-size:var(--type-2);margin:var(--space-3) 0 0;">Reviews</h2>
-        <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <p style="font-size:var(--type-2);margin:2px 0;">"Exceptional range and control across genres."</p>
-          <span style="font-size:var(--type-1);color:var(--color-muted);">— T-Series A&amp;R Team</span>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Reviews</h3></div>
+        <div class="ml-review-card">
+          <div class="ml-review-card__head">
+            <img class="ml-avatar ml-avatar--sm" src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
+            <b>Ishita Rao</b>
+            <span class="ml-review-card__stars">★★★★★</span>
+          </div>
+          <p class="ml-review-card__body">Quiet live room and a patient engineer. Got three vocal takes done inside a morning.</p>
         </div>
       </div>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);display:flex;align-items:center;gap:var(--space-3);">
-      <div style="flex:1;"><b style="font-size:var(--type-2);display:block;">₹8,000<span style="font-weight:400;color:var(--color-muted);font-size:var(--type-1);"> /hr from</span></b></div>
-      <a class="ml-btn ml-btn--primary" href="/preview/flows/booking/availability_calendar/index.html" style="text-decoration:none;padding:0 var(--space-4);">Check availability</a>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/booking/availability_calendar/index.html">Check availability</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
