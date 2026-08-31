@@ -2,7 +2,16 @@
 
 Canonical layout families. A new page should start from one of these templates.
 
-**Interactive reference:** `guide/styleguide.html` § Templates — section-by-section breakdown of all 9 template families.
+
+
+> **Reconciled 2026-08-31.** Rendered into `/guide` by
+> `scripts/build-guide.mjs`, so this file is the source and cannot drift
+> from the catalogue. Its interactive reference used to be
+> `styleguide.html`, which now 301-redirects to `/guide`.
+
+> The nine families below predate the flow model. `/guide` → Patterns is the
+> live list — **24 flows** generated from `webapp/flows/`. These remain the
+> layout archetypes those flows are built from.
 
 ## Template families
 

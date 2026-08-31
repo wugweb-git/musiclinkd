@@ -1,34 +1,45 @@
 # Motion
 
-Use purposeful motion only: pressed state, gentle card lift, sheet/modal fade and scale, swipeable discovery, audio waveform feedback, and skeleton loading. Respect reduced-motion preferences.
+Use purposeful motion only: pressed state, gentle card lift, sheet/modal fade
+and scale, swipeable discovery, audio waveform feedback, and skeleton loading.
+Respect reduced-motion preferences.
 
-**Interactive reference:** `guide/styleguide.html` § Motion — interactive hover and press demos with live easing.
+> **Reconciled 2026-08-31.** This file predates the v9 system and several of
+> its values had gone stale. Corrections are marked below; the rules that
+> survived are unchanged. It is now rendered into `/guide` by
+> `scripts/build-guide.mjs`, so this file is the source and cannot drift
+> from the catalogue again.
 
 ## Timing
 
-| Duration | Easing | Usage |
+Web durations are the four `--duration-*` tokens. Native does **not** take a
+duration — it takes a spring, and `MLMotion.spring1..4` are emitted to both
+Compose and SwiftUI from the same source.
+
+| Token | Web | Usage |
 |---|---|---|
-| 150ms | cubic-bezier(0.4, 0, 0.2, 1) | Button presses, chip toggles |
-| 200ms | cubic-bezier(0.4, 0, 0.2, 1) | Hover states, icon changes |
-| 300ms | cubic-bezier(0.4, 0, 0.2, 1) | Card lifts, page transitions, sheet reveal |
-| 500ms | cubic-bezier(0.4, 0, 0.2, 1) | Modal/dialog fade+scale, splash fade-in |
+| `--duration-1` | 125ms | Button press, chip toggle, ripple |
+| `--duration-2` | 200ms | Hover, icon change, colour change, dismissal |
+| `--duration-3` | 320ms | Sheet reveal, card lift, shared-element transform |
+| `--duration-4` | 500ms | Modal fade+scale, splash |
+
+*Was 150/200/300/500. Three of the four disagreed with the shipped tokens.*
 
 ## Rules
 
-- Use one easing curve for all motion: `cubic-bezier(0.4, 0, 0.2, 1)`.
-- Pressed state: scale to `0.97`.
-- Hover: lift 2–4px with minimal shadow.
-- Skeleton loading: shimmer animation at 1.5s loop.
+- **Three easings, not one:** `--ease-standard` for most motion,
+  `--ease-enter` for arrivals, `--ease-spring` for overshoot.
+  *Was "use one easing curve for all motion". A single curve cannot express
+  arrival and departure, and native uses springs regardless.*
+- Pressed state: `scale(0.97)`. *(unchanged — matches `.ml-btn:active`)*
+- Hover: lift 2–4px with minimal shadow. Pointer only; never the sole signal.
+- Skeleton shimmer: **1.4s** loop. *Was 1.5s.*
 - Audio waveform: CSS keyframe bounce, staggered delays.
-- Always check `prefers-reduced-motion` and disable animations when set.
+- Always honour `prefers-reduced-motion`.
+- Exit runs at roughly 60–70% of enter.
 
-## Canonical animations
+## Known gap
 
-| Animation | Spec |
-|---|---|
-| Card hover lift | 200ms, translateY(-2px), shadow 0 8px 24px rgba(0,0,0,0.06) |
-| Button press | 150ms, scale(0.97) |
-| Bottom sheet reveal | 300ms, translateY + fade |
-| Modal entrance | 500ms, scale(0.95→1) + fade in |
-| Skeleton shimmer | 1.5s infinite linear, background-position slide |
-| Waveform bounce | 800ms infinite alternate, scaleY, staggered by 80ms |
+The system has feedback motion but no choreography: **0** entry animations,
+**0** view transitions, **0** scroll-driven motion, and state switching is a
+hard cut across 518 states. See `docs/09-Roadmap/motion-plan.md`.

@@ -271,6 +271,76 @@ function parseSections(file) {
 
 const sections = [...parseSections("ml-core.css"), ...parseSections("ml-widgets.css")];
 
+/* ── governance READMEs ─────────────────────────────────────────────────
+   frontend/guide/ carries ten folders that hold no assets — only a README.
+   They looked like dead scaffolding from a pre-v9 structure, and seven of them
+   turned out to hold ~155 lines of design law that had never reached the
+   catalogue: the card container contract, the template families, the profile
+   module composition, the motion rules, the a11y floors.
+
+   None of it was deployed (*.md is excluded from hosting) and none of it was
+   in /guide, so the rules governing this system were invisible on the page
+   that IS this system. Worse, six of eight measurable claims had gone stale —
+   Lucide-only icons, Unsplash photography, one easing curve, a 24dp radius,
+   150ms timings, a 44px floor — every one contradicting something v9 had
+   deliberately changed.
+
+   The files are reconciled and now RENDERED FROM DISK. That makes them the
+   source rather than a second copy: edit the README and the catalogue follows,
+   which is the only arrangement that stops the two disagreeing again. */
+function readGovernance(name) {
+  try { return readFileSync(join(ROOT, "frontend/guide", name, "README.md"), "utf8"); }
+  catch { return ""; }
+}
+
+/* A deliberately small Markdown subset — headings, tables, lists, fenced code,
+   blockquotes, inline code/bold/em. Enough for these seven files and nothing
+   more; a full parser would be a dependency for six documents. */
+function md(src) {
+  if (!src) return "";
+  const inline = (t) => esc(t)
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+    .replace(/(^|[\s(])\*([^*]+)\*/g, "$1<i>$2</i>");
+  const out = [];
+  const lines = src.split("\n");
+  let i = 0;
+  while (i < lines.length) {
+    const l = lines[i];
+    if (/^```/.test(l)) {                                   // fenced code
+      const buf = [];
+      for (i++; i < lines.length && !/^```/.test(lines[i]); i++) buf.push(lines[i]);
+      i++;
+      out.push(`<pre class="g-pre"><code>${esc(buf.join("\n"))}</code></pre>`);
+    } else if (/^\|/.test(l) && /^\|[\s:-]+\|/.test(lines[i + 1] || "")) {
+      const cell = (r) => r.split("|").slice(1, -1).map((c) => c.trim());
+      const head = cell(l); i += 2;
+      const body = [];
+      for (; i < lines.length && /^\|/.test(lines[i]); i++) body.push(cell(lines[i]));
+      out.push(`<table class="g-t"><thead><tr>${head.map((h) => `<th>${inline(h)}</th>`).join("")}</tr></thead>` +
+        `<tbody>${body.map((r) => `<tr>${r.map((c, n) => n === 0 ? `<th>${inline(c)}</th>` : `<td>${inline(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`);
+    } else if (/^>/.test(l)) {                              // blockquote
+      const buf = [];
+      for (; i < lines.length && /^>/.test(lines[i]); i++) buf.push(lines[i].replace(/^>\s?/, ""));
+      out.push(`<p class="g-note">${inline(buf.join(" "))}</p>`);
+    } else if (/^[-*] /.test(l)) {                          // list
+      const buf = [];
+      for (; i < lines.length && (/^[-*] /.test(lines[i]) || /^\s+\S/.test(lines[i])); i++)
+        /^[-*] /.test(lines[i]) ? buf.push(lines[i].replace(/^[-*] /, "")) : (buf[buf.length - 1] += " " + lines[i].trim());
+      out.push(`<ul class="g-rules">${buf.map((b) => `<li>${inline(b)}</li>`).join("")}</ul>`);
+    } else if (/^#{2,3} /.test(l)) {                        // sub-heading
+      out.push(`<h4 class="g-rules__h">${inline(l.replace(/^#+ /, ""))}</h4>`); i++;
+    } else if (/^# /.test(l) || l.trim() === "") {          // title / blank
+      i++;
+    } else {                                                // paragraph
+      const buf = [];
+      for (; i < lines.length && lines[i].trim() && !/^[#>|`-]/.test(lines[i]); i++) buf.push(lines[i]);
+      out.push(`<p class="ml-lede ml-measure">${inline(buf.join(" "))}</p>`);
+    }
+  }
+  return out.join("\n");
+}
+
 /* ── the recycling chain ────────────────────────────────────────────────
    Component -> screens -> flows, computed by joining each section's own
    selectors against the class attributes of every built screen.
@@ -1501,6 +1571,23 @@ const html = `<!doctype html>
      the glyph still inherits colour, which an <img> of an external SVG cannot. */
   .g-lu { display: block; width: 22px; height: 22px; background: currentColor;
           -webkit-mask: var(--lu) center / contain no-repeat; mask: var(--lu) center / contain no-repeat; }
+  /* Governance rendered from the folder READMEs. Set apart from the catalogue
+     prose because it is RULE text, not description — a reader should be able to
+     tell "this is the contract" from "this is what the thing is". */
+  .g-rules { margin: var(--space-2) 0 0; padding-left: var(--space-3);
+             max-width: var(--layout-measure); font-size: var(--type-2); }
+  .g-rules li { margin-bottom: var(--space-1); }
+  .g-rules__h { margin: var(--space-3) 0 var(--space-1); font-family: var(--font-display);
+                font-size: var(--type-2); font-weight: var(--weight-3); }
+  /* A reconciliation note — why a value here differs from what the file said
+     before. Quieter than the rule it annotates, and never mistakable for one. */
+  .g-note { margin: var(--space-2) 0; padding: var(--space-2) var(--space-3);
+            border-left: var(--border-2) solid var(--color-line);
+            background: var(--color-surface); color: var(--color-muted);
+            font-size: var(--type-1); max-width: var(--layout-measure); }
+  .g-pre { margin: var(--space-2) 0; padding: var(--space-3); overflow-x: auto;
+           background: var(--color-surface); border-radius: var(--radius-2);
+           font-size: var(--type-1); }
   .g-use { margin-top: var(--space-2); font-size: var(--type-1); color: var(--color-muted);
            max-width: var(--layout-measure); }
   .g-use code { font-size: 0.92em; }
@@ -1909,6 +1996,9 @@ const html = `<!doctype html>
         <div class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-1)">${n}px · ${ground}</div></div>`).join("")}
   </div></div>
 
+  <h3 style="margin-top:var(--space-4)">Accessibility floors</h3>
+  ${md(readGovernance("accessibility"))}
+
   <h3 style="margin-top:var(--space-4)">Decisions not taken</h3>
   <p class="ml-lede ml-measure">Spec items that were considered and deliberately
     NOT adopted, or moved out of CSS entirely. Moved here from Gaps on
@@ -1953,12 +2043,18 @@ const html = `<!doctype html>
     stylesheet can hold.</p>
 
   <h2 class="g-h" id="core">Core · ${core.length}</h2>
+  ${md(readGovernance("components"))}
+
   ${core.map(componentSection).join("\n")}
 
   <h2 class="g-h" id="widgets">Widgets · ${widg.length}</h2>
+  ${md(readGovernance("cards"))}
+
   ${widg.map(componentSection).join("\n")}
 
   <h2 class="g-h" id="motion">Motion</h2>
+  ${md(readGovernance("motion"))}
+
   <p class="ml-lede" style="max-width:64ch">
     Four steps, <b>dual-authored</b>. Web gets a duration and a cubic-bezier;
     native gets spring physics, because a duration is not translatable to a
@@ -1986,6 +2082,8 @@ const html = `<!doctype html>
   </div>
 
   <h2 class="g-h" id="patterns">Patterns · ${patterns.reduce((n, fl) => n + fl.screens.filter((x) => x.onSystem).length, 0)}</h2>
+  ${md(readGovernance("templates"))}
+  ${md(readGovernance("profile-types"))}
   <p class="ml-lede" style="max-width:64ch">
     Composed patterns are <b>real screens</b>, not mockups — every one below is
     live under <code>/preview</code> and built from the components above. Listed

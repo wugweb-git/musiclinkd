@@ -2,7 +2,18 @@
 
 Use shared modules — identity, hero, audio, projects, credits, gallery, services, equipment, availability, reviews, contact, and business information — to compose profiles. Do not create a wholly separate layout for every role.
 
-**Interactive reference:** `guide/styleguide.html` § Profiles — role variants and module composition for all 4 profile families.
+
+
+> **Reconciled 2026-08-31.** Rendered into `/guide` by
+> `scripts/build-guide.mjs`, so this file is the source and cannot drift
+> from the catalogue. Its interactive reference used to be
+> `styleguide.html`, which now 301-redirects to `/guide`.
+
+> **Still unbuilt in the design layer.** `role_profiles` is a live Firestore
+> collection with an admin route, and none of the four families or their
+> module lists appear in `/guide`. This file is currently the only place the
+> composition rules exist — see the Gaps ledger, "Live data the design layer
+> cannot see".
 
 ## Primary template families
 

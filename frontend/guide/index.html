@@ -55,6 +55,23 @@
      the glyph still inherits colour, which an <img> of an external SVG cannot. */
   .g-lu { display: block; width: 22px; height: 22px; background: currentColor;
           -webkit-mask: var(--lu) center / contain no-repeat; mask: var(--lu) center / contain no-repeat; }
+  /* Governance rendered from the folder READMEs. Set apart from the catalogue
+     prose because it is RULE text, not description — a reader should be able to
+     tell "this is the contract" from "this is what the thing is". */
+  .g-rules { margin: var(--space-2) 0 0; padding-left: var(--space-3);
+             max-width: var(--layout-measure); font-size: var(--type-2); }
+  .g-rules li { margin-bottom: var(--space-1); }
+  .g-rules__h { margin: var(--space-3) 0 var(--space-1); font-family: var(--font-display);
+                font-size: var(--type-2); font-weight: var(--weight-3); }
+  /* A reconciliation note — why a value here differs from what the file said
+     before. Quieter than the rule it annotates, and never mistakable for one. */
+  .g-note { margin: var(--space-2) 0; padding: var(--space-2) var(--space-3);
+            border-left: var(--border-2) solid var(--color-line);
+            background: var(--color-surface); color: var(--color-muted);
+            font-size: var(--type-1); max-width: var(--layout-measure); }
+  .g-pre { margin: var(--space-2) 0; padding: var(--space-3); overflow-x: auto;
+           background: var(--color-surface); border-radius: var(--radius-2);
+           font-size: var(--type-1); }
   .g-use { margin-top: var(--space-2); font-size: var(--type-1); color: var(--color-muted);
            max-width: var(--layout-measure); }
   .g-use code { font-size: 0.92em; }
@@ -576,6 +593,15 @@
         <div class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-1)">64px · ink</div></div>
   </div></div>
 
+  <h3 style="margin-top:var(--space-4)">Accessibility floors</h3>
+  <p class="ml-lede ml-measure">Meet WCAG AA contrast, support screen readers and keyboard/focus navigation, preserve clear focus states, and never communicate critical meaning through colour alone.</p>
+<p class="g-note"><b>Reconciled 2026-08-31.</b> This file predates the v9 system and several of its values had gone stale. Corrections are marked below; the rules that survived are unchanged. It is now rendered into <code>/guide</code> by <code>scripts/build-guide.mjs</code>, so this file is the source and cannot drift from the catalogue again.</p>
+<h4 class="g-rules__h">Measured floors</h4>
+<table class="g-t"><thead><tr><th>Rule</th><th>Value</th></tr></thead><tbody><tr><th>Touch target</th><td><code>--size-3</code> (48dp) web + Compose, 44pt iOS</td></tr><tr><th>Contrast, normal text</th><td>4.5:1</td></tr><tr><th>Contrast, large text</th><td>3:1</td></tr><tr><th>Focus ring</th><td>2px <code>--color-pink</code> at 2px offset, <code>:focus-visible</code> only</td></tr></tbody></table>
+<p class="ml-lede ml-measure"><i>Was "keep targets at least 44px" without qualification. 44 is the Apple floor; web and Android are 48. Both now ship, per platform, from one token source.</i></p>
+<h4 class="g-rules__h">Standing rules</h4>
+<ul class="g-rules"><li>Controls smaller than the floor take an invisible 48dp target rather than growing — a 32dp chip is the right visual size.</li><li>Text over artwork sits on <code>--media-scrim</code>, never on raw imagery.</li><li>A disabled control announces why, not just that it is dimmed.</li><li>Colour is never the only carrier of state — pair it with an icon or text.</li></ul>
+
   <h3 style="margin-top:var(--space-4)">Decisions not taken</h3>
   <p class="ml-lede ml-measure">Spec items that were considered and deliberately
     NOT adopted, or moved out of CSS entirely. Moved here from Gaps on
@@ -613,6 +639,14 @@
     stylesheet can hold.</p>
 
   <h2 class="g-h" id="core">Core · 39</h2>
+  <p class="ml-lede ml-measure">Approved components are shared primitives, controls, and composable blocks. Create an implementation and a usage specification together.</p>
+<p class="g-note"><b>Reconciled 2026-08-31.</b> This file predates the v9 system and several of its values had gone stale. Corrections are marked below; the rules that survived are unchanged. It is now rendered into <code>/guide</code> by <code>scripts/build-guide.mjs</code>, so this file is the source and cannot drift from the catalogue again.</p>
+<h4 class="g-rules__h">Implementation rules</h4>
+<ul class="g-rules"><li><b>Base container:</b> <code>--radius-3</code> (32px) corner, <code>--border-1</code> solid <code>--color-line</code>, <code>--color-paper</code> background. <i>Was "24dp radius, 1px #ECECF1" — #ECECF1 is exactly <code>--color-line</code>, but 24dp is not a step on the radius scale (8/16/32/pill), so it could never have been built from tokens.</i></li><li><b>All buttons:</b> pill shape (<code>--radius-4</code>), minimum <code>--size-3</code> (48dp) in both axes. <i>Was "min 44px". 44pt is the Apple floor and is correct in <code>MusicLinkdTokens.swift</code>; the web and Compose floor is Material's 48dp. Controls smaller than that carry an invisible 48dp target — see <code>.ml-hit</code>.</i></li><li><b>Icons:</b> two sets, never mixed inside one control. Gestalt (423, filled, 16/24 grid) is the product set that screens inline at build time; Lucide (2006, 2px stroked) is the breadth set. <i>Was "Lucide only, 1.75px stroke" — Lucide was replaced wholesale in v9 and reinstated 2026-08-31 as the second set, at its native 2px stroke.</i></li><li>Maintain one canonical implementation per component.</li><li>Do not create a visual variant when an existing component satisfies the need.</li></ul>
+<h4 class="g-rules__h">Canonical component list</h4>
+<p class="ml-lede ml-measure">The ten below were the original core. The system now documents <b>133</b> sections across <code>ml-core.css</code> and <code>ml-widgets.css</code>; <code>/guide</code> is the live list and this table is kept as the historical minimum, not the ceiling.</p>
+<table class="g-t"><thead><tr><th>Component</th><th>Purpose</th></tr></thead><tbody><tr><th>Button (primary, secondary, ghost)</th><td>CTAs, actions, passive triggers</td></tr><tr><th>Input Field</th><td>Form fields, onboarding, credentials, messaging</td></tr><tr><th>Chip</th><td>Genre/role/filter selectors (pill, toggle)</td></tr><tr><th>Search Bar</th><td>Directory search with category filters</td></tr><tr><th>Bottom Navigation</th><td>Master app tab switching</td></tr><tr><th>Audio Player / Waveform</th><td>Playable audio moments with animated waveform</td></tr><tr><th>Bottom Sheet</th><td>Modal overlay for confirmations, filters, forms</td></tr><tr><th>Empty State</th><td>Universal template for empty lists and no results</td></tr><tr><th>Verification Badge</th><td>Trust signal for verified artists and studios</td></tr><tr><th>Status Badge</th><td>Availability, confirmation, urgency indicators</td></tr></tbody></table>
+
   <section class="g-comp" id="c-base">
     <div class="g-comp__head">
       <h3>base</h3>
@@ -748,9 +782,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge" title="ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 73 screens</b>
+    <p class="g-use"><b>Recycled on 72 screens</b>
     across 22 flows —
-    <a href="/preview/flows/auth/registration_write"><code>auth/registration_write</code></a>, <a href="/preview/flows/band/band_create"><code>band/band_create</code></a>, <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a>, <a href="/preview/flows/band/band_settings"><code>band/band_settings</code></a>, <a href="/preview/flows/band/ensemble_lineup"><code>band/ensemble_lineup</code></a>, <a href="/preview/flows/band/upcoming_shows"><code>band/upcoming_shows</code></a> and 67 more.</p>
+    <a href="/preview/flows/auth/registration_write"><code>auth/registration_write</code></a>, <a href="/preview/flows/band/band_create"><code>band/band_create</code></a>, <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a>, <a href="/preview/flows/band/band_settings"><code>band/band_settings</code></a>, <a href="/preview/flows/band/ensemble_lineup"><code>band/ensemble_lineup</code></a>, <a href="/preview/flows/band/upcoming_shows"><code>band/upcoming_shows</code></a> and 66 more.</p>
     <details class="g-sel"><summary>7 selectors</summary>
       <code>.ml-status</code> <code>.ml-status--neutral</code> <code>.ml-status--success</code> <code>.ml-status--warning</code> <code>.ml-status--error</code> <code>.ml-status--accent</code> <code>.ml-status--info</code></details>
   </section>
@@ -1216,9 +1250,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 10 screens</b>
-    across 9 flows —
-    <a href="/preview/flows/booking/provider_availability"><code>booking/provider_availability</code></a>, <a href="/preview/flows/marketplace/marketplace_browse"><code>marketplace/marketplace_browse</code></a>, <a href="/preview/flows/marketplace/marketplace_seller_profile"><code>marketplace/marketplace_seller_profile</code></a>, <a href="/preview/flows/notifications/notifications_center"><code>notifications/notifications_center</code></a>, <a href="/preview/flows/recommendation_engine/for_you"><code>recommendation_engine/for_you</code></a>, <a href="/preview/flows/reviews/review_list"><code>reviews/review_list</code></a> and 4 more.</p>
+    <p class="g-use"><b>Recycled on 11 screens</b>
+    across 10 flows —
+    <a href="/preview/flows/booking/provider_availability"><code>booking/provider_availability</code></a>, <a href="/preview/flows/marketplace/marketplace_browse"><code>marketplace/marketplace_browse</code></a>, <a href="/preview/flows/marketplace/marketplace_seller_profile"><code>marketplace/marketplace_seller_profile</code></a>, <a href="/preview/flows/notifications/notifications_center"><code>notifications/notifications_center</code></a>, <a href="/preview/flows/public_profile/public_profile_view_talent"><code>public_profile/public_profile_view_talent</code></a>, <a href="/preview/flows/recommendation_engine/for_you"><code>recommendation_engine/for_you</code></a> and 5 more.</p>
     <details class="g-sel"><summary>1 selector</summary>
       <code>.ml-link</code></details>
   </section>
@@ -1384,6 +1418,20 @@
   </section>
 
   <h2 class="g-h" id="widgets">Widgets · 94</h2>
+  <p class="ml-lede ml-measure">Cards drive discovery and conversion. Every card conforms to the unified base container specification.</p>
+<p class="g-note"><b>Reconciled 2026-08-31.</b> This file predates the v9 system and several of its values had gone stale. Corrections are marked below; the rules that survived are unchanged. It is now rendered into <code>/guide</code> by <code>scripts/build-guide.mjs</code>, so this file is the source and cannot drift from the catalogue again.</p>
+<h4 class="g-rules__h">Container specification</h4>
+<pre class="g-pre"><code>shape        --radius-3   (32px)
+border       --border-1   solid --color-line
+background   --color-paper
+padding      --space-3    (16px)
+touch target --size-3     (48dp minimum)</code></pre>
+<p class="ml-lede ml-measure"><i>Was "RoundedCornerShape(24dp) / 1dp #ECECF1 / #FFFFFF / 16–20dp". The colour was right (#ECECF1 is <code>--color-line</code>); 24dp and the 16–20dp range are not steps on any scale, so no card could have been built from tokens and matched them.</i></p>
+<h4 class="g-rules__h">Implementation rules</h4>
+<ul class="g-rules"><li>One anatomy specification per type — reuse, do not fork.</li><li><b>Use the local photography library</b> under <code>/assets/img</code>, bound to a component. Never stock. <i>Was "use real photography from Unsplash". The guide carried 94 stock references and now carries zero; they were removed deliberately.</i></li><li>Each card has one primary CTA (hire, book, inquire, apply).</li><li>Approved tokens only — see <code>tokens/tokens.json</code>.</li><li>Zero shadow noise. Rely on the hairline border for definition.</li></ul>
+<h4 class="g-rules__h">Canonical card types</h4>
+<table class="g-t"><thead><tr><th>Card</th><th>Purpose</th></tr></thead><tbody><tr><th>Artist Card</th><td>Primary discovery unit for talent</td></tr><tr><th>Studio Card</th><td>Recording venue and rehearsal space</td></tr><tr><th>Marketplace Card</th><td>Gear, instruments, equipment</td></tr><tr><th>Project Card</th><td>Collaboration sessions and gigs</td></tr><tr><th>Opportunity Card</th><td>Open auditions and freelance calls</td></tr><tr><th>Review Card</th><td>Client testimonials</td></tr><tr><th>Booking Card</th><td>Studio reservations</td></tr><tr><th>Notification Card</th><td>Push notification items</td></tr><tr><th>Message Card</th><td>Chat list items</td></tr></tbody></table>
+
   <section class="g-comp" id="c-app-shell">
     <div class="g-comp__head">
       <h3>app shell</h3>
@@ -1522,9 +1570,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge" title="ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 9 screens</b>
+    <p class="g-use"><b>Recycled on 10 screens</b>
     across 5 flows —
-    <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a>, <a href="/preview/flows/business_profiles/business_overview"><code>business_profiles/business_overview</code></a>, <a href="/preview/flows/discover/community_detail"><code>discover/community_detail</code></a>, <a href="/preview/flows/discover/discover_feed"><code>discover/discover_feed</code></a>, <a href="/preview/flows/discover/discover_profile_detail"><code>discover/discover_profile_detail</code></a>, <a href="/preview/flows/discover/trending_recommended_sections"><code>discover/trending_recommended_sections</code></a> and 3 more.</p>
+    <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a>, <a href="/preview/flows/business_profiles/business_overview"><code>business_profiles/business_overview</code></a>, <a href="/preview/flows/discover/community_detail"><code>discover/community_detail</code></a>, <a href="/preview/flows/discover/discover_feed"><code>discover/discover_feed</code></a>, <a href="/preview/flows/discover/discover_profile_detail"><code>discover/discover_profile_detail</code></a>, <a href="/preview/flows/discover/trending_recommended_sections"><code>discover/trending_recommended_sections</code></a> and 4 more.</p>
     <details class="g-sel"><summary>5 selectors</summary>
       <code>.ml-media-card</code> <code>.ml-media-card__tag</code> <code>.ml-media-card__body</code> <code>.ml-media-card__title</code> <code>.ml-media-card__sub</code></details>
   </section>
@@ -1603,9 +1651,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 50 screens</b>
+    <p class="g-use"><b>Recycled on 51 screens</b>
     across 20 flows —
-    <a href="/preview/flows/discover/business_profile"><code>discover/business_profile</code></a>, <a href="/preview/flows/discover/community_detail"><code>discover/community_detail</code></a>, <a href="/preview/flows/discover/discover_profile_detail"><code>discover/discover_profile_detail</code></a>, <a href="/preview/flows/discover/project_detail"><code>discover/project_detail</code></a>, <a href="/preview/flows/discover/studio_profile_discover"><code>discover/studio_profile_discover</code></a>, <a href="/preview/flows/portfolio/profile_project_view"><code>portfolio/profile_project_view</code></a> and 44 more.</p>
+    <a href="/preview/flows/discover/business_profile"><code>discover/business_profile</code></a>, <a href="/preview/flows/discover/community_detail"><code>discover/community_detail</code></a>, <a href="/preview/flows/discover/discover_profile_detail"><code>discover/discover_profile_detail</code></a>, <a href="/preview/flows/discover/project_detail"><code>discover/project_detail</code></a>, <a href="/preview/flows/discover/studio_profile_discover"><code>discover/studio_profile_discover</code></a>, <a href="/preview/flows/portfolio/profile_project_view"><code>portfolio/profile_project_view</code></a> and 45 more.</p>
     <details class="g-sel"><summary>6 selectors</summary>
       <code>.ml-hero</code> <code>.ml-hero__body</code> <code>.ml-hero__name</code> <code>.ml-hero__sub</code> <code>.ml-hero__stats</code> <code>.ml-action-row</code></details>
   </section>
@@ -2848,8 +2896,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use g-use--none">Not used by any screen yet.
-    Built and documented here; no flow has recycled it.</p>
+    <p class="g-use"><b>Recycled on 1 screen</b>
+    across 1 flow —
+    <a href="/preview/flows/public_profile/public_profile_view_talent"><code>public_profile/public_profile_view_talent</code></a>.</p>
     <details class="g-sel"><summary>7 selectors</summary>
       <code>.ml-testimonial</code> <code>.ml-testimonial__quote</code> <code>.ml-testimonial__user</code> <code>.ml-testimonial__name</code> <code>.ml-testimonial__role</code> <code>.ml-testimonial__stats</code> <code>.ml-testimonial__stat</code></details>
   </section>
@@ -2900,8 +2949,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use g-use--none">Not used by any screen yet.
-    Built and documented here; no flow has recycled it.</p>
+    <p class="g-use"><b>Recycled on 1 screen</b>
+    across 1 flow —
+    <a href="/preview/flows/public_profile/public_profile_view_talent"><code>public_profile/public_profile_view_talent</code></a>.</p>
     <details class="g-sel"><summary>6 selectors</summary>
       <code>.ml-trust</code> <code>.ml-trust__row</code> <code>.ml-trust__mark</code> <code>.ml-trust__what</code> <code>.ml-trust__who</code> <code>.ml-trust__stats</code></details>
   </section>
@@ -3627,6 +3677,17 @@
   </section>
 
   <h2 class="g-h" id="motion">Motion</h2>
+  <p class="ml-lede ml-measure">Use purposeful motion only: pressed state, gentle card lift, sheet/modal fade and scale, swipeable discovery, audio waveform feedback, and skeleton loading. Respect reduced-motion preferences.</p>
+<p class="g-note"><b>Reconciled 2026-08-31.</b> This file predates the v9 system and several of its values had gone stale. Corrections are marked below; the rules that survived are unchanged. It is now rendered into <code>/guide</code> by <code>scripts/build-guide.mjs</code>, so this file is the source and cannot drift from the catalogue again.</p>
+<h4 class="g-rules__h">Timing</h4>
+<p class="ml-lede ml-measure">Web durations are the four <code>--duration-*</code> tokens. Native does <b>not</b> take a duration — it takes a spring, and <code>MLMotion.spring1..4</code> are emitted to both Compose and SwiftUI from the same source.</p>
+<table class="g-t"><thead><tr><th>Token</th><th>Web</th><th>Usage</th></tr></thead><tbody><tr><th><code>--duration-1</code></th><td>125ms</td><td>Button press, chip toggle, ripple</td></tr><tr><th><code>--duration-2</code></th><td>200ms</td><td>Hover, icon change, colour change, dismissal</td></tr><tr><th><code>--duration-3</code></th><td>320ms</td><td>Sheet reveal, card lift, shared-element transform</td></tr><tr><th><code>--duration-4</code></th><td>500ms</td><td>Modal fade+scale, splash</td></tr></tbody></table>
+<p class="ml-lede ml-measure"><i>Was 150/200/300/500. Three of the four disagreed with the shipped tokens.</i></p>
+<h4 class="g-rules__h">Rules</h4>
+<ul class="g-rules"><li><b>Three easings, not one:</b> <code>--ease-standard</code> for most motion, <code>--ease-enter</code> for arrivals, <code>--ease-spring</code> for overshoot. <i>Was "use one easing curve for all motion". A single curve cannot express arrival and departure, and native uses springs regardless.</i></li><li>Pressed state: <code>scale(0.97)</code>. <i>(unchanged — matches <code>.ml-btn:active</code>)</i></li><li>Hover: lift 2–4px with minimal shadow. Pointer only; never the sole signal.</li><li>Skeleton shimmer: <b>1.4s</b> loop. <i>Was 1.5s.</i></li><li>Audio waveform: CSS keyframe bounce, staggered delays.</li><li>Always honour <code>prefers-reduced-motion</code>.</li><li>Exit runs at roughly 60–70% of enter.</li></ul>
+<h4 class="g-rules__h">Known gap</h4>
+<p class="ml-lede ml-measure">The system has feedback motion but no choreography: <b>0</b> entry animations, <b>0</b> view transitions, <b>0</b> scroll-driven motion, and state switching is a hard cut across 518 states. See <code>docs/09-Roadmap/motion-plan.md</code>.</p>
+
   <p class="ml-lede" style="max-width:64ch">
     Four steps, <b>dual-authored</b>. Web gets a duration and a cubic-bezier;
     native gets spring physics, because a duration is not translatable to a
@@ -3673,6 +3734,22 @@
   </div>
 
   <h2 class="g-h" id="patterns">Patterns · 205</h2>
+  <p class="ml-lede ml-measure">Canonical layout families. A new page should start from one of these templates.</p>
+<p class="g-note"><b>Reconciled 2026-08-31.</b> Rendered into <code>/guide</code> by <code>scripts/build-guide.mjs</code>, so this file is the source and cannot drift from the catalogue. Its interactive reference used to be <code>styleguide.html</code>, which now 301-redirects to <code>/guide</code>.</p>
+<p class="g-note">The nine families below predate the flow model. <code>/guide</code> → Patterns is the live list — <b>24 flows</b> generated from <code>webapp/flows/</code>. These remain the layout archetypes those flows are built from.</p>
+<h4 class="g-rules__h">Template families</h4>
+<table class="g-t"><thead><tr><th>Template</th><th>Purpose</th><th>Key sections</th></tr></thead><tbody><tr><th>Splash</th><td>App launch</td><td>Centered logo on dark background, fade-in</td></tr><tr><th>Login</th><td>Authentication</td><td>Email/password, social auth, brand mark</td></tr><tr><th>Onboarding</th><td>Profile setup</td><td>Progress indicator, role selection, photo upload, genre/skills, availability</td></tr><tr><th>Home</th><td>Personalized dashboard</td><td>Greeting, quick stats, activity feed, recommendations, upcoming bookings</td></tr><tr><th>Discover</th><td>Card-driven discovery</td><td>Search bar, filter chips, card grid, skeleton loading, empty state</td></tr><tr><th>Artist Profile</th><td>Talent showcase</td><td>Hero, About, Audio, Projects, Credits, Reviews, Gallery, Services, sticky Hire CTA</td></tr><tr><th>Studio Profile</th><td>Business showcase</td><td>Identity header, equipment, rooms, calendar, reviews, Booking CTA</td></tr><tr><th>Marketplace</th><td>Gear &amp; instrument listings</td><td>Category tabs, search, filter bar, listing grid, sorting</td></tr><tr><th>Settings</th><td>Account management</td><td>Profile, Account, Notifications, Privacy, Payments, Help, Log out</td></tr></tbody></table>
+<h4 class="g-rules__h">Rules</h4>
+<ul class="g-rules"><li>Start every new screen from one of these template families.</li><li>Reuse approved cards, components, and patterns from the design system.</li><li>Do not create a wholly separate layout when a template family fits.</li><li>Use <code>tokens/tokens.json</code> for all spacing, radius, color, and motion values.</li></ul>
+  <p class="ml-lede ml-measure">Use shared modules — identity, hero, audio, projects, credits, gallery, services, equipment, availability, reviews, contact, and business information — to compose profiles. Do not create a wholly separate layout for every role.</p>
+<p class="g-note"><b>Reconciled 2026-08-31.</b> Rendered into <code>/guide</code> by <code>scripts/build-guide.mjs</code>, so this file is the source and cannot drift from the catalogue. Its interactive reference used to be <code>styleguide.html</code>, which now 301-redirects to <code>/guide</code>.</p>
+<p class="g-note"><b>Still unbuilt in the design layer.</b> <code>role_profiles</code> is a live Firestore collection with an admin route, and none of the four families or their module lists appear in <code>/guide</code>. This file is currently the only place the composition rules exist — see the Gaps ledger, "Live data the design layer cannot see".</p>
+<h4 class="g-rules__h">Primary template families</h4>
+<table class="g-t"><thead><tr><th>Family</th><th>Roles</th><th>Key modules</th></tr></thead><tbody><tr><th>Talent</th><td>Singer, Instrumentalist, Producer/Engineer, DJ/Performer, Composer, Lyricist</td><td>Hero + photo capture, verification badge, nav tabs (About, Projects, Credits, Reviews), audio waveform, Connect/Hire CTA</td></tr><tr><th>Band</th><td>Ensembles, groups, duos</td><td>Banner + logo, lineup carousel (member cards), technical rider &amp; stage plot, media reel, Booking CTA</td></tr><tr><th>Business</th><td>Recording Studio, Record Label, Music School, Equipment Dealer</td><td>Identity header, equipment checklist, room photos, availability calendar, reviews, Booking CTA (studio) / Course catalog (school) / Artist grid (label) / Product catalog (dealer)</td></tr><tr><th>Venue</th><td>Concert hall, club, amphitheater, festival</td><td>Hero imagery + address, capacity &amp; features ledger, event calendar, Booking CTA for tour managers</td></tr></tbody></table>
+<h4 class="g-rules__h">Category-specific modules (Talent)</h4>
+<table class="g-t"><thead><tr><th>Role variant</th><th>Modules</th></tr></thead><tbody><tr><th>Singer / Vocalist</th><td>Vocal register, performance languages, microphone specs</td></tr><tr><th>Instrumentalist</th><td>Core instrument registry, touring setup, session availability</td></tr><tr><th>Producer / Engineer</th><td>DAW stack, outboard gear ledger, A/B mixing deck</td></tr><tr><th>DJ / Performer</th><td>Deck setup, residency timeline, festival logs</td></tr><tr><th>Composer</th><td>Filmography, original scores carousel</td></tr><tr><th>Lyricist</th><td>Signature lyric cards, IPRS verification, writing languages</td></tr></tbody></table>
+<h4 class="g-rules__h">Rules</h4>
+<ul class="g-rules"><li>Compose profiles from shared modules — do not create separate layouts per role.</li><li>Use <code>tokens/tokens.json</code> for all spacing, radius, color, and typography values.</li><li>Verification badges follow the approved component spec (see <code>components/README.md</code>).</li></ul>
   <p class="ml-lede" style="max-width:64ch">
     Composed patterns are <b>real screens</b>, not mockups — every one below is
     live under <code>/preview</code> and built from the components above. Listed
@@ -3893,7 +3970,7 @@
         <b>Creator Marketplace (browse)</b>
         <span>8 states · default, empty, sale</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_item_detail">
         <b>Listing Detail</b>
-        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_saved_bookmarks">
+        <span>2 states · default, rental</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_saved_bookmarks">
         <b>Saved &amp; Favorites — Marketplace tab</b>
         <span>3 states · grid, list, empty</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_search_filters">
         <b>Market Search / Category / Filters / Sort</b>
@@ -4051,7 +4128,7 @@
         <b>Public Profile (cross-reference)</b>
         <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/public_profile/public_profile_view_talent">
         <b>Public Profile — Talent template</b>
-        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/public_profile/public_profile_view_band">
+        <span>2 states · default, owner</span></a><a class="g-pattern" href="/preview/flows/public_profile/public_profile_view_band">
         <b>Public Profile — Band template</b>
         <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/public_profile/public_profile_view_business">
         <b>Public Profile — Business template</b>
@@ -4417,12 +4494,12 @@
       205 of
       205 screens are rebuilt.</p>
 
-    <h3 style="margin:var(--space-4) 0 var(--space-2)">Built but never recycled · 53 of 133</h3>
+    <h3 style="margin:var(--space-4) 0 var(--space-2)">Built but never recycled · 51 of 133</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
       Documented here, used by no screen. Not a rendering fault — this is the
       recycling backlog, and it is the number that should fall as flows are
       rebuilt. Each component page states its own count.</p>
-    <div class="ml-chip-wrap"><a class="ml-chip" href="#c-base">base</a><a class="ml-chip" href="#c-tabular-numbers">tabular numbers</a><a class="ml-chip" href="#c-readable-measure">readable measure</a><a class="ml-chip" href="#c-select">select</a><a class="ml-chip" href="#c-accordion">accordion</a><a class="ml-chip" href="#c-dialog">dialog</a><a class="ml-chip" href="#c-floating-action-button">floating action button</a><a class="ml-chip" href="#c-toast">toast</a><a class="ml-chip" href="#c-equalizer">equalizer</a><a class="ml-chip" href="#c-band-card">band card</a><a class="ml-chip" href="#c-credit-row">credit row</a><a class="ml-chip" href="#c-swipe-deck">swipe deck</a><a class="ml-chip" href="#c-drawer">drawer</a><a class="ml-chip" href="#c-video">video</a><a class="ml-chip" href="#c-stem-mixer">stem mixer</a><a class="ml-chip" href="#c-editorial-layouts">editorial layouts</a><a class="ml-chip" href="#c-bento">bento</a><a class="ml-chip" href="#c-split-editorial">split editorial</a><a class="ml-chip" href="#c-tooltip">tooltip</a><a class="ml-chip" href="#c-popover">popover</a><a class="ml-chip" href="#c-help-button">help button</a><a class="ml-chip" href="#c-combobox">combobox</a><a class="ml-chip" href="#c-breadcrumb">breadcrumb</a><a class="ml-chip" href="#c-trends-table">trends table</a><a class="ml-chip" href="#c-collage">collage</a><a class="ml-chip" href="#c-social-sign-in-button">social sign-in button</a><a class="ml-chip" href="#c-native-keyboard-ime">native keyboard &amp; IME</a><a class="ml-chip" href="#c-testimonial">testimonial</a><a class="ml-chip" href="#c-ambient-album-card">ambient album card</a><a class="ml-chip" href="#c-trust-verification">trust &amp; verification</a><a class="ml-chip" href="#c-sticker">sticker</a><a class="ml-chip" href="#c-ambient-mosaic-panel">ambient mosaic panel</a><a class="ml-chip" href="#c-permission-dialog">permission dialog</a><a class="ml-chip" href="#c-camera-picker">camera picker</a><a class="ml-chip" href="#c-audio-recorder">audio recorder</a><a class="ml-chip" href="#c-inline-editor">inline editor</a><a class="ml-chip" href="#c-animated-success">animated success</a><a class="ml-chip" href="#c-footer-cta">footer CTA</a><a class="ml-chip" href="#c-what-s-new">what's new</a><a class="ml-chip" href="#c-android-app-grid">android app grid</a><a class="ml-chip" href="#c-recommended-collaborator-card">recommended collaborator card</a><a class="ml-chip" href="#c-collaborator-match-rail">collaborator match rail</a><a class="ml-chip" href="#c-discovery-search-result-card">discovery search result card</a><a class="ml-chip" href="#c-networking-feed">networking feed</a><a class="ml-chip" href="#c-band-members">band members</a><a class="ml-chip" href="#c-studio-venue-list-item">studio venue list item</a><a class="ml-chip" href="#c-featured-studio-card">featured studio card</a><a class="ml-chip" href="#c-studio-spec">studio spec</a><a class="ml-chip" href="#c-project-card">project card</a><a class="ml-chip" href="#c-recent-project-card">recent project card</a><a class="ml-chip" href="#c-track-card">track card</a><a class="ml-chip" href="#c-audio-podcast-demo">audio podcast demo</a><a class="ml-chip" href="#c-hire-contact-modal">hire contact modal</a></div>
+    <div class="ml-chip-wrap"><a class="ml-chip" href="#c-base">base</a><a class="ml-chip" href="#c-tabular-numbers">tabular numbers</a><a class="ml-chip" href="#c-readable-measure">readable measure</a><a class="ml-chip" href="#c-select">select</a><a class="ml-chip" href="#c-accordion">accordion</a><a class="ml-chip" href="#c-dialog">dialog</a><a class="ml-chip" href="#c-floating-action-button">floating action button</a><a class="ml-chip" href="#c-toast">toast</a><a class="ml-chip" href="#c-equalizer">equalizer</a><a class="ml-chip" href="#c-band-card">band card</a><a class="ml-chip" href="#c-credit-row">credit row</a><a class="ml-chip" href="#c-swipe-deck">swipe deck</a><a class="ml-chip" href="#c-drawer">drawer</a><a class="ml-chip" href="#c-video">video</a><a class="ml-chip" href="#c-stem-mixer">stem mixer</a><a class="ml-chip" href="#c-editorial-layouts">editorial layouts</a><a class="ml-chip" href="#c-bento">bento</a><a class="ml-chip" href="#c-split-editorial">split editorial</a><a class="ml-chip" href="#c-tooltip">tooltip</a><a class="ml-chip" href="#c-popover">popover</a><a class="ml-chip" href="#c-help-button">help button</a><a class="ml-chip" href="#c-combobox">combobox</a><a class="ml-chip" href="#c-breadcrumb">breadcrumb</a><a class="ml-chip" href="#c-trends-table">trends table</a><a class="ml-chip" href="#c-collage">collage</a><a class="ml-chip" href="#c-social-sign-in-button">social sign-in button</a><a class="ml-chip" href="#c-native-keyboard-ime">native keyboard &amp; IME</a><a class="ml-chip" href="#c-ambient-album-card">ambient album card</a><a class="ml-chip" href="#c-sticker">sticker</a><a class="ml-chip" href="#c-ambient-mosaic-panel">ambient mosaic panel</a><a class="ml-chip" href="#c-permission-dialog">permission dialog</a><a class="ml-chip" href="#c-camera-picker">camera picker</a><a class="ml-chip" href="#c-audio-recorder">audio recorder</a><a class="ml-chip" href="#c-inline-editor">inline editor</a><a class="ml-chip" href="#c-animated-success">animated success</a><a class="ml-chip" href="#c-footer-cta">footer CTA</a><a class="ml-chip" href="#c-what-s-new">what's new</a><a class="ml-chip" href="#c-android-app-grid">android app grid</a><a class="ml-chip" href="#c-recommended-collaborator-card">recommended collaborator card</a><a class="ml-chip" href="#c-collaborator-match-rail">collaborator match rail</a><a class="ml-chip" href="#c-discovery-search-result-card">discovery search result card</a><a class="ml-chip" href="#c-networking-feed">networking feed</a><a class="ml-chip" href="#c-band-members">band members</a><a class="ml-chip" href="#c-studio-venue-list-item">studio venue list item</a><a class="ml-chip" href="#c-featured-studio-card">featured studio card</a><a class="ml-chip" href="#c-studio-spec">studio spec</a><a class="ml-chip" href="#c-project-card">project card</a><a class="ml-chip" href="#c-recent-project-card">recent project card</a><a class="ml-chip" href="#c-track-card">track card</a><a class="ml-chip" href="#c-audio-podcast-demo">audio podcast demo</a><a class="ml-chip" href="#c-hire-contact-modal">hire contact modal</a></div>
 
 
     <h3 style="margin:var(--space-4) 0 var(--space-2)">States declared but not rendered · 0</h3>
