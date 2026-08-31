@@ -49,7 +49,7 @@
         <a class="ml-tabs__tab" role="tab" aria-selected="false" href="/preview/flows/business_profiles/business_reviews_gallery_tab/index.html">Reviews</a>
       </nav>
 
-      <div style="padding:var(--space-3) var(--space-4) 0">
+      <div data-state="default" style="padding:var(--space-3) var(--space-4) 0">
         <a class="ml-person-row" href="/preview/flows/public_profile/public_profile_view/index.html">
           <img src="/assets/img/editorials/41f63164364f0757ddb2a20693f4b144.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Rhea Kapoor</b><p>Studio manager</p></span>
@@ -71,8 +71,49 @@
           <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
         </a>
       </div>
+      <div style="padding:0 var(--space-4)">
+        <div data-state="owner">
+          <div class="ml-section"><h2>Team and roles</h2></div>
+          <div class="ml-person-row">
+            <img src="/assets/img/editorials/41f63164364f0757ddb2a20693f4b144.jpg" alt="" loading="lazy" />
+            <span class="meta"><b>Rhea Kapoor</b><p>Owner</p></span>
+            <button class="ml-icon-btn ml-icon-btn--muted" type="button" aria-label="Change role for Rhea Kapoor"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg></button>
+          </div>
+          <div class="ml-person-row">
+            <img src="/assets/img/editorials/4b18ab6b2f209a6f51a9d38de6d3f07f.jpg" alt="" loading="lazy" />
+            <span class="meta"><b>Rohan D'Souza</b><p>Admin · can accept bookings</p></span>
+            <button class="ml-icon-btn ml-icon-btn--muted" type="button" aria-label="Change role for Rohan D'Souza"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg></button>
+          </div>
+          <div class="ml-person-row">
+            <img src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
+            <span class="meta"><b>Kabir Sheth</b><p>Staff</p></span>
+            <button class="ml-icon-btn ml-icon-btn--muted" type="button" aria-label="Change role for Kabir Sheth"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg></button>
+          </div>
+          <div class="ml-person-row">
+            <img src="/assets/img/editorials/3dee9cb6252a4c8f8a149c9fd40d4a9e.jpg" alt="" loading="lazy" />
+            <span class="meta"><b>Meera Nair</b><p>Staff</p></span>
+            <button class="ml-icon-btn ml-icon-btn--muted" type="button" aria-label="Change role for Meera Nair"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg></button>
+          </div>
+          <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-2)" href="?state=invite">Invite a member</a>
+        </div>
+
+        <div data-state="invite">
+          <div class="ml-section"><h2>Invite someone</h2></div>
+          <div class="ml-field">
+            <label for="t-who">Email or MusicLinkd username</label>
+            <input id="t-who" type="text" placeholder="rohan@example.com" />
+          </div>
+          <div class="ml-field">
+            <label for="t-role">Role</label>
+            <select id="t-role"><option>Staff</option><option>Manager</option><option>Admin</option><option>Owner</option></select>
+          </div>
+          <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-1)">
+            Admins can accept bookings and edit services. Staff appear on the profile but change nothing.
+          </p>
+          <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=owner">Send invitation</a>
+        </div></div>
     </main>
-    <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
+    <footer class="ml-app__footer" data-state="default owner draft no_services no_portfolio no_team no_reviews no_availability visible_if_owner leads analytics invite" style="display:flex;gap:var(--space-2)">
       <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/communication/chat_conversation/index.html">Message</a>
       <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/business_profiles/business_book_now/index.html">Book now</a>
     </footer>

@@ -118,7 +118,7 @@
   <li><a href="#core">Core · 39</a></li>
   <li><a href="#widgets">Widgets · 94</a></li>
   <li><a href="#motion">Motion</a></li>
-  <li><a href="#patterns">Patterns · 171</a></li>
+  <li><a href="#patterns">Patterns · 173</a></li>
   <li><a href="#icons">Icons · 423</a></li>
   <li><a href="#taxonomy">Taxonomy · 18</a></li>
   <li><a href="#gaps">Gaps</a></li>
@@ -242,11 +242,20 @@
     stays monochrome, which is why these rules matter more than they look.</p>
 
   <h3 style="margin-top:var(--space-4)">Aspect ratios</h3>
-  <p class="ml-lede ml-measure">Three, not four. The old catalogue listed a
-    fourth — <code>3:2 · Studio Photo</code> — which is now folded into
-    <code>--media-aspect-wide</code>; its description names studio photos
-    explicitly. A ratio that differs from another by 0.28 is not a decision
-    anyone can make consistently at a glance.</p>
+  <p class="ml-lede ml-measure">Three tokens. The old catalogue listed a
+    fourth — <code>3:2 · Studio Photo</code> — and for studio photography it is
+    folded into <code>--media-aspect-wide</code>, whose description names studio
+    photos explicitly. A ratio differing from another by 0.28 is not a decision
+    anyone makes consistently at a glance.</p>
+  <p class="ml-type-1" style="color:var(--color-muted);max-width:var(--layout-measure)">
+    <b>One component still writes <code>3/2</code> literally:</b>
+    <a href="#c-what-are-you-looking-for-grid"><code>.ml-dimension</code></a>, the
+    Discover entry grid, where the ratio is load-bearing — six tiles in two
+    columns only resolve to a whole number of rows at 3:2. It is recorded here
+    rather than tokenised because the token budget is at its ceiling and a
+    fourth aspect used once would be a name for a single call site, which is the
+    sprawl the ceiling exists to stop. Found 2026-08-31 while measuring
+    contrast; this page had claimed the consolidation was total, and it was not.</p>
   <div class="g-row" style="align-items:flex-start">
     <figure style="margin:0;max-width:180px">
         <div class="ml-media" style="aspect-ratio:var(--media-aspect-square);border-radius:var(--radius-2)">
@@ -3301,7 +3310,7 @@
     </p>
   </div>
 
-  <h2 class="g-h" id="patterns">Patterns · 171</h2>
+  <h2 class="g-h" id="patterns">Patterns · 173</h2>
   <p class="ml-lede" style="max-width:64ch">
     Composed patterns are <b>real screens</b>, not mockups — every one below is
     live under <code>/preview</code> and built from the components above. Listed
@@ -3588,23 +3597,27 @@
   </section>
   <section class="g-comp">
     <div class="g-comp__head"><h3>Business Profiles (Studios, Labels)</h3>
-      <span class="g-file">flow 12 · 7 on the system</span></div>
+      <span class="g-file">flow 12 · 9 on the system</span></div>
     <div class="g-demo"><div class="g-patterns">
       <a class="g-pattern" href="/preview/flows/business_profiles/business_overview">
         <b>Overview</b>
-        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_services_tab">
+        <span>10 states · default, draft, unpublished</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_services_tab">
         <b>Services Tab</b>
-        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_equipment_tab">
+        <span>2 states · default, owner</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_equipment_tab">
         <b>Equipment Tab</b>
         <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_team_tab">
         <b>Team &amp; Works Tab</b>
-        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_reviews_gallery_tab">
+        <span>3 states · default, owner, invite</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_reviews_gallery_tab">
         <b>Reviews &amp; Gallery Tab</b>
         <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_book_now">
         <b>Book Now (CTA)</b>
         <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_owner_insights">
         <b>Owner Mode / Business Insights</b>
-        <span>1 state · visible_if_owner</span></a>
+        <span>3 states · visible_if_owner, leads, analytics</span></a><a class="g-pattern" href="/preview/flows/business_profiles/create_business">
+        <b>Create a business</b>
+        <span>6 states · basics, identity, location</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_dashboard">
+        <b>Business dashboard</b>
+        <span>2 states · default, quiet</span></a>
     </div></div>
   </section>
   <section class="g-comp">
@@ -3959,8 +3972,8 @@
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Screens not yet on the system · 0</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0">
       Still carrying local <code>&lt;style&gt;</code> blocks or pre-system markup.
-      171 of
-      171 screens are rebuilt.</p>
+      173 of
+      173 screens are rebuilt.</p>
 
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Token-level gaps</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">

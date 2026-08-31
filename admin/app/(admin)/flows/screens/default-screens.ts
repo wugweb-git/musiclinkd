@@ -749,15 +749,43 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 1,
       screenNumber: 71,
       title: "Overview",
-      states: ["default"],
+      states: [
+        "default",
+        // FLOW-12 brief, 2026-08-31. Draft/unpublished/suspended/not-found are
+        // what this same profile looks like in each lifecycle state — one
+        // screen, not four. Empty sections are states too: the brief says an
+        // owner and a visitor should see different copy for "no services yet".
+        "draft", "unpublished", "suspended", "not_found",
+        "no_services", "no_portfolio", "no_team", "no_reviews", "no_availability",
+      ],
       collectionsTouched: ["users"],
+    },
+    {
+      key: "create_business",
+      order: 8,
+      screenNumber: 171,
+      title: "Create a business",
+      states: ["basics", "identity", "location", "hours", "preview", "published"],
+      collectionsTouched: ["businesses"],
+      notes:
+        "PROPOSED 2026-08-31 from the FLOW-12 brief, which asks for lightweight creation and explicitly warns against a huge form. Six steps as STATES of one screen: you can see how far along you are and go back without losing a back-stack entry per field. Identity, logo, cover, description, location and hours are those steps, not six screens.",
+    },
+    {
+      key: "business_dashboard",
+      order: 9,
+      screenNumber: 172,
+      title: "Business dashboard",
+      states: ["default", "quiet"],
+      collectionsTouched: ["businesses", "studio_bookings"],
+      notes:
+        "PROPOSED 2026-08-31 from the FLOW-12 brief. The owner's home: today's activity, pending requests, upcoming bookings, and quick actions. The brief warns against turning this into a generic analytics dashboard, so the numbers are few and each one links to the thing it counts. \"quiet\" is the honest state for a business with nothing happening today.",
     },
     {
       key: "business_services_tab",
       order: 2,
       screenNumber: 72,
       title: "Services Tab",
-      states: ["default"],
+      states: ["default", "owner"],
       collectionsTouched: ["users"],
       notes: "serviceOfferings (priced menu) — added this session.",
     },
@@ -775,7 +803,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 4,
       screenNumber: 74,
       title: "Team & Works Tab",
-      states: ["default"],
+      states: ["default", "owner", "invite"],
       collectionsTouched: ["users"],
       notes: "teamMembers — added this session, matches BusinessProfileScreens.kt's mock \"Octave Sound Labs\" content exactly.",
     },
@@ -802,7 +830,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 7,
       screenNumber: 77,
       title: "Owner Mode / Business Insights",
-      states: ["visible_if_owner"],
+      states: ["visible_if_owner", "leads", "analytics"],
       collectionsTouched: [],
       notes: "100% mocked as of this session's audit — BusinessOwnerInsightsScreen has no real data source.",
     },

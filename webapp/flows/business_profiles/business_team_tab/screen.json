@@ -8,7 +8,9 @@
   "screenTitle": "Team & Works Tab",
   "screenOrder": 4,
   "states": [
-    "default"
+    "default",
+    "owner",
+    "invite"
   ],
   "collectionsTouched": [
     "users"

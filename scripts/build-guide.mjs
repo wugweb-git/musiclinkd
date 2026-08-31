@@ -1526,11 +1526,20 @@ const html = `<!doctype html>
     stays monochrome, which is why these rules matter more than they look.</p>
 
   <h3 style="margin-top:var(--space-4)">Aspect ratios</h3>
-  <p class="ml-lede ml-measure">Three, not four. The old catalogue listed a
-    fourth — <code>3:2 · Studio Photo</code> — which is now folded into
-    <code>--media-aspect-wide</code>; its description names studio photos
-    explicitly. A ratio that differs from another by 0.28 is not a decision
-    anyone can make consistently at a glance.</p>
+  <p class="ml-lede ml-measure">Three tokens. The old catalogue listed a
+    fourth — <code>3:2 · Studio Photo</code> — and for studio photography it is
+    folded into <code>--media-aspect-wide</code>, whose description names studio
+    photos explicitly. A ratio differing from another by 0.28 is not a decision
+    anyone makes consistently at a glance.</p>
+  <p class="ml-type-1" style="color:var(--color-muted);max-width:var(--layout-measure)">
+    <b>One component still writes <code>3/2</code> literally:</b>
+    <a href="#c-what-are-you-looking-for-grid"><code>.ml-dimension</code></a>, the
+    Discover entry grid, where the ratio is load-bearing — six tiles in two
+    columns only resolve to a whole number of rows at 3:2. It is recorded here
+    rather than tokenised because the token budget is at its ceiling and a
+    fourth aspect used once would be a name for a single call site, which is the
+    sprawl the ceiling exists to stop. Found 2026-08-31 while measuring
+    contrast; this page had claimed the consolidation was total, and it was not.</p>
   <div class="g-row" style="align-items:flex-start">
     ${[["square", "1/1", "Album art, avatars, track thumbs", "stage", 3],
        ["wide", "16/9", "Studio photos, video, hero imagery", "gear", 5],

@@ -49,7 +49,7 @@
         <a class="ml-tabs__tab" role="tab" aria-selected="false" href="/preview/flows/business_profiles/business_reviews_gallery_tab/index.html">Reviews</a>
       </nav>
 
-      <div style="padding:var(--space-3) var(--space-4) 0">
+      <div data-state="default" style="padding:var(--space-3) var(--space-4) 0">
         <!-- Services are OWNED by flow 11 and consumed here, not rebuilt. -->
         <a class="ml-service" href="/preview/flows/booking/configure_session/index.html">
           <span class="ml-choice__body">
@@ -83,8 +83,32 @@
           Rates are per room, before engineer time. Block bookings over three days are quoted separately.
         </p>
       </div>
+      <div style="padding:0 var(--space-4)">
+        <!-- Owner view: the same services, plus their publication state. The
+             brief says services are OWNED by flow 11, so every edit hands off. -->
+        <div data-state="owner">
+          <div class="ml-section"><h2>Your services</h2>
+            <a class="ml-section__link" href="/preview/flows/services_availability/service_offerings_editor/index.html">Manage</a></div>
+          <div class="ml-check-row">
+            <span class="ml-choice__body"><span class="ml-choice__title">Tracking</span></span>
+            <span class="ml-status ml-status--success">Live</span>
+          </div>
+          <div class="ml-check-row">
+            <span class="ml-choice__body"><span class="ml-choice__title">Mixing</span></span>
+            <span class="ml-status ml-status--success">Live</span>
+          </div>
+          <div class="ml-check-row">
+            <span class="ml-choice__body"><span class="ml-choice__title">Mastering</span></span>
+            <span class="ml-status ml-status--neutral">Draft</span>
+          </div>
+          <div class="ml-check-row">
+            <span class="ml-choice__body"><span class="ml-choice__title">Rental</span></span>
+            <span class="ml-status ml-status--warning">Paused</span>
+          </div>
+          <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-2)" href="/preview/flows/services_availability/session_configuration/index.html">Add a service</a>
+        </div></div>
     </main>
-    <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
+    <footer class="ml-app__footer" data-state="default owner draft no_services no_portfolio no_team no_reviews no_availability visible_if_owner leads analytics invite" style="display:flex;gap:var(--space-2)">
       <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/communication/chat_conversation/index.html">Message</a>
       <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/business_profiles/business_book_now/index.html">Book now</a>
     </footer>

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0D0D" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/business_profiles/create_business/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Business — Create</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/business_profiles/business_overview/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Create a business</h1>
+    </header>
+    <nav class="ml-tabs ml-tabs--fill" role="tablist" aria-label="Step" style="margin:0 var(--space-4)">
+      <a class="ml-tabs__tab" role="tab" data-chip="basics" href="?state=basics">1</a><a class="ml-tabs__tab" role="tab" data-chip="identity" href="?state=identity">2</a><a class="ml-tabs__tab" role="tab" data-chip="location" href="?state=location">3</a><a class="ml-tabs__tab" role="tab" data-chip="hours" href="?state=hours">4</a><a class="ml-tabs__tab" role="tab" data-chip="preview" href="?state=preview">5</a>
+    </nav>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+
+      <div data-state="basics">
+        <div class="ml-section"><h2>The basics</h2></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          Four things now, the rest whenever you like. Nothing is public until you publish.
+        </p>
+        <div class="ml-field">
+        <label for="b-name">Business name</label>
+        <input id="b-name" type="text" value="" placeholder="Yash Raj Sound Studios" />
+      </div>
+        <div class="ml-field">
+        <label for="b-type">Type</label>
+        <select id="b-type"><option>Recording studio</option><option>Mixing studio</option><option>Rehearsal room</option><option>Music school</option><option>Label</option><option>Venue</option><option>Dealer</option><option>Rental provider</option></select>
+      </div>
+        <div class="ml-field">
+        <label for="b-city">City</label>
+        <input id="b-city" type="text" value="Mumbai" />
+      </div>
+        <div class="ml-field">
+        <label for="b-short">One line about it</label>
+        <input id="b-short" type="text" value="" placeholder="Two tracking rooms and a mix suite" />
+      </div>
+      </div>
+
+      <div data-state="identity">
+        <div class="ml-section"><h2>Logo and cover</h2></div>
+        <div class="ml-upload-grid">
+          <div class="ml-upload-grid__item">
+            <img src="/assets/img/speakers/48dcea90c715465b4dcd2ff760bfcf65.jpg" alt="" loading="lazy" />
+            <button class="ml-upload-grid__remove" type="button" aria-label="Remove logo"></button>
+          </div>
+          <div class="ml-upload-grid__item">
+            <img src="/assets/img/6/01e26955706919.598fd42d42f34.png" alt="" loading="lazy" />
+            <button class="ml-upload-grid__remove" type="button" aria-label="Remove cover"></button>
+          </div>
+          <button class="ml-upload-grid__add" type="button" aria-label="Add an image"></button>
+        </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>About</h2></div>
+        <div class="ml-field">
+        <label for="b-about">Description</label>
+        <textarea id="b-about" rows="3" placeholder="What you do, who for, and what makes the room worth booking."></textarea>
+      </div>
+        <div class="ml-field">
+        <label for="b-year">Established</label>
+        <input id="b-year" type="text" value="" placeholder="2014" />
+      </div>
+        <div class="ml-field">
+        <label for="b-site">Website</label>
+        <input id="b-site" type="url" value="" placeholder="https://…" />
+      </div>
+      </div>
+
+      <div data-state="location">
+        <div class="ml-section"><h2>Where you are</h2></div>
+        <div class="ml-field">
+        <label for="b-addr">Address</label>
+        <input id="b-addr" type="text" value="" placeholder="Unit 4, Link Road" />
+      </div>
+        <div class="ml-field">
+        <label for="b-area">Area</label>
+        <input id="b-area" type="text" value="Andheri West" />
+      </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>What to show publicly</h2></div>
+        <div role="radiogroup" aria-label="Address visibility">
+          <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Full address</span>
+              <span class="ml-choice__meta">Anyone can find the door. Right for a studio or a venue.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Area only</span>
+              <span class="ml-choice__meta">People see Andheri West, and you send the address when you accept.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Service area</span>
+              <span class="ml-choice__meta">You travel to them. No address shown at all.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+        </div>
+      </div>
+
+      <div data-state="hours">
+        <div class="ml-section"><h2>Opening hours</h2></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          When the doors are open. This is separate from when a specific room is free to book.
+        </p>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Monday</span>
+            <span class="ml-choice__meta">09:00 – 00:00</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Monday"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Tuesday</span>
+            <span class="ml-choice__meta">09:00 – 00:00</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Tuesday"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Wednesday</span>
+            <span class="ml-choice__meta">09:00 – 00:00</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Wednesday"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Thursday</span>
+            <span class="ml-choice__meta">09:00 – 00:00</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Thursday"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Friday</span>
+            <span class="ml-choice__meta">09:00 – 00:00</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Friday"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Saturday</span>
+            <span class="ml-choice__meta">09:00 – 00:00</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Saturday"></button>
+        </div>
+        <div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Sunday</span>
+            <span class="ml-choice__meta">Closed</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Sunday"></button>
+        </div>
+      </div>
+
+      <div data-state="preview">
+        <div class="ml-section"><h2>How it will look</h2></div>
+        <a class="ml-result" href="/preview/flows/business_profiles/business_overview/index.html">
+          <img class="ml-result__thumb" src="/assets/img/6/01e26955706919.598fd42d42f34.png" alt="" loading="lazy" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">Yash Raj Sound Studios</span>
+            <span class="ml-result__meta">Recording studio · Andheri West, Mumbai</span>
+          </span>
+        </a>
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>Services</span><span>Add after publishing</span></div>
+          <div class="ml-summary__row"><span>Team</span><span>Just you for now</span></div>
+          <div class="ml-summary__row"><span>Availability</span><span>Not published yet</span></div>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
+          You can publish now and add services, team and availability afterwards.
+        </p>
+      </div>
+
+      <div class="ml-empty" data-state="published">
+        <h2 class="ml-empty__title" style="color:var(--color-success)">Business created</h2>
+        <p class="ml-empty__body">Add a service so people can actually book you — that's the one thing left that matters.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/services_availability/session_configuration/index.html">Add a service</a>
+        <a class="ml-btn ml-btn--secondary" style="margin-top:var(--space-2)" href="/preview/flows/business_profiles/business_dashboard/index.html">Go to dashboard</a>
+      </div>
+    </main>
+    <footer class="ml-app__footer" data-state="basics identity location hours preview">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="?state=published">Continue</a>
+    </footer>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>

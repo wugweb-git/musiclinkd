@@ -49,7 +49,7 @@
         <a class="ml-tabs__tab" role="tab" aria-selected="false" href="/preview/flows/business_profiles/business_reviews_gallery_tab/index.html">Reviews</a>
       </nav>
 
-      <div style="padding:var(--space-3) var(--space-4) 0">
+      <div data-state="default no_services no_portfolio no_team no_reviews no_availability" style="padding:var(--space-3) var(--space-4) 0">
         <p class="ml-type-2" style="color:var(--color-muted);margin:0">
           Two tracking rooms and a mix suite in Andheri West. Neve sidecar, maintained backline,
           and engineers who have worked on records you have heard of. Open 9am to midnight, seven days.
@@ -77,14 +77,65 @@
         </div>
 
         <div class="ml-section" style="margin-top:var(--space-3)"><h3>Owner</h3>
-          <a class="ml-section__link" href="/preview/flows/business_profiles/business_owner_insights/index.html">Insights</a></div>
+          <a class="ml-section__link" href="/preview/flows/business_profiles/business_dashboard/index.html">Dashboard</a></div>
+        <a class="ml-action-row" href="/preview/flows/business_profiles/create_business/index.html">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Add another business</span>
+            <span class="ml-choice__meta">A second studio, a label, a venue</span>
+          </span>
+          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        </a>
         <div class="ml-person-row">
           <img src="/assets/img/editorials/41f63164364f0757ddb2a20693f4b144.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Rhea Kapoor</b><p>Studio manager since 2014</p></span>
         </div>
       </div>
+      <div style="padding:0 var(--space-4)">
+        <div class="ml-banner ml-banner--warning" data-state="draft">
+          <span class="ml-banner__body">This profile is a draft. Only you can see it.</span>
+        </div>
+        <div class="ml-banner ml-banner--info" data-state="unpublished">
+          <span class="ml-banner__body">Unpublished. It won't appear in Discover, search or booking until you publish it.</span>
+        </div>
+
+        <div class="ml-empty" data-state="suspended">
+          <h2 class="ml-empty__title">This business profile is temporarily unavailable</h2>
+          <p class="ml-empty__body">It's under review. If it's yours, support can tell you more.</p>
+          <a class="ml-btn ml-btn--primary" href="/preview/flows/user_settings/raise_ticket/index.html">Contact support</a>
+        </div>
+
+        <div class="ml-empty" data-state="not_found">
+          <h2 class="ml-empty__title">This business is no longer available</h2>
+          <p class="ml-empty__body">It may have closed or been removed.</p>
+          <a class="ml-btn ml-btn--primary" href="/preview/flows/discover/discover_feed/index.html">Discover other businesses</a>
+        </div>
+
+        <div class="ml-empty" data-state="no_services">
+          <h2 class="ml-empty__title">No services listed yet</h2>
+          <p class="ml-empty__body">Customers can't book what isn't listed. Add what you offer and what it costs.</p>
+          <a class="ml-btn ml-btn--primary" href="/preview/flows/services_availability/service_offerings_editor/index.html">Add a service</a>
+        </div>
+        <div class="ml-empty" data-state="no_portfolio">
+          <h2 class="ml-empty__title">No work shown yet</h2>
+          <p class="ml-empty__body">Show what you've made — it's the thing people actually judge you on.</p>
+          <a class="ml-btn ml-btn--primary" href="/preview/flows/portfolio/portfolio_dashboard/index.html">Add work</a>
+        </div>
+        <div class="ml-empty" data-state="no_team">
+          <h2 class="ml-empty__title">No team members listed</h2>
+          <p class="ml-empty__body">People book rooms, but they trust engineers.</p>
+          <a class="ml-btn ml-btn--primary" href="/preview/flows/business_profiles/business_team_tab/index.html?state=invite">Invite someone</a>
+        </div>
+        <div class="ml-empty" data-state="no_reviews">
+          <h2 class="ml-empty__title">No reviews yet</h2>
+          <p class="ml-empty__body">Reviews appear after a completed session. Nothing is shown until then.</p>
+        </div>
+        <div class="ml-empty" data-state="no_availability">
+          <h2 class="ml-empty__title">Availability isn't published</h2>
+          <p class="ml-empty__body">People can still message you to ask about a date.</p>
+          <a class="ml-btn ml-btn--primary" href="/preview/flows/services_availability/availability_toggle/index.html">Publish availability</a>
+        </div></div>
     </main>
-    <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
+    <footer class="ml-app__footer" data-state="default owner draft no_services no_portfolio no_team no_reviews no_availability visible_if_owner leads analytics invite" style="display:flex;gap:var(--space-2)">
       <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/communication/chat_conversation/index.html">Message</a>
       <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/business_profiles/business_book_now/index.html">Book now</a>
     </footer>

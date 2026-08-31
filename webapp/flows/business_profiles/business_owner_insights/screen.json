@@ -8,7 +8,9 @@
   "screenTitle": "Owner Mode / Business Insights",
   "screenOrder": 7,
   "states": [
-    "visible_if_owner"
+    "visible_if_owner",
+    "leads",
+    "analytics"
   ],
   "collectionsTouched": [],
   "notes": "100% mocked as of this session's audit — BusinessOwnerInsightsScreen has no real data source.",

@@ -8,7 +8,8 @@
   "screenTitle": "Services Tab",
   "screenOrder": 2,
   "states": [
-    "default"
+    "default",
+    "owner"
   ],
   "collectionsTouched": [
     "users"

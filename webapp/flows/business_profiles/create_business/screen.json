@@ -1,0 +1,29 @@
+{
+  "flowKey": "business_profiles",
+  "flowTitle": "Business Profiles (Studios, Labels)",
+  "flowStatus": "partial",
+  "flowOrder": 12,
+  "screenKey": "create_business",
+  "screenNumber": 171,
+  "screenTitle": "Create a business",
+  "screenOrder": 8,
+  "states": [
+    "basics",
+    "identity",
+    "location",
+    "hours",
+    "preview",
+    "published"
+  ],
+  "collectionsTouched": [
+    "businesses"
+  ],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-12 brief, which asks for lightweight creation and explicitly warns against a huge form. Six steps as STATES of one screen: you can see how far along you are and go back without losing a back-stack entry per field. Identity, logo, cover, description, location and hours are those steps, not six screens.",
+  "dataContract": [
+    {
+      "collection": "businesses",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    }
+  ]
+}

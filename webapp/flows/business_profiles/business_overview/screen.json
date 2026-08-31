@@ -8,7 +8,16 @@
   "screenTitle": "Overview",
   "screenOrder": 1,
   "states": [
-    "default"
+    "default",
+    "draft",
+    "unpublished",
+    "suspended",
+    "not_found",
+    "no_services",
+    "no_portfolio",
+    "no_team",
+    "no_reviews",
+    "no_availability"
   ],
   "collectionsTouched": [
     "users"

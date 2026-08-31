@@ -1,0 +1,49 @@
+{
+  "flowKey": "business_profiles",
+  "flowTitle": "Business Profiles (Studios, Labels)",
+  "flowStatus": "partial",
+  "flowOrder": 12,
+  "screenKey": "business_dashboard",
+  "screenNumber": 172,
+  "screenTitle": "Business dashboard",
+  "screenOrder": 9,
+  "states": [
+    "default",
+    "quiet"
+  ],
+  "collectionsTouched": [
+    "businesses",
+    "studio_bookings"
+  ],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-12 brief. The owner's home: today's activity, pending requests, upcoming bookings, and quick actions. The brief warns against turning this into a generic analytics dashboard, so the numbers are few and each one links to the thing it counts. \"quiet\" is the honest state for a business with nothing happening today.",
+  "dataContract": [
+    {
+      "collection": "businesses",
+      "sample": null,
+      "note": "No seed sample available for this collection in this build."
+    },
+    {
+      "collection": "studio_bookings",
+      "sample": {
+        "studioId": "mock-studio-yash-raj-sound-studios",
+        "userId": "mock-talent-aditi-sen",
+        "date": "2026-08-12",
+        "slotText": "10:00 AM – 2:00 PM",
+        "totalAmount": 32000,
+        "bookedHourSlots": [
+          "10:00",
+          "11:00",
+          "12:00",
+          "13:00"
+        ],
+        "bookingStatus": "confirmed",
+        "paymentStatus": "PAID",
+        "createdAt": "2026-08-05T09:00:00.000Z",
+        "sessionType": "recording",
+        "durationTier": "half_day",
+        "engineerRequested": true,
+        "paymentMethod": "UPI"
+      }
+    }
+  ]
+}

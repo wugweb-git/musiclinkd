@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T04:37:35.780Z",
+  "generatedAt": "2026-08-31T04:41:57.323Z",
   "flows": [
     {
       "key": "home",
@@ -95,7 +95,7 @@
       "order": 12,
       "status": "partial",
       "description": "UserDoc Business extension (businessName/Type/tagline/hours/GSTIN/services/equipment/teamMembers/serviceOfferings/gallery) modeled this session, matching BusinessProfileScreens.kt's mock \"Octave Sound Labs\" tabs. businessType only covers 4 of the PRD's ~8 sub-types (Studio/Label/School/Dealer — missing Production House/Booking Agency/Artist Manager/Rental Company).",
-      "screenCount": 7
+      "screenCount": 9
     },
     {
       "key": "notifications",
@@ -4500,7 +4500,16 @@
       "screenTitle": "Overview",
       "screenOrder": 1,
       "states": [
-        "default"
+        "default",
+        "draft",
+        "unpublished",
+        "suspended",
+        "not_found",
+        "no_services",
+        "no_portfolio",
+        "no_team",
+        "no_reviews",
+        "no_availability"
       ],
       "collectionsTouched": [
         "users"
@@ -4560,12 +4569,91 @@
       "flowTitle": "Business Profiles (Studios, Labels)",
       "flowStatus": "partial",
       "flowOrder": 12,
+      "screenKey": "create_business",
+      "screenNumber": 171,
+      "screenTitle": "Create a business",
+      "screenOrder": 8,
+      "states": [
+        "basics",
+        "identity",
+        "location",
+        "hours",
+        "preview",
+        "published"
+      ],
+      "collectionsTouched": [
+        "businesses"
+      ],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-12 brief, which asks for lightweight creation and explicitly warns against a huge form. Six steps as STATES of one screen: you can see how far along you are and go back without losing a back-stack entry per field. Identity, logo, cover, description, location and hours are those steps, not six screens.",
+      "dataContract": [
+        {
+          "collection": "businesses",
+          "sample": null,
+          "note": "No seed sample available for this collection in this build."
+        }
+      ]
+    },
+    {
+      "flowKey": "business_profiles",
+      "flowTitle": "Business Profiles (Studios, Labels)",
+      "flowStatus": "partial",
+      "flowOrder": 12,
+      "screenKey": "business_dashboard",
+      "screenNumber": 172,
+      "screenTitle": "Business dashboard",
+      "screenOrder": 9,
+      "states": [
+        "default",
+        "quiet"
+      ],
+      "collectionsTouched": [
+        "businesses",
+        "studio_bookings"
+      ],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-12 brief. The owner's home: today's activity, pending requests, upcoming bookings, and quick actions. The brief warns against turning this into a generic analytics dashboard, so the numbers are few and each one links to the thing it counts. \"quiet\" is the honest state for a business with nothing happening today.",
+      "dataContract": [
+        {
+          "collection": "businesses",
+          "sample": null,
+          "note": "No seed sample available for this collection in this build."
+        },
+        {
+          "collection": "studio_bookings",
+          "sample": {
+            "studioId": "mock-studio-yash-raj-sound-studios",
+            "userId": "mock-talent-aditi-sen",
+            "date": "2026-08-12",
+            "slotText": "10:00 AM – 2:00 PM",
+            "totalAmount": 32000,
+            "bookedHourSlots": [
+              "10:00",
+              "11:00",
+              "12:00",
+              "13:00"
+            ],
+            "bookingStatus": "confirmed",
+            "paymentStatus": "PAID",
+            "createdAt": "2026-08-05T09:00:00.000Z",
+            "sessionType": "recording",
+            "durationTier": "half_day",
+            "engineerRequested": true,
+            "paymentMethod": "UPI"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "business_profiles",
+      "flowTitle": "Business Profiles (Studios, Labels)",
+      "flowStatus": "partial",
+      "flowOrder": 12,
       "screenKey": "business_services_tab",
       "screenNumber": 72,
       "screenTitle": "Services Tab",
       "screenOrder": 2,
       "states": [
-        "default"
+        "default",
+        "owner"
       ],
       "collectionsTouched": [
         "users"
@@ -4775,7 +4863,9 @@
       "screenTitle": "Team & Works Tab",
       "screenOrder": 4,
       "states": [
-        "default"
+        "default",
+        "owner",
+        "invite"
       ],
       "collectionsTouched": [
         "users"
@@ -4935,7 +5025,9 @@
       "screenTitle": "Owner Mode / Business Insights",
       "screenOrder": 7,
       "states": [
-        "visible_if_owner"
+        "visible_if_owner",
+        "leads",
+        "analytics"
       ],
       "collectionsTouched": [],
       "notes": "100% mocked as of this session's audit — BusinessOwnerInsightsScreen has no real data source.",
