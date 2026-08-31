@@ -1,0 +1,20 @@
+{
+  "flowKey": "saved_favorites",
+  "flowTitle": "Saved & Favorites",
+  "flowStatus": "app-mocked",
+  "flowOrder": 24,
+  "screenKey": "collection_detail",
+  "screenNumber": 156,
+  "screenTitle": "Collection",
+  "screenOrder": 2,
+  "states": [
+    "default",
+    "empty",
+    "shared",
+    "private",
+    "editing"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-24 brief. A collection needs its own route and deep link — it is shareable and can be opened directly — so it is a screen rather than a state of the hub. Rename/description/privacy/delete are a sheet and a dialog on this screen, not four further screens. Deleting a collection must not delete the saved items, and the copy says so.",
+  "dataContract": []
+}

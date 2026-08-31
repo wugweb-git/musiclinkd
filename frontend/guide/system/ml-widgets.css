@@ -1503,10 +1503,20 @@
   opacity: 0; pointer-events: none; z-index: var(--z-3);
   transition: opacity var(--duration-1) var(--ease-standard);
 }
+/* --gesture-tooltip-delay is why a tooltip does not fire the instant a pointer
+   crosses the control: without it, moving the mouse across a toolbar flashes
+   every tip in the row. The token existed and nothing referenced it, so the
+   tooltip had no delay at all — it appeared immediately on hover, which is the
+   behaviour the token was written to prevent. Focus is exempt: a keyboard user
+   has already committed to the control, so the tip shows at once. */
+.ml-tip:hover::after, .ml-tip:hover::before {
+  transition-delay: var(--gesture-tooltip-delay);
+}
 .ml-tip:hover::after, .ml-tip:focus-within::after {
   opacity: 1; transform: translateX(-50%) translateY(0);
 }
 .ml-tip:hover::before, .ml-tip:focus-within::before { opacity: 1; }
+.ml-tip:focus-within::after, .ml-tip:focus-within::before { transition-delay: 0s; }
 .ml-tip--below::after { bottom: auto; top: calc(100% + var(--space-2)); }
 .ml-tip--below::before {
   bottom: auto; top: calc(100% + 2px);

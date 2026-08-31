@@ -1,0 +1,17 @@
+{
+  "flowKey": "saved_favorites",
+  "flowTitle": "Saved & Favorites",
+  "flowStatus": "app-mocked",
+  "flowOrder": 24,
+  "screenKey": "saved_item_detail",
+  "screenNumber": 158,
+  "screenTitle": "Saved item",
+  "screenOrder": 4,
+  "states": [
+    "default",
+    "unavailable"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-24 brief, which is explicit that Saved must never become a duplicate detail page. This shows the ORIGINAL entity preview plus the saved-specific facts (saved date, favourite state, which collection) and a single Open Original action into the canonical flow.",
+  "dataContract": []
+}

@@ -152,17 +152,54 @@ const ALIAS = {
   "motion-spec": "#motion", "f-voice": "#brand", "palette": "#foundations",
   "palette-2": "#foundations", "brand-colors": "#foundations",
   "brand-identity": "#brand", "tokens": "#foundations",
+  /* The asset library IS #brand: both are a live directory listing of
+     brand/assets. The old one counted 12 "files" because it counted .gitkeep
+     and .DS_Store; the new one counts the 9 real marks. */
+  "brand-asset-library": "#brand", "brand-asset-grid": "#brand",
+  /* Merged into #imagery on 2026-08-31 rather than kept as a browsable
+     library — every pool there is bound to a component. */
+  "imagery": "#imagery", "branded-media": "#imagery",
 
   // taxonomy
   "p-catalog": "#taxonomy", "p-personas": "#taxonomy", "p-modules": "#taxonomy",
   "pr-talent": "#taxonomy", "pr-band": "#taxonomy", "pr-biz": "#taxonomy", "pr-venue": "#taxonomy",
 
-  // patterns
+  // patterns — #patterns is generated from webapp/flows, and went from 7 flows
+  // to 22 as the flows were rebuilt. Everything below now has a flow behind it;
+  // these were reported missing only because this map was written when it did not.
   "pat-auth": "#patterns", "pat-onboard": "#patterns", "pat-marketplace": "#patterns",
   "p-onboard": "#patterns", "p-splash": "#patterns", "p-public": "#patterns",
   "p-disc": "#patterns", "p-discover": "#patterns", "p-srch": "#patterns",
   "p-mkt": "#patterns", "p-artist": "#patterns", "p-studio": "#patterns",
   "p-journeys": "#patterns",
+  "pat-booking": "#patterns", "pat-studio-book": "#patterns", "p-book": "#patterns",
+  "vd-booking": "#patterns", "pat-messaging": "#patterns", "p-msg": "#patterns",
+  "pat-reviews": "#patterns", "pat-reputation": "#patterns",
+  "pat-settings": "#patterns", "cr-settings": "#patterns",
+  "pat-hiring": "#patterns", "pat-project": "#patterns",
+  "p-checkout": "#patterns",
+
+  // page parts — every one of these is a component that already exists; the
+  // old catalogue documented them as pieces of one page rather than as
+  // reusable parts, which is the framing the rebuild deliberately dropped.
+  "p2-header": "c-profile-hero", "p2-grid": "c-masonry", "p2-filter": "c-bottom-sheet",
+  "p2-cta": "c-footer-cta", "p2-sticky": "c-sticky-footer", "p2-swipe": "c-swipe-deck",
+  "p2-credits": "c-credit-row",
+
+  // layout — same: named as page layouts, built as components.
+  "lay-shell": "c-app-shell", "lay-nav": "c-nav-app-bar",
+  "lay-heroes": "c-editorial-layouts", "lay-android": "c-android-app-grid",
+
+  // the whole Core + Widgets catalogue IS the native component catalogue;
+  // every section carries its Compose class in a badge.
+  "native-component-catalog": "#core",
+  // System bars / insets / edge-to-edge — documented under Foundations as of
+  // 2026-08-31. This alias was written BEFORE that section existed and was
+  // false when written: Foundations had zero mentions of safe areas or insets,
+  // so the alias would have counted a real gap as migrated. Caught by spot-
+  // checking the map against the built page rather than trusting it.
+  "android-platform": "#foundations",
+  "bl-strategy": "c-feature-grid", "pattern-brief-wizard": "c-step-progress",
 };
 
 // Deliberately not carried over, each with the reason. Listing them is the
@@ -190,6 +227,10 @@ const DROPPED = {
   "f-layout": "as above",
   "f-responsive": "superseded by --bp-medium / --bp-expanded",
   more: "nav plumbing, not a section",
+  bottomSheet: "a demo element's id, not a catalogue section",
+  "util-ai": "part of the prompt library above",
+  "util-illustrations": "was an empty scaffold — 'Illustration Library — no files yet'. There is nothing to migrate; the icon set at #icons is the real library.",
+  "util-motion-assets": "was an empty scaffold — 'GIF & Lottie Library — no files yet'. The motion pools that DO exist are documented under #imagery, bound to components.",
 };
 
 const missing = [];

@@ -1245,8 +1245,14 @@ const documented = sections.filter((s) => DEMOS[s.name]);
 const undocumented = sections.filter((s) => !DEMOS[s.name]);
 
 const f = tokens.foundation;
+/* The chip is painted with var(--color-NAME), not the raw hex. It used to use
+   the literal, which meant the colour book documented a token while painting
+   with something that merely happened to match — the swatch proved nothing
+   about whether the token resolves. It also left every brand-expression colour
+   reported as referenced by nothing, because the only place they appear IS
+   this book. */
 const swatch = (name, value, note) => `<div class="g-swatch">
-      <span class="g-chipcol" style="background:${value}"></span>
+      <span class="g-chipcol" style="background:var(--color-${name})"></span>
       <code>--color-${name}</code><b>${value}</b>${note ? `<span>${esc(note)}</span>` : ""}</div>`;
 
 /* Truncate prose for the card blurb. Two things the previous one-liner got
@@ -1412,6 +1418,7 @@ const html = `<!doctype html>
 <body>
 <nav class="g-nav" aria-label="Sections"><ul>
   <li><a href="#brand">Brand</a></li>
+  <li><a href="#imagery">Imagery</a></li>
   <li><a href="#foundations">Foundations</a></li>
   <li><a href="#core">Core · ${core.length}</a></li>
   <li><a href="#widgets">Widgets · ${widg.length}</a></li>
@@ -1499,6 +1506,98 @@ const html = `<!doctype html>
     in a separate section up here, which is exactly the "two colour books"
     problem the merge fixes.
   </p>
+
+  <h2 class="g-h" id="imagery">Imagery</h2>
+  <p class="ml-lede ml-measure">Recovered from the old catalogue's Imagery
+    section on 2026-08-31. Everything here is bound to a token or a component;
+    nothing below introduces an asset the system does not already use.
+    <b>Media is the only element permitted to carry saturation</b> — chrome
+    stays monochrome, which is why these rules matter more than they look.</p>
+
+  <h3 style="margin-top:var(--space-4)">Aspect ratios</h3>
+  <p class="ml-lede ml-measure">Three, not four. The old catalogue listed a
+    fourth — <code>3:2 · Studio Photo</code> — which is now folded into
+    <code>--media-aspect-wide</code>; its description names studio photos
+    explicitly. A ratio that differs from another by 0.28 is not a decision
+    anyone can make consistently at a glance.</p>
+  <div class="g-row" style="align-items:flex-start">
+    ${[["square", "1/1", "Album art, avatars, track thumbs", "stage", 3],
+       ["wide", "16/9", "Studio photos, video, hero imagery", "gear", 5],
+       ["card", "4/3", "Media card artwork", "editorial", 2]]
+      .map(([k, v, use, pool, i]) => `<figure style="margin:0;max-width:180px">
+        <div class="ml-media" style="aspect-ratio:var(--media-aspect-${k});border-radius:var(--radius-2)">
+          <img src="${m(pool, i)}" alt="" /></div>
+        <figcaption class="ml-type-1" style="margin-top:var(--space-1)">
+          <code>--media-aspect-${k}</code><br><b>${v}</b><br>
+          <span style="color:var(--color-muted)">${use}</span></figcaption></figure>`).join("")}
+  </div>
+
+  <h3 style="margin-top:var(--space-4)">The scrim</h3>
+  <p class="ml-lede ml-measure">One treatment, not four. Any text laid over
+    artwork sits on <code>--media-scrim</code> — never on raw imagery, because
+    a photograph's luminance is not something the type can negotiate with.</p>
+  <div class="g-demo"><div class="ml-media ml-media--wide ml-media--scrim" style="max-width:340px;border-radius:var(--radius-2)">
+    <img src="${m("gear", 5)}" alt="" />
+    <div class="ml-media__overlay"><b>Yash Raj Sound Studios</b>
+      <div class="ml-type-1">Andheri West · Dolby Atmos</div></div></div>
+    <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
+      Same photograph without the scrim would put white type over a blown highlight.</p></div>
+
+  <p class="ml-type-1" style="color:var(--color-muted);max-width:var(--layout-measure);margin-top:var(--space-3)">
+    The old catalogue offered four overlay treatments. Only the dark gradient
+    survived, and the three that did not are recorded here rather than dropped
+    in silence. <b>Pink Tint</b> and <b>Duotone</b> both put chrome colour ON
+    the media, which inverts the one palette rule this system has — media
+    carries the saturation, chrome does not add any. <b>Left Fade</b> was a
+    layout need, not a treatment: a component wanting type beside artwork uses
+    <code>.ml-split-editorial</code>, which does not tint the photograph at all.</p>
+
+  <h3 style="margin-top:var(--space-4)">Motion &amp; object media</h3>
+  <p class="ml-lede ml-measure">The old catalogue called these “Branded Media
+    Assets” and listed them as a library to browse. They are not a library —
+    each pool is already bound to a component, and that binding is the only
+    reason a file here is part of the system. A pool with no component is not
+    documented on this page.</p>
+  <table class="g-t"><thead><tr><th>Pool</th><th>Folder</th><th>Files</th><th>Bound to</th></tr></thead><tbody>
+    ${[["object", "img/5", "3D object renders on transparent ground", "c-bento"],
+       ["motion", "img/6", "Short looping animations", "c-bento"],
+       ["video", "img/4", "Real motion, muted and looping", "c-video, c-split-editorial"]]
+      .map(([k, dir, what, bound]) => `<tr><th><code>${k}</code></th><td><code>${dir}</code> — ${what}</td>
+        <td class="ml-tabular">${MEDIA[k].length}</td>
+        <td>${bound.split(", ").map((b) => `<a href="#${b}"><code>${b}</code></a>`).join(" ")}</td></tr>`).join("")}
+  </tbody></table>
+  <div class="g-row" style="margin-top:var(--space-3);align-items:flex-start">
+    <figure style="margin:0;max-width:160px">
+      <div class="ml-media" style="aspect-ratio:var(--media-aspect-square);border-radius:var(--radius-2)">
+        <img src="${m("object", 1)}" alt="" loading="lazy" /></div>
+      <figcaption class="ml-type-1" style="margin-top:var(--space-1);color:var(--color-muted)">object</figcaption></figure>
+    <figure style="margin:0;max-width:160px">
+      <div class="ml-media" style="aspect-ratio:var(--media-aspect-square);border-radius:var(--radius-2)">
+        <img src="${m("motion", 0)}" alt="" loading="lazy" /></div>
+      <figcaption class="ml-type-1" style="margin-top:var(--space-1);color:var(--color-muted)">motion</figcaption></figure>
+    <figure style="margin:0;max-width:220px">
+      <div class="ml-media" style="aspect-ratio:var(--media-aspect-card);border-radius:var(--radius-2)">
+        <video src="${m("video", 2)}" muted loop playsinline autoplay aria-label="Studio session"></video></div>
+      <figcaption class="ml-type-1" style="margin-top:var(--space-1);color:var(--color-muted)">video</figcaption></figure>
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);max-width:var(--layout-measure);margin-top:var(--space-2)">
+    Counts are read from disk at build time, so adding a file to a folder makes
+    it available with no edit here — and <code>build-hosting</code> derives its
+    ship-list from the markup this produces, so a pool and what actually
+    deploys cannot drift.</p>
+
+  <h3 style="margin-top:var(--space-4)">Avatars</h3>
+  <p class="ml-lede ml-measure">Four steps, and the profile header is
+    <code>--avatar-4</code>. The old catalogue specified <code>96dp</code> for
+    a profile and <code>64dp</code> for a card; 96 is not a step and adding one
+    would break the four-step rule, so the profile header renders at 64 —
+    the value <code>--avatar-4</code>'s own description already assigns to it.</p>
+  <div class="g-row">
+    ${["1", "2", "3", "4"].map((k, i) => `<figure style="margin:0;text-align:center">
+      <img src="${m("faces", i * 4)}" alt="" style="width:var(--avatar-${k});height:var(--avatar-${k});border-radius:var(--radius-4);object-fit:cover" />
+      <figcaption class="ml-type-1" style="margin-top:var(--space-1);color:var(--color-muted)">
+        <code>--avatar-${k}</code><br>${f.avatar[k].$web}</figcaption></figure>`).join("")}
+  </div>
 
   <h2 class="g-h" id="foundations">Foundations</h2>
   <p class="ml-lede" style="max-width:64ch">${esc(tokens.meta.palette.$description.split(".")[1])}.</p>
@@ -1653,6 +1752,38 @@ const html = `<!doctype html>
           <img src="/guide/brand/assets/${f}.svg" alt="" style="width:${n}px;height:${n}px;display:block" /></span>
         <div class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-1)">${n}px · ${ground}</div></div>`).join("")}
   </div></div>
+
+  <h3 style="margin-top:var(--space-4)">System bars &amp; insets</h3>
+  <p class="ml-lede ml-measure">The app draws <b>edge to edge</b> — content
+    renders behind the status and navigation bars, and the bars themselves stay
+    transparent. Nothing may rely on the OS reserving that space, so every
+    fixed-position component pads itself by an inset token. Recovered from the
+    old catalogue's Android Platform section on 2026-08-31; the tokens already
+    existed but nothing on this page said what they were for, which is how
+    three of them ended up referenced by no component at all.</p>
+  <table class="g-t"><thead><tr><th>Token</th><th>Value</th><th>Compose inset</th><th>What it is</th></tr></thead><tbody>
+    ${[["--safe-top", "env(safe-area-inset-top, 24px)", "WindowInsets.statusBars",
+        "Status bar. The fallback is the 24dp Android status bar, used when env() is unsupported."],
+       ["--safe-bottom", "env(safe-area-inset-bottom, 16px)", "WindowInsets.navigationBars",
+        "Gesture bar / navigation bar."],
+       ["--chrome-status-bar", "24px", "WindowInsets.statusBars",
+        "Status-bar height as a plain number, for layout maths that cannot use env()."],
+       ["--chrome-nav-bar", "48px", "WindowInsets.navigationBars",
+        "Three-button navigation bar height."],
+       ["--chrome-scrollbar", "12px", "—",
+        "Desktop scrollbar width. Web-only; there is no native counterpart."]]
+      .map(([t, v, api, what]) => `<tr><th><code>${t}</code></th><td><code>${esc(v)}</code></td>
+        <td>${api === "—" ? "—" : `<code>${api}</code>`}</td><td>${esc(what)}</td></tr>`).join("")}
+  </tbody></table>
+  <p class="ml-type-1" style="color:var(--color-muted);max-width:var(--layout-measure);margin-top:var(--space-2)">
+    Applied by <code>.ml-appbar</code> (<code>padding-top: calc(var(--space-2) +
+    var(--safe-top))</code>), <code>.ml-tabbar</code> and the floating action
+    button, so a screen author never adds inset padding by hand. The old
+    catalogue also listed <code>WindowInsets.ime</code>,
+    <code>systemGestures</code> and <code>displayCutout</code>: IME is a
+    component here (see <a href="#c-native-keyboard-ime">native keyboard &amp;
+    IME</a>), and the other two are behaviour Compose handles, not values a
+    stylesheet can hold.</p>
 
   <h2 class="g-h" id="core">Core · ${core.length}</h2>
   ${core.map(componentSection).join("\n")}

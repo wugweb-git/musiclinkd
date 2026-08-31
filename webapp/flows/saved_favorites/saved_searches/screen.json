@@ -1,0 +1,19 @@
+{
+  "flowKey": "saved_favorites",
+  "flowTitle": "Saved & Favorites",
+  "flowStatus": "app-mocked",
+  "flowOrder": 24,
+  "screenKey": "saved_searches",
+  "screenNumber": 157,
+  "screenTitle": "Saved searches",
+  "screenOrder": 3,
+  "states": [
+    "default",
+    "empty",
+    "alerts_on",
+    "editing"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-24 brief. A saved search is a query plus filters plus an alert toggle; running one hands off to FLOW 19 Search and alert delivery belongs to FLOW 13. This screen owns the list and the alert switch only.",
+  "dataContract": []
+}

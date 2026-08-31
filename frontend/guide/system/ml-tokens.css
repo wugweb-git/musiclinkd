@@ -152,7 +152,7 @@
   --status-warning-text: color-mix(in srgb, var(--color-warning) 50%, black); /* Pending, caution — text/icon on that fill */
 
   /* Safe area — edge-to-edge is mandatory, not optional */
-  --safe-top: env(safe-area-inset-top, 24px);
+  --safe-top: env(safe-area-inset-top, var(--chrome-status-bar));
   --safe-bottom: env(safe-area-inset-bottom, 16px);
 
   /* System chrome — space we reserve but do not draw */

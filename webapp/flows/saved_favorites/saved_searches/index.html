@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0D0D" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/saved_favorites/saved_searches/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Saved — Searches</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/saved_favorites/saved_favorites_hub/index.html?state=collections" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0;flex:1">Saved searches</h1>
+      
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div class="ml-banner ml-banner--info" data-state="alerts_on">
+        <span class="ml-banner__body">New results for "Recording studios in Mumbai".
+          <a class="ml-link" href="/preview/flows/search/universal_search/index.html?state=results">View results</a></span>
+      </div>
+
+      <div class="ml-banner ml-banner--info" data-state="editing">
+        <span class="ml-banner__body">Editing. Turn alerts on or off, or delete a search.</span>
+      </div>
+
+      <div data-state="default alerts_on editing">
+        <div class="ml-check-row">
+          <a class="ml-choice__body" href="/preview/flows/search/universal_search/index.html?state=results" style="text-decoration:none;color:inherit">
+            <span class="ml-choice__title">Recording studios in Mumbai</span>
+            <span class="ml-choice__meta">Studios · within 8 km · under ₹2,500/hr</span>
+          </a>
+          <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Alerts for Recording studios in Mumbai"></button>
+        </div>
+        <div class="ml-check-row">
+          <a class="ml-choice__body" href="/preview/flows/search/universal_search/index.html?state=results" style="text-decoration:none;color:inherit">
+            <span class="ml-choice__title">Session vocalist, Hindi</span>
+            <span class="ml-choice__meta">People · Mumbai · available</span>
+          </a>
+          <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Alerts for Session vocalist, Hindi"></button>
+        </div>
+        <div class="ml-check-row">
+          <a class="ml-choice__body" href="/preview/flows/search/universal_search/index.html?state=results" style="text-decoration:none;color:inherit">
+            <span class="ml-choice__title">Neve 1073</span>
+            <span class="ml-choice__meta">Market · gear sale · any condition</span>
+          </a>
+          <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Alerts for Neve 1073"></button>
+        </div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
+          Alerts are delivered as notifications. You can turn them all off in Notification settings.
+        </p>
+      </div>
+
+      <div class="ml-empty" data-state="empty">
+        <h2 class="ml-empty__title">No saved searches</h2>
+        <p class="ml-empty__body">Run a search, apply the filters you want, then save it to be told when something new matches.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/search/universal_search/index.html">Search MusicLinkd</a>
+      </div>
+    </main>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>

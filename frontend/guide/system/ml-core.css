@@ -40,6 +40,22 @@ body {
   -webkit-tap-highlight-color: transparent;   /* we draw our own pressed state */
 }
 
+/* The UA stylesheet's bold defaults must be reset, or the weight scale is a
+   claim the browser ignores.
+
+   On 2026-08-31 every font-weight DECLARATION in this system was moved onto
+   --weight-*, and 700 was removed from the scale entirely. Grepping the
+   stylesheets then showed zero 700s — and the rendered guide still computed
+   font-weight 700 on 219 elements: 195 <b> and 24 bare <h3>. Nothing declared
+   it. `b, strong { font-weight: bolder }` and `h1..h6 { font-weight: bold }`
+   come from the user agent, and no author rule had ever overridden them.
+
+   Only a live render catches this; it is invisible to any amount of reading
+   the CSS. :where() keeps specificity at zero so every component rule still
+   wins without needing to restate the weight. */
+:where(b, strong) { font-weight: var(--weight-3); }
+:where(h1, h2, h3, h4, h5, h6) { font-weight: var(--weight-3); }
+
 /* One focus treatment for the whole system. Pink, because a black ring on
    black text is invisible — the same reasoning tokens.json records. */
 :where(a, button, input, textarea, select, [tabindex]):focus-visible {

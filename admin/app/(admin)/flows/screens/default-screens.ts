@@ -1524,10 +1524,49 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 1,
       screenNumber: 120,
       title: "Saved & Favorites Hub",
-      states: ["artists", "bands", "studios", "marketplace", "empty", "grid_view", "list_view"],
+      states: [
+        "artists", "bands", "studios", "marketplace", "empty", "grid_view", "list_view",
+        // FLOW-24 spec, added 2026-08-31. Every "SCREEN NN — ITEM X" section in
+        // that brief is a STATE of a saved row, not a screen: a saved item that
+        // has been sold, expired, made private or deleted still occupies one
+        // row in this list and only its resolution differs. Favourites is a
+        // filter over the same list, not a second collection.
+        "favorites", "collections", "bulk_select",
+        "item_sold", "item_expired", "item_private", "item_unavailable",
+      ],
       collectionsTouched: [],
       notes:
         "SavedAndFavoritesFlow (SupportingScreens.kt:1023), reached from the dashboard's Saved shortcut. SavedTab enum: ARTISTS, BANDS, STUDIOS, MARKETPLACE (+ EMPTY). The Marketplace tab is the same screen already documented as marketplace_saved_bookmarks under the marketplace flow (MarketplaceFeature.kt routes here, defaulted to that tab) — listed here too since it's one tab of this single real hub, not a separate implementation. All four tabs are local mutableStateListOf mock data (hardcoded artists/studios/marketplace items); zero Firestore reads or writes, no persisted \"saved\" relationship on any real document.",
+    },
+    {
+      key: "collection_detail",
+      order: 2,
+      screenNumber: 156,
+      title: "Collection",
+      states: ["default", "empty", "shared", "private", "editing"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from the FLOW-24 brief. A collection needs its own route and deep link — it is shareable and can be opened directly — so it is a screen rather than a state of the hub. Rename/description/privacy/delete are a sheet and a dialog on this screen, not four further screens. Deleting a collection must not delete the saved items, and the copy says so.",
+    },
+    {
+      key: "saved_searches",
+      order: 3,
+      screenNumber: 157,
+      title: "Saved searches",
+      states: ["default", "empty", "alerts_on", "editing"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from the FLOW-24 brief. A saved search is a query plus filters plus an alert toggle; running one hands off to FLOW 19 Search and alert delivery belongs to FLOW 13. This screen owns the list and the alert switch only.",
+    },
+    {
+      key: "saved_item_detail",
+      order: 4,
+      screenNumber: 158,
+      title: "Saved item",
+      states: ["default", "unavailable"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from the FLOW-24 brief, which is explicit that Saved must never become a duplicate detail page. This shows the ORIGINAL entity preview plus the saved-specific facts (saved date, favourite state, which collection) and a single Open Original action into the canonical flow.",
     },
   ],
 };

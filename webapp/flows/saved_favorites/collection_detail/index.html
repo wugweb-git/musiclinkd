@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0D0D" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/saved_favorites/collection_detail/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Saved — Collection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/saved_favorites/saved_favorites_hub/index.html?state=collections" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0;flex:1">Mumbai studios</h1>
+      <button class="ml-icon-btn ml-icon-btn--bare" type="button" data-open-sheet="cd-settings" aria-label="Collection settings"><svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 19.5A1.75 1.75 0 1 1 9 16a1.75 1.75 0 0 1 0 3.5M22.25 16h-8.32a5.24 5.24 0 0 0-9.86 0H1.75a1.75 1.75 0 0 0 0 3.5h2.32a5.24 5.24 0 0 0 9.86 0h8.32a1.75 1.75 0 0 0 0-3.5M15 4.5A1.75 1.75 0 1 1 15 8a1.75 1.75 0 0 1 0-3.5M1.75 8h8.32a5.24 5.24 0 0 0 9.86 0h2.32a1.75 1.75 0 0 0 0-3.5h-2.32a5.24 5.24 0 0 0-9.86 0H1.75a1.75 1.75 0 0 0 0 3.5"/></svg></button>
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div data-state="default shared private editing">
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0">Rooms I'd book again.</p>
+        <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 var(--space-3)">
+          3 items
+        </p>
+      </div>
+
+      <span class="ml-status ml-status--neutral" data-state="private">Private — only you can see this</span>
+      <span class="ml-status ml-status--accent" data-state="shared">Shared with a link</span>
+
+      <div class="ml-banner ml-banner--info" data-state="editing">
+        <span class="ml-banner__body">Editing. Remove or move items, then done.</span>
+      </div>
+
+      <a class="ml-result" data-state="default shared private editing" href="/preview/flows/public_profile/public_profile_view/index.html">
+        <img class="ml-result__thumb" src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Ishita Rao</span>
+          <span class="ml-result__meta">Session vocalist · Mumbai · 4.9 ★</span>
+        </span>
+      </a>
+      <a class="ml-result" data-state="default shared private editing" href="/preview/flows/public_profile/public_profile_view_talent/index.html">
+        <img class="ml-result__thumb" src="/assets/img/editorials/3dee9cb6252a4c8f8a149c9fd40d4a9e.jpg" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Meera Nair</span>
+          <span class="ml-result__meta">Playback vocalist · Kochi</span>
+        </span>
+      </a>
+      <a class="ml-result" data-state="default shared private editing" href="/preview/flows/booking/studio_profile/index.html">
+        <img class="ml-result__thumb" src="/assets/img/6/01e26955706919.598fd42d42f34.png" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Yash Raj Sound Studios</span>
+          <span class="ml-result__meta">Andheri West · from ₹1,800/hr</span>
+        </span>
+      </a>
+
+      <div class="ml-empty" data-state="empty">
+        <h2 class="ml-empty__title">This collection is empty</h2>
+        <p class="ml-empty__body">Add saved items to it from the Saved list.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/saved_favorites/saved_favorites_hub/index.html">Add to collection</a>
+      </div>
+    </main>
+
+    <div class="ml-sheet-scrim" data-sheet-scrim-for="cd-settings"></div>
+    <div class="ml-sheet" id="cd-settings" role="dialog" aria-label="Collection settings">
+      <span class="ml-sheet__handle"></span>
+      <div class="ml-sheet__body">
+        <div class="ml-field">
+          <label for="cd-name">Name</label>
+          <input id="cd-name" type="text" value="Mumbai studios" />
+        </div>
+        <div class="ml-field">
+          <label for="cd-priv">Privacy</label>
+          <select id="cd-priv"><option>Private</option><option>Shared with a link</option><option>Public</option></select>
+        </div>
+        <a class="ml-action-row" href="?state=editing"><span class="ml-choice__body"><span class="ml-choice__title">Edit items</span></span><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg></a>
+        <a class="ml-action-row" href="/preview/flows/saved_favorites/saved_favorites_hub/index.html?state=collections">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title" style="color:var(--color-error)">Delete collection</span>
+            <span class="ml-choice__meta">The saved items themselves are not deleted</span>
+          </span>
+          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        </a>
+        <button class="ml-btn ml-btn--secondary ml-btn--block" type="button" style="margin-top:var(--space-2)" data-close-sheet="cd-settings">Close</button>
+      </div>
+    </div>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>

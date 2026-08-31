@@ -108,11 +108,12 @@
 <body>
 <nav class="g-nav" aria-label="Sections"><ul>
   <li><a href="#brand">Brand</a></li>
+  <li><a href="#imagery">Imagery</a></li>
   <li><a href="#foundations">Foundations</a></li>
   <li><a href="#core">Core · 39</a></li>
   <li><a href="#widgets">Widgets · 94</a></li>
   <li><a href="#motion">Motion</a></li>
-  <li><a href="#patterns">Patterns · 156</a></li>
+  <li><a href="#patterns">Patterns · 159</a></li>
   <li><a href="#icons">Icons · 423</a></li>
   <li><a href="#taxonomy">Taxonomy · 18</a></li>
   <li><a href="#gaps">Gaps</a></li>
@@ -228,6 +229,115 @@
     problem the merge fixes.
   </p>
 
+  <h2 class="g-h" id="imagery">Imagery</h2>
+  <p class="ml-lede ml-measure">Recovered from the old catalogue's Imagery
+    section on 2026-08-31. Everything here is bound to a token or a component;
+    nothing below introduces an asset the system does not already use.
+    <b>Media is the only element permitted to carry saturation</b> — chrome
+    stays monochrome, which is why these rules matter more than they look.</p>
+
+  <h3 style="margin-top:var(--space-4)">Aspect ratios</h3>
+  <p class="ml-lede ml-measure">Three, not four. The old catalogue listed a
+    fourth — <code>3:2 · Studio Photo</code> — which is now folded into
+    <code>--media-aspect-wide</code>; its description names studio photos
+    explicitly. A ratio that differs from another by 0.28 is not a decision
+    anyone can make consistently at a glance.</p>
+  <div class="g-row" style="align-items:flex-start">
+    <figure style="margin:0;max-width:180px">
+        <div class="ml-media" style="aspect-ratio:var(--media-aspect-square);border-radius:var(--radius-2)">
+          <img src="/assets/img/6/02d124205931695.66c4331e162d1.jpg" alt="" /></div>
+        <figcaption class="ml-type-1" style="margin-top:var(--space-1)">
+          <code>--media-aspect-square</code><br><b>1/1</b><br>
+          <span style="color:var(--color-muted)">Album art, avatars, track thumbs</span></figcaption></figure><figure style="margin:0;max-width:180px">
+        <div class="ml-media" style="aspect-ratio:var(--media-aspect-wide);border-radius:var(--radius-2)">
+          <img src="/assets/img/speakers/39fdf43f680420b44f547c6cb535900b.jpg" alt="" /></div>
+        <figcaption class="ml-type-1" style="margin-top:var(--space-1)">
+          <code>--media-aspect-wide</code><br><b>16/9</b><br>
+          <span style="color:var(--color-muted)">Studio photos, video, hero imagery</span></figcaption></figure><figure style="margin:0;max-width:180px">
+        <div class="ml-media" style="aspect-ratio:var(--media-aspect-card);border-radius:var(--radius-2)">
+          <img src="/assets/img/4/5c45943974eb98266d0fc97e34e568e5.png" alt="" /></div>
+        <figcaption class="ml-type-1" style="margin-top:var(--space-1)">
+          <code>--media-aspect-card</code><br><b>4/3</b><br>
+          <span style="color:var(--color-muted)">Media card artwork</span></figcaption></figure>
+  </div>
+
+  <h3 style="margin-top:var(--space-4)">The scrim</h3>
+  <p class="ml-lede ml-measure">One treatment, not four. Any text laid over
+    artwork sits on <code>--media-scrim</code> — never on raw imagery, because
+    a photograph's luminance is not something the type can negotiate with.</p>
+  <div class="g-demo"><div class="ml-media ml-media--wide ml-media--scrim" style="max-width:340px;border-radius:var(--radius-2)">
+    <img src="/assets/img/speakers/39fdf43f680420b44f547c6cb535900b.jpg" alt="" />
+    <div class="ml-media__overlay"><b>Yash Raj Sound Studios</b>
+      <div class="ml-type-1">Andheri West · Dolby Atmos</div></div></div>
+    <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
+      Same photograph without the scrim would put white type over a blown highlight.</p></div>
+
+  <p class="ml-type-1" style="color:var(--color-muted);max-width:var(--layout-measure);margin-top:var(--space-3)">
+    The old catalogue offered four overlay treatments. Only the dark gradient
+    survived, and the three that did not are recorded here rather than dropped
+    in silence. <b>Pink Tint</b> and <b>Duotone</b> both put chrome colour ON
+    the media, which inverts the one palette rule this system has — media
+    carries the saturation, chrome does not add any. <b>Left Fade</b> was a
+    layout need, not a treatment: a component wanting type beside artwork uses
+    <code>.ml-split-editorial</code>, which does not tint the photograph at all.</p>
+
+  <h3 style="margin-top:var(--space-4)">Motion &amp; object media</h3>
+  <p class="ml-lede ml-measure">The old catalogue called these “Branded Media
+    Assets” and listed them as a library to browse. They are not a library —
+    each pool is already bound to a component, and that binding is the only
+    reason a file here is part of the system. A pool with no component is not
+    documented on this page.</p>
+  <table class="g-t"><thead><tr><th>Pool</th><th>Folder</th><th>Files</th><th>Bound to</th></tr></thead><tbody>
+    <tr><th><code>object</code></th><td><code>img/5</code> — 3D object renders on transparent ground</td>
+        <td class="ml-tabular">9</td>
+        <td><a href="#c-bento"><code>c-bento</code></a></td></tr><tr><th><code>motion</code></th><td><code>img/6</code> — Short looping animations</td>
+        <td class="ml-tabular">4</td>
+        <td><a href="#c-bento"><code>c-bento</code></a></td></tr><tr><th><code>video</code></th><td><code>img/4</code> — Real motion, muted and looping</td>
+        <td class="ml-tabular">10</td>
+        <td><a href="#c-video"><code>c-video</code></a> <a href="#c-split-editorial"><code>c-split-editorial</code></a></td></tr>
+  </tbody></table>
+  <div class="g-row" style="margin-top:var(--space-3);align-items:flex-start">
+    <figure style="margin:0;max-width:160px">
+      <div class="ml-media" style="aspect-ratio:var(--media-aspect-square);border-radius:var(--radius-2)">
+        <img src="/assets/img/5/2410fd1c701e077323b1f575af075a4a.webp" alt="" loading="lazy" /></div>
+      <figcaption class="ml-type-1" style="margin-top:var(--space-1);color:var(--color-muted)">object</figcaption></figure>
+    <figure style="margin:0;max-width:160px">
+      <div class="ml-media" style="aspect-ratio:var(--media-aspect-square);border-radius:var(--radius-2)">
+        <img src="/assets/img/6/47ff4e166535133.641ae4294e1a1.gif" alt="" loading="lazy" /></div>
+      <figcaption class="ml-type-1" style="margin-top:var(--space-1);color:var(--color-muted)">motion</figcaption></figure>
+    <figure style="margin:0;max-width:220px">
+      <div class="ml-media" style="aspect-ratio:var(--media-aspect-card);border-radius:var(--radius-2)">
+        <video src="/assets/img/4/3-EAR-Alpha-hevc-safari.mp4" muted loop playsinline autoplay aria-label="Studio session"></video></div>
+      <figcaption class="ml-type-1" style="margin-top:var(--space-1);color:var(--color-muted)">video</figcaption></figure>
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);max-width:var(--layout-measure);margin-top:var(--space-2)">
+    Counts are read from disk at build time, so adding a file to a folder makes
+    it available with no edit here — and <code>build-hosting</code> derives its
+    ship-list from the markup this produces, so a pool and what actually
+    deploys cannot drift.</p>
+
+  <h3 style="margin-top:var(--space-4)">Avatars</h3>
+  <p class="ml-lede ml-measure">Four steps, and the profile header is
+    <code>--avatar-4</code>. The old catalogue specified <code>96dp</code> for
+    a profile and <code>64dp</code> for a card; 96 is not a step and adding one
+    would break the four-step rule, so the profile header renders at 64 —
+    the value <code>--avatar-4</code>'s own description already assigns to it.</p>
+  <div class="g-row">
+    <figure style="margin:0;text-align:center">
+      <img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" style="width:var(--avatar-1);height:var(--avatar-1);border-radius:var(--radius-4);object-fit:cover" />
+      <figcaption class="ml-type-1" style="margin-top:var(--space-1);color:var(--color-muted)">
+        <code>--avatar-1</code><br>24px</figcaption></figure><figure style="margin:0;text-align:center">
+      <img src="/assets/img/editorials/3dee9cb6252a4c8f8a149c9fd40d4a9e.jpg" alt="" style="width:var(--avatar-2);height:var(--avatar-2);border-radius:var(--radius-4);object-fit:cover" />
+      <figcaption class="ml-type-1" style="margin-top:var(--space-1);color:var(--color-muted)">
+        <code>--avatar-2</code><br>32px</figcaption></figure><figure style="margin:0;text-align:center">
+      <img src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" style="width:var(--avatar-3);height:var(--avatar-3);border-radius:var(--radius-4);object-fit:cover" />
+      <figcaption class="ml-type-1" style="margin-top:var(--space-1);color:var(--color-muted)">
+        <code>--avatar-3</code><br>48px</figcaption></figure><figure style="margin:0;text-align:center">
+      <img src="/assets/img/editorials/8fe517d7b0584d24e1b4a6b10c1c8251.jpg" alt="" style="width:var(--avatar-4);height:var(--avatar-4);border-radius:var(--radius-4);object-fit:cover" />
+      <figcaption class="ml-type-1" style="margin-top:var(--space-1);color:var(--color-muted)">
+        <code>--avatar-4</code><br>64px</figcaption></figure>
+  </div>
+
   <h2 class="g-h" id="foundations">Foundations</h2>
   <p class="ml-lede" style="max-width:64ch"> Black, grey and white build every surface and control.</p>
 
@@ -239,47 +349,47 @@
     name, not by a second group.
   </p>
   <div class="g-swatches"><div class="g-swatch">
-      <span class="g-chipcol" style="background:#0D0D0D"></span>
+      <span class="g-chipcol" style="background:var(--color-ink)"></span>
       <code>--color-ink</code><b>#0D0D0D</b><span>Primary action AND primary text</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#FCFCFD"></span>
+      <span class="g-chipcol" style="background:var(--color-paper)"></span>
       <code>--color-paper</code><b>#FCFCFD</b><span>App canvas / page background</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#FFFFFF"></span>
+      <span class="g-chipcol" style="background:var(--color-white)"></span>
       <code>--color-white</code><b>#FFFFFF</b><span>Card and sheet fill</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#F8F8FB"></span>
+      <span class="g-chipcol" style="background:var(--color-surface)"></span>
       <code>--color-surface</code><b>#F8F8FB</b><span>Subtle raised/sunken fill — search bars, inactive segments, skeletons</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#ECECF1"></span>
+      <span class="g-chipcol" style="background:var(--color-line)"></span>
       <code>--color-line</code><b>#ECECF1</b><span>Hairline borders, dividers, list separators</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#6E6E7D"></span>
+      <span class="g-chipcol" style="background:var(--color-muted)"></span>
       <code>--color-muted</code><b>#6E6E7D</b><span>Secondary text, metadata, placeholder</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#EA4C89"></span>
+      <span class="g-chipcol" style="background:var(--color-pink)"></span>
       <code>--color-pink</code><b>#EA4C89</b><span>Brand accent — focus ring, selection, active tab, brand mark, waveform progress</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#C7295F"></span>
+      <span class="g-chipcol" style="background:var(--color-pink-pressed)"></span>
       <code>--color-pink-pressed</code><b>#C7295F</b><span>Two jobs, one token</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#FCE7F3"></span>
+      <span class="g-chipcol" style="background:var(--color-pink-container)"></span>
       <code>--color-pink-container</code><b>#FCE7F3</b><span>The one permitted tinted surface — accent chips, progress tracks</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#2B2B2B"></span>
+      <span class="g-chipcol" style="background:var(--color-ink-pressed)"></span>
       <code>--color-ink-pressed</code><b>#2B2B2B</b><span>Pressed state of a primary (black) control — lifts off pure black so the press is visible</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#22C55E"></span>
+      <span class="g-chipcol" style="background:var(--color-success)"></span>
       <code>--color-success</code><b>#22C55E</b></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#F59E0B"></span>
+      <span class="g-chipcol" style="background:var(--color-warning)"></span>
       <code>--color-warning</code><b>#F59E0B</b></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#DC2626"></span>
+      <span class="g-chipcol" style="background:var(--color-error)"></span>
       <code>--color-error</code><b>#DC2626</b></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#FF005C"></span>
+      <span class="g-chipcol" style="background:var(--color-brand-warm-pink)"></span>
       <code>--color-brand-warm-pink</code><b>#FF005C</b><span>Brand pink</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#141621"></span>
+      <span class="g-chipcol" style="background:var(--color-brand-black)"></span>
       <code>--color-brand-black</code><b>#141621</b><span>Brand black, faintly blue</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#FFFFFF"></span>
+      <span class="g-chipcol" style="background:var(--color-brand-white)"></span>
       <code>--color-brand-white</code><b>#FFFFFF</b><span>The supplied swatch labelled White carried HEX #000000 against RGB 255 255 255 — contradictory</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#4F5059"></span>
+      <span class="g-chipcol" style="background:var(--color-brand-dark-gray)"></span>
       <code>--color-brand-dark-gray</code><b>#4F5059</b><span>EXPRESSION ONLY — never on a product screen</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#C4C5C8"></span>
+      <span class="g-chipcol" style="background:var(--color-brand-light-gray)"></span>
       <code>--color-brand-light-gray</code><b>#C4C5C8</b><span>EXPRESSION ONLY — never on a product screen</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#2563EB"></span>
+      <span class="g-chipcol" style="background:var(--color-info)"></span>
       <code>--color-info</code><b>#2563EB</b><span>Informational badge — 'On Tour', 'Remote available'</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:#9CA3AF"></span>
+      <span class="g-chipcol" style="background:var(--color-disabled)"></span>
       <code>--color-disabled</code><b>#9CA3AF</b><span>Inactive control borders and text</span></div><div class="g-swatch">
-      <span class="g-chipcol" style="background:rgba(13,13,13,0.32)"></span>
+      <span class="g-chipcol" style="background:var(--color-scrim)"></span>
       <code>--color-scrim</code><b>rgba(13,13,13,0.32)</b><span>Backdrop behind drawers, sheets and modals</span></div></div>
 
   <h3 style="margin-top:var(--space-4)">Scales</h3>
@@ -443,6 +553,32 @@
           <img src="/guide/brand/assets/logo-badge-inverse.svg" alt="" style="width:64px;height:64px;display:block" /></span>
         <div class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-1)">64px · ink</div></div>
   </div></div>
+
+  <h3 style="margin-top:var(--space-4)">System bars &amp; insets</h3>
+  <p class="ml-lede ml-measure">The app draws <b>edge to edge</b> — content
+    renders behind the status and navigation bars, and the bars themselves stay
+    transparent. Nothing may rely on the OS reserving that space, so every
+    fixed-position component pads itself by an inset token. Recovered from the
+    old catalogue's Android Platform section on 2026-08-31; the tokens already
+    existed but nothing on this page said what they were for, which is how
+    three of them ended up referenced by no component at all.</p>
+  <table class="g-t"><thead><tr><th>Token</th><th>Value</th><th>Compose inset</th><th>What it is</th></tr></thead><tbody>
+    <tr><th><code>--safe-top</code></th><td><code>env(safe-area-inset-top, 24px)</code></td>
+        <td><code>WindowInsets.statusBars</code></td><td>Status bar. The fallback is the 24dp Android status bar, used when env() is unsupported.</td></tr><tr><th><code>--safe-bottom</code></th><td><code>env(safe-area-inset-bottom, 16px)</code></td>
+        <td><code>WindowInsets.navigationBars</code></td><td>Gesture bar / navigation bar.</td></tr><tr><th><code>--chrome-status-bar</code></th><td><code>24px</code></td>
+        <td><code>WindowInsets.statusBars</code></td><td>Status-bar height as a plain number, for layout maths that cannot use env().</td></tr><tr><th><code>--chrome-nav-bar</code></th><td><code>48px</code></td>
+        <td><code>WindowInsets.navigationBars</code></td><td>Three-button navigation bar height.</td></tr><tr><th><code>--chrome-scrollbar</code></th><td><code>12px</code></td>
+        <td>—</td><td>Desktop scrollbar width. Web-only; there is no native counterpart.</td></tr>
+  </tbody></table>
+  <p class="ml-type-1" style="color:var(--color-muted);max-width:var(--layout-measure);margin-top:var(--space-2)">
+    Applied by <code>.ml-appbar</code> (<code>padding-top: calc(var(--space-2) +
+    var(--safe-top))</code>), <code>.ml-tabbar</code> and the floating action
+    button, so a screen author never adds inset padding by hand. The old
+    catalogue also listed <code>WindowInsets.ime</code>,
+    <code>systemGestures</code> and <code>displayCutout</code>: IME is a
+    component here (see <a href="#c-native-keyboard-ime">native keyboard &amp;
+    IME</a>), and the other two are behaviour Compose handles, not values a
+    stylesheet can hold.</p>
 
   <h2 class="g-h" id="core">Core · 39</h2>
   <section class="g-comp" id="c-base">
@@ -3156,7 +3292,7 @@
     </p>
   </div>
 
-  <h2 class="g-h" id="patterns">Patterns · 156</h2>
+  <h2 class="g-h" id="patterns">Patterns · 159</h2>
   <p class="ml-lede" style="max-width:64ch">
     Composed patterns are <b>real screens</b>, not mockups — every one below is
     live under <code>/preview</code> and built from the components above. Listed
@@ -3623,11 +3759,17 @@
   </section>
   <section class="g-comp">
     <div class="g-comp__head"><h3>Saved &amp; Favorites</h3>
-      <span class="g-file">flow 24 · 1 on the system</span></div>
+      <span class="g-file">flow 24 · 4 on the system</span></div>
     <div class="g-demo"><div class="g-patterns">
       <a class="g-pattern" href="/preview/flows/saved_favorites/saved_favorites_hub">
         <b>Saved &amp; Favorites Hub</b>
-        <span>7 states · artists, bands, studios</span></a>
+        <span>14 states · artists, bands, studios</span></a><a class="g-pattern" href="/preview/flows/saved_favorites/collection_detail">
+        <b>Collection</b>
+        <span>5 states · default, empty, shared</span></a><a class="g-pattern" href="/preview/flows/saved_favorites/saved_searches">
+        <b>Saved searches</b>
+        <span>4 states · default, empty, alerts_on</span></a><a class="g-pattern" href="/preview/flows/saved_favorites/saved_item_detail">
+        <b>Saved item</b>
+        <span>2 states · default, unavailable</span></a>
     </div></div>
   </section>
 
@@ -3764,8 +3906,8 @@
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Screens not yet on the system · 0</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0">
       Still carrying local <code>&lt;style&gt;</code> blocks or pre-system markup.
-      156 of
-      156 screens are rebuilt.</p>
+      159 of
+      159 screens are rebuilt.</p>
 
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Token-level gaps</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">

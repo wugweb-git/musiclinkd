@@ -4,5 +4,5 @@
   "order": 24,
   "status": "app-mocked",
   "description": "ADDED 2026-08-13 (direct source read, previously only 1 of its 4 real tabs was documented — as `marketplace_saved_bookmarks` under the `marketplace` flow, which remains accurate for that one tab). `SavedAndFavoritesFlow` (SupportingScreens.kt:1023, reached from the dashboard's Saved shortcut) is the actual hub — `SavedTab` enum: ARTISTS, BANDS, STUDIOS, MARKETPLACE (+ EMPTY state), grid/list view toggle, per-tab remove action. All four tabs are 100% local `mutableStateListOf` mock data (hardcoded artists/studios/marketplace items) — zero Firestore reads or writes, no persisted \"saved\" relationship on any real document.",
-  "screenCount": 1
+  "screenCount": 4
 }
