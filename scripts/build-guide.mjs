@@ -2062,18 +2062,18 @@ const html = `<!doctype html>
     hand-maintained and went stale; this one cannot.
   </p>
   <div class="g-demo">
-    ${gaps.widgets.length === 0 ? "" : `
+
     <h3 style="margin:0 0 var(--space-2)">Widgets named but not built · ${gaps.widgets.length} of 27</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
       Named in <code>Widget_Directory.md</code> with no matching component in the system.</p>
-    <div class="ml-chip-wrap">${gaps.widgets.map((w) => `<span class="ml-chip">${esc(w)}</span>`).join("")}</div>`}
+    <div class="ml-chip-wrap">${gaps.widgets.map((w) => `<span class="ml-chip">${esc(w)}</span>`).join("")}</div>
 
-    ${gaps.screens.length === 0 ? "" : `
+
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Screens not yet on the system · ${gaps.screens.length}</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0">
       Still carrying local <code>&lt;style&gt;</code> blocks or pre-system markup.
       ${patterns.reduce((n, fl) => n + fl.screens.filter((x) => x.onSystem).length, 0)} of
-      ${patterns.reduce((n, fl) => n + fl.screens.length, 0)} screens are rebuilt.</p>`}
+      ${patterns.reduce((n, fl) => n + fl.screens.length, 0)} screens are rebuilt.</p>
 
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Built but never recycled · ${UNUSED_COMPONENTS().length} of ${sections.length}</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
@@ -2082,7 +2082,7 @@ const html = `<!doctype html>
       rebuilt. Each component page states its own count.</p>
     <div class="ml-chip-wrap">${UNUSED_COMPONENTS().map((w) => `<a class="ml-chip" href="#${slug(w)}">${esc(w)}</a>`).join("")}</div>
 
-    ${stateGaps.missing.length === 0 ? "" : `
+
     <h3 style="margin:var(--space-4) 0 var(--space-2)">States declared but not rendered · ${stateGaps.missing.length}</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
       <b>Loading</b> is declared by ${stateGaps.loadingDeclared} screen${stateGaps.loadingDeclared === 1 ? "" : "s"}
@@ -2090,7 +2090,7 @@ const html = `<!doctype html>
       and shows nothing is worse than one that never claimed it — the component
       state map above already predicts this by listing Loading as <i>composed</i>
       rather than owned, and almost nothing composes it.</p>
-    <div class="ml-chip-wrap">${stateGaps.missing.map((x) => `<a class="ml-chip" href="/preview/flows/${x}"><code>${esc(x)}</code></a>`).join("")}</div>`}
+    <div class="ml-chip-wrap">${stateGaps.missing.map((x) => `<a class="ml-chip" href="/preview/flows/${x}"><code>${esc(x)}</code></a>`).join("")}</div>
 
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Live data the design layer cannot see · ${blindSpots.length}</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
