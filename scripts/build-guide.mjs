@@ -321,6 +321,55 @@ function usedBy(section) {
 }
 for (const s of sections) s.screens = usedBy(s);
 
+/* Three further gaps, all derived for the same reason the others are: a
+   hand-kept list goes stale, and these three were only visible in a roadmap
+   doc nobody opens while working in the catalogue. */
+
+/** Components the system documents that no screen has ever recycled. */
+const UNUSED_COMPONENTS = () => sections.filter((s) => !s.screens.length).map((s) => s.name);
+
+/** Screens whose contract DECLARES a state the markup never renders.
+    Loading is the live case: .ml-skeleton exists and almost nothing composes
+    it, so screens promise a loading state and show nothing. */
+function readStateGaps() {
+  const out = { loadingDeclared: 0, loadingRendered: 0, missing: [] };
+  const flowsDir = join(ROOT, "webapp/flows");
+  let flows = [];
+  try { flows = readdirSync(flowsDir); } catch { return out; }
+  for (const flow of flows) {
+    let entries = [];
+    try { entries = readdirSync(join(flowsDir, flow)); } catch { continue; }
+    for (const sc of entries) {
+      let contract, html;
+      try {
+        contract = JSON.parse(readFileSync(join(flowsDir, flow, sc, "screen.json"), "utf8"));
+        html = readFileSync(join(flowsDir, flow, sc, "index.html"), "utf8");
+      } catch { continue; }
+      const declares = (contract.states || []).some((x) => /load/i.test(x));
+      const renders = /ml-skeleton/.test(html);
+      if (declares) out.loadingDeclared++;
+      if (renders) out.loadingRendered++;
+      if (declares && !renders) out.missing.push(`${flow}/${sc}`);
+    }
+  }
+  return out;
+}
+
+/** Live product data with an admin UI that the DESIGN layer cannot see.
+    role_profiles and modules are Firestore collections with full admin CRUD;
+    the catalogue has no persona list and no module list, so a screen author
+    cannot tell which persona a screen serves. */
+function readDesignBlindSpots() {
+  const want = { "role-profiles": "Personas / roles", modules: "Platform modules", analytics: "Analytics" };
+  const out = [];
+  for (const [route, label] of Object.entries(want)) {
+    let hasRoute = false;
+    try { hasRoute = readdirSync(join(ROOT, "admin/app/(admin)")).includes(route); } catch {}
+    if (hasRoute) out.push({ route, label });
+  }
+  return out;
+}
+
 /* ── demos ─────────────────────────────────────────────────────────────── */
 /* Authored once, keyed by section name. A section with no entry here is not
    dropped — it is reported in the coverage ledger. */
@@ -1378,6 +1427,8 @@ const stateMap = (s) => {
 };
 
 const gaps = readGaps(sections.map((s) => s.name), patterns);
+const stateGaps = readStateGaps();
+const blindSpots = readDesignBlindSpots();
 const core = documented.filter((s) => s.file === "ml-core.css");
 const widg = documented.filter((s) => s.file === "ml-widgets.css");
 
@@ -1999,6 +2050,32 @@ const html = `<!doctype html>
       ${patterns.reduce((n, fl) => n + fl.screens.filter((x) => x.onSystem).length, 0)} of
       ${patterns.reduce((n, fl) => n + fl.screens.length, 0)} screens are rebuilt.</p>
 
+    <h3 style="margin:var(--space-4) 0 var(--space-2)">Built but never recycled · ${UNUSED_COMPONENTS().length} of ${sections.length}</h3>
+    <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
+      Documented here, used by no screen. Not a rendering fault — this is the
+      recycling backlog, and it is the number that should fall as flows are
+      rebuilt. Each component page states its own count.</p>
+    <div class="ml-chip-wrap">${UNUSED_COMPONENTS().map((w) => `<a class="ml-chip" href="#${slug(w)}">${esc(w)}</a>`).join("")}</div>
+
+    <h3 style="margin:var(--space-4) 0 var(--space-2)">States declared but not rendered · ${stateGaps.missing.length}</h3>
+    <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
+      <b>Loading</b> is declared by ${stateGaps.loadingDeclared} screen${stateGaps.loadingDeclared === 1 ? "" : "s"}
+      and rendered by ${stateGaps.loadingRendered}. A screen that promises a loading state
+      and shows nothing is worse than one that never claimed it — the component
+      state map above already predicts this by listing Loading as <i>composed</i>
+      rather than owned, and almost nothing composes it.</p>
+    <div class="ml-chip-wrap">${stateGaps.missing.map((x) => `<a class="ml-chip" href="/preview/flows/${x}"><code>${esc(x)}</code></a>`).join("")}</div>
+
+    <h3 style="margin:var(--space-4) 0 var(--space-2)">Live data the design layer cannot see · ${blindSpots.length}</h3>
+    <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
+      Firestore collections with full admin CRUD and no counterpart in this
+      catalogue. A screen author cannot tell which persona a screen serves or
+      which module it belongs to, because neither is expressed anywhere in the
+      design layer.</p>
+    <table class="g-t"><thead><tr><th>Missing here</th><th>Exists as</th></tr></thead><tbody>
+      ${blindSpots.map((b) => `<tr><th>${esc(b.label)}</th><td>admin route <code>/${esc(b.route)}</code> + Firestore collection</td></tr>`).join("")}
+    </tbody></table>
+
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Token-level gaps</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
       One table, merged 2026-08-30 — this used to be a second "Gaps" section
@@ -2019,7 +2096,7 @@ const html = `<!doctype html>
   <p class="ml-lede" style="margin-top:var(--space-3)">
     Replaces <code>/guide/styleguide</code> (213 tokens) and
     <code>/guide/musiclinkd-system</code> (524 Gestalt tokens). Both 301-redirect
-    here via <code>firebase.json</code> once deployed. Generated by
+    here via <code>firebase.json</code>, verified live 2026-08-31. Generated by
     <code>scripts/build-guide.mjs</code> — do not hand-edit.
   </p>
 </div>
