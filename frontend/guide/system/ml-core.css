@@ -118,6 +118,14 @@ body {
 
 .ml-btn--block   { display: flex; width: 100%; }
 .ml-btn--lg      { min-height: var(--size-4); font-size: var(--type-2); }
+/* --sm is NARROWER, never SHORTER. Two call sites (the IME bar's Send and the
+   inline editor's Save/Cancel) had been asking for .ml-btn--sm since before it
+   existed — the class was never defined, so both rendered at full width and
+   the guide's own class check found it on 2026-08-31. The obvious reading of
+   "small" would drop min-height below --size-3, which is the 48dp
+   accessibility floor this system states two rules above; a button in a
+   cramped bar needs less horizontal room, not a smaller tap target. */
+.ml-btn--sm      { padding: 0 var(--space-3); }
 
 /* ── icon button ───────────────────────────────────────────────────────── */
 /* Compose: IconButton — note the 48dp box around a 20dp glyph               */

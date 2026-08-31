@@ -1090,6 +1090,150 @@ const DEMOS = {
   </div>
   <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">One component, four former names — .thread-row, .collab-row, .req-row and .applicant-row.</p>`,
 
+  /* ── Widget Directory backfill ──────────────────────────────────────────
+     Demos for the fourteen widgets the directory named and the system had
+     never built. Photography comes from the existing pools via m(); no new
+     imagery is introduced, because a widget demo is not a reason to bind a
+     new asset to the system. */
+
+  "recommended collaborator card": `<div style="max-width:340px"><a class="ml-collab-card" href="#c-recommended-collaborator-card">
+    <div class="ml-collab-card__head"><img src="${m("faces", 4)}" alt="" />
+      <div class="ml-collab-card__id"><div class="ml-collab-card__name">Rhea Kapoor</div>
+        <span class="ml-collab-card__role">Mixing Engineer · Mumbai</span></div>
+      <span class="ml-match"><span class="ml-match__pct">92%</span></span></div>
+    <ul class="ml-collab-card__why"><li>Both worked on <b>Dil Ki Raah</b></li>
+      <li>Overlapping genres — Sufi, Indie</li></ul>
+    <div class="ml-collab-card__actions"><span class="ml-btn">Connect</span>
+      <span class="ml-btn ml-btn--ghost">View</span></div></a></div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">The match figure reuses .ml-match rather than a second percentage treatment.</p>`,
+
+  "collaborator match rail": `<div class="ml-collab-rail" style="max-width:360px">
+    ${[["Rhea Kapoor", "Mixing Engineer", 92, 4], ["Imtiaz Khan", "Session Guitarist", 87, 7],
+       ["Nikhil Rao", "Composer", 81, 10]]
+      .map(([n, r, p, i]) => `<a class="ml-collab-card" href="#c-collaborator-match-rail">
+        <div class="ml-collab-card__head"><img src="${m("faces", i)}" alt="" />
+          <div class="ml-collab-card__id"><div class="ml-collab-card__name">${n}</div>
+            <span class="ml-collab-card__role">${r}</span></div>
+          <span class="ml-match"><span class="ml-match__pct">${p}%</span></span></div></a>`).join("")}
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Layout only — it does not restyle the cards it holds, so the two cannot drift.</p>`,
+
+  "discovery search result card": `<div style="max-width:360px">
+    ${[["Ananya Sharma", "Playback Vocalist · Mumbai", ["Sufi", "Bollywood"], 1],
+       ["Yash Raj Sound", "Recording Studio · Andheri", ["Dolby Atmos", "Live room"], 5]]
+      .map(([n, meta, tags, i]) => `<a class="ml-search-result" href="#c-discovery-search-result-card">
+        <img src="${m("faces", i)}" alt="" />
+        <div class="ml-search-result__body"><div class="ml-search-result__name">${n}</div>
+          <span class="ml-search-result__meta">${meta}</span>
+          <div class="ml-search-result__tags">${tags.map((t) => `<span class="ml-chip">${t}</span>`).join("")}</div></div>
+        <span class="ml-match"><span class="ml-match__pct">88%</span></span></a>`).join("")}
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">The richer sibling of .ml-result — a row has no room for genres or match data.</p>`,
+
+  "networking feed": `<div class="ml-feed" style="max-width:360px">
+    <div class="ml-post"><div class="ml-post__head"><img src="${m("faces", 2)}" alt="" />
+      <div><b>Karan Saxena</b><span>Guitarist · 2h</span></div></div>
+      <p class="ml-post__body">Tracked three takes of the bridge today. The room finally sounds right.</p></div>
+    <div class="ml-post"><div class="ml-post__head"><img src="${m("faces", 6)}" alt="" />
+      <div><b>Priya Sharma</b><span>Producer · 5h</span></div></div>
+      <p class="ml-post__body">Looking for a tabla player for a session in Bandra next week.</p></div>
+    <p class="ml-feed__end">You're all caught up</p></div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">The post is .ml-post. This is the feed around it — it owns the two states a post has no concept of, loading-more and empty.</p>`,
+
+  "band members": `<div class="ml-roster" style="max-width:340px">
+    ${[["Raman Negi", "Vocals, rhythm guitar", true, 0], ["Paras Thakur", "Lead guitar", false, 3],
+       ["Sahil Sarin", "Drums", false, 8], ["Ramit Mehra", "Bass", false, 11]]
+      .map(([n, inst, lead, i]) => `<div class="ml-roster__member" data-lead="${lead}">
+        <img src="${m("faces", i)}" alt="" />
+        <div class="ml-roster__id"><div class="ml-roster__name">${n}</div>
+          <span class="ml-roster__instrument">${inst}</span></div></div>`).join("")}
+  </div>`,
+
+  "studio venue list item": `<div style="max-width:360px">
+    ${[["Andheri Live Room", "Andheri East · 1.4 km", "★ 4.4", 2],
+       ["Yash Raj Sound Studios", "Andheri West · 3.2 km", "★ 4.9", 5]]
+      .map(([n, loc, r, i]) => `<a class="ml-studio-card ml-studio-card--compact" href="#c-studio-venue-list-item">
+        <div class="ml-studio-card__media"><img src="${m("gear", i)}" alt="" /></div>
+        <div class="ml-studio-card__body"><div class="ml-studio-card__name">${n}</div>
+          <div class="ml-studio-card__loc">${loc}</div></div>
+        <span class="ml-type-1" style="color:var(--color-muted)">${r}</span></a>`).join("")}
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">A modifier on .ml-studio-card, not a second block — same data, one-line layout.</p>`,
+
+  "featured studio card": `<a class="ml-featured-studio" href="#c-featured-studio-card" style="max-width:360px">
+    <div class="ml-media ml-media--scrim"><img src="${m("gear", 4)}" alt="" /></div>
+    <div class="ml-featured-studio__body"><div class="ml-featured-studio__name">Yash Raj Sound Studios</div>
+      <span class="ml-featured-studio__meta">Dolby Atmos · SSL 9000J · Andheri West</span>
+      <div class="ml-featured-studio__rate">₹4,500 / hour</div></div></a>`,
+
+  "studio spec": `<dl class="ml-spec" style="max-width:360px">
+    ${[["Console", "SSL 9000J, 72 channels"], ["Monitors", "PMC IB2S · Yamaha NS-10M"],
+       ["Microphones", "Neumann U87 Ai · AKG C414 · Shure SM7B"],
+       ["Outboard", "Neve 1073 ×2 · Urei 1176 · Lexicon 480L"],
+       ["Room", "Live room 620 sq ft · booth 90 sq ft"]]
+      .map(([k, v]) => `<div class="ml-spec__row"><dt class="ml-spec__key">${k}</dt>
+        <dd class="ml-spec__val" style="margin:0">${v}</dd></div>`).join("")}
+  </dl>`,
+
+  "project card": `<a class="ml-project-card" href="#c-project-card" style="max-width:240px">
+    <div class="ml-media"><img src="${m("stage", 3)}" alt="" /></div>
+    <div class="ml-project-card__body"><div class="ml-project-card__title">Dil Ki Raah</div>
+      <div class="ml-project-card__meta">Single · Released 14 Mar 2026</div>
+      <div class="ml-project-card__credits"><span class="ml-status ml-status--success">Released</span>
+        <span class="ml-type-1" style="color:var(--color-muted)">4 credits</span></div></div></a>`,
+
+  "recent project card": `<div style="max-width:360px">
+    ${[["Neon Horizon", "Mix engineer · 2026", 6], ["Tu Hi Bata", "Composer · 2025", 9]]
+      .map(([t, meta, i]) => `<a class="ml-project-card ml-project-card--compact" href="#c-recent-project-card">
+        <div class="ml-media"><img src="${m("stage", i)}" alt="" /></div>
+        <div class="ml-project-card__body"><div class="ml-project-card__title">${t}</div>
+          <div class="ml-project-card__meta">${meta}</div></div></a>`).join("")}
+  </div>`,
+
+  "track card": `<div style="max-width:360px">
+    ${[["Dil Ki Raah", "3:42", "128k", 3], ["Neon Horizon", "4:05", "86k", 6],
+       ["Tu Hi Bata", "3:18", "54k", 9]]
+      .map(([t, dur, plays, i]) => `<a class="ml-track" href="#c-track-card">
+        <div class="ml-media"><img src="${m("stage", i)}" alt="" /></div>
+        <div class="ml-track__body"><div class="ml-track__title">${t}</div>
+          <div class="ml-track__meta"><span>${dur}</span>
+            <span class="ml-track__platforms"><span class="ml-badge">Spotify</span><span class="ml-badge">YouTube</span></span></div></div>
+        <span class="ml-track__plays">${plays}</span></a>`).join("")}
+  </div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Platforms are named in the existing badge — the system ships no third-party logo artwork.</p>`,
+
+  "audio podcast demo": `<div class="ml-player ml-player--inline" style="max-width:340px">
+    <div class="ml-player__title">Demo — session reel</div>
+    <div class="ml-player__transport"><button class="ml-player__btn" aria-label="Play">${ic("play", 18)}</button>
+      <div class="ml-player__wave" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="42" tabindex="0">
+      ${Array.from({ length: 28 }, (_, i) => `<span class="ml-player__bar${i < 12 ? " is-played" : ""}" style="height:${20 + ((i * 37) % 60)}%"></span>`).join("")}
+      </div><span class="ml-player__time">1:24</span></div></div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">A modifier on .ml-player, not a second player — the transport and waveform are the same component.</p>`,
+
+  "hire contact modal": `<div class="g-frame" style="padding:var(--space-3)">
+    <form class="ml-hire">
+      <div class="ml-hire__row"><span class="ml-hire__label">Scope</span>
+        <div class="ml-hire__scope"><button type="button" class="ml-chip" aria-pressed="true">Session</button>
+          <button type="button" class="ml-chip">Full track</button>
+          <button type="button" class="ml-chip">Live show</button></div></div>
+      <div class="ml-hire__row"><span class="ml-hire__label">Proposed date</span>
+        <label class="ml-field"><input type="date" value="2026-09-14" /></label></div>
+      <div class="ml-hire__row"><span class="ml-hire__label">Budget</span>
+        <div class="ml-hire__budget"><label class="ml-field"><input type="text" value="₹25,000" /></label>
+          <span class="ml-type-1" style="color:var(--color-muted)">per day</span></div></div>
+      <button type="button" class="ml-btn">Send inquiry</button>
+    </form></div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Form body only. The shell is .ml-sheet or .ml-dialog, so this cannot fork their open/close behaviour.</p>`,
+
+  "share sheet": `<div class="g-frame" style="padding:var(--space-3)"><div class="ml-share">
+    <div class="ml-share__preview"><img src="${m("faces", 1)}" alt="" />
+      <div><b>Ananya Sharma</b><div class="ml-type-1" style="color:var(--color-muted)">Playback Vocalist · Mumbai</div></div></div>
+    <p class="ml-share__msg">Check out Ananya on MusicLinkd — musiclinkd.com/ananya</p>
+    <div class="ml-share__channels"><span class="ml-btn">WhatsApp</span>
+      <span class="ml-btn ml-btn--ghost">Copy link</span>
+      <span class="ml-btn ml-btn--ghost">More</span></div></div></div>
+  <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Named for the job, not the destination — a .ml-whatsapp-sheet guarantees a near-identical .ml-telegram-sheet later.</p>`,
+
 };
 
 /* ── page ──────────────────────────────────────────────────────────────── */
@@ -1659,6 +1803,35 @@ if (play) play.addEventListener('click', () => {
 </body>
 </html>
 `;
+
+/* Every ml-* class the page uses must be defined by the stylesheets or by the
+   page's own <style> block. A demo that names a class nobody wrote renders
+   unstyled, and the guide is the one place where that failure is invisible —
+   it looks like a component that simply has no styling yet.
+   Introduced 2026-08-31 after this caught four: three widget demos written
+   against a guessed `.ml-audio` (the real class is `.ml-player`), and
+   `.ml-btn--sm`, which two demos had been asking for since before it existed.
+   assertIcons() already fails the build on an unknown icon; this is the same
+   guarantee for classes. */
+{
+  const styleBlocks = (html.match(/<style>[\s\S]*?<\/style>/g) || []).join("\n");
+  const sheets = ["ml-tokens.css", "ml-core.css", "ml-widgets.css"]
+    .map((f) => readFileSync(join(SYS, f), "utf8")).join("\n");
+  const defined = new Set(
+    [...(sheets + styleBlocks).matchAll(/\.(ml-[a-zA-Z0-9_-]+)/g)].map((m) => m[1])
+  );
+  const undefinedClasses = new Set();
+  for (const attr of html.matchAll(/class="([^"]+)"/g))
+    for (const c of attr[1].split(/\s+/))
+      if (c.startsWith("ml-") && !defined.has(c)) undefinedClasses.add(c);
+  if (undefinedClasses.size) {
+    throw new Error(
+      `build-guide: ${undefinedClasses.size} undefined ml-* class(es) in the ` +
+        `generated page — ${[...undefinedClasses].sort().join(", ")}. ` +
+        `Either the demo has a typo or the component was never written.`
+    );
+  }
+}
 
 writeFileSync(OUT, html);
 console.log(`build-guide: ${sections.length} sections (${documented.length} documented, ${undocumented.length} not), ` +

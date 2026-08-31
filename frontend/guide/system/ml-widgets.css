@@ -2155,3 +2155,271 @@
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .ml-person-row .time { font-size: var(--type-1); color: var(--color-muted); flex: none; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   WIDGET DIRECTORY BACKFILL — 2026-08-31
+
+   The fourteen widgets Widget_Directory.md named and the system had never
+   built. Until now the guide reported them honestly in its Gaps ledger and
+   stopped there, which meant every screen needing one invented its own
+   markup — the duplication the system exists to prevent.
+
+   Each section carries its Widget_Directory name in a Compose note, which is
+   also how readGaps() in build-guide.mjs decides a widget is built: the
+   ledger below is driven by these comments, so a widget cannot be quietly
+   marked done without the CSS actually existing.
+
+   Where a widget is a VARIANT of something already here it is built as a
+   modifier rather than a new block — StudioVenueListItem is a compact
+   StudioCard, RecentProjectCard a compact ProjectCard. Inventing parallel
+   blocks for those is how .thread-row / .collab-row / .req-row / .applicant-row
+   happened, and .ml-person-row already had to absorb all four.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── recommended collaborator card ─────────────────────────────────────── */
+/* Widget_Directory: RecommendedCollaboratorCard · AI collaborator matching   */
+/* Compose: RecommendedCollaboratorCard                                       */
+
+.ml-collab-card {
+  display: grid; gap: var(--space-2);
+  padding: var(--space-3);
+  border: var(--border-1) solid var(--color-line);
+  border-radius: var(--radius-2);
+  background: var(--color-white);
+  color: inherit; text-decoration: none;
+}
+.ml-collab-card__head { display: flex; align-items: center; gap: var(--space-2); }
+.ml-collab-card__head img {
+  width: var(--avatar-3); height: var(--avatar-3);
+  border-radius: var(--radius-4); object-fit: cover; flex: none;
+}
+.ml-collab-card__id { flex: 1; min-width: 0; }
+.ml-collab-card__name { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-collab-card__role {
+  display: block; font-size: var(--type-1); color: var(--color-muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* The match figure reuses .ml-match, not a second percentage treatment. */
+.ml-collab-card__why { margin: 0; font-size: var(--type-1); color: var(--color-muted); }
+.ml-collab-card__why li { margin-top: 2px; }
+.ml-collab-card__actions { display: flex; gap: var(--space-2); }
+.ml-collab-card:hover { border-color: var(--color-ink); }
+.ml-collab-card:active { transform: scale(0.99); }
+
+/* ── collaborator match rail ───────────────────────────────────────────── */
+/* Widget_Directory: CollaboratorMatchWidget · a rail OF the card above       */
+/* Compose: RecommendedCollaboratorsSection                                   */
+
+/* Deliberately only a layout: the card is .ml-collab-card. A "widget that is
+   a collection of another widget" must not restyle its children, or the two
+   drift apart the moment one is edited. */
+.ml-collab-rail { display: flex; gap: var(--space-3); overflow-x: auto; scroll-snap-type: x mandatory;
+                  padding-bottom: var(--space-2); -webkit-overflow-scrolling: touch; }
+.ml-collab-rail > .ml-collab-card { flex: 0 0 82%; max-width: 320px; scroll-snap-align: start; }
+
+/* ── discovery search result card ──────────────────────────────────────── */
+/* Widget_Directory: DiscoverySearchResultCard · global search result item    */
+/* Compose: DiscoverySearchResultCard                                         */
+
+/* .ml-result is the compact ROW used inside a results list. This is the
+   richer card the global-search screen shows: it adds genres and match data,
+   which a row has no room for. */
+.ml-search-result {
+  display: flex; gap: var(--space-3); align-items: flex-start;
+  padding: var(--space-3);
+  border-bottom: var(--border-1) solid var(--color-line);
+  color: inherit; text-decoration: none;
+}
+.ml-search-result:last-child { border-bottom: 0; }
+.ml-search-result > img {
+  width: var(--avatar-4); height: var(--avatar-4);
+  border-radius: var(--radius-2); object-fit: cover; flex: none;
+}
+.ml-search-result__body { flex: 1; min-width: 0; }
+.ml-search-result__name { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-search-result__meta { display: block; margin-top: 2px; font-size: var(--type-1); color: var(--color-muted); }
+.ml-search-result__tags { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-top: var(--space-2); }
+.ml-search-result:hover { background: var(--color-surface); }
+.ml-search-result:active { background: var(--color-surface); transform: scale(0.995); }
+
+/* ── networking feed ───────────────────────────────────────────────────── */
+/* Widget_Directory: NetworkingFeed · social activity feed                    */
+/* Compose: NetworkingFeed                                                    */
+
+/* The POST is .ml-post, which already exists. This is the feed that holds
+   them, plus the two states a feed has and a post does not: loading more,
+   and nothing to show. */
+.ml-feed { display: grid; }
+.ml-feed__end { padding: var(--space-4) var(--space-3); text-align: center;
+                font-size: var(--type-1); color: var(--color-muted); }
+.ml-feed.is-loading .ml-feed__end::after { content: "Loading…"; }
+.ml-feed.is-empty > .ml-post { display: none; }
+
+/* ── band members ──────────────────────────────────────────────────────── */
+/* Widget_Directory: BandMembersWidget · roster with instrument roles         */
+/* Compose: BandMembersWidget                                                 */
+
+.ml-roster { display: grid; gap: var(--space-2); }
+.ml-roster__member { display: flex; align-items: center; gap: var(--space-2); }
+.ml-roster__member img {
+  width: var(--avatar-3); height: var(--avatar-3);
+  border-radius: var(--radius-4); object-fit: cover; flex: none;
+}
+.ml-roster__id { flex: 1; min-width: 0; }
+.ml-roster__name { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-roster__instrument { display: block; font-size: var(--type-1); color: var(--color-muted); }
+/* Lead is a role, not a decoration — it reuses the verified mark's language
+   rather than inventing a second "this one is special" treatment. */
+.ml-roster__member[data-lead="true"] .ml-roster__name::after {
+  content: "Lead"; margin-left: var(--space-2);
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-1);
+  background: var(--color-ink); color: var(--color-white);
+  font-size: var(--type-1); font-weight: var(--weight-2); vertical-align: middle;
+}
+
+/* ── studio venue list item ────────────────────────────────────────────── */
+/* Widget_Directory: StudioVenueListItem · compact StudioCard                 */
+/* Compose: StudioVenueListItem                                               */
+
+/* A MODIFIER on .ml-studio-card, not a new block. Same data, one-line layout. */
+.ml-studio-card--compact { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2); }
+.ml-studio-card--compact .ml-studio-card__media {
+  width: var(--avatar-4); height: var(--avatar-4);
+  border-radius: var(--radius-2); flex: none; aspect-ratio: auto;
+}
+.ml-studio-card--compact .ml-studio-card__body { flex: 1; min-width: 0; padding: 0; }
+
+/* ── featured studio card ──────────────────────────────────────────────── */
+/* Widget_Directory: FeaturedStudioCard · hero studio promotion               */
+/* Compose: FeaturedStudioCard                                                */
+
+.ml-featured-studio { position: relative; display: block; overflow: hidden;
+                      border-radius: var(--radius-3); color: var(--color-white); text-decoration: none; }
+.ml-featured-studio .ml-media { aspect-ratio: var(--media-aspect-card); }
+.ml-featured-studio__body { position: absolute; z-index: 1; inset: auto var(--space-3) var(--space-3); }
+.ml-featured-studio__name { font-family: var(--font-display); font-size: var(--type-3);
+                            font-weight: var(--weight-3); line-height: 1.15; }
+.ml-featured-studio__meta { display: block; margin-top: 2px; font-size: var(--type-1); opacity: 0.86; }
+.ml-featured-studio__rate { margin-top: var(--space-2); font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-featured-studio:active { transform: scale(0.99); }
+
+/* ── studio spec ───────────────────────────────────────────────────────── */
+/* Widget_Directory: StudioSpecWidget · console, monitors, mic inventory      */
+/* Compose: StudioSpecWidget                                                  */
+
+/* Tabular by nature — a spec sheet is read by scanning one column, so this is
+   a definition list, not a card grid. */
+.ml-spec { display: grid; gap: var(--space-2); margin: 0; }
+.ml-spec__row { display: grid; grid-template-columns: 40% 1fr; gap: var(--space-3);
+                padding-bottom: var(--space-2); border-bottom: var(--border-1) solid var(--color-line); }
+.ml-spec__row:last-child { border-bottom: 0; padding-bottom: 0; }
+.ml-spec__key { font-size: var(--type-1); color: var(--color-muted); }
+.ml-spec__val { font-size: var(--type-2); }
+.ml-spec__val .ml-tabular { font-variant-numeric: tabular-nums; }
+
+/* ── project card ──────────────────────────────────────────────────────── */
+/* Widget_Directory: ProjectCard · portfolio release presentation             */
+/* Compose: UnifiedProjectCard                                                */
+
+.ml-project-card {
+  display: grid; gap: var(--space-2);
+  border: var(--border-1) solid var(--color-line);
+  border-radius: var(--radius-2);
+  background: var(--color-white);
+  overflow: hidden; color: inherit; text-decoration: none;
+}
+.ml-project-card .ml-media { aspect-ratio: var(--media-aspect-square); }
+.ml-project-card__body { padding: 0 var(--space-3) var(--space-3); display: grid; gap: var(--space-1); }
+.ml-project-card__title { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-project-card__meta { font-size: var(--type-1); color: var(--color-muted); }
+.ml-project-card__credits { display: flex; align-items: center; gap: var(--space-1); margin-top: var(--space-1); }
+.ml-project-card:hover { border-color: var(--color-ink); }
+.ml-project-card:active { transform: scale(0.99); }
+
+/* ── recent project card ───────────────────────────────────────────────── */
+/* Widget_Directory: RecentProjectCard · compact dashboard ProjectCard        */
+/* Compose: RecentProjectCard                                                 */
+
+.ml-project-card--compact { grid-template-columns: auto 1fr; align-items: center;
+                            gap: var(--space-3); padding: var(--space-2); }
+.ml-project-card--compact .ml-media {
+  width: var(--avatar-4); height: var(--avatar-4);
+  border-radius: var(--radius-2); aspect-ratio: auto;
+}
+.ml-project-card--compact .ml-project-card__body { padding: 0; }
+
+/* ── track card ────────────────────────────────────────────────────────── */
+/* Widget_Directory: TrackCard · track release discovery item                 */
+/* Compose: UnifiedTrackCard                                                  */
+
+.ml-track { display: flex; align-items: center; gap: var(--space-3);
+            padding: var(--space-2) 0; color: inherit; text-decoration: none; }
+.ml-track > .ml-media {
+  width: var(--avatar-4); height: var(--avatar-4);
+  border-radius: var(--radius-1); flex: none;
+}
+.ml-track__body { flex: 1; min-width: 0; }
+.ml-track__title { font-size: var(--type-2); font-weight: var(--weight-3);
+                   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ml-track__meta { display: flex; align-items: center; gap: var(--space-2);
+                  margin-top: 2px; font-size: var(--type-1); color: var(--color-muted); }
+/* Platform marks are BADGES, not brand logos — the system ships no third-party
+   logo artwork, so the platform is named in text inside the existing badge. */
+.ml-track__platforms { display: flex; gap: var(--space-1); }
+.ml-track__plays { font-variant-numeric: tabular-nums; flex: none; font-size: var(--type-1);
+                   color: var(--color-muted); }
+.ml-track:hover .ml-track__title { text-decoration: underline; }
+.ml-track:active { transform: scale(0.995); }
+
+/* ── audio podcast demo ────────────────────────────────────────────────── */
+/* Widget_Directory: AudioPodcastDemoWidget · inline demo player              */
+/* Compose: AudioPodcastDemoWidget                                            */
+
+/* A MODIFIER on .ml-player — the audio component's real class name. Written
+   against a guessed `.ml-audio` first, which does not exist: the demo rendered
+   unstyled and the guide's own class check caught it. Same transport and
+   waveform, boxed for use inside a dashboard card rather than sitting on the
+   page ground, and it adds the one thing the bare player has no slot for — a
+   title, since a demo reel needs saying what it is. */
+.ml-player--inline {
+  display: grid; gap: var(--space-2);
+  padding: var(--space-3);
+  border: var(--border-1) solid var(--color-line);
+  border-radius: var(--radius-2);
+  background: var(--color-surface);
+}
+.ml-player__title { font-size: var(--type-1); color: var(--color-muted); }
+.ml-player--inline .ml-player__transport { display: flex; align-items: center; gap: var(--space-2); }
+
+/* ── hire contact modal ────────────────────────────────────────────────── */
+/* Widget_Directory: HireContactModal · hiring inquiry                        */
+/* Compose: HireContactModal                                                  */
+
+/* The shell is .ml-sheet (mobile) or .ml-dialog (expanded) — this is only the
+   form body, so the widget cannot fork the sheet's open/close behaviour. */
+.ml-hire { display: grid; gap: var(--space-3); }
+.ml-hire__scope { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+.ml-hire__row { display: grid; gap: var(--space-1); }
+.ml-hire__label { font-size: var(--type-1); color: var(--color-muted); }
+.ml-hire__budget { display: flex; align-items: center; gap: var(--space-2); }
+.ml-hire__budget .ml-field { flex: 1; }
+.ml-hire[aria-busy="true"] .ml-btn { pointer-events: none; opacity: var(--opacity-3); }
+
+/* ── share sheet ───────────────────────────────────────────────────────── */
+/* Widget_Directory: WhatsAppShareSheet · external share with preview         */
+/* Compose: WhatsAppShareSheet                                                */
+
+/* Named for the JOB, not the destination. WhatsApp is one channel; building
+   .ml-whatsapp-sheet would guarantee a near-identical .ml-telegram-sheet the
+   first time a second channel is added. */
+.ml-share { display: grid; gap: var(--space-3); }
+.ml-share__preview { display: flex; gap: var(--space-3); align-items: center;
+                     padding: var(--space-3); border: var(--border-1) solid var(--color-line);
+                     border-radius: var(--radius-2); background: var(--color-surface); }
+.ml-share__preview img {
+  width: var(--avatar-4); height: var(--avatar-4);
+  border-radius: var(--radius-1); object-fit: cover; flex: none;
+}
+.ml-share__msg { font-size: var(--type-2); }
+.ml-share__channels { display: flex; flex-wrap: wrap; gap: var(--space-2); }

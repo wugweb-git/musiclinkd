@@ -2,141 +2,79 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<!-- viewport-fit=cover is what makes env(safe-area-inset-*) resolve to real
-     values instead of 0 on notched/gesture-bar devices — without it the
-     safe-area CSS in app-shell.css is a no-op. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<!--
-  All resource paths below are ABSOLUTE (/preview/...), not relative. This
-  build is deployed at musiclinkd.com/preview, and Firebase Hosting's
-  cleanUrls+trailingSlash:false config means a page at .../flows/auth/splash
-  has NO trailing slash — the browser then resolves relative "./x"/"../x"
-  paths against the WRONG base (one level too shallow), silently breaking
-  screen.json/CSS/JS loads. Absolute paths sidestep that entirely. If this
-  ever moves to a different mount point, update MOUNT_BASE in
-  shared/app-shell.js and the paths below together.
--->
+<meta name="screen-json-path" content="/preview/flows/public_profile/public_profile_view_venue/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<meta name="screen-json-path" content="/preview/flows/public_profile/public_profile_view_venue/screen.json" />
-<title>MusicLinkd — Public Profile / Public Profile — Venue template</title>
+<title>MusicLinkd — Profile — The Quarter</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
-<!-- app-shell.css = native ENVIRONMENT (safe-area, viewport, keyboard).
-     tokens.css = the real MusicLinkd VISUAL design system (colors, type,
-     .btn/.field/.otp-box components) — copied verbatim from
-     frontend/guide/styleguide.html. Both compose on every screen. -->
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<!--
-  Designed 2026-08-16, replacing the raw template. Data below is the exact
-  dataContract sample from this screen's own screen.json — not invented.
-
-  HONEST GAP, not silently smoothed over: this screen's notes field says
-  "profileType === VENUE — renders the Venue extension fields," but the
-  actual dataContract sample in screen.json is the same generic Arijit Sen
-  TALENT record used across most other screens (vocalRange,
-  sessionAvailability — Talent-only fields, no Venue fields like capacity/
-  address/amenities anywhere in it). No Venue-shaped sample exists anywhere
-  in this build to build the real Venue-specific fields from, so this
-  screen renders the real sample as given (profile identity, bio, genres,
-  trust badges, one portfolio project, one review) rather than fabricating
-  Venue fields that aren't backed by any real schema seen so far. Revisit
-  once a real Venue sample exists.
--->
 </head>
 <body>
-  <div class="app-root">
 
-    <!-- Icon buttons: 44x44px minimum tap target, not the .btn class's own
-         48px minimum — 44px is Apple HIG's floor for icon-only controls and
-         was picked deliberately (not shrunk below either real guideline)
-         since .btn's 48px is sized for text+icon buttons with side padding,
-         not a bare glyph. Caught on re-audit 2026-08-16: this was 36px in
-         the first pass, undercutting both real minimums. -->
-    <header class="app-topbar" style="display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-3);">
-      <button type="button" class="ml-btn ml-btn--secondary" style="min-height:44px;width:44px;padding:0;border-radius:50%;" aria-label="Back">←</button>
-      <button type="button" class="ml-btn ml-btn--secondary" style="min-height:44px;width:44px;padding:0;border-radius:50%;" aria-label="Share">⤴</button>
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/discover/discover_feed/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">The Quarter</h1>
     </header>
-
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-3) var(--space-4);">
-      <div style="text-align:center;padding:var(--space-3) 0;">
-        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400" alt="Arijit Sen" style="width:88px;height:88px;border-radius:50%;object-fit:cover;margin:0 auto var(--space-2);display:block;" />
-        <div style="display:flex;align-items:center;justify-content:center;gap:var(--space-1);">
-          <span class="ml-wordmark" style="font-size:var(--type-3);">Arijit Sen</span>
-          <span class="ml-badge ml-status ml-status--success" role="img" aria-label="Verified Artist" title="Verified Artist">✓</span>
+    <main class="ml-app__body app-content--scroll" style="padding:0 0 var(--space-4)">
+      <img src="/assets/img/6/05c010236455615.68ecac46e6ab2.png" alt="" loading="lazy"
+           style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
+      <div style="padding:0 var(--space-4)">
+        <img class="ml-avatar ml-avatar--lg ml-lift" src="/assets/img/speakers/703a51ef4eaab63412c12f2350b8fd8b.jpg" alt="" loading="lazy"
+             style="margin-top:calc(var(--size-3) * -1)" />
+        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">The Quarter</h2>
+        <p class="ml-type-1" style="color:var(--color-muted);margin:0">Live room · Lower Parel</p>
+        <div class="ml-rating" style="margin-top:var(--space-2)">
+          <span class="ml-rating__score">4.6</span>
+          <span class="ml-rating__count">· 112 shows</span>
         </div>
-        <div style="color:var(--color-muted);font-size:var(--type-1);margin-top:2px;">Singer · Composer · Mumbai, MH · Andheri</div>
-      </div>
 
-      <div style="display:flex;gap:var(--space-1);flex-wrap:wrap;justify-content:center;margin-bottom:var(--space-3);">
-        <span class="ml-chip sel">Verified Artist</span>
-        <span class="ml-chip sel">Rising Talent</span>
-        <span class="ml-chip">Available for Collab</span>
-        <span class="ml-chip">Touring</span>
-      </div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">A 220-capacity room with a proper stage and a house engineer. Thursday to Saturday, doors at eight.</p>
 
-      <p style="font-size:var(--type-2);color:var(--color-ink);line-height:1.5;text-align:center;margin:0 0 var(--space-4);">
-        Playback &amp; classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.
-      </p>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>The room</h3></div>
+        <div class="ml-summary">
+          <div class="ml-summary__row"><span>Capacity</span><span>220</span></div>
+          <div class="ml-summary__row"><span>Stage</span><span>6m × 4m</span></div>
+          <div class="ml-summary__row"><span>Hire fee</span><span>₹25,000/night</span></div>
+        </div>
 
-      <div style="display:flex;gap:var(--space-1);flex-wrap:wrap;margin-bottom:var(--space-4);">
-        <span class="ml-chip">Bollywood / Filmi</span>
-        <span class="ml-chip">Sufi Devotional</span>
-        <span class="ml-chip">Acoustic / Unplugged</span>
-        <span class="ml-chip">Acoustic Guitar</span>
-        <span class="ml-chip">Hindi</span>
-        <span class="ml-chip">Bengali</span>
-        <span class="ml-chip">English</span>
-      </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Provided</h3></div>
+        <div class="ml-chip-wrap">
+          <span class="ml-chip">PA system</span>
+          <span class="ml-chip">Backline</span>
+          <span class="ml-chip">Lighting</span>
+          <span class="ml-chip">Green room</span>
+        </div>
 
-      <div class="ml-card ml-card--lg ml-card--padded">
-        <div style="font-size:var(--type-1);font-weight:600;color:var(--color-muted);margin-bottom:var(--space-2);">PORTFOLIO</div>
-        <div style="display:flex;justify-content:space-between;align-items:start;">
-          <div>
-            <div style="font-weight:700;">Tum Hi Toh (Unplugged)</div>
-            <div style="font-size:var(--type-1);color:var(--color-muted);margin-top:2px;">Acoustic unplugged reinterpretation — 4.2M plays on Spotify.</div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Reviews</h3>
+          <a class="ml-section__link" href="/preview/flows/reviews/review_list/index.html">See all</a></div>
+        <article class="ml-review-card">
+          <div class="ml-review-card__head">
+            <img class="ml-avatar ml-avatar--sm" src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
+            <b>Kabir Sheth</b>
+            <span class="ml-review-card__stars">★★★★★</span>
           </div>
-          <span class="ml-badge" style="background:var(--color-surface);color:var(--color-muted);flex-shrink:0;">Released</span>
-        </div>
-        <div style="display:flex;gap:var(--space-3);margin-top:var(--space-2);font-size:var(--type-1);color:var(--color-muted);">
-          <span>4.2K views</span><span>610 likes</span><span>88 shares</span>
-        </div>
-      </div>
-
-      <div class="ml-card ml-card--lg ml-card--padded" style="margin-bottom:0;">
-        <div style="font-size:var(--type-1);font-weight:600;color:var(--color-muted);margin-bottom:var(--space-2);">REVIEWS</div>
-        <!-- Raw var(--color-warning) is ~2.2:1 on white and fails even the 3:1
-             floor for non-text UI, so these stars are DARKENED amber rather
-             than the token itself. That reasoning is unchanged; what changed
-             on 2026-08-30 is that the darkening is now derived from the token
-             with color-mix instead of being the hand-picked hex #B45309, so a
-             change to --color-warning reaches this screen. The mix measures
-             5.41:1, slightly better than the 5.02:1 the hex gave. --warn is
-             still correct as-is for chips that carry their own background. -->
-        <div style="color:color-mix(in srgb, var(--color-warning) 60%, black);font-size:var(--type-2);" role="img" aria-label="5 out of 5 stars">★★★★★</div>
-        <p style="font-size:var(--type-2);margin:var(--space-1) 0;">"Exceptional range and control across genres."</p>
-        <div style="font-size:var(--type-1);color:var(--color-muted);">— T-Series A&amp;R Team</div>
+          <p class="ml-review-card__body">Turned up prepared, worked fast, and took direction without ego. Booked again the same week.</p>
+        </article>
       </div>
     </main>
-
-    <footer class="app-bottombar" style="padding:var(--space-2) var(--space-3);">
-      <button type="button" class="ml-btn ml-btn--primary ml-btn--block" data-open-sheet="contact-sheet">Contact Arijit</button>
+    <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
+      <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/communication/chat_conversation/index.html">Message</a>
+      <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/booking/availability_calendar/index.html">Enquire about a date</a>
     </footer>
   </div>
-
-  <div class="sheet-scrim" data-sheet-scrim-for="contact-sheet"></div>
-  <div class="sheet" id="contact-sheet" style="background:var(--color-white);border-radius:var(--radius-3) var(--radius-3) 0 0;padding:var(--space-4);">
-    <p style="font-weight:700;margin-bottom:var(--space-2);">Contact Arijit Sen</p>
-    <p style="color:var(--color-muted);font-size:var(--type-1);margin-bottom:var(--space-3);">Send a direct message or request a booking. (Structural demo only — no real messaging/booking backend wired here.)</p>
-    <button type="button" class="ml-btn ml-btn--primary ml-btn--block" data-close-sheet="contact-sheet">Close</button>
-  </div>
-
   <script src="/preview/shared/app-shell.js" defer></script>
 </body>
 </html>
