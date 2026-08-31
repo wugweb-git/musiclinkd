@@ -5,7 +5,9 @@
  *   frontend/guide/tokens/tokens.json   (source of truth, hand-edited)
  *        │
  *        ├─→ frontend/guide/system/ml-tokens.css   web preview, light only
- *        └─→ MusicLinkdTokens.kt / .swift          phase 5 / 6, not yet emitted
+ *        └─→ (via scripts/build-handoff.mjs)
+ *              docs/handoff/MusicLinkdTokens.kt      Compose
+ *              docs/handoff/MusicLinkdTokens.swift   SwiftUI
  *
  * Why this exists: before v9 the "tokens" lived in three places at once —
  * tokens.json, styleguide.html's :root, and webapp/shared/tokens.css — and

@@ -1,0 +1,22 @@
+{
+  "flowKey": "search",
+  "flowTitle": "Search",
+  "flowStatus": "app-mocked",
+  "flowOrder": 19,
+  "screenKey": "search_filters",
+  "screenNumber": 168,
+  "screenTitle": "Search filters",
+  "screenOrder": 2,
+  "states": [
+    "people",
+    "businesses",
+    "services",
+    "marketplace_results",
+    "opportunities_results",
+    "portfolio_results",
+    "active"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-19 brief. Filters change per entity type, and the brief says not to show irrelevant ones — so the filter set is a state keyed to the entity being filtered, in ONE sheet-shaped screen rather than six. Sort lives here too. Active filters appear as chips back on the results.",
+  "dataContract": []
+}

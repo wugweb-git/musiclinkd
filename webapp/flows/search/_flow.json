@@ -4,5 +4,5 @@
   "order": 19,
   "status": "app-mocked",
   "description": "CORRECTED 2026-08-13 (direct source read, SupportingScreens.kt): the 2026-08-12 audit was wrong — `UniversalSearchFlow` (SupportingScreens.kt:281, reached via the dashboard's top-bar Search icon, `SupportingModule.UNIVERSAL_SEARCH`) is a real, standalone, reachable screen, not a duplicate of Discover's or Booking's internal SEARCH_RESULTS states (those remain separately covered under `discover`/`booking`). 4-state (`SearchScreenState`: HOME/LIVE/RESULTS/EMPTY), fully mocked — a hardcoded 10-item `mockAllResults` list, zero Firestore reads. `DemoDataProvider.kt`'s `searchFilterCategories` list is still confirmed dead code, unrelated to this screen.",
-  "screenCount": 1
+  "screenCount": 2
 }

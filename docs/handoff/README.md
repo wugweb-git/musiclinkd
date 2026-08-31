@@ -1,4 +1,4 @@
-# Android handoff
+# Native handoff
 
 **Generated.** Source: `frontend/guide/tokens/tokens.json` (v9.0.0).
 Regenerate with `node scripts/build-handoff.mjs`. Do not hand-edit
@@ -9,7 +9,24 @@ same file, and patching one side is how the two drift apart.
 
 | File | Contents |
 |---|---|
-| `MusicLinkdTokens.kt` | Compose `Color`, `Dp`, `TextStyle`, spring specs and shape tokens |
+| `MusicLinkdTokens.kt` | Compose `Color`, `Dp`, `TextStyle`, `FontWeight`, spring specs and shape tokens |
+| `MusicLinkdTokens.swift` | SwiftUI `Color`, `CGFloat`, `Font`, `Font.Weight`, `Animation.spring` and shadow tokens |
+
+## The two are not translations of each other
+
+Four values genuinely differ by platform, and the generator emits each from its
+own `$android` / `$ios` form rather than converting one into the other:
+
+| | Compose | SwiftUI |
+|---|---|---|
+| `size.3` — touch minimum | **48**dp (Material) | **44**pt (Apple HIG) |
+| `radius.4` | `9999.dp` | `Capsule()` |
+| motion | `dampingRatio` / `stiffness` | `response` / `dampingFraction` |
+| type | `sp` ramp + `FontWeight(n)` | Dynamic Type `textStyle` + named weight |
+
+Copying the Android numbers into Swift would have produced a file that looks
+right and is wrong in four places — most damagingly the touch target, which
+would be 4pt over Apple's minimum on every control in the app.
 
 ## Before you build
 

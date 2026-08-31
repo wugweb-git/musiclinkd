@@ -140,6 +140,21 @@ object MLOpacity {
     const val Opacity4 = 0.64f
 }
 
+/** Font weight — 400/500/600/800. There is deliberately no 700 step: the heavy
+ *  UI weight was cut from 700 to 600 on 2026-08-31, and leaving a 700 here
+ *  would let it creep back one Composable at a time. Reference these rather
+ *  than writing FontWeight(600) inline. */
+object MLWeight {
+    /** Body copy, running text */
+    val W1 = FontWeight(400)
+    /** Medium — list titles, secondary labels */
+    val W2 = FontWeight(500)
+    /** Semibold — the system's emphasis weight */
+    val W3 = FontWeight(600)
+    /** Display only — hero headlines and the one big number on a screen */
+    val W4 = FontWeight(800)
+}
+
 /** Type. Sizes are sp and scale with the user's OS font-size setting; that is
  *  the whole reason these are authored separately from the web clamp(). */
 object MLType {
@@ -148,7 +163,7 @@ object MLType {
         fontFamily = Inter,
         fontSize = 12.sp,
         lineHeight = 16.sp,
-        fontWeight = FontWeight(600),
+        fontWeight = MLWeight.W3,
         letterSpacing = 0.12.sp,
     )
     /** Body copy, default UI text, list item titles — Material bodyLarge */
@@ -156,7 +171,7 @@ object MLType {
         fontFamily = Inter,
         fontSize = 16.sp,
         lineHeight = 24.sp,
-        fontWeight = FontWeight(400),
+        fontWeight = MLWeight.W1,
         letterSpacing = 0.00.sp,
     )
     /** Section headings, card titles, screen titles — Material titleLarge */
@@ -164,7 +179,7 @@ object MLType {
         fontFamily = InterTight,
         fontSize = 22.sp,
         lineHeight = 28.sp,
-        fontWeight = FontWeight(600),
+        fontWeight = MLWeight.W3,
         letterSpacing = -0.22.sp,
     )
     /** Display — hero headlines, now-playing track title, the one big number on a screen — Material displaySmall */
@@ -172,7 +187,7 @@ object MLType {
         fontFamily = InterTight,
         fontSize = 32.sp,
         lineHeight = 40.sp,
-        fontWeight = FontWeight(800),
+        fontWeight = MLWeight.W4,
         letterSpacing = -0.96.sp,
     )
 }

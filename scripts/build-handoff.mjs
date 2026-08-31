@@ -1,14 +1,17 @@
 #!/usr/bin/env node
 /**
- * build-handoff.mjs — emits the Android handoff from tokens.json.
+ * build-handoff.mjs — emits the NATIVE handoff from tokens.json.
  *
  *   frontend/guide/tokens/tokens.json   (source of truth, hand-edited)
- *        └─→ docs/handoff/MusicLinkdTokens.kt    Compose tokens
- *        └─→ docs/handoff/README.md              how to consume them
+ *        └─→ docs/handoff/MusicLinkdTokens.kt     Compose tokens
+ *        └─→ docs/handoff/MusicLinkdTokens.swift  SwiftUI tokens
+ *        └─→ docs/handoff/README.md               how to consume them
  *
- * Why this exists: tokens.json has carried explicit $android forms on every
- * token since v9 — sp ramps, spring physics, Dp values — and nothing consumed
- * them. Dual authoring that no build reads is just a longer JSON file. This
+ * Why this exists: tokens.json has carried explicit $android AND $ios forms on
+ * every token since v9 — sp ramps, Dynamic Type styles, spring physics, Dp and
+ * CGFloat values — and nothing consumed them. Compose got its generator on
+ * 2026-08-30; SwiftUI was still unread on 2026-08-31, so 63 $ios entries were
+ * authored, reviewed and shipped to no consumer at all. Both are emitted here. Dual authoring that no build reads is just a longer JSON file. This
  * is the consumer, and it is generated for the same reason ml-tokens.css is:
  * a hand-copied Kotlin file drifts from the CSS within one sprint, and the
  * whole point of the dual authoring was that web and native cannot disagree.
@@ -29,6 +32,7 @@ import { fileURLToPath } from "node:url";
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = resolve(ROOT, "frontend/guide/tokens/tokens.json");
 const OUT_KT = resolve(ROOT, "docs/handoff/MusicLinkdTokens.kt");
+const OUT_SWIFT = resolve(ROOT, "docs/handoff/MusicLinkdTokens.swift");
 const OUT_MD = resolve(ROOT, "docs/handoff/README.md");
 const CHECK = process.argv.includes("--check");
 
@@ -77,6 +81,31 @@ const componentLines = Object.entries(f.component)
   .map(([k, v]) => `    /** ${(v.$description || "").split(".")[0]} */\n    val ${pascal(k)} = ${dpNum(v.$android)}.dp`)
   .join("\n");
 
+/* Weight is a named scale on Compose too, for the same reason it became one on
+   web: it was written as a bare FontWeight(600) inside each TextStyle, so the
+   700 -> 600 change of 2026-08-31 reached the CSS in one edit and reached
+   Compose only because these four styles happened to be regenerated. Nothing
+   named the scale, so nothing outside MLType could reference it — a Composable
+   wanting a semibold label had to type the number, which is exactly the state
+   the web side was just dug out of (114 literal declarations). */
+const weightLines = steps(f.weight)
+  .map((k) => `    /** ${(f.weight[k].$description || "").split(".")[0]} */\n    val W${k} = FontWeight(${f.weight[k].$value})`)
+  .join("\n");
+
+/** A type step's weight must BE one of the four steps, never a stray value. */
+const WEIGHT_TOKEN = new Map(steps(f.weight).map((k) => [f.weight[k].$value, `MLWeight.W${k}`]));
+function weightRef(value, where) {
+  const tok = WEIGHT_TOKEN.get(value);
+  if (!tok) {
+    throw new Error(
+      `${where} uses fontWeight ${value}, which is not a step in foundation.weight ` +
+        `(${[...WEIGHT_TOKEN.keys()].join(", ")}). Add the step or change the type ramp — ` +
+        `do not emit a weight Compose cannot name.`
+    );
+  }
+  return tok;
+}
+
 const typeLines = steps(f.type).map((k) => {
   const a = f.type[k].$android;
   const doc = f.type[k].$description;
@@ -85,7 +114,7 @@ const typeLines = steps(f.type).map((k) => {
         fontFamily = ${a.family === "InterTight" ? "InterTight" : a.family === "UnicaOne" ? "UnicaOne" : "Inter"},
         fontSize = ${sp(a.size)}.sp,
         lineHeight = ${sp(a.lineHeight)}.sp,
-        fontWeight = FontWeight(${a.weight}),
+        fontWeight = ${weightRef(a.weight, `type.${k}.$android`)},
         letterSpacing = ${trackSp(a.letterSpacing, a.size)}.sp,
     )`;
 }).join("\n");
@@ -112,6 +141,220 @@ const gestureLines = Object.entries(T.interaction)
     const lit = a;
     return `    /** ${(v.$description || "").split(".")[0]} */\n    val ${pascal(k)} = ${lit}`;
   }).join("\n");
+
+
+/* ── SwiftUI ───────────────────────────────────────────────────────────────
+   tokens.json has carried $ios forms on 63 entries since v9 and NOTHING read
+   them — the whole iOS half of the dual authoring was writing to a file no
+   build consumed. Compose got its generator on 2026-08-30; this is the same
+   thing for SwiftUI, added 2026-08-31.
+
+   iOS is not Android with different syntax, and the values differ where the
+   platforms genuinely differ:
+     · size.3 is 44, not 48 — Apple's touch minimum, not Material's
+     · radius.4 is Capsule(), not a 9999 number
+     · motion is response/dampingFraction, not dampingRatio/stiffness
+     · type maps onto Dynamic Type text styles so it scales with the user's
+       accessibility setting, exactly as the sp ramp does on Android
+   Copying the Android numbers across would have produced a plausible file
+   that was wrong in four places. */
+
+/** #EA4C89 -> Color(red:green:blue:) ; rgba(...) -> with opacity */
+function swiftColor(v) {
+  const hex = v.match(/^#([0-9A-Fa-f]{6})$/);
+  const c = (n) => (parseInt(n, 16) / 255).toFixed(4);
+  if (hex) {
+    const h = hex[1];
+    return `Color(red: ${c(h.slice(0,2))}, green: ${c(h.slice(2,4))}, blue: ${c(h.slice(4,6))})`;
+  }
+  const rgba = v.match(/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+)\s*)?\)$/);
+  if (rgba) {
+    const [, r, g, b, a] = rgba;
+    const f = (n) => (Number(n) / 255).toFixed(4);
+    const op = a === undefined ? "" : `.opacity(${a})`;
+    return `Color(red: ${f(r)}, green: ${f(g)}, blue: ${f(b)})${op}`;
+  }
+  throw new Error(`cannot express "${v}" as a SwiftUI Color`);
+}
+
+/* Apple names weights; it does not take numbers. The map is explicit rather
+   than arithmetic so an unmappable weight FAILS instead of silently rounding
+   to something close. */
+const SWIFT_WEIGHT = { 400: ".regular", 500: ".medium", 600: ".semibold", 700: ".bold", 800: ".heavy" };
+function swiftWeight(value, where) {
+  const w = SWIFT_WEIGHT[value];
+  if (!w) throw new Error(`${where}: no SwiftUI Font.Weight for ${value}`);
+  return w;
+}
+
+const sColor = Object.entries(f.color)
+  .filter(([k]) => !k.startsWith("$") && !k.startsWith("brand"))
+  .map(([k, v]) => `    /// ${(v.$description || "").split(".")[0]}\n    public static let ${k} = ${swiftColor(v.$value)}`)
+  .join("\n");
+
+const sScale = (group, prefix) => steps(f[group])
+  .filter((k) => f[group][k].$ios !== "capsule")
+  .map((k) => `    /// ${(f[group][k].$description || "").split(".")[0]}\n    public static let ${prefix}${k}: CGFloat = ${f[group][k].$ios}`)
+  .join("\n");
+
+const sWeight = steps(f.weight)
+  .map((k) => `    /// ${(f.weight[k].$description || "").split(".")[0]}\n    public static let w${k}: Font.Weight = ${swiftWeight(f.weight[k].$value, `weight.${k}`)}`)
+  .join("\n");
+
+const sType = steps(f.type).map((k) => {
+  const a = f.type[k].$ios;
+  const doc = f.type[k].$description;
+  return `    /// ${doc}
+    public static let type${k} = Font.system(.${a.textStyle}, design: .default).weight(.${a.weight})`;
+}).join("\n");
+
+const sMotion = steps(f.motion).map((k) => {
+  const a = f.motion[k].$ios;
+  return `    /// ${f.motion[k].$description}
+    public static let spring${k} = Animation.spring(response: ${a.response}, dampingFraction: ${a.dampingFraction})`;
+}).join("\n");
+
+const sElevation = steps(f.elevation).map((k) => {
+  const a = f.elevation[k].$ios;
+  return `    /// ${(f.elevation[k].$description || "").split(".")[0]}
+    public static let e${k} = Shadow(radius: ${a.radius}, y: ${a.y}, opacity: ${a.opacity})`;
+}).join("\n");
+
+const sOpacity = steps(f.opacity)
+  .map((k) => `    /// ${f.opacity[k].$description}\n    public static let o${k}: Double = ${f.opacity[k].$value}`)
+  .join("\n");
+
+const sComponent = Object.entries(f.component)
+  .filter(([k]) => !k.startsWith("$"))
+  .map(([k, v]) => `    /// ${(v.$description || "").split(".")[0]}\n    public static let ${k}: CGFloat = ${v.$ios}`)
+  .join("\n");
+
+/* The Swift type comes from the token's own $type, not from a blanket CGFloat.
+   longPress is a duration in seconds — typing it CGFloat compiles but is wrong
+   at every call site that passes it to a timer, and a pinch scale is a bare
+   number rather than a length. Getting this from the data means a new
+   interaction token cannot be mistyped by omission. */
+const SWIFT_TYPE = { dimension: "CGFloat", duration: "TimeInterval", number: "CGFloat" };
+const sGesture = Object.entries(T.interaction)
+  .filter(([k, v]) => !k.startsWith("$") && v.$ios !== "—")
+  .map(([k, v]) => {
+    const ty = SWIFT_TYPE[v.$type];
+    if (!ty) throw new Error(`interaction.${k}: no Swift type for $type "${v.$type}"`);
+    return `    /// ${(v.$description || "").split(".")[0]}\n    public static let ${k}: ${ty} = ${v.$ios}`;
+  })
+  .join("\n");
+
+/* Haptics are generators you instantiate, not values you store, so they are
+   emitted as documentation rather than as constants — a `let` here would be a
+   token that no call site could actually use. */
+const sHaptic = Object.entries(T.semantic.haptic || {})
+  .filter(([k]) => !k.startsWith("$"))
+  .map(([k, v]) => `//   ${k.padEnd(10)} ${v.$ios}`)
+  .join("\n");
+
+const swift = `//
+//  MusicLinkdTokens.swift — GENERATED. Do not edit.
+//
+//  Source:     frontend/guide/tokens/tokens.json  (v${T.meta.version})
+//  Regenerate: node scripts/build-handoff.mjs
+//
+//  The web preview at /guide and MusicLinkdTokens.kt are generated from this
+//  same file, so all three cannot disagree. If a value here looks wrong,
+//  change tokens.json and regenerate — do not patch this file.
+//
+//  Deliberately NOT emitted, for the same reasons as the Compose file:
+//    - zIndex            SwiftUI uses view order and .zIndex(), not a scale
+//    - layout.max        a web page max-width; on iOS that is a size class
+//    - chrome.scrollbar  browser chrome
+//    - the brand* colours expression only, never rendered by the app
+//
+//  Insets are NOT tokens here — read safeAreaInsets from the framework.
+//
+
+import SwiftUI
+
+public enum MLColor {
+${sColor}
+}
+
+public enum MLSpace {
+${sScale("space", "s")}
+}
+
+/// Radius. Step 4 is Capsule(), not a number — a 9999 corner radius is a web
+/// idiom; SwiftUI has a shape for it and clipping to it is exact at any size.
+public enum MLRadius {
+${sScale("radius", "r")}
+    public static let capsule = Capsule()
+}
+
+/// Control heights. Step 3 is **44**, not Android's 48 — that is Apple's
+/// touch-target minimum, and using Material's number here would be wrong on
+/// both platforms at once.
+public enum MLSize {
+${sScale("size", "s")}
+}
+
+public enum MLIcon {
+${sScale("icon", "i")}
+}
+
+public enum MLAvatar {
+${sScale("avatar", "a")}
+}
+
+public enum MLBorder {
+${sScale("border", "b")}
+}
+
+public enum MLOpacity {
+${sOpacity}
+}
+
+/// Font weight — 400/500/600/800 as Apple's named weights. There is
+/// deliberately no .bold step: the heavy UI weight was cut from 700 to 600 on
+/// 2026-08-31 and leaving one would let it creep back.
+public enum MLWeight {
+${sWeight}
+}
+
+/// Type. Built on Dynamic Type text styles so every step scales with the
+/// user's accessibility setting — the same reason Android authors an sp ramp
+/// rather than reusing the web clamp().
+public enum MLType {
+${sType}
+}
+
+/// Motion — response/dampingFraction, which is how SwiftUI expresses a spring.
+/// Not a duration, and not Compose's dampingRatio/stiffness pair.
+public enum MLMotion {
+${sMotion}
+}
+
+public struct Shadow {
+    public let radius: CGFloat
+    public let y: CGFloat
+    public let opacity: Double
+}
+
+/// Elevation. Prefer a hairline border to a shadow; these exist for the cases
+/// that genuinely lift off the surface.
+public enum MLElevation {
+${sElevation}
+}
+
+public enum MLGesture {
+${sGesture}
+}
+
+/// Dimensions fixed by a platform contract rather than chosen by us.
+public enum MLComponent {
+${sComponent}
+}
+
+/// Haptics are UIKit generators, not values:
+${sHaptic}
+`;
 
 const kt = `/*
  * MusicLinkdTokens.kt — GENERATED. Do not edit.
@@ -197,6 +440,14 @@ object MLOpacity {
 ${opacityLines}
 }
 
+/** Font weight — 400/500/600/800. There is deliberately no 700 step: the heavy
+ *  UI weight was cut from 700 to 600 on 2026-08-31, and leaving a 700 here
+ *  would let it creep back one Composable at a time. Reference these rather
+ *  than writing FontWeight(600) inline. */
+object MLWeight {
+${weightLines}
+}
+
 /** Type. Sizes are sp and scale with the user's OS font-size setting; that is
  *  the whole reason these are authored separately from the web clamp(). */
 object MLType {
@@ -238,7 +489,7 @@ const scaleTable = ["space", "radius", "size", "icon", "avatar", "border", "elev
     return `| \`${g}\` | ${steps(grp).length} | ${vals} |`;
   }).join("\n");
 
-const md = `# Android handoff
+const md = `# Native handoff
 
 **Generated.** Source: \`frontend/guide/tokens/tokens.json\` (v${T.meta.version}).
 Regenerate with \`node scripts/build-handoff.mjs\`. Do not hand-edit
@@ -249,7 +500,24 @@ same file, and patching one side is how the two drift apart.
 
 | File | Contents |
 |---|---|
-| \`MusicLinkdTokens.kt\` | Compose \`Color\`, \`Dp\`, \`TextStyle\`, spring specs and shape tokens |
+| \`MusicLinkdTokens.kt\` | Compose \`Color\`, \`Dp\`, \`TextStyle\`, \`FontWeight\`, spring specs and shape tokens |
+| \`MusicLinkdTokens.swift\` | SwiftUI \`Color\`, \`CGFloat\`, \`Font\`, \`Font.Weight\`, \`Animation.spring\` and shadow tokens |
+
+## The two are not translations of each other
+
+Four values genuinely differ by platform, and the generator emits each from its
+own \`$android\` / \`$ios\` form rather than converting one into the other:
+
+| | Compose | SwiftUI |
+|---|---|---|
+| \`size.3\` — touch minimum | **48**dp (Material) | **44**pt (Apple HIG) |
+| \`radius.4\` | \`9999.dp\` | \`Capsule()\` |
+| motion | \`dampingRatio\` / \`stiffness\` | \`response\` / \`dampingFraction\` |
+| type | \`sp\` ramp + \`FontWeight(n)\` | Dynamic Type \`textStyle\` + named weight |
+
+Copying the Android numbers into Swift would have produced a file that looks
+right and is wrong in four places — most damagingly the touch target, which
+would be 4pt over Apple's minimum on every control in the app.
 
 ## Before you build
 
@@ -318,7 +586,7 @@ button therefore fills with \`PinkPressed\` so its white label passes.
 
 /* ── write ─────────────────────────────────────────────────────────────── */
 
-const outputs = [[OUT_KT, kt], [OUT_MD, md]];
+const outputs = [[OUT_KT, kt], [OUT_SWIFT, swift], [OUT_MD, md]];
 
 if (CHECK) {
   let stale = false;

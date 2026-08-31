@@ -1560,10 +1560,29 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 1,
       screenNumber: 118,
       title: "Universal Search",
-      states: ["home", "live_typing", "results", "empty"],
+      states: [
+        "home", "live_typing", "results", "empty",
+        // FLOW-19 brief, 2026-08-31. The seven "RESULTS" sections are one
+        // result list filtered by entity type, so they are states. Partial
+        // results, typo recovery, permission and offline likewise: the query
+        // has already run, only what comes back differs.
+        "people", "businesses", "services", "marketplace_results",
+        "opportunities_results", "portfolio_results", "groups",
+        "partial", "typo", "permission", "offline", "error",
+      ],
       collectionsTouched: [],
       notes:
         "UniversalSearchFlow (SupportingScreens.kt:281), SearchScreenState enum (HOME/LIVE/RESULTS/EMPTY). Reached from the dashboard's top-bar Search icon (SupportingModule.UNIVERSAL_SEARCH) — a genuinely separate screen from discover's/booking's own internal search-results states, not a duplicate. Filters a hardcoded 10-item mockAllResults list across Musicians/Bands/Projects/Studios categories; zero Firestore reads.",
+    },
+    {
+      key: "search_filters",
+      order: 2,
+      screenNumber: 168,
+      title: "Search filters",
+      states: ["people", "businesses", "services", "marketplace_results", "opportunities_results", "portfolio_results", "active"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from the FLOW-19 brief. Filters change per entity type, and the brief says not to show irrelevant ones — so the filter set is a state keyed to the entity being filtered, in ONE sheet-shaped screen rather than six. Sort lives here too. Active filters appear as chips back on the results.",
     },
   ],
   qr_share: [

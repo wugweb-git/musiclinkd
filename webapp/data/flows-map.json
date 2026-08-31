@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T04:19:48.868Z",
+  "generatedAt": "2026-08-31T04:30:33.028Z",
   "flows": [
     {
       "key": "home",
@@ -151,7 +151,7 @@
       "order": 19,
       "status": "app-mocked",
       "description": "CORRECTED 2026-08-13 (direct source read, SupportingScreens.kt): the 2026-08-12 audit was wrong — `UniversalSearchFlow` (SupportingScreens.kt:281, reached via the dashboard's top-bar Search icon, `SupportingModule.UNIVERSAL_SEARCH`) is a real, standalone, reachable screen, not a duplicate of Discover's or Booking's internal SEARCH_RESULTS states (those remain separately covered under `discover`/`booking`). 4-state (`SearchScreenState`: HOME/LIVE/RESULTS/EMPTY), fully mocked — a hardcoded 10-item `mockAllResults` list, zero Firestore reads. `DemoDataProvider.kt`'s `searchFilterCategories` list is still confirmed dead code, unrelated to this screen.",
-      "screenCount": 1
+      "screenCount": 2
     },
     {
       "key": "recommendation_engine",
@@ -6150,10 +6150,44 @@
         "home",
         "live_typing",
         "results",
-        "empty"
+        "empty",
+        "people",
+        "businesses",
+        "services",
+        "marketplace_results",
+        "opportunities_results",
+        "portfolio_results",
+        "groups",
+        "partial",
+        "typo",
+        "permission",
+        "offline",
+        "error"
       ],
       "collectionsTouched": [],
       "notes": "UniversalSearchFlow (SupportingScreens.kt:281), SearchScreenState enum (HOME/LIVE/RESULTS/EMPTY). Reached from the dashboard's top-bar Search icon (SupportingModule.UNIVERSAL_SEARCH) — a genuinely separate screen from discover's/booking's own internal search-results states, not a duplicate. Filters a hardcoded 10-item mockAllResults list across Musicians/Bands/Projects/Studios categories; zero Firestore reads.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "search",
+      "flowTitle": "Search",
+      "flowStatus": "app-mocked",
+      "flowOrder": 19,
+      "screenKey": "search_filters",
+      "screenNumber": 168,
+      "screenTitle": "Search filters",
+      "screenOrder": 2,
+      "states": [
+        "people",
+        "businesses",
+        "services",
+        "marketplace_results",
+        "opportunities_results",
+        "portfolio_results",
+        "active"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-19 brief. Filters change per entity type, and the brief says not to show irrelevant ones — so the filter set is a state keyed to the entity being filtered, in ONE sheet-shaped screen rather than six. Sort lives here too. Active filters appear as chips back on the results.",
       "dataContract": []
     },
     {
