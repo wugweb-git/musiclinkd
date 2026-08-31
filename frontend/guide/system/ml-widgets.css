@@ -720,7 +720,7 @@
   position: absolute;
   top: 2px; left: 50%;
   transform: translateX(6px);
-  padding: 0 4px;
+  padding: 0 var(--space-1);
   border-radius: var(--radius-4);
   /* 9px reversed text is the hardest contrast case in the system: white on
      --color-pink is 3.56:1. --color-pink-pressed takes it to 6.4:1. */
@@ -931,7 +931,7 @@
    party composing, and a send that didn't reach the server. Both reuse
    .ml-bubble so they inherit its shape/alignment rules rather than
    duplicating them. */
-.ml-bubble--typing { display: inline-flex; align-items: center; gap: 4px; padding: var(--space-2) 14px; }
+.ml-bubble--typing { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-2) 14px; }
 .ml-bubble--typing span {
   width: 6px; height: 6px; border-radius: var(--radius-4);
   background: var(--color-muted); opacity: 0.5;
@@ -944,7 +944,7 @@
 .ml-bubble--failed { background: var(--status-error-bg);
                       color: var(--color-ink); border: var(--border-1) solid color-mix(in srgb, var(--color-error) 32%, transparent); }
 .ml-bubble__error {
-  display: flex; align-items: center; gap: 4px; margin-top: 4px;
+  display: flex; align-items: center; gap: var(--space-1); margin-top: var(--space-1);
   font-size: var(--type-1); color: var(--status-error-text);
 }
 .ml-chat__day {

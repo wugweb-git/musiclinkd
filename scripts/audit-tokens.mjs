@@ -88,16 +88,22 @@ for (const t of TOKENS.keys()) {
 }
 
 /* ── literals a token already names ────────────────────────────────────── */
-// Only scalar, unambiguous families. Type sizes are clamp() and spacing is
-// contextual, so matching those on value alone would cry wolf.
-const SCALAR_FAMILIES = ["space", "radius", "size", "icon", "avatar", "border"];
-const byValue = new Map();
+/* Matching on VALUE alone is unsound and overstates the problem: `margin-left:
+   24px` is not a missed --icon-3, it is a margin that happens to be 24. The
+   first run of this reported 75 such "literals", most of them coincidences.
+   A literal only counts when the PROPERTY and the token FAMILY agree. */
+const PROPERTY_FAMILY = [
+  { re: /^border(-(top|right|bottom|left|width|inline|block))?$/, family: "border" },
+  { re: /^border-radius$/,                                         family: "radius" },
+  { re: /^(gap|row-gap|column-gap|padding(-\w+)?|margin(-\w+)?)$/,  family: "space" },
+  { re: /^(min-height|height)$/,                                   family: "size" },
+];
+const byFamilyValue = new Map(); // "family|24px" -> token name
 for (const [name, value] of TOKENS) {
   const fam = name.replace(/^--/, "").split("-")[0];
-  if (!SCALAR_FAMILIES.includes(fam)) continue;
   if (!/^\d+px$/.test(value)) continue;
-  if (!byValue.has(value)) byValue.set(value, []);
-  byValue.get(value).push(name);
+  const key = `${fam}|${value}`;
+  if (!byFamilyValue.has(key)) byFamilyValue.set(key, name);
 }
 
 const PALETTE = new Set([...TOKENS.entries()]
@@ -122,9 +128,15 @@ for (const f of ["frontend/guide/system/ml-core.css", "frontend/guide/system/ml-
     if (wasInComment || /^\s*(\*|\/\*|\/\/)/.test(line)) return;
     // strip any single-line comment before scanning the declaration
     line = line.replace(/\/\*[\s\S]*?\*\//g, "");
-    for (const m of line.matchAll(/:\s*[^;]*?(?<![\w.-])(\d+px)\b/g)) {
-      const hit = byValue.get(m[1]);
-      if (hit) literals.push({ file: f, line: i + 1, value: m[1], token: hit[0], src: line.trim().slice(0, 90) });
+    for (const m of line.matchAll(/([a-z-]+)\s*:\s*([^;{}]*)/g)) {
+      const prop = m[1];
+      const fam = PROPERTY_FAMILY.find((p) => p.re.test(prop))?.family;
+      if (!fam) continue;
+      for (const v of m[2].matchAll(/(?<![\w.-])(\d+px)\b/g)) {
+        const token = byFamilyValue.get(`${fam}|${v[1]}`);
+        if (token) literals.push({ file: f, line: i + 1, value: v[1], token, prop,
+                                   src: line.trim().slice(0, 90) });
+      }
     }
     for (const m of line.matchAll(/#[0-9a-fA-F]{3,8}\b/g)) {
       if (!PALETTE.has(m[0].toLowerCase()))
