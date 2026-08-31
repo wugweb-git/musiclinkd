@@ -76,6 +76,10 @@ writeScreen({
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
       <h1 class="ml-type-3" style="margin:0">Network</h1>
       <span class="ml-appbar__actions">
+        <!-- Collaboration is a separate journey from Messaging — the work
+             relationship rather than the conversation — so it gets its own
+             way in from the network surface. -->
+        <a class="ml-icon-btn ml-icon-btn--bare" href="${P}collaborations/index.html" aria-label="Collaborations">${icon("check", { size: 20 })}</a>
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}chat_thread_list/index.html" aria-label="Messages">${icon("send", { size: 20 })}</a>
       </span>
     </header>

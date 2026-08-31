@@ -1,0 +1,25 @@
+{
+  "flowKey": "communication",
+  "flowTitle": "Communication & Collaboration",
+  "flowStatus": "partial",
+  "flowOrder": 6,
+  "screenKey": "collaboration_files",
+  "screenNumber": 187,
+  "screenTitle": "Project files",
+  "screenOrder": 11,
+  "states": [
+    "all",
+    "audio",
+    "video",
+    "images",
+    "documents",
+    "versions",
+    "uploading",
+    "upload_error",
+    "access",
+    "unavailable"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from FLOW 06, which is explicit that audio is a first-class collaboration object and must not look like a generic attachment. Waveform, duration, contributor and version history. Filters are states. BETA.",
+  "dataContract": []
+}

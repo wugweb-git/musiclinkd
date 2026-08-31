@@ -1,0 +1,30 @@
+{
+  "flowKey": "communication",
+  "flowTitle": "Communication & Collaboration",
+  "flowStatus": "partial",
+  "flowOrder": 6,
+  "screenKey": "collaboration_project",
+  "screenNumber": 185,
+  "screenTitle": "Project",
+  "screenOrder": 9,
+  "states": [
+    "overview",
+    "participants",
+    "files",
+    "timeline",
+    "activity",
+    "notes",
+    "on_hold",
+    "completed",
+    "cancelled",
+    "archived",
+    "no_files",
+    "no_milestones",
+    "no_activity",
+    "permission_denied",
+    "deleted"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from FLOW 06. The workspace. Its areas (overview, participants, files, timeline, activity, notes) are states of one screen rather than six, and the lifecycle (on hold, completed, cancelled, archived) is a state of the same screen. The brief warns against building Jira: milestones exist, tasks deliberately do not. BETA.",
+  "dataContract": []
+}

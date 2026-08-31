@@ -4,5 +4,5 @@
   "order": 6,
   "status": "partial",
   "description": "connections collection has two inconsistent writers: FirebaseManager.sendConnectionRequest is correct (senderUid/targetUserId/status, composite doc ID); ConnectionsScreen.kt's second writer still writes a different, non-composite document for the same pair. chat_threads/messages exist in firestore.rules but weren't independently re-audited this session.",
-  "screenCount": 7
+  "screenCount": 11
 }

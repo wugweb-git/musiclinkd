@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T05:14:27.439Z",
+  "generatedAt": "2026-08-31T05:18:34.088Z",
   "flows": [
     {
       "key": "home",
@@ -55,7 +55,7 @@
       "order": 6,
       "status": "partial",
       "description": "connections collection has two inconsistent writers: FirebaseManager.sendConnectionRequest is correct (senderUid/targetUserId/status, composite doc ID); ConnectionsScreen.kt's second writer still writes a different, non-composite document for the same pair. chat_threads/messages exist in firestore.rules but weren't independently re-audited this session.",
-      "screenCount": 7
+      "screenCount": 11
     },
     {
       "key": "marketplace",
@@ -2221,6 +2221,103 @@
           "note": "No seed sample available for this collection in this build."
         }
       ]
+    },
+    {
+      "flowKey": "communication",
+      "flowTitle": "Communication & Collaboration",
+      "flowStatus": "partial",
+      "flowOrder": 6,
+      "screenKey": "collaborations",
+      "screenNumber": 184,
+      "screenTitle": "Collaborations",
+      "screenOrder": 8,
+      "states": [
+        "active",
+        "pending",
+        "completed",
+        "drafts",
+        "empty",
+        "no_invitations"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-06 Collaboration brief. Messaging answers \"can we talk?\"; Collaboration answers \"are we working together, on what, and what happens next?\". This is the list of that second thing. Four tabs are four states of one list. BETA.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "communication",
+      "flowTitle": "Communication & Collaboration",
+      "flowStatus": "partial",
+      "flowOrder": 6,
+      "screenKey": "collaboration_project",
+      "screenNumber": 185,
+      "screenTitle": "Project",
+      "screenOrder": 9,
+      "states": [
+        "overview",
+        "participants",
+        "files",
+        "timeline",
+        "activity",
+        "notes",
+        "on_hold",
+        "completed",
+        "cancelled",
+        "archived",
+        "no_files",
+        "no_milestones",
+        "no_activity",
+        "permission_denied",
+        "deleted"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from FLOW 06. The workspace. Its areas (overview, participants, files, timeline, activity, notes) are states of one screen rather than six, and the lifecycle (on hold, completed, cancelled, archived) is a state of the same screen. The brief warns against building Jira: milestones exist, tasks deliberately do not. BETA.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "communication",
+      "flowTitle": "Communication & Collaboration",
+      "flowStatus": "partial",
+      "flowOrder": 6,
+      "screenKey": "collaboration_proposal",
+      "screenNumber": 186,
+      "screenTitle": "Proposal",
+      "screenOrder": 10,
+      "states": [
+        "draft",
+        "received",
+        "counter",
+        "accepted",
+        "declined",
+        "invitation"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from FLOW 06. Scope, deliverables, timeline and compensation. Sending, receiving, countering and the outcome are one negotiation, so they are states of one screen. The brief says not to invent legal terms, so it records what was agreed without pretending to be a contract. BETA.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "communication",
+      "flowTitle": "Communication & Collaboration",
+      "flowStatus": "partial",
+      "flowOrder": 6,
+      "screenKey": "collaboration_files",
+      "screenNumber": 187,
+      "screenTitle": "Project files",
+      "screenOrder": 11,
+      "states": [
+        "all",
+        "audio",
+        "video",
+        "images",
+        "documents",
+        "versions",
+        "uploading",
+        "upload_error",
+        "access",
+        "unavailable"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from FLOW 06, which is explicit that audio is a first-class collaboration object and must not look like a generic attachment. Waveform, duration, contributor and version history. Filters are states. BETA.",
+      "dataContract": []
     },
     {
       "flowKey": "communication",

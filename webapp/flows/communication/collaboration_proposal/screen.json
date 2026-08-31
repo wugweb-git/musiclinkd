@@ -1,0 +1,21 @@
+{
+  "flowKey": "communication",
+  "flowTitle": "Communication & Collaboration",
+  "flowStatus": "partial",
+  "flowOrder": 6,
+  "screenKey": "collaboration_proposal",
+  "screenNumber": 186,
+  "screenTitle": "Proposal",
+  "screenOrder": 10,
+  "states": [
+    "draft",
+    "received",
+    "counter",
+    "accepted",
+    "declined",
+    "invitation"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from FLOW 06. Scope, deliverables, timeline and compensation. Sending, receiving, countering and the outcome are one negotiation, so they are states of one screen. The brief says not to invent legal terms, so it records what was agreed without pretending to be a contract. BETA.",
+  "dataContract": []
+}

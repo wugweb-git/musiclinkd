@@ -889,6 +889,50 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       notes: "Real read/write exists, but write side uses \"content\" not the admin schema's \"text\", plus a mediaUrl read/write mismatch — flagged, needs a migration-aware fix (Prompt F §5).",
     },
     {
+      key: "collaborations",
+      order: 8,
+      screenNumber: 184,
+      title: "Collaborations",
+      states: ["active", "pending", "completed", "drafts", "empty", "no_invitations"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from the FLOW-06 Collaboration brief. Messaging answers \"can we talk?\"; Collaboration answers \"are we working together, on what, and what happens next?\". This is the list of that second thing. Four tabs are four states of one list. BETA.",
+    },
+    {
+      key: "collaboration_project",
+      order: 9,
+      screenNumber: 185,
+      title: "Project",
+      states: [
+        "overview", "participants", "files", "timeline", "activity", "notes",
+        "on_hold", "completed", "cancelled", "archived",
+        "no_files", "no_milestones", "no_activity", "permission_denied", "deleted",
+      ],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from FLOW 06. The workspace. Its areas (overview, participants, files, timeline, activity, notes) are states of one screen rather than six, and the lifecycle (on hold, completed, cancelled, archived) is a state of the same screen. The brief warns against building Jira: milestones exist, tasks deliberately do not. BETA.",
+    },
+    {
+      key: "collaboration_proposal",
+      order: 10,
+      screenNumber: 186,
+      title: "Proposal",
+      states: ["draft", "received", "counter", "accepted", "declined", "invitation"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from FLOW 06. Scope, deliverables, timeline and compensation. Sending, receiving, countering and the outcome are one negotiation, so they are states of one screen. The brief says not to invent legal terms, so it records what was agreed without pretending to be a contract. BETA.",
+    },
+    {
+      key: "collaboration_files",
+      order: 11,
+      screenNumber: 187,
+      title: "Project files",
+      states: ["all", "audio", "video", "images", "documents", "versions", "uploading", "upload_error", "access", "unavailable"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from FLOW 06, which is explicit that audio is a first-class collaboration object and must not look like a generic attachment. Waveform, duration, contributor and version history. Filters are states. BETA.",
+    },
+    {
       key: "networking_feed_artist_profile",
       order: 7,
       screenNumber: 84,

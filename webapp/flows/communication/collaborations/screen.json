@@ -1,0 +1,21 @@
+{
+  "flowKey": "communication",
+  "flowTitle": "Communication & Collaboration",
+  "flowStatus": "partial",
+  "flowOrder": 6,
+  "screenKey": "collaborations",
+  "screenNumber": 184,
+  "screenTitle": "Collaborations",
+  "screenOrder": 8,
+  "states": [
+    "active",
+    "pending",
+    "completed",
+    "drafts",
+    "empty",
+    "no_invitations"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-06 Collaboration brief. Messaging answers \"can we talk?\"; Collaboration answers \"are we working together, on what, and what happens next?\". This is the list of that second thing. Four tabs are four states of one list. BETA.",
+  "dataContract": []
+}
