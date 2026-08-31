@@ -51,9 +51,9 @@ const profileView = ({ screen, name, tagline, cover, face, stat, about, sections
           <span class="ml-rating__score">${stat[0]}</span>
           <span class="ml-rating__count">· ${stat[1]}</span>
         </div>
-        ${availability ? `<p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-2) 0 0;display:flex;align-items:center;gap:var(--space-1)"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;flex:none"></span>${availability}</p>` : ""}
-
-        ${owner ? `<!-- Public and owner are one screen with two states, not two
+        ${[
+          availability && `<p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-2) 0 0;display:flex;align-items:center;gap:var(--space-1)"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;flex:none"></span>${availability}</p>`,
+          owner && `<!-- Public and owner are one screen with two states, not two
              profiles: "It is the same profile with owner controls." The owner
              actions replace the public ones in the same slot rather than
              sitting beside them. -->
@@ -61,11 +61,11 @@ const profileView = ({ screen, name, tagline, cover, face, stat, about, sections
           <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/profile_management/edit_identity/index.html">${icon("edit", { size: 16 })} Edit profile</a>
           <a class="ml-btn ml-btn--secondary" href="${P}profile_analytics/index.html" aria-label="Analytics">${icon("graph-bar", { size: 16 })}</a>
         </div>
-        <a class="ml-link" data-state="owner" href="?state=default" style="display:block;text-align:center;font-size:var(--type-1);margin-top:var(--space-2)">View as public</a>` : ""}
-
+        <a class="ml-link" data-state="owner" href="?state=default" style="display:block;text-align:center;font-size:var(--type-1);margin-top:var(--space-2)">View as public</a>`,
+        ].filter(Boolean).join("\n        ")}
         <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">${about}</p>
-
-        ${trust ? `<!-- Trust as numbers with their source, not a wall of badges. -->
+        ${[
+          trust && `<!-- Trust as numbers with their source, not a wall of badges. -->
         <div class="ml-trust" style="margin-top:var(--space-3)">
           <div class="ml-trust__row">
             <span class="ml-trust__mark">${icon("check-circle-fill", { size: 14 })}</span>
@@ -74,15 +74,13 @@ const profileView = ({ screen, name, tagline, cover, face, stat, about, sections
           <div class="ml-trust__stats">
             ${trust.stats.map(([n, l]) => `<div class="ml-testimonial__stat"><b>${n}</b><span>${l}</span></div>`).join("\n            ")}
           </div>
-        </div>` : ""}
-
-        ${identity ? `<div class="ml-section" style="margin-top:var(--space-3)"><h3>Music identity</h3></div>
+        </div>`,
+          identity && `<div class="ml-section" style="margin-top:var(--space-3)"><h3>Music identity</h3></div>
         ${identity.map(([label, chips]) => `<div class="ml-type-1" style="color:var(--color-muted);margin-bottom:var(--space-1)">${label}</div>
         <div class="ml-chip-wrap" style="margin-bottom:var(--space-3)">
           ${chips.map((c) => `<span class="ml-chip">${c}</span>`).join("")}
-        </div>`).join("\n        ")}` : ""}
-
-        ${work ? `<div class="ml-section" style="margin-top:var(--space-3)"><h3>Featured work</h3></div>
+        </div>`).join("\n        ")}`,
+          work && `<div class="ml-section" style="margin-top:var(--space-3)"><h3>Featured work</h3></div>
         <div class="ml-rail">
           ${work.map(([img, t, sub, href]) => `<a class="ml-media-card" href="${href}">
             <img src="${img}" alt="" loading="lazy" />
@@ -91,8 +89,8 @@ const profileView = ({ screen, name, tagline, cover, face, stat, about, sections
               <div class="ml-media-card__sub">${sub}</div>
             </div>
           </a>`).join("\n          ")}
-        </div>` : ""}
-
+        </div>`,
+        ].filter(Boolean).join("\n        ")}
         ${sections}
 
         <div class="ml-section" style="margin-top:var(--space-3)"><h3>Reviews</h3>
