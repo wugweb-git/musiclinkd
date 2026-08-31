@@ -4,5 +4,5 @@
   "order": 20,
   "status": "missing",
   "description": "Explicitly deprioritized by the user (\"ignore\"). For reference: GeminiRecommendationEngine.kt is real app-side code but neutered by a placeholder-API-key guard-check bug (checks for the wrong placeholder string, so it always falls through to hardcoded fallback data).",
-  "screenCount": 0
+  "screenCount": 2
 }

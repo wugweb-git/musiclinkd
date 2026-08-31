@@ -1,0 +1,41 @@
+{
+  "flowKey": "verifications",
+  "flowTitle": "Verifications",
+  "flowStatus": "app-mocked",
+  "flowOrder": 16,
+  "screenKey": "verification_status",
+  "screenNumber": 173,
+  "screenTitle": "Verification status",
+  "screenOrder": 2,
+  "states": [
+    "not_started",
+    "pending",
+    "verified",
+    "rejected",
+    "expired",
+    "help"
+  ],
+  "collectionsTouched": [
+    "verification_requests"
+  ],
+  "notes": "PROPOSED 2026-08-31 from the FLOW-16 brief. The lifecycle lives here as five states of ONE screen, because a person checking their verification is doing the same thing whatever the answer is. The brief's rule that verification must not become a vanity badge shapes the copy: it says what was checked, not that the person is endorsed. Rejection gives a reason and a route back in without restarting. BETA.",
+  "dataContract": [
+    {
+      "collection": "verification_requests",
+      "sample": {
+        "subjectType": "USER",
+        "subjectId": "mock-talent-vedanshu-beats-mock",
+        "submittedBy": "mock-talent-vedanshu-beats-mock",
+        "status": "APPROVED",
+        "documentPaths": [
+          "verification_documents/mock/Aadhaar_Front_SwarSandhya.pdf"
+        ],
+        "verificationIdType": "govt_id_aadhaar",
+        "submittedAt": "2026-06-01T09:00:00.000Z",
+        "reviewedBy": "mock-admin-system",
+        "reviewedAt": "2026-06-15T09:00:00.000Z",
+        "notes": "ID matches profile name; approved."
+      }
+    }
+  ]
+}

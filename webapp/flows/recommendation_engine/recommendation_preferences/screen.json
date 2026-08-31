@@ -1,0 +1,17 @@
+{
+  "flowKey": "recommendation_engine",
+  "flowTitle": "Recommendation Engine",
+  "flowStatus": "missing",
+  "flowOrder": 20,
+  "screenKey": "recommendation_preferences",
+  "screenNumber": 183,
+  "screenTitle": "Recommendation settings",
+  "screenOrder": 2,
+  "states": [
+    "default",
+    "off"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from FLOW 20. Which signals may be used, and an off switch. The brief: turning personalisation off must not imply core search stops working, and the copy says exactly that. Mirrors the Personalisation control in Settings rather than replacing it. BETA.",
+  "dataContract": []
+}

@@ -175,6 +175,17 @@ export function assertIcons(names) {
 }
 
 /* Small shared fragments so 31 screens cannot disagree about a back arrow. */
+/** The Beta badge, for flows that have no backend behind them yet — Band,
+    Verification, Reviews, Subscription, Recommendations, CMS, Collaboration.
+    Marking them is the honest thing to do and it stops a screen reading as a
+    finished surface.
+
+    Reuses .ml-status--accent rather than adding a rule, and says the WORD
+    "Beta" so the meaning is not carried by colour alone. Distinct from
+    .ml-tabbar__beta, which solves a different problem: a 9px marker floated
+    over a nav label, with its own contrast working. */
+export const beta = `<span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>`;
+
 export const backArrow = (href, label = "Back") =>
   `<a class="ml-icon-btn ml-icon-btn--bare" href="${href}" aria-label="${label}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>

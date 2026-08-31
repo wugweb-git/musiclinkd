@@ -1,0 +1,21 @@
+{
+  "flowKey": "subscription",
+  "flowTitle": "Subscription",
+  "flowStatus": "missing",
+  "flowOrder": 18,
+  "screenKey": "manage_subscription",
+  "screenNumber": 180,
+  "screenTitle": "Manage subscription",
+  "screenOrder": 3,
+  "states": [
+    "active",
+    "upgrade",
+    "downgrade",
+    "cancel",
+    "cancelled",
+    "past_due"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from FLOW 18. Upgrade, downgrade and cancel are states of one screen, each showing what changes and when it takes effect. The brief forbids manipulative retention patterns, so cancelling is a plain path with no interstitial offer. BETA.",
+  "dataContract": []
+}

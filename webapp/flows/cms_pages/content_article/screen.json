@@ -1,0 +1,38 @@
+{
+  "flowKey": "cms_pages",
+  "flowTitle": "CMS Pages",
+  "flowStatus": "partial",
+  "flowOrder": 22,
+  "screenKey": "content_article",
+  "screenNumber": 177,
+  "screenTitle": "Article",
+  "screenOrder": 7,
+  "states": [
+    "default",
+    "faq",
+    "policy",
+    "help",
+    "archived",
+    "restricted",
+    "not_found",
+    "offline"
+  ],
+  "collectionsTouched": [
+    "page_content"
+  ],
+  "notes": "PROPOSED 2026-08-31 from FLOW 22. One editorial reader for every content type — article, FAQ, policy, help — because they differ in content, not in shape. Archived, restricted and not-found are states of the same reader. Editorial typography, generous measure; the brief warns against dense documentation pages. BETA.",
+  "dataContract": [
+    {
+      "collection": "page_content",
+      "sample": {
+        "route": "/",
+        "title": "MusicLinkd — Find your next collaborator",
+        "status": "PUBLISHED",
+        "content": "MusicLinkd connects singers, musicians, producers, studios, and venues across India for collaboration, booking, and hire.",
+        "seoDescription": "MusicLinkd is India's marketplace for music talent, studios, and collaboration.",
+        "updatedBy": "mock-admin-system",
+        "updatedAt": "2026-08-01T09:00:00.000Z"
+      }
+    }
+  ]
+}

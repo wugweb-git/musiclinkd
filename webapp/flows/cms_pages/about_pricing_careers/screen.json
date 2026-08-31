@@ -8,7 +8,9 @@
   "screenTitle": "About / Pricing / Careers",
   "screenOrder": 2,
   "states": [
-    "default"
+    "default",
+    "pricing",
+    "careers"
   ],
   "collectionsTouched": [],
   "notes": "Static HTML pages under frontend/website/.",

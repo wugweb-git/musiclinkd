@@ -1,0 +1,20 @@
+{
+  "flowKey": "band",
+  "flowTitle": "Band",
+  "flowStatus": "partial",
+  "flowOrder": 15,
+  "screenKey": "band_settings",
+  "screenNumber": 175,
+  "screenTitle": "Band settings",
+  "screenOrder": 5,
+  "states": [
+    "default",
+    "privacy",
+    "leave",
+    "remove_member",
+    "delete"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from FLOW 15. Leave, remove-member and delete are the brief's three destructive actions; each is a state that explains consequences before confirming, never a one-tap row. BETA.",
+  "dataContract": []
+}

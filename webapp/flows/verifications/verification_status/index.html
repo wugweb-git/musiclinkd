@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0D0D" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/verifications/verification_status/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Verification</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/profile_management/profile_overview/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0;flex:1">Verification</h1>
+      <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+
+      <div data-state="not_started">
+        <div class="ml-person-row">
+          <img src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
+          <span class="meta"><b>Ishita Rao</b><p>Not verified</p></span>
+        </div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-3) 0">
+          Verification tells people that we have checked something specific about you.
+          It is not a recommendation, and it does not affect how good anyone thinks your work is.
+        </p>
+
+        <div class="ml-section"><h2>What you can verify</h2></div>
+        <div class="ml-choice">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Basic</span>
+            <span class="ml-choice__meta">Checks: That you are a real person, using one government ID.</span>
+            <span class="ml-choice__meta">You'll need: One government ID</span>
+            <span class="ml-choice__meta">You get: A Basic badge on your profile</span>
+          </span>
+        </div>
+        <div class="ml-choice">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Professional</span>
+            <span class="ml-choice__meta">Checks: Basic, plus that the work on your profile is genuinely yours.</span>
+            <span class="ml-choice__meta">You'll need: One government ID, and two pieces of released work you are credited on</span>
+            <span class="ml-choice__meta">You get: A Professional badge, and priority in Discover</span>
+          </span>
+        </div>
+        <div class="ml-choice">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">Business</span>
+            <span class="ml-choice__meta">Checks: That the business exists and that you are authorised to act for it.</span>
+            <span class="ml-choice__meta">You'll need: GST certificate and one document showing your authority</span>
+            <span class="ml-choice__meta">You get: A Business badge on the business profile</span>
+          </span>
+        </div>
+
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/verifications/verification_screen/index.html">Get verified</a>
+        <a class="ml-action-row" href="?state=help">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">How verification works</span>
+          <span class="ml-choice__meta">What we check, and what we do with your documents</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+      </div>
+
+      <div data-state="pending">
+        <span class="ml-status ml-status--warning">Under review</span>
+        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">We're checking your documents</h2>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0">
+          Submitted 29 August. Most checks finish within two working days, but we don't promise a time —
+          if it needs a second look it takes longer.
+        </p>
+        <ol class="ml-timeline" style="margin-top:var(--space-3)">
+          <li class="ml-timeline__item is-done"><span class="ml-timeline__title">Documents received</span>
+            <span class="ml-timeline__meta">29 Aug, 14:02</span></li>
+          <li class="ml-timeline__item is-current"><span class="ml-timeline__title">Under review</span></li>
+          <li class="ml-timeline__item"><span class="ml-timeline__title">Decision</span>
+            <span class="ml-timeline__meta">You'll be notified</span></li>
+        </ol>
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-3)">
+          You can keep using MusicLinkd normally while this is happening.
+        </p>
+      </div>
+
+      <div data-state="verified">
+        <div class="ml-person-row">
+          <img src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
+          <span class="meta"><b>Ishita Rao</b><p>Verified · Professional</p></span>
+          <span class="ml-status ml-status--success">Verified</span>
+        </div>
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>Level</span><span>Professional</span></div>
+          <div class="ml-summary__row"><span>Verified on</span><span>14 August 2026</span></div>
+          <div class="ml-summary__row"><span>We checked</span><span>Identity and credited work</span></div>
+        </div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+          Your badge appears on your profile, in search, in Discover, on listings and beside your reviews.
+          It means we checked your identity and your credits — nothing more than that.
+        </p>
+        <a class="ml-action-row" href="?state=help">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">How verification works</span>
+          
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+      </div>
+
+      <!-- Rejection: a reason where policy allows, and a way back in that does
+           not make you start from nothing. -->
+      <div data-state="rejected">
+        <span class="ml-status ml-status--error">Not completed</span>
+        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">We couldn't verify you this time</h2>
+        <div class="ml-banner ml-banner--error" style="margin-top:var(--space-2)">
+          <span class="ml-banner__body">The name on your ID didn't match the name on your profile.</span>
+        </div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+          This is usually a small mismatch — a middle name, or a stage name on the profile.
+          Correcting one of the two is normally enough. Your other documents are still on file.
+        </p>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/verifications/verification_screen/index.html?state=govt_id_upload">Send a different ID</a>
+        <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-2)" href="/preview/flows/profile_management/edit_identity/index.html">Change the name on my profile</a>
+      </div>
+
+      <div data-state="expired">
+        <span class="ml-status ml-status--warning">Expired</span>
+        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">Your verification has expired</h2>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0">
+          Business verification lasts a year, because company details change. Your badge is hidden until you renew.
+          Nothing else about your account is affected.
+        </p>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/verifications/verification_screen/index.html?state=level_business">Renew verification</a>
+      </div>
+
+      <div data-state="help">
+        <div class="ml-section"><h2>Why verify?</h2></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          People book strangers on this platform. A badge tells them we checked something concrete —
+          not that we recommend you, and not that your work is good.
+        </p>
+        <div class="ml-section"><h2>What happens to my documents?</h2></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          They are encrypted, seen only by the person reviewing them, and deleted once the check is done.
+          They are never shown on your profile. Only the status — verified or not — is public.
+        </p>
+        <div class="ml-section"><h2>How long does it take?</h2></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          Usually two working days. We won't promise faster than we can deliver.
+        </p>
+        <div class="ml-section"><h2>What if I'm rejected?</h2></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0">
+          You get a reason, and you fix only the thing that was wrong — you don't start again.
+          There's no limit on how many times you can try.
+        </p>
+      </div>
+    </main>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>

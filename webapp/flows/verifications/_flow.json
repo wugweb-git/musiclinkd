@@ -4,5 +4,5 @@
   "order": 16,
   "status": "app-mocked",
   "description": "verification_requests collection and the admin Verification page are both real and working. SCREEN-MAPPED 2026-08-12 (grounded Explore audit, upgraded from \"missing\" to \"app-mocked\"): one real, reachable screen (VerificationScreen) exists off the Profile tab, but it's fully simulated — upload boxes hardcode literal filenames into local state (no file picker, no FirebaseStorage call) and never write to `verification_requests`. No status-tracking (pending/approved/rejected) screen exists; verified status is three local booleans driving badge colors. `VerificationRequestSchema` is defined in BackendSchemas.kt but never instantiated.",
-  "screenCount": 1
+  "screenCount": 2
 }

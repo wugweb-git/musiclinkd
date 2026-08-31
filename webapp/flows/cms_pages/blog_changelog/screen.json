@@ -8,7 +8,11 @@
   "screenTitle": "Blog / Changelog",
   "screenOrder": 4,
   "states": [
-    "default"
+    "default",
+    "article",
+    "announcement",
+    "archived",
+    "not_found"
   ],
   "collectionsTouched": [],
   "notes": "Generated from CHANGELOG.md at build time via scripts/generate-changelog.mjs — not Firestore-backed.",

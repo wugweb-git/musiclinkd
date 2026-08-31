@@ -11,7 +11,12 @@
     "id_type_selector",
     "govt_id_upload",
     "gst_upload",
-    "badge_timeline"
+    "badge_timeline",
+    "level_basic",
+    "level_professional",
+    "level_business",
+    "review",
+    "consent"
   ],
   "collectionsTouched": [],
   "notes": "Reachable from the Profile tab. Upload boxes hardcode a literal filename into local state on tap (no file picker, no FirebaseStorage call) — the exact same fake filenames (Aadhaar_Front_SwarSandhya.pdf, GST_Verification_VedanshuMusic.pdf) referenced in this session's mock-data seeding. No write to verification_requests; no status-tracking (pending/approved/rejected) screen exists anywhere — verified status is three local booleans.",

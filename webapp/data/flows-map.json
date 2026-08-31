@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T04:41:57.323Z",
+  "generatedAt": "2026-08-31T04:57:08.490Z",
   "flows": [
     {
       "key": "home",
@@ -119,7 +119,7 @@
       "order": 15,
       "status": "partial",
       "description": "UserDoc Band extension (bandName/lineupMembers/techRiderUrl/stagePlotUrl) modeled. \"Shows\" (upcoming/past performances) closed 2026-08-12: `BandShow { title, date, venueName?, ticketUrl?, isPast }` + `UserDoc.shows?: BandShow[]` — a flat array, not a separate collection.",
-      "screenCount": 3
+      "screenCount": 5
     },
     {
       "key": "verifications",
@@ -127,7 +127,7 @@
       "order": 16,
       "status": "app-mocked",
       "description": "verification_requests collection and the admin Verification page are both real and working. SCREEN-MAPPED 2026-08-12 (grounded Explore audit, upgraded from \"missing\" to \"app-mocked\"): one real, reachable screen (VerificationScreen) exists off the Profile tab, but it's fully simulated — upload boxes hardcode literal filenames into local state (no file picker, no FirebaseStorage call) and never write to `verification_requests`. No status-tracking (pending/approved/rejected) screen exists; verified status is three local booleans driving badge colors. `VerificationRequestSchema` is defined in BackendSchemas.kt but never instantiated.",
-      "screenCount": 1
+      "screenCount": 2
     },
     {
       "key": "reviews",
@@ -143,7 +143,7 @@
       "order": 18,
       "status": "missing",
       "description": "Not modeled at all — no subscription/plan/tier collection exists anywhere in this schema yet.",
-      "screenCount": 0
+      "screenCount": 4
     },
     {
       "key": "search",
@@ -159,7 +159,7 @@
       "order": 20,
       "status": "missing",
       "description": "Explicitly deprioritized by the user (\"ignore\"). For reference: GeminiRecommendationEngine.kt is real app-side code but neutered by a placeholder-API-key guard-check bug (checks for the wrong placeholder string, so it always falls through to hardcoded fallback data).",
-      "screenCount": 0
+      "screenCount": 2
     },
     {
       "key": "user_settings",
@@ -175,7 +175,7 @@
       "order": 22,
       "status": "partial",
       "description": "page_content collection and the admin Pages module are both real and working, but frontend/website/ is 100% static HTML that never reads Firestore at runtime — edits made here don't reach the live site. Documented as a known gap (CMS_Content_Mapping.md), not silently dropped.",
-      "screenCount": 5
+      "screenCount": 7
     },
     {
       "key": "qr_share",
@@ -5940,7 +5940,13 @@
       "screenTitle": "Band Profile (public view)",
       "screenOrder": 1,
       "states": [
-        "default"
+        "default",
+        "owner",
+        "private",
+        "members_only",
+        "no_portfolio",
+        "no_events",
+        "no_followers"
       ],
       "collectionsTouched": [
         "users"
@@ -6001,12 +6007,106 @@
       "flowTitle": "Band",
       "flowStatus": "partial",
       "flowOrder": 15,
+      "screenKey": "band_create",
+      "screenNumber": 174,
+      "screenTitle": "Create a band",
+      "screenOrder": 4,
+      "states": [
+        "identity",
+        "members",
+        "invitation",
+        "published"
+      ],
+      "collectionsTouched": [
+        "users"
+      ],
+      "notes": "PROPOSED 2026-08-31 from the deferred-flows brief, FLOW 15. Identity, members and the invitation a member receives are steps of one creation, so they are states. A band is a collective professional entity, not a group chat — the copy says so and the fields (type, formation year, languages) follow the brief. BETA.",
+      "dataContract": [
+        {
+          "collection": "users",
+          "sample": {
+            "displayName": "Arijit Sen",
+            "email": "arijit.sen@musiclinkd-mock.example",
+            "primaryRole": "singer",
+            "secondaryRole": "composer",
+            "isVerified": true,
+            "isBanned": false,
+            "isAvailable": true,
+            "hourlyRate": 4500,
+            "budgetTier": "premium",
+            "location": "Mumbai, MH · Andheri",
+            "bio": "Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.",
+            "gender": "Male",
+            "genres": [
+              "Bollywood / Filmi",
+              "Sufi Devotional",
+              "Acoustic / Unplugged"
+            ],
+            "languages": [
+              "Hindi (हिंदी)",
+              "Bengali (বাংলা)",
+              "English"
+            ],
+            "instruments": [
+              "Acoustic Guitar"
+            ],
+            "personaBadges": [
+              "Available for Collab",
+              "Touring"
+            ],
+            "trustBadges": [
+              "Verified Artist",
+              "Rising Talent"
+            ],
+            "avatarUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+            "createdAt": "2026-08-01T09:00:00.000Z",
+            "profileType": "TALENT",
+            "vocalRange": "tenor",
+            "sessionAvailability": "open_for_gigs",
+            "externalLinks": {
+              "spotify": "https://open.spotify.com/artist/arijitsen-mock",
+              "youtube": "https://youtube.com/@arijitsen-mock"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "band",
+      "flowTitle": "Band",
+      "flowStatus": "partial",
+      "flowOrder": 15,
+      "screenKey": "band_settings",
+      "screenNumber": 175,
+      "screenTitle": "Band settings",
+      "screenOrder": 5,
+      "states": [
+        "default",
+        "privacy",
+        "leave",
+        "remove_member",
+        "delete"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from FLOW 15. Leave, remove-member and delete are the brief's three destructive actions; each is a state that explains consequences before confirming, never a one-tap row. BETA.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "band",
+      "flowTitle": "Band",
+      "flowStatus": "partial",
+      "flowOrder": 15,
       "screenKey": "ensemble_lineup",
       "screenNumber": 91,
       "screenTitle": "Ensemble Lineup Display",
       "screenOrder": 2,
       "states": [
-        "default"
+        "default",
+        "owner",
+        "pending",
+        "roles",
+        "remove_member",
+        "empty"
       ],
       "collectionsTouched": [
         "users"
@@ -6072,7 +6172,9 @@
       "screenTitle": "Upcoming Shows List",
       "screenOrder": 3,
       "states": [
-        "hardcoded"
+        "hardcoded",
+        "past",
+        "empty"
       ],
       "collectionsTouched": [],
       "notes": "\"Shows\" is not modeled anywhere — the real UI shows a hardcoded list. Flagged, deferred pending a shape decision (flat array vs. own collection).",
@@ -6091,11 +6193,57 @@
         "id_type_selector",
         "govt_id_upload",
         "gst_upload",
-        "badge_timeline"
+        "badge_timeline",
+        "level_basic",
+        "level_professional",
+        "level_business",
+        "review",
+        "consent"
       ],
       "collectionsTouched": [],
       "notes": "Reachable from the Profile tab. Upload boxes hardcode a literal filename into local state on tap (no file picker, no FirebaseStorage call) — the exact same fake filenames (Aadhaar_Front_SwarSandhya.pdf, GST_Verification_VedanshuMusic.pdf) referenced in this session's mock-data seeding. No write to verification_requests; no status-tracking (pending/approved/rejected) screen exists anywhere — verified status is three local booleans.",
       "dataContract": []
+    },
+    {
+      "flowKey": "verifications",
+      "flowTitle": "Verifications",
+      "flowStatus": "app-mocked",
+      "flowOrder": 16,
+      "screenKey": "verification_status",
+      "screenNumber": 173,
+      "screenTitle": "Verification status",
+      "screenOrder": 2,
+      "states": [
+        "not_started",
+        "pending",
+        "verified",
+        "rejected",
+        "expired",
+        "help"
+      ],
+      "collectionsTouched": [
+        "verification_requests"
+      ],
+      "notes": "PROPOSED 2026-08-31 from the FLOW-16 brief. The lifecycle lives here as five states of ONE screen, because a person checking their verification is doing the same thing whatever the answer is. The brief's rule that verification must not become a vanity badge shapes the copy: it says what was checked, not that the person is endorsed. Rejection gives a reason and a route back in without restarting. BETA.",
+      "dataContract": [
+        {
+          "collection": "verification_requests",
+          "sample": {
+            "subjectType": "USER",
+            "subjectId": "mock-talent-vedanshu-beats-mock",
+            "submittedBy": "mock-talent-vedanshu-beats-mock",
+            "status": "APPROVED",
+            "documentPaths": [
+              "verification_documents/mock/Aadhaar_Front_SwarSandhya.pdf"
+            ],
+            "verificationIdType": "govt_id_aadhaar",
+            "submittedAt": "2026-06-01T09:00:00.000Z",
+            "reviewedBy": "mock-admin-system",
+            "reviewedAt": "2026-06-15T09:00:00.000Z",
+            "notes": "ID matches profile name; approved."
+          }
+        }
+      ]
     },
     {
       "flowKey": "reviews",
@@ -6296,6 +6444,86 @@
       ]
     },
     {
+      "flowKey": "subscription",
+      "flowTitle": "Subscription",
+      "flowStatus": "missing",
+      "flowOrder": 18,
+      "screenKey": "plans",
+      "screenNumber": 178,
+      "screenTitle": "Plans",
+      "screenOrder": 1,
+      "states": [
+        "default",
+        "free",
+        "pro",
+        "business",
+        "trial",
+        "promotion",
+        "feature_limit"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from FLOW 18. Plan comparison and each plan's detail are one screen: the plan being examined is the state. feature_limit is the same screen reached after hitting a limit, which is where the brief says to explain WHICH limit and what lifts it. No fabricated prices beyond the placeholder tiers already used on the marketing page. BETA.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "subscription",
+      "flowTitle": "Subscription",
+      "flowStatus": "missing",
+      "flowOrder": 18,
+      "screenKey": "checkout",
+      "screenNumber": 179,
+      "screenTitle": "Checkout",
+      "screenOrder": 2,
+      "states": [
+        "review",
+        "processing",
+        "success",
+        "failure"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from FLOW 18. Plan, price, tax, billing period and terms before paying. Payment credentials are never shown or collected in this design layer — the method is named, never entered. processing blocks a second submission. BETA.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "subscription",
+      "flowTitle": "Subscription",
+      "flowStatus": "missing",
+      "flowOrder": 18,
+      "screenKey": "manage_subscription",
+      "screenNumber": 180,
+      "screenTitle": "Manage subscription",
+      "screenOrder": 3,
+      "states": [
+        "active",
+        "upgrade",
+        "downgrade",
+        "cancel",
+        "cancelled",
+        "past_due"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from FLOW 18. Upgrade, downgrade and cancel are states of one screen, each showing what changes and when it takes effect. The brief forbids manipulative retention patterns, so cancelling is a plain path with no interstitial offer. BETA.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "subscription",
+      "flowTitle": "Subscription",
+      "flowStatus": "missing",
+      "flowOrder": 18,
+      "screenKey": "invoices",
+      "screenNumber": 181,
+      "screenTitle": "Invoices",
+      "screenOrder": 4,
+      "states": [
+        "default",
+        "empty",
+        "receipt"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from FLOW 18. Invoice list and a single receipt, which is a state rather than a screen. BETA.",
+      "dataContract": []
+    },
+    {
       "flowKey": "search",
       "flowTitle": "Search",
       "flowStatus": "app-mocked",
@@ -6346,6 +6574,49 @@
       ],
       "collectionsTouched": [],
       "notes": "PROPOSED 2026-08-31 from the FLOW-19 brief. Filters change per entity type, and the brief says not to show irrelevant ones — so the filter set is a state keyed to the entity being filtered, in ONE sheet-shaped screen rather than six. Sort lives here too. Active filters appear as chips back on the results.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "recommendation_engine",
+      "flowTitle": "Recommendation Engine",
+      "flowStatus": "missing",
+      "flowOrder": 20,
+      "screenKey": "for_you",
+      "screenNumber": 182,
+      "screenTitle": "For you",
+      "screenOrder": 1,
+      "states": [
+        "default",
+        "people",
+        "businesses",
+        "services",
+        "opportunities",
+        "marketplace",
+        "collaborators",
+        "nearby",
+        "why",
+        "dismissed",
+        "empty"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from FLOW 20. The brief's six recommendation TYPES are one list filtered by what is being recommended, so they are states. Every card carries its reason in words — the brief demands transparency over mystery and forbids fabricated reasons, so a card with no honest reason is not shown. \"why\" expands the reason; \"dismissed\" is what Not Interested leaves behind. BETA.",
+      "dataContract": []
+    },
+    {
+      "flowKey": "recommendation_engine",
+      "flowTitle": "Recommendation Engine",
+      "flowStatus": "missing",
+      "flowOrder": 20,
+      "screenKey": "recommendation_preferences",
+      "screenNumber": 183,
+      "screenTitle": "Recommendation settings",
+      "screenOrder": 2,
+      "states": [
+        "default",
+        "off"
+      ],
+      "collectionsTouched": [],
+      "notes": "PROPOSED 2026-08-31 from FLOW 20. Which signals may be used, and an off switch. The brief: turning personalisation off must not imply core search stops working, and the copy says exactly that. Mirrors the Personalisation control in Settings rather than replacing it. BETA.",
       "dataContract": []
     },
     {
@@ -7000,7 +7271,9 @@
       "screenTitle": "About / Pricing / Careers",
       "screenOrder": 2,
       "states": [
-        "default"
+        "default",
+        "pricing",
+        "careers"
       ],
       "collectionsTouched": [],
       "notes": "Static HTML pages under frontend/website/.",
@@ -7016,7 +7289,9 @@
       "screenTitle": "Legal Pages (site)",
       "screenOrder": 3,
       "states": [
-        "default"
+        "default",
+        "policy",
+        "restricted"
       ],
       "collectionsTouched": [],
       "notes": "Static HTML today — cross-reference Flow 21's \"Legal Pages\" entry point, and the admin's page_content collection below.",
@@ -7032,11 +7307,88 @@
       "screenTitle": "Blog / Changelog",
       "screenOrder": 4,
       "states": [
-        "default"
+        "default",
+        "article",
+        "announcement",
+        "archived",
+        "not_found"
       ],
       "collectionsTouched": [],
       "notes": "Generated from CHANGELOG.md at build time via scripts/generate-changelog.mjs — not Firestore-backed.",
       "dataContract": []
+    },
+    {
+      "flowKey": "cms_pages",
+      "flowTitle": "CMS Pages",
+      "flowStatus": "partial",
+      "flowOrder": 22,
+      "screenKey": "content_home",
+      "screenNumber": 176,
+      "screenTitle": "Guides & help",
+      "screenOrder": 6,
+      "states": [
+        "default",
+        "category",
+        "searching",
+        "no_results",
+        "offline"
+      ],
+      "collectionsTouched": [
+        "page_content"
+      ],
+      "notes": "PROPOSED 2026-08-31 from FLOW 22. The READER's journey — the brief is explicit that authoring belongs to Admin, not here. Featured, latest, categories and search in one screen; the category being browsed is a state. BETA.",
+      "dataContract": [
+        {
+          "collection": "page_content",
+          "sample": {
+            "route": "/",
+            "title": "MusicLinkd — Find your next collaborator",
+            "status": "PUBLISHED",
+            "content": "MusicLinkd connects singers, musicians, producers, studios, and venues across India for collaboration, booking, and hire.",
+            "seoDescription": "MusicLinkd is India's marketplace for music talent, studios, and collaboration.",
+            "updatedBy": "mock-admin-system",
+            "updatedAt": "2026-08-01T09:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "flowKey": "cms_pages",
+      "flowTitle": "CMS Pages",
+      "flowStatus": "partial",
+      "flowOrder": 22,
+      "screenKey": "content_article",
+      "screenNumber": 177,
+      "screenTitle": "Article",
+      "screenOrder": 7,
+      "states": [
+        "default",
+        "faq",
+        "policy",
+        "help",
+        "archived",
+        "restricted",
+        "not_found",
+        "offline"
+      ],
+      "collectionsTouched": [
+        "page_content"
+      ],
+      "notes": "PROPOSED 2026-08-31 from FLOW 22. One editorial reader for every content type — article, FAQ, policy, help — because they differ in content, not in shape. Archived, restricted and not-found are states of the same reader. Editorial typography, generous measure; the brief warns against dense documentation pages. BETA.",
+      "dataContract": [
+        {
+          "collection": "page_content",
+          "sample": {
+            "route": "/",
+            "title": "MusicLinkd — Find your next collaborator",
+            "status": "PUBLISHED",
+            "content": "MusicLinkd connects singers, musicians, producers, studios, and venues across India for collaboration, booking, and hire.",
+            "seoDescription": "MusicLinkd is India's marketplace for music talent, studios, and collaboration.",
+            "updatedBy": "mock-admin-system",
+            "updatedAt": "2026-08-01T09:00:00.000Z"
+          }
+        }
+      ]
     },
     {
       "flowKey": "cms_pages",

@@ -4,5 +4,5 @@
   "order": 22,
   "status": "partial",
   "description": "page_content collection and the admin Pages module are both real and working, but frontend/website/ is 100% static HTML that never reads Firestore at runtime — edits made here don't reach the live site. Documented as a known gap (CMS_Content_Mapping.md), not silently dropped.",
-  "screenCount": 5
+  "screenCount": 7
 }

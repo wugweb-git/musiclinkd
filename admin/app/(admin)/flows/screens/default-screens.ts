@@ -1102,16 +1102,36 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 1,
       screenNumber: 90,
       title: "Band Profile (public view)",
-      states: ["default"],
+      states: ["default", "owner", "private", "members_only", "no_portfolio", "no_events", "no_followers"],
       collectionsTouched: ["users"],
       notes: "Renders off profileType === \"BAND\" now; previously one of three disconnected template-selection heuristics.",
+    },
+    {
+      key: "band_create",
+      order: 4,
+      screenNumber: 174,
+      title: "Create a band",
+      states: ["identity", "members", "invitation", "published"],
+      collectionsTouched: ["users"],
+      notes:
+        "PROPOSED 2026-08-31 from the deferred-flows brief, FLOW 15. Identity, members and the invitation a member receives are steps of one creation, so they are states. A band is a collective professional entity, not a group chat — the copy says so and the fields (type, formation year, languages) follow the brief. BETA.",
+    },
+    {
+      key: "band_settings",
+      order: 5,
+      screenNumber: 175,
+      title: "Band settings",
+      states: ["default", "privacy", "leave", "remove_member", "delete"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from FLOW 15. Leave, remove-member and delete are the brief's three destructive actions; each is a state that explains consequences before confirming, never a one-tap row. BETA.",
     },
     {
       key: "ensemble_lineup",
       order: 2,
       screenNumber: 91,
       title: "Ensemble Lineup Display",
-      states: ["default"],
+      states: ["default", "owner", "pending", "roles", "remove_member", "empty"],
       collectionsTouched: ["users"],
       notes: "lineupMembers — real field, confirmed matches the app's existing lineup-carousel UI shape.",
     },
@@ -1120,7 +1140,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 3,
       screenNumber: 92,
       title: "Upcoming Shows List",
-      states: ["hardcoded"],
+      states: ["hardcoded", "past", "empty"],
       collectionsTouched: [],
       notes: "\"Shows\" is not modeled anywhere — the real UI shows a hardcoded list. Flagged, deferred pending a shape decision (flat array vs. own collection).",
     },
@@ -1140,7 +1160,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 2,
       screenNumber: 94,
       title: "About / Pricing / Careers",
-      states: ["default"],
+      states: ["default", "pricing", "careers"],
       collectionsTouched: [],
       notes: "Static HTML pages under frontend/website/.",
     },
@@ -1149,7 +1169,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 3,
       screenNumber: 95,
       title: "Legal Pages (site)",
-      states: ["default"],
+      states: ["default", "policy", "restricted"],
       collectionsTouched: [],
       notes: "Static HTML today — cross-reference Flow 21's \"Legal Pages\" entry point, and the admin's page_content collection below.",
     },
@@ -1158,9 +1178,29 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 4,
       screenNumber: 96,
       title: "Blog / Changelog",
-      states: ["default"],
+      states: ["default", "article", "announcement", "archived", "not_found"],
       collectionsTouched: [],
       notes: "Generated from CHANGELOG.md at build time via scripts/generate-changelog.mjs — not Firestore-backed.",
+    },
+    {
+      key: "content_home",
+      order: 6,
+      screenNumber: 176,
+      title: "Guides & help",
+      states: ["default", "category", "searching", "no_results", "offline"],
+      collectionsTouched: ["page_content"],
+      notes:
+        "PROPOSED 2026-08-31 from FLOW 22. The READER's journey — the brief is explicit that authoring belongs to Admin, not here. Featured, latest, categories and search in one screen; the category being browsed is a state. BETA.",
+    },
+    {
+      key: "content_article",
+      order: 7,
+      screenNumber: 177,
+      title: "Article",
+      states: ["default", "faq", "policy", "help", "archived", "restricted", "not_found", "offline"],
+      collectionsTouched: ["page_content"],
+      notes:
+        "PROPOSED 2026-08-31 from FLOW 22. One editorial reader for every content type — article, FAQ, policy, help — because they differ in content, not in shape. Archived, restricted and not-found are states of the same reader. Editorial typography, generous measure; the brief warns against dense documentation pages. BETA.",
     },
     {
       key: "admin_pages_editor",
@@ -1499,10 +1539,26 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 1,
       screenNumber: 106,
       title: "Verify Professional Status",
-      states: ["id_type_selector", "govt_id_upload", "gst_upload", "badge_timeline"],
+      states: [
+        "id_type_selector", "govt_id_upload", "gst_upload", "badge_timeline",
+        // FLOW-16 brief, 2026-08-31. The three levels (basic / professional /
+        // business) differ in what evidence they ask for, so they are states
+        // of one submission rather than three screens.
+        "level_basic", "level_professional", "level_business", "review", "consent",
+      ],
       collectionsTouched: [],
       notes:
         "Reachable from the Profile tab. Upload boxes hardcode a literal filename into local state on tap (no file picker, no FirebaseStorage call) — the exact same fake filenames (Aadhaar_Front_SwarSandhya.pdf, GST_Verification_VedanshuMusic.pdf) referenced in this session's mock-data seeding. No write to verification_requests; no status-tracking (pending/approved/rejected) screen exists anywhere — verified status is three local booleans.",
+    },
+    {
+      key: "verification_status",
+      order: 2,
+      screenNumber: 173,
+      title: "Verification status",
+      states: ["not_started", "pending", "verified", "rejected", "expired", "help"],
+      collectionsTouched: ["verification_requests"],
+      notes:
+        "PROPOSED 2026-08-31 from the FLOW-16 brief. The lifecycle lives here as five states of ONE screen, because a person checking their verification is doing the same thing whatever the answer is. The brief's rule that verification must not become a vanity badge shapes the copy: it says what was checked, not that the person is endorsed. Rejection gives a reason and a route back in without restarting. BETA.",
     },
   ],
   reviews: [
@@ -1746,6 +1802,81 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       collectionsTouched: [],
       notes:
         "PROPOSED 2026-08-31 from the FLOW-24 brief, which is explicit that Saved must never become a duplicate detail page. This shows the ORIGINAL entity preview plus the saved-specific facts (saved date, favourite state, which collection) and a single Open Original action into the canonical flow.",
+    },
+  ],
+
+  // --- 2026-08-31: FLOW 18 and FLOW 20 had NO screens at all. Both are
+  // PROPOSED from the deferred-flows brief and marked BETA in the UI: neither
+  // has an Android implementation, and subscription has no schema either
+  // (MASTER-REGISTRY records "not modelled at all — no subscription/plan/tier
+  // collection exists anywhere"). Designing them does not change that; the
+  // screens say Beta so nobody reads them as shipped.
+  subscription: [
+    {
+      key: "plans",
+      order: 1,
+      screenNumber: 178,
+      title: "Plans",
+      states: ["default", "free", "pro", "business", "trial", "promotion", "feature_limit"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from FLOW 18. Plan comparison and each plan's detail are one screen: the plan being examined is the state. feature_limit is the same screen reached after hitting a limit, which is where the brief says to explain WHICH limit and what lifts it. No fabricated prices beyond the placeholder tiers already used on the marketing page. BETA.",
+    },
+    {
+      key: "checkout",
+      order: 2,
+      screenNumber: 179,
+      title: "Checkout",
+      states: ["review", "processing", "success", "failure"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from FLOW 18. Plan, price, tax, billing period and terms before paying. Payment credentials are never shown or collected in this design layer — the method is named, never entered. processing blocks a second submission. BETA.",
+    },
+    {
+      key: "manage_subscription",
+      order: 3,
+      screenNumber: 180,
+      title: "Manage subscription",
+      states: ["active", "upgrade", "downgrade", "cancel", "cancelled", "past_due"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from FLOW 18. Upgrade, downgrade and cancel are states of one screen, each showing what changes and when it takes effect. The brief forbids manipulative retention patterns, so cancelling is a plain path with no interstitial offer. BETA.",
+    },
+    {
+      key: "invoices",
+      order: 4,
+      screenNumber: 181,
+      title: "Invoices",
+      states: ["default", "empty", "receipt"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from FLOW 18. Invoice list and a single receipt, which is a state rather than a screen. BETA.",
+    },
+  ],
+
+  recommendation_engine: [
+    {
+      key: "for_you",
+      order: 1,
+      screenNumber: 182,
+      title: "For you",
+      states: [
+        "default", "people", "businesses", "services", "opportunities",
+        "marketplace", "collaborators", "nearby", "why", "dismissed", "empty",
+      ],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from FLOW 20. The brief's six recommendation TYPES are one list filtered by what is being recommended, so they are states. Every card carries its reason in words — the brief demands transparency over mystery and forbids fabricated reasons, so a card with no honest reason is not shown. \"why\" expands the reason; \"dismissed\" is what Not Interested leaves behind. BETA.",
+    },
+    {
+      key: "recommendation_preferences",
+      order: 2,
+      screenNumber: 183,
+      title: "Recommendation settings",
+      states: ["default", "off"],
+      collectionsTouched: [],
+      notes:
+        "PROPOSED 2026-08-31 from FLOW 20. Which signals may be used, and an off switch. The brief: turning personalisation off must not imply core search stops working, and the copy says exactly that. Mirrors the Personalisation control in Settings rather than replacing it. BETA.",
     },
   ],
 };

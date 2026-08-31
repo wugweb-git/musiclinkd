@@ -1,0 +1,19 @@
+{
+  "flowKey": "subscription",
+  "flowTitle": "Subscription",
+  "flowStatus": "missing",
+  "flowOrder": 18,
+  "screenKey": "checkout",
+  "screenNumber": 179,
+  "screenTitle": "Checkout",
+  "screenOrder": 2,
+  "states": [
+    "review",
+    "processing",
+    "success",
+    "failure"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from FLOW 18. Plan, price, tax, billing period and terms before paying. Payment credentials are never shown or collected in this design layer — the method is named, never entered. processing blocks a second submission. BETA.",
+  "dataContract": []
+}

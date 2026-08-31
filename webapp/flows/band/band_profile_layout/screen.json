@@ -8,7 +8,13 @@
   "screenTitle": "Band Profile (public view)",
   "screenOrder": 1,
   "states": [
-    "default"
+    "default",
+    "owner",
+    "private",
+    "members_only",
+    "no_portfolio",
+    "no_events",
+    "no_followers"
   ],
   "collectionsTouched": [
     "users"

@@ -10,7 +10,7 @@
 <meta name="screen-json-path" content="/preview/flows/verifications/verification_screen/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Verification</title>
+<title>MusicLinkd — Verification — Submit</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
@@ -23,67 +23,120 @@
 
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
-      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/profile_management/profile_overview/index.html" aria-label="Back">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/verifications/verification_status/index.html" aria-label="Back">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
         </a>
-      <h1 class="ml-type-2" style="margin:0">Get verified</h1>
+      <h1 class="ml-type-2" style="margin:0;flex:1">Get verified</h1>
+      <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <!-- Four steps, four states, one screen. A wizard whose steps are
-           screens gives you a back-stack you have to manage; states give you
-           one that the URL already describes. -->
+
       <div data-state="id_type_selector">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
-          Verification adds a badge to your profile and unlocks direct booking. We check that you are who you say you are — nothing else.
-        </p>
-        <div class="ml-section"><h2>What are you verifying with?</h2></div>
-        <div role="radiogroup" aria-label="Document type">
-          <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
+        <div class="ml-section"><h2>What are you verifying?</h2></div>
+        <div role="radiogroup" aria-label="Verification level">
+          <a class="ml-choice" role="radio" aria-checked="false" href="?state=level_basic">
             <span class="ml-choice__body">
-              <span class="ml-choice__title">Aadhaar</span>
-              <span class="ml-choice__meta">Most common, fastest to check</span>
+              <span class="ml-choice__title">Basic</span>
+              <span class="ml-choice__meta">That you are a real person, using one government ID.</span>
+              <span class="ml-choice__meta">Needs: One government ID</span>
             </span>
             <span class="ml-choice__mark"></span>
-          </div>
-          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+          </a>
+          <a class="ml-choice" role="radio" aria-checked="true" href="?state=level_professional">
             <span class="ml-choice__body">
-              <span class="ml-choice__title">Passport</span>
-              <span class="ml-choice__meta">For non-residents</span>
+              <span class="ml-choice__title">Professional</span>
+              <span class="ml-choice__meta">Basic, plus that the work on your profile is genuinely yours.</span>
+              <span class="ml-choice__meta">Needs: One government ID, and two pieces of released work you are credited on</span>
             </span>
             <span class="ml-choice__mark"></span>
-          </div>
-          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+          </a>
+          <a class="ml-choice" role="radio" aria-checked="false" href="?state=level_business">
             <span class="ml-choice__body">
-              <span class="ml-choice__title">Driving licence</span>
-              
+              <span class="ml-choice__title">Business</span>
+              <span class="ml-choice__meta">That the business exists and that you are authorised to act for it.</span>
+              <span class="ml-choice__meta">Needs: GST certificate and one document showing your authority</span>
             </span>
             <span class="ml-choice__mark"></span>
-          </div>
-          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
-            <span class="ml-choice__body">
-              <span class="ml-choice__title">GST certificate</span>
-              <span class="ml-choice__meta">For businesses</span>
-            </span>
-            <span class="ml-choice__mark"></span>
-          </div>
+          </a>
         </div>
-        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=govt_id_upload">Continue</a>
+      </div>
+
+      <div data-state="level_basic">
+        <div class="ml-section"><h2>Basic — one document</h2></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          One government ID with your name and photograph. We check the name against your profile.
+        </p>
+        <a class="ml-action-row" href="?state=govt_id_upload">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Continue to upload</span>
+          
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+      </div>
+
+      <div data-state="level_professional">
+        <div class="ml-section"><h2>Professional — ID and two credits</h2></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          One government ID, plus two pieces of released work you're credited on. A link to each is enough —
+          a streaming page, a label page, or a release you've already added to your portfolio.
+        </p>
+        <div class="ml-field">
+          <label for="v-c1">First credit (link)</label>
+          <input id="v-c1" type="url" placeholder="https://open.spotify.com/track/…" />
+        </div>
+        <div class="ml-field">
+          <label for="v-c2">Second credit (link)</label>
+          <input id="v-c2" type="url" placeholder="https://…" />
+        </div>
+        <a class="ml-action-row" href="?state=govt_id_upload">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Continue to upload</span>
+          
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+      </div>
+
+      <div data-state="level_business">
+        <div class="ml-section"><h2>Business — company documents</h2></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          We check that the business exists and that you can act for it. We do not ask for bank details,
+          and we never will as part of verification.
+        </p>
+        <a class="ml-action-row" href="?state=gst_upload">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Continue</span>
+          
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
       </div>
 
       <div data-state="govt_id_upload">
-        <div class="ml-section"><h2>Upload your Aadhaar</h2></div>
+        <div class="ml-section"><h2>Your ID</h2></div>
         <div class="ml-dropzone">
-          <span class="ml-dropzone__hint">Photograph or PDF, both sides</span>
+          <span class="ml-dropzone__hint">Photograph or scan, both sides</span>
           <span class="ml-dropzone__formats">JPG, PNG or PDF · up to 10MB</span>
         </div>
+        <div class="ml-field" style="margin-top:var(--space-3)">
+          <label for="v-type">Document type</label>
+          <select id="v-type"><option>Aadhaar</option><option>Passport</option><option>Driving licence</option><option>Voter ID</option></select>
+        </div>
         <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
-          Stored encrypted, seen only by the reviewer, and deleted once the check completes.
+          Cover any number you don't want us to see. We only need the name and photograph.
         </p>
-        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=gst_upload">Continue</a>
+        <a class="ml-action-row" href="?state=review">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Continue</span>
+          
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
       </div>
 
       <div data-state="gst_upload">
-        <div class="ml-section"><h2>Business details</h2></div>
+        <div class="ml-section"><h2>Business documents</h2></div>
         <div class="ml-field">
           <label for="v-gst">GST number</label>
           <input id="v-gst" type="text" placeholder="27ABCDE1234F1Z5" />
@@ -92,22 +145,65 @@
           <span class="ml-dropzone__hint">GST certificate</span>
           <span class="ml-dropzone__formats">PDF · up to 10MB</span>
         </div>
-        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
-          Skip this if you are verifying as an individual.
+        <div class="ml-dropzone" style="margin-top:var(--space-2)">
+          <span class="ml-dropzone__hint">Proof you can act for the business</span>
+          <span class="ml-dropzone__formats">Letterhead, board resolution or incorporation document</span>
+        </div>
+        <a class="ml-action-row" href="?state=review">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Continue</span>
+          
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+      </div>
+
+      <div data-state="review">
+        <div class="ml-section"><h2>Before you send it</h2></div>
+        <div class="ml-summary">
+          <div class="ml-summary__row"><span>Level</span><span>Professional</span></div>
+          <div class="ml-summary__row"><span>ID</span><span>Aadhaar · 2 files</span></div>
+          <div class="ml-summary__row"><span>Credits</span><span>2 links</span></div>
+          <div class="ml-summary__row"><span>Name on profile</span><span>Ishita Rao</span></div>
+        </div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+          Check the name on your profile matches the name on your ID — a mismatch is the single
+          most common reason a check fails.
         </p>
+        <a class="ml-action-row" href="?state=consent">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Consent and submit</span>
+          
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+      </div>
+
+      <div data-state="consent">
+        <div class="ml-section"><h2>Your consent</h2></div>
+        <label class="ml-check-row">
+          <span class="ml-check-ctl" role="checkbox" aria-checked="true"></span>
+          <span class="ml-choice__body"><span class="ml-choice__title">
+            I agree to MusicLinkd checking these documents to verify my identity.
+          </span></span>
+        </label>
+        <label class="ml-check-row">
+          <span class="ml-check-ctl" role="checkbox" aria-checked="true"></span>
+          <span class="ml-choice__body"><span class="ml-choice__title">
+            I understand my documents are deleted once the check is complete, and are never shown publicly.
+          </span></span>
+        </label>
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=badge_timeline">Submit for review</a>
       </div>
 
       <div data-state="badge_timeline">
-        <div class="ml-section"><h2>Where it's up to</h2></div>
-        <ol class="ml-timeline">
-          <li class="ml-timeline__item is-done"><span class="ml-timeline__title">Documents received</span>
-            <span class="ml-timeline__meta">29 Aug, 14:02</span></li>
-          <li class="ml-timeline__item is-current"><span class="ml-timeline__title">Under review</span>
-            <span class="ml-timeline__meta">Usually two working days</span></li>
-          <li class="ml-timeline__item"><span class="ml-timeline__title">Badge issued</span></li>
-        </ol>
-        <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/profile_management/profile_overview/index.html">Back to profile</a>
+        <div class="ml-empty">
+          <h2 class="ml-empty__title">Sent for review</h2>
+          <p class="ml-empty__body">
+            We'll notify you when it's decided. Most checks finish within two working days.
+          </p>
+          <a class="ml-btn ml-btn--primary" href="/preview/flows/verifications/verification_status/index.html?state=pending">See status</a>
+        </div>
       </div>
     </main>
   </div>

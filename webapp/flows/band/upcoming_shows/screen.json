@@ -8,7 +8,9 @@
   "screenTitle": "Upcoming Shows List",
   "screenOrder": 3,
   "states": [
-    "hardcoded"
+    "hardcoded",
+    "past",
+    "empty"
   ],
   "collectionsTouched": [],
   "notes": "\"Shows\" is not modeled anywhere — the real UI shows a hardcoded list. Flagged, deferred pending a shape decision (flat array vs. own collection).",

@@ -1,0 +1,18 @@
+{
+  "flowKey": "subscription",
+  "flowTitle": "Subscription",
+  "flowStatus": "missing",
+  "flowOrder": 18,
+  "screenKey": "invoices",
+  "screenNumber": 181,
+  "screenTitle": "Invoices",
+  "screenOrder": 4,
+  "states": [
+    "default",
+    "empty",
+    "receipt"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from FLOW 18. Invoice list and a single receipt, which is a state rather than a screen. BETA.",
+  "dataContract": []
+}

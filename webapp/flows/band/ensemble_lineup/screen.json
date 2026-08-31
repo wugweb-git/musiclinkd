@@ -8,7 +8,12 @@
   "screenTitle": "Ensemble Lineup Display",
   "screenOrder": 2,
   "states": [
-    "default"
+    "default",
+    "owner",
+    "pending",
+    "roles",
+    "remove_member",
+    "empty"
   ],
   "collectionsTouched": [
     "users"

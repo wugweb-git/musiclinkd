@@ -1,0 +1,26 @@
+{
+  "flowKey": "recommendation_engine",
+  "flowTitle": "Recommendation Engine",
+  "flowStatus": "missing",
+  "flowOrder": 20,
+  "screenKey": "for_you",
+  "screenNumber": 182,
+  "screenTitle": "For you",
+  "screenOrder": 1,
+  "states": [
+    "default",
+    "people",
+    "businesses",
+    "services",
+    "opportunities",
+    "marketplace",
+    "collaborators",
+    "nearby",
+    "why",
+    "dismissed",
+    "empty"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from FLOW 20. The brief's six recommendation TYPES are one list filtered by what is being recommended, so they are states. Every card carries its reason in words — the brief demands transparency over mystery and forbids fabricated reasons, so a card with no honest reason is not shown. \"why\" expands the reason; \"dismissed\" is what Not Interested leaves behind. BETA.",
+  "dataContract": []
+}

@@ -160,9 +160,13 @@ const ALIAS = {
      library — every pool there is bound to a component. */
   "imagery": "#imagery", "branded-media": "#imagery",
 
-  // taxonomy
-  "p-catalog": "#taxonomy", "p-personas": "#taxonomy", "p-modules": "#taxonomy",
-  "pr-talent": "#taxonomy", "pr-band": "#taxonomy", "pr-biz": "#taxonomy", "pr-venue": "#taxonomy",
+  // taxonomy — only p-catalog actually landed there. #taxonomy renders the 18
+  // categories from Master_Data_Seed_Values.md and contains ZERO personas and
+  // no module list; checked against the built page 2026-08-31. The four
+  // entries below were aliased here on the assumption that "taxonomy" covered
+  // them, which is the same mistake as the android-platform alias: an
+  // unverified alias hides a real gap by counting it as migrated.
+  "p-catalog": "#taxonomy",
 
   // patterns — #patterns is generated from webapp/flows, and went from 7 flows
   // to 22 as the flows were rebuilt. Everything below now has a flow behind it;

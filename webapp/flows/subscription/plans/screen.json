@@ -1,0 +1,22 @@
+{
+  "flowKey": "subscription",
+  "flowTitle": "Subscription",
+  "flowStatus": "missing",
+  "flowOrder": 18,
+  "screenKey": "plans",
+  "screenNumber": 178,
+  "screenTitle": "Plans",
+  "screenOrder": 1,
+  "states": [
+    "default",
+    "free",
+    "pro",
+    "business",
+    "trial",
+    "promotion",
+    "feature_limit"
+  ],
+  "collectionsTouched": [],
+  "notes": "PROPOSED 2026-08-31 from FLOW 18. Plan comparison and each plan's detail are one screen: the plan being examined is the state. feature_limit is the same screen reached after hitting a limit, which is where the brief says to explain WHICH limit and what lifts it. No fabricated prices beyond the placeholder tiers already used on the marketing page. BETA.",
+  "dataContract": []
+}

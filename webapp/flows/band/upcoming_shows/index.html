@@ -26,44 +26,56 @@
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/band/band_profile_layout/index.html" aria-label="Back">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
         </a>
-      <h1 class="ml-type-2" style="margin:0">Shows</h1>
+      <h1 class="ml-type-2" style="margin:0;flex:1">Shows</h1>
+      <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
     </header>
+    <nav class="ml-tabs ml-tabs--fill" role="tablist" aria-label="Shows" style="margin:0 var(--space-4)">
+      <a class="ml-tabs__tab" role="tab" data-chip="hardcoded" href="?state=hardcoded">Upcoming</a>
+      <a class="ml-tabs__tab" role="tab" data-chip="past" href="?state=past">Past</a>
+    </nav>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <!-- The declared state is "hardcoded", which is a note in the registry
-           that the Android screen ships a fixed list rather than reading
-           Firestore. It is not a state this screen enters, so it is recorded
-           here rather than rendered as one. -->
+      <!-- The declared state is "hardcoded": a registry note that the Android
+           screen ships a fixed list rather than reading Firestore. Recorded
+           here rather than silently renamed. -->
       <div data-state="hardcoded">
-      <div class="ml-section"><h2>Upcoming</h2></div>
-      <div class="ml-booking-card">
-        <div class="ml-booking-card__body">
-          <span class="ml-booking-card__title">Antisocial, Khar</span>
-          <span class="ml-booking-card__meta">18 Aug 2026 · Doors 8pm · ₹500</span>
-          <span class="ml-status ml-status--success">Confirmed</span>
+        <div class="ml-booking-card">
+          <div class="ml-booking-card__body">
+            <span class="ml-booking-card__title">Antisocial, Khar</span>
+            <span class="ml-booking-card__meta">18 Aug 2026 · Doors 8pm · ₹500</span>
+            <span class="ml-status ml-status--success">Confirmed</span>
+          </div>
         </div>
-      </div>
-      <div class="ml-booking-card">
-        <div class="ml-booking-card__body">
-          <span class="ml-booking-card__title">The Quarter, Lower Parel</span>
-          <span class="ml-booking-card__meta">02 Sep 2026 · Doors 9pm · ₹700</span>
-          <span class="ml-status ml-status--success">Confirmed</span>
+        <div class="ml-booking-card">
+          <div class="ml-booking-card__body">
+            <span class="ml-booking-card__title">The Quarter, Lower Parel</span>
+            <span class="ml-booking-card__meta">02 Sep 2026 · Doors 9pm · ₹700</span>
+            <span class="ml-status ml-status--success">Confirmed</span>
+          </div>
         </div>
-      </div>
-      <div class="ml-booking-card">
-        <div class="ml-booking-card__body">
-          <span class="ml-booking-card__title">Bandra Base</span>
-          <span class="ml-booking-card__meta">21 Sep 2026 · Support slot · ₹400</span>
-          <span class="ml-status ml-status--warning">Holding</span>
+        <div class="ml-booking-card">
+          <div class="ml-booking-card__body">
+            <span class="ml-booking-card__title">Bandra Base</span>
+            <span class="ml-booking-card__meta">21 Sep 2026 · Support slot · ₹400</span>
+            <span class="ml-status ml-status--warning">Holding</span>
+          </div>
         </div>
       </div>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Past</h2></div>
-      <div class="ml-summary__row"><span>12 Jul 2026 · Antisocial, Khar</span><span>Sold out</span></div>
-      <div class="ml-summary__row"><span>28 Jun 2026 · The Quarter</span><span>180 in</span></div>
+      <div data-state="past">
+        <div class="ml-summary">
+          <div class="ml-summary__row"><span>12 Jul 2026 · Antisocial, Khar</span><span>Sold out</span></div>
+          <div class="ml-summary__row"><span>28 Jun 2026 · The Quarter</span><span>180 in</span></div>
+          <div class="ml-summary__row"><span>09 May 2026 · Bandra Base</span><span>120 in</span></div>
+        </div>
+      </div>
+
+      <div class="ml-empty" data-state="empty">
+        <h2 class="ml-empty__title">No shows yet</h2>
+        <p class="ml-empty__body">Add a date and it appears on the band profile, on every member's profile, and in Discover.</p>
       </div>
     </main>
     <footer class="ml-app__footer">
-      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/band/band_profile_layout/index.html">Add a show</a>
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/band/band_profile_layout/index.html?state=owner">Add a show</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

@@ -1,0 +1,35 @@
+{
+  "flowKey": "cms_pages",
+  "flowTitle": "CMS Pages",
+  "flowStatus": "partial",
+  "flowOrder": 22,
+  "screenKey": "content_home",
+  "screenNumber": 176,
+  "screenTitle": "Guides & help",
+  "screenOrder": 6,
+  "states": [
+    "default",
+    "category",
+    "searching",
+    "no_results",
+    "offline"
+  ],
+  "collectionsTouched": [
+    "page_content"
+  ],
+  "notes": "PROPOSED 2026-08-31 from FLOW 22. The READER's journey — the brief is explicit that authoring belongs to Admin, not here. Featured, latest, categories and search in one screen; the category being browsed is a state. BETA.",
+  "dataContract": [
+    {
+      "collection": "page_content",
+      "sample": {
+        "route": "/",
+        "title": "MusicLinkd — Find your next collaborator",
+        "status": "PUBLISHED",
+        "content": "MusicLinkd connects singers, musicians, producers, studios, and venues across India for collaboration, booking, and hire.",
+        "seoDescription": "MusicLinkd is India's marketplace for music talent, studios, and collaboration.",
+        "updatedBy": "mock-admin-system",
+        "updatedAt": "2026-08-01T09:00:00.000Z"
+      }
+    }
+  ]
+}

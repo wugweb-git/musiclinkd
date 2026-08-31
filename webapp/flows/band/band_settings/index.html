@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0D0D0D" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="screen-json-path" content="/preview/flows/band/band_settings/screen.json" />
+<link rel="manifest" href="/preview/manifest.json" />
+<link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
+<title>MusicLinkd — Band — Settings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/preview/shared/app-shell.css" />
+</head>
+<body>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/band/band_profile_layout/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0;flex:1">Band settings</h1>
+      <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+
+      <div data-state="default">
+        <div class="ml-section"><h2>Band</h2></div>
+        <a class="ml-action-row" href="/preview/flows/band/band_create/index.html?state=identity">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Identity</span>
+          <span class="ml-choice__meta">Name, genre, city, about</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+        <a class="ml-action-row" href="/preview/flows/band/ensemble_lineup/index.html?state=roles">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Members and roles</span>
+          <span class="ml-choice__meta">4 members</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+        <a class="ml-action-row" href="?state=privacy">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Privacy</span>
+          <span class="ml-choice__meta">Public</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Leaving</h2></div>
+        <a class="ml-action-row" href="?state=leave">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Leave this band</span>
+          <span class="ml-choice__meta">You stay on MusicLinkd; the band continues</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Danger zone</h2></div>
+        <a class="ml-action-row" href="?state=delete">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title" style="color:var(--color-error)">Delete this band</span>
+            <span class="ml-choice__meta">Only the owner can do this. Read what happens first.</span>
+          </span>
+          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        </a>
+      </div>
+
+      <div data-state="privacy">
+        <div class="ml-section"><h2>Who can see this band?</h2></div>
+        <div role="radiogroup" aria-label="Band visibility">
+          <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Public</span>
+              <span class="ml-choice__meta">Anyone, including people not on MusicLinkd. Appears in Discover and search.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">MusicLinkd members</span>
+              <span class="ml-choice__meta">Signed-in people only.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+          <div class="ml-choice" role="radio" aria-checked="false" tabindex="-1">
+            <span class="ml-choice__body">
+              <span class="ml-choice__title">Private</span>
+              <span class="ml-choice__meta">Only members. Useful while you're still forming.</span>
+            </span>
+            <span class="ml-choice__mark"></span>
+          </div>
+        </div>
+      </div>
+
+      <div data-state="leave">
+        <div class="ml-section"><h2>Leave The Kolaba Sessions?</h2></div>
+        <div class="ml-summary">
+          <div class="ml-summary__row"><span>Your profile</span><span>Unaffected</span></div>
+          <div class="ml-summary__row"><span>Music you added</span><span>Stays with the band, credited to you</span></div>
+          <div class="ml-summary__row"><span>Past shows</span><span>Keep your name</span></div>
+          <div class="ml-summary__row"><span>Rejoining</span><span>Needs a new invitation</span></div>
+        </div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/band/band_profile_layout/index.html">Leave band</a>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=default">Cancel</a>
+      </div>
+
+      <div data-state="remove_member">
+        <div class="ml-section"><h2>Remove a member</h2></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          Removing someone is done from the line-up, so you can see who you're removing.
+        </p>
+        <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/band/ensemble_lineup/index.html?state=remove_member">Go to line-up</a>
+      </div>
+
+      <div data-state="delete">
+        <div class="ml-banner ml-banner--error">
+          <span class="ml-banner__body">Deleting a band is permanent. It cannot be undone.</span>
+        </div>
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>What happens</h2></div>
+        <div class="ml-summary">
+          <div class="ml-summary__row"><span>Band profile</span><span>Deleted</span></div>
+          <div class="ml-summary__row"><span>Members</span><span>Keep their own profiles</span></div>
+          <div class="ml-summary__row"><span>Music</span><span>Returns to whoever uploaded it</span></div>
+          <div class="ml-summary__row"><span>Upcoming shows</span><span>Removed from every profile</span></div>
+          <div class="ml-summary__row"><span>Past shows</span><span>Kept on members' profiles</span></div>
+          <div class="ml-summary__row"><span>Members are told</span><span>Yes, by notification</span></div>
+        </div>
+        <div class="ml-field" style="margin-top:var(--space-3)">
+          <label for="b-confirm">Type the band's name to confirm</label>
+          <input id="b-confirm" type="text" placeholder="The Kolaba Sessions" />
+        </div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/band/band_profile_layout/index.html">Delete band</a>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=default">Cancel</a>
+      </div>
+    </main>
+  </div>
+  <script src="/preview/shared/app-shell.js" defer></script>
+</body>
+</html>
