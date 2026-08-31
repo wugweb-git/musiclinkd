@@ -18,7 +18,7 @@
 import { writeScreen, icon, backArrow, assertIcons, finish, media } from "../write-screen.mjs";
 
 const P = "/preview/flows/marketplace/";
-assertIcons(["search", "heart", "filter", "add"]);
+assertIcons(["search", "heart", "filter", "add", "arrow-forward"]);
 
 /** Every listing carries its category so one grid serves all six states, and
     the keywords the demo search matches on — search_filtered used to show the
@@ -102,6 +102,14 @@ writeScreen({
       <!-- Category tiles jump straight to a state via the URL, so they work
            with no JavaScript at all — the old ones were bound to a dead
            selector and did nothing. -->
+      <a class="ml-action-row" data-state="default" href="${P}marketplace_nearby/index.html" style="margin-bottom:var(--space-2)">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Near you</span>
+          <span class="ml-choice__meta">Sorted by distance from your city</span>
+        </span>
+        ${icon("arrow-forward", { size: 18 })}
+      </a>
+
       <div class="ml-rail" data-state="default" style="margin-bottom:var(--space-3)">
         ${CATS.slice(1).map(([k, l]) => catTile(k, l)).join("\n        ")}
       </div>
@@ -166,10 +174,11 @@ writeScreen({
           Cardioid dynamic, used on two album sessions. Original box, shock mount and cable included.
           Collection in Andheri or courier at cost.
         </p>
-        <div class="ml-person-row" style="margin-top:var(--space-3)">
+        <a class="ml-person-row" style="margin-top:var(--space-3)" href="${P}marketplace_seller_profile/index.html">
           <img src="${media("faces", 3)}" alt="" loading="lazy" />
           <span class="meta"><b>Aarav Menon</b><p>Seller · 12 listings · joined 2024</p></span>
-        </div>
+          ${icon("arrow-forward", { size: 18 })}
+        </a>
         <div class="ml-summary" style="margin-top:var(--space-3)">
           <div class="ml-summary__row"><span>Asking price</span><span>₹28,500</span></div>
           <div class="ml-summary__row"><span>Delivery</span><span>At cost</span></div>
@@ -430,6 +439,209 @@ writeScreen({
         <a class="ml-btn ml-btn--secondary" href="?state=default">Clear filters</a>
       </div>
     </main>
+  </div>`,
+});
+
+/* ══ the approved plan's Market +4 ═════════════════════════════════════════
+   nearby, availability, rental_summary and seller_profile. Each owns a route.
+   Everything else in that column was already delivered as states on the eight
+   screens above. ═══════════════════════════════════════════════════════════ */
+
+writeScreen({
+  flow: "marketplace", screen: "marketplace_nearby", title: "Market — Nearby",
+  body: `
+  <div class="ml-app">
+    ${bar("Nearby", `${P}marketplace_browse/index.html`)}
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div data-state="default">
+        <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
+          Sorted by distance from Andheri West, the city on your profile.
+        </p>
+        ${LISTINGS.slice(0, 5).map((l, i) => `<a class="ml-result" href="${P}marketplace_item_detail/index.html">
+          <img class="ml-result__thumb" src="${l.img}" alt="" loading="lazy" />
+          <span class="ml-result__body">
+            <span class="ml-result__name">${l.title}</span>
+            <span class="ml-result__meta">${l.meta}</span>
+            <span class="ml-result__meta">${[1.2, 2.4, 4.1, 6.8, 11.2][i]} km away</span>
+          </span>
+          <span class="ml-result__trail">${l.price}</span>
+        </a>`).join("\n        ")}
+      </div>
+
+      <div class="ml-empty" data-state="empty">
+        <h2 class="ml-empty__title">Nothing listed near you</h2>
+        <p class="ml-empty__body">Nobody within 25 km has listed anything yet. Browsing everywhere usually works better in a smaller city.</p>
+        <a class="ml-btn ml-btn--primary" href="${P}marketplace_browse/index.html">Browse everywhere</a>
+      </div>
+
+      <!-- Distance comes from the city on the profile, not live location. The
+           copy says so, and does not pretend the app can grant itself the
+           permission it does not have. -->
+      <div class="ml-empty" data-state="permission_denied">
+        <h2 class="ml-empty__title">We're using the city on your profile</h2>
+        <p class="ml-empty__body">
+          Location access is off, so distances are measured from Andheri West rather than from
+          where you are. You can turn it on in your device settings — we can't change it from here.
+        </p>
+        <a class="ml-btn ml-btn--primary" href="?state=default">Use my profile city</a>
+        <a class="ml-btn ml-btn--secondary" style="margin-top:var(--space-2)" href="/preview/flows/profile_management/edit_identity/index.html">Change my city</a>
+      </div>
+    </main>
+  </div>`,
+});
+
+/* Rental availability reuses .ml-calendar — the same component booking uses,
+   which is exactly why it lives in the system and not in either flow. */
+const R_DAYS = Array.from({ length: 30 }, (_, i) => i + 1);
+const R_TAKEN = new Set([5, 6, 7, 14, 15, 22, 23]);
+
+writeScreen({
+  flow: "marketplace", screen: "marketplace_availability", title: "Market — Availability",
+  body: `
+  <div class="ml-app">
+    ${bar("Availability", `${P}marketplace_item_detail/index.html`)}
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <a class="ml-result" href="${P}marketplace_item_detail/index.html">
+        <img class="ml-result__thumb" src="${media("gear", 3)}" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Focusrite Scarlett 2i2</span>
+          <span class="ml-result__meta">Gear Rental · Mumbai</span>
+        </span>
+        <span class="ml-result__trail">₹800/day</span>
+      </a>
+
+      <div class="ml-calendar" data-state="default" style="margin-top:var(--space-3)">
+        <div class="ml-calendar__head"><span class="ml-calendar__month">September 2026</span></div>
+        <div class="ml-calendar__dow">${["M", "T", "W", "T", "F", "S", "S"].map((d) => `<span>${d}</span>`).join("")}</div>
+        <div class="ml-calendar__grid">
+          ${Array.from({ length: 1 }, () => `<span></span>`).join("")}
+          ${R_DAYS.map((d) => `<button type="button" class="ml-calendar__day${R_TAKEN.has(d) ? " is-blocked" : ""}"${R_TAKEN.has(d) ? ` disabled aria-label="${d} September, already rented"` : ""}>${d}</button>`).join("\n          ")}
+        </div>
+        <div class="ml-calendar__legend">
+          <span><i class="ml-calendar__key ml-calendar__key--sel"></i>Free</span>
+          <span><i class="ml-calendar__key ml-calendar__key--blocked"></i>Already out</span>
+        </div>
+      </div>
+
+      <div class="ml-empty" data-state="unavailable">
+        <h2 class="ml-empty__title">This item isn't being rented right now</h2>
+        <p class="ml-empty__body">The owner has paused it. You can still message them to ask.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/communication/chat_conversation/index.html">Message the owner</a>
+      </div>
+    </main>
+    <footer class="ml-app__footer" data-state="default">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="${P}marketplace_rental_summary/index.html">Request these dates</a>
+    </footer>
+  </div>`,
+});
+
+writeScreen({
+  flow: "marketplace", screen: "marketplace_rental_summary", title: "Market — Rental summary",
+  body: `
+  <div class="ml-app">
+    ${bar("Your rental", `${P}marketplace_availability/index.html`)}
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <a class="ml-result" href="${P}marketplace_item_detail/index.html">
+        <img class="ml-result__thumb" src="${media("gear", 3)}" alt="" loading="lazy" />
+        <span class="ml-result__body">
+          <span class="ml-result__name">Focusrite Scarlett 2i2</span>
+          <span class="ml-result__meta">From Aarav Menon · Mumbai</span>
+        </span>
+      </a>
+
+      <div class="ml-summary" style="margin-top:var(--space-3)" data-state="default">
+        <div class="ml-summary__row"><span>Out</span><span>Mon 8 Sept</span></div>
+        <div class="ml-summary__row"><span>Back</span><span>Thu 11 Sept</span></div>
+        <div class="ml-summary__row"><span>3 days at ₹800</span><span>₹2,400</span></div>
+        <div class="ml-summary__row"><span>Deposit, refundable</span><span>₹5,000</span></div>
+        <div class="ml-summary__row ml-summary__row--total"><span>Now</span><span>₹7,400</span></div>
+        <p class="ml-summary__note">
+          The deposit is held, not paid to the owner, and comes back within three days of return
+          if the item is as it went out.
+        </p>
+      </div>
+
+      <div data-state="returned">
+        <div class="ml-banner ml-banner--success"><span class="ml-banner__body">Returned on 11 September. Deposit released.</span></div>
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>Rental</span><span>₹2,400</span></div>
+          <div class="ml-summary__row"><span>Deposit returned</span><span>₹5,000</span></div>
+          <div class="ml-summary__row"><span>Deductions</span><span>None</span></div>
+        </div>
+        <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/reviews/marketplace_review_screen/index.html">Review the owner</a>
+      </div>
+
+      <div data-state="overdue">
+        <div class="ml-banner ml-banner--warning"><span class="ml-banner__body">Due back yesterday.</span></div>
+        <div class="ml-summary" style="margin-top:var(--space-3)">
+          <div class="ml-summary__row"><span>Was due</span><span>Thu 11 Sept</span></div>
+          <div class="ml-summary__row"><span>Late fee</span><span>₹800/day from today</span></div>
+          <div class="ml-summary__row"><span>Taken from</span><span>The deposit</span></div>
+        </div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+          If you need it longer, message the owner — extending is usually cheaper than the late fee.
+        </p>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/communication/chat_conversation/index.html">Message the owner</a>
+      </div>
+    </main>
+    <footer class="ml-app__footer" data-state="default">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="${P}marketplace_order_status/index.html">Confirm rental</a>
+    </footer>
+  </div>`,
+});
+
+/* The TRADING identity, deliberately distinct from FLOW 14's public profile,
+   which is the person. What matters here is whether they ship. */
+writeScreen({
+  flow: "marketplace", screen: "marketplace_seller_profile", title: "Market — Seller",
+  body: `
+  <div class="ml-app">
+    ${bar("Seller", `${P}marketplace_item_detail/index.html`)}
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div class="ml-person-row">
+        <img src="${media("faces", 8)}" alt="" loading="lazy" />
+        <span class="meta"><b data-state="default">Aarav Menon</b><b data-state="business">Blue Note Recording Co.</b>
+        <p data-state="default">Selling since 2024 · Mumbai</p><p data-state="business">Business seller · Bandra</p></span>
+        <span class="ml-status ml-status--accent" data-state="business">Verified business</span>
+      </div>
+
+      <div class="ml-stat-grid" style="margin-top:var(--space-3)">
+        <div class="ml-kpi"><span class="ml-kpi__num">4.8</span>Rating</div>
+        <div class="ml-kpi"><span class="ml-kpi__num">31</span>Sold</div>
+        <div class="ml-kpi"><span class="ml-kpi__num">2h</span>Usually replies in</div>
+        <div class="ml-kpi"><span class="ml-kpi__num">0</span>Disputes</div>
+      </div>
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Listed now</h3></div>
+      <div class="ml-market-grid">
+        ${LISTINGS.slice(0, 4).map((l) => `<a class="ml-market-card" href="${P}marketplace_item_detail/index.html">
+          <div class="ml-market-card__media"><img src="${l.img}" alt="" loading="lazy" /></div>
+          <div class="ml-market-card__body">
+            <div class="ml-market-card__price">${l.price}</div>
+            <div class="ml-market-card__title">${l.title}</div>
+          </div>
+        </a>`).join("\n        ")}
+      </div>
+
+      <div class="ml-section" style="margin-top:var(--space-3)"><h3>What buyers said</h3></div>
+      <article class="ml-review-card">
+        <div class="ml-review-card__head">
+          <img class="ml-avatar ml-avatar--sm" src="${media("faces", 2)}" alt="" loading="lazy" />
+          <b>Ishita Rao</b>
+          <span class="ml-review-card__stars">★★★★★</span>
+        </div>
+        <p class="ml-review-card__body">Exactly as described, packed properly, posted the same day.</p>
+      </article>
+
+      <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-3)">
+        This is their trading record. Their
+        <a class="ml-link" href="/preview/flows/public_profile/public_profile_view/index.html">musician profile</a>
+        is separate.
+      </p>
+    </main>
+    <footer class="ml-app__footer">
+      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/communication/chat_conversation/index.html">Message seller</a>
+    </footer>
   </div>`,
 });
 

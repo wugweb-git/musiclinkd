@@ -18,7 +18,7 @@
  *
  * No new CSS.
  */
-import { writeScreen, backArrow, icon, assertIcons, finish, media } from "../write-screen.mjs";
+import { writeScreen, backArrow, icon, assertIcons, beta, finish, media } from "../write-screen.mjs";
 
 const P = "/preview/flows/business_profiles/";
 assertIcons(["arrow-forward", "check", "send"]);
@@ -266,6 +266,7 @@ businessScreen({
           <p class="ml-review-card__body">${b}</p>
         </article>`).join("\n        ")}
         <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-2)" href="/preview/flows/reviews/review_list/index.html">All 62 reviews</a>
+        <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-2)" href="${P}business_gallery/index.html">All 18 photographs</a>
 
         <div class="ml-section" style="margin-top:var(--space-3)"><h3>Gallery</h3></div>
         <div class="ml-masonry">
@@ -571,6 +572,66 @@ writeScreen({
         ${icon("arrow-forward", { size: 18 })}
       </a>
     </main>
+  </div>`,
+});
+
+/* ══ the approved plan's Business +3, part built ═══════════════════════════
+   business_gallery is the last of that column. business_dashboard and
+   team_management were already delivered — the latter as an owner STATE on
+   business_team_tab rather than a screen, since it is the same list with
+   different affordances.
+
+   The gallery earns a route because it is linkable and shareable: a studio
+   sends someone the photographs, not the profile. The tab shows a sample. ═══ */
+
+writeScreen({
+  flow: "business_profiles", screen: "business_gallery", title: "Business — Gallery",
+  body: `
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      ${backArrow(`${P}business_reviews_gallery_tab/index.html`, "Back")}
+      <h1 class="ml-type-2" style="margin:0;flex:1">Gallery</h1>
+      ${beta}
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div data-state="default">
+        <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          Yash Raj Sound Studios · 18 photographs
+        </p>
+
+        <div class="ml-section"><h3>The rooms</h3></div>
+        <div class="ml-masonry">
+          ${[1, 7, 12, 3].map((i) => `<img class="ml-mosaic-tile" src="${media(i % 2 ? "gear" : "stage", i)}" alt="" loading="lazy" />`).join("\n          ")}
+        </div>
+
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Equipment</h3></div>
+        <div class="ml-masonry">
+          ${[0, 6, 9].map((i) => `<img class="ml-mosaic-tile" src="${media("gear", i)}" alt="" loading="lazy" />`).join("\n          ")}
+        </div>
+
+        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Sessions here</h3></div>
+        <div class="ml-masonry">
+          ${[4, 6, 11].map((i) => `<img class="ml-mosaic-tile" src="${media("stage", i)}" alt="" loading="lazy" />`).join("\n          ")}
+        </div>
+
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-3)">
+          Photographs of sessions are published with the artist's agreement.
+        </p>
+      </div>
+
+      <div class="ml-empty" data-state="empty">
+        <h2 class="ml-empty__title">No photographs yet</h2>
+        <p class="ml-empty__body">
+          People book a room they can picture. Three or four honest photographs of the live room
+          and the desk do more than a description.
+        </p>
+        <a class="ml-btn ml-btn--primary" href="${P}business_dashboard/index.html">Add photographs</a>
+      </div>
+    </main>
+    <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
+      <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/qr_share/qr_share_flow/index.html?state=options">Share</a>
+      <a class="ml-btn ml-btn--primary" style="flex:1" href="${P}business_book_now/index.html">Book a room</a>
+    </footer>
   </div>`,
 });
 

@@ -25,6 +25,15 @@ const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;al
       <h1 class="ml-type-2" style="margin:0">${title}</h1>
     </header>`;
 
+/* A row that leads somewhere. */
+const rowLink = (label, href, meta) => `<a class="ml-action-row" href="${href}">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">${label}</span>
+          ${meta ? `<span class="ml-choice__meta">${meta}</span>` : ""}
+        </span>
+        ${icon("arrow-forward", { size: 18 })}
+      </a>`;
+
 const field = (id, label, type, value, ph) => `<div class="ml-field">
         <label for="${id}">${label}</label>
         ${type === "textarea"
@@ -111,7 +120,8 @@ writeScreen({
         ${icon("arrow-forward", { size: 18 })}
       </a>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h2>What you offer</h2></div>
+      <div class="ml-section" style="margin-top:var(--space-3)"><h2>What you offer</h2>
+        <a class="ml-section__link" href="${P}my_services/index.html">All services</a></div>
       ${OFFERS.map(([n, m, p, live]) => `<div class="ml-check-row">
         <span class="ml-choice__body">
           <span class="ml-choice__title">${n}</span>
@@ -221,6 +231,62 @@ writeScreen({
     <footer class="ml-app__footer">
       <a class="ml-btn ml-btn--primary ml-btn--block" href="${P}service_offerings_editor/index.html">Save amenities</a>
     </footer>
+  </div>`,
+});
+
+/* ══ the approved plan's Services +3, part built ═══════════════════════════
+   my_services lists what a provider offers, with publication state.
+   service_offerings_editor edits the set inline and session_configuration adds
+   one — those two already existed, so this is the third and last. ══════════ */
+
+writeScreen({
+  flow: "services_availability", screen: "my_services", title: "Services — Mine",
+  body: `
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
+      <h1 class="ml-type-3" style="margin:0">Your services</h1>
+      <span class="ml-appbar__actions">
+        <a class="ml-icon-btn ml-icon-btn--bare" href="${P}session_configuration/index.html" aria-label="Add a service">${icon("add", { size: 20 })}</a>
+      </span>
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+
+      <div data-state="default">
+        ${[["Studio session", "Full day, in person", "₹12,000/day", "success", "Live", "9 bookings"],
+           ["Remote vocal", "Stems within 5 days", "₹6,000/track", "success", "Live", "22 bookings"],
+           ["Topline writing", "Melody and lyric", "₹15,000", "success", "Live", "3 bookings"],
+           ["Live performance", "Up to 60 minutes", "₹25,000", "warning", "Paused", "1 booking"]]
+          .map(([n, m, p, kind, st, count]) => `<a class="ml-service" href="${P}session_configuration/index.html">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">${n}</span>
+            <span class="ml-choice__meta">${m} · ${count}</span>
+          </span>
+          <span class="ml-result__trail">${p}</span>
+          <span class="ml-status ml-status--${kind}">${st}</span>
+        </a>`).join("\n        ")}
+
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Also</h2></div>
+        ${rowLink("Availability", `${P}availability_toggle/index.html`, "Open for gigs · Mon–Fri")}
+        ${rowLink("Rates and deposits", `${P}rate_pricing_editor/index.html`)}
+      </div>
+
+      <div data-state="paused">
+        <div class="ml-banner ml-banner--warning">
+          <span class="ml-banner__body">All your services are paused. Nobody can book you.</span>
+        </div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+          Your profile stays visible and people can still message you. Pausing is not the same as
+          being unavailable — that lives in Availability.
+        </p>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Unpause everything</a>
+      </div>
+
+      <div class="ml-empty" data-state="empty">
+        <h2 class="ml-empty__title">No services yet</h2>
+        <p class="ml-empty__body">People can't book what isn't listed. One service with an honest price is enough to start.</p>
+        <a class="ml-btn ml-btn--primary" href="${P}session_configuration/index.html">Add a service</a>
+      </div>
+    </main>
   </div>`,
 });
 

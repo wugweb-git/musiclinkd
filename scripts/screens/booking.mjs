@@ -21,7 +21,7 @@
  */
 import { writeScreen, backArrow, icon, assertIcons, checkMark, finish, media } from "../write-screen.mjs";
 
-assertIcons(["calendar", "filter"]);
+assertIcons(["calendar", "filter", "arrow-forward"]);
 
 const P = "/preview/flows/booking/";
 
@@ -36,6 +36,16 @@ const titleBar = (title, backTo) => `<header class="ml-appbar" style="display:fl
       ${backArrow(backTo, "Back")}
       <h1 class="ml-type-2" style="margin:0">${title}</h1>
     </header>`;
+
+/* A row that leads somewhere. booking.mjs did not have one, since its earlier
+   screens are all cards and forms; the provider screens are lists of choices. */
+const rowLink = (label, href, meta) => `<a class="ml-action-row" href="${href}">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">${label}</span>
+          ${meta ? `<span class="ml-choice__meta">${meta}</span>` : ""}
+        </span>
+        ${icon("arrow-forward", { size: 18 })}
+      </a>`;
 
 /* A tab whose selected state is derived from the screen state. role=tab +
    data-chip is all the shell needs; see applyState() in app-shell.js. */
@@ -536,6 +546,194 @@ writeScreen({
       <a class="ml-btn ml-btn--secondary" style="flex:1" href="${P}studio_discovery/index.html">Book another</a>
       <a class="ml-btn ml-btn--primary" style="flex:1" href="${P}my_bookings/index.html">My bookings</a>
     </footer>
+  </div>`,
+});
+
+/* ══ the approved plan's Booking +3 — the provider side ════════════════════
+   The eleven screens above are all customer-side. A studio owner answering a
+   request had nowhere to stand. These three are that place, and each owns a
+   route. Lifecycle stays as states, as it already is on the customer side. ══ */
+
+writeScreen({
+  flow: "booking", screen: "provider_dashboard", title: "Booking — Provider",
+  body: `
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
+      <h1 class="ml-type-3" style="margin:0">Your rooms</h1>
+      <span class="ml-appbar__actions">
+        <a class="ml-icon-btn ml-icon-btn--bare" href="${P}provider_availability/index.html" aria-label="Manage availability">${icon("calendar", { size: 20 })}</a>
+      </span>
+    </header>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+
+      <div data-state="default">
+        <div class="ml-section"><h2>Needs an answer</h2></div>
+        <a class="ml-action-row" href="${P}provider_requests/index.html">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">3 booking requests</span>
+            <span class="ml-choice__meta">Oldest waiting 14 hours — they can't plan until you reply</span>
+          </span>
+          <span class="ml-status ml-status--warning">Answer</span>
+        </a>
+
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Today</h2></div>
+        <div class="ml-summary">
+          <div class="ml-summary__row"><span>10:00 · Tracking Room 1</span><span>Ishita Rao</span></div>
+          <div class="ml-summary__row"><span>15:00 · Mix Suite</span><span>Kabir Sheth</span></div>
+          <div class="ml-summary__row"><span>19:00 · Booth B</span><span>Free</span></div>
+        </div>
+
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>This week</h2></div>
+        <div class="ml-stat-grid">
+          <div class="ml-kpi"><span class="ml-kpi__num">14</span>Sessions</div>
+          <div class="ml-kpi"><span class="ml-kpi__num">68%</span>Rooms used</div>
+        </div>
+
+        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Manage</h2></div>
+        ${rowLink("Availability and blocked dates", `${P}provider_availability/index.html`)}
+        ${rowLink("Rates and services", "/preview/flows/services_availability/rate_pricing_editor/index.html", "Owned by Services")}
+      </div>
+
+      <div class="ml-empty" data-state="quiet">
+        <h2 class="ml-empty__title">Nothing booked today</h2>
+        <p class="ml-empty__body">No requests waiting either. A good day to put the rooms in front of people.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/business_profiles/business_overview/index.html">Check your public profile</a>
+      </div>
+    </main>
+  </div>`,
+});
+
+const REQUESTS = [
+  ["Ishita Rao", "Tracking Room 1 · Wed 12 Aug, 10:00–14:00", "₹7,200", 2, "14 hours ago"],
+  ["Kabir Sheth", "Mix Suite · Fri 14 Aug, 15:00–19:00", "₹4,800", 8, "5 hours ago"],
+  ["Meera Nair", "Booth B · Sat 15 Aug, 11:00–13:00", "₹1,400", 4, "1 hour ago"],
+];
+
+writeScreen({
+  flow: "booking", screen: "provider_requests", title: "Booking — Requests",
+  body: `
+  <div class="ml-app">
+    ${titleBar("Requests", `${P}provider_dashboard/index.html`)}
+    <nav class="ml-tabs ml-tabs--fill" role="tablist" aria-label="Requests" style="margin:0 var(--space-4)">
+      <a class="ml-tabs__tab" role="tab" data-chip="pending" href="?state=pending">Waiting</a>
+      <a class="ml-tabs__tab" role="tab" data-chip="accepted" href="?state=accepted">Accepted</a>
+      <a class="ml-tabs__tab" role="tab" data-chip="declined" href="?state=declined">Declined</a>
+    </nav>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+
+      <div data-state="pending">
+        ${REQUESTS.map(([n, what, amt, i, ago]) => `<div class="ml-booking-card">
+          <img class="ml-booking-card__thumb" src="${media("faces", i)}" alt="" loading="lazy" />
+          <div class="ml-booking-card__body">
+            <span class="ml-booking-card__title">${n}</span>
+            <span class="ml-booking-card__meta">${what}</span>
+            <span class="ml-booking-card__meta">${amt} · asked ${ago}</span>
+            <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
+              <a class="ml-btn ml-btn--secondary" style="flex:1" href="?state=declined">Decline</a>
+              <a class="ml-btn ml-btn--primary" style="flex:1" href="?state=accepted">Accept</a>
+            </div>
+          </div>
+        </div>`).join("\n        ")}
+        <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
+          Requests expire after 48 hours if nobody answers, and the person is told why.
+        </p>
+      </div>
+
+      <div data-state="accepted">
+        <div class="ml-banner ml-banner--success">
+          <span class="ml-banner__body">Accepted. The room is held and the deposit has been taken.</span>
+        </div>
+        ${REQUESTS.slice(0, 2).map(([n, what, amt, i]) => `<div class="ml-booking-card">
+          <img class="ml-booking-card__thumb" src="${media("faces", i)}" alt="" loading="lazy" />
+          <div class="ml-booking-card__body">
+            <span class="ml-booking-card__title">${n}</span>
+            <span class="ml-booking-card__meta">${what}</span>
+            <span class="ml-status ml-status--success">Confirmed · ${amt}</span>
+          </div>
+        </div>`).join("\n        ")}
+      </div>
+
+      <div data-state="declined">
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          Declined requests keep their reason, so you can see whether you are turning away the
+          same kind of work repeatedly.
+        </p>
+        <div class="ml-summary">
+          <div class="ml-summary__row"><span>Meera Nair · 15 Aug</span><span>Room already booked</span></div>
+          <div class="ml-summary__row"><span>Rohan D'Souza · 9 Aug</span><span>Outside opening hours</span></div>
+        </div>
+      </div>
+
+      <div class="ml-empty" data-state="empty">
+        <h2 class="ml-empty__title">No requests waiting</h2>
+        <p class="ml-empty__body">Everything has been answered.</p>
+        <a class="ml-btn ml-btn--primary" href="${P}provider_dashboard/index.html">Back to your rooms</a>
+      </div>
+    </main>
+  </div>`,
+});
+
+writeScreen({
+  flow: "booking", screen: "provider_availability", title: "Booking — Availability",
+  body: `
+  <div class="ml-app">
+    ${titleBar("Availability", `${P}provider_dashboard/index.html`)}
+    <nav class="ml-tabs ml-tabs--fill" role="tablist" aria-label="Availability" style="margin:0 var(--space-4)">
+      <a class="ml-tabs__tab" role="tab" data-chip="default" href="?state=default">Calendar</a>
+      <a class="ml-tabs__tab" role="tab" data-chip="hours" href="?state=hours">Hours</a>
+      <a class="ml-tabs__tab" role="tab" data-chip="blocked" href="?state=blocked">Blocked</a>
+    </nav>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+
+      <div class="ml-calendar" data-state="default">
+        <div class="ml-calendar__head"><span class="ml-calendar__month">August 2026</span></div>
+        <div class="ml-calendar__dow">${["M", "T", "W", "T", "F", "S", "S"].map((d) => `<span>${d}</span>`).join("")}</div>
+        <div class="ml-calendar__grid">
+          ${Array.from({ length: LEAD }, () => `<span></span>`).join("")}
+          ${DAYS.map((d) => {
+            const cls = ["ml-calendar__day"];
+            if (BLOCKED.has(d)) cls.push("is-blocked");
+            if (d === TODAY) cls.push("is-today");
+            return `<button type="button" class="${cls.join(" ")}"${BLOCKED.has(d) ? " disabled" : ""}>${d}</button>`;
+          }).join("\n          ")}
+        </div>
+        <div class="ml-calendar__legend">
+          <span><i class="ml-calendar__key ml-calendar__key--sel"></i>Bookable</span>
+          <span><i class="ml-calendar__key ml-calendar__key--blocked"></i>Booked or blocked</span>
+        </div>
+      </div>
+
+      <div data-state="hours">
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          When the rooms can be booked. Separate from when the building is open.
+        </p>
+        ${["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+          .map((d, i) => `<div class="ml-check-row">
+          <span class="ml-choice__body">
+            <span class="ml-choice__title">${d}</span>
+            <span class="ml-choice__meta">${i === 6 ? "Closed" : "09:00 – 00:00"}</span>
+          </span>
+          <button class="ml-switch" type="button" role="switch" aria-checked="${i !== 6}" aria-label="${d}"></button>
+        </div>`).join("\n        ")}
+      </div>
+
+      <div data-state="blocked">
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          Dates nobody can book, whatever the hours say. Maintenance, holidays, a session you took offline.
+        </p>
+        <div class="ml-summary">
+          <div class="ml-summary__row"><span>3–4 August</span><span>Maintenance</span></div>
+          <div class="ml-summary__row"><span>17–18 August</span><span>Closed</span></div>
+          <div class="ml-summary__row"><span>24–25 August</span><span>Private session</span></div>
+        </div>
+        <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Block more dates</a>
+      </div>
+
+      <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-3)">
+        Rates live in Services, which owns them —
+        <a class="ml-link" href="/preview/flows/services_availability/rate_pricing_editor/index.html">edit rates</a>.
+      </p>
+    </main>
   </div>`,
 });
 

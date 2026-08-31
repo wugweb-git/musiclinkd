@@ -63,6 +63,7 @@ writeScreen({
       <h1 class="ml-type-3" style="margin:0">Opportunities</h1>
       <span class="ml-appbar__actions">
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}my_applications/index.html" aria-label="My applications">${icon("check", { size: 20 })}</a>
+        <a class="ml-icon-btn ml-icon-btn--bare" href="${P}my_opportunities/index.html" aria-label="What you've posted">${icon("search", { size: 20 })}</a>
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}create_opportunity/index.html" aria-label="Post an opportunity">${icon("add", { size: 20 })}</a>
       </span>
     </header>
@@ -288,6 +289,61 @@ writeScreen({
         <h3 class="ml-empty__title">No applications yet</h3>
         <p class="ml-empty__body">When you apply for an opportunity it will show up here, with its status.</p>
         <a class="ml-btn ml-btn--primary" href="${P}opportunities_home/index.html">Browse opportunities</a>
+      </div>
+    </main>
+  </div>`,
+});
+
+/* ══ the approved plan's Opportunities +2, part built ══════════════════════
+   my_opportunities is the POSTER's side. my_applications, already built, is
+   the applicant's. Two different people looking at the same objects from
+   opposite ends, which is why they are two screens and not two states.
+
+   applicant_profile from that column was NOT built: the canonical person
+   profile already serves it, and manage_applicants links straight there. That
+   is the recycling rule applied to the plan's own column. ═════════════════ */
+
+const MINE = [
+  { st: "posted", title: "Session vocalist — Hindi pop EP", meta: "3 applicants · closes in 3 days",
+    status: ["success", "Live"], href: `${P}manage_applicants/index.html` },
+  { st: "posted", title: "Live drummer — 6-city club tour", meta: "11 applicants · closes in 11 days",
+    status: ["success", "Live"], href: `${P}manage_applicants/index.html` },
+  { st: "drafts", title: "Mixing engineer — indie rock album", meta: "Not posted · saved 28 Aug",
+    status: [null, "Draft"], href: `${P}create_opportunity/index.html` },
+  { st: "closed", title: "Cover art & visualiser", meta: "Filled by Priya Iyer · closed 20 Aug",
+    status: [null, "Filled"], href: `${P}opportunity_detail/index.html` },
+  { st: "closed", title: "Keys session — jazz trio", meta: "Expired with no hire · 28 Jul",
+    status: ["error", "Expired"], href: `${P}opportunity_detail/index.html` },
+];
+
+writeScreen({
+  flow: "opportunities", screen: "my_opportunities", title: "Opportunities — Mine",
+  body: `
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
+      <h1 class="ml-type-3" style="margin:0">What you've posted</h1>
+      <span class="ml-appbar__actions">
+        <a class="ml-icon-btn ml-icon-btn--bare" href="${P}create_opportunity/index.html" aria-label="Post an opportunity">${icon("add", { size: 20 })}</a>
+      </span>
+    </header>
+    <nav class="ml-tabs ml-tabs--fill" role="tablist" aria-label="Your opportunities" style="margin:0 var(--space-4)">
+      ${tab("posted", "Live")}${tab("drafts", "Drafts")}${tab("closed", "Closed")}
+    </nav>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      ${MINE.map((m) => `<a class="ml-application-card" data-state="${m.st}" href="${m.href}">
+        <div class="ml-application-card__body">
+          <span class="ml-application-card__title">${m.title}</span>
+          <span class="ml-application-card__meta">${m.meta}</span>
+        </div>
+        <div class="ml-application-card__foot">
+          <span class="ml-status${m.status[0] ? ` ml-status--${m.status[0]}` : ""}">${m.status[1]}</span>
+        </div>
+      </a>`).join("\n      ")}
+
+      <div class="ml-empty" data-state="empty">
+        <h2 class="ml-empty__title">You haven't posted anything</h2>
+        <p class="ml-empty__body">Posting takes a couple of minutes, and you can save a draft first.</p>
+        <a class="ml-btn ml-btn--primary" href="${P}create_opportunity/index.html">Post an opportunity</a>
       </div>
     </main>
   </div>`,
