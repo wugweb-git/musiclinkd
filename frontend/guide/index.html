@@ -124,7 +124,7 @@
   <li><a href="#core">Core · 39</a></li>
   <li><a href="#widgets">Widgets · 94</a></li>
   <li><a href="#motion">Motion</a></li>
-  <li><a href="#patterns">Patterns · 191</a></li>
+  <li><a href="#patterns">Patterns · 205</a></li>
   <li><a href="#icons">Icons · 423</a></li>
   <li><a href="#taxonomy">Taxonomy · 18</a></li>
   <li><a href="#gaps">Gaps</a></li>
@@ -576,6 +576,16 @@
         <div class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-1)">64px · ink</div></div>
   </div></div>
 
+  <h3 style="margin-top:var(--space-4)">Decisions not taken</h3>
+  <p class="ml-lede ml-measure">Spec items that were considered and deliberately
+    NOT adopted, or moved out of CSS entirely. Moved here from Gaps on
+    2026-08-31: none of these is outstanding work, and listing a settled
+    decision under "Gaps" reads as a backlog item nobody has got to. A gap is
+    something missing; this is something decided.</p>
+  <table class="g-t"><thead><tr><th>Item</th><th>Why</th></tr></thead><tbody>
+    <tr><th>breakpoints 767/1023/1440 — decision, not a gap</th><td>The spec's four breakpoints were considered and NOT adopted, not overlooked. platform.windowSize keeps Material's 600/840 WindowSizeClass values because those are what Compose actually branches on, and the app is Android-first. Shipping web breakpoints that disagree with the native ones is the exact drift v9 removed. --layout-max 1440 is kept as a max-width, which is what the spec's 1440 figure really was.</td></tr><tr><th>density modes</th><td>Not implemented, as the spec itself notes.</td></tr><tr><th>Snackbar 4s/10s</th><td>Durations are behaviour, not design tokens — they belong to the toast controller, not the stylesheet. Documented in the toast section's prose instead.</td></tr>
+  </tbody></table>
+
   <h3 style="margin-top:var(--space-4)">System bars &amp; insets</h3>
   <p class="ml-lede ml-measure">The app draws <b>edge to edge</b> — content
     renders behind the status and navigation bars, and the bars themselves stay
@@ -658,9 +668,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge" title="ml-core.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 176 screens</b>
+    <p class="g-use"><b>Recycled on 190 screens</b>
     across 24 flows —
-    <a href="/preview/flows/auth/email_auth"><code>auth/email_auth</code></a>, <a href="/preview/flows/auth/email_verification"><code>auth/email_verification</code></a>, <a href="/preview/flows/auth/forgot_password"><code>auth/forgot_password</code></a>, <a href="/preview/flows/auth/google_signin"><code>auth/google_signin</code></a>, <a href="/preview/flows/auth/mobile_auth"><code>auth/mobile_auth</code></a>, <a href="/preview/flows/auth/otp_verification"><code>auth/otp_verification</code></a> and 170 more.</p>
+    <a href="/preview/flows/auth/email_auth"><code>auth/email_auth</code></a>, <a href="/preview/flows/auth/email_verification"><code>auth/email_verification</code></a>, <a href="/preview/flows/auth/forgot_password"><code>auth/forgot_password</code></a>, <a href="/preview/flows/auth/google_signin"><code>auth/google_signin</code></a>, <a href="/preview/flows/auth/mobile_auth"><code>auth/mobile_auth</code></a>, <a href="/preview/flows/auth/otp_verification"><code>auth/otp_verification</code></a> and 184 more.</p>
     <details class="g-sel"><summary>4 selectors</summary>
       <code>.ml-icon-btn</code> <code>.ml-icon-btn--bare</code> <code>.ml-icon-btn--primary</code> <code>.ml-icon-btn--muted</code></details>
   </section>
@@ -719,9 +729,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge" title="ml-core.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge" title="ml-core.css">Pressed</span><span class="ml-badge" title="ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 38 screens</b>
+    <p class="g-use"><b>Recycled on 40 screens</b>
     across 11 flows —
-    <a href="/preview/flows/booking/configure_session"><code>booking/configure_session</code></a>, <a href="/preview/flows/booking/filters"><code>booking/filters</code></a>, <a href="/preview/flows/discover/advanced_filters"><code>discover/advanced_filters</code></a>, <a href="/preview/flows/discover/businesses"><code>discover/businesses</code></a>, <a href="/preview/flows/discover/communities"><code>discover/communities</code></a>, <a href="/preview/flows/discover/discover_opportunities"><code>discover/discover_opportunities</code></a> and 32 more.</p>
+    <a href="/preview/flows/booking/configure_session"><code>booking/configure_session</code></a>, <a href="/preview/flows/booking/filters"><code>booking/filters</code></a>, <a href="/preview/flows/discover/advanced_filters"><code>discover/advanced_filters</code></a>, <a href="/preview/flows/discover/businesses"><code>discover/businesses</code></a>, <a href="/preview/flows/discover/communities"><code>discover/communities</code></a>, <a href="/preview/flows/discover/discover_opportunities"><code>discover/discover_opportunities</code></a> and 34 more.</p>
     <details class="g-sel"><summary>3 selectors</summary>
       <code>.ml-chip</code> <code>.ml-chip__icon</code> <code>.ml-chip__dismiss</code></details>
   </section>
@@ -738,9 +748,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge" title="ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 66 screens</b>
+    <p class="g-use"><b>Recycled on 73 screens</b>
     across 22 flows —
-    <a href="/preview/flows/auth/registration_write"><code>auth/registration_write</code></a>, <a href="/preview/flows/band/band_create"><code>band/band_create</code></a>, <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a>, <a href="/preview/flows/band/band_settings"><code>band/band_settings</code></a>, <a href="/preview/flows/band/ensemble_lineup"><code>band/ensemble_lineup</code></a>, <a href="/preview/flows/band/upcoming_shows"><code>band/upcoming_shows</code></a> and 60 more.</p>
+    <a href="/preview/flows/auth/registration_write"><code>auth/registration_write</code></a>, <a href="/preview/flows/band/band_create"><code>band/band_create</code></a>, <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a>, <a href="/preview/flows/band/band_settings"><code>band/band_settings</code></a>, <a href="/preview/flows/band/ensemble_lineup"><code>band/ensemble_lineup</code></a>, <a href="/preview/flows/band/upcoming_shows"><code>band/upcoming_shows</code></a> and 67 more.</p>
     <details class="g-sel"><summary>7 selectors</summary>
       <code>.ml-status</code> <code>.ml-status--neutral</code> <code>.ml-status--success</code> <code>.ml-status--warning</code> <code>.ml-status--error</code> <code>.ml-status--accent</code> <code>.ml-status--info</code></details>
   </section>
@@ -811,9 +821,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Focused</span><span class="ml-badge" title="ml-core.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 29 screens</b>
-    across 12 flows —
-    <a href="/preview/flows/auth/google_signin"><code>auth/google_signin</code></a>, <a href="/preview/flows/booking/studio_profile"><code>booking/studio_profile</code></a>, <a href="/preview/flows/business_profiles/business_reviews_gallery_tab"><code>business_profiles/business_reviews_gallery_tab</code></a>, <a href="/preview/flows/communication/chat_conversation"><code>communication/chat_conversation</code></a>, <a href="/preview/flows/communication/networking_feed_artist_profile"><code>communication/networking_feed_artist_profile</code></a>, <a href="/preview/flows/discover/business_profile"><code>discover/business_profile</code></a> and 23 more.</p>
+    <p class="g-use"><b>Recycled on 30 screens</b>
+    across 13 flows —
+    <a href="/preview/flows/auth/google_signin"><code>auth/google_signin</code></a>, <a href="/preview/flows/booking/studio_profile"><code>booking/studio_profile</code></a>, <a href="/preview/flows/business_profiles/business_reviews_gallery_tab"><code>business_profiles/business_reviews_gallery_tab</code></a>, <a href="/preview/flows/communication/chat_conversation"><code>communication/chat_conversation</code></a>, <a href="/preview/flows/communication/networking_feed_artist_profile"><code>communication/networking_feed_artist_profile</code></a>, <a href="/preview/flows/discover/business_profile"><code>discover/business_profile</code></a> and 24 more.</p>
     <details class="g-sel"><summary>4 selectors</summary>
       <code>.ml-avatar</code> <code>.ml-avatar--sm</code> <code>.ml-avatar--lg</code> <code>.ml-avatar-btn</code></details>
   </section>
@@ -830,9 +840,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 94 screens</b>
+    <p class="g-use"><b>Recycled on 102 screens</b>
     across 23 flows —
-    <a href="/preview/flows/band/band_create"><code>band/band_create</code></a>, <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a>, <a href="/preview/flows/band/band_settings"><code>band/band_settings</code></a>, <a href="/preview/flows/band/ensemble_lineup"><code>band/ensemble_lineup</code></a>, <a href="/preview/flows/booking/configure_session"><code>booking/configure_session</code></a>, <a href="/preview/flows/booking/equipment_screen"><code>booking/equipment_screen</code></a> and 88 more.</p>
+    <a href="/preview/flows/band/band_create"><code>band/band_create</code></a>, <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a>, <a href="/preview/flows/band/band_settings"><code>band/band_settings</code></a>, <a href="/preview/flows/band/ensemble_lineup"><code>band/ensemble_lineup</code></a>, <a href="/preview/flows/booking/configure_session"><code>booking/configure_session</code></a>, <a href="/preview/flows/booking/equipment_screen"><code>booking/equipment_screen</code></a> and 96 more.</p>
     <details class="g-sel"><summary>3 selectors</summary>
       <code>.ml-section</code> <code>.ml-section__link</code> <code>.ml-rail</code></details>
   </section>
@@ -999,9 +1009,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 70 screens</b>
+    <p class="g-use"><b>Recycled on 77 screens</b>
     across 18 flows —
-    <a href="/preview/flows/auth/email_auth"><code>auth/email_auth</code></a>, <a href="/preview/flows/auth/mobile_auth"><code>auth/mobile_auth</code></a>, <a href="/preview/flows/auth/otp_verification"><code>auth/otp_verification</code></a>, <a href="/preview/flows/auth/registration_write"><code>auth/registration_write</code></a>, <a href="/preview/flows/band/band_create"><code>band/band_create</code></a>, <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a> and 64 more.</p>
+    <a href="/preview/flows/auth/email_auth"><code>auth/email_auth</code></a>, <a href="/preview/flows/auth/mobile_auth"><code>auth/mobile_auth</code></a>, <a href="/preview/flows/auth/otp_verification"><code>auth/otp_verification</code></a>, <a href="/preview/flows/auth/registration_write"><code>auth/registration_write</code></a>, <a href="/preview/flows/band/band_create"><code>band/band_create</code></a>, <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a> and 71 more.</p>
     <details class="g-sel"><summary>2 selectors</summary>
       <code>.ml-app__footer</code> <code>.ml-app__footer--bare</code></details>
   </section>
@@ -1077,9 +1087,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge" title="ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 51 screens</b>
-    across 19 flows —
-    <a href="/preview/flows/auth/email_auth"><code>auth/email_auth</code></a>, <a href="/preview/flows/auth/email_verification"><code>auth/email_verification</code></a>, <a href="/preview/flows/auth/forgot_password"><code>auth/forgot_password</code></a>, <a href="/preview/flows/auth/google_signin"><code>auth/google_signin</code></a>, <a href="/preview/flows/auth/mobile_auth"><code>auth/mobile_auth</code></a>, <a href="/preview/flows/auth/otp_verification"><code>auth/otp_verification</code></a> and 45 more.</p>
+    <p class="g-use"><b>Recycled on 55 screens</b>
+    across 21 flows —
+    <a href="/preview/flows/auth/email_auth"><code>auth/email_auth</code></a>, <a href="/preview/flows/auth/email_verification"><code>auth/email_verification</code></a>, <a href="/preview/flows/auth/forgot_password"><code>auth/forgot_password</code></a>, <a href="/preview/flows/auth/google_signin"><code>auth/google_signin</code></a>, <a href="/preview/flows/auth/mobile_auth"><code>auth/mobile_auth</code></a>, <a href="/preview/flows/auth/otp_verification"><code>auth/otp_verification</code></a> and 49 more.</p>
     <details class="g-sel"><summary>5 selectors</summary>
       <code>.ml-banner</code> <code>.ml-banner--error</code> <code>.ml-banner--info</code> <code>.ml-banner--success</code> <code>.ml-banner--warning</code></details>
   </section>
@@ -1114,9 +1124,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Pressed</span><span class="ml-badge" title="ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 20 screens</b>
+    <p class="g-use"><b>Recycled on 23 screens</b>
     across 2 flows —
-    <a href="/preview/flows/onboarding/genres"><code>onboarding/genres</code></a>, <a href="/preview/flows/onboarding/instrument_proficiency"><code>onboarding/instrument_proficiency</code></a>, <a href="/preview/flows/onboarding/instruments"><code>onboarding/instruments</code></a>, <a href="/preview/flows/onboarding/languages"><code>onboarding/languages</code></a>, <a href="/preview/flows/onboarding/location"><code>onboarding/location</code></a>, <a href="/preview/flows/onboarding/networking_links"><code>onboarding/networking_links</code></a> and 14 more.</p>
+    <a href="/preview/flows/onboarding/genres"><code>onboarding/genres</code></a>, <a href="/preview/flows/onboarding/instrument_proficiency"><code>onboarding/instrument_proficiency</code></a>, <a href="/preview/flows/onboarding/instruments"><code>onboarding/instruments</code></a>, <a href="/preview/flows/onboarding/languages"><code>onboarding/languages</code></a>, <a href="/preview/flows/onboarding/location"><code>onboarding/location</code></a>, <a href="/preview/flows/onboarding/networking_links"><code>onboarding/networking_links</code></a> and 17 more.</p>
     <details class="g-sel"><summary>6 selectors</summary>
       <code>.ml-steps</code> <code>.ml-steps__track</code> <code>.ml-steps__fill</code> <code>.ml-steps__label</code> <code>.ml-dots</code> <code>.ml-dots__dot</code></details>
   </section>
@@ -1136,9 +1146,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge" title="ml-core.css">Pressed</span><span class="ml-badge" title="ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 98 screens</b>
+    <p class="g-use"><b>Recycled on 105 screens</b>
     across 23 flows —
-    <a href="/preview/flows/auth/google_signin"><code>auth/google_signin</code></a>, <a href="/preview/flows/band/band_settings"><code>band/band_settings</code></a>, <a href="/preview/flows/booking/payment_screen"><code>booking/payment_screen</code></a>, <a href="/preview/flows/business_profiles/create_business"><code>business_profiles/create_business</code></a>, <a href="/preview/flows/communication/collaboration_files"><code>communication/collaboration_files</code></a>, <a href="/preview/flows/onboarding/dashboard_handoff"><code>onboarding/dashboard_handoff</code></a> and 92 more.</p>
+    <a href="/preview/flows/auth/google_signin"><code>auth/google_signin</code></a>, <a href="/preview/flows/band/band_settings"><code>band/band_settings</code></a>, <a href="/preview/flows/booking/payment_screen"><code>booking/payment_screen</code></a>, <a href="/preview/flows/business_profiles/create_business"><code>business_profiles/create_business</code></a>, <a href="/preview/flows/communication/collaboration_files"><code>communication/collaboration_files</code></a>, <a href="/preview/flows/onboarding/dashboard_handoff"><code>onboarding/dashboard_handoff</code></a> and 99 more.</p>
     <details class="g-sel"><summary>6 selectors</summary>
       <code>.ml-choice</code> <code>.ml-choice__body</code> <code>.ml-choice__title</code> <code>.ml-choice__meta</code> <code>.ml-choice__mark</code> <code>.ml-chip-wrap</code></details>
   </section>
@@ -1206,9 +1216,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 8 screens</b>
-    across 8 flows —
-    <a href="/preview/flows/marketplace/marketplace_browse"><code>marketplace/marketplace_browse</code></a>, <a href="/preview/flows/notifications/notifications_center"><code>notifications/notifications_center</code></a>, <a href="/preview/flows/recommendation_engine/for_you"><code>recommendation_engine/for_you</code></a>, <a href="/preview/flows/reviews/review_list"><code>reviews/review_list</code></a>, <a href="/preview/flows/saved_favorites/saved_searches"><code>saved_favorites/saved_searches</code></a>, <a href="/preview/flows/search/universal_search"><code>search/universal_search</code></a> and 2 more.</p>
+    <p class="g-use"><b>Recycled on 10 screens</b>
+    across 9 flows —
+    <a href="/preview/flows/booking/provider_availability"><code>booking/provider_availability</code></a>, <a href="/preview/flows/marketplace/marketplace_browse"><code>marketplace/marketplace_browse</code></a>, <a href="/preview/flows/marketplace/marketplace_seller_profile"><code>marketplace/marketplace_seller_profile</code></a>, <a href="/preview/flows/notifications/notifications_center"><code>notifications/notifications_center</code></a>, <a href="/preview/flows/recommendation_engine/for_you"><code>recommendation_engine/for_you</code></a>, <a href="/preview/flows/reviews/review_list"><code>reviews/review_list</code></a> and 4 more.</p>
     <details class="g-sel"><summary>1 selector</summary>
       <code>.ml-link</code></details>
   </section>
@@ -1228,9 +1238,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Pressed</span><span class="ml-badge" title="ml-core.css">Selected</span><span class="ml-badge" title="ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 16 screens</b>
-    across 9 flows —
-    <a href="/preview/flows/booking/configure_session"><code>booking/configure_session</code></a>, <a href="/preview/flows/business_profiles/create_business"><code>business_profiles/create_business</code></a>, <a href="/preview/flows/home/home_dashboard"><code>home/home_dashboard</code></a>, <a href="/preview/flows/notifications/notification_categories"><code>notifications/notification_categories</code></a>, <a href="/preview/flows/notifications/notification_preferences_onboarding"><code>notifications/notification_preferences_onboarding</code></a>, <a href="/preview/flows/notifications/notification_settings"><code>notifications/notification_settings</code></a> and 10 more.</p>
+    <p class="g-use"><b>Recycled on 18 screens</b>
+    across 10 flows —
+    <a href="/preview/flows/booking/configure_session"><code>booking/configure_session</code></a>, <a href="/preview/flows/booking/provider_availability"><code>booking/provider_availability</code></a>, <a href="/preview/flows/business_profiles/create_business"><code>business_profiles/create_business</code></a>, <a href="/preview/flows/home/home_dashboard"><code>home/home_dashboard</code></a>, <a href="/preview/flows/notifications/notification_categories"><code>notifications/notification_categories</code></a>, <a href="/preview/flows/notifications/notification_preferences_onboarding"><code>notifications/notification_preferences_onboarding</code></a> and 12 more.</p>
     <details class="g-sel"><summary>1 selector</summary>
       <code>.ml-switch</code></details>
   </section>
@@ -1253,9 +1263,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Pressed</span><span class="ml-badge" title="ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 27 screens</b>
-    across 11 flows —
-    <a href="/preview/flows/booking/equipment_screen"><code>booking/equipment_screen</code></a>, <a href="/preview/flows/profile_management/profile_completion"><code>profile_management/profile_completion</code></a>, <a href="/preview/flows/services_availability/session_configuration"><code>services_availability/session_configuration</code></a>, <a href="/preview/flows/services_availability/studio_services_amenities"><code>services_availability/studio_services_amenities</code></a>, <a href="/preview/flows/verifications/verification_screen"><code>verifications/verification_screen</code></a>, <a href="/preview/flows/booking/configure_session"><code>booking/configure_session</code></a> and 21 more.</p>
+    <p class="g-use"><b>Recycled on 29 screens</b>
+    across 12 flows —
+    <a href="/preview/flows/booking/equipment_screen"><code>booking/equipment_screen</code></a>, <a href="/preview/flows/profile_management/profile_completion"><code>profile_management/profile_completion</code></a>, <a href="/preview/flows/services_availability/session_configuration"><code>services_availability/session_configuration</code></a>, <a href="/preview/flows/services_availability/studio_services_amenities"><code>services_availability/studio_services_amenities</code></a>, <a href="/preview/flows/verifications/verification_screen"><code>verifications/verification_screen</code></a>, <a href="/preview/flows/booking/configure_session"><code>booking/configure_session</code></a> and 23 more.</p>
     <details class="g-sel"><summary>3 selectors</summary>
       <code>.ml-check-ctl</code> <code>.ml-check-ctl--radio</code> <code>.ml-check-row</code></details>
   </section>
@@ -1366,9 +1376,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-core.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 45 screens</b>
+    <p class="g-use"><b>Recycled on 47 screens</b>
     across 13 flows —
-    <a href="/preview/flows/booking/equipment_screen"><code>booking/equipment_screen</code></a>, <a href="/preview/flows/profile_management/profile_completion"><code>profile_management/profile_completion</code></a>, <a href="/preview/flows/services_availability/session_configuration"><code>services_availability/session_configuration</code></a>, <a href="/preview/flows/services_availability/studio_services_amenities"><code>services_availability/studio_services_amenities</code></a>, <a href="/preview/flows/verifications/verification_screen"><code>verifications/verification_screen</code></a>, <a href="/preview/flows/booking/configure_session"><code>booking/configure_session</code></a> and 39 more.</p>
+    <a href="/preview/flows/booking/equipment_screen"><code>booking/equipment_screen</code></a>, <a href="/preview/flows/profile_management/profile_completion"><code>profile_management/profile_completion</code></a>, <a href="/preview/flows/services_availability/session_configuration"><code>services_availability/session_configuration</code></a>, <a href="/preview/flows/services_availability/studio_services_amenities"><code>services_availability/studio_services_amenities</code></a>, <a href="/preview/flows/verifications/verification_screen"><code>verifications/verification_screen</code></a>, <a href="/preview/flows/booking/configure_session"><code>booking/configure_session</code></a> and 41 more.</p>
     <details class="g-sel"><summary>6 selectors</summary>
       <code>.ml-btn-group</code> <code>.ml-help</code> <code>.ml-check-ctl</code> <code>.ml-chip</code> <code>.ml-crumbs__item</code> <code>.ml-segmented__btn</code></details>
   </section>
@@ -1388,9 +1398,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 191 screens</b>
+    <p class="g-use"><b>Recycled on 205 screens</b>
     across 24 flows —
-    <a href="/preview/flows/auth/email_auth"><code>auth/email_auth</code></a>, <a href="/preview/flows/auth/email_verification"><code>auth/email_verification</code></a>, <a href="/preview/flows/auth/forgot_password"><code>auth/forgot_password</code></a>, <a href="/preview/flows/auth/google_signin"><code>auth/google_signin</code></a>, <a href="/preview/flows/auth/mobile_auth"><code>auth/mobile_auth</code></a>, <a href="/preview/flows/auth/otp_verification"><code>auth/otp_verification</code></a> and 185 more.</p>
+    <a href="/preview/flows/auth/email_auth"><code>auth/email_auth</code></a>, <a href="/preview/flows/auth/email_verification"><code>auth/email_verification</code></a>, <a href="/preview/flows/auth/forgot_password"><code>auth/forgot_password</code></a>, <a href="/preview/flows/auth/google_signin"><code>auth/google_signin</code></a>, <a href="/preview/flows/auth/mobile_auth"><code>auth/mobile_auth</code></a>, <a href="/preview/flows/auth/otp_verification"><code>auth/otp_verification</code></a> and 199 more.</p>
     <details class="g-sel"><summary>2 selectors</summary>
       <code>.ml-app</code> <code>.ml-app__body</code></details>
   </section>
@@ -1407,9 +1417,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 141 screens</b>
-    across 23 flows —
-    <a href="/preview/flows/auth/email_verification"><code>auth/email_verification</code></a>, <a href="/preview/flows/auth/forgot_password"><code>auth/forgot_password</code></a>, <a href="/preview/flows/auth/reset_password"><code>auth/reset_password</code></a>, <a href="/preview/flows/band/band_create"><code>band/band_create</code></a>, <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a>, <a href="/preview/flows/band/band_settings"><code>band/band_settings</code></a> and 135 more.</p>
+    <p class="g-use"><b>Recycled on 155 screens</b>
+    across 24 flows —
+    <a href="/preview/flows/auth/email_verification"><code>auth/email_verification</code></a>, <a href="/preview/flows/auth/forgot_password"><code>auth/forgot_password</code></a>, <a href="/preview/flows/auth/reset_password"><code>auth/reset_password</code></a>, <a href="/preview/flows/band/band_create"><code>band/band_create</code></a>, <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a>, <a href="/preview/flows/band/band_settings"><code>band/band_settings</code></a> and 149 more.</p>
     <details class="g-sel"><summary>4 selectors</summary>
       <code>.ml-appbar</code> <code>.ml-appbar__titles</code> <code>.ml-appbar__title</code> <code>.ml-appbar__actions</code></details>
   </section>
@@ -1532,9 +1542,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge" title="ml-widgets.css">Pressed</span><span class="ml-badge" title="ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 4 screens</b>
+    <p class="g-use"><b>Recycled on 5 screens</b>
     across 2 flows —
-    <a href="/preview/flows/marketplace/marketplace_browse"><code>marketplace/marketplace_browse</code></a>, <a href="/preview/flows/marketplace/marketplace_saved_bookmarks"><code>marketplace/marketplace_saved_bookmarks</code></a>, <a href="/preview/flows/saved_favorites/saved_favorites_hub"><code>saved_favorites/saved_favorites_hub</code></a>, <a href="/preview/flows/marketplace/marketplace_item_detail"><code>marketplace/marketplace_item_detail</code></a>.</p>
+    <a href="/preview/flows/marketplace/marketplace_browse"><code>marketplace/marketplace_browse</code></a>, <a href="/preview/flows/marketplace/marketplace_saved_bookmarks"><code>marketplace/marketplace_saved_bookmarks</code></a>, <a href="/preview/flows/marketplace/marketplace_seller_profile"><code>marketplace/marketplace_seller_profile</code></a>, <a href="/preview/flows/saved_favorites/saved_favorites_hub"><code>saved_favorites/saved_favorites_hub</code></a>, <a href="/preview/flows/marketplace/marketplace_item_detail"><code>marketplace/marketplace_item_detail</code></a>.</p>
     <details class="g-sel"><summary>8 selectors</summary>
       <code>.ml-market-card</code> <code>.ml-market-card__media</code> <code>.ml-market-card__save</code> <code>.ml-market-card__body</code> <code>.ml-market-card__price</code> <code>.ml-market-card__title</code> <code>.ml-market-card__meta</code> <code>.ml-market-grid</code></details>
   </section>
@@ -1552,9 +1562,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 22 screens</b>
-    across 9 flows —
-    <a href="/preview/flows/band/upcoming_shows"><code>band/upcoming_shows</code></a>, <a href="/preview/flows/booking/my_bookings"><code>booking/my_bookings</code></a>, <a href="/preview/flows/home/home_dashboard"><code>home/home_dashboard</code></a>, <a href="/preview/flows/booking/studio_profile"><code>booking/studio_profile</code></a>, <a href="/preview/flows/business_profiles/business_reviews_gallery_tab"><code>business_profiles/business_reviews_gallery_tab</code></a>, <a href="/preview/flows/public_profile/public_profile_view"><code>public_profile/public_profile_view</code></a> and 16 more.</p>
+    <p class="g-use"><b>Recycled on 24 screens</b>
+    across 10 flows —
+    <a href="/preview/flows/band/upcoming_shows"><code>band/upcoming_shows</code></a>, <a href="/preview/flows/booking/my_bookings"><code>booking/my_bookings</code></a>, <a href="/preview/flows/booking/provider_requests"><code>booking/provider_requests</code></a>, <a href="/preview/flows/home/home_dashboard"><code>home/home_dashboard</code></a>, <a href="/preview/flows/booking/studio_profile"><code>booking/studio_profile</code></a>, <a href="/preview/flows/business_profiles/business_reviews_gallery_tab"><code>business_profiles/business_reviews_gallery_tab</code></a> and 18 more.</p>
     <details class="g-sel"><summary>11 selectors</summary>
       <code>.ml-booking-card</code> <code>.ml-booking-card__thumb</code> <code>.ml-booking-card__body</code> <code>.ml-booking-card__title</code> <code>.ml-booking-card__meta</code> <code>.ml-review-card</code> <code>.ml-review-card__head</code> <code>.ml-review-card__stars</code> <code>.ml-review-card__body</code> <code>.ml-notification</code> <code>.ml-notification--unread</code></details>
   </section>
@@ -1572,9 +1582,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 9 screens</b>
-    across 7 flows —
-    <a href="/preview/flows/business_profiles/business_dashboard"><code>business_profiles/business_dashboard</code></a>, <a href="/preview/flows/business_profiles/business_owner_insights"><code>business_profiles/business_owner_insights</code></a>, <a href="/preview/flows/discover/service_detail"><code>discover/service_detail</code></a>, <a href="/preview/flows/home/home_dashboard"><code>home/home_dashboard</code></a>, <a href="/preview/flows/portfolio/portfolio_dashboard"><code>portfolio/portfolio_dashboard</code></a>, <a href="/preview/flows/portfolio/profile_project_view"><code>portfolio/profile_project_view</code></a> and 3 more.</p>
+    <p class="g-use"><b>Recycled on 11 screens</b>
+    across 9 flows —
+    <a href="/preview/flows/booking/provider_dashboard"><code>booking/provider_dashboard</code></a>, <a href="/preview/flows/business_profiles/business_dashboard"><code>business_profiles/business_dashboard</code></a>, <a href="/preview/flows/business_profiles/business_owner_insights"><code>business_profiles/business_owner_insights</code></a>, <a href="/preview/flows/discover/service_detail"><code>discover/service_detail</code></a>, <a href="/preview/flows/home/home_dashboard"><code>home/home_dashboard</code></a>, <a href="/preview/flows/marketplace/marketplace_seller_profile"><code>marketplace/marketplace_seller_profile</code></a> and 5 more.</p>
     <details class="g-sel"><summary>5 selectors</summary>
       <code>.ml-stat-grid</code> <code>.ml-stat</code> <code>.ml-stat__num</code> <code>.ml-stat__label</code> <code>.ml-stat__delta</code></details>
   </section>
@@ -1593,9 +1603,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 46 screens</b>
-    across 18 flows —
-    <a href="/preview/flows/discover/business_profile"><code>discover/business_profile</code></a>, <a href="/preview/flows/discover/community_detail"><code>discover/community_detail</code></a>, <a href="/preview/flows/discover/discover_profile_detail"><code>discover/discover_profile_detail</code></a>, <a href="/preview/flows/discover/project_detail"><code>discover/project_detail</code></a>, <a href="/preview/flows/discover/studio_profile_discover"><code>discover/studio_profile_discover</code></a>, <a href="/preview/flows/portfolio/profile_project_view"><code>portfolio/profile_project_view</code></a> and 40 more.</p>
+    <p class="g-use"><b>Recycled on 50 screens</b>
+    across 20 flows —
+    <a href="/preview/flows/discover/business_profile"><code>discover/business_profile</code></a>, <a href="/preview/flows/discover/community_detail"><code>discover/community_detail</code></a>, <a href="/preview/flows/discover/discover_profile_detail"><code>discover/discover_profile_detail</code></a>, <a href="/preview/flows/discover/project_detail"><code>discover/project_detail</code></a>, <a href="/preview/flows/discover/studio_profile_discover"><code>discover/studio_profile_discover</code></a>, <a href="/preview/flows/portfolio/profile_project_view"><code>portfolio/profile_project_view</code></a> and 44 more.</p>
     <details class="g-sel"><summary>6 selectors</summary>
       <code>.ml-hero</code> <code>.ml-hero__body</code> <code>.ml-hero__name</code> <code>.ml-hero__sub</code> <code>.ml-hero__stats</code> <code>.ml-action-row</code></details>
   </section>
@@ -1706,9 +1716,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 79 screens</b>
-    across 22 flows —
-    <a href="/preview/flows/auth/email_verification"><code>auth/email_verification</code></a>, <a href="/preview/flows/auth/forgot_password"><code>auth/forgot_password</code></a>, <a href="/preview/flows/auth/reset_password"><code>auth/reset_password</code></a>, <a href="/preview/flows/band/band_create"><code>band/band_create</code></a>, <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a>, <a href="/preview/flows/band/ensemble_lineup"><code>band/ensemble_lineup</code></a> and 73 more.</p>
+    <p class="g-use"><b>Recycled on 86 screens</b>
+    across 23 flows —
+    <a href="/preview/flows/auth/email_verification"><code>auth/email_verification</code></a>, <a href="/preview/flows/auth/forgot_password"><code>auth/forgot_password</code></a>, <a href="/preview/flows/auth/reset_password"><code>auth/reset_password</code></a>, <a href="/preview/flows/band/band_create"><code>band/band_create</code></a>, <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a>, <a href="/preview/flows/band/ensemble_lineup"><code>band/ensemble_lineup</code></a> and 80 more.</p>
     <details class="g-sel"><summary>3 selectors</summary>
       <code>.ml-empty</code> <code>.ml-empty__title</code> <code>.ml-empty__body</code></details>
   </section>
@@ -1725,9 +1735,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge" title="ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 35 screens</b>
+    <p class="g-use"><b>Recycled on 38 screens</b>
     across 12 flows —
-    <a href="/preview/flows/band/upcoming_shows"><code>band/upcoming_shows</code></a>, <a href="/preview/flows/booking/availability_calendar"><code>booking/availability_calendar</code></a>, <a href="/preview/flows/booking/my_bookings"><code>booking/my_bookings</code></a>, <a href="/preview/flows/business_profiles/business_equipment_tab"><code>business_profiles/business_equipment_tab</code></a>, <a href="/preview/flows/business_profiles/business_overview"><code>business_profiles/business_overview</code></a>, <a href="/preview/flows/business_profiles/business_reviews_gallery_tab"><code>business_profiles/business_reviews_gallery_tab</code></a> and 29 more.</p>
+    <a href="/preview/flows/band/upcoming_shows"><code>band/upcoming_shows</code></a>, <a href="/preview/flows/booking/availability_calendar"><code>booking/availability_calendar</code></a>, <a href="/preview/flows/booking/my_bookings"><code>booking/my_bookings</code></a>, <a href="/preview/flows/booking/provider_availability"><code>booking/provider_availability</code></a>, <a href="/preview/flows/booking/provider_requests"><code>booking/provider_requests</code></a>, <a href="/preview/flows/business_profiles/business_equipment_tab"><code>business_profiles/business_equipment_tab</code></a> and 32 more.</p>
     <details class="g-sel"><summary>3 selectors</summary>
       <code>.ml-tabs</code> <code>.ml-tabs__tab</code> <code>.ml-tabs--fill</code></details>
   </section>
@@ -1747,9 +1757,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 34 screens</b>
-    across 11 flows —
-    <a href="/preview/flows/booking/booking_summary"><code>booking/booking_summary</code></a>, <a href="/preview/flows/booking/search_results"><code>booking/search_results</code></a>, <a href="/preview/flows/booking/studio_discovery"><code>booking/studio_discovery</code></a>, <a href="/preview/flows/business_profiles/business_book_now"><code>business_profiles/business_book_now</code></a>, <a href="/preview/flows/business_profiles/create_business"><code>business_profiles/create_business</code></a>, <a href="/preview/flows/communication/collaborations"><code>communication/collaborations</code></a> and 28 more.</p>
+    <p class="g-use"><b>Recycled on 38 screens</b>
+    across 12 flows —
+    <a href="/preview/flows/booking/booking_summary"><code>booking/booking_summary</code></a>, <a href="/preview/flows/booking/search_results"><code>booking/search_results</code></a>, <a href="/preview/flows/booking/studio_discovery"><code>booking/studio_discovery</code></a>, <a href="/preview/flows/business_profiles/business_book_now"><code>business_profiles/business_book_now</code></a>, <a href="/preview/flows/business_profiles/create_business"><code>business_profiles/create_business</code></a>, <a href="/preview/flows/communication/collaborations"><code>communication/collaborations</code></a> and 32 more.</p>
     <details class="g-sel"><summary>7 selectors</summary>
       <code>.ml-result</code> <code>.ml-result__thumb</code> <code>.ml-result__thumb--square</code> <code>.ml-result__body</code> <code>.ml-result__name</code> <code>.ml-result__meta</code> <code>.ml-result__trail</code></details>
   </section>
@@ -1807,9 +1817,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 5 screens</b>
-    across 3 flows —
-    <a href="/preview/flows/business_profiles/business_services_tab"><code>business_profiles/business_services_tab</code></a>, <a href="/preview/flows/discover/business_profile"><code>discover/business_profile</code></a>, <a href="/preview/flows/discover/discover_profile_detail"><code>discover/discover_profile_detail</code></a>, <a href="/preview/flows/discover/services"><code>discover/services</code></a>, <a href="/preview/flows/public_profile/talent_services_view"><code>public_profile/talent_services_view</code></a>.</p>
+    <p class="g-use"><b>Recycled on 6 screens</b>
+    across 4 flows —
+    <a href="/preview/flows/business_profiles/business_services_tab"><code>business_profiles/business_services_tab</code></a>, <a href="/preview/flows/discover/business_profile"><code>discover/business_profile</code></a>, <a href="/preview/flows/discover/discover_profile_detail"><code>discover/discover_profile_detail</code></a>, <a href="/preview/flows/discover/services"><code>discover/services</code></a>, <a href="/preview/flows/public_profile/talent_services_view"><code>public_profile/talent_services_view</code></a>, <a href="/preview/flows/services_availability/my_services"><code>services_availability/my_services</code></a>.</p>
     <details class="g-sel"><summary>6 selectors</summary>
       <code>.ml-service</code> <code>.ml-service__head</code> <code>.ml-service__title</code> <code>.ml-service__by</code> <code>.ml-service__foot</code> <code>.ml-service__rate</code></details>
   </section>
@@ -1934,9 +1944,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge" title="ml-widgets.css">Selected</span><span class="ml-badge" title="ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 1 screen</b>
-    across 1 flow —
-    <a href="/preview/flows/booking/availability_calendar"><code>booking/availability_calendar</code></a>.</p>
+    <p class="g-use"><b>Recycled on 3 screens</b>
+    across 2 flows —
+    <a href="/preview/flows/booking/availability_calendar"><code>booking/availability_calendar</code></a>, <a href="/preview/flows/booking/provider_availability"><code>booking/provider_availability</code></a>, <a href="/preview/flows/marketplace/marketplace_availability"><code>marketplace/marketplace_availability</code></a>.</p>
     <details class="g-sel"><summary>10 selectors</summary>
       <code>.ml-calendar</code> <code>.ml-calendar__head</code> <code>.ml-calendar__month</code> <code>.ml-calendar__dow</code> <code>.ml-calendar__grid</code> <code>.ml-calendar__day</code> <code>.ml-calendar__legend</code> <code>.ml-calendar__key</code> <code>.ml-calendar__key--sel</code> <code>.ml-calendar__key--blocked</code></details>
   </section>
@@ -2032,9 +2042,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 6 screens</b>
-    across 5 flows —
-    <a href="/preview/flows/business_profiles/business_dashboard"><code>business_profiles/business_dashboard</code></a>, <a href="/preview/flows/business_profiles/business_owner_insights"><code>business_profiles/business_owner_insights</code></a>, <a href="/preview/flows/home/home_dashboard"><code>home/home_dashboard</code></a>, <a href="/preview/flows/public_profile/profile_analytics"><code>public_profile/profile_analytics</code></a>, <a href="/preview/flows/qr_share/qr_settings"><code>qr_share/qr_settings</code></a>, <a href="/preview/flows/reviews/reputation_dashboard"><code>reviews/reputation_dashboard</code></a>.</p>
+    <p class="g-use"><b>Recycled on 8 screens</b>
+    across 7 flows —
+    <a href="/preview/flows/booking/provider_dashboard"><code>booking/provider_dashboard</code></a>, <a href="/preview/flows/business_profiles/business_dashboard"><code>business_profiles/business_dashboard</code></a>, <a href="/preview/flows/business_profiles/business_owner_insights"><code>business_profiles/business_owner_insights</code></a>, <a href="/preview/flows/home/home_dashboard"><code>home/home_dashboard</code></a>, <a href="/preview/flows/marketplace/marketplace_seller_profile"><code>marketplace/marketplace_seller_profile</code></a>, <a href="/preview/flows/public_profile/profile_analytics"><code>public_profile/profile_analytics</code></a> and 2 more.</p>
     <details class="g-sel"><summary>10 selectors</summary>
       <code>.ml-kpi</code> <code>.ml-kpi__num</code> <code>.ml-kpi__delta</code> <code>.ml-kpi__delta--up</code> <code>.ml-kpi__delta--down</code> <code>.ml-bars</code> <code>.ml-bars__bar</code> <code>.ml-bars__labels</code> <code>.ml-spark</code> <code>.ml-spark__bar</code></details>
   </section>
@@ -2123,9 +2133,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 1 screen</b>
+    <p class="g-use"><b>Recycled on 2 screens</b>
     across 1 flow —
-    <a href="/preview/flows/opportunities/my_applications"><code>opportunities/my_applications</code></a>.</p>
+    <a href="/preview/flows/opportunities/my_applications"><code>opportunities/my_applications</code></a>, <a href="/preview/flows/opportunities/my_opportunities"><code>opportunities/my_opportunities</code></a>.</p>
     <details class="g-sel"><summary>5 selectors</summary>
       <code>.ml-application-card</code> <code>.ml-application-card__body</code> <code>.ml-application-card__title</code> <code>.ml-application-card__meta</code> <code>.ml-application-card__foot</code></details>
   </section>
@@ -2207,9 +2217,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 45 screens</b>
+    <p class="g-use"><b>Recycled on 49 screens</b>
     across 18 flows —
-    <a href="/preview/flows/auth/reset_password"><code>auth/reset_password</code></a>, <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a>, <a href="/preview/flows/band/band_settings"><code>band/band_settings</code></a>, <a href="/preview/flows/band/ensemble_lineup"><code>band/ensemble_lineup</code></a>, <a href="/preview/flows/band/upcoming_shows"><code>band/upcoming_shows</code></a>, <a href="/preview/flows/booking/booking_success"><code>booking/booking_success</code></a> and 39 more.</p>
+    <a href="/preview/flows/auth/reset_password"><code>auth/reset_password</code></a>, <a href="/preview/flows/band/band_profile_layout"><code>band/band_profile_layout</code></a>, <a href="/preview/flows/band/band_settings"><code>band/band_settings</code></a>, <a href="/preview/flows/band/ensemble_lineup"><code>band/ensemble_lineup</code></a>, <a href="/preview/flows/band/upcoming_shows"><code>band/upcoming_shows</code></a>, <a href="/preview/flows/booking/booking_success"><code>booking/booking_success</code></a> and 43 more.</p>
     <details class="g-sel"><summary>4 selectors</summary>
       <code>.ml-summary</code> <code>.ml-summary__row</code> <code>.ml-summary__row--total</code> <code>.ml-summary__note</code></details>
   </section>
@@ -2412,9 +2422,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 2 screens</b>
+    <p class="g-use"><b>Recycled on 3 screens</b>
     across 2 flows —
-    <a href="/preview/flows/business_profiles/business_reviews_gallery_tab"><code>business_profiles/business_reviews_gallery_tab</code></a>, <a href="/preview/flows/public_profile/media_gallery"><code>public_profile/media_gallery</code></a>.</p>
+    <a href="/preview/flows/business_profiles/business_gallery"><code>business_profiles/business_gallery</code></a>, <a href="/preview/flows/business_profiles/business_reviews_gallery_tab"><code>business_profiles/business_reviews_gallery_tab</code></a>, <a href="/preview/flows/public_profile/media_gallery"><code>public_profile/media_gallery</code></a>.</p>
     <details class="g-sel"><summary>5 selectors</summary>
       <code>.ml-masonry</code> <code>.ml-masonry--roomy</code> <code>.ml-mosaic-tile</code> <code>.ml-mosaic-tile__cap</code> <code>.ml-mosaic-tile__pin</code></details>
   </section>
@@ -3246,9 +3256,9 @@
     <div class="g-states">
     <span class="g-states__lbl">States</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Hover</span><span class="ml-badge ml-badge--inherit" title="Base rule in ml-core.css — every focusable element">Focused</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Pressed</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Selected</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Disabled</span><span class="ml-badge ml-badge--compose" title="Compose .ml-skeleton">Loading</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Error</span><span class="ml-badge ml-badge--compose" title="Compose .ml-empty">Empty</span><span class="ml-badge ml-badge--off" title="Not available — building it belongs in ml-widgets.css">Open</span>
   </div>
-    <p class="g-use"><b>Recycled on 23 screens</b>
+    <p class="g-use"><b>Recycled on 24 screens</b>
     across 12 flows —
-    <a href="/preview/flows/band/band_create"><code>band/band_create</code></a>, <a href="/preview/flows/band/ensemble_lineup"><code>band/ensemble_lineup</code></a>, <a href="/preview/flows/business_profiles/business_overview"><code>business_profiles/business_overview</code></a>, <a href="/preview/flows/business_profiles/business_owner_insights"><code>business_profiles/business_owner_insights</code></a>, <a href="/preview/flows/business_profiles/business_team_tab"><code>business_profiles/business_team_tab</code></a>, <a href="/preview/flows/communication/ai_matchmaker_tab"><code>communication/ai_matchmaker_tab</code></a> and 17 more.</p>
+    <a href="/preview/flows/band/band_create"><code>band/band_create</code></a>, <a href="/preview/flows/band/ensemble_lineup"><code>band/ensemble_lineup</code></a>, <a href="/preview/flows/business_profiles/business_overview"><code>business_profiles/business_overview</code></a>, <a href="/preview/flows/business_profiles/business_owner_insights"><code>business_profiles/business_owner_insights</code></a>, <a href="/preview/flows/business_profiles/business_team_tab"><code>business_profiles/business_team_tab</code></a>, <a href="/preview/flows/communication/ai_matchmaker_tab"><code>communication/ai_matchmaker_tab</code></a> and 18 more.</p>
     <details class="g-sel"><summary>1 selector</summary>
       <code>.ml-person-row</code></details>
   </section>
@@ -3662,7 +3672,7 @@
     </p>
   </div>
 
-  <h2 class="g-h" id="patterns">Patterns · 191</h2>
+  <h2 class="g-h" id="patterns">Patterns · 205</h2>
   <p class="ml-lede" style="max-width:64ch">
     Composed patterns are <b>real screens</b>, not mockups — every one below is
     live under <code>/preview</code> and built from the components above. Listed
@@ -3708,7 +3718,7 @@
   </section>
   <section class="g-comp">
     <div class="g-comp__head"><h3>User Onboarding</h3>
-      <span class="g-file">flow 2 · 13 on the system</span></div>
+      <span class="g-file">flow 2 · 16 on the system</span></div>
     <div class="g-demo"><div class="g-patterns">
       <a class="g-pattern" href="/preview/flows/onboarding/primary_role">
         <b>Primary Role Selection</b>
@@ -3736,12 +3746,18 @@
         <b>Submit / Publish Profile</b>
         <span>3 states · submitting, success, error</span></a><a class="g-pattern" href="/preview/flows/onboarding/dashboard_handoff">
         <b>Success → Dashboard Handoff</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/onboarding/specialisation">
+        <b>Your specialisation</b>
+        <span>6 states · singer, musician, producer</span></a><a class="g-pattern" href="/preview/flows/onboarding/work_preferences">
+        <b>How you work</b>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/onboarding/privacy_preferences">
+        <b>Privacy to start with</b>
         <span>1 state · default</span></a>
     </div></div>
   </section>
   <section class="g-comp">
     <div class="g-comp__head"><h3>Add Portfolio</h3>
-      <span class="g-file">flow 3 · 11 on the system</span></div>
+      <span class="g-file">flow 3 · 12 on the system</span></div>
     <div class="g-demo"><div class="g-patterns">
       <a class="g-pattern" href="/preview/flows/portfolio/portfolio_dashboard">
         <b>Portfolio Dashboard</b>
@@ -3765,7 +3781,9 @@
         <b>Success State</b>
         <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/portfolio/profile_project_view">
         <b>Published Project — Profile View</b>
-        <span>1 state · default</span></a>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/portfolio/portfolio_settings">
+        <b>Portfolio settings</b>
+        <span>3 states · default, reorder, archived</span></a>
     </div></div>
   </section>
   <section class="g-comp">
@@ -3819,7 +3837,7 @@
   </section>
   <section class="g-comp">
     <div class="g-comp__head"><h3>Opportunities</h3>
-      <span class="g-file">flow 5 · 6 on the system</span></div>
+      <span class="g-file">flow 5 · 7 on the system</span></div>
     <div class="g-demo"><div class="g-patterns">
       <a class="g-pattern" href="/preview/flows/opportunities/opportunities_home">
         <b>Opportunities Home / Search / Categories / Results / Filters</b>
@@ -3833,7 +3851,9 @@
         <b>Create Opportunity / Edit Opportunity</b>
         <span>3 states · default, publishing, error</span></a><a class="g-pattern" href="/preview/flows/opportunities/manage_applicants">
         <b>Manage Applicants</b>
-        <span>2 states · default, empty</span></a>
+        <span>2 states · default, empty</span></a><a class="g-pattern" href="/preview/flows/opportunities/my_opportunities">
+        <b>My opportunities</b>
+        <span>4 states · posted, drafts, closed</span></a>
     </div></div>
   </section>
   <section class="g-comp">
@@ -3867,7 +3887,7 @@
   </section>
   <section class="g-comp">
     <div class="g-comp__head"><h3>Marketplace — Buy/Sell/Rent</h3>
-      <span class="g-file">flow 7 · 8 on the system</span></div>
+      <span class="g-file">flow 7 · 12 on the system</span></div>
     <div class="g-demo"><div class="g-patterns">
       <a class="g-pattern" href="/preview/flows/marketplace/marketplace_browse">
         <b>Creator Marketplace (browse)</b>
@@ -3885,12 +3905,20 @@
         <b>Create Listing (Sell + Rent Out, shared, listingType param)</b>
         <span>3 states · default, publishing, error</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_my_listings">
         <b>My Listings / My Purchases / My Rentals</b>
-        <span>4 states · listings, purchases, rentals</span></a>
+        <span>4 states · listings, purchases, rentals</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_nearby">
+        <b>Nearby listings</b>
+        <span>3 states · default, empty, permission_denied</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_availability">
+        <b>Rental availability</b>
+        <span>2 states · default, unavailable</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_rental_summary">
+        <b>Rental summary</b>
+        <span>3 states · default, returned, overdue</span></a><a class="g-pattern" href="/preview/flows/marketplace/marketplace_seller_profile">
+        <b>Seller</b>
+        <span>2 states · default, business</span></a>
     </div></div>
   </section>
   <section class="g-comp">
     <div class="g-comp__head"><h3>Booking</h3>
-      <span class="g-file">flow 8 · 11 on the system</span></div>
+      <span class="g-file">flow 8 · 14 on the system</span></div>
     <div class="g-demo"><div class="g-patterns">
       <a class="g-pattern" href="/preview/flows/booking/studio_discovery">
         <b>Studio Discovery</b>
@@ -3914,7 +3942,13 @@
         <b>Booking Success</b>
         <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/booking/my_bookings">
         <b>My Bookings</b>
-        <span>3 states · upcoming, past, cancelled</span></a>
+        <span>3 states · upcoming, past, cancelled</span></a><a class="g-pattern" href="/preview/flows/booking/provider_dashboard">
+        <b>Provider dashboard</b>
+        <span>2 states · default, quiet</span></a><a class="g-pattern" href="/preview/flows/booking/provider_requests">
+        <b>Booking requests</b>
+        <span>4 states · pending, accepted, declined</span></a><a class="g-pattern" href="/preview/flows/booking/provider_availability">
+        <b>Manage availability</b>
+        <span>3 states · default, blocked, hours</span></a>
     </div></div>
   </section>
   <section class="g-comp">
@@ -3946,7 +3980,7 @@
   </section>
   <section class="g-comp">
     <div class="g-comp__head"><h3>Services, Availability</h3>
-      <span class="g-file">flow 11 · 5 on the system</span></div>
+      <span class="g-file">flow 11 · 6 on the system</span></div>
     <div class="g-demo"><div class="g-patterns">
       <a class="g-pattern" href="/preview/flows/services_availability/availability_toggle">
         <b>Availability Toggle (Talent)</b>
@@ -3958,12 +3992,14 @@
         <b>Rate / Pricing Editor</b>
         <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/services_availability/session_configuration">
         <b>Session Configuration (booking-side service selection)</b>
-        <span>1 state · default</span></a>
+        <span>1 state · default</span></a><a class="g-pattern" href="/preview/flows/services_availability/my_services">
+        <b>My services</b>
+        <span>3 states · default, paused, empty</span></a>
     </div></div>
   </section>
   <section class="g-comp">
     <div class="g-comp__head"><h3>Business Profiles (Studios, Labels)</h3>
-      <span class="g-file">flow 12 · 9 on the system</span></div>
+      <span class="g-file">flow 12 · 10 on the system</span></div>
     <div class="g-demo"><div class="g-patterns">
       <a class="g-pattern" href="/preview/flows/business_profiles/business_overview">
         <b>Overview</b>
@@ -3983,7 +4019,9 @@
         <b>Create a business</b>
         <span>6 states · basics, identity, location</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_dashboard">
         <b>Business dashboard</b>
-        <span>2 states · default, quiet</span></a>
+        <span>2 states · default, quiet</span></a><a class="g-pattern" href="/preview/flows/business_profiles/business_gallery">
+        <b>Business gallery</b>
+        <span>2 states · default, empty</span></a>
     </div></div>
   </section>
   <section class="g-comp">
@@ -4366,16 +4404,9 @@
     hand-maintained and went stale; this one cannot.
   </p>
   <div class="g-demo">
-    <h3 style="margin:0 0 var(--space-2)">Widgets named but not built · 0 of 27</h3>
-    <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
-      Named in <code>Widget_Directory.md</code> with no matching component in the system.</p>
-    <div class="ml-chip-wrap"></div>
+    
 
-    <h3 style="margin:var(--space-4) 0 var(--space-2)">Screens not yet on the system · 14</h3>
-    <p class="ml-type-1" style="color:var(--color-muted);margin:0">
-      Still carrying local <code>&lt;style&gt;</code> blocks or pre-system markup.
-      191 of
-      205 screens are rebuilt.</p>
+    
 
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Built but never recycled · 53 of 133</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
@@ -4384,14 +4415,7 @@
       rebuilt. Each component page states its own count.</p>
     <div class="ml-chip-wrap"><a class="ml-chip" href="#c-base">base</a><a class="ml-chip" href="#c-tabular-numbers">tabular numbers</a><a class="ml-chip" href="#c-readable-measure">readable measure</a><a class="ml-chip" href="#c-select">select</a><a class="ml-chip" href="#c-accordion">accordion</a><a class="ml-chip" href="#c-dialog">dialog</a><a class="ml-chip" href="#c-floating-action-button">floating action button</a><a class="ml-chip" href="#c-toast">toast</a><a class="ml-chip" href="#c-equalizer">equalizer</a><a class="ml-chip" href="#c-band-card">band card</a><a class="ml-chip" href="#c-credit-row">credit row</a><a class="ml-chip" href="#c-swipe-deck">swipe deck</a><a class="ml-chip" href="#c-drawer">drawer</a><a class="ml-chip" href="#c-video">video</a><a class="ml-chip" href="#c-stem-mixer">stem mixer</a><a class="ml-chip" href="#c-editorial-layouts">editorial layouts</a><a class="ml-chip" href="#c-bento">bento</a><a class="ml-chip" href="#c-split-editorial">split editorial</a><a class="ml-chip" href="#c-tooltip">tooltip</a><a class="ml-chip" href="#c-popover">popover</a><a class="ml-chip" href="#c-help-button">help button</a><a class="ml-chip" href="#c-combobox">combobox</a><a class="ml-chip" href="#c-breadcrumb">breadcrumb</a><a class="ml-chip" href="#c-trends-table">trends table</a><a class="ml-chip" href="#c-collage">collage</a><a class="ml-chip" href="#c-social-sign-in-button">social sign-in button</a><a class="ml-chip" href="#c-native-keyboard-ime">native keyboard &amp; IME</a><a class="ml-chip" href="#c-testimonial">testimonial</a><a class="ml-chip" href="#c-ambient-album-card">ambient album card</a><a class="ml-chip" href="#c-trust-verification">trust &amp; verification</a><a class="ml-chip" href="#c-sticker">sticker</a><a class="ml-chip" href="#c-ambient-mosaic-panel">ambient mosaic panel</a><a class="ml-chip" href="#c-permission-dialog">permission dialog</a><a class="ml-chip" href="#c-camera-picker">camera picker</a><a class="ml-chip" href="#c-audio-recorder">audio recorder</a><a class="ml-chip" href="#c-inline-editor">inline editor</a><a class="ml-chip" href="#c-animated-success">animated success</a><a class="ml-chip" href="#c-footer-cta">footer CTA</a><a class="ml-chip" href="#c-what-s-new">what's new</a><a class="ml-chip" href="#c-android-app-grid">android app grid</a><a class="ml-chip" href="#c-recommended-collaborator-card">recommended collaborator card</a><a class="ml-chip" href="#c-collaborator-match-rail">collaborator match rail</a><a class="ml-chip" href="#c-discovery-search-result-card">discovery search result card</a><a class="ml-chip" href="#c-networking-feed">networking feed</a><a class="ml-chip" href="#c-band-members">band members</a><a class="ml-chip" href="#c-studio-venue-list-item">studio venue list item</a><a class="ml-chip" href="#c-featured-studio-card">featured studio card</a><a class="ml-chip" href="#c-studio-spec">studio spec</a><a class="ml-chip" href="#c-project-card">project card</a><a class="ml-chip" href="#c-recent-project-card">recent project card</a><a class="ml-chip" href="#c-track-card">track card</a><a class="ml-chip" href="#c-audio-podcast-demo">audio podcast demo</a><a class="ml-chip" href="#c-hire-contact-modal">hire contact modal</a></div>
 
-    <h3 style="margin:var(--space-4) 0 var(--space-2)">States declared but not rendered · 5</h3>
-    <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
-      <b>Loading</b> is declared by 6 screens
-      and rendered by 1. A screen that promises a loading state
-      and shows nothing is worse than one that never claimed it — the component
-      state map above already predicts this by listing Loading as <i>composed</i>
-      rather than owned, and almost nothing composes it.</p>
-    <div class="ml-chip-wrap"><a class="ml-chip" href="/preview/flows/auth/email_auth"><code>auth/email_auth</code></a><a class="ml-chip" href="/preview/flows/auth/splash"><code>auth/splash</code></a><a class="ml-chip" href="/preview/flows/communication/collaboration_files"><code>communication/collaboration_files</code></a><a class="ml-chip" href="/preview/flows/notifications/notifications_center"><code>notifications/notifications_center</code></a><a class="ml-chip" href="/preview/flows/verifications/verification_screen"><code>verifications/verification_screen</code></a></div>
+    
 
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Live data the design layer cannot see · 3</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
@@ -4403,15 +4427,6 @@
       <tr><th>Personas / roles</th><td>admin route <code>/role-profiles</code> + Firestore collection</td></tr><tr><th>Platform modules</th><td>admin route <code>/modules</code> + Firestore collection</td></tr><tr><th>Analytics</th><td>admin route <code>/analytics</code> + Firestore collection</td></tr>
     </tbody></table>
 
-    <h3 style="margin:var(--space-4) 0 var(--space-2)">Token-level gaps</h3>
-    <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
-      One table, merged 2026-08-30 — this used to be a second "Gaps" section
-      under Foundations. Each row is a spec item that was considered and either
-      resolved, deferred with a reason, or moved out of CSS entirely — not
-      silently dropped.</p>
-    <table class="g-t"><thead><tr><th>Item</th><th>Why</th></tr></thead><tbody>
-      <tr><th>breakpoints 767/1023/1440 — decision, not a gap</th><td>The spec's four breakpoints were considered and NOT adopted, not overlooked. platform.windowSize keeps Material's 600/840 WindowSizeClass values because those are what Compose actually branches on, and the app is Android-first. Shipping web breakpoints that disagree with the native ones is the exact drift v9 removed. --layout-max 1440 is kept as a max-width, which is what the spec's 1440 figure really was.</td></tr><tr><th>density modes</th><td>Not implemented, as the spec itself notes.</td></tr><tr><th>Snackbar 4s/10s</th><td>Durations are behaviour, not design tokens — they belong to the toast controller, not the stylesheet. Documented in the toast section's prose instead.</td></tr>
-    </tbody></table>
   </div>
 
   <h2 class="g-h" id="coverage">Coverage</h2>

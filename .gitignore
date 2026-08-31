@@ -45,3 +45,9 @@ firebase-debug.*.log
 # Build caches (were previously tracked under app/)
 .gradle/
 .next/
+
+# Scratch tarballs and anything else parked for deletion. build-hosting.sh
+# already excludes this folder from the deploy — a preview_bundle.tgz was
+# publicly downloadable from it before that exclude existed — but nothing
+# stopped one being COMMITTED. Ignoring it closes the other half.
+frontend/guide/_to_delete/

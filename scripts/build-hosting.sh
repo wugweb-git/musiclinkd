@@ -168,8 +168,17 @@ cp -r webapp/. dist/preview/
 # original app-shell.js forever and every deploy looked like a no-op. Deriving
 # it removes the step there was to forget: change the shell and the cache name
 # changes with it, so old caches are dropped on activate.
-SW_ID=$(cat dist/preview/shared/app-shell.js dist/preview/shared/app-shell.css \
-        dist/preview/manifest.json 2>/dev/null | shasum -a 256 | cut -c1-12)
+# Hash EXACTLY the files service-worker.js lists in SHELL_FILES. It used to
+# hash three of the five — shared/icon.svg and offline.html were cached but not
+# hashed, so changing either alone left the cache name identical and the old
+# copy in place. Network-first limits the damage to the offline fallback, but a
+# cache key that does not cover what it caches is the same class of bug as the
+# hand-bumped v1 this replaced.
+SW_ID=$(cat dist/preview/manifest.json \
+        dist/preview/shared/app-shell.css \
+        dist/preview/shared/app-shell.js \
+        dist/preview/shared/icon.svg \
+        dist/preview/offline.html 2>/dev/null | shasum -a 256 | cut -c1-12)
 sed -i '' "s/__BUILD_ID__/$SW_ID/" dist/preview/service-worker.js
 grep -q "__BUILD_ID__" dist/preview/service-worker.js && \
   { echo "    ERROR: service-worker.js BUILD_ID not stamped"; exit 1; }

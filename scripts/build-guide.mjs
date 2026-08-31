@@ -345,8 +345,20 @@ function readStateGaps() {
         contract = JSON.parse(readFileSync(join(flowsDir, flow, sc, "screen.json"), "utf8"));
         html = readFileSync(join(flowsDir, flow, sc, "index.html"), "utf8");
       } catch { continue; }
-      const declares = (contract.states || []).some((x) => /load/i.test(x));
-      const renders = /ml-skeleton/.test(html);
+      /* Match the STATE, not the substring. /load/i also matches "uploading",
+         "upload_error", "govt_id_upload" and "gst_upload" — which reported
+         collaboration_files and verification_screen as missing a loading state
+         neither of them ever declared, inflating this gap from 3 to 5. */
+      const declares = (contract.states || []).some((x) => /^(loading|is_loading|load)$/i.test(x));
+      /* The system has TWO loading affordances and this checked for one.
+         .ml-skeleton is the shimmer placeholder for content whose shape is
+         known; .ml-spinner is the indeterminate wait, which is the right
+         choice for a splash or a sign-in submit where there is no shape to
+         placeholder. Checking only for skeleton reported all three remaining
+         screens as broken when each renders a spinner — the gap was never
+         real. Both count, plus aria-busy for a screen that marks the region
+         rather than drawing an affordance. */
+      const renders = /ml-skeleton|ml-spinner|ml-progress|aria-busy/.test(html);
       if (declares) out.loadingDeclared++;
       if (renders) out.loadingRendered++;
       if (declares && !renders) out.missing.push(`${flow}/${sc}`);
@@ -1897,6 +1909,17 @@ const html = `<!doctype html>
         <div class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-1)">${n}px · ${ground}</div></div>`).join("")}
   </div></div>
 
+  <h3 style="margin-top:var(--space-4)">Decisions not taken</h3>
+  <p class="ml-lede ml-measure">Spec items that were considered and deliberately
+    NOT adopted, or moved out of CSS entirely. Moved here from Gaps on
+    2026-08-31: none of these is outstanding work, and listing a settled
+    decision under "Gaps" reads as a backlog item nobody has got to. A gap is
+    something missing; this is something decided.</p>
+  <table class="g-t"><thead><tr><th>Item</th><th>Why</th></tr></thead><tbody>
+    ${Object.entries(tokens.meta.knownGaps).filter(([k]) => !k.startsWith("$"))
+      .map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join("")}
+  </tbody></table>
+
   <h3 style="margin-top:var(--space-4)">System bars &amp; insets</h3>
   <p class="ml-lede ml-measure">The app draws <b>edge to edge</b> — content
     renders behind the status and navigation bars, and the bars themselves stay
@@ -2039,16 +2062,18 @@ const html = `<!doctype html>
     hand-maintained and went stale; this one cannot.
   </p>
   <div class="g-demo">
+    ${gaps.widgets.length === 0 ? "" : `
     <h3 style="margin:0 0 var(--space-2)">Widgets named but not built · ${gaps.widgets.length} of 27</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
       Named in <code>Widget_Directory.md</code> with no matching component in the system.</p>
-    <div class="ml-chip-wrap">${gaps.widgets.map((w) => `<span class="ml-chip">${esc(w)}</span>`).join("")}</div>
+    <div class="ml-chip-wrap">${gaps.widgets.map((w) => `<span class="ml-chip">${esc(w)}</span>`).join("")}</div>`}
 
+    ${gaps.screens.length === 0 ? "" : `
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Screens not yet on the system · ${gaps.screens.length}</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0">
       Still carrying local <code>&lt;style&gt;</code> blocks or pre-system markup.
       ${patterns.reduce((n, fl) => n + fl.screens.filter((x) => x.onSystem).length, 0)} of
-      ${patterns.reduce((n, fl) => n + fl.screens.length, 0)} screens are rebuilt.</p>
+      ${patterns.reduce((n, fl) => n + fl.screens.length, 0)} screens are rebuilt.</p>`}
 
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Built but never recycled · ${UNUSED_COMPONENTS().length} of ${sections.length}</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
@@ -2057,6 +2082,7 @@ const html = `<!doctype html>
       rebuilt. Each component page states its own count.</p>
     <div class="ml-chip-wrap">${UNUSED_COMPONENTS().map((w) => `<a class="ml-chip" href="#${slug(w)}">${esc(w)}</a>`).join("")}</div>
 
+    ${stateGaps.missing.length === 0 ? "" : `
     <h3 style="margin:var(--space-4) 0 var(--space-2)">States declared but not rendered · ${stateGaps.missing.length}</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
       <b>Loading</b> is declared by ${stateGaps.loadingDeclared} screen${stateGaps.loadingDeclared === 1 ? "" : "s"}
@@ -2064,7 +2090,7 @@ const html = `<!doctype html>
       and shows nothing is worse than one that never claimed it — the component
       state map above already predicts this by listing Loading as <i>composed</i>
       rather than owned, and almost nothing composes it.</p>
-    <div class="ml-chip-wrap">${stateGaps.missing.map((x) => `<a class="ml-chip" href="/preview/flows/${x}"><code>${esc(x)}</code></a>`).join("")}</div>
+    <div class="ml-chip-wrap">${stateGaps.missing.map((x) => `<a class="ml-chip" href="/preview/flows/${x}"><code>${esc(x)}</code></a>`).join("")}</div>`}
 
     <h3 style="margin:var(--space-4) 0 var(--space-2)">Live data the design layer cannot see · ${blindSpots.length}</h3>
     <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
@@ -2076,16 +2102,6 @@ const html = `<!doctype html>
       ${blindSpots.map((b) => `<tr><th>${esc(b.label)}</th><td>admin route <code>/${esc(b.route)}</code> + Firestore collection</td></tr>`).join("")}
     </tbody></table>
 
-    <h3 style="margin:var(--space-4) 0 var(--space-2)">Token-level gaps</h3>
-    <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
-      One table, merged 2026-08-30 — this used to be a second "Gaps" section
-      under Foundations. Each row is a spec item that was considered and either
-      resolved, deferred with a reason, or moved out of CSS entirely — not
-      silently dropped.</p>
-    <table class="g-t"><thead><tr><th>Item</th><th>Why</th></tr></thead><tbody>
-      ${Object.entries(tokens.meta.knownGaps).filter(([k]) => !k.startsWith("$"))
-        .map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join("")}
-    </tbody></table>
   </div>
 
   <h2 class="g-h" id="coverage">Coverage</h2>
