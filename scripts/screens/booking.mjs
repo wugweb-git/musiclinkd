@@ -167,6 +167,21 @@ const LEAD = (MONTH_START.getDay() + 6) % 7;
 const BLOCKED = new Set([3, 4, 11, 17, 18, 24, 25]);
 const TODAY = 12;
 
+/* ONE day renderer, called by both calendars. They were duplicated verbatim
+   and had already drifted: the customer calendar announced "3 August,
+   unavailable" on a blocked day while the provider calendar announced just
+   "3, dimmed button" — same data, same markup, different a11y contract. A
+   shared helper is the only thing that keeps two copies of a grid in step. */
+const calendarDay = (d) => {
+  const cls = ["ml-calendar__day"];
+  if (BLOCKED.has(d)) cls.push("is-blocked");
+  if (d === TODAY) cls.push("is-today");
+  /* A disabled button announces "dimmed" but not WHY, and not which month —
+     the label carries the reason. */
+  const label = BLOCKED.has(d) ? ` disabled aria-label="${d} August, unavailable"` : "";
+  return `<button type="button" class="${cls.join(" ")}"${label}>${d}</button>`;
+};
+
 const SLOTS = [
   ["09:00 – 11:00", false], ["11:00 – 13:00", true], ["13:00 – 15:00", false],
   ["15:00 – 17:00", false], ["17:00 – 19:00", true], ["19:00 – 21:00", false],
@@ -199,12 +214,7 @@ writeScreen({
         </div>
         <div class="ml-calendar__grid">
           ${Array.from({ length: LEAD }, () => `<span></span>`).join("")}
-          ${DAYS.map((d) => {
-            const cls = ["ml-calendar__day"];
-            if (BLOCKED.has(d)) cls.push("is-blocked");
-            if (d === TODAY) cls.push("is-today");
-            return `<button type="button" class="${cls.join(" ")}"${BLOCKED.has(d) ? " disabled aria-label=\"" + d + " August, unavailable\"" : ""}>${d}</button>`;
-          }).join("\n          ")}
+          ${DAYS.map(calendarDay).join("\n          ")}
         </div>
         <div class="ml-calendar__legend">
           <span><i class="ml-calendar__key ml-calendar__key--sel"></i>Available</span>
@@ -690,12 +700,7 @@ writeScreen({
         <div class="ml-calendar__dow">${["M", "T", "W", "T", "F", "S", "S"].map((d) => `<span>${d}</span>`).join("")}</div>
         <div class="ml-calendar__grid">
           ${Array.from({ length: LEAD }, () => `<span></span>`).join("")}
-          ${DAYS.map((d) => {
-            const cls = ["ml-calendar__day"];
-            if (BLOCKED.has(d)) cls.push("is-blocked");
-            if (d === TODAY) cls.push("is-today");
-            return `<button type="button" class="${cls.join(" ")}"${BLOCKED.has(d) ? " disabled" : ""}>${d}</button>`;
-          }).join("\n          ")}
+          ${DAYS.map(calendarDay).join("\n          ")}
         </div>
         <div class="ml-calendar__legend">
           <span><i class="ml-calendar__key ml-calendar__key--sel"></i>Bookable</span>

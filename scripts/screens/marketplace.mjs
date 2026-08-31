@@ -457,7 +457,14 @@ writeScreen({
         <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-2)">
           Sorted by distance from Andheri West, the city on your profile.
         </p>
-        ${LISTINGS.slice(0, 5).map((l, i) => `<a class="ml-result" href="${P}marketplace_item_detail/index.html">
+        ${/* Only things with a physical pickup belong on a distance-sorted screen.
+             Slicing LISTINGS unfiltered stamped a distance on the beat pack and the
+             mixing service — "Lo-fi Beat Pack · Beats Licensing · 4.1 km away", directly
+             under a line that says results are sorted by distance. Both are delivered
+             as files; neither has anywhere to be. The category already encodes this:
+             sale and rental carry a city in their meta, beats/mixing/services do not. */
+          LISTINGS.filter((l) => l.cat === "sale" || l.cat === "rental")
+            .slice(0, 5).map((l, i) => `<a class="ml-result" href="${P}marketplace_item_detail/index.html">
           <img class="ml-result__thumb" src="${l.img}" alt="" loading="lazy" />
           <span class="ml-result__body">
             <span class="ml-result__name">${l.title}</span>
