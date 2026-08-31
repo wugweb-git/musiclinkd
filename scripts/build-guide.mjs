@@ -289,8 +289,21 @@ const sections = [...parseSections("ml-core.css"), ...parseSections("ml-widgets.
    source rather than a second copy: edit the README and the catalogue follows,
    which is the only arrangement that stops the two disagreeing again. */
 function readGovernance(name) {
-  try { return readFileSync(join(ROOT, "frontend/guide", name, "README.md"), "utf8"); }
-  catch { return ""; }
+  /* One folder, six files — was six folders holding one README each, alongside
+     four more that held nothing at all. Ten directories removed 2026-08-31;
+     the rules moved to frontend/guide/rules/ rather than being deleted with
+     them, because they are the only written source for the card contract, the
+     template families and the profile module composition.
+
+     THROWS rather than returning "" on a missing file. The previous version
+     swallowed the error, which meant deleting one of these folders would have
+     silently blanked a whole section of the catalogue and the build would still
+     have reported success. */
+  const f = join(ROOT, "frontend/guide/rules", `${name}.md`);
+  try { return readFileSync(f, "utf8"); }
+  catch { throw new Error(`build-guide: governance file missing — ${f}. ` +
+    `Six sections of the catalogue render from frontend/guide/rules/; a missing ` +
+    `one is a blank section, not a warning.`); }
 }
 
 /* A deliberately small Markdown subset — headings, tables, lists, fenced code,

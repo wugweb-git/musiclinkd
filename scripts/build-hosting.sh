@@ -108,7 +108,11 @@ echo "==> Copying frontend/guide/ design-system reference into dist/guide/"
 #                                    is the directory named exactly "icons" —
 #                                    icons-lucide/ is NOT matched and DOES ship,
 #                                    which is required: see below.
-#   testdir.tmp/, widgets/           empty
+#   rules/                           the six governance markdown files. They are
+#                                    RENDERED INTO index.html at build time, so
+#                                    the source does not need to ship — but note
+#                                    the *.md exclude below is what drops them,
+#                                    not this line.
 #   skills/, docs/, *.md             markdown; belongs in the repo, not on a CDN
 #   styleguide.html                  660KB, and /guide/styleguide 301s away from
 #                                    it, so it could never be fetched
@@ -144,10 +148,9 @@ rsync -a \
   --exclude='brandkit/' \
   --exclude='_Music*' \
   --exclude='icons/' \
-  --exclude='testdir.tmp/' \
-  --exclude='widgets/' \
   --exclude='skills/' \
   --exclude='docs/' \
+  --exclude='rules/' \
   --exclude='*.md' \
   --exclude='styleguide.html' \
   --exclude='_to_delete/' \
@@ -183,5 +186,40 @@ sed -i '' "s/__BUILD_ID__/$SW_ID/" dist/preview/service-worker.js
 grep -q "__BUILD_ID__" dist/preview/service-worker.js && \
   { echo "    ERROR: service-worker.js BUILD_ID not stamped"; exit 1; }
 echo "    service worker cache: musiclinkd-shell-$SW_ID"
+
+# Bust the shared CSS/JS by URL, not by header.
+#
+# The headers above are correct NOW, but a browser that cached these files
+# while they were still served "max-age=31536000, immutable" will not
+# revalidate them for a year — that is what immutable MEANS. It never asks,
+# so it never learns the header changed, and the corrected header cannot
+# reach the very clients it was meant to fix. One such client was still
+# parsing a 189-rule ml-widgets.css against the live 657 on 2026-08-31, so
+# every widget added since was silently unstyled for it.
+#
+# A query string is a different cache key, so a stamped URL cannot hit a
+# poisoned entry at all. ASSET_ID covers the system CSS and the app shell —
+# change any of them and every page asks for a URL no cache has seen.
+ASSET_ID=$(cat dist/guide/system/ml-tokens.css \
+           dist/guide/system/ml-core.css \
+           dist/guide/system/ml-widgets.css \
+           dist/preview/shared/app-shell.css \
+           dist/preview/shared/app-shell.js \
+           dist/preview/shared/tokens.css 2>/dev/null | shasum -a 256 | cut -c1-12)
+
+# Rewrite only our own absolute asset paths; Google Fonts and anything
+# already carrying a query are left alone.
+find dist/preview dist/guide -name '*.html' -type f -print0 \
+  | xargs -0 sed -i '' -E \
+      -e "s#(href=\"/guide/system/ml-(tokens|core|widgets)\.css)\"#\1?v=$ASSET_ID\"#g" \
+      -e "s#(href=\"/preview/shared/(app-shell|tokens)\.css)\"#\1?v=$ASSET_ID\"#g" \
+      -e "s#(src=\"/preview/shared/app-shell\.js)\"#\1?v=$ASSET_ID\"#g"
+
+STAMPED=$(grep -rl "?v=$ASSET_ID" dist/preview dist/guide --include='*.html' | wc -l | tr -d ' ')
+if [ "$STAMPED" -lt 200 ]; then
+  echo "    ERROR: only $STAMPED pages carry the asset stamp — expected every screen"
+  exit 1
+fi
+echo "    shared assets stamped ?v=$ASSET_ID across $STAMPED pages"
 
 echo "==> dist/ ready ($(find dist -type f | wc -l | tr -d ' ') files)"
