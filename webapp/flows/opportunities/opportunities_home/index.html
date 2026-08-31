@@ -10,64 +10,78 @@
 <meta name="screen-json-path" content="/preview/flows/opportunities/opportunities_home/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Opportunities / Home</title>
+<title>MusicLinkd — Opportunities</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-.opp-card { display: block; border: 1px solid var(--color-line); border-radius: var(--radius-2); padding: var(--space-3); margin-bottom: var(--space-2); text-decoration: none; color: inherit; }
-  .opp-card b { font-size: var(--type-2); display: block; }
-  .opp-card .poster { font-size: var(--type-1); color: var(--color-muted); margin-top: 2px; }
-  .opp-card .meta-row { display: flex; justify-content: space-between; align-items: center; margin-top: var(--space-2); }
-  .opp-card .budget { font-weight: 700; font-size: var(--type-2); }
-  .opp-card .applicants { font-size: var(--type-1); color: var(--color-muted); }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-4);padding-right:var(--space-3);height:56px;display:flex;align-items:center;">
-      <h1 style="font-size:var(--type-3);">Opportunities</h1>
-      <!-- MVP scope: real Browse + Detail + "Message the poster" — no formal Application record yet. This whole flow is confirmed 100% missing in the real app today (zero real screens, zero Firestore reads) — shown here as the spec's build target. -->
-      <span class="ml-status ml-status--info" style="margin-left:auto">MVP scope</span>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
+      <h1 class="ml-type-3" style="margin:0">Opportunities</h1>
+      <span class="ml-appbar__actions">
+        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/opportunities/my_applications/index.html" aria-label="My applications"><svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></a>
+        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/opportunities/create_opportunity/index.html" aria-label="Post an opportunity"><svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22 10h-8V2a2 2 0 0 0-4 0v8H2a2 2 0 0 0 0 4h8v8a2 2 0 0 0 4 0v-8h8a2 2 0 0 0 0-4"/></svg></a>
+      </span>
     </header>
-    <main class="app-content app-content--scroll" style="padding:var(--space-2) var(--space-4) var(--space-4);">
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <a class="ml-opportunity-card" data-state="default" href="/preview/flows/opportunities/opportunity_detail/index.html">
+        <div class="ml-opportunity-card__head">
+          <span class="ml-opportunity-card__title">Session vocalist — Hindi pop EP</span>
+          <span class="ml-opportunity-card__by">Octave Sound Labs</span>
+        </div>
+        <p class="ml-opportunity-card__body">Three tracks, two days at our Andheri room. Reference: soft-pop, light belt.</p>
+        <div class="ml-opportunity-card__foot">
+          <span class="ml-opportunity-card__budget">₹12,000/day</span>
+          <span class="ml-opportunity-card__closes is-soon">Closes in 3 days</span>
+        </div>
+      </a>
+      <a class="ml-opportunity-card" data-state="default" href="/preview/flows/opportunities/opportunity_detail/index.html">
+        <div class="ml-opportunity-card__head">
+          <span class="ml-opportunity-card__title">Live drummer — 6-city club tour</span>
+          <span class="ml-opportunity-card__by">Wavelength Artists</span>
+        </div>
+        <p class="ml-opportunity-card__body">Six shows across Mumbai, Pune, Bengaluru, Hyderabad, Chennai, Kochi. Rehearsals paid.</p>
+        <div class="ml-opportunity-card__foot">
+          <span class="ml-opportunity-card__budget">₹45,000/week</span>
+          <span class="ml-opportunity-card__closes">Closes in 11 days</span>
+        </div>
+      </a>
+      <a class="ml-opportunity-card" data-state="default" href="/preview/flows/opportunities/opportunity_detail/index.html">
+        <div class="ml-opportunity-card__head">
+          <span class="ml-opportunity-card__title">Mixing engineer — indie rock album</span>
+          <span class="ml-opportunity-card__by">Aarav Menon</span>
+        </div>
+        <p class="ml-opportunity-card__body">Nine tracks, stems ready. Looking for someone with a rough, roomy sensibility.</p>
+        <div class="ml-opportunity-card__foot">
+          <span class="ml-opportunity-card__budget">₹60,000 project</span>
+          <span class="ml-opportunity-card__closes">Closes in 6 days</span>
+        </div>
+      </a>
+      <a class="ml-opportunity-card" data-state="default" href="/preview/flows/opportunities/opportunity_detail/index.html">
+        <div class="ml-opportunity-card__head">
+          <span class="ml-opportunity-card__title">Cover art & motion loop</span>
+          <span class="ml-opportunity-card__by">Blue Note Recording Co.</span>
+        </div>
+        <p class="ml-opportunity-card__body">Single artwork plus a 6-second visualiser loop for streaming platforms.</p>
+        <div class="ml-opportunity-card__foot">
+          <span class="ml-opportunity-card__budget">₹18,000</span>
+          <span class="ml-opportunity-card__closes">Closes in 20 days</span>
+        </div>
+      </a>
 
-      <div id="panel-default">
-        <a class="opp-card" href="/preview/flows/opportunities/opportunity_detail/index.html">
-          <b>Indie Rock Vocalist Wanted</b>
-          <span class="poster">The Sound Attic (Ironwood Records) · Mumbai, MH</span>
-          <div class="meta-row"><span class="budget">₹15,000 / Session</span><span class="applicants">6 applicants</span></div>
-        </a>
-        <a class="opp-card" href="/preview/flows/opportunities/opportunity_detail/index.html">
-          <b>Session Guitarist for EP</b>
-          <span class="poster">Karan Saxena · New Delhi, DL</span>
-          <div class="meta-row"><span class="budget">₹8,000 / Song</span><span class="applicants">3 applicants</span></div>
-        </a>
-        <a class="opp-card" href="/preview/flows/opportunities/opportunity_detail/index.html" style="margin-bottom:0;">
-          <b>Mix Engineer for Live EP</b>
-          <span class="poster">Aditi Sen · Bengaluru, KA</span>
-          <div class="meta-row"><span class="budget">₹12,000 / Project</span><span class="applicants">2 applicants</span></div>
-        </a>
-      </div>
-
-      <div id="panel-empty" style="display:none;flex-direction:column;align-items:center;text-align:center;padding-top:20vh;gap:var(--space-3);">
-        <p style="color:var(--color-muted);font-size:var(--type-2);">No open opportunities right now.</p>
+      <div class="ml-empty" data-state="empty">
+        <h3 class="ml-empty__title">No open opportunities</h3>
+        <p class="ml-empty__body">Nothing matches your roles and location right now. Post one of your own, or widen your preferences.</p>
+        <a class="ml-btn ml-btn--primary" href="/preview/flows/opportunities/create_opportunity/index.html">Post an opportunity</a>
       </div>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
-      <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/opportunities/create_opportunity/index.html" style="text-decoration:none;">Post an opportunity</a>
-    </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    document.addEventListener("musiclinkd:screen-ready", () => {
-      if (window.MusicLinkd.currentState === "empty") {
-        document.getElementById("panel-default").style.display = "none";
-        document.getElementById("panel-empty").style.display = "flex";
-      }
-    });
-  </script>
 </body>
 </html>

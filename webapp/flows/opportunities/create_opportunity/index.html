@@ -10,58 +10,62 @@
 <meta name="screen-json-path" content="/preview/flows/opportunities/create_opportunity/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Opportunities / Create</title>
+<title>MusicLinkd — Opportunities — Post</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-.field textarea { min-height: 88px; padding: var(--space-2) var(--space-3); border-radius: var(--radius-2); border: 1px solid var(--color-line); background: #fff; font: var(--type-2) 'Inter', sans-serif; resize: none; }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/opportunities/opportunities_home/index.html" aria-label="Close" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </a>
-      <!-- MVP, shipped minimal: title, description, role, budget, location, publish. Richer fields (skills/languages/deadline/opportunity type) are Phase 2. -->
-      <span class="ml-status ml-status--info" style="margin-left:auto">MVP scope</span>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/opportunities/opportunities_home/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Post an opportunity</h1>
     </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4) var(--space-4);">
-      <div id="panel-default" style="display:flex;flex-direction:column;gap:var(--space-3);">
-        <h1 style="font-size:var(--type-3);margin:0;">Post an opportunity</h1>
-        <div class="ml-field"><label for="t">Title</label><input id="t" type="text" value="Indie Rock Vocalist Wanted" /></div>
-        <div class="ml-field"><label for="d">Description</label><textarea id="d">Looking for a lead vocalist for a 2-song indie rock session.</textarea></div>
-        <div class="ml-field"><label for="r">Role required</label><input id="r" type="text" value="Singer / Vocalist" /></div>
-        <div class="ml-field"><label for="b">Budget</label><input id="b" type="text" value="₹15,000 / Session" /></div>
-        <div class="ml-field"><label for="l">Location</label><input id="l" type="text" value="Mumbai, MH" /></div>
-        <button type="button" class="ml-btn ml-btn--primary ml-btn--block" id="publish-btn">Publish opportunity</button>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <div data-state="default">
+        <div class="ml-field">
+          <label for="o-title">Title</label>
+          <input id="o-title" type="text" value="Session vocalist — Hindi pop EP" />
+        </div>
+        <div class="ml-field">
+          <label for="o-role">Role</label>
+          <select id="o-role"><option>Session vocalist</option><option>Session musician</option><option>Producer</option><option>Mixing engineer</option><option>Composer</option><option>DJ</option></select>
+        </div>
+        <div class="ml-field">
+          <label for="o-budget">Budget (₹)</label>
+          <input id="o-budget" type="text" inputmode="numeric" value="12000" />
+        </div>
+        <div class="ml-field">
+          <label for="o-loc">Location</label>
+          <input id="o-loc" type="text" value="Andheri West, Mumbai" />
+        </div>
+        <div class="ml-field">
+          <label for="o-brief">Brief</label>
+          <textarea id="o-brief" rows="4">Three tracks, two days at our Andheri room.</textarea>
+        </div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=publishing">Post opportunity</a>
       </div>
 
-      <div id="panel-publishing" style="display:none;text-align:center;padding-top:20vh;">
-        <span class="ml-spinner"></span>
-        <p style="color:var(--color-muted);margin-top:var(--space-3);">Publishing…</p>
+      <div class="ml-empty" data-state="publishing">
+        <span class="ml-spinner" role="status" aria-label="Publishing"></span>
+        <p class="ml-empty__body" style="margin-top:var(--space-3)">Posting your opportunity…</p>
       </div>
 
-      <div id="panel-error" style="display:none;text-align:center;padding-top:15vh;">
-        <p style="color:var(--color-error);font-weight:600;">Couldn't publish this opportunity.</p>
-        <p style="color:var(--color-muted);font-size:var(--type-1);margin-top:var(--space-1);">Check your connection and try again.</p>
+      <div data-state="error">
+        <div class="ml-banner ml-banner--error">
+          <span class="ml-banner__body">Couldn't post — a budget is required before this can go live.</span>
+        </div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Back to the form</a>
       </div>
     </main>
-    <footer class="app-bottombar"></footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
-  <script>
-    document.addEventListener("musiclinkd:screen-ready", () => {
-      const state = window.MusicLinkd.currentState;
-      if (state === "publishing") { document.getElementById("panel-default").style.display = "none"; document.getElementById("panel-publishing").style.display = "block"; }
-      else if (state === "error") { document.getElementById("panel-default").style.display = "none"; document.getElementById("panel-error").style.display = "block"; }
-    });
-    document.getElementById("publish-btn")?.addEventListener("click", () => {
-      window.location.href = "/preview/flows/opportunities/opportunities_home/index.html";
-    });
-  </script>
 </body>
 </html>

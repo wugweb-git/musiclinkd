@@ -10,44 +10,51 @@
 <meta name="screen-json-path" content="/preview/flows/opportunities/opportunity_detail/screen.json" />
 <link rel="manifest" href="/preview/manifest.json" />
 <link rel="apple-touch-icon" href="/preview/shared/icon.svg" />
-<title>MusicLinkd — Opportunities / Detail</title>
+<title>MusicLinkd — Opportunities — Detail</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/guide/system/ml-tokens.css" />
+<link rel="stylesheet" href="/guide/system/ml-core.css" />
+<link rel="stylesheet" href="/guide/system/ml-widgets.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
-<link rel="stylesheet" href="/preview/shared/tokens.css" />
-<style>
-  .summary-row { display: flex; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); font-size: var(--type-1); }
-  .summary-row span:first-child { color: var(--color-muted); }
-</style>
 </head>
 <body>
-  <div class="app-root">
-    <header class="app-topbar" style="padding-left:var(--space-3);padding-right:var(--space-3);display:flex;align-items:center;height:56px;">
-      <a href="/preview/flows/opportunities/opportunities_home/index.html" aria-label="Back" style="display:flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;color:var(--color-ink);text-decoration:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
+
+  <div class="ml-app">
+    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+      <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/opportunities/opportunities_home/index.html" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+      <h1 class="ml-type-2" style="margin:0">Opportunity</h1>
     </header>
-    <main class="app-content app-content--scroll" style="padding:0 var(--space-4);">
-      <span class="ml-chip" style="margin-bottom:var(--space-2);display:inline-flex;">Rock / Metal</span>
-      <h1 style="font-size:var(--type-3);margin:0 0 4px;">Indie Rock Vocalist Wanted</h1>
-      <div style="display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-3);">
-        <div style="width:32px;height:32px;border-radius:50%;background:var(--color-surface);"></div>
-        <span style="font-size:var(--type-1);color:var(--color-muted);">The Sound Attic (Ironwood Records) · Mumbai, MH</span>
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+      <h2 class="ml-type-3" style="margin:0">Session vocalist — Hindi pop EP</h2>
+      <div class="ml-person-row" style="margin-top:var(--space-2)">
+        <img src="/assets/img/editorials/0e7b75cc331c13fd482936dd133a8363.jpg" alt="" loading="lazy" />
+        <span class="meta"><b>Octave Sound Labs</b><p>Studio · Andheri West, Mumbai</p></span>
       </div>
+      <span class="ml-status ml-status--warning" style="margin-top:var(--space-2);display:inline-flex">Closes in 3 days</span>
 
-      <p style="font-size:var(--type-2);">Looking for a lead vocalist for a 2-song indie rock session. Recording booked for next month — must be comfortable with live-take recording and quick harmony work.</p>
+      <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        Three tracks, two days at our Andheri room. Reference points are soft-pop with a light belt —
+        think restrained verses and an open chorus. Stems and a scratch guide will be provided a week ahead.
+      </p>
 
-      <div style="margin-top:var(--space-3);">
-        <div class="summary-row"><span>Role required</span><span>Singer / Vocalist</span></div>
-        <div class="summary-row"><span>Budget</span><span>₹15,000 / Session</span></div>
-        <div class="summary-row"><span>Location</span><span>Mumbai, MH</span></div>
-        <div class="summary-row"><span>Applicants</span><span>6</span></div>
-        <div class="summary-row"><span>Posted</span><span>25 Jul 2026</span></div>
+      <div class="ml-summary" style="margin-top:var(--space-3)">
+        <div class="ml-summary__row"><span>Rate</span><span>₹12,000/day</span></div>
+        <div class="ml-summary__row"><span>Duration</span><span>2 days</span></div>
+        <div class="ml-summary__row"><span>Location</span><span>Andheri West, Mumbai</span></div>
+        <div class="ml-summary__row"><span>Languages</span><span>Hindi, English</span></div>
+        <div class="ml-summary__row ml-summary__row--total"><span>Total</span><span>₹24,000</span></div>
+        <p class="ml-summary__note">Paid within 7 days of the final session.</p>
       </div>
     </main>
-    <footer class="app-bottombar" style="padding:0 var(--space-4) var(--space-3);">
-      <button type="button" class="ml-btn ml-btn--primary ml-btn--block">Message the poster</button>
+    <!-- Both sides of the same posting: the poster manages applicants, the
+         applicant applies. Two roles on one screen rather than two screens. -->
+    <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
+      <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/opportunities/manage_applicants/index.html">Applicants</a>
+      <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/opportunities/opportunity_apply/index.html">Apply</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

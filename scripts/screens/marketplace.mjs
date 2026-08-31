@@ -346,7 +346,7 @@ writeScreen({
       ${ORDER.map(([st, at, kind, msg]) => `<div data-state="${st}" style="margin-top:var(--space-3)">
         <div class="ml-banner ml-banner--${kind}"><span class="ml-banner__body">${msg}</span></div>
         <ol class="ml-timeline" style="margin-top:var(--space-3)">
-          ${STEPS.map((s, i) => `<li class="ml-timeline__item${st === "cancelled" && i > 0 ? "" : i < at ? " is-done" : i === at ? " is-current" : ""}">
+          ${STEPS.map((s, i) => `<li class="ml-timeline__item${st === "cancelled" ? "" : i < at ? " is-done" : i === at ? " is-current" : ""}">
             <span class="ml-timeline__title">${s}</span>
           </li>`).join("\n          ")}
         </ol>
