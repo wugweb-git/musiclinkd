@@ -18,6 +18,11 @@
 import { writeScreen, icon, backArrow, assertIcons, finish, media } from "../write-screen.mjs";
 
 const P = "/preview/flows/marketplace/";
+
+/* The demo seller, in one place. item_detail links straight through to
+   seller_profile, so a face chosen separately on each screen made the same
+   named person change appearance on the way. */
+const SELLER = { name: "Aarav Menon", face: media("faces", 3) };
 assertIcons(["search", "heart", "filter", "add", "arrow-forward"]);
 
 /** Every listing carries its category so one grid serves all six states, and
@@ -58,7 +63,7 @@ const chip = ([key, label]) => {
    matches the demo query — "search_filtered". One grid covers all eight
    states with no duplicated markup. */
 const card = (l) => `<a class="ml-market-card" data-state="default ${l.q ? "search_filtered " : ""}${l.cat}"
-          href="${P}marketplace_item_detail/index.html">
+          href="${P}marketplace_item_detail/index.html${l.cat === "rental" ? "?state=rental" : ""}">
           <div class="ml-market-card__media">
             <img src="${l.img}" alt="" loading="lazy" />
             ${l.status ? `<span class="ml-status ml-status--${l.status[0]}" style="position:absolute;top:var(--space-2);left:var(--space-2)">${l.status[1]}</span>` : ""}
@@ -157,38 +162,65 @@ const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;al
       <h1 class="ml-type-2" style="margin:0">${title}</h1>
     </header>`;
 
-/* ── marketplace_item_detail — default ─────────────────────────────────── */
+/* ── marketplace_item_detail — default (sale) / rental ─────────────────
+   A third of LISTINGS is rental, and rental is not a separate screen: it is
+   this screen with a per-day price and "Check availability" instead of "Buy
+   now". Branching it here is what gives marketplace_availability an entry
+   from the natural browse → listing path, rather than only from its own
+   sub-flow. */
 writeScreen({
   flow: "marketplace", screen: "marketplace_item_detail", title: "Market — Item detail",
   body: `
   <div class="ml-app">
     ${bar("Listing", `${P}marketplace_browse/index.html`)}
     <main class="ml-app__body app-content--scroll" style="padding:0 0 var(--space-4)">
-      <img src="${media("gear", 0)}" alt="Shure SM7B microphone" loading="lazy"
+      <img src="${media("gear", 0)}" alt="Shure SM7B microphone" data-state="default" loading="lazy"
+           style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
+      <img src="${media("gear", 3)}" alt="Focusrite Scarlett 2i2 audio interface" data-state="rental" loading="lazy"
            style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
       <div style="padding:var(--space-3) var(--space-4)">
-        <div class="ml-market-card__price" style="font-size:var(--type-4)">₹28,500</div>
-        <h2 class="ml-type-3" style="margin:var(--space-1) 0">Shure SM7B Microphone</h2>
-        <span class="ml-status ml-status--warning">Like new</span>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">
-          Cardioid dynamic, used on two album sessions. Original box, shock mount and cable included.
-          Collection in Andheri or courier at cost.
-        </p>
+        <div data-state="default">
+          <div class="ml-market-card__price" style="font-size:var(--type-4)">₹28,500</div>
+          <h2 class="ml-type-3" style="margin:var(--space-1) 0">Shure SM7B Microphone</h2>
+          <span class="ml-status ml-status--warning">Like new</span>
+          <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">
+            Cardioid dynamic, used on two album sessions. Original box, shock mount and cable included.
+            Collection in Andheri or courier at cost.
+          </p>
+        </div>
+        <div data-state="rental">
+          <div class="ml-market-card__price" style="font-size:var(--type-4)">₹800/day</div>
+          <h2 class="ml-type-3" style="margin:var(--space-1) 0">Focusrite Scarlett 2i2</h2>
+          <span class="ml-status ml-status--success">Available</span>
+          <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">
+            Two-in, two-out interface with the original cables. Collection in Andheri.
+            Minimum two days, and a refundable deposit is held for the length of the rental.
+          </p>
+        </div>
         <a class="ml-person-row" style="margin-top:var(--space-3)" href="${P}marketplace_seller_profile/index.html">
-          <img src="${media("faces", 3)}" alt="" loading="lazy" />
-          <span class="meta"><b>Aarav Menon</b><p>Seller · 12 listings · joined 2024</p></span>
+          <img src="${SELLER.face}" alt="" loading="lazy" />
+          <span class="meta"><b>${SELLER.name}</b><p>Seller · 12 listings · joined 2024</p></span>
           ${icon("arrow-forward", { size: 18 })}
         </a>
-        <div class="ml-summary" style="margin-top:var(--space-3)">
+        <div class="ml-summary" style="margin-top:var(--space-3)" data-state="default">
           <div class="ml-summary__row"><span>Asking price</span><span>₹28,500</span></div>
           <div class="ml-summary__row"><span>Delivery</span><span>At cost</span></div>
           <div class="ml-summary__row ml-summary__row--total"><span>Total</span><span>₹28,500</span></div>
         </div>
+        <div class="ml-summary" style="margin-top:var(--space-3)" data-state="rental">
+          <div class="ml-summary__row"><span>Per day</span><span>₹800</span></div>
+          <div class="ml-summary__row"><span>Minimum</span><span>2 days</span></div>
+          <div class="ml-summary__row"><span>Deposit, refundable</span><span>₹5,000</span></div>
+        </div>
       </div>
     </main>
-    <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
+    <footer class="ml-app__footer" data-state="default" style="display:flex;gap:var(--space-2)">
       <a class="ml-btn ml-btn--secondary" style="flex:1" href="${P}marketplace_make_offer/index.html">Make offer</a>
       <a class="ml-btn ml-btn--primary" style="flex:1" href="${P}marketplace_order_status/index.html">Buy now</a>
+    </footer>
+    <footer class="ml-app__footer" data-state="rental" style="display:flex;gap:var(--space-2)">
+      <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/communication/chat_conversation/index.html">Message</a>
+      <a class="ml-btn ml-btn--primary" style="flex:1" href="${P}marketplace_availability/index.html">Check availability</a>
     </footer>
   </div>`,
 });
@@ -521,7 +553,7 @@ writeScreen({
         <div class="ml-calendar__head"><span class="ml-calendar__month">September 2026</span></div>
         <div class="ml-calendar__dow">${["M", "T", "W", "T", "F", "S", "S"].map((d) => `<span>${d}</span>`).join("")}</div>
         <div class="ml-calendar__grid">
-          ${Array.from({ length: 1 }, () => `<span></span>`).join("")}
+          <span></span>
           ${R_DAYS.map((d) => `<button type="button" class="ml-calendar__day${R_TAKEN.has(d) ? " is-blocked" : ""}"${R_TAKEN.has(d) ? ` disabled aria-label="${d} September, already rented"` : ""}>${d}</button>`).join("\n          ")}
         </div>
         <div class="ml-calendar__legend">
@@ -552,13 +584,13 @@ writeScreen({
         <img class="ml-result__thumb" src="${media("gear", 3)}" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Focusrite Scarlett 2i2</span>
-          <span class="ml-result__meta">From Aarav Menon · Mumbai</span>
+          <span class="ml-result__meta">From ${SELLER.name} · Mumbai</span>
         </span>
       </a>
 
       <div class="ml-summary" style="margin-top:var(--space-3)" data-state="default">
-        <div class="ml-summary__row"><span>Out</span><span>Mon 8 Sept</span></div>
-        <div class="ml-summary__row"><span>Back</span><span>Thu 11 Sept</span></div>
+        <div class="ml-summary__row"><span>Out</span><span>Tue 8 Sept</span></div>
+        <div class="ml-summary__row"><span>Back</span><span>Fri 11 Sept</span></div>
         <div class="ml-summary__row"><span>3 days at ₹800</span><span>₹2,400</span></div>
         <div class="ml-summary__row"><span>Deposit, refundable</span><span>₹5,000</span></div>
         <div class="ml-summary__row ml-summary__row--total"><span>Now</span><span>₹7,400</span></div>
@@ -581,7 +613,7 @@ writeScreen({
       <div data-state="overdue">
         <div class="ml-banner ml-banner--warning"><span class="ml-banner__body">Due back yesterday.</span></div>
         <div class="ml-summary" style="margin-top:var(--space-3)">
-          <div class="ml-summary__row"><span>Was due</span><span>Thu 11 Sept</span></div>
+          <div class="ml-summary__row"><span>Was due</span><span>Fri 11 Sept</span></div>
           <div class="ml-summary__row"><span>Late fee</span><span>₹800/day from today</span></div>
           <div class="ml-summary__row"><span>Taken from</span><span>The deposit</span></div>
         </div>
@@ -606,8 +638,9 @@ writeScreen({
     ${bar("Seller", `${P}marketplace_item_detail/index.html`)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div class="ml-person-row">
-        <img src="${media("faces", 8)}" alt="" loading="lazy" />
-        <span class="meta"><b data-state="default">Aarav Menon</b><b data-state="business">Blue Note Recording Co.</b>
+        <img src="${SELLER.face}" alt="" data-state="default" loading="lazy" />
+        <img src="${media("gear", 7)}" alt="" data-state="business" loading="lazy" />
+        <span class="meta"><b data-state="default">${SELLER.name}</b><b data-state="business">Blue Note Recording Co.</b>
         <p data-state="default">Selling since 2024 · Mumbai</p><p data-state="business">Business seller · Bandra</p></span>
         <span class="ml-status ml-status--accent" data-state="business">Verified business</span>
       </div>

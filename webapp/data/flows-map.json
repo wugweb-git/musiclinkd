@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T05:38:43.311Z",
+  "generatedAt": "2026-08-31T06:31:01.811Z",
   "flows": [
     {
       "key": "home",
@@ -2585,7 +2585,8 @@
       "screenTitle": "Listing Detail",
       "screenOrder": 2,
       "states": [
-        "default"
+        "default",
+        "rental"
       ],
       "collectionsTouched": [],
       "notes": "Rendered as an AlertDialog inside the browse screen, not a separate navigable screen. \"Contact Seller\" / \"Rent This Gear\" confirm buttons only set a local fake-success string (e.g. a fabricated request ID) — no network or DB call.",

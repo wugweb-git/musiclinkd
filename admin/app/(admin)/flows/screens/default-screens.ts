@@ -1529,7 +1529,7 @@ export const DEFAULT_SCREENS: Record<string, ScreenSeed[]> = {
       order: 2,
       screenNumber: 100,
       title: "Listing Detail",
-      states: ["default"],
+      states: ["default", "rental"],
       collectionsTouched: [],
       notes:
         "Rendered as an AlertDialog inside the browse screen, not a separate navigable screen. \"Contact Seller\" / \"Rent This Gear\" confirm buttons only set a local fake-success string (e.g. a fabricated request ID) — no network or DB call.",

@@ -21,7 +21,7 @@
 import { writeScreen, icon, backArrow, assertIcons, finish, media } from "../write-screen.mjs";
 
 const P = "/preview/flows/opportunities/";
-assertIcons(["add", "check", "cancel", "search"]);
+assertIcons(["add", "check", "cancel", "search", "briefcase"]);
 
 const tab = (state, label) =>
   `<a class="ml-tabs__tab" role="tab" data-chip="${state}" href="?state=${state}">${label}</a>`;
@@ -63,7 +63,7 @@ writeScreen({
       <h1 class="ml-type-3" style="margin:0">Opportunities</h1>
       <span class="ml-appbar__actions">
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}my_applications/index.html" aria-label="My applications">${icon("check", { size: 20 })}</a>
-        <a class="ml-icon-btn ml-icon-btn--bare" href="${P}my_opportunities/index.html" aria-label="What you've posted">${icon("search", { size: 20 })}</a>
+        <a class="ml-icon-btn ml-icon-btn--bare" href="${P}my_opportunities/index.html" aria-label="What you've posted">${icon("briefcase", { size: 20 })}</a>
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}create_opportunity/index.html" aria-label="Post an opportunity">${icon("add", { size: 20 })}</a>
       </span>
     </header>
