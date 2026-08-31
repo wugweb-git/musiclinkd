@@ -271,6 +271,56 @@ function parseSections(file) {
 
 const sections = [...parseSections("ml-core.css"), ...parseSections("ml-widgets.css")];
 
+/* ── the recycling chain ────────────────────────────────────────────────
+   Component -> screens -> flows, computed by joining each section's own
+   selectors against the class attributes of every built screen.
+
+   This is the link the catalogue never had. A component page could say what a
+   thing IS and which states it has, and nothing said whether any screen had
+   ever used it — so "everything is mapped and recycled" was unfalsifiable.
+   It is now a number per component, and the absences are the useful half:
+   55 of 133 sections are used by no screen at all (measured 2026-08-31),
+   which is the real backlog, not a rendering problem.
+
+   Derived, never listed. Add a component to a screen and the count moves on
+   the next build; delete the last use and it drops back to zero. */
+const SCREEN_USE = (() => {
+  const flowsDir = join(ROOT, "webapp/flows");
+  const screens = [];
+  let flows = [];
+  try { flows = readdirSync(flowsDir); } catch { return { screens: [], byClass: new Map() }; }
+  for (const flow of flows) {
+    let entries = [];
+    try { entries = readdirSync(join(flowsDir, flow)); } catch { continue; }
+    for (const sc of entries) {
+      let html;
+      try { html = readFileSync(join(flowsDir, flow, sc, "index.html"), "utf8"); } catch { continue; }
+      const classes = new Set();
+      for (const m of html.matchAll(/class="([^"]+)"/g))
+        for (const c of m[1].split(/\s+/)) if (c.startsWith("ml-")) classes.add("." + c);
+      screens.push({ flow, key: sc, classes });
+    }
+  }
+  /* class -> screens, so a section with many selectors resolves in one pass
+     rather than rescanning every screen per selector. */
+  const byClass = new Map();
+  for (const s of screens)
+    for (const c of s.classes) {
+      if (!byClass.has(c)) byClass.set(c, []);
+      byClass.get(c).push(s);
+    }
+  return { screens, byClass };
+})();
+
+/** Which built screens use any selector this section owns. */
+function usedBy(section) {
+  const hit = new Map();
+  for (const sel of section.selectors)
+    for (const s of SCREEN_USE.byClass.get(sel) || []) hit.set(`${s.flow}/${s.key}`, s);
+  return [...hit.values()];
+}
+for (const s of sections) s.screens = usedBy(s);
+
 /* ── demos ─────────────────────────────────────────────────────────────── */
 /* Authored once, keyed by section name. A section with no entry here is not
    dropped — it is reported in the coverage ledger. */
@@ -1284,6 +1334,7 @@ const componentSection = (s) => `<section class="g-comp" id="${slug(s.name)}">
     ${s.prose ? `<p class="ml-lede ml-measure">${esc(clamp(s.prose, 320))}</p>` : ""}
     <div class="g-demo">${DEMOS[s.name]}</div>
     ${stateMap(s)}
+    ${usageRow(s)}
     <details class="g-sel"><summary>${s.selectors.length} selector${s.selectors.length === 1 ? "" : "s"}</summary>
       <code>${s.selectors.join("</code> <code>")}</code></details>
   </section>`;
@@ -1292,6 +1343,22 @@ const componentSection = (s) => `<section class="g-comp" id="${slug(s.name)}">
    absences are the useful half. A screen author who can see that a card has no
    "loading" is told to reach for .ml-skeleton rather than invent a second
    screen, which is exactly the decision that went wrong across the flows. */
+/* Where this component is actually recycled. The absence is the point: a
+   component no screen uses is either not built into the product yet or is
+   dead weight, and until this row existed the catalogue could not tell you
+   which components those were. Screens link into /preview so the claim is one
+   click from being checked. */
+const usageRow = (s) => {
+  const n = s.screens.length;
+  if (!n) return `<p class="g-use g-use--none">Not used by any screen yet.
+    Built and documented here; no flow has recycled it.</p>`;
+  const flows = [...new Set(s.screens.map((x) => x.flow))];
+  const shown = s.screens.slice(0, 6);
+  return `<p class="g-use"><b>Recycled on ${n} screen${n === 1 ? "" : "s"}</b>
+    across ${flows.length} flow${flows.length === 1 ? "" : "s"} —
+    ${shown.map((x) => `<a href="/preview/flows/${x.flow}/${x.key}"><code>${x.flow}/${x.key}</code></a>`).join(", ")}${n > shown.length ? ` and ${n - shown.length} more` : ""}.</p>`;
+};
+
 const stateMap = (s) => {
   const has = new Set(s.states);
   /* Focus is only inherited by something focusable. The demo markup is the
@@ -1371,6 +1438,12 @@ const html = `<!doctype html>
      the glyph still inherits colour, which an <img> of an external SVG cannot. */
   .g-lu { display: block; width: 22px; height: 22px; background: currentColor;
           -webkit-mask: var(--lu) center / contain no-repeat; mask: var(--lu) center / contain no-repeat; }
+  .g-use { margin-top: var(--space-2); font-size: var(--type-1); color: var(--color-muted);
+           max-width: var(--layout-measure); }
+  .g-use code { font-size: 0.92em; }
+  /* An unused component is stated plainly rather than styled as an error — it
+     is a backlog item, not a defect. */
+  .g-use--none { color: var(--color-muted); font-style: italic; }
   .g-states__lbl { font-size: var(--type-1); color: var(--color-muted); margin-right: var(--space-1); }
   .g-states .ml-badge--off { background: none; border: 1px dashed var(--color-line);
                              color: var(--color-muted); text-decoration: line-through; }

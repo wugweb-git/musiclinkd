@@ -26,47 +26,69 @@
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/cms_pages/admin_pages_editor/index.html" aria-label="Back">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
         </a>
-      <h1 class="ml-type-2" style="margin:0">About & pricing</h1>
+      <h1 class="ml-type-2" style="margin:0;flex:1">About & pricing</h1>
+      <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div class="ml-section"><h2>About</h2></div>
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
-        MusicLinkd is built in Mumbai for the people who actually make music here — session players,
-        engineers, studios and venues who have been finding each other through group chats and word of mouth.
-      </p>
-
-      <div class="ml-section"><h2>Pricing</h2></div>
-      <div class="ml-tiers">
-        <div class="ml-tier">
-          <b>Free</b>
-          <span class="ml-value">₹0</span>
-          <p>A public profile</p>
-          <p>Apply to opportunities</p>
-          <p>Message your connections</p>
-        </div>
-        <div class="ml-tier ml-tier--featured">
-          <b>Pro</b>
-          <span class="ml-value">₹499/mo</span>
-          <p>Everything in Free</p>
-          <p>Priority in Discover</p>
-          <p>Analytics</p>
-          <p>Direct booking</p>
-        </div>
-        <div class="ml-tier">
-          <b>Business</b>
-          <span class="ml-value">₹1,499/mo</span>
-          <p>Everything in Pro</p>
-          <p>Team accounts</p>
-          <p>Room management</p>
-          <p>Invoicing</p>
-        </div>
+      <div data-state="default">
+        <div class="ml-section"><h2>About</h2></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3);max-width:64ch;margin-inline:auto">
+          MusicLinkd is built in Mumbai for the people who actually make music here — session players,
+          engineers, studios and venues who have been finding each other through group chats and word of mouth.
+        </p>
+        <a class="ml-action-row" href="?state=pricing">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Pricing</span>
+          <span class="ml-choice__meta">Free, Pro and Business</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+        <a class="ml-action-row" href="?state=careers">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Careers</span>
+          <span class="ml-choice__meta">3 open roles</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
       </div>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Careers</h2></div>
-      <div class="ml-summary">
-        <div class="ml-summary__row"><span>Android engineer</span><span>Mumbai · Full time</span></div>
-        <div class="ml-summary__row"><span>Product designer</span><span>Mumbai · Full time</span></div>
-        <div class="ml-summary__row"><span>Community lead</span><span>Mumbai · Contract</span></div>
+      <div data-state="pricing">
+        <div class="ml-section"><h2>Pricing</h2></div>
+        <div class="ml-tiers">
+          <div class="ml-tier">
+            <b>Free</b>
+            <span class="ml-value">₹0</span>
+            <p>A public profile</p>
+            <p>Apply to opportunities</p>
+            <p>Message your connections</p>
+          </div>
+          <div class="ml-tier ml-tier--featured">
+            <b>Pro</b>
+            <span class="ml-value">₹499/mo</span>
+            <p>Everything in Free</p>
+            <p>Priority in Discover</p>
+            <p>Analytics</p>
+            <p>Direct booking</p>
+          </div>
+          <div class="ml-tier">
+            <b>Business</b>
+            <span class="ml-value">₹1,499/mo</span>
+            <p>Everything in Pro</p>
+            <p>Team accounts</p>
+            <p>Room management</p>
+            <p>Invoicing</p>
+          </div>
+        </div>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/subscription/plans/index.html">Compare in the app</a>
+      </div>
+
+      <div data-state="careers">
+        <div class="ml-section"><h2>Open roles</h2></div>
+        <div class="ml-summary">
+          <div class="ml-summary__row"><span>Android engineer</span><span>Mumbai · Full time</span></div>
+          <div class="ml-summary__row"><span>Product designer</span><span>Mumbai · Full time</span></div>
+          <div class="ml-summary__row"><span>Community lead</span><span>Mumbai · Contract</span></div>
+        </div>
       </div>
     </main>
   </div>

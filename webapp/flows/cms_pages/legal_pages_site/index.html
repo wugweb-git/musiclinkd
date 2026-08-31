@@ -26,17 +26,44 @@
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/cms_pages/admin_pages_editor/index.html" aria-label="Back">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
         </a>
-      <h1 class="ml-type-2" style="margin:0">Legal pages</h1>
+      <h1 class="ml-type-2" style="margin:0;flex:1">Legal pages</h1>
+      <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
-        The public versions of what the app shows in Settings. Edited here, published to the website.
-      </p>
-      <div class="ml-summary__row"><span>Terms of service</span><span>Updated 14 June 2026</span></div>
-      <div class="ml-summary__row"><span>Privacy policy</span><span>Updated 14 June 2026</span></div>
-      <div class="ml-summary__row"><span>Community guidelines</span><span>Updated 2 August 2026</span></div>
-      <div class="ml-summary__row"><span>Marketplace rules</span><span>Updated 14 August 2026</span></div>
-      <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/user_settings/legal_pages/index.html">See them in the app</a>
+      <div data-state="default">
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+          The public versions of what the app shows in Settings. Edited in Admin, published to the website.
+        </p>
+        <div class="ml-summary">
+          <div class="ml-summary__row"><span>Terms of service</span><span>14 June 2026</span></div>
+          <div class="ml-summary__row"><span>Privacy policy</span><span>14 June 2026</span></div>
+          <div class="ml-summary__row"><span>Community guidelines</span><span>2 August 2026</span></div>
+          <div class="ml-summary__row"><span>Marketplace rules</span><span>14 August 2026</span></div>
+        </div>
+        <a class="ml-action-row" href="/preview/flows/cms_pages/content_article/index.html?state=policy">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Read the marketplace rules</span>
+          
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+        <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/user_settings/legal_pages/index.html">See them in the app</a>
+      </div>
+
+      <div data-state="policy">
+        <a class="ml-action-row" href="/preview/flows/cms_pages/content_article/index.html?state=policy">
+        <span class="ml-choice__body">
+          <span class="ml-choice__title">Marketplace rules</span>
+          <span class="ml-choice__meta">Version 2.1 · 14 August 2026</span>
+        </span>
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+      </a>
+      </div>
+
+      <div class="ml-empty" data-state="restricted">
+        <h2 class="ml-empty__title">You don't have access to this</h2>
+        <p class="ml-empty__body">Some legal documents are only shown to business accounts.</p>
+      </div>
     </main>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

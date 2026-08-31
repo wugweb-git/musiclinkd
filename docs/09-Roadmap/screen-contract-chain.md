@@ -14,11 +14,37 @@ The chain the briefs describe:
 Measured against the repo rather than asserted. Every number below was counted
 from the filesystem on 2026-08-31.
 
-**The screen count is a moving target.** It went 173 → 174 → 184 during the
-hour this was written, because a parallel session is actively generating flows.
-Treat every count here as "as of 2026-08-31" and re-run the commands in the last
-section rather than trusting the figure — the RATIOS and the absences are the
-durable part, not the totals.
+**The screen count is a moving target, in both directions.** It went
+173 → 174 → 184 during the hour this was written, because a parallel session is
+actively generating flows. Treat every count here as "as of 2026-08-31" and
+re-run the commands in the last section rather than trusting the figure — the
+absences are the durable part, not the totals.
+
+### Recycling is the dominant force on that number
+
+Patterns, blocks, bars and widgets are being folded into states rather than
+duplicated as screens. The measured position, 2026-08-31:
+
+| | screens | states | states/screen |
+|---|---|---|---|
+| Flows already collapsed (10) | 38 | 217 | **5.7** |
+| Flows not yet collapsed (14) | 146 | 301 | 2.1 |
+| Total | 184 | 518 | 2.8 |
+
+The spread is wide: `search` runs at 11.5 states/screen and `qr_share` at 7.3,
+while `discover` (21 screens) and `onboarding` (13) still sit at 1.3 — one
+screen per state, which is the duplication the recycling removes.
+
+Component reuse tells the same story from the other side: **249 distinct
+`ml-*` components across 184 screens, averaging 12.7 screens per component**
+(`ml-app` on 176, `ml-icon-btn` on 162, `ml-btn` on 143, `ml-appbar` on 126).
+
+**No projection is recorded here on purpose.** An early draft extrapolated the
+5.7 ratio onto the remaining flows and predicted ~91 screens. That number was
+wrong twice over: collapsibility is not uniform (a settings flow may genuinely
+need routes where a search flow does not), and **CRUD screens have not been
+built yet**, which pushes the count back up. The direction of travel is down;
+the destination is not knowable from this data and should not be guessed at.
 
 ## What exists
 
@@ -88,6 +114,26 @@ arrays. The work is filling the remainder, not building the field.
 
 This is one pass over `default-screens.ts` + `generate.ts` plus two generated
 documents. **Not started, by explicit decision.**
+
+### Loading is declared but not built
+
+Measured across all 184 screens by comparing `screen.json.states` against the
+rendered markup:
+
+| State | Declared on | Rendered | Both |
+|---|---|---|---|
+| empty | 27 | 61 (`.ml-empty`) | 25 |
+| loading | 5 | **1** (`.ml-skeleton`) | **1** |
+
+Empty states are real and used more widely than they are declared. Loading is
+not: five screens declare it, one renders a skeleton. `auth/splash`,
+`auth/email_auth`, `verifications/verification_screen` and
+`notifications/notifications_center` all declare a loading state that renders
+nothing.
+
+This is what the guide's component state map predicts — it shows `Loading` as
+*composed* (available via `.ml-skeleton`) rather than owned by any component,
+and almost nothing composes it.
 
 ### Two defects found in the Screens → Permissions link
 
