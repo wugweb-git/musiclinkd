@@ -30,6 +30,22 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+# BSD and GNU disagree on two flags this script needs, so it used to run on a
+# Mac and nowhere else — not in CI, not in a container. `sed -i` takes a
+# MANDATORY backup suffix on BSD and REFUSES one on GNU; `stat` spells the size
+# format -f%z on BSD and -c%s on GNU. Detect once, use everywhere.
+#
+# SED_I is an array, not a function, deliberately: one of the two call sites is
+# `xargs -0 sed ...`, and xargs execs a real binary — it cannot see a shell
+# function. An array expands correctly on both sides.
+if sed --version >/dev/null 2>&1; then
+  SED_I=(-i)                           # GNU
+  filesize() { stat -c%s "$1"; }
+else
+  SED_I=(-i '')                        # BSD / macOS
+  filesize() { stat -f%z "$1"; }
+fi
+
 echo "==> Building admin/"
 (cd admin && npm run build)
 
@@ -78,7 +94,7 @@ while IFS= read -r f; do [ -n "$f" ] && MEDIA_RULES+=(--include="$f"); done <<< 
 for d in 1 4 5 6 inspiration; do MEDIA_RULES+=(--exclude="assets/img/$d/*"); done
 KEEP_N=$(printf '%s\n' "$MEDIA_KEEP" | grep -c . || true)
 KEEP_BYTES=$(printf '%s\n' "$MEDIA_KEEP" | while IFS= read -r f; do
-  [ -n "$f" ] && [ -f "frontend/website/$f" ] && stat -f%z "frontend/website/$f" 2>/dev/null || true
+  [ -n "$f" ] && [ -f "frontend/website/$f" ] && filesize "frontend/website/$f" 2>/dev/null || true
 done | awk '{t+=$1} END {printf "%.1f", t/1048576}')
 echo "    keeping $KEEP_N referenced media files (${KEEP_BYTES}MB) of $(find frontend/website/assets/img/{1,4,5,6,inspiration} -type f 2>/dev/null | wc -l | tr -d ' ')"
 
@@ -182,7 +198,7 @@ SW_ID=$(cat dist/preview/manifest.json \
         dist/preview/shared/app-shell.js \
         dist/preview/shared/icon.svg \
         dist/preview/offline.html 2>/dev/null | shasum -a 256 | cut -c1-12)
-sed -i '' "s/__BUILD_ID__/$SW_ID/" dist/preview/service-worker.js
+sed "${SED_I[@]}" "s/__BUILD_ID__/$SW_ID/" dist/preview/service-worker.js
 grep -q "__BUILD_ID__" dist/preview/service-worker.js && \
   { echo "    ERROR: service-worker.js BUILD_ID not stamped"; exit 1; }
 echo "    service worker cache: musiclinkd-shell-$SW_ID"
@@ -211,7 +227,7 @@ ASSET_ID=$(cat dist/guide/system/ml-tokens.css \
 # Rewrite only our own absolute asset paths; Google Fonts and anything
 # already carrying a query are left alone.
 find dist/preview dist/guide -name '*.html' -type f -print0 \
-  | xargs -0 sed -i '' -E \
+  | xargs -0 sed "${SED_I[@]}" -E \
       -e "s#(href=\"/guide/system/ml-(tokens|core|widgets|fixes)\.css)\"#\1?v=$ASSET_ID\"#g" \
       -e "s#(href=\"/preview/shared/(app-shell|tokens)\.css)\"#\1?v=$ASSET_ID\"#g" \
       -e "s#(src=\"/preview/shared/app-shell\.js)\"#\1?v=$ASSET_ID\"#g"
