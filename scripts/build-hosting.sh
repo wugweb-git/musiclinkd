@@ -67,14 +67,6 @@ node scripts/build-handoff.mjs --check
 echo "==> Generating the screen registry from webapp/flows"
 (cd webapp && node ../scripts/build-registry.mjs flows --write)
 
-# The audit gate. It is the last point before deploy at which a screen can be
-# caught referencing a class nothing defines, declaring a state its markup
-# cannot render, or naming a route that does not exist. It exits non-zero on
-# FAIL, and set -e stops the deploy.
-echo "==> Auditing the design system"
-(cd webapp && node ../scripts/audit-system.mjs \
-   --flows flows --css ../frontend/guide/system --map data/flows-map.json)
-
 echo "==> Generating changelog page from CHANGELOG.md"
 node scripts/generate-changelog.mjs
 
@@ -255,3 +247,14 @@ fi
 echo "    shared assets stamped ?v=$ASSET_ID across $STAMPED pages"
 
 echo "==> dist/ ready ($(find dist -type f | wc -l | tr -d ' ') files)"
+
+# The audit runs AFTER the build, and does NOT block it. Deliberate, and worth
+# being clear about the trade: a gate that cannot stop a deploy is a report, not
+# a gate — a screen referencing a class nothing defines, declaring a state its
+# own markup cannot render, or a journey naming a route that does not exist will
+# ship, and you will read about it afterwards. That is the instruction: deploy
+# first, audit second. `|| true` is what makes it advisory; delete it and the
+# build stops on FAIL again.
+echo "==> Auditing the design system (report only — does not block this build)"
+(cd webapp && node ../scripts/audit-system.mjs \
+   --flows flows --css ../frontend/guide/system --map data/flows-map.json) || true
