@@ -23,11 +23,86 @@ firebase-debug.*.log
 # renames them on the way into dist/, so the source folders are numbered.
 # The rules therefore matched nothing and 279MB across 441 files sat untracked
 # AND unignored, one `git add -A` away from entering history.
-/frontend/website/assets/img/1/
-/frontend/website/assets/img/4/
-/frontend/website/assets/img/5/
-/frontend/website/assets/img/6/
-/frontend/website/assets/img/inspiration/
+/frontend/website/assets/img/1/*
+/frontend/website/assets/img/4/*
+/frontend/website/assets/img/5/*
+/frontend/website/assets/img/6/*
+/frontend/website/assets/img/inspiration/*
+
+# ...EXCEPT the ones the shipping markup actually references. These are product
+# imagery, not reference material, and leaving them untracked meant the live
+# site's photographs existed on exactly one laptop: 47 screens rendered
+# correctly on the machine that deployed them and showed broken images on every
+# other clone, and no CI runner could ever build this repo. Same defect the
+# editorials/ and speakers/ note above describes fixing — it just was not
+# finished for the numbered folders.
+#
+# 57 files, 25.8MB. Derived from the same grep build-hosting.sh uses to build
+# its ship-list, so this list and the deploy agree by construction. Regenerate:
+#
+#   grep -ohE 'assets/img/(1|4|5|6|inspiration)/[^"')? ]+\.(jpg|jpeg|png|webp|gif|mp4|webm)' \
+#     frontend/guide/index.html frontend/guide/styleguide.html frontend/website/*.html \
+#     webapp/index.html webapp/flows/*/*/index.html | sort -u
+#
+# Reference the image from a new screen and you must add it here too, or that
+# screen ships broken to everyone but you.
+!/frontend/website/assets/img/4/1312x830_ES_ICP_Brand_License.webp
+!/frontend/website/assets/img/4/3-EAR-Alpha-hevc-safari.mp4
+!/frontend/website/assets/img/4/3_featured_image.jpg
+!/frontend/website/assets/img/4/5c45943974eb98266d0fc97e34e568e5.png
+!/frontend/website/assets/img/4/8-social-media-for-authors.png
+!/frontend/website/assets/img/4/Group_427319664_1.webp
+!/frontend/website/assets/img/4/Header_MentalHealth_1200x515.jpg
+!/frontend/website/assets/img/4/Header_Recaps.png
+!/frontend/website/assets/img/4/S4A_Songwriting_LP_Hero_1000x1000.mp4
+!/frontend/website/assets/img/4/banner_desktop.mp4
+!/frontend/website/assets/img/5/08421da885c9615b0d718a82c54c5e5b.webp
+!/frontend/website/assets/img/5/2410fd1c701e077323b1f575af075a4a.webp
+!/frontend/website/assets/img/6/0112aa48922759.58a5af725b594.png
+!/frontend/website/assets/img/6/01e26955706919.598fd42d42f34.png
+!/frontend/website/assets/img/6/029447155900185.635d48d12326c.png
+!/frontend/website/assets/img/6/02d124205931695.66c4331e162d1.jpg
+!/frontend/website/assets/img/6/04182c58798961.5d48bcac8dd8f.png
+!/frontend/website/assets/img/6/04d19175072573.5c4228a54c659.png
+!/frontend/website/assets/img/6/05c010236455615.68ecac46e6ab2.png
+!/frontend/website/assets/img/6/06b1b644260799.580db89c27acd.jpg
+!/frontend/website/assets/img/6/098487151670541.630ff959012ce.png
+!/frontend/website/assets/img/6/09be4757713549.59e07fd50a027.png
+!/frontend/website/assets/img/6/0ad951188258241.6599204c7ae25.jpg
+!/frontend/website/assets/img/6/0b2a48130612451.6183ce949e6bb.png
+!/frontend/website/assets/img/6/0fce2e23519969.5632466ce6ea2.png
+!/frontend/website/assets/img/6/1fb99036172023.57185e790e9bd.png
+!/frontend/website/assets/img/6/275756239533293.692b5b42b7427.jpg
+!/frontend/website/assets/img/6/3ff315159820693.63a64ad705a7c.png
+!/frontend/website/assets/img/6/47ff4e166535133.641ae4294e1a1.gif
+!/frontend/website/assets/img/6/5a334c176002181.64bdb619e73b5.png
+!/frontend/website/assets/img/inspiration/01cd28458d61c30401bb3f4682594e03.jpg
+!/frontend/website/assets/img/inspiration/03e7e739c632b54a61c2a521038999a7.jpg
+!/frontend/website/assets/img/inspiration/066a622d3aeca4293347207fe6347cb7.jpg
+!/frontend/website/assets/img/inspiration/1060x608sr-60.jpg
+!/frontend/website/assets/img/inspiration/15769e1251cfb7df483e37ffdc734c11.jpg
+!/frontend/website/assets/img/inspiration/15769e1251cfb7df483e37ffdc734c11.png
+!/frontend/website/assets/img/inspiration/1805a3366e8062d6fd77806201a8ded7.jpg
+!/frontend/website/assets/img/inspiration/1853db3c0c58ac0d7ac7681764a17bd6.png
+!/frontend/website/assets/img/inspiration/1fb383c5455f8284451f83e7afe33eb4.jpg
+!/frontend/website/assets/img/inspiration/296x296SC.DN01.webp
+!/frontend/website/assets/img/inspiration/296x296SC.FPESS04-60.jpg
+!/frontend/website/assets/img/inspiration/296x296SC.MVESS04-60.jpg
+!/frontend/website/assets/img/inspiration/300x172sr-60.jpg
+!/frontend/website/assets/img/inspiration/316x316SC.CAHGOY01-60.jpg
+!/frontend/website/assets/img/inspiration/316x316SC.MVESS04-60.jpg
+!/frontend/website/assets/img/inspiration/316x316bf-60.jpg
+!/frontend/website/assets/img/inspiration/320x320cc-60.jpg
+!/frontend/website/assets/img/inspiration/380x380bb-60.jpg
+!/frontend/website/assets/img/inspiration/380x380bb.webp
+!/frontend/website/assets/img/inspiration/440x440bb.webp
+!/frontend/website/assets/img/inspiration/480x275sr-60.jpg
+!/frontend/website/assets/img/inspiration/486x486bb-60.jpg
+!/frontend/website/assets/img/inspiration/4e87a09beb437875f213f76041e6a2c6.jpg
+!/frontend/website/assets/img/inspiration/526bb382be9218c9856746b182c3b38b.jpg
+!/frontend/website/assets/img/inspiration/580x326mv-60.jpg
+!/frontend/website/assets/img/inspiration/592x592SC.FPESS04-60.jpg
+!/frontend/website/assets/img/inspiration/592x592SC.MVESS04.webp
 # A ~300MB local archive of the image folder above, referenced by no page and
 # not a web asset. It was untracked AND unignored, so `git add -A` would have
 # put 300MB into history permanently.
