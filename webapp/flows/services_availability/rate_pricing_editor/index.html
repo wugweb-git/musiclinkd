@@ -29,7 +29,7 @@
       <h1 class="ml-type-3" style="margin:0">Rates</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div class="ml-section"><h2>Base rates</h2></div>
+      <section class="ml-section-block"><div class="ml-section"><h2>Base rates</h2></div>
       <div class="ml-field">
         <label for="r-day">Day rate (₹)</label>
         <input id="r-day" type="text" value="12000" />
@@ -41,9 +41,9 @@
       <div class="ml-field">
         <label for="r-track">Per track (₹)</label>
         <input id="r-track" type="text" value="6000" />
-      </div>
+      </div></section>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Adjustments</h2></div>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Adjustments</h2></div>
       <div class="ml-check-row">
         <span class="ml-choice__body"><span class="ml-choice__title">Travel outside Mumbai</span>
         <span class="ml-choice__meta">Charged at cost, agreed up front</span></span>
@@ -53,9 +53,9 @@
         <span class="ml-choice__body"><span class="ml-choice__title">Rush turnaround</span>
         <span class="ml-choice__meta">+25% for delivery under 48 hours</span></span>
         <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Rush turnaround"></button>
-      </div>
+      </div></section>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Deposit</h2></div>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Deposit</h2></div>
       <div class="ml-field">
         <label for="r-dep">Deposit taken on booking</label>
         <select id="r-dep"><option>50% of the total</option><option>25% of the total</option><option>A flat ₹5,000</option><option>No deposit</option></select>
@@ -63,7 +63,7 @@
       <div class="ml-field">
         <label for="r-cancel">Free cancellation window</label>
         <select id="r-cancel"><option>48 hours</option><option>24 hours</option><option>7 days</option><option>No free cancellation</option></select>
-      </div>
+      </div></section>
     </main>
     <footer class="ml-app__footer">
       <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/services_availability/service_offerings_editor/index.html">Save rates</a>

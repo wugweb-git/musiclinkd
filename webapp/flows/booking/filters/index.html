@@ -29,7 +29,7 @@
       <h1 class="ml-type-3" style="margin:0">Filters</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div class="ml-section"><h3>Service</h3></div>
+      <section class="ml-section-block"><div class="ml-section"><h3>Service</h3></div>
       <div class="ml-chip-wrap">
         <button type="button" class="ml-chip" aria-pressed="true">Tracking</button>
         <button type="button" class="ml-chip" aria-pressed="false">Mixing</button>
@@ -38,15 +38,15 @@
         <button type="button" class="ml-chip" aria-pressed="true">Andheri</button>
         <button type="button" class="ml-chip" aria-pressed="false">Bandra</button>
         <button type="button" class="ml-chip" aria-pressed="false">Lower Parel</button>
-      </div>
+      </div></section>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Hourly rate</h3>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Hourly rate</h3>
         <span class="ml-section__link">up to ₹2,500</span></div>
-      <input class="ml-slider" type="range" min="500" max="5000" step="100" value="2500" aria-label="Maximum hourly rate" />
+      <input class="ml-slider" type="range" min="500" max="5000" step="100" value="2500" aria-label="Maximum hourly rate" /></section>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Distance</h3>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Distance</h3>
         <span class="ml-section__link">within 8 km</span></div>
-      <input class="ml-slider" type="range" min="1" max="25" value="8" aria-label="Maximum distance in kilometres" />
+      <input class="ml-slider" type="range" min="1" max="25" value="8" aria-label="Maximum distance in kilometres" /></section>
     </main>
     <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
       <button class="ml-btn ml-btn--secondary" type="reset" style="flex:1">Reset</button>

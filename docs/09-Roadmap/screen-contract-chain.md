@@ -137,13 +137,41 @@ and almost nothing composes it.
 
 ### Two defects found in the Screens → Permissions link
 
-Worth fixing whenever that pass happens:
+**Fixed 2026-09-01 — and the original diagnosis was wrong about what these
+were.** Both turned out to be the same defect (a screen-contract naming bug),
+not "missing `firestore.rules` blocks":
 
-- `businesses` and `opportunities` are named in `collectionsTouched` and have
-  **no `firestore.rules` block at all**.
-- `feedPosts` and `studioBookings` are camelCase in the screen contracts but
-  `feed_posts` / `studio_bookings` in the rules — a naming mismatch, not a
-  missing rule.
+- `businesses` (2 screens: `business_profiles/create_business`,
+  `business_profiles/business_dashboard`) and `opportunities`
+  (`home/home_dashboard`) are not real collections — no `BusinessDoc`/
+  `OpportunityDoc` exists in `admin/types/firestore.ts`, and both screens'
+  `dataContract` entries for them were `"sample": null` with "No seed sample
+  available for this collection in this build," because nothing generates
+  samples for collections that don't exist. Business profiles are `UserDoc`
+  records with `profileType === "BUSINESS"` (`admin/types/firestore.ts:181-
+  209`, the "Business extension" fields) — they live in `/users`, which
+  already has rules. Opportunities are backed by `/projects`, per the
+  existing `firestore.rules` comment on `opportunity_applications` ("above is
+  the opportunity itself") and confirmed by `opportunities_home/screen.json`,
+  which correctly uses `"projects"`. There was never a missing rules block to
+  write; writing one for `businesses`/`opportunities` would have created
+  rules for collections that shouldn't exist, papering over the real bug
+  instead of fixing it.
+- `feedPosts` and `studioBookings` (same `home_dashboard/screen.json`) were
+  camelCase against real snake_case collections (`feed_posts`,
+  `studio_bookings`) that already have rules — a naming mismatch, not a
+  missing rule, as originally noted.
+
+**Fix applied:** corrected `collectionsTouched` and `dataContract.collection`
+in all 3 screen.json files to the real collection names
+(`businesses`→`users` ×2, `opportunities`→`projects`,
+`studioBookings`→`studio_bookings`, `feedPosts`→`feed_posts`). No
+`firestore.rules` changes were needed or made — the rules for `users`,
+`projects`, `studio_bookings`, and `feed_posts` already existed and are
+correct. **Not done:** the `dataContract.sample` fields for `users`
+(BUSINESS-profileType), `projects` (OPEN-status), and `feed_posts` on these
+3 screens are still `null` — the naming is now correct but real seed samples
+still need writing; flagged in each file rather than fixed here.
 
 ## Out of scope
 

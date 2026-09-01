@@ -1,7 +1,14 @@
 # Motion plan — why the product looks dead, and the order to fix it
 
-**Drafted 2026-08-31.** Not started. Sits alongside
-`design-system-rebuild-plan.md` and `guide-design-system-fix-plan.md`.
+**Drafted 2026-08-31.** All five phases landed 2026-09-01 (order 1 → 5 → 2 →
+3 → 4, per the plan below) except Phase 4's directional + shared-element
+tier, deliberately scoped out — see that section. Sits alongside
+`design-system-rebuild-plan.md` and `guide-design-system-fix-plan.md`. None
+of this has been visually verified yet — every phase is a local file edit;
+nothing has been watched render in a real browser. See each phase's section
+for what was corrected from the original diagnosis along the way (Phase 5's
+"renders nothing" claim was wrong for all 4 named screens; Phase 3 needed a
+new wrapper element the original plan didn't anticipate).
 
 ## The diagnosis, measured
 
@@ -125,46 +132,135 @@ state switch and the screen becomes noisy.
 
 ## Phase 3 — Scroll-driven reveal
 
-CSS-only via `animation-timeline: view()`. No `IntersectionObserver`, no JS, no
-scroll listener — so it costs nothing on the main thread and cannot jank.
+**Done, 2026-09-01, with a scope correction found along the way.**
+`.ml-section` (the heading row: `<div class="ml-section"><h2>…</h2></div>`) is
+not a section container — it's just the label. The actual section content
+(cards, lists) sits as separate flat siblings after it, not nested inside it.
+Animating `.ml-section` alone would only move the heading; the content below
+would still pop in instantly, a weaker and arguably worse-looking effect than
+doing nothing.
 
-- One reveal per section, not per element
-- Must degrade to fully-visible where unsupported — content is readable first,
+Fixed by introducing `.ml-section-block`, a wrapper element (`<section
+class="ml-section-block">`) that groups each `.ml-section` heading with every
+sibling that follows it up to the next `.ml-section` (or end of parent), so
+one reveal covers heading + content together. Rolled out via a script that
+inserts only the wrapper open/close tags into the original file text at exact
+byte offsets — verified byte-identical everywhere else across all 80 files
+(diffed against a pre-change backup) and tag-balance-checked, rather than
+round-tripped through an HTML serializer, which was tried first and rejected
+after it silently lowercased SVG `viewBox` to `viewbox` (would have broken
+every icon's viewBox — SVG attribute names are case-sensitive, HTML parsers
+are not) and reformatted every line of every file.
+
+**Scope: 80 of the 101 `.ml-section` usages, not all of them.** A repo-wide
+scan split the 101 into three groups:
+- **69 files** — 2+ `.ml-section` under the same parent, on a long
+  independently-scrollable page (`home_dashboard`, `discover_feed`,
+  `public_profile_view`, etc.). Wrapped.
+- **11 files** — exactly one `.ml-section` on a scrollable `main`, no
+  `[data-state]` ancestor. Wrapped.
+- **21 files** — exactly one `.ml-section`, and it's the first thing inside a
+  `[data-state]` wizard-step div (`verification_screen` and 20 others). **Not
+  wrapped, deliberately** — that content already animates in via the Phase 1
+  state-entry rule when its step becomes active. Also wrapping it for scroll
+  would stack two animation triggers on the same element, which the
+  Excessive Motion rule (1-2 key elements per view) rules out.
+
+Also preserved: one file (`portfolio/media_preview`) had its `.ml-section`'s
+parent `<main>` carrying an explicit flex `gap`, which used to space the
+heading from its content as flat flex siblings. Wrapping them would have
+silently dropped that gap (down to the heading's own smaller bottom margin).
+The wrapper for that one file replicates the same gap value internally
+(`display:flex;flex-direction:column;gap:var(--space-3)`) so spacing is
+unchanged; the other 79 didn't need this — their parents have no explicit
+gap, so spacing comes from `.ml-section`'s own margin and normal block-margin
+collapsing through the (unstyled, `display:block`) wrapper, which is
+transparent to it.
+
+CSS lives in `ml-widgets.css`, guarded by `@supports (animation-timeline:
+view())` — unsupported browsers get the plain unanimated layout, never an
+invisible one, since there is no unguarded `opacity: 0` baseline outside the
+`@supports` block.
+
+- One reveal per section (heading + content together), not per element
+- Degrades to fully-visible where unsupported — content is readable first,
   animated second, per the Motion Sensitivity rule
 - **Explicitly excluded:** parallax and scroll-jacking. The rules name both as
   disorienting, and the palette rule ("media carries the colour") means the
   photography is already doing the work parallax would attempt.
 
+**Not yet done:** visual verification. Same caveat as every other phase —
+these are local file edits; the hosted `/preview` serves a deployed build,
+so nothing here has actually been watched render.
+
 ## Phase 4 — Screen-to-screen transitions
 
-View Transition API for `/preview` navigation, which is currently a full reload.
+**Base tier done, 2026-09-01; directional + shared-element tier deliberately
+not started.** `/preview` screens are separate static HTML files navigated
+via full `<a href>` page loads, not a single-page app — so this uses the
+**cross-document** View Transition API (`@view-transition { navigation:
+auto; }` in `ml-core.css`), not `document.startViewTransition()`. Zero JS:
+CSS's forward-compatible parsing means a browser that doesn't recognise the
+at-rule just ignores it, so unsupported browsers keep the normal instant
+navigation they already had — nothing to guard, nothing that can render
+broken. Every screen-to-screen click across all ~184 screens now gets a
+default crossfade (styled to `--duration-3` / `--ease-standard` instead of
+the browser's own default timing) instead of an instant swap.
 
-- Forward navigates left/up, back navigates right/down — `navigation-direction`
-- Shared-element continuity for card → detail, where the artwork is the anchor
-- Native equivalents already exist (Compose shared-element, SwiftUI
-  `matchedGeometryEffect`) and map onto `MLMotion.spring3`, the token whose
-  description already reads *"sheet reveal, card lift, shared-element /
-  container transform"*
+Not done, and scoped separately rather than folded into this pass:
+
+- **Directional detection** (forward slides left/up, back slides right/down)
+  needs a `pageswap` listener calling
+  `event.viewTransition.types.add('forward'|'back')` so CSS can select on
+  `:active-view-transition-type()` — a new small script, not a CSS-only
+  change like everything else in this plan.
+- **Shared-element continuity** (card → detail, artwork as the anchor) needs
+  `view-transition-name` assigned consistently across every matched
+  card/detail screen pair — real per-screen work across the ~184-screen
+  corpus, not a global rule.
+
+Both map onto `MLMotion.spring3`, the token whose description already reads
+*"sheet reveal, card lift, shared-element / container transform"*, so the
+native (Compose/SwiftUI) side has an equivalent waiting whenever this gets
+scoped.
 
 ## Phase 5 — Loading, which is the real gap
 
-Measured across all 184 screens:
+**Correction, 2026-09-01: the diagnosis below was wrong on the specific
+screens.** Read all four named files directly rather than trusting this
+table. Findings:
 
-| State | Declared | Rendered | Both |
-|---|---|---|---|
-| empty | 27 | 61 (`.ml-empty`) | 25 |
-| **loading** | **5** | **1** (`.ml-skeleton`) | **1** |
+- `auth/splash` — loading state renders real text plus a spinner. Not empty.
+- `auth/email_auth` — `data-state="loading"` wraps a real `.ml-spinner` in the
+  footer CTA. Not empty.
+- `verifications/verification_screen` — has **no** `data-state="loading"`
+  anywhere in the file. It doesn't declare a loading state at all, contrary
+  to this table.
+- `notifications/notifications_center` — had a spinner + "Loading…" text.
+  Not empty, but this was the one real problem: a content list using a
+  spinner instead of the skeleton pattern this same file's own comment
+  prescribes ("Skeletons, not spinners, for content"). **Fixed 2026-09-01** —
+  now three `.ml-skeleton` rows shaped like real notification rows, matching
+  `home_dashboard`'s existing correct pattern.
 
-Empty states are real. **Loading is not** — `auth/splash`, `auth/email_auth`,
-`verifications/verification_screen` and `notifications/notifications_center` all
-declare a loading state that renders nothing.
+A repo-wide grep (`data-state="[^"]*\bloading\b[^"]*"` across
+`webapp/flows/**/index.html`) found loading states declared in exactly these
+four files — no fifth, no hidden empty ones. So "Declared: 5, Rendered: 1
+(`.ml-skeleton`), Both: 1" was very likely counting `.ml-skeleton` usage
+specifically (only `home_dashboard` uses it) rather than "renders nothing" —
+the original phrasing overstated the problem. The real, narrower finding:
+loading treatment was inconsistent (skeleton in one place, spinner in two,
+plain text in one), not absent. That inconsistency is now reduced by one
+(`notifications_center` fixed); `email_auth`'s button spinner is arguably
+correct as-is (a button awaiting a network response is exactly what a
+spinner is for, not a skeleton), and `splash`'s plain-text treatment is a
+judgment call, not a defect, for a resume screen with no content to shape a
+skeleton around.
 
-This is a *motion* problem only in part; mostly it is a missing state. The
-Loading States rule is High severity, and the guide's own state map already
-predicts this by showing `Loading` as *composed* rather than owned by anything.
-
-**This phase is the one with product impact rather than polish**, and arguably
-belongs before Phase 3.
+This is a *motion* problem only in part; mostly it was a consistency
+question, not a missing-state one as originally written. The Loading States
+rule is still High severity and worth keeping in mind for any future screen
+that declares loading with no visual treatment — none currently do.
 
 ## What this plan does not do
 

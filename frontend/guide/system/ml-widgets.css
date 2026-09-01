@@ -2561,3 +2561,75 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   background: none;
   pointer-events: auto;
 }
+
+/* ── entry choreography ───────────────────────────────────────────────── */
+/* Motion plan Phase 2 (docs/09-Roadmap/motion-plan.md). Precondition: Phase 1
+   in ml-core.css ([data-state] transition + @starting-style) must be landed,
+   or these fire on every render instead of once per state entry — they do
+   land inside the same allow-discrete/@starting-style mechanism, so a card
+   only animates in when its containing [data-state] block goes from
+   display:none to visible, not on every paint.
+
+   Excessive Motion rule caps this at the primary collection per screen — five
+   selectors only, the recycled collection components, not every card-shaped
+   thing in the system. transform/opacity only, per the frame-budget rule.
+   Stagger 40ms/item, capped at 8 — beyond that the plan calls it "slow, not
+   choreographed", so item 9+ reuses item 8's delay rather than continuing to
+   climb. */
+.ml-artist-card,
+.ml-studio-card,
+.ml-market-card,
+.ml-track,
+.ml-collab-rail {
+  transition: opacity var(--duration-2) var(--ease-enter),
+              transform var(--duration-2) var(--ease-enter);
+}
+@starting-style {
+  .ml-artist-card,
+  .ml-studio-card,
+  .ml-market-card,
+  .ml-track,
+  .ml-collab-rail {
+    opacity: 0;
+    transform: translateY(var(--space-2));
+  }
+}
+.ml-artist-card:nth-child(1), .ml-studio-card:nth-child(1), .ml-market-card:nth-child(1), .ml-track:nth-child(1), .ml-collab-rail:nth-child(1) { transition-delay: 0ms; }
+.ml-artist-card:nth-child(2), .ml-studio-card:nth-child(2), .ml-market-card:nth-child(2), .ml-track:nth-child(2), .ml-collab-rail:nth-child(2) { transition-delay: 40ms; }
+.ml-artist-card:nth-child(3), .ml-studio-card:nth-child(3), .ml-market-card:nth-child(3), .ml-track:nth-child(3), .ml-collab-rail:nth-child(3) { transition-delay: 80ms; }
+.ml-artist-card:nth-child(4), .ml-studio-card:nth-child(4), .ml-market-card:nth-child(4), .ml-track:nth-child(4), .ml-collab-rail:nth-child(4) { transition-delay: 120ms; }
+.ml-artist-card:nth-child(5), .ml-studio-card:nth-child(5), .ml-market-card:nth-child(5), .ml-track:nth-child(5), .ml-collab-rail:nth-child(5) { transition-delay: 160ms; }
+.ml-artist-card:nth-child(6), .ml-studio-card:nth-child(6), .ml-market-card:nth-child(6), .ml-track:nth-child(6), .ml-collab-rail:nth-child(6) { transition-delay: 200ms; }
+.ml-artist-card:nth-child(7), .ml-studio-card:nth-child(7), .ml-market-card:nth-child(7), .ml-track:nth-child(7), .ml-collab-rail:nth-child(7) { transition-delay: 240ms; }
+.ml-artist-card:nth-child(n+8), .ml-studio-card:nth-child(n+8), .ml-market-card:nth-child(n+8), .ml-track:nth-child(n+8), .ml-collab-rail:nth-child(n+8) { transition-delay: 280ms; }
+
+/* ── scroll-driven reveal ─────────────────────────────────────────────── */
+/* Motion plan Phase 3. .ml-section-block wraps an .ml-section heading plus
+   everything that belongs to it, so one reveal covers the whole section
+   (heading + content) rather than the heading alone — see the wrapper
+   rollout note below. animation-timeline: view() is CSS-only: no JS, no
+   IntersectionObserver, no scroll listener, so it cannot jank the main
+   thread. Guarded by @supports so unsupported browsers render normally —
+   content is readable first, animated second, per the Motion Sensitivity
+   rule; there is no unguarded opacity:0 baseline anywhere outside this
+   block, so nothing is ever invisible-by-default if the feature is missing.
+
+   Not applied to .ml-section alone: single-section screens whose one
+   .ml-section lives inside a [data-state] wizard step (verification_screen
+   and 20 others) already animate on state entry via the Phase 1 rule in
+   ml-core.css — adding a second, scroll-triggered animation on the same
+   content would stack two motions on one element, which the Excessive
+   Motion rule (animate 1-2 key elements per view) rules out. Only screens
+   where .ml-section-block sits in a long, independently-scrollable page
+   (80 files, wrapped 2026-09-01) get this. */
+@supports (animation-timeline: view()) {
+  @keyframes ml-reveal {
+    from { opacity: 0; transform: translateY(var(--space-3)); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .ml-section-block {
+    animation: ml-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+}

@@ -31,7 +31,7 @@
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
       <div data-state="default">
-        <div class="ml-section"><h2>Who can see your work</h2></div>
+        <section class="ml-section-block"><div class="ml-section"><h2>Who can see your work</h2></div>
         <div role="radiogroup" aria-label="Portfolio visibility">
           <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
             <span class="ml-choice__body">
@@ -54,9 +54,9 @@
             </span>
             <span class="ml-choice__mark"></span>
           </div>
-        </div>
+        </div></section>
 
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Defaults for new work</h2></div>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Defaults for new work</h2></div>
         <div class="ml-check-row">
           <span class="ml-choice__body">
             <span class="ml-choice__title">Show collaborators</span>
@@ -76,9 +76,9 @@
             <span class="ml-choice__meta">People can share a link to a piece</span>
           </span>
           <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Allow sharing"></button>
-        </div>
+        </div></section>
 
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Your work</h2>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Your work</h2>
           <a class="ml-section__link" href="?state=reorder">Reorder</a></div>
         <div class="ml-check-row">
           <span class="ml-choice__body">
@@ -113,7 +113,7 @@
             <span class="ml-choice__title">Archived work</span>
             <span class="ml-choice__meta">2 pieces, hidden but not deleted</span>
           </span>
-        </a>
+        </a></section>
       </div>
 
       <!-- Reorder is a MODE, not a screen: the same list, draggable, with a
@@ -154,7 +154,7 @@
       </div>
 
       <div data-state="archived">
-        <div class="ml-section"><h2>Archived</h2></div>
+        <section class="ml-section-block"><div class="ml-section"><h2>Archived</h2></div>
         <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Hidden from your profile and from Discover. Nothing is deleted, and credits you gave
           other people stay on their profiles.
@@ -173,7 +173,7 @@
           </span>
           <button class="ml-btn ml-btn--secondary" type="button">Restore</button>
         </div>
-        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Back to settings</a>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Back to settings</a></section>
       </div>
     </main>
   </div>

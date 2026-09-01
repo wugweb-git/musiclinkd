@@ -32,15 +32,15 @@
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
       <div data-state="review">
-        <div class="ml-section"><h2>What you're paying for</h2></div>
+        <section class="ml-section-block"><div class="ml-section"><h2>What you're paying for</h2></div>
         <div class="ml-summary">
           <div class="ml-summary__row"><span>Pro</span><span>₹423.73</span></div>
           <div class="ml-summary__row"><span>GST at 18%</span><span>₹76.27</span></div>
           <div class="ml-summary__row ml-summary__row--total"><span>Today</span><span>₹499.00</span></div>
           <p class="ml-summary__note">Then ₹499 on the 31st of each month, until you cancel.</p>
-        </div>
+        </div></section>
 
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Pay with</h2></div>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Pay with</h2></div>
         <div role="radiogroup" aria-label="Payment method">
           <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
             <span class="ml-choice__body">
@@ -70,7 +70,7 @@
           <a class="ml-link" href="/preview/flows/user_settings/legal_pages/index.html">terms</a>.
           You can cancel any time and keep access until the period you've paid for ends.
         </p>
-        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=processing">Subscribe · ₹499</a>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=processing">Subscribe · ₹499</a></section>
       </div>
 
       <!-- Processing hides the button entirely, so it cannot be pressed twice. -->

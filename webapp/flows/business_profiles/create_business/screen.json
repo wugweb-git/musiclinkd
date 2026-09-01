@@ -16,14 +16,14 @@
     "published"
   ],
   "collectionsTouched": [
-    "businesses"
+    "users"
   ],
-  "notes": "PROPOSED 2026-08-31 from the FLOW-12 brief, which asks for lightweight creation and explicitly warns against a huge form. Six steps as STATES of one screen: you can see how far along you are and go back without losing a back-stack entry per field. Identity, logo, cover, description, location and hours are those steps, not six screens.",
+  "notes": "PROPOSED 2026-08-31 from the FLOW-12 brief, which asks for lightweight creation and explicitly warns against a huge form. Six steps as STATES of one screen: you can see how far along you are and go back without losing a back-stack entry per field. Identity, logo, cover, description, location and hours are those steps, not six screens. Corrected 2026-09-01: collectionsTouched said \"businesses\", a collection that does not exist in the canonical schema and had no firestore.rules block. Business profiles are UserDoc records with profileType===\"BUSINESS\" (admin/types/firestore.ts:181-209, the \"Business extension\" fields) — this screen writes to /users like every other profile-creation screen, not a separate collection. See docs/09-Roadmap/screen-contract-chain.md.",
   "dataContract": [
     {
-      "collection": "businesses",
+      "collection": "users",
       "sample": null,
-      "note": "No seed sample available for this collection in this build."
+      "note": "No seed sample with profileType===\"BUSINESS\" populated yet — corrected from the wrong collection name (\"businesses\"), but a real sample still needs writing."
     }
   ]
 }

@@ -17,11 +17,11 @@
   "collectionsTouched": [
     "users",
     "connections",
-    "opportunities",
-    "studioBookings",
-    "feedPosts"
+    "projects",
+    "studio_bookings",
+    "feed_posts"
   ],
-  "notes": "Returning-user dashboard. Every count and activity row is seeded sample data — there is no backend query behind them yet.",
+  "notes": "Returning-user dashboard. Every count and activity row is seeded sample data — there is no backend query behind them yet. Corrected 2026-09-01: collectionsTouched previously said \"opportunities\" (no such collection exists — Opportunities is backed by /projects, per the existing firestore.rules comment on opportunity_applications) and camelCase \"studioBookings\"/\"feedPosts\" (the real collections are snake_case studio_bookings/feed_posts, both of which already have firestore.rules — this was a naming mismatch, not a missing rule). See docs/09-Roadmap/screen-contract-chain.md.",
   "dataContract": [
     {
       "collection": "users",
@@ -79,19 +79,19 @@
       }
     },
     {
-      "collection": "opportunities",
+      "collection": "projects",
       "sample": null,
-      "note": "No seed sample available for this collection in this build."
+      "note": "No seed sample with an OPEN-status opportunity populated yet — corrected from the wrong collection name (\"opportunities\"), but a real sample still needs writing."
     },
     {
-      "collection": "studioBookings",
+      "collection": "studio_bookings",
       "sample": null,
-      "note": "No seed sample available for this collection in this build."
+      "note": "No seed sample populated yet — corrected from the camelCase name (\"studioBookings\"); real studio_bookings samples exist elsewhere (see business_dashboard/screen.json) and could be reused here."
     },
     {
-      "collection": "feedPosts",
+      "collection": "feed_posts",
       "sample": null,
-      "note": "No seed sample available for this collection in this build."
+      "note": "No seed sample populated yet — corrected from the camelCase name (\"feedPosts\")."
     }
   ]
 }

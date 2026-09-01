@@ -37,9 +37,34 @@
         <span class="ml-banner__body">Notifications are muted until 9am. <a class="ml-link" href="/preview/flows/notifications/notification_settings/index.html">Change</a></span>
       </div>
 
-      <div class="ml-empty" data-state="loading">
-        <span class="ml-spinner" role="status" aria-label="Loading"></span>
-        <p class="ml-empty__body" style="margin-top:var(--space-3)">Loading…</p>
+      <!-- state: loading — recycled skeleton rows shaped like real notifications,
+           not a spinner. ml-core.css's own loading-section comment: "Skeletons,
+           not spinners, for content — a spinner tells the user nothing about
+           what is arriving." home_dashboard already does this for its content;
+           this list was the odd one out with a bare spinner + "Loading…" text.
+           Fixed 2026-09-01, motion-plan.md Phase 5. -->
+      <div data-state="loading" role="status" aria-label="Loading notifications" style="display:flex;flex-direction:column;gap:var(--space-1)">
+        <div class="ml-person-row" style="border:0;padding:var(--space-2) 0">
+          <div class="ml-skeleton" style="width:var(--avatar-3);height:var(--avatar-3);border-radius:var(--radius-4);flex:none"></div>
+          <span class="meta" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px">
+            <span class="ml-skeleton" style="display:block;height:14px;width:72%;border-radius:var(--radius-1)"></span>
+            <span class="ml-skeleton" style="display:block;height:11px;width:40%;border-radius:var(--radius-1)"></span>
+          </span>
+        </div>
+        <div class="ml-person-row" style="border:0;padding:var(--space-2) 0">
+          <div class="ml-skeleton" style="width:var(--avatar-3);height:var(--avatar-3);border-radius:var(--radius-4);flex:none"></div>
+          <span class="meta" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px">
+            <span class="ml-skeleton" style="display:block;height:14px;width:55%;border-radius:var(--radius-1)"></span>
+            <span class="ml-skeleton" style="display:block;height:11px;width:30%;border-radius:var(--radius-1)"></span>
+          </span>
+        </div>
+        <div class="ml-person-row" style="border:0;padding:var(--space-2) 0">
+          <div class="ml-skeleton" style="width:var(--avatar-3);height:var(--avatar-3);border-radius:var(--radius-4);flex:none"></div>
+          <span class="meta" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px">
+            <span class="ml-skeleton" style="display:block;height:14px;width:64%;border-radius:var(--radius-1)"></span>
+            <span class="ml-skeleton" style="display:block;height:11px;width:35%;border-radius:var(--radius-1)"></span>
+          </span>
+        </div>
       </div>
 
       <a class="ml-notification ml-notification--unread" data-state="populated high_priority category_filtered muted_banner grouped" href="/preview/flows/booking/payment_screen/index.html?state=error">

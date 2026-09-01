@@ -46,7 +46,7 @@
       <!-- home: nothing typed yet. Recents and taxonomy-derived suggestions
            only — the brief says not to fill space with arbitrary content. -->
       <div data-state="home">
-        <div class="ml-section"><h2>Recent</h2>
+        <section class="ml-section-block"><div class="ml-section"><h2>Recent</h2>
           <button class="ml-section__link" type="button">Clear all</button></div>
         <a class="ml-action-row" href="?state=results">
           <span class="ml-choice__body"><span class="ml-choice__title">mixing engineer Mumbai</span></span>
@@ -59,9 +59,9 @@
         <a class="ml-action-row" href="?state=results">
           <span class="ml-choice__body"><span class="ml-choice__title">tabla</span></span>
           <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m15.18 12 7.16-7.16a2.25 2.25 0 1 0-3.18-3.18L12 8.82 4.84 1.66a2.25 2.25 0 1 0-3.18 3.18L8.82 12l-7.16 7.16a2.25 2.25 0 1 0 3.18 3.18L12 15.18l7.16 7.16a2.24 2.24 0 0 0 3.18 0c.88-.88.88-2.3 0-3.18z"/></svg>
-        </a>
+        </a></section>
 
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Browse</h2></div>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Browse</h2></div>
         <div class="ml-chip-wrap">
           <a class="ml-chip" href="?state=results">Vocalists</a>
           <a class="ml-chip" href="?state=results">Producers</a>
@@ -70,7 +70,7 @@
           <a class="ml-chip" href="?state=results">Rehearsal rooms</a>
           <a class="ml-chip" href="?state=results">Gear</a>
           <a class="ml-chip" href="?state=results">Opportunities</a>
-        </div>
+        </div></section>
       </div>
 
       <!-- live_typing: suggestions come from the taxonomy, not invented. -->
@@ -223,10 +223,10 @@
       <!-- Partial: one category empty must not make the whole search look
            empty, which the brief states outright. -->
       <div data-state="partial">
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Businesses</h2></div>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Businesses</h2></div>
         <p class="ml-type-2" style="color:var(--color-muted);margin:0">
           No businesses match "vocalist". People and services below still do.
-        </p>
+        </p></section>
       </div>
 
       <div class="ml-empty" data-state="empty">
