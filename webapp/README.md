@@ -167,29 +167,26 @@ element — a bug `audit-flow.mjs` itself had.
   audit first.
 
 
-## Regenerating `data/designed-screens.json`
+## The screen registry
 
-The Flow/Screen Index badges each row **Designed** or **Stub**. That comes from
-`data/designed-screens.json`, which is a static list, so it goes stale the
-moment you design a screen without regenerating it. From `webapp/`:
+The Flow/Screen Index badges each row **Designed** or **Stub**. That now comes
+from `data/screen-registry.json`, which is **generated**:
 
 ```bash
-python3 - <<'EOF'
-import os, json
-designed = []
-for flow in sorted(os.listdir('flows')):
-    fp = os.path.join('flows', flow)
-    if not os.path.isdir(fp): continue
-    for scr in sorted(os.listdir(fp)):
-        idx = os.path.join(fp, scr, 'index.html')
-        if not os.path.isfile(idx): continue
-        if 'THIS FILE IS A TEMPLATE, NOT A DESIGNED SCREEN' not in open(idx, encoding='utf-8').read():
-            designed.append(f"{flow}/{scr}")
-json.dump({"_note": "Regenerate with the snippet in webapp/README.md.",
-           "designed": designed}, open('data/designed-screens.json', 'w'), indent=2)
-print(len(designed), "designed")
-EOF
+cd webapp && node ../scripts/build-registry.mjs flows --write
 ```
 
-The marker string is the one the scaffolder writes into every fresh template,
-so a screen counts as designed the moment that line is removed.
+`scripts/build-hosting.sh` runs it on every deploy, so it cannot go stale.
+
+This replaced `data/designed-screens.json`, a static list you had to remember to
+regenerate — and nobody did. It was 118 screens out of date, so the workbench
+reported "87 of 205 designed" while every screen was finished, and the product
+looked 42% built when it was done. Anything derived from the files on disk
+should be derived from the files on disk.
+
+The registry records, per route: byte size, whether a `screen.json` exists, and
+how many states it declares. A route counts as built when its `index.html` no
+longer carries the scaffolder's `THIS FILE IS A TEMPLATE, NOT A DESIGNED SCREEN`
+marker — the same test as before, just run at build time instead of by hand.
+
+

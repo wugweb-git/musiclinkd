@@ -60,6 +60,21 @@ echo "==> Verifying generated artefacts are current"
 node scripts/build-tokens.mjs --check
 node scripts/build-handoff.mjs --check
 
+# The screen registry is DERIVED, never committed by hand. The list it replaces
+# was hand-maintained and drifted 118 screens out of date, so the workbench
+# reported the product as 42% built while every screen was finished. Generating
+# it here removes the step there was to forget.
+echo "==> Generating the screen registry from webapp/flows"
+(cd webapp && node ../scripts/build-registry.mjs flows --write)
+
+# The audit gate. It is the last point before deploy at which a screen can be
+# caught referencing a class nothing defines, declaring a state its markup
+# cannot render, or naming a route that does not exist. It exits non-zero on
+# FAIL, and set -e stops the deploy.
+echo "==> Auditing the design system"
+(cd webapp && node ../scripts/audit-system.mjs \
+   --flows flows --css ../frontend/guide/system --map data/flows-map.json)
+
 echo "==> Generating changelog page from CHANGELOG.md"
 node scripts/generate-changelog.mjs
 
