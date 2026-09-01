@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,14 +17,15 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/discover/discover_feed/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">Yash Raj Sound Studios</h1>
     </header>
@@ -36,7 +37,7 @@
         <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 0">Recording studio · Andheri West, Mumbai</p>
         <div class="ml-rating" style="margin-top:var(--space-2)">
           <span class="ml-rating__score">4.8</span>
-          <span class="ml-rating__stars">★★★★★</span>
+          <span class="ml-rating__stars"><span class="ml-rating" role="img" aria-label="5 out of 5 stars" style="--ml-rating:100%"><i aria-hidden="true"></i></span></span>
           <span class="ml-rating__count">· 62 reviews</span>
         </div>
       </div>
@@ -49,7 +50,7 @@
         <a class="ml-tabs__tab" role="tab" aria-selected="false" href="/preview/flows/business_profiles/business_reviews_gallery_tab/index.html">Reviews</a>
       </nav>
 
-      <div data-state="default" style="padding:var(--space-3) var(--space-4) 0">
+      <div data-state="default" style="padding:var(--space-3) var(--space-4) 0" data-state-default>
         <!-- Services are OWNED by flow 11 and consumed here, not rebuilt. -->
         <a class="ml-service" href="/preview/flows/booking/configure_session/index.html">
           <span class="ml-choice__body">
@@ -86,7 +87,7 @@
       <div style="padding:0 var(--space-4)">
         <!-- Owner view: the same services, plus their publication state. The
              brief says services are OWNED by flow 11, so every edit hands off. -->
-        <div data-state="owner">
+        <div data-state="owner" hidden>
           <div class="ml-section"><h2>Your services</h2>
             <a class="ml-section__link" href="/preview/flows/services_availability/service_offerings_editor/index.html">Manage</a></div>
           <div class="ml-check-row">
@@ -108,9 +109,9 @@
           <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-2)" href="/preview/flows/services_availability/session_configuration/index.html">Add a service</a>
         </div></div>
     </main>
-    <footer class="ml-app__footer" data-state="default owner draft no_services no_portfolio no_team no_reviews no_availability visible_if_owner leads analytics invite" style="display:flex;gap:var(--space-2)">
+    <footer class="ml-app__footer" data-state="default owner draft no_services no_portfolio no_team no_reviews no_availability visible_if_owner leads analytics invite" style="display:flex;gap:var(--space-2)" data-state-default>
       <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/communication/chat_conversation/index.html">Message</a>
-      <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/business_profiles/business_book_now/index.html">Book now</a>
+      <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/business_profiles/business_book_now/index.html">Book</a>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

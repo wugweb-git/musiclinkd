@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,21 +17,22 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/verifications/verification_status/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0;flex:1">Get verified</h1>
       <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
-      <div data-state="id_type_selector">
+      <div data-state="id_type_selector" data-state-default>
         <div class="ml-section"><h2>What are you verifying?</h2></div>
         <div role="radiogroup" aria-label="Verification level">
           <a class="ml-choice" role="radio" aria-checked="false" href="?state=level_basic">
@@ -61,7 +62,7 @@
         </div>
       </div>
 
-      <div data-state="level_basic">
+      <div data-state="level_basic" hidden>
         <div class="ml-section"><h2>Basic — one document</h2></div>
         <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           One government ID with your name and photograph. We check the name against your profile.
@@ -71,11 +72,11 @@
           <span class="ml-choice__title">Continue to upload</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
       </div>
 
-      <div data-state="level_professional">
+      <div data-state="level_professional" hidden>
         <div class="ml-section"><h2>Professional — ID and two credits</h2></div>
         <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           One government ID, plus two pieces of released work you're credited on. A link to each is enough —
@@ -94,11 +95,11 @@
           <span class="ml-choice__title">Continue to upload</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
       </div>
 
-      <div data-state="level_business">
+      <div data-state="level_business" hidden>
         <div class="ml-section"><h2>Business — company documents</h2></div>
         <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           We check that the business exists and that you can act for it. We do not ask for bank details,
@@ -109,11 +110,11 @@
           <span class="ml-choice__title">Continue</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
       </div>
 
-      <div data-state="govt_id_upload">
+      <div data-state="govt_id_upload" hidden>
         <div class="ml-section"><h2>Your ID</h2></div>
         <div class="ml-dropzone">
           <span class="ml-dropzone__hint">Photograph or scan, both sides</span>
@@ -131,11 +132,11 @@
           <span class="ml-choice__title">Continue</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
       </div>
 
-      <div data-state="gst_upload">
+      <div data-state="gst_upload" hidden>
         <div class="ml-section"><h2>Business documents</h2></div>
         <div class="ml-field">
           <label for="v-gst">GST number</label>
@@ -154,11 +155,11 @@
           <span class="ml-choice__title">Continue</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
       </div>
 
-      <div data-state="review">
+      <div data-state="review" hidden>
         <div class="ml-section"><h2>Before you send it</h2></div>
         <div class="ml-summary">
           <div class="ml-summary__row"><span>Level</span><span>Professional</span></div>
@@ -175,20 +176,21 @@
           <span class="ml-choice__title">Consent and submit</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
       </div>
 
-      <div data-state="consent">
+      <div data-state="consent" hidden>
         <div class="ml-section"><h2>Your consent</h2></div>
         <label class="ml-check-row">
-          <span class="ml-check-ctl" role="checkbox" aria-checked="true"></span>
+          <span class="ml-check-ctl" role="checkbox" aria-label="Basic" aria-checked="true"></span>
           <span class="ml-choice__body"><span class="ml-choice__title">
             I agree to MusicLinkd checking these documents to verify my identity.
           </span></span>
         </label>
         <label class="ml-check-row">
-          <span class="ml-check-ctl" role="checkbox" aria-checked="true"></span>
+          <span class="ml-check-ctl" role="checkbox" aria-label="
+            I agree to MusicLinkd checking these documents to verify my identit" aria-checked="true"></span>
           <span class="ml-choice__body"><span class="ml-choice__title">
             I understand my documents are deleted once the check is complete, and are never shown publicly.
           </span></span>
@@ -196,7 +198,7 @@
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=badge_timeline">Submit for review</a>
       </div>
 
-      <div data-state="badge_timeline">
+      <div data-state="badge_timeline" hidden>
         <div class="ml-empty">
           <h2 class="ml-empty__title">Sent for review</h2>
           <p class="ml-empty__body">

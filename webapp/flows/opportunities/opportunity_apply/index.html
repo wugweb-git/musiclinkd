@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,19 +17,20 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/opportunities/opportunity_detail/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">Apply</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div data-state="default">
+      <div data-state="default" data-state-default>
         <section class="ml-section-block"><div class="ml-section"><h2>Session vocalist — Hindi pop EP</h2></div>
         <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-3)">Octave Sound Labs · ₹12,000/day</p></section>
 
@@ -65,18 +66,18 @@
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=submitting">Send application</a></section>
       </div>
 
-      <div class="ml-empty" data-state="submitting">
+      <div class="ml-empty" data-state="submitting" hidden>
         <span class="ml-spinner" role="status" aria-label="Sending"></span>
         <p class="ml-empty__body" style="margin-top:var(--space-3)">Sending your application…</p>
       </div>
 
-      <div class="ml-empty" data-state="submitted">
+      <div class="ml-empty" data-state="submitted" hidden>
         <h3 class="ml-empty__title" style="color:var(--color-success)">Application sent</h3>
         <p class="ml-empty__body">Octave Sound Labs will see it straight away. You'll be notified when they respond.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/opportunities/my_applications/index.html">See my applications</a>
       </div>
 
-      <div data-state="error">
+      <div data-state="error" hidden>
         <div class="ml-banner ml-banner--error">
           <span class="ml-banner__body">Couldn't send — attach at least one piece of work first.</span>
         </div>

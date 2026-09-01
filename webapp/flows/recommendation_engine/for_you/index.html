@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,16 +17,17 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
+    <header class="ml-appbar">
       <h1 class="ml-type-3" style="margin:0">For you</h1>
       <span class="ml-appbar__actions">
         <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
-        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/recommendation_engine/recommendation_preferences/index.html" aria-label="Recommendation settings"><svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></a>
+        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/recommendation_engine/recommendation_preferences/index.html" aria-label="Recommendation settings"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check"/></svg></a>
       </span>
     </header>
     <nav class="ml-tabs" role="tablist" aria-label="What to show" style="margin:0 var(--space-4)">
@@ -34,18 +35,18 @@
     </nav>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
-      <p class="ml-type-1" data-state="default" style="color:var(--color-muted);margin:0 0 var(--space-2)">
+      <p class="ml-type-1" data-state="default" style="color:var(--color-muted);margin:0 0 var(--space-2)" data-state-default>
         Suggestions based on your roles, your work and where you are. Every one says why.
       </p>
 
-      <div class="ml-banner ml-banner--info" data-state="nearby">
+      <div class="ml-banner ml-banner--info" data-state="nearby" hidden>
         <span class="ml-banner__body">
           Nearby uses the city on your profile, not your live location.
           <a class="ml-link" href="/preview/flows/user_settings/privacy_settings/index.html?state=search_visibility">Change</a>
         </span>
       </div>
 
-      <div class="ml-match" data-state="people collaborators default why">
+      <div class="ml-match" data-state="people collaborators default why" data-state-default>
         <a class="ml-person-row" style="border:0;padding:0" href="/preview/flows/public_profile/public_profile_view_talent/index.html">
           <img src="/assets/img/editorials/3dee9cb6252a4c8f8a149c9fd40d4a9e.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Meera Nair</b><p>Playback vocalist · Kochi</p></span>
@@ -59,7 +60,7 @@
           <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/public_profile/public_profile_view_talent/index.html">Follow</a>
         </div>
       </div>
-      <div class="ml-match" data-state="people default why">
+      <div class="ml-match" data-state="people default why" data-state-default>
         <a class="ml-person-row" style="border:0;padding:0" href="/preview/flows/public_profile/public_profile_view/index.html">
           <img src="/assets/img/editorials/4b18ab6b2f209a6f51a9d38de6d3f07f.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Rohan D'Souza</b><p>Mixing engineer · Bengaluru</p></span>
@@ -73,7 +74,7 @@
           <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/public_profile/public_profile_view/index.html">Follow</a>
         </div>
       </div>
-      <div class="ml-match" data-state="collaborators default why">
+      <div class="ml-match" data-state="collaborators default why" data-state-default>
         <a class="ml-person-row" style="border:0;padding:0" href="/preview/flows/public_profile/public_profile_view/index.html">
           <img src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Kabir Sheth</b><p>Producer · Pune</p></span>
@@ -87,7 +88,7 @@
           <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/public_profile/public_profile_view/index.html">Message</a>
         </div>
       </div>
-      <div class="ml-match" data-state="businesses default why">
+      <div class="ml-match" data-state="businesses default why" data-state-default>
         <a class="ml-person-row" style="border:0;padding:0" href="/preview/flows/business_profiles/business_overview/index.html">
           <img src="/assets/img/speakers/48dcea90c715465b4dcd2ff760bfcf65.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Blue Note Recording Co.</b><p>Recording studio · Bandra · 4.1 km</p></span>
@@ -101,7 +102,7 @@
           <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/business_profiles/business_overview/index.html">Book</a>
         </div>
       </div>
-      <div class="ml-match" data-state="services default why">
+      <div class="ml-match" data-state="services default why" data-state-default>
         <a class="ml-person-row" style="border:0;padding:0" href="/preview/flows/public_profile/talent_services_view/index.html">
           <img src="/assets/img/6/0ad951188258241.6599204c7ae25.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Vocal Tuning & Comping</b><p>Ishita Rao · remote · ₹2,000</p></span>
@@ -115,7 +116,7 @@
           <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/public_profile/talent_services_view/index.html">Book</a>
         </div>
       </div>
-      <div class="ml-match" data-state="opportunities default why">
+      <div class="ml-match" data-state="opportunities default why" data-state-default>
         <a class="ml-person-row" style="border:0;padding:0" href="/preview/flows/opportunities/opportunity_detail/index.html">
           <img src="/assets/img/6/04182c58798961.5d48bcac8dd8f.png" alt="" loading="lazy" />
           <span class="meta"><b>Session vocalist — Hindi pop EP</b><p>Octave Sound Labs · ₹12,000/day</p></span>
@@ -129,7 +130,7 @@
           <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/opportunities/opportunity_detail/index.html">Apply</a>
         </div>
       </div>
-      <div class="ml-match" data-state="marketplace default why">
+      <div class="ml-match" data-state="marketplace default why" data-state-default>
         <a class="ml-person-row" style="border:0;padding:0" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
           <img src="/assets/img/speakers/5e4c5a1598e10dfe9c213609ce2ab5fb.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Rode NT1 Condenser Mic</b><p>Gear Rental · Bengaluru · ₹450/day</p></span>
@@ -143,7 +144,7 @@
           <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/marketplace/marketplace_item_detail/index.html">View</a>
         </div>
       </div>
-      <div class="ml-match" data-state="nearby default why">
+      <div class="ml-match" data-state="nearby default why" data-state-default>
         <a class="ml-person-row" style="border:0;padding:0" href="/preview/flows/booking/studio_profile/index.html">
           <img src="/assets/img/6/01e26955706919.598fd42d42f34.png" alt="" loading="lazy" />
           <span class="meta"><b>Yash Raj Sound Studios</b><p>Recording studio · Andheri West · 2.4 km</p></span>
@@ -160,7 +161,7 @@
 
       <!-- "Why am I seeing this?" expands the signals actually used. Listing a
            signal we do not use would be a fabricated reason. -->
-      <div data-state="why">
+      <div data-state="why" hidden>
         <div class="ml-section" style="margin-top:var(--space-3)"><h2>Why you're seeing these</h2></div>
         <div class="ml-summary">
           <div class="ml-summary__row"><span>Your roles and genres</span><span>Used</span></div>
@@ -174,7 +175,7 @@
         <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/recommendation_engine/recommendation_preferences/index.html">Change what's used</a>
       </div>
 
-      <div data-state="dismissed">
+      <div data-state="dismissed" hidden>
         <div class="ml-banner ml-banner--info">
           <span class="ml-banner__body">Hidden. You'll see fewer like it.</span>
         </div>
@@ -183,7 +184,7 @@
 
       <!-- No fabricated recommendations: when there is nothing honest to say,
            say that, and offer the thing that would actually help. -->
-      <div class="ml-empty" data-state="empty">
+      <div class="ml-empty" data-state="empty" hidden>
         <h2 class="ml-empty__title">We're still learning what's useful to you</h2>
         <p class="ml-empty__body">
           We'd rather show you nothing than guess. Adding your roles and a piece of work
@@ -193,7 +194,7 @@
         <a class="ml-btn ml-btn--secondary" style="margin-top:var(--space-2)" href="/preview/flows/discover/discover_feed/index.html">Explore instead</a>
       </div>
 
-      <p class="ml-type-1" data-state="default" style="color:var(--color-muted);margin-top:var(--space-3)">
+      <p class="ml-type-1" data-state="default" style="color:var(--color-muted);margin-top:var(--space-3)" data-state-default>
         That's everything worth suggesting today. <a class="ml-link" href="?state=why">Why these?</a>
       </p>
     </main>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,22 +17,23 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/booking/studio_discovery/index.html" aria-label="Back to discovery">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">Studios near you</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <p class="ml-type-1" data-state="default" style="color:var(--color-muted);margin:0 0 var(--space-2)">
+      <p class="ml-type-1" data-state="default" style="color:var(--color-muted);margin:0 0 var(--space-2)" data-state-default>
         4 studios · sorted by distance
       </p>
-      <a class="ml-result" data-state="default" href="/preview/flows/booking/studio_profile/index.html">
+      <a class="ml-result" data-state="default" href="/preview/flows/booking/studio_profile/index.html" data-state-default>
         <img class="ml-result__thumb" src="/assets/img/6/01e26955706919.598fd42d42f34.png" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Yash Raj Sound Studios</span>
@@ -40,7 +41,7 @@
         </span>
         <span class="ml-result__trail">₹1,800/hr</span>
       </a>
-      <a class="ml-result" data-state="default" href="/preview/flows/booking/studio_profile/index.html">
+      <a class="ml-result" data-state="default" href="/preview/flows/booking/studio_profile/index.html" data-state-default>
         <img class="ml-result__thumb" src="/assets/img/speakers/48dcea90c715465b4dcd2ff760bfcf65.jpg" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Blue Note Recording Co.</span>
@@ -48,7 +49,7 @@
         </span>
         <span class="ml-result__trail">₹2,400/hr</span>
       </a>
-      <a class="ml-result" data-state="default" href="/preview/flows/booking/studio_profile/index.html">
+      <a class="ml-result" data-state="default" href="/preview/flows/booking/studio_profile/index.html" data-state-default>
         <img class="ml-result__thumb" src="/assets/img/6/05c010236455615.68ecac46e6ab2.png" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Soundbox Rehearsal Rooms</span>
@@ -56,7 +57,7 @@
         </span>
         <span class="ml-result__trail">₹900/hr</span>
       </a>
-      <a class="ml-result" data-state="default" href="/preview/flows/booking/studio_profile/index.html">
+      <a class="ml-result" data-state="default" href="/preview/flows/booking/studio_profile/index.html" data-state-default>
         <img class="ml-result__thumb" src="/assets/img/4/Header_Recaps.png" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Third Wave Audio</span>
@@ -65,7 +66,7 @@
         <span class="ml-result__trail">₹1,500/hr</span>
       </a>
 
-      <div class="ml-empty" data-state="empty">
+      <div class="ml-empty" data-state="empty" hidden>
         <h3 class="ml-empty__title">No studios match those filters</h3>
         <p class="ml-empty__body">Try widening the distance, or clearing the price ceiling.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/booking/filters/index.html">Adjust filters</a>

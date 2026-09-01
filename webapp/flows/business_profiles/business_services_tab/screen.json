@@ -9,7 +9,20 @@
   "screenOrder": 2,
   "states": [
     "default",
-    "owner"
+    "owner",
+    "draft",
+    "no_services",
+    "no_portfolio",
+    "no_team",
+    "no_reviews",
+    "no_availability",
+    "visible_if_owner",
+    "leads",
+    "analytics",
+    "invite",
+    "unpublished",
+    "suspended",
+    "not_found"
   ],
   "collectionsTouched": [
     "users"

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
@@ -24,25 +25,25 @@
   <div class="ml-app">
     <header class="ml-navbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/discover/discover_feed/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-navbar__title">Saved</h1>
       <span class="ml-navbar__spacer"></span>
       
     </header>
     <main class="ml-app__body">
-      <div data-state="populated">
-        <nav class="ml-tabs" aria-label="Saved type" style="margin-top:0">
-          <button class="ml-tabs__tab" aria-selected="true">People</button>
-          <button class="ml-tabs__tab" aria-selected="false">Spaces</button>
-          <button class="ml-tabs__tab" aria-selected="false">Projects</button>
-          <button class="ml-tabs__tab" aria-selected="false">Communities</button>
+      <div data-state="populated" hidden>
+        <nav class="ml-tabs" aria-label="Saved type" style="margin-top:0" role="tablist">
+          <button class="ml-tabs__tab" aria-selected="true" role="tab">People</button>
+          <button class="ml-tabs__tab" aria-selected="false" role="tab">Spaces</button>
+          <button class="ml-tabs__tab" aria-selected="false" role="tab">Projects</button>
+          <button class="ml-tabs__tab" aria-selected="false" role="tab">Communities</button>
         </nav>
         <div style="margin-top:var(--space-3)">
           <a class="ml-result" href="/preview/flows/discover/discover_profile_detail/index.html">
           <img class="ml-result__thumb" src="/assets/img/editorials/324eae250c23aafe52ea0ef9caab5d5f.jpg" alt="" />
           <span class="ml-result__body">
-            <span class="ml-result__name">Rahul Iyer<span class="ml-verified" aria-label="Verified"><svg width="10" height="10" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span></span>
+            <span class="ml-result__name">Rahul Iyer<span class="ml-verified" aria-label="Verified"><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check"/></svg></span></span>
             <span class="ml-result__meta">Producer · Mix Engineer · Mumbai</span>
           </span>
           <span class="ml-result__trail"><span class="ml-status ml-status--success">Available</span></span>
@@ -50,7 +51,7 @@
           <a class="ml-result" href="/preview/flows/discover/discover_profile_detail/index.html">
           <img class="ml-result__thumb" src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" />
           <span class="ml-result__body">
-            <span class="ml-result__name">Ananya Sharma<span class="ml-verified" aria-label="Verified"><svg width="10" height="10" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span></span>
+            <span class="ml-result__name">Ananya Sharma<span class="ml-verified" aria-label="Verified"><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check"/></svg></span></span>
             <span class="ml-result__meta">Playback Vocalist · Mumbai</span>
           </span>
           <span class="ml-result__trail"><span class="ml-status ml-status--warning">Selective</span></span>
@@ -66,7 +67,7 @@
         </div>
       </div>
 
-      <div class="ml-empty" data-state="empty">
+      <div class="ml-empty" data-state="empty" data-state-default>
         <h2 class="ml-empty__title">Nothing saved yet</h2>
         <p class="ml-empty__body">Tap the bookmark on any profile, studio or project to keep it here.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/discover/discover_feed/index.html">Start discovering</a>
@@ -74,23 +75,23 @@
     </main>
     <nav class="ml-tabbar" aria-label="Primary">
       <a class="ml-tabbar__item" href="/preview/flows/discover/trending_recommended_sections/index.html">
-        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0 1 10v14h8v-7a3 3 0 1 1 6 0v7h8V10z"/></svg></span>
+        <span class="ml-tabbar__icon"><svg class="ml-icon ml-icon--3" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-home"/></svg></span>
         Home
       </a>
       <span class="ml-tabbar__item" aria-current="page">
-        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.87 12.9a1.25 1.25 0 1 0-.89.37q.52-.01.89-.37m2.27 1.13A2 2 0 0 1 14 15.16l-8.38 3.22L8.84 10a2 2 0 0 1 1.13-1.13l8.61-3.45zm5.35-10.52A12 12 0 1 0 3.52 20.48 12 12 0 0 0 20.49 3.52z"/></svg></span>
+        <span class="ml-tabbar__icon"><svg class="ml-icon ml-icon--3" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-compass"/></svg></span>
         Discover
       </span>
       <a class="ml-tabbar__item" href="/preview/flows/communication/networking_feed/index.html">
-        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a11 11 0 0 0-8.52 17.95l-1.46 5.43a.5.5 0 0 0 .73.55l5.08-2.75A10.98 10.98 0 0 0 23 11 11 11 0 0 0 12 0"/></svg></span>
+        <span class="ml-tabbar__icon"><svg class="ml-icon ml-icon--3" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-message"/></svg></span>
         Connections
       </a>
       <a class="ml-tabbar__item" href="/preview/flows/marketplace/marketplace_browse/index.html">
-        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.25.25a6 6 0 0 0-6 6V7H2.5L1.01 17.13A6 6 0 0 0 6.95 24h10.1A6 6 0 0 0 23 17.13L21.5 7h-3.25v-.75a6 6 0 0 0-6-6M9.75 7v-.75a2.5 2.5 0 1 1 5 0V7z"/></svg></span>
+        <span class="ml-tabbar__icon"><svg class="ml-icon ml-icon--3" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-bag"/></svg></span>
         Market<span class="ml-tabbar__beta">Beta</span>
       </a>
       <a class="ml-tabbar__item" href="/preview/flows/profile_management/profile_overview/index.html">
-        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.5 5.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0M2 22a10 10 0 1 1 20 0v2H2z"/></svg></span>
+        <span class="ml-tabbar__icon"><svg class="ml-icon ml-icon--3" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-person"/></svg></span>
         Profile
       </a>
     </nav>

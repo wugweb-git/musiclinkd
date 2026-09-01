@@ -203,6 +203,7 @@ echo "    service worker cache: musiclinkd-shell-$SW_ID"
 ASSET_ID=$(cat dist/guide/system/ml-tokens.css \
            dist/guide/system/ml-core.css \
            dist/guide/system/ml-widgets.css \
+           dist/guide/system/ml-fixes.css \
            dist/preview/shared/app-shell.css \
            dist/preview/shared/app-shell.js \
            dist/preview/shared/tokens.css 2>/dev/null | shasum -a 256 | cut -c1-12)
@@ -211,7 +212,7 @@ ASSET_ID=$(cat dist/guide/system/ml-tokens.css \
 # already carrying a query are left alone.
 find dist/preview dist/guide -name '*.html' -type f -print0 \
   | xargs -0 sed -i '' -E \
-      -e "s#(href=\"/guide/system/ml-(tokens|core|widgets)\.css)\"#\1?v=$ASSET_ID\"#g" \
+      -e "s#(href=\"/guide/system/ml-(tokens|core|widgets|fixes)\.css)\"#\1?v=$ASSET_ID\"#g" \
       -e "s#(href=\"/preview/shared/(app-shell|tokens)\.css)\"#\1?v=$ASSET_ID\"#g" \
       -e "s#(src=\"/preview/shared/app-shell\.js)\"#\1?v=$ASSET_ID\"#g"
 

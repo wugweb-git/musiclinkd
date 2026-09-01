@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,14 +17,15 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/discover/discover_feed/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">Ishita Rao</h1>
     </header>
@@ -55,13 +56,13 @@
         <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Selected work</h3>
           <a class="ml-section__link" href="/preview/flows/public_profile/media_gallery/index.html">Gallery</a></div>
         <div class="ml-rail">
-          <a class="ml-media-card" href="/preview/flows/public_profile/media_gallery/index.html">
+          <a class="ml-media-card" href="/preview/flows/public_profile/media_gallery/index.html" aria-label="Media Gallery (photo/video full-screen viewer)">
             <img src="/assets/img/6/02d124205931695.66c4331e162d1.jpg" alt="" loading="lazy" />
           </a>
-          <a class="ml-media-card" href="/preview/flows/public_profile/media_gallery/index.html">
+          <a class="ml-media-card" href="/preview/flows/public_profile/media_gallery/index.html" aria-label="Media Gallery (photo/video full-screen viewer)">
             <img src="/assets/img/6/05c010236455615.68ecac46e6ab2.png" alt="" loading="lazy" />
           </a>
-          <a class="ml-media-card" href="/preview/flows/public_profile/media_gallery/index.html">
+          <a class="ml-media-card" href="/preview/flows/public_profile/media_gallery/index.html" aria-label="Media Gallery (photo/video full-screen viewer)">
             <img src="/assets/img/6/0ad951188258241.6599204c7ae25.jpg" alt="" loading="lazy" />
           </a>
         </div></section>
@@ -76,30 +77,30 @@
         <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>More on this profile</h3></div>
         <a class="ml-action-row" href="/preview/flows/public_profile/collaborators_graph/index.html">
           <span class="ml-choice__body"><span class="ml-choice__title">Collaborators</span></span>
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
         </a>
         <a class="ml-action-row" href="/preview/flows/public_profile/profile_analytics/index.html">
           <span class="ml-choice__body"><span class="ml-choice__title">Analytics</span>
           <span class="ml-choice__meta">Only you can see this</span></span>
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
         </a></section>
 
         <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Other profile types</h3></div>
         <a class="ml-action-row" href="/preview/flows/public_profile/public_profile_view_band/index.html">
           <span class="ml-choice__body"><span class="ml-choice__title">Band</span></span>
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
         </a>
         <a class="ml-action-row" href="/preview/flows/public_profile/public_profile_view_business/index.html">
           <span class="ml-choice__body"><span class="ml-choice__title">Business</span></span>
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
         </a>
         <a class="ml-action-row" href="/preview/flows/public_profile/public_profile_view_venue/index.html">
           <span class="ml-choice__body"><span class="ml-choice__title">Venue</span></span>
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
         </a>
         <a class="ml-action-row" href="/preview/flows/public_profile/public_profile_view_talent/index.html">
           <span class="ml-choice__body"><span class="ml-choice__title">Playback vocalist</span></span>
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
         </a></section>
 
         <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Reviews</h3>
@@ -108,7 +109,7 @@
           <div class="ml-review-card__head">
             <img class="ml-avatar ml-avatar--sm" src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
             <b>Kabir Sheth</b>
-            <span class="ml-review-card__stars">★★★★★</span>
+            <span class="ml-review-card__stars"><span class="ml-rating" role="img" aria-label="5 out of 5 stars" style="--ml-rating:100%"><i aria-hidden="true"></i></span></span>
           </div>
           <p class="ml-review-card__body">Turned up prepared, worked fast, and took direction without ego. Booked again the same week.</p>
         </article></section>

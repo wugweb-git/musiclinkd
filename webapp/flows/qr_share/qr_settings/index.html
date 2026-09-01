@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,20 +17,21 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/qr_share/qr_share_flow/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0;flex:1">QR settings</h1>
       
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div data-state="default analytics">
+      <div data-state="default analytics" data-state-default>
         <div class="ml-check-row">
           <span class="ml-choice__body">
             <span class="ml-choice__title">My QR code is active</span>
@@ -75,18 +76,18 @@
           <span class="ml-choice__title">Scan activity</span>
           <span class="ml-choice__meta">Who's opened your code</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="/preview/flows/user_settings/privacy_settings/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Privacy settings</span>
           <span class="ml-choice__meta">What the card is allowed to show</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a></section>
       </div>
 
-      <div data-state="analytics">
+      <div data-state="analytics" hidden>
         <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Scan activity</h2></div>
         <div class="ml-stat-grid">
           <div class="ml-kpi"><span class="ml-kpi__num">148</span>Scans<span class="ml-kpi__delta ml-kpi__delta--up">+22</span></div>
@@ -99,7 +100,7 @@
         </p></section>
       </div>
 
-      <div class="ml-empty" data-state="disabled">
+      <div class="ml-empty" data-state="disabled" hidden>
         <h2 class="ml-empty__title">Your QR code is off</h2>
         <p class="ml-empty__body">Anyone scanning a printed card will be told the code isn't active. Your profile is still reachable by its link.</p>
         <a class="ml-btn ml-btn--primary" href="?state=default">Turn it back on</a>

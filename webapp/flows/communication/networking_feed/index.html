@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,19 +17,20 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
+    <header class="ml-appbar">
       <h1 class="ml-type-3" style="margin:0">Network</h1>
       <span class="ml-appbar__actions">
         <!-- Collaboration is a separate journey from Messaging — the work
              relationship rather than the conversation — so it gets its own
              way in from the network surface. -->
-        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/collaborations/index.html" aria-label="Collaborations"><svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></a>
-        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_thread_list/index.html" aria-label="Messages"><svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg></a>
+        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/collaborations/index.html" aria-label="Collaborations"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check"/></svg></a>
+        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_thread_list/index.html" aria-label="Messages"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-send"/></svg></a>
       </span>
     </header>
     <nav class="ml-tabs" role="tablist" aria-label="Network" style="margin:0 var(--space-4)">
@@ -39,7 +40,7 @@
       <a class="ml-tabs__tab" role="tab" aria-selected="false" href="/preview/flows/communication/ai_matchmaker_tab/index.html">Matches</a>
     </nav>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div class="ml-banner ml-banner--info" data-state="posting">
+      <div class="ml-banner ml-banner--info" data-state="posting" hidden>
         <span class="ml-banner__body">Posting…</span>
       </div>
 
@@ -54,8 +55,8 @@
         <p class="ml-post__body">Wrapped two days on a Hindi pop EP at Octave. Three tracks, all live takes — the room did most of the work.</p>
         <div class="ml-post__media"><img src="/assets/img/6/02d124205931695.66c4331e162d1.jpg" alt="" loading="lazy" /></div>
         <div class="ml-post__actions">
-          <button class="ml-post__action" type="button" aria-pressed="false"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m22.18 13.58-9.13 9a1.5 1.5 0 0 1-2.1 0l-9.13-9a6.2 6.2 0 0 1 0-8.77 6.3 6.3 0 0 1 8.84 0L12 6.15l1.34-1.34a6.3 6.3 0 0 1 8.84 0 6.2 6.2 0 0 1 0 8.77"/></svg> 42</button>
-          <button class="ml-post__action" type="button"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg> 7</button>
+          <button class="ml-post__action" type="button" aria-pressed="false"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-heart"/></svg> 42</button>
+          <button class="ml-post__action" type="button"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-send"/></svg> 7</button>
         </div>
       </article>
       <article class="ml-post">
@@ -69,8 +70,8 @@
         <p class="ml-post__body">New Neve sidecar in Room B from Monday. Existing bookings keep their rate for the month.</p>
         <div class="ml-post__media"><img src="/assets/img/speakers/40a9560dcb1289e6d450c5259060ea79.jpg" alt="" loading="lazy" /></div>
         <div class="ml-post__actions">
-          <button class="ml-post__action" type="button" aria-pressed="false"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m22.18 13.58-9.13 9a1.5 1.5 0 0 1-2.1 0l-9.13-9a6.2 6.2 0 0 1 0-8.77 6.3 6.3 0 0 1 8.84 0L12 6.15l1.34-1.34a6.3 6.3 0 0 1 8.84 0 6.2 6.2 0 0 1 0 8.77"/></svg> 118</button>
-          <button class="ml-post__action" type="button"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg> 23</button>
+          <button class="ml-post__action" type="button" aria-pressed="false"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-heart"/></svg> 118</button>
+          <button class="ml-post__action" type="button"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-send"/></svg> 23</button>
         </div>
       </article>
       <article class="ml-post">
@@ -84,8 +85,8 @@
         <p class="ml-post__body">Looking for a bassist who can read charts for a jazz-adjacent session next week in Bandra. Paid, half day.</p>
         
         <div class="ml-post__actions">
-          <button class="ml-post__action" type="button" aria-pressed="false"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m22.18 13.58-9.13 9a1.5 1.5 0 0 1-2.1 0l-9.13-9a6.2 6.2 0 0 1 0-8.77 6.3 6.3 0 0 1 8.84 0L12 6.15l1.34-1.34a6.3 6.3 0 0 1 8.84 0 6.2 6.2 0 0 1 0 8.77"/></svg> 15</button>
-          <button class="ml-post__action" type="button"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg> 11</button>
+          <button class="ml-post__action" type="button" aria-pressed="false"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-heart"/></svg> 15</button>
+          <button class="ml-post__action" type="button"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-send"/></svg> 11</button>
         </div>
       </article>
     </main>

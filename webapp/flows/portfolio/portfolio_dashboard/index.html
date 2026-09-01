@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
@@ -29,16 +30,16 @@
       </div>
       <div class="ml-appbar__actions">
         <a class="ml-icon-btn" href="/preview/flows/portfolio/portfolio_settings/index.html" aria-label="Portfolio settings">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-sun"/></svg>
         </a>
         <a class="ml-icon-btn" href="/preview/flows/portfolio/choose_project_type/index.html" aria-label="Add project">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-plus-stroke"/></svg>
         </a>
       </div>
     </header>
     <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3)">
 
-      <a class="ml-card" href="/preview/flows/portfolio/profile_project_view/index.html" data-state="populated">
+      <a class="ml-card" href="/preview/flows/portfolio/profile_project_view/index.html" data-state="populated" hidden>
         <div class="ml-media ml-media--wide ml-media--scrim">
           <img src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=600" alt="" />
           <span class="ml-media__tag"><span class="ml-status ml-status--success">Released</span></span>
@@ -56,7 +57,7 @@
       </a>
 
       <!-- state: empty -->
-      <div class="ml-empty" data-state="empty">
+      <div class="ml-empty" data-state="empty" data-state-default>
         <h2 class="ml-empty__title">No projects yet</h2>
         <p class="ml-empty__body">Add a song, album, or performance to start building your public portfolio.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/portfolio/choose_project_type/index.html">Add your first project</a>
@@ -64,7 +65,7 @@
     </main>
     <!-- the empty state carries its own CTA, so the footer would otherwise be
          an empty bordered strip in that state -->
-    <footer class="ml-app__footer" data-state="populated">
+    <footer class="ml-app__footer" data-state="populated" hidden>
       <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/portfolio/choose_project_type/index.html">Add a project</a>
     </footer>
   </div>

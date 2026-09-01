@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,14 +17,15 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/discover/discover_feed/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">Arijit Sen</h1>
     </header>
@@ -34,7 +35,7 @@
       <div style="padding:0 var(--space-4)">
         <img class="ml-avatar ml-avatar--lg ml-lift" src="/assets/img/editorials/3dee9cb6252a4c8f8a149c9fd40d4a9e.jpg" alt="" loading="lazy"
              style="margin-top:calc(var(--size-3) * -1)" />
-        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">Arijit Sen <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24M6.37 11.61a1.25 1.25 0 0 1 1.76 0l2.37 2.36 5.37-5.35a1.25 1.25 0 0 1 1.76 1.76L10.5 17.5l-4.13-4.13a1.25 1.25 0 0 1 0-1.76"/></svg></h2>
+        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">Arijit Sen <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-verified"/></svg></h2>
         <p class="ml-type-1" style="color:var(--color-muted);margin:0">Singer · Composer · Mumbai, MH</p>
         <div class="ml-rating" style="margin-top:var(--space-2)">
           <span class="ml-rating__score">5.0</span>
@@ -45,16 +46,16 @@
              profiles: "It is the same profile with owner controls." The owner
              actions replace the public ones in the same slot rather than
              sitting beside them. -->
-        <div class="ml-action-row" data-state="owner">
-          <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/profile_management/edit_identity/index.html"><svg width="16" height="16" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.45 1.95a3.25 3.25 0 1 1 4.6 4.6l-2.3 2.3-4.6-4.6zM2.5 16.9 13.4 6.02l4.6 4.6L7.08 21.5 1 23z"/></svg> Edit profile</a>
-          <a class="ml-btn ml-btn--secondary" href="/preview/flows/public_profile/profile_analytics/index.html" aria-label="Analytics"><svg width="16" height="16" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 1h-3a1 1 0 0 0-1 1v20a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1M22 7h-3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1M5 10H2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V11a1 1 0 0 0-1-1"/></svg></a>
+        <div class="ml-action-row" data-state="owner" hidden>
+          <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/profile_management/edit_identity/index.html"><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-pencil"/></svg> Edit profile</a>
+          <a class="ml-btn ml-btn--secondary" href="/preview/flows/public_profile/profile_analytics/index.html" aria-label="Analytics"><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-bar-chart"/></svg></a>
         </div>
-        <a class="ml-link" data-state="owner" href="?state=default" style="display:block;text-align:center;font-size:var(--type-1);margin-top:var(--space-2)">View as public</a>
+        <a class="ml-link" data-state="owner" href="?state=default" style="display:block;text-align:center;font-size:var(--type-1);margin-top:var(--space-2)" hidden>View as public</a>
         <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">Playback & classical singer known for Bollywood, Sufi, and acoustic reinterpretations. 10+ years touring and session work.</p>
         <!-- Trust as numbers with their source, not a wall of badges. -->
         <div class="ml-trust" style="margin-top:var(--space-3)">
           <div class="ml-trust__row">
-            <span class="ml-trust__mark"><svg width="14" height="14" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24M6.37 11.61a1.25 1.25 0 0 1 1.76 0l2.37 2.36 5.37-5.35a1.25 1.25 0 0 1 1.76 1.76L10.5 17.5l-4.13-4.13a1.25 1.25 0 0 1 0-1.76"/></svg></span>
+            <span class="ml-trust__mark"><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-verified"/></svg></span>
             <div><div class="ml-trust__what">Verified Artist</div><div class="ml-trust__who">Identity confirmed on MusicLinkd</div></div>
           </div>
           <div class="ml-trust__stats">
@@ -98,13 +99,13 @@
           <div class="ml-review-card__head">
             <img class="ml-avatar ml-avatar--sm" src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
             <b>Kabir Sheth</b>
-            <span class="ml-review-card__stars">★★★★★</span>
+            <span class="ml-review-card__stars"><span class="ml-rating" role="img" aria-label="5 out of 5 stars" style="--ml-rating:100%"><i aria-hidden="true"></i></span></span>
           </div>
           <p class="ml-review-card__body">Turned up prepared, worked fast, and took direction without ego. Booked again the same week.</p>
         </article></section>
       </div>
     </main>
-    <footer class="ml-app__footer" data-state="default" style="display:flex;gap:var(--space-2)">
+    <footer class="ml-app__footer" data-state="default" style="display:flex;gap:var(--space-2)" data-state-default>
       <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/communication/chat_conversation/index.html">Message</a>
       <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/booking/studio_discovery/index.html">Book a session</a>
     </footer>

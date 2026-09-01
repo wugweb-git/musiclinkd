@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,12 +17,13 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;padding:var(--space-3) var(--space-4)">
+    <header class="ml-appbar">
       <h1 class="ml-type-3" style="margin:0">My bookings</h1>
     </header>
     <nav class="ml-tabs ml-tabs--fill" role="tablist" aria-label="Booking status" style="margin:0 var(--space-4)">
@@ -31,7 +32,7 @@
       <a class="ml-tabs__tab" role="tab" data-chip="cancelled" href="?state=cancelled">Cancelled</a>
     </nav>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <a class="ml-booking-card" data-state="upcoming" href="/preview/flows/booking/booking_success/index.html">
+      <a class="ml-booking-card" data-state="upcoming" href="/preview/flows/booking/booking_success/index.html" data-state-default>
           <img class="ml-booking-card__thumb" src="/assets/img/6/029447155900185.635d48d12326c.png" alt="" loading="lazy" />
           <div class="ml-booking-card__body">
             <span class="ml-booking-card__title">Yash Raj Sound Studios — Tracking Room 1</span>
@@ -39,7 +40,7 @@
             <span class="ml-status ml-status--success">Confirmed</span>
           </div>
         </a>
-      <a class="ml-booking-card" data-state="upcoming" href="/preview/flows/booking/booking_success/index.html">
+      <a class="ml-booking-card" data-state="upcoming" href="/preview/flows/booking/booking_success/index.html" data-state-default>
           <img class="ml-booking-card__thumb" src="/assets/img/speakers/39fdf43f680420b44f547c6cb535900b.jpg" alt="" loading="lazy" />
           <div class="ml-booking-card__body">
             <span class="ml-booking-card__title">Soundbox Rehearsal — Room B</span>
@@ -47,7 +48,8 @@
             <span class="ml-status ml-status--warning">Awaiting deposit</span>
           </div>
         </a>
-      <a class="ml-booking-card" data-state="past" href="/preview/flows/booking/booking_success/index.html">
+      <div class="ml-stack ml-stack--2" data-state="past" hidden>
+      <a class="ml-booking-card" href="/preview/flows/booking/booking_success/index.html">
           <img class="ml-booking-card__thumb" src="/assets/img/6/098487151670541.630ff959012ce.png" alt="" loading="lazy" />
           <div class="ml-booking-card__body">
             <span class="ml-booking-card__title">Blue Note Recording Co.</span>
@@ -55,7 +57,10 @@
             <span class="ml-status">Completed</span>
           </div>
         </a>
-      <a class="ml-booking-card" data-state="past" href="/preview/flows/booking/booking_success/index.html">
+      <a class="ml-btn ml-btn--secondary ml-btn--sm" href="/preview/flows/reviews/write_review/index.html">Leave a review</a>
+    </div>
+      <div class="ml-stack ml-stack--2" data-state="past" hidden>
+      <a class="ml-booking-card" href="/preview/flows/booking/booking_success/index.html">
           <img class="ml-booking-card__thumb" src="/assets/img/4/Group_427319664_1.webp" alt="" loading="lazy" />
           <div class="ml-booking-card__body">
             <span class="ml-booking-card__title">Mix review — Aarav Menon</span>
@@ -63,8 +68,10 @@
             <span class="ml-status">Completed</span>
           </div>
         </a>
+      <a class="ml-btn ml-btn--secondary ml-btn--sm" href="/preview/flows/reviews/write_review/index.html">Leave a review</a>
+    </div>
 
-      <div class="ml-empty" data-state="cancelled">
+      <div class="ml-empty" data-state="cancelled" hidden>
         <h3 class="ml-empty__title">No cancelled bookings</h3>
         <p class="ml-empty__body">Bookings you cancel will be listed here, with any refund status.</p>
         <a class="ml-btn ml-btn--secondary" href="/preview/flows/booking/studio_discovery/index.html">Find a studio</a>

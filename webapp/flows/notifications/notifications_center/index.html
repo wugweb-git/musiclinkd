@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,23 +17,24 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
+    <header class="ml-appbar">
       <h1 class="ml-type-3" style="margin:0">Notifications</h1>
       <span class="ml-appbar__actions">
-        <a class="ml-icon-btn ml-icon-btn--bare" href="?state=populated" aria-label="Mark all as read"><svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></a>
-        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/notifications/notification_settings/index.html" aria-label="Notification settings"><svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19 7v6.17A10 10 0 0 1 22 19H2a10 10 0 0 1 3-5.83V7a7 7 0 1 1 14 0m-4 14a3 3 0 1 1-6 0z"/></svg></a>
+        <a class="ml-icon-btn ml-icon-btn--bare" href="?state=populated" aria-label="Mark all as read"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check"/></svg></a>
+        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/notifications/notification_settings/index.html" aria-label="Notification settings"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-bell"/></svg></a>
       </span>
     </header>
     <nav class="ml-tabs" role="tablist" aria-label="Filter" style="margin:0 var(--space-4)">
       <a class="ml-tabs__tab" role="tab" data-chip="populated" href="?state=populated">All</a><a class="ml-tabs__tab" role="tab" data-chip="high_priority" href="?state=high_priority">Needs attention</a><a class="ml-tabs__tab" role="tab" data-chip="search_filtered" href="?state=search_filtered">Unread</a><a class="ml-tabs__tab" role="tab" data-chip="category_filtered" href="?state=category_filtered">Opportunities</a><a class="ml-tabs__tab" role="tab" data-chip="grouped" href="?state=grouped">Grouped</a>
     </nav>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div class="ml-banner ml-banner--warning" data-state="muted_banner">
+      <div class="ml-banner ml-banner--warning" data-state="muted_banner" hidden>
         <span class="ml-banner__body">Notifications are muted until 9am. <a class="ml-link" href="/preview/flows/notifications/notification_settings/index.html">Change</a></span>
       </div>
 
@@ -43,7 +44,7 @@
            what is arriving." home_dashboard already does this for its content;
            this list was the odd one out with a bare spinner + "Loading…" text.
            Fixed 2026-09-01, motion-plan.md Phase 5. -->
-      <div data-state="loading" role="status" aria-label="Loading notifications" style="display:flex;flex-direction:column;gap:var(--space-1)">
+      <div data-state="loading" role="status" aria-label="Loading notifications" style="display:flex;flex-direction:column;gap:var(--space-1)" data-state-default>
         <div class="ml-person-row" style="border:0;padding:var(--space-2) 0">
           <div class="ml-skeleton" style="width:var(--avatar-3);height:var(--avatar-3);border-radius:var(--radius-4);flex:none"></div>
           <span class="meta" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px">
@@ -67,7 +68,7 @@
         </div>
       </div>
 
-      <a class="ml-notification ml-notification--unread" data-state="populated high_priority category_filtered muted_banner grouped" href="/preview/flows/booking/payment_screen/index.html?state=error">
+      <a class="ml-notification ml-notification--unread" data-state="populated high_priority category_filtered muted_banner grouped" href="/preview/flows/booking/payment_screen/index.html?state=error" hidden>
         <div class="ml-person-row" style="border:0;padding:0">
           <img src="/assets/img/editorials/0e7b75cc331c13fd482936dd133a8363.jpg" alt="" loading="lazy" />
           <span class="meta">
@@ -77,7 +78,7 @@
           <span class="ml-status ml-status--accent">Unread</span>
         </div>
       </a>
-      <a class="ml-notification ml-notification--unread" data-state="populated high_priority muted_banner grouped" href="/preview/flows/booking/my_bookings/index.html?state=cancelled">
+      <a class="ml-notification ml-notification--unread" data-state="populated high_priority muted_banner grouped" href="/preview/flows/booking/my_bookings/index.html?state=cancelled" hidden>
         <div class="ml-person-row" style="border:0;padding:0">
           <img src="/assets/img/editorials/41f63164364f0757ddb2a20693f4b144.jpg" alt="" loading="lazy" />
           <span class="meta">
@@ -87,7 +88,7 @@
           <span class="ml-status ml-status--accent">Unread</span>
         </div>
       </a>
-      <a class="ml-notification ml-notification--unread" data-state="populated high_priority search_filtered muted_banner grouped" href="/preview/flows/user_settings/security_settings/index.html?state=security_alert">
+      <a class="ml-notification ml-notification--unread" data-state="populated high_priority search_filtered muted_banner grouped" href="/preview/flows/user_settings/security_settings/index.html?state=security_alert" hidden>
         <div class="ml-person-row" style="border:0;padding:0">
           <img src="/assets/img/editorials/8fe517d7b0584d24e1b4a6b10c1c8251.jpg" alt="" loading="lazy" />
           <span class="meta">
@@ -97,7 +98,7 @@
           <span class="ml-status ml-status--accent">Unread</span>
         </div>
       </a>
-      <a class="ml-notification ml-notification--unread" data-state="populated search_filtered muted_banner grouped" href="/preview/flows/communication/chat_conversation/index.html">
+      <a class="ml-notification ml-notification--unread" data-state="populated search_filtered muted_banner grouped" href="/preview/flows/communication/chat_conversation/index.html" hidden>
         <div class="ml-person-row" style="border:0;padding:0">
           <img src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
           <span class="meta">
@@ -107,7 +108,7 @@
           <span class="ml-status ml-status--accent">Unread</span>
         </div>
       </a>
-      <a class="ml-notification ml-notification--unread" data-state="populated category_filtered muted_banner grouped" href="/preview/flows/opportunities/my_applications/index.html?state=shortlisted">
+      <a class="ml-notification ml-notification--unread" data-state="populated category_filtered muted_banner grouped" href="/preview/flows/opportunities/my_applications/index.html?state=shortlisted" hidden>
         <div class="ml-person-row" style="border:0;padding:0">
           <img src="/assets/img/editorials/41f63164364f0757ddb2a20693f4b144.jpg" alt="" loading="lazy" />
           <span class="meta">
@@ -117,7 +118,7 @@
           <span class="ml-status ml-status--accent">Unread</span>
         </div>
       </a>
-      <a class="ml-notification" data-state="populated muted_banner grouped" href="/preview/flows/notifications/notification_detail/index.html?state=collaboration">
+      <a class="ml-notification" data-state="populated muted_banner grouped" href="/preview/flows/notifications/notification_detail/index.html?state=collaboration" hidden>
         <div class="ml-person-row" style="border:0;padding:0">
           <img src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
           <span class="meta">
@@ -127,7 +128,7 @@
           
         </div>
       </a>
-      <a class="ml-notification" data-state="populated search_filtered muted_banner grouped" href="/preview/flows/marketplace/marketplace_make_offer/index.html?state=countered">
+      <a class="ml-notification" data-state="populated search_filtered muted_banner grouped" href="/preview/flows/marketplace/marketplace_make_offer/index.html?state=countered" hidden>
         <div class="ml-person-row" style="border:0;padding:0">
           <img src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
           <span class="meta">
@@ -137,7 +138,7 @@
           
         </div>
       </a>
-      <a class="ml-notification" data-state="populated muted_banner grouped" href="/preview/flows/communication/chat_conversation/index.html">
+      <a class="ml-notification" data-state="populated muted_banner grouped" href="/preview/flows/communication/chat_conversation/index.html" hidden>
         <div class="ml-person-row" style="border:0;padding:0">
           <img src="/assets/img/editorials/3dee9cb6252a4c8f8a149c9fd40d4a9e.jpg" alt="" loading="lazy" />
           <span class="meta">
@@ -147,7 +148,7 @@
           
         </div>
       </a>
-      <a class="ml-notification" data-state="populated muted_banner grouped" href="/preview/flows/reviews/review_detail/index.html">
+      <a class="ml-notification" data-state="populated muted_banner grouped" href="/preview/flows/reviews/review_detail/index.html" hidden>
         <div class="ml-person-row" style="border:0;padding:0">
           <img src="/assets/img/editorials/4b18ab6b2f209a6f51a9d38de6d3f07f.jpg" alt="" loading="lazy" />
           <span class="meta">
@@ -157,7 +158,7 @@
           
         </div>
       </a>
-      <a class="ml-notification" data-state="populated muted_banner grouped" href="/preview/flows/portfolio/profile_project_view/index.html">
+      <a class="ml-notification" data-state="populated muted_banner grouped" href="/preview/flows/portfolio/profile_project_view/index.html" hidden>
         <div class="ml-person-row" style="border:0;padding:0">
           <img src="/assets/img/editorials/324eae250c23aafe52ea0ef9caab5d5f.jpg" alt="" loading="lazy" />
           <span class="meta">
@@ -167,7 +168,7 @@
           
         </div>
       </a>
-      <a class="ml-notification" data-state="populated muted_banner grouped" href="/preview/flows/user_settings/app_version/index.html">
+      <a class="ml-notification" data-state="populated muted_banner grouped" href="/preview/flows/user_settings/app_version/index.html" hidden>
         <div class="ml-person-row" style="border:0;padding:0">
           <img src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" loading="lazy" />
           <span class="meta">
@@ -180,7 +181,7 @@
 
       <!-- Grouping: low-value repetition collapses to one row. Payments,
            bookings and security never do. -->
-      <a class="ml-notification" data-state="grouped" href="/preview/flows/communication/collaborators_tab/index.html">
+      <a class="ml-notification" data-state="grouped" href="/preview/flows/communication/collaborators_tab/index.html" hidden>
         <div class="ml-person-row" style="border:0;padding:0">
           <span class="ml-facepile">
             <img src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
@@ -192,7 +193,7 @@
         </div>
       </a>
 
-      <div class="ml-empty" data-state="push_denied">
+      <div class="ml-empty" data-state="push_denied" hidden>
         <h2 class="ml-empty__title">Notifications are turned off</h2>
         <p class="ml-empty__body">
           You'll still see everything here, but nothing will reach your phone. Turn them on
@@ -201,18 +202,18 @@
         <a class="ml-btn ml-btn--primary" href="/preview/flows/notifications/notification_settings/index.html">Notification settings</a>
       </div>
 
-      <div class="ml-empty" data-state="offline">
+      <div class="ml-empty" data-state="offline" hidden>
         <h2 class="ml-empty__title">You're offline</h2>
         <p class="ml-empty__body">These are the notifications we had already loaded. Anything new will arrive when you reconnect.</p>
       </div>
 
-      <div class="ml-empty" data-state="error">
+      <div class="ml-empty" data-state="error" hidden>
         <h2 class="ml-empty__title">We couldn't load your notifications</h2>
         <p class="ml-empty__body">Nothing has been lost — try again in a moment.</p>
         <a class="ml-btn ml-btn--primary" href="?state=populated">Retry</a>
       </div>
 
-      <div class="ml-empty" data-state="empty">
+      <div class="ml-empty" data-state="empty" hidden>
         <h2 class="ml-empty__title">Nothing new</h2>
         <p class="ml-empty__body">Messages, booking updates and opportunity news land here.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/discover/discover_feed/index.html">Go to Discover</a>

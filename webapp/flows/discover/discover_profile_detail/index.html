@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
@@ -24,13 +25,13 @@
   <div class="ml-app">
     <main class="ml-app__body" style="padding-inline:0">
       <div class="ml-hero">
-        <img src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" />
+        <span class="ml-media-placeholder" role="img" aria-label="Discover category — no photograph yet"><svg class="ml-icon ml-icon--4" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-briefcase"/></svg></span>
         <div style="position:absolute;z-index:1;top:calc(var(--space-2) + var(--safe-top));left:var(--space-2);right:var(--space-2);display:flex;justify-content:space-between">
           <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/discover/people_talent/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
           <button class="ml-icon-btn" aria-label="Save to your list">
-            <svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M18 14a6 6 0 0 0-2.75-5.04V2.37A2.5 2.5 0 0 0 17 0H7a2.5 2.5 0 0 0 1.75 2.37v6.6A6 6 0 0 0 6 14h5v7.56c0 .95.38 1.8 1 2.44.62-.63 1-1.5 1-2.44V14z"/></svg>
+            <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-pin-tack"/></svg>
           </button>
         </div>
         <div class="ml-hero__body">
@@ -38,7 +39,7 @@
           <h1 class="ml-hero__name" style="margin-top:var(--space-2)">Rahul Iyer</h1>
           <div class="ml-hero__sub">Producer · Mix Engineer · Andheri West, Mumbai</div>
           <div class="ml-hero__stats">
-            <span><b>8.1k</b> followers</span><span><b>★ 4.8</b> (126)</span><span><b>94%</b> match</span>
+            <span><b>8.1k</b> followers</span><span><b><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-star"/></svg> 4.8</b> (126)</span><span><b>94%</b> match</span>
           </div>
         </div>
       </div>
@@ -48,6 +49,7 @@
           <a class="ml-btn ml-btn--primary" href="/preview/flows/communication/chat_conversation/index.html">Message</a>
           <button class="ml-btn ml-btn--secondary">Follow</button>
           <a class="ml-btn ml-btn--secondary" href="/preview/flows/discover/service_detail/index.html">Hire</a>
+        <a class="ml-btn ml-btn--ghost" href="/preview/flows/public_profile/public_profile_view_talent/index.html">View full profile</a>
         </div>
 
         <p class="ml-type-2" style="margin:0 0 var(--space-3)">Twelve years mixing Hindi and Punjabi film music. Neve desk, Dolby Atmos certified. Happiest on a fast turnaround.</p>
@@ -59,7 +61,7 @@
         <section class="ml-section-block"><div class="ml-section"><h2>Listen</h2></div>
         <div class="ml-player ml-card" style="padding:var(--space-2) var(--space-3)">
           <button class="ml-player__btn" aria-label="Play showreel">
-            <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22.62 9.48 8.63.48A3 3 0 0 0 4 3v18a3 3 0 0 0 4.63 2.52l14-9a3 3 0 0 0 0-5.04"/></svg>
+            <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-play"/></svg>
           </button>
           <div class="ml-player__wave" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
             <span class="ml-player__bar is-played" style="height:18%"></span><span class="ml-player__bar is-played" style="height:49%"></span><span class="ml-player__bar is-played" style="height:80%"></span><span class="ml-player__bar is-played" style="height:47%"></span><span class="ml-player__bar is-played" style="height:78%"></span><span class="ml-player__bar is-played" style="height:45%"></span><span class="ml-player__bar is-played" style="height:76%"></span><span class="ml-player__bar is-played" style="height:43%"></span><span class="ml-player__bar is-played" style="height:74%"></span><span class="ml-player__bar" style="height:41%"></span><span class="ml-player__bar" style="height:72%"></span><span class="ml-player__bar" style="height:39%"></span><span class="ml-player__bar" style="height:70%"></span><span class="ml-player__bar" style="height:37%"></span><span class="ml-player__bar" style="height:68%"></span><span class="ml-player__bar" style="height:35%"></span><span class="ml-player__bar" style="height:66%"></span><span class="ml-player__bar" style="height:33%"></span><span class="ml-player__bar" style="height:64%"></span><span class="ml-player__bar" style="height:31%"></span><span class="ml-player__bar" style="height:62%"></span><span class="ml-player__bar" style="height:29%"></span><span class="ml-player__bar" style="height:60%"></span><span class="ml-player__bar" style="height:27%"></span><span class="ml-player__bar" style="height:58%"></span><span class="ml-player__bar" style="height:25%"></span><span class="ml-player__bar" style="height:56%"></span><span class="ml-player__bar" style="height:23%"></span><span class="ml-player__bar" style="height:54%"></span><span class="ml-player__bar" style="height:21%"></span><span class="ml-player__bar" style="height:52%"></span><span class="ml-player__bar" style="height:19%"></span><span class="ml-player__bar" style="height:50%"></span><span class="ml-player__bar" style="height:81%"></span><span class="ml-player__bar" style="height:48%"></span><span class="ml-player__bar" style="height:79%"></span><span class="ml-player__bar" style="height:46%"></span><span class="ml-player__bar" style="height:77%"></span><span class="ml-player__bar" style="height:44%"></span><span class="ml-player__bar" style="height:75%"></span>

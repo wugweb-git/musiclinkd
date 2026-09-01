@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,13 +17,14 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
     <header class="ml-navbar"><a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/portfolio/select_role/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a><span class="ml-navbar__spacer"></span><div class="ml-steps">
         <span class="ml-steps__label">5/9</span>
         <span class="ml-steps__track"><span class="ml-steps__fill" style="width:56%"></span></span>
@@ -35,14 +36,14 @@
       </div>
 
       <div class="ml-search">
-        <svg class="ml-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-search-outline"/></svg>
         <input type="search" placeholder="Search musicians by name" aria-label="Search collaborators" />
       </div>
 
-      <div class="ml-chip-wrap" data-state="selected">
+      <div class="ml-chip-wrap" data-state="selected" hidden>
         <span class="ml-badge ml-badge--accent ml-badge--removable">Arijit Sen<button class="ml-badge__remove" aria-label="Remove Arijit Sen">×</button></span>
       </div>
-      <p class="ml-type-1" style="color:var(--color-muted)" data-state="searching">Start typing to find collaborators already on MusicLinkd.</p>
+      <p class="ml-type-1" style="color:var(--color-muted)" data-state="searching" data-state-default>Start typing to find collaborators already on MusicLinkd.</p>
 
       <div>
         <button class="ml-choice" aria-checked="true" role="checkbox">
@@ -51,7 +52,7 @@
             <span class="ml-choice__title">Arijit Sen</span>
             <span class="ml-choice__meta">Singer · Composer · Mumbai, MH</span>
           </span>
-          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <span class="ml-choice__mark"><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check-light"/></svg></span>
         </button>
         <button class="ml-choice" aria-checked="false" role="checkbox">
           <img class="ml-avatar" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=120" alt="" />
@@ -59,7 +60,7 @@
             <span class="ml-choice__title">Mehek Kapoor</span>
             <span class="ml-choice__meta">Session Guitarist · Pune, MH</span>
           </span>
-          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <span class="ml-choice__mark"><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check-light"/></svg></span>
         </button>
       </div>
     </main>

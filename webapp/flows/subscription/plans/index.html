@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,26 +17,27 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/user_settings/account_settings/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0;flex:1">Plans</h1>
       <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
-      <div class="ml-banner ml-banner--info" data-state="default free pro business">
+      <div class="ml-banner ml-banner--info" data-state="default free pro business" data-state-default>
         <span class="ml-banner__body">You're on Free. Nothing here charges you until you choose it.</span>
       </div>
 
       <!-- Comparison. Every row is a real capability, not a checkmark grid. -->
-      <div class="ml-tiers" data-state="default">
+      <div class="ml-tiers" data-state="default" data-state-default>
         <a class="ml-tier" href="?state=free">
           <b>Free</b>
           <span class="ml-value">₹0</span>
@@ -63,12 +64,12 @@
         </a>
       </div>
 
-      <p class="ml-type-1" data-state="default" style="color:var(--color-muted);margin-top:var(--space-2)">
+      <p class="ml-type-1" data-state="default" style="color:var(--color-muted);margin-top:var(--space-2)" data-state-default>
         Prices include GST. You can change or cancel at any time, and cancelling takes one tap
         from Manage subscription.
       </p>
 
-      <div data-state="free">
+      <div data-state="free" hidden>
         <section class="ml-section-block"><div class="ml-section"><h2>Free</h2></div>
         <p class="ml-type-4" style="margin:0">₹0 <span class="ml-type-1" style="color:var(--color-muted)">Always</span></p></section>
         <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>What you get</h3></div>
@@ -83,7 +84,7 @@
           Free is a real plan, not a trial. It does not expire.
         </p></section>
       </div>
-      <div data-state="pro">
+      <div data-state="pro" hidden>
         <section class="ml-section-block"><div class="ml-section"><h2>Pro</h2></div>
         <p class="ml-type-4" style="margin:0">₹499 <span class="ml-type-1" style="color:var(--color-muted)">per month</span></p></section>
         <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>What you get</h3></div>
@@ -97,7 +98,7 @@
         </div>
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/subscription/checkout/index.html">Choose Pro</a></section>
       </div>
-      <div data-state="business">
+      <div data-state="business" hidden>
         <section class="ml-section-block"><div class="ml-section"><h2>Business</h2></div>
         <p class="ml-type-4" style="margin:0">₹1,499 <span class="ml-type-1" style="color:var(--color-muted)">per month</span></p></section>
         <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>What you get</h3></div>
@@ -113,7 +114,7 @@
       </div>
 
       <!-- Trial, only described where one genuinely exists. -->
-      <div data-state="trial">
+      <div data-state="trial" hidden>
         <div class="ml-banner ml-banner--info">
           <span class="ml-banner__body">You're on a Pro trial. It ends on 14 September.</span>
         </div>
@@ -130,7 +131,7 @@
 
       <!-- A promotion states the real price beside the offer price and a real
            end date. No countdown, no invented scarcity. -->
-      <div data-state="promotion">
+      <div data-state="promotion" hidden>
         <section class="ml-section-block"><div class="ml-section"><h2>Launch pricing</h2></div>
         <div class="ml-summary">
           <div class="ml-summary__row"><span>Pro, normally</span><span>₹499/month</span></div>
@@ -145,7 +146,7 @@
 
       <!-- Reached a limit. Say WHICH limit, what lifts it, and nothing else
            stops working. -->
-      <div data-state="feature_limit">
+      <div data-state="feature_limit" hidden>
         <div class="ml-banner ml-banner--warning">
           <span class="ml-banner__body">You've used all 3 portfolio pieces on Free.</span>
         </div>

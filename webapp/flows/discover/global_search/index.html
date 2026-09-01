@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
@@ -24,10 +25,10 @@
   <div class="ml-app">
     <header class="ml-navbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/discover/discover_feed/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <div class="ml-search" style="flex:1">
-        <span class="ml-search__icon"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg></span>
+        <span class="ml-search__icon"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-search"/></svg></span>
         <input type="search" placeholder="Search talent, studios, projects…" aria-label="Search MusicLinkd" autofocus />
       </div>
     </header>
@@ -38,14 +39,14 @@
       <h1 class="ml-visually-hidden">Search MusicLinkd</h1>
 
       <!-- idle: recent + suggested -->
-      <div data-state="idle">
+      <div data-state="idle" data-state-default>
         <section class="ml-section-block"><div class="ml-section"><h2>Recent</h2></div>
         <a class="ml-suggest" href="/preview/flows/discover/search_results/index.html">
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.06 17.06a1.5 1.5 0 0 1-2.12 0l-4.44-4.44V6a1.5 1.5 0 0 1 3 0v5.38l3.56 3.56a1.5 1.5 0 0 1 0 2.12M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-clock"/></svg>
           <span class="ml-suggest__body">mix engineer mumbai</span>
         </a>
         <a class="ml-suggest" href="/preview/flows/discover/search_results/index.html">
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.06 17.06a1.5 1.5 0 0 1-2.12 0l-4.44-4.44V6a1.5 1.5 0 0 1 3 0v5.38l3.56 3.56a1.5 1.5 0 0 1 0 2.12M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-clock"/></svg>
           <span class="ml-suggest__body">jam room andheri</span>
         </a></section>
 
@@ -57,14 +58,14 @@
       </div>
 
       <!-- typing: live suggestions across dimensions -->
-      <div data-state="typing">
+      <div data-state="typing" hidden>
         <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-2) 0">Results for "mix"</p>
         <a class="ml-suggest" href="/preview/flows/discover/search_results/index.html">
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-search"/></svg>
           <span class="ml-suggest__body">mix engineer<span class="ml-suggest__kind">in People</span></span>
         </a>
         <a class="ml-suggest" href="/preview/flows/discover/services/index.html">
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-search"/></svg>
           <span class="ml-suggest__body">mixing &amp; mastering<span class="ml-suggest__kind">in Services</span></span>
         </a>
         <a class="ml-suggest" href="/preview/flows/discover/discover_profile_detail/index.html">
@@ -74,7 +75,7 @@
       </div>
 
       <!-- no_results -->
-      <div class="ml-empty" data-state="no_results">
+      <div class="ml-empty" data-state="no_results" hidden>
         <h2 class="ml-empty__title">Nothing found</h2>
         <p class="ml-empty__body">Try a different spelling, or browse by category instead.</p>
         <a class="ml-btn ml-btn--secondary" href="/preview/flows/discover/discover_feed/index.html">Browse Discover</a>

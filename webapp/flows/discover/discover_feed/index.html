@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
@@ -29,28 +30,28 @@
       </div>
       <div class="ml-appbar__actions">
         <a class="ml-icon-btn" href="/preview/flows/discover/saved_profiles/index.html" aria-label="Saved">
-          <svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M18 14a6 6 0 0 0-2.75-5.04V2.37A2.5 2.5 0 0 0 17 0H7a2.5 2.5 0 0 0 1.75 2.37v6.6A6 6 0 0 0 6 14h5v7.56c0 .95.38 1.8 1 2.44.62-.63 1-1.5 1-2.44V14z"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-pin-tack"/></svg>
         </a>
         <a class="ml-icon-btn" href="/preview/flows/discover/nearby/index.html" aria-label="Nearby">
-          <svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a8 8 0 0 1 6.92 12L12 24 5.08 12a7.95 7.95 0 0 1 1.26-9.66A8 8 0 0 1 12 0m0 10.75a2.75 2.75 0 1 0 0-5.5 2.75 2.75 0 0 0 0 5.5"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-pin"/></svg>
         </a>
       </div>
     </header>
 
     <main class="ml-app__body">
       <a class="ml-search" href="/preview/flows/discover/global_search/index.html" style="text-decoration:none;color:inherit">
-        <span class="ml-search__icon"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg></span>
+        <span class="ml-search__icon"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-search"/></svg></span>
         <span style="flex:1;color:var(--color-muted);font-size:var(--type-2)">Search talent, studios, projects…</span>
         <span class="ml-search__divider"></span>
         <span class="ml-icon-btn ml-icon-btn--bare" aria-hidden="true" style="min-width:24px;min-height:24px;border:0">
-          <svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a5 5 0 0 0-5 5v6a5 5 0 0 0 10 0V5a5 5 0 0 0-5-5M5.5 11.5a1.5 1.5 0 0 0-3 0 9 9 0 0 0 8 8.94v2.06a1.5 1.5 0 1 0 3 0v-2.06a9 9 0 0 0 8-8.94 1.5 1.5 0 0 0-3 0 6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-mic"/></svg>
         </span>
       </a>
 
       <section class="ml-section-block"><div class="ml-section"><h2>What are you looking for?</h2></div>
       <div class="ml-dimension-grid">
         <a class="ml-dimension" href="/preview/flows/discover/people_talent/index.html">
-          <img src="/assets/img/editorials/c148e6ee64619796d9ef250e1b9f22d9.jpg" alt="" />
+          <span class="ml-media-placeholder" role="img" aria-label="Discover category — no photograph yet"><svg class="ml-icon ml-icon--4" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-briefcase"/></svg></span>
           <span class="ml-dimension__label">People<span class="ml-dimension__count">12,400 artists</span></span>
         </a>
         <a class="ml-dimension" href="/preview/flows/discover/studios_spaces/index.html">
@@ -84,7 +85,7 @@
         <a class="ml-result" href="/preview/flows/discover/discover_profile_detail/index.html">
           <img class="ml-result__thumb" src="/assets/img/editorials/324eae250c23aafe52ea0ef9caab5d5f.jpg" alt="" />
           <span class="ml-result__body">
-            <span class="ml-result__name">Rahul Iyer<span class="ml-verified" aria-label="Verified"><svg width="10" height="10" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span></span>
+            <span class="ml-result__name">Rahul Iyer<span class="ml-verified" aria-label="Verified"><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check"/></svg></span></span>
             <span class="ml-result__meta">Producer · Mix Engineer · Mumbai</span>
           </span>
           <span class="ml-result__trail"><span class="ml-match">
@@ -152,7 +153,7 @@
           <div class="ml-studio-card__body">
             <div class="ml-studio-card__name">Andheri Live Room</div>
             <div class="ml-studio-card__loc">Andheri East · 1.4 km</div>
-            <div class="ml-studio-card__meta"><span>★ 4.4 (52)</span><span class="ml-studio-card__price">Jam room</span></div>
+            <div class="ml-studio-card__meta"><span><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-star"/></svg> 4.4 (52)</span><span class="ml-studio-card__price">Jam room</span></div>
           </div>
         </a>
         <a class="ml-studio-card" href="/preview/flows/discover/studio_profile_discover/index.html">
@@ -160,7 +161,7 @@
           <div class="ml-studio-card__body">
             <div class="ml-studio-card__name">Blue Note Recording Co.</div>
             <div class="ml-studio-card__loc">Bandra · 3.2 km</div>
-            <div class="ml-studio-card__meta"><span>★ 4.6 (94)</span><span class="ml-studio-card__price">Recording</span></div>
+            <div class="ml-studio-card__meta"><span><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-star"/></svg> 4.6 (94)</span><span class="ml-studio-card__price">Recording</span></div>
           </div>
         </a>
       </div></section>
@@ -173,7 +174,7 @@
         <a class="ml-result" href="/preview/flows/discover/discover_profile_detail/index.html">
           <img class="ml-result__thumb" src="/assets/img/editorials/0b7348ff4eeab75b4ebf24e5e05bfef6.jpg" alt="" />
           <span class="ml-result__body">
-            <span class="ml-result__name">Ananya Sharma<span class="ml-verified" aria-label="Verified"><svg width="10" height="10" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span></span>
+            <span class="ml-result__name">Ananya Sharma<span class="ml-verified" aria-label="Verified"><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check"/></svg></span></span>
             <span class="ml-result__meta">Playback Vocalist · joined 3 weeks ago</span>
           </span>
           <span class="ml-result__trail"><span class="ml-status ml-status--success">Available</span></span>
@@ -190,23 +191,23 @@
     </main>
     <nav class="ml-tabbar" aria-label="Primary">
       <a class="ml-tabbar__item" href="/preview/flows/discover/trending_recommended_sections/index.html">
-        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0 1 10v14h8v-7a3 3 0 1 1 6 0v7h8V10z"/></svg></span>
+        <span class="ml-tabbar__icon"><svg class="ml-icon ml-icon--3" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-home"/></svg></span>
         Home
       </a>
       <span class="ml-tabbar__item" aria-current="page">
-        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.87 12.9a1.25 1.25 0 1 0-.89.37q.52-.01.89-.37m2.27 1.13A2 2 0 0 1 14 15.16l-8.38 3.22L8.84 10a2 2 0 0 1 1.13-1.13l8.61-3.45zm5.35-10.52A12 12 0 1 0 3.52 20.48 12 12 0 0 0 20.49 3.52z"/></svg></span>
+        <span class="ml-tabbar__icon"><svg class="ml-icon ml-icon--3" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-compass"/></svg></span>
         Discover
       </span>
       <a class="ml-tabbar__item" href="/preview/flows/communication/networking_feed/index.html">
-        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a11 11 0 0 0-8.52 17.95l-1.46 5.43a.5.5 0 0 0 .73.55l5.08-2.75A10.98 10.98 0 0 0 23 11 11 11 0 0 0 12 0"/></svg></span>
+        <span class="ml-tabbar__icon"><svg class="ml-icon ml-icon--3" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-message"/></svg></span>
         Connections
       </a>
       <a class="ml-tabbar__item" href="/preview/flows/marketplace/marketplace_browse/index.html">
-        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.25.25a6 6 0 0 0-6 6V7H2.5L1.01 17.13A6 6 0 0 0 6.95 24h10.1A6 6 0 0 0 23 17.13L21.5 7h-3.25v-.75a6 6 0 0 0-6-6M9.75 7v-.75a2.5 2.5 0 1 1 5 0V7z"/></svg></span>
+        <span class="ml-tabbar__icon"><svg class="ml-icon ml-icon--3" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-bag"/></svg></span>
         Market<span class="ml-tabbar__beta">Beta</span>
       </a>
       <a class="ml-tabbar__item" href="/preview/flows/profile_management/profile_overview/index.html">
-        <span class="ml-tabbar__icon"><svg width="22" height="22" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.5 5.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0M2 22a10 10 0 1 1 20 0v2H2z"/></svg></span>
+        <span class="ml-tabbar__icon"><svg class="ml-icon ml-icon--3" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-person"/></svg></span>
         Profile
       </a>
     </nav>

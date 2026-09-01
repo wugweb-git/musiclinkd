@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,22 +17,23 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
+    <header class="ml-appbar">
       <h1 class="ml-type-3" style="margin:0">What you've posted</h1>
       <span class="ml-appbar__actions">
-        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/opportunities/create_opportunity/index.html" aria-label="Post an opportunity"><svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22 10h-8V2a2 2 0 0 0-4 0v8H2a2 2 0 0 0 0 4h8v8a2 2 0 0 0 4 0v-8h8a2 2 0 0 0 0-4"/></svg></a>
+        <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/opportunities/create_opportunity/index.html" aria-label="Post an opportunity"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-plus"/></svg></a>
       </span>
     </header>
     <nav class="ml-tabs ml-tabs--fill" role="tablist" aria-label="Your opportunities" style="margin:0 var(--space-4)">
       <a class="ml-tabs__tab" role="tab" data-chip="posted" href="?state=posted">Live</a><a class="ml-tabs__tab" role="tab" data-chip="drafts" href="?state=drafts">Drafts</a><a class="ml-tabs__tab" role="tab" data-chip="closed" href="?state=closed">Closed</a>
     </nav>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <a class="ml-application-card" data-state="posted" href="/preview/flows/opportunities/manage_applicants/index.html">
+      <a class="ml-application-card" data-state="posted" href="/preview/flows/opportunities/manage_applicants/index.html" data-state-default>
         <div class="ml-application-card__body">
           <span class="ml-application-card__title">Session vocalist — Hindi pop EP</span>
           <span class="ml-application-card__meta">3 applicants · closes in 3 days</span>
@@ -41,7 +42,7 @@
           <span class="ml-status ml-status--success">Live</span>
         </div>
       </a>
-      <a class="ml-application-card" data-state="posted" href="/preview/flows/opportunities/manage_applicants/index.html">
+      <a class="ml-application-card" data-state="posted" href="/preview/flows/opportunities/manage_applicants/index.html" data-state-default>
         <div class="ml-application-card__body">
           <span class="ml-application-card__title">Live drummer — 6-city club tour</span>
           <span class="ml-application-card__meta">11 applicants · closes in 11 days</span>
@@ -50,7 +51,7 @@
           <span class="ml-status ml-status--success">Live</span>
         </div>
       </a>
-      <a class="ml-application-card" data-state="drafts" href="/preview/flows/opportunities/create_opportunity/index.html">
+      <a class="ml-application-card" data-state="drafts" href="/preview/flows/opportunities/create_opportunity/index.html" hidden>
         <div class="ml-application-card__body">
           <span class="ml-application-card__title">Mixing engineer — indie rock album</span>
           <span class="ml-application-card__meta">Not posted · saved 28 Aug</span>
@@ -59,7 +60,7 @@
           <span class="ml-status">Draft</span>
         </div>
       </a>
-      <a class="ml-application-card" data-state="closed" href="/preview/flows/opportunities/opportunity_detail/index.html">
+      <a class="ml-application-card" data-state="closed" href="/preview/flows/opportunities/opportunity_detail/index.html" hidden>
         <div class="ml-application-card__body">
           <span class="ml-application-card__title">Cover art & visualiser</span>
           <span class="ml-application-card__meta">Filled by Priya Iyer · closed 20 Aug</span>
@@ -68,7 +69,7 @@
           <span class="ml-status">Filled</span>
         </div>
       </a>
-      <a class="ml-application-card" data-state="closed" href="/preview/flows/opportunities/opportunity_detail/index.html">
+      <a class="ml-application-card" data-state="closed" href="/preview/flows/opportunities/opportunity_detail/index.html" hidden>
         <div class="ml-application-card__body">
           <span class="ml-application-card__title">Keys session — jazz trio</span>
           <span class="ml-application-card__meta">Expired with no hire · 28 Jul</span>
@@ -78,7 +79,7 @@
         </div>
       </a>
 
-      <div class="ml-empty" data-state="empty">
+      <div class="ml-empty" data-state="empty" hidden>
         <h2 class="ml-empty__title">You haven't posted anything</h2>
         <p class="ml-empty__body">Posting takes a couple of minutes, and you can save a draft first.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/opportunities/create_opportunity/index.html">Post an opportunity</a>

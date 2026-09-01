@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,14 +17,15 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/notifications/notification_settings/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">By category</h1>
     </header>
@@ -32,7 +33,7 @@
       <a class="ml-tabs__tab" role="tab" data-chip="messages" href="?state=messages">Messages</a><a class="ml-tabs__tab" role="tab" data-chip="bookings" href="?state=bookings">Bookings</a><a class="ml-tabs__tab" role="tab" data-chip="marketplace" href="?state=marketplace">Market</a><a class="ml-tabs__tab" role="tab" data-chip="opportunities" href="?state=opportunities">Opportunities</a><a class="ml-tabs__tab" role="tab" data-chip="system" href="?state=system">System</a>
     </nav>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div data-state="default">
+      <div data-state="default" data-state-default>
         <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Choose what you're told about, and how. Anything switched off here still appears
           in your notification list — it just doesn't reach your phone or inbox.
@@ -42,39 +43,39 @@
           <span class="ml-choice__title">Messages</span>
           <span class="ml-choice__meta">2 of 3 on</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="?state=bookings">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Bookings</span>
           <span class="ml-choice__meta">5 of 5 on</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="?state=marketplace">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Market</span>
           <span class="ml-choice__meta">3 of 4 on</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="?state=opportunities">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Opportunities</span>
           <span class="ml-choice__meta">3 of 4 on</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="?state=system">
         <span class="ml-choice__body">
           <span class="ml-choice__title">System</span>
           <span class="ml-choice__meta">2 of 4 on</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
       </div>
 
-      <div data-state="messages">
+      <div data-state="messages" hidden>
         <div class="ml-section"><h2>Messages</h2></div>
         <div class="ml-check-row">
           <span class="ml-choice__body">
@@ -99,7 +100,7 @@
         </div>
         
       </div>
-      <div data-state="bookings">
+      <div data-state="bookings" hidden>
         <div class="ml-section"><h2>Bookings</h2></div>
         <div class="ml-check-row">
           <span class="ml-choice__body">
@@ -138,7 +139,7 @@
         </div>
         
       </div>
-      <div data-state="marketplace">
+      <div data-state="marketplace" hidden>
         <div class="ml-section"><h2>Market</h2></div>
         <div class="ml-check-row">
           <span class="ml-choice__body">
@@ -170,7 +171,7 @@
         </div>
         
       </div>
-      <div data-state="opportunities">
+      <div data-state="opportunities" hidden>
         <div class="ml-section"><h2>Opportunities</h2></div>
         <div class="ml-check-row">
           <span class="ml-choice__body">
@@ -202,7 +203,7 @@
         </div>
         
       </div>
-      <div data-state="system">
+      <div data-state="system" hidden>
         <div class="ml-section"><h2>System</h2></div>
         <div class="ml-check-row">
           <span class="ml-choice__body">

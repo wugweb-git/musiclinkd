@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,13 +17,14 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
     <header class="ml-navbar"><a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/auth/registration_write/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a><span class="ml-navbar__spacer"></span><div class="ml-steps">
         <span class="ml-steps__label">1/13</span>
         <span class="ml-steps__track"><span class="ml-steps__fill" style="width:8%"></span></span>
@@ -35,44 +36,44 @@
       </div>
       <div role="radiogroup" aria-label="Primary role">
         <button class="ml-choice" role="radio" aria-checked="true">
-          <span class="ml-emoji" aria-hidden="true">🎤</span>
+          <span class="ml-emoji" aria-hidden="true"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-mic"/></svg></span>
           <span class="ml-choice__body">
             <span class="ml-choice__title">Singer / Vocalist</span>
             <span class="ml-choice__meta">Lead or backing vocals</span>
           </span>
-          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <span class="ml-choice__mark"><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check-light"/></svg></span>
         </button>
         <button class="ml-choice" role="radio" aria-checked="false">
-          <span class="ml-emoji" aria-hidden="true">🎙️</span>
+          <span class="ml-emoji" aria-hidden="true"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-mic"/></svg></span>
           <span class="ml-choice__body">
             <span class="ml-choice__title">Rapper / MC</span>
             <span class="ml-choice__meta">Hip-hop, rap, spoken word</span>
           </span>
-          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <span class="ml-choice__mark"><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check-light"/></svg></span>
         </button>
         <button class="ml-choice" role="radio" aria-checked="false">
-          <span class="ml-emoji" aria-hidden="true">🧑‍🎤</span>
+          <span class="ml-emoji" aria-hidden="true"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-vocalist"/></svg></span>
           <span class="ml-choice__body">
             <span class="ml-choice__title">Folk Vocalist</span>
             <span class="ml-choice__meta">Traditional &amp; folk performance</span>
           </span>
-          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <span class="ml-choice__mark"><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check-light"/></svg></span>
         </button>
         <button class="ml-choice" role="radio" aria-checked="false">
-          <span class="ml-emoji" aria-hidden="true">🎸</span>
+          <span class="ml-emoji" aria-hidden="true"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-guitar"/></svg></span>
           <span class="ml-choice__body">
             <span class="ml-choice__title">Guitarist</span>
             <span class="ml-choice__meta">Acoustic, electric, bass</span>
           </span>
-          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <span class="ml-choice__mark"><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check-light"/></svg></span>
         </button>
         <button class="ml-choice" role="radio" aria-checked="false">
-          <span class="ml-emoji" aria-hidden="true">🎹</span>
+          <span class="ml-emoji" aria-hidden="true"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-piano"/></svg></span>
           <span class="ml-choice__body">
             <span class="ml-choice__title">Keyboardist / Pianist</span>
             <span class="ml-choice__meta">Keys, piano, synthesis</span>
           </span>
-          <span class="ml-choice__mark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <span class="ml-choice__mark"><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check-light"/></svg></span>
         </button>
       </div>
       <p class="ml-type-1" style="color:var(--color-muted)">Your role is sourced from the platform's 18 person types.</p>

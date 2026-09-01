@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,42 +17,43 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/band/band_profile_layout/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0;flex:1">Band settings</h1>
       <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
-      <div data-state="default">
+      <div data-state="default" data-state-default>
         <section class="ml-section-block"><div class="ml-section"><h2>Band</h2></div>
         <a class="ml-action-row" href="/preview/flows/band/band_create/index.html?state=identity">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Identity</span>
           <span class="ml-choice__meta">Name, genre, city, about</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="/preview/flows/band/ensemble_lineup/index.html?state=roles">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Members and roles</span>
           <span class="ml-choice__meta">4 members</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="?state=privacy">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Privacy</span>
           <span class="ml-choice__meta">Public</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a></section>
 
         <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Leaving</h2></div>
@@ -61,7 +62,7 @@
           <span class="ml-choice__title">Leave this band</span>
           <span class="ml-choice__meta">You stay on MusicLinkd; the band continues</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a></section>
 
         <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Danger zone</h2></div>
@@ -70,11 +71,11 @@
             <span class="ml-choice__title" style="color:var(--color-error)">Delete this band</span>
             <span class="ml-choice__meta">Only the owner can do this. Read what happens first.</span>
           </span>
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
         </a></section>
       </div>
 
-      <div data-state="privacy">
+      <div data-state="privacy" hidden>
         <section class="ml-section-block"><div class="ml-section"><h2>Who can see this band?</h2></div>
         <div role="radiogroup" aria-label="Band visibility">
           <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
@@ -101,7 +102,7 @@
         </div></section>
       </div>
 
-      <div data-state="leave">
+      <div data-state="leave" hidden>
         <section class="ml-section-block"><div class="ml-section"><h2>Leave The Kolaba Sessions?</h2></div>
         <div class="ml-summary">
           <div class="ml-summary__row"><span>Your profile</span><span>Unaffected</span></div>
@@ -113,7 +114,7 @@
         <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=default">Cancel</a></section>
       </div>
 
-      <div data-state="remove_member">
+      <div data-state="remove_member" hidden>
         <section class="ml-section-block"><div class="ml-section"><h2>Remove a member</h2></div>
         <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Removing someone is done from the line-up, so you can see who you're removing.
@@ -121,7 +122,7 @@
         <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/band/ensemble_lineup/index.html?state=remove_member">Go to line-up</a></section>
       </div>
 
-      <div data-state="delete">
+      <div data-state="delete" hidden>
         <div class="ml-banner ml-banner--error">
           <span class="ml-banner__body">Deleting a band is permanent. It cannot be undone.</span>
         </div>

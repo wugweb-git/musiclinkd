@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,13 +17,14 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
     <header class="ml-navbar"><a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/auth/mobile_auth/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a></header>
     <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3);text-align:center">
       <div>
@@ -31,7 +32,7 @@
         <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Sent to +91 98765 43210</p>
       </div>
 
-      <div class="ml-otp" role="group" aria-label="6-digit verification code" data-state="entering verifying">
+      <div class="ml-otp" role="group" aria-label="6-digit verification code" data-state="entering verifying" data-state-default>
         <span class="ml-otp__box is-filled">4</span>
         <span class="ml-otp__box is-filled">8</span>
         <span class="ml-otp__box is-filled">2</span>
@@ -39,29 +40,29 @@
         <span class="ml-otp__box"></span>
         <span class="ml-otp__box"></span>
       </div>
-      <div class="ml-otp" role="group" aria-label="6-digit verification code" data-state="error">
+      <div class="ml-otp" role="group" aria-label="6-digit verification code" data-state="error" hidden>
         <span class="ml-otp__box is-invalid">4</span><span class="ml-otp__box is-invalid">8</span><span class="ml-otp__box is-invalid">2</span><span class="ml-otp__box is-invalid">6</span>
         <span class="ml-otp__box is-invalid">1</span>
         <span class="ml-otp__box is-invalid">9</span>
       </div>
 
-      <div data-state="success">
+      <div data-state="success" hidden>
         <div class="ml-check">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <svg class="ml-icon ml-icon--4" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check-light"/></svg>
       </div>
         <p class="ml-type-2" style="margin-top:var(--space-2)">Number verified</p>
       </div>
 
-      <div class="ml-banner ml-banner--error" role="alert" data-state="error">
+      <div class="ml-banner ml-banner--error" role="alert" data-state="error" hidden>
         That code isn't right. You have 2 attempts left.
       </div>
 
-      <p class="ml-type-1" style="color:var(--color-muted)" data-state="entering error">Didn't get it? Resend in 0:24</p>
-      <div class="ml-spinner" style="margin:0 auto" data-state="verifying"></div>
+      <p class="ml-type-1" style="color:var(--color-muted)" data-state="entering error" data-state-default>Didn't get it? Resend in 0:24</p>
+      <div class="ml-spinner" style="margin:0 auto" data-state="verifying" hidden></div>
     </main>
     <footer class="ml-app__footer">
-      <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/auth/registration_write/index.html" data-state="entering error success">Verify</a>
-      <span class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" aria-disabled="true" data-state="verifying">Verifying…</span>
+      <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/auth/registration_write/index.html" data-state="entering error success" data-state-default>Verify</a>
+      <span class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" aria-disabled="true" data-state="verifying" hidden>Verifying…</span>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>
