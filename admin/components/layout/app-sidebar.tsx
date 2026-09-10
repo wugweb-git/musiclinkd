@@ -28,12 +28,14 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader>
+      <SidebarHeader className="border-b border-sidebar-border/70">
         <Link
           href="/"
-          className="flex items-center gap-2 rounded-md px-2 py-1.5 hover:bg-sidebar-accent"
+          className="flex items-center gap-2 rounded-md px-2 py-1.5 transition-colors hover:bg-sidebar-accent/10"
         >
-          <Music2 className="size-5 text-primary" />
+          <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
+            <Music2 className="size-4" />
+          </span>
           <span className="font-heading text-sm font-bold tracking-tight group-data-[collapsible=icon]:hidden">
             MusicLinkd Ops
           </span>
@@ -55,9 +57,15 @@ export function AppSidebar() {
                       <navItem.icon />
                       <span>{navItem.label}</span>
                     </SidebarMenuButton>
-                    {navItem.mock ? <SidebarMenuBadge>mock</SidebarMenuBadge> : null}
+                    {navItem.mock ? (
+                      <SidebarMenuBadge className="rounded-full bg-sidebar-accent/15 text-[10px] font-medium text-sidebar-accent">
+                        mock
+                      </SidebarMenuBadge>
+                    ) : null}
                     {isNavModuleDisabled(navItem.key) ? (
-                      <SidebarMenuBadge className="text-destructive">disabled</SidebarMenuBadge>
+                      <SidebarMenuBadge className="rounded-full bg-destructive/10 text-[10px] font-medium text-destructive">
+                        disabled
+                      </SidebarMenuBadge>
                     ) : null}
                   </SidebarMenuItem>
                 ))}
@@ -66,12 +74,14 @@ export function AppSidebar() {
           </SidebarGroup>
         ))}
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="border-t border-sidebar-border/70">
         <SidebarMenu>
           <SidebarMenuItem>
             <div className="flex items-center gap-2 px-2 py-1.5 text-xs text-sidebar-foreground/70 group-data-[collapsible=icon]:hidden">
               <span className="truncate">{user?.email}</span>
-              <span className="ml-auto rounded bg-sidebar-accent px-1.5 py-0.5 font-medium">{role}</span>
+              <span className="ml-auto shrink-0 rounded-full bg-sidebar-accent/15 px-2 py-0.5 font-medium text-sidebar-accent">
+                {role}
+              </span>
             </div>
           </SidebarMenuItem>
           <SidebarMenuItem>

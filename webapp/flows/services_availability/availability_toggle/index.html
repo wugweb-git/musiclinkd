@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,14 +17,15 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/services_availability/service_offerings_editor/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">Availability</h1>
     </header>
@@ -44,28 +45,28 @@
         <a class="ml-chip" data-chip="unavailable" href="?state=unavailable">Unavailable</a>
       </div>
 
-      <div data-state="available_now" style="margin-top:var(--space-3)">
+      <div data-state="available_now" style="margin-top:var(--space-3)" data-state-default>
         <span class="ml-status ml-status--success">Available now</span>
         <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">You appear at the top of Discover and can be booked today.</p>
       </div>
-      <div data-state="open_for_gigs" style="margin-top:var(--space-3)">
+      <div data-state="open_for_gigs" style="margin-top:var(--space-3)" hidden>
         <span class="ml-status ml-status--accent">Open for gigs</span>
         <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">You appear in Discover and in opportunity matches, with normal priority.</p>
       </div>
-      <div data-state="booked_soon" style="margin-top:var(--space-3)">
+      <div data-state="booked_soon" style="margin-top:var(--space-3)" hidden>
         <span class="ml-status ml-status--warning">Booked soon</span>
         <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">You still appear, marked as filling up. Requests are allowed but flagged.</p>
       </div>
-      <div data-state="on_tour" style="margin-top:var(--space-3)">
+      <div data-state="on_tour" style="margin-top:var(--space-3)" hidden>
         <span class="ml-status ml-status--neutral">On tour</span>
         <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">You appear with your tour dates. Booking requests are held until you return.</p>
       </div>
-      <div data-state="unavailable" style="margin-top:var(--space-3)">
+      <div data-state="unavailable" style="margin-top:var(--space-3)" hidden>
         <span class="ml-status ml-status--error">Unavailable</span>
         <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">Hidden from Discover. People with your link can still see your profile.</p>
       </div>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Working week</h2></div>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Working week</h2></div>
       <div class="ml-check-row">
         <span class="ml-choice__body"><span class="ml-choice__title">Monday</span>
         <span class="ml-choice__meta">10:00 – 19:00</span></span>
@@ -100,14 +101,14 @@
         <span class="ml-choice__body"><span class="ml-choice__title">Sunday</span>
         <span class="ml-choice__meta">By arrangement</span></span>
         <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Sunday"></button>
-      </div>
+      </div></section>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Blocked dates</h2>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Blocked dates</h2>
         <a class="ml-section__link" href="/preview/flows/booking/availability_calendar/index.html">Calendar</a></div>
       <div class="ml-summary">
         <div class="ml-summary__row"><span>17–18 August</span><span>On tour</span></div>
         <div class="ml-summary__row"><span>24–25 August</span><span>Personal</span></div>
-      </div>
+      </div></section>
     </main>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

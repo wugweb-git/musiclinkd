@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,36 +17,37 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/user_settings/help_center/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">Terms & privacy</h1>
     </header>
-    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
+    <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)" tabindex="0">
       <!-- The documents are sections OF this page, not four rows linking back
            to the page you are already on. -->
-      <div class="ml-section"><h2>Terms of service</h2><span class="ml-section__link">Updated 14 June 2026</span></div>
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">Using MusicLinkd means agreeing to these terms. Bookings and marketplace orders are contracts between you and the other party; we hold deposits and release them under the rules below.</p>
-      <div class="ml-section"><h2>Privacy policy</h2><span class="ml-section__link">Updated 14 June 2026</span></div>
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">We don't sell your personal data, and we don't use your uploads to train anything. Your location is shown as a city, never a precise address.</p>
-      <div class="ml-section"><h2>Community guidelines</h2></div>
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">Represent your own work. Don't post someone else's recordings, photographs or credits as your own. Harassment ends an account.</p>
-      <div class="ml-section"><h2>Marketplace rules</h2><span class="ml-section__link">Prohibited items, offers, disputes</span></div>
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">List only what you own and can ship or hand over. Offers expire after 48 hours. Disputes are held against the deposit until both sides are heard.</p>
+      <section class="ml-section-block"><div class="ml-section"><h2>Terms of service</h2><span class="ml-section__link">Updated 14 June 2026</span></div>
+      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">Using MusicLinkd means agreeing to these terms. Bookings and marketplace orders are contracts between you and the other party; we hold deposits and release them under the rules below.</p></section>
+      <section class="ml-section-block"><div class="ml-section"><h2>Privacy policy</h2><span class="ml-section__link">Updated 14 June 2026</span></div>
+      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">We don't sell your personal data, and we don't use your uploads to train anything. Your location is shown as a city, never a precise address.</p></section>
+      <section class="ml-section-block"><div class="ml-section"><h2>Community guidelines</h2></div>
+      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">Represent your own work. Don't post someone else's recordings, photographs or credits as your own. Harassment ends an account.</p></section>
+      <section class="ml-section-block"><div class="ml-section"><h2>Marketplace rules</h2><span class="ml-section__link">Prohibited items, offers, disputes</span></div>
+      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">List only what you own and can ship or hand over. Offers expire after 48 hours. Disputes are held against the deposit until both sides are heard.</p></section>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h2>In short</h2></div>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>In short</h2></div>
       <p class="ml-type-2" style="color:var(--color-muted);margin:0">
         You own the work you upload. We show it to the people you choose to show it to.
         We don't sell your personal data, and we don't use your uploads to train anything.
         Bookings and marketplace orders are contracts between you and the other party;
         we hold deposits and release them under the rules above.
-      </p>
+      </p></section>
     </main>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

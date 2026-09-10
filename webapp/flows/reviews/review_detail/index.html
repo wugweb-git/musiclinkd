@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,14 +17,15 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/reviews/review_list/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0;flex:1">Review</h1>
       <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
@@ -34,38 +35,38 @@
         <div class="ml-review-card__head">
           <img class="ml-avatar ml-avatar--sm" src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
           <b>Ishita Rao</b>
-          <span class="ml-review-card__stars">★★★★★</span>
+          <span class="ml-review-card__stars"><span class="ml-rating" role="img" aria-label="5 out of 5 stars" style="--ml-rating:100%"><i aria-hidden="true"></i></span></span>
         </div>
         <p class="ml-review-card__body">Quiet live room and a patient engineer. Got three vocal takes done inside a morning.</p>
       </article>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Ratings</h2></div>
-      <div class="ml-summary__row"><span>Communication</span><span>★★★★★</span></div>
-      <div class="ml-summary__row"><span>Punctuality</span><span>★★★★★</span></div>
-      <div class="ml-summary__row"><span>Musicianship</span><span>★★★★★</span></div>
-      <div class="ml-summary__row"><span>Value</span><span>★★★★☆</span></div>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Ratings</h2></div>
+      <div class="ml-summary__row"><span>Communication</span><span><span class="ml-rating" role="img" aria-label="5 out of 5 stars" style="--ml-rating:100%"><i aria-hidden="true"></i></span></span></div>
+      <div class="ml-summary__row"><span>Punctuality</span><span><span class="ml-rating" role="img" aria-label="5 out of 5 stars" style="--ml-rating:100%"><i aria-hidden="true"></i></span></span></div>
+      <div class="ml-summary__row"><span>Musicianship</span><span><span class="ml-rating" role="img" aria-label="5 out of 5 stars" style="--ml-rating:100%"><i aria-hidden="true"></i></span></span></div>
+      <div class="ml-summary__row"><span>Value</span><span><span class="ml-rating" role="img" aria-label="4 out of 5 stars" style="--ml-rating:80%"><i aria-hidden="true"></i></span></span></div></section>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Actions</h2></div>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Actions</h2></div>
       <a class="ml-action-row" href="/preview/flows/reviews/review_business_response/index.html">
         <span class="ml-choice__body"><span class="ml-choice__title">Reply publicly</span>
         <span class="ml-choice__meta">Your reply appears under the review</span></span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
       <a class="ml-action-row" href="/preview/flows/reviews/review_report/index.html">
         <span class="ml-choice__body"><span class="ml-choice__title">Report this review</span>
         <span class="ml-choice__meta">If it breaks the guidelines</span></span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
       <a class="ml-action-row" href="?state=edit">
         <span class="ml-choice__body"><span class="ml-choice__title">Edit your review</span>
         <span class="ml-choice__meta">Within 48 hours of posting</span></span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
 
       <!-- Editing is time-boxed and the edit is disclosed, so a review cannot
            be quietly rewritten after the fact. -->
-      <div data-state="edit">
-        <div class="ml-section"><h2>Edit your review</h2></div>
+      <div data-state="edit" hidden>
+        <section class="ml-section-block"><div class="ml-section"><h2>Edit your review</h2></div>
         <div class="ml-field">
           <label for="e-body">Your review</label>
           <textarea id="e-body" rows="4">Quiet live room and a patient engineer. Got three vocal takes done inside a morning.</textarea>
@@ -74,10 +75,10 @@
           Edited reviews are marked "edited" with the date. You can edit for 48 hours after posting.
         </p>
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Save changes</a>
-        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=delete">Delete this review instead</a>
+        <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=delete">Delete this review instead</a></section>
       </div>
 
-      <div data-state="delete">
+      <div data-state="delete" hidden>
         <div class="ml-banner ml-banner--error">
           <span class="ml-banner__body">Delete your review?</span>
         </div>
@@ -90,7 +91,7 @@
         <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=default">Keep it</a>
       </div>
 
-      <div data-state="reported">
+      <div data-state="reported" hidden>
         <div class="ml-banner ml-banner--warning">
           <span class="ml-banner__body">This review has been reported and is being checked.</span>
         </div>
@@ -98,7 +99,7 @@
           It stays visible while we look at it. A review is only removed if it breaks the
           guidelines — not because it is critical.
         </p>
-      </div>
+      </div></section>
     </main>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

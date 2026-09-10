@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { CollectionListPage } from "@/components/shared/collection-list-page";
 import { StatusBadge } from "@/components/shared/status-badge";
+import { TruncatedCell } from "@/components/shared/truncated-cell";
 import { ANALYTICS_EVENTS } from "@/config/constants";
 import { trackEvent } from "@/services/analytics";
 import { moderationFlagsRepo } from "@/services/repositories";
@@ -21,7 +22,11 @@ const columns: ColumnDef<Row>[] = [
     cell: ({ row }) => <Badge variant="outline">{row.original.data.targetType}</Badge>,
   },
   { accessorKey: "data.targetId", header: "Target ID" },
-  { accessorKey: "data.reason", header: "Reason" },
+  {
+    accessorKey: "data.reason",
+    header: "Reason",
+    cell: ({ row }) => <TruncatedCell text={row.original.data.reason} maxWidth={280} />,
+  },
   { accessorKey: "data.reportedBy", header: "Reported by" },
   {
     accessorKey: "data.status",

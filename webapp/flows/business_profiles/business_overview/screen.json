@@ -17,7 +17,12 @@
     "no_portfolio",
     "no_team",
     "no_reviews",
-    "no_availability"
+    "no_availability",
+    "owner",
+    "visible_if_owner",
+    "leads",
+    "analytics",
+    "invite"
   ],
   "collectionsTouched": [
     "users"

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
@@ -27,14 +28,14 @@
         <img src="/assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg" alt="" />
         <div style="position:absolute;z-index:1;top:calc(var(--space-2) + var(--safe-top));left:var(--space-2)">
           <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/discover/studios_spaces/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
         </div>
         <div class="ml-hero__body">
           <span class="ml-status ml-status--success">Available today</span>
           <h1 class="ml-hero__name" style="margin-top:var(--space-2)">Andheri Live Room</h1>
           <div class="ml-hero__sub">Jam room · Andheri East · 1.4 km away</div>
-          <div class="ml-hero__stats"><span><b>★ 4.4</b> (52)</span><span><b>₹3,200</b>/hr</span></div>
+          <div class="ml-hero__stats"><span><b><svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-star"/></svg> 4.4</b> (52)</span><span><b>₹3,200</b>/hr</span></div>
         </div>
       </div>
 
@@ -46,26 +47,26 @@
 
         <p class="ml-type-2" style="margin:0 0 var(--space-3)">Acoustically treated 320 sq ft room. Walk-ins welcome off-peak.</p>
 
-        <div class="ml-section"><h2>Gear</h2></div>
+        <section class="ml-section-block"><div class="ml-section"><h2>Gear</h2></div>
         <div class="ml-chip-wrap">
           <button class="ml-chip" aria-pressed="false">Pearl drum kit</button><button class="ml-chip" aria-pressed="false">Ampeg bass rig</button><button class="ml-chip" aria-pressed="false">2× Marshall</button><button class="ml-chip" aria-pressed="false">PA + 4 monitors</button><button class="ml-chip" aria-pressed="false">Shure SM58 ×4</button>
-        </div>
+        </div></section>
 
-        <div class="ml-section"><h2>Photos</h2></div>
-        <div class="ml-rail">
+        <section class="ml-section-block"><div class="ml-section"><h2>Photos</h2></div>
+        <div class="ml-rail" tabindex="0">
           <img class="ml-card" src="/assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg" alt="Live room" style="width:220px;height:140px;object-fit:cover" />
           <img class="ml-card" src="/assets/img/speakers/5e4c5a1598e10dfe9c213609ce2ab5fb.jpg" alt="Control desk" style="width:220px;height:140px;object-fit:cover" />
           <img class="ml-card" src="/assets/img/speakers/20400c2337df4ff17c3b0e72deefa4ad.jpg" alt="Booth" style="width:220px;height:140px;object-fit:cover" />
-        </div>
+        </div></section>
 
-        <div class="ml-section"><h2>Reviews</h2></div>
+        <section class="ml-section-block"><div class="ml-section"><h2>Reviews</h2></div>
         <div class="ml-card ml-card--padded">
           <div class="ml-review-card__head">
             <img class="ml-avatar ml-avatar--sm" src="/assets/img/editorials/4dcf33e3aa19ee077f4e95c2b66ae43a.jpg" alt="" />
-            <span><span class="ml-row__title">Mehek Kapoor</span><span class="ml-review-card__stars">★★★★★</span></span>
+            <span><span class="ml-row__title">Mehek Kapoor</span><span class="ml-review-card__stars"><span class="ml-rating" role="img" aria-label="5 out of 5 stars" style="--ml-rating:100%"><i aria-hidden="true"></i></span></span></span>
           </div>
           <p class="ml-review-card__body" style="margin-bottom:0">Great room for a five-piece. Booked it twice in a month.</p>
-        </div>
+        </div></section>
       </div>
     </main>
   </div>

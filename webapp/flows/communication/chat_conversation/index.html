@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,19 +17,20 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_thread_list/index.html" aria-label="Back to messages">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <img class="ml-avatar" src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
       <h1 class="ml-type-3" style="margin:0">Ishita Rao</h1>
     </header>
-    <main class="ml-app__body app-content--scroll ml-chat" style="padding:var(--space-3) var(--space-4)">
+    <main class="ml-app__body app-content--scroll ml-chat" style="padding:var(--space-3) var(--space-4)" tabindex="0">
       <div class="ml-chat__day">Today</div>
       <div class="ml-bubble ml-bubble--in">
         Hi! Are you free Tuesday for the Hindi pop session?<span class="ml-bubble__meta">10:02</span>
@@ -44,18 +45,18 @@
         Perfect — I'll bring my own mic if that helps.<span class="ml-bubble__meta">10:06</span>
       </div>
 
-      <div class="ml-bubble ml-bubble--out" data-state="sending" style="opacity:var(--opacity-3)">
+      <div class="ml-bubble ml-bubble--out" data-state="sending" style="opacity:var(--opacity-3)" hidden>
         See you Tuesday.<span class="ml-bubble__meta">Sending…</span>
       </div>
 
-      <div class="ml-bubble ml-bubble--out ml-bubble--failed" data-state="error">
+      <div class="ml-bubble ml-bubble--out ml-bubble--failed" data-state="error" hidden>
         See you Tuesday.
         <span class="ml-bubble__error">Not delivered — tap to retry</span>
       </div>
     </main>
     <footer class="ml-composer">
       <textarea rows="1" aria-label="Message" placeholder="Message Ishita…"></textarea>
-      <button class="ml-icon-btn ml-icon-btn--primary" type="button" aria-label="Send"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg></button>
+      <button class="ml-icon-btn ml-icon-btn--primary" type="button" aria-label="Send"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-send"/></svg></button>
     </footer>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

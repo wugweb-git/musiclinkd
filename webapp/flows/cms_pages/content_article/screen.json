@@ -15,7 +15,8 @@
     "archived",
     "restricted",
     "not_found",
-    "offline"
+    "offline",
+    "announcement"
   ],
   "collectionsTouched": [
     "page_content"

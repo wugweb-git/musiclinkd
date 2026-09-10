@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,21 +17,22 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/user_settings/account_settings/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">Data & privacy</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div class="ml-section"><h2>Your data</h2></div>
+      <section class="ml-section-block"><div class="ml-section"><h2>Your data</h2></div>
 
-      <div data-state="default">
+      <div data-state="default" data-state-default>
         <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-2)">
           Your export may contain your profile, portfolio, messages, bookings and account information.
           It takes a little while to prepare.
@@ -39,24 +40,24 @@
         <a class="ml-btn ml-btn--secondary ml-btn--block" href="?state=export_requested">Request data export</a>
       </div>
 
-      <div data-state="export_requested">
+      <div data-state="export_requested" hidden>
         <div class="ml-banner ml-banner--info"><span class="ml-banner__body">Export requested. We'll email you when it's ready.</span></div>
       </div>
-      <div data-state="export_processing">
+      <div data-state="export_processing" hidden>
         <div class="ml-banner ml-banner--info"><span class="ml-banner__body">Preparing your export. This usually takes a few hours.</span></div>
       </div>
-      <div data-state="export_ready">
+      <div data-state="export_ready" hidden>
         <div class="ml-banner ml-banner--success"><span class="ml-banner__body">Your data export is ready.</span></div>
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=default">Download</a>
         <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">The link expires in 7 days.</p>
       </div>
-      <div data-state="export_expired">
+      <div data-state="export_expired" hidden>
         <div class="ml-banner ml-banner--warning"><span class="ml-banner__body">That export has expired. You can request a new one.</span></div>
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=export_requested">Request again</a>
-      </div>
+      </div></section>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Personalisation</h2></div>
-      <div data-state="default personalisation">
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Personalisation</h2></div>
+      <div data-state="default personalisation" data-state-default>
         <div role="radiogroup" aria-label="Personalisation">
           <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
             <span class="ml-choice__body">
@@ -83,23 +84,23 @@
         <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
           Turning personalisation off does not turn off search — you can still find anything, it is just ordered plainly.
         </p>
-      </div>
+      </div></section>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h2>More</h2></div>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>More</h2></div>
       <a class="ml-action-row" href="/preview/flows/user_settings/privacy_settings/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Privacy settings</span>
           <span class="ml-choice__meta">Who can see you and reach you</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
       <a class="ml-action-row" href="/preview/flows/user_settings/legal_pages/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Terms and privacy</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
-      </a>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
+      </a></section>
     </main>
   </div>
   <script src="/preview/shared/app-shell.js" defer></script>

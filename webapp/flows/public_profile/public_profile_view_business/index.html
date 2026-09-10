@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,14 +17,15 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/discover/discover_feed/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">Yash Raj Sound Studios</h1>
     </header>
@@ -43,36 +44,36 @@
         
         <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">Two tracking rooms and a mix suite in Andheri West. Neve sidecar, maintained backline, and engineers who have worked on the records you have heard of.</p>
         
-        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Services</h3></div>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Services</h3></div>
         <div class="ml-summary">
           <div class="ml-summary__row"><span>Tracking</span><span>from ₹1,800/hr</span></div>
           <div class="ml-summary__row"><span>Mixing</span><span>from ₹1,200/hr</span></div>
           <div class="ml-summary__row"><span>Rehearsal</span><span>from ₹700/hr</span></div>
-        </div>
+        </div></section>
 
-        <div class="ml-section" style="margin-top:var(--space-3)"><h3>The rooms</h3></div>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>The rooms</h3></div>
         <div class="ml-rail">
-          <a class="ml-media-card" href="/preview/flows/booking/studio_profile/index.html">
+          <a class="ml-media-card" href="/preview/flows/booking/studio_profile/index.html" aria-label="Studio Profile">
             <img src="/assets/img/speakers/02e0f0a15edc103c549c136fb31c42a6.jpg" alt="" loading="lazy" />
           </a>
-          <a class="ml-media-card" href="/preview/flows/booking/studio_profile/index.html">
+          <a class="ml-media-card" href="/preview/flows/booking/studio_profile/index.html" aria-label="Studio Profile">
             <img src="/assets/img/speakers/48dcea90c715465b4dcd2ff760bfcf65.jpg" alt="" loading="lazy" />
           </a>
-          <a class="ml-media-card" href="/preview/flows/booking/studio_profile/index.html">
+          <a class="ml-media-card" href="/preview/flows/booking/studio_profile/index.html" aria-label="Studio Profile">
             <img src="/assets/img/speakers/703a51ef4eaab63412c12f2350b8fd8b.jpg" alt="" loading="lazy" />
           </a>
-        </div>
+        </div></section>
 
-        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Reviews</h3>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Reviews</h3>
           <a class="ml-section__link" href="/preview/flows/reviews/review_list/index.html">See all</a></div>
         <article class="ml-review-card">
           <div class="ml-review-card__head">
             <img class="ml-avatar ml-avatar--sm" src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
             <b>Kabir Sheth</b>
-            <span class="ml-review-card__stars">★★★★★</span>
+            <span class="ml-review-card__stars"><span class="ml-rating" role="img" aria-label="5 out of 5 stars" style="--ml-rating:100%"><i aria-hidden="true"></i></span></span>
           </div>
           <p class="ml-review-card__body">Turned up prepared, worked fast, and took direction without ego. Booked again the same week.</p>
-        </article>
+        </article></section>
       </div>
     </main>
     <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">

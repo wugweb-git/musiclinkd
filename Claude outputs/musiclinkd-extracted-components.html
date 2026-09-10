@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MusicLinkd — Extracted Components (Imagery, Swipe Deck, Advanced Layouts)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter+Tight:ital,wght@0,600;0,700;0,800;1,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   MusicLinkd — EXTRACTED COMPONENT SET
+   Source: styleguide.html (MusicLinkd Design System — Consolidated Master
+   Reference). Everything below is lifted verbatim from that file except the
+   two blocks explicitly marked GAP-FILL and "Page chrome for this extract".
+
+   Layer order:
+     1. DESIGN TOKENS   — full :root, both blocks, unmodified
+     2. GAP-FILL        — undefined-in-source names, inferred
+     3. KEYFRAMES       — all 15 animations from source
+     4. COMPONENT RULES — only rules whose selectors are used here
+     5. PAGE CHROME     — this document's own wrapper, not part of the system
+   ========================================================================== */
+
+/* ===== 1. DESIGN TOKENS (verbatim) ===================================== */
+/* ===== MASTER UNIFIED DESIGN SYSTEM CSS (SINGLE SOURCE OF TRUTH) ===== */
+:root{/* ===== 01 Foundation — raw scale primitives (color, type, spacing, sizing,
+       radius, border, opacity, shadow/elevation, motion). No meaning attached
+       yet; that's the Semantic layer below. Grouped per the 8-category token
+       architecture (Foundation/Semantic/Layout/Component/State/Interaction/
+       Responsive/Platform) that Layout/Component/State/Interaction/Responsive/
+       Platform already follow further down this block — this comment and the
+       "02 Semantic" one below are additive labels only, added to make that
+       existing structure explicit; no token values changed. ===== */
+    /* 4-token exponential scale (r=2) — every numeric category, no exceptions.
+       Legacy names below are aliases so existing usages keep working. */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 16px;
+    --space-4: 32px;
+    --radius-1: 8px;
+    --radius-2: 16px;
+    --radius-3: 32px;
+    --radius-4: 9999px; /* pill / full round */
+    --opacity-1: 0.08;
+    --opacity-2: 0.16;
+    --opacity-3: 0.32;
+    --opacity-4: 0.64;
+    --duration-1: 125ms;
+    --duration-2: 200ms;
+    --duration-3: 320ms;
+    --duration-4: 500ms;
+    /* Fluid type scale — 4 tokens, each a clamp() that scales continuously
+       between the mobile baseline (360px) and wide desktop (1440px), the
+       same span the breakpoint grid in governance.md is built on. Min/max
+       pairs step exponentially (~x1.4-1.6) like every other token category. */
+    --type-1: clamp(10px, calc(10px + 2  * (100vw - 360px) / 1080), 12px);
+    --type-2: clamp(14px, calc(14px + 4  * (100vw - 360px) / 1080), 18px);
+    --type-3: clamp(20px, calc(20px + 8  * (100vw - 360px) / 1080), 28px);
+    --type-4: clamp(28px, calc(28px + 16 * (100vw - 360px) / 1080), 44px);
+    /* 4 z-index tiers, exponential x2. Elements that must stay in strict
+       order within one tier (e.g. a drawer above its own scrim) use a small
+       calc() offset off that tier's base rather than inventing a 5th token. */
+    --z-1: 100;  /* persistent chrome: top nav */
+    --z-2: 200;  /* drawer system: scrim, sidebar, its toggle button */
+    --z-3: 400;  /* transient overlays: side sheet + modal, and their scrims */
+    --z-4: 800;  /* system feedback: toast */
+
+    /* Legacy aliases (kept so the rest of the file doesn't need a mass rewrite) */
+    --sp-xs: var(--space-1);
+    --sp-sm: var(--space-2);
+    --sp-md: var(--space-3);
+    --sp-lg: var(--space-4);
+    --sp-1: var(--space-1);
+    --sp-2: var(--space-2);
+    --sp-3: var(--space-3);
+    --sz-sm: 32px;
+    --sz-md: 40px;
+    --sz-lg: 48px;
+    --sz-xl: 56px;
+    --r-sm: var(--radius-1);
+    --r-md: var(--radius-2);
+    --r-lg: var(--radius-3);
+    --r-pill: var(--radius-4);
+    --r-card: var(--radius-3);
+    --r-media: var(--radius-2);
+    --el-0: none;
+    --el-1: var(--shadow-1);
+    --el-2: var(--shadow-2);
+    --el-3: var(--shadow-3);
+    --bd-none: none;
+    --bd-subtle: 1px solid var(--line);
+    --bd-focus: 2px solid var(--pink);
+    --bd-sel: 2px solid var(--black);
+    --op-disabled: var(--opacity-3);
+    --op-hover: var(--opacity-1);
+    --op-pressed: var(--opacity-2);
+    --op-overlay: var(--opacity-4);
+    --dur-fast: var(--duration-1);
+    --dur-default: var(--duration-1);
+    --dur-medium: var(--duration-2);
+    --dur-slow: var(--duration-3);
+    --dur-entrance: var(--duration-4);
+    /* ===== 02 Semantic — purpose/meaning tokens (content, surface, border,
+       action, feedback/status). Everything from here down in this original
+       block is a semantic color; the raw Foundation primitives are above. ===== */
+    --pink: #EA4C89;
+    --black: #0D0D0D;
+    --paper: #FCFCFD;
+    --line: #ECECF1;
+    --muted: #7D7D8E;
+    --success: #22C55E;
+    --warn: #F59E0B;
+    --err: #DC2626;
+    --purple: #8B5CF6;
+    --sw: 240px;
+    --font-display: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --surface-2: #F1F5F9;
+    --surface-alt: #F8F8FB;
+    --pink-container: #FCE7F3;
+    --purple-container: #F3E8FF;
+    --shadow-1: 0 1px 3px rgba(13,11,38,0.08);
+    --shadow-2: 0 4px 12px rgba(13,11,38,0.05);
+    --shadow-3: 0 8px 24px rgba(13,11,38,0.08);
+    --shadow-4: 0 12px 32px rgba(13,11,38,0.12);
+    --text: #0D0D0D;
+    --fs-9: var(--type-1);
+    --fs-10: var(--type-1);
+    --fs-caption: var(--type-1);
+    --fs-h3: var(--type-2);
+    --fs-h1: var(--type-3);
+    --fs-h2: var(--type-3);
+    --fs-body: var(--type-2);
+    --fs-body-lg: var(--type-2);
+    --fs-8: var(--type-1);
+    --fs-display: var(--type-4);
+    --sp-4: var(--space-4);
+    --r-1: var(--radius-1);
+    --r-2: var(--radius-2);
+    --r-3: var(--radius-3);
+    --r-4: var(--radius-4);
+    --op-1: var(--opacity-1);
+    --op-2: var(--opacity-2);
+    --op-3: var(--opacity-3);
+    --op-4: var(--opacity-4);
+
+    /* ===== Gestalt (Pinterest) full-fidelity scale — additive, namespaced
+       "gestalt-" prefix. Nothing above this block changes; these exist for work needing
+       finer steps than the 4-token core provides. Extracted verbatim from
+       github.com/pinterest/gestalt (Apache-2.0). See f-gestalt-tokens section
+       and frontend/guide/tokens/tokens.json (foundation.gestalt) for the full
+       mapping and rationale. ===== */
+    --gestalt-space-0: 0px; --gestalt-space-100: 4px; --gestalt-space-200: 8px; --gestalt-space-300: 12px;
+    --gestalt-space-400: 16px; --gestalt-space-500: 20px; --gestalt-space-600: 24px; --gestalt-space-700: 28px;
+    --gestalt-space-800: 32px; --gestalt-space-900: 36px; --gestalt-space-1000: 40px; --gestalt-space-1100: 44px;
+    --gestalt-space-1200: 48px; --gestalt-space-1300: 52px; --gestalt-space-1400: 56px; --gestalt-space-1500: 60px;
+    --gestalt-space-1600: 64px;
+    --gestalt-rounding-0: 0px; --gestalt-rounding-100: 4px; --gestalt-rounding-200: 8px; --gestalt-rounding-300: 12px;
+    --gestalt-rounding-400: 16px; --gestalt-rounding-500: 20px; --gestalt-rounding-600: 24px; --gestalt-rounding-700: 28px;
+    --gestalt-rounding-800: 32px; --gestalt-rounding-pill: 999px; --gestalt-rounding-circle: 50%;
+    --gestalt-opacity-0: 0; --gestalt-opacity-100: 0.04; --gestalt-opacity-200: 0.2; --gestalt-opacity-300: 0.4;
+    --gestalt-opacity-400: 0.8; --gestalt-opacity-500: 0.9;
+    --gestalt-font-100: 12px; --gestalt-font-200: 14px; --gestalt-font-300: 16px; --gestalt-font-400: 20px;
+    --gestalt-font-500: 28px; --gestalt-font-600: 36px;
+    --gestalt-elevation-floating: 0px 0px 8px rgba(0,0,0,0.1);
+    --gestalt-elevation-raised-top: 0px 2px 8px rgba(0,0,0,0.12);
+    --gestalt-elevation-raised-bottom: 0px -2px 8px rgba(0,0,0,0.12);
+    --gestalt-duration-0: 0ms; --gestalt-duration-50: 50ms; --gestalt-duration-100: 100ms; --gestalt-duration-150: 150ms;
+    --gestalt-duration-200: 200ms; --gestalt-duration-300: 300ms; --gestalt-duration-400: 400ms; --gestalt-duration-500: 500ms;
+    --gestalt-duration-600: 600ms; --gestalt-duration-700: 700ms; --gestalt-duration-900: 900ms;
+    --gestalt-ease-linear: cubic-bezier(0, 0, 1, 1);
+    --gestalt-ease-expressive: cubic-bezier(0.55, 0, 0, 1);
+    --gestalt-ease-lateral: cubic-bezier(0.8, 0, 0.2, 1);
+    --gestalt-ease-bounce: cubic-bezier(0, 0.35, 0, 1.25);
+    --gestalt-ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+    --gestalt-ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+
+    /* Motion aliases -- documented in the "Global Design Tokens Architecture" motion table
+       but never actually defined anywhere; wired up here to the real Gestalt/duration scale
+       rather than inventing yet another motion system. */
+    --ease-std: var(--gestalt-ease-expressive);
+    --ease-spring: var(--gestalt-ease-bounce);
+    --duration-short: var(--duration-1);
+
+  /* ===== GESTALT-INSPIRED TOKENS (v5.0) =====
+     Was sitting outside :root { } (invalid CSS, every --g-* name undefined) until this
+     2026-08-12 repair -- 25 live rules across the modal/popover/combobox/segmented family
+     depended on these and were rendering unstyled. Folded into the main :root here rather
+     than given a new block, per "map tokens instead of creating a section again". */
+  /* Elevation — Gestalt 4-level shadow system */
+  --g-el-0: none;
+  --g-el-1: 0 1px 2px rgba(0,0,0,0.06), 0 1px 1px rgba(0,0,0,0.04);
+  --g-el-2: 0 2px 4px rgba(0,0,0,0.06), 0 4px 8px rgba(0,0,0,0.04);
+  --g-el-3: 0 4px 8px rgba(0,0,0,0.08), 0 8px 16px rgba(0,0,0,0.06);
+  --g-el-4: 0 8px 16px rgba(0,0,0,0.10), 0 16px 32px rgba(0,0,0,0.08);
+
+  /* Focus ring — Gestalt 2px pink focus */
+  --g-focus: 0 0 0 2px var(--white), 0 0 0 4px var(--pink);
+  --g-focus-subtle: 0 0 0 2px var(--white), 0 0 0 4px rgba(234, 76, 137, 0.4);
+
+  /* Interaction states — Gestalt opacity-based */
+  --g-hover-bg: rgba(13, 13, 13, 0.06);
+  --g-pressed-bg: rgba(13, 13, 13, 0.10);
+  --g-selected-bg: rgba(234, 76, 137, 0.10);
+  --g-disabled-opacity: var(--op-disabled); /* was a hardcoded 0.30, conflicting with --opacity-3/--op-disabled (0.32) */
+
+  /* Border radius — Gestalt consistent scale */
+  --g-r-sm: 8px;
+  --g-r-md: 12px;
+  --g-r-lg: 16px;
+  --g-r-xl: 24px;
+  --g-r-pill: 9999px;
+
+  /* Spacing — Gestalt 4px base */
+  --g-sp-1: 4px;
+  --g-sp-2: 8px;
+  --g-sp-3: 12px;
+  --g-sp-4: 16px;
+  --g-sp-5: 20px;
+  --g-sp-6: 24px;
+  --g-sp-8: 32px;
+  --g-sp-10: 40px;
+  --g-sp-12: 48px;
+  --g-sp-16: 64px;
+
+  /* Typography — Gestalt type ramp */
+  --g-fs-caption: 12px;
+  --g-fs-body: 14px;
+  --g-fs-body-lg: 16px;
+  --g-fs-title: 20px;
+  --g-fs-heading: 24px;
+  --g-fs-display: 32px;
+
+  /* Component-specific */
+  --g-btn-h: 40px;
+  --g-btn-h-sm: 32px;
+  --g-btn-h-lg: 48px;
+  --g-input-h: 40px;
+  --g-chip-h: 32px;
+
+  /* ===== Layout — container/gutter/gap/aspect-ratio, previously undocumented as tokens ===== */
+  --layout-container-max: 1440px;
+  --layout-gutter-mobile: var(--space-3);
+  --layout-gutter-tablet: var(--space-4);
+  --layout-gutter-desktop: var(--space-4);
+  --layout-gap-sm: var(--space-2);
+  --layout-gap-md: var(--space-3);
+  --layout-gap-lg: var(--space-4);
+  --layout-aspect-card: 4/3;
+  --layout-aspect-hero: 16/9;
+  --layout-aspect-avatar: 1/1;
+  /* Column/grid counts — previously only hardcoded inline in the @media rules
+     below ("4-Column"/"3-Column"/"2-Column"/"1-Column" spec-card grids,
+     .masonry-grid column-count:3). Tokenized here so the two stay in sync;
+     values match what those real rules already use, not invented. */
+  --grid-cols-mobile: 1;
+  --grid-cols-tablet: 2;
+  --grid-cols-desktop: 3;
+  --grid-cols-wide: 4;
+
+  /* ===== Component — named sizing tokens (previously prose-only in f-sizing) ===== */
+  --comp-btn-h-sm: var(--sz-sm);
+  --comp-btn-h-md: var(--sz-md);
+  --comp-btn-h-lg: var(--sz-lg);
+  --comp-input-h: var(--sz-md);
+  --comp-chip-h: var(--sz-sm);
+  --comp-card-padding: var(--space-3);
+  --comp-card-radius: var(--radius-3);
+
+  /* ===== State — named aliases onto the --g-* state layer above ===== */
+  --state-focus-ring: var(--g-focus);
+  --state-hover-bg: var(--g-hover-bg);
+  --state-pressed-bg: var(--g-pressed-bg);
+  --state-selected-bg: var(--g-selected-bg);
+  --state-disabled-opacity: var(--g-disabled-opacity);
+
+  /* ===== Interaction — App vs Web, previously entirely missing (touch target was the only
+     exception, and it conflicted with tokens.json: 44px here vs 48dp there. tokens.json v7.0
+     is the newer, named source of truth, so 48px wins; --g-touch-target below now aliases it
+     instead of hardcoding its own value.) ===== */
+  --int-app-touch-target-min: var(--sz-lg);       /* 48px, matches tokens.json foundation.touch.targetMin */
+  --int-app-touch-target-comfortable: 56px;        /* matches tokens.json foundation.touch.comfortable */
+  --int-app-swipe-threshold: 80px;                 /* matches the bottom-sheet dismiss gesture already coded */
+  --int-app-longpress-ms: 500ms;
+  --int-app-drag-threshold: 8px;
+  --int-app-pinch-scale-min: 0.5;
+  --int-app-pinch-scale-max: 3;
+  --int-web-hover-transition: var(--duration-2);
+  --int-web-focus-ring: var(--g-focus);
+  --int-web-tooltip-delay: 400ms;
+  --int-web-context-menu-offset: 4px;
+  --g-touch-target: var(--int-app-touch-target-min);
+
+  /* ===== Responsive — real breakpoints matching the actual @media rules below (the docs in
+     f-breakpoints/f-grid claimed 1440px for "Wide"; these are what the CSS actually uses) ===== */
+  --bp-mobile-max: 767px;
+  --bp-tablet-min: 768px;
+  --bp-tablet-max: 1023px;
+  --bp-desktop-min: 1024px;
+  --bp-wide-min: 1440px;
+
+  /* ===== Platform — App vs Web (safe-area was a single inline env() one-off before this) ===== */
+  --plat-app-safe-area-top: env(safe-area-inset-top, 24px);
+  --plat-app-safe-area-bottom: env(safe-area-inset-bottom, var(--space-3));
+  --plat-app-status-bar-h: 24px;
+  --plat-app-nav-bar-h: 48px;
+  --plat-web-scrollbar-w: 12px;
+  --plat-web-min-viewport: 320px;}
+:root{--sw: 0px;}
+
+/* ===== 2. GAP-FILL ===================================================== */
+
+/* ===================================================================
+   GAP-FILL — classes & variables REFERENCED by the extracted markup but
+   NEVER DEFINED anywhere in the source styleguide.html. Verified by
+   grepping all 3 <style> blocks: zero matches. In the original file these
+   elements render UNSTYLED. Values below are inferred from surrounding
+   conventions in the same file, not copied from source. Marked so you can
+   fix them upstream or replace them.
+   =================================================================== */
+:root{
+  --text-2: var(--muted);                 /* GAP: used by .section-desc + adv hero copy */
+  --ease: var(--gestalt-ease-expressive); /* GAP: used by .adv-article-card transition */
+  --pink-hover: #D93B77;                  /* GAP: used by .btn-primary-ds:hover; -10% L on --pink */
+  --white: #FFFFFF;                       /* GAP: used by --g-focus / --g-focus-subtle */
+}
+/* GAP: section header trio used by adv-dualhero / adv-features / adv-blog */
+.section-header{margin-bottom:var(--space-4)}
+.section-title{font-family:var(--font-display);font-size:var(--type-4);font-weight:800;letter-spacing:-0.02em;color:var(--text);margin:0 0 var(--space-2)}
+.section-desc{font-size:var(--type-2);color:var(--text-2);max-width:60ch;margin:0}
+/* GAP: button variants used by adv-* sections (source only defines .btn-p/.btn-s/.btn-g/.btn-sm) */
+.btn-primary{background:var(--pink);color:#fff;border:1px solid var(--pink)}
+.btn-primary:hover{background:var(--pink-hover);border-color:var(--pink-hover)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn-outline:hover{background:var(--g-hover-bg)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid transparent}
+.btn-ghost:hover{background:var(--g-hover-bg)}
+/* GAP: pill label on the blog hero banner */
+.chip-badge{display:inline-block;padding:var(--space-1) var(--space-3);border-radius:var(--radius-4);
+  background:var(--paper);border:1px solid var(--line);font-size:var(--type-1);font-weight:700;
+  letter-spacing:0.04em;text-transform:uppercase;color:var(--text);margin-bottom:var(--space-2)}
+
+
+/* ===== 3. KEYFRAMES / ANIMATIONS (verbatim, all 15) ==================== */
+@keyframes eqWave {
+    0%, 100% { height: 6px; }
+    50% { height: 20px; }
+}
+@keyframes pulseGlow {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.85; }
+}
+@keyframes floatPhone {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pulse-ring{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.15)}}
+@keyframes shimmer-text{to{background-position:200% center}}
+@keyframes toastIn{0%{transform:translateY(100px);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes toastOut{0%{transform:translateY(0);opacity:1}100%{transform:translateY(100px);opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes wfb{0%{transform:scaleY(0.3)}100%{transform:scaleY(1)}}
+@keyframes ping{0%{transform:scale(1);opacity:1}75%,100%{transform:scale(2);opacity:0}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes g-modal-in {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes g-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@keyframes waveform-bg{0%{background-position:0 0}100%{background-position:0 100%}}
+
+/* ===== 4. COMPONENT RULES (verbatim) =================================== */
+/* Sections & Typography */
+.sec{padding: 48px 0;
+    border-bottom: 1px solid var(--line);
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;}
+h1, h2, h3{font-family: 'Inter Tight', sans-serif;
+    letter-spacing: -0.02em;}
+.eyebrow{font-family: 'Inter Tight', sans-serif;
+    font-size: var(--type-1);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--pink);
+    margin-bottom: 4px;}
+.sec h2{font-size: var(--type-3);
+    font-weight: 800;
+    color: var(--black);
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;}
+.sec p.desc{font-size: var(--type-2);
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 0 0 24px 0;
+    max-width: 680px;}
+/* Cards & Spec Grids */
+.card-s{background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    padding: var(--space-4);
+    box-shadow: 0 1px 3px rgba(13,11,38,0.03);
+    margin-bottom: var(--space-4);}
+.spec-grid{display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    width: 100%;}
+.spec-card{background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    padding: 20px;}
+/* .visual-demo / .demo-label / .demo-row / .demo-grid were used ~131 times across this file's
+   component sections (every "Live Preview" block) but had no real definition anywhere — only
+   .visual-demo had two stray min/max-height rules (line ~1128/1135) from an unrelated responsive
+   patch. Every demo block in this file has been rendering as unstyled, un-laid-out plain <div>s:
+   no card background/border, no row/grid layout for the items inside. Added 2026-08-16 to match
+   this file's real .card-s / .spec-card / .spec-grid visual language rather than inventing a new
+   one. This is additive only — doesn't touch the existing min/max-height clamp rules below. */
+.visual-demo{background: var(--surface-alt);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    padding: var(--space-3);
+    margin-bottom: var(--space-3);}
+.demo-label{font-size: var(--type-1);
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-2);}
+.demo-row{display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    align-items: center;}
+.demo-grid{display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--space-2);}
+.swc{position: absolute;
+    inset: 0;
+    border-radius: var(--radius-3);
+    overflow: hidden;
+    transition: transform var(--duration-3) cubic-bezier(0.25,1,0.5,1), opacity var(--duration-2);
+    box-shadow: var(--shadow-3);}
+.hl{border: 1px solid var(--line);
+    background: #fff;}
+.btn-g{background: transparent;
+    color: var(--black);
+    border-color: var(--line);}
+.badge-vf{background: rgba(139, 92, 246, 0.12);
+    color: var(--purple);}
+.copy-link-btn{position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: var(--type-2);
+    opacity: 0.4;
+    transition: opacity var(--duration-1);}
+.copy-link-btn:hover{opacity: 1;}
+.sec{position: relative;}
+.token-table{width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;}
+.token-table th, .token-table td{padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    font-size: var(--type-1);}
+.token-table th{background: #F8F8FB;
+    font-weight: 600;
+    color: var(--black);}
+/* Buttons, Chips & Interactive Controls */
+button, input, select, textarea, .chip, .btn, .sgt, .platform-tab{min-height: 48px;
+    box-sizing: border-box;}
+.btn{display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-pill);
+    padding: var(--space-2) var(--space-3);
+    font: 600 var(--type-1)/1 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all var(--duration-1) ease;
+    border: 1px solid transparent;}
+.btn-p{background: var(--black);
+    color: #ffffff;}
+.btn-s{background: #ffffff;
+    color: var(--black);
+    border-color: var(--line);}
+.badge{display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--r-pill);
+    font-size: var(--type-1);
+    font-weight: 600;}
+.badge-av{background: rgba(34,197,94,0.12); color: #166534;}
+/* Splash Screen */
+<div class="phone-frame">
+<div class="phone-screen" style="background:var(--black);display:flex;align-items:center;justify-content:center;min-height:500px">
+<div style="text-align:center">
+<div style="font-family:'Inter Tight',sans-serif;font-weight:800;font-size:var(--type-3);color:#fff;letter-spacing:-0.04em">MusicLink<em style="color:var(--pink);font-style:normal">d</em></div>
+<div style="color:var(--muted);font-size:var(--type-1);margin-top:6px">Your professional music network</div>
+</div>
+</div>
+</div>
+
+/* Login */
+<div class="phone-frame">
+<div class="phone-screen">
+<div class="phone-notch"><div class="dot"></div></div>
+<div class="phone-status"><span>9:41</span><span>●●●●○</span></div>
+<div class="phone-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:450px;gap:16px">
+<div style="font-family:'Inter Tight',sans-serif;font-weight:800;font-size:var(--type-3);color:var(--black);letter-spacing:-0.04em">MusicLink<em style="color:var(--pink);font-style:normal">d</em></div>
+<button class="btn btn-s btn-sm" style="width:100%;max-width:280px">Continue with Google</button>
+<div style="font-size:var(--type-1);color:var(--muted)">or</div>
+<input style="width:100%;max-width:280px;padding:10px 14px;border:1px solid var(--line);border-radius:9999px;font:var(--type-1) 'Inter';outline:none" placeholder="Email">
+<button class="btn btn-p btn-sm" style="width:100%;max-width:280px">Sign In</button>
+<p style="font-size:var(--type-1);color:var(--muted)">Don't have an account? <a href="#" style="color:var(--pink);font-weight:600">Sign up</a></p>
+</div>
+</div>
+</div>
+</div>
+
+/* Onboarding */
+<div class="phone-frame">
+<div class="phone-screen">
+<div class="phone-notch"><div class="dot"></div></div>
+<div class="phone-status"><span>9:41</span><span>●●●●○</span></div>
+<div class="phone-body">
+<div style="font-size:var(--type-2);font-weight:700;margin-bottom:4px">Create your profile</div>
+<div style="font-size:var(--type-1);color:var(--muted);margin-bottom:12px">Choose your primary role</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<div class="card-s" style="padding:10px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:#FCE7F3;display:grid;place-items:center;color:var(--pink);font-size:var(--type-1)">🎤</div><span style="font-size:var(--type-1);font-weight:600">Artist / Vocalist</span></div>
+<div class="card-s" style="padding:10px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:#FCE7F3;display:grid;place-items:center;color:var(--pink);font-size:var(--type-1)">🎛️</div><span style="font-size:var(--type-1);font-weight:600">Producer / Engineer</span></div>
+<div class="card-s" style="padding:10px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:#FCE7F3;display:grid;place-items:center;color:var(--pink);font-size:var(--type-1)">🏢</div><span style="font-size:var(--type-1);font-weight:600">Studio / Business</span></div>
+</div>
+<div style="margin-top:12px"><div style="display:flex;justify-content:space-between;font-size:var(--type-1);margin-bottom:2px"><span>Step 1 of 8</span><span style="color:var(--pink)">12%</span></div><div style="height:3px;background:#E2E8F0;border-radius:2px"><div style="height:100%;background:var(--pink);width:12%;border-radius:2px"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+
+/* Discover Feed */
+<div class="phone-frame">
+<div class="phone-screen">
+<div class="phone-notch"><div class="dot"></div></div>
+<div class="phone-status"><span>9:41</span><span>●●●●○</span></div>
+<div class="phone-body">
+<div style="display:flex;align-items:center;gap:8px;background:#F8F8FB;border:1px solid var(--line);border-radius:9999px;padding:8px 12px;margin-bottom:8px"><span style="font-size:var(--type-1)">🔍</span><span style="font-size:var(--type-1);color:var(--muted)">Search talent, studios...</span></div>
+<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px"><span class="chip" style="background:var(--black);color:#fff;font-size:var(--type-1)">All</span><span class="chip" style="font-size:var(--type-1)">Vocalists</span><span class="chip" style="font-size:var(--type-1)">Studios</span></div>
+<div class="demo-grid">
+<div class="card-s hl" style="text-align:center;padding:10px"><div style="font-size:var(--type-2)">🎤</div><div style="font-size:var(--type-1);font-weight:600;margin-top:4px">Ananya</div><div style="font-size:var(--type-1);color:var(--muted)">94% match</div></div>
+<div class="card-s hl" style="text-align:center;padding:10px"><div style="font-size:var(--type-2)">🎛️</div><div style="font-size:var(--type-1);font-weight:600;margin-top:4px">Rahul</div><div style="font-size:var(--type-1);color:var(--muted)">82% match</div></div>
+<div class="card-s hl" style="text-align:center;padding:10px"><div style="font-size:var(--type-2)">🏢</div><div style="font-size:var(--type-1);font-weight:600;margin-top:4px">Yash Raj</div><div style="font-size:var(--type-1);color:var(--muted)">Studio</div></div>
+<div class="card-s hl" style="text-align:center;padding:10px"><div style="font-size:var(--type-2)">🎸</div><div style="font-size:var(--type-1);font-weight:600;margin-top:4px">HS8</div><div style="font-size:var(--type-1);color:var(--muted)">₹45,000</div></div>
+</div>
+</div>
+<div class="phone-navbar"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+</div>
+</div>
+</div>
+
+/* Artist Profile */
+<div class="phone-frame">
+<div class="phone-screen">
+<div class="phone-notch"><div class="dot"></div></div>
+<div class="phone-status"><span>9:41</span><span>●●●●○</span></div>
+<div style="height:90px;background:linear-gradient(135deg,#181A22,#4A4D5C);margin:0;display:flex;align-items:flex-end;padding:12px"><div style="width:44px;height:44px;border-radius:50%;border:2px solid #fff;background:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=88&q=80') center/cover"></div></div>
+<div class="phone-body">
+<div style="font-size:var(--type-2);font-weight:700">Ananya Sharma</div>
+<div style="font-size:var(--type-1);color:var(--muted)">Playback Vocalist · Mumbai</div>
+<div style="color:var(--warn);font-size:var(--type-1);margin-top:2px">★★★★★</div>
+<div style="display:flex;gap:4px;margin:6px 0"><span class="chip">Hindi Folk</span><span class="chip">Pop Vocals</span></div>
+<div style="display:flex;justify-content:space-between;text-align:center;padding:8px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:8px 0">
+<div><b style="font-size:var(--type-2)">12.4k</b><div style="font-size:var(--type-1);color:var(--muted)">Followers</div></div>
+<div><b style="font-size:var(--type-2)">42</b><div style="font-size:var(--type-1);color:var(--muted)">Credits</div></div>
+<div><b style="font-size:var(--type-2)">4.9 ★</b><div style="font-size:var(--type-1);color:var(--muted)">Rating</div></div>
+</div>
+<button class="btn btn-p btn-sm" style="width:100%;margin-top:8px">Hire Artist</button>
+</div>
+<div class="phone-navbar"><i></i><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+</div>
+</div>
+
+/* Messaging */
+<div class="phone-frame">
+<div class="phone-screen">
+<div class="phone-notch"><div class="dot"></div></div>
+<div class="phone-status"><span>9:41</span><span>●●●●○</span></div>
+<div class="phone-body" style="display:flex;flex-direction:column;gap:10px;min-height:400px">
+<div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=64&q=80') center/cover"></div><div><div style="font-size:var(--type-1);font-weight:600">Rahul Varma</div><div style="font-size:var(--type-1);color:var(--muted)">Mix Engineer</div></div></div>
+<div style="display:flex;flex-direction:column;gap:8px;flex:1">
+<div style="display:flex;gap:6px"><div style="width:24px;height:24px;border-radius:50%;background:var(--black);flex-shrink:0"></div><div style="background:#F8F8FB;padding:8px 12px;border-radius:14px 14px 14px 0;font-size:var(--type-1);max-width:70%">Hey, I reviewed the stems.</div></div>
+<div style="display:flex;gap:6px;justify-content:flex-end"><div style="background:var(--black);color:#fff;padding:8px 12px;border-radius:14px 14px 0 14px;font-size:var(--type-1);max-width:70%">Amazing! When can we mix?</div></div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;background:#F8F8FB;border:1px solid var(--line);border-radius:9999px;padding:8px 12px;margin-top:auto"><span style="font-size:var(--type-1)">💬</span><span style="font-size:var(--type-1);color:var(--muted)">Type a message...</span></div>
+</div>
+<div class="phone-navbar"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+</div>
+</div>
+</div>
+</div>
+
+/* Studio Booking */
+<div class="phone-frame">
+<div class="phone-screen">
+<div class="phone-notch"><div class="dot"></div></div>
+<div class="phone-status"><span>9:41</span><span>●●●●○</span></div>
+<div class="phone-body">
+<div style="font-size:var(--type-2);font-weight:700;margin-bottom:8px">Book Studio</div>
+<div class="card-s" style="margin-bottom:8px">
+<!-- Real data: dist/preview/flows/booking/booking_summary/screen.json. Was a
+     fabricated "North Room / 20 Aug / ₹7,200" placeholder. See the booking
+     provenance note at #ml-booking. -->
+<div style="font-size:var(--type-1);font-weight:600">Yash Raj Sound Studios</div>
+<div style="font-size:var(--type-1);color:var(--muted)">Wed, 12 Aug · 10:00 AM – 2:00 PM</div>
+<div style="font-weight:700;margin-top:4px">₹32,000</div>
+<div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-p btn-sm" style="flex:1">Confirm</button><button class="btn btn-s btn-sm" style="flex:1">Cancel</button></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
+<div style="padding:6px;text-align:center;border:1px solid var(--line);border-radius:8px;font-size:var(--type-1)">10:00 AM</div>
+<div style="padding:6px;text-align:center;border:2px solid var(--pink);background:#FCE7F3;border-radius:8px;font-size:var(--type-1);font-weight:600;color:var(--pink)">2:00 PM</div>
+<div style="padding:6px;text-align:center;border:1px solid var(--line);border-radius:8px;font-size:var(--type-1);color:var(--muted);opacity:0.5">6:00 PM</div>
+</div>
+</div>
+<div class="phone-navbar"><i></i><i></i><i></i><i class="on"></i><i></i></div>
+</div>
+</div>
+</div>
+</div>
+
+/* Marketplace */
+<div class="phone-frame">
+<div class="phone-screen">
+<div class="phone-notch"><div class="dot"></div></div>
+<div class="phone-status"><span>9:41</span><span>●●●●○</span></div>
+<div class="phone-body">
+<div style="font-size:var(--type-2);font-weight:700;margin-bottom:6px">Marketplace</div>
+<div style="display:flex;gap:4px;margin-bottom:8px"><span class="chip" style="background:var(--black);color:#fff;font-size:var(--type-1)">All</span><span class="chip" style="font-size:var(--type-1)">Gear</span><span class="chip" style="font-size:var(--type-1)">Rentals</span></div>
+<div class="demo-grid">
+<div class="card-s hl" style="text-align:center;padding:10px"><div style="height:60px;background:var(--surface-alt, #F8F8FB);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:var(--type-2)">🎸</div><div style="font-size:var(--type-1);font-weight:600;margin-top:4px">Yamaha HS8</div><div style="font-size:var(--type-1);color:var(--muted)">₹45,000</div><button class="btn btn-p btn-sm" style="width:100%;margin-top:4px">Inquire</button></div>
+<div class="card-s hl" style="text-align:center;padding:10px"><div style="height:60px;background:var(--surface-alt, #F8F8FB);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:var(--type-2)">🎙️</div><div style="font-size:var(--type-1);font-weight:600;margin-top:4px">Neumann U87</div><div style="font-size:var(--type-1);color:var(--muted)">₹2,500/day</div><button class="btn btn-p btn-sm" style="width:100%;margin-top:4px">Rent</button></div>
+</div>
+</div>
+<div class="phone-navbar"><i></i><i></i><i></i><i></i><i class="on"></i></div>
+</div>
+</div>
+</div>
+</div>
+
+/* ===== VISUAL EFFECTS & TEXTURES ===== */
+.bg-dots{background-image:radial-gradient(rgba(13,13,13,0.06) 1px,transparent 1px);background-size:16px 16px}
+.bg-grid{background-image:linear-gradient(to right,rgba(13,13,13,0.04) 1px,transparent 1px),linear-gradient(to bottom,rgba(13,13,13,0.04) 1px,transparent 1px);background-size:24px 24px}
+.bg-noise{position:relative}
+.bg-noise::before{content:"";position:absolute;inset:0;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+.bg-noise>*{position:relative;z-index:1}
+.texture-paper{background-color:#FCFCFD;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L35 10 L30 15 L25 10Z' fill='rgba(13,13,13,0.02)'/%3E%3C/svg%3E")}
+/* ===== CARD & BLOCK HEIGHT CONSTRAINTS (Breakpoint-Mapped) ===== */
+.card-s{min-height:120px;overflow:hidden}
+.visual-demo{min-height:80px}
+.spec-card{min-height:100px}
+@media(max-width:767px){.card-s{max-height:480px}
+.spec-card{max-height:360px}
+.visual-demo{max-height:600px}}
+@media(min-width:768px) and (max-width:1023px){.card-s{max-height:520px}
+.spec-card{max-height:400px}}
+@media(min-width:1024px) and (max-width:1439px){.card-s{max-height:600px}
+.spec-card{max-height:480px}}
+@media(min-width:1440px){.card-s{max-height:680px}
+.spec-card{max-height:560px}}
+.swc{position: absolute; width: 100%; height: 100%; left: 0; top: 0; transition: transform 300ms cubic-bezier(0.175,0.885,0.32,1.275), opacity 300ms; transform-origin: center bottom; background: #fff; border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column;}
+here
+   picked up the tablet media query's --sw:0px reset and collapsed the sidebar to 0 width; at
+   desktop it silently won position:sticky (from the 6573 duplicate) while left:-100% went unused
+   only by luck of sticky's cascade semantics. Removed 2026-08-13 structural fix. */
+/* .spec-grid{grid-template-columns:1fr}
+.copy-link-btn{font-size: var(--fs-10);
+    padding: 3px 8px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 200ms;
+    float: right;}
+.sec:hover .copy-link-btn{opacity: 1;}
+/* 2. Dual-Sided Floating Hero */
+.adv-dual-hero{position: relative; padding: 120px 20px; text-align: center; background: #F8F8FB;
+    border-radius: 32px; overflow: hidden; margin: 40px 0; min-height: 70vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;}
+.adv-dual-hero h2{font-size: clamp(40px, 8vw, 72px); font-weight: 800; line-height: 1.1;
+    color: var(--black); max-width: 600px; position: relative; z-index: 10;}
+.adv-hero-img{position: absolute; border-radius: 20px; box-shadow: 0 12px 32px rgba(0,0,0,0.12); z-index: 5; object-fit: cover;}
+.adv-hero-left-1{width: 220px; height: 280px; left: 5%; top: 10%; transform: rotate(-6deg);}
+.adv-hero-left-2{width: 160px; height: 200px; left: 15%; bottom: 10%; transform: rotate(5deg);}
+.adv-hero-right-1{width: 240px; height: 240px; right: 5%; top: 15%; transform: rotate(4deg);}
+.adv-hero-right-2{width: 180px; height: 260px; right: 15%; bottom: 5%; transform: rotate(-4deg);}
+/* 3. Three-Column Feature Grid */
+.adv-feature-grid{display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px; padding: 60px 20px; max-width: 1200px; margin: 0 auto;}
+.adv-feature-card{text-align: left;}
+.adv-fc-graphic{position: relative; width: 100%; height: 180px; border-radius: 24px; margin-bottom: 32px;
+    background: #E8F5E9; display: flex; align-items: center; justify-content: center;}
+.adv-fc-avatar{position: absolute; bottom: -20px; width: 72px; height: 72px; border-radius: 50%;
+    border: 4px solid #fff; box-shadow: 0 8px 24px rgba(0,0,0,0.12); background: #fff;}
+.adv-feature-card h3{font-size: 24px; font-weight: 700; margin-bottom: 12px; color: var(--black);}
+.adv-feature-card p{font-size: 16px; color: var(--text-2); margin-bottom: 24px;}
+.adv-feature-list{list-style: none; padding: 0; margin: 0;}
+.adv-feature-list li{font-size: 14px; margin-bottom: 12px; display: flex; gap: 8px; color: var(--black);}
+.adv-feature-list li::before{content: '✓'; font-weight: 800;}
+/* 4. Graphic Banner & Article Grid */
+.adv-blog-hero{background: #E1F5FE; border-radius: 32px; padding: 80px 40px; text-align: center;
+    position: relative; overflow: hidden; margin: 40px 0;}
+.adv-blog-hero h2{font-size: clamp(48px, 8vw, 80px); font-weight: 800; color: var(--black); line-height: 1; position: relative; z-index: 10;}
+.adv-article-grid{display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px; margin-top: 32px;}
+.adv-article-card{display: flex; flex-direction: column; gap: 16px; cursor: pointer;}
+.adv-article-card:hover .aac-img{transform: scale(1.03);}
+.aac-img-wrapper{position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 16/10;}
+.aac-img{width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);}
+.aac-overlay-icon{position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: #fff; padding: 8px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.15);}
+.aac-title{font-size: 20px; font-weight: 700; color: var(--black); line-height: 1.3; margin: 0;}
+.aac-meta{display: flex; gap: 12px; align-items: center; font-size: 12px; color: var(--text-2);}
+/* ===== GESTALT-INSPIRED COMPONENT STYLES (v5.0) ===== */
+/* Focus rings — Gestalt 2px pink focus */
+.btn:focus-visible, .chip:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible{outline: none;
+  box-shadow: var(--g-focus);}
+.btn:active, .chip:active{transform: scale(0.97);}
+.btn:disabled{opacity: var(--g-disabled-opacity); cursor: not-allowed; pointer-events: none;}
+/* ===== SPEC / TOKEN GRIDS ===== */
+.spec-grid{display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;}
+.spec-grid.g3{grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));}
+.spec-card{background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 14px;}
+.spec-label{font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--pink); margin-bottom: 4px;}
+.token-table{width: 100%; border-collapse: collapse; margin-bottom: 24px; overflow-x: auto; display: block;}
+.token-table th, .token-table td{text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); font-size: 12px; white-space: nowrap;}
+/* ===== WAVEFORM ===== */
+.wf{display: flex; gap: 2px; align-items: flex-end; height: 22px;}
+.wf span{width: 2px; border-radius: 2px; background: var(--pink); animation: wfb 800ms ease-in-out infinite alternate;}
+.wf span:nth-child(1){height:10px;animation-delay:0ms}
+.wf span:nth-child(2){height:18px;animation-delay:50ms}
+.wf span:nth-child(3){height:7px;animation-delay:100ms}
+.wf span:nth-child(4){height:22px;animation-delay:150ms}
+.wf span:nth-child(5){height:12px;animation-delay:200ms}
+.wf span:nth-child(6){height:20px;animation-delay:250ms}
+.wf span:nth-child(7){height:8px;animation-delay:300ms}
+.wf span:nth-child(8){height:16px;animation-delay:350ms}
+.wf span:nth-child(9){height:14px;animation-delay:400ms}
+.wf span:nth-child(10){height:24px;animation-delay:450ms}
+.wf span:nth-child(11){height:6px;animation-delay:500ms}
+.wf span:nth-child(12){height:18px;animation-delay:550ms}
+/* ===== DESIGN TOKENS — MusicLinkd v4.0 & v5.0 Master ===== */
+/* ===== BASE RESET ===== */
+*, *::before, *::after{box-sizing: border-box;}
+body{font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--paper);
+  color: var(--black);
+  margin: 0;
+  scroll-behavior: smooth;
+  overflow-x: hidden;}
+h1, h2, h3, h4{font-family: 'Inter Tight', sans-serif; letter-spacing: -0.02em; margin: 0;}
+img{max-width: 100%; height: auto; display: block;}
+/* .main redefinition removed 2026-08-13 -- unconditional, competed with the correct rule at
+   line ~450 (margin-left:var(--sw), width:calc(100% - var(--sw)), padding:40px 48px 120px).
+   The flex:1/max-width here were already inert (sidebar is position:fixed, not in flex flow);
+   the padding was the only live part and it silently replaced the canonical value. */
+.sec{padding: clamp(32px, 5vw, 64px) 0; border-bottom: 1px solid var(--line);}
+.sec:last-child{border-bottom: none;}
+.eyebrow{font-size: var(--fs-9); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pink); margin-bottom: 6px;}
+.sec h2{font-size: var(--fs-h2); margin-bottom: 12px;}
+.sec p.desc{color: var(--muted); font-size: var(--fs-body); max-width: 520px; margin-bottom: 20px;}
+/* ===== COMPONENT STYLES ===== */
+.hl{transition: transform 200ms var(--ease), box-shadow 200ms;}
+.hl:hover{transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06);}
+.btn{display: inline-flex; align-items: center; justify-content: center; border-radius: var(--r-pill); padding: 8px 16px; font: 600 12px/1 'Inter'; cursor: pointer; transition: all 150ms; border: 1px solid transparent; min-height: 40px; white-space: nowrap;}
+.btn-p{background: var(--pink); color: #fff;}
+.btn-p:hover{background: var(--pink-hover);}
+.btn-s{background: #fff; border-color: var(--line); color: var(--black);}
+.btn-s:hover{background: #F8F8FB;}
+.btn-g{background: transparent; color: var(--black);}
+.btn-g:hover{background: #F8F8FB;}
+.btn-sm{padding: 5px 12px; font-size: 10px; min-height: 32px;}
+.badge{display: inline-flex; align-items: center; gap: 3px; padding: 2px 8px; border-radius: var(--r-pill); font-size: 9px; font-weight: 600;}
+.badge-av{background: #DCFCE7; color: #15803D;}
+.badge-vf{background: #FCE7F3; color: var(--pink);}
+.card-s{background: #fff; border: 1px solid var(--line); border-radius: var(--r-card); padding: 16px;}
+.card-s.hl{transition: transform 200ms var(--ease), box-shadow 200ms;}
+.card-s.hl:hover{transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06);}
+.toast-popup{position:fixed;bottom:30px;left:30px;z-index:var(--z-4);background:var(--black);color:#fff;padding:var(--space-2) var(--space-3);border-radius:var(--radius-2);font:600 var(--type-1) 'Inter',sans-serif;box-shadow:var(--shadow-3);display:flex;align-items:center;gap:var(--space-2);transform:translateY(100px);opacity:0;pointer-events:none}
+.toast-popup.show{animation:toastIn 0.3s ease forwards}
+.toast-popup.hide{animation:toastOut 0.3s ease forwards}
+
+/* ===== 5. PAGE CHROME (this extract only) ============================== */
+
+/* ===== Page chrome for this extract only (not from source) ===== */
+body{margin:0;background:var(--paper);color:var(--text);font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.xw{max-width:1120px;margin:0 auto;padding:var(--space-4) var(--space-3) 96px}
+.xhead{padding:var(--space-4) 0 var(--space-3);border-bottom:1px solid var(--line);margin-bottom:var(--space-4)}
+.xhead h1{font-family:var(--font-display);font-size:var(--type-4);font-weight:800;letter-spacing:-0.02em;margin:0 0 var(--space-2)}
+.xhead p{color:var(--muted);font-size:var(--type-2);margin:0;max-width:70ch}
+.xtoc{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-3)}
+.xtoc a{font-size:var(--type-1);font-weight:600;text-decoration:none;color:var(--text);
+  padding:6px 12px;border:1px solid var(--line);border-radius:var(--radius-4);background:#fff}
+.xtoc a:hover{background:var(--g-hover-bg)}
+.xnote{font-size:var(--type-1);color:var(--muted);background:var(--surface-alt);
+  border:1px solid var(--line);border-left:3px solid var(--warn);
+  border-radius:var(--radius-1);padding:var(--space-3);margin:var(--space-3) 0}
+.xnote code{font-family:var(--font-mono);font-size:0.95em;background:#fff;padding:1px 5px;
+  border:1px solid var(--line);border-radius:4px}
+
+</style>
+</head>
+<body>
+
+<div class="xw">
+
+<header class="xhead">
+  <h1>Extracted Components</h1>
+  <p>Six components pulled out of <code>styleguide.html</code>, with the full token layer,
+     all keyframes, shadows, type scale and every CSS rule they depend on. Self-contained
+     apart from Google Fonts and the Unsplash / randomuser / flaticon image URLs already
+     hardcoded in the source markup.</p>
+  <nav class="xtoc">
+<a href="#imagery">17 · Imagery & Visual Assets</a>
+<a href="#pattern-swipe-deck">Pattern · Swipe Deck</a>
+<a href="#adv-dualhero">Advanced · Dual-Sided Floating Hero</a>
+<a href="#adv-features">Advanced · Three-Column Feature Grid</a>
+<a href="#adv-blog">Advanced · Graphic Banner Hero & Article Grid</a>
+<a href="#audio-first">Brand · Audio-First Banner</a>
+  </nav>
+  <div class="xnote">
+    <strong>Source gaps found during extraction.</strong> These names are used by the
+    markup but defined nowhere in the original file's three <code>&lt;style&gt;</code>
+    blocks, so they render unstyled there:
+    <code>.section-header</code> <code>.section-title</code> <code>.section-desc</code>
+    <code>.btn-primary</code> <code>.btn-outline</code> <code>.btn-ghost</code>
+    <code>.chip-badge</code> <code>--text-2</code> <code>--ease</code>
+    <code>--pink-hover</code> <code>--white</code>.
+    They are filled in under <em>GAP-FILL</em> with inferred values — replace or fix upstream.
+  </div>
+</header>
+
+<section class="sec" id="imagery">
+<button class="copy-link-btn" onclick="copyLink('imagery')">🔗</button>
+<div class="eyebrow">17 Imagery</div>
+<h2>Imagery & Visual Assets <span class="badge badge-av" style="margin-left:8px">New</span></h2>
+<p class="desc">Photography guidelines, gradient treatments, image overlays, and visual asset specifications for MusicLinkd. All images use Unsplash for production-quality placeholder photography.</p>
+
+<div class="visual-demo">
+<div class="demo-label">Image Aspect Ratios</div>
+<div class="demo-grid">
+<div class="card-s hl" style="padding:0;overflow:hidden">
+<div style="aspect-ratio:1;background:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80') center/cover"></div>
+<div style="padding:8px;font-size:var(--type-1);text-align:center;font-weight:600">1:1 · Avatar / Profile</div>
+</div>
+<div class="card-s hl" style="padding:0;overflow:hidden">
+<div style="aspect-ratio:16/9;background:url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=400&q=80') center/cover"></div>
+<div style="padding:8px;font-size:var(--type-1);text-align:center;font-weight:600">16:9 · Hero / Cover</div>
+</div>
+<div class="card-s hl" style="padding:0;overflow:hidden">
+<div style="aspect-ratio:4/3;background:url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=400&q=80') center/cover"></div>
+<div style="padding:8px;font-size:var(--type-1);text-align:center;font-weight:600">4:3 · Card Media</div>
+</div>
+<div class="card-s hl" style="padding:0;overflow:hidden">
+<div style="aspect-ratio:3/2;background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80') center/cover"></div>
+<div style="padding:8px;font-size:var(--type-1);text-align:center;font-weight:600">3:2 · Studio Photo</div>
+</div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Gradient Overlay Treatments</div>
+<div class="demo-grid">
+<div class="card-s hl" style="padding:0;overflow:hidden;position:relative;min-height:180px">
+<div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=500&q=80') center/cover"></div>
+<div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,11,38,0.85),rgba(13,11,38,0.1))"></div>
+<div style="position:relative;z-index:1;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-height:180px;color:#fff">
+<div style="font-size:var(--type-2);font-weight:800">Dark Gradient</div>
+<div style="font-size:var(--type-1);opacity:0.7">Bottom-heavy · 85%→10%</div>
+</div>
+</div>
+<div class="card-s hl" style="padding:0;overflow:hidden;position:relative;min-height:180px">
+<div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=500&q=80') center/cover"></div>
+<div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(234,76,137,0.7),rgba(13,11,38,0.4))"></div>
+<div style="position:relative;z-index:1;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-height:180px;color:#fff">
+<div style="font-size:var(--type-2);font-weight:800">Pink Tint</div>
+<div style="font-size:var(--type-1);opacity:0.7">Brand overlay · 135deg</div>
+</div>
+</div>
+<div class="card-s hl" style="padding:0;overflow:hidden;position:relative;min-height:180px">
+<div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80') center/cover"></div>
+<div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(13,11,38,0.9),rgba(13,11,38,0.2))"></div>
+<div style="position:relative;z-index:1;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-height:180px;color:#fff">
+<div style="font-size:var(--type-2);font-weight:800">Left Fade</div>
+<div style="font-size:var(--type-1);opacity:0.7">Horizontal · 90%→20%</div>
+</div>
+</div>
+<div class="card-s hl" style="padding:0;overflow:hidden;position:relative;min-height:180px">
+<div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=500&q=80') center/cover;filter:grayscale(100%)"></div>
+<div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,11,38,0.6),rgba(13,11,38,0.3))"></div>
+<div style="position:relative;z-index:1;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-height:180px;color:#fff">
+<div style="font-size:var(--type-2);font-weight:800">Duotone</div>
+<div style="font-size:var(--type-1);opacity:0.7">Grayscale + overlay</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Profile & Avatar Imagery</div>
+<div class="demo-row" style="gap:16px;align-items:flex-end">
+<div style="text-align:center">
+<div style="width:96px;height:96px;border-radius:50%;background:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80') center/cover;border:3px solid #fff;box-shadow:var(--shadow-2);margin-bottom:4px"></div>
+<span style="font-size:var(--type-1);color:var(--muted)">96dp · Profile</span>
+</div>
+<div style="text-align:center">
+<div style="width:64px;height:64px;border-radius:50%;background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=130&q=80') center/cover;border:2px solid #fff;box-shadow:var(--shadow-1);margin-bottom:4px"></div>
+<span style="font-size:var(--type-1);color:var(--muted)">64dp · Card</span>
+</div>
+<div style="text-align:center">
+<div style="width:48px;height:48px;border-radius:50%;background:url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=100&q=80') center/cover;border:2px solid #fff;margin-bottom:4px"></div>
+<span style="font-size:var(--type-1);color:var(--muted)">48dp · List</span>
+</div>
+<div style="text-align:center">
+<div style="width:32px;height:32px;border-radius:50%;background:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=64&q=80') center/cover;border:1.5px solid #fff;margin-bottom:4px"></div>
+<span style="font-size:var(--type-1);color:var(--muted)">32dp · Chip</span>
+</div>
+<div style="text-align:center">
+<div style="width:24px;height:24px;border-radius:50%;background:url('https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=48&q=80') center/cover;border:1px solid #fff;margin-bottom:4px"></div>
+<span style="font-size:var(--type-1);color:var(--muted)">24dp · Micro</span>
+</div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Studio & Equipment Photography</div>
+<div class="demo-grid">
+<div class="card-s hl" style="padding:0;overflow:hidden">
+<div style="height:140px;background:url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=500&q=80') center/cover;position:relative">
+<span style="position:absolute;bottom:6px;left:6px;background:rgba(13,11,38,0.8);color:#fff;padding:2px 8px;border-radius:4px;font-size:var(--type-1);font-weight:600">₹1,800/hr</span>
+</div>
+<div style="padding:10px"><div style="font-size:var(--type-1);font-weight:700">Yash Raj Studios</div><div style="font-size:var(--type-1);color:var(--muted)">Mumbai · Dolby Atmos</div></div>
+</div>
+<div class="card-s hl" style="padding:0;overflow:hidden">
+<div style="height:140px;background:url('https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=500&q=80') center/cover;position:relative">
+<span style="position:absolute;bottom:6px;left:6px;background:var(--pink);color:#fff;padding:2px 8px;border-radius:4px;font-size:var(--type-1);font-weight:600">Rental</span>
+</div>
+<div style="padding:10px"><div style="font-size:var(--type-1);font-weight:700">Neumann U87 Ai</div><div style="font-size:var(--type-1);color:var(--muted)">₹2,500/day · Excellent</div></div>
+</div>
+<div class="card-s hl" style="padding:0;overflow:hidden">
+<div style="height:140px;background:url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=500&q=80') center/cover;position:relative">
+<span style="position:absolute;bottom:6px;left:6px;background:rgba(13,11,38,0.8);color:#fff;padding:2px 8px;border-radius:4px;font-size:var(--type-1);font-weight:600">Live Room</span>
+</div>
+<div style="padding:10px"><div style="font-size:var(--type-1);font-weight:700">Yash Raj Sound Studios</div><div style="font-size:var(--type-1);color:var(--muted)">Andheri · SSL Console</div></div>
+</div>
+<div class="card-s hl" style="padding:0;overflow:hidden">
+<div style="height:140px;background:url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80') center/cover;position:relative">
+<span style="position:absolute;bottom:6px;left:6px;background:var(--success);color:#fff;padding:2px 8px;border-radius:4px;font-size:var(--type-1);font-weight:600">Available</span>
+</div>
+<div style="padding:10px"><div style="font-size:var(--type-1);font-weight:700">Yamaha HS8</div><div style="font-size:var(--type-1);color:var(--muted)">₹45,000 · Mumbai</div></div>
+</div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Full-Bleed Hero Images</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div class="card-s hl" style="padding:0;overflow:hidden;position:relative;min-height:240px;border:none">
+<div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80') center/cover"></div>
+<div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,11,38,0.9),rgba(13,11,38,0.2),rgba(13,11,38,0.1))"></div>
+<div style="position:relative;z-index:1;padding:32px 24px;display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-height:240px;color:#fff">
+<span class="badge badge-vf" style="margin-bottom:8px">Featured Artist</span>
+<h3 style="font-size:var(--type-3);font-weight:800;margin-bottom:4px;color:#fff">Ananya Sharma</h3>
+<p style="font-size:var(--type-1);opacity:0.8;margin-bottom:12px">Playback Vocalist · 42 Credits · 4.9 ★</p>
+<div style="display:flex;gap:8px"><button class="btn btn-p btn-sm" style="background:#fff;color:var(--black)">▶ Listen</button><button class="btn btn-s btn-sm" style="background:transparent;border-color:rgba(255,255,255,0.3);color:#fff">View Profile</button></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="visual-demo">
+<div class="demo-label">Background Textures & Patterns</div>
+<div class="demo-grid">
+<div class="card-s hl bg-dots" style="min-height:120px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px">
+<div style="font-size:var(--type-3)">🔘</div>
+<span style="font-size:var(--type-1);font-weight:600">Dot Pattern</span>
+<span style="font-size:var(--type-1);color:var(--muted)">16px · 6% opacity</span>
+</div>
+<div class="card-s hl bg-grid" style="min-height:120px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px">
+<div style="font-size:var(--type-3)">📐</div>
+<span style="font-size:var(--type-1);font-weight:600">Grid Mesh</span>
+<span style="font-size:var(--type-1);color:var(--muted)">24px · 4% opacity</span>
+</div>
+<div class="card-s hl texture-paper" style="min-height:120px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px">
+<div style="font-size:var(--type-3)">📄</div>
+<span style="font-size:var(--type-1);font-weight:600">Paper Texture</span>
+<span style="font-size:var(--type-1);color:var(--muted)">SVG pattern</span>
+</div>
+<div class="card-s hl bg-noise" style="min-height:120px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px">
+<div style="font-size:var(--type-3)">🌫️</div>
+<span style="font-size:var(--type-1);font-weight:600">Noise Texture</span>
+<span style="font-size:var(--type-1);color:var(--muted)">3% opacity</span>
+</div>
+</div>
+</div>
+
+<div class="spec-grid">
+<div class="spec-card">
+<div class="spec-label">Image Sources</div>
+<table class="token-table"><tr><th>Type</th><th>Source</th></tr>
+<tr><td>Profile Photos</td><td>Unsplash · People</td></tr>
+<tr><td>Studio Photos</td><td>Unsplash · Interiors</td></tr>
+<tr><td>Equipment</td><td>Unsplash · Technology</td></tr>
+<tr><td>Backgrounds</td><td>CSS Patterns / SVG</td></tr>
+<tr><td>Album Art</td><td>Gradient + Text</td></tr></table>
+</div>
+<div class="spec-card">
+<div class="spec-label">Image Treatments</div>
+<table class="token-table"><tr><th>Treatment</th><th>Usage</th></tr>
+<tr><td>Dark Gradient</td><td>Hero cards, featured</td></tr>
+<tr><td>Pink Tint</td><td>Brand accent overlay</td></tr>
+<tr><td>Grayscale</td><td>Duotone, editorial</td></tr>
+<tr><td>Blur</td><td>Background, loading</td></tr>
+<tr><td>No Overlay</td><td>Gallery, portfolio</td></tr></table>
+</div>
+<div class="spec-card">
+<div class="spec-label">Border Radius</div>
+<table class="token-table"><tr><th>Context</th><th>Radius</th></tr>
+<tr><td>Card Image</td><td>16dp</td></tr>
+<tr><td>Avatar</td><td>50%</td></tr>
+<tr><td>Gallery Thumb</td><td>12dp</td></tr>
+<tr><td>Hero Cover</td><td>24dp</td></tr>
+<tr><td>Album Art</td><td>8dp</td></tr></table>
+</div>
+</div>
+</section><section class="sec" id="pattern-swipe-deck">
+<button class="copy-link-btn" onclick="copyLink('pattern-swipe-deck')" aria-label="Copy link to section pattern-swipe-deck">🔗</button>
+<div class="eyebrow">Patterns</div>
+<h2>Swipe Deck <span class="badge badge-av" style="margin-left:8px">Stable</span> <span style="font-size:var(--type-1);color:var(--muted);font-weight:400">v4.0</span></h2>
+<p class="desc">Tinder-style discovery deck. Swipe or use the buttons to shortlist/pass; the JS driving this (<code>swipeRender</code>) already existed in the file but had no container to render into.</p>
+<div id="deckW" style="position:relative;width:100%;max-width:320px;height:420px;margin:0 auto"></div>
+<div style="display:flex;gap:var(--space-2);justify-content:center;margin-top:var(--space-3)">
+<button class="btn btn-g btn-sm" onclick="swipeDo('left')">✕ Pass</button>
+<button class="btn btn-p btn-sm" onclick="swipeDo('right')">♥ Shortlist</button>
+<button class="btn btn-g btn-sm" onclick="swipeReset()">Reset</button>
+</div>
+</section><section class="sec" id="adv-dualhero">
+    <div class="section-header">
+        <h2 class="section-title">Dual-Sided Floating Hero</h2>
+        <p class="section-desc">A center-aligned typography hero flanked by staggered, floating images on both sides.</p>
+    </div>
+    <div class="adv-dual-hero">
+        <img src="https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?auto=format&fit=crop&w=400&q=80" alt="" class="adv-hero-img adv-hero-left-1">
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80" alt="" class="adv-hero-img adv-hero-left-2">
+        
+        <h2>Create in a more inspiring place</h2>
+        <p style="font-size: 20px; color: var(--text-2); max-width: 500px; margin: 24px auto; position: relative; z-index: 10;">Share what you love on MusicLinkd, where your ideas can spark real-life action.</p>
+        <button class="btn btn-primary" style="position: relative; z-index: 10; border-radius: 24px; padding: 16px 32px; font-size: 18px;">Get started</button>
+
+        <img src="https://images.unsplash.com/photo-1516280440502-8610334861e6?auto=format&fit=crop&w=400&q=80" alt="" class="adv-hero-img adv-hero-right-1">
+        <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=400&q=80" alt="" class="adv-hero-img adv-hero-right-2">
+    </div>
+</section><section class="sec" id="adv-features">
+    <div class="section-header">
+        <h2 class="section-title">Three-Column Feature Grid</h2>
+        <p class="section-desc">A grid of columns featuring a floating graphic avatar over a colored shape.</p>
+    </div>
+    <div class="adv-feature-grid">
+        <div class="adv-feature-card">
+            <div class="adv-fc-graphic" style="background: #E0F2FE;">
+                <img src="https://images.unsplash.com/photo-1598387993441-a364f854c3e1?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 100%; object-fit: cover; border-radius: 24px; opacity: 0.8;" alt="">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="adv-fc-avatar" alt="Avatar">
+            </div>
+            <h3>Content creators</h3>
+            <p>For everyone who wants to share their music ideas.</p>
+            <ul class="adv-feature-list">
+                <li>Grow and engage your audience</li>
+                <li>Make money with features to drive traffic</li>
+            </ul>
+        </div>
+        <div class="adv-feature-card">
+            <div class="adv-fc-graphic" style="background: #E8F5E9;">
+                <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 100%; object-fit: cover; border-radius: 24px; opacity: 0.8;" alt="">
+                <div class="adv-fc-avatar" style="display: flex; align-items: center; justify-content: center; background: var(--black);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </div>
+            </div>
+            <h3>Studios & Gear</h3>
+            <p>For shops and retailers of any size.</p>
+            <ul class="adv-feature-list">
+                <li>Increase sales or web conversions</li>
+                <li>Build brand awareness seamlessly</li>
+            </ul>
+        </div>
+        <div class="adv-feature-card">
+            <div class="adv-fc-graphic" style="background: #FCE4EC;">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80" style="width: 100%; height: 100%; object-fit: cover; border-radius: 24px; opacity: 0.8;" alt="">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="adv-fc-avatar" alt="Avatar">
+            </div>
+            <h3>Publishers & Labels</h3>
+            <p>For traditional, digital and everything in between.</p>
+            <ul class="adv-feature-list">
+                <li>Amplify your brand to millions</li>
+                <li>Grow your business with efficiency</li>
+            </ul>
+        </div>
+    </div>
+</section><section class="sec" id="adv-blog">
+    <div class="section-header">
+        <h2 class="section-title">Graphic Banner Hero & Article Grid</h2>
+        <p class="section-desc">A full-width rounded banner with a light background and cut-out graphics, followed by an article grid.</p>
+    </div>
+    
+    <div class="adv-blog-hero">
+        <div class="chip-badge">Creator blog</div>
+        <h2>What's new</h2>
+        <img src="https://cdn-icons-png.flaticon.com/512/3255/3255850.png" style="position: absolute; left: 10%; top: 20%; width: 120px; opacity: 0.8; transform: rotate(-15deg);" alt="">
+        <img src="https://cdn-icons-png.flaticon.com/512/3255/3255813.png" style="position: absolute; right: 10%; bottom: 10%; width: 140px; opacity: 0.8; transform: rotate(15deg);" alt="">
+    </div>
+
+    <div style="display: flex; gap: 8px; margin-bottom: 24px;">
+        <button class="btn btn-outline" style="border-radius: 24px; background: #E2E8F0; border-color: transparent;">All</button>
+        <button class="btn btn-ghost" style="border-radius: 24px;">News</button>
+        <button class="btn btn-ghost" style="border-radius: 24px;">Best practices</button>
+        <button class="btn btn-ghost" style="border-radius: 24px;">Success stories</button>
+    </div>
+
+    <div class="adv-article-grid">
+        <div class="adv-article-card">
+            <div class="aac-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?auto=format&fit=crop&w=600&q=80" class="aac-img" alt="">
+                <div class="aac-overlay-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"></path><path d="M18 20V4"></path><path d="M6 20v-4"></path></svg>
+                </div>
+            </div>
+            <h3 class="aac-title">How to use storefront linking to monetise content</h3>
+            <div class="aac-meta">
+                <span>15 June 2026</span>
+                <span style="background: #F1F5F9; padding: 4px 10px; border-radius: 12px;">News</span>
+            </div>
+        </div>
+        <div class="adv-article-card">
+            <div class="aac-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=600&q=80" class="aac-img" alt="">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="aac-overlay-icon" style="width: 48px; height: 48px; padding: 0; object-fit: cover;" alt="">
+            </div>
+            <h3 class="aac-title">Photo selection and editing essentials for creators</h3>
+            <div class="aac-meta">
+                <span>9 June 2026</span>
+                <span style="background: #F1F5F9; padding: 4px 10px; border-radius: 12px;">Best practices</span>
+            </div>
+        </div>
+        <div class="adv-article-card">
+            <div class="aac-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1516280440502-8610334861e6?auto=format&fit=crop&w=600&q=80" class="aac-img" alt="">
+                <div class="aac-overlay-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"></path><path d="m9 10 2 2 4-4"></path></svg>
+                </div>
+            </div>
+            <h3 class="aac-title">How one UK creator boosts engagement with seasonal content</h3>
+            <div class="aac-meta">
+                <span>4 June 2026</span>
+                <span style="background: #F1F5F9; padding: 4px 10px; border-radius: 12px;">Success stories</span>
+            </div>
+        </div>
+    </div>
+</section><section class="sec" id="audio-first">
+<div class="eyebrow">Brand</div>
+<h2>Audio-First Design Banner</h2>
+<p class="desc">Standalone dark banner with an animated scanline background (<code>waveform-bg</code>) and a live waveform bar (<code>.wf</code>).</p>
+<div class="visual-demo" style="background:var(--black);border-radius:24px;padding:32px;text-align:center;overflow:hidden;position:relative">
+<div style="position:absolute;inset:0;opacity:0.05;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(234,76,137,0.3) 2px,rgba(234,76,137,0.3) 4px);background-size:100% 8px;animation:waveform-bg 4s linear infinite"></div>
+<div style="position:relative;z-index:1">
+<div style="font-size:var(--type-4);margin-bottom:12px">🎧</div>
+<h3 style="color:#fff;font-size:var(--type-3);font-weight:800;margin-bottom:8px">Audio-First Design</h3>
+<p style="color:rgba(255,255,255,0.6);font-size:var(--type-1);max-width:360px;margin:0 auto 16px">Every card has a waveform preview. Every profile has audio samples. Music comes first.</p>
+<div class="wf" style="justify-content:center;height:28px"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+</div>
+</section>
+
+</div>
+
+<div id="toast" class="toast-popup" style="display:none"><span id="toastMsg">Notification</span></div>
+
+<script>
+
+/* ---- copyLink (verbatim from source) ---- */
+function copyLink(sectionId){
+  const url = window.location.origin + window.location.pathname + '#' + sectionId;
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = event.target;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => btn.textContent = '🔗', 1200);
+  });
+}
+
+/* ---- toast (verbatim from source) ---- */
+function toastMsg(msg){
+  const toast = document.getElementById('toast');
+  const toastMsgEl = document.getElementById('toastMsg');
+  if(!toast || !toastMsgEl) return;
+  toastMsgEl.textContent = msg;
+  toast.style.display = 'flex';
+  toast.classList.remove('hide');
+  toast.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+    toast.classList.add('hide');
+    setTimeout(() => { toast.style.display='none'; toast.classList.remove('hide'); }, 300);
+  }, 2500);
+}
+
+/* ---- swipe deck (verbatim from source) ---- */
+const sc=[{name:'Priya Raj',title:'Female Punjabi Folk Singer',bg:'linear-gradient(135deg,#EA4C89,#0D0D0D)',tag:'Match 98%'},{name:'Arjun Beats',title:'Mixing & Mastering Engineer',bg:'linear-gradient(135deg,#2563EB,#181A22)',tag:'Match 85%'},{name:'SoundSpace',title:'Dolby Atmos Room',bg:'linear-gradient(135deg,#7C3AED,#0D0D0D)',tag:'Available'}];
+let sIdx=0;
+function swipeRender(){const w=document.getElementById('deckW');if(!w)return;w.innerHTML='';if(sIdx>=sc.length){w.innerHTML='<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;background:#fff;border:1px solid var(--line);border-radius:24px;padding:16px"><div><div style="font-size:var(--type-3);margin-bottom:8px">✨</div><h4 style="font-size:var(--type-2)">Deck Empty</h4><button class="btn btn-p btn-sm" onclick="swipeReset()" style="margin-top:8px">Reload</button></div></div>';return}sc.forEach((c,i)=>{if(i<sIdx)return;const o=i-sIdx;w.insertAdjacentHTML('beforeend','<div class="swc" style="z-index:'+(100-i)+';transform:scale('+(1-o*0.05)+') translateY('+(o*12)+'px);opacity:'+(o>2?0:1)+'"><div style="width:100%;height:100%;background:'+c.bg+';color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:16px"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85),rgba(0,0,0,0.1))"></div><div style="position:relative;z-index:1"><span style="padding:2px 8px;background:rgba(255,255,255,0.2);border-radius:9999px;font-size:var(--type-1);font-weight:700;text-transform:uppercase;margin-bottom:6px;display:inline-block">'+c.tag+'</span><h4 style="font-size:var(--type-2);font-weight:700;margin-bottom:2px">'+c.name+'</h4><p style="font-size:var(--type-1);opacity:0.8">'+c.title+'</p></div></div></div>')})}
+function swipeDo(dir){if(sIdx>=sc.length)return;const card=document.querySelector('#deckW .swc');if(!card)return;card.style.transition='transform var(--duration-3) cubic-bezier(0.25,1,0.5,1),opacity var(--duration-2)';card.style.transform='translateX('+(dir==='right'?280:-280)+'px) translateY(40px) rotate('+(dir==='right'?15:-15)+'deg) scale(0.9)';card.style.opacity='0';toastMsg(dir==='right'?'Shortlisted!':'Passed');setTimeout(()=>{sIdx++;swipeRender()},300)}
+function swipeReset(){sIdx=0;swipeRender();toastMsg('Deck reset')}
+
+document.addEventListener('DOMContentLoaded', function(){
+  if (typeof swipeRender === 'function') swipeRender();
+});
+
+</script>
+</body>
+</html>

@@ -8,7 +8,8 @@
   "screenTitle": "Trending Projects / Recommended Collaborators",
   "screenOrder": 5,
   "states": [
-    "hidden"
+    "hidden",
+    "empty"
   ],
   "collectionsTouched": [],
   "notes": "Composable functions still exist in source but their call sites are commented out — confirmed hidden, not deleted.",

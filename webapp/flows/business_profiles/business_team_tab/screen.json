@@ -10,7 +10,19 @@
   "states": [
     "default",
     "owner",
-    "invite"
+    "invite",
+    "draft",
+    "no_services",
+    "no_portfolio",
+    "no_team",
+    "no_reviews",
+    "no_availability",
+    "visible_if_owner",
+    "leads",
+    "analytics",
+    "unpublished",
+    "suspended",
+    "not_found"
   ],
   "collectionsTouched": [
     "users"

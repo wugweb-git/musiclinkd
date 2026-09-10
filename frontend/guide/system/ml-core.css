@@ -106,6 +106,62 @@ body {
   }
 }
 
+/* ── state transitions ────────────────────────────────────────────────── */
+/* Motion plan Phase 1 (docs/09-Roadmap/motion-plan.md). app-shell.js's state
+   switch is `el.hidden = !states.includes(state)` — 518 of these across 184
+   screens, every one an instant blink. This rule animates the discrete
+   [hidden] change without touching app-shell.js (a concurrent session owns
+   that file, and the Cancellable rule says state correctness must not depend
+   on an animation event — `hidden` stays the source of truth throughout).
+
+   Known asymmetry, tested live rather than assumed from the CSS: ENTER
+   (hidden removed) animates correctly — @starting-style plus the display
+   allow-discrete transition is exactly what it's for, and nothing else
+   overrides display while [hidden] is absent. EXIT (hidden added) does NOT
+   fade/slide out — [hidden]{display:none!important} above (line ~30) forces
+   display:none in the same style recalculation the attribute is added in,
+   before any transition can run, since a display:none box generates no
+   transitionable frame. That !important is load-bearing for a real prior bug
+   (components' own `display` rules beating [hidden]'s near-zero UA
+   specificity) and is not being touched here — exit stays an instant cut
+   until that's solved separately. Shipping the half that verifiably works
+   rather than a rule that looks complete but silently does nothing on exit. */
+[data-state] {
+  transition:
+    opacity var(--duration-2) var(--ease-standard),
+    transform var(--duration-2) var(--ease-standard),
+    overlay var(--duration-2) allow-discrete,
+    display var(--duration-2) allow-discrete;
+}
+@starting-style {
+  [data-state]:not([hidden]) { opacity: 0; transform: translateY(var(--space-2)); }
+}
+
+/* ── screen transitions ───────────────────────────────────────────────── */
+/* Motion plan Phase 4 — base tier only (docs/09-Roadmap/motion-plan.md has
+   the full note on what's deliberately not done here yet: directional
+   forward/back detection and shared-element card->detail artwork
+   continuity, which need a small new JS file plus naming ~184 screens in
+   matched pairs — scoped as a separate follow-up, not folded into this
+   pass, per the same Excessive-Motion discipline as every other phase).
+
+   This is the CROSS-DOCUMENT View Transition API: /preview screens are
+   separate static HTML files loaded via full <a href> navigation, not a
+   single-page app, so this is the zero-JS variant (`@view-transition`),
+   not `document.startViewTransition()`. CSS's forward-compatible parsing
+   means a browser that doesn't recognise this at-rule just ignores it —
+   no @supports guard needed, and navigation falls back to its normal
+   instant swap, never a broken or half-applied state. */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--duration-3);
+  animation-timing-function: var(--ease-standard);
+}
+
 /* ── button ────────────────────────────────────────────────────────────── */
 /* Compose: Button / FilledTonalButton / OutlinedButton, MLSize.s3 minHeight  */
 

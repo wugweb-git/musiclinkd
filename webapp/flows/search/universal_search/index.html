@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,14 +17,15 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/discover/discover_feed/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-visually-hidden">Search</h1>
       <div class="ml-field" style="flex:1">
@@ -37,7 +38,7 @@
          same list rather than a separate results screen. -->
     <nav class="ml-tabs" role="tablist" aria-label="Result type"
          data-state="results typo people businesses services marketplace_results opportunities_results portfolio_results groups partial"
-         style="margin:0 var(--space-4)">
+         style="margin:0 var(--space-4)" hidden>
       <a class="ml-tabs__tab" role="tab" data-chip="results typo" href="?state=results">All</a><a class="ml-tabs__tab" role="tab" data-chip="people" href="?state=people">People</a><a class="ml-tabs__tab" role="tab" data-chip="businesses" href="?state=businesses">Businesses</a><a class="ml-tabs__tab" role="tab" data-chip="services" href="?state=services">Services</a><a class="ml-tabs__tab" role="tab" data-chip="marketplace_results" href="?state=marketplace_results">Market</a><a class="ml-tabs__tab" role="tab" data-chip="opportunities_results" href="?state=opportunities_results">Opportunities</a><a class="ml-tabs__tab" role="tab" data-chip="portfolio_results" href="?state=portfolio_results">Portfolio</a><a class="ml-tabs__tab" role="tab" data-chip="groups" href="?state=groups">Groups</a>
     </nav>
 
@@ -45,23 +46,23 @@
 
       <!-- home: nothing typed yet. Recents and taxonomy-derived suggestions
            only — the brief says not to fill space with arbitrary content. -->
-      <div data-state="home">
-        <div class="ml-section"><h2>Recent</h2>
+      <div data-state="home" data-state-default>
+        <section class="ml-section-block"><div class="ml-section"><h2>Recent</h2>
           <button class="ml-section__link" type="button">Clear all</button></div>
         <a class="ml-action-row" href="?state=results">
           <span class="ml-choice__body"><span class="ml-choice__title">mixing engineer Mumbai</span></span>
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m15.18 12 7.16-7.16a2.25 2.25 0 1 0-3.18-3.18L12 8.82 4.84 1.66a2.25 2.25 0 1 0-3.18 3.18L8.82 12l-7.16 7.16a2.25 2.25 0 1 0 3.18 3.18L12 15.18l7.16 7.16a2.24 2.24 0 0 0 3.18 0c.88-.88.88-2.3 0-3.18z"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-close"/></svg>
         </a>
         <a class="ml-action-row" href="?state=results">
           <span class="ml-choice__body"><span class="ml-choice__title">recording studio Delhi</span></span>
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m15.18 12 7.16-7.16a2.25 2.25 0 1 0-3.18-3.18L12 8.82 4.84 1.66a2.25 2.25 0 1 0-3.18 3.18L8.82 12l-7.16 7.16a2.25 2.25 0 1 0 3.18 3.18L12 15.18l7.16 7.16a2.24 2.24 0 0 0 3.18 0c.88-.88.88-2.3 0-3.18z"/></svg>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-close"/></svg>
         </a>
         <a class="ml-action-row" href="?state=results">
           <span class="ml-choice__body"><span class="ml-choice__title">tabla</span></span>
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m15.18 12 7.16-7.16a2.25 2.25 0 1 0-3.18-3.18L12 8.82 4.84 1.66a2.25 2.25 0 1 0-3.18 3.18L8.82 12l-7.16 7.16a2.25 2.25 0 1 0 3.18 3.18L12 15.18l7.16 7.16a2.24 2.24 0 0 0 3.18 0c.88-.88.88-2.3 0-3.18z"/></svg>
-        </a>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-close"/></svg>
+        </a></section>
 
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Browse</h2></div>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Browse</h2></div>
         <div class="ml-chip-wrap">
           <a class="ml-chip" href="?state=results">Vocalists</a>
           <a class="ml-chip" href="?state=results">Producers</a>
@@ -70,75 +71,75 @@
           <a class="ml-chip" href="?state=results">Rehearsal rooms</a>
           <a class="ml-chip" href="?state=results">Gear</a>
           <a class="ml-chip" href="?state=results">Opportunities</a>
-        </div>
+        </div></section>
       </div>
 
       <!-- live_typing: suggestions come from the taxonomy, not invented. -->
-      <div data-state="live_typing">
+      <div data-state="live_typing" hidden>
         <a class="ml-suggest" href="?state=results">
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg><span>vocalist</span>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-search"/></svg><span>vocalist</span>
         </a>
         <a class="ml-suggest" href="?state=results">
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg><span>vocalist Mumbai</span>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-search"/></svg><span>vocalist Mumbai</span>
         </a>
         <a class="ml-suggest" href="?state=results">
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg><span>vocalist Hindi</span>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-search"/></svg><span>vocalist Hindi</span>
         </a>
         <a class="ml-suggest" href="?state=results">
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg><span>vocal booth</span>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-search"/></svg><span>vocal booth</span>
         </a>
         <a class="ml-suggest" href="?state=results">
-          <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></svg><span>vocal tuning</span>
+          <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-search"/></svg><span>vocal tuning</span>
         </a>
       </div>
 
       <!-- Typo recovery is a state of the results, not a screen. -->
-      <div data-state="typo">
+      <div data-state="typo" hidden>
         <p class="ml-type-2" style="margin:0 0 var(--space-2)">
           Showing results for <b>vocalist</b>. Search instead for
           <a class="ml-link" href="?state=empty">vocalest</a>.
         </p>
       </div>
 
-      <div class="ml-chip-wrap" data-state="results typo partial typo" style="margin-bottom:var(--space-2)">
+      <div class="ml-chip-wrap" data-state="results typo partial typo" style="margin-bottom:var(--space-2)" hidden>
         <button type="button" class="ml-chip" aria-pressed="true">Mumbai ×</button>
         <button type="button" class="ml-chip" aria-pressed="true">Available ×</button>
         <button type="button" class="ml-chip" aria-pressed="false">Hindi</button>
         <a class="ml-chip" href="/preview/flows/search/search_filters/index.html?state=people">Filters</a>
       </div>
 
-      <p class="ml-type-1" data-state="results typo typo" style="color:var(--color-muted);margin:0 0 var(--space-2)">
+      <p class="ml-type-1" data-state="results typo typo" style="color:var(--color-muted);margin:0 0 var(--space-2)" hidden>
         12 results for "vocalist"
       </p>
 
-      <a class="ml-result" data-state="results typo people partial" href="/preview/flows/public_profile/public_profile_view/index.html">
+      <a class="ml-result" data-state="results typo people partial" href="/preview/flows/public_profile/public_profile_view/index.html" hidden>
         <img class="ml-result__thumb" src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Ishita Rao</span>
           <span class="ml-result__meta">Session vocalist · Mumbai · Hindi, English</span>
           <span class="ml-status ml-status--success">Available</span>
         </span>
-        <span class="ml-result__trail">4.9 ★</span>
+        <span class="ml-result__trail">4.9 <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-star"/></svg></span>
       </a>
-      <a class="ml-result" data-state="results typo people partial" href="/preview/flows/public_profile/public_profile_view_talent/index.html">
+      <a class="ml-result" data-state="results typo people partial" href="/preview/flows/public_profile/public_profile_view_talent/index.html" hidden>
         <img class="ml-result__thumb" src="/assets/img/editorials/3dee9cb6252a4c8f8a149c9fd40d4a9e.jpg" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Meera Nair</span>
           <span class="ml-result__meta">Playback vocalist · Kochi · Malayalam, Tamil</span>
           
         </span>
-        <span class="ml-result__trail">5.0 ★</span>
+        <span class="ml-result__trail">5.0 <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-star"/></svg></span>
       </a>
-      <a class="ml-result" data-state="results typo people" href="/preview/flows/public_profile/public_profile_view/index.html">
+      <a class="ml-result" data-state="results typo people" href="/preview/flows/public_profile/public_profile_view/index.html" hidden>
         <img class="ml-result__thumb" src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Kabir Sheth</span>
           <span class="ml-result__meta">Producer · Pune · Indie, electronic</span>
           <span class="ml-status ml-status--warning">Booked soon</span>
         </span>
-        <span class="ml-result__trail">4.7 ★</span>
+        <span class="ml-result__trail">4.7 <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-star"/></svg></span>
       </a>
-      <a class="ml-result" data-state="results typo businesses" href="/preview/flows/business_profiles/business_overview/index.html">
+      <a class="ml-result" data-state="results typo businesses" href="/preview/flows/business_profiles/business_overview/index.html" hidden>
         <img class="ml-result__thumb" src="/assets/img/6/01e26955706919.598fd42d42f34.png" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Yash Raj Sound Studios</span>
@@ -147,7 +148,7 @@
         </span>
         <span class="ml-result__trail">₹1,800/hr</span>
       </a>
-      <a class="ml-result" data-state="results typo businesses" href="/preview/flows/business_profiles/business_overview/index.html">
+      <a class="ml-result" data-state="results typo businesses" href="/preview/flows/business_profiles/business_overview/index.html" hidden>
         <img class="ml-result__thumb" src="/assets/img/speakers/48dcea90c715465b4dcd2ff760bfcf65.jpg" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Blue Note Recording Co.</span>
@@ -156,7 +157,7 @@
         </span>
         <span class="ml-result__trail">₹2,400/hr</span>
       </a>
-      <a class="ml-result" data-state="results typo services" href="/preview/flows/public_profile/talent_services_view/index.html">
+      <a class="ml-result" data-state="results typo services" href="/preview/flows/public_profile/talent_services_view/index.html" hidden>
         <img class="ml-result__thumb" src="/assets/img/speakers/40a9560dcb1289e6d450c5259060ea79.jpg" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Full Track Mix & Master</span>
@@ -165,7 +166,7 @@
         </span>
         <span class="ml-result__trail">₹6,000</span>
       </a>
-      <a class="ml-result" data-state="results typo services" href="/preview/flows/public_profile/talent_services_view/index.html">
+      <a class="ml-result" data-state="results typo services" href="/preview/flows/public_profile/talent_services_view/index.html" hidden>
         <img class="ml-result__thumb" src="/assets/img/6/0ad951188258241.6599204c7ae25.jpg" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Vocal Tuning & Comping</span>
@@ -174,7 +175,7 @@
         </span>
         <span class="ml-result__trail">₹2,000</span>
       </a>
-      <a class="ml-result" data-state="results typo marketplace_results" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
+      <a class="ml-result" data-state="results typo marketplace_results" href="/preview/flows/marketplace/marketplace_item_detail/index.html" hidden>
         <img class="ml-result__thumb" src="/assets/img/speakers/0159435ccca405aa6d2c59bb4f11947b.jpg" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Shure SM7B Microphone</span>
@@ -183,7 +184,7 @@
         </span>
         <span class="ml-result__trail">₹28,500</span>
       </a>
-      <a class="ml-result" data-state="results typo marketplace_results" href="/preview/flows/marketplace/marketplace_item_detail/index.html">
+      <a class="ml-result" data-state="results typo marketplace_results" href="/preview/flows/marketplace/marketplace_item_detail/index.html" hidden>
         <img class="ml-result__thumb" src="/assets/img/speakers/2ca39961ae931d2d4b515b2bc889e025.jpg" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Focusrite Scarlett 2i2</span>
@@ -192,7 +193,7 @@
         </span>
         <span class="ml-result__trail">₹800/day</span>
       </a>
-      <a class="ml-result" data-state="results typo opportunities_results" href="/preview/flows/opportunities/opportunity_detail/index.html">
+      <a class="ml-result" data-state="results typo opportunities_results" href="/preview/flows/opportunities/opportunity_detail/index.html" hidden>
         <img class="ml-result__thumb" src="/assets/img/6/04182c58798961.5d48bcac8dd8f.png" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Session vocalist — Hindi pop EP</span>
@@ -201,7 +202,7 @@
         </span>
         <span class="ml-result__trail">₹12,000/day</span>
       </a>
-      <a class="ml-result" data-state="results typo portfolio_results" href="/preview/flows/portfolio/profile_project_view/index.html">
+      <a class="ml-result" data-state="results typo portfolio_results" href="/preview/flows/portfolio/profile_project_view/index.html" hidden>
         <img class="ml-result__thumb ml-result__thumb--square" src="/assets/img/6/02d124205931695.66c4331e162d1.jpg" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Neon Monsoon</span>
@@ -210,7 +211,7 @@
         </span>
         <span class="ml-result__trail">2026</span>
       </a>
-      <a class="ml-result" data-state="results typo groups" href="/preview/flows/communication/networking_feed/index.html">
+      <a class="ml-result" data-state="results typo groups" href="/preview/flows/communication/networking_feed/index.html" hidden>
         <img class="ml-result__thumb" src="/assets/img/6/05c010236455615.68ecac46e6ab2.png" alt="" loading="lazy" />
         <span class="ml-result__body">
           <span class="ml-result__name">Mumbai Session Players</span>
@@ -222,14 +223,14 @@
 
       <!-- Partial: one category empty must not make the whole search look
            empty, which the brief states outright. -->
-      <div data-state="partial">
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Businesses</h2></div>
+      <div data-state="partial" hidden>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Businesses</h2></div>
         <p class="ml-type-2" style="color:var(--color-muted);margin:0">
           No businesses match "vocalist". People and services below still do.
-        </p>
+        </p></section>
       </div>
 
-      <div class="ml-empty" data-state="empty">
+      <div class="ml-empty" data-state="empty" hidden>
         <h2 class="ml-empty__title">No results found</h2>
         <p class="ml-empty__body">Try a different search, or remove some filters.</p>
         <a class="ml-btn ml-btn--primary" href="?state=results">Clear filters</a>
@@ -239,19 +240,19 @@
       </div>
 
       <!-- The brief: show only what this person is allowed to discover. -->
-      <div class="ml-empty" data-state="permission">
+      <div class="ml-empty" data-state="permission" hidden>
         <h2 class="ml-empty__title">Some results are hidden</h2>
         <p class="ml-empty__body">A few profiles matching this search aren't public. You're seeing everything you have access to.</p>
         <a class="ml-btn ml-btn--primary" href="?state=results">Show what I can see</a>
       </div>
 
-      <div class="ml-empty" data-state="offline">
+      <div class="ml-empty" data-state="offline" hidden>
         <h2 class="ml-empty__title">You're offline</h2>
         <p class="ml-empty__body">These are the last results we loaded. They may be out of date, and availability isn't current.</p>
         <a class="ml-btn ml-btn--primary" href="?state=results">Retry</a>
       </div>
 
-      <div class="ml-empty" data-state="error">
+      <div class="ml-empty" data-state="error" hidden>
         <h2 class="ml-empty__title">We couldn't complete your search</h2>
         <p class="ml-empty__body">Something went wrong at our end, not yours.</p>
         <a class="ml-btn ml-btn--primary" href="?state=results">Retry</a>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,19 +17,20 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/user_settings/account_settings/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">Security</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div data-state="default two_factor_setup">
+      <div data-state="default two_factor_setup" data-state-default>
         <div class="ml-section"><h2>Sign-in</h2></div>
         <div class="ml-summary__row"><span>Password</span><span>Last changed 4 months ago</span></div>
         <div class="ml-check-row">
@@ -44,18 +45,18 @@
           <span class="ml-choice__title">Signed-in devices</span>
           <span class="ml-choice__meta">3 devices</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
       </div>
 
-      <div data-state="two_factor_on">
+      <div data-state="two_factor_on" hidden>
         <div class="ml-banner ml-banner--success"><span class="ml-banner__body">Two-factor is on. You'll be asked for a code on new devices.</span></div>
         <div class="ml-summary" style="margin-top:var(--space-3)">
           <div class="ml-summary__row"><span>Method</span><span>SMS to +91 98••• ••432</span></div>
           <div class="ml-summary__row"><span>Recovery codes</span><span>8 unused</span></div>
         </div>
       </div>
-      <div data-state="connected_accounts">
+      <div data-state="connected_accounts" hidden>
         <div class="ml-section"><h2>Connected accounts</h2></div>
         <div class="ml-check-row">
           <span class="ml-choice__body"><span class="ml-choice__title">Google</span>
@@ -68,7 +69,7 @@
           <button class="ml-btn ml-btn--secondary" type="button">Connect</button>
         </div>
       </div>
-      <div data-state="security_alert">
+      <div data-state="security_alert" hidden>
         <div class="ml-banner ml-banner--warning"><span class="ml-banner__body">New sign-in detected.</span></div>
         <div class="ml-summary" style="margin-top:var(--space-3)">
           <div class="ml-summary__row"><span>Device</span><span>Chrome on Windows</span></div>
@@ -78,9 +79,9 @@
         <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/user_settings/active_sessions/index.html">Review devices</a>
       </div>
 
-      <div data-state="default two_factor_setup">
+      <div data-state="default two_factor_setup" data-state-default>
         <div class="ml-section"><h2>Set up two-factor</h2></div>
-        <div data-state="two_factor_setup">
+        <div data-state="two_factor_setup" hidden>
         <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-2)">
           We'll send a six-digit code to +91 98••• ••432 whenever you sign in on a device we don't recognise.
         </p>

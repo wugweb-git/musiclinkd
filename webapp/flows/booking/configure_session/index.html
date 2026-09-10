@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,26 +17,27 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/booking/availability_calendar/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">Session</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div class="ml-section"><h3>Session type</h3></div>
+      <section class="ml-section-block"><div class="ml-section"><h3>Session type</h3></div>
       <div class="ml-chip-wrap">
         <button type="button" class="ml-chip" aria-pressed="true">Tracking</button>
         <button type="button" class="ml-chip" aria-pressed="false">Mixing</button>
         <button type="button" class="ml-chip" aria-pressed="false">Rehearsal</button>
-      </div>
+      </div></section>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Add-ons</h3></div>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Add-ons</h3></div>
       <div class="ml-check-row">
         <span class="ml-choice__body"><span class="ml-choice__title">Engineer</span><span class="ml-choice__meta">₹800/hr</span></span>
         <button class="ml-switch" type="button" role="switch" aria-checked="true" aria-label="Engineer"></button>
@@ -48,11 +49,11 @@
       <div class="ml-check-row">
         <span class="ml-choice__body"><span class="ml-choice__title">Recorded video</span><span class="ml-choice__meta">₹3,500</span></span>
         <button class="ml-switch" type="button" role="switch" aria-checked="false" aria-label="Recorded video"></button>
-      </div>
+      </div></section>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Equipment</h3>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Equipment</h3>
         <a class="ml-section__link" href="/preview/flows/booking/equipment_screen/index.html">Choose</a></div>
-      <p class="ml-type-1" style="color:var(--color-muted);margin:0">Neumann U87 and Neve 1073 are included.</p>
+      <p class="ml-type-1" style="color:var(--color-muted);margin:0">Neumann U87 and Neve 1073 are included.</p></section>
     </main>
     <footer class="ml-app__footer">
       <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/booking/booking_summary/index.html">Review booking</a>

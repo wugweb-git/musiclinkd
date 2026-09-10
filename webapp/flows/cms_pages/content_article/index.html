@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,14 +17,15 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/cms_pages/content_home/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0;flex:1">Guides</h1>
       <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
@@ -32,7 +33,7 @@
     <main class="ml-app__body app-content--scroll" style="padding:0 0 var(--space-4)">
 
       <!-- article -->
-      <div data-state="default">
+      <div data-state="default" data-state-default>
         <img src="/assets/img/4/5c45943974eb98266d0fc97e34e568e5.png" alt="" loading="lazy"
              style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
         <div style="padding:var(--space-3) var(--space-4)">
@@ -51,7 +52,7 @@
               beforehand, the charts or the lyric you prepare, the travel, and the revisions
               afterwards that nobody wrote down. Quoting only for the room means the rest is free.
             </p>
-            <div class="ml-section" style="margin-top:var(--space-3)"><h3>What to include</h3></div>
+            <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>What to include</h3></div>
             <div class="ml-summary">
               <div class="ml-summary__row"><span>Prep</span><span>Usually 1–2 hours</span></div>
               <div class="ml-summary__row"><span>The session</span><span>Booked hours</span></div>
@@ -61,57 +62,57 @@
             <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
               The second thing people forget is the deposit. Half up front is normal here,
               and it is the difference between a booking and an intention.
-            </p>
+            </p></section>
           </div>
 
-          <div class="ml-section" style="margin-top:var(--space-4)"><h3>Do this next</h3></div>
+          <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-4)"><h3>Do this next</h3></div>
           <a class="ml-action-row" href="/preview/flows/services_availability/rate_pricing_editor/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Set your rates</span>
           <span class="ml-choice__meta">Day rate, deposit, cancellation window</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
-      </a>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
+      </a></section>
 
-          <div class="ml-section" style="margin-top:var(--space-3)"><h3>Related</h3></div>
+          <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Related</h3></div>
           <a class="ml-action-row" href="?state=default">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Deposits, cancellations and the 48-hour rule</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
           <a class="ml-action-row" href="?state=default">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Negotiating without undercutting yourself</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
-      </a>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
+      </a></section>
 
-          <div class="ml-section" style="margin-top:var(--space-3)"><h3>Was this useful?</h3></div>
+          <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Was this useful?</h3></div>
           <div style="display:flex;gap:var(--space-2)">
             <button class="ml-btn ml-btn--secondary" type="button" style="flex:1">Yes</button>
             <button class="ml-btn ml-btn--secondary" type="button" style="flex:1">No</button>
-          </div>
+          </div></section>
         </div>
       </div>
 
       <!-- faq -->
-      <div data-state="faq" style="padding:var(--space-3) var(--space-4)">
+      <div data-state="faq" style="padding:var(--space-3) var(--space-4)" hidden>
         <h2 class="ml-type-3" style="margin:0 0 var(--space-3)">Frequently asked</h2>
-        <div class="ml-section"><h3>When is the deposit taken?</h3></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3);max-width:64ch;margin-inline:auto">When the studio confirms your slot, not when you request it. If they decline, nothing is charged.</p>
-        <div class="ml-section"><h3>Can I cancel a booking?</h3></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3);max-width:64ch;margin-inline:auto">Free up to 48 hours before. Inside 48 hours the studio keeps the deposit.</p>
-        <div class="ml-section"><h3>When do I get paid?</h3></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3);max-width:64ch;margin-inline:auto">Within seven days of a completed session, to the account on your profile.</p>
-        <div class="ml-section"><h3>Why was my listing removed?</h3></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3);max-width:64ch;margin-inline:auto">Usually a prohibited item or someone else's photos. You always get an email saying which.</p>
+        <section class="ml-section-block"><div class="ml-section"><h3>When is the deposit taken?</h3></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3);max-width:64ch;margin-inline:auto">When the studio confirms your slot, not when you request it. If they decline, nothing is charged.</p></section>
+        <section class="ml-section-block"><div class="ml-section"><h3>Can I cancel a booking?</h3></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3);max-width:64ch;margin-inline:auto">Free up to 48 hours before. Inside 48 hours the studio keeps the deposit.</p></section>
+        <section class="ml-section-block"><div class="ml-section"><h3>When do I get paid?</h3></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3);max-width:64ch;margin-inline:auto">Within seven days of a completed session, to the account on your profile.</p></section>
+        <section class="ml-section-block"><div class="ml-section"><h3>Why was my listing removed?</h3></div>
+        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3);max-width:64ch;margin-inline:auto">Usually a prohibited item or someone else's photos. You always get an email saying which.</p></section>
       </div>
 
       <!-- policy / legal -->
-      <div data-state="policy" style="padding:var(--space-3) var(--space-4)">
+      <div data-state="policy" style="padding:var(--space-3) var(--space-4)" hidden>
         <span class="ml-eyebrow">Policy</span>
         <h2 class="ml-type-3" style="margin:var(--space-1) 0">Marketplace rules</h2>
         <div class="ml-summary" style="margin-bottom:var(--space-3)">
@@ -119,25 +120,25 @@
           <div class="ml-summary__row"><span>Version</span><span>2.1</span></div>
         </div>
         <div style="max-width:64ch;margin-inline:auto">
-          <div class="ml-section"><h3>What you may list</h3></div>
-          <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">Only what you own and can hand over or ship. No counterfeits, no stolen gear, no listings for something you have not got yet.</p>
-          <div class="ml-section"><h3>Offers</h3></div>
-          <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">An offer is binding for 48 hours. A seller may counter once. Neither side is charged until an offer is accepted.</p>
-          <div class="ml-section"><h3>Deposits and disputes</h3></div>
-          <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">Rental deposits are held, not paid out, until the item comes back. If the two sides disagree we hold the deposit until both have been heard.</p>
-          <div class="ml-section"><h3>Removal</h3></div>
-          <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">We remove listings that break these rules and email you the reason. Repeated breaches end an account.</p>
+          <section class="ml-section-block"><div class="ml-section"><h3>What you may list</h3></div>
+          <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">Only what you own and can hand over or ship. No counterfeits, no stolen gear, no listings for something you have not got yet.</p></section>
+          <section class="ml-section-block"><div class="ml-section"><h3>Offers</h3></div>
+          <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">An offer is binding for 48 hours. A seller may counter once. Neither side is charged until an offer is accepted.</p></section>
+          <section class="ml-section-block"><div class="ml-section"><h3>Deposits and disputes</h3></div>
+          <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">Rental deposits are held, not paid out, until the item comes back. If the two sides disagree we hold the deposit until both have been heard.</p></section>
+          <section class="ml-section-block"><div class="ml-section"><h3>Removal</h3></div>
+          <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">We remove listings that break these rules and email you the reason. Repeated breaches end an account.</p></section>
         </div>
       </div>
 
       <!-- help article: problem, explanation, steps -->
-      <div data-state="help" style="padding:var(--space-3) var(--space-4)">
+      <div data-state="help" style="padding:var(--space-3) var(--space-4)" hidden>
         <span class="ml-eyebrow">Help · Bookings</span>
         <h2 class="ml-type-3" style="margin:var(--space-1) 0">My deposit was taken but the booking isn't showing</h2>
         <p class="ml-lede" style="max-width:64ch;margin-inline:auto">
           Almost always a payment that succeeded at your bank but had not reached us when you last looked.
         </p>
-        <div class="ml-section" style="margin-top:var(--space-3)"><h3>What to do</h3></div>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>What to do</h3></div>
         <ol class="ml-timeline">
           <li class="ml-timeline__item is-done"><span class="ml-timeline__title">Check My bookings</span>
             <span class="ml-timeline__meta">Pull down to refresh</span></li>
@@ -145,11 +146,11 @@
             <span class="ml-timeline__meta">Most clear on their own</span></li>
           <li class="ml-timeline__item"><span class="ml-timeline__title">Still missing? Send us the reference</span></li>
         </ol>
-        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/user_settings/raise_ticket/index.html">Contact support</a>
+        <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/user_settings/raise_ticket/index.html">Contact support</a></section>
       </div>
 
       <!-- announcement -->
-      <div data-state="announcement" style="padding:var(--space-3) var(--space-4)">
+      <div data-state="announcement" style="padding:var(--space-3) var(--space-4)" hidden>
         <span class="ml-eyebrow">Announcement</span>
         <h2 class="ml-type-3" style="margin:var(--space-1) 0">Offers now expire after 48 hours</h2>
         <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-3)">31 August 2026</p>
@@ -161,25 +162,25 @@
         <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/marketplace/marketplace_browse/index.html">Go to Market</a>
       </div>
 
-      <div class="ml-empty" data-state="archived">
+      <div class="ml-empty" data-state="archived" hidden>
         <h2 class="ml-empty__title">This guide is out of date</h2>
         <p class="ml-empty__body">It described how deposits worked before August 2026. There is a current version.</p>
         <a class="ml-btn ml-btn--primary" href="?state=default">Read the current version</a>
       </div>
 
-      <div class="ml-empty" data-state="restricted">
+      <div class="ml-empty" data-state="restricted" hidden>
         <h2 class="ml-empty__title">You don't have access to this</h2>
         <p class="ml-empty__body">Some guides are only for business accounts.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/cms_pages/content_home/index.html">Back to guides</a>
       </div>
 
-      <div class="ml-empty" data-state="not_found">
+      <div class="ml-empty" data-state="not_found" hidden>
         <h2 class="ml-empty__title">This content is unavailable</h2>
         <p class="ml-empty__body">It may have been moved or withdrawn.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/cms_pages/content_home/index.html">Back to guides</a>
       </div>
 
-      <div class="ml-empty" data-state="offline">
+      <div class="ml-empty" data-state="offline" hidden>
         <h2 class="ml-empty__title">You're offline</h2>
         <p class="ml-empty__body">This is the copy we saved last time. It may have changed since.</p>
       </div>

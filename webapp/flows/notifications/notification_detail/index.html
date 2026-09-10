@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,19 +17,20 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/notifications/notifications_center/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">Notification</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div data-state="booking">
+      <div data-state="booking" data-state-default>
         <div class="ml-person-row">
           <img src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Ishita Rao</b><p>Booking request</p></span>
@@ -47,7 +48,7 @@
           <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/booking/my_bookings/index.html">Accept request</a>
         </div>
       </div>
-      <div data-state="collaboration">
+      <div data-state="collaboration" hidden>
         <div class="ml-person-row">
           <img src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Kabir Sheth</b><p>Collaboration invitation</p></span>
@@ -65,7 +66,7 @@
           <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/portfolio/portfolio_dashboard/index.html">Accept</a>
         </div>
       </div>
-      <div data-state="opportunity">
+      <div data-state="opportunity" hidden>
         <div class="ml-person-row">
           <img src="/assets/img/editorials/41f63164364f0757ddb2a20693f4b144.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Octave Sound Labs</b><p>Application shortlisted</p></span>
@@ -82,7 +83,7 @@
           <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/opportunities/opportunity_detail/index.html">View opportunity</a>
         </div>
       </div>
-      <div data-state="marketplace">
+      <div data-state="marketplace" hidden>
         <div class="ml-person-row">
           <img src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Aarav Menon</b><p>Counter offer</p></span>
@@ -100,7 +101,7 @@
           <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/marketplace/marketplace_order_status/index.html">Accept ₹26,000</a>
         </div>
       </div>
-      <div data-state="payment">
+      <div data-state="payment" hidden>
         <div class="ml-person-row">
           <img src="/assets/img/editorials/0e7b75cc331c13fd482936dd133a8363.jpg" alt="" loading="lazy" />
           <span class="meta"><b>MusicLinkd</b><p>Payment failed</p></span>
@@ -118,19 +119,19 @@
         </div>
       </div>
 
-      <div class="ml-empty" data-state="expired">
+      <div class="ml-empty" data-state="expired" hidden>
         <h2 class="ml-empty__title">This is no longer available</h2>
         <p class="ml-empty__body">The opportunity closed, or the offer expired, before you got to it.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/notifications/notifications_center/index.html">Back to notifications</a>
       </div>
 
-      <div class="ml-empty" data-state="entity_deleted">
+      <div class="ml-empty" data-state="entity_deleted" hidden>
         <h2 class="ml-empty__title">This content is no longer available</h2>
         <p class="ml-empty__body">It may have been deleted by whoever posted it.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/notifications/notifications_center/index.html">Back to notifications</a>
       </div>
 
-      <div class="ml-empty" data-state="permission_denied">
+      <div class="ml-empty" data-state="permission_denied" hidden>
         <h2 class="ml-empty__title">You don't have access to this</h2>
         <p class="ml-empty__body">Its visibility changed after you were notified.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/notifications/notifications_center/index.html">Back to notifications</a>

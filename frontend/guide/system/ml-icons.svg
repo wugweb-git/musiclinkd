@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-chevron-right" viewBox="0 0 24 24" fill="currentColor"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></symbol>
+  <symbol id="i-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="currentColor"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></symbol>
+  <symbol id="i-check-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="M10.09 2.24a2.1 2.1 0 0 1 3.82 0l2.2 4.63q.05.09.15.12l4.91.74c1.75.26 2.45 2.5 1.18 3.79l-3.55 3.6a.2.2 0 0 0-.06.18l.84 5.1c.3 1.81-1.53 3.2-3.1 2.34l-4.38-2.4a.2.2 0 0 0-.2 0l-4.39 2.4c-1.56.86-3.39-.53-3.1-2.34l.85-5.1a.2.2 0 0 0-.06-.17l-3.55-3.61c-1.27-1.29-.57-3.53 1.18-3.8L7.73 7a.2.2 0 0 0 .16-.12z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="currentColor"><path d="M10 16a6 6 0 1 1 .02-12.01A6 6 0 0 1 10 16m13.13 2.88L21 16.75l-2.13-2.13a10 10 0 1 0-4.24 4.24L16.75 21l2.13 2.13a3 3 0 0 0 4.25 0 3 3 0 0 0 0-4.24"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24" fill="currentColor"><path d="m22.18 13.58-9.13 9a1.5 1.5 0 0 1-2.1 0l-9.13-9a6.2 6.2 0 0 1 0-8.77 6.3 6.3 0 0 1 8.84 0L12 6.15l1.34-1.34a6.3 6.3 0 0 1 8.84 0 6.2 6.2 0 0 1 0 8.77"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 1 10v14h8v-7a3 3 0 1 1 6 0v7h8V10z"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24" fill="currentColor"><path d="M12.87 12.9a1.25 1.25 0 1 0-.89.37q.52-.01.89-.37m2.27 1.13A2 2 0 0 1 14 15.16l-8.38 3.22L8.84 10a2 2 0 0 1 1.13-1.13l8.61-3.45zm5.35-10.52A12 12 0 1 0 3.52 20.48 12 12 0 0 0 20.49 3.52z"/></symbol>
+  <symbol id="i-message" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a11 11 0 0 0-8.52 17.95l-1.46 5.43a.5.5 0 0 0 .73.55l5.08-2.75A10.98 10.98 0 0 0 23 11 11 11 0 0 0 12 0"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24" fill="currentColor"><path d="M12.25.25a6 6 0 0 0-6 6V7H2.5L1.01 17.13A6 6 0 0 0 6.95 24h10.1A6 6 0 0 0 23 17.13L21.5 7h-3.25v-.75a6 6 0 0 0-6-6M9.75 7v-.75a2.5 2.5 0 1 1 5 0V7z"/></symbol>
+  <symbol id="i-person" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 5.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0M2 22a10 10 0 1 1 20 0v2H2z"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19.5A1.75 1.75 0 1 1 9 16a1.75 1.75 0 0 1 0 3.5M22.25 16h-8.32a5.24 5.24 0 0 0-9.86 0H1.75a1.75 1.75 0 0 0 0 3.5h2.32a5.24 5.24 0 0 0 9.86 0h8.32a1.75 1.75 0 0 0 0-3.5M15 4.5A1.75 1.75 0 1 1 15 8a1.75 1.75 0 0 1 0-3.5M1.75 8h8.32a5.24 5.24 0 0 0 9.86 0h2.32a1.75 1.75 0 0 0 0-3.5h-2.32a5.24 5.24 0 0 0-9.86 0H1.75a1.75 1.75 0 0 0 0 3.5"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24" fill="currentColor"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M22.62 9.48 8.63.48A3 3 0 0 0 4 3v18a3 3 0 0 0 4.63 2.52l14-9a3 3 0 0 0 0-5.04"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24" fill="currentColor"><path d="m15.18 12 7.16-7.16a2.25 2.25 0 1 0-3.18-3.18L12 8.82 4.84 1.66a2.25 2.25 0 1 0-3.18 3.18L8.82 12l-7.16 7.16a2.25 2.25 0 1 0 3.18 3.18L12 15.18l7.16 7.16a2.24 2.24 0 0 0 3.18 0c.88-.88.88-2.3 0-3.18z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="currentColor"><path d="M22 10h-8V2a2 2 0 0 0-4 0v8H2a2 2 0 0 0 0 4h8v8a2 2 0 0 0 4 0v-8h8a2 2 0 0 0 0-4"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24" fill="currentColor"><path d="M19 7v6.17A10 10 0 0 1 22 19H2a10 10 0 0 1 3-5.83V7a7 7 0 1 1 14 0m-4 14a3 3 0 1 1-6 0z"/></symbol>
+  <symbol id="i-caret-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-plus-stroke" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-google" viewBox="0 0 24 24" fill="currentColor"><path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.67-.22-2.45H12v4.64h6.47c-.28 1.5-1.13 2.78-2.4 3.63v3.02h3.88c2.27-2.09 3.57-5.17 3.57-8.84z"/><path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.95-2.9l-3.88-3.02c-1.08.72-2.45 1.15-4.07 1.15-3.13 0-5.78-2.12-6.73-4.96H1.27v3.12C3.25 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.27A7.2 7.2 0 0 1 4.89 12c0-.79.14-1.56.38-2.27V6.61H1.27A12 12 0 0 0 0 12c0 1.94.46 3.77 1.27 5.39z"/><path fill="#EA4335" d="M12 4.77c1.77 0 3.35.61 4.6 1.8l3.44-3.44C17.96 1.19 15.24 0 12 0 7.31 0 3.25 2.7 1.27 6.61l4 3.12C6.22 6.89 8.87 4.77 12 4.77z"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24" fill="currentColor"><path d="M11 11H6v5h5zm9-7h-2.5V2.5a1.5 1.5 0 1 0-3 0V4h-5V2.5a1.5 1.5 0 1 0-3 0V4H4a3 3 0 0 0-3 3v13a3 3 0 0 0 3 3h16a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3M4 9h16v11H4z"/></symbol>
+  <symbol id="i-pin-tack" viewBox="0 0 24 24" fill="currentColor"><path d="M18 14a6 6 0 0 0-2.75-5.04V2.37A2.5 2.5 0 0 0 17 0H7a2.5 2.5 0 0 0 1.75 2.37v6.6A6 6 0 0 0 6 14h5v7.56c0 .95.38 1.8 1 2.44.62-.63 1-1.5 1-2.44V14z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a8 8 0 0 1 6.92 12L12 24 5.08 12a7.95 7.95 0 0 1 1.26-9.66A8 8 0 0 1 12 0m0 10.75a2.75 2.75 0 1 0 0-5.5 2.75 2.75 0 0 0 0 5.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="currentColor"><path d="M17.06 17.06a1.5 1.5 0 0 1-2.12 0l-4.44-4.44V6a1.5 1.5 0 0 1 3 0v5.38l3.56 3.56a1.5 1.5 0 0 1 0 2.12M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3a3 3 0 0 1 3-3 3 3 0 0 1 3 3v18a3 3 0 0 1-3 3 3 3 0 0 1-3-3zm10 0a3 3 0 0 1 3-3 3 3 0 0 1 3 3v18a3 3 0 0 1-3 3 3 3 0 0 1-3-3z"/></symbol>
+  <symbol id="i-verified" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24M6.37 11.61a1.25 1.25 0 0 1 1.76 0l2.37 2.36 5.37-5.35a1.25 1.25 0 0 1 1.76 1.76L10.5 17.5l-4.13-4.13a1.25 1.25 0 0 1 0-1.76"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a5 5 0 0 0-5 5v6a5 5 0 0 0 10 0V5a5 5 0 0 0-5-5M5.5 11.5a1.5 1.5 0 0 0-3 0 9 9 0 0 0 8 8.94v2.06a1.5 1.5 0 1 0 3 0v-2.06a9 9 0 0 0 8-8.94 1.5 1.5 0 0 0-3 0 6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24" fill="currentColor"><path d="M8 11a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9m10 3c-1.36 0-2.6.46-3.61 1.23A8 8 0 0 0 8 12c-4.42 0-8 3.62-8 8.08V22h24v-1.94A6.03 6.03 0 0 0 18 14m0-7.5a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5"/></symbol>
+  <symbol id="i-music-note" viewBox="0 0 24 24" fill="currentColor"><path d="M10.18 18.9V4.56c0-.6.49-1.1 1.1-1.1h8.36c.6 0 1.09.5 1.09 1.1v7.78a5.08 5.08 0 0 0-6.91 4.76 5.1 5.1 0 0 0 10.13.73H24V4.36A4.36 4.36 0 0 0 19.64 0h-8.37a4.36 4.36 0 0 0-4.36 4.36v9.8A5.07 5.07 0 0 0 0 18.9a5.1 5.1 0 0 0 10.18 0"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 7.5V5A2.5 2.5 0 0 1 9 2.5h6A2.5 2.5 0 0 1 17.5 5v2.5H21a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-11c0-1.1.9-2 2-2zm8 0v-2h-5v2z"/></symbol>
+  <symbol id="i-search-outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M8 7l4-4 4 4"/><path d="M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></symbol>
+  <symbol id="i-caret-right-2" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24" fill="currentColor"><path d="M17.45 1.95a3.25 3.25 0 1 1 4.6 4.6l-2.3 2.3-4.6-4.6zM2.5 16.9 13.4 6.02l4.6 4.6L7.08 21.5 1 23z"/></symbol>
+  <symbol id="i-bar-chart" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 1h-3a1 1 0 0 0-1 1v20a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1M22 7h-3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1M5 10H2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V11a1 1 0 0 0-1-1"/></symbol>
+  <symbol> elements into guide/system/ml-icons.svg.
+     Replaces: 🎹 x3 (which was doing duty for BOTH keyboard and piano) · 🥁 🎧 🎛 🎼 🪘 🧑 🔐 ⚡ 🎸
+
+     DELIBERATELY ONE GUITAR, NOT THREE. The first attempt drew acoustic, electric
+     and bass separately; rendered at 24px they were three near-identical shapes —
+     which reproduces the exact problem the emoji had, where one 🎸 served both
+     Acoustic and Bass Guitar. At icon scale the body outline is all that survives,
+     so the distinction cannot be carried by the glyph. The screens already print
+     "Acoustic Guitar" and "Bass Guitar" next to it; the label carries the meaning
+     and the icon carries the category. Fewer, clearer glyphs beat more, muddier ones.
+
+     NO HANDSHAKE EITHER. 🤝 appeared once, on the networking feed. The set already
+     has `people`, which says the same thing and is already recycled. A new glyph
+     used once is a backlog entry waiting to happen. -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+
+
+
+
+  <symbol id="i-keyboard" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M3 6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm1.4 2h1.4v4.6h1.4V8h1.6v4.6h1.4V8h1.6v4.6h1.4V8h1.6v4.6h1.4V8h1.6v4.6h1.4V8h1.4v8H4.4z"/>
+  </symbol>
+  <symbol id="i-piano" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M4 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 2h3.2v8.4H8.6V5h2.7v8.4h1.4V5h2.7v8.4h1.4V5H20v14H4z"/>
+  </symbol>
+  <symbol id="i-drums" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 4c-4.6 0-8.4 1.6-8.4 3.6v8.8C3.6 18.4 7.4 20 12 20s8.4-1.6 8.4-3.6V7.6C20.4 5.6 16.6 4 12 4zm0 2c3.9 0 6.4 1.2 6.4 1.6S15.9 9.2 12 9.2 5.6 8 5.6 7.6 8.1 6 12 6z"/>
+    <path d="M6.6 11.4 4.9 17a.9.9 0 0 0 1.7.5l1.7-5.6zm10.8 0-1.7.5 1.7 5.6a.9.9 0 0 0 1.7-.5z"/>
+  </symbol>
+  <symbol id="i-percussion" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2.6c-3.3 0-6 1.3-6 2.9 0 1.6 2.7 2.9 6 2.9s6-1.3 6-2.9c0-1.6-2.7-2.9-6-2.9z"/>
+    <path d="M6 7.9v5.6c0 2.4 1.2 4.6 2.4 6.2a3 3 0 0 0 2.4 1.3h2.4a3 3 0 0 0 2.4-1.3c1.2-1.6 2.4-3.8 2.4-6.2V7.9c-1.3 1.1-3.5 1.7-6 1.7s-4.7-.6-6-1.7z"/>
+  </symbol>
+  <symbol id="i-headphones" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 3a9 9 0 0 0-9 9v5.5A2.5 2.5 0 0 0 5.5 20H7a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H5.1A7 7 0 0 1 19 12.1V12h-2a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h1.5a2.5 2.5 0 0 0 2.5-2.5V12a9 9 0 0 0-9-9z"/>
+  </symbol>
+  <symbol id="i-mixer" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M4 3a1 1 0 0 0-1 1v16a1 1 0 0 0 2 0V4a1 1 0 0 0-1-1zm5 0a1 1 0 0 0-1 1v16a1 1 0 0 0 2 0V4a1 1 0 0 0-1-1zm5 0a1 1 0 0 0-1 1v16a1 1 0 0 0 2 0V4a1 1 0 0 0-1-1zm5 0a1 1 0 0 0-1 1v16a1 1 0 0 0 2 0V4a1 1 0 0 0-1-1z"/>
+    <path d="M4 6.4a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm5 7a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm5-4a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm5 4.6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+  </symbol>
+  <symbol id="i-score" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M5 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm2.5 4h9a.9.9 0 0 1 0 1.8h-9a.9.9 0 0 1 0-1.8zm0 3.4h9a.9.9 0 0 1 0 1.8h-9a.9.9 0 0 1 0-1.8zm7.6 3.6a.8.8 0 0 1 .9.8v3.4a2.1 2.1 0 1 1-1.6-2v-1.4a.8.8 0 0 1 .7-.8z"/>
+  </symbol>
+  <symbol id="i-vocalist" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M9.5 2.5a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8zM9.5 11c-3.6 0-6.5 2-6.5 4.4V21h13v-5.6c0-2.5-2.9-4.4-6.5-4.4z"/>
+    <path d="M18.4 3.1a1.7 1.7 0 0 0-1.7 1.7v4.4a1.7 1.7 0 0 0 3.4 0V4.8a1.7 1.7 0 0 0-1.7-1.7zm-3 6.1a.8.8 0 0 0-.8.8 3.8 3.8 0 0 0 3 3.7v1.6a.8.8 0 0 0 1.6 0v-1.6a3.8 3.8 0 0 0 3-3.7.8.8 0 0 0-1.6 0 2.2 2.2 0 0 1-4.4 0 .8.8 0 0 0-.8-.8z"/>
+  </symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2a5 5 0 0 0-5 5v2.4h-.4A2.6 2.6 0 0 0 4 12v7.4A2.6 2.6 0 0 0 6.6 22h10.8a2.6 2.6 0 0 0 2.6-2.6V12a2.6 2.6 0 0 0-2.6-2.6H17V7a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v2.4H9V7a3 3 0 0 1 3-3zm0 9.4a1.9 1.9 0 0 1 1 3.5v1.6a1 1 0 0 1-2 0v-1.6a1.9 1.9 0 0 1 1-3.5z"/>
+  </symbol>
+  <symbol id="i-guitar" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M21.3 1.5a.9.9 0 0 0-1.3 0l-1.5 1.5-.8-.8a.85.85 0 0 0-1.2 1.2l.7.7-3.9 3.9-.6-.6a.85.85 0 0 0-1.2 1.2l.5.5-2.2 2.2a4.3 4.3 0 0 0-2.3-.2 4.6 4.6 0 0 0-2.6 1.4 4.4 4.4 0 0 0-1 4.3 3.9 3.9 0 0 0 .8 1.5 3.9 3.9 0 0 0 1.5.8 4.4 4.4 0 0 0 4.3-1 4.6 4.6 0 0 0 1.4-2.6 4.3 4.3 0 0 0-.2-2.3l2.2-2.2.5.5a.85.85 0 0 0 1.2-1.2l-.6-.6 3.9-3.9.7.7a.85.85 0 0 0 1.2-1.2l-.8-.8 1.5-1.5a.9.9 0 0 0 0-1.3zM9.6 17.7a2 2 0 1 1-2.8-2.8 2 2 0 0 1 2.8 2.8z"/>
+  </symbol>
+</svg>

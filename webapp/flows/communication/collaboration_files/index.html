@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,40 +17,41 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/collaboration_project/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0;flex:1">Files</h1>
-      <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span><a class="ml-icon-btn ml-icon-btn--bare" href="?state=uploading" aria-label="Upload a file"><svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22 10h-8V2a2 2 0 0 0-4 0v8H2a2 2 0 0 0 0 4h8v8a2 2 0 0 0 4 0v-8h8a2 2 0 0 0 0-4"/></svg></a>
+      <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span><a class="ml-icon-btn ml-icon-btn--bare" href="?state=uploading" aria-label="Upload a file"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-plus"/></svg></a>
     </header>
     <nav class="ml-tabs" role="tablist" aria-label="File type" style="margin:0 var(--space-4)"
-         data-state="all audio video images documents versions">
+         data-state="all audio video images documents versions" data-state-default>
       <a class="ml-tabs__tab" role="tab" data-chip="all" href="?state=all">All</a><a class="ml-tabs__tab" role="tab" data-chip="audio" href="?state=audio">Audio</a><a class="ml-tabs__tab" role="tab" data-chip="video" href="?state=video">Video</a><a class="ml-tabs__tab" role="tab" data-chip="images" href="?state=images">Images</a><a class="ml-tabs__tab" role="tab" data-chip="documents" href="?state=documents">Docs</a>
     </nav>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
       <!-- Audio is not an attachment: it plays, and it says who made it and
            which version it is. -->
-      <div data-state="all audio">
-        <div class="ml-section"><h3>Rough mix v3</h3>
+      <div data-state="all audio" data-state-default>
+        <section class="ml-section-block"><div class="ml-section"><h3>Rough mix v3</h3>
           <a class="ml-section__link" href="?state=versions">3 versions</a></div>
         <div class="ml-player">
-          <button class="ml-player__btn" type="button" aria-label="Play Neon Monsoon — rough mix v3"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22.62 9.48 8.63.48A3 3 0 0 0 4 3v18a3 3 0 0 0 4.63 2.52l14-9a3 3 0 0 0 0-5.04"/></svg></button>
+          <button class="ml-player__btn" type="button" aria-label="Play Neon Monsoon — rough mix v3"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-play"/></svg></button>
           <span class="ml-player__wave" aria-hidden="true">
             <span class="ml-player__bar is-played" style="height:20%"></span><span class="ml-player__bar is-played" style="height:57%"></span><span class="ml-player__bar is-played" style="height:34%"></span><span class="ml-player__bar is-played" style="height:71%"></span><span class="ml-player__bar is-played" style="height:48%"></span><span class="ml-player__bar is-played" style="height:25%"></span><span class="ml-player__bar is-played" style="height:62%"></span><span class="ml-player__bar is-played" style="height:39%"></span><span class="ml-player__bar is-played" style="height:76%"></span><span class="ml-player__bar is-played" style="height:53%"></span><span class="ml-player__bar is-played" style="height:30%"></span><span class="ml-player__bar is-played" style="height:67%"></span><span class="ml-player__bar is-played" style="height:44%"></span><span class="ml-player__bar" style="height:21%"></span><span class="ml-player__bar" style="height:58%"></span><span class="ml-player__bar" style="height:35%"></span><span class="ml-player__bar" style="height:72%"></span><span class="ml-player__bar" style="height:49%"></span><span class="ml-player__bar" style="height:26%"></span><span class="ml-player__bar" style="height:63%"></span><span class="ml-player__bar" style="height:40%"></span><span class="ml-player__bar" style="height:77%"></span><span class="ml-player__bar" style="height:54%"></span><span class="ml-player__bar" style="height:31%"></span><span class="ml-player__bar" style="height:68%"></span><span class="ml-player__bar" style="height:45%"></span><span class="ml-player__bar" style="height:22%"></span><span class="ml-player__bar" style="height:59%"></span><span class="ml-player__bar" style="height:36%"></span><span class="ml-player__bar" style="height:73%"></span><span class="ml-player__bar" style="height:50%"></span><span class="ml-player__bar" style="height:27%"></span>
           </span>
           <span class="ml-player__time">2:41</span>
         </div>
-        <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 var(--space-3)">Neon Monsoon — rough mix v3 · Rohan D'Souza · 2 days ago · current</p>
-        <div class="ml-section"><h3>Vocal stems</h3></div>
+        <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 var(--space-3)">Neon Monsoon — rough mix v3 · Rohan D'Souza · 2 days ago · current</p></section>
+        <section class="ml-section-block"><div class="ml-section"><h3>Vocal stems</h3></div>
         <div class="ml-player">
-          <button class="ml-player__btn" type="button" aria-label="Play Neon Monsoon — lead vocal, comped"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22.62 9.48 8.63.48A3 3 0 0 0 4 3v18a3 3 0 0 0 4.63 2.52l14-9a3 3 0 0 0 0-5.04"/></svg></button>
+          <button class="ml-player__btn" type="button" aria-label="Play Neon Monsoon — lead vocal, comped"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-play"/></svg></button>
           <span class="ml-player__wave" aria-hidden="true">
             <span class="ml-player__bar is-played" style="height:20%"></span><span class="ml-player__bar is-played" style="height:57%"></span><span class="ml-player__bar is-played" style="height:34%"></span><span class="ml-player__bar is-played" style="height:71%"></span><span class="ml-player__bar is-played" style="height:48%"></span><span class="ml-player__bar is-played" style="height:25%"></span><span class="ml-player__bar is-played" style="height:62%"></span><span class="ml-player__bar is-played" style="height:39%"></span><span class="ml-player__bar is-played" style="height:76%"></span><span class="ml-player__bar is-played" style="height:53%"></span><span class="ml-player__bar is-played" style="height:30%"></span><span class="ml-player__bar is-played" style="height:67%"></span><span class="ml-player__bar is-played" style="height:44%"></span><span class="ml-player__bar is-played" style="height:21%"></span><span class="ml-player__bar is-played" style="height:58%"></span><span class="ml-player__bar is-played" style="height:35%"></span><span class="ml-player__bar is-played" style="height:72%"></span><span class="ml-player__bar is-played" style="height:49%"></span><span class="ml-player__bar is-played" style="height:26%"></span><span class="ml-player__bar is-played" style="height:63%"></span><span class="ml-player__bar is-played" style="height:40%"></span><span class="ml-player__bar is-played" style="height:77%"></span><span class="ml-player__bar is-played" style="height:54%"></span><span class="ml-player__bar is-played" style="height:31%"></span><span class="ml-player__bar is-played" style="height:68%"></span><span class="ml-player__bar is-played" style="height:45%"></span><span class="ml-player__bar is-played" style="height:22%"></span><span class="ml-player__bar is-played" style="height:59%"></span><span class="ml-player__bar is-played" style="height:36%"></span><span class="ml-player__bar is-played" style="height:73%"></span><span class="ml-player__bar is-played" style="height:50%"></span><span class="ml-player__bar is-played" style="height:27%"></span>
           </span>
@@ -58,17 +59,17 @@
         </div>
         <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 var(--space-3)">Neon Monsoon — lead vocal, comped · Ishita Rao · 22 Aug</p>
         <div class="ml-player">
-          <button class="ml-player__btn" type="button" aria-label="Play Neon Monsoon — chorus stack"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22.62 9.48 8.63.48A3 3 0 0 0 4 3v18a3 3 0 0 0 4.63 2.52l14-9a3 3 0 0 0 0-5.04"/></svg></button>
+          <button class="ml-player__btn" type="button" aria-label="Play Neon Monsoon — chorus stack"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-play"/></svg></button>
           <span class="ml-player__wave" aria-hidden="true">
             <span class="ml-player__bar is-played" style="height:20%"></span><span class="ml-player__bar is-played" style="height:57%"></span><span class="ml-player__bar is-played" style="height:34%"></span><span class="ml-player__bar is-played" style="height:71%"></span><span class="ml-player__bar is-played" style="height:48%"></span><span class="ml-player__bar is-played" style="height:25%"></span><span class="ml-player__bar is-played" style="height:62%"></span><span class="ml-player__bar is-played" style="height:39%"></span><span class="ml-player__bar is-played" style="height:76%"></span><span class="ml-player__bar is-played" style="height:53%"></span><span class="ml-player__bar is-played" style="height:30%"></span><span class="ml-player__bar is-played" style="height:67%"></span><span class="ml-player__bar is-played" style="height:44%"></span><span class="ml-player__bar is-played" style="height:21%"></span><span class="ml-player__bar is-played" style="height:58%"></span><span class="ml-player__bar is-played" style="height:35%"></span><span class="ml-player__bar is-played" style="height:72%"></span><span class="ml-player__bar is-played" style="height:49%"></span><span class="ml-player__bar is-played" style="height:26%"></span><span class="ml-player__bar is-played" style="height:63%"></span><span class="ml-player__bar is-played" style="height:40%"></span><span class="ml-player__bar is-played" style="height:77%"></span><span class="ml-player__bar is-played" style="height:54%"></span><span class="ml-player__bar is-played" style="height:31%"></span><span class="ml-player__bar is-played" style="height:68%"></span><span class="ml-player__bar is-played" style="height:45%"></span><span class="ml-player__bar is-played" style="height:22%"></span><span class="ml-player__bar is-played" style="height:59%"></span><span class="ml-player__bar is-played" style="height:36%"></span><span class="ml-player__bar is-played" style="height:73%"></span><span class="ml-player__bar is-played" style="height:50%"></span><span class="ml-player__bar is-played" style="height:27%"></span>
           </span>
           <span class="ml-player__time">2:41</span>
         </div>
-        <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 var(--space-3)">Neon Monsoon — chorus stack · Ishita Rao · 22 Aug</p>
+        <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 var(--space-3)">Neon Monsoon — chorus stack · Ishita Rao · 22 Aug</p></section>
       </div>
 
-      <div data-state="all images">
-        <div class="ml-section"><h3>References and artwork</h3></div>
+      <div data-state="all images" data-state-default>
+        <section class="ml-section-block"><div class="ml-section"><h3>References and artwork</h3></div>
         <div class="ml-upload-grid">
           <div class="ml-upload-grid__item">
             <img src="/assets/img/6/02d124205931695.66c4331e162d1.jpg" alt="" loading="lazy" />
@@ -80,50 +81,50 @@
             <img src="/assets/img/6/0ad951188258241.6599204c7ae25.jpg" alt="" loading="lazy" />
           </div>
           <button class="ml-upload-grid__add" type="button" aria-label="Add an image"></button>
-        </div>
+        </div></section>
       </div>
 
-      <div data-state="all video">
-        <div class="ml-section"><h3>Video</h3></div>
+      <div data-state="all video" data-state-default>
+        <section class="ml-section-block"><div class="ml-section"><h3>Video</h3></div>
         <div class="ml-attachment">
-          <span class="ml-attachment__icon"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22.62 9.48 8.63.48A3 3 0 0 0 4 3v18a3 3 0 0 0 4.63 2.52l14-9a3 3 0 0 0 0-5.04"/></svg></span>
+          <span class="ml-attachment__icon"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-play"/></svg></span>
           <span class="ml-attachment__body">
             <span class="ml-attachment__name">Live room take — 22 Aug.mp4</span>
             <span class="ml-attachment__meta">Kabir Sheth · 84 MB</span>
           </span>
-        </div>
+        </div></section>
       </div>
 
       <!-- Documents DO use .ml-attachment. That is the distinction the brief
            asks for: audio is a first-class object, a lyric sheet is a file. -->
-      <div data-state="all documents">
-        <div class="ml-section"><h3>Documents</h3></div>
+      <div data-state="all documents" data-state-default>
+        <section class="ml-section-block"><div class="ml-section"><h3>Documents</h3></div>
         <div class="ml-attachment">
-          <span class="ml-attachment__icon"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span>
+          <span class="ml-attachment__icon"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check"/></svg></span>
           <span class="ml-attachment__body">
             <span class="ml-attachment__name">Neon Monsoon — lyrics v2.pdf</span>
             <span class="ml-attachment__meta">Kabir Sheth · 84 KB</span>
           </span>
         </div>
         <div class="ml-attachment">
-          <span class="ml-attachment__icon"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span>
+          <span class="ml-attachment__icon"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check"/></svg></span>
           <span class="ml-attachment__body">
             <span class="ml-attachment__name">Split sheet — draft.pdf</span>
             <span class="ml-attachment__meta">Kabir Sheth · 120 KB</span>
           </span>
         </div>
         <div class="ml-attachment">
-          <span class="ml-attachment__icon"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 22 .73 13.75a2.5 2.5 0 1 1 3.54-3.53L9 14.94l10.73-10.7a2.5 2.5 0 0 1 3.54 3.52z"/></svg></span>
+          <span class="ml-attachment__icon"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-check"/></svg></span>
           <span class="ml-attachment__body">
             <span class="ml-attachment__name">Chord chart.pdf</span>
             <span class="ml-attachment__meta">Ishita Rao · 61 KB</span>
           </span>
-        </div>
+        </div></section>
       </div>
 
       <!-- Versions are kept, never overwritten. -->
-      <div data-state="versions">
-        <div class="ml-section"><h3>Rough mix — all versions</h3></div>
+      <div data-state="versions" hidden>
+        <section class="ml-section-block"><div class="ml-section"><h3>Rough mix — all versions</h3></div>
         <ol class="ml-timeline">
           <li class="ml-timeline__item is-current">
             <span class="ml-timeline__title">v3 — current</span>
@@ -143,10 +144,10 @@
         </ol>
         <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
           Older versions are kept. Nothing is overwritten.
-        </p>
+        </p></section>
       </div>
 
-      <div data-state="uploading">
+      <div data-state="uploading" hidden>
         <div class="ml-dropzone">
           <span class="ml-dropzone__hint">Drop a file, or choose one</span>
           <span class="ml-dropzone__formats">WAV, MP3, MP4, JPG, PNG, PDF</span>
@@ -159,15 +160,15 @@
         <a class="ml-btn ml-btn--ghost ml-btn--block" style="margin-top:var(--space-2)" href="?state=all">Cancel upload</a>
       </div>
 
-      <div data-state="upload_error">
+      <div data-state="upload_error" hidden>
         <div class="ml-banner ml-banner--error">
           <span class="ml-banner__body">Upload failed at 62%. Nothing was saved.</span>
         </div>
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=uploading">Retry</a>
       </div>
 
-      <div data-state="access">
-        <div class="ml-section"><h3>Who can open this file?</h3></div>
+      <div data-state="access" hidden>
+        <section class="ml-section-block"><div class="ml-section"><h3>Who can open this file?</h3></div>
         <div role="radiogroup" aria-label="File access">
           <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
             <span class="ml-choice__body">
@@ -183,10 +184,10 @@
             </span>
             <span class="ml-choice__mark"></span>
           </div>
-        </div>
+        </div></section>
       </div>
 
-      <div class="ml-empty" data-state="unavailable">
+      <div class="ml-empty" data-state="unavailable" hidden>
         <h2 class="ml-empty__title">This file is no longer available</h2>
         <p class="ml-empty__body">Whoever uploaded it removed it. Other versions may still be there.</p>
         <a class="ml-btn ml-btn--primary" href="?state=versions">See versions</a>

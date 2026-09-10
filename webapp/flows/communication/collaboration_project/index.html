@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,25 +17,26 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/collaborations/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0;flex:1">Neon Monsoon</h1>
       <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
     </header>
     <nav class="ml-tabs" role="tablist" aria-label="Project" style="margin:0 var(--space-4)"
-         data-state="overview participants files timeline activity notes no_files no_milestones no_activity">
+         data-state="overview participants files timeline activity notes no_files no_milestones no_activity" data-state-default>
       <a class="ml-tabs__tab" role="tab" data-chip="overview" href="?state=overview">Overview</a><a class="ml-tabs__tab" role="tab" data-chip="participants" href="?state=participants">People</a><a class="ml-tabs__tab" role="tab" data-chip="timeline" href="?state=timeline">Timeline</a><a class="ml-tabs__tab" role="tab" data-chip="activity" href="?state=activity">Activity</a><a class="ml-tabs__tab" role="tab" data-chip="notes" href="?state=notes">Notes</a>
     </nav>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
-      <div data-state="overview">
+      <div data-state="overview" data-state-default>
         <span class="ml-status ml-status--success">Active</span>
         <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">Neon Monsoon</h2>
         <p class="ml-type-2" style="color:var(--color-muted);margin:0">
@@ -48,26 +49,26 @@
           <img src="/assets/img/editorials/3dee9cb6252a4c8f8a149c9fd40d4a9e.jpg" alt="" loading="lazy" />
         </div>
 
-        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Latest</h3>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Latest</h3>
           <a class="ml-section__link" href="/preview/flows/communication/collaboration_files/index.html">All files</a></div>
         <div class="ml-player">
-          <button class="ml-player__btn" type="button" aria-label="Play Neon Monsoon — rough mix v3"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22.62 9.48 8.63.48A3 3 0 0 0 4 3v18a3 3 0 0 0 4.63 2.52l14-9a3 3 0 0 0 0-5.04"/></svg></button>
+          <button class="ml-player__btn" type="button" aria-label="Play Neon Monsoon — rough mix v3"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-play"/></svg></button>
           <span class="ml-player__wave" aria-hidden="true">
             <span class="ml-player__bar is-played" style="height:20%"></span><span class="ml-player__bar is-played" style="height:57%"></span><span class="ml-player__bar is-played" style="height:34%"></span><span class="ml-player__bar is-played" style="height:71%"></span><span class="ml-player__bar is-played" style="height:48%"></span><span class="ml-player__bar is-played" style="height:25%"></span><span class="ml-player__bar is-played" style="height:62%"></span><span class="ml-player__bar is-played" style="height:39%"></span><span class="ml-player__bar is-played" style="height:76%"></span><span class="ml-player__bar is-played" style="height:53%"></span><span class="ml-player__bar is-played" style="height:30%"></span><span class="ml-player__bar is-played" style="height:67%"></span><span class="ml-player__bar is-played" style="height:44%"></span><span class="ml-player__bar" style="height:21%"></span><span class="ml-player__bar" style="height:58%"></span><span class="ml-player__bar" style="height:35%"></span><span class="ml-player__bar" style="height:72%"></span><span class="ml-player__bar" style="height:49%"></span><span class="ml-player__bar" style="height:26%"></span><span class="ml-player__bar" style="height:63%"></span><span class="ml-player__bar" style="height:40%"></span><span class="ml-player__bar" style="height:77%"></span><span class="ml-player__bar" style="height:54%"></span><span class="ml-player__bar" style="height:31%"></span><span class="ml-player__bar" style="height:68%"></span><span class="ml-player__bar" style="height:45%"></span><span class="ml-player__bar" style="height:22%"></span><span class="ml-player__bar" style="height:59%"></span><span class="ml-player__bar" style="height:36%"></span><span class="ml-player__bar" style="height:73%"></span><span class="ml-player__bar" style="height:50%"></span><span class="ml-player__bar" style="height:27%"></span>
           </span>
           <span class="ml-player__time">2:41</span>
         </div>
-        <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 var(--space-3)">Neon Monsoon — rough mix v3 · Rohan D'Souza · 2 days ago</p>
+        <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 var(--space-3)">Neon Monsoon — rough mix v3 · Rohan D'Souza · 2 days ago</p></section>
 
-        <div class="ml-section"><h3>Where it's up to</h3>
+        <section class="ml-section-block"><div class="ml-section"><h3>Where it's up to</h3>
           <a class="ml-section__link" href="?state=timeline">Timeline</a></div>
         <div class="ml-progress">
           <span class="ml-progress__title">2 of 4 milestones</span>
           <span class="ml-progress__meta">50%</span>
           <span class="ml-progress__track"><span class="ml-progress__fill" style="width:50%"></span></span>
-        </div>
+        </div></section>
 
-        <div class="ml-section" style="margin-top:var(--space-3)"><h3>Agreed</h3></div>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Agreed</h3></div>
         <div class="ml-summary">
           <div class="ml-summary__row"><span>Your role</span><span>Lead vocal</span></div>
           <div class="ml-summary__row"><span>Credit</span><span>Yes, on release</span></div>
@@ -76,52 +77,52 @@
         </div>
         <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
           What everyone agreed when the proposal was accepted. It is a record, not a contract.
-        </p>
+        </p></section>
 
-        <div class="ml-section" style="margin-top:var(--space-3)"><h3>The project needs</h3></div>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>The project needs</h3></div>
         <a class="ml-action-row" href="/preview/flows/booking/studio_discovery/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Book a room</span>
           <span class="ml-choice__meta">Studio or rehearsal</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="/preview/flows/public_profile/talent_services_view/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Find a service</span>
           <span class="ml-choice__meta">Mixing, mastering, art</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="/preview/flows/marketplace/marketplace_browse/index.html?state=rental">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Rent equipment</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
-      </a>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
+      </a></section>
       </div>
 
-      <div data-state="participants">
+      <div data-state="participants" hidden>
         <div class="ml-person-row">
           <img src="/assets/img/editorials/291c9c89af5a84fd95b6be0fc51380a8.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Ishita Rao</b><p>Lead vocal · you</p></span>
-          <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_conversation/index.html" aria-label="Message Ishita Rao"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg></a>
+          <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_conversation/index.html" aria-label="Message Ishita Rao"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-send"/></svg></a>
         </div>
         <div class="ml-person-row">
           <img src="/assets/img/editorials/57aaa337f11143d89be62ba33e20211d.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Kabir Sheth</b><p>Producer · owner</p></span>
-          <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_conversation/index.html" aria-label="Message Kabir Sheth"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg></a>
+          <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_conversation/index.html" aria-label="Message Kabir Sheth"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-send"/></svg></a>
         </div>
         <div class="ml-person-row">
           <img src="/assets/img/editorials/4b18ab6b2f209a6f51a9d38de6d3f07f.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Rohan D'Souza</b><p>Mixing engineer</p></span>
-          <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_conversation/index.html" aria-label="Message Rohan D'Souza"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg></a>
+          <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_conversation/index.html" aria-label="Message Rohan D'Souza"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-send"/></svg></a>
         </div>
         <div class="ml-person-row">
           <img src="/assets/img/editorials/3dee9cb6252a4c8f8a149c9fd40d4a9e.jpg" alt="" loading="lazy" />
           <span class="meta"><b>Meera Nair</b><p>Backing vocals</p></span>
-          <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_conversation/index.html" aria-label="Message Meera Nair"><svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m.46 2.43-.03.03c-.4.42-.58 1.06-.28 1.68L3 10.5 16 12 3 13.5.15 19.86c-.3.62-.13 1.26.27 1.67l.05.05c.4.38 1 .56 1.62.3l20.99-8.5q.28-.12.47-.3l.04-.04c.68-.71.51-2-.51-2.42L2.09 2.12Q1.79 2 1.49 2q-.61.01-1.03.43"/></svg></a>
+          <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/communication/chat_conversation/index.html" aria-label="Message Meera Nair"><svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-send"/></svg></a>
         </div>
         <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-2)" href="/preview/flows/communication/collaboration_proposal/index.html?state=invitation">Invite someone</a>
         <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">
@@ -129,7 +130,7 @@
         </p>
       </div>
 
-      <div data-state="timeline">
+      <div data-state="timeline" hidden>
         <ol class="ml-timeline">
           <li class="ml-timeline__item is-done">
             <span class="ml-timeline__title">Lyrics approved</span>
@@ -154,7 +155,7 @@
         </p>
       </div>
 
-      <div data-state="activity">
+      <div data-state="activity" hidden>
         <ol class="ml-timeline">
           <li class="ml-timeline__item is-done">
             <span class="ml-timeline__title">Rohan uploaded rough mix v3</span>
@@ -179,8 +180,8 @@
         </ol>
       </div>
 
-      <div data-state="notes">
-        <div class="ml-section"><h3>Decisions</h3></div>
+      <div data-state="notes" hidden>
+        <section class="ml-section-block"><div class="ml-section"><h3>Decisions</h3></div>
         <div class="ml-summary">
           <div class="ml-summary__row"><span>Key</span><span>D minor, capo 2</span></div>
           <div class="ml-summary__row"><span>Reference</span><span>Restrained verse, open chorus</span></div>
@@ -189,11 +190,11 @@
         <div class="ml-field" style="margin-top:var(--space-3)">
           <label for="p-note">Add a note</label>
           <textarea id="p-note" rows="3" placeholder="Something everyone should remember."></textarea>
-        </div>
+        </div></section>
       </div>
 
       <!-- Lifecycle. Same project, different state of the world. -->
-      <div data-state="on_hold">
+      <div data-state="on_hold" hidden>
         <div class="ml-banner ml-banner--warning">
           <span class="ml-banner__body">On hold since 26 August — waiting on stems from Kabir.</span>
         </div>
@@ -203,51 +204,51 @@
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=overview">Resume project</a>
       </div>
 
-      <div class="ml-empty" data-state="completed">
+      <div class="ml-empty" data-state="completed" hidden>
         <h2 class="ml-empty__title">Completed 14 August</h2>
         <p class="ml-empty__body">Four people, four milestones, eleven files. Two things left worth doing.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/portfolio/portfolio_dashboard/index.html">Add to your portfolio</a>
         <a class="ml-btn ml-btn--secondary" style="margin-top:var(--space-2)" href="/preview/flows/reviews/completed_project_review/index.html">Review the collaboration</a>
       </div>
 
-      <div class="ml-empty" data-state="cancelled">
+      <div class="ml-empty" data-state="cancelled" hidden>
         <h2 class="ml-empty__title">This project was cancelled</h2>
         <p class="ml-empty__body">Files and messages are kept for everyone who was on it. Nothing was deleted.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/communication/collaborations/index.html">Back to collaborations</a>
       </div>
 
-      <div class="ml-empty" data-state="archived">
+      <div class="ml-empty" data-state="archived" hidden>
         <h2 class="ml-empty__title">Archived</h2>
         <p class="ml-empty__body">Out of your active list, still readable, and restorable.</p>
         <a class="ml-btn ml-btn--primary" href="?state=overview">Restore project</a>
       </div>
 
-      <div class="ml-empty" data-state="no_files">
+      <div class="ml-empty" data-state="no_files" hidden>
         <h2 class="ml-empty__title">No files yet</h2>
         <p class="ml-empty__body">Stems, references, lyrics, a rough phone recording — whatever gets it started.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/communication/collaboration_files/index.html?state=uploading">Upload the first file</a>
       </div>
-      <div class="ml-empty" data-state="no_milestones">
+      <div class="ml-empty" data-state="no_milestones" hidden>
         <h2 class="ml-empty__title">No milestones</h2>
         <p class="ml-empty__body">Three or four dates everyone agrees on is usually enough.</p>
         <a class="ml-btn ml-btn--primary" href="?state=timeline">Add a milestone</a>
       </div>
-      <div class="ml-empty" data-state="no_activity">
+      <div class="ml-empty" data-state="no_activity" hidden>
         <h2 class="ml-empty__title">Nothing has happened yet</h2>
         <p class="ml-empty__body">Joins, uploads and completed milestones show up here.</p>
       </div>
 
-      <div class="ml-empty" data-state="permission_denied">
+      <div class="ml-empty" data-state="permission_denied" hidden>
         <h2 class="ml-empty__title">You don't have access to this project</h2>
         <p class="ml-empty__body">Only its participants can open it.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/communication/collaborations/index.html">Back</a>
       </div>
-      <div class="ml-empty" data-state="deleted">
+      <div class="ml-empty" data-state="deleted" hidden>
         <h2 class="ml-empty__title">This collaboration is no longer available</h2>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/communication/collaborations/index.html">Back to collaborations</a>
       </div>
     </main>
-    <footer class="ml-app__footer" data-state="overview participants timeline activity notes" style="display:flex;gap:var(--space-2)">
+    <footer class="ml-app__footer" data-state="overview participants timeline activity notes" style="display:flex;gap:var(--space-2)" data-state-default>
       <a class="ml-btn ml-btn--secondary" style="flex:1" href="/preview/flows/communication/chat_conversation/index.html">Discuss</a>
       <a class="ml-btn ml-btn--primary" style="flex:1" href="/preview/flows/communication/collaboration_files/index.html">Files</a>
     </footer>

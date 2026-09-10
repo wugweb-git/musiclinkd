@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,13 +17,14 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
     <header class="ml-navbar"><a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/onboarding/persona_badges/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a><span class="ml-navbar__spacer"></span><div class="ml-steps">
         <span class="ml-steps__label">11/13</span>
         <span class="ml-steps__track"><span class="ml-steps__fill" style="width:85%"></span></span>
@@ -35,7 +36,7 @@
       </div>
 
       <div>
-        <div class="ml-section"><h2>Profile</h2><a class="ml-section__link" href="/preview/flows/onboarding/profile_creation/index.html">Edit</a></div>
+        <section class="ml-section-block"><div class="ml-section"><h2>Profile</h2><a class="ml-section__link" href="/preview/flows/onboarding/profile_creation/index.html">Edit</a></div>
         <div class="ml-card ml-card--padded">
           <div class="ml-row">
           <span class="ml-row__body">
@@ -49,11 +50,11 @@
             <span class="ml-row__title">Mumbai, MH · Andheri West</span>
           </span>
         </div>
-        </div>
+        </div></section>
       </div>
 
       <div>
-        <div class="ml-section"><h2>Role</h2><a class="ml-section__link" href="/preview/flows/onboarding/primary_role/index.html">Edit</a></div>
+        <section class="ml-section-block"><div class="ml-section"><h2>Role</h2><a class="ml-section__link" href="/preview/flows/onboarding/primary_role/index.html">Edit</a></div>
         <div class="ml-card ml-card--padded">
           <div class="ml-row">
           <span class="ml-row__body">
@@ -67,21 +68,21 @@
             <span class="ml-row__title">Composer</span>
           </span>
         </div>
-        </div>
+        </div></section>
       </div>
 
       <div>
-        <div class="ml-section"><h2>Skills</h2><a class="ml-section__link" href="/preview/flows/onboarding/genres/index.html">Edit</a></div>
+        <section class="ml-section-block"><div class="ml-section"><h2>Skills</h2><a class="ml-section__link" href="/preview/flows/onboarding/genres/index.html">Edit</a></div>
         <div class="ml-card ml-card--padded" style="display:flex;flex-direction:column;gap:var(--space-3)">
           <div><div class="ml-row__meta">Genres</div><div class="ml-chip-wrap" style="margin-top:var(--space-2)"><button class="ml-chip" aria-pressed="true">Bollywood / Filmi</button><button class="ml-chip" aria-pressed="true">Sufi Devotional</button></div></div>
           <div><div class="ml-row__meta">Languages</div><div class="ml-chip-wrap" style="margin-top:var(--space-2)"><button class="ml-chip" aria-pressed="true">Hindi</button><button class="ml-chip" aria-pressed="true">English</button></div></div>
           <div><div class="ml-row__meta">Instruments</div><div class="ml-chip-wrap" style="margin-top:var(--space-2)"><button class="ml-chip" aria-pressed="true">Acoustic Guitar · 6 yrs</button><button class="ml-chip" aria-pressed="true">Bass Guitar · 2 yrs</button></div></div>
-        </div>
+        </div></section>
       </div>
 
       <div>
-        <div class="ml-section"><h2>Badges</h2><a class="ml-section__link" href="/preview/flows/onboarding/persona_badges/index.html">Edit</a></div>
-        <div class="ml-chip-wrap"><button class="ml-chip" aria-pressed="true">Available for Collab</button><button class="ml-chip" aria-pressed="true">Open to Session Work</button><button class="ml-chip" aria-pressed="true">Recording</button></div>
+        <section class="ml-section-block"><div class="ml-section"><h2>Badges</h2><a class="ml-section__link" href="/preview/flows/onboarding/persona_badges/index.html">Edit</a></div>
+        <div class="ml-chip-wrap"><button class="ml-chip" aria-pressed="true">Available for Collab</button><button class="ml-chip" aria-pressed="true">Open to Session Work</button><button class="ml-chip" aria-pressed="true">Recording</button></div></section>
       </div>
     </main>
     <footer class="ml-app__footer">

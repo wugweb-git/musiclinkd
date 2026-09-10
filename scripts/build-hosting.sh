@@ -30,6 +30,22 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+# BSD and GNU disagree on two flags this script needs, so it used to run on a
+# Mac and nowhere else — not in CI, not in a container. `sed -i` takes a
+# MANDATORY backup suffix on BSD and REFUSES one on GNU; `stat` spells the size
+# format -f%z on BSD and -c%s on GNU. Detect once, use everywhere.
+#
+# SED_I is an array, not a function, deliberately: one of the two call sites is
+# `xargs -0 sed ...`, and xargs execs a real binary — it cannot see a shell
+# function. An array expands correctly on both sides.
+if sed --version >/dev/null 2>&1; then
+  SED_I=(-i)                           # GNU
+  filesize() { stat -c%s "$1"; }
+else
+  SED_I=(-i '')                        # BSD / macOS
+  filesize() { stat -f%z "$1"; }
+fi
+
 echo "==> Building admin/"
 (cd admin && npm run build)
 
@@ -43,6 +59,13 @@ echo "==> Building admin/"
 echo "==> Verifying generated artefacts are current"
 node scripts/build-tokens.mjs --check
 node scripts/build-handoff.mjs --check
+
+# The screen registry is DERIVED, never committed by hand. The list it replaces
+# was hand-maintained and drifted 118 screens out of date, so the workbench
+# reported the product as 42% built while every screen was finished. Generating
+# it here removes the step there was to forget.
+echo "==> Generating the screen registry from webapp/flows"
+(cd webapp && node ../scripts/build-registry.mjs flows --write)
 
 echo "==> Generating changelog page from CHANGELOG.md"
 node scripts/generate-changelog.mjs
@@ -78,7 +101,7 @@ while IFS= read -r f; do [ -n "$f" ] && MEDIA_RULES+=(--include="$f"); done <<< 
 for d in 1 4 5 6 inspiration; do MEDIA_RULES+=(--exclude="assets/img/$d/*"); done
 KEEP_N=$(printf '%s\n' "$MEDIA_KEEP" | grep -c . || true)
 KEEP_BYTES=$(printf '%s\n' "$MEDIA_KEEP" | while IFS= read -r f; do
-  [ -n "$f" ] && [ -f "frontend/website/$f" ] && stat -f%z "frontend/website/$f" 2>/dev/null || true
+  [ -n "$f" ] && [ -f "frontend/website/$f" ] && filesize "frontend/website/$f" 2>/dev/null || true
 done | awk '{t+=$1} END {printf "%.1f", t/1048576}')
 echo "    keeping $KEEP_N referenced media files (${KEEP_BYTES}MB) of $(find frontend/website/assets/img/{1,4,5,6,inspiration} -type f 2>/dev/null | wc -l | tr -d ' ')"
 
@@ -182,7 +205,7 @@ SW_ID=$(cat dist/preview/manifest.json \
         dist/preview/shared/app-shell.js \
         dist/preview/shared/icon.svg \
         dist/preview/offline.html 2>/dev/null | shasum -a 256 | cut -c1-12)
-sed -i '' "s/__BUILD_ID__/$SW_ID/" dist/preview/service-worker.js
+sed "${SED_I[@]}" "s/__BUILD_ID__/$SW_ID/" dist/preview/service-worker.js
 grep -q "__BUILD_ID__" dist/preview/service-worker.js && \
   { echo "    ERROR: service-worker.js BUILD_ID not stamped"; exit 1; }
 echo "    service worker cache: musiclinkd-shell-$SW_ID"
@@ -203,6 +226,7 @@ echo "    service worker cache: musiclinkd-shell-$SW_ID"
 ASSET_ID=$(cat dist/guide/system/ml-tokens.css \
            dist/guide/system/ml-core.css \
            dist/guide/system/ml-widgets.css \
+           dist/guide/system/ml-fixes.css \
            dist/preview/shared/app-shell.css \
            dist/preview/shared/app-shell.js \
            dist/preview/shared/tokens.css 2>/dev/null | shasum -a 256 | cut -c1-12)
@@ -210,8 +234,8 @@ ASSET_ID=$(cat dist/guide/system/ml-tokens.css \
 # Rewrite only our own absolute asset paths; Google Fonts and anything
 # already carrying a query are left alone.
 find dist/preview dist/guide -name '*.html' -type f -print0 \
-  | xargs -0 sed -i '' -E \
-      -e "s#(href=\"/guide/system/ml-(tokens|core|widgets)\.css)\"#\1?v=$ASSET_ID\"#g" \
+  | xargs -0 sed "${SED_I[@]}" -E \
+      -e "s#(href=\"/guide/system/ml-(tokens|core|widgets|fixes)\.css)\"#\1?v=$ASSET_ID\"#g" \
       -e "s#(href=\"/preview/shared/(app-shell|tokens)\.css)\"#\1?v=$ASSET_ID\"#g" \
       -e "s#(src=\"/preview/shared/app-shell\.js)\"#\1?v=$ASSET_ID\"#g"
 
@@ -223,3 +247,14 @@ fi
 echo "    shared assets stamped ?v=$ASSET_ID across $STAMPED pages"
 
 echo "==> dist/ ready ($(find dist -type f | wc -l | tr -d ' ') files)"
+
+# The audit runs AFTER the build, and does NOT block it. Deliberate, and worth
+# being clear about the trade: a gate that cannot stop a deploy is a report, not
+# a gate — a screen referencing a class nothing defines, declaring a state its
+# own markup cannot render, or a journey naming a route that does not exist will
+# ship, and you will read about it afterwards. That is the instruction: deploy
+# first, audit second. `|| true` is what makes it advisory; delete it and the
+# build stops on FAIL again.
+echo "==> Auditing the design system (report only — does not block this build)"
+(cd webapp && node ../scripts/audit-system.mjs \
+   --flows flows --css ../frontend/guide/system --map data/flows-map.json) || true

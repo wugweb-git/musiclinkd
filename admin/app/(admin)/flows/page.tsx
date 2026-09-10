@@ -1,6 +1,7 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
+import { collectionGroup, getDocs } from "firebase/firestore";
 import { LayoutList, Pencil, Plus, Rows3, Sparkles, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,24 +10,19 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { DataTable } from "@/components/shared/data-table";
+import { StatusBadge } from "@/components/shared/status-badge";
+import { TruncatedCell } from "@/components/shared/truncated-cell";
 import { PageShell } from "@/components/layout/page-shell";
 import { useCollection } from "@/hooks/use-collection";
 import { useRequireModule } from "@/hooks/use-require-module";
+import { getFirebaseDb } from "@/services/firebase";
 import { flowsRepo } from "@/services/repositories";
-import { flowScreensRepo } from "@/services/repositories/flow-screens-repository";
-import type { FlowDoc, FlowStatus, WithId } from "@/types/firestore";
+import type { FlowDoc, WithId } from "@/types/firestore";
 import { FlowEditorSheet } from "./flow-editor-sheet";
 import { DEFAULT_FLOWS } from "./default-flows";
 import { FlowsStackedView } from "./flows-stacked-view";
 
 type Row = WithId<FlowDoc>;
-
-const STATUS_VARIANT: Record<FlowStatus, "default" | "secondary" | "destructive" | "outline"> = {
-  documented: "default",
-  partial: "secondary",
-  "app-mocked": "outline",
-  missing: "destructive",
-};
 
 function buildColumns(onEdit: (row: Row) => void, screenCounts: Record<string, number>): ColumnDef<Row>[] {
   return [
@@ -47,9 +43,13 @@ function buildColumns(onEdit: (row: Row) => void, screenCounts: Record<string, n
     {
       accessorKey: "data.status",
       header: "Status",
-      cell: ({ row }) => <Badge variant={STATUS_VARIANT[row.original.data.status]}>{row.original.data.status}</Badge>,
+      cell: ({ row }) => <StatusBadge status={row.original.data.status} />,
     },
-    { accessorKey: "data.description", header: "Description" },
+    {
+      accessorKey: "data.description",
+      header: "Description",
+      cell: ({ row }) => <TruncatedCell text={row.original.data.description} maxWidth={420} />,
+    },
     {
       id: "actions",
       header: "",
@@ -95,14 +95,26 @@ export default function FlowsPage() {
   const [screenCounts, setScreenCounts] = useState<Record<string, number>>({});
 
   useEffect(() => {
+    // Single collectionGroup query instead of one .count() per flow row —
+    // firestore.rules' screens rule doesn't depend on {flowId}, so this is
+    // valid under the same security rules. Was previously 23-25 parallel
+    // aggregate queries, one per row, which is why "Screens" showed "…"
+    // indefinitely on slower connections.
     let cancelled = false;
-    Promise.all(data.map(async (flow) => [flow.id, await flowScreensRepo(flow.id).count()] as const)).then((entries) => {
-      if (!cancelled) setScreenCounts(Object.fromEntries(entries));
+    getDocs(collectionGroup(getFirebaseDb(), "screens")).then((snap) => {
+      if (cancelled) return;
+      const counts: Record<string, number> = {};
+      for (const d of snap.docs) {
+        const flowId = d.ref.parent.parent?.id;
+        if (!flowId) continue;
+        counts[flowId] = (counts[flowId] ?? 0) + 1;
+      }
+      setScreenCounts(counts);
     });
     return () => {
       cancelled = true;
     };
-  }, [data]);
+  }, []);
 
   if (!hasAccess) return null;
 

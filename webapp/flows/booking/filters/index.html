@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,19 +17,20 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/booking/studio_discovery/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">Filters</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div class="ml-section"><h3>Service</h3></div>
+      <section class="ml-section-block"><div class="ml-section"><h3>Service</h3></div>
       <div class="ml-chip-wrap">
         <button type="button" class="ml-chip" aria-pressed="true">Tracking</button>
         <button type="button" class="ml-chip" aria-pressed="false">Mixing</button>
@@ -38,15 +39,15 @@
         <button type="button" class="ml-chip" aria-pressed="true">Andheri</button>
         <button type="button" class="ml-chip" aria-pressed="false">Bandra</button>
         <button type="button" class="ml-chip" aria-pressed="false">Lower Parel</button>
-      </div>
+      </div></section>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Hourly rate</h3>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Hourly rate</h3>
         <span class="ml-section__link">up to ₹2,500</span></div>
-      <input class="ml-slider" type="range" min="500" max="5000" step="100" value="2500" aria-label="Maximum hourly rate" />
+      <input class="ml-slider" type="range" min="500" max="5000" step="100" value="2500" aria-label="Maximum hourly rate" /></section>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h3>Distance</h3>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h3>Distance</h3>
         <span class="ml-section__link">within 8 km</span></div>
-      <input class="ml-slider" type="range" min="1" max="25" value="8" aria-label="Maximum distance in kilometres" />
+      <input class="ml-slider" type="range" min="1" max="25" value="8" aria-label="Maximum distance in kilometres" /></section>
     </main>
     <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
       <button class="ml-btn ml-btn--secondary" type="reset" style="flex:1">Reset</button>

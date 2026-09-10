@@ -1,0 +1,379 @@
+/**
+ * ml-fixes.css — the fix layer.
+ *
+ * Load AFTER ml-tokens.css, ml-core.css and ml-widgets.css. Everything here is
+ * intended to be folded back into its home file (tokens.json, ml-core.css,
+ * ml-widgets.css) once reviewed; it lives in one file first so the whole change
+ * set can be reasoned about and reverted as a unit.
+ *
+ * Nothing here invents a new visual language. Every value is an existing token
+ * or a documented replacement for one that failed WCAG.
+ */
+
+/* ─── 1. TOKENS ──────────────────────────────────────────────────────────────
+   Fold into tokens.json. Net −1 against the 108 ceiling: purple's three tokens
+   go (already declared removed in meta.palette.removed), two new steps arrive. */
+:root {
+  /* The token delta this file originally carried — foundation.space.5 = 64 and
+     a new foundation.type.2 = 14 — is NOT applied. scripts/build-tokens.mjs
+     enforces a hard 4-step ceiling per scale ("the rule v8 lost"), and both
+     additions would have made their scale 5 steps. The need is real and
+     recorded in docs; raising the ceiling is an architecture decision, not a
+     fix. Everything below uses the existing 4-step scales unchanged. */
+
+  /* CHANGED — WCAG 2.1 AA. The brand pink #EA4C89 is a locked brand value and is
+     NOT changed; what changes is which token product UI reaches for as text or
+     fill. #C7295F is already in the system as --color-pink-pressed (5.37:1). */
+  --color-pink-text: var(--color-pink-pressed);   /* 5.37 on white, 4.57 on pink-container */
+  --color-success:   #15803D;                     /* was #22C55E — 2.28 FAIL -> 5.02 PASS */
+  --color-warning:   #A45B00;                     /* was #F59E0B — 2.15 FAIL -> 5.15 PASS */
+  --color-line-strong: #8E8E9C;                   /* 3.23 on white — control boundaries only */
+
+  --size-touch: 44px;                             /* not emitted; see note 4 */
+}
+
+/* ─── 2. STATE — moved out ───────────────────────────────────────────────────
+   The CSS fix that lived here (`[data-state]{display:none}` plus a reveal class)
+   is SUPERSEDED by 21-state-default-hidden.mjs, which stamps `hidden` into the
+   markup instead.
+
+   Why: a concurrent motion pass animates this exact selector with
+   `transition: display allow-discrete` and an `@starting-style` keyed on
+   `[hidden]` being removed. A display:none default fights both. Stamping the
+   markup collides with nothing — app-shell still owns the attribute at runtime,
+   `[hidden]{display:none!important}` still does the hiding, and the entry
+   animation still fires on removal. Every mechanism keeps its existing owner. */
+
+/* ─── 3. APP BAR — three slots ───────────────────────────────────────────────
+   .ml-appbar was authored as two slots (titles / actions) with space-between.
+   152 of 155 uses are back-title-actions with no spacer, so the title flies to
+   the right edge — measured at 390px: back button x16–64, h1 ending at x374.
+   Those same 152 also override the padding inline, which drops --safe-top and
+   puts the header under the notch. Grid fixes both; the codemod removes the
+   inline overrides so this rule can take effect. */
+.ml-appbar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-2);
+  justify-content: unset;
+  padding: var(--space-2) var(--space-3);
+  padding-top: calc(var(--space-2) + var(--safe-top));
+}
+.ml-appbar > :first-child:is(a, button) { justify-self: start; }
+.ml-appbar__titles,
+.ml-appbar > h1,
+.ml-appbar > .ml-appbar__title { grid-column: 2; justify-self: start; min-width: 0; }
+.ml-appbar--center > h1,
+.ml-appbar--center .ml-appbar__titles { justify-self: center; text-align: center; }
+.ml-appbar__actions { grid-column: 3; justify-self: end; }
+/* A bar with only a title and no leading control keeps the title at the start. */
+.ml-appbar > :first-child:not(a):not(button) { grid-column: 1 / 3; }
+
+/* ─── 4. TOUCH TARGETS ───────────────────────────────────────────────────────
+   221 of 816 interactive elements measure under 44px. meta.tokenMap already maps
+   "touch target min / comfortable" to --size-3 / --size-4 (48/56), so these
+   controls are violating an existing floor rather than missing a token. The hit
+   area is extended with a pseudo-element so the VISUAL height is unchanged —
+   a 32px chip stays a 32px chip and gains a 44px target. */
+.ml-chip,
+.ml-check-ctl,
+.ml-tabs__tab,
+.ml-segmented__btn,
+.ml-switch,
+.ml-avatar-btn { position: relative; }
+.ml-chip::before,
+.ml-check-ctl::before,
+.ml-tabs__tab::before,
+.ml-segmented__btn::before,
+.ml-switch::before,
+.ml-avatar-btn::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; height: 100%;
+  min-width: var(--size-touch);
+  min-height: var(--size-touch);
+  border-radius: inherit;
+}
+/* A chip row must not grow just because its targets did. */
+.ml-chip-wrap { row-gap: var(--space-3); }
+
+/* ─── 5. FOCUS ───────────────────────────────────────────────────────────────
+   ml-core.css sets a global :focus-visible ring through :where(), which has zero
+   specificity, and then .ml-field input:focus { outline: none } beats it. Text
+   inputs therefore fall back to a border-colour change alone. */
+.ml-field input:focus-visible,
+.ml-field textarea:focus-visible,
+.ml-field select:focus-visible,
+.ml-search input:focus-visible {
+  outline: var(--border-2) solid var(--color-pink-text);
+  outline-offset: 2px;
+}
+
+/* ─── 6. ICONS IN TEXT BUTTONS ───────────────────────────────────────────────
+   .ml-icon-btn svg has a sizing rule; .ml-btn svg does not, so icons inside text
+   buttons are sized by hardcoded attributes — measured at 18px (×241), 22px (×71)
+   and 14/28/30px, none of which are on the --icon-* scale. */
+.ml-btn svg,
+.ml-action-row svg,
+.ml-row svg { width: var(--icon-2); height: var(--icon-2); flex: none; }
+.ml-btn--sm svg { width: var(--icon-1); height: var(--icon-1); }
+.ml-btn--lg svg { width: var(--icon-3); height: var(--icon-3); }
+
+/* ─── 7. LIST HIERARCHY ──────────────────────────────────────────────────────
+   .ml-section > h2 and .ml-row__title were both --type-1/--weight-3, so a grouped
+   settings list had no visible hierarchy between the group label and the row
+   label. The new 14px step gives the row meta a home at the same time. */
+.ml-section > h2,
+.ml-section__title {
+  font-size: var(--type-1);
+  font-weight: var(--weight-3);
+  letter-spacing: -0.01em;
+}
+.ml-row__title,
+.ml-choice__title { font-size: var(--type-1); font-weight: var(--weight-2); }
+.ml-row__meta,
+.ml-choice__meta,
+.ml-result__meta,
+.ml-person-row__meta { font-size: var(--type-1); color: var(--color-muted); }
+
+/* ─── 8. TEXT ON IMAGES ──────────────────────────────────────────────────────
+   5 of 28 text-over-image blocks ship with no scrim — white labels over pale
+   photographs at close to 1:1. Building it into the component means text-on-image
+   cannot ship without one. */
+.ml-media-card,
+.ml-cat-tile--media,
+.ml-studio-card__media,
+.ml-artist-card__media { position: relative; isolation: isolate; }
+.ml-media-card::after,
+.ml-cat-tile--media::after,
+.ml-studio-card__media::after,
+.ml-artist-card__media::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(to top,
+    color-mix(in srgb, var(--color-ink) 78%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 42%, transparent) 34%,
+    transparent 68%);
+  pointer-events: none;
+  z-index: 0;
+}
+.ml-media-card > :not(img),
+.ml-cat-tile--media > :not(img) { position: relative; z-index: 1; }
+
+/* ─── 9. CARD FAMILY — compose, do not re-declare ────────────────────────────
+   .ml-card already carries background, radius, elevation, overflow, colour,
+   text-decoration, display and transition. .ml-artist-card ≈ .ml-studio-card at
+   90% identical declarations; .ml-collab-card ≈ .ml-project-card at 80%.
+   The permanent fix is to delete those eight declarations from each specialised
+   card in ml-widgets.css and add .ml-card to the markup. Until that sweep lands,
+   this makes the base available to any card that adopts it without a visual
+   change, so the migration can be done one card at a time. */
+.ml-card--artist,
+.ml-card--studio,
+.ml-card--market,
+.ml-card--media,
+.ml-card--band,
+.ml-card--project,
+.ml-card--collab,
+.ml-card--application,
+.ml-card--booking,
+.ml-card--review,
+.ml-card--opportunity { /* modifier hooks — geometry only, surface comes from .ml-card */ }
+.ml-card--media { aspect-ratio: var(--media-aspect-card); background: var(--color-surface); }
+.ml-card--bordered { border: var(--border-1) solid var(--color-line); }
+.ml-card--row { display: flex; gap: var(--space-3); padding: var(--space-3); }
+
+/* ─── 10. SKELETONS ──────────────────────────────────────────────────────────
+   Every skeleton state fails axe scrollable-region-focusable: a scroll container
+   with nothing focusable inside is unreachable by keyboard. The container stops
+   scrolling while it is a placeholder, which removes the trap entirely. */
+[data-state="loading"] .ml-rail,
+[data-state="loading"] .ml-scroll,
+.ml-skeleton-wrap { overflow: hidden; }
+.ml-skeleton[aria-hidden="true"] ~ * { /* real content keeps its own focus order */ }
+
+/* ─── 11. THE COMPOSITION LAYER ──────────────────────────────────────────────
+   2,223 inline style attributes across the build carry only 237 distinct values.
+   These nine classes absorb most of them. Each one is a pattern that recurred
+   often enough to have earned a name. */
+
+/* .ml-stack — vertical rhythm. Replaces 386× margin-top:var(--space-3) and
+   26× display:flex;flex-direction:column;gap. Rhythm belongs to the container. */
+.ml-stack { display: flex; flex-direction: column; gap: var(--space-3); }
+.ml-stack--1 { gap: var(--space-1); }
+.ml-stack--2 { gap: var(--space-2); }
+.ml-stack--4 { gap: var(--space-4); }
+
+/* .ml-cluster — horizontal group that wraps. */
+.ml-cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.ml-cluster--between { justify-content: space-between; }
+.ml-cluster--3 { gap: var(--space-3); }
+
+/* .ml-grow — replaces 100× flex:1 and 43× margin:0;flex:1 */
+.ml-grow { flex: 1; min-width: 0; }
+
+/* .ml-page-head — title + subtitle. 25 screens, 25 uses, no class today. */
+.ml-page-head { display: flex; flex-direction: column; gap: var(--space-1);
+  padding: 0 var(--space-4) var(--space-3); }
+.ml-page-head > h1 { margin: 0; font-size: var(--type-1); font-weight: var(--weight-4);
+  font-family: var(--font-display); line-height: 1.1; letter-spacing: -0.03em; }
+.ml-page-head > p { margin: 0; font-size: var(--type-1); color: var(--color-muted); }
+
+/* .ml-meta-pair — value over label. 23 screens, 87 uses. */
+.ml-meta-pair { display: flex; flex-direction: column; gap: 2px; }
+.ml-meta-pair > b { font-size: var(--type-1); font-weight: var(--weight-3);
+  color: var(--color-ink); font-variant-numeric: tabular-nums; }
+.ml-meta-pair > p { margin: 0; font-size: var(--type-1); color: var(--color-muted); }
+
+/* .ml-action-bar — secondary + primary footer pair. 7 screens, 24 uses. */
+.ml-action-bar { display: flex; gap: var(--space-2); padding: var(--space-3);
+  padding-bottom: calc(var(--space-3) + var(--safe-bottom));
+  border-top: var(--border-1) solid var(--color-line); background: var(--color-white); }
+.ml-action-bar > * { flex: 1; }
+.ml-action-bar--sticky { position: sticky; bottom: 0; z-index: var(--z-2); }
+
+/* .ml-banner__action — error banner + retry. 10 screens, 10 uses. */
+.ml-banner__action { display: flex; align-items: center; gap: var(--space-3);
+  justify-content: space-between; flex-wrap: wrap; }
+.ml-banner__action > .ml-btn { flex: none; }
+
+/* .ml-section-head — heading + trailing control (rating, See all, chevron). */
+.ml-section-head { display: flex; align-items: baseline;
+  justify-content: space-between; gap: var(--space-3); }
+.ml-section-head > :first-child { min-width: 0; }
+
+/* .ml-select — 15 screens use a bare <select> with no class; none exists. */
+.ml-select { position: relative; display: block; }
+.ml-select > select {
+  appearance: none; width: 100%;
+  min-height: var(--size-2);
+  padding: var(--space-2) var(--size-3) var(--space-2) var(--space-3);
+  font: inherit; font-size: var(--type-1); color: var(--color-ink);
+  background: var(--color-white);
+  border: var(--border-1) solid var(--color-line-strong);
+  border-radius: var(--radius-2);
+}
+.ml-select::after {
+  content: ""; position: absolute; right: var(--space-3); top: 50%;
+  width: 8px; height: 8px; margin-top: -6px;
+  border-right: var(--border-2) solid var(--color-muted);
+  border-bottom: var(--border-2) solid var(--color-muted);
+  transform: rotate(45deg); pointer-events: none;
+}
+.ml-select > select:focus-visible {
+  outline: var(--border-2) solid var(--color-pink-text); outline-offset: 2px;
+}
+
+/* ─── 12. CONTROL BOUNDARIES ─────────────────────────────────────────────────
+   --color-line at 1.46:1 fails WCAG 1.4.11 (3:1) where it draws the boundary of
+   a control. Dividers and hairlines are decorative and keep the softer line. */
+.ml-field input,
+.ml-field textarea,
+.ml-field select,
+.ml-check-ctl,
+.ml-switch,
+.ml-otp__box,
+.ml-segmented { border-color: var(--color-line-strong); }
+
+/* ─── 13. STATUS COLOUR ──────────────────────────────────────────────────────
+   Neutral and positive outcomes were rendering in the error treatment —
+   "Cancelled — refunded in full" is the good outcome, "Offer declined" is
+   neutral. Both move off --error in the codemod; these are the targets. */
+.ml-banner--neutral { background: var(--color-surface); color: var(--color-ink);
+  border-color: var(--color-line-strong); }
+.ml-banner--success { background: color-mix(in srgb, var(--color-success) 10%, var(--color-white));
+  color: var(--color-success); border-color: var(--color-success); }
+
+/* ─── 14. REDUCED MOTION ─────────────────────────────────────────────────────
+   Only 3 of 7 keyframes were exempted, and none of the 32 :active scale
+   transforms. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── 15. RESIDUAL CONTRAST ──────────────────────────────────────────────────
+   Found by running axe across all 205 screens after the first pass. */
+
+/* Muted text on the ink splash measured 3.42:1. --color-muted is tuned for
+   light surfaces; a dark surface needs its own step. */
+:root { --color-muted-on-ink: #8E8E9C; }   /* 6.02 on --color-ink */
+.ml-app--ink .ml-type-1,
+[style*="--color-ink"] .ml-type-1,
+.ml-splash [style*="--color-muted"] { color: var(--color-muted-on-ink) !important; }
+
+/* The success banner's own 10% tint left its text at 4.38. 6% clears AA. */
+.ml-banner--success {
+  background: color-mix(in srgb, var(--color-success) 6%, var(--color-white));
+}
+
+/* ─── 16. SCROLL CONTAINERS ──────────────────────────────────────────────────
+   A scroll container with nothing focusable inside is unreachable by keyboard.
+   The codemod adds tabindex="0" where that is true; this gives it a visible
+   focus state so the affordance is not silent. */
+[tabindex="0"].ml-rail:focus-visible,
+[tabindex="0"].app-content--scroll:focus-visible {
+  outline: var(--border-2) solid var(--color-pink-text);
+  outline-offset: -2px;
+}
+
+/* ─── 17. TYPE UTILITIES — removed ───────────────────────────────────────────
+   This block defined .ml-type-1..5 for the renumbered scale. With the renumber
+   dropped, ml-tokens.css already emits .ml-type-1..4 correctly and redefining
+   them here would only be a second place they are declared. */
+
+/* ─── 18. ICONS ──────────────────────────────────────────────────────────────
+   One sprite, referenced. 612 inline copies became 612 references to 37 symbols. */
+.ml-icon    { flex: none; display: inline-block; vertical-align: middle; fill: currentColor; }
+.ml-icon--1 { width: var(--icon-1); height: var(--icon-1); }
+.ml-icon--2 { width: var(--icon-2); height: var(--icon-2); }
+.ml-icon--3 { width: var(--icon-3); height: var(--icon-3); }
+.ml-icon--4 { width: var(--icon-4); height: var(--icon-4); }
+
+/* Rating — the value is one custom property, so 3.5 renders as 70% and no
+   half-star character is needed. Replaces 262 ★/☆ text glyphs. */
+.ml-rating { --ml-rating: 0%; display: inline-block; position: relative;
+  width: calc(var(--icon-1) * 5); height: var(--icon-1); color: var(--color-line-strong); }
+.ml-rating::before, .ml-rating > i {
+  content: ""; position: absolute; inset: 0; background: currentColor;
+  /* The star is inlined as a data: URI rather than referenced as
+
+     url("ml-icons.svg#i-star"). An external-file FRAGMENT is not a valid
+
+     mask source in Chrome or Safari — only same-document fragments resolve —
+
+     so the sprite reference would have rendered every rating as a blank bar.
+
+     The <use> references in the screens are unaffected; that is SVG, not CSS. */
+
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23000%22%3E%3Cpath%20d%3D%22M10.09%202.24a2.1%202.1%200%200%201%203.82%200l2.2%204.63q.05.09.15.12l4.91.74c1.75.26%202.45%202.5%201.18%203.79l-3.55%203.6a.2.2%200%200%200-.06.18l.84%205.1c.3%201.81-1.53%203.2-3.1%202.34l-4.38-2.4a.2.2%200%200%200-.2%200l-4.39%202.4c-1.56.86-3.39-.53-3.1-2.34l.85-5.1a.2.2%200%200%200-.06-.17l-3.55-3.61c-1.27-1.29-.57-3.53%201.18-3.8L7.73%207a.2.2%200%200%200%20.16-.12z%22%2F%3E%3C%2Fsvg%3E") repeat-x left center / var(--icon-1) var(--icon-1);
+
+          mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23000%22%3E%3Cpath%20d%3D%22M10.09%202.24a2.1%202.1%200%200%201%203.82%200l2.2%204.63q.05.09.15.12l4.91.74c1.75.26%202.45%202.5%201.18%203.79l-3.55%203.6a.2.2%200%200%200-.06.18l.84%205.1c.3%201.81-1.53%203.2-3.1%202.34l-4.38-2.4a.2.2%200%200%200-.2%200l-4.39%202.4c-1.56.86-3.39-.53-3.1-2.34l.85-5.1a.2.2%200%200%200-.06-.17l-3.55-3.61c-1.27-1.29-.57-3.53%201.18-3.8L7.73%207a.2.2%200%200%200%20.16-.12z%22%2F%3E%3C%2Fsvg%3E") repeat-x left center / var(--icon-1) var(--icon-1); }
+.ml-rating > i { color: var(--color-ink); width: var(--ml-rating); }
+
+/* ─── 19. MEDIA PLACEHOLDER ──────────────────────────────────────────────────
+   Where a photograph was removed and no replacement exists yet. Deliberately
+   not a spinner and not a broken-image glyph: this is a settled state, not a
+   loading one. It says "no photograph" plainly and stops the screen asserting
+   something untrue — which is what a confident picture of the wrong object was
+   doing on three marketplace listings.
+
+   `border-radius: inherit` matters: it sits inside .ml-media / a card that has
+   already rounded its corners, and a square tile inside a rounded frame reads
+   as a rendering bug rather than a placeholder. */
+.ml-media-placeholder {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: var(--media-aspect-card);
+  background: var(--color-surface);
+  color: var(--color-line-strong);
+  border-radius: inherit;
+}

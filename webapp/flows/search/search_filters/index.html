@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,186 +17,187 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/search/universal_search/index.html?state=results" aria-label="Back to results">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0;flex:1">Filters</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
-      <div data-state="active">
-        <div class="ml-section"><h2>Active</h2>
+      <div data-state="active" hidden>
+        <section class="ml-section-block"><div class="ml-section"><h2>Active</h2>
           <button class="ml-section__link" type="button">Clear all</button></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="true">Mumbai ×</button>
           <button type="button" class="ml-chip" aria-pressed="true">Vocalist ×</button>
           <button type="button" class="ml-chip" aria-pressed="true">Available ×</button>
-        </div>
+        </div></section>
       </div>
 
       <!-- Location and sort apply to every entity type, so they sit outside
            the per-entity block rather than being repeated six times. -->
-      <div class="ml-section"><h2>Location</h2></div>
+      <section class="ml-section-block"><div class="ml-section"><h2>Location</h2></div>
       <div class="ml-chip-wrap">
         <button type="button" class="ml-chip" aria-pressed="true">Mumbai</button>
         <button type="button" class="ml-chip" aria-pressed="false">Pune</button>
         <button type="button" class="ml-chip" aria-pressed="false">Delhi</button>
         <button type="button" class="ml-chip" aria-pressed="false">Bengaluru</button>
         <button type="button" class="ml-chip" aria-pressed="false">Anywhere</button>
-      </div>
-      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Within</h2>
+      </div></section>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Within</h2>
         <span class="ml-section__link">8 km</span></div>
       <input class="ml-slider" type="range" min="1" max="50" value="8" aria-label="Maximum distance in kilometres" />
 
-      <div data-state="people">
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Role</h2></div>
+      <div data-state="people" data-state-default>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Role</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="true">Vocalist</button>
           <button type="button" class="ml-chip" aria-pressed="false">Producer</button>
           <button type="button" class="ml-chip" aria-pressed="false">Engineer</button>
           <button type="button" class="ml-chip" aria-pressed="false">Composer</button>
           <button type="button" class="ml-chip" aria-pressed="false">DJ</button>
-        </div>
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Genre</h2></div>
+        </div></section>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Genre</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">Pop</button>
           <button type="button" class="ml-chip" aria-pressed="false">Indie</button>
           <button type="button" class="ml-chip" aria-pressed="false">Hip-hop</button>
           <button type="button" class="ml-chip" aria-pressed="false">Classical</button>
           <button type="button" class="ml-chip" aria-pressed="false">Electronic</button>
-        </div>
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Language</h2></div>
+        </div></section>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Language</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">Hindi</button>
           <button type="button" class="ml-chip" aria-pressed="false">English</button>
           <button type="button" class="ml-chip" aria-pressed="false">Marathi</button>
           <button type="button" class="ml-chip" aria-pressed="false">Tamil</button>
-        </div>
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Availability</h2></div>
+        </div></section>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Availability</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">Available now</button>
           <button type="button" class="ml-chip" aria-pressed="false">Open for gigs</button>
           <button type="button" class="ml-chip" aria-pressed="false">Any</button>
-        </div>
+        </div></section>
       </div>
-      <div data-state="businesses">
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Type</h2></div>
+      <div data-state="businesses" hidden>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Type</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">Recording studio</button>
           <button type="button" class="ml-chip" aria-pressed="false">Rehearsal room</button>
           <button type="button" class="ml-chip" aria-pressed="false">Music school</button>
           <button type="button" class="ml-chip" aria-pressed="false">Label</button>
           <button type="button" class="ml-chip" aria-pressed="false">Venue</button>
-        </div>
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Service</h2></div>
+        </div></section>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Service</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">Tracking</button>
           <button type="button" class="ml-chip" aria-pressed="false">Mixing</button>
           <button type="button" class="ml-chip" aria-pressed="false">Mastering</button>
           <button type="button" class="ml-chip" aria-pressed="false">Rental</button>
-        </div>
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Rating</h2></div>
+        </div></section>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Rating</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">4.5+</button>
           <button type="button" class="ml-chip" aria-pressed="false">4.0+</button>
           <button type="button" class="ml-chip" aria-pressed="false">Any</button>
-        </div>
+        </div></section>
       </div>
-      <div data-state="services">
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Category</h2></div>
+      <div data-state="services" hidden>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Category</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">Recording</button>
           <button type="button" class="ml-chip" aria-pressed="false">Mixing</button>
           <button type="button" class="ml-chip" aria-pressed="false">Mastering</button>
           <button type="button" class="ml-chip" aria-pressed="false">Production</button>
           <button type="button" class="ml-chip" aria-pressed="false">Lessons</button>
-        </div>
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Delivery</h2></div>
+        </div></section>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Delivery</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">In person</button>
           <button type="button" class="ml-chip" aria-pressed="false">Remote</button>
           <button type="button" class="ml-chip" aria-pressed="false">Either</button>
-        </div>
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Duration</h2></div>
+        </div></section>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Duration</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">Per hour</button>
           <button type="button" class="ml-chip" aria-pressed="false">Half day</button>
           <button type="button" class="ml-chip" aria-pressed="false">Full day</button>
           <button type="button" class="ml-chip" aria-pressed="false">Per track</button>
-        </div>
+        </div></section>
       </div>
-      <div data-state="marketplace_results">
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Listing</h2></div>
+      <div data-state="marketplace_results" hidden>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Listing</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">Buy</button>
           <button type="button" class="ml-chip" aria-pressed="false">Sell</button>
           <button type="button" class="ml-chip" aria-pressed="false">Rent</button>
-        </div>
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Category</h2></div>
+        </div></section>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Category</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">Microphones</button>
           <button type="button" class="ml-chip" aria-pressed="false">Monitors</button>
           <button type="button" class="ml-chip" aria-pressed="false">Interfaces</button>
           <button type="button" class="ml-chip" aria-pressed="false">Backline</button>
           <button type="button" class="ml-chip" aria-pressed="false">Keys</button>
-        </div>
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Condition</h2></div>
+        </div></section>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Condition</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">New</button>
           <button type="button" class="ml-chip" aria-pressed="false">Like new</button>
           <button type="button" class="ml-chip" aria-pressed="false">Used</button>
-        </div>
+        </div></section>
       </div>
-      <div data-state="opportunities_results">
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Type</h2></div>
+      <div data-state="opportunities_results" hidden>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Type</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">Session</button>
           <button type="button" class="ml-chip" aria-pressed="false">Tour</button>
           <button type="button" class="ml-chip" aria-pressed="false">Project</button>
           <button type="button" class="ml-chip" aria-pressed="false">Collaboration</button>
-        </div>
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Mode</h2></div>
+        </div></section>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Mode</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">In person</button>
           <button type="button" class="ml-chip" aria-pressed="false">Remote</button>
-        </div>
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Deadline</h2></div>
+        </div></section>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Deadline</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">This week</button>
           <button type="button" class="ml-chip" aria-pressed="false">This month</button>
           <button type="button" class="ml-chip" aria-pressed="false">Any</button>
-        </div>
+        </div></section>
       </div>
-      <div data-state="portfolio_results">
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Work type</h2></div>
+      <div data-state="portfolio_results" hidden>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Work type</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">Track</button>
           <button type="button" class="ml-chip" aria-pressed="false">Album</button>
           <button type="button" class="ml-chip" aria-pressed="false">Video</button>
           <button type="button" class="ml-chip" aria-pressed="false">Live</button>
-        </div>
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Genre</h2></div>
+        </div></section>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Genre</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">Pop</button>
           <button type="button" class="ml-chip" aria-pressed="false">Indie</button>
           <button type="button" class="ml-chip" aria-pressed="false">Film</button>
           <button type="button" class="ml-chip" aria-pressed="false">Classical</button>
-        </div>
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Year</h2></div>
+        </div></section>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Year</h2></div>
         <div class="ml-chip-wrap">
           <button type="button" class="ml-chip" aria-pressed="false">2026</button>
           <button type="button" class="ml-chip" aria-pressed="false">2025</button>
           <button type="button" class="ml-chip" aria-pressed="false">Earlier</button>
-        </div>
-      </div>
+        </div></section>
+      </div></section>
 
-      <div class="ml-section" style="margin-top:var(--space-3)"><h2>Sort</h2></div>
+      <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Sort</h2></div>
       <div role="radiogroup" aria-label="Sort">
         <div class="ml-choice" role="radio" aria-checked="true" tabindex="0">
           <span class="ml-choice__body">
@@ -226,7 +227,7 @@
           </span>
           <span class="ml-choice__mark"></span>
         </div>
-      </div>
+      </div></section>
     </main>
     <footer class="ml-app__footer" style="display:flex;gap:var(--space-2)">
       <button class="ml-btn ml-btn--secondary" type="reset" style="flex:1">Reset</button>

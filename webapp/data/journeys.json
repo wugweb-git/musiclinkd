@@ -1,0 +1,164 @@
+{
+  "_note": "Layer 4. A journey crosses flows; validate with 16-journeys.mjs and 11-audit.mjs.",
+  "journeys": [
+    {
+      "id": "hire-talent",
+      "name": "Hire a session musician",
+      "actor": "Hirer",
+      "trigger": "Needs a player for a session",
+      "outcome": "Booking confirmed and paid",
+      "steps": [
+        {
+          "route": "discover/people_talent"
+        },
+        {
+          "route": "discover/discover_profile_detail"
+        },
+        {
+          "route": "public_profile/public_profile_view_talent"
+        },
+        {
+          "route": "public_profile/talent_services_view"
+        },
+        {
+          "route": "booking/configure_session"
+        },
+        {
+          "route": "booking/booking_summary"
+        },
+        {
+          "route": "booking/payment_screen"
+        },
+        {
+          "route": "booking/booking_success"
+        }
+      ]
+    },
+    {
+      "id": "book-studio",
+      "name": "Book a studio",
+      "actor": "Hirer",
+      "trigger": "Needs a room for a date",
+      "outcome": "Booking confirmed and paid",
+      "steps": [
+        {
+          "route": "discover/studios_spaces"
+        },
+        {
+          "route": "discover/studio_profile_discover"
+        },
+        {
+          "route": "booking/availability_calendar"
+        },
+        {
+          "route": "booking/configure_session"
+        },
+        {
+          "route": "booking/booking_summary"
+        },
+        {
+          "route": "booking/payment_screen"
+        },
+        {
+          "route": "booking/booking_success"
+        }
+      ]
+    },
+    {
+      "id": "review-after-booking",
+      "name": "Review after a session",
+      "actor": "Hirer",
+      "trigger": "Session finished",
+      "outcome": "Review published, reputation updated",
+      "steps": [
+        {
+          "route": "booking/booking_success"
+        },
+        {
+          "route": "booking/my_bookings"
+        },
+        {
+          "route": "reviews/write_review"
+        },
+        {
+          "route": "reviews/review_list"
+        }
+      ]
+    },
+    {
+      "id": "sell-gear",
+      "name": "Sell a piece of gear",
+      "actor": "Talent / Studio",
+      "trigger": "Has gear to sell",
+      "outcome": "Sold and paid out",
+      "steps": [
+        {
+          "route": "marketplace/marketplace_create_listing"
+        },
+        {
+          "route": "marketplace/marketplace_my_listings"
+        },
+        {
+          "route": "marketplace/marketplace_make_offer"
+        },
+        {
+          "route": "marketplace/marketplace_order_status"
+        }
+      ]
+    },
+    {
+      "id": "get-hired",
+      "name": "Get hired for an opportunity",
+      "actor": "Talent",
+      "trigger": "Looking for work",
+      "outcome": "Application accepted",
+      "steps": [
+        {
+          "route": "opportunities/opportunities_home"
+        },
+        {
+          "route": "opportunities/opportunity_detail"
+        },
+        {
+          "route": "opportunities/opportunity_apply"
+        },
+        {
+          "route": "opportunities/my_applications"
+        }
+      ]
+    },
+    {
+      "id": "onboard",
+      "name": "Sign up to a live public profile",
+      "actor": "New user",
+      "trigger": "First open",
+      "outcome": "Public profile discoverable",
+      "steps": [
+        {
+          "route": "auth/welcome"
+        },
+        {
+          "route": "auth/email_auth"
+        },
+        {
+          "route": "onboarding/primary_role"
+        },
+        {
+          "route": "onboarding/genres"
+        },
+        {
+          "route": "onboarding/profile_creation"
+        },
+        {
+          "route": "onboarding/review_confirm"
+        },
+        {
+          "route": "onboarding/submit_publish"
+        },
+        {
+          "route": "public_profile/public_profile_view_talent"
+        }
+      ]
+    }
+  ]
+}

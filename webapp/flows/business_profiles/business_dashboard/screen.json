@@ -12,15 +12,15 @@
     "quiet"
   ],
   "collectionsTouched": [
-    "businesses",
+    "users",
     "studio_bookings"
   ],
-  "notes": "PROPOSED 2026-08-31 from the FLOW-12 brief. The owner's home: today's activity, pending requests, upcoming bookings, and quick actions. The brief warns against turning this into a generic analytics dashboard, so the numbers are few and each one links to the thing it counts. \"quiet\" is the honest state for a business with nothing happening today.",
+  "notes": "PROPOSED 2026-08-31 from the FLOW-12 brief. The owner's home: today's activity, pending requests, upcoming bookings, and quick actions. The brief warns against turning this into a generic analytics dashboard, so the numbers are few and each one links to the thing it counts. \"quiet\" is the honest state for a business with nothing happening today. Corrected 2026-09-01: collectionsTouched said \"businesses\", a collection that does not exist in the canonical schema and had no firestore.rules block. Business profiles are UserDoc records with profileType===\"BUSINESS\" (admin/types/firestore.ts:181-209) — this screen reads /users like every other profile screen, not a separate collection. See docs/09-Roadmap/screen-contract-chain.md.",
   "dataContract": [
     {
-      "collection": "businesses",
+      "collection": "users",
       "sample": null,
-      "note": "No seed sample available for this collection in this build."
+      "note": "No seed sample with profileType===\"BUSINESS\" populated yet — corrected from the wrong collection name (\"businesses\"), but a real sample still needs writing."
     },
     {
       "collection": "studio_bookings",

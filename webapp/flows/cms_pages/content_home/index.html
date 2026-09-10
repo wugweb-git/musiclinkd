@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,12 +17,13 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
+    <header class="ml-appbar">
       <h1 class="ml-type-3" style="margin:0">Guides</h1>
       <span class="ml-status ml-status--accent" title="This flow is a design preview">Beta</span>
     </header>
@@ -32,8 +33,8 @@
         <input id="c-q" type="search" placeholder="Deposits, rates, verification…" />
       </div>
 
-      <div data-state="default">
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Featured</h2></div>
+      <div data-state="default" data-state-default>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Featured</h2></div>
         <a class="ml-article" href="/preview/flows/cms_pages/content_article/index.html">
           <img src="/assets/img/4/5c45943974eb98266d0fc97e34e568e5.png" alt="" loading="lazy" />
           <div>
@@ -41,53 +42,53 @@
             <span class="ml-type-1" style="color:var(--color-muted)">Music career · 28 Aug 2026</span>
             <p>Studio time, prep, revisions, and the two things people forget to charge for.</p>
           </div>
-        </a>
+        </a></section>
 
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Browse</h2></div>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Browse</h2></div>
         <a class="ml-action-row" href="?state=category">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Getting started</span>
           <span class="ml-choice__meta">Your profile, your first booking · 6 articles</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="?state=category">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Marketplace</span>
           <span class="ml-choice__meta">Buying, selling, renting, disputes · 9 articles</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="?state=category">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Bookings</span>
           <span class="ml-choice__meta">Deposits, cancellations, no-shows · 7 articles</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="?state=category">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Music career</span>
           <span class="ml-choice__meta">Rates, credits, negotiating · 11 articles</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="?state=category">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Business</span>
           <span class="ml-choice__meta">Studios, teams, invoicing · 5 articles</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="?state=category">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Safety</span>
           <span class="ml-choice__meta">Reporting, blocking, verification · 4 articles</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
-      </a>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
+      </a></section>
 
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Latest</h2></div>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Latest</h2></div>
         <a class="ml-article" href="/preview/flows/cms_pages/content_article/index.html">
           <img src="/assets/img/4/8-social-media-for-authors.png" alt="" loading="lazy" />
           <div>
@@ -108,20 +109,20 @@
             <b>Selling gear without getting stung</b>
             <span class="ml-type-1" style="color:var(--color-muted)">Marketplace · 14 Aug 2026</span>
           </div>
-        </a>
+        </a></section>
 
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Still stuck?</h2></div>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Still stuck?</h2></div>
         <a class="ml-action-row" href="/preview/flows/user_settings/raise_ticket/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Contact support</span>
           <span class="ml-choice__meta">Replies within one working day</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
-      </a>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
+      </a></section>
       </div>
 
-      <div data-state="category">
-        <div class="ml-section" style="margin-top:var(--space-3)"><h2>Bookings</h2></div>
+      <div data-state="category" hidden>
+        <section class="ml-section-block"><div class="ml-section" style="margin-top:var(--space-3)"><h2>Bookings</h2></div>
         <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Holding a room, paying a deposit, and what happens when plans change.
         </p>
@@ -130,39 +131,39 @@
           <span class="ml-choice__title">Deposits, cancellations and the 48-hour rule</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="/preview/flows/cms_pages/content_article/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">What happens if a studio cancels on you</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="/preview/flows/cms_pages/content_article/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Rescheduling without losing your deposit</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="/preview/flows/cms_pages/content_article/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">No-shows, both directions</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="/preview/flows/cms_pages/content_article/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Booking a room you have not seen</span>
           
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
-      </a>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
+      </a></section>
       </div>
 
-      <div data-state="searching">
+      <div data-state="searching" hidden>
         <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-3) 0 var(--space-2)">
           4 results for "deposit"
         </p>
@@ -171,38 +172,38 @@
           <span class="ml-choice__title">Deposits, cancellations and the 48-hour rule</span>
           <span class="ml-choice__meta">Bookings</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="/preview/flows/cms_pages/content_article/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">When is the deposit taken?</span>
           <span class="ml-choice__meta">Bookings</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="/preview/flows/cms_pages/content_article/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Refunds and how long they take</span>
           <span class="ml-choice__meta">Bookings</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
         <a class="ml-action-row" href="/preview/flows/cms_pages/content_article/index.html">
         <span class="ml-choice__body">
           <span class="ml-choice__title">Marketplace deposits on rentals</span>
           <span class="ml-choice__meta">Bookings</span>
         </span>
-        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.65.66c-.87.88-.87 2.3 0 3.18L14.71 12l-8.06 8.16c-.87.88-.87 2.3 0 3.18a2.2 2.2 0 0 0 3.14 0L21 12 9.8.66a2.2 2.2 0 0 0-3.15 0"/></svg>
+        <svg class="ml-icon ml-icon--2" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-right"/></svg>
       </a>
       </div>
 
-      <div class="ml-empty" data-state="no_results">
+      <div class="ml-empty" data-state="no_results" hidden>
         <h2 class="ml-empty__title">Nothing matches that</h2>
         <p class="ml-empty__body">Try "deposit", "cancellation" or "payout" — or just ask us.</p>
         <a class="ml-btn ml-btn--primary" href="/preview/flows/user_settings/raise_ticket/index.html">Contact support</a>
       </div>
 
-      <div class="ml-empty" data-state="offline">
+      <div class="ml-empty" data-state="offline" hidden>
         <h2 class="ml-empty__title">You're offline</h2>
         <p class="ml-empty__body">Guides you've already opened are still readable. New ones need a connection.</p>
       </div>

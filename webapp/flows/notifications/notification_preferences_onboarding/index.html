@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0D0D0D" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,19 +17,20 @@
 <link rel="stylesheet" href="/guide/system/ml-tokens.css" />
 <link rel="stylesheet" href="/guide/system/ml-core.css" />
 <link rel="stylesheet" href="/guide/system/ml-widgets.css" />
+<link rel="stylesheet" href="/guide/system/ml-fixes.css" />
 <link rel="stylesheet" href="/preview/shared/app-shell.css" />
 </head>
 <body>
 
   <div class="ml-app">
-    <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
+    <header class="ml-appbar">
       <a class="ml-icon-btn ml-icon-btn--bare" href="/preview/flows/onboarding/dashboard_handoff/index.html" aria-label="Back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg class="ml-icon ml-icon--1" aria-hidden="true"><use href="/guide/system/ml-icons.svg#i-chevron-left"/></svg>
         </a>
       <h1 class="ml-type-3" style="margin:0">Stay in the loop</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <div data-state="default">
+      <div data-state="default" data-state-default>
       <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
         Pick what matters now. You can change any of it later in Settings, and nothing is on by default that you did not choose.
       </p>
@@ -73,7 +74,7 @@
       <!-- The OS permission prompt is a moment, not a screen. The brief: explain
            the value BEFORE asking, and never imply the app can override a
            denial — so "denied" points at device settings and says so plainly. -->
-      <div class="ml-empty" data-state="asking">
+      <div class="ml-empty" data-state="asking" hidden>
         <h2 class="ml-empty__title">Allow notifications?</h2>
         <p class="ml-empty__body">
           So you hear when someone messages you, books your service, or answers an opportunity.
@@ -83,7 +84,7 @@
         <a class="ml-btn ml-btn--ghost" style="margin-top:var(--space-2)" href="/preview/flows/notifications/notifications_center/index.html">Not now</a>
       </div>
 
-      <div class="ml-empty" data-state="denied">
+      <div class="ml-empty" data-state="denied" hidden>
         <h2 class="ml-empty__title">Notifications are turned off</h2>
         <p class="ml-empty__body">
           You'll still see everything inside MusicLinkd. To get them on your phone, turn them
@@ -92,7 +93,7 @@
         <a class="ml-btn ml-btn--primary" href="/preview/flows/notifications/notifications_center/index.html">Continue without them</a>
       </div>
     </main>
-    <footer class="ml-app__footer" data-state="default">
+    <footer class="ml-app__footer" data-state="default" data-state-default>
       <a class="ml-btn ml-btn--primary ml-btn--block" href="/preview/flows/notifications/notifications_center/index.html">Done</a>
     </footer>
   </div>
