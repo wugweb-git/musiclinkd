@@ -115,7 +115,7 @@ export function DataTable<T>({
             placeholder={searchPlaceholder}
             value={globalFilter}
             onChange={(e) => setGlobalFilter(e.target.value)}
-            className="max-w-sm"
+            className="h-8 max-w-sm bg-background"
           />
           {groupableColumns && groupableColumns.length > 0 ? (
             <Select
@@ -144,19 +144,25 @@ export function DataTable<T>({
       ) : data.length === 0 ? (
         <EmptyState title={emptyTitle} description={emptyDescription} />
       ) : (
-        <div className="rounded-lg border">
+        <div className="overflow-hidden rounded-lg border">
           <Table>
-            <TableHeader className="sticky top-0 z-10 bg-background">
+            <TableHeader className="sticky top-0 z-10 bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/80">
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
                     <TableHead
                       key={header.id}
-                      className={header.column.getCanSort() ? "cursor-pointer select-none" : undefined}
+                      className={
+                        header.column.getCanSort()
+                          ? "cursor-pointer select-none hover:text-foreground"
+                          : undefined
+                      }
                       onClick={header.column.getToggleSortingHandler()}
                     >
-                      {flexRender(header.column.columnDef.header, header.getContext())}
-                      {{ asc: " ▲", desc: " ▼" }[header.column.getIsSorted() as string] ?? ""}
+                      <span className="inline-flex items-center gap-1">
+                        {flexRender(header.column.columnDef.header, header.getContext())}
+                        {{ asc: "▲", desc: "▼" }[header.column.getIsSorted() as string] ?? ""}
+                      </span>
                     </TableHead>
                   ))}
                 </TableRow>
@@ -202,8 +208,8 @@ export function DataTable<T>({
       )}
 
       {!loading && data.length > 0 ? (
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-0.5">
+          <p className="text-sm text-muted-foreground tabular-nums">
             {selectedRows.length > 0
               ? `${selectedRows.length} of ${table.getFilteredRowModel().rows.length} selected`
               : (() => {

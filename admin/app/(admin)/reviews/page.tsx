@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { CollectionListPage } from "@/components/shared/collection-list-page";
+import { TruncatedCell } from "@/components/shared/truncated-cell";
 import { reviewsRepo } from "@/services/repositories";
 import type { ReviewDoc, WithId } from "@/types/firestore";
 
@@ -29,7 +30,11 @@ const columns: ColumnDef<Row>[] = [
       </span>
     ),
   },
-  { accessorKey: "data.text", header: "Review" },
+  {
+    accessorKey: "data.text",
+    header: "Review",
+    cell: ({ row }) => <TruncatedCell text={row.original.data.text} maxWidth={320} />,
+  },
   {
     id: "actions",
     header: "",

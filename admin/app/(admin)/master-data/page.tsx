@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { DataTable } from "@/components/shared/data-table";
+import { TruncatedCell } from "@/components/shared/truncated-cell";
 import { PageShell } from "@/components/layout/page-shell";
 import { useCollection } from "@/hooks/use-collection";
 import { useRequireModule } from "@/hooks/use-require-module";
@@ -21,7 +22,11 @@ type Row = WithId<TaxonomyCategoryDoc>;
 const columns: ColumnDef<Row>[] = [
   { accessorKey: "id", header: "Key" },
   { accessorKey: "data.label", header: "Label" },
-  { accessorKey: "data.description", header: "Description" },
+  {
+    accessorKey: "data.description",
+    header: "Description",
+    cell: ({ row }) => <TruncatedCell text={row.original.data.description} maxWidth={360} />,
+  },
   {
     accessorKey: "data.isActive",
     header: "Status",
