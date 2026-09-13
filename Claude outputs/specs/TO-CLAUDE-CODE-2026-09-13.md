@@ -58,31 +58,29 @@ claim.
 
 ---
 
-## 3. Dark mode is declared and cannot ever match
+## 3. Dark mode — DEFERRED, do not touch
+
+**Vedanshu's decision, 13 Sep: leave it alone. Deferred to a future session.**
+Do not delete `@custom-variant dark`, do not remove the variant line, do not "tidy" it.
+
+Recorded here only so the next reader knows the state and does not rediscover it as a defect:
 
 ```css
 /* src/styles.css:8 */
 @custom-variant dark (&:is(.dark *));
 ```
 
-There is **no `.dark { }` block anywhere in `src/styles.css`** (grep: 0 matches). Ten `dark:`
-utilities exist in `src/`. Every one of them compiles and can never match, because nothing ever adds
-the `.dark` class.
+- No `.dark { }` block anywhere in `src/styles.css`.
+- Nothing in `src/` ever adds the `.dark` class.
+- No `prefers-color-scheme` outside the reduced-motion block.
+- Exactly **one** `dark:` utility in the whole app — `dark:border-destructive` in
+  `src/components/ui/alert.tsx`, which is vendored shadcn and out of bounds anyway.
 
-This is not cosmetic: `dark:bg-card` *looks* like working dark-mode support to anyone reading the
-code, and to Lovable's agent, which will keep adding more.
+**Correction on record:** an earlier version of this document said there were 10 `dark:` utilities.
+There is one. The grep was matching `dark: s.dark` in `ml/qr.tsx` and `"dark"` string keys in
+`data/identity.ts` — JavaScript object properties, not Tailwind classes.
 
-Two honest options, and this one is genuinely Vedanshu's:
-
-- **Build it** — define the `.dark` palette and a toggle. Real work, a real feature.
-- **Delete the variant and the 10 utilities** — one line plus ten small edits, and the codebase stops
-  claiming a feature it does not have.
-
-The earlier note that "deleting it would switch some styles on in OS dark mode" is worth checking
-before acting: this variant keys off a `.dark` **class**, not `prefers-color-scheme`, so removing it
-should change nothing at runtime. Verify that before either path.
-
----
+It is inert either way. That is the reason it can wait, not a reason to remove it.
 
 ## 4. Phase 8 has no spec, and here is its real size
 
