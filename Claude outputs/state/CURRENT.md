@@ -22,7 +22,7 @@ originally: new
 | | |
 |---|---|
 | Frontend repo | `wugweb-git/musiclinkd-9e6ca875` — TanStack Start · React 19 · Tailwind v4 · Supabase · bun |
-| Design guide repo | `wugweb-git/musiclinkd` — `tokens.json` → `ml-tokens.css` → `/guide` |
+| Design guide repo | `wugweb-git/musiclinkd` — reference only. **Not edited from this project**; pull from it only when Vedanshu points at something specific. |
 | Host | **Lovable.** Published at `musiclinkd.lovable.app`. **Nothing ships to Firebase.** |
 | Firebase | `musiclinkd-7ae30` — admin panel and Firestore backend only |
 | Supabase (frontend) | live tables: `profiles`, `portfolio_items` |
@@ -59,22 +59,15 @@ Fixed 13 Sep by renaming 12 parents: `bands`, `bands.$id`, `collab.new`, `collab
 
 ## Design system — verified 13 Sep 2026
 
-**Read the column headers.** An earlier version of this section merged app facts and guide facts into
-one table and got three things wrong as a result: it gave the guide's type-step count as the app's,
-claimed an eyebrow font token the app does not have, and said "three places" above a four-row table.
-Corrected below; the two systems are now stated separately, always.
-
-| | App (`musiclinkd-9e6ca875`) | Guide (`musiclinkd`) |
-|---|---|---|
-| Type scale | **5 steps** — `--type-1..5`, `--type-5` hero-only | **7 steps** — `--type-1..7` |
-| Font tokens | `--font-sans` and `--font-display`, both Inter. **There is no `--font-eyebrow` in the app** | `--font-display: 'Inter Tight'` · `--font-eyebrow: 'Unica One'` |
-| Weights loaded | 400 / 500 / 600 / 700 | `--weight-4: 800` |
-| Token count | — | **111 declarations**; the old 108 ceiling is lifted |
-
-Shared, and true of both:
+Everything below is the **app**, read from `src/styles.css` on 13 Sep. An earlier version of this
+section mixed in guide values and got the type-step count and the eyebrow font wrong as a result.
+No guide values appear here now.
 
 | | |
 |---|---|
+| Type scale | **5 steps** — `--type-1..5`, `--type-5` is hero-only |
+| Font tokens | `--font-sans` and `--font-display`, both Inter. **There is no `--font-eyebrow`** — a claim to the contrary in `lovable-project-knowledge.md` is wrong and should be corrected at the next knowledge update |
+| Weights loaded | 400 / 500 / 600 / 700. 800 is never requested |
 | Steps-per-scale rule | **DEAD.** Any scale carries as many steps as the design needs |
 | Letter-spacing | None. Headings use Inter's normal tracking; the wordmark is set at 0 |
 | Brand pink | `#EA4C89` fills · `#C7295F` text. `#5B4BFF` is superseded and always a bug |
@@ -100,29 +93,15 @@ One item from that set stays, because it is inside the app and nothing to do wit
 and chips stay pills. As written, Lovable's agent will build 8px chips on new screens. One line in
 `AGENTS.md` and one in the Lovable knowledge.
 
-**Until this is settled, neither repo is authoritative for radius, fonts, weight or photography.**
-Do not cite either one as governing in those four areas.
-
 ### Radius — the detail
 
 The app moved to Material 3 on 13 Sep (`df56e0a`, 124 files, 465 insertions) on the stated reason
 *"follow the industry standards, esp. for mobile UX"* — Android is the target. Cards went 32px → 16px
 across 372 call sites; small tiles are 12px; sheets and dialogs are 28px; buttons and chips stay pills.
 
-**The design guide has not followed.** `frontend/guide/system/ml-tokens.css` still emits four steps:
-
-```
---radius-1: 8px   --radius-2: 16px   --radius-3: 32px   --radius-4: 9999px
-```
-
-The guide is the stated source of truth, and the app is now hand-diverged from it again — the same
-drift class that produced the wrong type scale. One of the two has to move. Until then, do not cite
-either as authoritative for radius.
-
 ~~`AGENTS.md` line 152 contradicts its own repo.~~ **Fixed in `47f7c7b`** — it now documents the
 Material 3 roles (sm 8 chips · md 12 tiles/inputs · lg 16 cards · xl 20 · 2xl 28 sheets/dialogs · 3xl
-32 hero · full). The guide-repo `tokens.json` radius is still `8/16/32/pill` — that disagreement
-stands.
+32 hero · full).
 
 **Correction on record (1):** `audits/TAILWIND-DS-AUDIT.md` §A1 called making the radius aliases
 real steps *"the single cheapest win available — it restores expressiveness to ~450 existing call
@@ -194,33 +173,14 @@ everyone but their owner; the old `USING (true)` policy is gone; the migration i
 profiles are public, so nothing visible changed. **This supersedes the warning elsewhere in the
 older documents that the policy is unenforced.**
 
-## The photography rule — my error, and the evidence
+## The photography rule
 
-**I was wrong about why it was deleted.** I wrote that the rule was being removed because Unsplash
-is unreachable behind an unconfirmed email. That is not what happened: Claude Code removed it
-because Vedanshu said in chat that no such rule exists. I inferred a motive from a partial log and
-published it as fact here and in Notion. Corrected.
+Removed from `AGENTS.md` and the Lovable project knowledge on Vedanshu's statement that no such rule
+exists. **Settled for this project; not reopened.**
 
-**The rule does exist, and not only in documents I wrote.** It is in the governed design system, in
-the design-guide repo, committed 31 Aug 2026 in `1b7c197` — `frontend/guide/rules/cards.md`:
-
-> **Use the local photography library** under `/assets/img`, bound to a component. Never stock.
-> *Was "use real photography from Unsplash". The guide carried 94 stock references and now carries
-> zero; they were removed deliberately.*
-
-Three things follow. The rule predates this session. It records a deliberate removal of 94 Unsplash
-references, so it is a decision that was already executed once. And it is still live in
-`frontend/guide/rules/cards.md` today, while it has now been deleted from `AGENTS.md` and the
-Lovable project knowledge — so the two repos disagree about photography as well as radius.
-
-This is Vedanshu's to settle, and it is a one-line change in two or three places either way:
-
-- **Keep it** — restore the line in `AGENTS.md` and the Lovable knowledge; the 14 remaining Unsplash
-  URLs in `src/` become debt against `frontend/website/assets/img/`.
-- **Retire it** — remove it from `frontend/guide/rules/cards.md` too, so the design system stops
-  asserting a rule the app no longer follows.
-
-What should not happen is the current state: deleted in one repo, still governing in the other.
+Earlier versions of this document argued the point at length and got the reason for the deletion
+wrong. Both are in git history. 14 files in `src/` still carry Unsplash URLs; whether they are
+replaced is a normal content task, not a rule violation.
 
 ## Open decisions — owner, not engineering
 
