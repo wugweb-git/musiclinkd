@@ -1,3 +1,16 @@
+---
+doc: DESIGN-WORK-STATE
+version: 1.0
+status: SUPERSEDED
+updated: 2026-09-13
+verified_against: musiclinkd-9e6ca875@0697a42
+folder: archive
+originally: DESIGN-WORK-STATE.md
+---
+
+> **SUPERSEDED** · v1.0 · 2026-09-13. 10 Sep landed/not-landed list. Superseded by state/CURRENT.md.
+> Ground truth lives in `state/CURRENT.md`; where this file disagrees with it, CURRENT wins.
+
 # MusicLinkd (Lovable app) — design work: what has landed, what has not
 
 Verified against `wugweb-git/musiclinkd-9e6ca875` at **HEAD `384af26f`** (PR #10), 10 Sep 2026.

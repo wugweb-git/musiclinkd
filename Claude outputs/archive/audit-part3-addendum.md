@@ -1,3 +1,16 @@
+---
+doc: audit-part3-addendum
+version: 1.0
+status: SUPERSEDED
+updated: 2026-09-13
+verified_against: musiclinkd-9e6ca875@0697a42
+folder: archive
+originally: musiclinkd-audit-part3-addendum-2026-09-10.md
+---
+
+> **SUPERSEDED** · v1.0 · 2026-09-13. Corrections to part 3. Unreadable standalone; read with audit-part3-chat-history.md.
+> Ground truth lives in `state/CURRENT.md`; where this file disagrees with it, CURRENT wins.
+
 # Part 3 — Addendum: the two linked messages, and a correction
 
 **Date:** 10 September 2026

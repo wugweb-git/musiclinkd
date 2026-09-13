@@ -1,3 +1,16 @@
+---
+doc: AGENTS
+version: 2.0
+status: CURRENT
+updated: 2026-09-13
+verified_against: musiclinkd-9e6ca875@0697a42
+folder: reference
+originally: AGENTS.md
+---
+
+> **CURRENT** · v2.0 · 2026-09-13. PROPOSED replacement for the live AGENTS.md at the root of musiclinkd-9e6ca875. The copy here is not what agents read — apply it to that repo.
+> Ground truth lives in `state/CURRENT.md`; where this file disagrees with it, CURRENT wins.
+
 <!-- LOVABLE:BEGIN -->
 > [!IMPORTANT]
 > This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
@@ -22,7 +35,7 @@ Nothing here is a prototype.
 ## GitHub ↔ Lovable sync protocol
 
 Sync is two-way: commits pushed to the tracked branch appear in the Lovable editor, and edits made
-in Lovable are committed here. Four rules govern it. Breaking them costs a day each.
+in Lovable are committed here. Five rules govern it. Breaking them costs a day each.
 
 ### 1. Lovable tracks exactly one branch
 
@@ -143,10 +156,20 @@ render as empty boxes on real devices. `lucide-react` is installed and already u
 
 `README.md` is stale — ignore its palette and type values.
 
-Radius **8 / 16 / 32 / pill** only; `24px` and `20px` are not on the scale. Type is four fluid
-`clamp()` tokens, never arbitrary sizes. Brand pink `#EA4C89`; `#5B4BFF` is from a superseded
-brief and is always a bug. Purple is permitted only on the category badge. Photography comes from
-the local library — never Unsplash or stock.
+Radius **8 / 16 / 32 / pill**; `24px` and `20px` are not steps. Type is a scale of fluid `clamp()`
+tokens — **seven steps as of 13 Sep 2026** — never an arbitrary size. **The "exactly four steps per
+scale" rule is dead.** Any scale may carry as many steps as the design needs; what stays banned is
+the one-off value. Need a size the scale cannot express? Add a token, never a `text-[17px]`.
+
+Brand pink `#EA4C89`; `#5B4BFF` is from a superseded brief and is always a bug. Purple is permitted
+only on the category badge. **`--navy` / `#0D0B26` is retired** — it survives only as a documented
+back-compat shim in `styles.css` for 17 route files; never reach for it in new code, use `ink`.
+Photography comes from the local library — never Unsplash or stock.
+
+**Typography is one family: Inter.** `--font-sans`, `--font-display` and `--font-eyebrow` all
+resolve to it; the three token names stay so a future change is one line. **Inter Tight, Unica One
+and JetBrains Mono are all retired — never reintroduce any of them.** No letter-spacing tuning:
+headings use Inter's normal tracking and the wordmark is set at 0.
 
 `:focus-visible` ring on every interactive control. 48dp touch floor; a control that should look
 smaller keeps an invisible 48dp hit area rather than growing.
@@ -156,7 +179,17 @@ smaller keeps an invisible 48dp hit area rather than growing.
 Flat, dot-named files under `src/routes/` (`booking.$id.pay.tsx` → `/booking/:id/pay`). Dynamic
 segments use bare `$`. `__root.tsx` is the only shell. **`routeTree.gen.ts` is generated — never
 hand-edit.** No `src/pages/`, no `app/layout.tsx`. Every route defines its own `head()`. Wizards
-keep state in a `?step=` search param. Every route reachable from a real entry point.
+keep state in a `?step=` search param.
+
+**A path that has children must be a leaf named `.index.tsx`, not a component at the parent path.**
+`bands.index.tsx`, not `bands.tsx`, the moment `bands.$id.*` exists. A parent route that renders a
+component and has no `<Outlet />` swallows every child: the child URL resolves, and the parent's
+screen paints over it. This shipped to production and broke 26 URLs across `/bands`, `/reviews`,
+`/plans`, `/help` and `/search` before it was caught on 13 Sep. The tree is now 207 routes with
+zero children under an Outlet-less parent; keep it that way.
+
+**Every route reachable from a real entry point.** Known debt: roughly 20 finished screens
+currently have no inbound link anywhere in the app. Do not add to that number.
 
 ### Data
 
@@ -182,6 +215,10 @@ directly to the live database — it desyncs the schema from migration history.
 
 Data access is server-side via `createServerFn` in `*.functions.ts` guarded by
 `requireSupabaseAuth`. Do not add client-side Supabase writes.
+
+**`profiles.visibility` is NOT enforced.** The RLS migration is merged but has never been applied;
+the live SELECT policy is still `USING (true)`. Do not write code that assumes a non-public profile
+is hidden by the database.
 
 ---
 

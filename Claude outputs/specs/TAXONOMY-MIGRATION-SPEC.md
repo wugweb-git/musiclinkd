@@ -1,3 +1,16 @@
+---
+doc: TAXONOMY-MIGRATION-SPEC
+version: 1.0
+status: CURRENT
+updated: 2026-09-13
+verified_against: musiclinkd-9e6ca875@0697a42
+folder: specs
+originally: TAXONOMY-MIGRATION-SPEC.md
+---
+
+> **CURRENT** · v1.0 · 2026-09-13. The only document here untouched by the route / token / typography changes. Never executed or verified against a live database.
+> Ground truth lives in `state/CURRENT.md`; where this file disagrees with it, CURRENT wins.
+
 # MusicLinkd — taxonomy migration spec
 
 **Target:** Supabase project `grufbwlmxhzpocryrhho` (owner: personal ID — Vedanshu's call, settled).

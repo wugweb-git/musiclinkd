@@ -1,3 +1,16 @@
+---
+doc: audit-part2-governance-and-code
+version: 1.0
+status: SUPERSEDED
+updated: 2026-09-13
+verified_against: musiclinkd-9e6ca875@0697a42
+folder: archive
+originally: musiclinkd-audit-part2-governance-and-code-2026-09-10.md
+---
+
+> **SUPERSEDED** · v1.0 · 2026-09-13. Code-review half is fully promoted into the phase specs. Kept as evidence trail.
+> Ground truth lives in `state/CURRENT.md`; where this file disagrees with it, CURRENT wins.
+
 # MusicLinkd — Audit Part 2: The Backup Repo, Governance Compliance, and Code Review
 
 **Date:** 10 September 2026

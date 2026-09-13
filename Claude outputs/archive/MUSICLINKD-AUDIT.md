@@ -1,3 +1,16 @@
+---
+doc: MUSICLINKD-AUDIT
+version: 1.0
+status: SUPERSEDED
+updated: 2026-09-13
+verified_against: musiclinkd-9e6ca875@0697a42
+folder: archive
+originally: MUSICLINKD-AUDIT.md
+---
+
+> **SUPERSEDED** · v1.0 · 2026-09-13. Revision 1 of the audit. Superseded 10 Sep by MUSICLINKD-LOVABLE-AUDIT.md, whose section 21 retracts this document's central frame. Do not delete — those corrections are unreadable without it.
+> Ground truth lives in `state/CURRENT.md`; where this file disagrees with it, CURRENT wins.
+
 # MusicLinkd — Consolidated Audit
 
 **Date:** 10 September 2026

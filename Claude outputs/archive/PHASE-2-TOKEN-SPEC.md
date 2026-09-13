@@ -1,3 +1,47 @@
+---
+doc: PHASE-2-TOKEN-SPEC
+version: 1.0
+status: SUPERSEDED
+updated: 2026-09-13
+verified_against: musiclinkd-9e6ca875@0697a42
+folder: archive
+originally: PHASE-2-TOKEN-SPEC.md
+---
+
+> **SUPERSEDED** · v1.0 · 2026-09-13. Phase 2 shipped. The file's own banner disowns its type scale, and its 'four steps' argument is the rule that is now dead. Sections 4 and 5 should be lifted into Phase 8.
+> Ground truth lives in `state/CURRENT.md`; where this file disagrees with it, CURRENT wins.
+
+> # ⚠️ SUPERSEDED — DO NOT USE THE TYPE SCALE IN THIS FILE
+>
+> The type scale below (10–12 / 14–18 / 20–28 / 28–44) is **wrong**. I sourced it from
+> `frontend/guide/README.md`, which is prose and pre-v9. The generated
+> `frontend/guide/system/ml-tokens.css` is the truth:
+>
+> ```css
+> --type-1: clamp(12px, calc(12px + 1  * (100vw - 360px) / 1080), 13px);
+> --type-2: clamp(16px, calc(16px + 2  * (100vw - 360px) / 1080), 18px);
+> --type-3: clamp(22px, calc(22px + 6  * (100vw - 360px) / 1080), 28px);
+> --type-4: clamp(32px, calc(32px + 12 * (100vw - 360px) / 1080), 44px);
+> ```
+>
+> `tokens.json` states the rule: **every web minimum equals its Android sp value — 12/16/22/32.**
+> Web minimums below that make the preview render smaller text than the app ever can. That exact
+> bug existed before 2026-08-29 as *"web 10/14/20/28 against native 12/16/22/32; the caption
+> measured 10.03px"* — and my clamp for `--text-1` computed to **10.1px at 412px**. I reproduced
+> the defect the token file was written to prevent.
+>
+> Also wrong here: **JetBrains Mono is retired** (never loaded, silently fell back to generic
+> monospace). **Navy `#0D0B26` is retired** — use `ink #0D0D0D`. **`line` is `#D5D5DE`, not
+> `#ECECF1`; `muted` is `#66666F`, not `#7D7D8E`.** And there is a **third font family I omitted —
+> Unica One**, for eyebrows/kickers only, single weight 400.
+>
+> The `text-[15px]`/`text-[17px]` mapping table below is invalid — it was computed against the
+> wrong scale. Against the real scale, `15px` and `17px` both sit between type-1 (12–13) and
+> type-2 (16–18), and `17px` is closest to type-2. **Re-derive before applying.**
+>
+> Radius, spacing, opacity and motion durations in this file are correct. Elevation values were
+> invented by me — the real ones are in `tokens.json`.
+
 # Phase 2 — `src/styles.css` token spec
 
 Exact values for the design-token refactor. Written so Phase 2 is transcription, not interpretation.

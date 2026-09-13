@@ -1,3 +1,16 @@
+---
+doc: lovable-workspace-knowledge
+version: 1.0
+status: CURRENT
+updated: 2026-09-13
+verified_against: musiclinkd-9e6ca875@0697a42
+folder: reference
+originally: lovable-workspace-knowledge.md
+---
+
+> **CURRENT** · v1.0 · 2026-09-13. Wugweb-wide standing rules. Deliberately abstract, so it has not aged. UNVERIFIED: whether this was ever installed as Lovable workspace knowledge.
+> Ground truth lives in `state/CURRENT.md`; where this file disagrees with it, CURRENT wins.
+
 # Wugweb — Workspace Knowledge
 
 Applies to every project in this workspace. Project Knowledge overrides this where they conflict.

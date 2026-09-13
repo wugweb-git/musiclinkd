@@ -1,3 +1,16 @@
+---
+doc: CLAUDE-CODE-WORK-ORDER
+version: 1.1
+status: PARTLY STALE
+updated: 2026-09-13
+verified_against: musiclinkd-9e6ca875@0697a42
+folder: plans
+originally: CLAUDE-CODE-WORK-ORDER.md
+---
+
+> **PARTLY STALE** · v1.1 · 2026-09-13. Executable phase plan. Appendix A was a second copy of AGENTS.md and is deleted. Phases 1, 2 (ml/ only) and 7 are DONE. Phase 8 is priced at ~97h.
+> Ground truth lives in `state/CURRENT.md`; where this file disagrees with it, CURRENT wins.
+
 # MusicLinkd — Claude Code Work Order
 
 **Repo:** `git@github.com:wugweb-git/musiclinkd-9e6ca875.git`
@@ -25,7 +38,7 @@ expensive in ways they normally aren't.
 - Every commit ends with `Co-Authored-By: Wugweb <admin@wugweb.com>` and updates `CHANGELOG.md`.
 
 **Context you need:** this app is the *only* MusicLinkd frontend — it replaces a Kotlin/Compose
-Android app being retired. Nothing here is a prototype. 205 routes exist; only 2 database tables
+Android app being retired. Nothing here is a prototype. 207 routes exist; only 2 database tables
 do (`profiles`, `portfolio_items`). Auth, onboarding and portfolio persist; every other flow is
 seeded mock data **by decision** — do not "fix" that, it is scheduled after the refactor.
 
@@ -69,7 +82,7 @@ The rules must exist in the repo before the code they govern changes.
 
 ### 1.1 Create `AGENTS.md`
 
-Full content in §Appendix A. **Preserve the existing `<!-- LOVABLE:BEGIN -->…<!-- LOVABLE:END -->`
+Full content: see `AGENTS.md` at the repo root (mirror in `reference/AGENTS.md`). **Preserve the existing `<!-- LOVABLE:BEGIN -->…<!-- LOVABLE:END -->`
 block byte-for-byte at the top** — Lovable manages it and may rewrite it.
 
 ### 1.2 Create `CHANGELOG.md`
@@ -247,7 +260,7 @@ returns nothing outside comments.
 `src/components/ml/ui.tsx`:
 
 ```js
-const active = path === item.to;   // exact match — broken on ~200 of 205 routes
+const active = path === item.to;   // exact match — broken on ~200 of 207 routes
 ```
 
 `/marketplace/search`, `/marketplace/rent/…`, `/profile/rahul`, `/messages/…` never highlight.
@@ -319,7 +332,7 @@ The hand-rolled modals have **no focus trap, no Escape handler, no scroll lock, 
 ```
 
 `Row` is the standard navigation primitive; this disables TanStack Router's compile-time route
-checking for **every** `Row` in the app. With 205 routes that is where dead links survive. Type it
+checking for **every** `Row` in the app. With 207 routes that is where dead links survive. Type it
 properly. **Expect this to surface real broken links** — list them in the PR rather than casting
 them away.
 
@@ -338,7 +351,7 @@ token compliance. Move to Tailwind classes bound to the Phase 2 tokens.
 
 **Branch:** none — this produces a document, not a commit · **Est:** 2 hours
 
-**Nobody has opened a single one of the 205 route bodies, or 21 of the 22 `src/data` modules.**
+**Nobody has opened a single one of the 207 route bodies, or 21 of the 22 `src/data` modules.**
 Before touching them, produce a per-file count of:
 
 - arbitrary radius (`rounded-[`) and type (`text-[`) values
@@ -392,7 +405,7 @@ Read it before starting.
 
 ## Open unknowns — flag, do not guess
 
-1. **205 route bodies unread.** Phase 7 exists to close this.
+1. **207 route bodies unread.** Phase 7 exists to close this.
 2. **Four constraints unverifiable** until routes are read: whether `/booking/$id/pay` and
    `/plans/checkout` imply a payment succeeded, a booking is confirmed, or availability is real.
    The rule is: never imply a state the system cannot deliver.
@@ -405,113 +418,10 @@ Read it before starting.
 
 # Appendix A — `AGENTS.md`
 
-Commit this verbatim in Phase 1. The `LOVABLE:BEGIN/END` block is Lovable-managed — preserve it.
+**Deleted 13 Sep 2026.** This appendix held a second, condensed copy of `AGENTS.md`. Two copies of
+the governing rules is exactly how the `#5B4BFF` palette drifted in the first place, and the copy
+here had already fallen behind on the type scale and the retired fonts.
 
----
-
-<!-- LOVABLE:BEGIN -->
-> [!IMPORTANT]
-> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
-> published git history — force pushing, or rebasing/amending/squashing commits
-> that are already pushed — as it rewrites history on Lovable's side and the
-> user will likely lose their project history.
->
-> Commits you push to the connected branch sync back to Lovable and show up in
-> the editor, so keep the branch in a working state.
-<!-- LOVABLE:END -->
-
-# Working in this repository
-
-MusicLinkd — India's professional network and operating system for the music industry.
-Live at `musiclinkd.lovable.app`.
-
-This repo is the **only** MusicLinkd frontend. It replaces a retired Kotlin/Compose Android app.
-Nothing here is a prototype.
-
-## GitHub ↔ Lovable sync protocol
-
-Sync is two-way: commits pushed to the tracked branch appear in the Lovable editor, and edits made
-in Lovable are committed here. Four rules govern it.
-
-**1. Lovable tracks exactly one branch** — default `main`. Only pushes to the tracked branch sync
-back. A feature branch is invisible in the editor until merged.
-
-**2. Conflicting pushes are quarantined, not merged.** Rejected changes are pushed to a
-`lovable-sync` branch, silently. After any push: `git fetch origin && git branch -r | grep
-lovable-sync`. If it exists, merge it before continuing.
-
-**3. One writer at a time.** You cannot switch or create branches while Lovable is editing, and
-concurrent writes are what create `lovable-sync`. Confirm the agent is idle before pushing.
-
-**4. Import does not exist.** Lovable exports to GitHub; it cannot import a repository. Never
-replace this repo's remote.
-
-**5. Never rewrite published history.** No `--force`, no rebase, amend or squash of anything
-pushed. Branch off and merge forward.
-
-```sh
-git checkout main && git pull --ff-only origin main
-git checkout -b <type>/<scope>
-# work, commit in small steps
-git checkout main && git pull --ff-only origin main
-git merge --no-ff <type>/<scope>
-git push origin main
-git fetch origin && git branch -r | grep lovable-sync   # verify clean
-```
-
-Keep `main` working at all times — every push is live in the editor.
-
-**Commit messages must describe the diff.** This history contains `"Added hidden footer icon"` on
-a commit that added ten business routes. Do not add to that. Every commit ends with
-`Co-Authored-By: Wugweb <admin@wugweb.com>` and updates `CHANGELOG.md`.
-
-## Code rules
-
-**TypeScript.** `exactOptionalPropertyTypes: true` is on — declare optional props as
-`prop?: T | undefined` **at the component definition**, never at the call site. No `as any` on
-router links; if `to` won't type-check, the route is wrong. Navigation active state uses
-longest-prefix matching with `/` special-cased.
-
-**Components.** Check `ml/ui.tsx`, `ml/kit.tsx` and `components/ui/` before creating anything.
-`components/ui/` holds 45 installed Radix primitives — use them; hand-rolled modals here lack
-focus trap, Escape and scroll lock. Never ship a control with no handler — disable it and say why.
-Never key styling off display copy. One styling mechanism: Tailwind + semantic tokens, not inline
-`style` objects.
-
-**Icons: never emoji** — not `⌕ 🎙 ← ✓ 📍 ♡ ★` in JSX, and not as fields in data modules. They
-render as empty boxes on real devices. `lucide-react` is installed.
-
-**Tokens.** `README.md` is stale — ignore its palette. Radius **8 / 16 / 32 / pill** only; 24 and
-20 are off-scale. Type is four fluid `clamp()` tokens, never arbitrary sizes. Brand pink
-`#EA4C89`; `#5B4BFF` is always a bug. Purple is category-badge only. Photography from the local
-library — never Unsplash. `:focus-visible` ring on every control. 48dp touch floor; a control that
-should look smaller keeps an invisible 48dp hit area.
-
-**Routing.** Flat dot-named files under `src/routes/` (`booking.$id.pay.tsx` →
-`/booking/:id/pay`). Bare `$` for dynamic segments. `__root.tsx` is the only shell.
-`routeTree.gen.ts` is generated — never hand-edit. No `src/pages/`, no `app/layout.tsx`. Every
-route defines its own `head()`; wizards use `?step=`. No orphan routes.
-
-**Data.** Keep UI copy, seed/demo content and runtime data in separate modules. Runtime data must
-be shaped so a real query can replace it without editing the screen. Never store relative time as
-a string. Never fabricate availability, counts, ratings or transaction state, and never imply a
-payment succeeded, a booking is confirmed or a deposit was refunded unless the system supports it.
-
-**Database.** Live tables are `profiles` and `portfolio_items` only; every other flow is seeded
-mock data by decision. All schema changes go through `supabase/migrations/` — never apply DDL
-directly. Do not design new tables from scratch; a live Firebase backend already models this
-domain. Data access is server-side via `createServerFn` guarded by `requireSupabaseAuth` — no
-client-side Supabase writes.
-
-## Before you say it is done
-
-```sh
-bun install && bunx tsc --noEmit && bun run lint && bun run build
-```
-
-Then a 412px render pass on every touched screen. Every screen ships loading, empty, error and
-offline states. Update `roadmap.md` so its checkboxes match reality.
-
-**If a link, connector or attachment cannot be read, say so in the reply** — a silent no-op turn
-has cost this project a full day. **If two sources disagree, surface the conflict** rather than
-picking one quietly.
+The single source is **`AGENTS.md` at the root of `musiclinkd-9e6ca875`**. A mirror of the current
+proposed version lives at `reference/AGENTS.md` in this folder; the repo copy is what agents
+actually read, so changes go there first.

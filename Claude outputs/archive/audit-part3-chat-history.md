@@ -1,3 +1,16 @@
+---
+doc: audit-part3-chat-history
+version: 1.0
+status: SUPERSEDED
+updated: 2026-09-13
+verified_against: musiclinkd-9e6ca875@0697a42
+folder: archive
+originally: musiclinkd-audit-part3-chat-history-2026-09-10.md
+---
+
+> **SUPERSEDED** · v1.0 · 2026-09-13. The only forensic record of 110 Lovable chat messages and 46 commits. Never delete.
+> Ground truth lives in `state/CURRENT.md`; where this file disagrees with it, CURRENT wins.
+
 # MusicLinkd — Audit Part 3: The Complete Lovable Chat History
 
 **Date:** 10 September 2026

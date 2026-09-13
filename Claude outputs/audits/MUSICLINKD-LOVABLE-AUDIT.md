@@ -1,3 +1,16 @@
+---
+doc: MUSICLINKD-LOVABLE-AUDIT
+version: 2.1
+status: PARTLY STALE
+updated: 2026-09-13
+verified_against: musiclinkd-9e6ca875@0697a42
+folder: audits
+originally: MUSICLINKD-LOVABLE-AUDIT.md
+---
+
+> **PARTLY STALE** · v2.1 · 2026-09-13. The forensic account of how the Lovable app was built. Diagnosis holds; counts do not.
+> Ground truth lives in `state/CURRENT.md`; where this file disagrees with it, CURRENT wins.
+
 # MusicLinkd (Lovable) — Complete Audit
 
 **Date:** 10 September 2026 · **Revision 2**
@@ -15,7 +28,7 @@ findings corrected in §21; decisions recorded in §3.
 
 ## 1. Verdict
 
-**205 routes. 2 database tables. And a design system, reconciled on 31 August, that the app
+**207 routes. 2 database tables. And a design system, reconciled on 31 August, that the app
 built from 1 September onward has never seen.**
 
 The Lovable app is not off-system by accident. It is built on **the previous generation of your
@@ -164,7 +177,7 @@ Every one of them will land in the Android app.
 
 | Layer | Implementation | Documented in | Status |
 |---|---|---|---|
-| **Frontend** | Lovable — TanStack Start, 205 routes | `.lovable/plan/*` only | **The frontend** |
+| **Frontend** | Lovable — TanStack Start, 207 routes | `.lovable/plan/*` only | **The frontend** |
 | ~~Kotlin / Jetpack Compose~~ | ~~Jetpack Compose~~ | `MASTER-REGISTRY.md` — 24 flows, 188 screens, 563 states | **Being dumped.** Read it before deleting it — see below |
 | **Design system** | `tokens.json` v8, `ml-core.css`, `ml-widgets.css`, `/guide`, 133 sections | `frontend/guide/*` — v9, reconciled 31 Aug | **Live. Never reached Lovable** |
 | **Backend** | Firebase `musiclinkd-7ae30`, 16 collections, 34 doc types | `admin/docs/architecture/*` | Live; Spark plan (§17) |
@@ -390,7 +403,7 @@ radius, Google Sans/Roboto — and it is the first file any agent reads in that 
 
 ## 12. Code defects
 
-**Bottom-nav highlighting broken on ~200 of 205 routes.**
+**Bottom-nav highlighting broken on ~200 of 207 routes.**
 
 ```js
 const active = path === item.to;
@@ -593,7 +606,7 @@ overturned two of my findings, **the remaining forty are likely to overturn more
 | Commits | 46 of 46 metadata; **2 diffs in full** | High on metadata |
 | Local repo `.md` | **23 of 63** read | Partial — §18 |
 | Component code | `ui.tsx`, `kit.tsx`, `cards.tsx`, `styles.css`, `profile-map.ts`, `types.ts`, 3 migrations | High on those only |
-| Route bodies | **0 of 205** | None |
+| Route bodies | **0 of 207** | None |
 | Live database | Queried directly | Measured |
 
 ---
@@ -651,7 +664,7 @@ overturned two of my findings, **the remaining forty are likely to overturn more
 3. **Which flows ship first?** Asked four times.
 4. **The 31k-line spec** — where does it live outside the Lovable chat?
 5. **The ~40 unread local `.md` files** — §18. The six already read overturned two findings.
-6. **Route bodies** — 0 of 205 opened. Four of your constraints stay unverifiable (§9).
+6. **Route bodies** — 0 of 207 opened. Four of your constraints stay unverifiable (§9).
 
 ---
 
@@ -694,6 +707,6 @@ on `auth.users` INSERT; EXECUTE revoked from `anon`/`authenticated`/`PUBLIC`.
 **Diffs read in full:** `5129664` (8 Sep) · `d10513f` (10 Sep)
 
 **Not read:** ~40 of 63 project `.md` (notably `PRODUCT-SPEC.md`, `docs/09-Roadmap/` ×3,
-`admin/docs/architecture/` ×9, `frontend/guide/INDEX.md`, `app-audit.md`) · all 205 route bodies ·
+`admin/docs/architecture/` ×9, `frontend/guide/INDEX.md`, `app-audit.md`) · all 207 route bodies ·
 45 Radix primitives · 21 of 22 `src/data/*` · 44 of 46 diffs · **18 empty user messages
 (unreadable)** · the interior of 54 assistant messages · `tokens/tokens.json` itself
