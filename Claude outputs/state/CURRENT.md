@@ -71,7 +71,28 @@ Fixed 13 Sep by renaming 12 parents: `bands`, `bands.$id`, `collab.new`, `collab
 | Navy | **Removed 13 Sep** — migrated to ink `#0D0D0D` (`81c8953`). Zero `navy` left in `src/`; `Btn variant="ink"`, `bg-ink` |
 | Radius | **Material 3 shape scale, adopted 13 Sep:** xs 4 · sm 8 · md 12 · lg 16 · xl 20 · 2xl 28 · 3xl 32 · full. `--radius` (shadcn base) is 16. |
 
-### Radius — the two repos now disagree
+## The guide and the app now disagree in three places
+
+Not three problems. One problem asked three times: **does the design guide lead or follow the app?**
+Every case below is the app moving and the guide staying. Settling the question once retires all
+three and the next few, which will otherwise arrive one at a time.
+
+| | App (`musiclinkd-9e6ca875`) | Guide (`musiclinkd`) |
+|---|---|---|
+| **Radius** | Material 3: 4 · 8 · 12 · 16 · 20 · 28 · 32 · full | `--radius-1..4` = 8 · 16 · 32 · 9999 |
+| **Fonts** | Inter alone — display, body, eyebrow | `--font-display: 'Inter Tight'` · `--font-eyebrow: 'Unica One', 'Inter Tight'` |
+| **Weights** | 400 / 500 / 600 / 700 loaded; 800 never requested | `--weight-4: 800` |
+| **Photography** | rule deleted from `AGENTS.md` and the Lovable knowledge | `frontend/guide/rules/cards.md` still says *"never stock"* |
+
+All four lines above were read from `frontend/guide/system/ml-tokens.css` and
+`frontend/guide/rules/cards.md` on 13 Sep. The guide is the stated source of truth and currently
+describes a product that no longer exists — its own `/guide` page renders in Inter Tight with 32px
+card corners.
+
+**Until this is settled, neither repo is authoritative for radius, fonts, weight or photography.**
+Do not cite either one as governing in those four areas.
+
+### Radius — the detail
 
 The app moved to Material 3 on 13 Sep (`df56e0a`, 124 files, 465 insertions) on the stated reason
 *"follow the industry standards, esp. for mobile UX"* — Android is the target. Cards went 32px → 16px
