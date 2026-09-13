@@ -3,7 +3,7 @@ doc: CURRENT
 version: 1.0
 status: CURRENT
 updated: 2026-09-13
-verified_against: musiclinkd-9e6ca875@0697a42
+verified_against: musiclinkd-9e6ca875@90a4676
 folder: state
 originally: new
 ---
@@ -35,8 +35,8 @@ retired; its Firebase backend is not.
 
 | | |
 |---|---|
-| `origin/main` | `0697a42` |
-| Lovable `latest_commit_sha` | `0697a422` — same commit, published, `error: null` |
+| `origin/main` | `90a4676` |
+| Lovable `latest_commit_sha` | tracks `main`, published, CI green |
 | Routes | **207**, zero children under an Outlet-less parent |
 | CI | GitHub Actions, bun 1.4.0. Blocking: typecheck, lint (correctness rules), build. Non-blocking: format check (`continue-on-error: true`) |
 
@@ -69,9 +69,34 @@ Fixed 13 Sep by renaming 12 parents: `bands`, `bands.$id`, `collab.new`, `collab
 | Letter-spacing | None. Headings use Inter's normal tracking; the wordmark is set at 0 |
 | Brand pink | `#EA4C89` fills · `#C7295F` text. `#5B4BFF` is superseded and always a bug |
 | Navy | `#0D0B26` **retired** — survives only as a documented back-compat shim for 17 route files |
-| Radius | 8 / 16 / 32 / pill |
+| Radius | **Material 3 shape scale, adopted 13 Sep:** xs 4 · sm 8 · md 12 · lg 16 · xl 20 · 2xl 28 · 3xl 32 · full. `--radius` (shadcn base) is 16. |
 
-**Correction on record:** an earlier claim that `scripts/build-handoff.mjs:95` would reject
+### Radius — the two repos now disagree
+
+The app moved to Material 3 on 13 Sep (`df56e0a`, 124 files, 465 insertions) on the stated reason
+*"follow the industry standards, esp. for mobile UX"* — Android is the target. Cards went 32px → 16px
+across 372 call sites; small tiles are 12px; sheets and dialogs are 28px; buttons and chips stay pills.
+
+**The design guide has not followed.** `frontend/guide/system/ml-tokens.css` still emits four steps:
+
+```
+--radius-1: 8px   --radius-2: 16px   --radius-3: 32px   --radius-4: 9999px
+```
+
+The guide is the stated source of truth, and the app is now hand-diverged from it again — the same
+drift class that produced the wrong type scale. One of the two has to move. Until then, do not cite
+either as authoritative for radius.
+
+**`AGENTS.md` contradicts its own repo.** Line 152 still reads *"Radius 8 / 16 / 32 / pill only;
+`24px` and `20px` are not on the scale"* while `styles.css` in the same repo defines
+`--radius-xl: 20px`. Fix line 152.
+
+**Correction on record (1):** `audits/TAILWIND-DS-AUDIT.md` §A1 called making the radius aliases
+real steps *"the single cheapest win available — it restores expressiveness to ~450 existing call
+sites without touching one of them."* That was wrong on cost. It took 124 files and 465 insertions,
+and it changed what nearly every screen looks like. Zero *token* edits is not zero edits.
+
+**Correction on record (2):** an earlier claim that `scripts/build-handoff.mjs:95` would reject
 `--type-5` was **wrong**. That check validates a type step's *weight value* against the weight
 scale and builds its map dynamically from `steps(f.weight)`. It never capped type steps. The word
 "four" in its comment is stale prose, not a validator.
@@ -115,6 +140,32 @@ navigation wiring rather than a sweep. It is the cheapest next step.
 - **The Lovable project `description` field still specifies the superseded system** — `#5B4BFF`
   primary, `#8B5CF6` secondary, `#FAFAFA` ground, Google Sans. It is read alongside project
   knowledge and contradicts it.
+
+## Shipped 13 Sep, after the reorganisation
+
+| Commit | What |
+|---|---|
+| `df057a0` | `viewport-fit=cover`; `--text-secondary` now points at `--muted-foreground`; five-step comment fixed |
+| `2ea034a` | Heading letter-spacing removed — `-0.02em` off `h1..h4`, `tracking-tight` off auth / welcome / error headings |
+| `b17b510` | `roadmap.md` synced; pending-screens audit committed as `docs/pending-screens-audit-2026-09-13.md` |
+| `d526f17` | One spacing system; `text-text2` renamed; `/talent/$id` links removed |
+| `abe3c66` | `/band` redirects to `/bands`; swipe deck moved under `/recommendations/swipe` |
+| `9993a6c` | Retired navy migrated to ink `#0D0D0D` (ΔE2000 14.1 — a visible change, not a rename) |
+| `df56e0a` | Material 3 shape scale |
+
+**`profiles.visibility` RLS is now applied to the live database.** Private profiles are hidden from
+everyone but their owner; the old `USING (true)` policy is gone; the migration is in history. All 3
+profiles are public, so nothing visible changed. **This supersedes the warning elsewhere in the
+older documents that the policy is unenforced.**
+
+## Unresolved rule change — flagged, not accepted
+
+The photography rule in `AGENTS.md` line 152 — *"Photography comes from the local library — never
+Unsplash or stock"* — is slated for deletion on the reasoning that Unsplash is unreachable behind an
+unconfirmed email. **Being unable to reach Unsplash is not a reason the rule was written.** The rule
+is about licensing and brand, not access. 14 files in `src/` still reference Unsplash URLs. Either
+the rule stands and those 14 are debt against `frontend/website/assets/img/`, or Vedanshu retires
+the rule deliberately. Do not delete it as "invalid".
 
 ## Open decisions — owner, not engineering
 
