@@ -1,0 +1,25 @@
+200	NF:not found	bad	/business/nope	Business profile | MusicLinkd	Business profile | MusicLinkd ← Business Business not found This profile may have been rem
+200	NF:not found	bad	/business/nope/dashboard	Business dashboard | MusicLinkd	Business dashboard | MusicLinkd ← Dashboard Business not found This business may have been
+200	NF:not found	bad	/reviews/nope/edit	Edit your review | MusicLinkd	Edit your review | MusicLinkd ← Edit review Review not found It may already have been dele
+200	NF:not found	bad	/services/nope	Service details | MusicLinkd	Service details | MusicLinkd ← Service Service not found It may have been removed. Home Di
+200	-	bad	/booking/nope	Book a studio session — MusicLinkd	Book a studio session — MusicLinkd This space is unavailable It may have been removed or i
+200	-	bad	/collab/invites/nope	Collaboration invitation | MusicLinkd	Collaboration invitation | MusicLinkd ← Invitation You don&#x27;t have access to this coll
+200	-	bad	/collab/proposals/nope	Collaboration proposal | MusicLinkd	Collaboration proposal | MusicLinkd ← Proposal You don&#x27;t have access to this collabor
+200	NF:not found	bad	/bands/nope/events	Band shows and opportunities | MusicLinkd	Band shows and opportunities | MusicLinkd ← Shows Band not found This band may have been d
+200	NF:no longer available	bad	/bands/nope	Band profile | MusicLinkd	Band profile | MusicLinkd ← Band This band is no longer available It may have been deleted
+200	NF:not found	bad	/opportunities/nope/manage	Manage opportunity | MusicLinkd	Manage opportunity | MusicLinkd ← Manage Opportunity not found It may already be closed. H
+200	-	bad	/identity/q/nope	Scanned MusicLinkd code	Scanned MusicLinkd code ← Scanned code musiclinkd.app/q/nope
+200	-	bad	/search/why/nope	Why am I seeing this? | MusicLinkd	Why am I seeing this? | MusicLinkd ← Why am I seeing this This result Matched on your prof
+200	-	bad	/onboarding/step/nope	Build your profile — MusicLinkd onboarding	Build your profile — MusicLinkd onboarding
+200	-	bad	/portfolio/nope/edit	Edit work — MusicLinkd portfolio	Edit work — MusicLinkd portfolio ← Edit work You can&#x27;t edit this work It may have bee
+200	-	bad	/portfolio/nope	Work detail — MusicLinkd portfolio	Work detail — MusicLinkd portfolio ← Work
+200	-	bad	/marketplace/l/nope	Listing | MusicLinkd Market	Listing | MusicLinkd Market ← Listing unavailable This listing was removed or sold. Home D
+200	-	bad	/marketplace/seller/nope	Seller | MusicLinkd Market	Seller | MusicLinkd Market ← Seller unavailable Home Discover Connections Market Profile
+200	NF:no longer available	bad	/marketplace/rent/e/nope	Rental | MusicLinkd	Rental | MusicLinkd ← Rental unavailable This listing was removed or is no longer availabl
+200	-	bad	/collab/nope	Collaboration workspace | MusicLinkd	Collaboration workspace | MusicLinkd ← Collaboration You don&#x27;t have access to this co
+200	-	bad	/opportunities/nope	Opportunity | MusicLinkd	Opportunity | MusicLinkd ← Opportunity This opportunity is gone It was closed, filled or r
+200	-	bad	/bookings/NOPE	Booking detail — MusicLinkd	Booking detail — MusicLinkd ← Booking This booking is unavailable It may have been cancell
+200	NF:not found	bad	/help/nope	Guide not found | MusicLinkd	Guide not found | MusicLinkd ← Not found This page has moved The guide you followed is no 
+404	-	bad	/verification/nope	Verification unavailable | MusicLinkd	Verification unavailable | MusicLinkd ← Verification That verification type does not exist
+404	NF:404	bad	/profile/nope	MusicLinkd — Discover Music Talent in India	MusicLinkd — Discover Music Talent in India 404 Page not found The page you&#x27;re lookin
+404	NF:404	bad	/totally-unknown	MusicLinkd — Discover Music Talent in India	MusicLinkd — Discover Music Talent in India 404 Page not found The page you&#x27;re lookin

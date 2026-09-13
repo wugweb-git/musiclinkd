@@ -1,0 +1,49 @@
+200	-	/booking/$id	/booking/octave-sound-labs	Book a studio session — MusicLinkd	Book a studio session — MusicLinkd ← Recording Studio Octave Sound Labs ✓ About this space
+200	-	/booking/$id/	/booking/octave-sound-labs/	Book a studio session — MusicLinkd	Book a studio session — MusicLinkd ← Recording Studio Octave Sound Labs ✓ About this space
+200	-	/talent/$id	/talent/ananya-sharma	Ananya Sharma — Playback Vocalist | MusicLinkd	Ananya Sharma — Playback Vocalist | MusicLinkd ← ⋯ Ananya Sharma Industry Verified @ anany
+200	-	/verification/$type	/verification/identity	Identity verification | MusicLinkd	Identity verification | MusicLinkd ← Identity verification Verified Approved on 13 Aug by 
+200	-	/bands/$id/contact	/bands/the-kite-notes/contact	Contact a band | MusicLinkd	Contact a band | MusicLinkd ← Contact The Kite Notes Why are you reaching out? Book for a 
+200	-	/bands/$id/events	/bands/the-kite-notes/events	Band shows and opportunities | MusicLinkd	Band shows and opportunities | MusicLinkd ← Shows The Kite Notes Shows Opportunities Monso
+200	-	/bands/$id/portfolio	/bands/the-kite-notes/portfolio	Band portfolio | MusicLinkd	Band portfolio | MusicLinkd ← Portfolio The Kite Notes Discography Live Paper Kites EP · 2
+200	-	/booking/$id/addons	/booking/octave-sound-labs/addons	Equipment &amp; add-ons — MusicLinkd booking	Equipment &amp; add-ons — MusicLinkd booking ← Equipment &amp; add-ons Optional House gear
+200	-	/booking/$id/details	/booking/octave-sound-labs/details	Session details — MusicLinkd booking	Session details — MusicLinkd booking ← Session details Live Room A Only what the provider 
+200	-	/booking/$id/pay	/booking/octave-sound-labs/pay	Pay your deposit — MusicLinkd booking	Pay your deposit — MusicLinkd booking ← Payment Deposit for Octave Sound Labs Payment Tota
+200	-	/booking/$id/review	/booking/octave-sound-labs/review	Review your booking — MusicLinkd	Review your booking — MusicLinkd ← Review booking Octave Sound Labs Pick a date and time f
+200	-	/booking/$id/schedule	/booking/octave-sound-labs/schedule	Pick a date and time — MusicLinkd booking	Pick a date and time — MusicLinkd booking ← Availability Live Room A · Octave Sound Labs D
+200	-	/booking/$id/service	/booking/octave-sound-labs/service	Choose a room or service — MusicLinkd booking	Choose a room or service — MusicLinkd booking ← Select a space Octave Sound Labs Each room
+200	-	/booking/confirmed/$ref	/booking/confirmed/MLB-4821	Booking confirmation — MusicLinkd	Booking confirmation — MusicLinkd Booking confirmed Your slot at Octave Sound Labs is lock
+200	-	/business/$id	/business/biz-1	Business profile | MusicLinkd	Business profile | MusicLinkd ← Soundhouse Bandra Recording studio Soundhouse Bandra verif
+200	-	/business/$id/analytics	/business/biz-1/analytics	Business analytics | MusicLinkd	Business analytics | MusicLinkd ← Analytics Soundhouse Bandra · last 30 days Page views 2,
+200	-	/business/$id/availability	/business/biz-1/availability	Business availability | MusicLinkd	Business availability | MusicLinkd ← Availability Soundhouse Bandra Opening hours Mon–Fri 
+200	-	/business/$id/dashboard	/business/biz-1/dashboard	Business dashboard | MusicLinkd	Business dashboard | MusicLinkd ← Dashboard Soundhouse Bandra 1 new enquiry Answering with
+200	-	/business/$id/enquiry	/business/biz-1/enquiry	Enquire with a business | MusicLinkd	Enquire with a business | MusicLinkd ← Enquire Soundhouse Bandra What is this about? Book 
+200	-	/business/$id/leads	/business/biz-1/leads	Leads inbox | MusicLinkd	Leads inbox | MusicLinkd ← Leads Soundhouse Bandra All New Replied Booked Meher Kapoor Stu
+200	-	/business/$id/manage	/business/biz-1/manage	Manage business | MusicLinkd	Manage business | MusicLinkd ← Manage Soundhouse Bandra Soundhouse Bandra Recording studio
+200	-	/business/$id/portfolio	/business/biz-1/portfolio	Business portfolio | MusicLinkd	Business portfolio | MusicLinkd ← Portfolio Soundhouse Bandra Credits Gallery Neon Monsoon
+200	-	/business/$id/reviews	/business/biz-1/reviews	Business reviews | MusicLinkd	Business reviews | MusicLinkd ← Reviews 4.9 · 64 reviews Neon Monsoon 2 weeks ago Booked f
+200	-	/business/$id/services	/business/biz-1/services	Business services | MusicLinkd	Business services | MusicLinkd ← Services Soundhouse Bandra Business availability Opening 
+200	-	/business/$id/team	/business/biz-1/team	Team &amp; roles | MusicLinkd	Team &amp; roles | MusicLinkd ← Team Soundhouse Bandra Ananya Rao Owner · since 2016 Kabir
+200	-	/business/$id/verification	/business/biz-1/verification	Verify your business | MusicLinkd	Verify your business | MusicLinkd ← Business verification Soundhouse Bandra Verified busin
+200	-	/collab/invites/$id	/collab/invites/inv-kalank	Invitation — Kalank — club remix | MusicLinkd	Invitation — Kalank — club remix | MusicLinkd ← Collaboration invitation Sent 2 days ago K
+200	-	/collab/invites/accepted/$id	/collab/invites/accepted/inv-kalank	You joined Kalank — club remix | MusicLinkd	You joined Kalank — club remix | MusicLinkd ← Invitation accepted Kalank — club remix Conf
+200	-	/collab/invites/declined/$id	/collab/invites/declined/inv-kalank	Declined — Kalank — club remix | MusicLinkd	Declined — Kalank — club remix | MusicLinkd ← Invitation declined Kalank — club remix Clos
+200	-	/collab/proposals/$id	/collab/proposals/prop-mix	Proposal — Raat Ki Rani | MusicLinkd	Proposal — Raat Ki Rani | MusicLinkd ← Proposal received Raat Ki Rani · Yesterday Scope Mi
+200	-	/collab/proposals/$id/counter	/collab/proposals/prop-mix/counter	Counter proposal | MusicLinkd	Counter proposal | MusicLinkd ← Counter proposal Raat Ki Rani Role Artist Singer Composer 
+200	-	/collab/proposals/accepted/$id	/collab/proposals/accepted/prop-mix	Proposal accepted — Raat Ki Rani | MusicLinkd	Proposal accepted — Raat Ki Rani | MusicLinkd ← Collaboration confirmed Raat Ki Rani Confi
+200	-	/collab/proposals/declined/$id	/collab/proposals/declined/prop-mix	Proposal declined — Raat Ki Rani | MusicLinkd	Proposal declined — Raat Ki Rani | MusicLinkd ← Proposal declined Raat Ki Rani Closed Prop
+200	-	/collab/$id/remove/$pid	/collab/raat-ki-rani/remove/meher-kaur	Remove Meher Kaur | MusicLinkd	Remove Meher Kaur | MusicLinkd ← Remove collaborator Raat Ki Rani Meher Kaur Musician · Gu
+200	-	/identity/q/$code	/identity/q/rahul-iyer	Scanned MusicLinkd code	Scanned MusicLinkd code ← Scanned code musiclinkd.app/q/rahul-iyer
+200	-	/onboarding/step/$id	/onboarding/step/identity	Build your profile — MusicLinkd onboarding	Build your profile — MusicLinkd onboarding
+200	-	/opportunities/$id/analytics	/opportunities/op-mine-1/analytics	Opportunity performance | MusicLinkd	Opportunity performance | MusicLinkd ← Performance Keys player for a 4-track live session 
+200	-	/opportunities/$id/manage	/opportunities/op-mine-1/manage	Manage opportunity | MusicLinkd	Manage opportunity | MusicLinkd ← Manage Keys player for a 4-track live session reviewing 
+200	-	/opportunities/$id/applicants	/opportunities/op-mine-1/applicants	Applicants | MusicLinkd Opportunities	Applicants | MusicLinkd Opportunities ← Applicants Keys player for a 4-track live session 
+200	NF:not found	/opportunities/$id/applicants/$aid	/opportunities/op-mine-1/applicants/ap-1	Applicant · application | MusicLinkd	Applicant · application | MusicLinkd ← Applicant Applicant not found This application may 
+200	-	/portfolio/$id/edit	/portfolio/demo-1/edit	Edit work — MusicLinkd portfolio	Edit work — MusicLinkd portfolio ← Edit work You can&#x27;t edit this work It may have bee
+200	-	/reviews/$id/edit	/reviews/rv-1/edit	Edit your review | MusicLinkd	Edit your review | MusicLinkd ← Edit review Studio session · 14 Aug Your rating Ratings ar
+200	-	/reviews/$id/reply	/reviews/rv-1/reply	Reply to a review | MusicLinkd	Reply to a review | MusicLinkd ← Reply Studio session · 14 Aug Ananya Sharma 3 weeks ago T
+200	-	/reviews/$id/report	/reviews/rv-1/report	Report a review | MusicLinkd	Report a review | MusicLinkd ← Report review Ananya Sharma &quot; Turned a rough voice mem
+200	-	/reviews/write/$id	/reviews/write/MLB-4821	Write a Review | MusicLinkd	Write a Review | MusicLinkd ← Write a review This review window has closed Reviews are ope
+200	-	/search/why/$id	/search/why/ananya-sharma	Why am I seeing this? | MusicLinkd	Why am I seeing this? | MusicLinkd ← Why am I seeing this This result Matched on your prof
+200	-	/services/$id	/services/svc-1	Service details | MusicLinkd	Service details | MusicLinkd ← Session vocals Manage 🎤 Session vocals — lead &amp; harmon
+200	-	/services/$id/enquiry	/services/svc-1/enquiry	Enquire about a service | MusicLinkd	Enquire about a service | MusicLinkd ← Enquire Session vocals — lead &amp; harmonies Sessi
+200	-	/services/$id/manage	/services/svc-1/manage	Manage a service | MusicLinkd	Manage a service | MusicLinkd ← Manage service Session vocals — lead &amp; harmonies Sessi

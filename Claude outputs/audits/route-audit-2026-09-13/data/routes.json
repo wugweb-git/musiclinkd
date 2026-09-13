@@ -1,0 +1,8824 @@
+{
+ "generated": "2026-09-13T11:57:01.516Z",
+ "count": 209,
+ "routes": [
+  {
+   "path": "/",
+   "file": "src/routes/index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": true,
+    "authBounce": false,
+    "title": "MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 43
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "lib/error-page.ts",
+    "routes/__root.tsx"
+   ],
+   "reachable": {
+    "depth": 0,
+    "via": "entry"
+   },
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": true,
+   "outbound": []
+  },
+  {
+   "path": "/band",
+   "file": "src/routes/band.tsx",
+   "facts": {
+    "beforeLoadRedirect": "/bands",
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": false,
+    "bottomNav": "n/a",
+    "lines": 12
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/bands"
+   ]
+  },
+  {
+   "path": "/categories",
+   "file": "src/routes/categories.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Browse Categories | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/discover",
+    "lines": 49
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/discover.index.tsx",
+    "routes/singers.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/discover",
+    "file": "routes/discover.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/discover",
+    "/categories"
+   ],
+   "returning": [
+    "/feed",
+    "/discover",
+    "/categories"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/discover"
+   ]
+  },
+  {
+   "path": "/feed",
+   "file": "src/routes/feed.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Your Dashboard | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "lines": 450
+   },
+   "inbound": 13,
+   "inboundFiles": [
+    "components/ml/ui.tsx",
+    "routes/auth.index.tsx",
+    "routes/auth.success.tsx",
+    "routes/notifications.index.tsx",
+    "routes/onboarding/done.tsx",
+    "routes/onboarding/skip.tsx",
+    "routes/opportunities.index.tsx",
+    "routes/recommendations.index.tsx",
+    "routes/reset-password.tsx",
+    "routes/welcome.tsx"
+   ],
+   "reachable": {
+    "depth": 2,
+    "via": "/legal/terms",
+    "file": "components/ml/ui.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed"
+   ],
+   "returning": [
+    "/feed"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/bands",
+    "/bookings",
+    "/bookings/$ref",
+    "/discover",
+    "/help",
+    "/messages",
+    "/notifications",
+    "/opportunities",
+    "/plans",
+    "/portfolio/new",
+    "/profile/edit",
+    "/recommendations",
+    "/reviews",
+    "/search",
+    "/studio"
+   ]
+  },
+  {
+   "path": "/me",
+   "file": "src/routes/me.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": true,
+    "authBounce": false,
+    "title": "My Professional Profile | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "lines": 68
+   },
+   "inbound": 28,
+   "inboundFiles": [
+    "components/ml/ui.tsx",
+    "components/ml/viewer.tsx",
+    "data/dashboard.ts",
+    "routes/auth.signout.tsx",
+    "routes/business.index.tsx",
+    "routes/help.index.tsx",
+    "routes/identity.qr.tsx",
+    "routes/onboarding/complete.tsx",
+    "routes/onboarding/done.tsx",
+    "routes/plans.checkout.tsx",
+    "routes/plans.index.tsx",
+    "routes/portfolio.index.tsx",
+    "routes/profile.$username.tsx",
+    "routes/profile.edit.tsx",
+    "routes/profile.insights.tsx",
+    "routes/reviews.index.tsx",
+    "routes/services.index.tsx",
+    "routes/settings.delete-account.tsx",
+    "routes/settings.index.tsx",
+    "routes/verification.index.tsx"
+   ],
+   "reachable": {
+    "depth": 2,
+    "via": "/legal/terms",
+    "file": "components/ml/ui.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/me"
+   ],
+   "returning": [
+    "/feed",
+    "/me"
+   ],
+   "reachableDirect": false,
+   "outbound": []
+  },
+  {
+   "path": "/messages",
+   "file": "src/routes/messages.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Messages | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "lines": 81
+   },
+   "inbound": 44,
+   "inboundFiles": [
+    "components/ml/collab.tsx",
+    "components/ml/person-profile.tsx",
+    "components/ml/profile.tsx",
+    "components/ml/qr.tsx",
+    "components/ml/ui.tsx",
+    "data/dashboard.ts",
+    "data/notifications.ts",
+    "routes/bands.$id.contact.tsx",
+    "routes/bands.$id.index.tsx",
+    "routes/booking.$id.index.tsx",
+    "routes/booking.$id.schedule.tsx",
+    "routes/booking.confirmed.$ref.tsx",
+    "routes/bookings.$ref.index.tsx",
+    "routes/business.$id.enquiry.tsx",
+    "routes/business.$id.index.tsx",
+    "routes/business.$id.leads.tsx",
+    "routes/collab.$id.index.tsx",
+    "routes/collab.invites.$id.tsx",
+    "routes/collab.invites.accepted.$id.tsx",
+    "routes/collab.invites.declined.$id.tsx",
+    "routes/collab.proposals.accepted.$id.tsx",
+    "routes/collab.proposals.declined.$id.tsx",
+    "routes/feed.tsx",
+    "routes/identity.q.$code.tsx",
+    "routes/marketplace/l.$id.tsx",
+    "routes/marketplace/rent/active.$id.tsx",
+    "routes/marketplace/rent/e.$id.tsx",
+    "routes/marketplace/rent/listings.tsx",
+    "routes/marketplace/rent/mine.tsx",
+    "routes/marketplace/rent/provider.$id.tsx",
+    "routes/marketplace/rent/request.$id.tsx",
+    "routes/marketplace/seller.$id.tsx",
+    "routes/opportunities.$id.applicants.$aid.tsx",
+    "routes/opportunities.$id.index.tsx",
+    "routes/opportunities.applications.$aid.tsx",
+    "routes/portfolio.select.tsx",
+    "routes/provider.bookings.$ref.tsx",
+    "routes/provider.bookings.requests.$ref.tsx",
+    "routes/services.$id.enquiry.tsx"
+   ],
+   "reachable": {
+    "depth": 2,
+    "via": "/legal/terms",
+    "file": "components/ml/ui.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/messages"
+   ],
+   "returning": [
+    "/feed",
+    "/messages"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/portfolio/select"
+   ]
+  },
+  {
+   "path": "/recently-viewed",
+   "file": "src/routes/recently-viewed.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Recently viewed | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/discover",
+    "lines": 104
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/search.history.tsx"
+   ],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/discover",
+    "/profile/$username"
+   ]
+  },
+  {
+   "path": "/recommended",
+   "file": "src/routes/recommended.tsx",
+   "facts": {
+    "beforeLoadRedirect": "/recommendations/swipe",
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": false,
+    "bottomNav": "n/a",
+    "lines": 12
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/recommendations/swipe"
+   ]
+  },
+  {
+   "path": "/reset-password",
+   "file": "src/routes/reset-password.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Set a new password — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 142
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/auth",
+    "/auth/forgot",
+    "/feed"
+   ]
+  },
+  {
+   "path": "/saved",
+   "file": "src/routes/saved.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Saved Profiles | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/discover",
+    "lines": 119
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "data/dashboard.ts",
+    "routes/recommendations.settings.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "data/dashboard.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/saved"
+   ],
+   "returning": [
+    "/feed",
+    "/saved"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/discover"
+   ]
+  },
+  {
+   "path": "/singers",
+   "file": "src/routes/singers.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Singers Directory | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/categories",
+    "lines": 105
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/categories",
+    "/search"
+   ]
+  },
+  {
+   "path": "/studio",
+   "file": "src/routes/studio.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Yash Raj Sound Studios | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "lines": 171
+   },
+   "inbound": 9,
+   "inboundFiles": [
+    "data/dashboard.ts",
+    "data/linked-profiles.ts",
+    "data/profile.ts",
+    "data/recommendations.ts",
+    "routes/booking.$id.schedule.tsx",
+    "routes/bookings.index.tsx",
+    "routes/discover.index.tsx",
+    "routes/feed.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "routes/feed.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/studio"
+   ],
+   "returning": [
+    "/feed",
+    "/studio"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/discover"
+   ]
+  },
+  {
+   "path": "/welcome",
+   "file": "src/routes/welcome.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": true,
+    "authBounce": false,
+    "title": "Welcome to MusicLinkd — India",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 190
+   },
+   "inbound": 7,
+   "inboundFiles": [
+    "components/ml/portfolio.tsx",
+    "components/ml/viewer.tsx",
+    "components/ml/work-form.tsx",
+    "routes/auth.signout.tsx",
+    "routes/legal.privacy.tsx",
+    "routes/legal.terms.tsx",
+    "routes/profile.edit.tsx"
+   ],
+   "reachable": {
+    "depth": 2,
+    "via": "/legal/terms",
+    "file": "routes/legal.terms.tsx"
+   },
+   "newUser": [
+    "/welcome"
+   ],
+   "returning": [
+    "/feed",
+    "/welcome"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/auth",
+    "/auth/phone",
+    "/feed"
+   ]
+  },
+  {
+   "path": "/auth/forgot",
+   "file": "src/routes/auth.forgot.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Reset your password — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 121
+   },
+   "inbound": 6,
+   "inboundFiles": [
+    "data/settings.ts",
+    "routes/auth.index.tsx",
+    "routes/auth.locked.tsx",
+    "routes/reset-password.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/auth",
+    "file": "routes/auth.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/auth",
+    "/auth/forgot"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/auth/forgot"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/auth"
+   ]
+  },
+  {
+   "path": "/auth/locked",
+   "file": "src/routes/auth.locked.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Account temporarily locked — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 70
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/auth",
+    "/auth/forgot",
+    "/help"
+   ]
+  },
+  {
+   "path": "/auth/maintenance",
+   "file": "src/routes/auth.maintenance.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Scheduled maintenance — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 48
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/help"
+   ]
+  },
+  {
+   "path": "/auth/offline",
+   "file": "src/routes/auth.offline.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "You",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 55
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/auth",
+    "/discover"
+   ]
+  },
+  {
+   "path": "/auth/otp",
+   "file": "src/routes/auth.otp.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": true,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Enter your code — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 134
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/auth.phone.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/auth/phone",
+    "file": "routes/auth.phone.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/auth/phone",
+    "/auth/otp"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/auth/phone",
+    "/auth/otp"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/auth",
+    "/auth/phone"
+   ]
+  },
+  {
+   "path": "/auth/phone",
+   "file": "src/routes/auth.phone.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Continue with phone — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 75
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "data/settings.ts",
+    "routes/auth.index.tsx",
+    "routes/auth.otp.tsx",
+    "routes/welcome.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/welcome",
+    "file": "routes/welcome.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/auth/phone"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/auth/phone"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/auth",
+    "/auth/otp"
+   ]
+  },
+  {
+   "path": "/auth/signout",
+   "file": "src/routes/auth.signout.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Sign out — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 59
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "data/settings.ts"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/settings/security",
+    "file": "data/settings.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/auth/signout"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/auth/signout"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/me",
+    "/welcome"
+   ]
+  },
+  {
+   "path": "/auth/success",
+   "file": "src/routes/auth.success.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Account created — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 60
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/auth.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/auth",
+    "file": "routes/auth.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/auth",
+    "/auth/success"
+   ],
+   "returning": [
+    "/feed",
+    "/welcome",
+    "/auth",
+    "/auth/success"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/feed",
+    "/onboarding"
+   ]
+  },
+  {
+   "path": "/auth/verify-email",
+   "file": "src/routes/auth.verify-email.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": true,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Confirm your email — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 108
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/auth.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/auth",
+    "file": "routes/auth.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/auth",
+    "/auth/verify-email"
+   ],
+   "returning": [
+    "/feed",
+    "/welcome",
+    "/auth",
+    "/auth/verify-email"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/auth"
+   ]
+  },
+  {
+   "path": "/bands/new",
+   "file": "src/routes/bands.new.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Create a Band | MusicLinkd",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/bands",
+    "lines": 217
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/bands.index.tsx",
+    "routes/onboarding/complete.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/bands",
+    "file": "routes/bands.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bands",
+    "/bands/new"
+   ],
+   "returning": [
+    "/feed",
+    "/bands",
+    "/bands/new"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/bands",
+    "/bands/$id"
+   ]
+  },
+  {
+   "path": "/booking/$id",
+   "file": "src/routes/booking.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": false,
+    "bottomNav": "n/a",
+    "lines": 16
+   },
+   "inbound": 8,
+   "inboundFiles": [
+    "data/identity.ts",
+    "routes/booking.$id.service.tsx",
+    "routes/bookings.$ref.index.tsx",
+    "routes/business.$id.enquiry.tsx",
+    "routes/business.$id.index.tsx",
+    "routes/opportunities.$id.applicants.$aid.tsx",
+    "routes/services.$id.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/bookings/$ref",
+    "file": "routes/bookings.$ref.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings/$ref",
+    "/booking/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings/$ref",
+    "/booking/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": []
+  },
+  {
+   "path": "/business/new",
+   "file": "src/routes/business.new.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": true,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Create a business | MusicLinkd",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/business",
+    "lines": 258
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "routes/business.$id.manage.tsx",
+    "routes/business.index.tsx",
+    "routes/onboarding/complete.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/business",
+    "file": "routes/business.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/business",
+    "/business/new"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/business",
+    "/business/new"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/business",
+    "/verification/choose"
+   ]
+  },
+  {
+   "path": "/discover/community",
+   "file": "src/routes/discover.community.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Discover the community | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/discover",
+    "lines": 79
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/bands/$id",
+    "/business/$id",
+    "/discover"
+   ]
+  },
+  {
+   "path": "/discover/music",
+   "file": "src/routes/discover.music.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Discover music | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/discover",
+    "lines": 84
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/discover",
+    "/portfolio/$id"
+   ]
+  },
+  {
+   "path": "/discover/nearby",
+   "file": "src/routes/discover.nearby.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Nearby on MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/discover",
+    "lines": 130
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/discover",
+    "/profile/$username",
+    "/search"
+   ]
+  },
+  {
+   "path": "/discover/projects",
+   "file": "src/routes/discover.projects.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Discover projects | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/discover",
+    "lines": 63
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/collab/new",
+    "/discover",
+    "/opportunities/$id"
+   ]
+  },
+  {
+   "path": "/help/$slug",
+   "file": "src/routes/help.$slug.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": true,
+    "bottomNav": "no",
+    "back": "/help",
+    "lines": 127
+   },
+   "inbound": 11,
+   "inboundFiles": [
+    "data/recommendations.ts",
+    "routes/help.category.$key.tsx",
+    "routes/help.index.tsx",
+    "routes/plans.earnings.tsx",
+    "routes/plans.index.tsx",
+    "routes/recommendations.settings.tsx",
+    "routes/reviews.index.tsx",
+    "routes/verification.choose.tsx",
+    "routes/verification.index.tsx",
+    "routes/verification.privacy.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/recommendations",
+    "file": "data/recommendations.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/recommendations",
+    "/help/$slug"
+   ],
+   "returning": [
+    "/feed",
+    "/recommendations",
+    "/help/$slug"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/help"
+   ]
+  },
+  {
+   "path": "/identity/analytics",
+   "file": "src/routes/identity.analytics.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "QR analytics — MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/identity/qr",
+    "lines": 82
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/identity.qr.tsx",
+    "routes/identity.settings.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/identity/qr",
+    "file": "routes/identity.qr.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/analytics"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/analytics"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/identity/print",
+    "/identity/qr"
+   ]
+  },
+  {
+   "path": "/identity/business",
+   "file": "src/routes/identity.business.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Business QR — Octave Sound Labs on MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/identity/qr",
+    "lines": 92
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/identity.qr.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/identity/qr",
+    "file": "routes/identity.qr.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/business"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/business"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/identity/print",
+    "/identity/qr"
+   ]
+  },
+  {
+   "path": "/identity/card",
+   "file": "src/routes/identity.card.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "MusicLinkd share card",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/identity/qr",
+    "lines": 113
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/bands.$id.index.tsx",
+    "routes/identity.qr.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/identity/qr",
+    "file": "routes/identity.qr.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bands",
+    "/bands/$id",
+    "/identity/card"
+   ],
+   "returning": [
+    "/feed",
+    "/bands",
+    "/bands/$id",
+    "/identity/card"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/identity/qr"
+   ]
+  },
+  {
+   "path": "/identity/customize",
+   "file": "src/routes/identity.customize.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Customise your MusicLinkd QR",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/identity/qr",
+    "lines": 100
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/identity.qr.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/identity/qr",
+    "file": "routes/identity.qr.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/customize"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/customize"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/identity/qr"
+   ]
+  },
+  {
+   "path": "/identity/full",
+   "file": "src/routes/identity.full.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": true,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Fullscreen QR — MusicLinkd ID",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 91
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/identity.qr.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/identity/qr",
+    "file": "routes/identity.qr.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/full"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/full"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/identity/qr"
+   ]
+  },
+  {
+   "path": "/identity/history",
+   "file": "src/routes/identity.history.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Scan history — MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/identity/qr",
+    "lines": 76
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/identity.qr.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/identity/qr",
+    "file": "routes/identity.qr.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/history"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/history"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/identity/q/$code",
+    "/identity/qr",
+    "/identity/scan"
+   ]
+  },
+  {
+   "path": "/identity/print",
+   "file": "src/routes/identity.print.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Print preview — MusicLinkd QR",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/identity/qr",
+    "lines": 117
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/identity.analytics.tsx",
+    "routes/identity.business.tsx",
+    "routes/identity.qr.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/identity/qr",
+    "file": "routes/identity.qr.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/print"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/print"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/identity/qr"
+   ]
+  },
+  {
+   "path": "/identity/qr",
+   "file": "src/routes/identity.qr.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Your MusicLinkd ID — QR & digital identity",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/me",
+    "lines": 227
+   },
+   "inbound": 16,
+   "inboundFiles": [
+    "components/ml/person-profile.tsx",
+    "data/cms.ts",
+    "routes/bands.$id.index.tsx",
+    "routes/bands.$id.invite.tsx",
+    "routes/bands.$id.manage.tsx",
+    "routes/identity.analytics.tsx",
+    "routes/identity.business.tsx",
+    "routes/identity.card.tsx",
+    "routes/identity.contact.index.tsx",
+    "routes/identity.customize.tsx",
+    "routes/identity.full.tsx",
+    "routes/identity.history.tsx",
+    "routes/identity.print.tsx",
+    "routes/identity.scan.tsx",
+    "routes/identity.settings.tsx",
+    "routes/opportunities.$id.index.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/me",
+    "file": "components/ml/person-profile.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/identity/analytics",
+    "/identity/business",
+    "/identity/card",
+    "/identity/contact",
+    "/identity/customize",
+    "/identity/full",
+    "/identity/history",
+    "/identity/print",
+    "/identity/scan",
+    "/identity/settings",
+    "/me"
+   ]
+  },
+  {
+   "path": "/identity/scan",
+   "file": "src/routes/identity.scan.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Scan a MusicLinkd QR code",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/identity/qr",
+    "lines": 129
+   },
+   "inbound": 6,
+   "inboundFiles": [
+    "routes/identity.history.tsx",
+    "routes/identity.q.$code.tsx",
+    "routes/identity.qr.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/identity/qr",
+    "file": "routes/identity.qr.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/scan"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/scan"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/identity/q/$code",
+    "/identity/qr"
+   ]
+  },
+  {
+   "path": "/identity/settings",
+   "file": "src/routes/identity.settings.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "QR & sharing settings — MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/identity/qr",
+    "lines": 118
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/identity.contact.index.tsx",
+    "routes/identity.qr.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/identity/qr",
+    "file": "routes/identity.qr.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/settings"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/settings"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/identity/analytics",
+    "/identity/qr"
+   ]
+  },
+  {
+   "path": "/legal/privacy",
+   "file": "src/routes/legal.privacy.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Privacy Policy — MusicLinkd",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/welcome",
+    "lines": 65
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "components/ml/auth.tsx",
+    "data/settings.ts"
+   ],
+   "reachable": {
+    "depth": 1,
+    "via": "/",
+    "file": "components/ml/auth.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/legal/privacy"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/legal/privacy"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/welcome"
+   ]
+  },
+  {
+   "path": "/legal/terms",
+   "file": "src/routes/legal.terms.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Terms of Use — MusicLinkd",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/welcome",
+    "lines": 68
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "components/ml/auth.tsx",
+    "data/settings.ts"
+   ],
+   "reachable": {
+    "depth": 1,
+    "via": "/",
+    "file": "components/ml/auth.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/legal/terms"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/legal/terms"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/welcome"
+   ]
+  },
+  {
+   "path": "/marketplace/mine",
+   "file": "src/routes/marketplace/mine.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "My Marketplace | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace",
+    "lines": 96
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/marketplace/index.tsx",
+    "routes/marketplace/sell.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/marketplace",
+    "file": "routes/marketplace/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/marketplace",
+    "/marketplace/mine"
+   ],
+   "returning": [
+    "/feed",
+    "/marketplace",
+    "/marketplace/mine"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace",
+    "/marketplace/sell"
+   ]
+  },
+  {
+   "path": "/marketplace/nearby",
+   "file": "src/routes/marketplace/nearby.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Nearby Listings | MusicLinkd Market",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace",
+    "lines": 39
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/marketplace/index.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/marketplace",
+    "file": "routes/marketplace/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/marketplace",
+    "/marketplace/nearby"
+   ],
+   "returning": [
+    "/feed",
+    "/marketplace",
+    "/marketplace/nearby"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace"
+   ]
+  },
+  {
+   "path": "/marketplace/saved",
+   "file": "src/routes/marketplace/saved.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Saved in Market | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace",
+    "lines": 82
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/marketplace/index.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/marketplace",
+    "file": "routes/marketplace/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/marketplace",
+    "/marketplace/saved"
+   ],
+   "returning": [
+    "/feed",
+    "/marketplace",
+    "/marketplace/saved"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace",
+    "/marketplace/seller/$id"
+   ]
+  },
+  {
+   "path": "/marketplace/search",
+   "file": "src/routes/marketplace/search.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Search the Market | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace",
+    "lines": 123
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/marketplace/index.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/marketplace",
+    "file": "routes/marketplace/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/marketplace",
+    "/marketplace/search"
+   ],
+   "returning": [
+    "/feed",
+    "/marketplace",
+    "/marketplace/search"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace"
+   ]
+  },
+  {
+   "path": "/marketplace/sell",
+   "file": "src/routes/marketplace/sell.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Create a Listing | MusicLinkd Market",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace",
+    "lines": 214
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "routes/marketplace/index.tsx",
+    "routes/marketplace/mine.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/marketplace",
+    "file": "routes/marketplace/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/marketplace",
+    "/marketplace/sell"
+   ],
+   "returning": [
+    "/feed",
+    "/marketplace",
+    "/marketplace/sell"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace",
+    "/marketplace/mine"
+   ]
+  },
+  {
+   "path": "/notifications/settings",
+   "file": "src/routes/notifications.settings.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Notification settings | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/notifications",
+    "lines": 108
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "data/settings.ts",
+    "routes/notifications.index.tsx",
+    "routes/search.saved.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/notifications",
+    "file": "routes/notifications.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/notifications",
+    "/notifications/settings"
+   ],
+   "returning": [
+    "/feed",
+    "/notifications",
+    "/notifications/settings"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/notifications"
+   ]
+  },
+  {
+   "path": "/onboarding/complete",
+   "file": "src/routes/onboarding/complete.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": true,
+    "authBounce": false,
+    "title": "Your profile is live — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/onboarding/preview",
+    "lines": 168
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/onboarding/done.tsx",
+    "routes/onboarding/preview.tsx"
+   ],
+   "reachable": {
+    "depth": 8,
+    "via": "/onboarding/preview",
+    "file": "routes/onboarding/preview.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/auth",
+    "/auth/success",
+    "/onboarding",
+    "/onboarding/step/$id",
+    "/onboarding/preview",
+    "/onboarding/complete"
+   ],
+   "returning": [
+    "/feed",
+    "/welcome",
+    "/auth",
+    "/auth/success",
+    "/onboarding",
+    "/onboarding/step/$id",
+    "/onboarding/preview",
+    "/onboarding/complete"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/bands/new",
+    "/business/new",
+    "/me",
+    "/onboarding/done",
+    "/onboarding/preview",
+    "/portfolio/new"
+   ]
+  },
+  {
+   "path": "/onboarding/done",
+   "file": "src/routes/onboarding/done.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "You",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/onboarding/complete",
+    "lines": 93
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/onboarding/complete.tsx"
+   ],
+   "reachable": {
+    "depth": 9,
+    "via": "/onboarding/complete",
+    "file": "routes/onboarding/complete.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/auth",
+    "/auth/success",
+    "/onboarding",
+    "/onboarding/step/$id",
+    "/onboarding/preview",
+    "/onboarding/complete",
+    "/onboarding/done"
+   ],
+   "returning": [
+    "/feed",
+    "/welcome",
+    "/auth",
+    "/auth/success",
+    "/onboarding",
+    "/onboarding/step/$id",
+    "/onboarding/preview",
+    "/onboarding/complete",
+    "/onboarding/done"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/discover",
+    "/feed",
+    "/me",
+    "/onboarding/complete",
+    "/portfolio/new"
+   ]
+  },
+  {
+   "path": "/onboarding/preview",
+   "file": "src/routes/onboarding/preview.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Preview your profile — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/onboarding/step/${list[list.length - 1]?.id ?? ",
+    "lines": 149
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/onboarding/complete.tsx",
+    "routes/onboarding/step.$id.tsx"
+   ],
+   "reachable": {
+    "depth": 7,
+    "via": "/onboarding/step/$id",
+    "file": "routes/onboarding/step.$id.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/auth",
+    "/auth/success",
+    "/onboarding",
+    "/onboarding/step/$id",
+    "/onboarding/preview"
+   ],
+   "returning": [
+    "/feed",
+    "/welcome",
+    "/auth",
+    "/auth/success",
+    "/onboarding",
+    "/onboarding/step/$id",
+    "/onboarding/preview"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/onboarding/complete",
+    "/onboarding/skip",
+    "/onboarding/step/$id"
+   ]
+  },
+  {
+   "path": "/onboarding/resume",
+   "file": "src/routes/onboarding/resume.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Pick up where you left off — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 103
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/onboarding/index.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/onboarding",
+    "file": "routes/onboarding/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/auth",
+    "/auth/success",
+    "/onboarding",
+    "/onboarding/resume"
+   ],
+   "returning": [
+    "/feed",
+    "/welcome",
+    "/auth",
+    "/auth/success",
+    "/onboarding",
+    "/onboarding/resume"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/onboarding",
+    "/onboarding/step/$id"
+   ]
+  },
+  {
+   "path": "/onboarding/skip",
+   "file": "src/routes/onboarding/skip.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Finish your profile later — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 73
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/onboarding/index.tsx",
+    "routes/onboarding/preview.tsx",
+    "routes/onboarding/step.$id.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/onboarding",
+    "file": "routes/onboarding/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/auth",
+    "/auth/success",
+    "/onboarding",
+    "/onboarding/skip"
+   ],
+   "returning": [
+    "/feed",
+    "/welcome",
+    "/auth",
+    "/auth/success",
+    "/onboarding",
+    "/onboarding/skip"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/feed",
+    "/onboarding/step/$id"
+   ]
+  },
+  {
+   "path": "/opportunities/mine",
+   "file": "src/routes/opportunities.mine.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "My opportunities | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/opportunities",
+    "lines": 105
+   },
+   "inbound": 11,
+   "inboundFiles": [
+    "routes/opportunities.$id.analytics.tsx",
+    "routes/opportunities.$id.applicants.$aid.tsx",
+    "routes/opportunities.$id.applicants.index.tsx",
+    "routes/opportunities.$id.manage.tsx",
+    "routes/opportunities.index.tsx",
+    "routes/opportunities.new.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/opportunities",
+    "file": "routes/opportunities.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/opportunities",
+    "/opportunities/mine"
+   ],
+   "returning": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/mine"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/opportunities",
+    "/opportunities/$id/applicants",
+    "/opportunities/$id/manage",
+    "/opportunities/new"
+   ]
+  },
+  {
+   "path": "/opportunities/new",
+   "file": "src/routes/opportunities.new.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": true,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Post an opportunity | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/opportunities/mine",
+    "lines": 358
+   },
+   "inbound": 7,
+   "inboundFiles": [
+    "routes/opportunities.$id.manage.tsx",
+    "routes/opportunities.index.tsx",
+    "routes/opportunities.mine.tsx",
+    "routes/opportunities.search.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/opportunities",
+    "file": "routes/opportunities.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/opportunities",
+    "/opportunities/new"
+   ],
+   "returning": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/new"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/opportunities",
+    "/opportunities/mine",
+    "/provider/availability"
+   ]
+  },
+  {
+   "path": "/opportunities/saved",
+   "file": "src/routes/opportunities.saved.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Saved opportunities | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/opportunities",
+    "lines": 52
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/opportunities.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/opportunities",
+    "file": "routes/opportunities.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/opportunities",
+    "/opportunities/saved"
+   ],
+   "returning": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/saved"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/opportunities"
+   ]
+  },
+  {
+   "path": "/opportunities/search",
+   "file": "src/routes/opportunities.search.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": true,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Search opportunities | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/opportunities",
+    "lines": 184
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/opportunities.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/opportunities",
+    "file": "routes/opportunities.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/opportunities",
+    "/opportunities/search"
+   ],
+   "returning": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/search"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/opportunities",
+    "/opportunities/new"
+   ]
+  },
+  {
+   "path": "/plans/checkout",
+   "file": "src/routes/plans.checkout.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": true,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Confirm Your Plan | MusicLinkd",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/plans",
+    "lines": 145
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/plans.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/plans",
+    "file": "routes/plans.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/plans",
+    "/plans/checkout"
+   ],
+   "returning": [
+    "/feed",
+    "/plans",
+    "/plans/checkout"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/me",
+    "/plans",
+    "/plans/manage"
+   ]
+  },
+  {
+   "path": "/plans/earnings",
+   "file": "src/routes/plans.earnings.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Earnings & Payouts | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/plans/manage",
+    "lines": 92
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "data/settings.ts",
+    "routes/plans.index.tsx",
+    "routes/plans.manage.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/plans",
+    "file": "routes/plans.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/plans",
+    "/plans/earnings"
+   ],
+   "returning": [
+    "/feed",
+    "/plans",
+    "/plans/earnings"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/bookings",
+    "/help/$slug",
+    "/marketplace",
+    "/plans/manage"
+   ]
+  },
+  {
+   "path": "/plans/manage",
+   "file": "src/routes/plans.manage.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Manage Subscription | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/plans",
+    "lines": 154
+   },
+   "inbound": 5,
+   "inboundFiles": [
+    "data/settings.ts",
+    "routes/plans.checkout.tsx",
+    "routes/plans.earnings.tsx",
+    "routes/plans.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/plans",
+    "file": "routes/plans.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/plans",
+    "/plans/manage"
+   ],
+   "returning": [
+    "/feed",
+    "/plans",
+    "/plans/manage"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/plans",
+    "/plans/earnings"
+   ]
+  },
+  {
+   "path": "/portfolio/analytics",
+   "file": "src/routes/portfolio.analytics.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": true,
+    "authBounce": false,
+    "title": "Portfolio performance — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/portfolio",
+    "lines": 97
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/portfolio.index.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/portfolio",
+    "file": "routes/portfolio.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/portfolio/new",
+    "/portfolio",
+    "/portfolio/analytics"
+   ],
+   "returning": [
+    "/feed",
+    "/portfolio/new",
+    "/portfolio",
+    "/portfolio/analytics"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/portfolio",
+    "/portfolio/$id",
+    "/portfolio/new"
+   ]
+  },
+  {
+   "path": "/portfolio/reorder",
+   "file": "src/routes/portfolio.reorder.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": true,
+    "authBounce": false,
+    "title": "Reorder portfolio — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/portfolio",
+    "lines": 108
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/portfolio.index.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/portfolio",
+    "file": "routes/portfolio.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/portfolio/new",
+    "/portfolio",
+    "/portfolio/reorder"
+   ],
+   "returning": [
+    "/feed",
+    "/portfolio/new",
+    "/portfolio",
+    "/portfolio/reorder"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/portfolio",
+    "/portfolio/new"
+   ]
+  },
+  {
+   "path": "/portfolio/select",
+   "file": "src/routes/portfolio.select.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": true,
+    "authBounce": false,
+    "title": "Choose work to share — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/messages",
+    "lines": 123
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/messages.tsx",
+    "routes/portfolio.index.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/messages",
+    "file": "routes/messages.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/messages",
+    "/portfolio/select"
+   ],
+   "returning": [
+    "/feed",
+    "/messages",
+    "/portfolio/select"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/messages",
+    "/portfolio/new"
+   ]
+  },
+  {
+   "path": "/portfolio/settings",
+   "file": "src/routes/portfolio.settings.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Portfolio settings — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/portfolio",
+    "lines": 114
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "data/settings.ts",
+    "routes/portfolio.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/settings/security",
+    "file": "data/settings.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/portfolio/settings"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/portfolio/settings"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/portfolio"
+   ]
+  },
+  {
+   "path": "/profile/$username",
+   "file": "src/routes/profile.$username.tsx",
+   "facts": {
+    "loaderRedirect": "/me",
+    "loader": true,
+    "notFound": true,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Profile not found | MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 55
+   },
+   "inbound": 20,
+   "inboundFiles": [
+    "components/ml/cards.tsx",
+    "components/ml/collab.tsx",
+    "components/ml/opportunity.tsx",
+    "components/ml/person-profile.tsx",
+    "data/identity.ts",
+    "data/linked-profiles.ts",
+    "data/profile.ts",
+    "data/recommendations.ts",
+    "routes/bands.$id.index.tsx",
+    "routes/discover.index.tsx",
+    "routes/discover.nearby.tsx",
+    "routes/opportunities.$id.applicants.$aid.tsx",
+    "routes/recently-viewed.tsx",
+    "routes/search.index.tsx",
+    "routes/talent.$id.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "components/ml/cards.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/profile/$username"
+   ],
+   "returning": [
+    "/feed",
+    "/profile/$username"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/me"
+   ]
+  },
+  {
+   "path": "/profile/edit",
+   "file": "src/routes/profile.edit.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": true,
+    "authBounce": true,
+    "title": "Edit Professional Profile | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/me",
+    "lines": 551
+   },
+   "inbound": 14,
+   "inboundFiles": [
+    "components/ml/person-profile.tsx",
+    "components/ml/profile.tsx",
+    "data/cms.ts",
+    "data/profile.ts",
+    "data/settings.ts",
+    "routes/feed.tsx",
+    "routes/profile.insights.tsx",
+    "routes/recommendations.index.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "routes/feed.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/profile/edit"
+   ],
+   "returning": [
+    "/feed",
+    "/profile/edit"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/me",
+    "/welcome"
+   ]
+  },
+  {
+   "path": "/profile/insights",
+   "file": "src/routes/profile.insights.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Profile insights — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/me",
+    "lines": 109
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/me",
+    "/profile/edit"
+   ]
+  },
+  {
+   "path": "/provider/availability",
+   "file": "src/routes/provider.availability.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Manage availability — MusicLinkd provider",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/provider/bookings",
+    "lines": 161
+   },
+   "inbound": 6,
+   "inboundFiles": [
+    "routes/bands.$id.manage.tsx",
+    "routes/opportunities.new.tsx",
+    "routes/provider.bookings.$ref.tsx",
+    "routes/provider.bookings.calendar.tsx",
+    "routes/provider.bookings.index.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/opportunities/new",
+    "file": "routes/opportunities.new.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/opportunities",
+    "/opportunities/new",
+    "/provider/availability"
+   ],
+   "returning": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/new",
+    "/provider/availability"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/provider/bookings"
+   ]
+  },
+  {
+   "path": "/provider/policies",
+   "file": "src/routes/provider.policies.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Booking policies — MusicLinkd provider",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/provider/bookings",
+    "lines": 130
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "data/cms.ts",
+    "routes/provider.bookings.index.tsx",
+    "routes/services.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/help",
+    "file": "data/cms.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/provider/policies"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/provider/policies"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/provider/bookings"
+   ]
+  },
+  {
+   "path": "/provider/pricing",
+   "file": "src/routes/provider.pricing.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Pricing — MusicLinkd provider",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/provider/bookings",
+    "lines": 165
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/provider.bookings.index.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/provider/bookings",
+    "file": "routes/provider.bookings.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/provider/bookings",
+    "/provider/pricing"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/provider/bookings",
+    "/provider/pricing"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/provider/bookings"
+   ]
+  },
+  {
+   "path": "/recommendations/settings",
+   "file": "src/routes/recommendations.settings.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Recommendation Settings | MusicLinkd",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/recommendations",
+    "lines": 90
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "data/settings.ts",
+    "routes/recommendations.index.tsx",
+    "routes/search.why.$id.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/recommendations",
+    "file": "routes/recommendations.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/recommendations",
+    "/recommendations/settings"
+   ],
+   "returning": [
+    "/feed",
+    "/recommendations",
+    "/recommendations/settings"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/discover",
+    "/help/$slug",
+    "/recommendations",
+    "/saved"
+   ]
+  },
+  {
+   "path": "/recommendations/swipe",
+   "file": "src/routes/recommendations.swipe.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Recommended For You | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/discover",
+    "lines": 156
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/discover.index.tsx",
+    "routes/recommended.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/discover",
+    "file": "routes/discover.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/discover",
+    "/recommendations/swipe"
+   ],
+   "returning": [
+    "/feed",
+    "/discover",
+    "/recommendations/swipe"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/discover"
+   ]
+  },
+  {
+   "path": "/reviews/request",
+   "file": "src/routes/reviews.request.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Ask for a review | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/reviews",
+    "lines": 103
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/reviews"
+   ]
+  },
+  {
+   "path": "/search/history",
+   "file": "src/routes/search.history.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Search history | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/search",
+    "lines": 127
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/search.saved.tsx"
+   ],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/recently-viewed",
+    "/search",
+    "/search/saved"
+   ]
+  },
+  {
+   "path": "/search/saved",
+   "file": "src/routes/search.saved.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Saved searches & alerts | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/search",
+    "lines": 128
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/search.history.tsx"
+   ],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/notifications/settings",
+    "/search",
+    "/search/history"
+   ]
+  },
+  {
+   "path": "/services/availability",
+   "file": "src/routes/services.availability.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Availability | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/services",
+    "lines": 177
+   },
+   "inbound": 5,
+   "inboundFiles": [
+    "routes/services.$id.index.tsx",
+    "routes/services.conflicts.tsx",
+    "routes/services.index.tsx",
+    "routes/services.new.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/services",
+    "file": "routes/services.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/services",
+    "/services/availability"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/services",
+    "/services/availability"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/provider/bookings/calendar",
+    "/services"
+   ]
+  },
+  {
+   "path": "/services/conflicts",
+   "file": "src/routes/services.conflicts.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Booking conflicts | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/services/availability",
+    "lines": 104
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/services/availability"
+   ]
+  },
+  {
+   "path": "/services/new",
+   "file": "src/routes/services.new.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": true,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Add a service | MusicLinkd",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/services",
+    "lines": 250
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "routes/business.$id.services.tsx",
+    "routes/services.$id.index.tsx",
+    "routes/services.index.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/services",
+    "file": "routes/services.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/services",
+    "/services/new"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/services",
+    "/services/new"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/services",
+    "/services/availability"
+   ]
+  },
+  {
+   "path": "/settings/account",
+   "file": "src/routes/settings.account.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Account details | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/settings",
+    "lines": 89
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "data/settings.ts"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/settings/security",
+    "file": "data/settings.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/settings/account"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/settings/account"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/settings"
+   ]
+  },
+  {
+   "path": "/settings/delete-account",
+   "file": "src/routes/settings.delete-account.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Delete your account — MusicLinkd",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/me",
+    "lines": 100
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "data/settings.ts",
+    "routes/settings.privacy.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/settings/security",
+    "file": "data/settings.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/settings/delete-account"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/settings/delete-account"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/me"
+   ]
+  },
+  {
+   "path": "/settings/privacy",
+   "file": "src/routes/settings.privacy.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Privacy | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/settings",
+    "lines": 76
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "data/settings.ts",
+    "routes/search.why.$id.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/settings/security",
+    "file": "data/settings.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/settings/privacy"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/settings/privacy"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/settings",
+    "/settings/delete-account"
+   ]
+  },
+  {
+   "path": "/settings/security",
+   "file": "src/routes/settings.security.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Security | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/settings",
+    "lines": 108
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "data/notifications.ts",
+    "data/settings.ts"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "data/notifications.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/settings"
+   ]
+  },
+  {
+   "path": "/talent/$id",
+   "file": "src/routes/talent.$id.tsx",
+   "facts": {
+    "beforeLoadRedirect": "/profile/$username",
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": false,
+    "bottomNav": "n/a",
+    "lines": 16
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/profile/$username"
+   ]
+  },
+  {
+   "path": "/verification/$type",
+   "file": "src/routes/verification.$type.tsx",
+   "facts": {
+    "loader": true,
+    "notFound": true,
+    "validateSearch": true,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Verification unavailable | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/verification",
+    "lines": 614
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/verification.choose.tsx",
+    "routes/verification.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/verification",
+    "file": "routes/verification.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/verification",
+    "/verification/$type"
+   ],
+   "returning": [
+    "/feed",
+    "/verification",
+    "/verification/$type"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/verification",
+    "/verification/badge",
+    "/verification/choose",
+    "/verification/privacy"
+   ]
+  },
+  {
+   "path": "/verification/badge",
+   "file": "src/routes/verification.badge.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Where your badge appears | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/verification",
+    "lines": 71
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/verification.$type.tsx",
+    "routes/verification.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/verification",
+    "file": "routes/verification.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/verification",
+    "/verification/badge"
+   ],
+   "returning": [
+    "/feed",
+    "/verification",
+    "/verification/badge"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/verification",
+    "/verification/privacy"
+   ]
+  },
+  {
+   "path": "/verification/choose",
+   "file": "src/routes/verification.choose.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Choose a verification type | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/verification",
+    "lines": 133
+   },
+   "inbound": 8,
+   "inboundFiles": [
+    "routes/business.$id.manage.tsx",
+    "routes/business.new.tsx",
+    "routes/verification.$type.tsx",
+    "routes/verification.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/verification",
+    "file": "routes/verification.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/verification",
+    "/verification/choose"
+   ],
+   "returning": [
+    "/feed",
+    "/verification",
+    "/verification/choose"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/help/$slug",
+    "/verification",
+    "/verification/$type",
+    "/verification/privacy"
+   ]
+  },
+  {
+   "path": "/verification/privacy",
+   "file": "src/routes/verification.privacy.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Verification privacy | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/verification",
+    "lines": 84
+   },
+   "inbound": 7,
+   "inboundFiles": [
+    "routes/business.$id.verification.tsx",
+    "routes/verification.$type.tsx",
+    "routes/verification.badge.tsx",
+    "routes/verification.choose.tsx",
+    "routes/verification.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/verification",
+    "file": "routes/verification.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/verification",
+    "/verification/privacy"
+   ],
+   "returning": [
+    "/feed",
+    "/verification",
+    "/verification/privacy"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/help/$slug",
+    "/verification"
+   ]
+  },
+  {
+   "path": "/auth",
+   "file": "src/routes/auth.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": true,
+    "usesAuth": true,
+    "authBounce": false,
+    "title": "Sign in — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 239
+   },
+   "inbound": 13,
+   "inboundFiles": [
+    "routes/auth.forgot.tsx",
+    "routes/auth.locked.tsx",
+    "routes/auth.offline.tsx",
+    "routes/auth.otp.tsx",
+    "routes/auth.phone.tsx",
+    "routes/auth.verify-email.tsx",
+    "routes/reset-password.tsx",
+    "routes/welcome.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/welcome",
+    "file": "routes/welcome.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/auth"
+   ],
+   "returning": [
+    "/feed",
+    "/welcome",
+    "/auth"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/auth/forgot",
+    "/auth/phone",
+    "/auth/success",
+    "/auth/verify-email",
+    "/discover",
+    "/feed"
+   ]
+  },
+  {
+   "path": "/bands",
+   "file": "src/routes/bands.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Bands & Groups | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "lines": 131
+   },
+   "inbound": 16,
+   "inboundFiles": [
+    "components/ml/person-profile.tsx",
+    "data/profile.ts",
+    "routes/band.tsx",
+    "routes/bands.$id.contact.tsx",
+    "routes/bands.$id.events.tsx",
+    "routes/bands.$id.index.tsx",
+    "routes/bands.$id.invite.tsx",
+    "routes/bands.$id.manage.tsx",
+    "routes/bands.$id.portfolio.tsx",
+    "routes/bands.new.tsx",
+    "routes/discover.index.tsx",
+    "routes/feed.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "routes/feed.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bands"
+   ],
+   "returning": [
+    "/feed",
+    "/bands"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/bands/$id",
+    "/bands/new"
+   ]
+  },
+  {
+   "path": "/bookings",
+   "file": "src/routes/bookings.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "My bookings — MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "lines": 131
+   },
+   "inbound": 13,
+   "inboundFiles": [
+    "routes/bands.$id.index.tsx",
+    "routes/booking.confirmed.$ref.tsx",
+    "routes/bookings.$ref.cancel.tsx",
+    "routes/bookings.$ref.index.tsx",
+    "routes/bookings.$ref.reschedule.tsx",
+    "routes/feed.tsx",
+    "routes/opportunities.$id.manage.tsx",
+    "routes/plans.earnings.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "routes/feed.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/provider/bookings",
+    "/studio"
+   ]
+  },
+  {
+   "path": "/business",
+   "file": "src/routes/business.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Business profiles | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/me",
+    "lines": 105
+   },
+   "inbound": 17,
+   "inboundFiles": [
+    "data/settings.ts",
+    "routes/business.$id.analytics.tsx",
+    "routes/business.$id.availability.tsx",
+    "routes/business.$id.dashboard.tsx",
+    "routes/business.$id.enquiry.tsx",
+    "routes/business.$id.index.tsx",
+    "routes/business.$id.leads.tsx",
+    "routes/business.$id.manage.tsx",
+    "routes/business.$id.portfolio.tsx",
+    "routes/business.$id.reviews.tsx",
+    "routes/business.$id.services.tsx",
+    "routes/business.$id.team.tsx",
+    "routes/business.$id.verification.tsx",
+    "routes/business.new.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/settings/security",
+    "file": "data/settings.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/business"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/business"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/business/$id",
+    "/business/new",
+    "/me"
+   ]
+  },
+  {
+   "path": "/collab",
+   "file": "src/routes/collab.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Collaborations — MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "lines": 321
+   },
+   "inbound": 61,
+   "inboundFiles": [
+    "components/ml/collab-extra.tsx",
+    "components/ml/collab-workspace.tsx",
+    "data/notifications.ts",
+    "data/recommendations.ts",
+    "routes/collab.$id.activity.tsx",
+    "routes/collab.$id.agreement.tsx",
+    "routes/collab.$id.discussion.tsx",
+    "routes/collab.$id.files.$fileId.tsx",
+    "routes/collab.$id.files.index.tsx",
+    "routes/collab.$id.index.tsx",
+    "routes/collab.$id.invite-link.tsx",
+    "routes/collab.$id.lifecycle.$action.tsx",
+    "routes/collab.$id.media.tsx",
+    "routes/collab.$id.milestones.$mid.tsx",
+    "routes/collab.$id.milestones.new.tsx",
+    "routes/collab.$id.notes.tsx",
+    "routes/collab.$id.participants.tsx",
+    "routes/collab.$id.remove.$pid.tsx",
+    "routes/collab.$id.roles.tsx",
+    "routes/collab.$id.settings.tsx",
+    "routes/collab.$id.share.tsx",
+    "routes/collab.$id.timeline.tsx",
+    "routes/collab.$id.transfer.tsx",
+    "routes/collab.invites.$id.tsx",
+    "routes/collab.invites.accepted.$id.tsx",
+    "routes/collab.invites.declined.$id.tsx",
+    "routes/collab.new.collaborators.tsx",
+    "routes/collab.new.index.tsx",
+    "routes/collab.proposals.$id.counter.tsx",
+    "routes/collab.proposals.$id.index.tsx",
+    "routes/collab.proposals.accepted.$id.tsx",
+    "routes/collab.proposals.declined.$id.tsx",
+    "routes/collab.proposals.new.tsx",
+    "routes/messages.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "data/notifications.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab"
+   ],
+   "returning": [
+    "/feed",
+    "/collab"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab/invites/$id",
+    "/collab/new",
+    "/collab/proposals/$id",
+    "/collab/proposals/new",
+    "/discover"
+   ]
+  },
+  {
+   "path": "/discover",
+   "file": "src/routes/discover.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Discover Talent | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "lines": 187
+   },
+   "inbound": 26,
+   "inboundFiles": [
+    "components/ml/ui.tsx",
+    "data/dashboard.ts",
+    "data/identity.ts",
+    "routes/auth.index.tsx",
+    "routes/auth.offline.tsx",
+    "routes/booking.$id.index.tsx",
+    "routes/categories.tsx",
+    "routes/collab.index.tsx",
+    "routes/discover.community.tsx",
+    "routes/discover.music.tsx",
+    "routes/discover.nearby.tsx",
+    "routes/discover.projects.tsx",
+    "routes/feed.tsx",
+    "routes/identity.q.$code.tsx",
+    "routes/onboarding/done.tsx",
+    "routes/recently-viewed.tsx",
+    "routes/recommendations.index.tsx",
+    "routes/recommendations.settings.tsx",
+    "routes/recommendations.swipe.tsx",
+    "routes/saved.tsx",
+    "routes/search.index.tsx",
+    "routes/studio.tsx"
+   ],
+   "reachable": {
+    "depth": 2,
+    "via": "/legal/terms",
+    "file": "components/ml/ui.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/discover"
+   ],
+   "returning": [
+    "/feed",
+    "/discover"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/bands",
+    "/categories",
+    "/profile/$username",
+    "/recommendations",
+    "/recommendations/swipe",
+    "/search",
+    "/studio"
+   ]
+  },
+  {
+   "path": "/help",
+   "file": "src/routes/help.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Help & Guides | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/me",
+    "lines": 118
+   },
+   "inbound": 13,
+   "inboundFiles": [
+    "components/ml/person-profile.tsx",
+    "data/settings.ts",
+    "routes/auth.locked.tsx",
+    "routes/auth.maintenance.tsx",
+    "routes/feed.tsx",
+    "routes/help.$slug.tsx",
+    "routes/help.category.$key.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "routes/feed.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help"
+   ],
+   "returning": [
+    "/feed",
+    "/help"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/help/$slug",
+    "/help/category/$key",
+    "/me"
+   ]
+  },
+  {
+   "path": "/marketplace",
+   "file": "src/routes/marketplace/index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Market — Gear, Rentals & Studios | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "lines": 149
+   },
+   "inbound": 17,
+   "inboundFiles": [
+    "components/ml/ui.tsx",
+    "data/notifications.ts",
+    "data/profile.ts",
+    "data/recommendations.ts",
+    "routes/marketplace/c.$slug.tsx",
+    "routes/marketplace/l.$id.tsx",
+    "routes/marketplace/mine.tsx",
+    "routes/marketplace/nearby.tsx",
+    "routes/marketplace/rent/saved.tsx",
+    "routes/marketplace/saved.tsx",
+    "routes/marketplace/search.tsx",
+    "routes/marketplace/sell.tsx",
+    "routes/marketplace/seller.$id.tsx",
+    "routes/plans.earnings.tsx"
+   ],
+   "reachable": {
+    "depth": 2,
+    "via": "/legal/terms",
+    "file": "components/ml/ui.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/marketplace"
+   ],
+   "returning": [
+    "/feed",
+    "/marketplace"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace/mine",
+    "/marketplace/nearby",
+    "/marketplace/saved",
+    "/marketplace/search",
+    "/marketplace/sell"
+   ]
+  },
+  {
+   "path": "/notifications",
+   "file": "src/routes/notifications.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Notifications | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/feed",
+    "lines": 149
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/feed.tsx",
+    "routes/notifications.settings.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "routes/feed.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/notifications"
+   ],
+   "returning": [
+    "/feed",
+    "/notifications"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/feed",
+    "/notifications/settings"
+   ]
+  },
+  {
+   "path": "/onboarding",
+   "file": "src/routes/onboarding/index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Set up your MusicLinkd profile",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 107
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/auth.success.tsx",
+    "routes/onboarding/resume.tsx",
+    "routes/onboarding/step.$id.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/auth/success",
+    "file": "routes/auth.success.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/auth",
+    "/auth/success",
+    "/onboarding"
+   ],
+   "returning": [
+    "/feed",
+    "/welcome",
+    "/auth",
+    "/auth/success",
+    "/onboarding"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/onboarding/resume",
+    "/onboarding/skip",
+    "/onboarding/step/$id"
+   ]
+  },
+  {
+   "path": "/opportunities",
+   "file": "src/routes/opportunities.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Opportunities for music professionals | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/feed",
+    "lines": 156
+   },
+   "inbound": 19,
+   "inboundFiles": [
+    "data/dashboard.ts",
+    "data/recommendations.ts",
+    "routes/feed.tsx",
+    "routes/opportunities.$id.apply.tsx",
+    "routes/opportunities.$id.index.tsx",
+    "routes/opportunities.applications.index.tsx",
+    "routes/opportunities.mine.tsx",
+    "routes/opportunities.new.tsx",
+    "routes/opportunities.saved.tsx",
+    "routes/opportunities.search.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "routes/feed.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/opportunities"
+   ],
+   "returning": [
+    "/feed",
+    "/opportunities"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/feed",
+    "/opportunities/applications",
+    "/opportunities/mine",
+    "/opportunities/new",
+    "/opportunities/saved",
+    "/opportunities/search"
+   ]
+  },
+  {
+   "path": "/plans",
+   "file": "src/routes/plans.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Plans & Pricing | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/me",
+    "lines": 139
+   },
+   "inbound": 5,
+   "inboundFiles": [
+    "components/ml/person-profile.tsx",
+    "routes/feed.tsx",
+    "routes/plans.checkout.tsx",
+    "routes/plans.manage.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "routes/feed.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/plans"
+   ],
+   "returning": [
+    "/feed",
+    "/plans"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/help/$slug",
+    "/me",
+    "/plans/checkout",
+    "/plans/earnings",
+    "/plans/manage"
+   ]
+  },
+  {
+   "path": "/portfolio",
+   "file": "src/routes/portfolio.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": true,
+    "authBounce": false,
+    "title": "Your portfolio — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/me",
+    "lines": 133
+   },
+   "inbound": 12,
+   "inboundFiles": [
+    "data/cms.ts",
+    "routes/bands.$id.index.tsx",
+    "routes/portfolio.$id.edit.tsx",
+    "routes/portfolio.$id.index.tsx",
+    "routes/portfolio.analytics.tsx",
+    "routes/portfolio.new.index.tsx",
+    "routes/portfolio.reorder.tsx",
+    "routes/portfolio.settings.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/portfolio/new",
+    "file": "routes/portfolio.new.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/portfolio/new",
+    "/portfolio"
+   ],
+   "returning": [
+    "/feed",
+    "/portfolio/new",
+    "/portfolio"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/me",
+    "/portfolio/analytics",
+    "/portfolio/new",
+    "/portfolio/reorder",
+    "/portfolio/select",
+    "/portfolio/settings"
+   ]
+  },
+  {
+   "path": "/recommendations",
+   "file": "src/routes/recommendations.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "For You — Recommendations | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/feed",
+    "lines": 191
+   },
+   "inbound": 7,
+   "inboundFiles": [
+    "components/ml/person-profile.tsx",
+    "routes/discover.index.tsx",
+    "routes/feed.tsx",
+    "routes/recommendations.settings.tsx",
+    "routes/search.why.$id.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "routes/feed.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/recommendations"
+   ],
+   "returning": [
+    "/feed",
+    "/recommendations"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/discover",
+    "/feed",
+    "/profile/edit",
+    "/recommendations/settings"
+   ]
+  },
+  {
+   "path": "/reviews",
+   "file": "src/routes/reviews.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Reviews & Ratings | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/me",
+    "lines": 264
+   },
+   "inbound": 21,
+   "inboundFiles": [
+    "components/ml/person-profile.tsx",
+    "data/cms.ts",
+    "data/notifications.ts",
+    "routes/feed.tsx",
+    "routes/reviews.$id.edit.tsx",
+    "routes/reviews.$id.reply.tsx",
+    "routes/reviews.$id.report.tsx",
+    "routes/reviews.request.tsx",
+    "routes/reviews.write.$id.tsx",
+    "routes/verification.index.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "routes/feed.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/reviews"
+   ],
+   "returning": [
+    "/feed",
+    "/reviews"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/help/$slug",
+    "/me",
+    "/reviews/write/$id"
+   ]
+  },
+  {
+   "path": "/search",
+   "file": "src/routes/search.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Search Results | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "lines": 176
+   },
+   "inbound": 12,
+   "inboundFiles": [
+    "routes/discover.index.tsx",
+    "routes/discover.nearby.tsx",
+    "routes/feed.tsx",
+    "routes/search.history.tsx",
+    "routes/search.saved.tsx",
+    "routes/singers.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "routes/feed.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/search"
+   ],
+   "returning": [
+    "/feed",
+    "/search"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/discover",
+    "/profile/$username"
+   ]
+  },
+  {
+   "path": "/services",
+   "file": "src/routes/services.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Your services | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/me",
+    "lines": 139
+   },
+   "inbound": 10,
+   "inboundFiles": [
+    "data/settings.ts",
+    "routes/services.$id.enquiry.tsx",
+    "routes/services.$id.index.tsx",
+    "routes/services.$id.manage.tsx",
+    "routes/services.availability.tsx",
+    "routes/services.new.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/settings/security",
+    "file": "data/settings.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/services"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/services"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/me",
+    "/provider/policies",
+    "/services/$id",
+    "/services/availability",
+    "/services/new"
+   ]
+  },
+  {
+   "path": "/settings",
+   "file": "src/routes/settings.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Settings | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/me",
+    "lines": 60
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/settings.account.tsx",
+    "routes/settings.privacy.tsx",
+    "routes/settings.security.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/settings/security",
+    "file": "routes/settings.security.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/settings"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/settings"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/me"
+   ]
+  },
+  {
+   "path": "/verification",
+   "file": "src/routes/verification.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Verification & Trust | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/me",
+    "lines": 164
+   },
+   "inbound": 16,
+   "inboundFiles": [
+    "components/ml/person-profile.tsx",
+    "data/cms.ts",
+    "data/notifications.ts",
+    "data/settings.ts",
+    "routes/bands.$id.manage.tsx",
+    "routes/verification.$type.tsx",
+    "routes/verification.badge.tsx",
+    "routes/verification.choose.tsx",
+    "routes/verification.privacy.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "data/notifications.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/verification"
+   ],
+   "returning": [
+    "/feed",
+    "/verification"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/help/$slug",
+    "/me",
+    "/reviews",
+    "/verification/$type",
+    "/verification/badge",
+    "/verification/choose",
+    "/verification/privacy"
+   ]
+  },
+  {
+   "path": "/bands/$id/contact",
+   "file": "src/routes/bands.$id.contact.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Contact a band | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/bands",
+    "lines": 105
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/bands",
+    "/bands/$id",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/bands/$id/events",
+   "file": "src/routes/bands.$id.events.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Band shows and opportunities | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/bands",
+    "lines": 111
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/bands",
+    "/bands/$id",
+    "/opportunities/$id"
+   ]
+  },
+  {
+   "path": "/bands/$id/invite",
+   "file": "src/routes/bands.$id.invite.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Invite Band Members | MusicLinkd",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/bands",
+    "lines": 106
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/bands.$id.index.tsx",
+    "routes/bands.$id.manage.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/bands/$id",
+    "file": "routes/bands.$id.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bands",
+    "/bands/$id",
+    "/bands/$id/invite"
+   ],
+   "returning": [
+    "/feed",
+    "/bands",
+    "/bands/$id",
+    "/bands/$id/invite"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/bands",
+    "/bands/$id/manage",
+    "/identity/qr"
+   ]
+  },
+  {
+   "path": "/bands/$id/manage",
+   "file": "src/routes/bands.$id.manage.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Manage Band | MusicLinkd",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/bands",
+    "lines": 231
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/bands.$id.index.tsx",
+    "routes/bands.$id.invite.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/bands/$id",
+    "file": "routes/bands.$id.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bands",
+    "/bands/$id",
+    "/bands/$id/manage"
+   ],
+   "returning": [
+    "/feed",
+    "/bands",
+    "/bands/$id",
+    "/bands/$id/manage"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/bands",
+    "/bands/$id",
+    "/bands/$id/invite",
+    "/identity/qr",
+    "/provider/availability",
+    "/verification"
+   ]
+  },
+  {
+   "path": "/bands/$id/portfolio",
+   "file": "src/routes/bands.$id.portfolio.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Band portfolio | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/bands",
+    "lines": 108
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/bands",
+    "/bands/$id"
+   ]
+  },
+  {
+   "path": "/booking/$id/addons",
+   "file": "src/routes/booking.$id.addons.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Equipment & add-ons — MusicLinkd booking",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/booking/${b.id}/details",
+    "lines": 64
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/booking.$id.details.tsx",
+    "routes/booking.$id.review.tsx"
+   ],
+   "reachable": {
+    "depth": 7,
+    "via": "/booking/$id/details",
+    "file": "routes/booking.$id.details.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/booking/$id/service",
+    "/booking/$id/schedule",
+    "/booking/$id/details",
+    "/booking/$id/addons"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/booking/$id/service",
+    "/booking/$id/schedule",
+    "/booking/$id/details",
+    "/booking/$id/addons"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/booking/$id/details",
+    "/booking/$id/review"
+   ]
+  },
+  {
+   "path": "/booking/$id/details",
+   "file": "src/routes/booking.$id.details.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Session details — MusicLinkd booking",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/booking/${b.id}/schedule",
+    "lines": 131
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/booking.$id.addons.tsx",
+    "routes/booking.$id.review.tsx",
+    "routes/booking.$id.schedule.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/booking/$id/schedule",
+    "file": "routes/booking.$id.schedule.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/booking/$id/service",
+    "/booking/$id/schedule",
+    "/booking/$id/details"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/booking/$id/service",
+    "/booking/$id/schedule",
+    "/booking/$id/details"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/booking/$id/addons",
+    "/booking/$id/schedule"
+   ]
+  },
+  {
+   "path": "/booking/$id/pay",
+   "file": "src/routes/booking.$id.pay.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Pay your deposit — MusicLinkd booking",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/booking/${b.id}/review",
+    "lines": 221
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/booking.$id.review.tsx"
+   ],
+   "reachable": {
+    "depth": 9,
+    "via": "/booking/$id/review",
+    "file": "routes/booking.$id.review.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/booking/$id/service",
+    "/booking/$id/schedule",
+    "/booking/$id/details",
+    "/booking/$id/addons",
+    "/booking/$id/review",
+    "/booking/$id/pay"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/booking/$id/service",
+    "/booking/$id/schedule",
+    "/booking/$id/details",
+    "/booking/$id/addons",
+    "/booking/$id/review",
+    "/booking/$id/pay"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/booking/$id/review",
+    "/booking/confirmed/$ref"
+   ]
+  },
+  {
+   "path": "/booking/$id/review",
+   "file": "src/routes/booking.$id.review.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Review your booking — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/booking/${b.id}/addons",
+    "lines": 141
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "routes/booking.$id.addons.tsx",
+    "routes/booking.$id.index.tsx",
+    "routes/booking.$id.pay.tsx"
+   ],
+   "reachable": {
+    "depth": 8,
+    "via": "/booking/$id/addons",
+    "file": "routes/booking.$id.addons.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/booking/$id/service",
+    "/booking/$id/schedule",
+    "/booking/$id/details",
+    "/booking/$id/addons",
+    "/booking/$id/review"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/booking/$id/service",
+    "/booking/$id/schedule",
+    "/booking/$id/details",
+    "/booking/$id/addons",
+    "/booking/$id/review"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/booking/$id/addons",
+    "/booking/$id/details",
+    "/booking/$id/pay",
+    "/booking/$id/schedule",
+    "/booking/confirmed/$ref"
+   ]
+  },
+  {
+   "path": "/booking/$id/schedule",
+   "file": "src/routes/booking.$id.schedule.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Pick a date and time — MusicLinkd booking",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/booking/${b.id}/service",
+    "lines": 248
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/booking.$id.details.tsx",
+    "routes/booking.$id.review.tsx",
+    "routes/booking.$id.service.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/booking/$id/service",
+    "file": "routes/booking.$id.service.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/booking/$id/service",
+    "/booking/$id/schedule"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/booking/$id/service",
+    "/booking/$id/schedule"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/booking/$id/details",
+    "/booking/$id/service",
+    "/messages",
+    "/studio"
+   ]
+  },
+  {
+   "path": "/booking/$id/service",
+   "file": "src/routes/booking.$id.service.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Choose a room or service — MusicLinkd booking",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/booking/${b.id}",
+    "lines": 59
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "data/identity.ts",
+    "routes/booking.$id.index.tsx",
+    "routes/booking.$id.schedule.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/identity/qr",
+    "file": "data/identity.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/booking/$id/service"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/booking/$id/service"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/booking/$id",
+    "/booking/$id/schedule"
+   ]
+  },
+  {
+   "path": "/booking/confirmed/$ref",
+   "file": "src/routes/booking.confirmed.$ref.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Booking confirmation — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 94
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/booking.$id.pay.tsx",
+    "routes/booking.$id.review.tsx"
+   ],
+   "reachable": {
+    "depth": 9,
+    "via": "/booking/$id/review",
+    "file": "routes/booking.$id.review.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/booking/$id/service",
+    "/booking/$id/schedule",
+    "/booking/$id/details",
+    "/booking/$id/addons",
+    "/booking/$id/review",
+    "/booking/confirmed/$ref"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/booking/$id/service",
+    "/booking/$id/schedule",
+    "/booking/$id/details",
+    "/booking/$id/addons",
+    "/booking/$id/review",
+    "/booking/confirmed/$ref"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/bookings",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/bookings/$ref/cancel",
+   "file": "src/routes/bookings.$ref.cancel.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Cancel booking — MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/bookings",
+    "lines": 145
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/bookings.$ref.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/bookings/$ref",
+    "file": "routes/bookings.$ref.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings/$ref",
+    "/bookings/$ref/cancel"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings/$ref",
+    "/bookings/$ref/cancel"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/bookings",
+    "/bookings/$ref"
+   ]
+  },
+  {
+   "path": "/bookings/$ref/reschedule",
+   "file": "src/routes/bookings.$ref.reschedule.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Reschedule booking — MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/bookings",
+    "lines": 139
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/bookings.$ref.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/bookings/$ref",
+    "file": "routes/bookings.$ref.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings/$ref",
+    "/bookings/$ref/reschedule"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings/$ref",
+    "/bookings/$ref/reschedule"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/bookings",
+    "/bookings/$ref"
+   ]
+  },
+  {
+   "path": "/business/$id/analytics",
+   "file": "src/routes/business.$id.analytics.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Business analytics | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/business",
+    "lines": 113
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/business.$id.dashboard.tsx"
+   ],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/business",
+    "/business/$id/dashboard"
+   ]
+  },
+  {
+   "path": "/business/$id/availability",
+   "file": "src/routes/business.$id.availability.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Business availability | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/business",
+    "lines": 102
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/business.$id.dashboard.tsx",
+    "routes/business.$id.services.tsx"
+   ],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/business",
+    "/business/$id/services"
+   ]
+  },
+  {
+   "path": "/business/$id/dashboard",
+   "file": "src/routes/business.$id.dashboard.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Business dashboard | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/business",
+    "lines": 135
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/business.$id.analytics.tsx",
+    "routes/business.$id.leads.tsx"
+   ],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/business",
+    "/business/$id",
+    "/business/$id/analytics",
+    "/business/$id/availability",
+    "/business/$id/leads",
+    "/business/$id/portfolio",
+    "/business/$id/reviews",
+    "/business/$id/services",
+    "/business/$id/verification"
+   ]
+  },
+  {
+   "path": "/business/$id/enquiry",
+   "file": "src/routes/business.$id.enquiry.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Enquire with a business | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/business",
+    "lines": 131
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/booking/$id",
+    "/business",
+    "/business/$id",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/business/$id/leads",
+   "file": "src/routes/business.$id.leads.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Leads inbox | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/business",
+    "lines": 104
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/business.$id.dashboard.tsx"
+   ],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/business",
+    "/business/$id/dashboard",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/business/$id/manage",
+   "file": "src/routes/business.$id.manage.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Manage business | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/business",
+    "lines": 144
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/business.$id.index.tsx",
+    "routes/business.$id.verification.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/business/$id",
+    "file": "routes/business.$id.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/business",
+    "/business/$id",
+    "/business/$id/manage"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/business",
+    "/business/$id",
+    "/business/$id/manage"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/business",
+    "/business/$id",
+    "/business/$id/team",
+    "/business/new",
+    "/provider/bookings/calendar",
+    "/verification/choose"
+   ]
+  },
+  {
+   "path": "/business/$id/portfolio",
+   "file": "src/routes/business.$id.portfolio.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Business portfolio | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/business",
+    "lines": 113
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/business.$id.dashboard.tsx"
+   ],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/business",
+    "/business/$id"
+   ]
+  },
+  {
+   "path": "/business/$id/reviews",
+   "file": "src/routes/business.$id.reviews.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Business reviews | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/business",
+    "lines": 122
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/business.$id.dashboard.tsx"
+   ],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/business",
+    "/business/$id"
+   ]
+  },
+  {
+   "path": "/business/$id/services",
+   "file": "src/routes/business.$id.services.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Business services | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/business",
+    "lines": 119
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/business.$id.availability.tsx",
+    "routes/business.$id.dashboard.tsx"
+   ],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/business",
+    "/business/$id",
+    "/business/$id/availability",
+    "/services/new"
+   ]
+  },
+  {
+   "path": "/business/$id/team",
+   "file": "src/routes/business.$id.team.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Team & roles | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/business",
+    "lines": 162
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/business.$id.index.tsx",
+    "routes/business.$id.manage.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/business/$id",
+    "file": "routes/business.$id.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/business",
+    "/business/$id",
+    "/business/$id/team"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/business",
+    "/business/$id",
+    "/business/$id/team"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/business",
+    "/business/$id"
+   ]
+  },
+  {
+   "path": "/business/$id/verification",
+   "file": "src/routes/business.$id.verification.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Verify your business | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/business",
+    "lines": 113
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/business.$id.dashboard.tsx"
+   ],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/business",
+    "/business/$id/manage",
+    "/verification/privacy"
+   ]
+  },
+  {
+   "path": "/collab/$id/activity",
+   "file": "src/routes/collab.$id.activity.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 64
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "components/ml/collab-workspace.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/collab/$id",
+    "file": "components/ml/collab-workspace.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/activity"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/activity"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab"
+   ]
+  },
+  {
+   "path": "/collab/$id/agreement",
+   "file": "src/routes/collab.$id.agreement.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 122
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/collab.$id.roles.tsx",
+    "routes/collab.$id.settings.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/collab/$id/settings",
+    "file": "routes/collab.$id.settings.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/settings",
+    "/collab/$id/agreement"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/settings",
+    "/collab/$id/agreement"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id/roles",
+    "/collab/$id/settings"
+   ]
+  },
+  {
+   "path": "/collab/$id/discussion",
+   "file": "src/routes/collab.$id.discussion.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 146
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "components/ml/collab-workspace.tsx",
+    "routes/collab.$id.index.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/collab/$id",
+    "file": "routes/collab.$id.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/discussion"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/discussion"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab"
+   ]
+  },
+  {
+   "path": "/collab/$id/invite-link",
+   "file": "src/routes/collab.$id.invite-link.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 106
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/collab.$id.participants.tsx",
+    "routes/collab.$id.settings.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/collab/$id/participants",
+    "file": "routes/collab.$id.participants.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/participants",
+    "/collab/$id/invite-link"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/participants",
+    "/collab/$id/invite-link"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id/participants"
+   ]
+  },
+  {
+   "path": "/collab/$id/media",
+   "file": "src/routes/collab.$id.media.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 104
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/collab.$id.files.index.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/collab/$id/files",
+    "file": "routes/collab.$id.files.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/files",
+    "/collab/$id/media"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/files",
+    "/collab/$id/media"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id/files"
+   ]
+  },
+  {
+   "path": "/collab/$id/notes",
+   "file": "src/routes/collab.$id.notes.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 98
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "components/ml/collab-workspace.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/collab/$id",
+    "file": "components/ml/collab-workspace.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/notes"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/notes"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab"
+   ]
+  },
+  {
+   "path": "/collab/$id/participants",
+   "file": "src/routes/collab.$id.participants.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 172
+   },
+   "inbound": 6,
+   "inboundFiles": [
+    "components/ml/collab-workspace.tsx",
+    "routes/collab.$id.index.tsx",
+    "routes/collab.$id.invite-link.tsx",
+    "routes/collab.$id.remove.$pid.tsx",
+    "routes/collab.$id.roles.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/collab/$id",
+    "file": "routes/collab.$id.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/participants"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/participants"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id/invite-link",
+    "/collab/$id/remove/$pid",
+    "/collab/$id/roles",
+    "/collab/$id/share",
+    "/collab/new/collaborators"
+   ]
+  },
+  {
+   "path": "/collab/$id/roles",
+   "file": "src/routes/collab.$id.roles.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 110
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/collab.$id.agreement.tsx",
+    "routes/collab.$id.participants.tsx",
+    "routes/collab.$id.settings.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/collab/$id/participants",
+    "file": "routes/collab.$id.participants.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/participants",
+    "/collab/$id/roles"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/participants",
+    "/collab/$id/roles"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id/agreement",
+    "/collab/$id/participants"
+   ]
+  },
+  {
+   "path": "/collab/$id/settings",
+   "file": "src/routes/collab.$id.settings.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 208
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "components/ml/collab-workspace.tsx",
+    "routes/collab.$id.agreement.tsx",
+    "routes/collab.$id.lifecycle.$action.tsx",
+    "routes/collab.$id.transfer.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/collab/$id",
+    "file": "components/ml/collab-workspace.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/settings"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/settings"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/agreement",
+    "/collab/$id/invite-link",
+    "/collab/$id/lifecycle/$action",
+    "/collab/$id/roles",
+    "/collab/$id/share",
+    "/collab/$id/transfer"
+   ]
+  },
+  {
+   "path": "/collab/$id/share",
+   "file": "src/routes/collab.$id.share.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 97
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/collab.$id.participants.tsx",
+    "routes/collab.$id.settings.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/collab/$id/participants",
+    "file": "routes/collab.$id.participants.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/participants",
+    "/collab/$id/share"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/participants",
+    "/collab/$id/share"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id"
+   ]
+  },
+  {
+   "path": "/collab/$id/timeline",
+   "file": "src/routes/collab.$id.timeline.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 138
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "components/ml/collab-workspace.tsx",
+    "routes/collab.$id.milestones.$mid.tsx",
+    "routes/collab.$id.milestones.new.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/collab/$id",
+    "file": "components/ml/collab-workspace.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/timeline"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/timeline"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id/milestones/new"
+   ]
+  },
+  {
+   "path": "/collab/$id/transfer",
+   "file": "src/routes/collab.$id.transfer.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 121
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/collab.$id.remove.$pid.tsx",
+    "routes/collab.$id.settings.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/collab/$id/settings",
+    "file": "routes/collab.$id.settings.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/settings",
+    "/collab/$id/transfer"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/settings",
+    "/collab/$id/transfer"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/settings"
+   ]
+  },
+  {
+   "path": "/collab/invites/$id",
+   "file": "src/routes/collab.invites.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 137
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/collab.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/collab",
+    "file": "routes/collab.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/invites/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/invites/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/invites/accepted/$id",
+    "/collab/invites/declined/$id",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/collab/new/collaborators",
+   "file": "src/routes/collab.new.collaborators.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Add collaborators — MusicLinkd",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/collab/new",
+    "lines": 186
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/collab.$id.participants.tsx",
+    "routes/collab.new.index.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/collab/new",
+    "file": "routes/collab.new.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/new",
+    "/collab/new/collaborators"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/new",
+    "/collab/new/collaborators"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id",
+    "/collab/new"
+   ]
+  },
+  {
+   "path": "/collab/proposals/new",
+   "file": "src/routes/collab.proposals.new.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Send a collaboration proposal | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 135
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/collab.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/collab",
+    "file": "routes/collab.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/proposals/new"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/proposals/new"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab"
+   ]
+  },
+  {
+   "path": "/help/category/$key",
+   "file": "src/routes/help.category.$key.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": true,
+    "bottomNav": "no",
+    "back": "/help",
+    "lines": 55
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/help.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/help",
+    "file": "routes/help.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/help/category/$key"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/help/category/$key"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/help",
+    "/help/$slug"
+   ]
+  },
+  {
+   "path": "/identity/contact/save",
+   "file": "src/routes/identity.contact.save.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Save contact — MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/identity/contact",
+    "lines": 105
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/identity.contact.index.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/identity/contact",
+    "file": "routes/identity.contact.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/contact",
+    "/identity/contact/save"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/contact",
+    "/identity/contact/save"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/identity/contact"
+   ]
+  },
+  {
+   "path": "/identity/q/$code",
+   "file": "src/routes/identity.q.$code.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Scanned MusicLinkd code",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/identity/scan",
+    "lines": 142
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/identity.history.tsx",
+    "routes/identity.scan.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/identity/scan",
+    "file": "routes/identity.scan.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/scan",
+    "/identity/q/$code"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/scan",
+    "/identity/q/$code"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/discover",
+    "/identity/scan",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/marketplace/c/$slug",
+   "file": "src/routes/marketplace/c.$slug.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace",
+    "lines": 84
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "components/ml/market.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/marketplace",
+    "file": "components/ml/market.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/marketplace",
+    "/marketplace/c/$slug"
+   ],
+   "returning": [
+    "/feed",
+    "/marketplace",
+    "/marketplace/c/$slug"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace"
+   ]
+  },
+  {
+   "path": "/marketplace/l/$id",
+   "file": "src/routes/marketplace/l.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace",
+    "lines": 224
+   },
+   "inbound": 5,
+   "inboundFiles": [
+    "components/ml/market.tsx",
+    "data/identity.ts"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/marketplace",
+    "file": "components/ml/market.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/marketplace",
+    "/marketplace/l/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/marketplace",
+    "/marketplace/l/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace",
+    "/marketplace/seller/$id",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/list",
+   "file": "src/routes/marketplace/rent/list.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Rent Out Equipment | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace/rent",
+    "lines": 363
+   },
+   "inbound": 5,
+   "inboundFiles": [
+    "routes/marketplace/rent/index.tsx",
+    "routes/marketplace/rent/listings.tsx",
+    "routes/marketplace/rent/nearby.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/marketplace/rent",
+    "file": "routes/marketplace/rent/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/list"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/list"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace/rent",
+    "/marketplace/rent/listings"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/listings",
+   "file": "src/routes/marketplace/rent/listings.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "My Rental Listings | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace/rent",
+    "lines": 186
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/marketplace/rent/index.tsx",
+    "routes/marketplace/rent/list.tsx",
+    "routes/marketplace/rent/mine.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/marketplace/rent",
+    "file": "routes/marketplace/rent/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/listings"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/listings"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace/rent",
+    "/marketplace/rent/list",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/mine",
+   "file": "src/routes/marketplace/rent/mine.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "My Rentals | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace/rent",
+    "lines": 103
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "routes/marketplace/rent/active.$id.tsx",
+    "routes/marketplace/rent/index.tsx",
+    "routes/marketplace/rent/request.$id.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/marketplace/rent",
+    "file": "routes/marketplace/rent/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/mine"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/mine"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace/rent",
+    "/marketplace/rent/active/$id",
+    "/marketplace/rent/listings",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/nearby",
+   "file": "src/routes/marketplace/rent/nearby.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Rentals Near You | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace/rent",
+    "lines": 108
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/marketplace/rent/index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/marketplace/rent",
+    "file": "routes/marketplace/rent/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/nearby"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/nearby"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace/rent",
+    "/marketplace/rent/list"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/saved",
+   "file": "src/routes/marketplace/rent/saved.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Saved Rentals | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace/rent",
+    "lines": 97
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/marketplace/rent/index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/marketplace/rent",
+    "file": "routes/marketplace/rent/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/saved"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/saved"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace",
+    "/marketplace/rent",
+    "/marketplace/rent/request/$id",
+    "/marketplace/rent/search"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/search",
+   "file": "src/routes/marketplace/rent/search.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Search Rental Equipment | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace/rent",
+    "lines": 164
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "routes/marketplace/rent/c.$slug.tsx",
+    "routes/marketplace/rent/index.tsx",
+    "routes/marketplace/rent/saved.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/marketplace/rent",
+    "file": "routes/marketplace/rent/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/search"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/search"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace/rent",
+    "/marketplace/rent/c/$slug"
+   ]
+  },
+  {
+   "path": "/marketplace/seller/$id",
+   "file": "src/routes/marketplace/seller.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace",
+    "lines": 81
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/marketplace/l.$id.tsx",
+    "routes/marketplace/saved.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/marketplace/saved",
+    "file": "routes/marketplace/saved.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/marketplace",
+    "/marketplace/saved",
+    "/marketplace/seller/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/marketplace",
+    "/marketplace/saved",
+    "/marketplace/seller/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/onboarding/step/$id",
+   "file": "src/routes/onboarding/step.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Build your profile — MusicLinkd onboarding",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 511
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "routes/onboarding/index.tsx",
+    "routes/onboarding/preview.tsx",
+    "routes/onboarding/resume.tsx",
+    "routes/onboarding/skip.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/onboarding",
+    "file": "routes/onboarding/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/auth",
+    "/auth/success",
+    "/onboarding",
+    "/onboarding/step/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/welcome",
+    "/auth",
+    "/auth/success",
+    "/onboarding",
+    "/onboarding/step/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/onboarding",
+    "/onboarding/preview",
+    "/onboarding/skip"
+   ]
+  },
+  {
+   "path": "/opportunities/$id/analytics",
+   "file": "src/routes/opportunities.$id.analytics.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Opportunity performance | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/opportunities/mine",
+    "lines": 91
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/opportunities.$id.applicants.index.tsx",
+    "routes/opportunities.$id.manage.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/opportunities/$id/applicants",
+    "file": "routes/opportunities.$id.applicants.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/opportunities",
+    "/opportunities/mine",
+    "/opportunities/$id/applicants",
+    "/opportunities/$id/analytics"
+   ],
+   "returning": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/mine",
+    "/opportunities/$id/applicants",
+    "/opportunities/$id/analytics"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/opportunities/$id/manage",
+    "/opportunities/mine"
+   ]
+  },
+  {
+   "path": "/opportunities/$id/apply",
+   "file": "src/routes/opportunities.$id.apply.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": true,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/opportunities",
+    "lines": 227
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/opportunities.$id.index.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/opportunities/$id",
+    "file": "routes/opportunities.$id.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/opportunities",
+    "/opportunities/$id",
+    "/opportunities/$id/apply"
+   ],
+   "returning": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/$id",
+    "/opportunities/$id/apply"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/opportunities",
+    "/opportunities/applications",
+    "/portfolio/new"
+   ]
+  },
+  {
+   "path": "/opportunities/$id/manage",
+   "file": "src/routes/opportunities.$id.manage.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Manage opportunity | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/opportunities/mine",
+    "lines": 155
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/opportunities.$id.analytics.tsx",
+    "routes/opportunities.mine.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/opportunities/mine",
+    "file": "routes/opportunities.mine.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/opportunities",
+    "/opportunities/mine",
+    "/opportunities/$id/manage"
+   ],
+   "returning": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/mine",
+    "/opportunities/$id/manage"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/bookings",
+    "/opportunities/$id/analytics",
+    "/opportunities/$id/applicants",
+    "/opportunities/mine",
+    "/opportunities/new"
+   ]
+  },
+  {
+   "path": "/opportunities/applications/$aid",
+   "file": "src/routes/opportunities.applications.$aid.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/opportunities/applications",
+    "lines": 174
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "components/ml/opportunity.tsx",
+    "routes/opportunities.$id.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/opportunities",
+    "file": "components/ml/opportunity.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/opportunities",
+    "/opportunities/applications/$aid"
+   ],
+   "returning": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/applications/$aid"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/messages",
+    "/opportunities/$id",
+    "/opportunities/applications"
+   ]
+  },
+  {
+   "path": "/portfolio/$id/edit",
+   "file": "src/routes/portfolio.$id.edit.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": true,
+    "authBounce": false,
+    "title": "Edit work — MusicLinkd portfolio",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/portfolio",
+    "lines": 55
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/portfolio.$id.index.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/portfolio/$id",
+    "file": "routes/portfolio.$id.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/portfolio/new",
+    "/portfolio/new/$kind",
+    "/portfolio/$id",
+    "/portfolio/$id/edit"
+   ],
+   "returning": [
+    "/feed",
+    "/portfolio/new",
+    "/portfolio/new/$kind",
+    "/portfolio/$id",
+    "/portfolio/$id/edit"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/portfolio"
+   ]
+  },
+  {
+   "path": "/portfolio/new/$kind",
+   "file": "src/routes/portfolio.new.$kind.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": true,
+    "authBounce": false,
+    "title": "Describe your work — MusicLinkd portfolio",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/portfolio/new",
+    "lines": 49
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/portfolio.new.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/portfolio/new",
+    "file": "routes/portfolio.new.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/portfolio/new",
+    "/portfolio/new/$kind"
+   ],
+   "returning": [
+    "/feed",
+    "/portfolio/new",
+    "/portfolio/new/$kind"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/portfolio/new"
+   ]
+  },
+  {
+   "path": "/provider/bookings/$ref",
+   "file": "src/routes/provider.bookings.$ref.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Session detail — MusicLinkd provider",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/provider/bookings",
+    "lines": 129
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/provider.bookings.calendar.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/provider/bookings/calendar",
+    "file": "routes/provider.bookings.calendar.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/provider/bookings",
+    "/provider/bookings/calendar",
+    "/provider/bookings/$ref"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/provider/bookings",
+    "/provider/bookings/calendar",
+    "/provider/bookings/$ref"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/messages",
+    "/provider/availability",
+    "/provider/bookings"
+   ]
+  },
+  {
+   "path": "/provider/bookings/calendar",
+   "file": "src/routes/provider.bookings.calendar.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Booking calendar — MusicLinkd provider",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/provider/bookings",
+    "lines": 244
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/business.$id.manage.tsx",
+    "routes/provider.bookings.index.tsx",
+    "routes/services.availability.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/provider/bookings",
+    "file": "routes/provider.bookings.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/provider/bookings",
+    "/provider/bookings/calendar"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/provider/bookings",
+    "/provider/bookings/calendar"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/provider/availability",
+    "/provider/bookings",
+    "/provider/bookings/$ref"
+   ]
+  },
+  {
+   "path": "/reviews/$id/edit",
+   "file": "src/routes/reviews.$id.edit.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Edit your review | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/reviews",
+    "lines": 96
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/reviews"
+   ]
+  },
+  {
+   "path": "/reviews/$id/reply",
+   "file": "src/routes/reviews.$id.reply.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Reply to a review | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/reviews",
+    "lines": 103
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/reviews"
+   ]
+  },
+  {
+   "path": "/reviews/$id/report",
+   "file": "src/routes/reviews.$id.report.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Report a review | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/reviews",
+    "lines": 106
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/reviews"
+   ]
+  },
+  {
+   "path": "/reviews/write/$id",
+   "file": "src/routes/reviews.write.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Write a Review | MusicLinkd",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/reviews",
+    "lines": 135
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/reviews.index.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/reviews",
+    "file": "routes/reviews.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/reviews",
+    "/reviews/write/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/reviews",
+    "/reviews/write/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/reviews"
+   ]
+  },
+  {
+   "path": "/search/why/$id",
+   "file": "src/routes/search.why.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Why am I seeing this? | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/recommendations",
+    "lines": 127
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/recommendations",
+    "/recommendations/settings",
+    "/settings/privacy"
+   ]
+  },
+  {
+   "path": "/services/$id/enquiry",
+   "file": "src/routes/services.$id.enquiry.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Enquire about a service | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/services",
+    "lines": 154
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/messages",
+    "/services",
+    "/services/$id"
+   ]
+  },
+  {
+   "path": "/services/$id/manage",
+   "file": "src/routes/services.$id.manage.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Manage a service | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/services",
+    "lines": 121
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/services",
+    "/services/$id"
+   ]
+  },
+  {
+   "path": "/bands/$id",
+   "file": "src/routes/bands.$id.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Band profile | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/bands",
+    "lines": 286
+   },
+   "inbound": 9,
+   "inboundFiles": [
+    "data/identity.ts",
+    "routes/bands.$id.contact.tsx",
+    "routes/bands.$id.events.tsx",
+    "routes/bands.$id.manage.tsx",
+    "routes/bands.$id.portfolio.tsx",
+    "routes/bands.index.tsx",
+    "routes/bands.new.tsx",
+    "routes/discover.community.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/bands",
+    "file": "routes/bands.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bands",
+    "/bands/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/bands",
+    "/bands/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/bands",
+    "/bands/$id/invite",
+    "/bands/$id/manage",
+    "/bookings",
+    "/identity/card",
+    "/identity/qr",
+    "/messages",
+    "/portfolio",
+    "/profile/$username"
+   ]
+  },
+  {
+   "path": "/booking/$id/",
+   "file": "src/routes/booking.$id.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Book a studio session — MusicLinkd",
+    "head": true,
+    "bottomNav": "n/a",
+    "lines": 166
+   },
+   "inbound": 0,
+   "inboundFiles": [],
+   "reachable": null,
+   "newUser": null,
+   "returning": null,
+   "reachableDirect": false,
+   "outbound": [
+    "/booking/$id/review",
+    "/booking/$id/service",
+    "/discover",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/bookings/$ref",
+   "file": "src/routes/bookings.$ref.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Booking detail — MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/bookings",
+    "lines": 194
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "routes/bookings.$ref.cancel.tsx",
+    "routes/bookings.$ref.reschedule.tsx",
+    "routes/feed.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "routes/feed.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings/$ref"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings/$ref"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/booking/$id",
+    "/bookings",
+    "/bookings/$ref/cancel",
+    "/bookings/$ref/reschedule",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/business/$id",
+   "file": "src/routes/business.$id.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Business profile | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/business",
+    "lines": 243
+   },
+   "inbound": 12,
+   "inboundFiles": [
+    "routes/business.$id.dashboard.tsx",
+    "routes/business.$id.enquiry.tsx",
+    "routes/business.$id.manage.tsx",
+    "routes/business.$id.portfolio.tsx",
+    "routes/business.$id.reviews.tsx",
+    "routes/business.$id.services.tsx",
+    "routes/business.$id.team.tsx",
+    "routes/business.index.tsx",
+    "routes/discover.community.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/business",
+    "file": "routes/business.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/business",
+    "/business/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/business",
+    "/business/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/booking/$id",
+    "/business",
+    "/business/$id/manage",
+    "/business/$id/team",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/collab/$id",
+   "file": "src/routes/collab.$id.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 162
+   },
+   "inbound": 8,
+   "inboundFiles": [
+    "components/ml/collab-workspace.tsx",
+    "components/ml/collab.tsx",
+    "routes/collab.$id.settings.tsx",
+    "routes/collab.$id.share.tsx",
+    "routes/collab.$id.transfer.tsx",
+    "routes/collab.invites.accepted.$id.tsx",
+    "routes/collab.new.collaborators.tsx",
+    "routes/collab.proposals.accepted.$id.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/collab",
+    "file": "components/ml/collab.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id/discussion",
+    "/collab/$id/participants",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/collab/new",
+   "file": "src/routes/collab.new.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Create a collaboration — MusicLinkd",
+    "head": true,
+    "bottomNav": "no",
+    "back": "/collab",
+    "lines": 127
+   },
+   "inbound": 6,
+   "inboundFiles": [
+    "routes/collab.index.tsx",
+    "routes/collab.new.collaborators.tsx",
+    "routes/discover.projects.tsx",
+    "routes/opportunities.$id.applicants.$aid.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/collab",
+    "file": "routes/collab.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/new"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/new"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/new/collaborators"
+   ]
+  },
+  {
+   "path": "/identity/contact",
+   "file": "src/routes/identity.contact.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Digital business card — MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/identity/qr",
+    "lines": 102
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "routes/identity.contact.save.tsx",
+    "routes/identity.qr.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/identity/qr",
+    "file": "routes/identity.qr.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/contact"
+   ],
+   "returning": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/contact"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/identity/contact/save",
+    "/identity/qr",
+    "/identity/settings"
+   ]
+  },
+  {
+   "path": "/marketplace/rent",
+   "file": "src/routes/marketplace/rent/index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Rent Equipment — Instruments, Audio & Live Gear | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "lines": 184
+   },
+   "inbound": 18,
+   "inboundFiles": [
+    "components/ml/booking.tsx",
+    "data/profile.ts",
+    "routes/marketplace/rent/c.$slug.tsx",
+    "routes/marketplace/rent/e.$id.tsx",
+    "routes/marketplace/rent/list.tsx",
+    "routes/marketplace/rent/listings.tsx",
+    "routes/marketplace/rent/mine.tsx",
+    "routes/marketplace/rent/nearby.tsx",
+    "routes/marketplace/rent/provider.$id.tsx",
+    "routes/marketplace/rent/request.$id.tsx",
+    "routes/marketplace/rent/saved.tsx",
+    "routes/marketplace/rent/search.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/me",
+    "file": "data/profile.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/marketplace/rent"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/marketplace/rent"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace/rent/c/$slug",
+    "/marketplace/rent/list",
+    "/marketplace/rent/listings",
+    "/marketplace/rent/mine",
+    "/marketplace/rent/nearby",
+    "/marketplace/rent/saved",
+    "/marketplace/rent/search"
+   ]
+  },
+  {
+   "path": "/opportunities/$id",
+   "file": "src/routes/opportunities.$id.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/opportunities",
+    "lines": 257
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "components/ml/opportunity.tsx",
+    "routes/bands.$id.events.tsx",
+    "routes/discover.projects.tsx",
+    "routes/opportunities.applications.$aid.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/opportunities",
+    "file": "components/ml/opportunity.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/opportunities",
+    "/opportunities/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/identity/qr",
+    "/messages",
+    "/opportunities",
+    "/opportunities/$id/apply",
+    "/opportunities/applications/$aid"
+   ]
+  },
+  {
+   "path": "/opportunities/applications",
+   "file": "src/routes/opportunities.applications.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "My applications | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/opportunities",
+    "lines": 75
+   },
+   "inbound": 7,
+   "inboundFiles": [
+    "data/dashboard.ts",
+    "data/notifications.ts",
+    "routes/opportunities.$id.apply.tsx",
+    "routes/opportunities.applications.$aid.tsx",
+    "routes/opportunities.index.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "data/notifications.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/opportunities/applications"
+   ],
+   "returning": [
+    "/feed",
+    "/opportunities/applications"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/opportunities"
+   ]
+  },
+  {
+   "path": "/portfolio/$id",
+   "file": "src/routes/portfolio.$id.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": true,
+    "authBounce": false,
+    "title": "Work detail — MusicLinkd portfolio",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/portfolio",
+    "lines": 194
+   },
+   "inbound": 5,
+   "inboundFiles": [
+    "components/ml/portfolio.tsx",
+    "components/ml/work-form.tsx",
+    "data/identity.ts",
+    "routes/discover.music.tsx",
+    "routes/portfolio.analytics.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/portfolio/select",
+    "file": "components/ml/portfolio.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/portfolio/new",
+    "/portfolio/new/$kind",
+    "/portfolio/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/portfolio/new",
+    "/portfolio/new/$kind",
+    "/portfolio/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/portfolio",
+    "/portfolio/$id/edit",
+    "/portfolio/new"
+   ]
+  },
+  {
+   "path": "/portfolio/new",
+   "file": "src/routes/portfolio.new.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Add work — MusicLinkd portfolio",
+    "head": true,
+    "bottomNav": "n/a",
+    "back": "/portfolio",
+    "lines": 62
+   },
+   "inbound": 11,
+   "inboundFiles": [
+    "routes/feed.tsx",
+    "routes/onboarding/complete.tsx",
+    "routes/onboarding/done.tsx",
+    "routes/opportunities.$id.apply.tsx",
+    "routes/portfolio.$id.index.tsx",
+    "routes/portfolio.analytics.tsx",
+    "routes/portfolio.index.tsx",
+    "routes/portfolio.new.$kind.tsx",
+    "routes/portfolio.reorder.tsx",
+    "routes/portfolio.select.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "routes/feed.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/portfolio/new"
+   ],
+   "returning": [
+    "/feed",
+    "/portfolio/new"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/portfolio",
+    "/portfolio/new/$kind"
+   ]
+  },
+  {
+   "path": "/provider/bookings",
+   "file": "src/routes/provider.bookings.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Provider bookings — MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "lines": 198
+   },
+   "inbound": 15,
+   "inboundFiles": [
+    "routes/bookings.index.tsx",
+    "routes/provider.availability.tsx",
+    "routes/provider.bookings.$ref.tsx",
+    "routes/provider.bookings.calendar.tsx",
+    "routes/provider.bookings.requests.$ref.tsx",
+    "routes/provider.bookings.requests.index.tsx",
+    "routes/provider.policies.tsx",
+    "routes/provider.pricing.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/bookings",
+    "file": "routes/bookings.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/provider/bookings"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/provider/bookings"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/provider/availability",
+    "/provider/bookings/calendar",
+    "/provider/bookings/requests",
+    "/provider/policies",
+    "/provider/pricing"
+   ]
+  },
+  {
+   "path": "/services/$id",
+   "file": "src/routes/services.$id.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Service details | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/services",
+    "lines": 205
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "routes/services.$id.enquiry.tsx",
+    "routes/services.$id.manage.tsx",
+    "routes/services.index.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/services",
+    "file": "routes/services.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/settings/security",
+    "/services",
+    "/services/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/settings/security",
+    "/services",
+    "/services/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/booking/$id",
+    "/services",
+    "/services/availability",
+    "/services/new"
+   ]
+  },
+  {
+   "path": "/collab/$id/files/$fileId",
+   "file": "src/routes/collab.$id.files.$fileId.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 131
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "components/ml/collab-extra.tsx",
+    "components/ml/collab.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/collab",
+    "file": "components/ml/collab.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id/files/$fileId"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id/files/$fileId"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id/files"
+   ]
+  },
+  {
+   "path": "/collab/$id/lifecycle/$action",
+   "file": "src/routes/collab.$id.lifecycle.$action.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Change project status | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 167
+   },
+   "inbound": 5,
+   "inboundFiles": [
+    "routes/collab.$id.settings.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/collab/$id/settings",
+    "file": "routes/collab.$id.settings.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/settings",
+    "/collab/$id/lifecycle/$action"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/settings",
+    "/collab/$id/lifecycle/$action"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id/settings"
+   ]
+  },
+  {
+   "path": "/collab/$id/milestones/$mid",
+   "file": "src/routes/collab.$id.milestones.$mid.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 107
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "components/ml/collab.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/collab",
+    "file": "components/ml/collab.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id/milestones/$mid"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id/milestones/$mid"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id/milestones/new",
+    "/collab/$id/timeline"
+   ]
+  },
+  {
+   "path": "/collab/$id/milestones/new",
+   "file": "src/routes/collab.$id.milestones.new.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Add a milestone | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 82
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/collab.$id.milestones.$mid.tsx",
+    "routes/collab.$id.timeline.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/collab/$id/milestones/$mid",
+    "file": "routes/collab.$id.milestones.$mid.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id/milestones/$mid",
+    "/collab/$id/milestones/new"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id/milestones/$mid",
+    "/collab/$id/milestones/new"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id/timeline"
+   ]
+  },
+  {
+   "path": "/collab/$id/remove/$pid",
+   "file": "src/routes/collab.$id.remove.$pid.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 124
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/collab.$id.participants.tsx"
+   ],
+   "reachable": {
+    "depth": 6,
+    "via": "/collab/$id/participants",
+    "file": "routes/collab.$id.participants.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/participants",
+    "/collab/$id/remove/$pid"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/participants",
+    "/collab/$id/remove/$pid"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id/participants",
+    "/collab/$id/transfer"
+   ]
+  },
+  {
+   "path": "/collab/invites/accepted/$id",
+   "file": "src/routes/collab.invites.accepted.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 91
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/collab.invites.$id.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/collab/invites/$id",
+    "file": "routes/collab.invites.$id.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/invites/$id",
+    "/collab/invites/accepted/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/invites/$id",
+    "/collab/invites/accepted/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/collab/invites/declined/$id",
+   "file": "src/routes/collab.invites.declined.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 65
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/collab.invites.$id.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/collab/invites/$id",
+    "file": "routes/collab.invites.$id.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/invites/$id",
+    "/collab/invites/declined/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/invites/$id",
+    "/collab/invites/declined/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/collab/proposals/$id/counter",
+   "file": "src/routes/collab.proposals.$id.counter.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Counter proposal | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 98
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "routes/collab.proposals.$id.index.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/collab/proposals/$id",
+    "file": "routes/collab.proposals.$id.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/proposals/$id",
+    "/collab/proposals/$id/counter"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/proposals/$id",
+    "/collab/proposals/$id/counter"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/proposals/$id"
+   ]
+  },
+  {
+   "path": "/collab/proposals/accepted/$id",
+   "file": "src/routes/collab.proposals.accepted.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 100
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/collab.proposals.$id.index.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/collab/proposals/$id",
+    "file": "routes/collab.proposals.$id.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/proposals/$id",
+    "/collab/proposals/accepted/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/proposals/$id",
+    "/collab/proposals/accepted/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/collab/proposals/declined/$id",
+   "file": "src/routes/collab.proposals.declined.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 65
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "routes/collab.proposals.$id.index.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/collab/proposals/$id",
+    "file": "routes/collab.proposals.$id.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/proposals/$id",
+    "/collab/proposals/declined/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/proposals/$id",
+    "/collab/proposals/declined/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/active/$id",
+   "file": "src/routes/marketplace/rent/active.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace/rent/mine",
+    "lines": 288
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "routes/marketplace/rent/mine.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/marketplace/rent/mine",
+    "file": "routes/marketplace/rent/mine.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/mine",
+    "/marketplace/rent/active/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/mine",
+    "/marketplace/rent/active/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace/rent/c/$slug",
+    "/marketplace/rent/e/$id",
+    "/marketplace/rent/mine",
+    "/marketplace/rent/provider/$id",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/c/$slug",
+   "file": "src/routes/marketplace/rent/c.$slug.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace/rent",
+    "lines": 98
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/marketplace/rent/active.$id.tsx",
+    "routes/marketplace/rent/index.tsx",
+    "routes/marketplace/rent/search.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/marketplace/rent",
+    "file": "routes/marketplace/rent/index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/c/$slug"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/c/$slug"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace/rent",
+    "/marketplace/rent/search"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/e/$id",
+   "file": "src/routes/marketplace/rent/e.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace/rent",
+    "lines": 283
+   },
+   "inbound": 6,
+   "inboundFiles": [
+    "components/ml/rental.tsx",
+    "routes/marketplace/rent/active.$id.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/marketplace/rent",
+    "file": "components/ml/rental.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/e/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/e/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace/rent",
+    "/marketplace/rent/provider/$id",
+    "/marketplace/rent/request/$id",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/provider/$id",
+   "file": "src/routes/marketplace/rent/provider.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace/rent",
+    "lines": 180
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "components/ml/rental.tsx",
+    "routes/marketplace/rent/active.$id.tsx",
+    "routes/marketplace/rent/e.$id.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/marketplace/rent",
+    "file": "components/ml/rental.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/provider/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/provider/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace/rent",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/request/$id",
+   "file": "src/routes/marketplace/rent/request.$id.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/marketplace/rent",
+    "lines": 254
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "components/ml/rental.tsx",
+    "routes/marketplace/rent/e.$id.tsx",
+    "routes/marketplace/rent/saved.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/marketplace/rent",
+    "file": "components/ml/rental.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/request/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/marketplace/rent",
+    "/marketplace/rent/request/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/marketplace/rent",
+    "/marketplace/rent/mine",
+    "/messages"
+   ]
+  },
+  {
+   "path": "/opportunities/$id/applicants/$aid",
+   "file": "src/routes/opportunities.$id.applicants.$aid.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/opportunities/mine",
+    "lines": 184
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "components/ml/opportunity.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/opportunities",
+    "file": "components/ml/opportunity.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/opportunities",
+    "/opportunities/$id/applicants/$aid"
+   ],
+   "returning": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/$id/applicants/$aid"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/booking/$id",
+    "/collab/new",
+    "/messages",
+    "/opportunities/$id/applicants",
+    "/opportunities/mine",
+    "/profile/$username"
+   ]
+  },
+  {
+   "path": "/provider/bookings/requests/$ref",
+   "file": "src/routes/provider.bookings.requests.$ref.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Review booking request — MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/provider/bookings",
+    "lines": 171
+   },
+   "inbound": 1,
+   "inboundFiles": [
+    "components/ml/booking.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/bookings",
+    "file": "components/ml/booking.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/bookings",
+    "/provider/bookings/requests/$ref"
+   ],
+   "returning": [
+    "/feed",
+    "/bookings",
+    "/provider/bookings/requests/$ref"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/messages",
+    "/provider/bookings"
+   ]
+  },
+  {
+   "path": "/collab/$id/files",
+   "file": "src/routes/collab.$id.files.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 119
+   },
+   "inbound": 4,
+   "inboundFiles": [
+    "components/ml/collab-workspace.tsx",
+    "routes/collab.$id.files.$fileId.tsx",
+    "routes/collab.$id.media.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/collab/$id",
+    "file": "components/ml/collab-workspace.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/files"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/$id",
+    "/collab/$id/files"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/$id/media"
+   ]
+  },
+  {
+   "path": "/collab/proposals/$id",
+   "file": "src/routes/collab.proposals.$id.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "${title} | MusicLinkd",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/collab",
+    "lines": 122
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/collab.index.tsx",
+    "routes/collab.proposals.$id.counter.tsx"
+   ],
+   "reachable": {
+    "depth": 4,
+    "via": "/collab",
+    "file": "routes/collab.index.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/collab",
+    "/collab/proposals/$id"
+   ],
+   "returning": [
+    "/feed",
+    "/collab",
+    "/collab/proposals/$id"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/collab",
+    "/collab/proposals/$id/counter",
+    "/collab/proposals/accepted/$id",
+    "/collab/proposals/declined/$id"
+   ]
+  },
+  {
+   "path": "/opportunities/$id/applicants",
+   "file": "src/routes/opportunities.$id.applicants.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Applicants | MusicLinkd Opportunities",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/opportunities/mine",
+    "lines": 76
+   },
+   "inbound": 3,
+   "inboundFiles": [
+    "routes/opportunities.$id.applicants.$aid.tsx",
+    "routes/opportunities.$id.manage.tsx",
+    "routes/opportunities.mine.tsx"
+   ],
+   "reachable": {
+    "depth": 5,
+    "via": "/opportunities/mine",
+    "file": "routes/opportunities.mine.tsx"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/opportunities",
+    "/opportunities/mine",
+    "/opportunities/$id/applicants"
+   ],
+   "returning": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/mine",
+    "/opportunities/$id/applicants"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/opportunities/$id/analytics",
+    "/opportunities/mine"
+   ]
+  },
+  {
+   "path": "/provider/bookings/requests",
+   "file": "src/routes/provider.bookings.requests.index.tsx",
+   "facts": {
+    "loader": false,
+    "notFound": false,
+    "validateSearch": false,
+    "usesAuth": false,
+    "authBounce": false,
+    "title": "Booking requests — MusicLinkd provider",
+    "head": true,
+    "bottomNav": "yes",
+    "back": "/provider/bookings",
+    "lines": 91
+   },
+   "inbound": 2,
+   "inboundFiles": [
+    "data/notifications.ts",
+    "routes/provider.bookings.index.tsx"
+   ],
+   "reachable": {
+    "depth": 3,
+    "via": "/feed",
+    "file": "data/notifications.ts"
+   },
+   "newUser": [
+    "/welcome",
+    "/feed",
+    "/provider/bookings/requests"
+   ],
+   "returning": [
+    "/feed",
+    "/provider/bookings/requests"
+   ],
+   "reachableDirect": false,
+   "outbound": [
+    "/provider/bookings"
+   ]
+  }
+ ],
+ "unmatched": []
+}

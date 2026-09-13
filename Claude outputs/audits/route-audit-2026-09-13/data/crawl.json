@@ -1,0 +1,2197 @@
+{
+ "fetched": 127,
+ "routes": {
+  "/": {
+   "url": "/",
+   "status": 200,
+   "location": null,
+   "title": "MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 8,
+   "linksOut": 0,
+   "crawled": {
+    "url": "/",
+    "depth": 0,
+    "from": "entry"
+   }
+  },
+  "/band": {
+   "url": "/band",
+   "status": 307,
+   "location": "/bands",
+   "nestedButtons": 0,
+   "ms": 17,
+   "linksOut": 0,
+   "crawled": null
+  },
+  "/categories": {
+   "url": "/categories",
+   "status": 200,
+   "location": null,
+   "title": "Browse Categories | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 30,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/categories",
+    "depth": 2,
+    "from": "/discover"
+   }
+  },
+  "/feed": {
+   "url": "/feed",
+   "status": 200,
+   "location": null,
+   "title": "Your Dashboard | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 57,
+   "linksOut": 21,
+   "crawled": {
+    "url": "/feed",
+    "depth": 0,
+    "from": "entry"
+   }
+  },
+  "/me": {
+   "url": "/me",
+   "status": 200,
+   "location": null,
+   "title": "My Professional Profile | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 61,
+   "linksOut": 5,
+   "crawled": {
+    "url": "/me",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/messages": {
+   "url": "/messages",
+   "status": 200,
+   "location": null,
+   "title": "Messages | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 66,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/messages",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/recently-viewed": {
+   "url": "/recently-viewed",
+   "status": 200,
+   "location": null,
+   "title": "Recently viewed | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 116,
+   "linksOut": 6,
+   "crawled": null
+  },
+  "/recommended": {
+   "url": "/recommended",
+   "status": 307,
+   "location": "/recommendations/swipe",
+   "nestedButtons": 0,
+   "ms": 70,
+   "linksOut": 0,
+   "crawled": null
+  },
+  "/reset-password": {
+   "url": "/reset-password",
+   "status": 200,
+   "location": null,
+   "title": "Set a new password — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 22,
+   "linksOut": 0,
+   "crawled": null
+  },
+  "/saved": {
+   "url": "/saved",
+   "status": 200,
+   "location": null,
+   "title": "Saved Profiles | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 27,
+   "linksOut": 5,
+   "crawled": {
+    "url": "/saved",
+    "depth": 3,
+    "from": "/recommendations/settings"
+   }
+  },
+  "/singers": {
+   "url": "/singers",
+   "status": 200,
+   "location": null,
+   "title": "Singers Directory | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 34,
+   "linksOut": 8,
+   "crawled": {
+    "url": "/singers",
+    "depth": 3,
+    "from": "/categories"
+   }
+  },
+  "/studio": {
+   "url": "/studio",
+   "status": 200,
+   "location": null,
+   "title": "Yash Raj Sound Studios | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 40,
+   "linksOut": 5,
+   "crawled": {
+    "url": "/studio",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/welcome": {
+   "url": "/welcome",
+   "status": 200,
+   "location": null,
+   "title": "Welcome to MusicLinkd — India&#x27;s music industry network",
+   "nestedButtons": 0,
+   "ms": 43,
+   "linksOut": 3,
+   "crawled": {
+    "url": "/welcome",
+    "depth": 0,
+    "from": "entry"
+   }
+  },
+  "/auth/forgot": {
+   "url": "/auth/forgot",
+   "status": 200,
+   "location": null,
+   "title": "Reset your password — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 46,
+   "linksOut": 1,
+   "crawled": null
+  },
+  "/auth/locked": {
+   "url": "/auth/locked",
+   "status": 200,
+   "location": null,
+   "title": "Account temporarily locked — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 51,
+   "linksOut": 1,
+   "crawled": null
+  },
+  "/auth/maintenance": {
+   "url": "/auth/maintenance",
+   "status": 200,
+   "location": null,
+   "title": "Scheduled maintenance — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 56,
+   "linksOut": 1,
+   "crawled": null
+  },
+  "/auth/offline": {
+   "url": "/auth/offline",
+   "status": 200,
+   "location": null,
+   "title": "You&#x27;re offline — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 42,
+   "linksOut": 1,
+   "crawled": null
+  },
+  "/auth/otp": {
+   "url": "/auth/otp",
+   "status": 307,
+   "location": "/auth/otp?phone=",
+   "nestedButtons": 0,
+   "ms": 17,
+   "linksOut": 0,
+   "crawled": null
+  },
+  "/auth/phone": {
+   "url": "/auth/phone",
+   "status": 200,
+   "location": null,
+   "title": "Continue with phone — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 21,
+   "linksOut": 1,
+   "crawled": null
+  },
+  "/auth/signout": {
+   "url": "/auth/signout",
+   "status": 200,
+   "location": null,
+   "title": "Sign out — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 25,
+   "linksOut": 0,
+   "crawled": null
+  },
+  "/auth/success": {
+   "url": "/auth/success",
+   "status": 200,
+   "location": null,
+   "title": "Account created — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 29,
+   "linksOut": 0,
+   "crawled": null
+  },
+  "/auth/verify-email": {
+   "url": "/auth/verify-email",
+   "status": 307,
+   "location": "/auth/verify-email?email=",
+   "nestedButtons": 0,
+   "ms": 30,
+   "linksOut": 0,
+   "crawled": null
+  },
+  "/bands/new": {
+   "url": "/bands/new",
+   "status": 200,
+   "location": null,
+   "title": "Create a Band | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 34,
+   "linksOut": 1,
+   "crawled": {
+    "url": "/bands/new",
+    "depth": 2,
+    "from": "/bands"
+   }
+  },
+  "/booking/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/business/new": {
+   "url": "/business/new",
+   "status": 307,
+   "location": "/business/new?step=type",
+   "nestedButtons": 0,
+   "ms": 7,
+   "linksOut": 0,
+   "crawled": null
+  },
+  "/discover/community": {
+   "url": "/discover/community",
+   "status": 200,
+   "location": null,
+   "title": "Discover the community | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 104,
+   "linksOut": 7,
+   "crawled": null
+  },
+  "/discover/music": {
+   "url": "/discover/music",
+   "status": 200,
+   "location": null,
+   "title": "Discover music | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 111,
+   "linksOut": 5,
+   "crawled": null
+  },
+  "/discover/nearby": {
+   "url": "/discover/nearby",
+   "status": 200,
+   "location": null,
+   "title": "Nearby on MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 122,
+   "linksOut": 6,
+   "crawled": null
+  },
+  "/discover/projects": {
+   "url": "/discover/projects",
+   "status": 200,
+   "location": null,
+   "title": "Discover projects | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 91,
+   "linksOut": 6,
+   "crawled": null
+  },
+  "/help/$slug": {
+   "url": "/help/pricing-your-first-service",
+   "status": 200,
+   "location": null,
+   "title": "Pricing your first service | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 17,
+   "linksOut": 3,
+   "crawled": {
+    "url": "/help/pricing-your-first-service",
+    "depth": 2,
+    "from": "/recommendations"
+   }
+  },
+  "/identity/analytics": {
+   "url": "/identity/analytics",
+   "status": 200,
+   "location": null,
+   "title": "QR analytics — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 22,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/identity/analytics",
+    "depth": 5,
+    "from": "/identity/settings"
+   }
+  },
+  "/identity/business": {
+   "url": "/identity/business",
+   "status": 200,
+   "location": null,
+   "title": "Business QR — Octave Sound Labs on MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 28,
+   "linksOut": 7,
+   "crawled": null
+  },
+  "/identity/card": {
+   "url": "/identity/card",
+   "status": 200,
+   "location": null,
+   "title": "MusicLinkd share card",
+   "nestedButtons": 0,
+   "ms": 6,
+   "linksOut": 6,
+   "crawled": {
+    "url": "/identity/card",
+    "depth": 3,
+    "from": "/bands/the-kite-notes"
+   }
+  },
+  "/identity/customize": {
+   "url": "/identity/customize",
+   "status": 200,
+   "location": null,
+   "title": "Customise your MusicLinkd QR",
+   "nestedButtons": 0,
+   "ms": 12,
+   "linksOut": 6,
+   "crawled": null
+  },
+  "/identity/full": {
+   "url": "/identity/full",
+   "status": 307,
+   "location": "/identity/full?style=light",
+   "nestedButtons": 0,
+   "ms": 20,
+   "linksOut": 0,
+   "crawled": null
+  },
+  "/identity/history": {
+   "url": "/identity/history",
+   "status": 200,
+   "location": null,
+   "title": "Scan history — MusicLinkd",
+   "nestedButtons": 3,
+   "ms": 26,
+   "linksOut": 7,
+   "crawled": null
+  },
+  "/identity/print": {
+   "url": "/identity/print",
+   "status": 200,
+   "location": null,
+   "title": "Print preview — MusicLinkd QR",
+   "nestedButtons": 0,
+   "ms": 30,
+   "linksOut": 6,
+   "crawled": {
+    "url": "/identity/print",
+    "depth": 6,
+    "from": "/identity/analytics"
+   }
+  },
+  "/identity/qr": {
+   "url": "/identity/qr",
+   "status": 200,
+   "location": null,
+   "title": "Your MusicLinkd ID — QR &amp; digital identity",
+   "nestedButtons": 0,
+   "ms": 34,
+   "linksOut": 6,
+   "crawled": {
+    "url": "/identity/qr",
+    "depth": 3,
+    "from": "/bands/the-kite-notes"
+   }
+  },
+  "/identity/scan": {
+   "url": "/identity/scan",
+   "status": 200,
+   "location": null,
+   "title": "Scan a MusicLinkd QR code",
+   "nestedButtons": 0,
+   "ms": 39,
+   "linksOut": 1,
+   "crawled": null
+  },
+  "/identity/settings": {
+   "url": "/identity/settings",
+   "status": 200,
+   "location": null,
+   "title": "QR &amp; sharing settings — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 42,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/identity/settings",
+    "depth": 4,
+    "from": "/identity/qr"
+   }
+  },
+  "/legal/privacy": {
+   "url": "/legal/privacy",
+   "status": 200,
+   "location": null,
+   "title": "Privacy Policy — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 8,
+   "linksOut": 1,
+   "crawled": {
+    "url": "/legal/privacy",
+    "depth": 1,
+    "from": "/welcome"
+   }
+  },
+  "/legal/terms": {
+   "url": "/legal/terms",
+   "status": 200,
+   "location": null,
+   "title": "Terms of Use — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 10,
+   "linksOut": 1,
+   "crawled": {
+    "url": "/legal/terms",
+    "depth": 1,
+    "from": "/welcome"
+   }
+  },
+  "/marketplace/mine": {
+   "url": "/marketplace/mine",
+   "status": 200,
+   "location": null,
+   "title": "My Marketplace | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 15,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/marketplace/mine",
+    "depth": 2,
+    "from": "/marketplace"
+   }
+  },
+  "/marketplace/nearby": {
+   "url": "/marketplace/nearby",
+   "status": 200,
+   "location": null,
+   "title": "Nearby Listings | MusicLinkd Market",
+   "nestedButtons": 0,
+   "ms": 22,
+   "linksOut": 6,
+   "crawled": {
+    "url": "/marketplace/nearby",
+    "depth": 2,
+    "from": "/marketplace"
+   }
+  },
+  "/marketplace/saved": {
+   "url": "/marketplace/saved",
+   "status": 200,
+   "location": null,
+   "title": "Saved in Market | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 26,
+   "linksOut": 6,
+   "crawled": {
+    "url": "/marketplace/saved",
+    "depth": 2,
+    "from": "/marketplace"
+   }
+  },
+  "/marketplace/search": {
+   "url": "/marketplace/search",
+   "status": 200,
+   "location": null,
+   "title": "Search the Market | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 30,
+   "linksOut": 6,
+   "crawled": {
+    "url": "/marketplace/search",
+    "depth": 2,
+    "from": "/marketplace"
+   }
+  },
+  "/marketplace/sell": {
+   "url": "/marketplace/sell",
+   "status": 200,
+   "location": null,
+   "title": "Create a Listing | MusicLinkd Market",
+   "nestedButtons": 0,
+   "ms": 34,
+   "linksOut": 5,
+   "crawled": {
+    "url": "/marketplace/sell",
+    "depth": 2,
+    "from": "/marketplace"
+   }
+  },
+  "/notifications/settings": {
+   "url": "/notifications/settings",
+   "status": 200,
+   "location": null,
+   "title": "Notification settings | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 45,
+   "linksOut": 6,
+   "crawled": {
+    "url": "/notifications/settings",
+    "depth": 2,
+    "from": "/notifications"
+   }
+  },
+  "/onboarding/complete": {
+   "url": "/onboarding/complete",
+   "status": 200,
+   "location": null,
+   "title": "Your profile is live — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 140,
+   "linksOut": 4,
+   "crawled": null
+  },
+  "/onboarding/done": {
+   "url": "/onboarding/done",
+   "status": 200,
+   "location": null,
+   "title": "You&#x27;re all set — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 122,
+   "linksOut": 5,
+   "crawled": null
+  },
+  "/onboarding/preview": {
+   "url": "/onboarding/preview",
+   "status": 200,
+   "location": null,
+   "title": "Preview your profile — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 24,
+   "linksOut": 3,
+   "crawled": null
+  },
+  "/onboarding/resume": {
+   "url": "/onboarding/resume",
+   "status": 200,
+   "location": null,
+   "title": "Pick up where you left off — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 33,
+   "linksOut": 0,
+   "crawled": null
+  },
+  "/onboarding/skip": {
+   "url": "/onboarding/skip",
+   "status": 200,
+   "location": null,
+   "title": "Finish your profile later — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 43,
+   "linksOut": 2,
+   "crawled": null
+  },
+  "/opportunities/mine": {
+   "url": "/opportunities/mine",
+   "status": 200,
+   "location": null,
+   "title": "My opportunities | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 56,
+   "linksOut": 9,
+   "crawled": null
+  },
+  "/opportunities/new": {
+   "url": "/opportunities/new",
+   "status": 307,
+   "location": "/opportunities/new?step=basics",
+   "nestedButtons": 0,
+   "ms": 78,
+   "linksOut": 0,
+   "crawled": {
+    "url": "/opportunities/new",
+    "depth": 2,
+    "from": "/opportunities"
+   }
+  },
+  "/opportunities/saved": {
+   "url": "/opportunities/saved",
+   "status": 200,
+   "location": null,
+   "title": "Saved opportunities | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 91,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/opportunities/saved",
+    "depth": 2,
+    "from": "/opportunities"
+   }
+  },
+  "/opportunities/search": {
+   "url": "/opportunities/search",
+   "status": 307,
+   "location": "/opportunities/search?q=",
+   "nestedButtons": 0,
+   "ms": 3,
+   "linksOut": 0,
+   "crawled": {
+    "url": "/opportunities/search",
+    "depth": 2,
+    "from": "/opportunities"
+   }
+  },
+  "/plans/checkout": {
+   "url": "/plans/checkout",
+   "status": 307,
+   "location": "/plans/checkout?plan=pro",
+   "nestedButtons": 0,
+   "ms": 4,
+   "linksOut": 0,
+   "crawled": null
+  },
+  "/plans/earnings": {
+   "url": "/plans/earnings",
+   "status": 200,
+   "location": null,
+   "title": "Earnings &amp; Payouts | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 18,
+   "linksOut": 8,
+   "crawled": {
+    "url": "/plans/earnings",
+    "depth": 2,
+    "from": "/plans"
+   }
+  },
+  "/plans/manage": {
+   "url": "/plans/manage",
+   "status": 200,
+   "location": null,
+   "title": "Manage Subscription | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 30,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/plans/manage",
+    "depth": 2,
+    "from": "/plans"
+   }
+  },
+  "/portfolio/analytics": {
+   "url": "/portfolio/analytics",
+   "status": 200,
+   "location": null,
+   "title": "Portfolio performance — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 38,
+   "linksOut": 2,
+   "crawled": {
+    "url": "/portfolio/analytics",
+    "depth": 3,
+    "from": "/portfolio"
+   }
+  },
+  "/portfolio/reorder": {
+   "url": "/portfolio/reorder",
+   "status": 200,
+   "location": null,
+   "title": "Reorder portfolio — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 45,
+   "linksOut": 2,
+   "crawled": {
+    "url": "/portfolio/reorder",
+    "depth": 3,
+    "from": "/portfolio"
+   }
+  },
+  "/portfolio/select": {
+   "url": "/portfolio/select",
+   "status": 200,
+   "location": null,
+   "title": "Choose work to share — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 53,
+   "linksOut": 1,
+   "crawled": {
+    "url": "/portfolio/select",
+    "depth": 2,
+    "from": "/messages"
+   }
+  },
+  "/portfolio/settings": {
+   "url": "/portfolio/settings",
+   "status": 200,
+   "location": null,
+   "title": "Portfolio settings — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 60,
+   "linksOut": 1,
+   "crawled": {
+    "url": "/portfolio/settings",
+    "depth": 3,
+    "from": "/portfolio"
+   }
+  },
+  "/profile/$username": {
+   "url": "/profile/ananya-sharma",
+   "status": 200,
+   "location": null,
+   "title": "Ananya Sharma — Playback Vocalist | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 440,
+   "linksOut": 5,
+   "crawled": {
+    "url": "/profile/ananya-sharma",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/profile/edit": {
+   "url": "/profile/edit",
+   "status": 200,
+   "location": null,
+   "title": "Edit Professional Profile | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 19,
+   "linksOut": 5,
+   "crawled": {
+    "url": "/profile/edit",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/profile/insights": {
+   "url": "/profile/insights",
+   "status": 200,
+   "location": null,
+   "title": "Profile insights — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 30,
+   "linksOut": 2,
+   "crawled": null
+  },
+  "/provider/availability": {
+   "url": "/provider/availability",
+   "status": 200,
+   "location": null,
+   "title": "Manage availability — MusicLinkd provider",
+   "nestedButtons": 0,
+   "ms": 52,
+   "linksOut": 6,
+   "crawled": {
+    "url": "/provider/availability",
+    "depth": 3,
+    "from": "/provider/bookings"
+   }
+  },
+  "/provider/policies": {
+   "url": "/provider/policies",
+   "status": 200,
+   "location": null,
+   "title": "Booking policies — MusicLinkd provider",
+   "nestedButtons": 0,
+   "ms": 60,
+   "linksOut": 1,
+   "crawled": {
+    "url": "/provider/policies",
+    "depth": 3,
+    "from": "/provider/bookings"
+   }
+  },
+  "/provider/pricing": {
+   "url": "/provider/pricing",
+   "status": 200,
+   "location": null,
+   "title": "Pricing — MusicLinkd provider",
+   "nestedButtons": 0,
+   "ms": 74,
+   "linksOut": 1,
+   "crawled": {
+    "url": "/provider/pricing",
+    "depth": 3,
+    "from": "/provider/bookings"
+   }
+  },
+  "/recommendations/settings": {
+   "url": "/recommendations/settings",
+   "status": 200,
+   "location": null,
+   "title": "Recommendation Settings | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 83,
+   "linksOut": 4,
+   "crawled": {
+    "url": "/recommendations/settings",
+    "depth": 2,
+    "from": "/recommendations"
+   }
+  },
+  "/recommendations/swipe": {
+   "url": "/recommendations/swipe",
+   "status": 200,
+   "location": null,
+   "title": "Recommended For You | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 94,
+   "linksOut": 5,
+   "crawled": {
+    "url": "/recommendations/swipe",
+    "depth": 2,
+    "from": "/discover"
+   }
+  },
+  "/reviews/request": {
+   "url": "/reviews/request",
+   "status": 200,
+   "location": null,
+   "title": "Ask for a review | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 12,
+   "linksOut": 6,
+   "crawled": null
+  },
+  "/search/history": {
+   "url": "/search/history",
+   "status": 200,
+   "location": null,
+   "title": "Search history | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 31,
+   "linksOut": 8,
+   "crawled": null
+  },
+  "/search/saved": {
+   "url": "/search/saved",
+   "status": 200,
+   "location": null,
+   "title": "Saved searches &amp; alerts | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 47,
+   "linksOut": 8,
+   "crawled": null
+  },
+  "/services/availability": {
+   "url": "/services/availability",
+   "status": 200,
+   "location": null,
+   "title": "Availability | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 63,
+   "linksOut": 7,
+   "crawled": null
+  },
+  "/services/conflicts": {
+   "url": "/services/conflicts",
+   "status": 200,
+   "location": null,
+   "title": "Booking conflicts | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 76,
+   "linksOut": 6,
+   "crawled": null
+  },
+  "/services/new": {
+   "url": "/services/new",
+   "status": 307,
+   "location": "/services/new?step=category",
+   "nestedButtons": 0,
+   "ms": 77,
+   "linksOut": 0,
+   "crawled": null
+  },
+  "/settings/account": {
+   "url": "/settings/account",
+   "status": 200,
+   "location": null,
+   "title": "Account details | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 89,
+   "linksOut": 6,
+   "crawled": null
+  },
+  "/settings/delete-account": {
+   "url": "/settings/delete-account",
+   "status": 200,
+   "location": null,
+   "title": "Delete your account — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 98,
+   "linksOut": 1,
+   "crawled": null
+  },
+  "/settings/privacy": {
+   "url": "/settings/privacy",
+   "status": 200,
+   "location": null,
+   "title": "Privacy | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 21,
+   "linksOut": 7,
+   "crawled": null
+  },
+  "/settings/security": {
+   "url": "/settings/security",
+   "status": 200,
+   "location": null,
+   "title": "Security | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 34,
+   "linksOut": 9,
+   "crawled": null
+  },
+  "/talent/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/verification/$type": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/verification/badge": {
+   "url": "/verification/badge",
+   "status": 200,
+   "location": null,
+   "title": "Where your badge appears | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 46,
+   "linksOut": 7,
+   "crawled": null
+  },
+  "/verification/choose": {
+   "url": "/verification/choose",
+   "status": 200,
+   "location": null,
+   "title": "Choose a verification type | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 61,
+   "linksOut": 9,
+   "crawled": null
+  },
+  "/verification/privacy": {
+   "url": "/verification/privacy",
+   "status": 200,
+   "location": null,
+   "title": "Verification privacy | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 72,
+   "linksOut": 7,
+   "crawled": null
+  },
+  "/auth": {
+   "url": "/auth",
+   "status": 307,
+   "location": "/auth?mode=signin",
+   "nestedButtons": 0,
+   "ms": 74,
+   "linksOut": 0,
+   "crawled": {
+    "url": "/auth",
+    "depth": 1,
+    "from": "/welcome"
+   }
+  },
+  "/bands": {
+   "url": "/bands",
+   "status": 200,
+   "location": null,
+   "title": "Bands &amp; Groups | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 13,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/bands",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/bookings": {
+   "url": "/bookings",
+   "status": 200,
+   "location": null,
+   "title": "My bookings — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 25,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/bookings",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/business": {
+   "url": "/business",
+   "status": 200,
+   "location": null,
+   "title": "Business profiles | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 37,
+   "linksOut": 7,
+   "crawled": null
+  },
+  "/collab": {
+   "url": "/collab",
+   "status": 200,
+   "location": null,
+   "title": "Collaborations — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 52,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/collab",
+    "depth": 2,
+    "from": "/recommendations"
+   }
+  },
+  "/discover": {
+   "url": "/discover",
+   "status": 200,
+   "location": null,
+   "title": "Discover Talent | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 71,
+   "linksOut": 13,
+   "crawled": {
+    "url": "/discover",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/help": {
+   "url": "/help",
+   "status": 200,
+   "location": null,
+   "title": "Help &amp; Guides | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 178,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/help",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/marketplace": {
+   "url": "/marketplace",
+   "status": 200,
+   "location": null,
+   "title": "Market — Gear, Rentals &amp; Studios | MusicLinkd",
+   "nestedButtons": 17,
+   "ms": 237,
+   "linksOut": 12,
+   "crawled": {
+    "url": "/marketplace",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/notifications": {
+   "url": "/notifications",
+   "status": 200,
+   "location": null,
+   "title": "Notifications | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 253,
+   "linksOut": 6,
+   "crawled": {
+    "url": "/notifications",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/onboarding": {
+   "url": "/onboarding",
+   "status": 200,
+   "location": null,
+   "title": "Set up your MusicLinkd profile",
+   "nestedButtons": 0,
+   "ms": 45,
+   "linksOut": 1,
+   "crawled": null
+  },
+  "/opportunities": {
+   "url": "/opportunities",
+   "status": 200,
+   "location": null,
+   "title": "Opportunities for music professionals | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 78,
+   "linksOut": 10,
+   "crawled": {
+    "url": "/opportunities",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/plans": {
+   "url": "/plans",
+   "status": 200,
+   "location": null,
+   "title": "Plans &amp; Pricing | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 98,
+   "linksOut": 8,
+   "crawled": {
+    "url": "/plans",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/portfolio": {
+   "url": "/portfolio",
+   "status": 200,
+   "location": null,
+   "title": "Your portfolio — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 110,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/portfolio",
+    "depth": 2,
+    "from": "/portfolio/new"
+   }
+  },
+  "/recommendations": {
+   "url": "/recommendations",
+   "status": 200,
+   "location": null,
+   "title": "For You — Recommendations | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 130,
+   "linksOut": 11,
+   "crawled": {
+    "url": "/recommendations",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/reviews": {
+   "url": "/reviews",
+   "status": 200,
+   "location": null,
+   "title": "Reviews &amp; Ratings | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 150,
+   "linksOut": 6,
+   "crawled": {
+    "url": "/reviews",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/search": {
+   "url": "/search",
+   "status": 200,
+   "location": null,
+   "title": "Search Results | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 169,
+   "linksOut": 6,
+   "crawled": {
+    "url": "/search",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/services": {
+   "url": "/services",
+   "status": 200,
+   "location": null,
+   "title": "Your services | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 184,
+   "linksOut": 9,
+   "crawled": null
+  },
+  "/settings": {
+   "url": "/settings",
+   "status": 200,
+   "location": null,
+   "title": "Settings | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 19,
+   "linksOut": 21,
+   "crawled": null
+  },
+  "/verification": {
+   "url": "/verification",
+   "status": 200,
+   "location": null,
+   "title": "Verification &amp; Trust | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 58,
+   "linksOut": 11,
+   "crawled": null
+  },
+  "/bands/$id/contact": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/bands/$id/events": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/bands/$id/invite": {
+   "url": "/bands/the-kite-notes/invite",
+   "status": 200,
+   "location": null,
+   "title": "Invite Band Members | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 31,
+   "linksOut": 2,
+   "crawled": {
+    "url": "/bands/the-kite-notes/invite",
+    "depth": 3,
+    "from": "/bands/the-kite-notes"
+   }
+  },
+  "/bands/$id/manage": {
+   "url": "/bands/the-kite-notes/manage",
+   "status": 200,
+   "location": null,
+   "title": "Manage Band | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 41,
+   "linksOut": 2,
+   "crawled": {
+    "url": "/bands/the-kite-notes/manage",
+    "depth": 3,
+    "from": "/bands/the-kite-notes"
+   }
+  },
+  "/bands/$id/portfolio": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/booking/$id/addons": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/booking/$id/details": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/booking/$id/pay": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/booking/$id/review": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/booking/$id/schedule": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/booking/$id/service": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/booking/confirmed/$ref": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/bookings/$ref/cancel": {
+   "url": "/bookings/MLB-4821/cancel",
+   "status": 200,
+   "location": null,
+   "title": "Cancel booking — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 13,
+   "linksOut": 1,
+   "crawled": {
+    "url": "/bookings/MLB-4821/cancel",
+    "depth": 2,
+    "from": "/bookings/MLB-4821"
+   }
+  },
+  "/bookings/$ref/reschedule": {
+   "url": "/bookings/MLB-4821/reschedule",
+   "status": 200,
+   "location": null,
+   "title": "Reschedule booking — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 33,
+   "linksOut": 1,
+   "crawled": {
+    "url": "/bookings/MLB-4821/reschedule",
+    "depth": 2,
+    "from": "/bookings/MLB-4821"
+   }
+  },
+  "/business/$id/analytics": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/business/$id/availability": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/business/$id/dashboard": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/business/$id/enquiry": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/business/$id/leads": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/business/$id/manage": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/business/$id/portfolio": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/business/$id/reviews": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/business/$id/services": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/business/$id/team": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/business/$id/verification": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/collab/$id/activity": {
+   "url": "/collab/raat-ki-rani/activity",
+   "status": 200,
+   "location": null,
+   "title": "Raat Ki Rani — project activity | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 17,
+   "linksOut": 14,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/activity",
+    "depth": 4,
+    "from": "/collab/raat-ki-rani"
+   }
+  },
+  "/collab/$id/agreement": {
+   "url": "/collab/raat-ki-rani/agreement",
+   "status": 200,
+   "location": null,
+   "title": "Working agreement — Raat Ki Rani | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 31,
+   "linksOut": 15,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/agreement",
+    "depth": 5,
+    "from": "/collab/raat-ki-rani/settings"
+   }
+  },
+  "/collab/$id/discussion": {
+   "url": "/collab/raat-ki-rani/discussion",
+   "status": 200,
+   "location": null,
+   "title": "Raat Ki Rani — project discussion | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 45,
+   "linksOut": 14,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/discussion",
+    "depth": 4,
+    "from": "/collab/raat-ki-rani"
+   }
+  },
+  "/collab/$id/invite-link": {
+   "url": "/collab/raat-ki-rani/invite-link",
+   "status": 200,
+   "location": null,
+   "title": "Invite link — Raat Ki Rani | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 57,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/invite-link",
+    "depth": 5,
+    "from": "/collab/raat-ki-rani/settings"
+   }
+  },
+  "/collab/$id/media": {
+   "url": "/collab/raat-ki-rani/media",
+   "status": 200,
+   "location": null,
+   "title": "Shared media — Raat Ki Rani | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 71,
+   "linksOut": 15,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/media",
+    "depth": 5,
+    "from": "/collab/raat-ki-rani/files"
+   }
+  },
+  "/collab/$id/notes": {
+   "url": "/collab/raat-ki-rani/notes",
+   "status": 200,
+   "location": null,
+   "title": "Raat Ki Rani — shared notes | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 21,
+   "linksOut": 14,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/notes",
+    "depth": 4,
+    "from": "/collab/raat-ki-rani"
+   }
+  },
+  "/collab/$id/participants": {
+   "url": "/collab/raat-ki-rani/participants",
+   "status": 200,
+   "location": null,
+   "title": "Raat Ki Rani — collaborators &amp; roles | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 37,
+   "linksOut": 19,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/participants",
+    "depth": 4,
+    "from": "/collab/raat-ki-rani"
+   }
+  },
+  "/collab/$id/roles": {
+   "url": "/collab/raat-ki-rani/roles",
+   "status": 200,
+   "location": null,
+   "title": "Roles on Raat Ki Rani | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 49,
+   "linksOut": 15,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/roles",
+    "depth": 5,
+    "from": "/collab/raat-ki-rani/settings"
+   }
+  },
+  "/collab/$id/settings": {
+   "url": "/collab/raat-ki-rani/settings",
+   "status": 200,
+   "location": null,
+   "title": "Raat Ki Rani — project settings | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 65,
+   "linksOut": 13,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/settings",
+    "depth": 4,
+    "from": "/collab/raat-ki-rani"
+   }
+  },
+  "/collab/$id/share": {
+   "url": "/collab/raat-ki-rani/share",
+   "status": 200,
+   "location": null,
+   "title": "Share Raat Ki Rani | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 76,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/share",
+    "depth": 5,
+    "from": "/collab/raat-ki-rani/settings"
+   }
+  },
+  "/collab/$id/timeline": {
+   "url": "/collab/raat-ki-rani/timeline",
+   "status": 200,
+   "location": null,
+   "title": "Raat Ki Rani — timeline &amp; milestones | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 89,
+   "linksOut": 16,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/timeline",
+    "depth": 4,
+    "from": "/collab/raat-ki-rani"
+   }
+  },
+  "/collab/$id/transfer": {
+   "url": "/collab/raat-ki-rani/transfer",
+   "status": 200,
+   "location": null,
+   "title": "Transfer ownership — Raat Ki Rani | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 98,
+   "linksOut": 2,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/transfer",
+    "depth": 5,
+    "from": "/collab/raat-ki-rani/settings"
+   }
+  },
+  "/collab/invites/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/collab/new/collaborators": {
+   "url": "/collab/new/collaborators",
+   "status": 200,
+   "location": null,
+   "title": "Add collaborators — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 15,
+   "linksOut": 3,
+   "crawled": {
+    "url": "/collab/new/collaborators",
+    "depth": 4,
+    "from": "/collab/new"
+   }
+  },
+  "/collab/proposals/new": {
+   "url": "/collab/proposals/new",
+   "status": 200,
+   "location": null,
+   "title": "Send a collaboration proposal | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 27,
+   "linksOut": 1,
+   "crawled": null
+  },
+  "/help/category/$key": {
+   "url": "/help/category/getting-started",
+   "status": 200,
+   "location": null,
+   "title": "Getting started Guides | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 35,
+   "linksOut": 2,
+   "crawled": {
+    "url": "/help/category/getting-started",
+    "depth": 2,
+    "from": "/help"
+   }
+  },
+  "/identity/contact/save": {
+   "url": "/identity/contact/save",
+   "status": 200,
+   "location": null,
+   "title": "Save contact — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 48,
+   "linksOut": 6,
+   "crawled": null
+  },
+  "/identity/q/$code": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/marketplace/c/$slug": {
+   "url": "/marketplace/c/instruments",
+   "status": 200,
+   "location": null,
+   "title": "Instruments | MusicLinkd Market",
+   "nestedButtons": 2,
+   "ms": 62,
+   "linksOut": 6,
+   "crawled": {
+    "url": "/marketplace/c/instruments",
+    "depth": 2,
+    "from": "/marketplace"
+   }
+  },
+  "/marketplace/l/$id": {
+   "url": "/marketplace/l/fender-strat-62",
+   "status": 200,
+   "location": null,
+   "title": "Fender American Vintage II &#x27;61 Stratocaster — ₹1,84,000 | MusicLinkd Market",
+   "nestedButtons": 4,
+   "ms": 81,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/marketplace/l/fender-strat-62",
+    "depth": 2,
+    "from": "/marketplace"
+   }
+  },
+  "/marketplace/rent/list": {
+   "url": "/marketplace/rent/list",
+   "status": 200,
+   "location": null,
+   "title": "Rent Out Equipment | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 91,
+   "linksOut": 6,
+   "crawled": null
+  },
+  "/marketplace/rent/listings": {
+   "url": "/marketplace/rent/listings",
+   "status": 200,
+   "location": null,
+   "title": "My Rental Listings | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 12,
+   "linksOut": 8,
+   "crawled": null
+  },
+  "/marketplace/rent/mine": {
+   "url": "/marketplace/rent/mine",
+   "status": 200,
+   "location": null,
+   "title": "My Rentals | MusicLinkd",
+   "nestedButtons": 2,
+   "ms": 15,
+   "linksOut": 8,
+   "crawled": null
+  },
+  "/marketplace/rent/nearby": {
+   "url": "/marketplace/rent/nearby",
+   "status": 200,
+   "location": null,
+   "title": "Rentals Near You | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 24,
+   "linksOut": 9,
+   "crawled": null
+  },
+  "/marketplace/rent/saved": {
+   "url": "/marketplace/rent/saved",
+   "status": 200,
+   "location": null,
+   "title": "Saved Rentals | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 30,
+   "linksOut": 7,
+   "crawled": null
+  },
+  "/marketplace/rent/search": {
+   "url": "/marketplace/rent/search",
+   "status": 200,
+   "location": null,
+   "title": "Search Rental Equipment | MusicLinkd",
+   "nestedButtons": 6,
+   "ms": 38,
+   "linksOut": 8,
+   "crawled": null
+  },
+  "/marketplace/seller/$id": {
+   "url": "/marketplace/seller/ravi-gear",
+   "status": 200,
+   "location": null,
+   "title": "Ravi Deshmukh — Session Guitarist · Gear Collector | MusicLinkd Market",
+   "nestedButtons": 3,
+   "ms": 45,
+   "linksOut": 6,
+   "crawled": {
+    "url": "/marketplace/seller/ravi-gear",
+    "depth": 3,
+    "from": "/marketplace/l/fender-strat-62"
+   }
+  },
+  "/onboarding/step/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/opportunities/$id/analytics": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/opportunities/$id/apply": {
+   "url": "/opportunities/op-2/apply?step=portfolio",
+   "status": 307,
+   "location": "/opportunities/op-2/apply?step=portfolio",
+   "nestedButtons": 0,
+   "ms": 6,
+   "linksOut": 0,
+   "crawled": {
+    "url": "/opportunities/op-2/apply",
+    "depth": 3,
+    "from": "/opportunities/op-2"
+   }
+  },
+  "/opportunities/$id/manage": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/opportunities/applications/$aid": {
+   "url": "/opportunities/applications/ap-1",
+   "status": 200,
+   "location": null,
+   "title": "Application · Female playback singer for indie-pop single | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 11,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/opportunities/applications/ap-1",
+    "depth": 2,
+    "from": "/opportunities/applications"
+   }
+  },
+  "/portfolio/$id/edit": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/portfolio/new/$kind": {
+   "url": "/portfolio/new/track",
+   "status": 200,
+   "location": null,
+   "title": "Describe your work — MusicLinkd portfolio",
+   "nestedButtons": 0,
+   "ms": 16,
+   "linksOut": 1,
+   "crawled": {
+    "url": "/portfolio/new/track",
+    "depth": 2,
+    "from": "/portfolio/new"
+   }
+  },
+  "/provider/bookings/$ref": {
+   "url": "/provider/bookings/MLB-4880",
+   "status": 200,
+   "location": null,
+   "title": "Session detail — MusicLinkd provider",
+   "nestedButtons": 0,
+   "ms": 22,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/provider/bookings/MLB-4880",
+    "depth": 4,
+    "from": "/provider/bookings/calendar"
+   }
+  },
+  "/provider/bookings/calendar": {
+   "url": "/provider/bookings/calendar",
+   "status": 200,
+   "location": null,
+   "title": "Booking calendar — MusicLinkd provider",
+   "nestedButtons": 0,
+   "ms": 28,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/provider/bookings/calendar",
+    "depth": 3,
+    "from": "/provider/bookings"
+   }
+  },
+  "/reviews/$id/edit": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/reviews/$id/reply": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/reviews/$id/report": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/reviews/write/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/search/why/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/services/$id/enquiry": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/services/$id/manage": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/bands/$id": {
+   "url": "/bands/the-kite-notes",
+   "status": 200,
+   "location": null,
+   "title": "Band profile | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 8,
+   "linksOut": 12,
+   "crawled": {
+    "url": "/bands/the-kite-notes",
+    "depth": 2,
+    "from": "/bands"
+   }
+  },
+  "/booking/$id/": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/bookings/$ref": {
+   "url": "/bookings/MLB-4821",
+   "status": 200,
+   "location": null,
+   "title": "Booking detail — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 12,
+   "linksOut": 8,
+   "crawled": {
+    "url": "/bookings/MLB-4821",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/business/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/collab/$id": {
+   "url": "/collab/raat-ki-rani",
+   "status": 200,
+   "location": null,
+   "title": "Raat Ki Rani — collaboration workspace | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 19,
+   "linksOut": 16,
+   "crawled": {
+    "url": "/collab/raat-ki-rani",
+    "depth": 3,
+    "from": "/collab"
+   }
+  },
+  "/collab/new": {
+   "url": "/collab/new",
+   "status": 200,
+   "location": null,
+   "title": "Create a collaboration — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 24,
+   "linksOut": 2,
+   "crawled": {
+    "url": "/collab/new",
+    "depth": 3,
+    "from": "/collab"
+   }
+  },
+  "/identity/contact": {
+   "url": "/identity/contact",
+   "status": 200,
+   "location": null,
+   "title": "Digital business card — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 31,
+   "linksOut": 8,
+   "crawled": null
+  },
+  "/marketplace/rent": {
+   "url": "/marketplace/rent",
+   "status": 200,
+   "location": null,
+   "title": "Rent Equipment — Instruments, Audio &amp; Live Gear | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 41,
+   "linksOut": 13,
+   "crawled": null
+  },
+  "/opportunities/$id": {
+   "url": "/opportunities/op-1",
+   "status": 200,
+   "location": null,
+   "title": "Female playback singer for indie-pop single | MusicLinkd Opportunities",
+   "nestedButtons": 0,
+   "ms": 47,
+   "linksOut": 8,
+   "crawled": {
+    "url": "/opportunities/op-1",
+    "depth": 2,
+    "from": "/opportunities"
+   }
+  },
+  "/opportunities/applications": {
+   "url": "/opportunities/applications",
+   "status": 200,
+   "location": null,
+   "title": "My applications | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 51,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/opportunities/applications",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/portfolio/$id": {
+   "url": "/portfolio/demo-1",
+   "status": 200,
+   "location": null,
+   "title": "Work detail — MusicLinkd portfolio",
+   "nestedButtons": 0,
+   "ms": 12,
+   "linksOut": 2,
+   "crawled": {
+    "url": "/portfolio/demo-1",
+    "depth": 3,
+    "from": "/portfolio"
+   }
+  },
+  "/portfolio/new": {
+   "url": "/portfolio/new",
+   "status": 200,
+   "location": null,
+   "title": "Add work — MusicLinkd portfolio",
+   "nestedButtons": 0,
+   "ms": 16,
+   "linksOut": 2,
+   "crawled": {
+    "url": "/portfolio/new",
+    "depth": 1,
+    "from": "/feed"
+   }
+  },
+  "/provider/bookings": {
+   "url": "/provider/bookings",
+   "status": 200,
+   "location": null,
+   "title": "Provider bookings — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 22,
+   "linksOut": 11,
+   "crawled": {
+    "url": "/provider/bookings",
+    "depth": 2,
+    "from": "/bookings"
+   }
+  },
+  "/services/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/collab/$id/files/$fileId": {
+   "url": "/collab/raat-ki-rani/files/mix-v3",
+   "status": 200,
+   "location": null,
+   "title": "Raat Ki Rani — Mix — file detail | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 27,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/files/mix-v3",
+    "depth": 4,
+    "from": "/collab/raat-ki-rani"
+   }
+  },
+  "/collab/$id/lifecycle/$action": {
+   "url": "/collab/raat-ki-rani/lifecycle/hold",
+   "status": 200,
+   "location": null,
+   "title": "Change project status | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 30,
+   "linksOut": 2,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/lifecycle/hold",
+    "depth": 5,
+    "from": "/collab/raat-ki-rani/settings"
+   }
+  },
+  "/collab/$id/milestones/$mid": {
+   "url": "/collab/raat-ki-rani/milestones/m1",
+   "status": 200,
+   "location": null,
+   "title": "Lyrics approved — milestone | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 34,
+   "linksOut": 8,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/milestones/m1",
+    "depth": 4,
+    "from": "/collab/raat-ki-rani"
+   }
+  },
+  "/collab/$id/milestones/new": {
+   "url": "/collab/raat-ki-rani/milestones/new",
+   "status": 200,
+   "location": null,
+   "title": "Add a milestone | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 38,
+   "linksOut": 2,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/milestones/new",
+    "depth": 5,
+    "from": "/collab/raat-ki-rani/timeline"
+   }
+  },
+  "/collab/$id/remove/$pid": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/collab/invites/accepted/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/collab/invites/declined/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/collab/proposals/$id/counter": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/collab/proposals/accepted/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/collab/proposals/declined/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/marketplace/rent/active/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/marketplace/rent/c/$slug": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/marketplace/rent/e/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/marketplace/rent/provider/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/marketplace/rent/request/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/opportunities/$id/applicants/$aid": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/provider/bookings/requests/$ref": {
+   "url": "/provider/bookings/requests/MLB-4901",
+   "status": 200,
+   "location": null,
+   "title": "Review booking request — MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 5,
+   "linksOut": 2,
+   "crawled": {
+    "url": "/provider/bookings/requests/MLB-4901",
+    "depth": 3,
+    "from": "/provider/bookings"
+   }
+  },
+  "/collab/$id/files": {
+   "url": "/collab/raat-ki-rani/files",
+   "status": 200,
+   "location": null,
+   "title": "Raat Ki Rani — project files | MusicLinkd",
+   "nestedButtons": 0,
+   "ms": 11,
+   "linksOut": 16,
+   "crawled": {
+    "url": "/collab/raat-ki-rani/files",
+    "depth": 4,
+    "from": "/collab/raat-ki-rani"
+   }
+  },
+  "/collab/proposals/$id": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/opportunities/$id/applicants": {
+   "url": null,
+   "status": null,
+   "crawled": null
+  },
+  "/provider/bookings/requests": {
+   "url": "/provider/bookings/requests",
+   "status": 200,
+   "location": null,
+   "title": "Booking requests — MusicLinkd provider",
+   "nestedButtons": 0,
+   "ms": 8,
+   "linksOut": 7,
+   "crawled": {
+    "url": "/provider/bookings/requests",
+    "depth": 3,
+    "from": "/provider/bookings"
+   }
+  }
+ }
+}

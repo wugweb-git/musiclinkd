@@ -1,0 +1,2246 @@
+{
+ "Talent (individual)": [
+  {
+   "path": "/me",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/me"
+   ],
+   "at": [
+    "data/dashboard.ts:32"
+   ],
+   "inboundFrom": [
+    "/categories",
+    "/feed",
+    "/messages",
+    "/recently-viewed",
+    "/saved",
+    "/singers",
+    "/studio",
+    "/auth/signout",
+    "/bands/new",
+    "/business/new",
+    "/discover/community",
+    "/discover/music",
+    "/discover/nearby",
+    "/discover/projects",
+    "/help/$slug",
+    "/identity/analytics",
+    "/identity/business",
+    "/identity/card",
+    "/identity/customize",
+    "/identity/history",
+    "/identity/print",
+    "/identity/qr",
+    "/identity/scan",
+    "/identity/settings",
+    "/legal/privacy",
+    "/legal/terms",
+    "/marketplace/mine",
+    "/marketplace/nearby",
+    "/marketplace/saved",
+    "/marketplace/search",
+    "/marketplace/sell",
+    "/notifications/settings",
+    "/onboarding/complete",
+    "/onboarding/done",
+    "/opportunities/mine",
+    "/opportunities/new",
+    "/opportunities/saved",
+    "/opportunities/search",
+    "/plans/checkout",
+    "/plans/earnings",
+    "/plans/manage",
+    "/profile/$username",
+    "/profile/edit",
+    "/profile/insights",
+    "/provider/availability",
+    "/provider/policies",
+    "/provider/pricing",
+    "/recommendations/settings",
+    "/recommendations/swipe",
+    "/reviews/request",
+    "/search/history",
+    "/search/saved",
+    "/services/availability",
+    "/services/conflicts",
+    "/services/new",
+    "/settings/account",
+    "/settings/delete-account",
+    "/settings/privacy",
+    "/settings/security",
+    "/verification/$type",
+    "/verification/badge",
+    "/verification/choose",
+    "/verification/privacy",
+    "/bands",
+    "/bookings",
+    "/business",
+    "/collab",
+    "/discover",
+    "/help",
+    "/marketplace",
+    "/notifications",
+    "/opportunities",
+    "/plans",
+    "/portfolio",
+    "/recommendations",
+    "/reviews",
+    "/search",
+    "/services",
+    "/settings",
+    "/verification",
+    "/bands/$id/contact",
+    "/bands/$id/events",
+    "/bands/$id/invite",
+    "/bands/$id/manage",
+    "/bands/$id/portfolio",
+    "/bookings/$ref/cancel",
+    "/bookings/$ref/reschedule",
+    "/business/$id/analytics",
+    "/business/$id/availability",
+    "/business/$id/dashboard",
+    "/business/$id/enquiry",
+    "/business/$id/leads",
+    "/business/$id/manage",
+    "/business/$id/portfolio",
+    "/business/$id/reviews",
+    "/business/$id/services",
+    "/business/$id/team",
+    "/business/$id/verification",
+    "/collab/$id/activity",
+    "/collab/$id/agreement",
+    "/collab/$id/discussion",
+    "/collab/$id/invite-link",
+    "/collab/$id/media",
+    "/collab/$id/notes",
+    "/collab/$id/participants",
+    "/collab/$id/roles",
+    "/collab/$id/settings",
+    "/collab/$id/share",
+    "/collab/$id/timeline",
+    "/collab/$id/transfer",
+    "/collab/invites/$id",
+    "/collab/new/collaborators",
+    "/collab/proposals/new",
+    "/help/category/$key",
+    "/identity/contact/save",
+    "/identity/q/$code",
+    "/marketplace/c/$slug",
+    "/marketplace/l/$id",
+    "/marketplace/rent/list",
+    "/marketplace/rent/listings",
+    "/marketplace/rent/mine",
+    "/marketplace/rent/nearby",
+    "/marketplace/rent/saved",
+    "/marketplace/rent/search",
+    "/marketplace/seller/$id",
+    "/opportunities/$id/analytics",
+    "/opportunities/$id/apply",
+    "/opportunities/$id/manage",
+    "/opportunities/applications/$aid",
+    "/provider/bookings/$ref",
+    "/provider/bookings/calendar",
+    "/reviews/$id/edit",
+    "/reviews/$id/reply",
+    "/reviews/$id/report",
+    "/reviews/write/$id",
+    "/search/why/$id",
+    "/services/$id/enquiry",
+    "/services/$id/manage",
+    "/bands/$id",
+    "/bookings/$ref",
+    "/business/$id",
+    "/collab/$id",
+    "/collab/new",
+    "/identity/contact",
+    "/marketplace/rent",
+    "/opportunities/$id",
+    "/opportunities/applications",
+    "/provider/bookings",
+    "/services/$id",
+    "/collab/$id/files/$fileId",
+    "/collab/$id/lifecycle/$action",
+    "/collab/$id/milestones/$mid",
+    "/collab/$id/milestones/new",
+    "/collab/$id/remove/$pid",
+    "/collab/invites/accepted/$id",
+    "/collab/invites/declined/$id",
+    "/collab/proposals/$id/counter",
+    "/collab/proposals/accepted/$id",
+    "/collab/proposals/declined/$id",
+    "/marketplace/rent/active/$id",
+    "/marketplace/rent/c/$slug",
+    "/marketplace/rent/e/$id",
+    "/marketplace/rent/provider/$id",
+    "/marketplace/rent/request/$id",
+    "/opportunities/$id/applicants/$aid",
+    "/provider/bookings/requests/$ref",
+    "/collab/$id/files",
+    "/collab/proposals/$id",
+    "/opportunities/$id/applicants",
+    "/provider/bookings/requests"
+   ]
+  },
+  {
+   "path": "/profile/edit",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/profile/edit"
+   ],
+   "at": [
+    "routes/feed.tsx:306"
+   ],
+   "inboundFrom": [
+    "/feed",
+    "/me",
+    "/help/$slug",
+    "/profile/$username",
+    "/profile/insights",
+    "/help",
+    "/recommendations",
+    "/settings",
+    "/help/category/$key"
+   ]
+  },
+  {
+   "path": "/portfolio",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/portfolio/new",
+    "/portfolio"
+   ],
+   "at": [
+    "routes/feed.tsx:324",
+    "routes/portfolio.new.index.tsx:26"
+   ],
+   "inboundFrom": [
+    "/help/$slug",
+    "/portfolio/analytics",
+    "/portfolio/reorder",
+    "/portfolio/settings",
+    "/help",
+    "/help/category/$key",
+    "/portfolio/$id/edit",
+    "/bands/$id",
+    "/portfolio/$id",
+    "/portfolio/new"
+   ]
+  },
+  {
+   "path": "/portfolio/new",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/portfolio/new"
+   ],
+   "at": [
+    "routes/feed.tsx:324"
+   ],
+   "inboundFrom": [
+    "/feed",
+    "/onboarding/complete",
+    "/onboarding/done",
+    "/portfolio/analytics",
+    "/portfolio/reorder",
+    "/portfolio/select",
+    "/portfolio",
+    "/opportunities/$id/apply",
+    "/portfolio/new/$kind",
+    "/portfolio/$id"
+   ]
+  },
+  {
+   "path": "/opportunities",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/opportunities"
+   ],
+   "at": [
+    "routes/feed.tsx:229"
+   ],
+   "inboundFrom": [
+    "/feed",
+    "/opportunities/mine",
+    "/opportunities/new",
+    "/opportunities/saved",
+    "/opportunities/search",
+    "/recommendations",
+    "/opportunities/$id/apply",
+    "/opportunities/$id",
+    "/opportunities/applications"
+   ]
+  },
+  {
+   "path": "/opportunities/$id/apply",
+   "hops": 3,
+   "chain": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/$id",
+    "/opportunities/$id/apply"
+   ],
+   "at": [
+    "routes/feed.tsx:229",
+    "components/ml/opportunity.tsx:120",
+    "routes/opportunities.$id.index.tsx:203"
+   ],
+   "inboundFrom": [
+    "/opportunities/$id"
+   ]
+  },
+  {
+   "path": "/opportunities/applications",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/opportunities/applications"
+   ],
+   "at": [
+    "data/dashboard.ts:334"
+   ],
+   "inboundFrom": [
+    "/feed",
+    "/notifications",
+    "/opportunities",
+    "/opportunities/$id/apply",
+    "/opportunities/applications/$aid"
+   ]
+  },
+  {
+   "path": "/opportunities/applications/$aid",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/opportunities/applications",
+    "/opportunities/applications/$aid"
+   ],
+   "at": [
+    "data/dashboard.ts:334",
+    "components/ml/opportunity.tsx:156"
+   ],
+   "inboundFrom": [
+    "/opportunities/$id",
+    "/opportunities/applications"
+   ]
+  },
+  {
+   "path": "/collab",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/recommendations",
+    "/collab"
+   ],
+   "at": [
+    "routes/feed.tsx:241",
+    "data/recommendations.ts:79"
+   ],
+   "inboundFrom": [
+    "/messages",
+    "/notifications",
+    "/recommendations",
+    "/collab/$id/activity",
+    "/collab/$id/agreement",
+    "/collab/$id/discussion",
+    "/collab/$id/invite-link",
+    "/collab/$id/media",
+    "/collab/$id/notes",
+    "/collab/$id/participants",
+    "/collab/$id/roles",
+    "/collab/$id/settings",
+    "/collab/$id/share",
+    "/collab/$id/timeline",
+    "/collab/$id/transfer",
+    "/collab/invites/$id",
+    "/collab/new/collaborators",
+    "/collab/proposals/new",
+    "/collab/$id",
+    "/collab/new",
+    "/collab/$id/files/$fileId",
+    "/collab/$id/lifecycle/$action",
+    "/collab/$id/milestones/$mid",
+    "/collab/$id/milestones/new",
+    "/collab/$id/remove/$pid",
+    "/collab/invites/accepted/$id",
+    "/collab/invites/declined/$id",
+    "/collab/proposals/$id/counter",
+    "/collab/proposals/accepted/$id",
+    "/collab/proposals/declined/$id",
+    "/collab/$id/files",
+    "/collab/proposals/$id"
+   ]
+  },
+  {
+   "path": "/collab/invites/$id",
+   "hops": 3,
+   "chain": [
+    "/feed",
+    "/recommendations",
+    "/collab",
+    "/collab/invites/$id"
+   ],
+   "at": [
+    "routes/feed.tsx:241",
+    "data/recommendations.ts:79",
+    "routes/collab.index.tsx:166"
+   ],
+   "inboundFrom": [
+    "/collab"
+   ]
+  },
+  {
+   "path": "/provider/bookings",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/bookings",
+    "/provider/bookings"
+   ],
+   "at": [
+    "routes/feed.tsx:327",
+    "routes/bookings.index.tsx:119"
+   ],
+   "inboundFrom": [
+    "/provider/availability",
+    "/provider/policies",
+    "/provider/pricing",
+    "/bookings",
+    "/provider/bookings/$ref",
+    "/provider/bookings/calendar",
+    "/provider/bookings/requests/$ref",
+    "/provider/bookings/requests"
+   ]
+  },
+  {
+   "path": "/provider/bookings/requests",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/provider/bookings/requests"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "data/notifications.ts:62"
+   ],
+   "inboundFrom": [
+    "/notifications",
+    "/provider/bookings"
+   ]
+  },
+  {
+   "path": "/services",
+   "hops": 4,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/settings/security",
+    "/settings",
+    "/services"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "data/notifications.ts:120",
+    "routes/settings.security.tsx:31",
+    "data/settings.ts:51"
+   ],
+   "inboundFrom": [
+    "/services/availability",
+    "/services/new",
+    "/settings",
+    "/services/$id/enquiry",
+    "/services/$id/manage",
+    "/services/$id"
+   ]
+  },
+  {
+   "path": "/services/new",
+   "hops": 5,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/settings/security",
+    "/settings",
+    "/services",
+    "/services/new"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "data/notifications.ts:120",
+    "routes/settings.security.tsx:31",
+    "data/settings.ts:51",
+    "routes/services.index.tsx:44"
+   ],
+   "inboundFrom": [
+    "/services",
+    "/business/$id/services",
+    "/services/$id"
+   ]
+  },
+  {
+   "path": "/services/$id/manage",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": []
+  },
+  {
+   "path": "/verification",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/help",
+    "/verification"
+   ],
+   "at": [
+    "routes/feed.tsx:331",
+    "data/cms.ts:123"
+   ],
+   "inboundFrom": [
+    "/me",
+    "/help/$slug",
+    "/profile/$username",
+    "/verification/$type",
+    "/verification/badge",
+    "/verification/choose",
+    "/verification/privacy",
+    "/help",
+    "/notifications",
+    "/settings",
+    "/bands/$id/manage",
+    "/help/category/$key"
+   ]
+  },
+  {
+   "path": "/identity/qr",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/help",
+    "/identity/qr"
+   ],
+   "at": [
+    "routes/feed.tsx:331",
+    "data/cms.ts:222"
+   ],
+   "inboundFrom": [
+    "/me",
+    "/help/$slug",
+    "/identity/analytics",
+    "/identity/business",
+    "/identity/card",
+    "/identity/customize",
+    "/identity/full",
+    "/identity/history",
+    "/identity/print",
+    "/identity/scan",
+    "/identity/settings",
+    "/profile/$username",
+    "/help",
+    "/bands/$id/invite",
+    "/bands/$id/manage",
+    "/help/category/$key",
+    "/bands/$id",
+    "/identity/contact",
+    "/opportunities/$id"
+   ]
+  },
+  {
+   "path": "/plans/earnings",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/plans",
+    "/plans/earnings"
+   ],
+   "at": [
+    "routes/feed.tsx:330",
+    "routes/plans.index.tsx:126"
+   ],
+   "inboundFrom": [
+    "/plans/manage",
+    "/plans",
+    "/settings"
+   ]
+  },
+  {
+   "path": "/reviews",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/reviews"
+   ],
+   "at": [
+    "routes/feed.tsx:329"
+   ],
+   "inboundFrom": [
+    "/feed",
+    "/me",
+    "/help/$slug",
+    "/profile/$username",
+    "/reviews/request",
+    "/help",
+    "/notifications",
+    "/verification",
+    "/help/category/$key",
+    "/reviews/$id/edit",
+    "/reviews/$id/reply",
+    "/reviews/$id/report",
+    "/reviews/write/$id"
+   ]
+  },
+  {
+   "path": "/reviews/$id/reply",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": []
+  },
+  {
+   "path": "/profile/insights",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": []
+  }
+ ],
+ "Hirer / client": [
+  {
+   "path": "/discover",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/discover"
+   ],
+   "at": [
+    "routes/feed.tsx:292"
+   ],
+   "inboundFrom": [
+    "/categories",
+    "/feed",
+    "/me",
+    "/messages",
+    "/recently-viewed",
+    "/saved",
+    "/singers",
+    "/studio",
+    "/auth/offline",
+    "/bands/new",
+    "/business/new",
+    "/discover/community",
+    "/discover/music",
+    "/discover/nearby",
+    "/discover/projects",
+    "/help/$slug",
+    "/identity/analytics",
+    "/identity/business",
+    "/identity/card",
+    "/identity/customize",
+    "/identity/history",
+    "/identity/print",
+    "/identity/qr",
+    "/identity/scan",
+    "/identity/settings",
+    "/legal/privacy",
+    "/legal/terms",
+    "/marketplace/mine",
+    "/marketplace/nearby",
+    "/marketplace/saved",
+    "/marketplace/search",
+    "/marketplace/sell",
+    "/notifications/settings",
+    "/onboarding/done",
+    "/opportunities/mine",
+    "/opportunities/new",
+    "/opportunities/saved",
+    "/opportunities/search",
+    "/plans/checkout",
+    "/plans/earnings",
+    "/plans/manage",
+    "/profile/$username",
+    "/profile/edit",
+    "/provider/availability",
+    "/provider/policies",
+    "/provider/pricing",
+    "/recommendations/settings",
+    "/recommendations/swipe",
+    "/reviews/request",
+    "/search/history",
+    "/search/saved",
+    "/services/availability",
+    "/services/conflicts",
+    "/services/new",
+    "/settings/account",
+    "/settings/delete-account",
+    "/settings/privacy",
+    "/settings/security",
+    "/verification/$type",
+    "/verification/badge",
+    "/verification/choose",
+    "/verification/privacy",
+    "/auth",
+    "/bands",
+    "/bookings",
+    "/business",
+    "/collab",
+    "/help",
+    "/marketplace",
+    "/notifications",
+    "/opportunities",
+    "/plans",
+    "/recommendations",
+    "/reviews",
+    "/search",
+    "/services",
+    "/settings",
+    "/verification",
+    "/bands/$id/contact",
+    "/bands/$id/events",
+    "/bands/$id/invite",
+    "/bands/$id/manage",
+    "/bands/$id/portfolio",
+    "/bookings/$ref/cancel",
+    "/bookings/$ref/reschedule",
+    "/business/$id/analytics",
+    "/business/$id/availability",
+    "/business/$id/dashboard",
+    "/business/$id/enquiry",
+    "/business/$id/leads",
+    "/business/$id/manage",
+    "/business/$id/portfolio",
+    "/business/$id/reviews",
+    "/business/$id/services",
+    "/business/$id/team",
+    "/business/$id/verification",
+    "/collab/$id/activity",
+    "/collab/$id/agreement",
+    "/collab/$id/discussion",
+    "/collab/$id/invite-link",
+    "/collab/$id/media",
+    "/collab/$id/notes",
+    "/collab/$id/participants",
+    "/collab/$id/roles",
+    "/collab/$id/settings",
+    "/collab/$id/share",
+    "/collab/$id/timeline",
+    "/collab/$id/transfer",
+    "/collab/invites/$id",
+    "/collab/new/collaborators",
+    "/collab/proposals/new",
+    "/help/category/$key",
+    "/identity/contact/save",
+    "/identity/q/$code",
+    "/marketplace/c/$slug",
+    "/marketplace/l/$id",
+    "/marketplace/rent/list",
+    "/marketplace/rent/listings",
+    "/marketplace/rent/mine",
+    "/marketplace/rent/nearby",
+    "/marketplace/rent/saved",
+    "/marketplace/rent/search",
+    "/marketplace/seller/$id",
+    "/opportunities/$id/analytics",
+    "/opportunities/$id/apply",
+    "/opportunities/$id/manage",
+    "/opportunities/applications/$aid",
+    "/provider/bookings/$ref",
+    "/provider/bookings/calendar",
+    "/reviews/$id/edit",
+    "/reviews/$id/reply",
+    "/reviews/$id/report",
+    "/reviews/write/$id",
+    "/search/why/$id",
+    "/services/$id/enquiry",
+    "/services/$id/manage",
+    "/bands/$id",
+    "/booking/$id/",
+    "/bookings/$ref",
+    "/business/$id",
+    "/collab/$id",
+    "/collab/new",
+    "/identity/contact",
+    "/marketplace/rent",
+    "/opportunities/$id",
+    "/opportunities/applications",
+    "/provider/bookings",
+    "/services/$id",
+    "/collab/$id/files/$fileId",
+    "/collab/$id/lifecycle/$action",
+    "/collab/$id/milestones/$mid",
+    "/collab/$id/milestones/new",
+    "/collab/$id/remove/$pid",
+    "/collab/invites/accepted/$id",
+    "/collab/invites/declined/$id",
+    "/collab/proposals/$id/counter",
+    "/collab/proposals/accepted/$id",
+    "/collab/proposals/declined/$id",
+    "/marketplace/rent/active/$id",
+    "/marketplace/rent/c/$slug",
+    "/marketplace/rent/e/$id",
+    "/marketplace/rent/provider/$id",
+    "/marketplace/rent/request/$id",
+    "/opportunities/$id/applicants/$aid",
+    "/provider/bookings/requests/$ref",
+    "/collab/$id/files",
+    "/collab/proposals/$id",
+    "/opportunities/$id/applicants",
+    "/provider/bookings/requests"
+   ]
+  },
+  {
+   "path": "/search",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/search"
+   ],
+   "at": [
+    "routes/feed.tsx:325"
+   ],
+   "inboundFrom": [
+    "/categories",
+    "/feed",
+    "/singers",
+    "/discover/nearby",
+    "/search/history",
+    "/search/saved",
+    "/discover"
+   ]
+  },
+  {
+   "path": "/search/why/$id",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": []
+  },
+  {
+   "path": "/recommendations",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/recommendations"
+   ],
+   "at": [
+    "routes/feed.tsx:241"
+   ],
+   "inboundFrom": [
+    "/feed",
+    "/me",
+    "/profile/$username",
+    "/recommendations/settings",
+    "/discover",
+    "/search/why/$id"
+   ]
+  },
+  {
+   "path": "/profile/$username",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/profile/$username"
+   ],
+   "at": [
+    "components/ml/cards.tsx:74"
+   ],
+   "inboundFrom": [
+    "/feed",
+    "/me",
+    "/recently-viewed",
+    "/singers",
+    "/discover/nearby",
+    "/identity/business",
+    "/identity/history",
+    "/identity/print",
+    "/identity/scan",
+    "/profile/insights",
+    "/talent/$id",
+    "/discover",
+    "/recommendations",
+    "/search",
+    "/collab/$id/participants",
+    "/identity/q/$code",
+    "/bands/$id",
+    "/opportunities/$id",
+    "/opportunities/$id/applicants/$aid"
+   ]
+  },
+  {
+   "path": "/opportunities/new",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/new"
+   ],
+   "at": [
+    "routes/feed.tsx:229",
+    "routes/opportunities.index.tsx:137"
+   ],
+   "inboundFrom": [
+    "/opportunities/mine",
+    "/opportunities/search",
+    "/opportunities",
+    "/opportunities/$id/manage"
+   ]
+  },
+  {
+   "path": "/opportunities/mine",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/mine"
+   ],
+   "at": [
+    "routes/feed.tsx:229",
+    "routes/opportunities.index.tsx:148"
+   ],
+   "inboundFrom": [
+    "/opportunities/new",
+    "/opportunities",
+    "/opportunities/$id/analytics",
+    "/opportunities/$id/manage",
+    "/opportunities/$id/applicants/$aid",
+    "/opportunities/$id/applicants"
+   ]
+  },
+  {
+   "path": "/opportunities/$id/applicants",
+   "hops": 3,
+   "chain": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/mine",
+    "/opportunities/$id/applicants"
+   ],
+   "at": [
+    "routes/feed.tsx:229",
+    "routes/opportunities.index.tsx:148",
+    "routes/opportunities.mine.tsx:82"
+   ],
+   "inboundFrom": [
+    "/opportunities/mine",
+    "/opportunities/$id/manage",
+    "/opportunities/$id/applicants/$aid"
+   ]
+  },
+  {
+   "path": "/opportunities/$id/applicants/$aid",
+   "hops": 4,
+   "chain": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/mine",
+    "/opportunities/$id/applicants",
+    "/opportunities/$id/applicants/$aid"
+   ],
+   "at": [
+    "routes/feed.tsx:229",
+    "routes/opportunities.index.tsx:148",
+    "routes/opportunities.mine.tsx:82",
+    "components/ml/opportunity.tsx:185"
+   ],
+   "inboundFrom": [
+    "/opportunities/$id/applicants"
+   ]
+  },
+  {
+   "path": "/booking/$id",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/bookings/$ref",
+    "/booking/$id"
+   ],
+   "at": [
+    "routes/feed.tsx:361",
+    "routes/bookings.$ref.index.tsx:178"
+   ],
+   "inboundFrom": [
+    "/business/$id/enquiry",
+    "/bookings/$ref",
+    "/business/$id",
+    "/services/$id",
+    "/opportunities/$id/applicants/$aid"
+   ]
+  },
+  {
+   "path": "/booking/$id/pay",
+   "hops": 6,
+   "chain": [
+    "/feed",
+    "/help",
+    "/identity/qr",
+    "/identity/business",
+    "/booking/$id/",
+    "/booking/$id/review",
+    "/booking/$id/pay"
+   ],
+   "at": [
+    "routes/feed.tsx:331",
+    "data/cms.ts:222",
+    "routes/identity.qr.tsx:168",
+    "data/identity.ts:97",
+    "routes/booking.$id.index.tsx:133",
+    "routes/booking.$id.review.tsx:130"
+   ],
+   "inboundFrom": [
+    "/booking/$id/review"
+   ]
+  },
+  {
+   "path": "/bookings",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/bookings"
+   ],
+   "at": [
+    "routes/feed.tsx:327"
+   ],
+   "inboundFrom": [
+    "/feed",
+    "/plans/earnings",
+    "/booking/confirmed/$ref",
+    "/bookings/$ref/cancel",
+    "/bookings/$ref/reschedule",
+    "/opportunities/$id/manage",
+    "/bands/$id",
+    "/bookings/$ref"
+   ]
+  },
+  {
+   "path": "/bookings/$ref",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/bookings/$ref"
+   ],
+   "at": [
+    "routes/feed.tsx:361"
+   ],
+   "inboundFrom": [
+    "/feed",
+    "/bookings",
+    "/bookings/$ref/cancel",
+    "/bookings/$ref/reschedule",
+    "/provider/bookings"
+   ]
+  },
+  {
+   "path": "/reviews/write/$id",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/reviews",
+    "/reviews/write/$id"
+   ],
+   "at": [
+    "routes/feed.tsx:329",
+    "routes/reviews.index.tsx:115"
+   ],
+   "inboundFrom": [
+    "/reviews"
+   ]
+  },
+  {
+   "path": "/services/$id/enquiry",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": []
+  },
+  {
+   "path": "/business/$id/enquiry",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": []
+  },
+  {
+   "path": "/saved",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/saved"
+   ],
+   "at": [
+    "data/dashboard.ts:100"
+   ],
+   "inboundFrom": [
+    "/feed",
+    "/recommendations/settings"
+   ]
+  },
+  {
+   "path": "/messages",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/messages"
+   ],
+   "at": [
+    "routes/feed.tsx:332"
+   ],
+   "inboundFrom": [
+    "/categories",
+    "/feed",
+    "/me",
+    "/recently-viewed",
+    "/saved",
+    "/singers",
+    "/studio",
+    "/bands/new",
+    "/business/new",
+    "/discover/community",
+    "/discover/music",
+    "/discover/nearby",
+    "/discover/projects",
+    "/help/$slug",
+    "/identity/analytics",
+    "/identity/business",
+    "/identity/card",
+    "/identity/customize",
+    "/identity/history",
+    "/identity/print",
+    "/identity/qr",
+    "/identity/scan",
+    "/identity/settings",
+    "/legal/privacy",
+    "/legal/terms",
+    "/marketplace/mine",
+    "/marketplace/nearby",
+    "/marketplace/saved",
+    "/marketplace/search",
+    "/marketplace/sell",
+    "/notifications/settings",
+    "/opportunities/mine",
+    "/opportunities/new",
+    "/opportunities/saved",
+    "/opportunities/search",
+    "/plans/checkout",
+    "/plans/earnings",
+    "/plans/manage",
+    "/portfolio/select",
+    "/profile/$username",
+    "/profile/edit",
+    "/provider/availability",
+    "/provider/policies",
+    "/provider/pricing",
+    "/recommendations/settings",
+    "/recommendations/swipe",
+    "/reviews/request",
+    "/search/history",
+    "/search/saved",
+    "/services/availability",
+    "/services/conflicts",
+    "/services/new",
+    "/settings/account",
+    "/settings/delete-account",
+    "/settings/privacy",
+    "/settings/security",
+    "/verification/$type",
+    "/verification/badge",
+    "/verification/choose",
+    "/verification/privacy",
+    "/bands",
+    "/bookings",
+    "/business",
+    "/collab",
+    "/discover",
+    "/help",
+    "/marketplace",
+    "/notifications",
+    "/opportunities",
+    "/plans",
+    "/recommendations",
+    "/reviews",
+    "/search",
+    "/services",
+    "/settings",
+    "/verification",
+    "/bands/$id/contact",
+    "/bands/$id/events",
+    "/bands/$id/invite",
+    "/bands/$id/manage",
+    "/bands/$id/portfolio",
+    "/booking/$id/schedule",
+    "/booking/confirmed/$ref",
+    "/bookings/$ref/cancel",
+    "/bookings/$ref/reschedule",
+    "/business/$id/analytics",
+    "/business/$id/availability",
+    "/business/$id/dashboard",
+    "/business/$id/enquiry",
+    "/business/$id/leads",
+    "/business/$id/manage",
+    "/business/$id/portfolio",
+    "/business/$id/reviews",
+    "/business/$id/services",
+    "/business/$id/team",
+    "/business/$id/verification",
+    "/collab/$id/activity",
+    "/collab/$id/agreement",
+    "/collab/$id/discussion",
+    "/collab/$id/invite-link",
+    "/collab/$id/media",
+    "/collab/$id/notes",
+    "/collab/$id/participants",
+    "/collab/$id/roles",
+    "/collab/$id/settings",
+    "/collab/$id/share",
+    "/collab/$id/timeline",
+    "/collab/$id/transfer",
+    "/collab/invites/$id",
+    "/collab/new/collaborators",
+    "/collab/proposals/new",
+    "/help/category/$key",
+    "/identity/contact/save",
+    "/identity/q/$code",
+    "/marketplace/c/$slug",
+    "/marketplace/l/$id",
+    "/marketplace/rent/list",
+    "/marketplace/rent/listings",
+    "/marketplace/rent/mine",
+    "/marketplace/rent/nearby",
+    "/marketplace/rent/saved",
+    "/marketplace/rent/search",
+    "/marketplace/seller/$id",
+    "/opportunities/$id/analytics",
+    "/opportunities/$id/apply",
+    "/opportunities/$id/manage",
+    "/opportunities/applications/$aid",
+    "/provider/bookings/$ref",
+    "/provider/bookings/calendar",
+    "/reviews/$id/edit",
+    "/reviews/$id/reply",
+    "/reviews/$id/report",
+    "/reviews/write/$id",
+    "/search/why/$id",
+    "/services/$id/enquiry",
+    "/services/$id/manage",
+    "/bands/$id",
+    "/booking/$id/",
+    "/bookings/$ref",
+    "/business/$id",
+    "/collab/$id",
+    "/collab/new",
+    "/identity/contact",
+    "/marketplace/rent",
+    "/opportunities/$id",
+    "/opportunities/applications",
+    "/provider/bookings",
+    "/services/$id",
+    "/collab/$id/files/$fileId",
+    "/collab/$id/lifecycle/$action",
+    "/collab/$id/milestones/$mid",
+    "/collab/$id/milestones/new",
+    "/collab/$id/remove/$pid",
+    "/collab/invites/accepted/$id",
+    "/collab/invites/declined/$id",
+    "/collab/proposals/$id/counter",
+    "/collab/proposals/accepted/$id",
+    "/collab/proposals/declined/$id",
+    "/marketplace/rent/active/$id",
+    "/marketplace/rent/c/$slug",
+    "/marketplace/rent/e/$id",
+    "/marketplace/rent/provider/$id",
+    "/marketplace/rent/request/$id",
+    "/opportunities/$id/applicants/$aid",
+    "/provider/bookings/requests/$ref",
+    "/collab/$id/files",
+    "/collab/proposals/$id",
+    "/opportunities/$id/applicants",
+    "/provider/bookings/requests"
+   ]
+  }
+ ],
+ "Band member": [
+  {
+   "path": "/bands",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/bands"
+   ],
+   "at": [
+    "routes/feed.tsx:328"
+   ],
+   "inboundFrom": [
+    "/band",
+    "/feed",
+    "/me",
+    "/bands/new",
+    "/profile/$username",
+    "/profile/insights",
+    "/discover",
+    "/bands/$id/contact",
+    "/bands/$id/events",
+    "/bands/$id/invite",
+    "/bands/$id/manage",
+    "/bands/$id/portfolio",
+    "/bands/$id"
+   ]
+  },
+  {
+   "path": "/bands/new",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/bands",
+    "/bands/new"
+   ],
+   "at": [
+    "routes/feed.tsx:328",
+    "routes/bands.index.tsx:46"
+   ],
+   "inboundFrom": [
+    "/onboarding/complete",
+    "/bands"
+   ]
+  },
+  {
+   "path": "/bands/$id",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/bands",
+    "/bands/$id"
+   ],
+   "at": [
+    "routes/feed.tsx:328",
+    "routes/bands.index.tsx:72"
+   ],
+   "inboundFrom": [
+    "/bands/new",
+    "/discover/community",
+    "/identity/business",
+    "/identity/history",
+    "/identity/print",
+    "/identity/scan",
+    "/bands",
+    "/bands/$id/contact",
+    "/bands/$id/events",
+    "/bands/$id/manage",
+    "/bands/$id/portfolio",
+    "/identity/q/$code"
+   ]
+  },
+  {
+   "path": "/bands/$id/manage",
+   "hops": 3,
+   "chain": [
+    "/feed",
+    "/bands",
+    "/bands/$id",
+    "/bands/$id/manage"
+   ],
+   "at": [
+    "routes/feed.tsx:328",
+    "routes/bands.index.tsx:72",
+    "routes/bands.$id.index.tsx:92"
+   ],
+   "inboundFrom": [
+    "/bands/$id/invite",
+    "/bands/$id"
+   ]
+  },
+  {
+   "path": "/bands/$id/invite",
+   "hops": 3,
+   "chain": [
+    "/feed",
+    "/bands",
+    "/bands/$id",
+    "/bands/$id/invite"
+   ],
+   "at": [
+    "routes/feed.tsx:328",
+    "routes/bands.index.tsx:72",
+    "routes/bands.$id.index.tsx:100"
+   ],
+   "inboundFrom": [
+    "/bands/$id/manage",
+    "/bands/$id"
+   ]
+  },
+  {
+   "path": "/bands/$id/events",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": []
+  },
+  {
+   "path": "/bands/$id/portfolio",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": []
+  },
+  {
+   "path": "/bands/$id/contact",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": []
+  }
+ ],
+ "Business owner": [
+  {
+   "path": "/business",
+   "hops": 4,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/settings/security",
+    "/settings",
+    "/business"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "data/notifications.ts:120",
+    "routes/settings.security.tsx:31",
+    "data/settings.ts:57"
+   ],
+   "inboundFrom": [
+    "/business/new",
+    "/settings",
+    "/business/$id/analytics",
+    "/business/$id/availability",
+    "/business/$id/dashboard",
+    "/business/$id/enquiry",
+    "/business/$id/leads",
+    "/business/$id/manage",
+    "/business/$id/portfolio",
+    "/business/$id/reviews",
+    "/business/$id/services",
+    "/business/$id/team",
+    "/business/$id/verification",
+    "/business/$id"
+   ]
+  },
+  {
+   "path": "/business/new",
+   "hops": 5,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/settings/security",
+    "/settings",
+    "/business",
+    "/business/new"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "data/notifications.ts:120",
+    "routes/settings.security.tsx:31",
+    "data/settings.ts:57",
+    "routes/business.index.tsx:34"
+   ],
+   "inboundFrom": [
+    "/onboarding/complete",
+    "/business",
+    "/business/$id/manage"
+   ]
+  },
+  {
+   "path": "/business/$id",
+   "hops": 5,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/settings/security",
+    "/settings",
+    "/business",
+    "/business/$id"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "data/notifications.ts:120",
+    "routes/settings.security.tsx:31",
+    "data/settings.ts:57",
+    "routes/business.index.tsx:47"
+   ],
+   "inboundFrom": [
+    "/discover/community",
+    "/business",
+    "/business/$id/dashboard",
+    "/business/$id/enquiry",
+    "/business/$id/manage",
+    "/business/$id/portfolio",
+    "/business/$id/reviews",
+    "/business/$id/services",
+    "/business/$id/team"
+   ]
+  },
+  {
+   "path": "/business/$id/manage",
+   "hops": 6,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/settings/security",
+    "/settings",
+    "/business",
+    "/business/$id",
+    "/business/$id/manage"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "data/notifications.ts:120",
+    "routes/settings.security.tsx:31",
+    "data/settings.ts:57",
+    "routes/business.index.tsx:47",
+    "routes/business.$id.index.tsx:54"
+   ],
+   "inboundFrom": [
+    "/business/$id/verification",
+    "/business/$id"
+   ]
+  },
+  {
+   "path": "/business/$id/dashboard",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": [
+    "/business/$id/analytics",
+    "/business/$id/leads"
+   ]
+  },
+  {
+   "path": "/business/$id/analytics",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": [
+    "/business/$id/dashboard"
+   ]
+  },
+  {
+   "path": "/business/$id/leads",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": [
+    "/business/$id/dashboard"
+   ]
+  },
+  {
+   "path": "/business/$id/services",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": [
+    "/business/$id/availability",
+    "/business/$id/dashboard"
+   ]
+  },
+  {
+   "path": "/business/$id/availability",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": [
+    "/business/$id/dashboard",
+    "/business/$id/services"
+   ]
+  },
+  {
+   "path": "/business/$id/portfolio",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": [
+    "/business/$id/dashboard"
+   ]
+  },
+  {
+   "path": "/business/$id/reviews",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": [
+    "/business/$id/dashboard"
+   ]
+  },
+  {
+   "path": "/business/$id/team",
+   "hops": 6,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/settings/security",
+    "/settings",
+    "/business",
+    "/business/$id",
+    "/business/$id/team"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "data/notifications.ts:120",
+    "routes/settings.security.tsx:31",
+    "data/settings.ts:57",
+    "routes/business.index.tsx:47",
+    "routes/business.$id.index.tsx:220"
+   ],
+   "inboundFrom": [
+    "/business/$id/manage",
+    "/business/$id"
+   ]
+  },
+  {
+   "path": "/business/$id/verification",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": [
+    "/business/$id/dashboard"
+   ]
+  },
+  {
+   "path": "/services/conflicts",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": []
+  },
+  {
+   "path": "/provider/availability",
+   "hops": 3,
+   "chain": [
+    "/feed",
+    "/opportunities",
+    "/opportunities/new",
+    "/provider/availability"
+   ],
+   "at": [
+    "routes/feed.tsx:229",
+    "routes/opportunities.index.tsx:137",
+    "routes/opportunities.new.tsx:198"
+   ],
+   "inboundFrom": [
+    "/opportunities/new",
+    "/bands/$id/manage",
+    "/provider/bookings/$ref",
+    "/provider/bookings/calendar",
+    "/provider/bookings"
+   ]
+  },
+  {
+   "path": "/provider/pricing",
+   "hops": 3,
+   "chain": [
+    "/feed",
+    "/bookings",
+    "/provider/bookings",
+    "/provider/pricing"
+   ],
+   "at": [
+    "routes/feed.tsx:327",
+    "routes/bookings.index.tsx:119",
+    "routes/provider.bookings.index.tsx:95"
+   ],
+   "inboundFrom": [
+    "/provider/bookings"
+   ]
+  }
+ ],
+ "Seller / rental provider": [
+  {
+   "path": "/marketplace",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/marketplace"
+   ],
+   "at": [
+    "components/ml/ui.tsx:24"
+   ],
+   "inboundFrom": [
+    "/categories",
+    "/feed",
+    "/me",
+    "/messages",
+    "/recently-viewed",
+    "/saved",
+    "/singers",
+    "/studio",
+    "/bands/new",
+    "/business/new",
+    "/discover/community",
+    "/discover/music",
+    "/discover/nearby",
+    "/discover/projects",
+    "/help/$slug",
+    "/identity/analytics",
+    "/identity/business",
+    "/identity/card",
+    "/identity/customize",
+    "/identity/history",
+    "/identity/print",
+    "/identity/qr",
+    "/identity/scan",
+    "/identity/settings",
+    "/legal/privacy",
+    "/legal/terms",
+    "/marketplace/mine",
+    "/marketplace/nearby",
+    "/marketplace/saved",
+    "/marketplace/search",
+    "/marketplace/sell",
+    "/notifications/settings",
+    "/opportunities/mine",
+    "/opportunities/new",
+    "/opportunities/saved",
+    "/opportunities/search",
+    "/plans/checkout",
+    "/plans/earnings",
+    "/plans/manage",
+    "/profile/$username",
+    "/profile/edit",
+    "/profile/insights",
+    "/provider/availability",
+    "/provider/policies",
+    "/provider/pricing",
+    "/recommendations/settings",
+    "/recommendations/swipe",
+    "/reviews/request",
+    "/search/history",
+    "/search/saved",
+    "/services/availability",
+    "/services/conflicts",
+    "/services/new",
+    "/settings/account",
+    "/settings/delete-account",
+    "/settings/privacy",
+    "/settings/security",
+    "/verification/$type",
+    "/verification/badge",
+    "/verification/choose",
+    "/verification/privacy",
+    "/bands",
+    "/bookings",
+    "/business",
+    "/collab",
+    "/discover",
+    "/help",
+    "/notifications",
+    "/opportunities",
+    "/plans",
+    "/recommendations",
+    "/reviews",
+    "/search",
+    "/services",
+    "/settings",
+    "/verification",
+    "/bands/$id/contact",
+    "/bands/$id/events",
+    "/bands/$id/invite",
+    "/bands/$id/manage",
+    "/bands/$id/portfolio",
+    "/bookings/$ref/cancel",
+    "/bookings/$ref/reschedule",
+    "/business/$id/analytics",
+    "/business/$id/availability",
+    "/business/$id/dashboard",
+    "/business/$id/enquiry",
+    "/business/$id/leads",
+    "/business/$id/manage",
+    "/business/$id/portfolio",
+    "/business/$id/reviews",
+    "/business/$id/services",
+    "/business/$id/team",
+    "/business/$id/verification",
+    "/collab/$id/activity",
+    "/collab/$id/agreement",
+    "/collab/$id/discussion",
+    "/collab/$id/invite-link",
+    "/collab/$id/media",
+    "/collab/$id/notes",
+    "/collab/$id/participants",
+    "/collab/$id/roles",
+    "/collab/$id/settings",
+    "/collab/$id/share",
+    "/collab/$id/timeline",
+    "/collab/$id/transfer",
+    "/collab/invites/$id",
+    "/collab/new/collaborators",
+    "/collab/proposals/new",
+    "/help/category/$key",
+    "/identity/contact/save",
+    "/identity/q/$code",
+    "/marketplace/c/$slug",
+    "/marketplace/l/$id",
+    "/marketplace/rent/list",
+    "/marketplace/rent/listings",
+    "/marketplace/rent/mine",
+    "/marketplace/rent/nearby",
+    "/marketplace/rent/saved",
+    "/marketplace/rent/search",
+    "/marketplace/seller/$id",
+    "/opportunities/$id/analytics",
+    "/opportunities/$id/apply",
+    "/opportunities/$id/manage",
+    "/opportunities/applications/$aid",
+    "/provider/bookings/$ref",
+    "/provider/bookings/calendar",
+    "/reviews/$id/edit",
+    "/reviews/$id/reply",
+    "/reviews/$id/report",
+    "/reviews/write/$id",
+    "/search/why/$id",
+    "/services/$id/enquiry",
+    "/services/$id/manage",
+    "/bands/$id",
+    "/bookings/$ref",
+    "/business/$id",
+    "/collab/$id",
+    "/collab/new",
+    "/identity/contact",
+    "/marketplace/rent",
+    "/opportunities/$id",
+    "/opportunities/applications",
+    "/provider/bookings",
+    "/services/$id",
+    "/collab/$id/files/$fileId",
+    "/collab/$id/lifecycle/$action",
+    "/collab/$id/milestones/$mid",
+    "/collab/$id/milestones/new",
+    "/collab/$id/remove/$pid",
+    "/collab/invites/accepted/$id",
+    "/collab/invites/declined/$id",
+    "/collab/proposals/$id/counter",
+    "/collab/proposals/accepted/$id",
+    "/collab/proposals/declined/$id",
+    "/marketplace/rent/active/$id",
+    "/marketplace/rent/c/$slug",
+    "/marketplace/rent/e/$id",
+    "/marketplace/rent/provider/$id",
+    "/marketplace/rent/request/$id",
+    "/opportunities/$id/applicants/$aid",
+    "/provider/bookings/requests/$ref",
+    "/collab/$id/files",
+    "/collab/proposals/$id",
+    "/opportunities/$id/applicants",
+    "/provider/bookings/requests"
+   ]
+  },
+  {
+   "path": "/marketplace/sell",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/marketplace",
+    "/marketplace/sell"
+   ],
+   "at": [
+    "components/ml/ui.tsx:24",
+    "routes/marketplace/index.tsx:54"
+   ],
+   "inboundFrom": [
+    "/marketplace/mine",
+    "/marketplace"
+   ]
+  },
+  {
+   "path": "/marketplace/mine",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/marketplace",
+    "/marketplace/mine"
+   ],
+   "at": [
+    "components/ml/ui.tsx:24",
+    "routes/marketplace/index.tsx:137"
+   ],
+   "inboundFrom": [
+    "/marketplace/sell",
+    "/marketplace"
+   ]
+  },
+  {
+   "path": "/marketplace/rent",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/profile/$username",
+    "/marketplace/rent"
+   ],
+   "at": [
+    "components/ml/cards.tsx:74",
+    "data/profile.ts:520"
+   ],
+   "inboundFrom": [
+    "/me",
+    "/profile/$username",
+    "/profile/insights",
+    "/booking/$id/addons",
+    "/marketplace/rent/list",
+    "/marketplace/rent/listings",
+    "/marketplace/rent/mine",
+    "/marketplace/rent/nearby",
+    "/marketplace/rent/saved",
+    "/marketplace/rent/search",
+    "/marketplace/rent/c/$slug",
+    "/marketplace/rent/e/$id",
+    "/marketplace/rent/provider/$id",
+    "/marketplace/rent/request/$id"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/list",
+   "hops": 3,
+   "chain": [
+    "/feed",
+    "/profile/$username",
+    "/marketplace/rent",
+    "/marketplace/rent/list"
+   ],
+   "at": [
+    "components/ml/cards.tsx:74",
+    "data/profile.ts:520",
+    "routes/marketplace/rent/index.tsx:64"
+   ],
+   "inboundFrom": [
+    "/marketplace/rent/listings",
+    "/marketplace/rent/nearby",
+    "/marketplace/rent"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/listings",
+   "hops": 3,
+   "chain": [
+    "/feed",
+    "/profile/$username",
+    "/marketplace/rent",
+    "/marketplace/rent/listings"
+   ],
+   "at": [
+    "components/ml/cards.tsx:74",
+    "data/profile.ts:520",
+    "routes/marketplace/rent/index.tsx:171"
+   ],
+   "inboundFrom": [
+    "/marketplace/rent/list",
+    "/marketplace/rent/mine",
+    "/marketplace/rent"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/mine",
+   "hops": 3,
+   "chain": [
+    "/feed",
+    "/profile/$username",
+    "/marketplace/rent",
+    "/marketplace/rent/mine"
+   ],
+   "at": [
+    "components/ml/cards.tsx:74",
+    "data/profile.ts:520",
+    "routes/marketplace/rent/index.tsx:170"
+   ],
+   "inboundFrom": [
+    "/marketplace/rent",
+    "/marketplace/rent/active/$id",
+    "/marketplace/rent/request/$id"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/request/$id",
+   "hops": 3,
+   "chain": [
+    "/feed",
+    "/profile/$username",
+    "/marketplace/rent",
+    "/marketplace/rent/request/$id"
+   ],
+   "at": [
+    "components/ml/cards.tsx:74",
+    "data/profile.ts:520",
+    "components/ml/rental.tsx:118"
+   ],
+   "inboundFrom": [
+    "/marketplace/rent/saved",
+    "/marketplace/rent",
+    "/marketplace/rent/e/$id"
+   ]
+  },
+  {
+   "path": "/marketplace/rent/active/$id",
+   "hops": 4,
+   "chain": [
+    "/feed",
+    "/profile/$username",
+    "/marketplace/rent",
+    "/marketplace/rent/mine",
+    "/marketplace/rent/active/$id"
+   ],
+   "at": [
+    "components/ml/cards.tsx:74",
+    "data/profile.ts:520",
+    "routes/marketplace/rent/index.tsx:170",
+    "routes/marketplace/rent/mine.tsx:65"
+   ],
+   "inboundFrom": [
+    "/marketplace/rent/mine"
+   ]
+  }
+ ],
+ "Everyone": [
+  {
+   "path": "/notifications",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/notifications"
+   ],
+   "at": [
+    "routes/feed.tsx:132"
+   ],
+   "inboundFrom": [
+    "/feed",
+    "/notifications/settings"
+   ]
+  },
+  {
+   "path": "/notifications/settings",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/notifications/settings"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "routes/notifications.index.tsx:63"
+   ],
+   "inboundFrom": [
+    "/search/saved",
+    "/notifications",
+    "/settings"
+   ]
+  },
+  {
+   "path": "/settings",
+   "hops": 3,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/settings/security",
+    "/settings"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "data/notifications.ts:120",
+    "routes/settings.security.tsx:31"
+   ],
+   "inboundFrom": [
+    "/settings/account",
+    "/settings/privacy",
+    "/settings/security"
+   ]
+  },
+  {
+   "path": "/settings/account",
+   "hops": 4,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/settings/security",
+    "/settings",
+    "/settings/account"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "data/notifications.ts:120",
+    "routes/settings.security.tsx:31",
+    "data/settings.ts:27"
+   ],
+   "inboundFrom": [
+    "/settings"
+   ]
+  },
+  {
+   "path": "/settings/privacy",
+   "hops": 4,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/settings/security",
+    "/settings",
+    "/settings/privacy"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "data/notifications.ts:120",
+    "routes/settings.security.tsx:31",
+    "data/settings.ts:76"
+   ],
+   "inboundFrom": [
+    "/settings",
+    "/search/why/$id"
+   ]
+  },
+  {
+   "path": "/settings/security",
+   "hops": 2,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/settings/security"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "data/notifications.ts:120"
+   ],
+   "inboundFrom": [
+    "/notifications",
+    "/settings"
+   ]
+  },
+  {
+   "path": "/settings/delete-account",
+   "hops": 3,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/settings/security",
+    "/settings/delete-account"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "data/notifications.ts:120",
+    "data/settings.ts:195"
+   ],
+   "inboundFrom": [
+    "/settings/privacy",
+    "/settings/security"
+   ]
+  },
+  {
+   "path": "/help",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/help"
+   ],
+   "at": [
+    "routes/feed.tsx:331"
+   ],
+   "inboundFrom": [
+    "/feed",
+    "/me",
+    "/auth/locked",
+    "/auth/maintenance",
+    "/help/$slug",
+    "/profile/$username",
+    "/settings",
+    "/help/category/$key"
+   ]
+  },
+  {
+   "path": "/plans",
+   "hops": 1,
+   "chain": [
+    "/feed",
+    "/plans"
+   ],
+   "at": [
+    "routes/feed.tsx:330"
+   ],
+   "inboundFrom": [
+    "/feed",
+    "/me",
+    "/plans/checkout",
+    "/plans/manage",
+    "/profile/$username"
+   ]
+  },
+  {
+   "path": "/auth/signout",
+   "hops": 4,
+   "chain": [
+    "/feed",
+    "/notifications",
+    "/settings/security",
+    "/settings",
+    "/auth/signout"
+   ],
+   "at": [
+    "routes/feed.tsx:132",
+    "data/notifications.ts:120",
+    "routes/settings.security.tsx:31",
+    "data/settings.ts:110"
+   ],
+   "inboundFrom": [
+    "/settings"
+   ]
+  },
+  {
+   "path": "/recently-viewed",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": [
+    "/search/history"
+   ]
+  },
+  {
+   "path": "/search/history",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": [
+    "/search/saved"
+   ]
+  },
+  {
+   "path": "/search/saved",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": [
+    "/search/history"
+   ]
+  },
+  {
+   "path": "/discover/music",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": []
+  },
+  {
+   "path": "/discover/projects",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": []
+  },
+  {
+   "path": "/discover/community",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": []
+  },
+  {
+   "path": "/discover/nearby",
+   "hops": null,
+   "chain": null,
+   "at": null,
+   "inboundFrom": []
+  }
+ ]
+}
