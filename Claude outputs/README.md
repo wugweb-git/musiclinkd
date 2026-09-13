@@ -50,6 +50,7 @@ Every file carries a front-matter block: `doc`, `version`, `status`, `updated`,
 |---|---|---|---|
 | `TAXONOMY-MIGRATION-SPEC.md` | 1.0 | CURRENT | 95 slugs across 7 broken categories, DDL, integrity options. The only document untouched by the route / token / typography changes. Never executed. |
 | `WIDGET-ADOPTION-SPEC.md` | 1.0 | AWAITING DECISION | 116 widget families in `ml-widgets.css`, currently hand-rolled twice. Three honest options; the choice decides everything downstream. |
+| `PR-SPEC-dead-spacing-and-band-route.md` | 1.0 | CURRENT | One small PR for Claude Code. Deletes 4 spacing tokens with zero call sites, and fixes a "Create band" CTA in onboarding that points at a read-only profile of a band absent from the data layer. |
 
 ### `audits/` — measurement
 
