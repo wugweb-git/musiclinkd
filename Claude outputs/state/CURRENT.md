@@ -151,6 +151,29 @@ navigation wiring rather than a sweep. It is the cheapest next step.
   primary, `#8B5CF6` secondary, `#FAFAFA` ground, Google Sans. It is read alongside project
   knowledge and contradicts it.
 
+## Shipped 13 Sep — render-path batch
+
+| Commit | What |
+|---|---|
+| `9427395` | **Profile sections render from the profile's own record, or an empty state.** Ananya, the 8 Discover talent profiles and real users without a seed profile all start from one empty base instead of spreading `...rahul`. Real users build from their own database row, `/me` included. |
+| `9427395` | Header and share sheet: missing photo, cover, role, location or availability show a neutral placeholder or are hidden. **The Verified tick now appears only for verified tiers** — it rendered on every profile before. |
+| `9427395` | Discover talent cards no longer show fabricated counts (640 connections, 410k plays, 12 reviews); unknown counts show "—". |
+| `9427395` | Overview and About tabs gained empty states for summary, bio, details, music identity and links. Page title no longer ends in a dangling dash when a profile has no role. |
+| `9427395` | The banner counts the same list the opportunity tiles count and links to `/opportunities`. Wording unchanged; still hidden at zero. |
+| `2fc32d2` | Decision recorded: the 11 seeded profiles stay **unmarked, deliberately, pre-launch**. |
+
+Verified live on `musiclinkd.lovable.app`: Meher Kaur's page shows "No audio yet" with none of
+Rahul's content; the Home banner reads "5 new opportunities". None of 20 profiles shares a section
+with Rahul, and his own page is unchanged.
+
+**No content was authored.** `src/data/talent-profiles.ts` was deleted before it shipped. The three
+items were closed as mechanics — a data-wiring fix and a render-path fix — which is why no bios,
+tracks or reviews had to be invented.
+
+The remaining `...rahul` spreads in `src/data/collab.ts:655` and `:871` are Rahul appearing as a
+collaborator on a project record. That is a person in a list, not a profile section inheriting a
+template. Correct as-is.
+
 ## Shipped 13 Sep — later batch
 
 | Commit | What |
