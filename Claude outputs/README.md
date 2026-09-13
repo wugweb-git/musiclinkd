@@ -52,7 +52,6 @@ Every file carries a front-matter block: `doc`, `version`, `status`, `updated`,
 | `TAXONOMY-MIGRATION-SPEC.md` | 1.0 | CURRENT | 95 slugs across 7 broken categories, DDL, integrity options. The only document untouched by the route / token / typography changes. Never executed. |
 | `lovable-prompt-wire-orphans.md` | 1.0 | AWAITING ACTION | Paste-ready Lovable prompt to link the ~20 finished screens nothing points at. Links only. Waiting on Lovable credits. |
 | `WIDGET-ADOPTION-SPEC.md` | 1.0 | AWAITING DECISION | 116 widget families in `ml-widgets.css`, currently hand-rolled twice. Three honest options; the choice decides everything downstream. |
-| `PR-SPEC-dead-spacing-and-band-route.md` | 1.0 | CURRENT | One small PR for Claude Code. Deletes 4 spacing tokens with zero call sites, and fixes a "Create band" CTA in onboarding that points at a read-only profile of a band absent from the data layer. |
 
 ### `audits/` — measurement
 
@@ -79,13 +78,8 @@ Every file carries a front-matter block: `doc`, `version`, `status`, `updated`,
 
 | File | Superseded by |
 |---|---|
-| `MUSICLINKD-AUDIT.md` | `audits/MUSICLINKD-LOVABLE-AUDIT.md`, whose §21 retracts this document's central frame. Do not delete — those corrections are unreadable without it. |
-| `PHASE-2-TOKEN-SPEC.md` | Phase 2 shipped. Its own banner disowns its type scale. §§4–5 should be lifted into the Phase 8 spec before this is forgotten. |
 | `DESIGN-WORK-STATE.md` | `state/CURRENT.md` |
-| `NOT-LANDED-REGISTER.md` | `state/BUILD-STATE-2026-09-13.md`, same day |
 | `audit-part2-governance-and-code.md` | Code-review half fully promoted into `plans/PHASE-SPECS-2b-to-9.md` |
-| `audit-part3-chat-history.md` | The only forensic record of 110 Lovable messages and 46 commits. **Never delete.** |
-| `audit-part3-addendum.md` | Corrections to part 3. Unreadable standalone. |
 | `lovable-knowledge-PREVIOUS.md` | The Lovable knowledge as it stood before the 13 Sep replacement. Kept so the change is reversible. |
 
 ## What changed on 13 Sep 2026
@@ -115,3 +109,14 @@ Every file carries a front-matter block: `doc`, `version`, `status`, `updated`,
   because the narrative is the only account of the chat history; flagged so the next reader knows.
 - **Whether `lovable-workspace-knowledge.md` was ever installed** is unrecorded. Cheapest open item
   in the folder.
+
+## Deleted 13 Sep 2026 — work completed
+
+| File | Why it was safe to delete |
+|---|---|
+| `PR-SPEC-dead-spacing-and-band-route.md` | Both changes shipped. `--spacing-xs/sm/md/lg` are gone and `--spacing-nav-clear` was kept as the spec required; `/band` is now an 11-line redirect to `/bands` and all 3 inbound references are repointed. |
+| `NOT-LANDED-REGISTER.md` | Superseded the same day by `state/BUILD-STATE-2026-09-13.md`. |
+| `PHASE-2-TOKEN-SPEC.md` | Phase 2 shipped. The two sections worth keeping — the shared constants — are live in code as `--container-app: 430px` and `--spacing-nav-clear: 96px`. |
+| `audit-part3-chat-history.md` · `audit-part3-addendum.md` | Every live finding was promoted into `plans/PHASE-SPECS-2b-to-9.md` (phases 3, 4, 5) or the handoff (Razorpay). The addendum was unreadable without part 3, so both went together. |
+
+All five remain in git history.
