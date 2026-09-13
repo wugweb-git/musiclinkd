@@ -43,13 +43,13 @@ const businessScreen = ({ screen, tab, body, state, bodyStates, extra = "" }) =>
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow("/preview/flows/discover/discover_feed/index.html", "Back")}
-      <h1 class="ml-type-3" style="margin:0">Yash Raj Sound Studios</h1>
+      <h1 class="ml-type-4" style="margin:0">Yash Raj Sound Studios</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:0 0 var(--space-4)">
       <img src="${media("stage", 1)}" alt="" loading="lazy"
            style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
       <div style="padding:var(--space-3) var(--space-4) 0">
-        <h2 class="ml-type-3" style="margin:0">Yash Raj Sound Studios</h2>
+        <h2 class="ml-type-4" style="margin:0">Yash Raj Sound Studios</h2>
         <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 0">Recording studio · Andheri West, Mumbai</p>
         <div class="ml-rating" style="margin-top:var(--space-2)">
           <span class="ml-rating__score">4.8</span>
@@ -126,7 +126,7 @@ businessScreen({
           <p class="ml-empty__body">People can still message you to ask about a date.</p>
           <a class="ml-btn ml-btn--primary" href="/preview/flows/services_availability/availability_toggle/index.html">Publish availability</a>
         </div>`,
-  body: `<p class="ml-type-2" style="color:var(--color-muted);margin:0">
+  body: `<p class="ml-type-3" style="color:var(--color-muted);margin:0">
           Two tracking rooms and a mix suite in Andheri West. Neve sidecar, maintained backline,
           and engineers who have worked on records you have heard of. Open 9am to midnight, seven days.
         </p>
@@ -282,10 +282,10 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(`${P}business_overview/index.html`, "Back to profile")}
-      <h1 class="ml-type-3" style="margin:0">Book</h1>
+      <h1 class="ml-type-4" style="margin:0">Book</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+      <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
         Booking is handled by the booking flow — pick a room, then a date and a session type.
       </p>
       ${[["Tracking Room 1", "42 m² live room · ₹1,800/hr", media("stage", 1)],
@@ -310,7 +310,7 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(`${P}business_overview/index.html`, "Back to profile")}
-      <h1 class="ml-type-3" style="margin:0">Insights</h1>
+      <h1 class="ml-type-4" style="margin:0">Insights</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <!-- "visible_if_owner" is a note that this is the owner variant of the
@@ -394,14 +394,14 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(`${P}business_overview/index.html`, "Back")}
-      <h1 class="ml-type-3" style="margin:0">Create a business</h1>
+      <h1 class="ml-type-4" style="margin:0">Create a business</h1>
     </header>
     ${stepBar()}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
       <div data-state="basics">
         <div class="ml-section"><h2>The basics</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Four things now, the rest whenever you like. Nothing is public until you publish.
         </p>
         ${bizField("b-name", "Business name", "text", "", "Yash Raj Sound Studios")}
@@ -450,7 +450,7 @@ writeScreen({
 
       <div data-state="hours">
         <div class="ml-section"><h2>Opening hours</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           When the doors are open. This is separate from when a specific room is free to book.
         </p>
         ${["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
@@ -503,7 +503,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Yash Raj Sound Studios</h1>
+      <h1 class="ml-type-4" style="margin:0">Yash Raj Sound Studios</h1>
       <span class="ml-appbar__actions">
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}business_owner_insights/index.html?state=analytics" aria-label="Insights">${icon("arrow-forward", { size: 20 })}</a>
       </span>
@@ -591,7 +591,7 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(`${P}business_reviews_gallery_tab/index.html`, "Back")}
-      <h1 class="ml-type-3" style="margin:0;flex:1">Gallery</h1>
+      <h1 class="ml-type-4" style="margin:0;flex:1">Gallery</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div data-state="default">

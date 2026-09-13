@@ -28,11 +28,18 @@ const cssSrc = ["ml-core.css","ml-widgets.css","ml-tokens.css","ml-fixes.css"]
 const defined = new Set([...cssSrc.matchAll(/\.(ml-[a-zA-Z0-9_-]+)/g)].map(m => m[1]));
 const tokens  = new Set([...cssSrc.matchAll(/(--[a-z0-9-]+)\s*:/g)].map(m => m[1]));
 
-/* 7 — token ceiling */
+/* 7 — token ceiling. Read from tokens.json rather than repeating the number here —
+   this line hardcoded 108 until 2026-09-11, and the ceiling had already moved to
+   111 by then. A second copy of the same number is exactly the sprawl the ceiling
+   itself exists to prevent. */
+const TOKENS_JSON = arg("--tokens", path.join(CSS, "..", "tokens", "tokens.json"));
+const CEILING = fs.existsSync(TOKENS_JSON)
+  ? JSON.parse(fs.readFileSync(TOKENS_JSON, "utf8")).meta.tokenBudget.ceiling
+  : 108; // fallback only if tokens.json can't be found from here
 const emitted = (fs.existsSync(path.join(CSS,"ml-tokens.css"))
   ? (fs.readFileSync(path.join(CSS,"ml-tokens.css"),"utf8").match(/^\s*--[a-z0-9-]+:/gm)||[]).length : 0);
-if (emitted > 108) fail("token-ceiling", `${emitted} emitted, ceiling is 108`);
-else console.log(`  token budget            ${emitted}/108`);
+if (emitted > CEILING) fail("token-ceiling", `${emitted} emitted, ceiling is ${CEILING}`);
+else console.log(`  token budget            ${emitted}/${CEILING}`);
 
 for (const f of screens) {
   const route = path.relative(FLOWS, path.dirname(f)).split(path.sep).join("/");

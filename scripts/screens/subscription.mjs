@@ -38,7 +38,7 @@ assertIcons(["arrow-forward", "check", "cancel"]);
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0;flex:1">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0;flex:1">${title}</h1>
       ${beta}
     </header>`;
 
@@ -94,7 +94,7 @@ writeScreen({
 
       ${PLANS.map(([key, name, price, cycle, feats]) => `<div data-state="${key}">
         <div class="ml-section"><h2>${name}</h2></div>
-        <p class="ml-type-4" style="margin:0">${price} <span class="ml-type-1" style="color:var(--color-muted)">${cycle}</span></p>
+        <p class="ml-type-6" style="margin:0">${price} <span class="ml-type-1" style="color:var(--color-muted)">${cycle}</span></p>
         <div class="ml-section" style="margin-top:var(--space-3)"><h3>What you get</h3></div>
         <div class="ml-summary">
           ${feats.map((f) => `<div class="ml-summary__row"><span>${f}</span><span>Included</span></div>`).join("\n          ")}
@@ -114,7 +114,7 @@ writeScreen({
           <div class="ml-summary__row"><span>Then</span><span>₹499/month, unless you cancel</span></div>
           <div class="ml-summary__row"><span>If you cancel</span><span>You keep Pro until the 14th, then go to Free</span></div>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           We'll email you three days before it ends. Cancelling during a trial costs nothing.
         </p>
         <a class="ml-btn ml-btn--secondary ml-btn--block" style="margin-top:var(--space-3)" href="${S}manage_subscription/index.html?state=cancel">Cancel the trial</a>
@@ -129,7 +129,7 @@ writeScreen({
           <div class="ml-summary__row"><span>Until 31 October 2026</span><span>₹299/month</span></div>
           <div class="ml-summary__row"><span>After that</span><span>₹499/month</span></div>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           The lower price holds for twelve months from the day you start, even after the offer closes.
         </p>
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="${S}checkout/index.html">Choose Pro at ₹299</a>
@@ -141,7 +141,7 @@ writeScreen({
         <div class="ml-banner ml-banner--warning">
           <span class="ml-banner__body">You've used all 3 portfolio pieces on Free.</span>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           Your existing work stays published and everything else on your account is unaffected —
           you just can't add a fourth piece on Free. Pro removes the limit.
         </p>
@@ -215,7 +215,7 @@ writeScreen({
         <div class="ml-banner ml-banner--error">
           <span class="ml-banner__body">Payment couldn't be completed. You have not been charged.</span>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           Your bank declined it. That is usually a limit on the card rather than anything wrong
           with the account.
         </p>
@@ -315,7 +315,7 @@ writeScreen({
         <div class="ml-banner ml-banner--error">
           <span class="ml-banner__body">We couldn't take September's payment.</span>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           Pro stays on for another seven days while you sort it out. After that the account
           moves to Free — nothing is deleted.
         </p>

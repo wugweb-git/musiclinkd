@@ -91,7 +91,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">For you</h1>
+      <h1 class="ml-type-4" style="margin:0">For you</h1>
       <span class="ml-appbar__actions">
         ${beta}
         <a class="ml-icon-btn ml-icon-btn--bare" href="${R}recommendation_preferences/index.html" aria-label="Recommendation settings">${icon("check", { size: 20 })}</a>
@@ -163,12 +163,12 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(`${R}for_you/index.html`, "Back")}
-      <h1 class="ml-type-3" style="margin:0;flex:1">Recommendation settings</h1>
+      <h1 class="ml-type-4" style="margin:0;flex:1">Recommendation settings</h1>
       ${beta}
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div data-state="default">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Choose what we may use. Turning something off makes suggestions less useful, not worse-behaved.
         </p>
         ${[["Your roles and genres", "The strongest signal, and the one you control directly", true],

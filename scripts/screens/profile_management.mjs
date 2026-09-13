@@ -30,7 +30,7 @@ assertIcons(["arrow-forward", "check", "add"]);
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0">${title}</h1>
     </header>`;
 
 const field = (id, label, type, value, ph) => `<div class="ml-field">
@@ -184,7 +184,7 @@ writeScreen({
   <div class="ml-app">
     ${bar("Profile type", `${P}profile_overview/index.html`)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+      <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
         This decides which fields your profile asks for. You can change it later without losing anything.
       </p>
       <div role="radiogroup" aria-label="Profile type">
@@ -209,7 +209,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Your profile</h1>
+      <h1 class="ml-type-4" style="margin:0">Your profile</h1>
       <span class="ml-appbar__actions">
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}public_profile_preview/index.html" aria-label="Preview">${icon("arrow-forward", { size: 20 })}</a>
       </span>
@@ -259,7 +259,7 @@ writeScreen({
           <span class="ml-progress__meta">${STEPS.filter((s) => s[1]).length} of ${STEPS.length}</span>
           <span class="ml-progress__track"><span class="ml-progress__fill" style="width:80%"></span></span>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-2) 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-2) 0 var(--space-3)">
           A complete profile appears in Discover and can be booked directly.
         </p>
         ${STEPS.map(([t, done]) => `<div class="ml-check-row">
@@ -331,7 +331,7 @@ writeScreen({
   <div class="ml-app">
     ${bar("External links", `${P}profile_overview/index.html`)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+      <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
         Audio and video live on the platforms you already use — paste the link and it plays inline on your profile.
       </p>
       ${LINKS.map(([name, val], i) => field(`lk-${i}`, name, "url", val, "https://…")).join("\n      ")}
@@ -362,10 +362,10 @@ writeScreen({
         <img src="${img}" alt="" loading="lazy"
              style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
         <div style="padding:var(--space-3) var(--space-4)">
-          <h2 class="ml-type-3" style="margin:0">${name}</h2>
+          <h2 class="ml-type-4" style="margin:0">${name}</h2>
           <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 0">${meta}</p>
           <span class="ml-status ml-status--accent" style="margin-top:var(--space-2);display:inline-flex">${trail}</span>
-          <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+          <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
             This is what someone sees when they open your profile from Discover or a shared link.
           </p>
         </div>

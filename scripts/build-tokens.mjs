@@ -15,10 +15,13 @@
  * pink months after the CSS had been corrected to black). Generating the CSS
  * makes that class of drift impossible: ml-tokens.css is never hand-edited.
  *
- * The build FAILS rather than warns on two conditions, both of which are the
- * failure modes this system actually had:
+ * The build FAILS rather than warns on two conditions:
  *   1. token count over meta.tokenBudget.ceiling  (it had reached 248)
- *   2. any scale grown past 4 steps               (radius had reached 26)
+ *   2. a scale whose steps are not numbered 1…n with no gaps
+ *
+ * Until 2026-09-11 the second rule capped every scale at 4 steps, the rule v8
+ * lost when radius had reached 26. The brand owner lifted that cap; the
+ * ceiling in (1) is what still stops duplicate-value sprawl.
  *
  * Usage:  node scripts/build-tokens.mjs [--check]
  *         --check verifies the committed CSS is current without writing.
@@ -67,11 +70,12 @@ function section(title) {
   lines.push("", `  /* ${title} */`);
 }
 
-/** A scale may never exceed 4 steps — this is the rule v8 lost. */
+/** A scale's steps are numbered 1…n with no gaps. Any number of steps is
+ *  allowed (the 4-step cap was lifted on 2026-09-11); a gap is a typo. */
 function scale(group, label) {
   const steps = Object.keys(group).filter((k) => /^\d+$/.test(k));
-  if (steps.length > 4) {
-    errors.push(`scale "${label}" has ${steps.length} steps; the maximum is 4`);
+  if (steps.some((k, i) => Number(k) !== i + 1)) {
+    errors.push(`scale "${label}" must be numbered 1…${steps.length} without gaps; found ${steps.join(",")}`);
   }
   return steps;
 }
@@ -169,7 +173,7 @@ for (const k of scale(f.type, "type")) {
     `clamp(${min}px, calc(${min}px + ${max - min} * (100vw - 360px) / 1080), ${max}px)`
   );
   // The other three axes are NOT separate custom properties — that would be
-  // 16 tokens for a 4-step scale. They ship as utility classes generated from
+  // four tokens for every step. They ship as utility classes generated from
   // the same source, so nothing can drift and nothing is hand-typed.
   typeClasses.push(
     `.ml-type-${k} {\n` +

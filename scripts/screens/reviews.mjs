@@ -31,7 +31,7 @@ assertIcons(["star", "arrow-forward"]);
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0;flex:1">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0;flex:1">${title}</h1>
       ${beta}
     </header>`;
 
@@ -175,8 +175,8 @@ writeScreen({
            social rating system, and this is where that starts. -->
       <div data-state="request">
         <div class="ml-inset ml-inset--raised" style="padding:var(--space-3)">
-          <h2 class="ml-type-3" style="margin:0 0 var(--space-1)">How was your session?</h2>
-          <p class="ml-type-2" style="color:var(--color-muted);margin:0">
+          <h2 class="ml-type-4" style="margin:0 0 var(--space-1)">How was your session?</h2>
+          <p class="ml-type-3" style="color:var(--color-muted);margin:0">
             Yash Raj Sound Studios, Tracking Room 1 — Wednesday 12 August.
           </p>
           <div style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
@@ -202,7 +202,7 @@ writeScreen({
         <div class="ml-banner ml-banner--warning">
           <span class="ml-banner__body">Your review is being checked before it appears.</span>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           This happens when a review is reported, or when it mentions a payment dispute.
           It usually takes a day. Nobody else can see it in the meantime.
         </p>
@@ -269,7 +269,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Reputation</h1>
+      <h1 class="ml-type-4" style="margin:0">Reputation</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div class="ml-stat-grid">
@@ -379,7 +379,7 @@ writeScreen({
         <div class="ml-banner ml-banner--warning">
           <span class="ml-banner__body">This review has been reported and is being checked.</span>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           It stays visible while we look at it. A review is only removed if it breaks the
           guidelines — not because it is critical.
         </p>
@@ -419,7 +419,7 @@ writeScreen({
   <div class="ml-app">
     ${bar("Report review", `${P}review_detail/index.html`)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+      <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
         Reporting is anonymous. A review is only removed if it breaks the guidelines — not because it's critical.
       </p>
       <div class="ml-field">

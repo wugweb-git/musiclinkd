@@ -70,7 +70,7 @@
   .wb-nav__list { flex: 1; min-height: 0; overflow-y: auto; padding: 0 var(--space-2) var(--space-4); }
 
   .wb-brand { display: flex; align-items: center; gap: var(--space-2); color: var(--wb-text); }
-  .wb-brand .ml-wordmark { font-size: var(--type-2); }
+  .wb-brand .ml-wordmark { font-size: var(--type-3); }
   .wb-kicker {
     font: var(--weight-3) var(--type-1)/1.4 var(--font-body);
     letter-spacing: .08em; text-transform: uppercase;
@@ -80,7 +80,7 @@
   /* Progress: 205 screens is a number nobody can hold. How much of it is
      designed is the question the index is actually asked. */
   .wb-progress { display: flex; align-items: baseline; gap: var(--space-2); margin-bottom: var(--space-2); }
-  .wb-progress__num { font: var(--weight-4) var(--type-3)/1 var(--font-display); color: var(--wb-text); font-variant-numeric: tabular-nums; }
+  .wb-progress__num { font: var(--weight-4) var(--type-4)/1 var(--font-display); color: var(--wb-text); font-variant-numeric: tabular-nums; }
   .wb-progress__of { font-size: var(--type-1); color: var(--wb-muted); }
   /* display:block is load-bearing: this is a <span>, and an inline box takes
      no height, so its block-level fill child escaped the track entirely and
@@ -92,7 +92,7 @@
     width: 100%; min-height: 40px; padding: 0 var(--space-3);
     background: var(--wb-raised); color: var(--wb-text);
     border: 1px solid var(--wb-line); border-radius: var(--radius-4);
-    font-size: var(--type-2); font-family: var(--font-body);
+    font-size: var(--type-3); font-family: var(--font-body);
   }
   .wb-search::placeholder { color: var(--wb-dim); }
   .wb-search:focus-visible { outline: 2px solid var(--color-pink); outline-offset: 1px; }
@@ -113,14 +113,14 @@
   .flow-group summary {
     display: flex; align-items: center; gap: var(--space-2);
     padding: var(--space-2); border-radius: var(--radius-2);
-    font: var(--weight-3) var(--type-2)/1.3 var(--font-body);
+    font: var(--weight-3) var(--type-3)/1.3 var(--font-body);
     color: var(--wb-text); cursor: pointer; list-style: none;
   }
   .flow-group summary::-webkit-details-marker { display: none; }
   .flow-group summary:hover { background: var(--wb-raised); }
   .flow-group summary::before {
     content: "›"; flex: none; width: 12px; color: var(--wb-dim);
-    font-size: var(--type-2); transition: transform var(--duration-2);
+    font-size: var(--type-3); transition: transform var(--duration-2);
   }
   .flow-group[open] > summary::before { transform: rotate(90deg); }
   .flow-group__title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -132,7 +132,7 @@
   .screen-list a {
     display: flex; align-items: center; gap: var(--space-2);
     padding: var(--space-2); border-radius: var(--radius-2);
-    text-decoration: none; color: var(--wb-muted); font-size: var(--type-2);
+    text-decoration: none; color: var(--wb-muted); font-size: var(--type-3);
   }
   .screen-list a:hover { background: var(--wb-raised); color: var(--wb-text); }
   .screen-list a.active { background: var(--color-pink); color: #FFFFFF; }
@@ -159,7 +159,7 @@
     background: var(--wb-panel); border-bottom: 1px solid var(--wb-line);
   }
   .wb-bar__id { min-width: 0; flex: 1; }
-  .wb-bar__title { font: var(--weight-3) var(--type-2)/1.3 var(--font-body); color: var(--wb-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .wb-bar__title { font: var(--weight-3) var(--type-3)/1.3 var(--font-body); color: var(--wb-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .wb-bar__route {
     display: block; font-size: var(--type-1); color: var(--wb-dim);
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;

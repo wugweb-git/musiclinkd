@@ -4,7 +4,7 @@
  * Source:    frontend/guide/tokens/tokens.json  (v9.0.0)
  * Regenerate: node scripts/build-tokens.mjs
  *
- * 108 tokens, ceiling 108. The previous hand-maintained system
+ * 111 tokens, ceiling 111. The previous hand-maintained system
  * had reached 248 custom properties in a single :root, of which every value
  * past the 4-step core was an exact duplicate under a second name.
  *
@@ -85,9 +85,12 @@
 
   /* Type — fluid clamp() on web; native uses the sp/Dynamic Type ramp in tokens.json */
   --type-1: clamp(12px, calc(12px + 1 * (100vw - 360px) / 1080), 13px);
-  --type-2: clamp(16px, calc(16px + 2 * (100vw - 360px) / 1080), 18px);
-  --type-3: clamp(22px, calc(22px + 6 * (100vw - 360px) / 1080), 28px);
-  --type-4: clamp(32px, calc(32px + 12 * (100vw - 360px) / 1080), 44px);
+  --type-2: clamp(14px, calc(14px + 1 * (100vw - 360px) / 1080), 15px);
+  --type-3: clamp(16px, calc(16px + 2 * (100vw - 360px) / 1080), 18px);
+  --type-4: clamp(22px, calc(22px + 6 * (100vw - 360px) / 1080), 28px);
+  --type-5: clamp(28px, calc(28px + 8 * (100vw - 360px) / 1080), 36px);
+  --type-6: clamp(32px, calc(32px + 12 * (100vw - 360px) / 1080), 44px);
+  --type-7: clamp(40px, calc(40px + 16 * (100vw - 360px) / 1080), 56px);
 
   /* Font families */
   --font-display: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -177,21 +180,42 @@
   font-family: var(--font-body);
   font-size: var(--type-2);
   font-weight: var(--weight-1);
-  line-height: 1.5;
+  line-height: 1.45;
   letter-spacing: 0;
 }
 .ml-type-3 {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: var(--type-3);
-  font-weight: var(--weight-3);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  font-weight: var(--weight-1);
+  line-height: 1.5;
+  letter-spacing: 0;
 }
 .ml-type-4 {
   font-family: var(--font-display);
   font-size: var(--type-4);
+  font-weight: var(--weight-3);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.ml-type-5 {
+  font-family: var(--font-display);
+  font-size: var(--type-5);
+  font-weight: var(--weight-3);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.ml-type-6 {
+  font-family: var(--font-display);
+  font-size: var(--type-6);
   font-weight: var(--weight-4);
   line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.ml-type-7 {
+  font-family: var(--font-display);
+  font-size: var(--type-7);
+  font-weight: var(--weight-4);
+  line-height: 1.04;
   letter-spacing: -0.03em;
 }
 

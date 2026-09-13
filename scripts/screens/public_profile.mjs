@@ -20,7 +20,7 @@ assertIcons(["arrow-forward", "send", "heart", "star", "check-circle-fill", "edi
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0">${title}</h1>
     </header>`;
 
 /* ── one public profile, five subjects ──────────────────────────────────
@@ -45,7 +45,7 @@ const profileView = ({ screen, name, tagline, cover, face, stat, about, sections
       <div style="padding:0 var(--space-4)">
         <img class="ml-avatar ml-avatar--lg ml-lift" src="${face}" alt="" loading="lazy"
              style="margin-top:calc(var(--size-3) * -1)" />
-        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">${name}${verified ? ` ${icon("check-circle-fill", { size: 18 })}` : ""}</h2>
+        <h2 class="ml-type-4" style="margin:var(--space-2) 0 var(--space-1)">${name}${verified ? ` ${icon("check-circle-fill", { size: 18 })}` : ""}</h2>
         <p class="ml-type-1" style="color:var(--color-muted);margin:0">${tagline}</p>
         <div class="ml-rating" style="margin-top:var(--space-2)">
           <span class="ml-rating__score">${stat[0]}</span>
@@ -63,7 +63,7 @@ const profileView = ({ screen, name, tagline, cover, face, stat, about, sections
         </div>
         <a class="ml-link" data-state="owner" href="?state=default" style="display:block;text-align:center;font-size:var(--type-1);margin-top:var(--space-2)">View as public</a>`,
         ].filter(Boolean).join("\n        ")}
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">${about}</p>
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">${about}</p>
         ${[
           trust && `<!-- Trust as numbers with their source, not a wall of badges. -->
         <div class="ml-trust" style="margin-top:var(--space-3)">
@@ -310,7 +310,7 @@ writeScreen({
     ${bar("Collaborators", `${P}public_profile_view/index.html`)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div data-state="default">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           People Ishita has credited, or been credited by, on released work.
         </p>
         ${[["Kabir Sheth", "Producer · 6 tracks together", 8], ["Rohan D'Souza", "Mixing engineer · 4 tracks", 6],

@@ -14,12 +14,12 @@
    Fold into tokens.json. Net −1 against the 108 ceiling: purple's three tokens
    go (already declared removed in meta.palette.removed), two new steps arrive. */
 :root {
-  /* The token delta this file originally carried — foundation.space.5 = 64 and
-     a new foundation.type.2 = 14 — is NOT applied. scripts/build-tokens.mjs
-     enforces a hard 4-step ceiling per scale ("the rule v8 lost"), and both
-     additions would have made their scale 5 steps. The need is real and
-     recorded in docs; raising the ceiling is an architecture decision, not a
-     fix. Everything below uses the existing 4-step scales unchanged. */
+  /* The token delta this file originally carried was foundation.space.5 = 64
+     and a new 14px type step. Both were held back while build-tokens.mjs
+     capped every scale at 4 steps. The cap was lifted on 2026-09-11, and the
+     14px step now exists as foundation.type.2 (the old steps 2–4 moved to 3,
+     4 and 6). space.5 is still not applied. Everything below uses the
+     scales as they stand. */
 
   /* CHANGED — WCAG 2.1 AA. The brand pink #EA4C89 is a locked brand value and is
      NOT changed; what changes is which token product UI reaches for as text or

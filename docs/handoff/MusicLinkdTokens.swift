@@ -153,12 +153,18 @@ public enum MLWeight {
 public enum MLType {
     /// Micro labels, captions, badges, metadata, timestamps
     public static let type1 = Font.system(.caption1, design: .default).weight(.semibold)
+    /// Secondary body — supporting lines under a title, list-item metadata, form help. Added 2026-09-11: nothing sat within 2px of 14, so screens carried 14–15px as arbitrary sizes
+    public static let type2 = Font.system(.subheadline, design: .default).weight(.regular)
     /// Body copy, default UI text, list item titles
-    public static let type2 = Font.system(.body, design: .default).weight(.regular)
+    public static let type3 = Font.system(.body, design: .default).weight(.regular)
     /// Section headings, card titles, screen titles
-    public static let type3 = Font.system(.title3, design: .default).weight(.semibold)
-    /// Display — hero headlines, now-playing track title, the one big number on a screen
-    public static let type4 = Font.system(.largeTitle, design: .default).weight(.heavy)
+    public static let type4 = Font.system(.title3, design: .default).weight(.semibold)
+    /// Large titles — a detail screen's headline, a figure inside a card. Added 2026-09-11 to fill the 22→32 gap, the widest in the old ramp
+    public static let type5 = Font.system(.title, design: .default).weight(.semibold)
+    /// Display — now-playing track title, the one big number on a screen
+    public static let type6 = Font.system(.largeTitle, design: .default).weight(.heavy)
+    /// Hero — the pre-auth landing headline only, one per product. Added 2026-09-11; the Lovable app shipped it first as its own --type-5. On iOS it maps to largeTitle, the largest Dynamic Type style
+    public static let type7 = Font.system(.largeTitle, design: .default).weight(.heavy)
 }
 
 /// Motion — response/dampingFraction, which is how SwiftUI expresses a spring.

@@ -151,7 +151,7 @@ writeScreen({
 
       <!-- Typo recovery is a state of the results, not a screen. -->
       <div data-state="typo">
-        <p class="ml-type-2" style="margin:0 0 var(--space-2)">
+        <p class="ml-type-3" style="margin:0 0 var(--space-2)">
           Showing results for <b>vocalist</b>. Search instead for
           <a class="ml-link" href="?state=empty">vocalest</a>.
         </p>
@@ -173,7 +173,7 @@ writeScreen({
            empty, which the brief states outright. -->
       <div data-state="partial">
         <div class="ml-section" style="margin-top:var(--space-3)"><h2>Businesses</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0">
           No businesses match "vocalist". People and services below still do.
         </p>
       </div>
@@ -253,7 +253,7 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(`${P}universal_search/index.html?state=results`, "Back to results")}
-      <h1 class="ml-type-3" style="margin:0;flex:1">Filters</h1>
+      <h1 class="ml-type-4" style="margin:0;flex:1">Filters</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 

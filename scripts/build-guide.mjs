@@ -567,7 +567,7 @@ const DEMOS = {
     <span class="ml-badge ml-badge--category">Sufi</span><span class="ml-badge ml-badge--category">Mixing</span></div>
   <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Purple is <b>category</b>, never state — a genre or service kind, not how something is going. It is scoped to this one modifier and appears nowhere else in the system.</p>`,
   "card": `<div class="ml-card ml-card--padded" style="max-width:320px"><b>Card</b>
-    <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Hairline border by default; elevation is opt-in.</p></div>`,
+    <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-1) 0 0">Hairline border by default; elevation is opt-in.</p></div>`,
   "media": `<div class="ml-media ml-media--wide ml-media--scrim" style="max-width:320px;border-radius:var(--radius-2)">
     <img src="${PHOTO}" alt="" /><div class="ml-media__overlay"><b>Text on the scrim</b></div></div>`,
   "avatar": `<div class="g-row"><img class="ml-avatar ml-avatar--sm" src="${FACE}" alt="" />
@@ -603,7 +603,7 @@ const DEMOS = {
     <button class="ml-icon-btn" aria-label="Filters">${ic("filter", 20)}</button></header></div>`,
   "sticky footer": `<div class="g-frame" style="height:220px;overflow-y:auto;display:flex;flex-direction:column">
     <div style="flex:1;padding:var(--space-3)">
-      <p class="ml-type-2" style="margin:0 0 var(--space-3)">Scroll this panel. The footer stays put and the content passes beneath it.</p>
+      <p class="ml-type-3" style="margin:0 0 var(--space-3)">Scroll this panel. The footer stays put and the content passes beneath it.</p>
       ${Array.from({length:6},(_,i)=>`<p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-3)">Paragraph ${i+1} of the scrolling body copy.</p>`).join("")}
     </div>
     <footer class="ml-app__footer" style="padding-bottom:var(--space-3)">
@@ -816,7 +816,7 @@ const DEMOS = {
         <b>.ml-glass</b> — frosted panel over media</div></div>
     <div class="ml-card ml-card--padded ml-grain ml-lift" style="margin-top:var(--space-2)">
       <b>.ml-grain + .ml-lift</b>
-      <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Surface only — no coloured glows, because the chrome stays monochrome.</p></div></div>`,
+      <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-1) 0 0">Surface only — no coloured glows, because the chrome stays monochrome.</p></div></div>`,
   "phone entry": `<div class="ml-field" style="max-width:340px"><label for="d-p">Mobile number</label>
     <div class="ml-phone"><span class="ml-phone__prefix">🇮🇳 +91</span>
     <input id="d-p" type="tel" placeholder="98765 43210" /></div></div>`,
@@ -839,9 +839,9 @@ const DEMOS = {
   "verified mark": `<span style="display:inline-flex;align-items:center;gap:var(--space-1);font-weight:var(--weight-3)">Ananya Sharma
     <span class="ml-verified">${ic("check", 10)}</span></span>`,
   "inline link": `<a class="ml-link" href="#c-inline-link">Forgot your password?</a>`,
-  "visually hidden": `<p class="ml-type-2" style="color:var(--color-muted);margin:0">
+  "visually hidden": `<p class="ml-type-3" style="color:var(--color-muted);margin:0">
     <code>.ml-visually-hidden</code> — present for assistive tech, absent visually. Nothing renders here by design.</p>`,
-  "base": `<p class="ml-type-2" style="color:var(--color-muted);margin:0">
+  "base": `<p class="ml-type-3" style="color:var(--color-muted);margin:0">
     Document defaults, the focus ring, the reduced-motion guard and the
     <code>[hidden]</code> override. Not a component — no demo.</p>`,
 
@@ -897,7 +897,7 @@ const DEMOS = {
   "bottom sheet": `<div class="g-frame" style="height:200px;position:relative;overflow:hidden">
     <div class="ml-sheet-scrim is-open" style="position:absolute"></div>
     <div class="ml-sheet is-open" style="position:absolute;max-width:100%"><span class="ml-sheet__handle"></span>
-    <div class="ml-sheet__body"><b>Filters</b><p class="ml-type-2" style="color:var(--color-muted)">Drag handle, scrim, detents.</p></div></div></div>`,
+    <div class="ml-sheet__body"><b>Filters</b><p class="ml-type-3" style="color:var(--color-muted)">Drag handle, scrim, detents.</p></div></div></div>`,
   "toast": `<div class="ml-toast" style="position:relative;left:0;transform:none;display:inline-block">Listing published</div>`,
   "empty state": `<div class="ml-empty" style="max-width:340px"><h3 class="ml-empty__title">Nothing saved yet</h3>
     <p class="ml-empty__body">Tap the bookmark on any profile to keep it here.</p>
@@ -932,11 +932,11 @@ const DEMOS = {
     <img class="ml-booking-card__thumb" src="${PHOTO}" alt="" /><div class="ml-booking-card__body">
     <div class="ml-booking-card__title">Andheri Live Room</div>
     <div class="ml-booking-card__meta">16 Aug · 3 hrs · ₹9,600</div></div></div></div>`,
-  "app shell": `<p class="ml-type-2" style="color:var(--color-muted);margin:0">
+  "app shell": `<p class="ml-type-3" style="color:var(--color-muted);margin:0">
     <code>.ml-app</code> bounds the viewport at 430dp and <code>.ml-app__body</code>
     is the only thing that scrolls. Every screen in the preview uses it — see any
     screen under <code>/preview</code> rather than a demo here.</p>`,
-  "tab-bar beta marker": `<p class="ml-type-2" style="color:var(--color-muted);margin:0">
+  "tab-bar beta marker": `<p class="ml-type-3" style="color:var(--color-muted);margin:0">
     Shown on the Market tab in the bottom-tab-bar demo above.</p>`,
   "inset card": `<a class="ml-inset" href="#c-inset-card" style="max-width:320px"><div class="ml-inset__media">
     <img src="${PHOTO}" alt="" /><span class="ml-inset__tag"><span class="ml-chip ml-chip--on-media">Best seller</span></span>
@@ -963,7 +963,7 @@ const DEMOS = {
     </div></div>
   <div style="height:150px"></div>`,
   "help button": `<div class="g-row" style="align-items:center">
-    <span class="ml-type-2">Industry verified</span>
+    <span class="ml-type-3">Industry verified</span>
     <span class="ml-pop-anchor"><button class="ml-help" aria-label="What does industry verified mean?" style="position:relative">?</button></span>
   </div>`,
   "combobox": `<div class="ml-combo" style="max-width:340px">
@@ -1158,8 +1158,8 @@ const DEMOS = {
         ${[0,1,2,3].map(r=>`<img src="${m("pins", c*17+r*5)}" alt="" loading="lazy" />`).join("")}</div>`).join("")}
     </div>
     <div class="ml-wall__card">
-      <div class="ml-wordmark" style="font-size:var(--type-2)">MUSIC<em>LINKD</em></div>
-      <p class="ml-type-2" style="margin:var(--space-2) 0 var(--space-3)">72,000 verified music professionals.</p>
+      <div class="ml-wordmark" style="font-size:var(--type-3)">MUSIC<em>LINKD</em></div>
+      <p class="ml-type-3" style="margin:var(--space-2) 0 var(--space-3)">72,000 verified music professionals.</p>
       <button class="ml-btn ml-btn--primary ml-btn--block">Create your profile</button></div>
   </div>
   <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">The wall is decorative and aria-hidden; the card carries the meaning. Drift respects prefers-reduced-motion.</p>`,
@@ -1235,8 +1235,8 @@ const DEMOS = {
 
   "animated success": `<div class="ml-success" style="max-width:280px">
     <span class="ml-success__mark"><span class="ml-success__ring"></span><span class="ml-success__tick">${ic("check",28)}</span></span>
-    <h4 style="margin:0;font-family:var(--font-display);font-size:var(--type-3);font-weight:var(--weight-3)">Booking confirmed</h4>
-    <p class="ml-type-2" style="color:var(--color-muted);margin:0">Yash Raj Sound Studios · Sat, 4 PM</p>
+    <h4 style="margin:0;font-family:var(--font-display);font-size:var(--type-4);font-weight:var(--weight-3)">Booking confirmed</h4>
+    <p class="ml-type-3" style="color:var(--color-muted);margin:0">Yash Raj Sound Studios · Sat, 4 PM</p>
   </div>`,
 
   "footer CTA": `<div class="ml-footer-cta" style="max-width:480px">
@@ -1269,15 +1269,15 @@ const DEMOS = {
 
   "tabular numbers": `<div class="g-row" style="gap:var(--space-4)">
     <div><div class="ml-eyebrow">Proportional</div>
-      <div style="font-size:var(--type-3);font-weight:var(--weight-3);line-height:1.6">
+      <div style="font-size:var(--type-4);font-weight:var(--weight-3);line-height:1.6">
         <div>1,204</div><div>8,891</div><div>11,073</div></div></div>
     <div><div class="ml-eyebrow">Tabular</div>
-      <div class="ml-tabular" style="font-size:var(--type-3);font-weight:var(--weight-3);line-height:1.6">
+      <div class="ml-tabular" style="font-size:var(--type-4);font-weight:var(--weight-3);line-height:1.6">
         <div>1,204</div><div>8,891</div><div>11,073</div></div></div>
   </div>
   <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)">Digits share one advance width, so columns align and a changing number does not shift the text beside it.</p>`,
 
-  "readable measure": `<p class="ml-measure ml-type-2" style="margin:0">A line of prose past roughly seventy-five characters starts to lose its return sweep — the eye has to hunt for the start of the next line. This paragraph is capped at <code>--layout-measure</code>, which is 64ch, and the cap is expressed in ch so it tracks the font rather than the viewport.</p>`,
+  "readable measure": `<p class="ml-measure ml-type-3" style="margin:0">A line of prose past roughly seventy-five characters starts to lose its return sweep — the eye has to hunt for the start of the next line. This paragraph is capped at <code>--layout-measure</code>, which is 64ch, and the cap is expressed in ch so it tracks the font rather than the viewport.</p>`,
 
   "person row": `<div style="max-width:360px">
     ${[["Vedanshu Beats","Producer · connected 12 May 2026","2h"],
@@ -1466,7 +1466,7 @@ function clamp(text, max) {
   return (at > max * 0.6 ? cut.slice(0, at) : cut).replace(/[,;:.\s]+$/, "") + "…";
 }
 
-const scaleRow = (label, group, fmt) => `<tr><th>${label}</th>${["1", "2", "3", "4"]
+const scaleRow = (label, group, fmt, cols = ["1", "2", "3", "4"]) => `<tr><th>${label}</th>${cols
   .map((k) => group[k] ? `<td><code>${fmt(group[k], k)}</code></td>` : "<td>—</td>").join("")}</tr>`;
 
 const componentSection = (s) => `<section class="g-comp" id="${slug(s.name)}">
@@ -1580,7 +1580,7 @@ const html = `<!doctype html>
     display: flex; align-items: center; justify-content: space-between; gap: var(--space-2);
     min-height: var(--size-3); padding: 0 var(--space-2);
     border-radius: var(--radius-1); color: var(--color-ink);
-    font-size: var(--type-2); text-decoration: none;
+    font-size: var(--type-3); text-decoration: none;
   }
   .g-side__link { font-weight: var(--weight-3); }
   .g-side__item { color: var(--color-muted); font-size: var(--type-1);
@@ -1599,11 +1599,11 @@ const html = `<!doctype html>
     display: flex; align-items: center; justify-content: space-between;
     min-height: var(--size-3); padding: 0 var(--space-2); cursor: pointer;
     border-radius: var(--radius-1);
-    font-size: var(--type-2); font-weight: var(--weight-3);
+    font-size: var(--type-3); font-weight: var(--weight-3);
   }
   .g-side__group summary:hover { background: var(--color-surface); }
   .g-side__group[hidden], .g-side__item[hidden], .g-side__link[hidden] { display: none; }
-  h2.g-h { font-family: var(--font-display); font-size: var(--type-4); font-weight:var(--weight-4);
+  h2.g-h { font-family: var(--font-display); font-size: var(--type-6); font-weight:var(--weight-4);
            letter-spacing: -0.03em; margin: var(--space-4) 0 var(--space-2); text-wrap: balance; }
   .g-comp__head h3, .g-rules__h { text-wrap: balance; }
   /* Every component anchor scrolled to a heading sitting under the sticky
@@ -1612,7 +1612,7 @@ const html = `<!doctype html>
   .g-comp, h2.g-h, .g-side__group summary { scroll-margin-top: calc(var(--size-4) + var(--space-3)); }
   .g-comp { padding: var(--space-4) 0; border-top: var(--border-1) solid var(--color-line); }
   .g-comp__head { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
-  .g-comp__head h3 { font-family: var(--font-display); font-size: var(--type-3); font-weight:var(--weight-3);
+  .g-comp__head h3 { font-family: var(--font-display); font-size: var(--type-4); font-weight:var(--weight-3);
                      letter-spacing: -0.01em; margin: 0; text-transform: capitalize; }
   .g-file { font-size: var(--type-1); color: var(--color-muted); }
   /* NO blanket aspect-ratio on demo images, deliberately.
@@ -1646,7 +1646,7 @@ const html = `<!doctype html>
      prose because it is RULE text, not description — a reader should be able to
      tell "this is the contract" from "this is what the thing is". */
   .g-rules { margin: var(--space-2) 0 0; padding-left: var(--space-3);
-             max-width: var(--layout-measure); font-size: var(--type-2); }
+             max-width: var(--layout-measure); font-size: var(--type-3); }
   .g-rules li { margin-bottom: var(--space-1); }
   /* An inline “Was …” clause is a reconciliation note living inside a rule,
      not part of it. It has to read as subordinate or the superseded value looks
@@ -1657,7 +1657,7 @@ const html = `<!doctype html>
                   padding-left: var(--space-2);
                   border-left: var(--border-2) solid var(--color-line); }
   .g-rules__h { margin: var(--space-3) 0 var(--space-1); font-family: var(--font-display);
-                font-size: var(--type-2); font-weight: var(--weight-3); }
+                font-size: var(--type-3); font-weight: var(--weight-3); }
   /* A reconciliation note — why a value here differs from what the file said
      before. Quieter than the rule it annotates, and never mistakable for one. */
   .g-note { margin: var(--space-2) 0; padding: var(--space-2) var(--space-3);
@@ -1689,7 +1689,7 @@ const html = `<!doctype html>
   .g-sel code { display: inline-block; margin: 2px 4px 2px 0; }
   code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em;
          background: var(--color-surface); padding: 1px 5px; border-radius: var(--radius-1); }
-  table.g-t { width: 100%; border-collapse: collapse; font-size: var(--type-2); }
+  table.g-t { width: 100%; border-collapse: collapse; font-size: var(--type-3); }
   table.g-t th, table.g-t td { text-align: left; padding: var(--space-2); border-bottom: 1px solid var(--color-line); }
   table.g-t th { color: var(--color-muted); font-weight:var(--weight-3); white-space: nowrap; }
   .g-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: var(--space-2); }
@@ -1724,7 +1724,7 @@ const html = `<!doctype html>
                border: 1px solid var(--color-line); border-radius: var(--radius-1);
                background: var(--color-white); color: inherit; text-decoration: none; }
   .g-pattern:hover { border-color: var(--color-ink); }
-  .g-pattern b { font-size: var(--type-2); }
+  .g-pattern b { font-size: var(--type-3); }
   .g-pattern span { font-size: var(--type-1); color: var(--color-muted); }
 </style>
 </head>
@@ -1771,7 +1771,7 @@ const html = `<!doctype html>
 
 <div class="g-wrap" id="content">
   <header class="g-head">
-    <div class="ml-wordmark" style="font-size:var(--type-4)">MUSIC<em>LINKD</em></div>
+    <div class="ml-wordmark" style="font-size:var(--type-6)">MUSIC<em>LINKD</em></div>
     <p class="ml-lede" style="margin-top:var(--space-2);max-width:60ch">
       The design system, <b>generated from itself</b>. Tokens come from
       <code>tokens.json</code>; components are parsed out of
@@ -1802,7 +1802,7 @@ const html = `<!doctype html>
   </div>
 
   <h3 style="margin-top:var(--space-4)">Positioning</h3>
-  <p class="ml-type-3" style="max-width:var(--layout-measure);font-family:var(--font-display);font-weight:var(--weight-3)">
+  <p class="ml-type-4" style="max-width:var(--layout-measure);font-family:var(--font-display);font-weight:var(--weight-3)">
     ${esc(tokens.brand.positioning)}</p>
 
   <h3 style="margin-top:var(--space-4)">Logo usage</h3>
@@ -1962,7 +1962,9 @@ const html = `<!doctype html>
       (v.$description || "").split(".")[0])).join("")}</div>
 
   <h3 style="margin-top:var(--space-4)">Scales</h3>
-  <p class="ml-lede">Four steps each, exponential. Every step is visibly different from its neighbour — that is the point, and why there is no fifth.</p>
+  <p class="ml-lede">Four steps each, exponential — every scale except type, which moved to seven on
+  2026-09-11 when the brand owner lifted the cap. Every step is visibly different from its
+  neighbour; that is still the point.</p>
   <table class="g-t"><thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead><tbody>
     ${scaleRow("space", f.space, (t) => t.$web)}
     ${scaleRow("radius", f.radius, (t) => t.$web)}
@@ -1971,12 +1973,21 @@ const html = `<!doctype html>
     ${scaleRow("avatar", f.avatar, (t) => t.$web)}
     ${scaleRow("elevation", f.elevation, (t) => t.$android)}
     ${scaleRow("opacity", f.opacity, (t) => t.$value)}
-    ${scaleRow("type · web", f.type, (t) => `${t.$web.min}–${t.$web.max}`)}
-    ${scaleRow("type · android", f.type, (t) => t.$android.size)}
-    ${scaleRow("type · iOS", f.type, (t) => t.$ios.textStyle)}
     ${scaleRow("motion · web", f.motion, (t) => t.$web.duration)}
     ${scaleRow("motion · android", f.motion, (t) => `spring ${t.$android.dampingRatio}/${t.$android.stiffness}`)}
   </tbody></table>
+
+  ${(() => {
+    const typeCols = Object.keys(f.type).filter((k) => /^\d+$/.test(k)).sort((a, b) => +a - +b);
+    return `<h4 style="margin-top:var(--space-3)">Type — ${typeCols.length} steps</h4>
+    <p class="ml-lede">Grown from four on 2026-09-11: 14px and 28px fill the two gaps the old
+    12/16/22/32 ramp left, and 40px is the hero step used once, on the pre-auth landing.</p>
+    <div style="overflow-x:auto"><table class="g-t"><thead><tr><th></th>${typeCols.map((k) => `<th>${k}</th>`).join("")}</tr></thead><tbody>
+      ${scaleRow("type · web", f.type, (t) => `${t.$web.min}–${t.$web.max}`, typeCols)}
+      ${scaleRow("type · android", f.type, (t) => t.$android.size, typeCols)}
+      ${scaleRow("type · iOS", f.type, (t) => t.$ios.textStyle, typeCols)}
+    </tbody></table></div>`;
+  })()}
   <p class="ml-lede" style="margin-top:var(--space-2)">
     Type and motion are <b>dual-authored</b>: <code>clamp()</code> does not exist on
     native and native motion is spring physics, so a single web value could never
@@ -1985,12 +1996,20 @@ const html = `<!doctype html>
   </p>
 
   <h3 style="margin-top:var(--space-4)">Type specimens</h3>
-  <div class="g-demo">
-    <div class="ml-type-4">Display — hero and screen titles</div>
-    <div class="ml-type-3" style="margin-top:var(--space-2)">Title — section and card headings</div>
-    <div class="ml-type-2" style="margin-top:var(--space-2)">Body — default UI copy and list items</div>
-    <div class="ml-type-1" style="margin-top:var(--space-2)">Caption — metadata, labels and badges</div>
-  </div>
+  <div class="g-demo">${(() => {
+    const LABEL = {
+      7: "Hero — the pre-auth landing headline, once per product",
+      6: "Display — hero headlines, now-playing track title, the one big number on a screen",
+      5: "Large title — a detail screen's headline, a figure inside a card",
+      4: "Title — section and card headings",
+      3: "Body — default UI copy and list items",
+      2: "Secondary body — supporting lines, list-item metadata, form help",
+      1: "Caption — metadata, labels and badges",
+    };
+    return Object.keys(f.type).filter((k) => /^\d+$/.test(k)).sort((a, b) => +b - +a)
+      .map((k, i) => `<div class="ml-type-${k}"${i ? ' style="margin-top:var(--space-2)"' : ""}>${esc(LABEL[k] || f.type[k].$description || "")}</div>`)
+      .join("");
+  })()}</div>
 
   <h3 style="margin-top:var(--space-4)">Scale audit</h3>
   <p class="ml-lede ml-measure">Measured, not asserted. A step passes if each neighbour differs by
@@ -2011,7 +2030,7 @@ const html = `<!doctype html>
   becomes. Generated from the same source the CSS is, so the app and this page cannot disagree.</p>
   <div style="overflow-x:auto">
   <table class="g-t"><thead><tr><th>Token</th><th>Fluid value (web)</th><th>Weight</th><th>Compose TextStyle</th><th>Usage</th></tr></thead><tbody>
-    ${["1","2","3","4"].map((k) => {
+    ${Object.keys(f.type).filter((k) => /^\d+$/.test(k)).sort((a, b) => +a - +b).map((k) => {
       const t = f.type[k], w = t.$web, a = t.$android;
       return `<tr><th>--type-${k}</th>
         <td class="ml-tabular">${w.min} → ${w.max}</td>

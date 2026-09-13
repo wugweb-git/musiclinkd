@@ -26,7 +26,7 @@ assertIcons(["arrow-forward", "search", "check", "heart"]);
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0;flex:1">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0;flex:1">${title}</h1>
       ${beta}
     </header>`;
 
@@ -59,7 +59,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Guides</h1>
+      <h1 class="ml-type-4" style="margin:0">Guides</h1>
       ${beta}
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
@@ -97,7 +97,7 @@ writeScreen({
 
       <div data-state="category">
         <div class="ml-section" style="margin-top:var(--space-3)"><h2>Bookings</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Holding a room, paying a deposit, and what happens when plans change.
         </p>
         ${["Deposits, cancellations and the 48-hour rule",
@@ -152,7 +152,7 @@ writeScreen({
              style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
         <div style="padding:var(--space-3) var(--space-4)">
           <span class="ml-eyebrow">Music career</span>
-          <h2 class="ml-type-4" style="margin:var(--space-1) 0;${READ}">What a session rate should actually cover</h2>
+          <h2 class="ml-type-6" style="margin:var(--space-1) 0;${READ}">What a session rate should actually cover</h2>
           <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-3)">
             Published 28 August 2026 · 6 min read
           </p>
@@ -161,7 +161,7 @@ writeScreen({
             everyone remembers and the smallest part of the work.
           </p>
           <div style="${READ}">
-            <p class="ml-type-2" style="color:var(--color-muted)">
+            <p class="ml-type-3" style="color:var(--color-muted)">
               A four-hour tracking session is rarely four hours. There is the listening you do
               beforehand, the charts or the lyric you prepare, the travel, and the revisions
               afterwards that nobody wrote down. Quoting only for the room means the rest is free.
@@ -173,7 +173,7 @@ writeScreen({
               <div class="ml-summary__row"><span>Revisions</span><span>Say how many are included</span></div>
               <div class="ml-summary__row"><span>Travel</span><span>Outside your city, at cost</span></div>
             </div>
-            <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+            <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
               The second thing people forget is the deposit. Half up front is normal here,
               and it is the difference between a booking and an intention.
             </p>
@@ -196,19 +196,19 @@ writeScreen({
 
       <!-- faq -->
       <div data-state="faq" style="padding:var(--space-3) var(--space-4)">
-        <h2 class="ml-type-3" style="margin:0 0 var(--space-3)">Frequently asked</h2>
+        <h2 class="ml-type-4" style="margin:0 0 var(--space-3)">Frequently asked</h2>
         ${[["When is the deposit taken?", "When the studio confirms your slot, not when you request it. If they decline, nothing is charged."],
            ["Can I cancel a booking?", "Free up to 48 hours before. Inside 48 hours the studio keeps the deposit."],
            ["When do I get paid?", "Within seven days of a completed session, to the account on your profile."],
            ["Why was my listing removed?", "Usually a prohibited item or someone else's photos. You always get an email saying which."]]
           .map(([q, a]) => `<div class="ml-section"><h3>${q}</h3></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3);${READ}">${a}</p>`).join("\n        ")}
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3);${READ}">${a}</p>`).join("\n        ")}
       </div>
 
       <!-- policy / legal -->
       <div data-state="policy" style="padding:var(--space-3) var(--space-4)">
         <span class="ml-eyebrow">Policy</span>
-        <h2 class="ml-type-3" style="margin:var(--space-1) 0">Marketplace rules</h2>
+        <h2 class="ml-type-4" style="margin:var(--space-1) 0">Marketplace rules</h2>
         <div class="ml-summary" style="margin-bottom:var(--space-3)">
           <div class="ml-summary__row"><span>Effective</span><span>14 August 2026</span></div>
           <div class="ml-summary__row"><span>Version</span><span>2.1</span></div>
@@ -219,14 +219,14 @@ writeScreen({
              ["Deposits and disputes", "Rental deposits are held, not paid out, until the item comes back. If the two sides disagree we hold the deposit until both have been heard."],
              ["Removal", "We remove listings that break these rules and email you the reason. Repeated breaches end an account."]]
             .map(([h, b]) => `<div class="ml-section"><h3>${h}</h3></div>
-          <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">${b}</p>`).join("\n          ")}
+          <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">${b}</p>`).join("\n          ")}
         </div>
       </div>
 
       <!-- help article: problem, explanation, steps -->
       <div data-state="help" style="padding:var(--space-3) var(--space-4)">
         <span class="ml-eyebrow">Help · Bookings</span>
-        <h2 class="ml-type-3" style="margin:var(--space-1) 0">My deposit was taken but the booking isn't showing</h2>
+        <h2 class="ml-type-4" style="margin:var(--space-1) 0">My deposit was taken but the booking isn't showing</h2>
         <p class="ml-lede" style="${READ}">
           Almost always a payment that succeeded at your bank but had not reached us when you last looked.
         </p>
@@ -244,9 +244,9 @@ writeScreen({
       <!-- announcement -->
       <div data-state="announcement" style="padding:var(--space-3) var(--space-4)">
         <span class="ml-eyebrow">Announcement</span>
-        <h2 class="ml-type-3" style="margin:var(--space-1) 0">Offers now expire after 48 hours</h2>
+        <h2 class="ml-type-4" style="margin:var(--space-1) 0">Offers now expire after 48 hours</h2>
         <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-3)">31 August 2026</p>
-        <p class="ml-type-2" style="color:var(--color-muted);${READ}">
+        <p class="ml-type-3" style="color:var(--color-muted);${READ}">
           Marketplace offers used to sit open indefinitely, which left sellers unsure whether an
           offer was still real. From today an offer expires after 48 hours unless it is answered.
           Nothing changes for offers already open.
@@ -291,8 +291,8 @@ writeScreen({
            style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
       <div style="padding:var(--space-3) var(--space-4)">
         <span class="ml-eyebrow">For the industry</span>
-        <h2 class="ml-type-4" style="margin:var(--space-1) 0">Find the people who make the record.</h2>
-        <p class="ml-type-2" style="color:var(--color-muted)">
+        <h2 class="ml-type-6" style="margin:var(--space-1) 0">Find the people who make the record.</h2>
+        <p class="ml-type-3" style="color:var(--color-muted)">
           Vocalists, producers, engineers, studios and venues — with rates, availability and work you can actually hear.
         </p>
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/auth/welcome/index.html">Join MusicLinkd</a>
@@ -315,7 +315,7 @@ writeScreen({
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div data-state="default">
         <div class="ml-section"><h2>About</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3);${READ}">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3);${READ}">
           MusicLinkd is built in Mumbai for the people who actually make music here — session players,
           engineers, studios and venues who have been finding each other through group chats and word of mouth.
         </p>
@@ -395,7 +395,7 @@ writeScreen({
     ${bar("Legal pages", `${C}admin_pages_editor/index.html`)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div data-state="default">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           The public versions of what the app shows in Settings. Edited in Admin, published to the website.
         </p>
         <div class="ml-summary">
@@ -428,11 +428,11 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Pages</h1>
+      <h1 class="ml-type-4" style="margin:0">Pages</h1>
       ${beta}
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+      <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
         What's published on musiclinkd.com. Writing and editing happen in Admin — this is the reader's
         view of what exists.
       </p>

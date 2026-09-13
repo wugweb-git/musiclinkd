@@ -23,8 +23,8 @@ const nav = (n, back) =>
   `<header class="ml-navbar">${backArrow(back)}<span class="ml-navbar__spacer"></span>${steps(n, T)}</header>`;
 
 const head = (title, sub) => `<div>
-        <h1 class="ml-type-3" style="margin:0">${title}</h1>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">${sub}</p>
+        <h1 class="ml-type-4" style="margin:0">${title}</h1>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-1) 0 0">${sub}</p>
       </div>`;
 
 const cta = (href, label = "Continue", extra = "") => `<footer class="ml-app__footer">
@@ -66,9 +66,9 @@ done.push(writeScreen({ flow: "portfolio", screen: "portfolio_dashboard", body: 
           <span class="ml-media__tag"><span class="ml-status ml-status--success">Released</span></span>
         </div>
         <div style="padding:var(--space-3)">
-          <div class="ml-type-3" style="font-weight:700">Tum Hi Toh (Unplugged)</div>
+          <div class="ml-type-4" style="font-weight:700">Tum Hi Toh (Unplugged)</div>
           <div class="ml-type-1" style="color:var(--color-muted)">Song · Released 14 Feb 2026</div>
-          <p class="ml-type-2" style="margin:var(--space-2) 0 var(--space-3)">Acoustic unplugged reinterpretation — 4.2M plays on Spotify.</p>
+          <p class="ml-type-3" style="margin:var(--space-2) 0 var(--space-3)">Acoustic unplugged reinterpretation — 4.2M plays on Spotify.</p>
           <div class="ml-stat-grid" style="grid-template-columns:repeat(3,1fr)">
             <div class="ml-stat"><span class="ml-stat__num">4,200</span><span class="ml-stat__label">Views</span></div>
             <div class="ml-stat"><span class="ml-stat__num">610</span><span class="ml-stat__label">Likes</span></div>
@@ -271,7 +271,7 @@ done.push(writeScreen({ flow: "portfolio", screen: "publish_project", body: `
       ${head("Review &amp; publish", "Last look before this goes on your public portfolio.")}
 
       <div class="ml-card ml-card--padded">
-        <div class="ml-type-3" style="font-weight:700">Tum Hi Toh (Unplugged)</div>
+        <div class="ml-type-4" style="font-weight:700">Tum Hi Toh (Unplugged)</div>
         ${reviewRow("Type", "Song")}
         ${reviewRow("Your role", "Singer")}
         ${reviewRow("Collaborators", "Arijit Sen — Mix Engineer")}
@@ -297,8 +297,8 @@ done.push(writeScreen({ flow: "portfolio", screen: "success", body: `
     <main class="ml-app__body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-3);text-align:center">
       ${checkMark}
       <div>
-        <h1 class="ml-type-3" style="margin:0">Project published</h1>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">"Tum Hi Toh (Unplugged)" is now live on your public portfolio.</p>
+        <h1 class="ml-type-4" style="margin:0">Project published</h1>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-1) 0 0">"Tum Hi Toh (Unplugged)" is now live on your public portfolio.</p>
       </div>
     </main>
     <footer class="ml-app__footer">
@@ -327,7 +327,7 @@ done.push(writeScreen({ flow: "portfolio", screen: "profile_project_view", body:
       </div>
 
       <div style="padding:var(--space-3)">
-        <p class="ml-type-2" style="margin:0 0 var(--space-3)">Acoustic unplugged reinterpretation — 4.2M plays on Spotify.</p>
+        <p class="ml-type-3" style="margin:0 0 var(--space-3)">Acoustic unplugged reinterpretation — 4.2M plays on Spotify.</p>
 
         <div class="ml-player ml-card" style="padding:var(--space-2) var(--space-3)">
           <button class="ml-player__btn" aria-label="Play">
@@ -397,7 +397,7 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(`${PF}portfolio_dashboard/index.html`, "Back")}
-      <h1 class="ml-type-3" style="margin:0;flex:1">Portfolio settings</h1>
+      <h1 class="ml-type-4" style="margin:0;flex:1">Portfolio settings</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
@@ -473,7 +473,7 @@ writeScreen({
 
       <div data-state="archived">
         <div class="ml-section"><h2>Archived</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Hidden from your profile and from Discover. Nothing is deleted, and credits you gave
           other people stay on their profiles.
         </p>

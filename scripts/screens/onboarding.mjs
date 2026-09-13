@@ -22,8 +22,8 @@ const nav = (n, back) =>
   `<header class="ml-navbar">${backArrow(back)}<span class="ml-navbar__spacer"></span>${steps(n, T)}</header>`;
 
 const head = (title, sub) => `<div>
-        <h1 class="ml-type-3" style="margin:0">${title}</h1>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">${sub}</p>
+        <h1 class="ml-type-4" style="margin:0">${title}</h1>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-1) 0 0">${sub}</p>
       </div>`;
 
 const cta = (href, label = "Continue", extra = "") => `<footer class="ml-app__footer">
@@ -150,7 +150,7 @@ done.push(writeScreen({ flow: "onboarding", screen: "instrument_proficiency", bo
         </div>
         <div style="display:flex;align-items:center;gap:var(--space-3)">
           <button class="ml-icon-btn" aria-label="Fewer years">−</button>
-          <span class="ml-type-3" style="flex:1;text-align:center">6 yrs</span>
+          <span class="ml-type-4" style="flex:1;text-align:center">6 yrs</span>
           <button class="ml-icon-btn" aria-label="More years">+</button>
         </div>
       </div>
@@ -167,7 +167,7 @@ done.push(writeScreen({ flow: "onboarding", screen: "instrument_proficiency", bo
         </div>
         <div style="display:flex;align-items:center;gap:var(--space-3)">
           <button class="ml-icon-btn" aria-label="Fewer years">−</button>
-          <span class="ml-type-3" style="flex:1;text-align:center">2 yrs</span>
+          <span class="ml-type-4" style="flex:1;text-align:center">2 yrs</span>
           <button class="ml-icon-btn" aria-label="More years">+</button>
         </div>
       </div>
@@ -317,19 +317,19 @@ done.push(writeScreen({ flow: "onboarding", screen: "submit_publish", body: `
     <main class="ml-app__body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-3);text-align:center">
       <div data-state="submitting">
         <div class="ml-spinner" style="margin:0 auto"></div>
-        <h1 class="ml-type-3" style="margin:var(--space-3) 0 0">Creating your profile…</h1>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">This takes a few seconds.</p>
+        <h1 class="ml-type-4" style="margin:var(--space-3) 0 0">Creating your profile…</h1>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-1) 0 0">This takes a few seconds.</p>
       </div>
 
       <div data-state="success">
         ${checkMark}
-        <h1 class="ml-type-3" style="margin:var(--space-3) 0 0">Profile published</h1>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">You're now discoverable on MusicLinkd.</p>
+        <h1 class="ml-type-4" style="margin:var(--space-3) 0 0">Profile published</h1>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-1) 0 0">You're now discoverable on MusicLinkd.</p>
         <span class="ml-status ml-status--success" style="margin-top:var(--space-3)">Verified email</span>
       </div>
 
       <div data-state="error">
-        <h1 class="ml-type-3" style="margin:0">Something went wrong</h1>
+        <h1 class="ml-type-4" style="margin:0">Something went wrong</h1>
         <div class="ml-banner ml-banner--error" role="alert" style="margin-top:var(--space-3)">
           We couldn't publish your profile right now. Check your connection and try again.
         </div>
@@ -356,8 +356,8 @@ done.push(writeScreen({ flow: "onboarding", screen: "dashboard_handoff", body: `
   <div class="ml-app">
     <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3);padding-top:var(--space-4)">
       <div style="text-align:center">
-        <h1 class="ml-wordmark" style="font-size:var(--type-4);margin:0">Welcome to MUSIC<em>LINKD</em></h1>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-2) 0 0">Your profile is live. Here's where to go from here.</p>
+        <h1 class="ml-wordmark" style="font-size:var(--type-6);margin:0">Welcome to MUSIC<em>LINKD</em></h1>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-2) 0 0">Your profile is live. Here's where to go from here.</p>
       </div>
       <div>
         ${nextStep("🎤", "Complete your portfolio", "Add projects, credits and audio", "/preview/flows/portfolio/portfolio_dashboard/index.html")}
@@ -390,7 +390,7 @@ const O = "/preview/flows/onboarding/";
 
 const obBar = (title, backTo, n, total) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0;flex:1">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0;flex:1">${title}</h1>
       ${steps(n, total)}
     </header>`;
 
@@ -439,8 +439,8 @@ writeScreen({
     ${obBar("What you do", `${O}primary_role/index.html`, 4, 8)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       ${SPECIALISATION.map(([role, heading, groups]) => `<div data-state="${role}">
-        <h2 class="ml-type-3" style="margin:0 0 var(--space-1)">${heading}</h2>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <h2 class="ml-type-4" style="margin:0 0 var(--space-1)">${heading}</h2>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           This decides what people can find you for. You can change any of it later.
         </p>
         ${groups.map(([label, opts]) => `<div class="ml-section" style="margin-top:var(--space-3)"><h3>${label}</h3></div>
@@ -459,7 +459,7 @@ writeScreen({
   <div class="ml-app">
     ${obBar("How you work", `${O}specialisation/index.html`, 5, 8)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+      <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
         So we only show you work you'd actually take.
       </p>
 
@@ -491,7 +491,7 @@ writeScreen({
   <div class="ml-app">
     ${obBar("Privacy", `${O}work_preferences/index.html`, 6, 8)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+      <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
         Two decisions worth making before your profile goes live. Both are in Settings afterwards.
       </p>
 

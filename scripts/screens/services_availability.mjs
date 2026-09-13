@@ -22,7 +22,7 @@ assertIcons(["arrow-forward", "add", "check"]);
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0">${title}</h1>
     </header>`;
 
 /* A row that leads somewhere. */
@@ -58,7 +58,7 @@ writeScreen({
   <div class="ml-app">
     ${bar("Availability", `${P}service_offerings_editor/index.html`)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+      <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
         One status, and it changes how you appear everywhere else. Pick the one that is true today.
       </p>
 
@@ -72,7 +72,7 @@ writeScreen({
 
       ${STATUSES.map(([st, label, kind, what]) => `<div data-state="${st}" style="margin-top:var(--space-3)">
         <span class="ml-status ml-status--${kind}">${label}</span>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">${what}</p>
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-2)">${what}</p>
       </div>`).join("\n      ")}
 
       <div class="ml-section" style="margin-top:var(--space-3)"><h2>Working week</h2></div>
@@ -106,7 +106,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Services</h1>
+      <h1 class="ml-type-4" style="margin:0">Services</h1>
       <span class="ml-appbar__actions">
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}session_configuration/index.html" aria-label="Add a service">${icon("add", { size: 20 })}</a>
       </span>
@@ -216,7 +216,7 @@ writeScreen({
   <div class="ml-app">
     ${bar("Amenities", `${P}service_offerings_editor/index.html`)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+      <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
         What a room provides without being asked. These show on your public profile and in search filters.
       </p>
       ${[["The room", ["Air conditioning", "Natural light", "Step-free access", "Green room"]],
@@ -244,7 +244,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Your services</h1>
+      <h1 class="ml-type-4" style="margin:0">Your services</h1>
       <span class="ml-appbar__actions">
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}session_configuration/index.html" aria-label="Add a service">${icon("add", { size: 20 })}</a>
       </span>
@@ -274,7 +274,7 @@ writeScreen({
         <div class="ml-banner ml-banner--warning">
           <span class="ml-banner__body">All your services are paused. Nobody can book you.</span>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           Your profile stays visible and people can still message you. Pausing is not the same as
           being unavailable — that lives in Availability.
         </p>

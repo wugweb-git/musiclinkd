@@ -28,7 +28,7 @@ assertIcons(["arrow-forward", "check", "cancel"]);
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0;flex:1">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0;flex:1">${title}</h1>
       ${beta}
     </header>`;
 
@@ -65,7 +65,7 @@ writeScreen({
           <img src="${media("faces", 2)}" alt="" loading="lazy" />
           <span class="meta"><b>Ishita Rao</b><p>Not verified</p></span>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-3) 0">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-3) 0">
           Verification tells people that we have checked something specific about you.
           It is not a recommendation, and it does not affect how good anyone thinks your work is.
         </p>
@@ -86,8 +86,8 @@ writeScreen({
 
       <div data-state="pending">
         <span class="ml-status ml-status--warning">Under review</span>
-        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">We're checking your documents</h2>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0">
+        <h2 class="ml-type-4" style="margin:var(--space-2) 0 var(--space-1)">We're checking your documents</h2>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0">
           Submitted 29 August. Most checks finish within two working days, but we don't promise a time —
           if it needs a second look it takes longer.
         </p>
@@ -114,7 +114,7 @@ writeScreen({
           <div class="ml-summary__row"><span>Verified on</span><span>14 August 2026</span></div>
           <div class="ml-summary__row"><span>We checked</span><span>Identity and credited work</span></div>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           Your badge appears on your profile, in search, in Discover, on listings and beside your reviews.
           It means we checked your identity and your credits — nothing more than that.
         </p>
@@ -125,11 +125,11 @@ writeScreen({
            not make you start from nothing. -->
       <div data-state="rejected">
         <span class="ml-status ml-status--error">Not completed</span>
-        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">We couldn't verify you this time</h2>
+        <h2 class="ml-type-4" style="margin:var(--space-2) 0 var(--space-1)">We couldn't verify you this time</h2>
         <div class="ml-banner ml-banner--error" style="margin-top:var(--space-2)">
           <span class="ml-banner__body">The name on your ID didn't match the name on your profile.</span>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           This is usually a small mismatch — a middle name, or a stage name on the profile.
           Correcting one of the two is normally enough. Your other documents are still on file.
         </p>
@@ -139,8 +139,8 @@ writeScreen({
 
       <div data-state="expired">
         <span class="ml-status ml-status--warning">Expired</span>
-        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">Your verification has expired</h2>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0">
+        <h2 class="ml-type-4" style="margin:var(--space-2) 0 var(--space-1)">Your verification has expired</h2>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0">
           Business verification lasts a year, because company details change. Your badge is hidden until you renew.
           Nothing else about your account is affected.
         </p>
@@ -149,21 +149,21 @@ writeScreen({
 
       <div data-state="help">
         <div class="ml-section"><h2>Why verify?</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           People book strangers on this platform. A badge tells them we checked something concrete —
           not that we recommend you, and not that your work is good.
         </p>
         <div class="ml-section"><h2>What happens to my documents?</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           They are encrypted, seen only by the person reviewing them, and deleted once the check is done.
           They are never shown on your profile. Only the status — verified or not — is public.
         </p>
         <div class="ml-section"><h2>How long does it take?</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Usually two working days. We won't promise faster than we can deliver.
         </p>
         <div class="ml-section"><h2>What if I'm rejected?</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0">
           You get a reason, and you fix only the thing that was wrong — you don't start again.
           There's no limit on how many times you can try.
         </p>
@@ -196,7 +196,7 @@ writeScreen({
 
       <div data-state="level_basic">
         <div class="ml-section"><h2>Basic — one document</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           One government ID with your name and photograph. We check the name against your profile.
         </p>
         ${rowLink("Continue to upload", "?state=govt_id_upload")}
@@ -204,7 +204,7 @@ writeScreen({
 
       <div data-state="level_professional">
         <div class="ml-section"><h2>Professional — ID and two credits</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           One government ID, plus two pieces of released work you're credited on. A link to each is enough —
           a streaming page, a label page, or a release you've already added to your portfolio.
         </p>
@@ -221,7 +221,7 @@ writeScreen({
 
       <div data-state="level_business">
         <div class="ml-section"><h2>Business — company documents</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           We check that the business exists and that you can act for it. We do not ask for bank details,
           and we never will as part of verification.
         </p>
@@ -269,7 +269,7 @@ writeScreen({
           <div class="ml-summary__row"><span>Credits</span><span>2 links</span></div>
           <div class="ml-summary__row"><span>Name on profile</span><span>Ishita Rao</span></div>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           Check the name on your profile matches the name on your ID — a mismatch is the single
           most common reason a check fails.
         </p>

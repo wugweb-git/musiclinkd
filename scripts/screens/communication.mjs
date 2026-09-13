@@ -53,7 +53,7 @@ const netStrip = (current) => `<nav class="ml-tabs" role="tablist" aria-label="N
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0">${title}</h1>
     </header>`;
 
 /* ── networking_feed — default / posting ────────────────────────────────── */
@@ -74,7 +74,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Network</h1>
+      <h1 class="ml-type-4" style="margin:0">Network</h1>
       <span class="ml-appbar__actions">
         <!-- Collaboration is a separate journey from Messaging — the work
              relationship rather than the conversation — so it gets its own
@@ -122,9 +122,9 @@ writeScreen({
              --size-4 and I had reached for a --size-6 that does not exist. -->
         <img class="ml-avatar ml-avatar--lg ml-lift" src="${media("faces", 2)}" alt="" loading="lazy"
              style="margin-top:calc(var(--size-3) * -1)" />
-        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">Ishita Rao</h2>
+        <h2 class="ml-type-4" style="margin:var(--space-2) 0 var(--space-1)">Ishita Rao</h2>
         <p class="ml-type-1" style="color:var(--color-muted);margin:0">Session vocalist · Mumbai · 4.9 ★</p>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           Hindi and English pop, light belt and soft head voice. Twelve EPs and two features since 2021.
         </p>
         <div style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">
@@ -148,7 +148,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Network</h1>
+      <h1 class="ml-type-4" style="margin:0">Network</h1>
     </header>
     ${netStrip("collaborators")}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
@@ -172,7 +172,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Network</h1>
+      <h1 class="ml-type-4" style="margin:0">Network</h1>
     </header>
     ${netStrip("requests")}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
@@ -199,7 +199,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Network</h1>
+      <h1 class="ml-type-4" style="margin:0">Network</h1>
     </header>
     ${netStrip("matches")}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
@@ -227,7 +227,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Messages</h1>
+      <h1 class="ml-type-4" style="margin:0">Messages</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       ${THREADS.map(([n, last, when, i, unread]) => `<a class="ml-notification${unread ? " ml-notification--unread" : ""}" data-state="default" href="${P}chat_conversation/index.html">
@@ -261,7 +261,7 @@ writeScreen({
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(`${P}chat_thread_list/index.html`, "Back to messages")}
       <img class="ml-avatar" src="${media("faces", 2)}" alt="" loading="lazy" />
-      <h1 class="ml-type-3" style="margin:0">Ishita Rao</h1>
+      <h1 class="ml-type-4" style="margin:0">Ishita Rao</h1>
     </header>
     <main class="ml-app__body app-content--scroll ml-chat" style="padding:var(--space-3) var(--space-4)">
       <div class="ml-chat__day">Today</div>

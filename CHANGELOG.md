@@ -19,6 +19,29 @@ All notable repository-level changes are recorded here.
 
 ### Changed
 
+- `foundation.type` grown 4 → 7 steps (`frontend/guide/tokens/tokens.json`): 12/14/16/22/28/32/40px, up
+  from 12/16/22/32. Old steps 2/3/4 (16-18 / 22-28 / 32-44px) became 3/4/6 to make room; new steps 2
+  (14px), 5 (28-36px) and 7 (40-56px, hero) fill the two gaps the old ramp left and give the Lovable
+  app's ad hoc `--type-5` a real home. `meta.tokenBudget.ceiling` raised 108 → 111 for the three new
+  steps, when the brand owner lifted the 4-step-per-scale cap `scripts/build-tokens.mjs` had enforced
+  since v9 (`scale()` now checks the steps are numbered 1…n with no gaps, not that there are ≤4 of
+  them). Regenerated everywhere the scale is emitted: `ml-tokens.css` (guide + `webapp/shared/`),
+  `docs/handoff/MusicLinkdTokens.{kt,swift}` (now 7 `Type*`/`type*` entries each), `frontend/guide/index.html`.
+- `scripts/build-guide.mjs`'s type-scale section rewritten to read the step count from `tokens.json`
+  rather than assume 4: `scaleRow()` takes an explicit column list (type now gets its own 7-column
+  table, split out of the shared 4-column space/radius/size/icon/avatar/elevation/opacity/motion
+  table it no longer fits), the type specimens block and the typography-spec table both iterate
+  `foundation.type`'s actual keys instead of a hardcoded `["1","2","3","4"]`.
+- `scripts/migrations/24-type-renumber.mjs` — the type renumber `05-codemod-css.mjs` was held for
+  (see `scripts/migrations/README.md`). Renumbers `--type-N`/`ml-type-N` 2→3, 3→4, 4→6 across
+  `webapp/flows/` (416 references, 194 of 205 screens) in one pass, so no value is renumbered twice;
+  idempotent via a per-file marker comment. The same remap applied by hand to every other file that
+  references a type step by number: `ml-core.css`, `ml-widgets.css`, `scripts/screens/*.mjs` (26
+  generator sources), `webapp/index.html`, `webapp/template/index.html` — 361 references, 31 files.
+- `scripts/audit-system.mjs`'s token-ceiling check read the ceiling from a hardcoded `108` instead of
+  `tokens.json`'s own `meta.tokenBudget.ceiling` — the same duplicate-value sprawl the ceiling exists
+  to prevent, and it would have failed the build the moment the ceiling above moved to 111. Now reads
+  `tokens.json` (falls back to 108 only if the file can't be found from the audit's working directory).
 - `styleguide.html`/`merge3.html` moved from `frontend/website/` to `frontend/guide/` — now the source-of-truth home for design-system material (tokens, icons, docs, and these two interactive references), deploying to `/guide/*.html` via `scripts/build-hosting.sh`. Live-site links and `merge3.html`'s asset paths updated accordingly.
 - Admin Page Management: removed `about`/`blog`/`careers` content pages, added `contact`; kept `home`/`pricing`/legal pages.
 - Admin Capabilities module: removed the one-click "Seed defaults" button (CLI `npm run seed` remains the seeding path).

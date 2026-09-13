@@ -26,7 +26,7 @@ assertIcons(["arrow-forward", "search", "check"]);
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0">${title}</h1>
     </header>`;
 
 /* A settings row is one of three things and nothing else. Keeping that closed
@@ -98,7 +98,7 @@ const formScreen = ({ screen, title, backTo, intro, fields, cta, successTitle, s
     ${bar(title, backTo)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div data-state="default">
-        ${intro ? `<p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">${intro}</p>` : ""}
+        ${intro ? `<p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">${intro}</p>` : ""}
         ${fields.join("\n        ")}
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=submitting">${cta}</a>
       </div>
@@ -290,7 +290,7 @@ settingsScreen({
     ]],
     ["Set up two-factor", [
       `<div data-state="two_factor_setup">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-2)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-2)">
           We'll send a six-digit code to +91 98••• ••432 whenever you sign in on a device we don't recognise.
         </p>
         ${field("tf-phone", "Mobile number", "tel", "+91 98••• ••432")}
@@ -365,7 +365,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Help &amp; support</h1>
+      <h1 class="ml-type-4" style="margin:0">Help &amp; support</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div class="ml-field">
@@ -424,12 +424,12 @@ writeScreen({
           2 results for "deposit"
         </p>
         ${FAQS.slice(0, 2).map(([q, a]) => `<div class="ml-section"><h2>${q}</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">${a}</p>`).join("\n        ")}
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">${a}</p>`).join("\n        ")}
       </div>
 
       <div data-state="default" style="margin-top:var(--space-3)">
         ${FAQS.map(([q, a]) => `<div class="ml-section"><h2>${q}</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">${a}</p>`).join("\n        ")}
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">${a}</p>`).join("\n        ")}
       </div>
     </main>
   </div>`,
@@ -452,10 +452,10 @@ writeScreen({
          ["Marketplace rules", "Prohibited items, offers, disputes",
           "List only what you own and can ship or hand over. Offers expire after 48 hours. Disputes are held against the deposit until both sides are heard."]]
         .map(([t, m, body]) => `<div class="ml-section"><h2>${t}</h2>${m ? `<span class="ml-section__link">${m}</span>` : ""}</div>
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">${body}</p>`).join("\n      ")}
+      <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">${body}</p>`).join("\n      ")}
 
       <div class="ml-section" style="margin-top:var(--space-3)"><h2>In short</h2></div>
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0">
+      <p class="ml-type-3" style="color:var(--color-muted);margin:0">
         You own the work you upload. We show it to the people you choose to show it to.
         We don't sell your personal data, and we don't use your uploads to train anything.
         Bookings and marketplace orders are contracts between you and the other party;
@@ -642,7 +642,7 @@ writeScreen({
     ${bar("Blocked accounts", `${P}privacy_settings/index.html`)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div data-state="default">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Blocked accounts cannot message you or see your profile. Blocking is immediate, and separate from reporting.
         </p>
         ${[["Anonymous account", "Blocked 12 Aug", 9], ["Loud Gear Rentals", "Business · blocked 2 Aug", 12]]
@@ -671,7 +671,7 @@ writeScreen({
       <div class="ml-section"><h2>Your data</h2></div>
 
       <div data-state="default">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-2)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-2)">
           Your export may contain your profile, portfolio, messages, bookings and account information.
           It takes a little while to prepare.
         </p>

@@ -34,7 +34,7 @@ body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-body);
-  font-size: var(--type-2);
+  font-size: var(--type-3);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;   /* we draw our own pressed state */
@@ -175,7 +175,7 @@ body {
   border: var(--border-1) solid transparent;
   border-radius: var(--radius-4);
   font-family: var(--font-body);
-  font-size: var(--type-2);
+  font-size: var(--type-3);
   font-weight: var(--weight-3);
   line-height: 1;
   text-decoration: none;
@@ -220,7 +220,7 @@ body {
 .ml-btn--ghost:active { background: var(--color-surface); }
 
 .ml-btn--block   { display: flex; width: 100%; }
-.ml-btn--lg      { min-height: var(--size-4); font-size: var(--type-2); }
+.ml-btn--lg      { min-height: var(--size-4); font-size: var(--type-3); }
 /* --sm is NARROWER, never SHORTER. Two call sites (the IME bar's Send and the
    inline editor's Save/Cancel) had been asking for .ml-btn--sm since before it
    existed — the class was never defined, so both rendered at full width and
@@ -284,7 +284,7 @@ body {
   background: var(--color-white);
   color: var(--color-ink);
   font-family: var(--font-body);
-  font-size: var(--type-2);
+  font-size: var(--type-3);
   transition: border-color var(--duration-1) var(--ease-standard);
 }
 .ml-field textarea { padding: var(--space-2) var(--space-3); min-height: calc(var(--size-4) * 2); border-radius: var(--radius-2); resize: vertical; }
@@ -317,7 +317,7 @@ body {
   background: none;
   color: var(--color-ink);
   font-family: var(--font-body);
-  font-size: var(--type-2);
+  font-size: var(--type-3);
 }
 .ml-search input:focus { outline: none; }
 .ml-search__divider { width: 1px; align-self: stretch; margin: var(--space-2) 0; background: var(--color-line); }
@@ -652,7 +652,7 @@ a.ml-card:active, button.ml-card:active { transform: scale(0.98); }
 .ml-section > h2, .ml-section > h3 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: var(--type-2);
+  font-size: var(--type-3);
   font-weight: var(--weight-3);
   letter-spacing: -0.01em;
   text-wrap: balance;
@@ -703,7 +703,7 @@ a.ml-card:active, button.ml-card:active { transform: scale(0.98); }
   text-decoration: none;
 }
 .ml-row__body  { flex: 1; min-width: 0; }
-.ml-row__title { display: block; font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-row__title { display: block; font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-row__meta  { display: block; font-size: var(--type-1); color: var(--color-muted); }
 .ml-row + .ml-row { border-top: var(--border-1) solid var(--color-line); }
 a.ml-row:active { background: var(--color-surface); }
@@ -785,7 +785,7 @@ a.ml-row:active { background: var(--color-surface); }
 .ml-wordmark {
   font-family: var(--font-eyebrow);
   font-weight: var(--weight-2);
-  font-size: var(--type-3);
+  font-size: var(--type-4);
   letter-spacing: -0.02em;
   text-transform: uppercase;
   color: var(--color-brand-black);
@@ -857,7 +857,7 @@ a.ml-row:active { background: var(--color-surface); }
   flex: none;
 }
 /* an <h1> on flow screens, so the UA margin has to go */
-.ml-navbar__title { margin: 0; font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-navbar__title { margin: 0; font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-navbar__spacer { flex: 1; }
 
 /* ── sticky footer ─────────────────────────────────────────────────────── */
@@ -931,7 +931,7 @@ a.ml-row:active { background: var(--color-surface); }
   border-radius: var(--radius-2);
   background: var(--color-white);
   color: var(--color-muted);
-  font-size: var(--type-3);
+  font-size: var(--type-4);
   font-weight: var(--weight-3);
   font-variant-numeric: tabular-nums;
 }
@@ -949,7 +949,7 @@ a.ml-row:active { background: var(--color-surface); }
   border: var(--border-1) solid var(--color-line);
   border-radius: var(--radius-4);
   background: var(--color-white);
-  font-size: var(--type-2); font-weight: var(--weight-3);
+  font-size: var(--type-3); font-weight: var(--weight-3);
   flex: none;
 }
 .ml-phone input { flex: 1; min-width: 0; }
@@ -1017,7 +1017,7 @@ a.ml-row:active { background: var(--color-surface); }
   border-radius: var(--radius-2);
   background: var(--color-white);
   color: inherit; text-align: left; text-decoration: none;
-  font-family: var(--font-body); font-size: var(--type-2);
+  font-family: var(--font-body); font-size: var(--type-3);
   cursor: pointer;
   transition: border-color var(--duration-1) var(--ease-standard);
 }
@@ -1202,7 +1202,7 @@ a.ml-row:active { background: var(--color-surface); }
   background: var(--color-white);
   color: var(--color-ink);
   font-family: var(--font-body);
-  font-size: var(--type-2);
+  font-size: var(--type-3);
   appearance: none;
   cursor: pointer;
 }
@@ -1264,7 +1264,7 @@ a.ml-row:active { background: var(--color-surface); }
   display: flex; align-items: center; gap: var(--space-3);
   min-height: var(--size-4);
   padding: var(--space-2) 0;
-  font-size: var(--type-2); font-weight: var(--weight-3);
+  font-size: var(--type-3); font-weight: var(--weight-3);
   cursor: pointer; list-style: none;
 }
 .ml-accordion > summary::-webkit-details-marker { display: none; }
@@ -1277,7 +1277,7 @@ a.ml-row:active { background: var(--color-surface); }
   transition: transform var(--duration-2) var(--ease-standard);
 }
 .ml-accordion[open] > summary::after { transform: rotate(-135deg) translate(-2px, -2px); }
-.ml-accordion__body { padding: 0 0 var(--space-3); color: var(--color-muted); font-size: var(--type-2); }
+.ml-accordion__body { padding: 0 0 var(--space-3); color: var(--color-muted); font-size: var(--type-3); }
 
 /* ── dialog ────────────────────────────────────────────────────────────── */
 /* Centre-screen decision. Distinct from .ml-sheet, which is for choosing among
@@ -1296,8 +1296,8 @@ a.ml-row:active { background: var(--color-surface); }
 }
 .ml-dialog::backdrop { background: color-mix(in srgb, var(--color-ink) 64%, transparent); }
 .ml-dialog__title { margin: 0 0 var(--space-2); font-family: var(--font-display);
-  font-size: var(--type-3); font-weight: var(--weight-3); letter-spacing: -0.01em; }
-.ml-dialog__body { margin: 0; color: var(--color-muted); font-size: var(--type-2); }
+  font-size: var(--type-4); font-weight: var(--weight-3); letter-spacing: -0.01em; }
+.ml-dialog__body { margin: 0; color: var(--color-muted); font-size: var(--type-3); }
 .ml-dialog__actions { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
 /* destructive confirmations put the safe choice first */
 .ml-dialog--danger .ml-dialog__title { color: var(--color-error); }
@@ -1316,7 +1316,7 @@ a.ml-row:active { background: var(--color-surface); }
   border: 0; border-radius: var(--radius-4);
   background: var(--color-ink); color: var(--color-white);
   box-shadow: var(--elevation-2);
-  font-family: var(--font-body); font-size: var(--type-2); font-weight: var(--weight-3);
+  font-family: var(--font-body); font-size: var(--type-3); font-weight: var(--weight-3);
   cursor: pointer;
   transition: transform var(--duration-1) var(--ease-standard);
 }

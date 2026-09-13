@@ -22,7 +22,7 @@ done.push(writeScreen({ flow: "auth", screen: "splash", body: `
   <div class="ml-app" style="background:var(--color-ink)">
     <main class="ml-app__body" style="display:flex;align-items:center;justify-content:center;text-align:center">
       <div>
-        <h1 class="ml-wordmark ml-wordmark--on-media" style="font-size:var(--type-4);margin:0">MUSIC<em>LINKD</em></h1>
+        <h1 class="ml-wordmark ml-wordmark--on-media" style="font-size:var(--type-6);margin:0">MUSIC<em>LINKD</em></h1>
         <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)" data-state="loading">Your professional music network</p>
         <p class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-2)" data-state="resuming_local_session">Restoring your session…</p>
         <div class="ml-spinner" style="margin:var(--space-4) auto 0"></div>
@@ -35,8 +35,8 @@ done.push(writeScreen({ flow: "auth", screen: "welcome", body: `
   <div class="ml-app">
     <main class="ml-app__body" style="display:flex;flex-direction:column;justify-content:center;gap:var(--space-4)">
       <div style="text-align:center">
-        <h1 class="ml-wordmark" style="font-size:var(--type-4);margin:0">MUSIC<em>LINKD</em></h1>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">Discover, collaborate, and get booked — India's network for musicians, studios, and bands.</p>
+        <h1 class="ml-wordmark" style="font-size:var(--type-6);margin:0">MUSIC<em>LINKD</em></h1>
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-2)">Discover, collaborate, and get booked — India's network for musicians, studios, and bands.</p>
       </div>
       <div style="display:flex;flex-direction:column;gap:var(--space-2)">
         <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/auth/email_auth/index.html?state=signup">Get started with email</a>
@@ -57,8 +57,8 @@ done.push(writeScreen({ flow: "auth", screen: "email_auth", body: `
     <header class="ml-navbar">${backArrow(W)}</header>
     <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3)">
       <div>
-        <h1 class="ml-type-3" style="margin:0">Welcome back</h1>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Sign in or create your MusicLinkd account.</p>
+        <h1 class="ml-type-4" style="margin:0">Welcome back</h1>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-1) 0 0">Sign in or create your MusicLinkd account.</p>
       </div>
 
       <div class="ml-segmented" role="tablist">
@@ -99,8 +99,8 @@ done.push(writeScreen({ flow: "auth", screen: "mobile_auth", body: `
     <header class="ml-navbar">${backArrow(W)}</header>
     <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3)">
       <div>
-        <h1 class="ml-type-3" style="margin:0">Enter your mobile number</h1>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">We'll send a 6-digit code to verify it's you.</p>
+        <h1 class="ml-type-4" style="margin:0">Enter your mobile number</h1>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-1) 0 0">We'll send a 6-digit code to verify it's you.</p>
       </div>
       <div class="ml-field">
         <label for="phone">Mobile number</label>
@@ -125,8 +125,8 @@ done.push(writeScreen({ flow: "auth", screen: "otp_verification", body: `
     <header class="ml-navbar">${backArrow("/preview/flows/auth/mobile_auth/index.html")}</header>
     <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3);text-align:center">
       <div>
-        <h1 class="ml-type-3" style="margin:0">Enter verification code</h1>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Sent to +91 98765 43210</p>
+        <h1 class="ml-type-4" style="margin:0">Enter verification code</h1>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-1) 0 0">Sent to +91 98765 43210</p>
       </div>
 
       <div class="ml-otp" role="group" aria-label="6-digit verification code" data-state="entering verifying">
@@ -145,7 +145,7 @@ done.push(writeScreen({ flow: "auth", screen: "otp_verification", body: `
 
       <div data-state="success">
         ${checkMark}
-        <p class="ml-type-2" style="margin-top:var(--space-2)">Number verified</p>
+        <p class="ml-type-3" style="margin-top:var(--space-2)">Number verified</p>
       </div>
 
       <div class="ml-banner ml-banner--error" role="alert" data-state="error">
@@ -168,8 +168,8 @@ done.push(writeScreen({ flow: "auth", screen: "google_signin", body: `
     <main class="ml-app__body" style="display:flex;flex-direction:column;gap:var(--space-3)">
       <div style="text-align:center">
         <svg width="30" height="30" viewBox="0 0 24 24" style="margin:0 auto" aria-hidden="true"><path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.67-.22-2.45H12v4.64h6.47c-.28 1.5-1.13 2.78-2.4 3.63v3.02h3.88c2.27-2.09 3.57-5.17 3.57-8.84z"/><path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.95-2.9l-3.88-3.02c-1.08.72-2.45 1.15-4.07 1.15-3.13 0-5.78-2.12-6.73-4.96H1.27v3.12C3.25 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.27A7.2 7.2 0 0 1 4.89 12c0-.79.14-1.56.38-2.27V6.61H1.27A12 12 0 0 0 0 12c0 1.94.46 3.77 1.27 5.39z"/><path fill="#EA4335" d="M12 4.77c1.77 0 3.35.61 4.6 1.8l3.44-3.44C17.96 1.19 15.24 0 12 0 7.31 0 3.25 2.7 1.27 6.61l4 3.12C6.22 6.89 8.87 4.77 12 4.77z"/></svg>
-        <h1 class="ml-type-3" style="margin:var(--space-2) 0 0">Choose an account</h1>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">to continue to MusicLinkd</p>
+        <h1 class="ml-type-4" style="margin:var(--space-2) 0 0">Choose an account</h1>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-1) 0 0">to continue to MusicLinkd</p>
       </div>
 
       <div class="ml-banner ml-banner--error" role="alert" data-state="fallback_fake">
@@ -195,7 +195,7 @@ done.push(writeScreen({ flow: "auth", screen: "google_signin", body: `
       <p class="ml-type-1" style="color:var(--color-muted)" data-state="account_picker">MusicLinkd will receive your name, email address and profile picture.</p>
       <div data-state="success" style="text-align:center">
         ${checkMark}
-        <p class="ml-type-2" style="margin-top:var(--space-2)">Signed in as ananya.sharma@gmail.com</p>
+        <p class="ml-type-3" style="margin-top:var(--space-2)">Signed in as ananya.sharma@gmail.com</p>
       </div>
       <a class="ml-btn ml-btn--primary ml-btn--block ml-btn--lg" href="/preview/flows/auth/email_auth/index.html?state=signup" data-state="fallback_fake">Continue with email</a>
     </main>
@@ -207,8 +207,8 @@ done.push(writeScreen({ flow: "auth", screen: "registration_write", body: `
     <main class="ml-app__body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-3);text-align:center">
       ${checkMark}
       <div>
-        <h1 class="ml-type-3" style="margin:0">Account created</h1>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Welcome to MusicLinkd — let's set up your profile next.</p>
+        <h1 class="ml-type-4" style="margin:0">Account created</h1>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-1) 0 0">Welcome to MusicLinkd — let's set up your profile next.</p>
       </div>
       <span class="ml-status ml-status--success" data-state="success">Verified email</span>
       <div class="ml-banner ml-banner--warning ml-banner--info" data-state="fallback_uid">
@@ -238,7 +238,7 @@ const A = "/preview/flows/auth/";
 
 const authBar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0">${title}</h1>
     </header>`;
 
 writeScreen({
@@ -297,7 +297,7 @@ writeScreen({
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
       <div data-state="default">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Give us the address on your account and we'll send a link to set a new password.
         </p>
         <div class="ml-field">
@@ -340,7 +340,7 @@ writeScreen({
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
       <div data-state="default weak">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Setting a new password for <b>ishita@example.com</b>. You'll be signed out everywhere else.
         </p>
         <div class="ml-field">
