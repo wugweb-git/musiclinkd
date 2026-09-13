@@ -36,7 +36,7 @@ Every file carries a front-matter block: `doc`, `version`, `status`, `updated`,
 |---|---|---|---|
 | `CURRENT.md` | 1.0 | CURRENT | **Ground truth.** Read first, update first. |
 | `BUILD-STATE-2026-09-13.md` | 1.0 | CURRENT | Dated snapshot of pushed / merged / live, with the session's corrections. Point-in-time — it does not age into `CURRENT.md`. |
-| `HANDOFF-2026-09-13.md` | 1.0 | CURRENT | Claude Code's consolidated handoff. **Rescued from a `/private/tmp` scratch directory** that is not version-controlled and would have been lost. |
+| `HANDOFF-2026-09-13.md` | 1.1 | CURRENT | Claude Code's consolidated handoff — 25 pending items plus known bugs. **Rescued from a `/private/tmp` scratch directory** that is not version-controlled. v1.0 was taken mid-edit and had Appendix A misnumbered 23–32; v1.1 is the corrected, fuller text. |
 
 ### `plans/` — executable work
 
@@ -62,6 +62,7 @@ Every file carries a front-matter block: `doc`, `version`, `status`, `updated`,
 | `TAILWIND-DS-AUDIT.md` | 1.1 | PARTLY STALE | Both design systems. Section B is overtaken — the ceiling was raised and the scale is 7 steps. Section A still holds. |
 | `FIRESTORE-SCHEMA-AUDIT.md` | 1.0 | CURRENT | 1063-line schema against live Firestore. Unaffected by frontend work. |
 | `pending-screens-audit-2026-09-13.md` | 1.0 | CURRENT | The 7 Sep list checked item by item against the code: 24 done, 9 partial, 4 not done, plus which screens nothing links to. Also committed in the app repo at `docs/`. |
+| `handoff-gap-audit-2026-09-13.md` | 1.0 | CURRENT | The sweep of every plan/audit/spec doc against the handoff, used to find what it was missing. Also rescued from scratch. |
 | `pending-screens-2026-09-07.md` | 1.0 | SUPERSEDED | The original list, written by Lovable's agent, from `.lovable/plan/`. Superseded by the audit above. |
 | `REFACTOR-REVIEW-URLMAP.md` | 1.1 | PARTLY STALE | Sections 1–4 (the `/feed` review) are live and **exist in no phase spec** — losing this file loses three bugs. Section 5's URL table should be script output, not prose. |
 
