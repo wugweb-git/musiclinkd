@@ -81,31 +81,19 @@ Shared, and true of both:
 | Navy | **Removed 13 Sep** — migrated to ink `#0D0D0D` (`81c8953`). Zero `navy` left in `src/`; `Btn variant="ink"`, `bg-ink` |
 | Radius | **Material 3 shape scale, adopted 13 Sep:** xs 4 · sm 8 · md 12 · lg 16 · xl 20 · 2xl 28 · 3xl 32 · full. `--radius` (shadcn base) is 16. |
 
-## The guide and the app disagree in five places
+## Scope
 
-Not five problems. **One problem asked five times: does the design guide lead or follow the app?**
-Every row is the app moving and the guide staying. Settling the question once retires all five, and
-the next few, which will otherwise arrive one at a time.
+**This project is the Lovable app, `musiclinkd-9e6ca875`.** The design-guide repo is not edited and
+its divergence from the app is not a problem tracked here. The guide is a reference to pull from only
+when Vedanshu points at a specific thing to take from it.
 
-| | App (`musiclinkd-9e6ca875`) | Guide (`musiclinkd`) |
-|---|---|---|
-| **Radius** | Material 3: 4 · 8 · 12 · 16 · 20 · 28 · 32 · full | `--radius-1..4` = 8 · 16 · 32 · 9999 |
-| **Display font** | Inter | `--font-display: 'Inter Tight'` |
-| **Weight** | 400 / 500 / 600 / 700 loaded; 800 never requested | `--weight-4: 800` |
-| **Type steps** | 5 | 7 |
-| **Photography** | rule deleted from `AGENTS.md` and the Lovable knowledge | `frontend/guide/rules/cards.md` still says *"never stock"* |
+Removed from this document on that instruction: the guide-vs-app comparison (radius, display font,
+weight 800, type steps, photography) and the "does the guide lead or follow" decision. They are in
+git history at `0d2d6da` if ever wanted.
 
-**Eyebrow font is NOT one of them.** An earlier version of this table listed it. The app has no
-eyebrow font token at all — `src/styles.css` declares only `--font-sans` and `--font-display`. The
-guide's Unica One eyebrow is real, but there is nothing in the app to compare it against.
-(`lovable-project-knowledge.md` also claims all three tokens resolve to Inter; that line is wrong for
-the same reason and should be corrected when the knowledge is next updated.)
+One item from that set stays, because it is inside the app and nothing to do with the guide:
 
-Every row was read from `frontend/guide/system/ml-tokens.css`, `frontend/guide/rules/cards.md` and
-`src/styles.css` on 13 Sep. The guide is the stated source of truth and currently describes a product
-that no longer exists — its own `/guide` page renders in Inter Tight with 32px card corners.
-
-### A contradiction inside the app, separate from the above
+### `AGENTS.md` and the code disagree about chips
 
 `AGENTS.md:152` assigns `sm` 8px to *"chips/small controls"*. The shared `Chip` component
 (`src/components/ml/ui.tsx:139`) is `rounded-full` — a pill — and the Material 3 commit says buttons
