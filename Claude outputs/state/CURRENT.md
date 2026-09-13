@@ -151,7 +151,25 @@ navigation wiring rather than a sweep. It is the cheapest next step.
   primary, `#8B5CF6` secondary, `#FAFAFA` ground, Google Sans. It is read alongside project
   knowledge and contradicts it.
 
-## Shipped 13 Sep, after the reorganisation
+## Shipped 13 Sep — later batch
+
+| Commit | What |
+|---|---|
+| `8783ea2` | `/feed`: the fake 450ms timer removed so the server renders real content; the three fabricated figures now computed from seed data; Bell links to `/notifications`. `ui/skeleton` default tint neutral. Four QR items ticked in `roadmap.md`. |
+| `78dca36` | **The 11 linked profiles are real rows in the live database.** Opportunity posters, applicants and collab participants now have their own `profiles` rows with content in `src/data/linked-profiles.ts`; their `auth.users` rows carry no email or password, so nobody can sign in as them. Migration `20260913090949_seed_linked_profiles.sql`. |
+| `78dca36` | `/profile/$username` returns a real **404** for a username with neither a database row nor a seed profile — it used to render Rahul Iyer's page. `/profile/me` redirects to `/me`. |
+| `e2e3b18` | Seed migration recorded in `schema_migrations`. |
+
+Published: `musiclinkd.lovable.app` is on this build. Verified live — unknown username 404s;
+`/profile/sunsetrecords` renders its own content.
+
+### Still open, recorded in `roadmap.md`
+
+- Ananya's profile and every Discover talent profile still copy Rahul's tracks, projects and reviews.
+- A real user with no seed profile still falls back to Rahul's sections.
+- The banner's *"9 new opportunities"* comes from a different seed stat than the 5 real ones.
+
+## Shipped 13 Sep, earlier batch
 
 | Commit | What |
 |---|---|
