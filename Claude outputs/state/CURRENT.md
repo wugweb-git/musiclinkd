@@ -59,35 +59,58 @@ Fixed 13 Sep by renaming 12 parents: `bands`, `bands.$id`, `collab.new`, `collab
 
 ## Design system — verified 13 Sep 2026
 
+**Read the column headers.** An earlier version of this section merged app facts and guide facts into
+one table and got three things wrong as a result: it gave the guide's type-step count as the app's,
+claimed an eyebrow font token the app does not have, and said "three places" above a four-row table.
+Corrected below; the two systems are now stated separately, always.
+
+| | App (`musiclinkd-9e6ca875`) | Guide (`musiclinkd`) |
+|---|---|---|
+| Type scale | **5 steps** — `--type-1..5`, `--type-5` hero-only | **7 steps** — `--type-1..7` |
+| Font tokens | `--font-sans` and `--font-display`, both Inter. **There is no `--font-eyebrow` in the app** | `--font-display: 'Inter Tight'` · `--font-eyebrow: 'Unica One'` |
+| Weights loaded | 400 / 500 / 600 / 700 | `--weight-4: 800` |
+| Token count | — | **111 declarations**; the old 108 ceiling is lifted |
+
+Shared, and true of both:
+
 | | |
 |---|---|
-| Type scale | **7 steps.** `--type-1` … `--type-7` |
-| Token count | **111 declarations** in the generated `ml-tokens.css` |
-| Token ceiling | **Lifted.** The old 108 cap is gone |
 | Steps-per-scale rule | **DEAD.** Any scale carries as many steps as the design needs |
-| Fonts | **Inter alone** — body, display, eyebrow. Inter Tight, Unica One and JetBrains Mono all retired |
 | Letter-spacing | None. Headings use Inter's normal tracking; the wordmark is set at 0 |
 | Brand pink | `#EA4C89` fills · `#C7295F` text. `#5B4BFF` is superseded and always a bug |
 | Navy | **Removed 13 Sep** — migrated to ink `#0D0D0D` (`81c8953`). Zero `navy` left in `src/`; `Btn variant="ink"`, `bg-ink` |
 | Radius | **Material 3 shape scale, adopted 13 Sep:** xs 4 · sm 8 · md 12 · lg 16 · xl 20 · 2xl 28 · 3xl 32 · full. `--radius` (shadcn base) is 16. |
 
-## The guide and the app now disagree in three places
+## The guide and the app disagree in five places
 
-Not three problems. One problem asked three times: **does the design guide lead or follow the app?**
-Every case below is the app moving and the guide staying. Settling the question once retires all
-three and the next few, which will otherwise arrive one at a time.
+Not five problems. **One problem asked five times: does the design guide lead or follow the app?**
+Every row is the app moving and the guide staying. Settling the question once retires all five, and
+the next few, which will otherwise arrive one at a time.
 
 | | App (`musiclinkd-9e6ca875`) | Guide (`musiclinkd`) |
 |---|---|---|
 | **Radius** | Material 3: 4 · 8 · 12 · 16 · 20 · 28 · 32 · full | `--radius-1..4` = 8 · 16 · 32 · 9999 |
-| **Fonts** | Inter alone — display, body, eyebrow | `--font-display: 'Inter Tight'` · `--font-eyebrow: 'Unica One', 'Inter Tight'` |
-| **Weights** | 400 / 500 / 600 / 700 loaded; 800 never requested | `--weight-4: 800` |
+| **Display font** | Inter | `--font-display: 'Inter Tight'` |
+| **Weight** | 400 / 500 / 600 / 700 loaded; 800 never requested | `--weight-4: 800` |
+| **Type steps** | 5 | 7 |
 | **Photography** | rule deleted from `AGENTS.md` and the Lovable knowledge | `frontend/guide/rules/cards.md` still says *"never stock"* |
 
-All four lines above were read from `frontend/guide/system/ml-tokens.css` and
-`frontend/guide/rules/cards.md` on 13 Sep. The guide is the stated source of truth and currently
-describes a product that no longer exists — its own `/guide` page renders in Inter Tight with 32px
-card corners.
+**Eyebrow font is NOT one of them.** An earlier version of this table listed it. The app has no
+eyebrow font token at all — `src/styles.css` declares only `--font-sans` and `--font-display`. The
+guide's Unica One eyebrow is real, but there is nothing in the app to compare it against.
+(`lovable-project-knowledge.md` also claims all three tokens resolve to Inter; that line is wrong for
+the same reason and should be corrected when the knowledge is next updated.)
+
+Every row was read from `frontend/guide/system/ml-tokens.css`, `frontend/guide/rules/cards.md` and
+`src/styles.css` on 13 Sep. The guide is the stated source of truth and currently describes a product
+that no longer exists — its own `/guide` page renders in Inter Tight with 32px card corners.
+
+### A contradiction inside the app, separate from the above
+
+`AGENTS.md:152` assigns `sm` 8px to *"chips/small controls"*. The shared `Chip` component
+(`src/components/ml/ui.tsx:139`) is `rounded-full` — a pill — and the Material 3 commit says buttons
+and chips stay pills. As written, Lovable's agent will build 8px chips on new screens. One line in
+`AGENTS.md` and one in the Lovable knowledge.
 
 **Until this is settled, neither repo is authoritative for radius, fonts, weight or photography.**
 Do not cite either one as governing in those four areas.
