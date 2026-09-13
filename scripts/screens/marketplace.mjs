@@ -88,7 +88,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Market</h1>
+      <h1 class="ml-type-4" style="margin:0">Market</h1>
       <span class="ml-appbar__actions">
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}marketplace_saved_bookmarks/index.html" aria-label="Saved listings">${icon("heart", { size: 20 })}</a>
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}marketplace_search_filters/index.html" aria-label="Search and filters">${icon("search", { size: 20 })}</a>
@@ -159,7 +159,7 @@ const tab = (state, label) =>
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0">${title}</h1>
     </header>`;
 
 /* ── marketplace_item_detail — default (sale) / rental ─────────────────
@@ -180,19 +180,19 @@ writeScreen({
            style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
       <div style="padding:var(--space-3) var(--space-4)">
         <div data-state="default">
-          <div class="ml-market-card__price" style="font-size:var(--type-4)">₹28,500</div>
-          <h2 class="ml-type-3" style="margin:var(--space-1) 0">Shure SM7B Microphone</h2>
+          <div class="ml-market-card__price" style="font-size:var(--type-6)">₹28,500</div>
+          <h2 class="ml-type-4" style="margin:var(--space-1) 0">Shure SM7B Microphone</h2>
           <span class="ml-status ml-status--warning">Like new</span>
-          <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">
+          <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-2)">
             Cardioid dynamic, used on two album sessions. Original box, shock mount and cable included.
             Collection in Andheri or courier at cost.
           </p>
         </div>
         <div data-state="rental">
-          <div class="ml-market-card__price" style="font-size:var(--type-4)">₹800/day</div>
-          <h2 class="ml-type-3" style="margin:var(--space-1) 0">Focusrite Scarlett 2i2</h2>
+          <div class="ml-market-card__price" style="font-size:var(--type-6)">₹800/day</div>
+          <h2 class="ml-type-4" style="margin:var(--space-1) 0">Focusrite Scarlett 2i2</h2>
           <span class="ml-status ml-status--success">Available</span>
-          <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">
+          <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-2)">
             Two-in, two-out interface with the original cables. Collection in Andheri.
             Minimum two days, and a refundable deposit is held for the length of the rental.
           </p>
@@ -332,7 +332,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">My market</h1>
+      <h1 class="ml-type-4" style="margin:0">My market</h1>
       <a class="ml-icon-btn ml-icon-btn--bare" href="${P}marketplace_create_listing/index.html" aria-label="Create listing">${icon("add", { size: 20 })}</a>
     </header>
     <nav class="ml-tabs ml-tabs--fill" role="tablist" aria-label="My market" style="margin:0 var(--space-4)">
@@ -403,7 +403,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Saved</h1>
+      <h1 class="ml-type-4" style="margin:0">Saved</h1>
     </header>
     <nav class="ml-tabs ml-tabs--fill" role="tablist" aria-label="View" style="margin:0 var(--space-4)">
       ${tab("grid", "Grid")}${tab("list", "List")}
@@ -617,7 +617,7 @@ writeScreen({
           <div class="ml-summary__row"><span>Late fee</span><span>₹800/day from today</span></div>
           <div class="ml-summary__row"><span>Taken from</span><span>The deposit</span></div>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           If you need it longer, message the owner — extending is usually cheaper than the late fee.
         </p>
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="/preview/flows/communication/chat_conversation/index.html">Message the owner</a>

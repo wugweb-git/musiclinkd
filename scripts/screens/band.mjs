@@ -23,7 +23,7 @@ assertIcons(["arrow-forward", "check", "cancel", "add", "send"]);
 
 const bar = (title, backTo, actions = "") => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0;flex:1">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0;flex:1">${title}</h1>
       ${beta}${actions}
     </header>`;
 
@@ -62,7 +62,7 @@ writeScreen({
       <img src="${media("stage", 6)}" alt="" loading="lazy"
            style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
       <div style="padding:var(--space-3) var(--space-4)">
-        <h2 class="ml-type-3" style="margin:0">The Kolaba Sessions</h2>
+        <h2 class="ml-type-4" style="margin:0">The Kolaba Sessions</h2>
         <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 0">
           Four-piece indie rock · Mumbai · formed 2022
         </p>
@@ -78,7 +78,7 @@ writeScreen({
           <span class="ml-banner__body">Visible to MusicLinkd members only — not to the open web.</span>
         </div>
 
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           Guitar-led indie with a horn section when the room allows it. Playing together since 2022,
           mostly around Mumbai and Pune. Available for festivals, club nights and session work as a unit.
         </p>
@@ -192,7 +192,7 @@ writeScreen({
           <div class="ml-summary__row"><span>Your role</span><span>Keys · Member</span></div>
           <div class="ml-summary__row"><span>Band</span><span>Four-piece indie rock, Mumbai</span></div>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-2)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-2)">
           Joining puts you on the band's public profile and lets the band apply for opportunities on your behalf.
           You can leave at any time.
         </p>
@@ -286,7 +286,7 @@ writeScreen({
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
 
       <div data-state="identity">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           A band is a professional entity of its own — it can hold music, shows, opportunities and bookings,
           separately from any member's profile.
         </p>
@@ -400,7 +400,7 @@ writeScreen({
 
       <div data-state="remove_member">
         <div class="ml-section"><h2>Remove a member</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Removing someone is done from the line-up, so you can see who you're removing.
         </p>
         <a class="ml-btn ml-btn--primary ml-btn--block" href="${B}ensemble_lineup/index.html?state=remove_member">Go to line-up</a>

@@ -20,6 +20,7 @@ Run them from `webapp/`:
 | `21-state-default-hidden.mjs` | `hidden` stamped on 428 non-default state elements across 132 screens |
 | `23-fix-imagery.mjs` | 7 watermarked photos + 3 listings whose photo contradicted their title |
 | `18-counters.mjs` | the six honest counts (templates / product screens / routes / states / …) |
+| `24-type-renumber.mjs` | 416 `--type-N`/`ml-type-N` references renumbered (2→3, 3→4, 4→6) across 194 screens, for the 2026-09-11 type scale (4 steps → 7) |
 
 The generators that must RE-RUN when content changes live one level up, in
 `scripts/`: `audit-system.mjs`, `build-registry.mjs`, `build-icons.mjs`,
@@ -27,15 +28,18 @@ The generators that must RE-RUN when content changes live one level up, in
 
 ## Not applied, and why
 
-- **`05-codemod-css.mjs` and the type renumber** — they existed only to make
-  room for a new 14px `--type-2`, and `build-tokens.mjs` caps every scale at
-  4 steps. Renumbering without the new step is churn with no destination.
-- **`17-patch-tokens.mjs`** — same reason. `foundation.space.5 = 64` and
-  `foundation.type.2 = 14` are both real needs (44% of all text sits at 12px
-  because nothing exists between 12 and 16; the top space step of 32 means the
-  gap BETWEEN sections can only be twice the padding INSIDE a card) but both
-  would take their scale to 5 steps. Raising the ceiling is an architecture
-  decision, not a fix.
+- **`05-codemod-css.mjs`** — planned to land alongside the type renumber
+  above; superseded by `24-type-renumber.mjs`, which folds both concerns
+  (renumbering plus the new-step CSS) into one migration. If `05-codemod-css.mjs`
+  is ever found on disk, treat it as dead: do not run it after `24-type-renumber.mjs`
+  has already applied.
+- **`17-patch-tokens.mjs`** — half of what it wanted is now done: the ceiling
+  was raised (108 → 111, 2026-09-11) and `foundation.type` grew 4 → 7 steps
+  (12/14/16/22/28/32/40), closing the 44%-of-text-sits-at-12px gap this note
+  describes. `foundation.space.5 = 64` is **still not applied** — the top
+  space step is still 32, so the gap between sections can still only be twice
+  the padding inside a card. That remains a real, open need and its own
+  architecture decision, separate from type.
 - **`09-build-guide.mjs`** — the multi-page guide emitter. It produces 161 good
   component and widget pages, but its index links to `/guide/foundations/` and
   `/guide/patterns/`, which it never emits, and it drops the Brand, Imagery,

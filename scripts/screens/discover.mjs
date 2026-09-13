@@ -62,7 +62,7 @@ const tabbar = (active) => `<nav class="ml-tabbar" aria-label="Primary">
 const search = (placeholder, href = D + "global_search/index.html") =>
   `<a class="ml-search" href="${href}" style="text-decoration:none;color:inherit">
         <span class="ml-search__icon">${icon("search", { size: 18 })}</span>
-        <span style="flex:1;color:var(--color-muted);font-size:var(--type-2)">${placeholder}</span>
+        <span style="flex:1;color:var(--color-muted);font-size:var(--type-3)">${placeholder}</span>
         <span class="ml-search__divider"></span>
         <span class="ml-icon-btn ml-icon-btn--bare" aria-hidden="true" style="min-width:24px;min-height:24px;border:0">
           ${icon("microphone", { size: 20 })}
@@ -420,7 +420,7 @@ done.push(writeScreen({ flow: "discover", screen: "studios_spaces", body: `
         <a class="ml-card" href="${D}studio_profile_discover/index.html">
           <div class="ml-media ml-media--wide"><img src="${IMG.studio1}" alt="" /></div>
           <div style="padding:var(--space-3)">
-            <div class="ml-type-2" style="font-weight:700">Andheri Live Room</div>
+            <div class="ml-type-3" style="font-weight:700">Andheri Live Room</div>
             <div class="ml-type-1" style="color:var(--color-muted)">Jam room · Andheri East · 1.4 km away</div>
             <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
               <span class="ml-badge">★ 4.4 (52)</span><span class="ml-badge">Drum kit</span><span class="ml-badge">PA</span>
@@ -430,7 +430,7 @@ done.push(writeScreen({ flow: "discover", screen: "studios_spaces", body: `
         <a class="ml-card" href="${D}studio_profile_discover/index.html">
           <div class="ml-media ml-media--wide"><img src="${IMG.studio2}" alt="" /></div>
           <div style="padding:var(--space-3)">
-            <div class="ml-type-2" style="font-weight:700">Blue Note Recording Co.</div>
+            <div class="ml-type-3" style="font-weight:700">Blue Note Recording Co.</div>
             <div class="ml-type-1" style="color:var(--color-muted)">Recording studio · Bandra · 3.2 km away</div>
             <div style="display:flex;gap:var(--space-2);margin-top:var(--space-2)">
               <span class="ml-badge">★ 4.6 (94)</span><span class="ml-badge">Neve desk</span><span class="ml-badge">Vocal booth</span>
@@ -495,9 +495,9 @@ done.push(writeScreen({ flow: "discover", screen: "projects", body: `
             <span class="ml-media__tag"><span class="ml-status ml-status--accent">2 open roles</span></span>
           </div>
           <div style="padding:var(--space-3)">
-            <div class="ml-type-2" style="font-weight:700">Monsoon Sessions</div>
+            <div class="ml-type-3" style="font-weight:700">Monsoon Sessions</div>
             <div class="ml-type-1" style="color:var(--color-muted)">Indie EP · Mumbai · led by Mehek Kapoor</div>
-            <p class="ml-type-2" style="margin:var(--space-2) 0 0">Five-track acoustic EP. Looking for a bassist and a mix engineer.</p>
+            <p class="ml-type-3" style="margin:var(--space-2) 0 0">Five-track acoustic EP. Looking for a bassist and a mix engineer.</p>
             <div class="ml-facepile">
               <img src="${IMG.mehek}" alt="" /><img src="${IMG.ananya}" alt="" /><img src="${IMG.arjun}" alt="" />
             </div>
@@ -506,7 +506,7 @@ done.push(writeScreen({ flow: "discover", screen: "projects", body: `
         <a class="ml-card" href="${D}project_detail/index.html">
           <div class="ml-media ml-media--wide"><img src="${IMG.crowd}" alt="" /></div>
           <div style="padding:var(--space-3)">
-            <div class="ml-type-2" style="font-weight:700">Tum Hi Toh (Unplugged)</div>
+            <div class="ml-type-3" style="font-weight:700">Tum Hi Toh (Unplugged)</div>
             <div class="ml-type-1" style="color:var(--color-muted)">Song · Released 14 Feb 2026 · 4.2M plays</div>
           </div>
         </a>
@@ -617,22 +617,22 @@ done.push(writeScreen({ flow: "discover", screen: "discover_opportunities", body
       <div style="display:flex;flex-direction:column;gap:var(--space-2)">
         <a class="ml-card ml-card--padded" href="/preview/flows/opportunities/opportunity_detail/index.html">
           <div style="display:flex;justify-content:space-between;gap:var(--space-2)">
-            <div class="ml-type-2" style="font-weight:700">Bassist for a 5-track indie EP</div>
+            <div class="ml-type-3" style="font-weight:700">Bassist for a 5-track indie EP</div>
             <span class="ml-status ml-status--success">Paid</span>
           </div>
           <div class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-1)">Monsoon Sessions · Mumbai · closes in 6 days</div>
-          <p class="ml-type-2" style="margin:var(--space-2) 0 0">Studio dates in March. Fretless preferred, not required.</p>
+          <p class="ml-type-3" style="margin:var(--space-2) 0 0">Studio dates in March. Fretless preferred, not required.</p>
         </a>
         <a class="ml-card ml-card--padded" href="/preview/flows/opportunities/opportunity_detail/index.html">
           <div style="display:flex;justify-content:space-between;gap:var(--space-2)">
-            <div class="ml-type-2" style="font-weight:700">Playback vocalist — Punjabi film</div>
+            <div class="ml-type-3" style="font-weight:700">Playback vocalist — Punjabi film</div>
             <span class="ml-status ml-status--warning">Audition</span>
           </div>
           <div class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-1)">Blue Ridge Records · Mumbai · closes in 12 days</div>
         </a>
         <a class="ml-card ml-card--padded" href="/preview/flows/opportunities/opportunity_detail/index.html">
           <div style="display:flex;justify-content:space-between;gap:var(--space-2)">
-            <div class="ml-type-2" style="font-weight:700">Mix engineer for a fusion album</div>
+            <div class="ml-type-3" style="font-weight:700">Mix engineer for a fusion album</div>
             <span class="ml-status ml-status--neutral">Collab</span>
           </div>
           <div class="ml-type-1" style="color:var(--color-muted);margin-top:var(--space-1)">Arjun Menon · Remote · closes in 3 days</div>
@@ -741,7 +741,7 @@ done.push(writeScreen({ flow: "discover", screen: "discover_profile_detail", tit
           <a class="ml-btn ml-btn--secondary" href="${D}service_detail/index.html">Hire</a>
         </div>
 
-        <p class="ml-type-2" style="margin:0 0 var(--space-3)">Twelve years mixing Hindi and Punjabi film music. Neve desk, Dolby Atmos certified. Happiest on a fast turnaround.</p>
+        <p class="ml-type-3" style="margin:0 0 var(--space-3)">Twelve years mixing Hindi and Punjabi film music. Neve desk, Dolby Atmos certified. Happiest on a fast turnaround.</p>
 
         <div class="ml-chip-wrap">
           ${chip("Bollywood / Filmi", true)}${chip("Sufi", true)}${chip("Hindi", true)}${chip("Punjabi", true)}
@@ -811,7 +811,7 @@ done.push(writeScreen({ flow: "discover", screen: "business_profile", body: `
           <button class="ml-btn ml-btn--secondary">Follow</button>
         </div>
 
-        <p class="ml-type-2" style="margin:0 0 var(--space-3)">Four rooms including a Dolby Atmos mix stage. In-house engineers, Steinway D, full backline.</p>
+        <p class="ml-type-3" style="margin:0 0 var(--space-3)">Four rooms including a Dolby Atmos mix stage. In-house engineers, Steinway D, full backline.</p>
 
         <div class="ml-section"><h2>Rooms</h2></div>
         <div class="ml-rail">
@@ -870,7 +870,7 @@ done.push(writeScreen({ flow: "discover", screen: "studio_profile_discover", tit
           <button class="ml-btn ml-btn--secondary">Save</button>
         </div>
 
-        <p class="ml-type-2" style="margin:0 0 var(--space-3)">Acoustically treated 320 sq ft room. Walk-ins welcome off-peak.</p>
+        <p class="ml-type-3" style="margin:0 0 var(--space-3)">Acoustically treated 320 sq ft room. Walk-ins welcome off-peak.</p>
 
         <div class="ml-section"><h2>Gear</h2></div>
         <div class="ml-chip-wrap">
@@ -919,7 +919,7 @@ done.push(writeScreen({ flow: "discover", screen: "project_detail", body: `
           <button class="ml-btn ml-btn--secondary">Follow</button>
         </div>
 
-        <p class="ml-type-2" style="margin:0 0 var(--space-3)">A five-track acoustic EP recorded across three Mumbai rooms this monsoon. Two roles still open.</p>
+        <p class="ml-type-3" style="margin:0 0 var(--space-3)">A five-track acoustic EP recorded across three Mumbai rooms this monsoon. Two roles still open.</p>
 
         <div class="ml-section"><h2>Open roles</h2></div>
         <div style="display:flex;flex-direction:column;gap:var(--space-2)">
@@ -968,7 +968,7 @@ done.push(writeScreen({ flow: "discover", screen: "service_detail", body: `
         <div style="display:flex;align-items:center;gap:var(--space-3)">
           <img class="ml-avatar ml-avatar--lg" src="${IMG.rahul}" alt="" />
           <div>
-            <h1 class="ml-type-3" style="margin:0">Mixing &amp; mastering</h1>
+            <h1 class="ml-type-4" style="margin:0">Mixing &amp; mastering</h1>
             <a class="ml-row__meta" href="${D}discover_profile_detail/index.html" style="color:var(--color-pink-pressed);font-weight:600;text-decoration:none">by Rahul Iyer</a>
           </div>
         </div>
@@ -1030,7 +1030,7 @@ done.push(writeScreen({ flow: "discover", screen: "community_detail", body: `
           You're in. New posts from Indie India will appear in Connections.
         </div>
 
-        <p class="ml-type-2" style="margin:0 0 var(--space-3)">For independent artists across India — releases, gig swaps, and honest feedback on works in progress.</p>
+        <p class="ml-type-3" style="margin:0 0 var(--space-3)">For independent artists across India — releases, gig swaps, and honest feedback on works in progress.</p>
 
         <div class="ml-section"><h2>Members</h2></div>
         <div>
@@ -1109,7 +1109,7 @@ done.push(writeScreen({ flow: "discover", screen: "trending_recommended_sections
       </div>
     </header>
     <main class="ml-app__body">
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">What's happening in your world.</p>
+      <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">What's happening in your world.</p>
       <div class="ml-banner ml-banner--info" data-state="empty">Follow a few artists and studios and this feed fills up.</div>
 
       <div class="ml-progress">

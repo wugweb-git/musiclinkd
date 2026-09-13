@@ -30,7 +30,7 @@ assertIcons(["heart", "search", "add", "check", "cancel", "arrow-forward", "filt
 
 const bar = (title, backTo, actions = "") => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0;flex:1">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0;flex:1">${title}</h1>
       ${actions}
     </header>`;
 
@@ -99,7 +99,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Saved</h1>
+      <h1 class="ml-type-4" style="margin:0">Saved</h1>
       <span class="ml-appbar__actions">
         <a class="ml-icon-btn ml-icon-btn--bare" data-chip="favorites" href="?state=favorites" aria-label="Favourites only">${icon("heart", { size: 20 })}</a>
         <a class="ml-icon-btn ml-icon-btn--bare" href="?state=bulk_select" aria-label="Select items">${icon("check", { size: 20 })}</a>
@@ -235,7 +235,7 @@ writeScreen({
       `<button class="ml-icon-btn ml-icon-btn--bare" type="button" data-open-sheet="cd-settings" aria-label="Collection settings">${icon("filter", { size: 20 })}</button>`)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div data-state="default shared private editing">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0">Rooms I'd book again.</p>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0">Rooms I'd book again.</p>
         <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 var(--space-3)">
           ${IN_COLLECTION.length} items
         </p>

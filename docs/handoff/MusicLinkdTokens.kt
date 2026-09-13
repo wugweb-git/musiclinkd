@@ -166,8 +166,16 @@ object MLType {
         fontWeight = MLWeight.W3,
         letterSpacing = 0.12.sp,
     )
-    /** Body copy, default UI text, list item titles — Material bodyLarge */
+    /** Secondary body — supporting lines under a title, list-item metadata, form help. Added 2026-09-11: nothing sat within 2px of 14, so screens carried 14–15px as arbitrary sizes — Material bodyMedium */
     val Type2 = TextStyle(
+        fontFamily = Inter,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        fontWeight = MLWeight.W1,
+        letterSpacing = 0.00.sp,
+    )
+    /** Body copy, default UI text, list item titles — Material bodyLarge */
+    val Type3 = TextStyle(
         fontFamily = Inter,
         fontSize = 16.sp,
         lineHeight = 24.sp,
@@ -175,20 +183,36 @@ object MLType {
         letterSpacing = 0.00.sp,
     )
     /** Section headings, card titles, screen titles — Material titleLarge */
-    val Type3 = TextStyle(
+    val Type4 = TextStyle(
         fontFamily = InterTight,
         fontSize = 22.sp,
         lineHeight = 28.sp,
         fontWeight = MLWeight.W3,
         letterSpacing = -0.22.sp,
     )
-    /** Display — hero headlines, now-playing track title, the one big number on a screen — Material displaySmall */
-    val Type4 = TextStyle(
+    /** Large titles — a detail screen's headline, a figure inside a card. Added 2026-09-11 to fill the 22→32 gap, the widest in the old ramp — Material headlineMedium */
+    val Type5 = TextStyle(
+        fontFamily = InterTight,
+        fontSize = 28.sp,
+        lineHeight = 36.sp,
+        fontWeight = MLWeight.W3,
+        letterSpacing = -0.56.sp,
+    )
+    /** Display — now-playing track title, the one big number on a screen — Material displaySmall */
+    val Type6 = TextStyle(
         fontFamily = InterTight,
         fontSize = 32.sp,
         lineHeight = 40.sp,
         fontWeight = MLWeight.W4,
         letterSpacing = -0.96.sp,
+    )
+    /** Hero — the pre-auth landing headline only, one per product. Added 2026-09-11; the Lovable app shipped it first as its own --type-5. On iOS it maps to largeTitle, the largest Dynamic Type style — Material displayMedium */
+    val Type7 = TextStyle(
+        fontFamily = InterTight,
+        fontSize = 40.sp,
+        lineHeight = 48.sp,
+        fontWeight = MLWeight.W4,
+        letterSpacing = -1.20.sp,
     )
 }
 

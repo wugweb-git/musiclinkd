@@ -84,7 +84,7 @@
 .ml-appbar__title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: var(--type-4);
+  font-size: var(--type-6);
   font-weight: var(--weight-4);
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -212,7 +212,7 @@
 .ml-artist-card__body { padding: var(--space-2); }
 .ml-artist-card__name {
   display: flex; align-items: center; gap: var(--space-1);
-  font-size: var(--type-2); font-weight: var(--weight-3); line-height: 1.2;
+  font-size: var(--type-3); font-weight: var(--weight-3); line-height: 1.2;
 }
 .ml-artist-card__name svg { width: var(--icon-1); height: var(--icon-1); color: var(--color-pink); flex: none; }
 .ml-artist-card__role {
@@ -246,7 +246,7 @@
 .ml-studio-card__media { position: relative; aspect-ratio: var(--media-aspect-wide); background: var(--color-surface); }
 .ml-studio-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ml-studio-card__body { padding: var(--space-2); }
-.ml-studio-card__name { font-size: var(--type-2); font-weight: var(--weight-3); line-height: 1.2; }
+.ml-studio-card__name { font-size: var(--type-3); font-weight: var(--weight-3); line-height: 1.2; }
 .ml-studio-card__loc  { font-size: var(--type-1); color: var(--color-muted); }
 .ml-studio-card__meta {
   display: flex; align-items: center; justify-content: space-between;
@@ -280,7 +280,7 @@
 }
 .ml-media-card__tag { position: absolute; z-index: 1; top: var(--space-2); left: var(--space-2); }
 .ml-media-card__body { position: absolute; z-index: 1; left: var(--space-3); right: var(--space-3); bottom: var(--space-3); }
-.ml-media-card__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-4); line-height: 1.15; letter-spacing: -0.01em; }
+.ml-media-card__title { font-family: var(--font-display); font-size: var(--type-4); font-weight: var(--weight-4); line-height: 1.15; letter-spacing: -0.01em; }
 .ml-media-card__sub   { font-size: var(--type-1); color: color-mix(in srgb, var(--color-white) 85%, transparent); }
 
 /* ── marketplace card ──────────────────────────────────────────────────── */
@@ -322,7 +322,7 @@
   width: var(--size-3); height: var(--size-3); transform: translate(50%, -50%);
 }
 .ml-market-card__body  { padding: var(--space-3) var(--space-2) var(--space-2); }
-.ml-market-card__price { font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-4); line-height: 1.1; }
+.ml-market-card__price { font-family: var(--font-display); font-size: var(--type-4); font-weight: var(--weight-4); line-height: 1.1; }
 .ml-market-card__title { font-size: var(--type-1); font-weight: var(--weight-3); margin-top: 2px; }
 .ml-market-card__meta  { font-size: var(--type-1); color: var(--color-muted); }
 /* Two-up browse grid. The card's own 168px width is for horizontal rails;
@@ -345,7 +345,7 @@
 .ml-booking-card + .ml-booking-card { margin-top: var(--space-2); }
 .ml-booking-card__thumb { width: var(--size-4); height: var(--size-4); border-radius: var(--radius-1); object-fit: cover; flex: none; background: var(--color-surface); }
 .ml-booking-card__body  { flex: 1; min-width: 0; }
-.ml-booking-card__title { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-booking-card__title { font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-booking-card__meta  { font-size: var(--type-1); color: var(--color-muted); }
 
 .ml-review-card { padding: var(--space-3); }
@@ -354,7 +354,7 @@
    below even the 3:1 graphic floor. Found while reusing this card for the
    Profile flow's reviews section, before it shipped anywhere else. */
 .ml-review-card__stars { color: var(--color-ink); font-size: var(--type-1); }
-.ml-review-card__body  { margin-top: var(--space-2); font-size: var(--type-2); }
+.ml-review-card__body  { margin-top: var(--space-2); font-size: var(--type-3); }
 
 .ml-notification { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-3) 0; }
 .ml-notification--unread { background: var(--color-pink-container); border-radius: var(--radius-2); padding-inline: var(--space-3); }
@@ -369,7 +369,7 @@
   border-radius: var(--radius-2);
   background: var(--color-white);
 }
-.ml-stat__num   { display: block; font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-4); line-height: 1; }
+.ml-stat__num   { display: block; font-family: var(--font-display); font-size: var(--type-4); font-weight: var(--weight-4); line-height: 1; }
 .ml-stat__label { display: block; margin-top: 2px; font-size: var(--type-1); color: var(--color-muted); font-weight: var(--weight-2); }
 .ml-stat__delta { font-size: var(--type-1); font-weight: var(--weight-3); color: var(--color-pink); }
 
@@ -380,7 +380,7 @@
 .ml-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ml-hero::after { content: ""; position: absolute; inset: 0; background: var(--media-scrim); }
 .ml-hero__body { position: absolute; z-index: 1; left: var(--space-3); right: var(--space-3); bottom: var(--space-3); color: var(--color-white); }
-.ml-hero__name { margin: 0; font-family: var(--font-display); font-size: var(--type-4); font-weight: var(--weight-4); line-height: 1.1; letter-spacing: -0.03em; }
+.ml-hero__name { margin: 0; font-family: var(--font-display); font-size: var(--type-6); font-weight: var(--weight-4); line-height: 1.1; letter-spacing: -0.03em; }
 .ml-hero__sub  { font-size: var(--type-1); color: color-mix(in srgb, var(--color-white) 85%, transparent); }
 .ml-hero__stats { display: flex; gap: var(--space-3); margin-top: var(--space-2); font-size: var(--type-1); }
 .ml-hero__stats b { font-weight: var(--weight-3); }
@@ -428,7 +428,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   border-radius: var(--radius-2);
   background: var(--color-pink-container);
 }
-.ml-progress__title { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-progress__title { font-size: var(--type-3); font-weight: var(--weight-3); }
 /* --color-muted was verified against paper (5.01) and surface (4.73) but not
    against a TINTED ground: on --color-pink-container it is 4.26 and fails.
    Secondary text on a tint takes ink at reduced weight instead. */
@@ -577,8 +577,8 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 /* ── empty state ───────────────────────────────────────────────────────── */
 
 .ml-empty { text-align: center; padding: var(--space-4) var(--space-3); }
-.ml-empty__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-3); margin: 0 0 var(--space-1); }
-.ml-empty__body  { font-size: var(--type-2); color: var(--color-muted); margin: 0 0 var(--space-3); }
+.ml-empty__title { font-family: var(--font-display); font-size: var(--type-4); font-weight: var(--weight-3); margin: 0 0 var(--space-1); }
+.ml-empty__body  { font-size: var(--type-3); color: var(--color-muted); margin: 0 0 var(--space-3); }
 
 /* ══ FLOW 4 — DISCOVER ═════════════════════════════════════════════════════
    Discover is "find someone or something inside the ecosystem". Market is
@@ -612,7 +612,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   background: none;
   color: var(--color-muted);
   font-family: var(--font-body);
-  font-size: var(--type-2);
+  font-size: var(--type-3);
   font-weight: var(--weight-3);
   white-space: nowrap;
   text-decoration: none;
@@ -664,7 +664,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-result__body { flex: 1; min-width: 0; }
 .ml-result__name {
   display: flex; align-items: center; gap: var(--space-1);
-  font-size: var(--type-2); font-weight: var(--weight-3); line-height: 1.2;
+  font-size: var(--type-3); font-weight: var(--weight-3); line-height: 1.2;
 }
 .ml-result__name svg { width: var(--icon-1); height: var(--icon-1); color: var(--color-pink); flex: none; }
 .ml-result__meta {
@@ -679,7 +679,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-match { display: inline-flex; flex-direction: column; align-items: flex-end; gap: 3px; }
 .ml-match__pct {
   font-family: var(--font-display);
-  font-size: var(--type-2); font-weight: var(--weight-4); line-height: 1;
+  font-size: var(--type-3); font-weight: var(--weight-4); line-height: 1;
   color: var(--color-pink-pressed);
   font-variant-numeric: tabular-nums;
 }
@@ -706,7 +706,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-community__media { position: relative; aspect-ratio: var(--media-aspect-wide); background: var(--color-surface); }
 .ml-community__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ml-community__body { padding: var(--space-2); }
-.ml-community__name { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-community__name { font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-community__meta { font-size: var(--type-1); color: var(--color-muted); }
 /* stacked member avatars */
 .ml-facepile { display: flex; margin-top: var(--space-2); }
@@ -729,7 +729,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   color: inherit; text-decoration: none;
 }
 .ml-service__head { display: flex; align-items: center; gap: var(--space-2); }
-.ml-service__title { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-service__title { font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-service__by { font-size: var(--type-1); color: var(--color-muted); }
 .ml-service__foot {
   display: flex; align-items: center; justify-content: space-between;
@@ -760,7 +760,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-dimension__label {
   position: absolute; z-index: 1; left: var(--space-2); bottom: var(--space-2);
   font-family: var(--font-display);
-  font-size: var(--type-3); font-weight: var(--weight-4); letter-spacing: -0.01em;
+  font-size: var(--type-4); font-weight: var(--weight-4); letter-spacing: -0.01em;
 }
 .ml-dimension__count { display: block; font-family: var(--font-body); font-size: var(--type-1); font-weight: var(--weight-2); opacity: 0.85; }
 
@@ -771,7 +771,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   min-height: var(--size-3);
   padding: var(--space-1) 0;
   color: inherit; text-decoration: none;
-  font-size: var(--type-2);
+  font-size: var(--type-3);
 }
 .ml-suggest svg { width: var(--icon-2); height: var(--icon-2); color: var(--color-muted); flex: none; }
 .ml-suggest__body { flex: 1; min-width: 0; }
@@ -869,13 +869,13 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-inset__body { padding: var(--space-3) var(--space-2) var(--space-2); }
 .ml-inset__title {
   font-family: var(--font-display);
-  font-size: var(--type-3);
+  font-size: var(--type-4);
   font-weight: var(--weight-4);
   letter-spacing: -0.02em;
   line-height: 1.15;
 }
 /* the grey line directly under the title, same size — a subtitle, not a caption */
-.ml-inset__sub { font-size: var(--type-3); font-weight: var(--weight-2); color: var(--color-muted); line-height: 1.15; }
+.ml-inset__sub { font-size: var(--type-4); font-weight: var(--weight-2); color: var(--color-muted); line-height: 1.15; }
 .ml-inset__body p { margin: var(--space-2) 0 0; color: var(--color-muted); }
 .ml-inset--dark .ml-inset__sub,
 .ml-inset--dark .ml-inset__body p { color: color-mix(in srgb, var(--color-white) 62%, transparent); }
@@ -893,7 +893,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   border-radius: var(--radius-4);
   background: var(--color-surface);
   font-family: var(--font-display);
-  font-size: var(--type-3);
+  font-size: var(--type-4);
   font-weight: var(--weight-3);
   white-space: nowrap;
 }
@@ -915,7 +915,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 /* Mixed weight inside one sentence, as in the reference: grey carries the
    sentence, ink carries the words that matter. Cheaper than colour and it
    works on a monochrome page. */
-.ml-lede { font-size: var(--type-2); color: var(--color-muted); line-height: 1.45; }
+.ml-lede { font-size: var(--type-3); color: var(--color-muted); line-height: 1.45; }
 .ml-lede b, .ml-lede strong { color: var(--color-ink); font-weight: var(--weight-3); }
 
 /* ── calendar ──────────────────────────────────────────────────────────── */
@@ -934,7 +934,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   display: flex; align-items: center; justify-content: space-between;
   gap: var(--space-2); margin-bottom: var(--space-2);
 }
-.ml-calendar__month { font-family: var(--font-display); font-size: var(--type-3);
+.ml-calendar__month { font-family: var(--font-display); font-size: var(--type-4);
   font-weight: var(--weight-3); letter-spacing: -0.01em; }
 .ml-calendar__dow {
   display: grid; grid-template-columns: repeat(7, 1fr);
@@ -947,7 +947,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   height: var(--ml-cal-cell);
   border: 0; border-radius: var(--radius-1);
   background: none; color: var(--color-ink);
-  font-family: var(--font-body); font-size: var(--type-2); font-variant-numeric: tabular-nums;
+  font-family: var(--font-body); font-size: var(--type-3); font-variant-numeric: tabular-nums;
   cursor: pointer;
 }
 .ml-calendar__day:disabled,
@@ -982,7 +982,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   max-width: 78%;
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-2);
-  font-size: var(--type-2);
+  font-size: var(--type-3);
   line-height: 1.45;
   overflow-wrap: anywhere;
 }
@@ -1032,7 +1032,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   padding: var(--space-2) var(--space-3);
   border: var(--border-1) solid var(--color-line); border-radius: var(--radius-2);
   background: var(--color-white); color: var(--color-ink);
-  font-family: var(--font-body); font-size: var(--type-2); resize: none;
+  font-family: var(--font-body); font-size: var(--type-3); resize: none;
 }
 
 /* ── attachment ────────────────────────────────────────────────────────── */
@@ -1051,7 +1051,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   background: var(--color-surface); color: var(--color-muted);
 }
 .ml-attachment__body { flex: 1; min-width: 0; }
-.ml-attachment__name { display: block; font-size: var(--type-2); font-weight: var(--weight-3);
+.ml-attachment__name { display: block; font-size: var(--type-3); font-weight: var(--weight-3);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ml-attachment__meta { display: block; font-size: var(--type-1); color: var(--color-muted); }
 
@@ -1077,7 +1077,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
    complete — the two states above couldn't represent that. */
 .ml-timeline__item.is-failed::before { background: var(--color-error); box-shadow: inset 0 0 0 2px var(--color-error); }
 .ml-timeline__item.is-failed .ml-timeline__title { color: var(--status-error-text); }
-.ml-timeline__title { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-timeline__title { font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-timeline__meta { font-size: var(--type-1); color: var(--color-muted); }
 
 /* ── metrics ───────────────────────────────────────────────────────────── */
@@ -1087,7 +1087,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
    communicates by shape alone. */
 
 .ml-kpi { display: flex; align-items: baseline; gap: var(--space-2); }
-.ml-kpi__num { font-family: var(--font-display); font-size: var(--type-4);
+.ml-kpi__num { font-family: var(--font-display); font-size: var(--type-6);
   font-weight: var(--weight-4); line-height: 1; letter-spacing: -0.03em; }
 .ml-kpi__delta { font-size: var(--type-1); font-weight: var(--weight-3); }
 .ml-kpi__delta--up   { color: var(--status-success-text); }
@@ -1135,9 +1135,9 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-post__head { display: flex; align-items: center; gap: var(--space-2); }
 .ml-post__head img { width: var(--size-2); height: var(--size-2); border-radius: var(--radius-4); object-fit: cover; flex: none; }
 .ml-post__who { flex: 1; min-width: 0; }
-.ml-post__name { display: block; font-size: var(--type-2); font-weight: var(--weight-3); line-height: 1.2; }
+.ml-post__name { display: block; font-size: var(--type-3); font-weight: var(--weight-3); line-height: 1.2; }
 .ml-post__meta { display: block; font-size: var(--type-1); color: var(--color-muted); }
-.ml-post__body { margin: var(--space-2) 0 0; font-size: var(--type-2); line-height: 1.5; }
+.ml-post__body { margin: var(--space-2) 0 0; font-size: var(--type-3); line-height: 1.5; }
 .ml-post__media { margin-top: var(--space-2); border-radius: var(--radius-2); overflow: hidden; }
 .ml-post__media img { display: block; width: 100%; }
 /* actions are text+icon, not filled buttons — a filled button per post would
@@ -1178,14 +1178,14 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   color: inherit; text-decoration: none;
 }
 .ml-opportunity-card__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-2); }
-.ml-opportunity-card__title { font-size: var(--type-2); font-weight: var(--weight-3); line-height: 1.25; }
+.ml-opportunity-card__title { font-size: var(--type-3); font-weight: var(--weight-3); line-height: 1.25; }
 .ml-opportunity-card__by { display: block; margin-top: 2px; font-size: var(--type-1); color: var(--color-muted); }
-.ml-opportunity-card__body { margin: var(--space-2) 0 0; font-size: var(--type-2); }
+.ml-opportunity-card__body { margin: var(--space-2) 0 0; font-size: var(--type-3); }
 .ml-opportunity-card__foot {
   display: flex; align-items: center; justify-content: space-between;
   margin-top: var(--space-3); font-size: var(--type-1);
 }
-.ml-opportunity-card__budget { font-weight: var(--weight-3); font-size: var(--type-2); }
+.ml-opportunity-card__budget { font-weight: var(--weight-3); font-size: var(--type-3); }
 /* a deadline is the one thing that changes urgency, so it gets a colour rule */
 .ml-opportunity-card__closes { color: var(--color-muted); }
 .ml-opportunity-card__closes.is-soon { color: var(--status-warning-text); font-weight: var(--weight-3); }
@@ -1201,7 +1201,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   background: var(--color-white); color: inherit; text-decoration: none;
 }
 .ml-application-card__body { flex: 1; min-width: 0; }
-.ml-application-card__title { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-application-card__title { font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-application-card__meta { display: block; font-size: var(--type-1); color: var(--color-muted); }
 .ml-application-card__foot { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-2); }
 
@@ -1218,7 +1218,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-band-card__media { position: relative; aspect-ratio: var(--media-aspect-wide); background: var(--color-surface); }
 .ml-band-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ml-band-card__body { padding: var(--space-2); }
-.ml-band-card__name { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-band-card__name { font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-band-card__meta { font-size: var(--type-1); color: var(--color-muted); }
 
 /* ── rating ────────────────────────────────────────────────────────────── */
@@ -1241,7 +1241,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-credit { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) 0; }
 .ml-credit + .ml-credit { border-top: var(--border-1) solid var(--color-line); }
 .ml-credit__body { flex: 1; min-width: 0; }
-.ml-credit__who { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-credit__who { font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-credit__role { display: block; font-size: var(--type-1); color: var(--color-muted); }
 
 /* ── order summary ─────────────────────────────────────────────────────── */
@@ -1250,12 +1250,12 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
    display face, because it is the number people actually read. */
 
 .ml-summary { border-radius: var(--radius-2); padding: var(--space-3); background: var(--color-white); box-shadow: var(--elevation-1); }
-.ml-summary__row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); padding: var(--space-1) 0; font-size: var(--type-2); }
+.ml-summary__row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); padding: var(--space-1) 0; font-size: var(--type-3); }
 .ml-summary__row span:first-child { color: var(--color-muted); }
 .ml-summary__row--total {
   margin-top: var(--space-2); padding-top: var(--space-3);
   border-top: var(--border-1) solid var(--color-line);
-  font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-4); letter-spacing: -0.01em;
+  font-family: var(--font-display); font-size: var(--type-4); font-weight: var(--weight-4); letter-spacing: -0.01em;
 }
 .ml-summary__row--total span:first-child { color: var(--color-ink); }
 .ml-summary__note { margin-top: var(--space-2); font-size: var(--type-1); color: var(--color-muted); }
@@ -1283,8 +1283,8 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-deck__card:nth-child(2) { transform: scale(0.96) translateY(12px); }
 .ml-deck__card:nth-child(3) { transform: scale(0.92) translateY(24px); }
 .ml-deck__body { position: absolute; z-index: 1; left: var(--space-3); right: var(--space-3); bottom: var(--space-3); color: var(--color-white); }
-.ml-deck__name { font-family: var(--font-display); font-size: var(--type-4); font-weight: var(--weight-4); line-height: 1.05; letter-spacing: -0.03em; }
-.ml-deck__meta { font-size: var(--type-2); color: color-mix(in srgb, var(--color-white) 85%, transparent); }
+.ml-deck__name { font-family: var(--font-display); font-size: var(--type-6); font-weight: var(--weight-4); line-height: 1.05; letter-spacing: -0.03em; }
+.ml-deck__meta { font-size: var(--type-3); color: color-mix(in srgb, var(--color-white) 85%, transparent); }
 .ml-deck__actions { display: flex; justify-content: center; gap: var(--space-3); margin-top: var(--space-3); }
 .ml-deck__btn {
   display: inline-flex; align-items: center; justify-content: center;
@@ -1305,7 +1305,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   min-height: var(--size-3);
   border: var(--border-1) solid var(--color-line); border-radius: var(--radius-4);
   background: var(--color-white); color: var(--color-ink);
-  font-family: var(--font-body); font-size: var(--type-2); font-weight: var(--weight-3);
+  font-family: var(--font-body); font-size: var(--type-3); font-weight: var(--weight-3);
   font-variant-numeric: tabular-nums; cursor: pointer;
 }
 .ml-slot[aria-pressed="true"] { background: var(--color-ink); color: var(--color-white); border-color: var(--color-ink); }
@@ -1448,7 +1448,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   width: 100%; height: 180px; object-fit: cover;
   border-radius: var(--radius-2); background: var(--color-paper);
 }
-.ml-bento__title { font-family: var(--font-display); font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-bento__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-bento__body { font-size: var(--type-1); color: var(--color-muted); }
 /* Dark bento: source uses rgba white 5% on 10% — translucent, so it works over
    whatever the section ground is instead of assuming black. */
@@ -1477,10 +1477,10 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-split__media { border-radius: var(--radius-3); overflow: hidden; }
 .ml-split__media img, .ml-split__media video { width: 100%; height: 100%; object-fit: cover; display: block; }
 /* The editorial pull-quote. Source sets Inter Tight 800 at clamp(32,4vw,48),
-   which is --type-4 to within a pixel. */
+   which is --type-6 to within a pixel. */
 .ml-quote {
   font-family: var(--font-display);
-  font-size: var(--type-4); font-weight: var(--weight-4);
+  font-size: var(--type-6); font-weight: var(--weight-4);
   line-height: 1.1; letter-spacing: -0.02em;
   margin: 0;
 }
@@ -1496,7 +1496,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-article__media { border-radius: var(--radius-2); overflow: hidden; aspect-ratio: 3 / 2; }
 .ml-article__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ml-article__tag { font-size: var(--type-1); font-weight: var(--weight-3); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-pink-pressed); }
-.ml-article__title { font-family: var(--font-display); font-size: var(--type-2); font-weight: var(--weight-3); line-height: 1.25; }
+.ml-article__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-3); line-height: 1.25; }
 .ml-article__meta { font-size: var(--type-1); color: var(--color-muted); }
 
 /* ── surface effects ───────────────────────────────────────────────────── */
@@ -1624,7 +1624,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   padding: var(--space-2);
   border: 0; background: none;
   border-radius: var(--radius-1);
-  font: inherit; font-size: var(--type-2); color: var(--color-ink);
+  font: inherit; font-size: var(--type-3); color: var(--color-ink);
   text-align: left; cursor: pointer;
   min-height: var(--size-3);
 }
@@ -1633,7 +1633,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-pop__item--danger { color: var(--color-error); }
 .ml-pop__sep { height: 1px; margin: var(--space-1) 0; background: var(--color-line); }
 /* PopoverMessage / PopoverEducational: prose, not a menu. */
-.ml-pop__msg { padding: var(--space-3); font-size: var(--type-2); line-height: 1.5; }
+.ml-pop__msg { padding: var(--space-3); font-size: var(--type-3); line-height: 1.5; }
 .ml-pop__msg-title { font-weight: var(--weight-3); margin-bottom: var(--space-1); }
 
 /* ── help button ───────────────────────────────────────────────────────── */
@@ -1682,7 +1682,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   display: flex; align-items: center; gap: var(--space-2);
   padding: var(--space-2);
   border-radius: var(--radius-1);
-  font-size: var(--type-2); cursor: pointer;
+  font-size: var(--type-3); cursor: pointer;
   min-height: var(--size-3);
 }
 .ml-combo__opt[aria-selected="true"] { background: var(--color-pink-container); font-weight: var(--weight-3); }
@@ -1743,8 +1743,8 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   background: var(--color-ink); color: var(--color-white);
   font-size: var(--type-1); font-weight: var(--weight-3); text-transform: uppercase; letter-spacing: 0.04em;
 }
-.ml-tier__name { font-size: var(--type-2); font-weight: var(--weight-3); }
-.ml-tier__price { font-size: var(--type-4); font-weight: var(--weight-4); line-height: 1; font-variant-numeric: tabular-nums; }
+.ml-tier__name { font-size: var(--type-3); font-weight: var(--weight-3); }
+.ml-tier__price { font-size: var(--type-6); font-weight: var(--weight-4); line-height: 1; font-variant-numeric: tabular-nums; }
 .ml-tier__unit { font-size: var(--type-1); color: var(--color-muted); }
 .ml-tier__feats { display: flex; flex-direction: column; gap: var(--space-1); margin: var(--space-2) 0; padding: 0; list-style: none; }
 .ml-tier__feat { display: flex; align-items: flex-start; gap: var(--space-2); font-size: var(--type-1); }
@@ -1783,10 +1783,10 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   min-height: var(--size-3);
 }
 .ml-trends__row:hover { background: var(--color-surface); }
-.ml-trends__rank { font-size: var(--type-2); font-weight: var(--weight-3); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.ml-trends__rank { font-size: var(--type-3); font-weight: var(--weight-3); color: var(--color-muted); font-variant-numeric: tabular-nums; }
 .ml-trends__term { display: flex; align-items: center; gap: var(--space-2); min-width: 0; }
 .ml-trends__thumb { width: var(--size-1); height: var(--size-1); flex: none; border-radius: var(--radius-1); object-fit: cover; background: var(--color-surface); }
-.ml-trends__label { font-size: var(--type-2); font-weight: var(--weight-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ml-trends__label { font-size: var(--type-3); font-weight: var(--weight-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ml-trends__sub { font-size: var(--type-1); color: var(--color-muted); }
 .ml-trends__delta { display: flex; align-items: center; gap: 2px; font-size: var(--type-1); font-weight: var(--weight-3); font-variant-numeric: tabular-nums; }
 .ml-trends__delta--up { color: var(--status-success-text); }
@@ -1812,7 +1812,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-collage__more {
   position: relative; display: flex; align-items: center; justify-content: center;
   background: var(--color-ink); color: var(--color-white);
-  font-size: var(--type-2); font-weight: var(--weight-3);
+  font-size: var(--type-3); font-weight: var(--weight-3);
 }
 
 /* ── social sign-in button ─────────────────────────────────────────────── */
@@ -1882,7 +1882,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   background: var(--color-pink-container);
   color: var(--color-pink-pressed);
 }
-.ml-feature__title { font-family: var(--font-display); font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-feature__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-feature__body { font-size: var(--type-1); color: var(--color-muted); line-height: 1.55; }
 /* The problem-statement variant: same shape, neutral disc, because a pain
    point is not an accent. */
@@ -1901,12 +1901,12 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   border-radius: var(--radius-3);
   background: var(--color-white);
 }
-.ml-testimonial__quote { font-size: var(--type-2); line-height: 1.5; margin: 0; }
+.ml-testimonial__quote { font-size: var(--type-3); line-height: 1.5; margin: 0; }
 .ml-testimonial__user { display: flex; align-items: center; gap: var(--space-2); }
 .ml-testimonial__name { font-size: var(--type-1); font-weight: var(--weight-3); }
 .ml-testimonial__role { font-size: var(--type-1); color: var(--color-muted); }
 .ml-testimonial__stats { display: flex; gap: var(--space-4); padding-top: var(--space-3); border-top: var(--border-1) solid var(--color-line); }
-.ml-testimonial__stat b { display: block; font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-4); font-variant-numeric: tabular-nums; }
+.ml-testimonial__stat b { display: block; font-family: var(--font-display); font-size: var(--type-4); font-weight: var(--weight-4); font-variant-numeric: tabular-nums; }
 .ml-testimonial__stat span { font-size: var(--type-1); color: var(--color-muted); }
 
 /* ── ambient album card ────────────────────────────────────────────────── */
@@ -1929,7 +1929,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 }
 .ml-album:hover .ml-album__play { transform: translate(-50%, -50%) scale(1.06); }
 .ml-album__play:active { transform: translate(-50%, -50%) scale(0.94); }
-.ml-album__title { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-album__title { font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-album__meta { font-size: var(--type-1); color: var(--color-muted); }
 
 /* ── trust & verification ──────────────────────────────────────────────── */
@@ -1947,7 +1947,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   background: var(--status-success-bg);
   color: var(--status-success-text);
 }
-.ml-trust__what { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-trust__what { font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-trust__who  { font-size: var(--type-1); color: var(--color-muted); }
 .ml-trust__stats { display: flex; gap: var(--space-4); padding-top: var(--space-3); border-top: var(--border-1) solid var(--color-line); }
 
@@ -2010,8 +2010,8 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   border-radius: var(--radius-4);
   background: var(--color-pink-container); color: var(--color-pink-pressed);
 }
-.ml-permission__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-3); margin: 0; }
-.ml-permission__why { font-size: var(--type-2); color: var(--color-muted); margin: 0; }
+.ml-permission__title { font-family: var(--font-display); font-size: var(--type-4); font-weight: var(--weight-3); margin: 0; }
+.ml-permission__why { font-size: var(--type-3); color: var(--color-muted); margin: 0; }
 .ml-permission__acts { display: grid; gap: var(--space-2); }
 
 /* ── camera picker ─────────────────────────────────────────────────────── */
@@ -2027,7 +2027,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   padding: var(--space-3);
   border: 0; border-radius: var(--radius-2);
   background: none; color: inherit; text-align: left;
-  font: inherit; font-size: var(--type-2); cursor: pointer;
+  font: inherit; font-size: var(--type-3); cursor: pointer;
 }
 .ml-capture__opt:hover { background: var(--color-surface); }
 .ml-capture__opt svg { flex: none; color: var(--color-muted); }
@@ -2042,7 +2042,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-rec__head { display: flex; align-items: center; gap: var(--space-2); }
 .ml-rec__dot { width: 10px; height: 10px; border-radius: var(--radius-4); background: var(--color-error); flex: none; }
 .ml-rec.is-live .ml-rec__dot { animation: ml-rec-pulse 1.4s ease-in-out infinite; }
-.ml-rec__time { font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-4); font-variant-numeric: tabular-nums; margin-left: auto; }
+.ml-rec__time { font-family: var(--font-display); font-size: var(--type-4); font-weight: var(--weight-4); font-variant-numeric: tabular-nums; margin-left: auto; }
 .ml-rec__meter { display: flex; align-items: flex-end; gap: 2px; height: var(--size-2); }
 .ml-rec__bar { flex: 1; background: var(--color-ink); border-radius: 1px; min-height: 3px; }
 .ml-rec__acts { display: flex; gap: var(--space-2); }
@@ -2102,8 +2102,8 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   background: var(--status-error-bg);
   color: var(--status-error-text);
 }
-.ml-error__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-3); margin: 0; }
-.ml-error__body { font-size: var(--type-2); color: var(--color-muted); margin: 0; max-width: 40ch; }
+.ml-error__title { font-family: var(--font-display); font-size: var(--type-4); font-weight: var(--weight-3); margin: 0; }
+.ml-error__body { font-size: var(--type-3); color: var(--color-muted); margin: 0; max-width: 40ch; }
 .ml-error__ref { font-size: var(--type-1); color: var(--color-muted); font-variant-numeric: tabular-nums; }
 
 /* ── offline & adaptive banners ────────────────────────────────────────── */
@@ -2131,7 +2131,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 
 .ml-qr { display: grid; gap: var(--space-3); justify-items: center; padding: var(--space-4); border: var(--border-1) solid var(--color-line); border-radius: var(--radius-3); background: var(--color-white); text-align: center; }
 .ml-qr__code { padding: var(--space-3); background: var(--color-white); border-radius: var(--radius-2); line-height: 0; }
-.ml-qr__handle { font-family: var(--font-display); font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-qr__handle { font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-qr__hint { font-size: var(--type-1); color: var(--color-muted); }
 
 /* ── animated success ──────────────────────────────────────────────────── */
@@ -2157,8 +2157,8 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
    and set at 78% white so they do not compete with the action. */
 
 .ml-footer-cta { display: grid; gap: var(--space-3); padding: var(--space-4); border-radius: var(--radius-3); background: var(--color-ink); color: var(--color-white); text-align: center; }
-.ml-footer-cta__title { font-family: var(--font-display); font-size: var(--type-3); font-weight: var(--weight-4); line-height: 1.15; margin: 0; }
-.ml-footer-cta__sub { font-size: var(--type-2); color: color-mix(in srgb, var(--color-white) 78%, transparent); margin: 0; }
+.ml-footer-cta__title { font-family: var(--font-display); font-size: var(--type-4); font-weight: var(--weight-4); line-height: 1.15; margin: 0; }
+.ml-footer-cta__sub { font-size: var(--type-3); color: color-mix(in srgb, var(--color-white) 78%, transparent); margin: 0; }
 .ml-footer-cta__links { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); padding-top: var(--space-3); border-top: var(--border-1) solid color-mix(in srgb, var(--color-white) 16%, transparent); }
 .ml-footer-cta__links a { color: color-mix(in srgb, var(--color-white) 78%, transparent); text-decoration: none; font-size: var(--type-1); position: relative; }
 /* These sit in a flex row, not in a sentence, so WCAG 2.2's inline-link
@@ -2182,7 +2182,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 .ml-whatsnew__ver { font-size: var(--type-1); color: var(--color-muted); font-variant-numeric: tabular-nums; }
 .ml-whatsnew__item { display: grid; grid-template-columns: auto 1fr; gap: var(--space-3); align-items: start; }
 .ml-whatsnew__kind { font-size: var(--type-1); font-weight: var(--weight-3); text-transform: uppercase; letter-spacing: 0.04em; padding: 2px var(--space-2); border-radius: var(--radius-4); background: var(--color-surface); color: var(--color-ink); white-space: nowrap; }
-.ml-whatsnew__what { font-size: var(--type-2); }
+.ml-whatsnew__what { font-size: var(--type-3); }
 .ml-whatsnew__why { font-size: var(--type-1); color: var(--color-muted); }
 
 /* ── android app grid ──────────────────────────────────────────────────── */
@@ -2232,7 +2232,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
    pushing the trailing control off the row — without min-width a flex item
    refuses to shrink below its content. */
 .ml-person-row .meta { flex: 1; min-width: 0; }
-.ml-person-row .meta b { font-size: var(--type-2); }
+.ml-person-row .meta b { font-size: var(--type-3); }
 /* DIRECT children only. The unbounded descendant version caught the unread
    dot nested inside <b> and gave it display:block, which pushed it onto its
    own line under the name — visible immediately on chat_thread_list. */
@@ -2283,7 +2283,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   border-radius: var(--radius-4); object-fit: cover; flex: none;
 }
 .ml-collab-card__id { flex: 1; min-width: 0; }
-.ml-collab-card__name { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-collab-card__name { font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-collab-card__role {
   display: block; font-size: var(--type-1); color: var(--color-muted);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -2325,7 +2325,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   border-radius: var(--radius-2); object-fit: cover; flex: none;
 }
 .ml-search-result__body { flex: 1; min-width: 0; }
-.ml-search-result__name { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-search-result__name { font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-search-result__meta { display: block; margin-top: 2px; font-size: var(--type-1); color: var(--color-muted); }
 .ml-search-result__tags { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-top: var(--space-2); }
 .ml-search-result:hover { background: var(--color-surface); }
@@ -2355,7 +2355,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   border-radius: var(--radius-4); object-fit: cover; flex: none;
 }
 .ml-roster__id { flex: 1; min-width: 0; }
-.ml-roster__name { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-roster__name { font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-roster__instrument { display: block; font-size: var(--type-1); color: var(--color-muted); }
 /* Lead is a role, not a decoration — it reuses the verified mark's language
    rather than inventing a second "this one is special" treatment. */
@@ -2387,10 +2387,10 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
                       border-radius: var(--radius-3); color: var(--color-white); text-decoration: none; }
 .ml-featured-studio .ml-media { aspect-ratio: var(--media-aspect-card); }
 .ml-featured-studio__body { position: absolute; z-index: 1; inset: auto var(--space-3) var(--space-3); }
-.ml-featured-studio__name { font-family: var(--font-display); font-size: var(--type-3);
+.ml-featured-studio__name { font-family: var(--font-display); font-size: var(--type-4);
                             font-weight: var(--weight-3); line-height: 1.15; }
 .ml-featured-studio__meta { display: block; margin-top: 2px; font-size: var(--type-1); opacity: 0.86; }
-.ml-featured-studio__rate { margin-top: var(--space-2); font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-featured-studio__rate { margin-top: var(--space-2); font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-featured-studio:active { transform: scale(0.99); }
 
 /* ── studio spec ───────────────────────────────────────────────────────── */
@@ -2404,7 +2404,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
                 padding-bottom: var(--space-2); border-bottom: var(--border-1) solid var(--color-line); }
 .ml-spec__row:last-child { border-bottom: 0; padding-bottom: 0; }
 .ml-spec__key { font-size: var(--type-1); color: var(--color-muted); }
-.ml-spec__val { font-size: var(--type-2); }
+.ml-spec__val { font-size: var(--type-3); }
 .ml-spec__val .ml-tabular { font-variant-numeric: tabular-nums; }
 
 /* ── project card ──────────────────────────────────────────────────────── */
@@ -2421,7 +2421,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
 }
 .ml-project-card .ml-media { aspect-ratio: var(--media-aspect-square); }
 .ml-project-card__body { padding: 0 var(--space-3) var(--space-3); display: grid; gap: var(--space-1); }
-.ml-project-card__title { font-size: var(--type-2); font-weight: var(--weight-3); }
+.ml-project-card__title { font-size: var(--type-3); font-weight: var(--weight-3); }
 .ml-project-card__meta { font-size: var(--type-1); color: var(--color-muted); }
 .ml-project-card__credits { display: flex; align-items: center; gap: var(--space-1); margin-top: var(--space-1); }
 .ml-project-card:hover { border-color: var(--color-ink); }
@@ -2450,7 +2450,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   border-radius: var(--radius-1); flex: none;
 }
 .ml-track__body { flex: 1; min-width: 0; }
-.ml-track__title { font-size: var(--type-2); font-weight: var(--weight-3);
+.ml-track__title { font-size: var(--type-3); font-weight: var(--weight-3);
                    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ml-track__meta { display: flex; align-items: center; gap: var(--space-2);
                   margin-top: 2px; font-size: var(--type-1); color: var(--color-muted); }
@@ -2511,7 +2511,7 @@ a.ml-notification, a.ml-booking-card, a.ml-tier, a.ml-avatar-btn {
   width: var(--avatar-4); height: var(--avatar-4);
   border-radius: var(--radius-1); object-fit: cover; flex: none;
 }
-.ml-share__msg { font-size: var(--type-2); }
+.ml-share__msg { font-size: var(--type-3); }
 .ml-share__channels { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 
 /* ── touch targets ─────────────────────────────────────────────────────────

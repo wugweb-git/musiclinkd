@@ -19,7 +19,7 @@ assertIcons(["arrow-forward", "search", "add", "check", "cancel", "bell", "send"
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0">${title}</h1>
     </header>`;
 
 const tab = (state, label) =>
@@ -94,7 +94,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Notifications</h1>
+      <h1 class="ml-type-4" style="margin:0">Notifications</h1>
       <span class="ml-appbar__actions">
         <a class="ml-icon-btn ml-icon-btn--bare" href="?state=populated" aria-label="Mark all as read">${icon("check", { size: 20 })}</a>
         <a class="ml-icon-btn ml-icon-btn--bare" href="${N}notification_settings/index.html" aria-label="Notification settings">${icon("bell", { size: 20 })}</a>
@@ -194,7 +194,7 @@ writeScreen({
   <div class="ml-app">
     ${bar("Per-feed settings", `${N}notification_settings/index.html`)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+      <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
         Push, email, or nothing — set per category. Anything switched off here still appears in the notification centre.
       </p>
       ${[["Messages", "Push"], ["Network", "Push"], ["Opportunities", "Push + email"],
@@ -211,7 +211,7 @@ writeScreen({
     ${bar("Stay in the loop", "/preview/flows/onboarding/dashboard_handoff/index.html")}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div data-state="default">
-      <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+      <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
         Pick what matters now. You can change any of it later in Settings, and nothing is on by default that you did not choose.
       </p>
       ${rowSwitch("Someone messages me", null, true)}
@@ -293,8 +293,8 @@ writeScreen({
           <img src="${media("faces", d.face)}" alt="" loading="lazy" />
           <span class="meta"><b>${d.who}</b><p>${d.kind}</p></span>
         </div>
-        <h2 class="ml-type-3" style="margin:var(--space-3) 0 var(--space-1)">${d.title}</h2>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0">${d.meta}</p>
+        <h2 class="ml-type-4" style="margin:var(--space-3) 0 var(--space-1)">${d.title}</h2>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0">${d.meta}</p>
         <div class="ml-summary" style="margin-top:var(--space-3)">
           ${d.rows.map(([k, v]) => `<div class="ml-summary__row"><span>${k}</span><span>${v}</span></div>`).join("\n          ")}
         </div>
@@ -359,7 +359,7 @@ writeScreen({
     </nav>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <div data-state="default">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Choose what you're told about, and how. Anything switched off here still appears
           in your notification list — it just doesn't reach your phone or inbox.
         </p>

@@ -42,7 +42,7 @@ assertIcons(["arrow-forward", "check", "cancel", "add", "send", "play", "pause"]
 
 const bar = (title, backTo, actions = "") => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0;flex:1">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0;flex:1">${title}</h1>
       ${beta}${actions}
     </header>`;
 
@@ -90,7 +90,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Collaborations</h1>
+      <h1 class="ml-type-4" style="margin:0">Collaborations</h1>
       <span class="ml-appbar__actions">
         ${beta}
         <a class="ml-icon-btn ml-icon-btn--bare" href="${C}collaboration_proposal/index.html?state=draft" aria-label="Propose a collaboration">${icon("add", { size: 20 })}</a>
@@ -153,8 +153,8 @@ writeScreen({
 
       <div data-state="overview">
         <span class="ml-status ml-status--success">Active</span>
-        <h2 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">Neon Monsoon</h2>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0">
+        <h2 class="ml-type-4" style="margin:var(--space-2) 0 var(--space-1)">Neon Monsoon</h2>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0">
           Single · Hindi pop. Lead vocal and topline, tracked at Yash Raj, mixed remotely.
         </p>
         <div class="ml-facepile" style="margin-top:var(--space-3)">
@@ -247,7 +247,7 @@ writeScreen({
         <div class="ml-banner ml-banner--warning">
           <span class="ml-banner__body">On hold since 26 August — waiting on stems from Kabir.</span>
         </div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
           Nothing is lost while a project is on hold. Deadlines stop counting and nobody is chased.
         </p>
         <a class="ml-btn ml-btn--primary ml-btn--block" style="margin-top:var(--space-3)" href="?state=overview">Resume project</a>
@@ -348,7 +348,7 @@ writeScreen({
           <img src="${media("faces", 8)}" alt="" loading="lazy" />
           <span class="meta"><b>Kabir Sheth</b><p>proposed a collaboration</p></span>
         </div>
-        <h2 class="ml-type-3" style="margin:var(--space-3) 0 var(--space-1)">Neon Monsoon</h2>
+        <h2 class="ml-type-4" style="margin:var(--space-3) 0 var(--space-1)">Neon Monsoon</h2>
         <p class="ml-type-1" style="color:var(--color-muted);margin:0 0 var(--space-3)">Single · Hindi pop</p>
         <div class="ml-summary">
           ${TERMS.map(([k, v]) => `<div class="ml-summary__row"><span>${k}</span><span>${v}</span></div>`).join("\n          ")}
@@ -363,7 +363,7 @@ writeScreen({
 
       <div data-state="counter">
         <div class="ml-section"><h2>Your counter</h2></div>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Change only what you want to change. Everything else stays as proposed.
         </p>
         <div class="ml-summary">

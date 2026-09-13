@@ -57,7 +57,7 @@ writeScreen({
 
     <!-- ══ compact header — identity + notifications, kept small per the brief ══ -->
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <span class="ml-wordmark" style="font-size:var(--type-2)">MUSIC<em>LINKD</em></span>
+      <span class="ml-wordmark" style="font-size:var(--type-3)">MUSIC<em>LINKD</em></span>
       <a class="ml-icon-btn ml-icon-btn--bare" href="${P}notifications/notifications_center/index.html" aria-label="Notifications, 3 unread" style="position:relative">
         ${icon("bell", { size: 20 })}
         <span class="ml-badge ml-badge--accent ml-badge--overlay">3</span>
@@ -69,8 +69,8 @@ writeScreen({
 
       <!-- Welcome -->
       <div style="padding:0 var(--space-4)">
-        <h1 class="ml-type-3" style="margin:0">Good afternoon, Vedanshu</h1>
-        <p class="ml-type-2" style="color:var(--color-muted);margin:var(--space-1) 0 0">Your MusicLinkd today</p>
+        <h1 class="ml-type-4" style="margin:0">Good afternoon, Vedanshu</h1>
+        <p class="ml-type-3" style="color:var(--color-muted);margin:var(--space-1) 0 0">Your MusicLinkd today</p>
       </div>
 
       <!-- Your activity — counts, not a promo card. No heading, so this is a
@@ -155,17 +155,17 @@ writeScreen({
         <div style="display:flex;flex-direction:column;gap:var(--space-2)">
           <div class="ml-card ml-card--padded" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-3)">
             <div>
-              <div class="ml-type-2" style="font-weight:700">Available for collaboration</div>
+              <div class="ml-type-3" style="font-weight:700">Available for collaboration</div>
               <div class="ml-type-1" style="color:var(--color-muted)">Visible on your public profile</div>
             </div>
             <button class="ml-switch" role="switch" aria-checked="true" aria-label="Collaboration availability"></button>
           </div>
           <a class="ml-card ml-card--padded" href="${P}discover/studios_spaces/index.html" style="display:flex;align-items:center;justify-content:space-between;text-decoration:none;color:inherit">
-            <span class="ml-type-2">Premium studio spaces near you</span>
+            <span class="ml-type-3">Premium studio spaces near you</span>
             ${icon("arrow-forward", { size: 16 })}
           </a>
           <a class="ml-card ml-card--padded" href="${P}portfolio/portfolio_dashboard/index.html" style="display:flex;align-items:center;justify-content:space-between;text-decoration:none;color:inherit">
-            <span class="ml-type-2">Add a track or EP to your portfolio</span>
+            <span class="ml-type-3">Add a track or EP to your portfolio</span>
             ${icon("arrow-forward", { size: 16 })}
           </a>
         </div>

@@ -37,7 +37,7 @@ assertIcons(["arrow-forward", "search", "add", "check", "cancel", "send", "heart
 
 const bar = (title, backTo, actions = "") => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0;flex:1">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0;flex:1">${title}</h1>
       ${actions}
     </header>`;
 
@@ -52,7 +52,7 @@ const rowLink = (label, href, meta) => `<a class="ml-action-row" href="${href}">
 /* The identity block that sits above or below the code. Deliberately separate
    from the code itself: the brief says identity must not be communicated by
    the QR alone, and a screen reader gets the name, not a picture of a code. */
-const identity = (name, role, verified) => `<h2 class="ml-type-3" style="margin:var(--space-2) 0 0">${name}</h2>
+const identity = (name, role, verified) => `<h2 class="ml-type-4" style="margin:var(--space-2) 0 0">${name}</h2>
         <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 0">${role}</p>
         ${verified ? `<span class="ml-status ml-status--accent" style="margin-top:var(--space-2);display:inline-flex">Verified</span>` : ""}`;
 
@@ -165,7 +165,7 @@ writeScreen({
       <div class="ml-inset ml-inset--dark" data-state="scanning" style="aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative">
         <span style="width:60%;aspect-ratio:1;border:2px solid var(--color-white);border-radius:var(--radius-2)"></span>
       </div>
-      <p class="ml-type-2" data-state="scanning" style="color:var(--color-muted);text-align:center;margin-top:var(--space-3)">
+      <p class="ml-type-3" data-state="scanning" style="color:var(--color-muted);text-align:center;margin-top:var(--space-3)">
         Point your camera at a MusicLinkd QR code.
       </p>
       <div data-state="scanning" style="display:flex;gap:var(--space-2);margin-top:var(--space-3)">

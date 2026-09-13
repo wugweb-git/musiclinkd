@@ -34,7 +34,7 @@ const back = (href, label) => backArrow(href, label);
    is its name, and a screen reader's heading list should start at the top. */
 const titleBar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0">${title}</h1>
     </header>`;
 
 /* A row that leads somewhere. booking.mjs did not have one, since its earlier
@@ -80,7 +80,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">My bookings</h1>
+      <h1 class="ml-type-4" style="margin:0">My bookings</h1>
     </header>
     <nav class="ml-tabs ml-tabs--fill" role="tablist" aria-label="Booking status" style="margin:0 var(--space-4)">
       ${tab("upcoming", "Upcoming")}
@@ -118,7 +118,7 @@ writeScreen({
     <main class="ml-app__body app-content--scroll" style="padding:0 var(--space-4) var(--space-4)">
 
       <div data-state="default">
-        <h1 class="ml-type-3" style="margin:var(--space-2) 0 var(--space-1)">Pay deposit</h1>
+        <h1 class="ml-type-4" style="margin:var(--space-2) 0 var(--space-1)">Pay deposit</h1>
         <p class="ml-type-1" style="color:var(--color-muted);margin-bottom:var(--space-3)">
           ₹5,000 due now · Yash Raj Sound Studios
         </p>
@@ -196,7 +196,7 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${back(`${P}studio_profile/index.html`, "Back to studio")}
-      <h1 class="ml-type-3" style="margin:0">Availability</h1>
+      <h1 class="ml-type-4" style="margin:0">Availability</h1>
     </header>
     <nav class="ml-tabs ml-tabs--fill" role="tablist" aria-label="Calendar view" style="margin:0 var(--space-4)">
       ${tab("monthly", "Month")}
@@ -223,7 +223,7 @@ writeScreen({
       </div>
 
       <div data-state="weekly">
-        <h2 class="ml-type-2" style="margin:0 0 var(--space-2)">Wed 12 August</h2>
+        <h2 class="ml-type-3" style="margin:0 0 var(--space-2)">Wed 12 August</h2>
         <div class="ml-slots">
           ${SLOTS.map(([t, taken]) => `<button type="button" class="ml-slot"${taken ? " disabled" : ""}>${t}</button>`).join("\n          ")}
         </div>
@@ -258,7 +258,7 @@ writeScreen({
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${back(`${P}studio_discovery/index.html`, "Back to discovery")}
-      <h1 class="ml-type-3" style="margin:0">Studios near you</h1>
+      <h1 class="ml-type-4" style="margin:0">Studios near you</h1>
     </header>
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
       <p class="ml-type-1" data-state="default" style="color:var(--color-muted);margin:0 0 var(--space-2)">
@@ -333,7 +333,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Studios</h1>
+      <h1 class="ml-type-4" style="margin:0">Studios</h1>
       <span class="ml-appbar__actions">
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}my_bookings/index.html" aria-label="My bookings">${icon("calendar", { size: 20 })}</a>
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}filters/index.html" aria-label="Filters">${icon("filter", { size: 20 })}</a>
@@ -376,7 +376,7 @@ writeScreen({
       <img src="${media("stage", 1)}" alt="" loading="lazy"
            style="width:100%;aspect-ratio:var(--media-aspect-card);object-fit:cover" />
       <div style="padding:var(--space-3) var(--space-4)">
-        <h2 class="ml-type-3" style="margin:0">Yash Raj Sound Studios</h2>
+        <h2 class="ml-type-4" style="margin:0">Yash Raj Sound Studios</h2>
         <p class="ml-type-1" style="color:var(--color-muted);margin:var(--space-1) 0 0">Andheri West, Mumbai</p>
         <div class="ml-rating" style="margin-top:var(--space-2)">
           <span class="ml-rating__score">4.8</span>
@@ -569,7 +569,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Your rooms</h1>
+      <h1 class="ml-type-4" style="margin:0">Your rooms</h1>
       <span class="ml-appbar__actions">
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}provider_availability/index.html" aria-label="Manage availability">${icon("calendar", { size: 20 })}</a>
       </span>
@@ -664,7 +664,7 @@ writeScreen({
       </div>
 
       <div data-state="declined">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Declined requests keep their reason, so you can see whether you are turning away the
           same kind of work repeatedly.
         </p>
@@ -709,7 +709,7 @@ writeScreen({
       </div>
 
       <div data-state="hours">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           When the rooms can be booked. Separate from when the building is open.
         </p>
         ${["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
@@ -723,7 +723,7 @@ writeScreen({
       </div>
 
       <div data-state="blocked">
-        <p class="ml-type-2" style="color:var(--color-muted);margin:0 0 var(--space-3)">
+        <p class="ml-type-3" style="color:var(--color-muted);margin:0 0 var(--space-3)">
           Dates nobody can book, whatever the hours say. Maintenance, holidays, a session you took offline.
         </p>
         <div class="ml-summary">

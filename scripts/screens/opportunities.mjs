@@ -28,7 +28,7 @@ const tab = (state, label) =>
 
 const bar = (title, backTo) => `<header class="ml-appbar" style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3)">
       ${backArrow(backTo, "Back")}
-      <h1 class="ml-type-3" style="margin:0">${title}</h1>
+      <h1 class="ml-type-4" style="margin:0">${title}</h1>
     </header>`;
 
 /* ── opportunities_home — default / empty ───────────────────────────────── */
@@ -60,7 +60,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">Opportunities</h1>
+      <h1 class="ml-type-4" style="margin:0">Opportunities</h1>
       <span class="ml-appbar__actions">
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}my_applications/index.html" aria-label="My applications">${icon("check", { size: 20 })}</a>
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}my_opportunities/index.html" aria-label="What you've posted">${icon("briefcase", { size: 20 })}</a>
@@ -86,14 +86,14 @@ writeScreen({
   <div class="ml-app">
     ${bar("Opportunity", `${P}opportunities_home/index.html`)}
     <main class="ml-app__body app-content--scroll" style="padding:var(--space-3) var(--space-4) var(--space-4)">
-      <h2 class="ml-type-3" style="margin:0">Session vocalist — Hindi pop EP</h2>
+      <h2 class="ml-type-4" style="margin:0">Session vocalist — Hindi pop EP</h2>
       <div class="ml-person-row" style="margin-top:var(--space-2)">
         <img src="${media("faces", 1)}" alt="" loading="lazy" />
         <span class="meta"><b>Octave Sound Labs</b><p>Studio · Andheri West, Mumbai</p></span>
       </div>
       <span class="ml-status ml-status--warning" style="margin-top:var(--space-2);display:inline-flex">Closes in 3 days</span>
 
-      <p class="ml-type-2" style="color:var(--color-muted);margin-top:var(--space-3)">
+      <p class="ml-type-3" style="color:var(--color-muted);margin-top:var(--space-3)">
         Three tracks, two days at our Andheri room. Reference points are soft-pop with a light belt —
         think restrained verses and an open chorus. Stems and a scratch guide will be provided a week ahead.
       </p>
@@ -269,7 +269,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">My applications</h1>
+      <h1 class="ml-type-4" style="margin:0">My applications</h1>
     </header>
     <nav class="ml-tabs" role="tablist" aria-label="Application status" style="margin:0 var(--space-4)">
       ${tab("submitted", "Submitted")}${tab("viewed", "Viewed")}${tab("shortlisted", "Shortlisted")}${tab("accepted", "Accepted")}${tab("rejected", "Closed")}
@@ -321,7 +321,7 @@ writeScreen({
   body: `
   <div class="ml-app">
     <header class="ml-appbar" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4)">
-      <h1 class="ml-type-3" style="margin:0">What you've posted</h1>
+      <h1 class="ml-type-4" style="margin:0">What you've posted</h1>
       <span class="ml-appbar__actions">
         <a class="ml-icon-btn ml-icon-btn--bare" href="${P}create_opportunity/index.html" aria-label="Post an opportunity">${icon("add", { size: 20 })}</a>
       </span>
