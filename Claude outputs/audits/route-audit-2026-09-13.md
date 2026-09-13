@@ -83,6 +83,10 @@ flowchart LR
 - **The seeded business accounts** (`sunsetrecords`, `thequarter`, `octave-sound-labs`, `northlightfilms`) are ordinary `profiles` rows.
 - **No `account_type` column exists.** Businesses (`/business/*`) and bands (`/bands/*`) are mock data, not linked to the signed-in account.
 
+**Owner decision (13 Sep): a band is not an account type.** Band setup can happen any time after
+registration, so `/bands/new` needs a permanent entry point for any signed-in user, not only the
+onboarding hand-off card. The step-21 band question stays an optional nudge.
+
 **What's missing (decisions for you, §8)**
 
 - Where the type is chosen: at registration, or as the first onboarding step.
