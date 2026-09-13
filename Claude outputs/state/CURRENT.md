@@ -158,14 +158,33 @@ everyone but their owner; the old `USING (true)` policy is gone; the migration i
 profiles are public, so nothing visible changed. **This supersedes the warning elsewhere in the
 older documents that the policy is unenforced.**
 
-## Unresolved rule change — flagged, not accepted
+## The photography rule — my error, and the evidence
 
-The photography rule in `AGENTS.md` line 152 — *"Photography comes from the local library — never
-Unsplash or stock"* — is slated for deletion on the reasoning that Unsplash is unreachable behind an
-unconfirmed email. **Being unable to reach Unsplash is not a reason the rule was written.** The rule
-is about licensing and brand, not access. 14 files in `src/` still reference Unsplash URLs. Either
-the rule stands and those 14 are debt against `frontend/website/assets/img/`, or Vedanshu retires
-the rule deliberately. Do not delete it as "invalid".
+**I was wrong about why it was deleted.** I wrote that the rule was being removed because Unsplash
+is unreachable behind an unconfirmed email. That is not what happened: Claude Code removed it
+because Vedanshu said in chat that no such rule exists. I inferred a motive from a partial log and
+published it as fact here and in Notion. Corrected.
+
+**The rule does exist, and not only in documents I wrote.** It is in the governed design system, in
+the design-guide repo, committed 31 Aug 2026 in `1b7c197` — `frontend/guide/rules/cards.md`:
+
+> **Use the local photography library** under `/assets/img`, bound to a component. Never stock.
+> *Was "use real photography from Unsplash". The guide carried 94 stock references and now carries
+> zero; they were removed deliberately.*
+
+Three things follow. The rule predates this session. It records a deliberate removal of 94 Unsplash
+references, so it is a decision that was already executed once. And it is still live in
+`frontend/guide/rules/cards.md` today, while it has now been deleted from `AGENTS.md` and the
+Lovable project knowledge — so the two repos disagree about photography as well as radius.
+
+This is Vedanshu's to settle, and it is a one-line change in two or three places either way:
+
+- **Keep it** — restore the line in `AGENTS.md` and the Lovable knowledge; the 14 remaining Unsplash
+  URLs in `src/` become debt against `frontend/website/assets/img/`.
+- **Retire it** — remove it from `frontend/guide/rules/cards.md` too, so the design system stops
+  asserting a rule the app no longer follows.
+
+What should not happen is the current state: deleted in one repo, still governing in the other.
 
 ## Open decisions — owner, not engineering
 
