@@ -1,9 +1,9 @@
 ---
 doc: lovable-knowledge-2026-09-13
-version: 1.0
+version: 1.1
 status: CURRENT
 updated: 2026-09-13
-verified_against: musiclinkd-9e6ca875@47f7c7b
+verified_against: musiclinkd-9e6ca875@d66392f
 folder: reference
 originally: lovable-knowledge-draft.md
 source: Claude Code session scratchpad
@@ -11,6 +11,8 @@ source: Claude Code session scratchpad
 
 > **CURRENT** · imported 13 Sep 2026. The project knowledge text applied to Lovable on 13 Sep. Lovable's agent reads this on every prompt. NOTE: the photography rule was removed from this text; see state/CURRENT.md before treating that as settled.
 > Ground truth lives in `state/CURRENT.md`; where this file disagrees with it, CURRENT wins.
+> **v1.1** mirrors the text live in Lovable after the 13 Sep chip/eyebrow fix: chips are `full`, not `sm`;
+> there is no `--font-eyebrow`; `src/styles.css` is the only token source. v1.0 is in git history.
 
 # MusicLinkd
 
@@ -88,8 +90,7 @@ link-based; no upload or storage.
 
 ## 3. Design tokens
 
-**Source of truth: `tokens/tokens.json`, the generated `ml-tokens.css`, and `src/styles.css` here.**
-Prose files (`README.md`, `governance.md`) carry pre-v9 values and are stale.
+**Source of truth: `src/styles.css`.**
 
 **Type — five fluid steps in this app:**
 
@@ -108,8 +109,8 @@ type-4 display, the one big number · type-5 hero only (pre-auth landing) — qu
 `text-[17px]`, `rounded-[24px]`, inline `style`. Need a new step? Add a token. Every step's web
 minimum equals its Android sp value (12/16/22/32/40). **10/14/20/28 is retired — never reintroduce.**
 
-**Fonts — ONE family: Inter**, weights 400/500/600/700 (nothing uses 800). `--font-sans`,
-`--font-display`, `--font-eyebrow` all resolve to Inter. **Inter Tight, Unica One and
+**Fonts — ONE family: Inter**, weights 400/500/600/700 (nothing uses 800). `--font-sans` and
+`--font-display` both resolve to Inter; there is no `--font-eyebrow` token. **Inter Tight, Unica One and
 `--font-mono` are retired** — never reintroduce. **No letter-spacing tuning on headings** —
 Inter's normal tracking everywhere (no `-0.02em`, no `tracking-tight`). Uppercase eyebrow labels may
 use positive tracking (`tracking-[0.14em]`).
@@ -121,16 +122,15 @@ the OS. `→ ★ ✓` are absent from Inter's subsets too: use Lucide, never a g
 `surface #F8F8FB` · `line #D5D5DE` · `muted #66666F` · `pink #EA4C89` · `pinkPressed #C7295F` ·
 `pinkContainer #FCE7F3` · `inkPressed #2B2B2B` · `success #22C55E` · `warning #F59E0B` ·
 `error #DC2626` · `info #2563EB` · `disabled #9CA3AF` · `scrim rgba(13,13,13,.32)` ·
-`purple #8B5CF6`. (`tokens.json` still says `paper #FCFCFD`; the app ground is `#ECECF1` for card
-contrast.)
+`purple #8B5CF6`.
 
 **Navy is removed** — near-black is `ink` (`bg-ink`, `Btn variant="ink"`). **`#5B4BFF` is superseded and always a bug.** **Purple is
 category-badge only.** Brand palette `#FF005C` · `#141621` · `#4F5059` · `#C4C5C8` is **marketing
 only**. Pink FILLS `#EA4C89`; pink TEXT `#C7295F` (`#EA4C89` fails AA as text).
 
-**Radius — Material 3 shape scale:** `sm` 8 chips/small controls · `md` 12 small tiles, thumbnails,
+**Radius — Material 3 shape scale:** `sm` 8 small controls · `md` 12 small tiles, thumbnails,
 inputs · `lg` 16 **cards** and list containers · `xl` 20 large tiles · `2xl` 28 sheets and dialogs ·
-`3xl` 32 hero only · `full` buttons/pills. Pick by role. **Space:** Tailwind numeric only (`p-1` 4px …
+`3xl` 32 hero only · `full` buttons, chips, pills and badges. Pick by role. **Space:** Tailwind numeric only (`p-1` 4px …
 `p-8` 32px) — no named spacing tokens. **Secondary text:** `text-muted-foreground`. **Opacity**
 .08/.16/.32/.64 · **Size** 32/40/48/56 · **Icon** 16/20/24/32 · **Border** 1/2.
 
