@@ -151,6 +151,33 @@ navigation wiring rather than a sweep. It is the cheapest next step.
   primary, `#8B5CF6` secondary, `#FAFAFA` ground, Google Sans. It is read alongside project
   knowledge and contradicts it.
 
+## Route audit — 13 Sep
+
+Full doc: `audits/route-audit-2026-09-13.md` + `route-audit-2026-09-13/screen-inventory.md`
+(209 routes, every screen, sheet, dialog and unreachable state cited by file and line).
+
+### Live breaks, verified in the code — not waiting on any decision
+
+| | Evidence |
+|---|---|
+| **Every "Book" button outside a past booking is broken.** They pass a *service* id to a route that only accepts *space* ids | `services.$id.index.tsx:153` passes `s.id`; `business.$id.index.tsx:91` and `opportunities.$id.applicants.$aid.tsx:168` hard-code `"svc-1"`. Valid ids are the four in `data/booking.ts`: `octave-sound-labs`, `headroom-mastering`, `basement-jam`, `waveform-podcast`. Result: "This space is unavailable". Only "Book again" on a finished booking works. |
+| **Nothing links to `/settings`** | `grep 'to="/settings"' src/` returns **zero** results. Sign out, Business and Services all live inside it. The only path from Home is Notifications → a security alert → Security → Back. |
+| **The business dashboard and its 7 sub-pages are URL-only** | Nothing links to `/business/$id/dashboard`. Creating a business also saves nothing. |
+| **Demo controls are in the production UI** | "Preview failure state" at `booking.$id.pay.tsx:132` and `ml/portfolio.tsx:319`, plus the `/collab` "States" cycler and the schedule-screen toggles. |
+| **Sign-up can skip onboarding** | Google sign-in and the email-confirmation link both land on Home. Phone sign-in can never succeed — `/auth/otp` always answers "That code did not match". |
+
+Counts: **35 of 209 routes unreachable** · 20 wrong link targets (2 fixed, 18 open) · 22 of 24
+parameter URLs return HTTP 200 with an in-page "not found" instead of a real 404.
+
+### Account type — a prerequisite, not only a decision
+
+Onboarding *does* ask "do you represent a business?" and "are you in a band?" — as **steps 20 and 21
+of 21**, after every individual-talent step. The answers land in `discovery_prefs` jsonb and
+**nothing reads them afterwards**. There is no account-type column in the database.
+
+So whichever way the product question is answered, a migration and a read path are required. That
+part is not a decision.
+
 ## Shipped 13 Sep — render-path batch
 
 | Commit | What |
