@@ -3,7 +3,7 @@ doc: CURRENT
 version: 1.0
 status: CURRENT
 updated: 2026-09-13
-verified_against: musiclinkd-9e6ca875@90a4676
+verified_against: musiclinkd-9e6ca875@47f7c7b
 folder: state
 originally: new
 ---
@@ -35,7 +35,7 @@ retired; its Firebase backend is not.
 
 | | |
 |---|---|
-| `origin/main` | `90a4676` |
+| `origin/main` | `47f7c7b` (published build = `47f7c7b`, verified on the live site by Claude Code 13 Sep) |
 | Lovable `latest_commit_sha` | tracks `main`, published, CI green |
 | Routes | **207**, zero children under an Outlet-less parent |
 | CI | GitHub Actions, bun 1.4.0. Blocking: typecheck, lint (correctness rules), build. Non-blocking: format check (`continue-on-error: true`) |
@@ -68,7 +68,7 @@ Fixed 13 Sep by renaming 12 parents: `bands`, `bands.$id`, `collab.new`, `collab
 | Fonts | **Inter alone** — body, display, eyebrow. Inter Tight, Unica One and JetBrains Mono all retired |
 | Letter-spacing | None. Headings use Inter's normal tracking; the wordmark is set at 0 |
 | Brand pink | `#EA4C89` fills · `#C7295F` text. `#5B4BFF` is superseded and always a bug |
-| Navy | `#0D0B26` **retired** — survives only as a documented back-compat shim for 17 route files |
+| Navy | **Removed 13 Sep** — migrated to ink `#0D0D0D` (`81c8953`). Zero `navy` left in `src/`; `Btn variant="ink"`, `bg-ink` |
 | Radius | **Material 3 shape scale, adopted 13 Sep:** xs 4 · sm 8 · md 12 · lg 16 · xl 20 · 2xl 28 · 3xl 32 · full. `--radius` (shadcn base) is 16. |
 
 ### Radius — the two repos now disagree
@@ -87,9 +87,10 @@ The guide is the stated source of truth, and the app is now hand-diverged from i
 drift class that produced the wrong type scale. One of the two has to move. Until then, do not cite
 either as authoritative for radius.
 
-**`AGENTS.md` contradicts its own repo.** Line 152 still reads *"Radius 8 / 16 / 32 / pill only;
-`24px` and `20px` are not on the scale"* while `styles.css` in the same repo defines
-`--radius-xl: 20px`. Fix line 152.
+~~`AGENTS.md` line 152 contradicts its own repo.~~ **Fixed in `47f7c7b`** — it now documents the
+Material 3 roles (sm 8 chips · md 12 tiles/inputs · lg 16 cards · xl 20 · 2xl 28 sheets/dialogs · 3xl
+32 hero · full). The guide-repo `tokens.json` radius is still `8/16/32/pill` — that disagreement
+stands.
 
 **Correction on record (1):** `audits/TAILWIND-DS-AUDIT.md` §A1 called making the radius aliases
 real steps *"the single cheapest win available — it restores expressiveness to ~450 existing call
@@ -130,9 +131,7 @@ navigation wiring rather than a sweep. It is the cheapest next step.
 
 ## Known-unsafe, not yet decided
 
-- **`profiles.visibility` RLS is NOT applied.** The migration is merged; the live SELECT policy is
-  still `USING (true)`. All 3 profiles are `visibility='public'`, so nothing is exposed *yet*. Do
-  not write code that assumes the database hides a non-public profile.
+- ~~`profiles.visibility` RLS is NOT applied.~~ **Applied 13 Sep** — see "Shipped 13 Sep" below.
 - **Firestore `/users` is world-readable at document level.** `allow read: if true` publishes the
   whole document, and `email` is present on all 83 user docs. Firestore has no field-level read
   control, so the first real OTP signup publishes that person's phone number. Fixed by a split
@@ -152,6 +151,11 @@ navigation wiring rather than a sweep. It is the cheapest next step.
 | `abe3c66` | `/band` redirects to `/bands`; swipe deck moved under `/recommendations/swipe` |
 | `9993a6c` | Retired navy migrated to ink `#0D0D0D` (ΔE2000 14.1 — a visible change, not a rename) |
 | `df56e0a` | Material 3 shape scale |
+| `47f7c7b` | Docs: `AGENTS.md` radius roles / ink / numeric spacing / `text-muted-foreground`; "never Unsplash" line removed on the owner's chat statement; CHANGELOG + roadmap. Lovable knowledge updated to match |
+
+Branch SHAs above; the merge commits on `main` are `d526f17`+`e2471e7` (one merge), `81c8953`, `90a4676`, `47f7c7b`.
+
+**`specs/PR-SPEC-dead-spacing-and-band-route.md` is already implemented** (before the spec was written), with deviations recorded in the spec.
 
 **`profiles.visibility` RLS is now applied to the live database.** Private profiles are hidden from
 everyone but their owner; the old `USING (true)` policy is gone; the migration is in history. All 3
@@ -195,8 +199,11 @@ What should not happen is the current state: deleted in one repo, still governin
 2. **Capacitor path** — thin wrapper around the hosted site, or a static bundle in the APK.
    Determines whether `viewport-fit=cover`, `@capacitor/preferences` and a manifest splash are
    needed at all.
-3. **Phase 8 prerequisites.**
-4. **Route naming** — `/recommendations` vs `/recommended`, `/bands` vs `/band`. Both pairs exist.
+3. **Phase 8 prerequisites — settled except photography.** Radius → Material 3 (`90a4676`), navy →
+   ink (`81c8953`). Photography is the open item above (the `cards.md` rule vs the owner's chat
+   statement). The sweep itself (~97h) is unstarted.
+4. ~~Route naming~~ — **resolved 13 Sep** (`e2471e7`): `/band` redirects to `/bands`; swipe deck is
+   `/recommendations/swipe`, `/recommended` redirects.
 5. **Widget adoption** — import `ml-widgets.css`, port 116 widgets to React, or share tokens only.
    See `specs/WIDGET-ADOPTION-SPEC.md`.
 

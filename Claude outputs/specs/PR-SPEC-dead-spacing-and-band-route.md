@@ -1,13 +1,15 @@
 ---
 doc: PR-SPEC-dead-spacing-and-band-route
 version: 1.0
-status: CURRENT
+status: IMPLEMENTED
 updated: 2026-09-13
 verified_against: musiclinkd-9e6ca875@0697a42
 folder: specs
 originally: new
 ---
 
+> **IMPLEMENTED 13 Sep 2026 by Claude Code** — see "Implementation status" at the end. Kept for the record.
+>
 > **CURRENT** · v1.0 · 2026-09-13. One small PR for Claude Code. Two findings that were previously
 > mis-filed as open decisions; measurement showed neither needs a decision.
 > Ground truth lives in `state/CURRENT.md`; where this file disagrees with it, CURRENT wins.
@@ -184,3 +186,33 @@ data/rentals.ts   data/reviews.ts
 Change 2 removes one of them incidentally. The remaining 14 are blocked on the local photo library
 existing, which is why this is named here rather than fixed. It belongs in Phase 8 or its own
 branch once there are real images to swap in.
+
+
+---
+
+## Implementation status — audited by Claude Code against `musiclinkd-9e6ca875@47f7c7b`
+
+Both changes had already landed before this spec was written (commits `d526f17` and `e2471e7`,
+merged as `e2471e7`, published). Checked against this spec's acceptance criteria:
+
+| Criterion | Result |
+|---|---|
+| No named spacing utility in `src/` | ✅ zero matches |
+| `--spacing-nav-clear` kept, `pb-nav-clear` still used | ✅ `styles.css:78`, `ml/ui.tsx:14` |
+| `grep 'to="/band"' src/` empty | ✅ |
+| Onboarding "Create band" → `/bands/new` | ✅ `onboarding/complete.tsx` |
+| `/bands`, `/bands/the-kite-notes` render their own screens | ✅ verified live |
+| `band.tsx` deleted, route count 207 → 206 | **Deviation** — see below |
+
+**Deviations:**
+
+1. **`/band` is a redirect to `/bands`, not deleted.** The screen body is gone (the file is now a
+   10-line `beforeLoad` redirect, like `/talent/$id`), but the URL still resolves, so an old
+   shared link lands on the directory instead of a 404. Route count stays 207. Deleting the
+   redirect is a one-file follow-up if a 404 is preferred.
+2. **The spec undercounted inbound references.** It said `/band` had exactly one (`complete.tsx:141`).
+   There were three; the other two were also repointed:
+   - `src/data/identity.ts` private-band `publicRoute: "/band"` → `/bands/the-kite-notes` (its `entityId`)
+   - `src/data/profile.ts` "The Local Train" collaborator `link: { to: "/band" }` → `/bands`
+   A `grep 'to="/band"'` misses both because they are object properties, not JSX attributes.
+3. **No new band record was invented** — consistent with this spec's "content is Vedanshu's call".
