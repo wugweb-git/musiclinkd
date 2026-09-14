@@ -44,6 +44,7 @@ Every file carries a front-matter block: `doc`, `version`, `status`, `updated`,
 | File | v | Status | What it is |
 |---|---|---|---|
 | `CLAUDE-CODE-WORK-ORDER.md` | 1.1 | PARTLY STALE | Eight phased branch-per-phase instructions. Appendix A (a second copy of `AGENTS.md`) deleted. Phases 1, 2 and 7 are DONE. |
+| `FINAL-PLAN-2026-09-14.md` | 1.0 | CURRENT | **Start here.** The consolidated plan: four tracks (ship-blocking, design system, UX mechanics, backend), measured at HEAD `1937767`. Supersedes the ordering in the two documents below; they keep their detail. |
 | `PLAN-registration-flow-2026-09-14.md` | 1.0 | AWAITING ACTION | Audit of the 28 new-user screens (the cleanest code in the repo — exclude it from the Phase 8 sweep) plus an 8-branch plan: `AuthStatus` for the three status screens, 16 `text-sm` tokens, motion on 19 step transitions, optional-step marking, Android IME. |
 | `PHASE-SPECS-2b-to-9.md` | 1.1 | PARTLY STALE | Specs for 2b, 3, 4, 5, 6, 7, 9. Renamed from `-2b-to-7` because it always covered 9. **Phase 8 is referenced five times and specified nowhere** — the real gap. |
 
