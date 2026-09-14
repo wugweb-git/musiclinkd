@@ -151,6 +151,22 @@ navigation wiring rather than a sweep. It is the cheapest next step.
   primary, `#8B5CF6` secondary, `#FAFAFA` ground, Google Sans. It is read alongside project
   knowledge and contradicts it.
 
+## Audit follow-up — validated 14 Sep at `4d402b6`
+
+Re-checked in the code, not from a report.
+
+| Finding | State |
+|---|---|
+| Nothing links to `/settings` | **FIXED** — `ml/person-profile.tsx:221` adds an owner-panel Settings row |
+| Business dashboard URL-only | **FIXED** — `business.$id.manage.tsx:73` links it |
+| Band, service and discovery entry points | **FIXED** — `b53f5e5` and `7fbd940`, 18 files |
+| **Every "Book" button outside a past booking** | **STILL BROKEN.** `business.$id.index.tsx:91`, `opportunities.$id.applicants.$aid.tsx:168` and `business.$id.enquiry.tsx:120` all still hard-code `params={{ id: "svc-1" }}`. `services.$id.index.tsx` now offers "Preview booking" → `/services/$id/enquiry` instead, so the service page no longer reaches booking at all. |
+| Demo controls in production | **STILL SHIPPING** — "Preview failure state" at `booking.$id.pay.tsx:132` and `ml/portfolio.tsx:319` |
+
+**The booking break is the one that matters and it is the one still open.** It is the primary
+transaction path, it is live, and it is a link-target fix. The F1/F2 batches touched 18 files around
+it without closing it.
+
 ## Route audit — 13 Sep
 
 Full doc: `audits/route-audit-2026-09-13.md` + `route-audit-2026-09-13/screen-inventory.md`
