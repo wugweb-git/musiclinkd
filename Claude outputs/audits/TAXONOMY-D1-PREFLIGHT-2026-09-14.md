@@ -1,6 +1,6 @@
 ---
 doc: TAXONOMY-D1-PREFLIGHT-2026-09-14
-version: 1.2
+version: 1.3
 status: CURRENT
 updated: 2026-09-14
 verified_against: musiclinkd-9e6ca875@1937767 · Lovable Cloud DB live read 14 Sep (read-only) · audits/FIRESTORE-FULL-DUMP.md parsed 14 Sep
@@ -14,8 +14,8 @@ originally: new
 
 # D1 pre-flight — taxonomy into Supabase
 
-**Result: do not execute the spec as written.** Two decisions are open, and D3 (seed marking) is
-not one of them. D3 does not block D1.
+**Result:** two things in the spec conflict with what is live. Both are open decisions, recorded
+here as facts and options only.
 
 ---
 
@@ -32,7 +32,7 @@ not one of them. D3 does not block D1.
 - cannot satisfy the spec itself — §5's GIN indexes and §6's validation trigger are on `profiles`,
   which exists only in the app's project.
 
-**Recommendation:** the app's project. A migration committed to `supabase/migrations/` lands there.
+A migration committed to `supabase/migrations/` in the app repo lands in the app's project.
 
 ---
 
@@ -75,10 +75,10 @@ reject every onboarding save.
   (Ghazal, Qawwali, Lofi, Acoustic, R&B / Soul, Reggae / Dub). The no-home instruments and
   languages above are **used by zero seed users** — there, A loses only granularity
   (`Acoustic Guitar` / `Electric Guitar` → `Guitar`), not values.
-- **Bhojpuri** has no ISO 639-1 code (639-3 `bho`). The spec's "ISO 639-1" rule needs a fallback —
-  BCP 47 (`bho`) is the standard answer and keeps two-letter codes where they exist.
+- **Bhojpuri** has no ISO 639-1 code (639-3 `bho`). The spec's "ISO 639-1" rule does not cover it;
+  BCP 47 permits `bho` alongside two-letter codes.
 - **Business roles** (`A&R`, `Publishing`, `Rehearsal space`, `Live music bookings` …) are in no
-  taxonomy category. They need a category of their own whichever vocabulary wins.
+  taxonomy category.
 - **The admin panel.** It stays on Firestore (decision record §5) and its Master Data page edits the
   Firestore vocabulary. If Supabase adopts the app's lists, that page edits values nothing reads —
   the "two live copies" problem in spec §8, sharpened.
@@ -92,11 +92,8 @@ reject every onboarding save.
 | **C. Union — app lists plus the missing taxonomy options** | slugify 14 rows | pickers grow by ~20 options → Lovable prompt | seeds import with no loss |
 | **C′. App lists plus the 6 used genres** | slugify 14 rows | genre picker grows by 6 → Lovable prompt | no lost values; instrument granularity only |
 
-~~Claude Code recommends A for D1.~~ *Revised after the full dump.* A drops a genre from 38 of the
-83 seed users — nearly half — so its loss is not small. Claude Code now recommends **C′**: the
-app's lists stay the base (no real user is remapped), and the six genres the seeds actually use are
-added. Instruments and languages need nothing added. Which genres appear in the product is still
-Vedanshu's call; C′ is the smallest set that imports the seeds without dropping values.
+Measured effect: A drops a genre from 38 of 83 seed users; B remaps the 3 real users; C and C′ add
+picker options. C′ is the smallest addition under which no seed value is dropped.
 
 ---
 
@@ -115,13 +112,12 @@ holding the instrument label `"Drums / Percussion"` where an `equipment_categori
 - `opportunity_types` — in the seed file, **absent live**. Never seeded.
 - `trust_bades` — a misspelt duplicate of `trust_badges`, **not in the seed file**, written by
   uid `O6vyNKe7M0ZqKq5xsjrUHzasM4J2`. That is not a `mock-` actor, so **at least one real Firebase
-  Auth account exists** — a partial answer to spec §8's open question. Do not import this category.
+  Auth account exists** — a partial answer to spec §8's open question.
 - Options were not dumped (subcollection), so option-level live state is still unverified. The
   seed file remains the source.
 
 **Counts.** 83 users (TALENT 62 · BUSINESS 19 · BAND 1 · VENUE 1) and 11 studios. The decision
-record's 92 users / 43 studios is not reproduced by any dump; treat 83 / 11 as the dataset until a
-paginated count says otherwise.
+record's 92 users / 43 studios is not reproduced by any dump; no paginated count has been run.
 
 ## D3 note — 50 of the 83 are generated filler
 
@@ -131,29 +127,27 @@ paginated count says otherwise.
 `mock-business-filler-analog-ensemble-studios-2` is located in Mumbai, addressed in Kolkata, and
 "serving the Chennai music scene". The other **33 are hand-written** and internally consistent.
 
-This sharpens the D3 decision: importing all 83 publishes 44 public pages that disagree with
-themselves. Rewriting them is content work, not Claude Code's. The import-shaped options are:
-the 33 hand-written rows; those plus filler with the contradicting bio left empty; or all 83.
+Importing all 83 publishes 44 public pages whose bio and location disagree.
 
-**PII-shaped fields not to carry into public `profiles`:** `email` (all 83, mock domains),
+**PII-shaped fields present:** `email` (all 83, mock domains),
 `gstin` (`mock-business-octave-sound-labs`), `phone` (`mock-studio-octave-sound-labs`).
 
-## D3 note — belongs in D2
+## D3 note — the auth.users key
 
-The two paths in the decision record are not exclusive: `is_seed` is one boolean, and importing
-BUSINESS + VENUE first works with it. Add the flag either way; mark the existing 11 rows.
+The two paths in the decision record are not mutually exclusive: `is_seed` is one boolean column,
+and an import of BUSINESS + VENUE first can carry it.
 
 `profiles.id` references `auth.users(id)`, so every imported seed needs a sign-in-less auth user
-(`20260913090949_seed_linked_profiles.sql` made 11). At 103 that is a lot of fake identities, and
-studios, labels and venues are exactly the rows a real owner may later claim. That argues for a
-`profiles` primary key of its own with a nullable `owner_uid` — a D2 design point, cheapest now.
+(`20260913090949_seed_linked_profiles.sql` made 11). Studios, labels and venues are rows a
+real owner may later claim; the current key ties a profile to a sign-in identity at creation.
 
 ---
 
-## Unblocks when answered
+## Open decisions (Vedanshu's)
 
 1. Target project — the app's (`gsqeymhtyzepwcnorjun`)?
-2. Vocabulary — A, B, C or C′ (recommended)?
+2. Vocabulary — A, B, C or C′?
+3. D3 — which seed rows, and whether marked.
 
 Then: D1 migration, backfill the 14 rows to slugs, save path writes slugs, validation trigger, spec
 §7 acceptance checks run as queries.
