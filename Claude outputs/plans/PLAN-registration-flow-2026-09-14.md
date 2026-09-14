@@ -29,7 +29,7 @@ originally: new
 >   replace emoji and glyphs in the shared `ml/` components.
 > - **§1's counts were also low at `4d402b6`.** A file-by-file read of the journey files (routes plus
 >   `ml/auth.tsx` and `ml/onboarding.tsx`) found 47 `text-[Npx]` sites (23 in `feed.tsx`), 18 inline
->   `style={{…}}` token backgrounds, and emoji role icons in `data/onboarding.ts` shown on the role step.
+>   `style={{…}}` (13 token colours, 5 computed widths), and emoji role icons in `data/onboarding.ts` shown on the role step.
 >   All were fixed in `ca15689`, which also removed the "Ananya Sharma" draft default.
 
 # New-user registration — audit and plan
