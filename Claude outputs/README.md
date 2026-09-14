@@ -36,6 +36,7 @@ Every file carries a front-matter block: `doc`, `version`, `status`, `updated`,
 |---|---|---|---|
 | `CURRENT.md` | 1.0 | CURRENT | **Ground truth.** Read first, update first. |
 | `BUILD-STATE-2026-09-13.md` | 1.0 | CURRENT | Dated snapshot of pushed / merged / live, with the session's corrections. Point-in-time — it does not age into `CURRENT.md`. |
+| `DECISION-backend-direction-2026-09-14.md` | 1.0 | CURRENT | **Neither map Firebase nor migrate it.** Firestore has 92 user docs and 0 real ones, so there is no data to move; identity already lives in Supabase. Taxonomy first, then grow tables as features need them, leave Firestore backing the admin panel. The open decision is the admin panel's fate, not the data. |
 | `HANDOFF-2026-09-13.md` | 1.1 | CURRENT | Claude Code's consolidated handoff — 25 pending items plus known bugs. **Rescued from a `/private/tmp` scratch directory** that is not version-controlled. v1.0 was taken mid-edit and had Appendix A misnumbered 23–32; v1.1 is the corrected, fuller text. |
 
 ### `plans/` — executable work
@@ -43,6 +44,7 @@ Every file carries a front-matter block: `doc`, `version`, `status`, `updated`,
 | File | v | Status | What it is |
 |---|---|---|---|
 | `CLAUDE-CODE-WORK-ORDER.md` | 1.1 | PARTLY STALE | Eight phased branch-per-phase instructions. Appendix A (a second copy of `AGENTS.md`) deleted. Phases 1, 2 and 7 are DONE. |
+| `PLAN-registration-flow-2026-09-14.md` | 1.0 | AWAITING ACTION | Audit of the 28 new-user screens (the cleanest code in the repo — exclude it from the Phase 8 sweep) plus an 8-branch plan: `AuthStatus` for the three status screens, 16 `text-sm` tokens, motion on 19 step transitions, optional-step marking, Android IME. |
 | `PHASE-SPECS-2b-to-9.md` | 1.1 | PARTLY STALE | Specs for 2b, 3, 4, 5, 6, 7, 9. Renamed from `-2b-to-7` because it always covered 9. **Phase 8 is referenced five times and specified nowhere** — the real gap. |
 
 ### `specs/` — designed, not yet built
