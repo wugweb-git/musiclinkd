@@ -1,6 +1,6 @@
 ---
 doc: TAXONOMY-D1-PREFLIGHT-2026-09-14
-version: 1.0
+version: 1.1
 status: CURRENT
 updated: 2026-09-14
 verified_against: musiclinkd-9e6ca875@1937767 · Lovable Cloud DB live read 14 Sep (read-only)
@@ -56,9 +56,19 @@ reject every onboarding save.
 
 ### Consequences either way
 
-- **Direction of mapping.** Fine → coarse is deterministic (`hindustani_classical` → `classical`).
-  Coarse → fine is a guess: a real user's `Classical` cannot be split into Hindustani or Carnatic
-  without asking them.
+- **Neither direction is lossless.** The Firestore seeds store taxonomy labels (`"Jazz / Blues"`,
+  `"Rock / Metal"`, `"Hindi (हिंदी)"` — `audits/FIRESTORE-SCHEMA-WITH-CONTENT.md`), so importing
+  them under option A means mapping taxonomy → app lists. Most options have a home; these do not:
+
+  | Field | No home in the app list (would become `other` or be dropped) | Needs a call |
+  |---|---|---|
+  | genres (5 of 17) | Ghazal · Lofi / Chill Beats · Acoustic / Unplugged · R&B / Soul · Reggae / Dub | Qawwali → Sufi? · Indie Pop → Indie, Pop, or both? · Blues half of Jazz / Blues lost |
+  | instruments (7 of 21) | Trumpet · Sarod · Shehnai · Mridangam · Veena · Tanpura · Cello | Dholak → Percussion? |
+  | languages (8 of 19) | Odia · Urdu · Sanskrit · Spanish · French · German · Japanese · Korean | — |
+
+  Under option B the loss runs the other way: a real user's `Classical` cannot be split into
+  Hindustani or Carnatic without asking them, and `Fusion`, `Regional`, `Bhojpuri` have no
+  taxonomy home.
 - **Bhojpuri** has no ISO 639-1 code (639-3 `bho`). The spec's "ISO 639-1" rule needs a fallback —
   BCP 47 (`bho`) is the standard answer and keeps two-letter codes where they exist.
 - **Business roles** (`A&R`, `Publishing`, `Rehearsal space`, `Live music bookings` …) are in no
@@ -71,12 +81,24 @@ reject every onboarding save.
 
 | Option | Data work | UI work | Seed import (D3) |
 |---|---|---|---|
-| **A. App lists become the taxonomy** | slugify 14 rows, mechanical | none — save path stores slugs, labels unchanged | 92 Firestore seeds map fine → coarse, deterministic |
+| **A. App lists become the taxonomy** | slugify 14 rows, mechanical | none — save path stores slugs, labels unchanged | lossy on the table above; ~a dozen mapping calls |
 | **B. Adopt the Firestore taxonomy** | remap 14 rows, 3 real users need guesses or re-asking | onboarding pickers change → Lovable prompt | seeds import directly |
+| **C. Union — app lists plus the missing taxonomy options** | slugify 14 rows | pickers grow by ~20 options → Lovable prompt | seeds import with no loss |
 
-Claude Code recommends **A**: the only lossy step in B lands on real users.
+Claude Code recommends **A for D1**: the loss in A lands on mock seed data, the loss in B lands on
+real users. **C** is the right answer if the missing genres, instruments and languages are wanted in
+the product — that is a content decision, and it can follow A without a second data migration
+(adding options never invalidates stored slugs).
 
 ---
+
+## D3 note — the seed counts disagree
+
+`DECISION-backend-direction-2026-09-14` says `users` 92 and `studios` 43, and that the REST page
+capped at 83. `audits/FIRESTORE-SCHEMA-WITH-CONTENT.md`, same date, says `users` 83 and `studios` 11,
+"nothing has changed since" 10 Sep. The `profileType` split in the decision record (62 + 19 + 1 + 1)
+sums to **83**, not 92 — so 9 user docs are uncounted by type, and the studios figure is a genuine
+conflict, not a paging artefact. Re-count with pagination before D3 sizes anything.
 
 ## D3 note — belongs in D2
 
