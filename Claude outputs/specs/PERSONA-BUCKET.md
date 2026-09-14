@@ -1,6 +1,6 @@
 ---
 doc: PERSONA-BUCKET
-version: 0.2
+version: 0.3
 status: DRAFT — for Vedanshu's review
 updated: 2026-09-14
 verified_against: musiclinkd-9e6ca875 supabase/migrations/20260914120000_taxonomy_persona_bucket.sql (generated from the same data)
@@ -22,12 +22,28 @@ originally: new
 | Screen | How it stays within 12 |
 |---|---|
 | Languages | 12 options |
-| Business types | 9 options |
-| Primary / secondary person type | pick a group (8), then a type (largest group: 8) |
+| Primary / secondary person type | pick a group (8), then a type (largest group: Business, 12) |
 | Instruments | `persona_bucket` caps at 12 — primary's instruments first, then secondaries', each by popularity |
 | Genres | `persona_bucket` caps at 12 — regional genres for the selected languages first, then universal, each by popularity |
 
 The generator refuses to build if any flat list or person-type group exceeds 12.
+
+## Business flow
+
+The **Business** person-type group *is* the business type list (12). Every row in it carries
+`metadata.flow = "business"`; picking one leads into the business flow. All other person types carry
+`flow = "talent"`. Whether a business type may be a *secondary* person type is not decided here.
+
+## Publish / unpublish
+
+`is_published` on `taxonomy_categories` and `taxonomy_options`, default `true`.
+
+- Clients (anon, signed-in) see only published rows — enforced by RLS, not by the app.
+- Unpublishing a category hides every option in it.
+- `persona_bucket` skips unpublished instruments, genres and languages, and rejects an unpublished
+  person type.
+- Toggling is service-role only (no client write): `UPDATE public.taxonomy_options SET is_published = false WHERE category_key = 'instruments' AND slug = 'harmonica';`
+- `updated_at` moves on every update (trigger).
 
 Call: `select * from persona_bucket('singer', array['lyricist','composer'], array['hi','en']);`
 — returns `category_key, slug, label, display_order`; `display_order` is the on-screen order, 1–12.
@@ -49,20 +65,6 @@ Call: `select * from persona_bucket('singer', array['lyricist','composer'], arra
 | `as` | অসমীয়া |
 | `en` | English |
 
-## Business types (9)
-
-| Slug | Label |
-|---|---|
-| `studio` | Studio |
-| `label` | Label |
-| `agency` | Agency |
-| `venue` | Venue |
-| `dealer` | Dealer |
-| `rental_provider` | Rental Provider |
-| `music_school` | Music School |
-| `production_house` | Production House |
-| `other` | Other |
-
 ## Instruments (34)
 
 | Family | Instruments |
@@ -77,7 +79,7 @@ Call: `select * from persona_bucket('singer', array['lyricist','composer'], arra
 
 Popularity order: 1. Acoustic Guitar · 2. Keyboard / Synthesizer · 3. Piano · 4. Electric Guitar · 5. Drums / Percussion · 6. Tabla · 7. Bass Guitar · 8. Flute (Bansuri) · 9. Violin · 10. Harmonium · 11. Sitar · 12. Dholak · 13. DJ Controller / Turntables · 14. Drum Machine / Sampler · 15. Saxophone · 16. Ukulele · 17. Cajón · 18. Santoor · 19. Mridangam · 20. Veena · 21. Sarangi · 22. Cello · 23. Trumpet · 24. Sarod · 25. Shehnai · 26. Tanpura · 27. Ghatam · 28. Kanjira · 29. Clarinet · 30. Nadaswaram · 31. Mandolin · 32. Double Bass · 33. Viola · 34. Harmonica
 
-## Person types (33) → instruments
+## Person types (39) → instruments
 
 | Group | Types |
 |---|---|
@@ -87,7 +89,7 @@ Popularity order: 1. Acoustic Guitar · 2. Keyboard / Synthesizer · 3. Piano ·
 | Technical (4) | Sound Engineer · Mixing Engineer · Mastering Engineer · Sound Designer |
 | Media (3) | DJ · RJ · Podcaster |
 | Education (1) | Music Teacher |
-| Business (6) | Artist Manager · A&R · Music Label · Music Publisher · Recording Studio · Event Organizer |
+| Business (12) | Recording Studio · Music Label · Venue · Event Organizer · Booking Agency · Artist Manager · Production House · Music School · Dealer · Rental Provider · Music Publisher · A&R |
 | Other (1) | Other |
 
 | Group | Slug | Label | Source | Instruments | Basis |
@@ -118,12 +120,18 @@ Popularity order: 1. Acoustic Guitar · 2. Keyboard / Synthesizer · 3. Piano ·
 | Media | `rj` | RJ | app | — | app: not asked |
 | Media | `podcaster` | Podcaster | app | — | app: not asked |
 | Education | `music_teacher` | Music Teacher | app | all | app: asked |
-| Business | `artist_manager` | Artist Manager | firestore | — | business |
-| Business | `a_and_r` | A&R | added | — | business |
-| Business | `music_label` | Music Label | firestore | — | business |
-| Business | `music_publisher` | Music Publisher | firestore | — | business |
-| Business | `studio` | Recording Studio | firestore | — | business |
-| Business | `event_organizer` | Event Organizer | firestore | — | business |
+| Business | `studio` | Recording Studio | both | — | business flow |
+| Business | `music_label` | Music Label | both | — | business flow |
+| Business | `venue` | Venue | both | — | business flow |
+| Business | `event_organizer` | Event Organizer | firestore | — | business flow |
+| Business | `booking_agency` | Booking Agency | both | — | business flow |
+| Business | `artist_manager` | Artist Manager | firestore | — | business flow |
+| Business | `production_house` | Production House | both | — | business flow |
+| Business | `music_school` | Music School | both | — | business flow |
+| Business | `dealer` | Dealer | both | — | business flow |
+| Business | `rental_provider` | Rental Provider | both | — | business flow |
+| Business | `music_publisher` | Music Publisher | firestore | — | business flow |
+| Business | `a_and_r` | A&R | added | — | business flow |
 | Other | `other` | Other | app | — | app: not asked |
 
 ## Genres (32) → languages, in popularity order
