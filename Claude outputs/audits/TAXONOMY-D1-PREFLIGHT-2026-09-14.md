@@ -115,7 +115,7 @@ studios, labels and venues are exactly the rows a real owner may later claim. Th
 ## Unblocks when answered
 
 1. Target project — the app's (`gsqeymhtyzepwcnorjun`)?
-2. Vocabulary — A or B?
+2. Vocabulary — A, B or C?
 
 Then: D1 migration, backfill the 14 rows to slugs, save path writes slugs, validation trigger, spec
 §7 acceptance checks run as queries.
