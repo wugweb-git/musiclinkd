@@ -1,6 +1,6 @@
 ---
 doc: PERSONA-BUCKET
-version: 0.1
+version: 0.2
 status: DRAFT — for Vedanshu's review
 updated: 2026-09-14
 verified_against: musiclinkd-9e6ca875 supabase/migrations/20260914120000_taxonomy_persona_bucket.sql (generated from the same data)
@@ -17,7 +17,20 @@ originally: new
 **Instruments** = union of the instruments allowed for the primary and each secondary person type.
 **Genres** = every *universal* genre, plus each *regional* genre linked to any selected language.
 
+## Screen limit — 12 per screen
+
+| Screen | How it stays within 12 |
+|---|---|
+| Languages | 12 options |
+| Business types | 9 options |
+| Primary / secondary person type | pick a group (8), then a type (largest group: 8) |
+| Instruments | `persona_bucket` caps at 12 — primary's instruments first, then secondaries', each by popularity |
+| Genres | `persona_bucket` caps at 12 — regional genres for the selected languages first, then universal, each by popularity |
+
+The generator refuses to build if any flat list or person-type group exceeds 12.
+
 Call: `select * from persona_bucket('singer', array['lyricist','composer'], array['hi','en']);`
+— returns `category_key, slug, label, display_order`; `display_order` is the on-screen order, 1–12.
 
 ## Languages (12)
 
@@ -62,7 +75,20 @@ Call: `select * from persona_bucket('singer', array['lyricist','composer'], arra
 | Wind | Flute (Bansuri) · Saxophone · Trumpet · Clarinet *(added)* · Shehnai · Nadaswaram *(added)* · Harmonica *(added)* |
 | Electronic | DJ Controller / Turntables *(added)* · Drum Machine / Sampler *(added)* |
 
+Popularity order: 1. Acoustic Guitar · 2. Keyboard / Synthesizer · 3. Piano · 4. Electric Guitar · 5. Drums / Percussion · 6. Tabla · 7. Bass Guitar · 8. Flute (Bansuri) · 9. Violin · 10. Harmonium · 11. Sitar · 12. Dholak · 13. DJ Controller / Turntables · 14. Drum Machine / Sampler · 15. Saxophone · 16. Ukulele · 17. Cajón · 18. Santoor · 19. Mridangam · 20. Veena · 21. Sarangi · 22. Cello · 23. Trumpet · 24. Sarod · 25. Shehnai · 26. Tanpura · 27. Ghatam · 28. Kanjira · 29. Clarinet · 30. Nadaswaram · 31. Mandolin · 32. Double Bass · 33. Viola · 34. Harmonica
+
 ## Person types (33) → instruments
+
+| Group | Types |
+|---|---|
+| Vocal (4) | Singer / Vocalist · Rapper / MC · Folk Vocalist · Voice Artist |
+| Instrumentalist (8) | Musician · Guitarist · Bassist · Keyboardist / Pianist · Drummer / Percussionist · Sitarist / Flutist · Violinist / String Player · Flautist / Wind Player |
+| Creator (6) | Composer · Lyricist · Vocal Arranger · Music Director · Music Producer · Beatmaker |
+| Technical (4) | Sound Engineer · Mixing Engineer · Mastering Engineer · Sound Designer |
+| Media (3) | DJ · RJ · Podcaster |
+| Education (1) | Music Teacher |
+| Business (6) | Artist Manager · A&R · Music Label · Music Publisher · Recording Studio · Event Organizer |
+| Other (1) | Other |
 
 | Group | Slug | Label | Source | Instruments | Basis |
 |---|---|---|---|---|---|
@@ -100,59 +126,59 @@ Call: `select * from persona_bucket('singer', array['lyricist','composer'], arra
 | Business | `event_organizer` | Event Organizer | firestore | — | business |
 | Other | `other` | Other | app | — | app: not asked |
 
-## Genres (32) → languages
+## Genres (32) → languages, in popularity order
 
 | Slug | Label | Scope | Languages |
 |---|---|---|---|
-| `indie_pop` | Indie Pop | universal | all |
-| `rock_metal` | Rock / Metal | universal | all |
-| `hiphop_trap` | Hip Hop / Trap | universal | all |
-| `lofi_chill` | Lofi / Chill Beats | universal | all |
-| `edm_synthwave` | EDM / Synthwave | universal | all |
-| `acoustic_unplugged` | Acoustic / Unplugged | universal | all |
-| `rnb_soul` | R&B / Soul | universal | all |
-| `jazz_blues` | Jazz / Blues | universal | all |
-| `reggae_dub` | Reggae / Dub | universal | all |
-| `fusion` | Fusion *(added)* | universal | all |
 | `bollywood_filmi` | Bollywood / Filmi | regional | हिंदी |
+| `punjabi_pop` | Punjabi Pop *(added)* | regional | ਪੰਜਾਬੀ |
 | `hindustani_classical` | Hindustani Classical | regional | हिंदी · ਪੰਜਾਬੀ · বাংলা · मराठी · ગુજરાતી · অসমীয়া · भोजपुरी |
 | `carnatic_classical` | Carnatic Classical | regional | தமிழ் · తెలుగు · ಕನ್ನಡ · മലയാളം |
 | `sufi_devotional` | Sufi Devotional | regional | हिंदी · ਪੰਜਾਬੀ |
+| `bhajan_kirtan` | Bhajan / Kirtan *(added)* | regional | all Indian |
 | `ghazal` | Ghazal | regional | हिंदी |
 | `qawwali` | Qawwali | regional | हिंदी · ਪੰਜਾਬੀ |
-| `bhajan_kirtan` | Bhajan / Kirtan *(added)* | regional | all Indian |
 | `punjabi_folk_bhangra` | Punjabi Folk / Bhangra | regional | ਪੰਜਾਬੀ |
-| `punjabi_pop` | Punjabi Pop *(added)* | regional | ਪੰਜਾਬੀ |
-| `rajasthani_folk` | Rajasthani Folk | regional | हिंदी |
-| `bhojpuri_folk` | Bhojpuri Folk *(added)* | regional | भोजपुरी |
 | `kollywood` | Tamil Film (Kollywood) *(added)* | regional | தமிழ் |
-| `gaana` | Gaana *(added)* | regional | தமிழ் |
 | `tollywood` | Telugu Film (Tollywood) *(added)* | regional | తెలుగు |
-| `sandalwood` | Kannada Film (Sandalwood) *(added)* | regional | ಕನ್ನಡ |
 | `mollywood` | Malayalam Film (Mollywood) *(added)* | regional | മലയാളം |
+| `sandalwood` | Kannada Film (Sandalwood) *(added)* | regional | ಕನ್ನಡ |
 | `rabindra_sangeet` | Rabindra Sangeet *(added)* | regional | বাংলা |
-| `baul` | Baul *(added)* | regional | বাংলা |
 | `lavani` | Lavani *(added)* | regional | मराठी |
-| `natya_sangeet` | Natya Sangeet *(added)* | regional | मराठी |
 | `garba_dandiya` | Garba / Dandiya *(added)* | regional | ગુજરાતી |
 | `bihu` | Bihu *(added)* | regional | অসমীয়া |
+| `bhojpuri_folk` | Bhojpuri Folk *(added)* | regional | भोजपुरी |
+| `gaana` | Gaana *(added)* | regional | தமிழ் |
+| `baul` | Baul *(added)* | regional | বাংলা |
+| `natya_sangeet` | Natya Sangeet *(added)* | regional | मराठी |
+| `rajasthani_folk` | Rajasthani Folk | regional | हिंदी |
+| `indie_pop` | Indie Pop | universal | all |
+| `hiphop_trap` | Hip Hop / Trap | universal | all |
+| `rock_metal` | Rock / Metal | universal | all |
+| `edm_synthwave` | EDM / Synthwave | universal | all |
+| `lofi_chill` | Lofi / Chill Beats | universal | all |
+| `acoustic_unplugged` | Acoustic / Unplugged | universal | all |
+| `fusion` | Fusion *(added)* | universal | all |
+| `rnb_soul` | R&B / Soul | universal | all |
+| `jazz_blues` | Jazz / Blues | universal | all |
+| `reggae_dub` | Reggae / Dub | universal | all |
 
 ## Worked examples
 
 **singer + lyricist, composer · languages हिंदी · English**
 
-- Instruments (34): all
-- Genres (17): 10 universal + Bollywood / Filmi, Hindustani Classical, Sufi Devotional, Ghazal, Qawwali, Bhajan / Kirtan, Rajasthani Folk
+- Instruments — 12 shown of 34 allowed: Acoustic Guitar, Keyboard / Synthesizer, Piano, Electric Guitar, Bass Guitar, Harmonium, Ukulele, Mandolin, Drums / Percussion, Tabla, Flute (Bansuri), Violin
+- Genres — 12 shown of 17 allowed: Bollywood / Filmi, Hindustani Classical, Sufi Devotional, Bhajan / Kirtan, Ghazal, Qawwali, Rajasthani Folk, Indie Pop, Hip Hop / Trap, Rock / Metal, EDM / Synthwave, Lofi / Chill Beats
 
 **singer + lyricist, dj · languages தமிழ்**
 
-- Instruments (10): Acoustic Guitar, Electric Guitar, Bass Guitar, Ukulele, Mandolin, Keyboard / Synthesizer, Piano, Harmonium, DJ Controller / Turntables, Drum Machine / Sampler
-- Genres (14): 10 universal + Carnatic Classical, Bhajan / Kirtan, Tamil Film (Kollywood), Gaana
+- Instruments — 10 shown of 10 allowed: Acoustic Guitar, Keyboard / Synthesizer, Piano, Electric Guitar, Bass Guitar, Harmonium, Ukulele, Mandolin, DJ Controller / Turntables, Drum Machine / Sampler
+- Genres — 12 shown of 14 allowed: Carnatic Classical, Bhajan / Kirtan, Tamil Film (Kollywood), Gaana, Indie Pop, Hip Hop / Trap, Rock / Metal, EDM / Synthwave, Lofi / Chill Beats, Acoustic / Unplugged, Fusion, R&B / Soul
 
 **drummer + folk_vocalist · languages ਪੰਜਾਬੀ · भोजपुरी**
 
-- Instruments (10): Acoustic Guitar, Harmonium, Drums / Percussion, Tabla, Dholak, Mridangam, Ghatam, Kanjira, Cajón, Drum Machine / Sampler
-- Genres (17): 10 universal + Hindustani Classical, Sufi Devotional, Qawwali, Bhajan / Kirtan, Punjabi Folk / Bhangra, Punjabi Pop, Bhojpuri Folk
+- Instruments — 10 shown of 10 allowed: Drums / Percussion, Tabla, Dholak, Drum Machine / Sampler, Cajón, Mridangam, Ghatam, Kanjira, Acoustic Guitar, Harmonium
+- Genres — 12 shown of 17 allowed: Punjabi Pop, Hindustani Classical, Sufi Devotional, Bhajan / Kirtan, Qawwali, Punjabi Folk / Bhangra, Bhojpuri Folk, Indie Pop, Hip Hop / Trap, Rock / Metal, EDM / Synthwave, Lofi / Chill Beats
 
 ## Not decided here
 
