@@ -12,18 +12,43 @@ originally: new
 > design system, plus a UX work plan for Claude Code. Every line number below was read from the
 > code at `4d402b6`, not inferred.
 > Ground truth lives in `state/CURRENT.md`.
+>
+> **Update, 14 Sep (app `1937767`).** §0 is corrected. Landed since this plan was written:
+> - **3.4 verified and fixed.** Google (`redirect_uri: origin`) and email confirmation
+>   (`emailRedirectTo: origin`) both returned to `/`, which sent any session to `/feed`. Every sign-in
+>   now returns through the splash, which reads `onboarding_complete`, `onboarding_step` and
+>   `onboarding_draft` and routes to Home, `/onboarding/resume` or `/onboarding`.
+> - **3.5 verified.** The auth server's public settings report `external.phone: false`. The old Verify
+>   button set the "not enabled" error unconditionally, and `signInWithOtp` was never called. The screens
+>   now call `signInWithOtp` / `verifyOtp`, and say phone sign-in is unavailable while the provider is
+>   off. Turning Phone on in Lovable Cloud auth settings is the remaining step; there is no code change.
+> - **Item 4 superseded.** `text-sm` is now a real 14-15px token (`--type-sm`), so its 302 sites are
+>   compliant without edits.
+> - **Item 3 done.** Welcome uses `Brand`; the Google hex fills carry a comment.
+> - Also: app-wide `text-primary` → `text-pink-strong` on text (126 sites, icons kept), and lucide icons
+>   replace emoji and glyphs in the shared `ml/` components.
+> - **§1's counts were also low at `4d402b6`.** A file-by-file read of the journey files (routes plus
+>   `ml/auth.tsx` and `ml/onboarding.tsx`) found 47 `text-[Npx]` sites (23 in `feed.tsx`), 18 inline
+>   `style={{…}}` token backgrounds, and emoji role icons in `data/onboarding.ts` shown on the role step.
+>   All were fixed in `ca15689`, which also removed the "Ananya Sharma" draft default.
 
 # New-user registration — audit and plan
 
-## 0. The flow list is one step ahead of the code
+## 0. Correction — the band step did exist
 
-The supplied flow has 29 screens including **25 `/onboarding/step/band` — "Are you in a band?"**
+**This section was wrong as first written.** It said the flow list was "one step ahead of the code":
+that `src/data/onboarding.ts` had 19 steps ending at `business`, no `band` step id, and no `bandIntent`
+anywhere in `src/`. The grep behind that came back empty and was trusted without a cross-check.
 
-**That step does not exist.** `src/data/onboarding.ts` defines **19 steps**, ending at `business`.
-There is no `band` step id, and `bandIntent` appears nowhere in `src/`. Band setup is not an account
-type and never enters onboarding — correct as built.
+The code at `4d402b6` had all three: `id: "band"` with `contract("ONB-27", "Band Intent",
+"/onboarding/step/band", …)`, `bandIntent` on the draft (persisted through `lib/profile-map.ts`), and a
+"Create your band profile" hand-off on `/onboarding/complete`. The supplied 29-screen flow list was
+right. Commit `ca15689` (merged `785ed4f`) removed them, on the owner's decision that a band is a
+profile type (a group of individuals) set up after registration, never in onboarding. Onboarding is now
+17 steps plus the hand-offs.
 
-**Action:** renumber the flow doc to 28 screens and delete step 25. No code change.
+Same failure class as the `build-handoff.mjs` and `dark:` counts: a negative grep is not evidence until
+it is checked against a file read or a diff.
 
 ---
 
