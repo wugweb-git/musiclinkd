@@ -1,9 +1,9 @@
 ---
 doc: TAXONOMY-D1-PREFLIGHT-2026-09-14
-version: 1.1
+version: 1.2
 status: CURRENT
 updated: 2026-09-14
-verified_against: musiclinkd-9e6ca875@1937767 · Lovable Cloud DB live read 14 Sep (read-only)
+verified_against: musiclinkd-9e6ca875@1937767 · Lovable Cloud DB live read 14 Sep (read-only) · audits/FIRESTORE-FULL-DUMP.md parsed 14 Sep
 folder: audits
 originally: new
 ---
@@ -69,6 +69,12 @@ reject every onboarding save.
   Under option B the loss runs the other way: a real user's `Classical` cannot be split into
   Hindustani or Carnatic without asking them, and `Fusion`, `Regional`, `Bhojpuri` have no
   taxonomy home.
+
+  **Measured against the full dump** (`audits/FIRESTORE-FULL-DUMP.md`, 83 users): the seeds use
+  **all 17 genres**, and **38 of 83 users** carry at least one genre with no home in the app list
+  (Ghazal, Qawwali, Lofi, Acoustic, R&B / Soul, Reggae / Dub). The no-home instruments and
+  languages above are **used by zero seed users** — there, A loses only granularity
+  (`Acoustic Guitar` / `Electric Guitar` → `Guitar`), not values.
 - **Bhojpuri** has no ISO 639-1 code (639-3 `bho`). The spec's "ISO 639-1" rule needs a fallback —
   BCP 47 (`bho`) is the standard answer and keeps two-letter codes where they exist.
 - **Business roles** (`A&R`, `Publishing`, `Rehearsal space`, `Live music bookings` …) are in no
@@ -84,21 +90,53 @@ reject every onboarding save.
 | **A. App lists become the taxonomy** | slugify 14 rows, mechanical | none — save path stores slugs, labels unchanged | lossy on the table above; ~a dozen mapping calls |
 | **B. Adopt the Firestore taxonomy** | remap 14 rows, 3 real users need guesses or re-asking | onboarding pickers change → Lovable prompt | seeds import directly |
 | **C. Union — app lists plus the missing taxonomy options** | slugify 14 rows | pickers grow by ~20 options → Lovable prompt | seeds import with no loss |
+| **C′. App lists plus the 6 used genres** | slugify 14 rows | genre picker grows by 6 → Lovable prompt | no lost values; instrument granularity only |
 
-Claude Code recommends **A for D1**: the loss in A lands on mock seed data, the loss in B lands on
-real users. **C** is the right answer if the missing genres, instruments and languages are wanted in
-the product — that is a content decision, and it can follow A without a second data migration
-(adding options never invalidates stored slugs).
+~~Claude Code recommends A for D1.~~ *Revised after the full dump.* A drops a genre from 38 of the
+83 seed users — nearly half — so its loss is not small. Claude Code now recommends **C′**: the
+app's lists stay the base (no real user is remapped), and the six genres the seeds actually use are
+added. Instruments and languages need nothing added. Which genres appear in the product is still
+Vedanshu's call; C′ is the smallest set that imports the seeds without dropping values.
 
 ---
 
-## D3 note — the seed counts disagree
+## What the full dump settles
 
-`DECISION-backend-direction-2026-09-14` says `users` 92 and `studios` 43, and that the REST page
-capped at 83. `audits/FIRESTORE-SCHEMA-WITH-CONTENT.md`, same date, says `users` 83 and `studios` 11,
-"nothing has changed since" 10 Sep. The `profileType` split in the decision record (62 + 19 + 1 + 1)
-sums to **83**, not 92 — so 9 user docs are uncounted by type, and the studios figure is a genuine
-conflict, not a paging artefact. Re-count with pagination before D3 sizes anything.
+Parsed from `audits/FIRESTORE-FULL-DUMP.md` (222 docs, 13 public collections), not read by eye.
+
+**The seed content is clean taxonomy data.** Every taxonomy-backed field on `users` —
+genres, persona/trust badges, `primaryRole`/`secondaryRole`, `budgetTier`, `sessionAvailability`,
+`dawStack`, `vocalRange`, `services` — uses only taxonomy values. The only drift in 83 documents:
+`"Kannada"` ×3 and `"Tamil"` ×1 (the spec's known case), and one `marketplace_items.itemCategory`
+holding the instrument label `"Drums / Percussion"` where an `equipment_categories` slug belongs.
+
+**Live Firestore taxonomy is not the seed file's 29.** It is 28 of them plus a stray:
+
+- `opportunity_types` — in the seed file, **absent live**. Never seeded.
+- `trust_bades` — a misspelt duplicate of `trust_badges`, **not in the seed file**, written by
+  uid `O6vyNKe7M0ZqKq5xsjrUHzasM4J2`. That is not a `mock-` actor, so **at least one real Firebase
+  Auth account exists** — a partial answer to spec §8's open question. Do not import this category.
+- Options were not dumped (subcollection), so option-level live state is still unverified. The
+  seed file remains the source.
+
+**Counts.** 83 users (TALENT 62 · BUSINESS 19 · BAND 1 · VENUE 1) and 11 studios. The decision
+record's 92 users / 43 studios is not reproduced by any dump; treat 83 / 11 as the dataset until a
+paginated count says otherwise.
+
+## D3 note — 50 of the 83 are generated filler
+
+`_id` contains `filler` on **50 of 83** users. Their bios are template strings
+(*"Guitarist based in Goa, working across …"*), and **44 of the 50 contradict their own
+`location`** — `mock-talent-filler-advait-bose` is located in New Delhi and "based in Mumbai";
+`mock-business-filler-analog-ensemble-studios-2` is located in Mumbai, addressed in Kolkata, and
+"serving the Chennai music scene". The other **33 are hand-written** and internally consistent.
+
+This sharpens the D3 decision: importing all 83 publishes 44 public pages that disagree with
+themselves. Rewriting them is content work, not Claude Code's. The import-shaped options are:
+the 33 hand-written rows; those plus filler with the contradicting bio left empty; or all 83.
+
+**PII-shaped fields not to carry into public `profiles`:** `email` (all 83, mock domains),
+`gstin` (`mock-business-octave-sound-labs`), `phone` (`mock-studio-octave-sound-labs`).
 
 ## D3 note — belongs in D2
 
@@ -115,7 +153,7 @@ studios, labels and venues are exactly the rows a real owner may later claim. Th
 ## Unblocks when answered
 
 1. Target project — the app's (`gsqeymhtyzepwcnorjun`)?
-2. Vocabulary — A, B or C?
+2. Vocabulary — A, B, C or C′ (recommended)?
 
 Then: D1 migration, backfill the 14 rows to slugs, save path writes slugs, validation trigger, spec
 §7 acceptance checks run as queries.
