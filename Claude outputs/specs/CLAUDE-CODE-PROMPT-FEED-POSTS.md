@@ -1,6 +1,6 @@
 # Claude Code prompt: feed posts on Home
 
-Version 1.0 · 14 Sep 2026 · Status: ready to paste into a Claude Code session in the app repo
+Version 1.1 · 14 Sep 2026 · Status: ready to paste into a Claude Code session in the app repo
 (`musiclinkd-9e6ca875`).
 
 Owner decision (14 Sep 2026): Claude Code builds the posts UI, as an exception to the
@@ -31,7 +31,7 @@ Table `public.feed_posts`, defined in `supabase/migrations/20260914180000_catalo
 
 - **RLS:** anyone can read. Authors insert, update and delete their own rows (`auth.uid() = author_profile_id`).
 - **Rows today:** 5 imported from Firebase (2 audio, 2 text, 1 image with 1 photo), dated 3–8 Aug 2026.
-- **Authors:** arijit-sen, kabeer-varma, vedanshu-beats, wugweb, vikramaditya-roy.
+- **Authors:** arijit.sen, kabeer.varma, vedanshu.beats, wugweb, vikramaditya.roy.
 - **No other tables:** there are none for likes, comments or follows.
 
 ### Server function
