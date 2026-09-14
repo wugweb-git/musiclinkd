@@ -1,6 +1,6 @@
 ---
 doc: DECISION-backend-direction-2026-09-14
-version: 1.0
+version: 1.1
 status: CURRENT
 updated: 2026-09-14
 verified_against: Firestore musiclinkd-7ae30 live read 14 Sep · musiclinkd-9e6ca875@4d402b6
@@ -168,6 +168,81 @@ Three facts that should be on the table whenever it is taken:
 | Option | Rejected because |
 |---|---|
 | **Map the Lovable app to Firestore** | Identity is already in Supabase. Splitting users from their content across two databases, joined in app code, is a permanent consistency problem and a per-feature decision nobody will make consistently. |
-| **Migrate Firestore data into Supabase** | There is no data. 92 user docs, 0 real. This is schema design, and calling it a migration hides that. |
+| **Migrate Firestore data into Supabase** *(as a production-data migration)* | There is no production data. 92 user docs, 0 real. But **importing the seed content is worth doing** — see §7, added 14 Sep after reading the documents. |
 | **Port all 34 document types at once** | 8 have no writer; several are Firestore workarounds. Porting the shape imports the smell without the constraint. |
 | **Decide the admin panel's fate now** | Nothing forces it today, and the right answer depends on how many tables the app grows. |
+
+
+---
+
+## 7. Addendum, 14 Sep — importing the seed content
+
+Added after reading the Firestore documents rather than counting them. **This refines §6, it does
+not contradict it.** There is still no production data. What there is, is good seed content, and
+importing it is worth doing for a reason that has nothing to do with migration.
+
+### What is actually in there
+
+Sampled live from the `users` collection:
+
+```
+profileType:  TALENT 62 · BUSINESS 19 · BAND 1 · VENUE 1
+emails:       83 of 83 are @…-mock.example   (deliberately non-routable)
+fields/doc:   22 — displayName, bio, genres[], instruments[], languages[],
+              location, hourlyRate, budgetTier, primaryRole, secondaryRole,
+              personaBadges[], trustBadges[], isVerified, lineupMembers[], shows[]
+```
+
+(The page caps at 83; the collection reports 92, so nine sit on a second page.)
+
+This is careful, realistic, India-specific content with correct email hygiene. It is materially
+better than treating `src/data/*.ts` as the source.
+
+### The real argument: it kills the largest item in Phase 8
+
+The app's content lives in **22 TypeScript modules** under `src/data/`. Splitting them is the single
+biggest line in the Phase 8 estimate — **40.5 hours**. If that content lived in Supabase tables
+instead, screens would read real queries, and the **UI copy / seed content / runtime data**
+separation that `AGENTS.md` requires would hold by construction instead of by discipline.
+
+That is an architecture win. The data movement is incidental to it.
+
+### Execution order
+
+**1. Taxonomy — import straight across.**
+29 categories, 95 slugs. Real curated reference data, not seed. Everything else references it: 20+
+columns across the schema are plain `string` waiting for it to exist. Spec ready in
+`specs/TAXONOMY-MIGRATION-SPEC.md`.
+
+**2. Design the tables. Do not copy the shape.**
+`profileType: BAND | BUSINESS | TALENT | VENUE` on one 22-field document **is** the god-document
+problem named in §4: one type carrying `bandName`, `lineupMembers` and `shows` alongside
+`hourlyRate` and `instruments`. In Postgres that is a `profiles` core plus per-type tables.
+
+**Copy the content, not the schema.** Everything in §4 step 2 applies — money to integer minor
+units, dates to `date`/`timestamptz`, `instrumentProficiency` to a join table, denormalised fan-out
+fields dropped in favour of joins.
+
+**3. Then seed the content into those tables.**
+
+### The decision inside step 3
+
+`profiles` SELECT is public, so **every imported row becomes a live public profile page the moment
+it lands**.
+
+On 13 Sep the decision was taken to keep 11 seeded profiles unmarked, deliberately, pre-launch.
+Importing 92 makes that **103 public pages for people who do not exist**. That was a reasonable call
+at 11; at 103 it is a different thing, and it should be taken again rather than inherited.
+
+Two paths that both work:
+
+- **Import all 92 and add a `is_seed` flag** the UI can read, so the marking decision stays
+  reversible without another migration.
+- **Import the 19 BUSINESS + 1 VENUE first.** Studios, labels and venues are what the booking and
+  marketplace flows actually need, and they are not invented humans. The 62 TALENT rows can follow
+  once the flag question is settled.
+
+### What does not change
+
+The admin panel stays on Firestore for now (§5). Importing seed content into Supabase does not
+decide the admin's fate, and should not be allowed to look like it does.
