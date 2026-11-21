@@ -119,7 +119,7 @@ propagate what a previous doc says without checking.
     via `add_theme_support('editor-styles')` and `enqueue_block_editor_assets` in `functions.php`.
 - **FluentCRM & FluentSMTP Email Architecture (2026-11-22):**
   - Native FluentCRM block-based email template (`fc_template`, ID 106) configured with clean editorial styling (centered brand header, Inter typography, callout pro-tips, pink pill CTA, and canonical unsubscribe footer).
-  - Responsive cross-client HTML email signature created in `templates/email/signature.html` for user-generated correspondence via FluentSMTP (`contact@musiclinkd.com`).
+  - Responsive cross-client HTML email signature created in `templates/email/signature.html` for user-generated correspondence via FluentSMTP (`contact@musiclinkd.com`), styled with ultra-minimal Linear/Stripe typographic hierarchy (no emojis, subtle monochrome vector mark, clean single-line contact, and subtle social glyphs without link clutter).
   - Streamlined `templates/page.html` to eliminate duplicate generic post titles and synced all ecosystem links in `parts/footer.html`.
 
 ## Environment note
