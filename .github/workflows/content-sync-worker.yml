@@ -1,0 +1,50 @@
+name: Content Ingestion & Health Sync Worker
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Every 6 hours
+  workflow_dispatch:      # Manual trigger
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/worker_content_sync.py'
+      - 'templates/**'
+      - 'parts/**'
+      - 'patterns/**'
+
+permissions:
+  contents: write
+
+jobs:
+  sync-audit:
+    name: Audit & Sync WordPress CMS Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Content Sync & Ingestion Audit
+        env:
+          WP_BASE_URL: 'https://musiclinkd.com'
+          WP_INGEST_USER: ${{ secrets.WP_INGEST_USER || 'ingest' }}
+          WP_INGEST_PASS: ${{ secrets.WP_INGEST_PASS }}
+        run: |
+          python3 scripts/worker_content_sync.py
+
+      - name: Commit & Push Health Log
+        run: |
+          git config user.name "musiclinkd-ingest-bot[bot]"
+          git config user.email "ingest-bot@users.noreply.github.com"
+          git add docs/logs/sync-health.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(worker): automated content sync & health audit log [skip ci]"
+            git push origin main
+          else
+            echo "No sync log changes to commit."
+          fi

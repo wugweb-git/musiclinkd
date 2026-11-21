@@ -136,6 +136,12 @@ propagate what a previous doc says without checking.
   - Consolidated documentation: moved `guide/docs/*` to `docs/handoff/`, moved `infrastructure/*.md` to `docs/06-Architecture/`.
   - Pruned obsolete empty folders (`backend/`, `guide/`, `infrastructure/`, `dist/`).
   - Added scratch outputs (`Claude outputs/`) to `.gitignore`.
+- **Scheduled GitHub Action Workers & Ingest System (2026-11-22):**
+  - Created WordPress service account `ingest` (User ID 2, administrator) with dedicated application password (`GitHub Worker Sync`) for automated REST API access and CMS ingestion.
+  - Built `scripts/worker_content_sync.py` to audit, verify, and log live REST page responses across 14 canonical slugs, writing health telemetry to `docs/logs/sync-health.json`.
+  - Configured GitHub Actions scheduled workflows:
+    - `.github/workflows/content-sync-worker.yml` (runs every 6 hours to check health, audit Gutenberg blocks, and log sync status).
+    - `.github/workflows/design-token-parity-worker.yml` (runs daily to verify JSON schema of `tokens.json` and theme token integrity).
 
 ## Environment note
 

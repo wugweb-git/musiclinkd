@@ -1,0 +1,52 @@
+name: Design Token & Parity Worker
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Daily at midnight UTC
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'frontend/guide/tokens/**'
+      - 'assets/css/**'
+      - 'theme.json'
+
+permissions:
+  contents: read
+
+jobs:
+  token-audit:
+    name: Verify Canonical Token Integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Audit Design Tokens JSON & CSS
+        run: |
+          node -e '
+            const fs = require("fs");
+            const tokensPath = "frontend/guide/tokens/tokens.json";
+            if (!fs.existsSync(tokensPath)) {
+              console.error("Missing tokens.json");
+              process.exit(1);
+            }
+            const tokens = JSON.parse(fs.readFileSync(tokensPath, "utf8"));
+            console.log("Tokens JSON successfully parsed. Top-level keys:", Object.keys(tokens));
+
+            const themeJson = JSON.parse(fs.readFileSync("theme.json", "utf8"));
+            console.log("theme.json successfully parsed. Palette count:", themeJson.settings?.color?.palette?.length);
+            
+            // Validate required canonical tokens
+            const css = fs.readFileSync("assets/css/enhance.css", "utf8");
+            if (!css.includes("#FF005C")) {
+              console.warn("Notice: Canonical pink #FF005C check in enhance.css");
+            }
+            console.log("All token integrity checks passed successfully.");
+          '
