@@ -121,6 +121,12 @@ propagate what a previous doc says without checking.
   - Native FluentCRM block-based email template (`fc_template`, ID 106) configured with clean editorial styling (centered brand header, Inter typography, callout pro-tips, pink pill CTA, and canonical unsubscribe footer).
   - Responsive cross-client HTML email signature created in `templates/email/signature.html` for user-generated correspondence via FluentSMTP (`contact@musiclinkd.com`), styled with ultra-minimal Linear/Stripe typographic hierarchy (no emojis, subtle monochrome vector mark, clean single-line contact, and subtle social glyphs without link clutter).
   - Streamlined `templates/page.html` to eliminate duplicate generic post titles and synced all ecosystem links in `parts/footer.html`.
+- **Ecosystem Plugin Synchronization & Form Design Parity (2026-11-22):**
+  - FluentCRM initialized with official company profile (`MusicLinkd`), sender (`MusicLinkd Creator Desk <contact@musiclinkd.com>`), logo asset, and address.
+  - Fluent Forms synchronized with branded Creator Application (Form ID 1) and Early Access Newsletter (Form ID 2), direct database lead capture (external email notifications disabled, leaving outbound mail to FluentSMTP).
+  - Native Fluent Forms CSS styling injected into `assets/css/enhance.css` with canonical `#FF005C` pill buttons, rounded inputs, and focus rings.
+  - Rank Math SEO populated with canonical organization metadata, title separator (`·`), and social card defaults.
+  - PWA for WP configured with brand tokens (`#FF005C` theme, `#0F0F14` background, vector favicon mark).
 
 ## Environment note
 

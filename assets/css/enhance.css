@@ -713,3 +713,81 @@
     align-items: center !important;
   }
 }
+
+/* ============================================================
+   Fluent Forms — MusicLinkd Native Design System Parity
+   ============================================================ */
+.fluentform,
+.frm-fluent-form {
+  font-family: var(--font-body, 'Inter', -apple-system, sans-serif) !important;
+  color: var(--text, #111827);
+}
+
+.fluentform .ff-el-form-control,
+.fluentform input[type="text"],
+.fluentform input[type="email"],
+.fluentform input[type="url"],
+.fluentform select,
+.fluentform textarea {
+  width: 100% !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  padding: 12px 16px !important;
+  background-color: var(--surface, #FFFFFF) !important;
+  color: var(--text, #111827) !important;
+  border: 1px solid var(--line, #E5E7EB) !important;
+  border-radius: var(--radius-md, 10px) !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+  outline: none !important;
+}
+
+.fluentform .ff-el-form-control:focus,
+.fluentform input:focus,
+.fluentform select:focus,
+.fluentform textarea:focus {
+  border-color: var(--brand-pink, #FF005C) !important;
+  box-shadow: 0 0 0 3px rgba(255, 0, 92, 0.12) !important;
+}
+
+.fluentform .ff-el-input-label,
+.fluentform label {
+  display: block !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--text-secondary, #4B5563) !important;
+  margin-bottom: 6px !important;
+  letter-spacing: -0.01em !important;
+}
+
+.fluentform .ff-btn-submit,
+.fluentform button[type="submit"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: var(--brand-pink, #FF005C) !important;
+  color: #FFFFFF !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  padding: 12px 28px !important;
+  min-height: 48px !important;
+  border: none !important;
+  border-radius: var(--radius-pill, 9999px) !important;
+  cursor: pointer !important;
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.fluentform .ff-btn-submit:hover,
+.fluentform button[type="submit"]:hover {
+  background-color: #E00052 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 14px rgba(255, 0, 92, 0.25) !important;
+}
+
+.fluentform .ff-errors-in-stack {
+  color: #EF4444 !important;
+  font-size: 12px !important;
+  margin-top: 4px !important;
+}
