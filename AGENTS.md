@@ -127,6 +127,10 @@ propagate what a previous doc says without checking.
   - Native Fluent Forms CSS styling injected into `assets/css/enhance.css` with canonical `#FF005C` pill buttons, rounded inputs, and focus rings.
   - Rank Math SEO populated with canonical organization metadata, title separator (`·`), and social card defaults.
   - PWA for WP configured with brand tokens (`#FF005C` theme, `#0F0F14` background, vector favicon mark).
+- **Headless WordPress REST API Bridge for App Ecosystem (2026-11-22):**
+  - Connected `app.musiclinkd.com` (`musiclinkd-9e6ca875/src/lib/help.functions.ts`) to fetch live published pages and guides from `https://musiclinkd.com/wp-json/wp/v2/pages`.
+  - Content parsing converts Gutenberg block markup into native app `ContentBlock[]` format, strictly inheriting the mobile app's native typography (`Inter`), colors (`--ink`, `--text-muted-foreground`), and card tokens (`--radius-lg`), preventing style clashes.
+  - Built-in zero-downtime fallback to Supabase `cms_pages` table if network is offline.
 
 ## Environment note
 
