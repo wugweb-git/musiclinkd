@@ -7,12 +7,20 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$template_html = file_get_contents(__DIR__ . '/../templates/email/template.html');
+$template_file = __DIR__ . '/../templates/email/template.html';
+if (!file_exists($template_file)) {
+    $template_file = dirname(__FILE__) . '/templates/email/template.html';
+}
+if (!file_exists($template_file)) {
+    $template_file = '/home/u544169507/domains/musiclinkd.com/public_html/ml_deploy/templates/email/template.html';
+}
+
+$template_html = file_get_contents($template_file);
 
 $template_data = [
     'post_title'   => 'MusicLinkd Premium Editorial Onboarding',
     'post_content' => $template_html,
-    'post_excerpt' => 'Really Good Emails-inspired premium onboarding with header, activation grid, pro tips, social handles, and canonical footer.',
+    'post_excerpt' => 'Really Good Emails-inspired onboarding with brand head, 3-step activation grid, pro tip callout, iKAN social handles, and canonical footer.',
     'post_type'    => function_exists('fluentcrmTemplateCPTSlug') ? fluentcrmTemplateCPTSlug() : 'fc_template',
     'post_status'  => 'publish'
 ];
