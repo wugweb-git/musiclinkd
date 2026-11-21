@@ -85,6 +85,11 @@ propagate what a previous doc says without checking.
   `musiclinkd-system/`, then `./scripts/build-hosting.sh` +
   `firebase deploy`) — run from an actual terminal, which no chat-based
   Codex session in this project has access to (file read/write only).
+- **WordPress Block Theme (2026-11-22):** The root repository now includes a
+  standard Full Site Editing (FSE) block theme (`style.css`, `theme.json`,
+  `index.php`, `templates/`, `parts/`, `patterns/`) mapped for Hostinger
+  WordPress deployment (`musiclinkd.com`). Allows tenant visual editing via
+  the WordPress Site Editor with canonical tokens.
 
 ## Environment note
 
