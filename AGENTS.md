@@ -131,6 +131,11 @@ propagate what a previous doc says without checking.
   - Connected `app.musiclinkd.com` (`musiclinkd-9e6ca875/src/lib/help.functions.ts`) to fetch live published pages and guides from `https://musiclinkd.com/wp-json/wp/v2/pages`.
   - Content parsing converts Gutenberg block markup into native app `ContentBlock[]` format, strictly inheriting the mobile app's native typography (`Inter`), colors (`--ink`, `--text-muted-foreground`), and card tokens (`--radius-lg`), preventing style clashes.
   - Built-in zero-downtime fallback to Supabase `cms_pages` table if network is offline.
+- **Repository Consolidation & Cleanup (2026-11-22):**
+  - Archived `toggleModule` schema and specs to `docs/06-Architecture/module-toggles.md`.
+  - Consolidated documentation: moved `guide/docs/*` to `docs/handoff/`, moved `infrastructure/*.md` to `docs/06-Architecture/`.
+  - Pruned obsolete empty folders (`backend/`, `guide/`, `infrastructure/`, `dist/`).
+  - Added scratch outputs (`Claude outputs/`) to `.gitignore`.
 
 ## Environment note
 
