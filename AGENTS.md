@@ -106,6 +106,17 @@ propagate what a previous doc says without checking.
     summary boxes and creator ownership guarantee ("Your work stays yours").
   - Mobile UX polish in `assets/css/enhance.css` (zero horizontal overflow,
     scaled orbit displays, touch-friendly navigation drawer, and micro-feeds).
+- **Gutenberg Blocks, Media Gallery & Site Identity (2026-11-22):**
+  - Converted all 13 pages from raw HTML chunks into native Gutenberg block markup
+    (`<!-- wp:group -->`, `<!-- wp:heading -->`, `<!-- wp:paragraph -->`, `<!-- wp:list -->`,
+    `<!-- wp:buttons -->`, `<!-- wp:columns -->`), enabling native visual drag-and-drop
+    editing in WordPress Admin (`/wp-admin/post.php`).
+  - 55 Media Library assets imported into WordPress (`wp_posts` attachments), including
+    official vector brand assets (`assets/img/brand/`) and editorial/speaker portraits
+    (`assets/img/gallery/`).
+  - Set `site_icon` (Favicon mark, ID 37) and `custom_logo` (White lockup, ID 36) in WordPress.
+  - Added SVG upload support and full Gutenberg Block Editor visual stylesheet parity
+    via `add_theme_support('editor-styles')` and `enqueue_block_editor_assets` in `functions.php`.
 
 ## Environment note
 
