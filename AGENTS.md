@@ -89,7 +89,11 @@ propagate what a previous doc says without checking.
   standard Full Site Editing (FSE) block theme (`style.css`, `theme.json`,
   `index.php`, `templates/`, `parts/`, `patterns/`) mapped for Hostinger
   WordPress deployment (`musiclinkd.com`). Allows tenant visual editing via
-  the WordPress Site Editor with canonical tokens.
+  the WordPress Site Editor with canonical tokens. Includes the imported
+  production design system (`assets/css/musiclinkd.css`, `main.css`, `tokens.css`),
+  interactions (`assets/js/main.js` with GSAP & ScrollTrigger), complete 17-section
+  landing pattern (`patterns/landing.php`), native nav header and footer parts,
+  and branded 404 template.
 
 ## Environment note
 

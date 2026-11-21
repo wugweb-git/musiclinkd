@@ -1,16 +1,30 @@
-<!-- wp:group {"tagName":"header","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|30","left":"var:preset|spacing|30","right":"var:preset|spacing|30"}},"border":{"bottom":{"color":"var:preset|color|border","width":"1px"}}},"backgroundColor":"surface","layout":{"type":"constrained"}} -->
-<header class="wp-block-group alignfull has-surface-background-color has-background" style="border-bottom-color:var(--wp--preset--color--border);border-bottom-width:1px;padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30)">
-	<!-- wp:group {"align":"wide","layout":{"type":"flex","justifyContent":"space-between","flexWrap":"nowrap"}} -->
-	<div class="wp-block-group alignwide">
-		<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"}} -->
-		<div class="wp-block-group">
-			<!-- wp:site-logo {"width":40} /-->
-			<!-- wp:site-title {"level":0,"style":{"typography":{"fontWeight":"700"}}} /-->
-		</div>
-		<!-- /wp:group -->
+<!-- wp:html -->
+<header class="nav" id="nav" role="banner">
+  <div class="container nav__inner">
+    <a href="/" class="nav__logo" aria-label="MusicLinkd home">
+      <svg class="nav__logo-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#141414"/><rect x="16" y="26" width="5" height="20" rx="2.5" fill="#FFFFFF"/><rect x="25.5" y="16" width="5" height="32" rx="2.5" fill="#EA4C89"/><rect x="35" y="22" width="5" height="24" rx="2.5" fill="#FFFFFF"/><rect x="44.5" y="30" width="5" height="16" rx="2.5" fill="#EA4C89"/></svg>
+      <span style="font-family:'Unica One','Inter Tight',sans-serif;font-weight:500;letter-spacing:-0.02em;text-transform:uppercase;color:#141621">MUSIC<em style="font-style:normal;color:#FF005C">LINKD</em></span>
+    </a>
 
-		<!-- wp:navigation {"layout":{"type":"flex","justifyContent":"right"}} /-->
-	</div>
-	<!-- /wp:group -->
+    <nav id="navLinks" class="nav__links" aria-label="Primary">
+      <a href="/#problem">Problem</a>
+      <a href="/#platform">Platform</a>
+      <a href="/#modules">Modules</a>
+      <a href="/#journeys">How It Works</a>
+      <a href="/#gallery">Screens</a>
+      <a href="/#trust">Trust</a>
+      <a href="/#ai">AI</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+
+    <div class="nav__actions">
+      <a href="/register/" class="btn btn--primary btn--sm nav__cta-desktop">Join Early Access</a>
+      <a href="/login/" class="btn btn--ghost btn--sm" style="display:inline-flex;align-items:center;padding:8px 14px;font-size:14px;font-weight:600;text-decoration:none;color:var(--text-primary)">Log In</a>
+      <button id="navToggle" class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
 </header>
-<!-- /wp:group -->
+<!-- /wp:html -->

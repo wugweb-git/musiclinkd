@@ -36,3 +36,86 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
     <?php
 }, 1);
+
+/**
+ * Enqueue Core Fonts, Stylesheets, and Scripts with 100% design fidelity.
+ */
+add_action('wp_enqueue_scripts', function () {
+    // 1. Google Fonts
+    wp_enqueue_style(
+        'musiclinkd-fonts',
+        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap',
+        array(),
+        null
+    );
+
+    // 2. Canonical Stylesheets
+    wp_enqueue_style(
+        'musiclinkd-tokens',
+        get_theme_file_uri('/assets/css/tokens.css'),
+        array(),
+        '1.0'
+    );
+
+    wp_enqueue_style(
+        'musiclinkd-main',
+        get_theme_file_uri('/assets/css/main.css'),
+        array('musiclinkd-tokens'),
+        '1.0'
+    );
+
+    wp_enqueue_style(
+        'musiclinkd-unified',
+        get_theme_file_uri('/assets/css/unified.css'),
+        array('musiclinkd-main'),
+        '1.0'
+    );
+
+    wp_enqueue_style(
+        'musiclinkd-enhance',
+        get_theme_file_uri('/assets/css/enhance.css'),
+        array('musiclinkd-unified'),
+        '1.0'
+    );
+
+    wp_enqueue_style(
+        'musiclinkd-css',
+        get_theme_file_uri('/assets/css/musiclinkd.css'),
+        array('musiclinkd-enhance'),
+        '1.0'
+    );
+
+    // 3. Animation & Icon Libraries
+    wp_enqueue_script(
+        'gsap',
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
+        array(),
+        '3.12.5',
+        array('strategy' => 'defer', 'in_footer' => true)
+    );
+
+    wp_enqueue_script(
+        'gsap-scrolltrigger',
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js',
+        array('gsap'),
+        '3.12.5',
+        array('strategy' => 'defer', 'in_footer' => true)
+    );
+
+    wp_enqueue_script(
+        'lucide-icons',
+        'https://unpkg.com/lucide@latest',
+        array(),
+        null,
+        array('strategy' => 'defer', 'in_footer' => true)
+    );
+
+    // 4. Interactive Main JS
+    wp_enqueue_script(
+        'musiclinkd-main-js',
+        get_theme_file_uri('/assets/js/main.js'),
+        array('gsap', 'gsap-scrolltrigger', 'lucide-icons'),
+        '1.0',
+        array('strategy' => 'defer', 'in_footer' => true)
+    );
+});
