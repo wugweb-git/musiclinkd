@@ -64,6 +64,21 @@
 		"typography": {
 			"fontFamilies": [
 				{
+					"fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+					"name": "Inter",
+					"slug": "inter"
+				},
+				{
+					"fontFamily": "'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif",
+					"name": "Inter Tight",
+					"slug": "inter-tight"
+				},
+				{
+					"fontFamily": "'Unica One', cursive, sans-serif",
+					"name": "Unica One",
+					"slug": "unica-one"
+				},
+				{
 					"fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
 					"name": "System Sans",
 					"slug": "system"

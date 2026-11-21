@@ -119,3 +119,92 @@ add_action('wp_enqueue_scripts', function () {
         array('strategy' => 'defer', 'in_footer' => true)
     );
 });
+
+/**
+ * Theme Setup: Identity, Logos, Editor Styles, Thumbnails.
+ */
+add_action('after_setup_theme', function () {
+    add_theme_support('title-tag');
+    add_theme_support('post-thumbnails');
+    add_theme_support('custom-logo', array(
+        'height'      => 100,
+        'width'       => 400,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ));
+    add_theme_support('site-icon');
+    add_theme_support('editor-styles');
+
+    // Register editor stylesheets for Gutenberg visual parity
+    add_editor_style(array(
+        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap',
+        'assets/css/tokens.css',
+        'assets/css/main.css',
+        'assets/css/unified.css',
+        'assets/css/enhance.css',
+        'assets/css/musiclinkd.css',
+    ));
+});
+
+/**
+ * Enqueue Block Editor Assets in WordPress Admin (Gutenberg).
+ */
+add_action('enqueue_block_editor_assets', function () {
+    wp_enqueue_style(
+        'musiclinkd-editor-fonts',
+        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&family=Unica+One&display=swap',
+        array(),
+        null
+    );
+    wp_enqueue_style(
+        'musiclinkd-editor-tokens',
+        get_theme_file_uri('/assets/css/tokens.css'),
+        array(),
+        '1.0'
+    );
+    wp_enqueue_style(
+        'musiclinkd-editor-main',
+        get_theme_file_uri('/assets/css/main.css'),
+        array('musiclinkd-editor-tokens'),
+        '1.0'
+    );
+    wp_enqueue_style(
+        'musiclinkd-editor-unified',
+        get_theme_file_uri('/assets/css/unified.css'),
+        array('musiclinkd-editor-main'),
+        '1.0'
+    );
+    wp_enqueue_style(
+        'musiclinkd-editor-enhance',
+        get_theme_file_uri('/assets/css/enhance.css'),
+        array('musiclinkd-editor-unified'),
+        '1.0'
+    );
+    wp_enqueue_style(
+        'musiclinkd-editor-css',
+        get_theme_file_uri('/assets/css/musiclinkd.css'),
+        array('musiclinkd-editor-enhance'),
+        '1.0'
+    );
+});
+
+/**
+ * Enable SVG upload in WordPress Media Library.
+ */
+add_filter('upload_mimes', function ($mimes) {
+    $mimes['svg'] = 'image/svg+xml';
+    $mimes['svgz'] = 'image/svg+xml';
+    return $mimes;
+});
+
+/**
+ * Fix SVG display in WordPress Media Library.
+ */
+add_filter('wp_check_filetype_and_ext', function ($data, $file, $filename, $mimes) {
+    $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+    if ($ext === 'svg') {
+        $data['ext']  = 'svg';
+        $data['type'] = 'image/svg+xml';
+    }
+    return $data;
+}, 10, 4);
