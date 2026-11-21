@@ -110,10 +110,11 @@ uses it, read the rules file and
 
 The root repository includes the production Full Site Editing (FSE) block theme mapped for Hostinger WordPress (`musiclinkd.com`):
 - `style.css`, `theme.json`, `functions.php`, `index.php`
-- `assets/` — canonical design tokens (`tokens.css`), base styles (`main.css`), website design system (`musiclinkd.css`), and interactive animations (`main.js` with GSAP & ScrollTrigger)
+- `assets/` — canonical design tokens (`tokens.css`), base styles (`main.css`), website design system (`musiclinkd.css`), responsive enhancements (`enhance.css`), and interactive animations (`main.js` with GSAP & ScrollTrigger)
 - `parts/` — native navigation header (`header.html`) and footer (`footer.html`)
 - `patterns/` — full 17-section marketing landing pattern (`patterns/landing.php`) and starter hero (`patterns/hero.php`)
 - `templates/` — `front-page.html`, `page.html`, `single.html`, `404.html`, and `index.html`
+- **CMS & Help Centre**: 11 production pages mapped from app engine (`/help/`, deep guides, `/about/`, `/pricing/`, `/cookies/`, and synced `/privacy/` & `/terms/` with ownership guarantees)
 
 ## Documentation
 

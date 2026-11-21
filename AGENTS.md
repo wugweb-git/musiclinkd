@@ -94,6 +94,18 @@ propagate what a previous doc says without checking.
   interactions (`assets/js/main.js` with GSAP & ScrollTrigger), complete 17-section
   landing pattern (`patterns/landing.php`), native nav header and footer parts,
   and branded 404 template.
+- **WordPress CMS, Help Centre & Legal System (2026-11-22):** All 11 CMS and
+  Help Centre guides from the mobile app repository have been mapped and imported
+  with full design system fidelity into WordPress:
+  - Help Centre Hub (`/help/`) with searchable category pills and direct support CTA.
+  - 7 Deep Guides (`/profile-that-gets-booked/`, `/pricing-your-first-service/`,
+    `/how-verification-works/`, `/booking-policies-explained/`, `/review-policy/`,
+    `/community-guidelines/`, `/whats-new/`).
+  - Ecosystem & Commercial Pages (`/about/`, `/pricing/`, `/cookies/`).
+  - Legal Sync: `/privacy/` and `/terms/` updated with "Short Version" executive
+    summary boxes and creator ownership guarantee ("Your work stays yours").
+  - Mobile UX polish in `assets/css/enhance.css` (zero horizontal overflow,
+    scaled orbit displays, touch-friendly navigation drawer, and micro-feeds).
 
 ## Environment note
 
