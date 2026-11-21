@@ -791,3 +791,70 @@
   font-size: 12px !important;
   margin-top: 4px !important;
 }
+
+/* Fluent Forms Validation & Error States */
+.fluentform .has-error .ff-el-form-control,
+.fluentform .has-error input,
+.fluentform .has-error select,
+.fluentform .has-error textarea,
+.fluentform .ff-el-is-error input,
+.fluentform input.error,
+.fluentform select.error,
+.fluentform textarea.error {
+  border-color: #EF4444 !important;
+  background-color: #FFF5F5 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+}
+
+.fluentform .text-danger,
+.fluentform .error {
+  color: #DC2626 !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  margin-top: 5px !important;
+  display: block !important;
+  line-height: 1.4 !important;
+}
+
+.fluentform .ff-errors-in-stack {
+  background-color: #FEF2F2 !important;
+  border: 1px solid #FECACA !important;
+  color: #991B1B !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  margin-bottom: 20px !important;
+}
+
+/* Success Confirmation State */
+.ml-form-success,
+.fluentform .ff-message-success {
+  background-color: #F0FDF4 !important;
+  border: 1px solid #BBF7D0 !important;
+  color: #166534 !important;
+  padding: 20px 24px !important;
+  border-radius: 12px !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+.ml-form-success strong {
+  display: block !important;
+  font-size: 16px !important;
+  color: #14532D !important;
+  margin-bottom: 6px !important;
+  letter-spacing: -0.01em !important;
+}
+
+.ml-form-success p {
+  margin: 0 !important;
+  color: #166534 !important;
+}
+
+/* Loading Spinner State */
+.fluentform .ff-btn-loading,
+.fluentform .ff-loading {
+  opacity: 0.75 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
