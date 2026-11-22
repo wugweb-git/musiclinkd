@@ -1,0 +1,15 @@
+{
+  "postponed_issues": [
+    {
+      "id": "SEC-COL-001",
+      "title": "Collab Owner Guard (Band Admin Role Escalation Patch)",
+      "branch": "fix/collab-owner-guard",
+      "migration_file": "supabase/migrations/20261015120000_collab_owner_guard.sql",
+      "dump_undo_file": "supabase/dumps/2026-10-15-before-collab-owner-guard.sql",
+      "status": "postponed",
+      "blocking_for_launch": false,
+      "date_postponed": "2026-11-23",
+      "reason": "Non-blocking security enhancement. Can be applied via Lovable Cloud database console or Supabase SQL editor whenever convenient without impacting current launch pipeline."
+    }
+  ]
+}
