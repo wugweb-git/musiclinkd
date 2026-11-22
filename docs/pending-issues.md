@@ -12,8 +12,8 @@ Documented as of 2026-11-22.
 | 🟡 **Medium** | **TanStack Start Deprecated API (`inputValidator`)** | 38 files across `src/lib/*.functions.ts` | ✅ **Resolved**: Modernized all 38 server function modules from `.inputValidator()` to `.validator(schema.parse)`. |
 | 🟡 **Medium** | **Supabase Type Drift (`types.ts`)** | `src/integrations/supabase/types.ts` | ✅ **Resolved**: Pruned zombie type `person_type_instruments` to match live PostgreSQL taxonomy schema. |
 | 🟡 **Medium** | **Component Deduplication (`Field`)** | `listing-form.tsx`, `booking.$id.details.tsx`, `opportunities.new.tsx`, `bands.new.tsx`, `profile.edit.tsx` | ✅ **Resolved**: Canonical `Field` re-exported from `ui.tsx` with auto-slug fallback; local boilerplate wrappers removed. `EditRow`, `ActionRow`, and `WorkspaceLink` intentionally left decoupled. |
-| 🟢 **Low** | **Fast Refresh ESLint Warnings (27 occurrences)** | `listing-form.tsx`, `market.tsx`, `public-profile.tsx`, etc. | Pending: Separate exported helper functions from React component files to enable pure HMR during local development. |
-| 🟢 **Low** | **Raw `<button>` Migration** | 62 route files | Pending: Incrementally migrate bare `<button>` HTML elements to design system `<Btn>` / `<IconBtn>` from `ui.tsx`. |
+| 🟢 **Low** | **Fast Refresh ESLint Warnings (27 occurrences)** | `listing-form.tsx`, `market.tsx`, `public-profile.tsx`, `bookable-setup.tsx`, `portfolio.tsx`, `drawer-list.tsx`, `qr.tsx`, `ui.tsx`, `identity.scan.tsx` | ✅ **Resolved**: Extracted hooks and helpers into dedicated `src/hooks/` and `src/lib/` modules. ESLint reports **0 errors, 0 warnings** across the codebase. |
+| 🟢 **Low** | **Raw `<button>` Migration** | 62 route files | 🟡 **In Progress (Batch 1 Complete)**: Migrated bare buttons across `saved.tsx`, `booking.$id.tsx`, `booking.$id.review.tsx`, `opportunities.$id.index.tsx`, `reviews.write.$id.tsx`, `notifications.index.tsx`, and `marketplace/l.$id.tsx` to `<Btn>` / `<IconBtn>`. Full 5-point quality gate passing (0 ESLint errors/warnings, 0 TS errors, 0 token drift, 168/168 Storybook tests passed). |
 
 ---
 
