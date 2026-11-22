@@ -2,12 +2,11 @@
 
 | Hostname | Product | Deploy source | Status |
 | --- | --- | --- | --- |
-| `musiclinkd.com` | Root redirect | `website/` | Redirect to `www.musiclinkd.com` |
-| `www.musiclinkd.com` | Marketing website | `website/` | Ready for deployment configuration |
-| `app.musiclinkd.com` | Customer app / Android App Links | `app/` | Android manifest already declares this host; web association/deployment still required |
-| `admin.musiclinkd.com` | Internal operations portal | `admin/` | Static access-gated shell scaffolded |
-| `styleguide.musiclinkd.com` | Public design-system reference | `styleguide/` | Static render scaffolded |
-| `api.musiclinkd.com` | Future API | `backend/` | Reserved |
+| `musiclinkd.com` | Marketing & Legal Hub | Hostinger WordPress | 🟢 **Live** (LiteSpeed / hCDN, FSE Theme, FluentCRM, Fluent Forms, Headless REST CMS) |
+| `app.musiclinkd.com` | Customer app / Android App Links | Cloudflare / Lovable (`musiclinkd-9e6ca875`) | 🟢 **Live** (Cloudflare Edge, TanStack Start + React 19, Supabase backend) |
+| `admin.musiclinkd.com` | Internal operations portal | WordPress Admin (`/wp-admin/`) | 🟢 **Live** (Authenticated via WordPress Hostinger instance) |
+| `styleguide.musiclinkd.com` | Public design-system reference | `frontend/guide/` | Static reference / Storybook |
+| `api.musiclinkd.com` | Future API / REST Endpoints | WordPress REST API (`/wp-json/wp/v2/`) | 🟢 **Live** (Active on `musiclinkd.com/wp-json/`) |
 
 ## Deployment rule
 
