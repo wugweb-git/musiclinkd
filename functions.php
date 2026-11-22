@@ -65,16 +65,9 @@ add_action('wp_enqueue_scripts', function () {
     );
 
     wp_enqueue_style(
-        'musiclinkd-unified',
-        get_theme_file_uri('/assets/css/unified.css'),
-        array('musiclinkd-main'),
-        '1.0'
-    );
-
-    wp_enqueue_style(
         'musiclinkd-enhance',
         get_theme_file_uri('/assets/css/enhance.css'),
-        array('musiclinkd-unified'),
+        array('musiclinkd-main'),
         '1.0'
     );
 
@@ -84,6 +77,10 @@ add_action('wp_enqueue_scripts', function () {
         array('musiclinkd-enhance'),
         '1.0'
     );
+
+    // Dequeue conflicting/redundant third-party stylesheets on frontend
+    wp_dequeue_style('wppb_stylesheet');
+    wp_dequeue_style('wppb_block_themes_front_end_stylesheet');
 
     // 3. Animation & Icon Libraries
     wp_enqueue_script(

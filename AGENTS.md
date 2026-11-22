@@ -142,6 +142,13 @@ propagate what a previous doc says without checking.
   - Configured GitHub Actions scheduled workflows:
     - `.github/workflows/content-sync-worker.yml` (runs every 6 hours to check health, audit Gutenberg blocks, and log sync status).
     - `.github/workflows/design-token-parity-worker.yml` (runs daily to verify JSON schema of `tokens.json` and theme token integrity).
+- **Home Page Layout, Header Logo & Navigation Remediation (2026-11-22):**
+  - Resolved empty white spaces and invisible headings on `musiclinkd.com`: reconciled `theme.json` to canonical light design system tokens (`#FCFCFD` background, `#141414` foreground/headings, `#FF005C` brand pink, `#FFFFFF` surfaces), eliminating dark mode theme tokens that rendered headings `#FFFFFF` on `#FCFCFD`.
+  - Replaced inaccurate placeholder inline equalizer bars in `parts/header.html` and `parts/footer.html` with official MusicLinkd vector waveform mark and canonical `MusicLink<em style="color:#FF005C;font-style:normal">d</em>` branding.
+  - Streamlined primary navigation from 10 cluttered anchor items down to 7 canonical destinations (`Platform`, `Features`, `Screens`, `Pricing`, `About`, `Help`, `Contact`) with desktop CTAs (`Log In`, `Join Early Access`) and verified external social targets.
+  - Eliminated CSS conflict by dropping redundant `unified.css` enqueue from `functions.php` and dequeued unused Profile Builder plugin stylesheets (`wppb_stylesheet`, `wppb_block_themes_front_end_stylesheet`).
+  - Added full-bleed `.entry-content` container reset, heading color safeguards, and `.pin-spacer` background matching with GSAP `ScrollTrigger.refresh()` on window load in `assets/js/main.js`.
+
 
 ## Environment note
 

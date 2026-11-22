@@ -7,6 +7,11 @@
   "use strict";
 
   document.addEventListener("DOMContentLoaded", init);
+  window.addEventListener("load", () => {
+    if (typeof ScrollTrigger !== "undefined") {
+      ScrollTrigger.refresh();
+    }
+  });
   let mm;
 
   function init() {

@@ -5,8 +5,8 @@
    ============================================================ */
 :root {
   /* Color — Brand */
-  --brand-pink: #EA4C89;
-  --brand-pink-hover: #D93C77;
+  --brand-pink: #FF005C;
+  --brand-pink-hover: #D9004E;
   --brand-navy: #141414;
   --accent-purple: #8B5CF6; /* badges only — never on buttons */
 
@@ -23,7 +23,7 @@
 
   /* Color — Border */
   --border: #ECECF1;
-  --border-focus: #EA4C89;
+  --border-focus: #FF005C;
 
   /* Color — Status */
   --success: #22C55E;

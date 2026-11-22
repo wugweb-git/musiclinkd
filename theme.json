@@ -17,47 +17,47 @@
 				{
 					"slug": "primary",
 					"name": "Brand Pink",
-					"color": "#E91E63"
+					"color": "#FF005C"
 				},
 				{
 					"slug": "primary-hover",
 					"name": "Brand Pink Hover",
-					"color": "#D81B60"
+					"color": "#D9004E"
 				},
 				{
 					"slug": "secondary",
-					"name": "Dark Plum",
-					"color": "#2A0845"
+					"name": "Navy Black",
+					"color": "#141414"
 				},
 				{
 					"slug": "background",
 					"name": "Background",
-					"color": "#0F0F12"
+					"color": "#FCFCFD"
 				},
 				{
 					"slug": "surface",
-					"name": "Surface Dark",
-					"color": "#1A1A22"
+					"name": "Surface",
+					"color": "#FFFFFF"
 				},
 				{
 					"slug": "surface-card",
 					"name": "Surface Card",
-					"color": "#23232E"
+					"color": "#FFFFFF"
 				},
 				{
 					"slug": "foreground",
 					"name": "Text Main",
-					"color": "#FFFFFF"
+					"color": "#141414"
 				},
 				{
 					"slug": "foreground-muted",
 					"name": "Text Muted",
-					"color": "#A0A0B0"
+					"color": "#7D7D8E"
 				},
 				{
 					"slug": "border",
 					"name": "Border Subtle",
-					"color": "#2E2E3E"
+					"color": "#ECECF1"
 				}
 			]
 		},
@@ -179,7 +179,7 @@
 					"text": "#FFFFFF"
 				},
 				"border": {
-					"radius": "8px"
+					"radius": "9999px"
 				},
 				"spacing": {
 					"padding": {
