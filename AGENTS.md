@@ -148,6 +148,12 @@ propagate what a previous doc says without checking.
   - Streamlined primary navigation from 10 cluttered anchor items down to 7 canonical destinations (`Platform`, `Features`, `Screens`, `Pricing`, `About`, `Help`, `Contact`) with desktop CTAs (`Log In`, `Join Early Access`) and verified external social targets.
   - Eliminated CSS conflict by dropping redundant `unified.css` enqueue from `functions.php` and dequeued unused Profile Builder plugin stylesheets (`wppb_stylesheet`, `wppb_block_themes_front_end_stylesheet`).
   - Added full-bleed `.entry-content` container reset, heading color safeguards, and `.pin-spacer` background matching with GSAP `ScrollTrigger.refresh()` on window load in `assets/js/main.js`.
+- **Mobile UX & Responsive Polish (2026-11-22):**
+  - Added fixed header clearance for all subpages (`calc(var(--nav-h) + 32px)` on desktop, `calc(64px + 24px)` on mobile) to eliminate title overlap under fixed navbar.
+  - Aligned mobile drawer breakpoint to `@media (max-width: 900px)` with `overscroll-behavior: contain` and background body scroll lock (`body.nav-open`) to prevent background scroll chaining during navigation.
+  - Enforced `16px` font size on all text/email/url inputs on mobile viewports to prevent iOS Safari auto-zooming.
+  - Upgraded footer social touch targets to 44x44px circular pills meeting WCAG 2.5.5 touch target guidelines.
+
 
 
 ## Environment note

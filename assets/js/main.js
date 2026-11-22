@@ -38,11 +38,26 @@
     const toggle = document.getElementById("navToggle");
     const links = document.getElementById("navLinks");
     if (!toggle || !links) return;
+
+    const closeNav = () => {
+      links.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("nav-open");
+    };
+
     toggle.addEventListener("click", () => {
       const open = links.classList.toggle("open");
       toggle.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("nav-open", open);
     });
-    links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+    links.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeNav));
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && links.classList.contains("open")) {
+        closeNav();
+      }
+    });
   }
 
   /* ---------- FAQ accordion ---------- */
