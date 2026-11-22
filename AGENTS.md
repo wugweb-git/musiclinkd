@@ -153,6 +153,9 @@ propagate what a previous doc says without checking.
   - Aligned mobile drawer breakpoint to `@media (max-width: 900px)` with `overscroll-behavior: contain` and background body scroll lock (`body.nav-open`) to prevent background scroll chaining during navigation.
   - Enforced `16px` font size on all text/email/url inputs on mobile viewports to prevent iOS Safari auto-zooming.
   - Upgraded footer social touch targets to 44x44px circular pills meeting WCAG 2.5.5 touch target guidelines.
+- **Database Mapping Strategy & Pending Backlog (2026-11-22):**
+  - Created `docs/pending-issues.md` outlining pending engineering tasks and database architecture.
+  - Established architectural principle: "Supabase as Operational Buffer, WordPress as CMS/CRM". Supabase PostgreSQL handles OLTP transactions (Auth, Bookings, Messaging, Collabs, Marketplace) without synchronous cross-database MySQL coupling; WordPress handles Headless CMS (`/wp-json/wp/v2/pages`), marketing forms (Fluent Forms), and CRM subscribers (FluentCRM) asynchronously via REST and scheduled GitHub Action workers (`scripts/worker_content_sync.py`).
 
 
 
