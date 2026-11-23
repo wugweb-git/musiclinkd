@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-23T06:31:44.588187+00:00",
+  "timestamp": "2026-11-23T23:35:15.065268+00:00",
   "base_url": "https://musiclinkd.com",
   "authenticated_as": "public_guest",
   "total_checked": 14,
@@ -11,7 +11,7 @@
       "title": "Help Centre",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 1095,
+      "latency_ms": 1845,
       "content_bytes": 12970,
       "modified_gmt": "2026-11-21T21:53:39",
       "has_gutenberg_blocks": true
@@ -21,7 +21,7 @@
       "title": "Contact MusicLinkd",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 716,
+      "latency_ms": 671,
       "content_bytes": 7712,
       "modified_gmt": "2026-11-21T22:44:32",
       "has_gutenberg_blocks": true
@@ -31,7 +31,7 @@
       "title": "About Us",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 526,
+      "latency_ms": 511,
       "content_bytes": 4996,
       "modified_gmt": "2026-11-21T21:53:41",
       "has_gutenberg_blocks": true
@@ -41,7 +41,7 @@
       "title": "Pricing",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 483,
+      "latency_ms": 543,
       "content_bytes": 5815,
       "modified_gmt": "2026-11-21T21:53:47",
       "has_gutenberg_blocks": true
@@ -51,7 +51,7 @@
       "title": "Privacy Policy",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 520,
+      "latency_ms": 543,
       "content_bytes": 4112,
       "modified_gmt": "2026-11-21T21:53:09",
       "has_gutenberg_blocks": true
@@ -61,7 +61,7 @@
       "title": "Terms of Use",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 566,
+      "latency_ms": 516,
       "content_bytes": 4216,
       "modified_gmt": "2026-11-21T21:53:17",
       "has_gutenberg_blocks": true
@@ -71,7 +71,7 @@
       "title": "Cookie Policy",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 572,
+      "latency_ms": 594,
       "content_bytes": 3712,
       "modified_gmt": "2026-11-21T21:53:44",
       "has_gutenberg_blocks": true
@@ -81,7 +81,7 @@
       "title": "Community guidelines",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 579,
+      "latency_ms": 496,
       "content_bytes": 4478,
       "modified_gmt": "2026-11-21T21:53:33",
       "has_gutenberg_blocks": true
@@ -91,7 +91,7 @@
       "title": "Review policy",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 580,
+      "latency_ms": 740,
       "content_bytes": 4912,
       "modified_gmt": "2026-11-21T21:53:31",
       "has_gutenberg_blocks": true
@@ -101,7 +101,7 @@
       "title": "Booking policies explained",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 583,
+      "latency_ms": 517,
       "content_bytes": 4802,
       "modified_gmt": "2026-11-21T21:53:28",
       "has_gutenberg_blocks": true
@@ -111,7 +111,7 @@
       "title": "How verification works",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 586,
+      "latency_ms": 518,
       "content_bytes": 5396,
       "modified_gmt": "2026-11-21T21:53:25",
       "has_gutenberg_blocks": true
@@ -121,7 +121,7 @@
       "title": "Pricing your first service",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 615,
+      "latency_ms": 514,
       "content_bytes": 5335,
       "modified_gmt": "2026-11-21T21:53:23",
       "has_gutenberg_blocks": true
@@ -131,7 +131,7 @@
       "title": "Building a profile that gets booked",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 520,
+      "latency_ms": 519,
       "content_bytes": 5841,
       "modified_gmt": "2026-11-21T21:53:20",
       "has_gutenberg_blocks": true
@@ -141,7 +141,7 @@
       "title": "What&#8217;s new in MusicLinkd",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 484,
+      "latency_ms": 519,
       "content_bytes": 4720,
       "modified_gmt": "2026-11-21T21:53:36",
       "has_gutenberg_blocks": true
