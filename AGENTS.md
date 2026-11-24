@@ -156,6 +156,30 @@ propagate what a previous doc says without checking.
 - **Database Mapping Strategy & Pending Backlog (2026-11-22):**
   - Created `docs/pending-issues.md` outlining pending engineering tasks and database architecture.
   - Established architectural principle: "Supabase as Operational Buffer, WordPress as CMS/CRM". Supabase PostgreSQL handles OLTP transactions (Auth, Bookings, Messaging, Collabs, Marketplace) without synchronous cross-database MySQL coupling; WordPress handles Headless CMS (`/wp-json/wp/v2/pages`), marketing forms (Fluent Forms), and CRM subscribers (FluentCRM) asynchronously via REST and scheduled GitHub Action workers (`scripts/worker_content_sync.py`).
+- **App Ecosystem Hardening, Production Deployment & Infrastructure Audit (2026-11-23 / 2026-11-24):**
+  - **Live Deployments Verified:**
+    - `https://app.musiclinkd.com`: Live on Cloudflare Edge / Nitro / Lovable runtime (`musiclinkd-9e6ca875`). Serves React 19 + TanStack Start SSR with responsive layout and Inter fonts (`HTTP/2 200 OK`).
+    - `https://musiclinkd.com`: Live on Hostinger LiteSpeed + hCDN (WordPress FSE theme, `HTTP/2 200 OK`).
+    - Headless CMS sync verified via `scripts/worker_content_sync.py`: all 14 canonical slugs returning 200 OK with Gutenberg block content (`docs/logs/sync-health.json`).
+  - **Dynamic Identity QR Resolver (`/identity/q/$code`):**
+    - Replaced static/hardcoded demo wireframe in `src/routes/identity.q.$code.tsx` with live database resolver `resolveDestination()` in `src/lib/qr.functions.ts`.
+    - Resolves profiles by username and bookables by slug directly against Supabase with active/private/deactivated states, offline detection, and graceful fallback to demo codes (`ananya`, `octave-labs`) for test/Storybook resilience.
+  - **PWA & Manifest Token Alignment:**
+    - Synchronized `public/manifest.webmanifest` (`background_color`, `theme_color`) and `src/routes/__root.tsx` (`<meta name="theme-color">`) to the canonical `#F3F1EC` warm ground (from stale `#ECECF1` / `#F5F5F5`).
+  - **Raw `<button>` Migration (Batch 2 Complete):**
+    - Migrated bare buttons across `services.$id.index.tsx`, `marketplace/seller.$id.tsx`, `booking.$id.details.tsx`, `conversation.$id.tsx`, and `notifications.settings.tsx` to `<Btn>` / `<IconBtn>`.
+    - Cumulative quality gates pass: 0 ESLint errors/warnings, 0 TypeScript errors, 0 design token drift (`check-token-drift.ts`), and clean client/SSR build.
+  - **100% Database-Backed Server Function Verification:**
+    - Verified all 44 server function modules in `src/lib/*.functions.ts`: 100% connected to live Supabase PostgreSQL tables; zero fake/mock stubs.
+    - Spotify integration verified (OAuth callback + `spotify_connections` table + `SpotifyRow` UI); pending production client credentials.
+    - Calendar integration verified (native Capacitor device calendar + universal `webcal://` `.ics` subscriptions).
+    - Google Business sync + India Post directory (`api.postalpincode.in`) verified.
+    - Payments confirmed deferred as an intentional peer-to-peer agreement model (no in-app payment gateway).
+  - **Git Branch Cleanup & Non-Blocking Issue Parking:**
+    - Pruned 79 merged local branches in `musiclinkd-9e6ca875`.
+    - Verified `p1/bookables` & `p1/facility-to-amenity` are fully contained within `main`.
+    - Verified `feat/discover-businesses-feed` is obsolete and superseded by main navigation architecture.
+    - Postponed non-blocking `collab_owner_guard` (Issue `SEC-COL-001`, branch `fix/collab-owner-guard`, migration `20261015120000_collab_owner_guard.sql`) into structured log `docs/logs/postponed-issues.json` until Lovable Cloud runs the database migration.
 
 
 

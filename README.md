@@ -66,24 +66,18 @@ previously grew one screen per state.
 
 ## Product surfaces
 
-| Address | Purpose | Source |
-| --- | --- | --- |
-| `musiclinkd.com` | Public marketing website | `frontend/website/` |
-| `musiclinkd.com/guide` | The design system | `frontend/guide/index.html` |
-| `musiclinkd.com/preview` | Screen preview, flow by flow | `webapp/` |
-| `admin.musiclinkd.com` | Internal operations portal | `admin/` |
-| `api.musiclinkd.com` | Reserved future API | `backend/` |
+| Address | Purpose | Source / Runtime | Status |
+| --- | --- | --- | --- |
+| `musiclinkd.com` | Public marketing website & CMS Hub | WordPress FSE Block Theme (`templates/`, `parts/`) | **Live** (Hostinger LiteSpeed + hCDN) |
+| `app.musiclinkd.com` | Customer PWA & Native App Engine | `musiclinkd-9e6ca875` (React 19 + TanStack Start) | **Live** (Cloudflare Edge / Nitro) |
+| `musiclinkd.com/guide` | The design system reference | `frontend/guide/index.html` | Active |
+| `musiclinkd.com/preview` | Screen preview, flow by flow | `webapp/` | Active |
+| `admin.musiclinkd.com` | Internal operations portal | `admin/` | Active |
+| `api.musiclinkd.com` | Headless REST & App Ingestion | WordPress REST API (`/wp-json/wp/v2`) | Active |
 
-All of the above are served by a **single** Firebase Hosting site
-(`musiclinkd-7ae30`). Hosting cannot route by hostname within one site, so
-`musiclinkd.com` and `admin.musiclinkd.com` serve identical content — admin's
-pages live at paths such as `/dashboard`, not at the admin domain's root. See
-[infrastructure/firebase-hosting.md](infrastructure/firebase-hosting.md).
+All public landing, CMS guides, and lead forms run on `musiclinkd.com`. The customer application runs on `app.musiclinkd.com` with Supabase PostgreSQL as its OLTP operational database and WordPress REST as its headless content buffer.
 
-`/guide/styleguide` and `/guide/musiclinkd-system` are the superseded
-catalogues and 301-redirect to `/guide`.
-
-See [infrastructure/domains.md](infrastructure/domains.md) for deployment ownership and DNS requirements. These hostnames are documented product surfaces; source configuration alone does not mean a hostname is currently deployed.
+See [docs/06-Architecture/domains.md](docs/06-Architecture/domains.md) for deployment ownership, DNS configuration, and live SSL details.
 
 ## Backend and Firebase
 
