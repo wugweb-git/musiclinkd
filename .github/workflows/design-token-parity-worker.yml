@@ -45,8 +45,8 @@ jobs:
             
             // Validate required canonical tokens
             const css = fs.readFileSync("assets/css/enhance.css", "utf8");
-            if (!css.includes("#FF005C")) {
-              console.warn("Notice: Canonical pink #FF005C check in enhance.css");
+            if (!css.includes("#EA4C89")) {
+              console.warn("Notice: Canonical pink #EA4C89 check in enhance.css");
             }
             console.log("All token integrity checks passed successfully.");
           '

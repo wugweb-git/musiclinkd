@@ -122,7 +122,7 @@ $form1Fields = [
         'settings' => [
             'align' => 'left',
             'button_style' => 'default',
-            'background_color' => '#FF005C',
+            'background_color' => '#EA4C89',
             'button_size' => 'md',
             'color' => '#ffffff',
             'button_ui' => ['type' => 'default', 'text' => 'Submit Creator Inquiry', 'img_url' => '']
@@ -220,7 +220,7 @@ $form2Fields = [
         'settings' => [
             'align' => 'left',
             'button_style' => 'default',
-            'background_color' => '#FF005C',
+            'background_color' => '#EA4C89',
             'button_size' => 'md',
             'color' => '#ffffff',
             'button_ui' => ['type' => 'default', 'text' => 'Join Early Access', 'img_url' => '']

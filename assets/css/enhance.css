@@ -746,8 +746,8 @@
 .fluentform input:focus,
 .fluentform select:focus,
 .fluentform textarea:focus {
-  border-color: var(--brand-pink, #FF005C) !important;
-  box-shadow: 0 0 0 3px rgba(255, 0, 92, 0.12) !important;
+  border-color: var(--brand-pink, #EA4C89) !important;
+  box-shadow: 0 0 0 3px rgba(234, 76, 137, 0.14) !important;
 }
 
 .fluentform .ff-el-input-label,
@@ -765,7 +765,7 @@
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  background-color: var(--brand-pink, #FF005C) !important;
+  background-color: var(--brand-pink, #EA4C89) !important;
   color: #FFFFFF !important;
   font-family: inherit !important;
   font-size: 14px !important;
@@ -781,9 +781,9 @@
 
 .fluentform .ff-btn-submit:hover,
 .fluentform button[type="submit"]:hover {
-  background-color: #E00052 !important;
+  background-color: var(--brand-pink-hover, #D63E78) !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 4px 14px rgba(255, 0, 92, 0.25) !important;
+  box-shadow: 0 4px 14px rgba(234, 76, 137, 0.25) !important;
 }
 
 .fluentform .ff-errors-in-stack {

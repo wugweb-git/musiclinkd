@@ -125,7 +125,7 @@ $form1Fields = [
         'settings' => [
             'align' => 'left',
             'button_style' => 'default',
-            'background_color' => '#FF005C',
+            'background_color' => '#EA4C89',
             'button_size' => 'md',
             'color' => '#ffffff',
             'button_ui' => ['type' => 'default', 'text' => 'Submit Creator Inquiry', 'img_url' => '']
@@ -172,7 +172,7 @@ $form2Fields = [
         'settings' => [
             'align' => 'left',
             'button_style' => 'default',
-            'background_color' => '#FF005C',
+            'background_color' => '#EA4C89',
             'button_size' => 'md',
             'color' => '#ffffff',
             'button_ui' => ['type' => 'default', 'text' => 'Join Early Access', 'img_url' => '']
@@ -245,13 +245,13 @@ if (function_exists('pwaforwp_defaultSettings')) {
 $pwaSettings['app_blog_name'] = 'MusicLinkd';
 $pwaSettings['app_blog_short_name'] = 'MusicLinkd';
 $pwaSettings['description'] = "India's Verified Creative Network & Booking Marketplace";
-$pwaSettings['theme_color'] = '#FF005C';
+$pwaSettings['theme_color'] = '#EA4C89';
 $pwaSettings['background_color'] = '#0F0F14';
 $pwaSettings['icon'] = 'https://musiclinkd.com/wp-content/themes/musiclinkd/assets/img/brand/favicon-mark.svg';
 $pwaSettings['splash_icon'] = 'https://musiclinkd.com/wp-content/themes/musiclinkd/assets/img/brand/favicon-mark.svg';
 $pwaSettings['custom_banner_background_color'] = '#0F0F14';
 $pwaSettings['custom_banner_title_color'] = '#FFFFFF';
-$pwaSettings['custom_banner_btn_color'] = '#FF005C';
+$pwaSettings['custom_banner_btn_color'] = '#EA4C89';
 $pwaSettings['custom_banner_btn_text_color'] = '#FFFFFF';
 $pwaSettings['normal_enable'] = 1;
 $pwaSettings['amp_enable'] = 0;

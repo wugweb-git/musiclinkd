@@ -33,8 +33,8 @@ LOGIN_CONTENT = """<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:pres
 
     <!-- wp:buttons {"layout":{"type":"flex","orientation":"vertical"},"style":{"spacing":{"blockGap":"14px","margin":{"top":"24px","bottom":"24px"}}}} -->
     <div class="wp-block-buttons" style="margin-top:24px;margin-bottom:24px">
-      <!-- wp:button {"width":100,"style":{"color":{"background":"#FF005C","text":"#FFFFFF"},"border":{"radius":"9999px"},"typography":{"fontWeight":"700","fontSize":"15px"}}} -->
-      <div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link has-text-color has-background wp-element-button" href="https://app.musiclinkd.com/auth" style="border-radius:9999px;background-color:#FF005C;color:#FFFFFF;font-size:15px;font-weight:700;padding:12px 24px;text-align:center;display:block">Open App Sign In →</a></div>
+      <!-- wp:button {"width":100,"style":{"color":{"background":"#EA4C89","text":"#FFFFFF"},"border":{"radius":"9999px"},"typography":{"fontWeight":"700","fontSize":"15px"}}} -->
+      <div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link has-text-color has-background wp-element-button" href="https://app.musiclinkd.com/auth" style="border-radius:9999px;background-color:#EA4C89;color:#FFFFFF;font-size:15px;font-weight:700;padding:12px 24px;text-align:center;display:block">Open App Sign In →</a></div>
       <!-- /wp:button -->
 
       <!-- wp:button {"width":100,"className":"is-style-outline","style":{"border":{"radius":"9999px","color":"#D1D5DB","width":"1px"},"color":{"text":"#111827"},"typography":{"fontWeight":"600","fontSize":"14px"}}} -->
@@ -48,7 +48,7 @@ LOGIN_CONTENT = """<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:pres
     <!-- /wp:separator -->
 
     <!-- wp:paragraph {"textAlign":"center","style":{"typography":{"fontSize":"13px"}},"textColor":"muted-foreground"} -->
-    <p class="has-text-align-center has-muted-foreground-color has-text-color" style="font-size:13px">Don't have an account yet? <a href="/register/" style="color:#FF005C;font-weight:600">Join Early Access</a> · <a href="/help/" style="color:#4B5563">Need help?</a></p>
+    <p class="has-text-align-center has-muted-foreground-color has-text-color" style="font-size:13px">Don't have an account yet? <a href="/register/" style="color:#EA4C89;font-weight:600">Join Early Access</a> · <a href="/help/" style="color:#4B5563">Need help?</a></p>
     <!-- /wp:paragraph -->
 
   </div>
@@ -95,8 +95,8 @@ REGISTER_CONTENT = """<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:p
 
       <!-- wp:buttons {"style":{"spacing":{"margin":{"top":"20px"}}}} -->
       <div class="wp-block-buttons" style="margin-top:20px">
-        <!-- wp:button {"width":100,"style":{"color":{"background":"#FF005C","text":"#FFFFFF"},"border":{"radius":"9999px"},"typography":{"fontWeight":"700","fontSize":"14px"}}} -->
-        <div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link has-text-color has-background wp-element-button" href="https://app.musiclinkd.com/onboarding" style="border-radius:9999px;background-color:#FF005C;color:#FFFFFF;font-size:14px;font-weight:700;padding:10px 20px;text-align:center;display:block">Get Started as Creator →</a></div>
+        <!-- wp:button {"width":100,"style":{"color":{"background":"#EA4C89","text":"#FFFFFF"},"border":{"radius":"9999px"},"typography":{"fontWeight":"700","fontSize":"14px"}}} -->
+        <div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link has-text-color has-background wp-element-button" href="https://app.musiclinkd.com/onboarding" style="border-radius:9999px;background-color:#EA4C89;color:#FFFFFF;font-size:14px;font-weight:700;padding:10px 20px;text-align:center;display:block">Get Started as Creator →</a></div>
         <!-- /wp:button -->
       </div>
       <!-- /wp:buttons -->
@@ -145,7 +145,7 @@ REGISTER_CONTENT = """<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:p
   <!-- /wp:group -->
 
   <!-- wp:paragraph {"textAlign":"center","style":{"typography":{"fontSize":"13px"},"spacing":{"margin":{"top":"24px"}}},"textColor":"muted-foreground"} -->
-  <p class="has-text-align-center has-muted-foreground-color has-text-color" style="font-size:13px;margin-top:24px">Already have an account? <a href="/login/" style="color:#FF005C;font-weight:600">Sign in here</a></p>
+  <p class="has-text-align-center has-muted-foreground-color has-text-color" style="font-size:13px;margin-top:24px">Already have an account? <a href="/login/" style="color:#EA4C89;font-weight:600">Sign in here</a></p>
   <!-- /wp:paragraph -->
 
 </div>

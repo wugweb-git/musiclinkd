@@ -189,6 +189,10 @@ propagate what a previous doc says without checking.
       - Native WordPress Dashboard Widget on `/wp-admin/index.php` ("⚡ MusicLinkd Engine & Ingestion Health").
       - Dedicated visual Admin Menu Page at `/wp-admin/admin.php?page=musiclinkd-engine` ("Engine Health") with real-time status pills, latency, and Gutenberg block edit links.
     - Updated `scripts/worker_content_sync.py` to push telemetry directly to the WordPress REST endpoint during scheduled runs.
+  - **Ecosystem Brand Token Unification (`#EA4C89`):**
+    - Aligned WordPress theme, tokens, and templates to `musiclinkd-app`'s canonical brand token `#EA4C89` (retiring marketing divergence `#FF005C`).
+    - Synchronized `theme.json`, `assets/css/tokens.css`, `assets/css/enhance.css`, `parts/header.html`, `parts/footer.html`, `inc/engine-dashboard.php`, and email templates.
+    - Standardized logo lockup: `#EA4C89` container with white vector waveform and canonical `MusicLink<em style="color:#EA4C89;font-style:normal">d</em>` wordmark.
 
 
 

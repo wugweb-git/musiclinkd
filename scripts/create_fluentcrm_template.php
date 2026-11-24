@@ -50,7 +50,7 @@ update_post_meta($template_id, '_template_config', [
     'content_bg_color'    => '#0F0F14',
     'content_font_family' => "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
     'text_color'          => '#D1D5DB',
-    'link_color'          => '#FF005C'
+    'link_color'          => '#EA4C89'
 ]);
 
 echo "Premium template ID {$template_id} successfully synced with FluentCRM.\n";

@@ -17,12 +17,12 @@
 				{
 					"slug": "primary",
 					"name": "Brand Pink",
-					"color": "#FF005C"
+					"color": "#EA4C89"
 				},
 				{
 					"slug": "primary-hover",
 					"name": "Brand Pink Hover",
-					"color": "#D9004E"
+					"color": "#D63E78"
 				},
 				{
 					"slug": "secondary",

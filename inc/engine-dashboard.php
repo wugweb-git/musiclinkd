@@ -140,13 +140,13 @@ function musiclinkd_render_dashboard_widget() {
                 <div style="font-size: 11px; color: #6B7280; text-transform: uppercase; font-weight: 600; margin-top: 2px;">Health Score</div>
             </div>
             <div style="background: #F9FAFB; padding: 10px 6px; border-radius: 6px; border: 1px solid #F3F4F6;">
-                <div style="font-size: 14px; font-weight: 700; color: #FF005C; margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><?php echo $auth_user; ?></div>
+                <div style="font-size: 14px; font-weight: 700; color: #EA4C89; margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><?php echo $auth_user; ?></div>
                 <div style="font-size: 11px; color: #6B7280; text-transform: uppercase; font-weight: 600; margin-top: 2px;">Service User</div>
             </div>
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 8px;">
-            <a href="<?php echo esc_url(admin_url('admin.php?page=musiclinkd-engine')); ?>" class="button button-primary" style="background: #FF005C; border-color: #FF005C; border-radius: 20px; font-weight: 600;">
+            <a href="<?php echo esc_url(admin_url('admin.php?page=musiclinkd-engine')); ?>" class="button button-primary" style="background: #EA4C89; border-color: #EA4C89; border-radius: 20px; font-weight: 600;">
                 View Full Engine Dashboard &rarr;
             </a>
             <span style="font-size: 12px; color: #9CA3AF;">Runs every 6 hrs</span>
@@ -173,7 +173,7 @@ function musiclinkd_render_engine_health_page() {
         <div style="background: linear-gradient(135deg, #141414 0%, #1F1F24 100%); color: #FCFCFD; padding: 28px 32px; border-radius: 12px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
             <div>
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                    <span style="background: #FF005C; color: #FFFFFF; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Ecosystem Engine</span>
+                    <span style="background: #EA4C89; color: #FFFFFF; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Ecosystem Engine</span>
                     <span style="color: #9CA3AF; font-size: 13px;">Automated Worker Telemetry</span>
                 </div>
                 <h1 style="color: #FFFFFF; font-size: 26px; font-weight: 700; margin: 0; padding: 0;">MusicLinkd Sync & Ingestion Health</h1>
@@ -202,7 +202,7 @@ function musiclinkd_render_engine_health_page() {
             </div>
             <div style="background: #FFFFFF; padding: 20px; border-radius: 10px; border: 1px solid #E5E7EB; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
                 <div style="color: #6B7280; font-size: 12px; font-weight: 600; text-transform: uppercase;">Authenticated As</div>
-                <div style="font-size: 20px; font-weight: 800; color: #FF005C; margin-top: 8px;"><?php echo $auth_user; ?></div>
+                <div style="font-size: 20px; font-weight: 800; color: #EA4C89; margin-top: 8px;"><?php echo $auth_user; ?></div>
                 <div style="font-size: 12px; color: #6B7280; margin-top: 4px;">ID 2 (REST CRUD Enabled)</div>
             </div>
             <div style="background: #FFFFFF; padding: 20px; border-radius: 10px; border: 1px solid #E5E7EB; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
@@ -245,7 +245,7 @@ function musiclinkd_render_engine_health_page() {
                         ?>
                             <tr>
                                 <td style="font-weight: 600;">
-                                    <code style="color: #FF005C; background: #FFF0F5; padding: 2px 6px; border-radius: 4px;">/<?php echo esc_html($slug); ?>/</code>
+                                    <code style="color: #EA4C89; background: #FFF0F5; padding: 2px 6px; border-radius: 4px;">/<?php echo esc_html($slug); ?>/</code>
                                 </td>
                                 <td><?php echo $title; ?></td>
                                 <td>
