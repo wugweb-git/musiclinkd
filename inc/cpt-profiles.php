@@ -21,26 +21,26 @@ if (!defined('ABSPATH')) {
 add_action('init', 'musiclinkd_register_profiles_cpt');
 function musiclinkd_register_profiles_cpt() {
     $labels = array(
-        'name'                  => _x('Profiles', 'Post Type General Name', 'musiclinkd'),
-        'singular_name'         => _x('Profile', 'Post Type Singular Name', 'musiclinkd'),
-        'menu_name'             => __('Profiles', 'musiclinkd'),
-        'name_admin_bar'        => __('Profile', 'musiclinkd'),
-        'archives'              => __('Profile Directory', 'musiclinkd'),
-        'all_items'             => __('All Profiles', 'musiclinkd'),
-        'add_new_item'          => __('Add New Profile', 'musiclinkd'),
+        'name'                  => _x('App Profiles', 'Post Type General Name', 'musiclinkd'),
+        'singular_name'         => _x('App Profile', 'Post Type Singular Name', 'musiclinkd'),
+        'menu_name'             => __('App Profiles', 'musiclinkd'),
+        'name_admin_bar'        => __('App Profile', 'musiclinkd'),
+        'archives'              => __('App Profile Directory', 'musiclinkd'),
+        'all_items'             => __('All App Profiles', 'musiclinkd'),
+        'add_new_item'          => __('Add New App Profile', 'musiclinkd'),
         'add_new'               => __('Add New', 'musiclinkd'),
-        'new_item'              => __('New Profile', 'musiclinkd'),
-        'edit_item'             => __('Edit Profile', 'musiclinkd'),
-        'update_item'           => __('Update Profile', 'musiclinkd'),
-        'view_item'             => __('View Profile', 'musiclinkd'),
-        'search_items'          => __('Search Profiles', 'musiclinkd'),
-        'not_found'             => __('No profiles found', 'musiclinkd'),
-        'not_found_in_trash'    => __('No profiles found in Trash', 'musiclinkd'),
+        'new_item'              => __('New App Profile', 'musiclinkd'),
+        'edit_item'             => __('Edit App Profile', 'musiclinkd'),
+        'update_item'           => __('Update App Profile', 'musiclinkd'),
+        'view_item'             => __('View App Profile', 'musiclinkd'),
+        'search_items'          => __('Search App Profiles', 'musiclinkd'),
+        'not_found'             => __('No app profiles found', 'musiclinkd'),
+        'not_found_in_trash'    => __('No app profiles found in Trash', 'musiclinkd'),
     );
 
     $args = array(
-        'label'                 => __('Profile', 'musiclinkd'),
-        'description'           => __('MusicLinkd App Profiles: Talent & Businesses', 'musiclinkd'),
+        'label'                 => __('App Profile', 'musiclinkd'),
+        'description'           => __('MusicLinkd Customer App Profiles: Talent & Businesses (synced from app; separate from WordPress system users)', 'musiclinkd'),
         'labels'                => $labels,
         'supports'              => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields', 'revisions'),
         'taxonomies'            => array('user_flow', 'person_type', 'genre', 'city', 'instrument'),
@@ -48,8 +48,8 @@ function musiclinkd_register_profiles_cpt() {
         'public'                => true,
         'show_ui'               => true,
         'show_in_menu'          => true,
-        'menu_position'         => 5,
-        'menu_icon'             => 'dashicons-admin-users',
+        'menu_position'         => 6,
+        'menu_icon'             => 'dashicons-id-alt',
         'show_in_admin_bar'     => true,
         'show_in_nav_menus'     => true,
         'can_export'            => true,
@@ -570,3 +570,17 @@ function musiclinkd_sync_profile_to_fluentcrm($profile, $user_flow_label) {
 
     return boolval($subscriber_id);
 }
+
+/**
+ * Render admin notification banner on the App Profiles directory screen
+ * ensuring zero confusion with WordPress Core System Users (Users -> Profile).
+ */
+add_action('all_admin_notices', function () {
+    $screen = get_current_screen();
+    if ($screen && $screen->post_type === 'profile') {
+        echo '<div class="notice notice-info is-dismissible" style="border-left-color: #EA4C89; padding: 12px 14px; margin: 15px 0;">';
+        echo '<p style="margin: 0; font-size: 13px; line-height: 1.5;"><strong>📱 MusicLinkd App Profiles Directory:</strong> This screen manages customer Talent &amp; Business profiles synced live from <code>musiclinkd-app</code> (Supabase). ';
+        echo 'These are <strong>customer application profiles</strong>, strictly separate from your <strong>WordPress Staff &amp; Administrator Accounts</strong> (which you manage under <a href="' . esc_url(admin_url('users.php')) . '">Users &rarr; All Users</a> or <a href="' . esc_url(admin_url('profile.php')) . '">Your Profile</a>).</p>';
+        echo '</div>';
+    }
+});
