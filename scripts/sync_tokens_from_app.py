@@ -12,11 +12,14 @@ Enforces the rule: "musiclinkd must pick from musiclinkd-app".
 import os
 import re
 import json
-import sys
+import glob
+import urllib.request
+import urllib.error
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-APP_REPO_ROOT = os.path.join(os.path.dirname(REPO_ROOT), "musiclinkd-app")
+APP_REPO_ROOT = os.environ.get("APP_REPO_ROOT", os.path.join(os.path.dirname(REPO_ROOT), "musiclinkd-app"))
 APP_STYLES_PATH = os.path.join(APP_REPO_ROOT, "src", "styles.css")
+REMOTE_APP_STYLES_URL = "https://raw.githubusercontent.com/wugweb-git/musiclinkd-9e6ca875/main/src/styles.css"
 
 # Canonical fallback defaults from musiclinkd-app/src/styles.css
 CANONICAL_APP_TOKENS = {
@@ -33,39 +36,49 @@ CANONICAL_APP_TOKENS = {
 }
 
 def extract_tokens_from_app():
-    """Extracts live tokens from musiclinkd-app/src/styles.css if available."""
+    """Extracts live tokens from musiclinkd-app/src/styles.css (locally or remotely)."""
     tokens = dict(CANONICAL_APP_TOKENS)
-    if not os.path.exists(APP_STYLES_PATH):
-        print(f"ℹ️ App repo styles not found at {APP_STYLES_PATH}, using canonical app token matrix.")
-        return tokens
+    css = ""
 
-    try:
-        with open(APP_STYLES_PATH, "r", encoding="utf-8") as f:
-            css = f.read()
+    if os.path.exists(APP_STYLES_PATH):
+        try:
+            with open(APP_STYLES_PATH, "r", encoding="utf-8") as f:
+                css = f.read()
+            print(f"✓ Read local app styles from {APP_STYLES_PATH}")
+        except Exception as e:
+            print(f"⚠️ Error reading local {APP_STYLES_PATH}: {e}")
 
-        # Extract brand pink
+    if not css:
+        try:
+            print(f"🌐 Fetching live app styles from {REMOTE_APP_STYLES_URL}...")
+            req = urllib.request.Request(
+                REMOTE_APP_STYLES_URL,
+                headers={"User-Agent": "MusicLinkd-TokenIngestion/1.0"}
+            )
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                css = resp.read().decode("utf-8")
+            print("✓ Successfully fetched live styles from musiclinkd-app remote repository.")
+        except Exception as e:
+            print(f"ℹ️ Remote fetch failed ({e}). Using canonical matrix.")
+
+    if css:
         brand_match = re.search(r'--brand:\s*(#[a-fA-F0-9]{3,8});', css)
         if brand_match:
             tokens["brand"] = brand_match.group(1).lower()
 
-        # Extract ink
         ink_match = re.search(r'--ink:\s*(#[a-fA-F0-9]{3,8});', css)
         if ink_match:
             tokens["ink"] = ink_match.group(1).lower()
 
-        # Extract warm surface
         warm_match = re.search(r'--surface-warm:\s*(#[a-fA-F0-9]{3,8});', css)
         if warm_match:
             tokens["surface_warm"] = warm_match.group(1).lower()
 
-        # Extract background
         bg_match = re.search(r'--background:\s*(#[a-fA-F0-9]{3,8});', css)
         if bg_match:
             tokens["background"] = bg_match.group(1).lower()
 
-        print(f"✓ Extracted live tokens from musiclinkd-app: brand={tokens['brand']}, ink={tokens['ink']}, warm={tokens['surface_warm']}")
-    except Exception as e:
-        print(f"⚠️ Error reading {APP_STYLES_PATH}: {e}. Falling back to canonical constants.")
+        print(f"✓ Active App Tokens: brand={tokens['brand']}, ink={tokens['ink']}, surface={tokens['surface_warm']}")
 
     return tokens
 
@@ -106,7 +119,6 @@ def sync_tokens_css(tokens):
     brand_hex = tokens["brand"].upper()
     hover_hex = tokens["brand_hover"].upper()
     
-    # Replace brand-pink declarations
     content = re.sub(r'--brand-pink:\s*#[a-fA-F0-9]{6};', f'--brand-pink: {brand_hex};', content)
     content = re.sub(r'--brand-pink-hover:\s*#[a-fA-F0-9]{6};', f'--brand-pink-hover: {hover_hex};', content)
     content = re.sub(r'--border-focus:\s*#[a-fA-F0-9]{6};', f'--border-focus: {brand_hex};', content)
@@ -115,11 +127,34 @@ def sync_tokens_css(tokens):
         f.write(content)
     print(f"✓ Synchronized assets/css/tokens.css to brand={brand_hex}")
 
+def sync_enhance_and_templates(tokens):
+    """Sanitizes enhance.css, parts, and patterns to ensure zero token divergence."""
+    brand_hex = tokens["brand"].upper()
+    files_to_check = [
+        os.path.join(REPO_ROOT, "assets", "css", "enhance.css"),
+        os.path.join(REPO_ROOT, "parts", "header.html"),
+        os.path.join(REPO_ROOT, "parts", "footer.html"),
+    ]
+    files_to_check.extend(glob.glob(os.path.join(REPO_ROOT, "patterns", "*.php")))
+
+    for fpath in files_to_check:
+        if not os.path.exists(fpath):
+            continue
+        with open(fpath, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        if "#FF005C" in content or "#ff005c" in content:
+            new_content = content.replace("#FF005C", brand_hex).replace("#ff005c", brand_hex.lower())
+            with open(fpath, "w", encoding="utf-8") as f:
+                f.write(new_content)
+            print(f"✓ Sanitized stale tokens in {os.path.relpath(fpath, REPO_ROOT)} -> {brand_hex}")
+
 def main():
     print("🚀 [Token Ingestion Worker] Ingesting design tokens from musiclinkd-app...")
     tokens = extract_tokens_from_app()
     sync_theme_json(tokens)
     sync_tokens_css(tokens)
+    sync_enhance_and_templates(tokens)
     print("🎉 Ingestion complete. WordPress theme tokens are 100% aligned with musiclinkd-app.")
 
 if __name__ == "__main__":

@@ -102,7 +102,7 @@ const NAV = `<header class="nav" id="nav" role="banner">
   <div class="container nav__inner">
     <a href="/" class="nav__logo" aria-label="MusicLinkd home">
       <svg class="nav__logo-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#141414"/><rect x="16" y="26" width="5" height="20" rx="2.5" fill="#FFFFFF"/><rect x="25.5" y="16" width="5" height="32" rx="2.5" fill="#EA4C89"/><rect x="35" y="22" width="5" height="24" rx="2.5" fill="#FFFFFF"/><rect x="44.5" y="30" width="5" height="16" rx="2.5" fill="#EA4C89"/></svg>
-      <span style="font-family:'Unica One','Inter Tight',sans-serif;font-weight:500;letter-spacing:-0.02em;text-transform:uppercase;color:#141621">MUSIC<em style="font-style:normal;color:#FF005C">LINKD</em></span>
+      <span style="font-family:'Unica One','Inter Tight',sans-serif;font-weight:500;letter-spacing:-0.02em;text-transform:uppercase;color:#141621">MUSIC<em style="font-style:normal;color:#EA4C89">LINKD</em></span>
     </a>
 
     <nav id="navLinks" class="nav__links" aria-label="Primary">
@@ -129,7 +129,7 @@ const FOOTER = `<footer class="footer" role="contentinfo">
   <div class="container">
     <div class="footer__grid">
       <div class="footer__brand">
-        <a href="/" style="font-family:'Unica One','Inter Tight',sans-serif;font-weight:500;font-size:22px;letter-spacing:-0.02em;text-transform:uppercase;text-decoration:none;color:#141621;display:inline-flex;align-items:center;gap:10px">MUSIC<em style="color:#FF005C;font-style:normal">LINKD</em></a>
+        <a href="/" style="font-family:'Unica One','Inter Tight',sans-serif;font-weight:500;font-size:22px;letter-spacing:-0.02em;text-transform:uppercase;text-decoration:none;color:#141621;display:inline-flex;align-items:center;gap:10px">MUSIC<em style="color:#EA4C89;font-style:normal">LINKD</em></a>
         <p>India's professional music ecosystem. Connecting artists, studios, engineers, labels, venues and music businesses through one unified platform.</p>
       </div>
       <div class="footer__col">

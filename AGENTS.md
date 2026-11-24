@@ -195,9 +195,9 @@ propagate what a previous doc says without checking.
     - Standardized logo lockup: `#EA4C89` container with white vector waveform and canonical `MusicLink<em style="color:#EA4C89;font-style:normal">d</em>` wordmark.
   - **App-First Ingestion & Automated Parity Enforcement:**
     - Established strict rule: `musiclinkd` picks from `musiclinkd-app` as the single design system source of truth.
-    - Created `scripts/sync_tokens_from_app.py` to extract tokens (`#ea4c89`, `#0d0d0d`, `#f3f1ec`, `#f5f5f5`, radius scale) from `musiclinkd-app/src/styles.css` and map them into WordPress `tokens.css`, `theme.json`, and patterns.
-    - Updated `scripts/worker_content_sync.py` to audit live WordPress pages against app token parity (`#EA4C89`) and ContentBlock structure.
-    - Updated `.github/workflows/content-sync-worker.yml` and `design-token-parity-worker.yml` to automatically run token ingestion and reject any stale tokens (`#FF005C`).
+    - Created `scripts/sync_tokens_from_app.py` to extract tokens (`#ea4c89`, `#0d0d0d`, `#f3f1ec`, `#f5f5f5`, radius scale) from `musiclinkd-app/src/styles.css` (or remote repository) and map them into WordPress `tokens.css`, `theme.json`, and patterns.
+    - Updated `scripts/worker_content_sync.py` to audit live WordPress pages against app token parity (`#EA4C89`), ContentBlock structure, and perform active REST auto-remediation for drifted pages.
+    - Updated `.github/workflows/content-sync-worker.yml` and `design-token-parity-worker.yml` to automatically run token ingestion, commit theme updates, and reject any stale tokens (`#FF005C`).
     - Added Fluent Forms automatic token migration in `inc/engine-dashboard.php`.
 
 

@@ -111,6 +111,34 @@ def run_sync_audit():
             has_stale_tokens = "#FF005C" in raw_content or "255, 0, 92" in raw_content or "255,0,92" in raw_content
             has_valid_blocks = "wp-block" in raw_content or "<!-- wp:" in raw_content or len(raw_content) > 500
 
+            # Active Ingestion Remediation: auto-heal drifted tokens via authenticated REST API
+            if has_stale_tokens and INGEST_USER and INGEST_PASS:
+                try:
+                    remediated_content = (
+                        raw_content.replace("#FF005C", "#EA4C89")
+                        .replace("#ff005c", "#ea4c89")
+                        .replace("255, 0, 92", "234, 76, 137")
+                        .replace("255,0,92", "234,76,137")
+                    )
+                    token = base64.b64encode(f"{INGEST_USER}:{INGEST_PASS}".encode()).decode()
+                    update_req = urllib.request.Request(
+                        f"{WP_BASE_URL}/wp-json/wp/v2/pages/{page_id}",
+                        data=json.dumps({"content": remediated_content}).encode("utf-8"),
+                        headers={
+                            "Content-Type": "application/json",
+                            "Authorization": f"Basic {token}",
+                            "User-Agent": "MusicLinkd-SyncWorker/1.0",
+                        },
+                        method="POST"
+                    )
+                    with urllib.request.urlopen(update_req, timeout=10) as update_resp:
+                        if update_resp.status == 200:
+                            print(f"    ✨ Auto-remediated page ID {page_id} tokens to #EA4C89")
+                            has_stale_tokens = False
+                            raw_content = remediated_content
+                except Exception as rem_err:
+                    print(f"    ⚠️ Failed to auto-remediate page ID {page_id}: {rem_err}")
+
             results["successful"] += 1
             results["pages"][slug] = {
                 "id": page_id,

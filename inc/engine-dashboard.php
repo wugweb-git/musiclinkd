@@ -307,7 +307,7 @@ function musiclinkd_render_engine_health_page() {
                 REST Endpoint: <code style="background: #E5E7EB; padding: 2px 6px; border-radius: 4px;">/wp-json/musiclinkd/v1/sync-health</code>
             </div>
             <div style="font-size: 12px; color: #6B7280;">
-                GitHub Worker: <a href="https://github.com/wugweb-git/musiclinkd/actions/workflows/content-sync-worker.yml" target="_blank" style="color: #FF005C; text-decoration: none; font-weight: 600;">content-sync-worker.yml &nearr;</a>
+                GitHub Worker: <a href="https://github.com/wugweb-git/musiclinkd/actions/workflows/content-sync-worker.yml" target="_blank" style="color: #EA4C89; text-decoration: none; font-weight: 600;">content-sync-worker.yml &nearr;</a>
             </div>
         </div>
 
