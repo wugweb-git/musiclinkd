@@ -206,6 +206,10 @@ propagate what a previous doc says without checking.
     - Registered SCF (Secure Custom Fields) group definitions (`group_profile_details`).
     - Registered authenticated batch ingestion endpoint `POST /wp-json/musiclinkd/v1/ingest-profiles`.
     - Created `scripts/sync_profiles_from_app.py` pulling all 149 profiles from Supabase and populating the WordPress Profile directory and FluentCRM.
+  - **Architectural Law — Supabase as Buffer, WordPress as Canonical Home (2026-11-24):**
+    - Established core rule: Supabase acts as the live operational buffer for `musiclinkd-app` (low-latency mobile transactions, JWT auth, and realtime events).
+    - In the end, all data lands canonically in WordPress (`musiclinkd.com`): customer directory records (`profile` CPT + SCF), published CMS pages (`wp_posts`), and CRM marketing (`FluentCRM`).
+    - Pinned administrative notice on `/wp-admin/edit.php?post_type=profile` to enforce clear distinction between customer app profiles and WordPress staff/administrator accounts.
 
 
 

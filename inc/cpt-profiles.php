@@ -697,7 +697,8 @@ add_action('all_admin_notices', function () {
     $screen = get_current_screen();
     if ($screen && $screen->post_type === 'profile') {
         echo '<div class="notice notice-info is-dismissible" style="border-left-color: #EA4C89; padding: 12px 14px; margin: 15px 0;">';
-        echo '<p style="margin: 0; font-size: 13px; line-height: 1.5;"><strong>📱 MusicLinkd App Profiles Directory:</strong> This screen manages customer Talent &amp; Business profiles synced live from <code>musiclinkd-app</code> (Supabase). ';
+        echo '<p style="margin: 0; font-size: 13px; line-height: 1.5;"><strong>📱 MusicLinkd App Profiles Directory:</strong> ';
+        echo 'Supabase serves as the live operational buffer for the customer app, while WordPress is the canonical permanent home for all Talent &amp; Business profiles, directory records, and CRM data. ';
         echo 'These are <strong>customer application profiles</strong>, strictly separate from your <strong>WordPress Staff &amp; Administrator Accounts</strong> (which you manage under <a href="' . esc_url(admin_url('users.php')) . '">Users &rarr; All Users</a> or <a href="' . esc_url(admin_url('profile.php')) . '">Your Profile</a>).</p>';
         echo '</div>';
     }

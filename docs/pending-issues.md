@@ -38,6 +38,10 @@ To ensure zero downtime, zero data corruption, and robust performance, we do **n
 └─────────────────────────────────┘                 └─────────────────────────────────┘
 ```
 
+### Architectural Law: Supabase as Buffer, WordPress as Canonical Home
+- **Supabase (`gsqeymhtyzepwcnorjun.supabase.co`):** Operational buffer for the customer app (`app.musiclinkd.com`). Handles high-concurrency client reads, auth JWTs, real-time messaging, and mobile caching.
+- **WordPress (`musiclinkd.com`):** The canonical home where everything lands in the end. Centralizes all customer Talent & Business profiles (`profile` CPT + SCF), CMS editorial content, SEO indexing, and marketing automation (`FluentCRM`).
+
 ### Mapping Matrix
 
 1. **Content & Editorial (Gutenberg → App):**
