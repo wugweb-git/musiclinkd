@@ -1,7 +1,9 @@
 {
-  "timestamp": "2026-11-24T16:22:10.899078+00:00",
+  "timestamp": "2026-11-24T16:29:36.737706+00:00",
   "base_url": "https://musiclinkd.com",
   "authenticated_as": "ingest",
+  "app_token_source": "musiclinkd-app/src/styles.css",
+  "canonical_brand": "#EA4C89",
   "total_checked": 14,
   "successful": 14,
   "failed": 0,
@@ -11,140 +13,168 @@
       "title": "Help Centre",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 2183,
-      "content_bytes": 12970,
-      "modified_gmt": "2026-11-21T21:53:39",
-      "has_gutenberg_blocks": true
+      "latency_ms": 919,
+      "content_bytes": 12972,
+      "modified_gmt": "2026-11-24T16:27:36",
+      "has_gutenberg_blocks": true,
+      "app_token_parity": "PASS_CANONICAL_APP_TOKENS",
+      "app_block_format": "PASS (ContentBlock[])"
     },
     "contact": {
       "id": 15,
       "title": "Contact MusicLinkd",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 784,
+      "latency_ms": 678,
       "content_bytes": 7712,
       "modified_gmt": "2026-11-21T22:44:32",
-      "has_gutenberg_blocks": true
+      "has_gutenberg_blocks": true,
+      "app_token_parity": "FAIL_STALE_PINK",
+      "app_block_format": "PASS (ContentBlock[])"
     },
     "about": {
       "id": 28,
       "title": "About Us",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 663,
+      "latency_ms": 656,
       "content_bytes": 4996,
       "modified_gmt": "2026-11-21T21:53:41",
-      "has_gutenberg_blocks": true
+      "has_gutenberg_blocks": true,
+      "app_token_parity": "PASS_CANONICAL_APP_TOKENS",
+      "app_block_format": "PASS (ContentBlock[])"
     },
     "pricing": {
       "id": 30,
       "title": "Pricing",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 614,
+      "latency_ms": 756,
       "content_bytes": 5815,
       "modified_gmt": "2026-11-21T21:53:47",
-      "has_gutenberg_blocks": true
+      "has_gutenberg_blocks": true,
+      "app_token_parity": "PASS_CANONICAL_APP_TOKENS",
+      "app_block_format": "PASS (ContentBlock[])"
     },
     "privacy": {
       "id": 3,
       "title": "Privacy Policy",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 648,
+      "latency_ms": 681,
       "content_bytes": 4112,
       "modified_gmt": "2026-11-21T21:53:09",
-      "has_gutenberg_blocks": true
+      "has_gutenberg_blocks": true,
+      "app_token_parity": "PASS_CANONICAL_APP_TOKENS",
+      "app_block_format": "PASS (ContentBlock[])"
     },
     "terms": {
       "id": 18,
       "title": "Terms of Use",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 632,
+      "latency_ms": 771,
       "content_bytes": 4216,
       "modified_gmt": "2026-11-21T21:53:17",
-      "has_gutenberg_blocks": true
+      "has_gutenberg_blocks": true,
+      "app_token_parity": "PASS_CANONICAL_APP_TOKENS",
+      "app_block_format": "PASS (ContentBlock[])"
     },
     "cookies": {
       "id": 29,
       "title": "Cookie Policy",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 654,
+      "latency_ms": 718,
       "content_bytes": 3712,
       "modified_gmt": "2026-11-21T21:53:44",
-      "has_gutenberg_blocks": true
+      "has_gutenberg_blocks": true,
+      "app_token_parity": "PASS_CANONICAL_APP_TOKENS",
+      "app_block_format": "PASS (ContentBlock[])"
     },
     "community-guidelines": {
       "id": 25,
       "title": "Community guidelines",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 642,
+      "latency_ms": 625,
       "content_bytes": 4478,
       "modified_gmt": "2026-11-21T21:53:33",
-      "has_gutenberg_blocks": true
+      "has_gutenberg_blocks": true,
+      "app_token_parity": "PASS_CANONICAL_APP_TOKENS",
+      "app_block_format": "PASS (ContentBlock[])"
     },
     "review-policy": {
       "id": 24,
       "title": "Review policy",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 708,
+      "latency_ms": 609,
       "content_bytes": 4912,
       "modified_gmt": "2026-11-21T21:53:31",
-      "has_gutenberg_blocks": true
+      "has_gutenberg_blocks": true,
+      "app_token_parity": "PASS_CANONICAL_APP_TOKENS",
+      "app_block_format": "PASS (ContentBlock[])"
     },
     "booking-policies-explained": {
       "id": 23,
       "title": "Booking policies explained",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 676,
+      "latency_ms": 650,
       "content_bytes": 4802,
       "modified_gmt": "2026-11-21T21:53:28",
-      "has_gutenberg_blocks": true
+      "has_gutenberg_blocks": true,
+      "app_token_parity": "PASS_CANONICAL_APP_TOKENS",
+      "app_block_format": "PASS (ContentBlock[])"
     },
     "how-verification-works": {
       "id": 22,
       "title": "How verification works",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 641,
-      "content_bytes": 5396,
+      "latency_ms": 688,
+      "content_bytes": 5600,
       "modified_gmt": "2026-11-21T21:53:25",
-      "has_gutenberg_blocks": true
+      "has_gutenberg_blocks": true,
+      "app_token_parity": "PASS_CANONICAL_APP_TOKENS",
+      "app_block_format": "PASS (ContentBlock[])"
     },
     "pricing-your-first-service": {
       "id": 21,
       "title": "Pricing your first service",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 677,
+      "latency_ms": 659,
       "content_bytes": 5335,
       "modified_gmt": "2026-11-21T21:53:23",
-      "has_gutenberg_blocks": true
+      "has_gutenberg_blocks": true,
+      "app_token_parity": "PASS_CANONICAL_APP_TOKENS",
+      "app_block_format": "PASS (ContentBlock[])"
     },
     "profile-that-gets-booked": {
       "id": 20,
       "title": "Building a profile that gets booked",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 637,
+      "latency_ms": 638,
       "content_bytes": 5841,
       "modified_gmt": "2026-11-21T21:53:20",
-      "has_gutenberg_blocks": true
+      "has_gutenberg_blocks": true,
+      "app_token_parity": "PASS_CANONICAL_APP_TOKENS",
+      "app_block_format": "PASS (ContentBlock[])"
     },
     "whats-new": {
       "id": 26,
       "title": "What&#8217;s new in MusicLinkd",
       "status": "OK",
       "http_status": 200,
-      "latency_ms": 638,
+      "latency_ms": 715,
       "content_bytes": 4720,
       "modified_gmt": "2026-11-21T21:53:36",
-      "has_gutenberg_blocks": true
+      "has_gutenberg_blocks": true,
+      "app_token_parity": "PASS_CANONICAL_APP_TOKENS",
+      "app_block_format": "PASS (ContentBlock[])"
     }
   }
 }
