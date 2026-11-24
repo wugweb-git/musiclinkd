@@ -417,12 +417,75 @@ add_action('rest_api_init', function () {
             return current_user_can('edit_pages');
         },
     ));
+    register_rest_route('musiclinkd/v1', '/ingest-taxonomies', array(
+        'methods'             => array('POST'),
+        'callback'            => 'musiclinkd_handle_ingest_taxonomies',
+        'permission_callback' => function () {
+            return current_user_can('edit_pages');
+        },
+    ));
 });
+
+/**
+ * Handle POST /wp-json/musiclinkd/v1/ingest-taxonomies
+ * Seeds all master taxonomy_options (person_types, genres, cities, instruments) from Supabase.
+ */
+function musiclinkd_handle_ingest_taxonomies(WP_REST_Request $request) {
+    if (!defined('MUSICLINKD_INGESTING')) {
+        define('MUSICLINKD_INGESTING', true);
+    }
+    $body = $request->get_json_params();
+    if (empty($body) || !isset($body['options']) || !is_array($body['options'])) {
+        return new WP_Error('invalid_payload', 'Payload must contain an options array.', array('status' => 400));
+    }
+
+    $category_map = array(
+        'person_types' => 'person_type',
+        'genres'       => 'genre',
+        'cities'       => 'city',
+        'instruments'  => 'instrument',
+    );
+
+    $created = 0;
+    $existing = 0;
+
+    foreach ($body['options'] as $opt) {
+        $cat = $opt['category_key'] ?? '';
+        if (!isset($category_map[$cat])) {
+            continue;
+        }
+        $taxonomy = $category_map[$cat];
+        $label = sanitize_text_field($opt['label'] ?? '');
+        $slug = sanitize_title($opt['slug'] ?? $label);
+        if (!$label) {
+            continue;
+        }
+
+        $term = term_exists($label, $taxonomy);
+        if (!$term) {
+            $res = wp_insert_term($label, $taxonomy, array('slug' => $slug));
+            if (!is_wp_error($res)) {
+                $created++;
+            }
+        } else {
+            $existing++;
+        }
+    }
+
+    return rest_ensure_response(array(
+        'success'  => true,
+        'created'  => $created,
+        'existing' => $existing,
+    ));
+}
 
 /**
  * Handle POST /wp-json/musiclinkd/v1/ingest-profiles
  */
 function musiclinkd_handle_ingest_profiles(WP_REST_Request $request) {
+    if (!defined('MUSICLINKD_INGESTING')) {
+        define('MUSICLINKD_INGESTING', true);
+    }
     global $wpdb;
     $body = $request->get_json_params();
 
@@ -703,3 +766,247 @@ add_action('all_admin_notices', function () {
         echo '</div>';
     }
 });
+
+/**
+ * Outbound Bidirectional Sync: Push profiles created/edited in WordPress to Supabase.
+ */
+add_action('save_post_profile', 'musiclinkd_push_profile_to_supabase', 25, 2);
+function musiclinkd_push_profile_to_supabase($post_id, $post) {
+    if (defined('MUSICLINKD_INGESTING') && MUSICLINKD_INGESTING) {
+        return;
+    }
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+    if (wp_is_post_revision($post_id) || $post->post_status !== 'publish') {
+        return;
+    }
+
+    $service_key = get_option('musiclinkd_supabase_service_key', defined('SUPABASE_SERVICE_ROLE_KEY') ? SUPABASE_SERVICE_ROLE_KEY : '');
+    $supabase_url = 'https://gsqeymhtyzepwcnorjun.supabase.co';
+
+    // Ensure a Supabase UUID exists
+    $supabase_id = get_post_meta($post_id, 'supabase_id', true);
+    if (empty($supabase_id)) {
+        $supabase_id = wp_generate_uuid4();
+        update_post_meta($post_id, 'supabase_id', $supabase_id);
+    }
+
+    // Read taxonomy terms
+    $roles = wp_get_post_terms($post_id, 'person_type', array('fields' => 'slugs'));
+    $genres = wp_get_post_terms($post_id, 'genre', array('fields' => 'slugs'));
+    $instruments = wp_get_post_terms($post_id, 'instrument', array('fields' => 'slugs'));
+    $cities = wp_get_post_terms($post_id, 'city', array('fields' => 'names'));
+    $city = !empty($cities) ? $cities[0] : '';
+
+    $hourly_rate = floatval(get_post_meta($post_id, 'hourly_rate', true));
+    $hourly_rate_paise = $hourly_rate > 0 ? intval($hourly_rate * 100) : null;
+
+    $links = array();
+    $spotify = get_post_meta($post_id, 'spotify_url', true);
+    if ($spotify) $links['spotify'] = $spotify;
+    $instagram = get_post_meta($post_id, 'instagram_url', true);
+    if ($instagram) $links['instagram'] = $instagram;
+    $youtube = get_post_meta($post_id, 'youtube_url', true);
+    if ($youtube) $links['youtube'] = $youtube;
+    $soundcloud = get_post_meta($post_id, 'soundcloud_url', true);
+    if ($soundcloud) $links['soundcloud'] = $soundcloud;
+    $website = get_post_meta($post_id, 'website_url', true);
+    if ($website) $links['website'] = $website;
+
+    $bio = wp_strip_all_tags($post->post_content);
+
+    $payload = array(
+        'id'                => $supabase_id,
+        'username'          => $post->post_name,
+        'display_name'      => $post->post_title,
+        'headline'          => get_post_meta($post_id, 'headline', true) ?: null,
+        'bio'               => $bio ?: null,
+        'city'              => $city ?: null,
+        'roles'             => array_values($roles),
+        'genres'            => array_values($genres),
+        'instruments'       => array_values($instruments),
+        'hourly_rate_paise' => $hourly_rate_paise,
+        'rate_paise'        => $hourly_rate_paise,
+        'rate_unit'         => get_post_meta($post_id, 'rate_unit', true) ?: 'hour',
+        'is_verified'       => boolval(get_post_meta($post_id, 'is_verified', true)),
+        'is_available'      => boolval(get_post_meta($post_id, 'is_available', true)),
+        'availability'      => get_post_meta($post_id, 'availability', true) ?: 'Available',
+        'avatar_url'        => get_post_meta($post_id, 'avatar_url', true) ?: null,
+        'cover_url'         => get_post_meta($post_id, 'cover_url', true) ?: null,
+        'rating'            => floatval(get_post_meta($post_id, 'rating', true)) ?: null,
+        'review_count'      => intval(get_post_meta($post_id, 'review_count', true)),
+        'qr_style'          => get_post_meta($post_id, 'qr_style', true) ?: 'light',
+        'links'             => (object)$links,
+        'updated_at'        => current_time('mysql', 1),
+    );
+
+    if (empty($service_key)) {
+        update_post_meta($post_id, '_supabase_sync_status', 'pending_service_key');
+        return;
+    }
+
+    $response = wp_remote_post("{$supabase_url}/rest/v1/profiles", array(
+        'method'  => 'POST',
+        'headers' => array(
+            'apikey'        => $service_key,
+            'Authorization' => 'Bearer ' . $service_key,
+            'Content-Type'  => 'application/json',
+            'Prefer'        => 'resolution=merge-duplicates',
+        ),
+        'body'    => wp_json_encode($payload),
+        'timeout' => 15,
+    ));
+
+    if (is_wp_error($response)) {
+        update_post_meta($post_id, '_supabase_sync_error', $response->get_error_message());
+        update_post_meta($post_id, '_supabase_sync_status', 'failed');
+    } else {
+        $code = wp_remote_retrieve_response_code($response);
+        if ($code >= 200 && $code < 300) {
+            update_post_meta($post_id, '_supabase_sync_status', 'synced');
+            update_post_meta($post_id, '_supabase_synced_at', current_time('mysql', 1));
+            delete_post_meta($post_id, '_supabase_sync_error');
+        } else {
+            update_post_meta($post_id, '_supabase_sync_status', 'failed');
+            update_post_meta($post_id, '_supabase_sync_error', 'HTTP ' . $code . ': ' . wp_remote_retrieve_body($response));
+        }
+    }
+}
+
+/**
+ * Register Submenu under 'App Profiles' for Sync Settings.
+ */
+add_action('admin_menu', function () {
+    add_submenu_page(
+        'edit.php?post_type=profile',
+        __('Supabase Sync Settings', 'musiclinkd'),
+        __('Sync Settings', 'musiclinkd'),
+        'manage_options',
+        'app-profiles-sync',
+        'musiclinkd_render_sync_settings_page'
+    );
+});
+
+/**
+ * Render Supabase Sync Settings Admin Page.
+ */
+function musiclinkd_render_sync_settings_page() {
+    if (!current_user_can('manage_options')) {
+        wp_die(__('You do not have sufficient permissions to access this page.', 'musiclinkd'));
+    }
+
+    // Handle form save
+    if (isset($_POST['musiclinkd_save_sync_settings']) && check_admin_referer('musiclinkd_sync_settings_verify')) {
+        $key = sanitize_text_field($_POST['musiclinkd_supabase_service_key'] ?? '');
+        update_option('musiclinkd_supabase_service_key', $key);
+        echo '<div class="notice notice-success is-dismissible"><p><strong>Settings saved successfully.</strong> Bidirectional sync will use this key for outbound Supabase writes.</p></div>';
+    }
+
+    $current_key = get_option('musiclinkd_supabase_service_key', '');
+    $profiles_count = wp_count_posts('profile')->publish ?? 0;
+    ?>
+    <div class="wrap">
+        <h1 style="display: flex; align-items: center; gap: 10px;">
+            <span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#EA4C89;"></span>
+            MusicLinkd App Profiles &rarr; Supabase Bidirectional Sync
+        </h1>
+        <p style="color: #64748B; font-size: 14px;">
+            Configure outbound synchronization from WordPress to the customer app (Supabase). When active, saving a profile here immediately writes to Supabase.
+        </p>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-top: 20px;">
+            <div style="background: #fff; padding: 24px; border: 1px solid #E2E8F0; border-radius: 8px;">
+                <form method="post" action="">
+                    <?php wp_nonce_field('musiclinkd_sync_settings_verify'); ?>
+                    <table class="form-table">
+                        <tr>
+                            <th scope="row"><label for="musiclinkd_supabase_service_key">Supabase Service Role Secret Key</label></th>
+                            <td>
+                                <input name="musiclinkd_supabase_service_key" type="password" id="musiclinkd_supabase_service_key" value="<?php echo esc_attr($current_key); ?>" class="regular-text" style="width: 100%; max-width: 500px;" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+                                <p class="description" style="margin-top: 8px;">
+                                    Found in your Supabase Dashboard: <code>Project Settings &rarr; API &rarr; service_role (secret)</code>.<br>
+                                    <em>Required to bypass Row Level Security (RLS) when writing newly added profiles from WordPress into Supabase.</em>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p class="submit">
+                        <input type="submit" name="musiclinkd_save_sync_settings" id="submit" class="button button-primary" style="background:#EA4C89; border-color:#EA4C89;" value="Save Sync Credentials">
+                    </p>
+                </form>
+            </div>
+
+            <div style="background: #fff; padding: 24px; border: 1px solid #E2E8F0; border-radius: 8px;">
+                <h3 style="margin-top: 0; font-size: 15px; border-bottom: 1px solid #F1F5F9; padding-bottom: 10px;">Sync Architecture Status</h3>
+                <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 2;">
+                    <li><strong>Published in WordPress:</strong> <code><?php echo intval($profiles_count); ?> profiles</code></li>
+                    <li><strong>Inbound Sync (Supabase &rarr; WP):</strong> <span style="color:#10B981; font-weight:600;">Active (Every 6h)</span></li>
+                    <li><strong>Outbound Sync (WP &rarr; Supabase):</strong> 
+                        <?php if ($current_key): ?>
+                            <span style="color:#10B981; font-weight:600;">Ready &amp; Configured</span>
+                        <?php else: ?>
+                            <span style="color:#F59E0B; font-weight:600;">Awaiting Secret Key</span>
+                        <?php endif; ?>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+/**
+ * Outbound Bidirectional Sync for Taxonomies:
+ * Pushing new/edited Genres, Cities, Person Types, or Instruments to Supabase `taxonomy_options`.
+ */
+add_action('created_term', 'musiclinkd_push_taxonomy_to_supabase', 10, 3);
+add_action('edited_term', 'musiclinkd_push_taxonomy_to_supabase', 10, 3);
+function musiclinkd_push_taxonomy_to_supabase($term_id, $tt_id, $taxonomy) {
+    if (defined('MUSICLINKD_INGESTING') && MUSICLINKD_INGESTING) {
+        return;
+    }
+
+    $taxonomy_map = array(
+        'person_type' => 'person_types',
+        'genre'       => 'genres',
+        'city'        => 'cities',
+        'instrument'  => 'instruments',
+    );
+
+    if (!isset($taxonomy_map[$taxonomy])) {
+        return;
+    }
+
+    $service_key = get_option('musiclinkd_supabase_service_key', defined('SUPABASE_SERVICE_ROLE_KEY') ? SUPABASE_SERVICE_ROLE_KEY : '');
+    if (empty($service_key)) {
+        return;
+    }
+
+    $term = get_term($term_id, $taxonomy);
+    if (!$term || is_wp_error($term)) {
+        return;
+    }
+
+    $supabase_url = 'https://gsqeymhtyzepwcnorjun.supabase.co';
+    $payload = array(
+        'category_key' => $taxonomy_map[$taxonomy],
+        'slug'         => str_replace('-', '_', $term->slug),
+        'label'        => $term->name,
+        'is_published' => true,
+        'sort_order'   => 999,
+    );
+
+    wp_remote_post("{$supabase_url}/rest/v1/taxonomy_options", array(
+        'method'  => 'POST',
+        'headers' => array(
+            'apikey'        => $service_key,
+            'Authorization' => 'Bearer ' . $service_key,
+            'Content-Type'  => 'application/json',
+            'Prefer'        => 'resolution=merge-duplicates',
+        ),
+        'body'    => wp_json_encode($payload),
+        'timeout' => 10,
+    ));
+}

@@ -73,9 +73,55 @@ def send_batch_to_wordpress(batch):
         print(f"⚠️ Ingestion error: {e}")
         return {"error": str(e)}
 
+def fetch_supabase_taxonomies():
+    """Fetches master taxonomy_options (person_types, genres, cities, instruments) from Supabase."""
+    endpoint = f"{SUPABASE_URL}/rest/v1/taxonomy_options?category_key=in.(person_types,genres,cities,instruments)&select=category_key,slug,label"
+    req = urllib.request.Request(
+        endpoint,
+        headers={
+            "apikey": SUPABASE_KEY,
+            "Authorization": f"Bearer {SUPABASE_KEY}",
+            "User-Agent": "MusicLinkd-ProfileSync/1.0",
+        }
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            options = json.loads(resp.read().decode("utf-8"))
+            print(f"✓ Retrieved {len(options)} master taxonomy options from Supabase.")
+            return options
+    except Exception as e:
+        print(f"⚠️ Failed to fetch master taxonomies: {e}")
+        return []
+
+def sync_master_taxonomies():
+    """Seeds all master taxonomy terms into WordPress."""
+    options = fetch_supabase_taxonomies()
+    if not options:
+        return
+    endpoint = f"{WP_BASE_URL}/wp-json/musiclinkd/v1/ingest-taxonomies"
+    token = base64.b64encode(f"{INGEST_USER}:{INGEST_PASS}".encode()).decode()
+    payload = json.dumps({"options": options}).encode("utf-8")
+    req = urllib.request.Request(
+        endpoint,
+        data=payload,
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Basic {token}",
+            "User-Agent": "MusicLinkd-ProfileSync/1.0",
+        },
+        method="POST"
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            res = json.loads(resp.read().decode("utf-8"))
+            print(f"✓ Master Taxonomies synced: +{res.get('created', 0)} created, {res.get('existing', 0)} existing.")
+    except Exception as e:
+        print(f"⚠️ Master taxonomy sync error: {e}")
+
 def run_profile_sync():
     print("🚀 [Profile Ingestion Worker] Starting Supabase -> WordPress SCF sync...")
     start_time = datetime.now()
+    sync_master_taxonomies()
     profiles = fetch_supabase_profiles()
 
     if not profiles:
