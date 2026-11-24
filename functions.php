@@ -205,3 +205,10 @@ add_filter('wp_check_filetype_and_ext', function ($data, $file, $filename, $mime
     }
     return $data;
 }, 10, 4);
+
+/**
+ * MusicLinkd Engine & Ingestion Dashboard.
+ */
+if (file_exists(get_theme_file_path('/inc/engine-dashboard.php'))) {
+    require_once get_theme_file_path('/inc/engine-dashboard.php');
+}

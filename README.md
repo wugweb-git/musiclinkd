@@ -111,6 +111,7 @@ The root repository includes the production Full Site Editing (FSE) block theme 
 - **CMS & Help Centre**: 11 production pages mapped from app engine (`/help/`, deep guides, `/about/`, `/pricing/`, `/cookies/`, and synced `/privacy/` & `/terms/` with ownership guarantees), all fully converted to native WordPress Gutenberg blocks for visual editing in WP Admin.
 - **Media & Identity**: 55 brand and gallery assets imported into WordPress Media Library; `site_icon` and `custom_logo` configured. Full Gutenberg editor style parity enqueued in `functions.php`.
 - **Email Design System**: FluentCRM block email template (ID 106) and cross-client FluentSMTP HTML signature (`templates/email/signature.html`).
+- **Engine Health & Visual Admin**: `inc/engine-dashboard.php` provides a native visual dashboard at `/wp-admin/admin.php?page=musiclinkd-engine`, a Dashboard Widget on `/wp-admin/index.php`, and a REST telemetry endpoint (`/wp-json/musiclinkd/v1/sync-health`).
 
 ## Documentation
 

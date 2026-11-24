@@ -136,6 +136,27 @@ def run_sync_audit():
         json.dump(results, f, indent=2)
     print(f"\n📊 Audit log written to {log_file}")
     
+    # Push telemetry directly to WordPress Admin options via REST API if credentials available
+    if INGEST_USER and INGEST_PASS:
+        try:
+            update_endpoint = f"{WP_BASE_URL}/wp-json/musiclinkd/v1/sync-health"
+            post_data = json.dumps(results).encode("utf-8")
+            token = base64.b64encode(f"{INGEST_USER}:{INGEST_PASS}".encode()).decode()
+            post_req = urllib.request.Request(
+                update_endpoint,
+                data=post_data,
+                headers={
+                    "Content-Type": "application/json",
+                    "Authorization": f"Basic {token}",
+                    "User-Agent": "MusicLinkd-SyncWorker/1.0",
+                },
+                method="POST"
+            )
+            with urllib.request.urlopen(post_req, timeout=10) as post_resp:
+                print(f"📡 Telemetry successfully pushed to WordPress Admin ({post_resp.status} OK)")
+        except Exception as e:
+            print(f"ℹ️ Notice: WordPress sync-health endpoint update ({e})")
+    
     # Write to GitHub Step Summary if running in Actions
     summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary_path:
