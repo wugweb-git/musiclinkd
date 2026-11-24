@@ -212,3 +212,10 @@ add_filter('wp_check_filetype_and_ext', function ($data, $file, $filename, $mime
 if (file_exists(get_theme_file_path('/inc/engine-dashboard.php'))) {
     require_once get_theme_file_path('/inc/engine-dashboard.php');
 }
+
+/**
+ * MusicLinkd Creators Custom Post Type & SCF (Secure Custom Fields) Mapping.
+ */
+if (file_exists(get_theme_file_path('/inc/cpt-creators.php'))) {
+    require_once get_theme_file_path('/inc/cpt-creators.php');
+}

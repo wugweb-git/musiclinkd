@@ -199,6 +199,11 @@ propagate what a previous doc says without checking.
     - Updated `scripts/worker_content_sync.py` to audit live WordPress pages against app token parity (`#EA4C89`), ContentBlock structure, and perform active REST auto-remediation for drifted pages.
     - Updated `.github/workflows/content-sync-worker.yml` and `design-token-parity-worker.yml` to automatically run token ingestion, commit theme updates, and reject any stale tokens (`#FF005C`).
     - Added Fluent Forms automatic token migration in `inc/engine-dashboard.php`.
+  - **Creator Directory, SCF (Secure Custom Fields) & FluentCRM Bridge (2026-11-24):**
+    - Created `inc/cpt-creators.php` registering the `creator` Custom Post Type (`/wp-json/wp/v2/creators`), taxonomies (`creator_role`, `creator_genre`, `creator_city`, `creator_instrument`), and SCF field group definitions (`group_creator_profile`).
+    - Registered authenticated batch ingestion endpoint `POST /wp-json/musiclinkd/v1/ingest-creators`.
+    - Integrated direct FluentCRM contact synchronization (`wp_fluentcrm_subscribers`), auto-populating subscriber records, names, cities, and tags on creator ingestion.
+    - Created `scripts/sync_creators_from_app.py` pulling all 149 creator profiles from Supabase and populating the WordPress Creator directory and FluentCRM.
 
 
 
