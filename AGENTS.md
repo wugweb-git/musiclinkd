@@ -180,6 +180,10 @@ propagate what a previous doc says without checking.
     - Verified `p1/bookables` & `p1/facility-to-amenity` are fully contained within `main`.
     - Verified `feat/discover-businesses-feed` is obsolete and superseded by main navigation architecture.
     - Postponed non-blocking `collab_owner_guard` (Issue `SEC-COL-001`, branch `fix/collab-owner-guard`, migration `20261015120000_collab_owner_guard.sql`) into structured log `docs/logs/postponed-issues.json` until Lovable Cloud runs the database migration.
+  - **Authenticated WordPress Ingestion Service Account:**
+    - Configured GitHub Secrets `WP_INGEST_USER` (`ingest`) and `WP_INGEST_PASS` (Application Password for "MusicLinkd Ingestion Engine", User ID 2).
+    - Verified full REST API CRUD authorization (`GET, POST, PUT, PATCH, DELETE`) against `https://musiclinkd.com/wp-json/wp/v2/users/me`.
+    - Automated worker (`content-sync-worker.yml` run 45431946729) verified with 100% success across all 14 canonical slugs authenticated as `ingest`.
 
 
 
