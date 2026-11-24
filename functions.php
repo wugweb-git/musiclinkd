@@ -214,8 +214,8 @@ if (file_exists(get_theme_file_path('/inc/engine-dashboard.php'))) {
 }
 
 /**
- * MusicLinkd Creators Custom Post Type & SCF (Secure Custom Fields) Mapping.
+ * MusicLinkd Profiles Custom Post Type & SCF (Secure Custom Fields) Mapping.
  */
-if (file_exists(get_theme_file_path('/inc/cpt-creators.php'))) {
-    require_once get_theme_file_path('/inc/cpt-creators.php');
+if (file_exists(get_theme_file_path('/inc/cpt-profiles.php'))) {
+    require_once get_theme_file_path('/inc/cpt-profiles.php');
 }
