@@ -16,6 +16,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: content-sync-worker
+  cancel-in-progress: false
+
 jobs:
   sync-audit:
     name: Audit & Sync WordPress CMS Pages
@@ -48,7 +52,7 @@ jobs:
           git add docs/logs/sync-health.json theme.json assets/css/ parts/ patterns/
           if ! git diff --cached --quiet; then
             git commit -m "chore(worker): automated content sync & app token ingestion [skip ci]"
-            git pull --rebase origin main
+            git pull --rebase -X ours origin main || git pull --rebase origin main
             git push origin main
           else
             echo "No sync log or theme token changes to commit."
