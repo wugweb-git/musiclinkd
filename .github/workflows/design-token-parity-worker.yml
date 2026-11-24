@@ -43,10 +43,21 @@ jobs:
             const themeJson = JSON.parse(fs.readFileSync("theme.json", "utf8"));
             console.log("theme.json successfully parsed. Palette count:", themeJson.settings?.color?.palette?.length);
             
-            // Validate required canonical tokens
+            // Validate canonical app tokens from musiclinkd-app
+            const primaryColor = themeJson.settings?.color?.palette?.find(p => p.slug === "primary")?.color;
+            if (primaryColor !== "#EA4C89") {
+              console.error(`Token drift detected! theme.json primary must be #EA4C89 (from musiclinkd-app), found: ${primaryColor}`);
+              process.exit(1);
+            }
+            
             const css = fs.readFileSync("assets/css/enhance.css", "utf8");
             if (!css.includes("#EA4C89")) {
-              console.warn("Notice: Canonical pink #EA4C89 check in enhance.css");
+              console.error("Missing canonical app pink #EA4C89 in enhance.css");
+              process.exit(1);
             }
-            console.log("All token integrity checks passed successfully.");
+            if (css.includes("#FF005C")) {
+              console.error("Stale marketing pink #FF005C detected in enhance.css! Must pick from app (#EA4C89).");
+              process.exit(1);
+            }
+            console.log("All token integrity and app parity checks passed successfully.");
           '

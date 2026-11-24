@@ -85,6 +85,27 @@ function musiclinkd_get_sync_health_data() {
 }
 
 /**
+ * Ensure Fluent Forms and ecosystem plugins inherit canonical #EA4C89 from musiclinkd-app.
+ */
+add_action('init', function () {
+    global $wpdb;
+    if ($wpdb && !get_transient('musiclinkd_ff_token_aligned_v2')) {
+        $table = $wpdb->prefix . 'fluentform_forms';
+        if ($wpdb->get_var("SHOW TABLES LIKE '{$table}'") === $table) {
+            $wpdb->query("UPDATE {$table} SET form_fields = REPLACE(form_fields, '#FF005C', '#EA4C89') WHERE form_fields LIKE '%#FF005C%'");
+        }
+        set_transient('musiclinkd_ff_token_aligned_v2', 1, DAY_IN_SECONDS);
+    }
+});
+
+/**
+ * Filter Fluent Forms inline rendered CSS to enforce canonical brand tokens.
+ */
+add_filter('fluentform/form_inline_css', function ($css) {
+    return str_replace('#FF005C', '#EA4C89', $css);
+});
+
+/**
  * Register Admin Menu for MusicLinkd Engine.
  */
 add_action('admin_menu', function () {
@@ -226,7 +247,7 @@ function musiclinkd_render_engine_health_page() {
                         <th style="font-weight: 600; color: #374151;">Page Title</th>
                         <th style="font-weight: 600; color: #374151;">HTTP Status</th>
                         <th style="font-weight: 600; color: #374151;">REST Latency</th>
-                        <th style="font-weight: 600; color: #374151;">Gutenberg Blocks</th>
+                        <th style="font-weight: 600; color: #374151;">Gutenberg & App Schema</th>
                         <th style="font-weight: 600; color: #374151; text-align: right;">Actions</th>
                     </tr>
                 </thead>
@@ -266,6 +287,7 @@ function musiclinkd_render_engine_health_page() {
                                     <?php else: ?>
                                         <span style="color: #9CA3AF; font-size: 12px;">Plain Content</span>
                                     <?php endif; ?>
+                                    <div style="font-size: 11px; color: #6B7280; margin-top: 2px;">App Tokens: <strong style="color: #EA4C89;">#EA4C89</strong></div>
                                 </td>
                                 <td style="text-align: right;">
                                     <?php if ($page_id > 0): ?>

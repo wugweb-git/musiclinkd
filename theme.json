@@ -118,7 +118,14 @@
 			]
 		},
 		"spacing": {
-			"units": ["px", "em", "rem", "%", "vh", "vw"],
+			"units": [
+				"px",
+				"em",
+				"rem",
+				"%",
+				"vh",
+				"vw"
+			],
 			"spacingScale": {
 				"operator": "*",
 				"increment": 1.5,

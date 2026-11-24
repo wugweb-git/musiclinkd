@@ -29,6 +29,10 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Ingest & Map Canonical App Tokens
+        run: |
+          python3 scripts/sync_tokens_from_app.py
+
       - name: Run Content Sync & Ingestion Audit
         env:
           WP_BASE_URL: 'https://musiclinkd.com'

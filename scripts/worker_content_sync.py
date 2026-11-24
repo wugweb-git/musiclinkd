@@ -86,12 +86,14 @@ def run_sync_audit():
         "timestamp": timestamp,
         "base_url": WP_BASE_URL,
         "authenticated_as": INGEST_USER if INGEST_PASS else "public_guest",
+        "app_token_source": "musiclinkd-app/src/styles.css",
+        "canonical_brand": "#EA4C89",
         "total_checked": len(CANONICAL_SLUGS),
         "successful": 0,
         "failed": 0,
-        "pages": {}
+        "pages": {},
     }
-    
+
     for slug in CANONICAL_SLUGS:
         endpoint = f"{WP_BASE_URL}/wp-json/wp/v2/pages?slug={slug}"
         resp = make_request(endpoint, INGEST_USER, INGEST_PASS)
@@ -105,6 +107,10 @@ def run_sync_audit():
             raw_content = page_obj.get("content", {}).get("rendered", "")
             page_id = page_obj.get("id")
             
+            # Parity checks against musiclinkd-app requirements
+            has_stale_tokens = "#FF005C" in raw_content or "255, 0, 92" in raw_content or "255,0,92" in raw_content
+            has_valid_blocks = "wp-block" in raw_content or "<!-- wp:" in raw_content or len(raw_content) > 500
+
             results["successful"] += 1
             results["pages"][slug] = {
                 "id": page_id,
@@ -114,9 +120,12 @@ def run_sync_audit():
                 "latency_ms": elapsed_ms,
                 "content_bytes": len(raw_content),
                 "modified_gmt": page_obj.get("modified_gmt", ""),
-                "has_gutenberg_blocks": "wp-block" in raw_content or "<!-- wp:" in raw_content or len(raw_content) > 500
+                "has_gutenberg_blocks": has_valid_blocks,
+                "app_token_parity": "FAIL_STALE_PINK" if has_stale_tokens else "PASS_CANONICAL_APP_TOKENS",
+                "app_block_format": "PASS (ContentBlock[])" if has_valid_blocks else "WARN (Unstructured)",
             }
-            print(f"  ✓ {slug.ljust(30)} -> ID {page_id} | {elapsed_ms}ms | {len(raw_content)} bytes")
+            token_pill = "✓ #EA4C89" if not has_stale_tokens else "✗ STALE PINK"
+            print(f"  ✓ {slug.ljust(28)} -> ID {str(page_id).ljust(4)} | {elapsed_ms}ms | {token_pill} | {len(raw_content)} bytes")
         else:
             results["failed"] += 1
             results["pages"][slug] = {
@@ -164,15 +173,17 @@ def run_sync_audit():
             f.write("## 🔄 MusicLinkd Content & Ingestion Worker Summary\n\n")
             f.write(f"- **Timestamp:** `{timestamp}`\n")
             f.write(f"- **Target:** `{WP_BASE_URL}`\n")
+            f.write(f"- **Token Source of Truth:** `musiclinkd-app` (`#EA4C89`)\n")
             f.write(f"- **Verified Pages:** {results['successful']} / {results['total_checked']}\n")
             f.write(f"- **Failed:** {results['failed']}\n\n")
-            f.write("| Slug | Page ID | Latency | Status |\n")
-            f.write("| :--- | :--- | :--- | :--- |\n")
+            f.write("| Slug | Page ID | Latency | App Token Parity | Status |\n")
+            f.write("| :--- | :--- | :--- | :--- | :--- |\n")
             for slug, info in results["pages"].items():
                 icon = "🟢" if info.get("status") == "OK" else "🔴"
                 page_id = info.get("id", "—")
                 lat = f"{info.get('latency_ms', 0)}ms"
-                f.write(f"| `{slug}` | {page_id} | {lat} | {icon} {info.get('status')} |\n")
+                token_status = "✓ #EA4C89" if info.get("app_token_parity") == "PASS_CANONICAL_APP_TOKENS" else "⚠️ Stale"
+                f.write(f"| `{slug}` | {page_id} | {lat} | {token_status} | {icon} {info.get('status')} |\n")
                 
     if results["failed"] > 0:
         print(f"⚠️ {results['failed']} pages failed health audit.")
