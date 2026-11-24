@@ -128,7 +128,7 @@ propagate what a previous doc says without checking.
   - Rank Math SEO populated with canonical organization metadata, title separator (`·`), and social card defaults.
   - PWA for WP configured with brand tokens (`#FF005C` theme, `#0F0F14` background, vector favicon mark).
 - **Headless WordPress REST API Bridge for App Ecosystem (2026-11-22):**
-  - Connected `app.musiclinkd.com` (`musiclinkd-9e6ca875/src/lib/help.functions.ts`) to fetch live published pages and guides from `https://musiclinkd.com/wp-json/wp/v2/pages`.
+  - Connected `app.musiclinkd.com` (`musiclinkd-app` / `wugweb-git/musiclinkd-9e6ca875`, `src/lib/help.functions.ts`) to fetch live published pages and guides from `https://musiclinkd.com/wp-json/wp/v2/pages`.
   - Content parsing converts Gutenberg block markup into native app `ContentBlock[]` format, strictly inheriting the mobile app's native typography (`Inter`), colors (`--ink`, `--text-muted-foreground`), and card tokens (`--radius-lg`), preventing style clashes.
   - Built-in zero-downtime fallback to Supabase `cms_pages` table if network is offline.
 - **Repository Consolidation & Cleanup (2026-11-22):**
@@ -158,7 +158,7 @@ propagate what a previous doc says without checking.
   - Established architectural principle: "Supabase as Operational Buffer, WordPress as CMS/CRM". Supabase PostgreSQL handles OLTP transactions (Auth, Bookings, Messaging, Collabs, Marketplace) without synchronous cross-database MySQL coupling; WordPress handles Headless CMS (`/wp-json/wp/v2/pages`), marketing forms (Fluent Forms), and CRM subscribers (FluentCRM) asynchronously via REST and scheduled GitHub Action workers (`scripts/worker_content_sync.py`).
 - **App Ecosystem Hardening, Production Deployment & Infrastructure Audit (2026-11-23 / 2026-11-24):**
   - **Live Deployments Verified:**
-    - `https://app.musiclinkd.com`: Live on Cloudflare Edge / Nitro / Lovable runtime (`musiclinkd-9e6ca875`). Serves React 19 + TanStack Start SSR with responsive layout and Inter fonts (`HTTP/2 200 OK`).
+    - `https://app.musiclinkd.com`: Live on Cloudflare Edge / Nitro / Lovable runtime (`musiclinkd-app`, remote: `wugweb-git/musiclinkd-9e6ca875`). Serves React 19 + TanStack Start SSR with responsive layout and Inter fonts (`HTTP/2 200 OK`).
     - `https://musiclinkd.com`: Live on Hostinger LiteSpeed + hCDN (WordPress FSE theme, `HTTP/2 200 OK`).
     - Headless CMS sync verified via `scripts/worker_content_sync.py`: all 14 canonical slugs returning 200 OK with Gutenberg block content (`docs/logs/sync-health.json`).
   - **Dynamic Identity QR Resolver (`/identity/q/$code`):**
@@ -176,7 +176,7 @@ propagate what a previous doc says without checking.
     - Google Business sync + India Post directory (`api.postalpincode.in`) verified.
     - Payments confirmed deferred as an intentional peer-to-peer agreement model (no in-app payment gateway).
   - **Git Branch Cleanup & Non-Blocking Issue Parking:**
-    - Pruned 79 merged local branches in `musiclinkd-9e6ca875`.
+    - Pruned 79 merged local branches in `musiclinkd-app` (`musiclinkd-9e6ca875`).
     - Verified `p1/bookables` & `p1/facility-to-amenity` are fully contained within `main`.
     - Verified `feat/discover-businesses-feed` is obsolete and superseded by main navigation architecture.
     - Postponed non-blocking `collab_owner_guard` (Issue `SEC-COL-001`, branch `fix/collab-owner-guard`, migration `20261015120000_collab_owner_guard.sql`) into structured log `docs/logs/postponed-issues.json` until Lovable Cloud runs the database migration.

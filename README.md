@@ -69,7 +69,7 @@ previously grew one screen per state.
 | Address | Purpose | Source / Runtime | Status |
 | --- | --- | --- | --- |
 | `musiclinkd.com` | Public marketing website & CMS Hub | WordPress FSE Block Theme (`templates/`, `parts/`) | **Live** (Hostinger LiteSpeed + hCDN) |
-| `app.musiclinkd.com` | Customer PWA & Native App Engine | `musiclinkd-9e6ca875` (React 19 + TanStack Start) | **Live** (Cloudflare Edge / Nitro) |
+| `app.musiclinkd.com` | Customer PWA & Native App Engine | `musiclinkd-app` (remote `musiclinkd-9e6ca875`, React 19 + TanStack Start) | **Live** (Cloudflare Edge / Nitro) |
 | `musiclinkd.com/guide` | The design system reference | `frontend/guide/index.html` | Active |
 | `musiclinkd.com/preview` | Screen preview, flow by flow | `webapp/` | Active |
 | `admin.musiclinkd.com` | Internal operations portal | `admin/` | Active |

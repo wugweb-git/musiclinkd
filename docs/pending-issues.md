@@ -4,7 +4,7 @@ Documented as of 2026-11-22.
 
 ---
 
-## 1. Pending App Codebase Issues (`musiclinkd-9e6ca875`)
+## 1. Pending App Codebase Issues (`musiclinkd-app` / `musiclinkd-9e6ca875`)
 
 | Priority | Issue | Location | Status / Resolution Plan |
 | :--- | :--- | :--- | :--- |
@@ -65,7 +65,7 @@ To ensure zero downtime, zero data corruption, and robust performance, we do **n
 
 | Area / System | Current Status | Details & Engineering Context |
 | :--- | :--- | :--- |
-| **Production Deployments** | ✅ **Live & Verified** | • `https://app.musiclinkd.com`: Cloudflare Edge / Nitro runtime (`musiclinkd-9e6ca875`). `HTTP/2 200 OK`.<br>• `https://musiclinkd.com`: Hostinger LiteSpeed + hCDN (WordPress FSE theme). `HTTP/2 200 OK`.<br>• Headless CMS Sync: All 14 canonical slugs returning HTTP 200 via `scripts/worker_content_sync.py` (`docs/logs/sync-health.json`). |
+| **Production Deployments** | ✅ **Live & Verified** | • `https://app.musiclinkd.com`: Cloudflare Edge / Nitro runtime (`musiclinkd-app` / `musiclinkd-9e6ca875`). `HTTP/2 200 OK`.<br>• `https://musiclinkd.com`: Hostinger LiteSpeed + hCDN (WordPress FSE theme). `HTTP/2 200 OK`.<br>• Headless CMS Sync: All 14 canonical slugs returning HTTP 200 via `scripts/worker_content_sync.py` (`docs/logs/sync-health.json`). |
 | **Server Functions (`src/lib/*.functions.ts`)** | ✅ **100% Real DB Backed** | All 44 server function modules queried against live Supabase PostgreSQL tables (`profiles`, `bookables`, `bookings`, `messages`, `reviews`, `channels`, `escrow_holds`, `rentals`, `bands`). Zero mock stubs, dummy data, or fake "not implemented" throws. |
 | **Dynamic QR Resolver (`/identity/q/$code`)** | ✅ **Resolved & Live** | `resolveDestination` in `src/lib/qr.functions.ts` checks `profiles` by username and `bookables` by slug. Handles active/private/deactivated states, offline network resilience, and demo fallbacks. |
 | **PWA Manifest & Ground Color** | ✅ **Aligned** | `public/manifest.webmanifest` and `src/routes/__root.tsx` aligned to canonical `#F3F1EC` warm ground. |
