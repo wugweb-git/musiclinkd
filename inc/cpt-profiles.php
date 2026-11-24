@@ -180,6 +180,19 @@ function musiclinkd_register_profile_meta() {
         'soundcloud_url'   => 'string',
         'website_url'      => 'string',
         'supabase_id'      => 'string',
+        'app_profile_url'  => 'string',
+        'qr_code_url'      => 'string',
+        'qr_style'         => 'string',
+        'qr_image_url'     => 'string',
+        'discovery_prefs'  => 'string',
+        'work_modes'       => 'string',
+        'intents'          => 'string',
+        'languages'        => 'string',
+        'persona_badges'   => 'string',
+        'trust_badges'     => 'string',
+        'specialisations'  => 'string',
+        'followers_count'  => 'integer',
+        'visibility'       => 'string',
     );
 
     foreach ($meta_fields as $field => $type) {
@@ -294,6 +307,79 @@ function musiclinkd_register_scf_profile_fields() {
                 'label'         => __('Instagram Profile', 'musiclinkd'),
                 'name'          => 'instagram_url',
                 'type'          => 'url',
+            ),
+            array(
+                'key'           => 'field_profile_app_profile_url',
+                'label'         => __('Live App Profile URL', 'musiclinkd'),
+                'name'          => 'app_profile_url',
+                'type'          => 'url',
+            ),
+            array(
+                'key'           => 'field_profile_qr_code_url',
+                'label'         => __('Identity QR Destination', 'musiclinkd'),
+                'name'          => 'qr_code_url',
+                'type'          => 'url',
+            ),
+            array(
+                'key'           => 'field_profile_qr_image_url',
+                'label'         => __('QR Code Image', 'musiclinkd'),
+                'name'          => 'qr_image_url',
+                'type'          => 'url',
+            ),
+            array(
+                'key'           => 'field_profile_qr_style',
+                'label'         => __('QR Style', 'musiclinkd'),
+                'name'          => 'qr_style',
+                'type'          => 'text',
+            ),
+            array(
+                'key'           => 'field_profile_work_modes',
+                'label'         => __('Work Modes', 'musiclinkd'),
+                'name'          => 'work_modes',
+                'type'          => 'text',
+            ),
+            array(
+                'key'           => 'field_profile_intents',
+                'label'         => __('Intents', 'musiclinkd'),
+                'name'          => 'intents',
+                'type'          => 'text',
+            ),
+            array(
+                'key'           => 'field_profile_languages',
+                'label'         => __('Languages', 'musiclinkd'),
+                'name'          => 'languages',
+                'type'          => 'text',
+            ),
+            array(
+                'key'           => 'field_profile_persona_badges',
+                'label'         => __('Persona Badges', 'musiclinkd'),
+                'name'          => 'persona_badges',
+                'type'          => 'text',
+            ),
+            array(
+                'key'           => 'field_profile_trust_badges',
+                'label'         => __('Trust Badges', 'musiclinkd'),
+                'name'          => 'trust_badges',
+                'type'          => 'text',
+            ),
+            array(
+                'key'           => 'field_profile_specialisations',
+                'label'         => __('Specialisations', 'musiclinkd'),
+                'name'          => 'specialisations',
+                'type'          => 'text',
+            ),
+            array(
+                'key'           => 'field_profile_followers_count',
+                'label'         => __('Followers Count', 'musiclinkd'),
+                'name'          => 'followers_count',
+                'type'          => 'number',
+            ),
+            array(
+                'key'           => 'field_profile_discovery_prefs',
+                'label'         => __('Discovery Preferences JSON', 'musiclinkd'),
+                'name'          => 'discovery_prefs',
+                'type'          => 'textarea',
+                'rows'          => 3,
             ),
             array(
                 'key'           => 'field_profile_supabase_id',
@@ -466,6 +552,38 @@ function musiclinkd_handle_ingest_profiles(WP_REST_Request $request) {
         update_post_meta($post_id, 'youtube_url', esc_url_raw($links['youtube'] ?? ''));
         update_post_meta($post_id, 'soundcloud_url', esc_url_raw($links['soundcloud'] ?? ''));
         update_post_meta($post_id, 'website_url', esc_url_raw($links['website'] ?? ''));
+
+        // App Canonical URLs, QR Codes & Preferences
+        $app_profile_url = esc_url_raw('https://app.musiclinkd.com/' . $username);
+        $qr_destination_url = esc_url_raw('https://app.musiclinkd.com/identity/q/' . $username);
+        $qr_image_url = esc_url_raw('https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($qr_destination_url));
+        $qr_style = sanitize_text_field($profile['qr_style'] ?? 'light');
+
+        update_post_meta($post_id, 'app_profile_url', $app_profile_url);
+        update_post_meta($post_id, 'qr_code_url', $qr_destination_url);
+        update_post_meta($post_id, 'qr_image_url', $qr_image_url);
+        update_post_meta($post_id, 'qr_style', $qr_style);
+
+        // Work modes, intents, languages, badges, preferences
+        $work_modes = is_array($profile['work_modes'] ?? null) ? implode(', ', array_map('sanitize_text_field', $profile['work_modes'])) : '';
+        $intents = is_array($profile['intents'] ?? null) ? implode(', ', array_map('sanitize_text_field', $profile['intents'])) : '';
+        $languages = is_array($profile['languages'] ?? null) ? implode(', ', array_map('sanitize_text_field', $profile['languages'])) : '';
+        $persona_badges = is_array($profile['persona_badges'] ?? null) ? implode(', ', array_map('sanitize_text_field', $profile['persona_badges'])) : '';
+        $trust_badges = is_array($profile['trust_badges'] ?? null) ? implode(', ', array_map('sanitize_text_field', $profile['trust_badges'])) : '';
+        $specialisations = is_array($profile['specialisations'] ?? null) ? implode(', ', array_map('sanitize_text_field', $profile['specialisations'])) : '';
+        $discovery_prefs = is_array($profile['discovery_prefs'] ?? null) ? json_encode($profile['discovery_prefs']) : '';
+        $followers_count = intval($profile['followers_count'] ?? 0);
+        $visibility = sanitize_text_field($profile['visibility'] ?? 'public');
+
+        update_post_meta($post_id, 'work_modes', $work_modes);
+        update_post_meta($post_id, 'intents', $intents);
+        update_post_meta($post_id, 'languages', $languages);
+        update_post_meta($post_id, 'persona_badges', $persona_badges);
+        update_post_meta($post_id, 'trust_badges', $trust_badges);
+        update_post_meta($post_id, 'specialisations', $specialisations);
+        update_post_meta($post_id, 'discovery_prefs', $discovery_prefs);
+        update_post_meta($post_id, 'followers_count', $followers_count);
+        update_post_meta($post_id, 'visibility', $visibility);
 
         // Assign Taxonomies
         wp_set_object_terms($post_id, array($user_flow_label), 'user_flow', false);
