@@ -952,25 +952,32 @@ function musiclinkd_handle_fluentcrm_status() {
 
     $fluent_classes = array();
     foreach (array(
-        'FluentCrm\App\Services\Helper',
         'FluentCrm\App\Models\CustomContactField',
-        'FluentCrm\App\Models\Subscriber',
         'FluentCrm\App\Models\Meta',
-        'FluentCrm\App\Api\Classes\Contacts',
     ) as $cls) {
         if (class_exists($cls)) {
             $fluent_classes[$cls] = get_class_methods($cls);
         }
     }
 
+    // Inspect fc_meta table
+    $meta_rows = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}fc_meta LIMIT 50", ARRAY_A);
+
+    $custom_fields_val = null;
+    if (function_exists('fluentcrm_get_custom_contact_fields')) {
+        $custom_fields_val = fluentcrm_get_custom_contact_fields();
+    } elseif (class_exists('FluentCrm\App\Models\CustomContactField')) {
+        $custom_fields_val = \FluentCrm\App\Models\CustomContactField::get();
+    }
+
     return rest_ensure_response(array(
         'fluent_api_exists'   => function_exists('FluentCrmApi'),
         'matched_tables'      => $tables,
         'subscribers_count'   => $sub_count,
-        'options'             => $options,
-        'fluent_classes'      => array_keys($fluent_classes),
-        'helper_methods'      => $fluent_classes['FluentCrm\App\Services\Helper'] ?? null,
-        'cf_route_callback'   => isset($custom_fields_route[0]['callback']) ? (is_array($custom_fields_route[0]['callback']) ? get_class($custom_fields_route[0]['callback'][0]) . '@' . $custom_fields_route[0]['callback'][1] : 'func') : null,
+        'meta_rows'           => $meta_rows,
+        'custom_fields_val'   => $custom_fields_val,
+        'custom_contact_field_methods' => $fluent_classes['FluentCrm\App\Models\CustomContactField'] ?? null,
+        'fc_meta_methods'     => $fluent_classes['FluentCrm\App\Models\Meta'] ?? null,
     ));
 }
 
