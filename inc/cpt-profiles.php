@@ -922,6 +922,81 @@ function musiclinkd_attach_fluentcrm_tags_and_lists($subscriber_id, array $tags,
 }
 
 /**
+ * Ensure FluentCRM Native Custom Contact Fields are registered and synchronized.
+ * This guarantees they appear in /settings/custom_contact_fields and inside
+ * every contact's profile view (#fluentcrm_sub_info_body).
+ */
+function musiclinkd_ensure_fluentcrm_custom_fields() {
+    if (!class_exists('FluentCrm\App\Models\CustomContactField')) {
+        return false;
+    }
+
+    $fields = array(
+        array(
+            'label' => 'Headline / Creative Bio',
+            'slug'  => 'headline',
+            'type'  => 'text',
+        ),
+        array(
+            'label' => 'Session Rate (INR)',
+            'slug'  => 'hourly_rate',
+            'type'  => 'text',
+        ),
+        array(
+            'label' => 'Booking Availability',
+            'slug'  => 'work_availability',
+            'type'  => 'text',
+        ),
+        array(
+            'label' => 'Community Rating',
+            'slug'  => 'rating_reviews',
+            'type'  => 'text',
+        ),
+        array(
+            'label' => 'Live App Profile (@handle)',
+            'slug'  => 'app_profile_url',
+            'type'  => 'text',
+        ),
+        array(
+            'label' => 'QR Identity Pass URL',
+            'slug'  => 'qr_pass_url',
+            'type'  => 'text',
+        ),
+        array(
+            'label' => 'Spotify / Portfolio Link',
+            'slug'  => 'social_link',
+            'type'  => 'text',
+        ),
+        array(
+            'label' => 'Captured Device Platform',
+            'slug'  => 'device_platform',
+            'type'  => 'text',
+        ),
+        array(
+            'label' => 'App Version & Build',
+            'slug'  => 'app_version',
+            'type'  => 'text',
+        ),
+        array(
+            'label' => 'Client Timezone & Locale',
+            'slug'  => 'client_timezone',
+            'type'  => 'text',
+        ),
+        array(
+            'label' => 'QR Identity Resolver Code',
+            'slug'  => 'qr_identity_code',
+            'type'  => 'text',
+        ),
+    );
+
+    $cf_model = new \FluentCrm\App\Models\CustomContactField();
+    $cf_model->saveGlobalFields($fields);
+
+    return $cf_model->getGlobalFields();
+}
+add_action('admin_init', 'musiclinkd_ensure_fluentcrm_custom_fields');
+
+/**
  * Handle GET /wp-json/musiclinkd/v1/fluentcrm-status
  */
 function musiclinkd_handle_fluentcrm_status() {
@@ -930,29 +1005,19 @@ function musiclinkd_handle_fluentcrm_status() {
         $sub_table = $wpdb->prefix . 'fc_subscribers';
         $sub_count = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$sub_table}");
 
-        $methods_info = array();
-        $source_file = '';
-        if (class_exists('FluentCrm\App\Models\CustomContactField')) {
-            $ref = new ReflectionClass('FluentCrm\App\Models\CustomContactField');
-            $source_file = $ref->getFileName();
-            foreach ($ref->getMethods() as $m) {
-                $methods_info[$m->getName()] = array(
-                    'is_static' => $m->isStatic(),
-                );
-            }
-        }
+        // Save & Ensure native custom fields
+        $global_fields = musiclinkd_ensure_fluentcrm_custom_fields();
 
-        // Read source file lines of CustomContactField if available
-        $source_code = '';
-        if ($source_file && file_exists($source_file)) {
-            $source_code = file_get_contents($source_file);
-        }
-
-        $current_fields = function_exists('fluentcrm_get_option') ? fluentcrm_get_option('contact_custom_fields', []) : null;
+        // Query subscriber 138 and 139 meta from wp_fc_subscriber_meta
+        $meta_138 = $wpdb->get_results("SELECT `key`, `value` FROM {$wpdb->prefix}fc_subscriber_meta WHERE subscriber_id = 138", ARRAY_A);
+        $meta_139 = $wpdb->get_results("SELECT `key`, `value` FROM {$wpdb->prefix}fc_subscriber_meta WHERE subscriber_id = 139", ARRAY_A);
 
         return rest_ensure_response(array(
-            'success'        => true,
-            'source_code'    => substr($source_code, 4500, 2000),
+            'success'       => true,
+            'sub_count'     => $sub_count,
+            'global_fields' => $global_fields,
+            'meta_138'      => $meta_138,
+            'meta_139'      => $meta_139,
         ));
     } catch (\Throwable $e) {
         return rest_ensure_response(array(
@@ -1209,58 +1274,6 @@ add_action('admin_footer', function () {
         ?>
         <script>
         (function() {
-            let activeSubscriberId = null;
-
-            function checkAndMountProfileTelemetry() {
-                const hash = window.location.hash || '';
-                const match = hash.match(/#\/subscribers\/(\d+)/);
-                if (!match) return;
-
-                const subscriberId = match[1];
-                const infoBody = document.querySelector('#fluentcrm_sub_info_body');
-                const fallbackContainer = document.querySelector('.fluentcrm_subscriber_info') ||
-                                          document.querySelector('.fc_subscriber_single') ||
-                                          document.querySelector('.fc-subscriber-single');
-
-                const targetEl = infoBody || fallbackContainer;
-                if (!targetEl) return;
-
-                const existingWidget = document.querySelector('#musiclinkd-injected-telemetry-' + subscriberId);
-
-                // If widget already exists and infoBody is present, ensure it's inside infoBody
-                if (existingWidget) {
-                    if (infoBody && !infoBody.contains(existingWidget)) {
-                        infoBody.insertBefore(existingWidget, infoBody.firstChild);
-                    }
-                    return;
-                }
-
-                // If subscriber changed, clear old widget
-                if (activeSubscriberId && activeSubscriberId !== subscriberId) {
-                    const oldWidget = document.querySelector('.musiclinkd-telemetry-container');
-                    if (oldWidget) oldWidget.remove();
-                }
-                activeSubscriberId = subscriberId;
-
-                // Fetch telemetry data from WordPress REST API
-                fetch('/wp-json/musiclinkd/v1/subscriber-widget?id=' + subscriberId)
-                    .then(r => r.json())
-                    .then(data => {
-                        if (!data || !data.html) return;
-                        if (document.querySelector('#musiclinkd-injected-telemetry-' + subscriberId)) return;
-
-                        const container = document.createElement('div');
-                        container.className = 'musiclinkd-telemetry-container';
-                        container.id = 'musiclinkd-injected-telemetry-' + subscriberId;
-                        container.innerHTML = data.html;
-
-                        const curInfoBody = document.querySelector('#fluentcrm_sub_info_body');
-                        const mountPoint = curInfoBody || targetEl;
-                        mountPoint.insertBefore(container, mountPoint.firstChild);
-                    })
-                    .catch(() => {});
-            }
-
             // Relabel "Subscriber" to "Profile" across Vue SPA UI
             function relabelSubscribers() {
                 const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
@@ -1269,8 +1282,7 @@ add_action('admin_footer', function () {
                     if (node.parentElement && (
                         node.parentElement.tagName === 'SCRIPT' || 
                         node.parentElement.tagName === 'STYLE' || 
-                        node.parentElement.isContentEditable ||
-                        node.parentElement.closest('.musiclinkd-crm-widget')
+                        node.parentElement.isContentEditable
                     )) {
                         continue;
                     }
@@ -1282,12 +1294,8 @@ add_action('admin_footer', function () {
                 }
             }
 
-            setInterval(function() {
-                checkAndMountProfileTelemetry();
-                relabelSubscribers();
-            }, 600);
-
-            window.addEventListener('hashchange', checkAndMountProfileTelemetry);
+            setInterval(relabelSubscribers, 500);
+            window.addEventListener('hashchange', relabelSubscribers);
         })();
         </script>
         <?php
@@ -1626,21 +1634,8 @@ function musiclinkd_push_taxonomy_to_supabase($term_id, $tt_id, $taxonomy) {
 function musiclinkd_handle_enrich_fluentcrm_profiles() {
     global $wpdb;
 
-    // 1. Configure custom fields in FluentCRM options
-    $custom_fields = array(
-        array('slug' => 'headline',           'label' => 'Headline / Creative Bio',    'type' => 'text'),
-        array('slug' => 'hourly_rate',        'label' => 'Session Rate (INR)',         'type' => 'text'),
-        array('slug' => 'work_availability',  'label' => 'Booking Availability',       'type' => 'text'),
-        array('slug' => 'rating_reviews',     'label' => 'Community Rating',           'type' => 'text'),
-        array('slug' => 'app_profile_url',    'label' => 'Live App Profile (@handle)', 'type' => 'url'),
-        array('slug' => 'qr_pass_url',       'label' => 'QR Identity Pass URL',       'type' => 'url'),
-        array('slug' => 'social_link',        'label' => 'Spotify / Portfolio Link',   'type' => 'url'),
-        array('slug' => 'device_platform',    'label' => 'Captured Device Platform',   'type' => 'text'),
-        array('slug' => 'app_version',        'label' => 'App Version & Build',        'type' => 'text'),
-        array('slug' => 'client_timezone',    'label' => 'Client Timezone & Locale',   'type' => 'text'),
-        array('slug' => 'qr_identity_code',   'label' => 'QR Identity Resolver Code',  'type' => 'text'),
-    );
-    update_option('fluentcrm_custom_contact_fields', $custom_fields, false);
+    // 1. Configure native custom contact fields in FluentCRM
+    musiclinkd_ensure_fluentcrm_custom_fields();
 
     $subscribers_table = $wpdb->prefix . 'fc_subscribers';
     $meta_table = $wpdb->prefix . 'fc_subscriber_meta';
