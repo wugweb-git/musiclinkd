@@ -222,15 +222,11 @@ propagate what a previous doc says without checking.
     - Updated `inc/engine-dashboard.php` metrics to monitor all 18 canonical pages.
   - **FluentCRM Creator Profiling & Public Profile Architecture (2026-11-25):**
     - Established strict profile routing: Public creator profiles live solely on the web app at `https://app.musiclinkd.com/@username` (routed via TanStack Start `$handle.tsx`). Deleted deprecated WordPress single profile templates (`templates/single-profile.html`) and archive template (`templates/archive-profile.html`). Set `'public' => false` on `profile` CPT and added a 301 redirect from `/profiles/{username}` to `https://app.musiclinkd.com/@{username}`.
-    - Repurposed FluentCRM from a generic newsletter tool into the administrative Creator CRM & Profiling Directory.
-    - Filtered out the term "Subscriber" across FluentCRM via `gettext` and dynamic DOM replacement, substituting it with "Profile" / "Creator Profile".
-    - Configured native FluentCRM Custom Contact Fields (`CustomContactField::saveGlobalFields`) across 6 full operational categories (28 fields) visible in `/settings/custom_contact_fields` and natively in contact details (`#fluentcrm_sub_info_body`):
-      - Onboarding & Identity: User Flow, Disciplines, Genres, City/Location, Work Modes, Languages, Intents.
-      - Profile & Bio: Headline / Creative Bio, Live App Profile (@handle), QR Pass URL, QR Resolver Code, Supabase UUID.
-      - Services & Pricing: Session Rate (INR), Rate Unit, Booking Availability, Specialisations.
-      - Portfolio & Media: Spotify Artist URL, Instagram Profile, Portfolio Link, Audio Stems Player Status.
-      - Trust & Verification: Verification Badge, Community Rating & Reviews, Trust Badges, Followers Count.
-      - Device Telemetry: Captured Device Platform, App Version & Build, Timezone & Locale, Last Session Sync.
+    - Vanilla FluentCRM Configuration (No Overrides):
+      - Zero overrides to FluentCRM core: removed all DOM replacement scripts, gettext label filters, and custom widget hooks so FluentCRM operates 100% stock and native.
+      - Native Custom Contact Fields (`CustomContactField::saveGlobalFields`) registered in `/settings/custom_contact_fields` and displayed in contact details:
+        - Primary App & QR: `Profile URL` (`https://app.musiclinkd.com/@username`), `QR` (`https://app.musiclinkd.com/identity/q/username`).
+        - Profile, Rates & Location: Headline / Bio, Session Rate (INR), Booking Availability, Community Rating, Disciplines, Genres, City, Spotify, Instagram.
     - Synchronized all 139 creators in FluentCRM (`wp_fc_subscribers` & `wp_fc_subscriber_meta`) with complete native custom values. Exported `fluentcrm_contacts_import.csv`.
 
 
