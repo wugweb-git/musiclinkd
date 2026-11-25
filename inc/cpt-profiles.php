@@ -925,67 +925,43 @@ function musiclinkd_attach_fluentcrm_tags_and_lists($subscriber_id, array $tags,
  * Handle GET /wp-json/musiclinkd/v1/fluentcrm-status
  */
 function musiclinkd_handle_fluentcrm_status() {
-    global $wpdb;
-    $fc_tables = $wpdb->get_results("SHOW TABLES LIKE '%fc_%'", ARRAY_N);
-    $fluent_tables = $wpdb->get_results("SHOW TABLES LIKE '%fluent%'", ARRAY_N);
-
-    $tables = array();
-    foreach (array_merge($fc_tables ?: array(), $fluent_tables ?: array()) as $row) {
-        $tables[] = $row[0];
-    }
-    $tables = array_values(array_unique($tables));
-
-    $sub_table = $wpdb->prefix . 'fc_subscribers';
-    $sub_count = 0;
-    if (in_array($sub_table, $tables)) {
+    try {
+        global $wpdb;
+        $sub_table = $wpdb->prefix . 'fc_subscribers';
         $sub_count = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$sub_table}");
-    }
 
-    // Inspect options related to custom fields
-    $options = $wpdb->get_results(
-        "SELECT option_name, option_value FROM {$wpdb->options} WHERE option_name LIKE '%custom_field%' OR option_name LIKE '%fluentcrm_contact%' LIMIT 20",
-        ARRAY_A
-    );
-
-    $routes = rest_get_server()->get_routes();
-    $custom_fields_route = $routes['/fluent-crm/v2/custom-fields/contacts'] ?? null;
-
-    $fluent_classes = array();
-    foreach (array(
-        'FluentCrm\App\Models\CustomContactField',
-        'FluentCrm\App\Models\Meta',
-    ) as $cls) {
-        if (class_exists($cls)) {
-            $fluent_classes[$cls] = get_class_methods($cls);
+        $methods_info = array();
+        $source_file = '';
+        if (class_exists('FluentCrm\App\Models\CustomContactField')) {
+            $ref = new ReflectionClass('FluentCrm\App\Models\CustomContactField');
+            $source_file = $ref->getFileName();
+            foreach ($ref->getMethods() as $m) {
+                $methods_info[$m->getName()] = array(
+                    'is_static' => $m->isStatic(),
+                );
+            }
         }
-    }
 
-    // Inspect fc_meta table
-    $meta_rows = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}fc_meta LIMIT 50", ARRAY_A);
-
-    $custom_fields_val = null;
-    if (function_exists('fluentcrm_get_custom_contact_fields')) {
-        $custom_fields_val = fluentcrm_get_custom_contact_fields();
-    } elseif (class_exists('FluentCrm\App\Models\CustomContactField')) {
-        $custom_fields_val = \FluentCrm\App\Models\CustomContactField::get();
-    }
-
-    $methods_info = array();
-    if (class_exists('FluentCrm\App\Models\CustomContactField')) {
-        $ref = new ReflectionClass('FluentCrm\App\Models\CustomContactField');
-        foreach ($ref->getMethods() as $m) {
-            $methods_info[$m->getName()] = array(
-                'is_static' => $m->isStatic(),
-                'params'    => array_map(function ($p) { return $p->getName(); }, $m->getParameters()),
-            );
+        // Read source file lines of CustomContactField if available
+        $source_code = '';
+        if ($source_file && file_exists($source_file)) {
+            $source_code = file_get_contents($source_file);
         }
-    }
 
-    return rest_ensure_response(array(
-        'fluent_api_exists'   => function_exists('FluentCrmApi'),
-        'subscribers_count'   => $sub_count,
-        'methods_info'        => $methods_info,
-    ));
+        return rest_ensure_response(array(
+            'success'      => true,
+            'sub_count'    => $sub_count,
+            'source_file'  => $source_file,
+            'source_code'  => substr($source_code, 0, 3000),
+            'methods_info' => $methods_info,
+        ));
+    } catch (\Throwable $e) {
+        return rest_ensure_response(array(
+            'error' => $e->getMessage(),
+            'file'  => $e->getFile(),
+            'line'  => $e->getLine(),
+        ));
+    }
 }
 
 /**
