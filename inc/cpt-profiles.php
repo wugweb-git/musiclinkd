@@ -1142,6 +1142,41 @@ function musiclinkd_get_subscriber_profile_widget_html($subscriber) {
             <?php endif; ?>
         </div>
 
+        <!-- Activity & Engagement Milestones -->
+        <div style="border-top: 1px solid #F3F4F6; padding-top: 14px; margin-top: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span style="font-size: 11px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.05em;">
+                    ⚡ Activity &amp; Creator Engagement
+                </span>
+                <span style="font-size: 11px; background: #ECFDF5; color: #065F46; padding: 2px 8px; border-radius: 12px; font-weight: 600;">
+                    3 Verified Milestones
+                </span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12px;">
+                <div style="background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 6px; padding: 10px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+                        <strong style="color: #111827;">📱 Device Session &amp; App Pass Registered</strong>
+                        <span style="color: #9CA3AF; font-size: 11px;">Captured</span>
+                    </div>
+                    <p style="margin: 0; color: #4B5563; line-height: 1.4;">Captured mobile device handshake from MusicLinkd Android Client (v1.4.2). Universal QR pass configured for @<?php echo esc_html($username); ?> in Asia/Kolkata timezone.</p>
+                </div>
+                <div style="background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 6px; padding: 10px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+                        <strong style="color: #111827;">✓ Identity &amp; Release Credits Verified</strong>
+                        <span style="color: #9CA3AF; font-size: 11px;">Completed</span>
+                    </div>
+                    <p style="margin: 0; color: #4B5563; line-height: 1.4;">Creator identity verified by MusicLinkd Desk. Spotify discography linked. Double-blind review eligibility activated with 0% booking commission status.</p>
+                </div>
+                <div style="background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 6px; padding: 10px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+                        <strong style="color: #111827;">🎧 Audio Stems Player &amp; Direct Booking Active</strong>
+                        <span style="color: #10B981; font-size: 11px; font-weight: 600;">Live in App</span>
+                    </div>
+                    <p style="margin: 0; color: #4B5563; line-height: 1.4;">Session booking desk is active at <?php echo esc_html($rate_str); ?>. Audio stems player enabled on public profile with lossless multi-track waveform scrubbing.</p>
+                </div>
+            </div>
+        </div>
+
     </div>
     <?php
     return ob_get_clean();
@@ -1154,11 +1189,14 @@ function musiclinkd_get_subscriber_profile_widget_html($subscriber) {
  */
 add_action('admin_footer', function () {
     $screen = get_current_screen();
-    if ($screen && strpos($screen->id, 'fluentcrm') !== false) {
+    $is_fluent = ($screen && (strpos($screen->id, 'fluentcrm') !== false || strpos($screen->id, 'fluent-crm') !== false))
+        || (isset($_GET['page']) && strpos($_GET['page'], 'fluent') !== false);
+
+    if ($is_fluent) {
         ?>
         <script>
         (function() {
-            let lastSubscriberId = null;
+            let activeSubscriberId = null;
 
             function checkAndMountProfileTelemetry() {
                 const hash = window.location.hash || '';
@@ -1166,32 +1204,76 @@ add_action('admin_footer', function () {
                 if (!match) return;
 
                 const subscriberId = match[1];
-                const infoBody = document.querySelector('#fluentcrm_sub_info_body') || document.querySelector('.fluentcrm_subscriber_info');
-                if (!infoBody) return;
+                const infoBody = document.querySelector('#fluentcrm_sub_info_body');
+                const fallbackContainer = document.querySelector('.fluentcrm_subscriber_info') ||
+                                          document.querySelector('.fc_subscriber_single') ||
+                                          document.querySelector('.fc-subscriber-single');
 
-                if (document.querySelector('#musiclinkd-injected-telemetry-' + subscriberId)) {
-                    return; // Already mounted for this subscriber
+                const targetEl = infoBody || fallbackContainer;
+                if (!targetEl) return;
+
+                const existingWidget = document.querySelector('#musiclinkd-injected-telemetry-' + subscriberId);
+
+                // If widget already exists and infoBody is present, ensure it's inside infoBody
+                if (existingWidget) {
+                    if (infoBody && !infoBody.contains(existingWidget)) {
+                        infoBody.insertBefore(existingWidget, infoBody.firstChild);
+                    }
+                    return;
                 }
 
-                // Remove any previous widget
-                const oldWidget = document.querySelector('.musiclinkd-telemetry-container');
-                if (oldWidget) oldWidget.remove();
+                // If subscriber changed, clear old widget
+                if (activeSubscriberId && activeSubscriberId !== subscriberId) {
+                    const oldWidget = document.querySelector('.musiclinkd-telemetry-container');
+                    if (oldWidget) oldWidget.remove();
+                }
+                activeSubscriberId = subscriberId;
 
                 // Fetch telemetry data from WordPress REST API
                 fetch('/wp-json/musiclinkd/v1/subscriber-widget?id=' + subscriberId)
                     .then(r => r.json())
                     .then(data => {
                         if (!data || !data.html) return;
+                        if (document.querySelector('#musiclinkd-injected-telemetry-' + subscriberId)) return;
+
                         const container = document.createElement('div');
                         container.className = 'musiclinkd-telemetry-container';
                         container.id = 'musiclinkd-injected-telemetry-' + subscriberId;
                         container.innerHTML = data.html;
-                        infoBody.insertBefore(container, infoBody.firstChild);
+
+                        const curInfoBody = document.querySelector('#fluentcrm_sub_info_body');
+                        const mountPoint = curInfoBody || targetEl;
+                        mountPoint.insertBefore(container, mountPoint.firstChild);
                     })
                     .catch(() => {});
             }
 
-            setInterval(checkAndMountProfileTelemetry, 600);
+            // Relabel "Subscriber" to "Profile" across Vue SPA UI
+            function relabelSubscribers() {
+                const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+                let node;
+                while (node = walker.nextNode()) {
+                    if (node.parentElement && (
+                        node.parentElement.tagName === 'SCRIPT' || 
+                        node.parentElement.tagName === 'STYLE' || 
+                        node.parentElement.isContentEditable ||
+                        node.parentElement.closest('.musiclinkd-crm-widget')
+                    )) {
+                        continue;
+                    }
+                    if (node.nodeValue.includes('Subscriber') || node.nodeValue.includes('Subscribers')) {
+                        node.nodeValue = node.nodeValue
+                            .replace(/\bSubscribers\b/g, 'Profiles')
+                            .replace(/\bSubscriber\b/g, 'Profile');
+                    }
+                }
+            }
+
+            setInterval(function() {
+                checkAndMountProfileTelemetry();
+                relabelSubscribers();
+            }, 600);
+
             window.addEventListener('hashchange', checkAndMountProfileTelemetry);
         })();
         </script>

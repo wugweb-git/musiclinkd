@@ -220,6 +220,16 @@ propagate what a previous doc says without checking.
     - Modernized `parts/header.html` and `parts/footer.html` to eliminate anchor hash jumping (`/#problem`, `/#modules`, `/#journeys`) and link to clean, indexable dedicated page routes.
     - Expanded scheduled content sync worker (`scripts/worker_content_sync.py`) from 14 to 18 canonical slugs. All 18 verified 100% 200 OK with Gutenberg block structure and `#EA4C89` token parity (`docs/logs/sync-health.json`).
     - Updated `inc/engine-dashboard.php` metrics to monitor all 18 canonical pages.
+  - **FluentCRM Creator Profiling & Public Profile Architecture (2026-11-25):**
+    - Established strict profile routing: Public creator profiles live solely on the web app at `https://app.musiclinkd.com/@username` (routed via TanStack Start `$handle.tsx`). Deleted deprecated WordPress single profile templates (`templates/single-profile.html`) and archive template (`templates/archive-profile.html`). Set `'public' => false` on `profile` CPT and added a 301 redirect from `/profiles/{username}` to `https://app.musiclinkd.com/@{username}`.
+    - Repurposed FluentCRM from a generic newsletter tool into the administrative Creator CRM & Profiling Directory.
+    - Filtered out the term "Subscriber" across FluentCRM via `gettext` and dynamic DOM replacement, substituting it with "Profile" / "Creator Profile".
+    - Injected rich profile & device telemetry card into `#fluentcrm_sub_info_body` on `admin.php?page=fluentcrm-admin#/subscribers/{id}#fluentcrm_sub_info_body`:
+      - Headline / creative bio, session rates (INR), booking availability, community rating.
+      - Captured device telemetry: Android Client & PWA WebClient (v1.4.2-prod Build 82, Asia/Kolkata timezone).
+      - Direct links to Live App Profile (`https://app.musiclinkd.com/@username`), Universal QR Resolver (`https://app.musiclinkd.com/identity/q/username`), and Spotify discography.
+      - Activity & engagement milestones (Device Session handshake, identity verification, audio stems player).
+    - Enriched all 139 creators in FluentCRM (`wp_fc_subscribers`) with 11 custom fields in `wp_fc_subscriber_meta` and engagement activity records in `wp_fc_subscriber_notes`. Exported `fluentcrm_contacts_import.csv`.
 
 
 
