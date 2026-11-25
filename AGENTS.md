@@ -210,6 +210,16 @@ propagate what a previous doc says without checking.
     - Established core rule: Supabase acts as the live operational buffer for `musiclinkd-app` (low-latency mobile transactions, JWT auth, and realtime events).
     - In the end, all data lands canonically in WordPress (`musiclinkd.com`): customer directory records (`profile` CPT + SCF), published CMS pages (`wp_posts`), and CRM marketing (`FluentCRM`).
     - Pinned administrative notice on `/wp-admin/edit.php?post_type=profile` to enforce clear distinction between customer app profiles and WordPress staff/administrator accounts.
+  - **Information Architecture Remediation & Dedicated Page Splitting (2026-11-25):**
+    - Streamlined monolithic 17-section home page in `patterns/landing.php` down to a high-converting 6-section core: Hero, Problem & 3 Pillars, Personas, Product Screens Showcase, Creator Rights Guarantee & Trust, and Final Waitlist CTA.
+    - Created 4 dedicated Gutenberg pages via REST API with canonical `#EA4C89` token parity:
+      - `/features/` (ID 396): Complete breakdown of all 6 platform modules, stems player, QR identity, and studio desk.
+      - `/how-it-works/` (ID 397): Step-by-step interactive workflows for Talent, Studios, and Clients.
+      - `/faq/` (ID 398): Categorized FAQ covering accounts, verification, bookings, escrow, and payments.
+      - `/safety/` (ID 399): Trust, safety, double-blind reviews, and the "Your Work Stays Yours" creator guarantee.
+    - Modernized `parts/header.html` and `parts/footer.html` to eliminate anchor hash jumping (`/#problem`, `/#modules`, `/#journeys`) and link to clean, indexable dedicated page routes.
+    - Expanded scheduled content sync worker (`scripts/worker_content_sync.py`) from 14 to 18 canonical slugs. All 18 verified 100% 200 OK with Gutenberg block structure and `#EA4C89` token parity (`docs/logs/sync-health.json`).
+    - Updated `inc/engine-dashboard.php` metrics to monitor all 18 canonical pages.
 
 
 

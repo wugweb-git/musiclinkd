@@ -22,6 +22,10 @@ INGEST_USER = os.environ.get("WP_INGEST_USER", "ingest")
 INGEST_PASS = os.environ.get("WP_INGEST_PASS", "")
 
 CANONICAL_SLUGS = [
+    "features",
+    "how-it-works",
+    "faq",
+    "safety",
     "help",
     "contact",
     "about",

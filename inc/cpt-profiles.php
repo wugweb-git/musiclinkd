@@ -424,6 +424,20 @@ add_action('rest_api_init', function () {
             return current_user_can('edit_pages');
         },
     ));
+    register_rest_route('musiclinkd/v1', '/fluentcrm-status', array(
+        'methods'             => array('GET'),
+        'callback'            => 'musiclinkd_handle_fluentcrm_status',
+        'permission_callback' => function () {
+            return current_user_can('edit_pages');
+        },
+    ));
+    register_rest_route('musiclinkd/v1', '/sync-fluentcrm', array(
+        'methods'             => array('POST'),
+        'callback'            => 'musiclinkd_handle_sync_fluentcrm',
+        'permission_callback' => function () {
+            return current_user_can('edit_pages');
+        },
+    ));
 });
 
 /**
@@ -696,12 +710,11 @@ function musiclinkd_handle_ingest_profiles(WP_REST_Request $request) {
 function musiclinkd_sync_profile_to_fluentcrm($profile, $user_flow_label) {
     global $wpdb;
 
-    $subscribers_table = $wpdb->prefix . 'fluentcrm_subscribers';
-    if ($wpdb->get_var("SHOW TABLES LIKE '{$subscribers_table}'") !== $subscribers_table) {
+    $username = sanitize_title($profile['username'] ?? '');
+    if (empty($username)) {
         return false;
     }
 
-    $username = sanitize_title($profile['username'] ?? '');
     $email = strtolower($username . '@users.musiclinkd.com');
     $first_name = sanitize_text_field($profile['first_name'] ?? '');
     $last_name = sanitize_text_field($profile['last_name'] ?? '');
@@ -717,10 +730,72 @@ function musiclinkd_sync_profile_to_fluentcrm($profile, $user_flow_label) {
     $state = sanitize_text_field($profile['state'] ?? '');
     $country = sanitize_text_field($profile['country'] ?? 'India');
     $avatar = esc_url_raw($profile['avatar_url'] ?? '');
+    $contact_type = $user_flow_label === 'Business' ? 'lead' : 'customer';
+
+    // Tags to apply for profiling
+    $tags = array($user_flow_label);
+    if (!empty($profile['person_type'])) {
+        $tags[] = ucwords(str_replace('_', ' ', $profile['person_type']));
+    }
+    if (!empty($profile['roles']) && is_array($profile['roles'])) {
+        foreach ($profile['roles'] as $r) {
+            $tags[] = ucwords(str_replace('_', ' ', $r));
+        }
+    }
+    if (!empty($profile['genres']) && is_array($profile['genres'])) {
+        foreach (array_slice($profile['genres'], 0, 3) as $g) {
+            $tags[] = ucwords(str_replace('_', ' ', $g));
+        }
+    }
+    if (!empty($profile['is_verified'])) {
+        $tags[] = 'Verified Creator';
+    }
+    if ($city) {
+        $tags[] = $city;
+    }
+    $tags = array_values(array_unique(array_filter($tags)));
+
+    $list_name = ($user_flow_label === 'Business') ? 'Music Businesses & Studios' : 'Talent Creators';
+
+    // 1. Try FluentCrmApi first if loaded
+    if (function_exists('FluentCrmApi')) {
+        try {
+            $contact_api = FluentCrmApi('contacts');
+            $data = array(
+                'email'        => $email,
+                'first_name'   => $first_name,
+                'last_name'    => $last_name,
+                'status'       => 'subscribed',
+                'contact_type' => $contact_type,
+                'city'         => $city,
+                'state'        => $state,
+                'country'      => $country,
+                'avatar'       => $avatar,
+                'source'       => 'musiclinkd_app_sync',
+                'tags'         => $tags,
+                'lists'        => array($list_name),
+            );
+            $contact = $contact_api->createOrUpdate($data);
+            if ($contact && !empty($contact->id)) {
+                return true;
+            }
+        } catch (\Exception $e) {
+            // Fall through to direct table sync
+        }
+    }
+
+    // 2. Direct database table sync (works in headless/REST context)
+    $subscribers_table = $wpdb->prefix . 'fc_subscribers';
+    if ($wpdb->get_var("SHOW TABLES LIKE '{$subscribers_table}'") !== $subscribers_table) {
+        $alt_table = $wpdb->prefix . 'fluentcrm_subscribers';
+        if ($wpdb->get_var("SHOW TABLES LIKE '{$alt_table}'") === $alt_table) {
+            $subscribers_table = $alt_table;
+        } else {
+            return false;
+        }
+    }
 
     $now = current_time('mysql', 1);
-
-    // Check if subscriber already exists
     $existing = $wpdb->get_row($wpdb->prepare(
         "SELECT id FROM {$subscribers_table} WHERE email = %s LIMIT 1",
         $email
@@ -731,7 +806,7 @@ function musiclinkd_sync_profile_to_fluentcrm($profile, $user_flow_label) {
         'last_name'    => $last_name,
         'email'        => $email,
         'status'       => 'subscribed',
-        'contact_type' => $user_flow_label === 'Business' ? 'lead' : 'customer',
+        'contact_type' => $contact_type,
         'city'         => $city,
         'state'        => $state,
         'country'      => $country,
@@ -749,7 +824,182 @@ function musiclinkd_sync_profile_to_fluentcrm($profile, $user_flow_label) {
         $subscriber_id = $wpdb->insert_id;
     }
 
+    if ($subscriber_id) {
+        musiclinkd_attach_fluentcrm_tags_and_lists($subscriber_id, $tags, $list_name);
+    }
+
     return boolval($subscriber_id);
+}
+
+/**
+ * Attach tags and list to a subscriber in FluentCRM database tables.
+ */
+function musiclinkd_attach_fluentcrm_tags_and_lists($subscriber_id, array $tags, $list_name) {
+    global $wpdb;
+
+    $pivot_table = $wpdb->prefix . 'fc_subscriber_pivot';
+    $tags_table = $wpdb->prefix . 'fc_tags';
+    $lists_table = $wpdb->prefix . 'fc_lists';
+
+    if ($wpdb->get_var("SHOW TABLES LIKE '{$pivot_table}'") !== $pivot_table) {
+        return;
+    }
+
+    $now = current_time('mysql', 1);
+
+    // 1. Process List
+    if ($list_name && $wpdb->get_var("SHOW TABLES LIKE '{$lists_table}'") === $lists_table) {
+        $list_slug = sanitize_title($list_name);
+        $list_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM {$lists_table} WHERE slug = %s LIMIT 1", $list_slug));
+        if (!$list_id) {
+            $wpdb->insert($lists_table, array(
+                'title'      => $list_name,
+                'slug'       => $list_slug,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ));
+            $list_id = $wpdb->insert_id;
+        }
+
+        if ($list_id) {
+            $has_list = $wpdb->get_var($wpdb->prepare(
+                "SELECT id FROM {$pivot_table} WHERE subscriber_id = %d AND object_id = %d AND object_type = 'FluentCrm\\\\App\\\\Models\\\\Lists' LIMIT 1",
+                $subscriber_id,
+                $list_id
+            ));
+            if (!$has_list) {
+                $wpdb->insert($pivot_table, array(
+                    'subscriber_id' => $subscriber_id,
+                    'object_id'     => $list_id,
+                    'object_type'   => 'FluentCrm\\App\\Models\\Lists',
+                    'created_at'    => $now,
+                    'updated_at'    => $now,
+                ));
+            }
+        }
+    }
+
+    // 2. Process Tags
+    if (!empty($tags) && $wpdb->get_var("SHOW TABLES LIKE '{$tags_table}'") === $tags_table) {
+        foreach ($tags as $tag_title) {
+            $tag_slug = sanitize_title($tag_title);
+            if (empty($tag_slug)) continue;
+
+            $tag_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM {$tags_table} WHERE slug = %s LIMIT 1", $tag_slug));
+            if (!$tag_id) {
+                $wpdb->insert($tags_table, array(
+                    'title'      => $tag_title,
+                    'slug'       => $tag_slug,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ));
+                $tag_id = $wpdb->insert_id;
+            }
+
+            if ($tag_id) {
+                $has_tag = $wpdb->get_var($wpdb->prepare(
+                    "SELECT id FROM {$pivot_table} WHERE subscriber_id = %d AND object_id = %d AND object_type = 'FluentCrm\\\\App\\\\Models\\\\Tag' LIMIT 1",
+                    $subscriber_id,
+                    $tag_id
+                ));
+                if (!$has_tag) {
+                    $wpdb->insert($pivot_table, array(
+                        'subscriber_id' => $subscriber_id,
+                        'object_id'     => $tag_id,
+                        'object_type'   => 'FluentCrm\\App\\Models\\Tag',
+                        'created_at'    => $now,
+                        'updated_at'    => $now,
+                    ));
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Handle GET /wp-json/musiclinkd/v1/fluentcrm-status
+ */
+function musiclinkd_handle_fluentcrm_status() {
+    global $wpdb;
+    $fc_tables = $wpdb->get_results("SHOW TABLES LIKE '%fc_%'", ARRAY_N);
+    $fluent_tables = $wpdb->get_results("SHOW TABLES LIKE '%fluent%'", ARRAY_N);
+
+    $tables = array();
+    foreach (array_merge($fc_tables ?: array(), $fluent_tables ?: array()) as $row) {
+        $tables[] = $row[0];
+    }
+    $tables = array_values(array_unique($tables));
+
+    $sub_table = $wpdb->prefix . 'fc_subscribers';
+    $sub_count = 0;
+    if (in_array($sub_table, $tables)) {
+        $sub_count = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$sub_table}");
+    }
+
+    return rest_ensure_response(array(
+        'fluent_api_exists' => function_exists('FluentCrmApi'),
+        'matched_tables'    => $tables,
+        'subscribers_count' => $sub_count,
+    ));
+}
+
+/**
+ * Handle POST /wp-json/musiclinkd/v1/sync-fluentcrm
+ * Pushes profiles into FluentCRM contacts with tags and lists for profiling.
+ */
+function musiclinkd_handle_sync_fluentcrm(WP_REST_Request $request) {
+    global $wpdb;
+    $body = $request->get_json_params();
+
+    $profiles = array();
+    if (!empty($body['profiles']) && is_array($body['profiles'])) {
+        $profiles = $body['profiles'];
+    } else {
+        // Fallback: Read all existing 'profile' post types in WordPress
+        $posts = get_posts(array(
+            'post_type'      => 'profile',
+            'posts_per_page' => -1,
+            'post_status'    => 'publish',
+        ));
+        foreach ($posts as $p) {
+            $flows = wp_get_object_terms($p->ID, 'user_flow', array('fields' => 'slugs'));
+            $is_biz = in_array('business_user', $flows);
+            $roles = wp_get_object_terms($p->ID, 'person_type', array('fields' => 'names'));
+            $genres = wp_get_object_terms($p->ID, 'genre', array('fields' => 'names'));
+            $city = get_post_meta($p->ID, 'area', true) ?: '';
+            if (!$city) {
+                $cities = wp_get_object_terms($p->ID, 'city', array('fields' => 'names'));
+                $city = !empty($cities) ? $cities[0] : '';
+            }
+
+            $profiles[] = array(
+                'username'     => $p->post_name,
+                'display_name' => $p->post_title,
+                'city'         => $city,
+                'is_verified'  => (bool) get_post_meta($p->ID, 'is_verified', true),
+                'roles'        => $roles,
+                'genres'       => $genres,
+                'avatar_url'   => get_post_meta($p->ID, 'avatar_url', true),
+                'user_flow'    => $is_biz ? 'business_user' : 'talent_user',
+            );
+        }
+    }
+
+    $synced = 0;
+    foreach ($profiles as $profile) {
+        $is_biz = ($profile['user_flow'] ?? '') === 'business_user';
+        $flow_label = $is_biz ? 'Business' : 'Talent';
+        if (musiclinkd_sync_profile_to_fluentcrm($profile, $flow_label)) {
+            $synced++;
+        }
+    }
+
+    return rest_ensure_response(array(
+        'success'        => true,
+        'total_profiles' => count($profiles),
+        'synced_to_crm'  => $synced,
+        'timestamp'      => current_time('mysql', 1),
+    ));
 }
 
 /**

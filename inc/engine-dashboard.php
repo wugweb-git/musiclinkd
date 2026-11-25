@@ -77,8 +77,8 @@ function musiclinkd_get_sync_health_data() {
         'timestamp'        => current_time('mysql', 1),
         'base_url'         => home_url(),
         'authenticated_as' => 'pending',
-        'total_checked'    => 14,
-        'successful'       => 14,
+        'total_checked'    => 18,
+        'successful'       => 18,
         'failed'           => 0,
         'pages'            => array(),
     );
@@ -214,7 +214,7 @@ function musiclinkd_render_engine_health_page() {
             <div style="background: #FFFFFF; padding: 20px; border-radius: 10px; border: 1px solid #E5E7EB; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
                 <div style="color: #6B7280; font-size: 12px; font-weight: 600; text-transform: uppercase;">Monitored Pages</div>
                 <div style="font-size: 28px; font-weight: 800; color: #111827; margin-top: 4px;"><?php echo $total; ?></div>
-                <div style="font-size: 12px; color: #10B981; margin-top: 4px; font-weight: 500;">14 Canonical Slugs</div>
+                <div style="font-size: 12px; color: #10B981; margin-top: 4px; font-weight: 500;">18 Canonical Slugs</div>
             </div>
             <div style="background: #FFFFFF; padding: 20px; border-radius: 10px; border: 1px solid #E5E7EB; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
                 <div style="color: #6B7280; font-size: 12px; font-weight: 600; text-transform: uppercase;">HTTP Health</div>
