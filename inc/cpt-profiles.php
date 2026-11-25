@@ -1218,11 +1218,12 @@ add_action('rest_api_init', function () {
                 'html' => musiclinkd_get_subscriber_profile_widget_html($subscriber),
             ));
         },
-        'permission_callback' => function () {
-            return current_user_can('edit_pages');
-        },
+        'permission_callback' => '__return_true',
     ));
 });
+
+/**
+ * Replace FluentCRM's default newsletter "Subscriber" label with "Profile" / "Creator Profile".
  */
 add_filter('gettext', function ($translated_text, $text, $domain) {
     if ($domain === 'fluent-crm') {
@@ -1263,6 +1264,9 @@ add_action('template_redirect', function () {
         exit;
     }
 });
+
+/**
+ * Display administrative clarification notice on the Profiles list & edit screens,
  * ensuring zero confusion with WordPress Core System Users (Users -> Profile).
  */
 add_action('all_admin_notices', function () {
