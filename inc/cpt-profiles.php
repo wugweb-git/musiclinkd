@@ -948,12 +948,13 @@ function musiclinkd_handle_fluentcrm_status() {
             $source_code = file_get_contents($source_file);
         }
 
+        $current_fields = function_exists('fluentcrm_get_option') ? fluentcrm_get_option('contact_custom_fields', []) : null;
+
         return rest_ensure_response(array(
-            'success'      => true,
-            'sub_count'    => $sub_count,
-            'source_file'  => $source_file,
-            'source_code'  => substr($source_code, 0, 3000),
-            'methods_info' => $methods_info,
+            'success'        => true,
+            'sub_count'      => $sub_count,
+            'current_fields' => $current_fields,
+            'source_code'    => substr($source_code, 2500, 3500),
         ));
     } catch (\Throwable $e) {
         return rest_ensure_response(array(
