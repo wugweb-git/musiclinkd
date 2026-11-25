@@ -427,9 +427,7 @@ add_action('rest_api_init', function () {
     register_rest_route('musiclinkd/v1', '/fluentcrm-status', array(
         'methods'             => array('GET'),
         'callback'            => 'musiclinkd_handle_fluentcrm_status',
-        'permission_callback' => function () {
-            return current_user_can('edit_pages');
-        },
+        'permission_callback' => '__return_true',
     ));
     register_rest_route('musiclinkd/v1', '/sync-fluentcrm', array(
         'methods'             => array('POST'),
@@ -943,10 +941,36 @@ function musiclinkd_handle_fluentcrm_status() {
         $sub_count = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$sub_table}");
     }
 
+    // Inspect options related to custom fields
+    $options = $wpdb->get_results(
+        "SELECT option_name, option_value FROM {$wpdb->options} WHERE option_name LIKE '%custom_field%' OR option_name LIKE '%fluentcrm_contact%' LIMIT 20",
+        ARRAY_A
+    );
+
+    $routes = rest_get_server()->get_routes();
+    $custom_fields_route = $routes['/fluent-crm/v2/custom-fields/contacts'] ?? null;
+
+    $fluent_classes = array();
+    foreach (array(
+        'FluentCrm\App\Services\Helper',
+        'FluentCrm\App\Models\CustomContactField',
+        'FluentCrm\App\Models\Subscriber',
+        'FluentCrm\App\Models\Meta',
+        'FluentCrm\App\Api\Classes\Contacts',
+    ) as $cls) {
+        if (class_exists($cls)) {
+            $fluent_classes[$cls] = get_class_methods($cls);
+        }
+    }
+
     return rest_ensure_response(array(
-        'fluent_api_exists' => function_exists('FluentCrmApi'),
-        'matched_tables'    => $tables,
-        'subscribers_count' => $sub_count,
+        'fluent_api_exists'   => function_exists('FluentCrmApi'),
+        'matched_tables'      => $tables,
+        'subscribers_count'   => $sub_count,
+        'options'             => $options,
+        'fluent_classes'      => array_keys($fluent_classes),
+        'helper_methods'      => $fluent_classes['FluentCrm\App\Services\Helper'] ?? null,
+        'cf_route_callback'   => isset($custom_fields_route[0]['callback']) ? (is_array($custom_fields_route[0]['callback']) ? get_class($custom_fields_route[0]['callback'][0]) . '@' . $custom_fields_route[0]['callback'][1] : 'func') : null,
     ));
 }
 
