@@ -224,12 +224,14 @@ propagate what a previous doc says without checking.
     - Established strict profile routing: Public creator profiles live solely on the web app at `https://app.musiclinkd.com/@username` (routed via TanStack Start `$handle.tsx`). Deleted deprecated WordPress single profile templates (`templates/single-profile.html`) and archive template (`templates/archive-profile.html`). Set `'public' => false` on `profile` CPT and added a 301 redirect from `/profiles/{username}` to `https://app.musiclinkd.com/@{username}`.
     - Repurposed FluentCRM from a generic newsletter tool into the administrative Creator CRM & Profiling Directory.
     - Filtered out the term "Subscriber" across FluentCRM via `gettext` and dynamic DOM replacement, substituting it with "Profile" / "Creator Profile".
-    - Injected rich profile & device telemetry card into `#fluentcrm_sub_info_body` on `admin.php?page=fluentcrm-admin#/subscribers/{id}#fluentcrm_sub_info_body`:
-      - Headline / creative bio, session rates (INR), booking availability, community rating.
-      - Captured device telemetry: Android Client & PWA WebClient (v1.4.2-prod Build 82, Asia/Kolkata timezone).
-      - Direct links to Live App Profile (`https://app.musiclinkd.com/@username`), Universal QR Resolver (`https://app.musiclinkd.com/identity/q/username`), and Spotify discography.
-      - Activity & engagement milestones (Device Session handshake, identity verification, audio stems player).
-    - Enriched all 139 creators in FluentCRM (`wp_fc_subscribers`) with 11 custom fields in `wp_fc_subscriber_meta` and engagement activity records in `wp_fc_subscriber_notes`. Exported `fluentcrm_contacts_import.csv`.
+    - Configured native FluentCRM Custom Contact Fields (`CustomContactField::saveGlobalFields`) across 6 full operational categories (28 fields) visible in `/settings/custom_contact_fields` and natively in contact details (`#fluentcrm_sub_info_body`):
+      - Onboarding & Identity: User Flow, Disciplines, Genres, City/Location, Work Modes, Languages, Intents.
+      - Profile & Bio: Headline / Creative Bio, Live App Profile (@handle), QR Pass URL, QR Resolver Code, Supabase UUID.
+      - Services & Pricing: Session Rate (INR), Rate Unit, Booking Availability, Specialisations.
+      - Portfolio & Media: Spotify Artist URL, Instagram Profile, Portfolio Link, Audio Stems Player Status.
+      - Trust & Verification: Verification Badge, Community Rating & Reviews, Trust Badges, Followers Count.
+      - Device Telemetry: Captured Device Platform, App Version & Build, Timezone & Locale, Last Session Sync.
+    - Synchronized all 139 creators in FluentCRM (`wp_fc_subscribers` & `wp_fc_subscriber_meta`) with complete native custom values. Exported `fluentcrm_contacts_import.csv`.
 
 
 
