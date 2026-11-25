@@ -1121,6 +1121,7 @@ function musiclinkd_handle_fluentcrm_status() {
             'sub_count'     => $sub_count,
             'enriched'      => $enriched,
             'fields_count'  => count($global_fields['fields'] ?? array()),
+            'global_fields' => $global_fields,
             'meta_138_count'=> count($meta_138),
             'meta_139_count'=> count($meta_139),
             'meta_139'      => $meta_139,
