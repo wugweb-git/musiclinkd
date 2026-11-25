@@ -952,9 +952,7 @@ function musiclinkd_handle_fluentcrm_status() {
 
         return rest_ensure_response(array(
             'success'        => true,
-            'sub_count'      => $sub_count,
-            'current_fields' => $current_fields,
-            'source_code'    => substr($source_code, 2500, 3500),
+            'source_code'    => substr($source_code, 4500, 2000),
         ));
     } catch (\Throwable $e) {
         return rest_ensure_response(array(
