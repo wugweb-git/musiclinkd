@@ -970,14 +970,21 @@ function musiclinkd_handle_fluentcrm_status() {
         $custom_fields_val = \FluentCrm\App\Models\CustomContactField::get();
     }
 
+    $field_types = null;
+    $field_groups = null;
+    $global_fields = null;
+    if (class_exists('FluentCrm\App\Models\CustomContactField')) {
+        $field_types = \FluentCrm\App\Models\CustomContactField::getFieldTypes();
+        $field_groups = \FluentCrm\App\Models\CustomContactField::getFieldGroups();
+        $global_fields = \FluentCrm\App\Models\CustomContactField::getGlobalFields();
+    }
+
     return rest_ensure_response(array(
         'fluent_api_exists'   => function_exists('FluentCrmApi'),
-        'matched_tables'      => $tables,
         'subscribers_count'   => $sub_count,
-        'meta_rows'           => $meta_rows,
-        'custom_fields_val'   => $custom_fields_val,
-        'custom_contact_field_methods' => $fluent_classes['FluentCrm\App\Models\CustomContactField'] ?? null,
-        'fc_meta_methods'     => $fluent_classes['FluentCrm\App\Models\Meta'] ?? null,
+        'field_types'         => $field_types,
+        'field_groups'        => $field_groups,
+        'global_fields'       => $global_fields,
     ));
 }
 
