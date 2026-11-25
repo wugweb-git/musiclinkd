@@ -44,6 +44,26 @@ def fetch_supabase_profiles():
         print(f"❌ Failed to fetch Supabase profiles: {e}")
         return []
 
+def fetch_supabase_table(table, select="*"):
+    """Fetches records from a Supabase table."""
+    endpoint = f"{SUPABASE_URL}/rest/v1/{table}?select={select}&limit=1000"
+    req = urllib.request.Request(
+        endpoint,
+        headers={
+            "apikey": SUPABASE_KEY,
+            "Authorization": f"Bearer {SUPABASE_KEY}",
+            "User-Agent": "MusicLinkd-ProfileSync/1.0",
+        }
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            print(f"✓ Retrieved {len(data)} rows from {table}.")
+            return data
+    except Exception as e:
+        print(f"⚠️ Failed to fetch {table}: {e}")
+        return []
+
 def send_batch_to_wordpress(batch):
     """Sends a batch of profiles to WordPress REST ingestion endpoint."""
     endpoint = f"{WP_BASE_URL}/wp-json/musiclinkd/v1/ingest-profiles"
@@ -127,6 +147,51 @@ def run_profile_sync():
     if not profiles:
         print("⚠️ No profiles found or failed to fetch. Aborting.")
         sys.exit(1)
+
+    print("📥 Querying rich profile relations (portfolio, services, bookables, equipment)...")
+    portfolio_items = fetch_supabase_table("portfolio_items", "id,user_id,title,kind,description,role,media_url,release_year,published")
+    services = fetch_supabase_table("profile_services", "id,profile_id,name,description,price_paise,price_unit,turnaround,work_modes,deliverables")
+    bookables = fetch_supabase_table("bookables", "id,owner_profile_id,name,hourly_rate_paise,amenities,operating_hours,cancellation_policy")
+    equipment = fetch_supabase_table("bookable_equipment", "id,bookable_id,name,category,quantity,included")
+
+    # Group by profile
+    port_by_user = {}
+    for p in portfolio_items:
+        uid = p.get("user_id")
+        if uid:
+            port_by_user.setdefault(uid, []).append(p)
+
+    serv_by_prof = {}
+    for s in services:
+        pid = s.get("profile_id")
+        if pid:
+            serv_by_prof.setdefault(pid, []).append(s)
+
+    book_by_owner = {}
+    for b in bookables:
+        oid = b.get("owner_profile_id")
+        if oid:
+            book_by_owner.setdefault(oid, []).append(b)
+
+    eq_by_book = {}
+    for e in equipment:
+        bid = e.get("bookable_id")
+        if bid:
+            eq_by_book.setdefault(bid, []).append(e)
+
+    # Attach to each profile
+    for p in profiles:
+        pid = p["id"]
+        p["portfolio"] = port_by_user.get(pid, [])
+        p["services"] = serv_by_prof.get(pid, [])
+        user_bookables = book_by_owner.get(pid, [])
+        p["bookables"] = user_bookables
+        user_eq = []
+        for b in user_bookables:
+            user_eq.extend(eq_by_book.get(b["id"], []))
+        p["equipment"] = user_eq
+
+    print(f"✓ Enriched {len(profiles)} profiles with portfolio ({len(portfolio_items)} works), services ({len(services)} services) & equipment ({len(equipment)} items).")
 
     batch_size = 25
     totals = {

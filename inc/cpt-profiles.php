@@ -667,6 +667,20 @@ function musiclinkd_handle_ingest_profiles(WP_REST_Request $request) {
         update_post_meta($post_id, 'followers_count', $followers_count);
         update_post_meta($post_id, 'visibility', $visibility);
 
+        // Store rich Portfolio, Services, Bookable facilities & Equipment
+        if (!empty($profile['portfolio']) && is_array($profile['portfolio'])) {
+            update_post_meta($post_id, 'profile_portfolio', wp_json_encode($profile['portfolio']));
+        }
+        if (!empty($profile['services']) && is_array($profile['services'])) {
+            update_post_meta($post_id, 'profile_services', wp_json_encode($profile['services']));
+        }
+        if (!empty($profile['bookables']) && is_array($profile['bookables'])) {
+            update_post_meta($post_id, 'profile_bookables', wp_json_encode($profile['bookables']));
+        }
+        if (!empty($profile['equipment']) && is_array($profile['equipment'])) {
+            update_post_meta($post_id, 'profile_equipment', wp_json_encode($profile['equipment']));
+        }
+
         // Assign Taxonomies
         wp_set_object_terms($post_id, array($user_flow_label), 'user_flow', false);
 
@@ -942,11 +956,15 @@ function musiclinkd_ensure_fluentcrm_custom_fields() {
         array('label' => 'Session Rate (INR)',           'slug' => 'hourly_rate',          'type' => 'text'),
         array('label' => 'Booking Availability',         'slug' => 'work_availability',    'type' => 'text'),
         array('label' => 'Community Rating',             'slug' => 'rating_reviews',       'type' => 'text'),
-        array('label' => 'Live App Profile (@handle)',   'slug' => 'app_profile_url',      'type' => 'text'),
-        array('label' => 'QR Identity Pass URL',         'slug' => 'qr_pass_url',          'type' => 'text'),
+
+        // Portfolio, Services & Equipment
+        array('label' => 'Portfolio & Published Works',  'slug' => 'portfolio_summary',    'type' => 'textarea'),
+        array('label' => 'Offered Services & Packages',  'slug' => 'services_summary',     'type' => 'textarea'),
+        array('label' => 'Studio Equipment & Amenities', 'slug' => 'equipment_summary',    'type' => 'textarea'),
+        array('label' => 'Work Modes & Delivery',        'slug' => 'work_modes',           'type' => 'text'),
 
         // Disciplines & Location
-        array('label' => 'Primary Disciplines / Roles',   'slug' => 'person_types',         'type' => 'text'),
+        array('label' => 'Primary Disciplines / Roles',  'slug' => 'person_types',         'type' => 'text'),
         array('label' => 'Music Genres',                 'slug' => 'genres',               'type' => 'text'),
         array('label' => 'City / Location',              'slug' => 'city_location',        'type' => 'text'),
         array('label' => 'User Flow',                    'slug' => 'user_flow',            'type' => 'text'),
@@ -955,6 +973,8 @@ function musiclinkd_ensure_fluentcrm_custom_fields() {
         array('label' => 'Spotify Artist / Discography', 'slug' => 'spotify_url',          'type' => 'text'),
         array('label' => 'Instagram Profile',            'slug' => 'instagram_url',        'type' => 'text'),
         array('label' => 'Primary Portfolio / Link',     'slug' => 'social_link',          'type' => 'text'),
+        array('label' => 'Live App Profile (@handle)',   'slug' => 'app_profile_url',      'type' => 'text'),
+        array('label' => 'QR Identity Pass URL',         'slug' => 'qr_pass_url',          'type' => 'text'),
     );
 
     $cf_model = new \FluentCrm\App\Models\CustomContactField();
@@ -1042,6 +1062,42 @@ function musiclinkd_enrich_all_fluentcrm_subscribers() {
         $supabase_id = $post_id ? get_post_meta($post_id, 'supabase_id', true) : $username;
         $is_verified = ($post_id && get_post_meta($post_id, 'is_verified', true)) ? 'Verified Desk Creator ✓' : 'Verified Artist ✓';
 
+        // Read Portfolio items from post meta
+        $portfolio_raw = $post_id ? get_post_meta($post_id, 'profile_portfolio', true) : '';
+        $portfolio_items = $portfolio_raw ? json_decode($portfolio_raw, true) : array();
+        if (!empty($portfolio_items) && is_array($portfolio_items)) {
+            $titles = array_map(function($item) {
+                $year = !empty($item['release_year']) ? ' (' . $item['release_year'] . ')' : '';
+                return ($item['title'] ?? 'Untitled') . $year;
+            }, array_slice($portfolio_items, 0, 4));
+            $portfolio_summary = count($portfolio_items) . ' Works: ' . implode(', ', $titles);
+        } else {
+            $portfolio_summary = ($flow_str === 'Business') ? 'Studio Discography & Session Proofs' : '3 Tracks, 1 Live Stems Video';
+        }
+
+        // Read Services from post meta
+        $services_raw = $post_id ? get_post_meta($post_id, 'profile_services', true) : '';
+        $services_items = $services_raw ? json_decode($services_raw, true) : array();
+        if (!empty($services_items) && is_array($services_items)) {
+            $serv_list = array_map(function($s) {
+                $p = !empty($s['price_paise']) ? ' (₹' . number_format($s['price_paise'] / 100) . ')' : '';
+                return ($s['name'] ?? 'Service') . $p;
+            }, array_slice($services_items, 0, 3));
+            $services_summary = implode(', ', $serv_list);
+        } else {
+            $services_summary = $rate_str !== 'Quoted on Request' ? 'Session Booking (' . $rate_str . ')' : 'Custom Audio Production & Engineering';
+        }
+
+        // Read Equipment from post meta
+        $equipment_raw = $post_id ? get_post_meta($post_id, 'profile_equipment', true) : '';
+        $equipment_items = $equipment_raw ? json_decode($equipment_raw, true) : array();
+        if (!empty($equipment_items) && is_array($equipment_items)) {
+            $eq_list = array_map(function($e) { return $e['name'] ?? ''; }, array_slice($equipment_items, 0, 5));
+            $equipment_summary = implode(', ', array_filter($eq_list));
+        } else {
+            $equipment_summary = ($flow_str === 'Business') ? 'Live Tracking Room, Vocal Booth, Mixing Console' : 'Standard Vocal & Guitar Setup';
+        }
+
         $fields_data = array(
             'profile_url'         => $app_profile,
             'qr'                  => $qr_pass,
@@ -1051,6 +1107,9 @@ function musiclinkd_enrich_all_fluentcrm_subscribers() {
             'person_types'        => $roles_str,
             'genres'              => $genres_str,
             'city_location'       => $city_str,
+            'portfolio_summary'   => $portfolio_summary,
+            'services_summary'    => $services_summary,
+            'equipment_summary'   => $equipment_summary,
             'work_modes'          => is_array($work_modes) ? implode(', ', $work_modes) : ($work_modes ?: 'In-person & Remote'),
             'languages'           => is_array($languages) ? implode(', ', $languages) : ($languages ?: 'English, Hindi'),
             'intents'             => is_array($intents) ? implode(', ', $intents) : ($intents ?: 'Bookings, Collaborations'),
