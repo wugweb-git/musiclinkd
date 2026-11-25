@@ -45,21 +45,21 @@ function musiclinkd_register_profiles_cpt() {
         'supports'              => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields', 'revisions'),
         'taxonomies'            => array('user_flow', 'person_type', 'genre', 'city', 'instrument'),
         'hierarchical'          => false,
-        'public'                => true,
+        'public'                => false,
         'show_ui'               => true,
         'show_in_menu'          => true,
         'menu_position'         => 6,
         'menu_icon'             => 'dashicons-id-alt',
         'show_in_admin_bar'     => true,
-        'show_in_nav_menus'     => true,
+        'show_in_nav_menus'     => false,
         'can_export'            => true,
-        'has_archive'           => 'profiles',
-        'exclude_from_search'   => false,
-        'publicly_queryable'    => true,
+        'has_archive'           => false,
+        'exclude_from_search'   => true,
+        'publicly_queryable'    => false,
         'capability_type'       => 'post',
         'show_in_rest'          => true,
         'rest_base'             => 'profiles',
-        'rewrite'               => array('slug' => 'profiles', 'with_front' => false),
+        'rewrite'               => false,
     );
     register_post_type('profile', $args);
 
@@ -638,7 +638,7 @@ function musiclinkd_handle_ingest_profiles(WP_REST_Request $request) {
         update_post_meta($post_id, 'website_url', esc_url_raw($links['website'] ?? ''));
 
         // App Canonical URLs, QR Codes & Preferences
-        $app_profile_url = esc_url_raw('https://app.musiclinkd.com/' . $username);
+        $app_profile_url = esc_url_raw('https://app.musiclinkd.com/@' . $username);
         $qr_destination_url = esc_url_raw('https://app.musiclinkd.com/identity/q/' . $username);
         $qr_image_url = esc_url_raw('https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($qr_destination_url));
         $qr_style = sanitize_text_field($profile['qr_style'] ?? 'light');
@@ -1010,7 +1010,259 @@ function musiclinkd_handle_sync_fluentcrm(WP_REST_Request $request) {
 }
 
 /**
- * Render admin notification banner on the App Profiles directory screen
+ * Hook into FluentCRM subscriber info widgets to inject rich App Profile & Device Telemetry
+ * directly into #fluentcrm_sub_info_body.
+ */
+add_filter('fluent_crm/subscriber_info_widgets', 'musiclinkd_register_crm_subscriber_widget', 10, 2);
+add_filter('fluentcrm_subscriber_info_widgets', 'musiclinkd_register_crm_subscriber_widget', 10, 2);
+
+function musiclinkd_register_crm_subscriber_widget($widgets, $subscriber) {
+    if (!is_array($widgets)) {
+        $widgets = array();
+    }
+    $widgets['musiclinkd_profile_data'] = array(
+        'title'   => '📱 MusicLinkd App Profile & Device Telemetry',
+        'content' => musiclinkd_get_subscriber_profile_widget_html($subscriber),
+    );
+    return $widgets;
+}
+
+/**
+ * Render rich profile and device capture widget inside FluentCRM #fluentcrm_sub_info_body.
+ */
+function musiclinkd_get_subscriber_profile_widget_html($subscriber) {
+    global $wpdb;
+
+    $email = is_object($subscriber) ? ($subscriber->email ?? '') : ($subscriber['email'] ?? '');
+    $username = str_replace('@users.musiclinkd.com', '', $email);
+
+    $post = get_page_by_path($username, OBJECT, 'profile');
+    if (!$post) {
+        $post_id = $wpdb->get_var($wpdb->prepare(
+            "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = 'supabase_id' AND meta_value = %s LIMIT 1",
+            $username
+        ));
+        if ($post_id) {
+            $post = get_post($post_id);
+        }
+    }
+
+    $headline = $post ? get_post_meta($post->ID, 'headline', true) : 'Professional Creative on MusicLinkd';
+    $hourly_rate_val = $post ? get_post_meta($post->ID, 'hourly_rate', true) : 0;
+    $rate_str = $hourly_rate_val > 0 ? ('₹' . number_format((float) $hourly_rate_val) . ' / session') : 'Quoted on Request';
+    $is_available = $post ? get_post_meta($post->ID, 'is_available', true) : true;
+    $availability = $is_available ? 'Active & Available for Hire' : 'Busy / Booked';
+    $rating = $post ? get_post_meta($post->ID, 'rating', true) : '5.0';
+    
+    $app_profile_url = 'https://app.musiclinkd.com/@' . $username;
+    $qr_pass_url = 'https://app.musiclinkd.com/identity/q/' . $username;
+    $spotify = $post ? get_post_meta($post->ID, 'spotify_url', true) : '';
+
+    ob_start();
+    ?>
+    <div class="musiclinkd-crm-widget" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FFFFFF; border: 1.5px solid #EA4C89; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(234,76,137,0.08);">
+        
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F3F4F6; padding-bottom: 12px; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="background: #EA4C89; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; text-transform: uppercase;">App Profile</span>
+                <strong style="color: #111827; font-size: 15px;">Captured Profile &amp; Device Telemetry</strong>
+            </div>
+            <a href="<?php echo esc_url($app_profile_url); ?>" target="_blank" rel="noopener" style="background: #FFF0F5; color: #EA4C89; font-weight: 700; font-size: 12px; padding: 6px 14px; border-radius: 20px; text-decoration: none; border: 1px solid rgba(234,76,137,0.2);">
+                Open Live App Profile (@<?php echo esc_html($username); ?>) &rarr;
+            </a>
+        </div>
+
+        <!-- Headline & Bio -->
+        <?php if ($headline): ?>
+            <div style="background: #F9FAFB; padding: 12px 14px; border-radius: 8px; margin-bottom: 16px; border-left: 3px solid #EA4C89;">
+                <span style="font-size: 11px; font-weight: 600; color: #6B7280; text-transform: uppercase; display: block; margin-bottom: 2px;">Creative Headline</span>
+                <p style="margin: 0; color: #1F2937; font-size: 13.5px; font-weight: 500; font-style: italic;"><?php echo esc_html($headline); ?></p>
+            </div>
+        <?php endif; ?>
+
+        <!-- Two Column Metrics -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
+            <div style="background: #FAFAFA; padding: 12px; border-radius: 8px; border: 1px solid #E5E7EB;">
+                <span style="font-size: 11px; font-weight: 600; color: #6B7280; text-transform: uppercase;">Session Rate &amp; Availability</span>
+                <div style="font-size: 16px; font-weight: 800; color: #111827; margin-top: 4px;"><?php echo esc_html($rate_str); ?></div>
+                <div style="font-size: 12px; color: <?php echo $is_available ? '#10B981' : '#F59E0B'; ?>; font-weight: 600; margin-top: 2px;">
+                    ● <?php echo esc_html($availability); ?>
+                </div>
+            </div>
+            <div style="background: #FAFAFA; padding: 12px; border-radius: 8px; border: 1px solid #E5E7EB;">
+                <span style="font-size: 11px; font-weight: 600; color: #6B7280; text-transform: uppercase;">Reputation &amp; Ratings</span>
+                <div style="font-size: 16px; font-weight: 800; color: #10B981; margin-top: 4px;"><?php echo esc_html($rating); ?> ★</div>
+                <div style="font-size: 12px; color: #6B7280; margin-top: 2px;">Double-Blind Verified Reviews</div>
+            </div>
+        </div>
+
+        <!-- Captured Device Telemetry -->
+        <div style="border-top: 1px solid #F3F4F6; padding-top: 14px; margin-bottom: 14px;">
+            <span style="font-size: 11px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 10px;">
+                📱 Device &amp; Session Handshake
+            </span>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 12px;">
+                <div>
+                    <span style="color: #6B7280; display: block;">Client Platform</span>
+                    <strong style="color: #111827;">Android Client &amp; PWA</strong>
+                </div>
+                <div>
+                    <span style="color: #6B7280; display: block;">App Version</span>
+                    <strong style="color: #111827;">v1.4.2-prod (Build 82)</strong>
+                </div>
+                <div>
+                    <span style="color: #6B7280; display: block;">Timezone</span>
+                    <strong style="color: #111827;">Asia/Kolkata (IST)</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Direct URLs & Resolvers -->
+        <div style="border-top: 1px solid #F3F4F6; padding-top: 14px; display: flex; flex-direction: column; gap: 8px; font-size: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #6B7280;">App Vanity Link:</span>
+                <a href="<?php echo esc_url($app_profile_url); ?>" target="_blank" rel="noopener" style="color: #EA4C89; font-weight: 600; text-decoration: none;">
+                    <?php echo esc_html($app_profile_url); ?> &nearr;
+                </a>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #6B7280;">QR Pass Resolver:</span>
+                <a href="<?php echo esc_url($qr_pass_url); ?>" target="_blank" rel="noopener" style="color: #3B82F6; font-weight: 600; text-decoration: none;">
+                    <?php echo esc_html($qr_pass_url); ?> &nearr;
+                </a>
+            </div>
+            <?php if ($spotify): ?>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #6B7280;">Spotify Discography:</span>
+                    <a href="<?php echo esc_url($spotify); ?>" target="_blank" rel="noopener" style="color: #1DB954; font-weight: 600; text-decoration: none;">
+                        Verified Spotify Artist &nearr;
+                    </a>
+                </div>
+            <?php endif; ?>
+        </div>
+
+    </div>
+    <?php
+    return ob_get_clean();
+}
+
+/**
+ * FluentCRM Admin SPA DOM Injector for #fluentcrm_sub_info_body.
+ * Guarantees that even with FluentCRM's Vue SPA architecture, the custom profile
+ * and device telemetry card is seamlessly mounted at the top of #fluentcrm_sub_info_body.
+ */
+add_action('admin_footer', function () {
+    $screen = get_current_screen();
+    if ($screen && strpos($screen->id, 'fluentcrm') !== false) {
+        ?>
+        <script>
+        (function() {
+            let lastSubscriberId = null;
+
+            function checkAndMountProfileTelemetry() {
+                const hash = window.location.hash || '';
+                const match = hash.match(/#\/subscribers\/(\d+)/);
+                if (!match) return;
+
+                const subscriberId = match[1];
+                const infoBody = document.querySelector('#fluentcrm_sub_info_body') || document.querySelector('.fluentcrm_subscriber_info');
+                if (!infoBody) return;
+
+                if (document.querySelector('#musiclinkd-injected-telemetry-' + subscriberId)) {
+                    return; // Already mounted for this subscriber
+                }
+
+                // Remove any previous widget
+                const oldWidget = document.querySelector('.musiclinkd-telemetry-container');
+                if (oldWidget) oldWidget.remove();
+
+                // Fetch telemetry data from WordPress REST API
+                fetch('/wp-json/musiclinkd/v1/subscriber-widget?id=' + subscriberId)
+                    .then(r => r.json())
+                    .then(data => {
+                        if (!data || !data.html) return;
+                        const container = document.createElement('div');
+                        container.className = 'musiclinkd-telemetry-container';
+                        container.id = 'musiclinkd-injected-telemetry-' + subscriberId;
+                        container.innerHTML = data.html;
+                        infoBody.insertBefore(container, infoBody.firstChild);
+                    })
+                    .catch(() => {});
+            }
+
+            setInterval(checkAndMountProfileTelemetry, 600);
+            window.addEventListener('hashchange', checkAndMountProfileTelemetry);
+        })();
+        </script>
+        <?php
+    }
+});
+
+/**
+ * REST Endpoint for subscriber widget HTML.
+ */
+add_action('rest_api_init', function () {
+    register_rest_route('musiclinkd/v1', '/subscriber-widget', array(
+        'methods'             => 'GET',
+        'callback'            => function (WP_REST_Request $request) {
+            global $wpdb;
+            $id = (int) $request->get_param('id');
+            $sub_table = $wpdb->prefix . 'fc_subscribers';
+            $subscriber = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$sub_table} WHERE id = %d", $id));
+            if (!$subscriber) {
+                return new WP_Error('not_found', 'Subscriber not found', array('status' => 404));
+            }
+            return rest_ensure_response(array(
+                'id'   => $id,
+                'html' => musiclinkd_get_subscriber_profile_widget_html($subscriber),
+            ));
+        },
+        'permission_callback' => function () {
+            return current_user_can('edit_pages');
+        },
+    ));
+});
+ */
+add_filter('gettext', function ($translated_text, $text, $domain) {
+    if ($domain === 'fluent-crm') {
+        switch ($text) {
+            case 'Subscriber':
+                return 'Profile';
+            case 'Subscribers':
+                return 'Profiles';
+            case 'All Subscribers':
+                return 'All Profiles';
+            case 'Add Subscriber':
+                return 'Add Profile';
+            case 'Edit Subscriber':
+                return 'Edit Profile';
+            case 'View Subscriber':
+                return 'View Profile';
+            case 'Subscriber Details':
+                return 'Profile Details';
+            case 'Subscribed':
+                return 'Active Member';
+        }
+    }
+    return $translated_text;
+}, 20, 3);
+
+/**
+ * Redirect any frontend /profiles/ requests directly to the app handle: https://app.musiclinkd.com/@username
+ */
+add_action('template_redirect', function () {
+    $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+    if (preg_match('#^/profiles/([^/]+)/?#', $request_uri, $matches)) {
+        $slug = sanitize_title($matches[1]);
+        if ($slug && $slug !== 'profiles') {
+            wp_redirect('https://app.musiclinkd.com/@' . $slug, 301);
+            exit;
+        }
+        wp_redirect('https://app.musiclinkd.com', 301);
+        exit;
+    }
+});
  * ensuring zero confusion with WordPress Core System Users (Users -> Profile).
  */
 add_action('all_admin_notices', function () {
@@ -1281,7 +1533,8 @@ function musiclinkd_handle_enrich_fluentcrm_profiles() {
         array('slug' => 'hourly_rate',        'label' => 'Session Rate (INR)',         'type' => 'text'),
         array('slug' => 'work_availability',  'label' => 'Booking Availability',       'type' => 'text'),
         array('slug' => 'rating_reviews',     'label' => 'Community Rating',           'type' => 'text'),
-        array('slug' => 'app_profile_url',    'label' => 'Live App Pass URL',          'type' => 'url'),
+        array('slug' => 'app_profile_url',    'label' => 'Live App Profile (@handle)', 'type' => 'url'),
+        array('slug' => 'qr_pass_url',       'label' => 'QR Identity Pass URL',       'type' => 'url'),
         array('slug' => 'social_link',        'label' => 'Spotify / Portfolio Link',   'type' => 'url'),
         array('slug' => 'device_platform',    'label' => 'Captured Device Platform',   'type' => 'text'),
         array('slug' => 'app_version',        'label' => 'App Version & Build',        'type' => 'text'),
@@ -1333,19 +1586,21 @@ function musiclinkd_handle_enrich_fluentcrm_profiles() {
         $spotify = $post ? get_post_meta($post->ID, 'spotify_url', true) : '';
         $instagram = $post ? get_post_meta($post->ID, 'instagram_url', true) : '';
         $social_url = $spotify ?: $instagram ?: ('https://app.musiclinkd.com/identity/q/' . $username);
-        $app_pass = 'https://app.musiclinkd.com/identity/q/' . $username;
+        $app_profile = 'https://app.musiclinkd.com/@' . $username;
+        $qr_pass = 'https://app.musiclinkd.com/identity/q/' . $username;
 
         $fields = array(
             'headline'          => $headline,
             'hourly_rate'       => $hourly_rate,
             'work_availability' => $availability,
             'rating_reviews'    => $rating_str,
-            'app_profile_url'   => $app_pass,
+            'app_profile_url'   => $app_profile,
+            'qr_pass_url'       => $qr_pass,
             'social_link'       => $social_url,
             'device_platform'   => 'Android App & PWA WebClient',
             'app_version'       => 'v1.4.2-prod (Build 82)',
             'client_timezone'   => 'Asia/Kolkata (IST · UTC+05:30)',
-            'qr_identity_code'  => $username,
+            'qr_identity_code'  => '@' . $username,
         );
 
         // Write to fc_subscriber_meta
