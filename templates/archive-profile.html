@@ -1,0 +1,49 @@
+<!-- wp:template-part {"slug":"header","tagName":"header","area":"header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"profiles-archive","style":{"spacing":{"padding":{"top":"calc(var(--nav-h) + 40px)","bottom":"96px"}}},"layout":{"type":"constrained","contentSize":"1000px"}} -->
+<main class="wp-block-group profiles-archive" style="padding-top:calc(var(--nav-h) + 40px);padding-bottom:96px">
+
+  <!-- Archive Hero -->
+  <div style="text-align:center;max-width:720px;margin:0 auto 48px auto">
+    <span style="color:#EA4C89;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:12px">Ecosystem Directory</span>
+    <h1 style="font-size:clamp(30px, 4vw, 44px);font-weight:800;color:#141414;letter-spacing:-0.03em;margin:0 0 16px 0">
+      App Profiles Directory
+    </h1>
+    <p style="color:#6B7280;font-size:16px;line-height:1.6;margin:0">
+      Browse verified Indian music creators, playback singers, session musicians, producers, audio engineers, and recording studios synced from MusicLinkd.
+    </p>
+  </div>
+
+  <!-- Profiles Query Grid -->
+  <!-- wp:query {"queryId":10,"query":{"perPage":12,"pages":0,"offset":0,"postType":"profile","order":"desc","orderBy":"date","inherit":true},"layout":{"type":"constrained"}} -->
+  <div class="wp-block-query">
+    <!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
+    <!-- wp:group {"tagName":"article","style":{"spacing":{"padding":{"top":"24px","right":"24px","bottom":"24px","left":"24px"}},"border":{"radius":"16px"}},"backgroundColor":"surface"} -->
+    <article class="wp-block-group has-surface-background-color has-background" style="border:1px solid rgba(0,0,0,0.08);border-radius:16px;padding:24px;display:flex;flex-direction:column;justify-content:space-between">
+      <div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <span style="font-size:11px;font-weight:700;color:#EA4C89;background:rgba(234,76,137,0.1);padding:3px 8px;border-radius:12px">PROFILE</span>
+          <span style="font-size:11px;color:#10B981;font-weight:600">✓ Verified</span>
+        </div>
+        <!-- wp:post-title {"level":2,"isLink":true,"style":{"typography":{"fontSize":"20px","fontWeight":"700"}}} /-->
+        <!-- wp:post-excerpt {"moreText":"View Profile &rarr;"} /-->
+      </div>
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(0,0,0,0.06);display:flex;justify-content:space-between;align-items:center">
+        <a href="https://app.musiclinkd.com" target="_blank" rel="noopener" style="font-size:12px;font-weight:600;color:#EA4C89;text-decoration:none">Book on App &nearr;</a>
+      </div>
+    </article>
+    <!-- /wp:group -->
+    <!-- /wp:post-template -->
+
+    <!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"space-between"}} -->
+    <!-- wp:query-pagination-previous /-->
+    <!-- wp:query-pagination-numbers /-->
+    <!-- wp:query-pagination-next /-->
+    <!-- /wp:query-pagination -->
+  </div>
+  <!-- /wp:query -->
+
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer","area":"footer"} /-->
