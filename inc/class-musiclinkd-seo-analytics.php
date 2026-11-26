@@ -154,6 +154,55 @@ class MusicLinkd_SEO_Analytics {
                 'focus_keyword'  => 'musiclinkd cookie policy',
                 'keywords'       => 'MusicLinkd cookies, session cookies, tracking policy',
             ),
+            'profile-that-gets-booked' => array(
+                'title'          => 'How to Build a Music Profile That Gets Booked | MusicLinkd Guide',
+                'description'    => 'Step-by-step guide to setting up your verified artist profile, selecting primary roles, uploading multi-track stems, and attracting paying clients in India.',
+                'canonical'      => 'https://musiclinkd.com/profile-that-gets-booked/',
+                'focus_keyword'  => 'musician profile guide',
+                'keywords'       => 'musician profile optimization, artist portfolio tips, hire session musicians India, music profile checklist, audio portfolio stems',
+            ),
+            'pricing-your-first-service' => array(
+                'title'          => 'Pricing Your First Music Service — Complete Guide | MusicLinkd',
+                'description'    => 'Learn how to price session recording, vocal delivery, mixing, and mastering in INR. Transparent rate recommendations and hourly benchmarks for musicians in India.',
+                'canonical'      => 'https://musiclinkd.com/pricing-your-first-service/',
+                'focus_keyword'  => 'how to price music services',
+                'keywords'       => 'session musician rates India, music production pricing, sound engineer rates, studio hourly rates, music service rate card',
+            ),
+            'how-verification-works' => array(
+                'title'          => 'How Verification Works — Blue Badges & Verified Identity | MusicLinkd',
+                'description'    => 'Understand the MusicLinkd verification process: government ID checks, credited discography validation, and verified pro badges for artists and studios.',
+                'canonical'      => 'https://musiclinkd.com/how-verification-works/',
+                'focus_keyword'  => 'musiclinkd verification',
+                'keywords'       => 'musician verification India, verified artist badge, audio professional credentials, blue tick musician, studio verification',
+            ),
+            'booking-policies-explained' => array(
+                'title'          => 'Booking Policies & Escrow Protection Explained | MusicLinkd',
+                'description'    => 'How bookings work on MusicLinkd: session reservations, calendar locks, milestone agreements, cancellation terms, and dispute resolution for musicians.',
+                'canonical'      => 'https://musiclinkd.com/booking-policies-explained/',
+                'focus_keyword'  => 'music booking policies India',
+                'keywords'       => 'music booking contract, studio cancellation policy, session musician agreement, escrow music booking, double booking protection',
+            ),
+            'review-policy' => array(
+                'title'          => 'Review Policy & Double-Blind Feedback Protocol | MusicLinkd',
+                'description'    => 'How our double-blind verified review protocol works. Unbiased feedback published only when both parties submit, preventing client or artist retaliation.',
+                'canonical'      => 'https://musiclinkd.com/review-policy/',
+                'focus_keyword'  => 'double blind music reviews',
+                'keywords'       => 'double blind reviews, authentic creator ratings, verified music reviews, client feedback music, fair reputation music',
+            ),
+            'community-guidelines' => array(
+                'title'          => 'Community Guidelines & Professional Standards | MusicLinkd',
+                'description'    => 'Our community code of conduct: mutual respect, professional communication, copyright integrity, and zero tolerance for harassment across the Indian music network.',
+                'canonical'      => 'https://musiclinkd.com/community-guidelines/',
+                'focus_keyword'  => 'musiclinkd community guidelines',
+                'keywords'       => 'music community standards, creator conduct policy, safe music collaboration, copyright ethics, professional musician conduct',
+            ),
+            'whats-new' => array(
+                'title'          => 'What’s New in MusicLinkd — Release Notes & Feature Updates',
+                'description'    => 'Latest updates to the MusicLinkd creator OS: multi-track stem audio player, digital NFC/QR passes, studio desk management, and PWA mobile enhancements.',
+                'canonical'      => 'https://musiclinkd.com/whats-new/',
+                'focus_keyword'  => 'musiclinkd updates',
+                'keywords'       => 'musiclinkd release notes, music tech changelog, stems player update, new music collaboration tools, studio software updates',
+            ),
         );
     }
 
@@ -263,15 +312,47 @@ class MusicLinkd_SEO_Analytics {
     }
 
     /**
-     * Render AI Context Discovery Link (/llms.txt) and Focused Meta Keywords in <head>.
+     * Render AI Context Discovery Link (/llms.txt), Focused Keywords, OpenGraph & Twitter Cards in <head>.
      */
     public static function render_seo_and_ai_head() {
         echo '<link rel="alternate" type="text/plain" href="https://musiclinkd.com/llms.txt" title="AI Context Discovery" />' . "\n";
+        echo '<meta name="author" content="MusicLinkd Technologies" />' . "\n";
+        echo '<meta name="geo.region" content="IN" />' . "\n";
+        echo '<meta name="geo.placename" content="India" />' . "\n";
+        echo '<meta name="theme-color" content="#EA4C89" />' . "\n";
         
         $key = self::get_current_route_key();
         $catalog = self::get_route_seo_catalog();
-        if ($key && !empty($catalog[$key]['keywords'])) {
-            echo '<meta name="keywords" content="' . esc_attr($catalog[$key]['keywords']) . '" />' . "\n";
+        if ($key && isset($catalog[$key])) {
+            $item = $catalog[$key];
+            if (!empty($item['focus_keyword'])) {
+                echo '<meta name="focus-keyphrase" content="' . esc_attr($item['focus_keyword']) . '" />' . "\n";
+            }
+            if (!empty($item['keywords'])) {
+                echo '<meta name="keywords" content="' . esc_attr($item['keywords']) . '" />' . "\n";
+            }
+            
+            // OpenGraph & Twitter Card fallbacks
+            $title = !empty($item['title']) ? $item['title'] : 'MusicLinkd';
+            $desc  = !empty($item['description']) ? $item['description'] : '';
+            $url   = !empty($item['canonical']) ? $item['canonical'] : 'https://musiclinkd.com/';
+            $image = 'https://musiclinkd.com/assets/img/brand/og-card.png';
+            
+            echo '<meta property="og:site_name" content="MusicLinkd" />' . "\n";
+            echo '<meta property="og:type" content="website" />' . "\n";
+            echo '<meta property="og:url" content="' . esc_url($url) . '" />' . "\n";
+            echo '<meta property="og:title" content="' . esc_attr($title) . '" />' . "\n";
+            if ($desc) {
+                echo '<meta property="og:description" content="' . esc_attr($desc) . '" />' . "\n";
+            }
+            echo '<meta property="og:image" content="' . esc_url($image) . '" />' . "\n";
+            echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
+            echo '<meta name="twitter:site" content="@musiclinkd" />' . "\n";
+            echo '<meta name="twitter:title" content="' . esc_attr($title) . '" />' . "\n";
+            if ($desc) {
+                echo '<meta name="twitter:description" content="' . esc_attr($desc) . '" />' . "\n";
+            }
+            echo '<meta name="twitter:image" content="' . esc_url($image) . '" />' . "\n";
         }
     }
 

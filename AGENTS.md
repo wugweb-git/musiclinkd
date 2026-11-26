@@ -241,6 +241,10 @@ propagate what a previous doc says without checking.
     - Added direct "Delete account" and "Delete specific data" options under Settings > Privacy & security in `musiclinkd-app`.
     - Enhanced `/settings/delete-account` with dual persona awareness (`useRequireBusiness`): dynamically displaying distinct deletion consequences for Talent users (artist profile, tracks/stems, creative services) and Business users (studio profile, rooms, equipment catalog, amenities, and business media).
     - Verified Android Capacitor 8 build and signed release bundle (`app-release.aab`, 6.2MB) with official production upload key (`musiclinkd-upload.jks`).
+  - **Comprehensive Multi-Repo SEO & Focus Keyphrase Enrichment (2026-11-26):**
+    - Expanded `inc/class-musiclinkd-seo-analytics.php` route catalog to cover all 19 canonical routes including all 7 Help Centre deep guides (`profile-that-gets-booked`, `pricing-your-first-service`, `how-verification-works`, `booking-policies-explained`, `review-policy`, `community-guidelines`, `whats-new`).
+    - Added double-buffered `<meta name="focus-keyphrase">`, OpenGraph, Twitter card, and geographic metadata tags (`geo.region: IN`) in `wp_head`.
+    - Enriched all core routes across `musiclinkd-app` (`__root.tsx`, `discover`, `search`, `marketplace`, `services`, `bands`, `opportunities`, `home`, `portfolio`, `identity.q.$code`, `welcome`, `delete-account`, `help`, and `publicProfileHead` for creator handles) with specific focus keyphrases, long-tail keywords, canonical URLs, and OpenGraph metadata.
 
 
 
