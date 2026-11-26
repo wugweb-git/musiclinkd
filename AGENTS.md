@@ -245,6 +245,11 @@ propagate what a previous doc says without checking.
     - Expanded `inc/class-musiclinkd-seo-analytics.php` route catalog to cover all 19 canonical routes including all 7 Help Centre deep guides (`profile-that-gets-booked`, `pricing-your-first-service`, `how-verification-works`, `booking-policies-explained`, `review-policy`, `community-guidelines`, `whats-new`).
     - Added double-buffered `<meta name="focus-keyphrase">`, OpenGraph, Twitter card, and geographic metadata tags (`geo.region: IN`) in `wp_head`.
     - Enriched all core routes across `musiclinkd-app` (`__root.tsx`, `discover`, `search`, `marketplace`, `services`, `bands`, `opportunities`, `home`, `portfolio`, `identity.q.$code`, `welcome`, `delete-account`, `help`, and `publicProfileHead` for creator handles) with specific focus keyphrases, long-tail keywords, canonical URLs, and OpenGraph metadata.
+  - **Dual Ecosystem Sitemap Architecture (2026-11-26):**
+    - Unified sitemaps across both properties (`musiclinkd.com` and `app.musiclinkd.com`):
+      - **WordPress (`musiclinkd`):** Filtered Rank Math sitemap index (`rank_math/sitemap/index`) to inject `/app-sitemap.xml`, `/ecosystem-sitemap.xml`, and `https://app.musiclinkd.com/sitemap.xml`. Serving virtual XML routes `/app-sitemap.xml` (all web app routes + published `@username` creator profile handles + `/identity/q/:code` passes) and `/ecosystem-sitemap.xml` (single unified map of both website and app). Updated `robots_txt` declaring all ecosystem sitemaps.
+      - **Web App (`musiclinkd-app`):** Built `src/lib/seo-feed.server.ts` and wired edge routing in `src/server.ts` so `/sitemap.xml`, `/robots.txt`, and `/llms.txt` deliver fast `HTTP 200 OK` responses at the Cloudflare edge mapping all web app and canonical website URLs. Kept `public/sitemap.xml`, `public/robots.txt`, and `public/llms.txt` in 100% sync.
+
 
 
 

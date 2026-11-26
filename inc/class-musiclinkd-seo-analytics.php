@@ -45,6 +45,11 @@ class MusicLinkd_SEO_Analytics {
         // Dynamic /llms.txt Virtual Route
         add_action('template_redirect', array(__CLASS__, 'maybe_serve_llms_txt'), 1);
 
+        // Rank Math Sitemap Hooks: Map Web App & Ecosystem Sitemaps
+        add_filter('rank_math/sitemap/index', array(__CLASS__, 'filter_rank_math_sitemap_index'), 20);
+        add_action('template_redirect', array(__CLASS__, 'maybe_serve_virtual_sitemaps'), 1);
+        add_filter('robots_txt', array(__CLASS__, 'filter_robots_txt'), 99);
+
         // Footer: Google Tag Manager & GA4 dataLayer event listeners
         add_action('wp_footer', array(__CLASS__, 'render_datalayer_events'), 99);
     }
@@ -392,8 +397,133 @@ class MusicLinkd_SEO_Analytics {
         echo "## Sitemaps & Feeds\n";
         echo "- Website Sitemap: https://musiclinkd.com/sitemap_index.xml\n";
         echo "- Web App Sitemap: https://app.musiclinkd.com/sitemap.xml\n";
+        echo "- Ecosystem Sitemap: https://musiclinkd.com/ecosystem-sitemap.xml\n";
+        echo "- App Sitemap: https://musiclinkd.com/app-sitemap.xml\n";
         echo "- Support & Contact: contact@musiclinkd.com\n";
         exit;
+    }
+
+    /**
+     * Append App & Ecosystem Sitemaps into Rank Math Sitemap Index.
+     *
+     * @param string $xml Rank Math XML index string.
+     * @return string
+     */
+    public static function filter_rank_math_sitemap_index($xml) {
+        $now = gmdate('Y-m-d\TH:i:s+00:00');
+        $extra_sitemaps = "\t<sitemap>\n" .
+            "\t\t<loc>" . esc_url(home_url('/app-sitemap.xml')) . "</loc>\n" .
+            "\t\t<lastmod>" . esc_html($now) . "</lastmod>\n" .
+            "\t</sitemap>\n" .
+            "\t<sitemap>\n" .
+            "\t\t<loc>" . esc_url(home_url('/ecosystem-sitemap.xml')) . "</loc>\n" .
+            "\t\t<lastmod>" . esc_html($now) . "</lastmod>\n" .
+            "\t</sitemap>\n" .
+            "\t<sitemap>\n" .
+            "\t\t<loc>https://app.musiclinkd.com/sitemap.xml</loc>\n" .
+            "\t\t<lastmod>" . esc_html($now) . "</lastmod>\n" .
+            "\t</sitemap>\n";
+
+        return $extra_sitemaps . $xml;
+    }
+
+    /**
+     * Serve Dynamic Virtual XML Sitemaps:
+     * - /app-sitemap.xml: Maps all public Web App routes & profiles (app.musiclinkd.com)
+     * - /ecosystem-sitemap.xml: Unified sitemap mapping both marketing site and web app
+     */
+    public static function maybe_serve_virtual_sitemaps() {
+        $path = trim(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH), '/');
+        if ('app-sitemap.xml' !== $path && 'ecosystem-sitemap.xml' !== $path) {
+            return;
+        }
+
+        header('Content-Type: text/xml; charset=utf-8');
+        header('Cache-Control: public, max-age=3600');
+        header('X-Robots-Tag: noindex, follow');
+
+        $now = gmdate('Y-m-d\TH:i:s+00:00');
+
+        $app_routes = array(
+            array('loc' => 'https://app.musiclinkd.com/', 'changefreq' => 'daily', 'priority' => '1.0'),
+            array('loc' => 'https://app.musiclinkd.com/discover', 'changefreq' => 'daily', 'priority' => '0.9'),
+            array('loc' => 'https://app.musiclinkd.com/marketplace', 'changefreq' => 'daily', 'priority' => '0.8'),
+            array('loc' => 'https://app.musiclinkd.com/services', 'changefreq' => 'daily', 'priority' => '0.8'),
+            array('loc' => 'https://app.musiclinkd.com/bands', 'changefreq' => 'daily', 'priority' => '0.8'),
+            array('loc' => 'https://app.musiclinkd.com/opportunities', 'changefreq' => 'daily', 'priority' => '0.8'),
+            array('loc' => 'https://app.musiclinkd.com/help', 'changefreq' => 'weekly', 'priority' => '0.7'),
+            array('loc' => 'https://app.musiclinkd.com/welcome', 'changefreq' => 'monthly', 'priority' => '0.6'),
+            array('loc' => 'https://app.musiclinkd.com/delete-account', 'changefreq' => 'monthly', 'priority' => '0.4'),
+        );
+
+        // Fetch published profiles to map public handle routes
+        $profile_posts = get_posts(array(
+            'post_type'      => 'profile',
+            'post_status'    => 'publish',
+            'posts_per_page' => 200,
+            'fields'         => 'post_name',
+        ));
+
+        if (!empty($profile_posts)) {
+            foreach ($profile_posts as $slug) {
+                if (empty($slug)) continue;
+                $app_routes[] = array(
+                    'loc'        => 'https://app.musiclinkd.com/@' . esc_attr($slug),
+                    'changefreq' => 'weekly',
+                    'priority'   => '0.7',
+                );
+                $app_routes[] = array(
+                    'loc'        => 'https://app.musiclinkd.com/identity/q/' . esc_attr($slug),
+                    'changefreq' => 'monthly',
+                    'priority'   => '0.6',
+                );
+            }
+        }
+
+        echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+        // If ecosystem sitemap, map all website pages first
+        if ('ecosystem-sitemap.xml' === $path) {
+            $catalog = self::get_route_seo_catalog();
+            foreach ($catalog as $item) {
+                echo "  <url>\n";
+                echo "    <loc>" . esc_url($item['canonical']) . "</loc>\n";
+                echo "    <lastmod>" . esc_html($now) . "</lastmod>\n";
+                echo "    <changefreq>weekly</changefreq>\n";
+                echo "    <priority>0.9</priority>\n";
+                echo "  </url>\n";
+            }
+        }
+
+        // Map web app routes
+        foreach ($app_routes as $route) {
+            echo "  <url>\n";
+            echo "    <loc>" . esc_url($route['loc']) . "</loc>\n";
+            echo "    <lastmod>" . esc_html($now) . "</lastmod>\n";
+            echo "    <changefreq>" . esc_html($route['changefreq']) . "</changefreq>\n";
+            echo "    <priority>" . esc_html($route['priority']) . "</priority>\n";
+            echo "  </url>\n";
+        }
+
+        echo '</urlset>' . "\n";
+        exit;
+    }
+
+    /**
+     * Filter robots.txt to declare all ecosystem sitemaps.
+     *
+     * @param string $output Default robots.txt content.
+     * @return string
+     */
+    public static function filter_robots_txt($output) {
+        $extra  = "\n# MusicLinkd Dual Ecosystem Sitemaps\n";
+        $extra .= "Sitemap: " . esc_url(home_url('/sitemap_index.xml')) . "\n";
+        $extra .= "Sitemap: " . esc_url(home_url('/ecosystem-sitemap.xml')) . "\n";
+        $extra .= "Sitemap: " . esc_url(home_url('/app-sitemap.xml')) . "\n";
+        $extra .= "Sitemap: https://app.musiclinkd.com/sitemap.xml\n";
+
+        return $output . $extra;
     }
 
     /**
