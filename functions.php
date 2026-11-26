@@ -219,3 +219,10 @@ if (file_exists(get_theme_file_path('/inc/engine-dashboard.php'))) {
 if (file_exists(get_theme_file_path('/inc/cpt-profiles.php'))) {
     require_once get_theme_file_path('/inc/cpt-profiles.php');
 }
+
+/**
+ * MusicLinkd Rank Math SEO, Google Site Kit & GTM / GA4 Event Layer.
+ */
+if (file_exists(get_theme_file_path('/inc/class-musiclinkd-seo-analytics.php'))) {
+    require_once get_theme_file_path('/inc/class-musiclinkd-seo-analytics.php');
+}
