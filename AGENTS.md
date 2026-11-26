@@ -236,6 +236,11 @@ propagate what a previous doc says without checking.
     - GTM & GA4 Telemetry: Rendered dataLayer events in `wp_footer` tracking `app_handoff` clicks, CTA conversions, Fluent Forms submissions, and social profile outbound clicks.
     - AI Search Discovery: Dynamically serving `https://musiclinkd.com/llms.txt` and `https://app.musiclinkd.com/llms.txt` for LLM crawler discovery with `<link rel="alternate" type="text/plain" href="/llms.txt">`.
     - Synced enriched portfolio, services, and studio equipment schemas across Supabase, WordPress post meta, and FluentCRM contacts.
+  - **Privacy Policy Canonicalization & Account/Data Deletion Architecture (2026-11-26):**
+    - Canonical Privacy Policy URL established at `https://musiclinkd.com/privacy/` (pre-rendered WordPress legal page with DPDP/GDPR disclosures, Rank Math schema, and organization metadata for Google Play Console submission). Added fallback redirect route at `app.musiclinkd.com/privacy` (and `/terms`) pointing directly to `/legal/privacy` to guarantee zero 404s across subdomains.
+    - Added direct "Delete account" and "Delete specific data" options under Settings > Privacy & security in `musiclinkd-app`.
+    - Enhanced `/settings/delete-account` with dual persona awareness (`useRequireBusiness`): dynamically displaying distinct deletion consequences for Talent users (artist profile, tracks/stems, creative services) and Business users (studio profile, rooms, equipment catalog, amenities, and business media).
+    - Verified Android Capacitor 8 build and signed release bundle (`app-release.aab`, 6.2MB) with official production upload key (`musiclinkd-upload.jks`).
 
 
 
