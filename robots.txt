@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+
+# MusicLinkd Dual Ecosystem Sitemaps
+Sitemap: https://musiclinkd.com/sitemap_index.xml
+Sitemap: https://musiclinkd.com/ecosystem-sitemap.xml
+Sitemap: https://musiclinkd.com/app-sitemap.xml
+Sitemap: https://app.musiclinkd.com/sitemap.xml
