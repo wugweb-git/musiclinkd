@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-11-26T21:07:45.024857+00:00",
-  "elapsed_seconds": 11.16,
+  "timestamp": "2026-11-27T07:25:12.404952+00:00",
+  "elapsed_seconds": 12.01,
   "target_url": "https://musiclinkd.com",
   "supabase_project": "https://gsqeymhtyzepwcnorjun.supabase.co",
   "stats": {
     "total": 150,
-    "created": 1,
-    "updated": 139,
+    "created": 0,
+    "updated": 140,
     "fluentcrm_synced": 140,
     "errors": []
   }
